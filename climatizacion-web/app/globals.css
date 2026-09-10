@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@import "./aula-tp-design-tokens.css";
+@import "./aula-tp-tokens.css";
+
+:root {
+  --background: var(--aula-bg);
+  --foreground: var(--aula-text);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-50: var(--color-info-soft);
+  --color-brand-100: var(--color-cyan-soft);
+  --color-brand-200: var(--color-line);
+  --color-brand-300: var(--color-blue-600);
+  --color-brand-400: var(--color-blue);
+  --color-brand-500: var(--color-blue);
+  --color-brand-600: var(--color-blue);
+  --color-brand-700: var(--color-navy);
+  --color-brand-800: var(--color-navy-deep);
+  --color-aula-blue: var(--color-blue);
+  --color-aula-navy: var(--color-navy);
+  --color-aula-teal: var(--color-blue);
+  --color-aula-magenta: var(--color-blue);
+  --color-aula-text: var(--color-ink);
+  --color-aula-muted: var(--color-muted);
+  --color-aula-line: var(--color-line);
+  --color-aula-bg: var(--color-surface);
+  --color-aula-surface: var(--color-card);
+  --font-sans: var(--aula-font);
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--aula-bg);
+  color: var(--aula-text);
+  font-family: var(--aula-font);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

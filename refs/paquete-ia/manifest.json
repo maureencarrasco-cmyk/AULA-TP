@@ -1,0 +1,355 @@
+{
+  "package_name": "Aula TP Chile - paquete para IA de programación",
+  "generated_at": "2026-09-09T22:26:42.9471905-03:00",
+  "source_conversation": "Recopila URLs de anoche / 6aa16ab1-d818-83e9-af5a-c6588ae10cce",
+  "total_sites": 10,
+  "extraction_summary": {
+    "sites_confirmed_active": 10,
+    "original_source_code_extracted": 0,
+    "authenticated_rendered_html_extracted": 0,
+    "screenshots_attempted": 10,
+    "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+  },
+  "sites": [
+    {
+      "order": 1,
+      "name": "Pantalla principal",
+      "purpose": "Ruta de aprendizaje principal Aula TP Chile para el módulo Refrigeración y Climatización.",
+      "url": "https://aula-tp-chile-ruta-0909.xam345345.chatgpt.site",
+      "slug": "aula-tp-chile-ruta-0909",
+      "sites_project": {
+        "project_id": "appgprj_6aa0de0325ec8191a50c5d8d2575e918",
+        "title": "Aula TP Chile Ruta de aprendizaje",
+        "description": "Interfaz educativa de Aula TP Chile con ruta de aprendizaje M1 a M4.",
+        "status": "active",
+        "access_mode": "custom",
+        "latest_version_number": 3,
+        "deployment_id": "appgdep_6aa0e6932b448191835fc4a75065df87"
+      },
+      "latest_version": {
+        "version_id": "appgprj_6aa0de0325ec8191a50c5d8d2575e918~appgver_ef875d98b6b481919acf48a21d1b7cc1",
+        "version_number": 3,
+        "source_commit_sha": "c89b1ac115f30c41d0c558468d203af1a8a16636",
+        "archive_format": "tar",
+        "archive_content_hash": "sha256:1a48f3f46b01c9babaf477e2e54f481981afe307349e303c50e27fadd0efa452",
+        "archive_size_bytes": 2600960,
+        "archive_file_count": 5
+      },
+      "retrieval": {
+        "unauthenticated_http_status": 401,
+        "unauthenticated_http_error": "Response status code does not indicate success: 401 (Unauthorized).",
+        "original_source_code_extracted": false,
+        "authenticated_rendered_html_extracted": false,
+        "screenshot_saved": true,
+        "screenshot_local_path": "capturas\\screenshot-sites.png",
+        "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+      }
+    },
+    {
+      "order": 2,
+      "name": "Presentación del curso",
+      "purpose": "Pantalla de presentación general del curso/módulo de Refrigeración y Climatización.",
+      "url": "https://aula-tpi-refrigeracion-climatizacion.xam345345.chatgpt.site",
+      "slug": "aula-tpi-refrigeracion-climatizacion",
+      "sites_project": {
+        "project_id": "appgprj_6aa0db6ca9248191ac28a31baa179814",
+        "title": "Aula TPI - Refrigeracion y Climatizacion",
+        "description": "Replica funcional de una interfaz de modulo educativo con estaciones, agentes y progreso.",
+        "status": "active",
+        "access_mode": "custom",
+        "latest_version_number": 1,
+        "deployment_id": "appgdep_6aa0dd1df48081918d3a4c8ead286786"
+      },
+      "latest_version": {
+        "version_id": "appgprj_6aa0db6ca9248191ac28a31baa179814~appgver_4aaeb21a128c8191beb8671d0dcd50f3",
+        "version_number": 1,
+        "source_commit_sha": "0520cb3deea92cb4091c872c9de87c763108ebb5",
+        "archive_format": "tar",
+        "archive_content_hash": "sha256:71dbb500e105ad7fa62da052c06cbca817d2be876c243596a161d2c95bde7358",
+        "archive_size_bytes": 40960,
+        "archive_file_count": 4
+      },
+      "retrieval": {
+        "unauthenticated_http_status": 401,
+        "unauthenticated_http_error": "Response status code does not indicate success: 401 (Unauthorized).",
+        "original_source_code_extracted": false,
+        "authenticated_rendered_html_extracted": false,
+        "screenshot_saved": true,
+        "screenshot_local_path": "capturas\\screenshot-sites.png",
+        "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+      }
+    },
+    {
+      "order": 3,
+      "name": "Estación 1",
+      "purpose": "Estación 1 de contextualización para el módulo.",
+      "url": "https://aula-tp-chile-estacion-1.xam345345.chatgpt.site",
+      "slug": "aula-tp-chile-estacion-1",
+      "sites_project": {
+        "project_id": "appgprj_6aa0db5f5f308191a1a8d605444db59a",
+        "title": "Aula TP Chile - Estación 1",
+        "description": "Interfaz educativa responsive inspirada en Aula TP Chile para la Estación 1 de climatización.",
+        "status": "active",
+        "access_mode": "custom",
+        "latest_version_number": 2,
+        "deployment_id": "appgdep_6aa0e5ff5684819184373558276f8b7c"
+      },
+      "latest_version": {
+        "version_id": "appgprj_6aa0db5f5f308191a1a8d605444db59a~appgver_434bb3483a8881918339afc6cf39ba92",
+        "version_number": 2,
+        "source_commit_sha": "d60876f1352463eef0892a86e94c133a2f792ceb",
+        "archive_format": "tar",
+        "archive_content_hash": "sha256:141ea8c7aa63a3fff262a76b647d11df3ed020a8cff74d168e6761a52507c384",
+        "archive_size_bytes": 2068480,
+        "archive_file_count": 68
+      },
+      "retrieval": {
+        "unauthenticated_http_status": 401,
+        "unauthenticated_http_error": "Response status code does not indicate success: 401 (Unauthorized).",
+        "original_source_code_extracted": false,
+        "authenticated_rendered_html_extracted": false,
+        "screenshot_saved": true,
+        "screenshot_local_path": "capturas\\screenshot-sites.png",
+        "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+      }
+    },
+    {
+      "order": 4,
+      "name": "Estación 2 AE1",
+      "purpose": "Estación 2, Aprendizaje Esperado 1.",
+      "url": "https://aula-tp-chile-estaciones.xam345345.chatgpt.site",
+      "slug": "aula-tp-chile-estaciones",
+      "sites_project": {
+        "project_id": "appgprj_6aa0dac9e4508191942aee20dc070c90",
+        "title": "Aula TP Chile - Estaciones",
+        "description": "Replica funcional de una interfaz clara de Aula TP Chile con ruta de estaciones, actividades y panel de avance.",
+        "status": "active",
+        "access_mode": "custom",
+        "latest_version_number": 4,
+        "deployment_id": "appgdep_6aa0e7f344a081919e8c124d7200001d"
+      },
+      "latest_version": {
+        "version_id": "appgprj_6aa0dac9e4508191942aee20dc070c90~appgver_2d83cb0a4c6081919822c7841935593e",
+        "version_number": 4,
+        "source_commit_sha": "4a4def279b3a116de580b9f2c1c54d582a0ac186",
+        "archive_format": "tar",
+        "archive_content_hash": "sha256:3ea25c44f4f185ed3c3e202dcfd6cd059585268d76ca3159639d361e711d8fe5",
+        "archive_size_bytes": 337920,
+        "archive_file_count": 7
+      },
+      "retrieval": {
+        "unauthenticated_http_status": 401,
+        "unauthenticated_http_error": "Response status code does not indicate success: 401 (Unauthorized).",
+        "original_source_code_extracted": false,
+        "authenticated_rendered_html_extracted": false,
+        "screenshot_saved": true,
+        "screenshot_local_path": "capturas\\screenshot-sites.png",
+        "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+      }
+    },
+    {
+      "order": 5,
+      "name": "Estación 2 AE2",
+      "purpose": "Estación 2, Aprendizaje Esperado 2.",
+      "url": "https://aula-tp-chile-estacion-2.xam345345.chatgpt.site",
+      "slug": "aula-tp-chile-estacion-2",
+      "sites_project": {
+        "project_id": "appgprj_6aa0da1ecacc8191b50c65c90c3d2128",
+        "title": "Aula TP Chile - Estacion 2",
+        "description": "Replica funcional de la pantalla Aula TP Chile - Estacion 2: Aprendizajes Esperados.",
+        "status": "active",
+        "access_mode": "custom",
+        "latest_version_number": 4,
+        "deployment_id": "appgdep_6aa0e62926ac8191b3ac30ec2aafc938"
+      },
+      "latest_version": {
+        "version_id": "appgprj_6aa0da1ecacc8191b50c65c90c3d2128~appgver_98654ce55028819183debd8964d00d08",
+        "version_number": 4,
+        "source_commit_sha": "c0e5cf7c06b43eaf70a77b806be66cab07e87204",
+        "archive_format": "tar",
+        "archive_content_hash": "sha256:522ee7c55ac55c885b9b59951183c0d86c550d02d0bd508f13da72b5ff1ed219",
+        "archive_size_bytes": 286720,
+        "archive_file_count": 7
+      },
+      "retrieval": {
+        "unauthenticated_http_status": 401,
+        "unauthenticated_http_error": "Response status code does not indicate success: 401 (Unauthorized).",
+        "original_source_code_extracted": false,
+        "authenticated_rendered_html_extracted": false,
+        "screenshot_saved": true,
+        "screenshot_local_path": "capturas\\screenshot-sites.png",
+        "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+      }
+    },
+    {
+      "order": 6,
+      "name": "Estación 2 AE3",
+      "purpose": "Estación 2, Aprendizaje Esperado 3.",
+      "url": "https://aula-tp-estacion-2-ae3.xam345345.chatgpt.site",
+      "slug": "aula-tp-estacion-2-ae3",
+      "sites_project": {
+        "project_id": "appgprj_6aa0dd64dc988191b43a90beb7da33c2",
+        "title": "Aula TP Chile - Estacion 2 AE3",
+        "description": "Replica responsive de una interfaz educativa Aula TP Chile para Refrigeracion y Climatizacion, Estacion 2 AE3.",
+        "status": "active",
+        "access_mode": "custom",
+        "latest_version_number": 2,
+        "deployment_id": "appgdep_6aa0e53229ac8191a55fda6e7fb15082"
+      },
+      "latest_version": {
+        "version_id": "appgprj_6aa0dd64dc988191b43a90beb7da33c2~appgver_9ea563c6a47c8191be9d1b430a7d9d03",
+        "version_number": 2,
+        "source_commit_sha": "b9cfcc53bfea36867bfcdced4039a6981318100b",
+        "archive_format": "tar",
+        "archive_content_hash": "sha256:d22247441d96b737baf60659d126900a8057a7605ef7953139232553b91167e8",
+        "archive_size_bytes": 327680,
+        "archive_file_count": 4
+      },
+      "retrieval": {
+        "unauthenticated_http_status": 401,
+        "unauthenticated_http_error": "Response status code does not indicate success: 401 (Unauthorized).",
+        "original_source_code_extracted": false,
+        "authenticated_rendered_html_extracted": false,
+        "screenshot_saved": true,
+        "screenshot_local_path": "capturas\\screenshot-sites.png",
+        "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+      }
+    },
+    {
+      "order": 7,
+      "name": "Estación 3",
+      "purpose": "Situación integradora del recorrido Aula TP Chile.",
+      "url": "https://aula-tp-chile-estacion-3.xam345345.chatgpt.site",
+      "slug": "aula-tp-chile-estacion-3",
+      "sites_project": {
+        "project_id": "appgprj_6aa0d94541dc81918244a8e57b96913f",
+        "title": "Aula TP Chile - Estación 3",
+        "description": "Recreación visual de la interfaz Aula TP Chile para Estación 3. Situación Integradora.",
+        "status": "active",
+        "access_mode": "custom",
+        "latest_version_number": 2,
+        "deployment_id": "appgdep_6aa0e3486fd08191b88031db738d76f3"
+      },
+      "latest_version": {
+        "version_id": "appgprj_6aa0d94541dc81918244a8e57b96913f~appgver_e88b2f2673bc8191aab3d85ee589709a",
+        "version_number": 2,
+        "source_commit_sha": "a94c72e293c4a3a7c7e2dce9952ef5d8afda5dd9",
+        "archive_format": "tar",
+        "archive_content_hash": "sha256:8e065079c38d68cc6358927945b8d8a0d89e1c00f5b5fcfa9fee8528342a245d",
+        "archive_size_bytes": 92160,
+        "archive_file_count": 11
+      },
+      "retrieval": {
+        "unauthenticated_http_status": 401,
+        "unauthenticated_http_error": "Response status code does not indicate success: 401 (Unauthorized).",
+        "original_source_code_extracted": false,
+        "authenticated_rendered_html_extracted": false,
+        "screenshot_saved": true,
+        "screenshot_local_path": "capturas\\screenshot-sites.png",
+        "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+      }
+    },
+    {
+      "order": 8,
+      "name": "Estación 4",
+      "purpose": "Evaluación final del recorrido Aula TP Chile.",
+      "url": "https://aula-tp-chile-evaluacion-final.xam345345.chatgpt.site",
+      "slug": "aula-tp-chile-evaluacion-final",
+      "sites_project": {
+        "project_id": "appgprj_6aa0d68c908c819184f5b4287ca1204f",
+        "title": "Aula TP Chile",
+        "description": "Recreación visual de la interfaz Aula TP Chile con estaciones, evaluación final y panel de avance.",
+        "status": "active",
+        "access_mode": "custom",
+        "latest_version_number": 3,
+        "deployment_id": "appgdep_6aa0e5f411ec81919da1da58a6899431"
+      },
+      "latest_version": {
+        "version_id": "appgprj_6aa0d68c908c819184f5b4287ca1204f~appgver_34ad3dde0c808191bd6776dc89b68403",
+        "version_number": 3,
+        "source_commit_sha": "6ba9b9e1ea6bcb18daad443048c8d81dd9811878",
+        "archive_format": "tar",
+        "archive_content_hash": "sha256:ddaa1bb2f12b9594e4d3afea0a71dd4c906c211b33a6bef5c41cd1548debfdb3",
+        "archive_size_bytes": 296960,
+        "archive_file_count": 5
+      },
+      "retrieval": {
+        "unauthenticated_http_status": 401,
+        "unauthenticated_http_error": "Response status code does not indicate success: 401 (Unauthorized).",
+        "original_source_code_extracted": false,
+        "authenticated_rendered_html_extracted": false,
+        "screenshot_saved": true,
+        "screenshot_local_path": "capturas\\screenshot-sites.png",
+        "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+      }
+    },
+    {
+      "order": 9,
+      "name": "Estación 5",
+      "purpose": "Retroalimentación y cierre del recorrido Aula TP Chile.",
+      "url": "https://aula-tp-estacion5-cierre.xam345345.chatgpt.site",
+      "slug": "aula-tp-estacion5-cierre",
+      "sites_project": {
+        "project_id": "appgprj_6aa0d4ee4dac8191a66f13e63435e0d6",
+        "title": "Aula TP Chile - Estacion 5",
+        "description": "Pantalla funcional de Retroalimentacion y Cierre para Aula TP Chile.",
+        "status": "active",
+        "access_mode": "custom",
+        "latest_version_number": 3,
+        "deployment_id": "appgdep_6aa0e661fdc081918d455c0c1b8c9c8f"
+      },
+      "latest_version": {
+        "version_id": "appgprj_6aa0d4ee4dac8191a66f13e63435e0d6~appgver_fed7595b9a008191b9bd75fdfc7cd6d3",
+        "version_number": 3,
+        "source_commit_sha": "70648884fa7ab784ec21b5cb2149da9faa190bf2",
+        "archive_format": "tar",
+        "archive_content_hash": "sha256:716459ed05da93e613553d8db9a4603c606dbbcb4cf1ed0b86927b950f7ae22f",
+        "archive_size_bytes": 542720,
+        "archive_file_count": 7
+      },
+      "retrieval": {
+        "unauthenticated_http_status": 401,
+        "unauthenticated_http_error": "Response status code does not indicate success: 401 (Unauthorized).",
+        "original_source_code_extracted": false,
+        "authenticated_rendered_html_extracted": false,
+        "screenshot_saved": true,
+        "screenshot_local_path": "capturas\\screenshot-sites.png",
+        "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+      }
+    },
+    {
+      "order": 10,
+      "name": "Versión adicional Refrigeración y Climatización",
+      "purpose": "Versión adicional del curso o pantalla relacionada con Refrigeración y Climatización.",
+      "url": "https://aula-tp-chile-refrigeracion-climatizacion.xam345345.chatgpt.site",
+      "slug": "aula-tp-chile-refrigeracion-climatizacion",
+      "sites_project": {
+        "project_id": "appgprj_6aa0e5b7846481919ce351f217bc22f0",
+        "title": "Aula TP Chile - Refrigeración y Climatización",
+        "description": "Panel estudiantil EdTech para el módulo Refrigeración y Climatización de Aula TP Chile.",
+        "status": "active",
+        "access_mode": "custom",
+        "latest_version_number": 1,
+        "deployment_id": "appgdep_6aa0e666a5208191bbfd5715e4b4ede7"
+      },
+      "latest_version": {
+        "version_id": "appgprj_6aa0e5b7846481919ce351f217bc22f0~appgver_d74cf419e6888191b134618010283280",
+        "version_number": 1,
+        "source_commit_sha": "4b8c426ac43059a4b32c343a6e531afe4ab5141f",
+        "archive_format": "tar",
+        "archive_content_hash": "sha256:97c8120048203f8526b61ae49bad1c7cd0d677dfb31e517cd97905f62b28917e",
+        "archive_size_bytes": 40960,
+        "archive_file_count": 4
+      },
+      "retrieval": {
+        "unauthenticated_http_status": 401,
+        "unauthenticated_http_error": "Response status code does not indicate success: 401 (Unauthorized).",
+        "original_source_code_extracted": false,
+        "authenticated_rendered_html_extracted": false,
+        "screenshot_saved": true,
+        "screenshot_local_path": "capturas\\screenshot-sites.png",
+        "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+      }
+    }
+  ]
+}

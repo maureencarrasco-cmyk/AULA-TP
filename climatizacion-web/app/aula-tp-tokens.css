@@ -1,0 +1,176 @@
+/* =============================================================================
+   Clim runtime aliases + utilities — maps onto shared aula-tp-design-tokens.css
+   Do NOT redefine brand/radius/shadow/btn/card tokens here. Import design-tokens first.
+   ============================================================================= */
+
+:root {
+  /* Clim TSX/Tailwind legacy names → shared tokens */
+  --aula-bg: var(--aula-pale);
+  --aula-font: var(--font-sans);
+  --aula-radius: var(--radius-lg);
+  --aula-shadow: var(--shadow-md);
+  --aula-magenta: var(--pink);
+  --aula-indigo: var(--aula-violet);
+  --aula-amber: var(--aula-warning);
+  --aula-teal-deep: var(--aula-teal);
+  --aula-green-pl: var(--aula-success);
+}
+
+/* Clim cards use Tailwind p-*; neutralize shared .aula-card padding */
+.aula-card {
+  padding: 0;
+}
+
+.aula-font {
+  font-family: var(--font-sans);
+  color: var(--aula-text);
+}
+
+.aula-header-hero {
+  background: linear-gradient(135deg, var(--aula-navy), var(--aula-blue));
+  color: #fff;
+}
+
+.aula-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--btn-height-sm);
+  padding: 0.55rem var(--btn-pad-x);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  border: 0;
+  border-radius: var(--btn-radius-pill);
+  box-shadow: var(--btn-primary-shadow);
+  font-weight: var(--btn-fw);
+  transition: var(--btn-transition);
+  cursor: pointer;
+}
+
+.aula-btn-primary:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+.aula-btn-primary:active {
+  transform: translateY(0);
+  filter: brightness(0.96);
+}
+
+.aula-btn-primary:disabled {
+  background: var(--btn-disabled-bg);
+  color: var(--btn-disabled-fg);
+  opacity: var(--btn-disabled-opacity);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.aula-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--btn-height-sm);
+  padding: 0.55rem var(--btn-pad-x);
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-fg);
+  border: 1px solid var(--btn-secondary-border);
+  border-radius: var(--btn-radius-pill);
+  font-weight: var(--btn-fw);
+  transition: var(--btn-transition);
+  cursor: pointer;
+}
+
+.aula-btn-secondary:hover {
+  border-color: var(--aula-blue);
+  box-shadow: var(--shadow-xs);
+  transform: translateY(-1px);
+}
+
+.aula-btn-success {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--btn-height-sm);
+  padding: 0.55rem var(--btn-pad-x);
+  background: var(--btn-success-bg);
+  color: var(--btn-success-fg);
+  border: 0;
+  border-radius: var(--btn-radius-pill);
+  box-shadow: var(--btn-success-shadow);
+  font-weight: var(--btn-fw);
+  transition: var(--btn-transition);
+  cursor: pointer;
+}
+
+.aula-btn-success:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+.aula-progress-track {
+  background: var(--aula-line);
+}
+
+.aula-progress-fill {
+  background: linear-gradient(90deg, var(--aula-blue-deep), var(--aula-blue));
+}
+
+.aula-modal-backdrop {
+  background: var(--aula-overlay);
+}
+
+.aula-modal-card {
+  background: var(--aula-surface);
+  border: 1px solid var(--aula-line);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Accesibilidad prefs */
+.aula-a11y-large {
+  font-size: 112.5%;
+}
+.aula-a11y-xlarge {
+  font-size: 125%;
+}
+.aula-a11y-hc {
+  --aula-bg: #000814;
+  --aula-pale: #000814;
+  --aula-surface: #001433;
+  --aula-text: #ffffff;
+  --aula-text-muted: #c5d8ff;
+  --aula-line: #4a6fa5;
+  --aula-line-strong: #6a8fc5;
+  --card-bg: #001433;
+  --card-border: 1px solid #4a6fa5;
+}
+.aula-a11y-simple * {
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+.aula-a11y-reduce-motion *,
+.aula-a11y-reduce-motion *::before,
+.aula-a11y-reduce-motion *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+.aula-a11y-focus-strong :focus-visible {
+  outline: 2px solid var(--color-cyan) !important;
+  outline-offset: 2px !important;
+}
+.aula-a11y-baja [data-decor] {
+  display: none !important;
+}
+.aula-a11y-apoyo .aula-hint-boost {
+  display: block !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aula-btn-primary:hover,
+  .aula-btn-secondary:hover,
+  .aula-btn-success:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,383 @@
+/* Climatización course hub — motion & polish (respects prefers-reduced-motion) */
+
+.clim-hub-hero {
+  position: relative;
+  overflow: hidden;
+  background-image: linear-gradient(90deg, rgba(3, 25, 78, 0.2) 0%, rgba(3, 25, 78, 0.08) 48%, rgba(3, 25, 78, 0.04) 100%), var(--hub-hero-image, url("/images/climatizacion/climatizacion-hero-v2.png"));
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.clim-hub-hero__blobs {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.clim-hub-hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+  opacity: 0.35;
+}
+
+.clim-hub-hero__blob--1 {
+  width: 280px;
+  height: 280px;
+  top: -60px;
+  right: 10%;
+  background: rgba(0, 139, 152, 0.55);
+}
+
+.clim-hub-hero__blob--2 {
+  width: 220px;
+  height: 220px;
+  bottom: -40px;
+  left: 5%;
+  background: rgba(245, 22, 112, 0.35);
+}
+
+.clim-hub-hero__blob--3 {
+  width: 160px;
+  height: 160px;
+  top: 40%;
+  left: 45%;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.clim-hub-collage__card {
+  will-change: transform;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.clim-hub-module {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s ease;
+}
+
+.clim-hub-module.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.clim-hub-module__img {
+  transition: transform 0.45s ease;
+}
+
+.clim-hub-module:hover .clim-hub-module__img {
+  transform: scale(1.06);
+}
+
+.clim-hub-how-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.clim-hub-how-card.is-active {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(6, 47, 145, 0.14);
+}
+
+.clim-hub-spotlight {
+  background: linear-gradient(120deg, rgba(8, 112, 239, 0.1), rgba(6, 47, 145, 0.06) 50%, rgba(0, 139, 152, 0.1));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .clim-hub-hero {
+    animation: clim-hub-gradient-shift 18s ease-in-out infinite alternate;
+  }
+
+  .clim-hub-hero__blob--1 {
+    animation: clim-hub-float-a 12s ease-in-out infinite;
+  }
+
+  .clim-hub-hero__blob--2 {
+    animation: clim-hub-float-b 14s ease-in-out infinite;
+  }
+
+  .clim-hub-hero__blob--3 {
+    animation: clim-hub-float-c 10s ease-in-out infinite;
+  }
+
+  .clim-hub-collage__card--float-a {
+    animation: clim-hub-card-float 7s ease-in-out infinite;
+  }
+
+  .clim-hub-collage__card--float-b {
+    animation: clim-hub-card-float 8.5s ease-in-out infinite 0.6s;
+  }
+
+  .clim-hub-collage__card--float-c {
+    animation: clim-hub-card-float 6.5s ease-in-out infinite 1.1s;
+  }
+}
+
+@keyframes clim-hub-gradient-shift {
+  0% {
+    background-position: 0% 40%;
+  }
+  100% {
+    background-position: 100% 60%;
+  }
+}
+
+@keyframes clim-hub-float-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-24px, 18px) scale(1.08);
+  }
+}
+
+@keyframes clim-hub-float-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, -16px) scale(1.05);
+  }
+}
+
+@keyframes clim-hub-float-c {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-12px, -20px);
+  }
+}
+
+@keyframes clim-hub-card-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clim-hub-hero,
+  .clim-hub-hero__blob,
+  .clim-hub-collage__card {
+    animation: none !important;
+  }
+
+  .clim-hub-module {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .clim-hub-module:hover .clim-hub-module__img {
+    transform: none;
+  }
+
+  .clim-hub-how-card,
+  .clim-hub-how-card.is-active {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* PREMIUM homogenization — surface chrome via design tokens */
+.clim-hub-module {
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--aula-line);
+  background: var(--aula-surface);
+  overflow: hidden;
+}
+
+.clim-hub-module:hover {
+  box-shadow: var(--card-shadow-elevated);
+  border-color: color-mix(in srgb, var(--aula-blue) 35%, var(--aula-line));
+}
+
+.clim-hub-how-card {
+  border-radius: var(--radius-xl);
+  background: var(--aula-surface);
+  box-shadow: var(--shadow-xs);
+}
+
+.clim-hub-how-card.is-active {
+  box-shadow: var(--card-shadow-elevated);
+}
+
+.clim-hub-spotlight {
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--aula-line);
+}
+
+.aula-course-stats {
+  display: grid;
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 17px;
+  background: #fff;
+  border: 1px solid #e1ebf7;
+  box-shadow: 0 5px 18px rgba(18, 58, 140, 0.07);
+}
+
+.aula-course-stats > div {
+  display: grid;
+  grid-template-columns: 31px 1fr auto;
+  align-items: center;
+  gap: 7px;
+  min-height: 41px;
+  padding: 6px 25px;
+  border-bottom: 1px solid #e0eaf4;
+  color: #062f91;
+  font-size: 13px;
+}
+
+.aula-course-stats > div:last-child {
+  border: 0;
+}
+
+.aula-course-stats strong {
+  font-weight: 700;
+}
+
+.aula-course-stats b {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.aula-stat-icon {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  color: #008b98;
+}
+
+.aula-ico {
+  position: relative;
+  display: block;
+  width: 25px;
+  height: 25px;
+}
+
+.aula-ico::before,
+.aula-ico::after {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.aula-ico-clipboard::before {
+  inset: 4px 4px 1px;
+  border: 2px solid currentColor;
+  border-radius: 3px;
+}
+
+.aula-ico-clipboard::after {
+  left: 8px;
+  top: 1px;
+  width: 9px;
+  height: 6px;
+  border: 2px solid currentColor;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0 8px 0 -3px currentColor, 0 13px 0 -3px currentColor;
+}
+
+.aula-ico-clock::before {
+  inset: 2px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+}
+
+.aula-ico-clock::after {
+  left: 12px;
+  top: 6px;
+  width: 2px;
+  height: 8px;
+  background: currentColor;
+  transform-origin: bottom;
+  transform: rotate(-34deg);
+}
+
+.aula-ico-cube::before {
+  left: 5px;
+  top: 4px;
+  width: 15px;
+  height: 15px;
+  border: 2px solid currentColor;
+  transform: rotate(30deg) skew(-8deg);
+}
+
+.aula-ico-cube::after {
+  left: 11px;
+  top: 5px;
+  width: 2px;
+  height: 15px;
+  background: currentColor;
+  transform: rotate(-30deg);
+}
+
+.aula-ico-check::before {
+  inset: 2px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+}
+
+.aula-ico-check::after {
+  left: 7px;
+  top: 8px;
+  width: 11px;
+  height: 6px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+.aula-stat-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #05a86b;
+}
+
+.aula-stat-status > i {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #00a96d;
+}
+
+.aula-stat-status.is-soon {
+  color: #b45309;
+}
+
+.aula-stat-status.is-soon > i {
+  background: #f59e0b;
+}
+
+.aula-stat-status.is-done {
+  color: #047857;
+}
+
+.aula-stat-status.is-done > i {
+  background: #059669;
+}
+
+.clim-hub-route-item .aula-course-stats {
+  margin: 10px 0 8px;
+  box-shadow: none;
+}
+
+.clim-hub-route-item .aula-course-stats > div {
+  min-height: 32px;
+  padding: 4px 12px;
+  font-size: 11px;
+}

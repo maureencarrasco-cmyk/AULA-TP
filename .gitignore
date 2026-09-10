@@ -1,0 +1,23 @@
+# dependencies / build
+node_modules/
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# env and secrets
+.env
+.env.*
+!.env.example
+*.pem
+credentials.json
+
+# logs / OS
+*.log
+.DS_Store
+
+# local tooling
+.vercel
+.cursor/projects/

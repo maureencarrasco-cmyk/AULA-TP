@@ -1,0 +1,5 @@
+Hola. Soy el Tutor Aula TP. En esta guía de puesta en marcha nos enfocamos en la carga de fluidos con seguridad y cuidado ambiental.
+Primero: prepara el área, verifica EPP y confirma que el sistema esté listo según el procedimiento.
+Segundo: realiza vacío o verificación de hermeticidad antes de cargar. No inventes valores: sigue el manual y NCh 3241.
+Tercero: conecta manifold y mangueras sin fugas. Carga por masa o procedimiento de fábrica, monitoreando presión y temperatura.
+Importante: nunca ventiles refrigerante a la atmósfera. Registra lo realizado. Esta guía es formativa; en evaluación no hay pistas del tutor.

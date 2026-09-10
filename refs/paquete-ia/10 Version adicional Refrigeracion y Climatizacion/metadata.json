@@ -1,0 +1,34 @@
+{
+  "order": 10,
+  "name": "Versión adicional Refrigeración y Climatización",
+  "purpose": "Versión adicional del curso o pantalla relacionada con Refrigeración y Climatización.",
+  "url": "https://aula-tp-chile-refrigeracion-climatizacion.xam345345.chatgpt.site",
+  "slug": "aula-tp-chile-refrigeracion-climatizacion",
+  "sites_project": {
+    "project_id": "appgprj_6aa0e5b7846481919ce351f217bc22f0",
+    "title": "Aula TP Chile - Refrigeración y Climatización",
+    "description": "Panel estudiantil EdTech para el módulo Refrigeración y Climatización de Aula TP Chile.",
+    "status": "active",
+    "access_mode": "custom",
+    "latest_version_number": 1,
+    "deployment_id": "appgdep_6aa0e666a5208191bbfd5715e4b4ede7"
+  },
+  "latest_version": {
+    "version_id": "appgprj_6aa0e5b7846481919ce351f217bc22f0~appgver_d74cf419e6888191b134618010283280",
+    "version_number": 1,
+    "source_commit_sha": "4b8c426ac43059a4b32c343a6e531afe4ab5141f",
+    "archive_format": "tar",
+    "archive_content_hash": "sha256:97c8120048203f8526b61ae49bad1c7cd0d677dfb31e517cd97905f62b28917e",
+    "archive_size_bytes": 40960,
+    "archive_file_count": 4
+  },
+  "retrieval": {
+    "unauthenticated_http_status": 401,
+    "unauthenticated_http_error": "Response status code does not indicate success: 401 (Unauthorized).",
+    "original_source_code_extracted": false,
+    "authenticated_rendered_html_extracted": false,
+    "screenshot_saved": true,
+    "screenshot_local_path": "capturas\\screenshot-sites.png",
+    "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+  }
+}

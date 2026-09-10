@@ -1,0 +1,50 @@
+---
+description: Aula TP Chile Design Language SPEC v2.0 — tokens, shell, estados y copy. Si captura y spec chocan, gana la spec.
+alwaysApply: true
+---
+
+# Aula TP Chile · Design Language SPEC v2.0
+
+Fuente: `refs/Aula_TP_Chile_Design_Language_SPEC_IA.pdf`.
+Contrato para TODOS los cursos TP. No inventar paletas, logos ni layouts por especialidad.
+
+## MUST
+
+- Usar **exactamente** los tokens de `climatizacion-web/app/aula-tp-design-tokens.css` (`--color-*`, `--specialty-*`). Prohibido introducir hex de marca nuevos.
+- Marca: **Aula TP Chile** (nunca «Aula TPI»). Claim: **Formación técnica con sentido**.
+- Un acento por especialidad: `--accent: var(--specialty-{slug})`. El acento colorea chips, anillo `current` y raya del PageHero. Nunca el fondo entero.
+- Especialidades: climatizacion `#3EC6E0`, electricidad `#F0B429`, enfermeria `#2BB3A8`. Administración reutiliza `--color-blue` (sin hex nuevo).
+- Estaciones: **un acento + StatusChip**. Prohibido arcoíris (verde/lila/naranjo/rosa por estación).
+- SupportRail fijo: Práctica libre = ok, Agente pedagógico = blue, Accesibilidad = `#6B5CE7` **solo en ese botón**.
+- Hero navy-deep + blanco solo en CourseHome / ModuleHome. StationPage: hero blanco, título navy.
+- Copy en español de Chile, tuteo, tildes. No cortar palabras.
+- Estados: `locked | available | current | complete | review | upcoming`.
+- Foco: outline 2px cyan, offset 2px. Toque mínimo 44px.
+- `prefers-reduced-motion`: sin scale ni parallax.
+
+## Tokens (no duplicar hex en componentes)
+
+```
+--color-navy: #0B3A6B
+--color-navy-deep: #072A4E
+--color-blue: #1558A0
+--color-blue-600: #1B6BC4
+--color-cyan: #3EC6E0
+--color-cyan-soft: #D6F4FA
+--color-ink: #122033
+--color-slate: #3D5166
+--color-muted: #6B7C8E
+--color-line: #D5DEE8
+--color-surface: #F4F7FB
+--color-card: #FFFFFF
+--color-ok: #1F8A5B / --color-ok-soft: #E6F6EE
+--color-warn: #C47A12 / --color-warn-soft: #FFF4E0
+--color-err: #C0392B / --color-err-soft: #FDECEA
+--color-info-soft: #E8F1FB
+```
+
+## NO replicar
+
+Fondos de paisaje como estructura, «Aula TPI», logos distintos por pantalla, handwriting como H1, 5 y 8 estaciones mezcladas en la misma vista.
+
+Si dudas entre captura PNG y esta spec: implementa la spec y conserva el texto pedagógico de la captura.

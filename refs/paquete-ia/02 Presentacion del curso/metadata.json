@@ -1,0 +1,34 @@
+{
+  "order": 2,
+  "name": "Presentación del curso",
+  "purpose": "Pantalla de presentación general del curso/módulo de Refrigeración y Climatización.",
+  "url": "https://aula-tpi-refrigeracion-climatizacion.xam345345.chatgpt.site",
+  "slug": "aula-tpi-refrigeracion-climatizacion",
+  "sites_project": {
+    "project_id": "appgprj_6aa0db6ca9248191ac28a31baa179814",
+    "title": "Aula TPI - Refrigeracion y Climatizacion",
+    "description": "Replica funcional de una interfaz de modulo educativo con estaciones, agentes y progreso.",
+    "status": "active",
+    "access_mode": "custom",
+    "latest_version_number": 1,
+    "deployment_id": "appgdep_6aa0dd1df48081918d3a4c8ead286786"
+  },
+  "latest_version": {
+    "version_id": "appgprj_6aa0db6ca9248191ac28a31baa179814~appgver_4aaeb21a128c8191beb8671d0dcd50f3",
+    "version_number": 1,
+    "source_commit_sha": "0520cb3deea92cb4091c872c9de87c763108ebb5",
+    "archive_format": "tar",
+    "archive_content_hash": "sha256:71dbb500e105ad7fa62da052c06cbca817d2be876c243596a161d2c95bde7358",
+    "archive_size_bytes": 40960,
+    "archive_file_count": 4
+  },
+  "retrieval": {
+    "unauthenticated_http_status": 401,
+    "unauthenticated_http_error": "Response status code does not indicate success: 401 (Unauthorized).",
+    "original_source_code_extracted": false,
+    "authenticated_rendered_html_extracted": false,
+    "screenshot_saved": true,
+    "screenshot_local_path": "capturas\\screenshot-sites.png",
+    "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+  }
+}

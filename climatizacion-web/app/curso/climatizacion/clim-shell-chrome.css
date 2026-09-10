@@ -1,0 +1,92 @@
+/* Clim module shell chrome — visual ADN only (tokens). No content/logic. */
+
+.aula-shell-main.aula-card,
+.aula-shell-nav.aula-card,
+.aula-shell-aside.aula-card {
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--aula-line);
+  background: var(--aula-surface);
+}
+
+.aula-shell-main.aula-card {
+  padding: var(--card-padding);
+}
+
+.aula-shell-station-option {
+  border-radius: var(--radius-xl);
+  transition: border-color var(--motion-base), background var(--motion-base), box-shadow var(--motion-base);
+}
+
+.aula-shell-station-option:hover {
+  box-shadow: var(--shadow-xs);
+}
+
+.aula-shell-pl-fab {
+  background: var(--btn-success-bg) !important;
+  box-shadow: var(--btn-success-shadow);
+  border-radius: var(--btn-radius-pill);
+  transition: var(--btn-transition);
+}
+
+.aula-shell-pl-fab:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+.aula-shell-drawer {
+  border-radius: var(--radius-2xl) 0 0 var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+}
+
+.aula-shell-feedback-ok {
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--aula-success) 40%, white);
+  background: var(--aula-success-soft);
+  color: var(--aula-success-ink);
+}
+
+.aula-shell-feedback-warn {
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--aula-warning) 45%, white);
+  background: var(--aula-warning-soft);
+  color: var(--aula-warning-ink);
+}
+
+.aula-shell-media {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--aula-line);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}
+
+.aula-login-input {
+  border-radius: var(--radius-xl) !important;
+  border: 1.5px solid var(--aula-line-strong) !important;
+  transition: border-color var(--motion-base), box-shadow var(--motion-base);
+}
+
+.aula-login-input:focus {
+  border-color: var(--aula-blue) !important;
+  box-shadow: var(--shadow-focus);
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aula-shell-pl-fab:hover {
+    transform: none;
+  }
+}
+
+
+.aula-tutor-fab {
+  background: var(--support-hub-fab-bg) !important;
+  box-shadow: var(--support-hub-fab-shadow) !important;
+}
+
+.aula-tutor-panel {
+  border-radius: var(--radius-2xl) !important;
+  border-color: var(--support-tutor-border) !important;
+  box-shadow: var(--shadow-xl) !important;
+  overflow: hidden;
+}

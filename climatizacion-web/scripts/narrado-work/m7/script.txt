@@ -1,0 +1,5 @@
+Hola. Soy el Tutor Aula TP. Esta guía de mantención preventiva prioriza seguridad y trazabilidad al manual.
+Antes de ingresar a cámara: EPP, autorización y bloqueo o etiquetado según el procedimiento de la planta.
+En el checklist: inspecciona filtros, drenaje y fijaciones. No abras tableros sin LOTO. Registra hallazgos en bitácora u orden de trabajo.
+Si detectas un correctivo acotado en obra, clasifícalo y verifica post-servicio. No inventes códigos AE: trabaja con AE 7.1 y 7.2 del módulo.
+Recuerda: la práctica libre es formativa y no altera tu nota. La ruta obligatoria sí exige evidencia registrada.

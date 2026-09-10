@@ -1,0 +1,34 @@
+{
+  "order": 7,
+  "name": "Estación 3",
+  "purpose": "Situación integradora del recorrido Aula TP Chile.",
+  "url": "https://aula-tp-chile-estacion-3.xam345345.chatgpt.site",
+  "slug": "aula-tp-chile-estacion-3",
+  "sites_project": {
+    "project_id": "appgprj_6aa0d94541dc81918244a8e57b96913f",
+    "title": "Aula TP Chile - Estación 3",
+    "description": "Recreación visual de la interfaz Aula TP Chile para Estación 3. Situación Integradora.",
+    "status": "active",
+    "access_mode": "custom",
+    "latest_version_number": 2,
+    "deployment_id": "appgdep_6aa0e3486fd08191b88031db738d76f3"
+  },
+  "latest_version": {
+    "version_id": "appgprj_6aa0d94541dc81918244a8e57b96913f~appgver_e88b2f2673bc8191aab3d85ee589709a",
+    "version_number": 2,
+    "source_commit_sha": "a94c72e293c4a3a7c7e2dce9952ef5d8afda5dd9",
+    "archive_format": "tar",
+    "archive_content_hash": "sha256:8e065079c38d68cc6358927945b8d8a0d89e1c00f5b5fcfa9fee8528342a245d",
+    "archive_size_bytes": 92160,
+    "archive_file_count": 11
+  },
+  "retrieval": {
+    "unauthenticated_http_status": 401,
+    "unauthenticated_http_error": "Response status code does not indicate success: 401 (Unauthorized).",
+    "original_source_code_extracted": false,
+    "authenticated_rendered_html_extracted": false,
+    "screenshot_saved": true,
+    "screenshot_local_path": "capturas\\screenshot-sites.png",
+    "limitation": "Sitio activo en ChatGPT Sites con acceso custom. La descarga HTTP directa sin sesión devuelve 401 Unauthorized. Para entrar por navegador, OpenAI solicita consentimiento para compartir perfil básico con el sitio; no se aprobó esa transmisión desde la automatización. No se pudo extraer el código fuente original ni el HTML renderizado autenticado. Se conserva URL, metadatos, procedencia de versión, hash del archivo interno de Sites y captura descargada cuando está disponible."
+  }
+}
