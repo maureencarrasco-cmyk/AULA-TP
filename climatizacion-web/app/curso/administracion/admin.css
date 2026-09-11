@@ -377,3 +377,33 @@
   background: var(--color-card);
   color: var(--color-navy);
 }
+
+.admin-module-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 252px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  max-width: 1580px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+.admin-module-layout > .aula-module-route--panel {
+  position: sticky;
+  top: 14px;
+}
+
+.admin-module-layout .admin-station {
+  margin-top: 0;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .admin-module-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-module-layout > .aula-module-route--panel {
+    position: static;
+  }
+}

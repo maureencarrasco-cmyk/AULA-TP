@@ -31,10 +31,16 @@ function writeStore(next: Store) {
   localStorage.setItem(LS_KEY, JSON.stringify(next));
 }
 
+function adminStationIsOpen(mod: AdminModule, id: string, completed: string[]): boolean {
+  const index = mod.stations.findIndex((station) => station.id === id);
+  if (index <= 0) return true;
+  return completed.includes(mod.stations[index - 1].id);
+}
+
 function toStripStations(mod: AdminModule): EstacionBase[] {
   return mod.stations.map((s, i) => ({
     id: s.id,
-    orden: i + 1,
+    orden: i,
     slug: s.id,
     titulo: s.titulo,
     horas: s.minutes / 60,
@@ -51,7 +57,7 @@ function toStripStations(mod: AdminModule): EstacionBase[] {
     permiteAgente: false,
     ctaCompletar: "Completar",
     ctaSiguiente: "Siguiente",
-    bloqueadoHastaCompletarAnterior: false,
+    bloqueadoHastaCompletarAnterior: i > 0,
   }));
 }
 
@@ -69,13 +75,20 @@ export default function AdminModuleShell({
   const [checks, setChecks] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    const store = readStore();
-    setCompleted(store[mod.slug] || []);
-  }, [mod.slug]);
-
-  useEffect(() => {
+    const done = readStore()[mod.slug] || [];
+    setCompleted(done);
     const wanted = initialStation || mod.stations[0]?.id;
-    if (wanted && mod.stations.some((s) => s.id === wanted)) setCurrentId(wanted);
+    if (wanted && mod.stations.some((station) => station.id === wanted) && adminStationIsOpen(mod, wanted, done)) {
+      setCurrentId(wanted);
+      return;
+    }
+    let current = mod.stations[0]?.id;
+    for (const station of mod.stations) {
+      if (!adminStationIsOpen(mod, station.id, done)) break;
+      current = station.id;
+      if (!done.includes(station.id)) break;
+    }
+    setCurrentId(current);
   }, [initialStation, mod]);
 
   const station = mod.stations.find((s) => s.id === currentId) || mod.stations[0];
@@ -96,8 +109,9 @@ export default function AdminModuleShell({
     });
   }
 
-  function selectFase(first: EstacionBase) {
-    setCurrentId(first.id);
+  function selectFase(target: EstacionBase, done = completed) {
+    if (!adminStationIsOpen(mod, target.id, done)) return;
+    setCurrentId(target.id);
     setQuizPick({});
     setQuizDone(false);
     setChecks({});
@@ -125,14 +139,15 @@ export default function AdminModuleShell({
         <p className="mt-1 max-w-3xl text-sm text-[var(--aula-text-muted)]">{mod.blurb}</p>
       </div>
 
-      <main className="sites-hub-main">
+      <main className="sites-hub-main admin-module-layout">
         <StationRail
+          layout="panel"
           items={stripStations.map((estacion, index) =>
             railItemFromEstacion(estacion, {
               index,
               done: completed.includes(estacion.id),
               active: estacion.id === station.id,
-              open: true,
+              open: adminStationIsOpen(mod, estacion.id, completed),
             }),
           )}
           onSelect={(id) => {
@@ -183,8 +198,9 @@ export default function AdminModuleShell({
               type="button"
               className="admin-btn"
               onClick={() => {
+                const done = completed.includes(station.id) ? completed : [...completed, station.id];
                 markDone(station.id);
-                if (next) selectFase(stripStations[idx + 1]);
+                if (next) selectFase(stripStations[idx + 1], done);
               }}
             >
               {next ? "Marcar y seguir →" : "Marcar estación completada"}

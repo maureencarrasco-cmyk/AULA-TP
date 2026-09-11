@@ -4,7 +4,13 @@ import type { EstacionBase, FaseRuta } from "@/lib/aula-module-types";
 import { FASE_LABELS } from "@/lib/aula-module-types";
 import "@/app/curso/climatizacion/clim-module-overview.css";
 
-export type StationRailTone = "green" | "blue" | "purple" | "orange" | "pink";
+export type StationRailTone =
+  | "blue"
+  | "green"
+  | "purple"
+  | "red"
+  | "pink"
+  | "orange";
 export type StationRailState = "completed" | "active" | "available" | "locked";
 
 export type StationRailItem = {
@@ -12,6 +18,7 @@ export type StationRailItem = {
   n: number;
   title: string;
   subtitle: string;
+  duration?: string;
   state: StationRailState;
   tone: StationRailTone;
   icon: string;
@@ -19,25 +26,39 @@ export type StationRailItem = {
 
 const STATUS_LABEL: Record<StationRailState, string> = {
   completed: "Completada",
-  active: "En curso",
+  active: "En desarrollo",
   available: "Disponible",
-  locked: "Pendiente",
+  locked: "Bloqueada",
 };
 
-export function toneForFase(fase: FaseRuta): StationRailTone {
-  if (fase === "contextualizacion") return "green";
-  if (fase === "situacion_integradora") return "purple";
-  if (fase === "evaluacion_final") return "orange";
-  if (fase === "retroalimentacion") return "pink";
-  return "blue";
+/** Un color por posición en la ruta: el recorrido se lee de un vistazo. */
+const RAIL_TONES: StationRailTone[] = [
+  "blue",
+  "green",
+  "purple",
+  "red",
+  "pink",
+  "orange",
+];
+
+const RAIL_ICONS = ["▤", "◈", "▣", "▥", "✎", "⚙", "▦", "◎"];
+
+export function toneForIndex(index: number): StationRailTone {
+  return RAIL_TONES[index % RAIL_TONES.length];
 }
 
-export function iconForFase(fase: FaseRuta): string {
+export function iconForFase(fase: FaseRuta, index = 0): string {
   if (fase === "contextualizacion") return "▤";
   if (fase === "situacion_integradora") return "✚";
   if (fase === "evaluacion_final") return "✓";
   if (fase === "retroalimentacion") return "↻";
-  return "◎";
+  return RAIL_ICONS[index % RAIL_ICONS.length];
+}
+
+function durationLabel(horas: number): string | undefined {
+  if (!horas) return undefined;
+  const minutos = Math.round(horas * 60);
+  return minutos >= 60 ? `${horas} h` : `${minutos} min`;
 }
 
 export function railItemFromEstacion(
@@ -56,25 +77,36 @@ export function railItemFromEstacion(
     n: args.index + 1,
     title: estacion.titulo,
     subtitle: FASE_LABELS[estacion.fase] || estacion.habilidad,
+    duration: durationLabel(estacion.horas),
     state,
-    tone: toneForFase(estacion.fase),
-    icon: iconForFase(estacion.fase),
+    tone: toneForIndex(args.index),
+    icon: iconForFase(estacion.fase, args.index),
   };
 }
 
 export default function StationRail({
   items,
   onSelect,
+  layout = "track",
 }: {
   items: StationRailItem[];
   onSelect: (id: string) => void;
+  layout?: "track" | "panel";
 }) {
+  const isPanel = layout === "panel";
   return (
-    <section className="aula-overview-card aula-module-route aula-module-route--guide" aria-labelledby="module-route-heading">
+    <section
+      className={`aula-overview-card aula-module-route aula-module-route--guide${isPanel ? " aula-module-route--panel" : ""}`}
+      aria-labelledby="module-route-heading"
+    >
       <h2 id="module-route-heading">
         <span aria-hidden>▦</span> Ruta del módulo
       </h2>
-      <div className="aula-module-route-track" role="list" aria-label="Ruta de estaciones del módulo">
+      <div
+        className="aula-module-route-track"
+        role="list"
+        aria-label="Ruta de estaciones del módulo"
+      >
         {items.map((item, index) => {
           const open = item.state !== "locked";
           return (
@@ -84,15 +116,22 @@ export default function StationRail({
               role="listitem"
               disabled={!open}
               onClick={() => open && onSelect(item.id)}
-              className={`aula-module-route-step tone-${item.tone} is-${item.state}${index === items.length - 1 ? " is-last" : ""}`}
+              className={`aula-module-route-step is-${item.state}${
+                index === items.length - 1 ? " is-last" : ""
+              }`}
               aria-current={item.state === "active" ? "step" : undefined}
             >
-              <span className="aula-module-route-number">{item.state === "completed" ? "✓" : item.n}</span>
-              <span className="aula-module-route-icon" aria-hidden>
-                {item.icon}
+              <span className="aula-module-route-number">
+                {item.state === "completed" ? "✓" : item.n}
               </span>
+              {isPanel ? null : (
+                <span className="aula-module-route-icon" aria-hidden>
+                  {item.icon}
+                </span>
+              )}
               <strong>{item.title}</strong>
               <em>{item.subtitle}</em>
+              {item.duration ? <span className="aula-module-route-time">{item.duration}</span> : null}
               <small>{STATUS_LABEL[item.state]}</small>
             </button>
           );

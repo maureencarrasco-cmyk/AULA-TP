@@ -1,0 +1,173 @@
+/* CourseHome banner — mismo contrato para todas las especialidades TP. */
+
+.course-home-banner {
+  --hero-accent: var(--color-blue);
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background: var(--color-navy-deep);
+}
+
+.course-home-banner[data-specialty="climatizacion"] {
+  --hero-accent: var(--specialty-climatizacion);
+}
+
+.course-home-banner[data-specialty="electricidad"] {
+  --hero-accent: var(--specialty-electricidad);
+}
+
+.course-home-banner[data-specialty="enfermeria"] {
+  --hero-accent: var(--specialty-enfermeria);
+}
+
+.course-home-banner[data-specialty="administracion"] {
+  --hero-accent: var(--specialty-administracion);
+}
+
+.course-home-banner::after {
+  content: "";
+  display: block;
+  height: 4px;
+  background: var(--hero-accent);
+}
+
+.course-home-banner__inner {
+  display: grid;
+  grid-template-columns: minmax(196px, 248px) minmax(0, 1fr) minmax(200px, 32%);
+  align-items: stretch;
+  min-height: 220px;
+}
+
+.course-home-banner__logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 12px 20px 20px;
+  padding: 14px 16px;
+  background: var(--color-card);
+  border-radius: 16px;
+  box-shadow: var(--shadow-2);
+}
+
+.course-home-banner__logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 52px;
+  object-fit: contain;
+}
+
+.course-home-banner__logo small {
+  display: block;
+  margin-top: 8px;
+  color: var(--color-slate);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.course-home-banner__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 24px 28px 8px;
+}
+
+.course-home-banner__brand {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.92;
+}
+
+.course-home-banner__kicker {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.course-home-banner__copy h1 {
+  margin: 4px 0 0;
+  color: #fff;
+  font-size: clamp(28px, 3.1vw, 42px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.course-home-banner__plan {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.course-home-banner__plan::after {
+  content: "";
+  display: block;
+  width: 88px;
+  height: 2px;
+  background: var(--hero-accent);
+}
+
+.course-home-banner__desc {
+  max-width: 54ch;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  opacity: 0.92;
+}
+
+.course-home-banner__photo {
+  min-height: 220px;
+  background-color: var(--color-navy-deep);
+  background-image: linear-gradient(90deg, #072a4e 0%, rgba(7, 42, 78, 0.55) 32%, transparent 62%),
+    var(--hero-photo);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (max-width: 980px) {
+  .course-home-banner__inner {
+    grid-template-columns: minmax(168px, 210px) minmax(0, 1fr);
+  }
+
+  .course-home-banner__photo {
+    grid-column: 1 / -1;
+    min-height: 140px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 680px) {
+  .course-home-banner__inner {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .course-home-banner__logo {
+    margin: 16px 16px 0;
+  }
+
+  .course-home-banner__copy {
+    padding: 16px 18px 20px;
+  }
+
+  .course-home-banner__copy h1 {
+    font-size: 28px;
+  }
+
+  .course-home-banner__photo {
+    min-height: 120px;
+    height: 120px;
+  }
+}

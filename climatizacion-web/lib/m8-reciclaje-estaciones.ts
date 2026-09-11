@@ -508,7 +508,7 @@ export const ESTACIONES_M8: EstacionM8[] = [
     orden: 5,
     slug: "situacion-integradora",
     titulo: "Situación Integradora — Retiro controlado integral",
-    horas: 5,
+    horas: 3,
     fase: "situacion_integradora",
     aeCodigos: ["AE 8.1", "AE 8.3"],
     ceCodigos: [],

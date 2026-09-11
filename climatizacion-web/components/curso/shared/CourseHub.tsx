@@ -10,6 +10,7 @@ import ClimStudentAuth, {
   type ClimSessionStudent,
 } from "@/components/curso/shared/ClimStudentAuth";
 import CourseStatsCard from "@/components/curso/shared/CourseStatsCard";
+import CourseHomeBanner from "@/components/curso/shared/CourseHomeBanner";
 import LearningPath from "@/components/curso/shared/LearningPath";
 import { COURSE_CATALOG_HREF } from "@/lib/course-portal";
 import "@/app/curso/climatizacion/hub.css";
@@ -438,10 +439,7 @@ export default function CourseHub({ hub }: { hub: CourseHubConfig }) {
           />
         ) : null}
       </header>
-      <div className="sites-hub-hero-note mx-auto max-w-6xl px-4 pb-2 sm:px-6">
-        <p className="text-xs font-bold uppercase tracking-wide text-[var(--aula-blue)]">{hub.sector} · {hub.level}</p>
-        <h1 className="text-2xl font-extrabold tracking-tight text-[var(--aula-navy)] sm:text-3xl">{hub.title}</h1>
-      </div>
+      <CourseHomeBanner hub={hub} />
 
       <main className="sites-hub-main">
         {hub.groups.map((group, index) => (

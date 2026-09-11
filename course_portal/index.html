@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portal de acceso a cursos Aula TP Chile: rutas técnico-profesionales, módulos desplegables y simulación educativa." />
+    <title>Aula TP Chile · Portal de cursos</title>
+    <script type="module" src="assets/model-viewer.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=20260911-plantilla-v19" />
+    <link rel="stylesheet" href="lms-module-graphics.css?v=20260911-estaciones-v25" />
+  </head>
+  <body>
+    <section id="authView" class="auth-view" aria-labelledby="authTitle">
+      <div class="auth-visual" aria-hidden="true">
+        <span class="auth-cross">✚</span>
+        <span class="auth-heart">♡</span>
+        <div class="auth-brand">
+          <img src="assets/aulatp-logo-horizontal-trim.png" alt="Aula TP Chile · Innovación y liderazgo digital" decoding="async" />
+        </div>
+        <div class="auth-message"><small>Portal institucional Aula TP</small><h1>Acceso a rutas pedagógicas TP</h1><p>Elige tu especialidad, revisa la ruta de aprendizaje y entra al curso. Catálogo oficial MINEDUC con cursos vivos y especialidades en preparación.</p></div>
+      </div>
+      <div class="auth-panel auth-panel--catalog">
+        <section class="course-gateway course-gateway--catalog" aria-labelledby="courseGatewayTitle">
+          <div class="gateway-heading">
+            <span>Entrada principal</span>
+            <h2 id="courseGatewayTitle">Rutas pedagógicas Aula TP</h2>
+            <p>Primero las especialidades abiertas. Después explora el catálogo completo por sector. Cada ruta mantiene módulos, evidencias y evaluación sin mezclar contenidos.</p>
+          </div>
+          <div id="courseLiveRoutes" class="portal-live-routes" data-live-routes aria-label="Rutas pedagógicas abiertas"></div>
+          <div class="portal-catalog-block">
+            <div class="portal-catalog-heading">
+              <h3>Explorar catálogo TP</h3>
+              <p>Filtra por sector o busca una especialidad. Las marcadas como Próximamente se habilitarán con la misma arquitectura de ruta.</p>
+            </div>
+            <div id="courseCatalogAuth" class="course-catalog course-catalog--grid" data-course-catalog="auth" aria-label="Catálogo de especialidades TP"></div>
+          </div>
+          <div class="portal-general-highlights" aria-label="Capacidades generales del portal">
+            <article><span aria-hidden="true">▣</span><strong>Ruta pedagógica</strong><p>Cada especialidad se presenta como un camino de módulos y estaciones.</p></article>
+            <article><span aria-hidden="true">◎</span><strong>Simulación guiada</strong><p>Actividades, práctica libre y evaluación con retroalimentación.</p></article>
+            <article><span aria-hidden="true">↗</span><strong>Seguimiento docente</strong><p>Evidencias y avance conectados al panel de evaluación.</p></article>
+          </div>
+        </section>
+        <form id="loginForm" class="login-card" method="post">
+          <span class="login-icon" aria-hidden="true">♙</span>
+          <p class="login-eyebrow">Acceso institucional</p>
+          <h2 id="authTitle">Ingresa al portal general</h2>
+          <p class="login-copy">Tu cuenta abre la ruta asignada y conserva avances, intentos, práctica libre y evaluación.</p>
+          <label><span>Usuario o correo institucional</span><input id="loginEmail" name="email" type="text" value="demo2" autocomplete="username" required /></label>
+          <label><span>Clave de acceso</span><input id="loginPassword" name="password" type="password" value="AulaTP-Demo2-2026!" autocomplete="current-password" required minlength="8" /></label>
+          <p id="loginError" class="login-error" role="alert" hidden></p>
+          <button id="loginButton" type="submit">Ingresar al curso seleccionado <b aria-hidden="true">→</b></button>
+          <p class="demo-note"><strong>Cuenta demo2</strong><span data-course-demo-note>Acceso directo por clave al curso seleccionado.</span></p>
+        </form>
+      </div>
+    </section>
+
+    <aside id="userSessionBar" class="user-session-bar" hidden aria-label="Sesión del estudiante">
+      <span id="userInitials" class="user-avatar">CS</span>
+      <span class="user-copy"><strong id="userFullName">Camila Soto</strong><small id="userRole">Estudiante</small></span>
+      <span class="user-course-progress"><small>Progreso</small><strong id="serverProgress">0 %</strong></span>
+      <button id="reviewerToggle" class="reviewer-toggle" type="button" aria-haspopup="dialog" aria-controls="reviewerPanel" aria-expanded="false">Admin revisión</button>
+      <button id="logoutButton" type="button">Cerrar sesión</button>
+    </aside>
+    <aside id="reviewerPanel" class="reviewer-panel" hidden aria-labelledby="reviewerTitle">
+      <header>
+        <div><small>Herramientas locales</small><strong id="reviewerTitle">Revisión administrador</strong></div>
+        <button id="closeReviewerPanel" type="button" aria-label="Cerrar revisión administrador">×</button>
+      </header>
+      <p>Usa estos controles para revisar pantallas sin completar todo como estudiante.</p>
+      <div class="reviewer-actions">
+        <button id="reviewerAdvance" type="button">Avanzar pantalla actual</button>
+        <button id="reviewerUnlock" type="button">Desbloquear navegación</button>
+        <button id="reviewerIntegrator" type="button">Ir a Situación Integradora</button>
+        <button id="reviewerReset" type="button">Reiniciar revisión local</button>
+      </div>
+      <small id="reviewerStatus">Modo revisión desactivado.</small>
+    </aside>
+
+    <button id="accessibilityButton" class="accessibility-button" type="button" aria-haspopup="dialog" aria-controls="accessibilityPanel" aria-expanded="false" hidden>
+      <span aria-hidden="true">◉</span><strong>Accesibilidad</strong>
+    </button>
+    <button id="practiceFloatingButton" class="practice-floating-button" type="button" aria-label="Abrir práctica libre del módulo actual" hidden>
+      <span aria-hidden="true">✎</span>
+      <span><small data-practice-floating-module>Módulo actual</small><strong>Práctica libre</strong></span>
+    </button>
+    <button id="supportDockButton" class="support-dock-button" type="button" aria-haspopup="dialog" aria-controls="supportDockPanel" aria-expanded="false" hidden>
+      <span aria-hidden="true">◎</span>
+      <span class="support-dock-button-copy"><small>Apoyos</small><strong>Ayuda del módulo</strong></span>
+    </button>
+    <div id="supportDockBackdrop" class="support-dock-backdrop" hidden></div>
+    <aside id="supportDockPanel" class="support-dock-panel" role="dialog" aria-modal="true" aria-labelledby="supportDockTitle" hidden>
+      <header>
+        <div><small>Apoyos Aula TP</small><h2 id="supportDockTitle">Herramientas de avance</h2></div>
+        <button id="closeSupportDock" type="button" aria-label="Cerrar apoyos">×</button>
+      </header>
+      <div class="support-dock-grid">
+        <p class="support-dock-context" id="supportDockContext" role="status">
+          <small>Ayuda según lo que ves ahora</small>
+          <strong data-support-context-title>Módulo actual</strong>
+          <span data-support-context-prompt>Abre una estación o etapa para contextualizar el agente y la práctica.</span>
+        </p>
+        <button type="button" class="support-card support-practice" data-support-action="practice">
+          <strong>Práctica libre</strong>
+          <small>Explora sin alterar tu % de ruta · <span data-support-practice-progress>0/0</span></small>
+        </button>
+        <button type="button" class="support-card support-tutor" data-support-action="tutor">
+          <strong>Tutor pedagógico</strong>
+          <small>Pistas y orientación gradual</small>
+        </button>
+        <button type="button" class="support-card support-accessibility" data-support-action="accessibility">
+          <strong>Accesibilidad</strong>
+          <small>Texto, contraste y apoyo visual</small>
+        </button>
+      </div>
+    </aside>
+    <div id="accessibilityBackdrop" class="accessibility-backdrop" hidden></div>
+    <aside id="accessibilityPanel" class="accessibility-panel" role="dialog" aria-modal="true" aria-labelledby="accessibilityTitle" hidden>
+      <header>
+        <div><span class="accessibility-mark" aria-hidden="true">Aa</span><div><p>Preferencias funcionales</p><h2 id="accessibilityTitle">Accesibilidad</h2></div></div>
+        <button id="closeAccessibility" class="accessibility-close" type="button" aria-label="Cerrar panel de accesibilidad">×</button>
+      </header>
+      <p class="accessibility-intro">Configura cómo quieres recibir y manipular la información. Estas opciones no cambian la dificultad del curso.</p>
+      <section aria-labelledby="accessibilityProfilesTitle">
+        <h3 id="accessibilityProfilesTitle">Perfiles rápidos</h3>
+        <div class="accessibility-profile-grid" role="group" aria-label="Perfiles rápidos de accesibilidad">
+          <button type="button" data-accessibility-profile="reading"><strong>Lectura cómoda</strong><small>Texto mayor, más espaciado y foco visible.</small></button>
+          <button type="button" data-accessibility-profile="calm"><strong>Baja estimulación</strong><small>Menos movimiento, diseño simple y ambiente neutro.</small></button>
+          <button type="button" data-accessibility-profile="guided"><strong>Apoyo guiado</strong><small>Narración, ayuda visible y más tiempo.</small></button>
+        </div>
+      </section>
+      <section aria-labelledby="readingPreferencesTitle">
+        <h3 id="readingPreferencesTitle">Lectura y visualización</h3>
+        <div class="accessibility-size-group" role="group" aria-label="Tamaño del texto">
+          <button type="button" data-text-scale="normal"><span aria-hidden="true">A</span><strong>Normal</strong></button>
+          <button type="button" data-text-scale="large"><span aria-hidden="true">A+</span><strong>Grande</strong></button>
+          <button type="button" data-text-scale="extra_large"><span aria-hidden="true">A++</span><strong>Muy grande</strong></button>
+        </div>
+        <div class="accessibility-switches">
+          <label><span class="preference-icon" aria-hidden="true">◐</span><span><strong>Alto contraste</strong><small>Aumenta la diferencia entre fondo, texto y controles.</small></span><input type="checkbox" data-accessibility-key="high_contrast" /><i aria-hidden="true"></i></label>
+          <label><span class="preference-icon" aria-hidden="true">◫</span><span><strong>Modo visual simple</strong><small>Reduce elementos decorativos y mantiene la actividad principal.</small></span><input type="checkbox" data-accessibility-key="simple_visual_mode" /><i aria-hidden="true"></i></label>
+          <label><span class="preference-icon" aria-hidden="true">↝</span><span><strong>Reducir movimiento</strong><small>Evita animaciones, rebotes y desplazamientos suaves.</small></span><input type="checkbox" data-accessibility-key="reduce_motion" /><i aria-hidden="true"></i></label>
+        </div>
+      </section>
+      <section aria-labelledby="focusPreferencesTitle">
+        <h3 id="focusPreferencesTitle">Claridad y foco</h3>
+        <div class="accessibility-switches">
+          <label><span class="preference-icon" aria-hidden="true">⌖</span><span><strong>Resaltar foco activo</strong><small>Marca con mayor claridad botones, campos y opciones seleccionadas.</small></span><input type="checkbox" data-accessibility-key="focus_highlight" /><i aria-hidden="true"></i></label>
+          <label><span class="preference-icon" aria-hidden="true">↔</span><span><strong>Espaciado amplio</strong><small>Aumenta separación entre tarjetas, preguntas y controles.</small></span><input type="checkbox" data-accessibility-key="spacious_layout" /><i aria-hidden="true"></i></label>
+          <label><span class="preference-icon" aria-hidden="true">▤</span><span><strong>Guía de lectura</strong><small>Aplica una banda suave para seguir mejor el contenido principal.</small></span><input type="checkbox" data-accessibility-key="reading_guide" /><i aria-hidden="true"></i></label>
+        </div>
+      </section>
+      <section aria-labelledby="supportPreferencesTitle">
+        <h3 id="supportPreferencesTitle">Audio y apoyos</h3>
+        <div class="accessibility-actions">
+          <button id="listenCurrentInstruction" type="button"><span aria-hidden="true">◖</span><strong>Escuchar instrucción</strong></button>
+          <button id="stopNarration" type="button"><span aria-hidden="true">■</span><strong>Detener audio</strong></button>
+        </div>
+        <div class="accessibility-switches">
+          <label><span class="preference-icon" aria-hidden="true">♫</span><span><strong>Narración activada</strong><small>Permite leer instrucciones cuando lo solicites.</small></span><input type="checkbox" data-accessibility-key="narration_enabled" /><i aria-hidden="true"></i></label>
+          <label><span class="preference-icon" aria-hidden="true">●</span><span><strong>Efectos de sonido</strong><small>Sonidos funcionales suaves, nunca asociados al castigo.</small></span><input type="checkbox" data-accessibility-key="sound_effects_enabled" /><i aria-hidden="true"></i></label>
+          <label><span class="preference-icon" aria-hidden="true">＋</span><span><strong>Necesito más tiempo</strong><small>Elimina cualquier avance automático de las actividades.</small></span><input type="checkbox" data-accessibility-key="more_time" /><i aria-hidden="true"></i></label>
+          <label><span class="preference-icon" aria-hidden="true">?</span><span><strong>Necesito más ayuda</strong><small>Hace más visible el acceso a pistas y orientaciones.</small></span><input type="checkbox" data-accessibility-key="more_help" /><i aria-hidden="true"></i></label>
+          <label><span class="preference-icon" aria-hidden="true">✓</span><span><strong>Confirmaciones sonoras</strong><small>Usa tonos breves al guardar, avanzar o seleccionar una opción.</small></span><input type="checkbox" data-accessibility-key="sound_confirmations" /><i aria-hidden="true"></i></label>
+        </div>
+        <div class="accessibility-audio-grid">
+          <label class="ambient-select"><span><strong>Ambiente relajante</strong><small>Sonido de fondo opcional y regulado.</small></span><select id="ambientSound"><option value="off">Apagado</option><option value="water">Agua suave</option><option value="nature">Naturaleza</option><option value="neutral">Ambiente neutro</option></select></label>
+          <label class="ambient-select"><span><strong>Velocidad de narración</strong><small>Ajusta el ritmo de lectura de instrucciones.</small></span><select id="narrationSpeed"><option value="slow">Lenta</option><option value="normal">Normal</option><option value="fast">Rápida</option></select></label>
+          <label class="accessibility-range"><span><strong>Volumen de apoyos</strong><small>Regula tonos y ambiente.</small></span><input id="audioVolume" type="range" min="0" max="100" step="5" /></label>
+        </div>
+        <p class="accessibility-shortcuts"><strong>Atajos:</strong> Esc cierra el panel. Tab recorre controles. La narración lee la instrucción visible de la pantalla actual.</p>
+      </section>
+      <footer><span id="accessibilitySaveStatus" role="status" aria-live="polite">Las preferencias se guardan automáticamente.</span><button id="resetAccessibility" type="button">Restablecer preferencias</button></footer>
+    </aside>
+
+    <button id="tutorButton" class="tutor-button" type="button" aria-haspopup="dialog" aria-controls="tutorPanel" aria-expanded="false" hidden>
+      <span class="tutor-button-avatar" aria-hidden="true"><img src="assets/aulatp-logo-horizontal-trim.png" alt="" decoding="async" /></span>
+      <span><small>¿Necesitas orientación?</small><strong>Tutor Aula TP</strong></span>
+      <i aria-hidden="true"></i>
+    </button>
+    <div id="tutorBackdrop" class="tutor-backdrop" hidden></div>
+    <aside id="tutorPanel" class="tutor-panel" role="dialog" aria-modal="true" aria-labelledby="tutorTitle" hidden>
+      <header class="tutor-header">
+        <div class="tutor-identity">
+          <span class="tutor-avatar" aria-hidden="true"><img src="assets/aulatp-logo-horizontal-trim.png" alt="" decoding="async" /></span>
+          <div><small>Tutor acompañante</small><h2 id="tutorTitle">Aula TP Chile</h2><p><i></i> Disponible para orientarte</p></div>
+        </div>
+        <button id="closeTutor" type="button" aria-label="Cerrar Tutor Aula TP">×</button>
+      </header>
+      <div class="tutor-context">
+        <span aria-hidden="true">◎</span>
+        <div><small>Te acompaño en</small><strong id="tutorContextLabel">Portada del curso</strong></div>
+      </div>
+      <div id="tutorMessages" class="tutor-messages" role="log" aria-live="polite" aria-relevant="additions">
+        <article class="tutor-message assistant">
+          <span aria-hidden="true"><img src="assets/aulatp-logo-horizontal-trim.png" alt="" decoding="async" /></span>
+          <div><strong>¡Hola! Soy tu Tutor Aula TP.</strong><p>Puedo acompañarte en Electricidad, Enfermería u otra ruta TP. Te ayudaré a comprender conceptos, ordenar evidencias y decidir con criterio técnico.</p></div>
+        </article>
+      </div>
+      <div id="tutorQuickActions" class="tutor-quick-actions" aria-label="Preguntas sugeridas">
+        <button type="button" data-tutor-prompt="Explícame el contenido de esta pantalla">Explícame esta etapa</button>
+        <button type="button" data-tutor-prompt="Dame una pista gradual para la actividad actual">Dame una pista gradual</button>
+        <button type="button" data-tutor-prompt="¿Qué evidencia debo revisar antes de responder?">¿Qué evidencia reviso?</button>
+      </div>
+      <form id="tutorForm" class="tutor-form">
+        <label for="tutorInput">Escribe tu duda</label>
+        <div><textarea id="tutorInput" rows="2" maxlength="2000" placeholder="Por ejemplo: ayúdame a ordenar la evidencia antes de decidir" required></textarea><button id="sendTutorMessage" type="submit" aria-label="Enviar mensaje al tutor">➤</button></div>
+        <small id="tutorSafetyNote">Te orientaré con pistas y preguntas. No reemplazo a tu docente ni resuelve evaluaciones por ti.</small>
+      </form>
+    </aside>
+
+    <main id="appShell" class="site-shell" hidden>
+      <section id="accessView" class="course-view is-active" aria-hidden="false">
+        <header class="hero-banner">
+          <div class="hero-banner-inner">
+            <div class="hero-logo" aria-label="Aula TP Chile">
+              <img class="brand-logo-img" src="assets/aulatp-logo-horizontal-trim.png" alt="Aula TP Chile" decoding="async" />
+              <small>Formación técnica con sentido</small>
+            </div>
+            <div class="hero-copy">
+              <p class="academy">Aula TP Chile</p>
+              <p class="specialty" data-course-hero-kicker>Módulos especialidad</p>
+              <h1 data-course-title>Atención de Enfermería</h1>
+              <p class="plan" data-course-hero-plan>Plan común</p>
+              <p class="hero-description" id="courseHeroDescription">Curso orientado al desarrollo de competencias básicas de atención en salud, con énfasis en cuidados, medición de parámetros, promoción, bioseguridad y registro clínico.</p>
+            </div>
+            <div class="hero-photo" aria-hidden="true"></div>
+          </div>
+        </header>
+
+        <section class="course-library-strip" aria-labelledby="courseLibraryTitle">
+          <div class="library-heading">
+            <span>Mis cursos</span>
+            <h2 id="courseLibraryTitle">Rutas técnico-profesionales ordenadas</h2>
+            <p>Despliega cada curso para comparar módulos y cambia de ruta sin salir del portal local.</p>
+          </div>
+          <div id="courseCatalogApp" class="course-catalog compact" data-course-catalog="app" aria-label="Cursos disponibles para el estudiante"></div>
+        </section>
+
+        <div class="portal-layout">
+          <section class="main-column">
+            <section class="route-panel" aria-labelledby="routeTitle">
+              <h2 id="routeTitle"><span aria-hidden="true">▱</span> Ruta de módulos de aprendizaje</h2>
+              <div id="moduleRoute" class="module-route" aria-label="Módulos del curso"></div>
+            </section>
+
+            <section class="selected-panel" aria-labelledby="selectedTitle">
+              <div class="section-title-row">
+                <h2 id="selectedTitle"><span aria-hidden="true">▧</span> Información del módulo seleccionado</h2>
+                <p><span aria-hidden="true">ⓘ</span> Haz clic en un módulo para ver el detalle.</p>
+              </div>
+              <div id="moduleTabs" class="module-tabs" aria-label="Selección de módulos"></div>
+              <article class="module-detail">
+                <div class="detail-copy">
+                  <p id="detailEyebrow" class="detail-eyebrow"></p>
+                  <h3 id="detailTitle"></h3>
+                  <p id="detailDescription" class="detail-description"></p>
+                  <ul id="detailOutcomes" class="outcome-list"></ul>
+                </div>
+                <div class="detail-illustration" aria-hidden="true">
+                  <span class="illustration-orb"></span>
+                  <span id="detailIcon" class="module-icon icon-care"></span>
+                </div>
+                <button id="enterDetail" class="detail-enter" type="button">Ingresar Módulo <span id="detailButtonNumber">1</span><b aria-hidden="true">›</b></button>
+              </article>
+            </section>
+          </section>
+
+          <aside class="side-column course-sidebar" data-course-sidebar aria-label="Información general del curso">
+            <section class="information-card">
+              <h2><span class="header-info-icon" aria-hidden="true">i</span> Información general</h2>
+              <dl>
+                <div><dt><span class="info-icon"><i class="ui-icon icon-stethoscope"></i></span> Especialidad</dt><dd data-course-specialty>Atención de Enfermería</dd></div>
+                <div><dt><span class="info-icon"><i class="ui-icon icon-level"></i></span> Nivel</dt><dd>3° Medio</dd></div>
+                <div><dt><span class="info-icon"><i class="ui-icon icon-calendar"></i></span> Período</dt><dd>I Semestre</dd></div>
+                <div><dt><span class="info-icon"><i class="ui-icon icon-book"></i></span> Programa</dt><dd>Plan Común</dd></div>
+                <div><dt><span class="info-icon progress-ring" data-progress-ring></span> Progreso general</dt><dd><span data-progress-range>0 % – 100 %</span></dd></div>
+              </dl>
+              <div class="progress-scale"><strong data-progress-number>0 %</strong><div><span data-progress-fill></span></div><strong>100 %</strong></div>
+              <div class="current-stage"><span>Etapa actual</span><strong data-current-module>Inicio del curso</strong></div>
+            </section>
+            <section class="course-stats" aria-label="Resumen de módulos">
+              <div><span class="stat-icon"><i class="ui-icon icon-clipboard"></i></span><strong>Módulos</strong><b data-stat-modules>5</b></div>
+              <div><span class="stat-icon"><i class="ui-icon icon-clock"></i></span><strong>Horas anuales</strong><b data-stat-hours-annual>836 h</b></div>
+              <div><span class="stat-icon"><i class="ui-icon icon-cube"></i></span><strong>Horas 3D</strong><b data-stat-hours-3d>225 h</b></div>
+              <div><span class="stat-icon"><i class="ui-icon icon-check"></i></span><strong>Estado</strong><b class="available"><i></i><span data-course-status>Disponible</span></b></div>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <section id="learningView" class="module-screen course-view" hidden aria-hidden="true" aria-labelledby="moduleHeroTitle">
+        <div class="lms-topbar">
+          <div class="lms-topbar-brand" aria-label="Aula TP Chile">
+            <img class="brand-logo-img" src="assets/aulatp-logo-horizontal-trim.png" alt="Aula TP Chile" decoding="async" />
+            <small>Formación técnica con sentido</small>
+          </div>
+          <button id="backToHome" class="back-button" type="button" aria-label="Volver a la portada del curso"><span aria-hidden="true">←</span> Volver al curso</button>
+          <div class="lms-topbar-chips" aria-label="Ubicación en la ruta">
+            <span id="moduleOaChip">OA</span>
+            <span id="moduleNumChip">Módulo 1</span>
+            <span id="moduleCourseChip" data-course-title>Curso</span>
+          </div>
+        </div>
+
+        <header id="moduleHero" class="module-hero">
+          <div class="module-hero-copy">
+            <h1 id="moduleHeroTitle" data-course-title>Nombre del curso</h1>
+            <h2 id="moduleScreenTitle">Módulo 1 · Nombre del módulo</h2>
+            <p class="lms-map-hero__station" id="moduleStationLabel"><span aria-hidden="true">◉</span> <b id="moduleStationName">Nombre de la estación</b><small id="moduleStationMeta">Estación 1 de 5</small></p>
+            <p id="moduleHeroDescription" hidden></p>
+            <div class="lms-map-hero__progress">
+              <div class="lms-map-hero__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso del módulo"><i id="moduleHeroProgressFill"></i></div>
+              <span id="moduleHeroProgressLabel">1 / 5 estaciones</span>
+            </div>
+          </div>
+          <p class="module-hero-station-chip" aria-hidden="true">
+            <span class="module-hero-station-chip__pin">◉</span>
+            <b id="moduleStationChip">Estación 1</b>
+            <small id="moduleStationChipName">Contextualización</small>
+          </p>
+        </header>
+
+        <div class="module-screen-layout">
+          <nav class="module-left-rail" aria-labelledby="internalRouteTitle">
+            <h2 id="internalRouteTitle"><span aria-hidden="true">▦</span> Ruta del módulo</h2>
+            <div id="internalRoute" class="internal-route module-left-rail__list"></div>
+          </nav>
+          <div class="module-screen-main">
+            <section class="station-card" aria-labelledby="stationCardTitle">
+              <header class="station-card__head">
+                <span class="station-card__icon" id="stationCardIcon" aria-hidden="true"></span>
+                <div>
+                  <h2 id="stationCardTitle">Estación 1 · Contextualización</h2>
+                  <p id="stationCardPurpose">Propósito de la estación</p>
+                </div>
+                <span class="station-card__time"><i aria-hidden="true">◷</i> <b id="stationCardDuration">45 min</b></span>
+              </header>
+              <div id="stationTemplateBody" class="station-template-body" hidden></div>
+              <div id="stationGenericBody" class="station-card__body">
+                <figure class="station-case">
+                  <img id="stationCaseImage" src="assets/electricity-module-graphic-v2.webp" alt="" decoding="async" />
+                  <figcaption>
+                    <span>Caso de estudio</span>
+                    <strong id="stationCaseTitle">Título del caso</strong>
+                    <p id="stationCaseText">Descripción breve del contexto del proyecto.</p>
+                  </figcaption>
+                </figure>
+                <div class="station-brief">
+                  <section class="station-block">
+                    <h3><span aria-hidden="true">✓</span> Objetivos de aprendizaje</h3>
+                    <ul id="stationObjectives" class="station-check"></ul>
+                  </section>
+                  <section class="station-block is-info">
+                    <h3><span aria-hidden="true">▤</span> Contenido de la estación</h3>
+                    <p id="stationContentTitle" class="station-block__lead"></p>
+                    <p id="stationContentText"></p>
+                  </section>
+                </div>
+                <section class="station-reflect" aria-labelledby="stationReflectTitle">
+                  <h3 id="stationReflectTitle"><span aria-hidden="true">✎</span> Tu reflexión</h3>
+                  <p id="stationReflectPrompt">¿Qué te llamó la atención de esta situación técnica?</p>
+                  <textarea id="stationReflectInput" rows="5" placeholder="Escribe aquí…" aria-label="Tu reflexión sobre esta estación"></textarea>
+                  <label for="stationReflectCheck"><input type="checkbox" id="stationReflectCheck" /> He revisado el contenido</label>
+                </section>
+              </div>
+            </section>
+
+            <div id="moduleFocusRow" class="lms-focus-row">
+              <section class="course-panel expected-panel" aria-labelledby="expectedTitle">
+                <h2 id="expectedTitle"><span aria-hidden="true">★</span> Aprendizajes esperados</h2>
+                <div id="aeTabs" class="ae-tabs" role="tablist" aria-label="Aprendizajes esperados"></div>
+                <p class="panel-hint"><span aria-hidden="true">i</span> Haz clic en un AE para ver sus etapas</p>
+              </section>
+              <section class="course-panel stages-panel" aria-labelledby="stagesTitle">
+                <h2 id="stagesTitle"><span aria-hidden="true">💡</span> Etapas del AE: <b id="selectedAeLabel">AE 1</b></h2>
+                <div id="pedagogicalStages" class="pedagogical-stages"></div>
+                <div class="stage-explanation"><span aria-hidden="true">i</span><p id="stageExplanation"></p></div>
+              </section>
+            </div>
+
+            <div class="lms-map-actions">
+              <button id="backToModuleFooter" class="lms-map-actions__ghost" type="button"><span aria-hidden="true">←</span> Anterior</button>
+              <button id="advanceStage" class="advance-stage" type="button"><span id="advanceStageLabel">Continuar</span><span aria-hidden="true">→</span></button>
+            </div>
+            <p class="lms-map-brand"><strong>Aula TP Chile</strong><span>Formación técnica con sentido</span></p>
+          </div>
+
+          <aside class="side-column course-sidebar module-sidebar" data-course-sidebar aria-label="Panel del módulo">
+            <section class="information-card module-information">
+              <h2><span class="header-info-icon" aria-hidden="true">i</span> Información del módulo</h2>
+              <dl>
+                <div><dt><span class="info-icon" aria-hidden="true">▦</span> Ruta</dt><dd id="screenStationIndex">1 / 5</dd></div>
+                <div><dt><span class="info-icon" aria-hidden="true">⚑</span> Estación</dt><dd id="screenModuleName">Contextualización</dd></div>
+                <div><dt><span class="info-icon" aria-hidden="true">▤</span> Módulo</dt><dd id="currentModuleCount">1 de 5</dd></div>
+                <div><dt><span class="info-icon" aria-hidden="true">☆</span> Aprendizaje</dt><dd id="screenAeList">AE 1, AE 2 y AE 3</dd></div>
+                <div><dt><span class="info-icon" aria-hidden="true">✓</span> Estado</dt><dd><b id="screenStationStatus">En desarrollo</b><span data-module-status hidden>En curso</span></dd></div>
+                <div><dt><span class="info-icon" aria-hidden="true">◷</span> Duración</dt><dd id="screenDuration">45 min</dd></div>
+              </dl>
+              <div class="progress-scale"><strong data-progress-number>0 %</strong><div><span data-progress-fill></span></div><strong>100 %</strong></div>
+            </section>
+            <div class="lms-map-quick" aria-label="Apoyos del módulo">
+              <button type="button" class="lms-map-quick__btn is-pl" data-support-action="practice">
+                <span class="lms-map-quick__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.1-3.1a6 6 0 0 1-8 8L6.3 20.8a2 2 0 0 1-2.8-2.8l6.6-6.5a6 6 0 0 1 8-8z"/></svg>
+                </span>
+                <span class="lms-map-quick__copy"><strong>Práctica libre</strong><small>Explora y practica habilidades</small></span>
+                <b aria-hidden="true">›</b>
+              </button>
+              <button type="button" class="lms-map-quick__btn is-agent" data-support-action="tutor">
+                <span class="lms-map-quick__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+                </span>
+                <span class="lms-map-quick__copy"><strong>Tutor pedagógico</strong><small>Orientación para tu aprendizaje</small></span>
+                <b aria-hidden="true">›</b>
+              </button>
+              <button type="button" class="lms-map-quick__btn is-a11y" data-support-action="accessibility">
+                <span class="lms-map-quick__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="12" cy="5" r="2.2"/><path d="M8.2 9.2h7.6l-1.1 3.4 2.7 1.4-.9 1.8-3.2-1.6-.8 6.2h-2.1l-.8-6.2-3.2 1.6-.9-1.8 2.7-1.4z"/></svg>
+                </span>
+                <span class="lms-map-quick__copy"><strong>Accesibilidad</strong><small>Personaliza tu experiencia</small></span>
+                <b aria-hidden="true">›</b>
+              </button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="contextualizationView" class="context-screen course-view module-screen" hidden aria-hidden="true" aria-labelledby="contextScreenTitle">
+        <div class="lms-topbar">
+          <div class="lms-topbar-brand" aria-label="Aula TP Chile">
+            <img class="brand-logo-img" src="assets/aulatp-logo-horizontal-trim.png" alt="Aula TP Chile" decoding="async" />
+            <small>Formación técnica con sentido</small>
+          </div>
+          <button id="backToModule" class="back-button" type="button" aria-label="Volver a la pantalla del módulo"><span aria-hidden="true">←</span> Volver al módulo</button>
+          <div class="lms-topbar-chips" aria-label="Ubicación en la ruta">
+            <span id="contextNumChip">Módulo 1</span>
+            <span data-course-title>Curso</span>
+          </div>
+        </div>
+
+        <header class="module-hero">
+          <div class="module-hero-copy">
+            <h1 id="contextScreenTitle" data-course-title>Nombre del curso</h1>
+            <h2 id="contextModuleTitle">Módulo 1 · Contextualización</h2>
+            <p class="lms-map-hero__station"><span aria-hidden="true">◉</span> <b id="contextStationTitle">Contextualización</b><small id="contextVersionLabel">Estación 1 de 8</small></p>
+            <p id="contextHeroLead">Conoce el contexto técnico o laboral de esta situación y activa tus conocimientos previos.</p>
+            <div class="lms-map-hero__progress">
+              <div class="lms-map-hero__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso de contextualización"><i id="contextHeroProgressFill"></i></div>
+              <span id="contextHeroProgressLabel">1 / 8 estaciones</span>
+            </div>
+          </div>
+          <p class="module-hero-station-chip">
+            <span class="module-hero-station-chip__pin" aria-hidden="true">◉</span>
+            <b id="contextRouteSign">Estación 1</b>
+            <small>Contextualización</small>
+          </p>
+        </header>
+
+        <div class="module-screen-layout">
+          <nav class="module-left-rail" aria-labelledby="contextRouteTitle">
+            <h2 id="contextRouteTitle"><span aria-hidden="true">▦</span> Ruta de contextualización</h2>
+            <div id="contextStepsRail" class="internal-route module-left-rail__list"></div>
+          </nav>
+          <div class="module-screen-main">
+            <section class="station-card" aria-labelledby="contextActivityTitle">
+              <header class="station-card__head">
+                <span class="station-card__icon" aria-hidden="true">▤</span>
+                <div>
+                  <h2 id="contextActivityTitle">Estación 1 · Contextualización</h2>
+                  <p id="contextActivityLead">Comprendo la situación técnica o laboral</p>
+                </div>
+                <span class="station-card__time"><i aria-hidden="true">◷</i> <b id="contextActivityMeta">10 min</b></span>
+              </header>
+              <div class="station-card__body">
+                <figure class="station-case">
+                  <img id="contextCaseHeroImage" src="assets/electricity-module-domestic-installation-v1.webp" alt="Caso profesional del módulo" decoding="async" />
+                  <figcaption>
+                    <span id="contextCaseTypeLabel">Caso de estudio</span>
+                    <strong id="situationPatientName">Situación profesional del módulo</strong>
+                    <p id="situationPatientSummary">Descripción breve del contexto del proyecto.</p>
+                    <div id="contextCaseNorm" class="station-case__norm" hidden></div>
+                  </figcaption>
+                </figure>
+                <div class="station-brief">
+                  <section class="station-block">
+                    <h3><span aria-hidden="true">✓</span> Objetivos de aprendizaje</h3>
+                    <ul id="contextCaseObservations" class="station-check"></ul>
+                  </section>
+                  <section class="station-block is-info">
+                    <h3><span aria-hidden="true">▤</span> Contenido de la estación</h3>
+                    <p id="contextCaseDescription"></p>
+                    <p id="contextCaseChallenge"></p>
+                  </section>
+                </div>
+                <section id="contextActivityPanel" class="station-reflect context-activity-panel" aria-labelledby="contextActivityHeading">
+                  <h3 id="contextActivityHeading"><span aria-hidden="true">✎</span> Actividad de la estación</h3>
+                  <p><span id="contextActivityNumber">Estación 1</span> · <span id="situationPatientSetting">Entorno de simulación</span></p>
+                  <div id="contextActivityContent" class="context-activity-content"></div>
+                  <div id="contextActivityResult" class="activity-result" role="status" aria-live="polite" hidden></div>
+                  <footer class="activity-actions">
+                    <button id="validateContextActivity" class="activity-primary" type="button">Comprobar respuestas</button>
+                    <button id="nextContextActivity" class="activity-next" type="button" hidden>Continuar a la siguiente estación</button>
+                  </footer>
+                </section>
+              </div>
+            </section>
+
+            <div hidden>
+              <div id="contextStepsLeft"></div>
+              <div id="contextStepsRight"></div>
+              <img id="contextCaseDetailImage" alt="" />
+              <span id="contextHoursLabel"></span>
+              <span id="contextDurationLabel"></span>
+              <span id="situationDuration"></span>
+              <strong id="contextCasePatient"></strong>
+              <span id="contextCaseSetting"></span>
+            </div>
+          </div>
+
+          <aside class="side-column course-sidebar module-sidebar context-sidebar" aria-label="Información del módulo y progreso">
+            <section class="information-card module-information">
+              <h2><span class="header-info-icon" aria-hidden="true">i</span> Información del módulo</h2>
+              <dl>
+                <div><dt><span class="info-icon" aria-hidden="true">▦</span> Ruta</dt><dd id="contextRouteCount">1 / 8</dd></div>
+                <div><dt><span class="info-icon" aria-hidden="true">⚑</span> Estación</dt><dd>Contextualización</dd></div>
+                <div><dt><span class="info-icon" aria-hidden="true">▤</span> Módulo</dt><dd id="contextModuleCount">1 de 5</dd></div>
+                <div><dt><span class="info-icon" aria-hidden="true">☆</span> Aprendizaje</dt><dd>AE 1</dd></div>
+                <div><dt><span class="info-icon" aria-hidden="true">✓</span> Estado</dt><dd id="contextStatus">En desarrollo</dd></div>
+                <div><dt><span class="info-icon" aria-hidden="true">◷</span> Duración</dt><dd id="contextSidebarDuration">45 min</dd></div>
+              </dl>
+              <div class="progress-scale"><strong id="contextProgressLabel">0 %</strong><div><span id="contextProgressFill"></span></div><strong>100 %</strong></div>
+            </section>
+            <div class="lms-map-quick" aria-label="Apoyos del módulo">
+              <button type="button" class="lms-map-quick__btn is-pl" data-support-action="practice">
+                <span class="lms-map-quick__icon" aria-hidden="true">⚒</span>
+                <span class="lms-map-quick__copy"><strong>Práctica libre</strong><small>Explora y practica habilidades</small></span>
+                <b aria-hidden="true">›</b>
+              </button>
+              <button type="button" class="lms-map-quick__btn is-agent" data-support-action="tutor">
+                <span class="lms-map-quick__icon" aria-hidden="true">💬</span>
+                <span class="lms-map-quick__copy"><strong>Agente pedagógico</strong><small>Te orienta y resuelve tus dudas</small></span>
+                <b aria-hidden="true">›</b>
+              </button>
+              <button type="button" class="lms-map-quick__btn is-a11y" data-support-action="accessibility">
+                <span class="lms-map-quick__icon" aria-hidden="true">♿</span>
+                <span class="lms-map-quick__copy"><strong>Accesibilidad</strong><small>Personaliza tu experiencia</small></span>
+                <b aria-hidden="true">›</b>
+              </button>
+            </div>
+            <p id="contextInstruction" class="context-instruction">Completa cada estación de la ruta para avanzar.</p>
+            <span id="contextTipLastNumber" hidden>8</span>
+          </aside>
+        </div>
+      </section>
+
+      <section id="aeJourneyView" class="ae-screen course-view" hidden aria-hidden="true" aria-labelledby="aeJourneyTitle">
+        <header class="ae-hero">
+          <div class="banner-grid"></div>
+          <div class="hero-logo ae-logo" aria-label="Aula TP Chile">
+            <img class="brand-logo-img" src="assets/aulatp-logo-horizontal-trim.png" alt="Aula TP Chile · Innovación y liderazgo digital" />
+          </div>
+          <button id="backFromAe" class="back-button" type="button" aria-label="Volver a la pantalla del módulo"><span aria-hidden="true">←</span> Volver atrás</button>
+          <div class="ae-hero-copy">
+            <p id="aeModuleEyebrow">Módulo 1</p>
+            <h1 id="aeJourneyTitle">Aplicación de cuidados básicos</h1>
+            <p>Ruta de aprendizaje esperado · avanza etapa por etapa</p>
+          </div>
+          <div class="ae-hero-care" aria-hidden="true"><span>♡</span><i>✚</i></div>
+          <div class="ae-hero-photo" aria-hidden="true"></div>
+        </header>
+
+        <div class="ae-layout">
+          <div class="ae-main">
+            <section class="ae-route-card" aria-label="Ruta del aprendizaje esperado">
+              <div id="aeRoute" class="ae-route"></div>
+              <article class="ae-center-card">
+                <img id="aeCenterImage" src="assets/electricity-module-domestic-installation-v1.webp" alt="Recorrido de aprendizaje del módulo en simulación técnica" />
+                <div>
+                  <strong id="aeCenterCode">AE 1</strong>
+                  <span id="aeCenterTitle">Cuidados básicos</span>
+                </div>
+                <i class="ae-center-shield" aria-hidden="true"></i>
+              </article>
+            </section>
+
+            <section id="aeStageDetail" class="ae-stage-detail" aria-labelledby="aeStageDetailTitle">
+              <header class="ae-stage-detail-header">
+                <span id="aeStageDetailNumber" class="ae-detail-number">1</span>
+                <div>
+                  <small id="aeStageDetailEyebrow">Etapa actual</small>
+                  <h2 id="aeStageDetailTitle">Analizar</h2>
+                  <p id="aeStageDetailDescription">Observa la situación profesional, identifica los antecedentes relevantes y reconoce qué información necesitas antes de actuar.</p>
+                </div>
+              </header>
+              <div id="aeStageActivity" class="ae-stage-activity"></div>
+              <div id="aeStageFeedback" class="ae-stage-feedback" role="status" aria-live="polite" hidden></div>
+              <button id="completeAeStage" class="ae-primary-action" type="button">Comprobar y completar etapa <span aria-hidden="true">›</span></button>
+            </section>
+            <button id="continueNextAe" class="ae-next-learning" type="button" hidden>Continuar al AE 2 <span aria-hidden="true">›</span></button>
+          </div>
+
+          <aside class="ae-sidebar" aria-label="Avance del aprendizaje esperado">
+            <section class="ae-progress-card">
+              <h2><span aria-hidden="true">↗</span> Tu avance</h2>
+              <dl>
+                <div><dt><span class="ae-side-icon" aria-hidden="true">▤</span> Ruta del AE</dt><dd id="aeRouteProgress">0 / 6</dd></div>
+                <div><dt><span class="ae-side-icon" aria-hidden="true">◎</span> Etapa actual</dt><dd id="aeCurrentStage">Analizar</dd></div>
+                <div><dt><span class="ae-side-icon" aria-hidden="true">▣</span> Módulo actual</dt><dd id="aeCurrentModule">Módulo 1</dd></div>
+                <div><dt><span class="ae-side-icon" aria-hidden="true">☆</span> AE activo</dt><dd id="aeActiveCode">AE 1</dd></div>
+                <div><dt><span class="ae-side-icon" aria-hidden="true">✓</span> Estado</dt><dd class="ae-status"><i></i><span id="aeStatusLabel">En progreso</span></dd></div>
+              </dl>
+              <div class="ae-progress-heading"><span>Progreso general</span><b id="aeProgressLabel">0 %</b></div>
+              <div class="ae-progress-scale"><span id="aeProgressFill"></span></div>
+              <div class="ae-completed-row"><span aria-hidden="true">♛</span><strong>Etapas completadas</strong><b id="aeCompletedCount">0 de 6</b></div>
+            </section>
+            <section id="aeAchievement" class="ae-achievement">
+              <p>Al completar las 6 etapas obtendrás:</p>
+              <span class="ae-trophy" aria-hidden="true">★</span>
+              <strong id="aeAchievementLabel">¡AE 1 logrado!</strong>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <section id="integratorView" class="integrator-screen course-view" hidden aria-hidden="true" aria-labelledby="integratorTitle">
+        <header class="integrator-hero">
+          <div class="banner-grid"></div>
+          <div class="hero-logo integrator-logo" aria-label="Aula TP Chile">
+            <img class="brand-logo-img" src="assets/aulatp-logo-horizontal-trim.png" alt="Aula TP Chile · Innovación y liderazgo digital" />
+          </div>
+          <button id="backFromIntegrator" class="back-button" type="button" aria-label="Volver a la pantalla del módulo"><span aria-hidden="true">←</span> Volver atrás</button>
+          <div class="integrator-hero-copy">
+            <h1 id="integratorTitle">Situación Integradora</h1>
+            <p id="integratorModuleTitle">Módulo 1 · Aplicación de cuidados básicos</p>
+            <span>5ª estación de la ruta de aprendizaje</span>
+          </div>
+          <div class="integrator-hero-photo" aria-hidden="true"></div>
+        </header>
+
+        <div class="integrator-shell">
+          <div class="integrator-notice"><span aria-hidden="true">i</span><p>Transita por las situaciones progresivas, reconoce las palabras clave y explora todos los antecedentes antes de resolver el desafío integrador.</p><small>El ticket verde aparece solo al completar cada etapa.</small></div>
+          <nav id="integratorRoute" class="integrator-route" aria-label="Ruta hacia la Situación Integradora"></nav>
+
+          <div class="integrator-layout">
+            <main class="integrator-main">
+              <section id="integratorStagePanel" class="integrator-stage-panel" aria-live="polite"></section>
+            </main>
+
+            <aside class="integrator-sidebar" aria-label="Información de la etapa">
+              <section class="integrator-progress-card">
+                <h2><span aria-hidden="true">◎</span> Información de la etapa</h2>
+                <dl>
+                  <div><dt>Ruta integradora</dt><dd id="integratorRouteCount">0 / 4</dd></div>
+                  <div><dt>Etapa actual</dt><dd id="integratorCurrentLabel">Situaciones progresivas</dd></div>
+                  <div><dt>Módulo actual</dt><dd id="integratorModuleLabel">Módulo 1</dd></div>
+                  <div><dt>AE integrados</dt><dd>AE 1 · AE 2 · AE 3</dd></div>
+                  <div><dt>Estado</dt><dd class="integrator-status"><i></i><span id="integratorStatusLabel">En progreso</span></dd></div>
+                </dl>
+                <div class="integrator-progress-heading"><span>Progreso de la etapa</span><b id="integratorProgressLabel">0 %</b></div>
+                <div class="integrator-progress-bar"><span id="integratorProgressFill"></span></div>
+                <div class="integrator-completed-row"><span aria-hidden="true">♛</span><strong>Etapas completadas</strong><b id="integratorCompletedCount">0 de 4</b></div>
+              </section>
+              <section id="integratorAchievement" class="integrator-achievement">
+                <p>Al lograr esta etapa demostrarás que puedes integrar tus aprendizajes y actuar con seguridad y criterio profesional.</p>
+                <span aria-hidden="true">★</span>
+                <strong>¡Situación Integradora lograda!</strong>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section id="practiceView" class="practice-screen course-view" hidden aria-hidden="true" aria-labelledby="practiceTitle">
+        <header class="practice-hero">
+          <div class="banner-grid"></div>
+          <div class="hero-logo practice-logo" aria-label="Aula TP Chile">
+            <img class="brand-logo-img" src="assets/aulatp-logo-horizontal-trim.png" alt="Aula TP Chile · Innovación y liderazgo digital" />
+          </div>
+          <button id="backFromPractice" class="back-button" type="button" aria-label="Volver a la pantalla del módulo"><span aria-hidden="true">←</span> Volver atrás</button>
+          <div class="practice-hero-copy">
+            <small id="practiceModuleLabel">Módulo 1 · Apoyo transversal</small>
+            <h1 id="practiceTitle">Práctica libre</h1>
+            <p id="practiceIntroText">Entrena con una situación técnica, revisa evidencias y vuelve a intentarlo sin penalización.</p>
+          </div>
+          <div class="practice-hero-symbol" aria-hidden="true">✎</div>
+        </header>
+
+        <div class="practice-shell">
+          <section class="practice-status" aria-label="Estado de la práctica">
+            <div><span aria-hidden="true">◎</span><p><small>Desafío actual</small><strong id="practiceCounter">1 de 6</strong></p></div>
+            <div><span aria-hidden="true">✓</span><p><small>Respuestas correctas</small><strong id="practiceScore">0</strong></p></div>
+            <div><span aria-hidden="true">↻</span><p><small>Reintentos</small><strong id="practiceRetries">0</strong></p></div>
+            <div class="practice-progress-wrap"><span>Avance de la ronda</span><b id="practiceProgressLabel">0 %</b><div class="practice-progress"><i id="practiceProgressFill"></i></div></div>
+          </section>
+
+          <div class="practice-layout">
+            <aside class="practice-patient-card" aria-labelledby="practicePatientName">
+              <div class="practice-patient-image"><img id="practicePatientImage" src="assets/electricity-module-domestic-installation-v1.webp" alt="Caso técnico de la práctica libre" /></div>
+              <div class="practice-patient-copy">
+                <span id="practiceCaseTypeLabel">Sistema 2D · caso de refuerzo</span>
+                <h2 id="practicePatientName">Caso técnico del módulo</h2>
+                <p id="practicePatientSetting">Entorno de simulación</p>
+                <div id="practicePatientSummary">Situación profesional del módulo.</div>
+              </div>
+              <div id="practiceFocusTags" class="practice-focus-tags" aria-label="Competencias que se refuerzan"></div>
+              <div class="practice-tip"><span aria-hidden="true">i</span><p><strong>Práctica sin penalización</strong>Puedes revisar la pista, corregir tu respuesta y generar otra ronda.</p></div>
+            </aside>
+
+            <main class="practice-workspace">
+              <nav id="practiceQuestionNav" class="practice-question-nav" aria-label="Preguntas de la ronda"></nav>
+              <article id="practiceQuestionCard" class="practice-question-card" aria-live="polite"></article>
+              <section id="practiceCompletion" class="practice-completion" hidden aria-live="polite">
+                <span aria-hidden="true">★</span>
+                <div><small>Ronda terminada</small><h2>¡Práctica completada!</h2><p id="practiceCompletionText"></p></div>
+                <div class="practice-completion-actions">
+                  <button id="restartPractice" class="practice-secondary-action" type="button">Generar otra ronda</button>
+                  <button id="continueAfterPractice" class="practice-primary-action" type="button">Continuar a Evaluación final <span aria-hidden="true">›</span></button>
+                </div>
+              </section>
+            </main>
+          </div>
+        </div>
+      </section>
+
+      <section id="evaluationView" class="evaluation-screen course-view" hidden aria-hidden="true" aria-labelledby="evaluationTitle">
+        <header class="practice-hero evaluation-hero">
+          <div class="banner-grid"></div>
+          <div class="hero-logo practice-logo" aria-label="Aula TP Chile">
+            <img class="brand-logo-img" src="assets/aulatp-logo-horizontal-trim.png" alt="Aula TP Chile · Innovación y liderazgo digital" />
+          </div>
+          <button id="backFromEvaluation" class="back-button" type="button" aria-label="Volver a la pantalla del módulo"><span aria-hidden="true">←</span> Volver atrás</button>
+          <div class="practice-hero-copy">
+            <small id="evaluationModuleLabel">Módulo 1 · Evaluación final</small>
+            <h1 id="evaluationTitle">Evaluación final y cierre</h1>
+            <p>Demuestra que puedes integrar el módulo, reconocer tus avances y continuar al siguiente desafío.</p>
+          </div>
+          <div class="practice-hero-symbol" aria-hidden="true">★</div>
+        </header>
+
+        <div class="practice-shell evaluation-shell">
+          <section class="practice-status" aria-label="Estado de la evaluación">
+            <div><span aria-hidden="true">◎</span><p><small>Módulo actual</small><strong id="evaluationCurrentModule">1 de 5</strong></p></div>
+            <div><span aria-hidden="true">✓</span><p><small>Preguntas</small><strong id="evaluationQuestionCount">25</strong></p></div>
+            <div><span aria-hidden="true">↗</span><p><small>Estado</small><strong id="evaluationStateLabel">En evaluación</strong></p></div>
+            <div class="practice-progress-wrap"><span>Avance del cierre</span><b id="evaluationProgressLabel">0 %</b><div class="practice-progress"><i id="evaluationProgressFill"></i></div></div>
+          </section>
+
+          <div class="evaluation-layout">
+            <aside class="practice-patient-card">
+              <div class="practice-patient-image"><img id="evaluationImage" src="assets/elena-rojas-patient-natural-card-v2.webp" alt="Caso de evaluación del módulo" /></div>
+              <div class="practice-patient-copy">
+                <span>Evaluación aplicada</span>
+                <h2 id="evaluationCaseTitle">Caso de cierre</h2>
+                <p id="evaluationCaseSetting" data-course-specialty>Atención de Enfermería</p>
+                <div id="evaluationCaseSummary">Integra las decisiones centrales del módulo.</div>
+              </div>
+              <div id="evaluationFocusTags" class="practice-focus-tags"></div>
+            </aside>
+
+            <main class="evaluation-workspace">
+              <section id="evaluationQuestionPanel" class="evaluation-card"></section>
+              <section class="evaluation-card">
+                <h2>Checklist de cierre del módulo</h2>
+                <div id="evaluationChecklist" class="ae-checklist"></div>
+              </section>
+              <section class="evaluation-card">
+                <h2 id="evaluationDevelopmentTitle">Situación de desarrollo</h2>
+                <div id="evaluationDevelopmentSituation" class="evaluation-development-situation"></div>
+                <label class="integrator-final-record"><strong id="evaluationReflectionPrompt">¿Qué decisión profesional te llevas de este módulo?</strong><textarea id="evaluationReflection" rows="5" minlength="50" placeholder="Escribe una acción concreta que aplicarás en una situación real de atención..."></textarea></label>
+                <label class="integrator-final-check"><input id="evaluationConfirm" type="checkbox" /><span>Confirmo que revisé mis respuestas y comprendo qué debo reforzar antes de continuar.</span></label>
+                <div id="evaluationFeedback" class="practice-feedback" hidden></div>
+                <div class="evaluation-action-row">
+                  <button id="completeEvaluation" class="practice-primary-action" type="button">Completar evaluación y cierre <span aria-hidden="true">›</span></button>
+                  <button id="continueAfterEvaluation" class="practice-primary-action complete-next" type="button" hidden>Continuar al siguiente módulo <span aria-hidden="true">›</span></button>
+                </div>
+              </section>
+              <section id="evaluationSummary" class="evaluation-summary" hidden aria-live="polite"></section>
+            </main>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="course-content.js?v=20260814-course-content"></script>
+    <script src="ae-content.js?v=20260826-complete-ae-v1"></script>
+    <script src="integrator-content.js?v=20260826-complete-integrators-v1"></script>
+    <script src="practice-content.js?v=20260820-practice-v1"></script>
+    <script src="electricity-content.js?v=20260830-portal-catalogo-v1"></script>
+    <script src="tp-specialties-catalog.js?v=20260909-portal-acceso-v1"></script>
+    <script src="catalog-portal-profile.js?v=20260909-portal-acceso-v1"></script>
+    <script src="app.js?v=20260910-flujo-v20"></script>
+  </body>
+</html>
+

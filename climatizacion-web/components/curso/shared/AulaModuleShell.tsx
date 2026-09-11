@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import ZoomableImage from "@/components/curso/shared/ZoomableImage";
 import TutorFlotante from "@/components/curso/shared/TutorFlotante";
 import SupportHub from "@/components/curso/shared/SupportHub";
-import { useCallback, useEffect, useMemo, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   A11Y_STORAGE_KEY,
   DEFAULT_A11Y,
@@ -31,8 +31,18 @@ import ClimStudentAuth, {
   type ClimSessionStudent,
 } from "@/components/curso/shared/ClimStudentAuth";
 import CourseStatsCard from "@/components/curso/shared/CourseStatsCard";
-import StationRail, { railItemFromEstacion } from "@/components/curso/shared/StationRail";
+import StationRail, { iconForFase, type StationRailItem } from "@/components/curso/shared/StationRail";
 import { HORAS_AULA_TP_POR_MODULO } from "@/lib/climatizacion-curso";
+import {
+  firstOpenInGroup,
+  groupDurationHours,
+  groupEstacionesToOverview,
+  groupState,
+  LMS_AE_STAGE_COPY,
+  LMS_OVERVIEW_NAMES,
+  overviewGroupForEstacion,
+  shortEstacionTitle,
+} from "@/lib/lms-module-overview";
 import "@/app/curso/climatizacion/clim-shell-chrome.css";
 import "@/app/curso/climatizacion/clim-module-overview.css";
 
@@ -131,19 +141,10 @@ export default function AulaModuleShell({
   const [studentName, setStudentName] = useState<string | null>(null);
   const [plChallengeMsg, setPlChallengeMsg] = useState<string | null>(null);
   const [plSelectedOpt, setPlSelectedOpt] = useState<string | null>(null);
-  /** Banner when hub/deep-link opens a station ahead of the sequential unlock chain (demo). */
+  /** Banner si ?estacion= apunta a una estación todavía bloqueada. */
   const [deepLinkBanner, setDeepLinkBanner] = useState<string | null>(null);
-  /** Mapa radial (SI centro) vs estación detallada — arquitectura visual tipo Enfermería. */
+  /** Mapa radial (SI centro) vs estación detallada. */
   const [viewMode, setViewMode] = useState<"mapa" | "estacion">("mapa");
-  /**
-   * P1 deep-link / hub spotlight (demo-friendly):
-   * When URL has estacion=/station= matching a known slug still locked by the
-   * sequential ruta, temporarily unlock stations up to that orden in-session
-   * so CondensadoraViewer / target station opens — WITHOUT marking prior
-   * stations completed (localStorage/LMS stay honest; prior remain available).
-   */
-  const [spotlightUnlockThroughOrden, setSpotlightUnlockThroughOrden] =
-    useState<number | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -190,17 +191,23 @@ export default function AulaModuleShell({
       const est = getEstacionBySlug(slug);
       if (est) {
         const alreadyOpen = stationIsUnlocked(est, loaded.completedIds);
-        if (!alreadyOpen) {
-          setSpotlightUnlockThroughOrden(est.orden);
-          setDeepLinkBanner(
-            `Entraste a ${shortTitle(est.titulo)} (demo). Las estaciones anteriores siguen disponibles en la ruta.`,
-          );
-        } else {
-          setSpotlightUnlockThroughOrden(null);
+        if (alreadyOpen) {
+          loaded = { ...loaded, currentId: est.id };
+          setViewMode("estacion");
           setDeepLinkBanner(null);
+        } else {
+          const resume =
+            estaciones.find(
+              (item) =>
+                stationIsUnlocked(item, loaded.completedIds) &&
+                !loaded.completedIds.includes(item.id),
+            ) || estaciones[0];
+          loaded = { ...loaded, currentId: resume.id };
+          setViewMode("mapa");
+          setDeepLinkBanner(
+            `«${shortTitle(est.titulo)}» todavía está bloqueada. Completa la estación anterior para abrirla.`,
+          );
         }
-        loaded = { ...loaded, currentId: est.id };
-        setViewMode("estacion");
       }
     } else if (typeof window !== "undefined") {
       try {
@@ -352,15 +359,15 @@ export default function AulaModuleShell({
 
   const isStationOpen = useCallback(
     (e: EstacionBase, completedIds: string[]) => {
-      if (
-        spotlightUnlockThroughOrden != null &&
-        e.orden <= spotlightUnlockThroughOrden
-      ) {
-        return true;
-      }
       return stationIsUnlocked(e, completedIds);
     },
-    [spotlightUnlockThroughOrden, stationIsUnlocked],
+    [stationIsUnlocked],
+  );
+
+  const overviewGroups = useMemo(() => groupEstacionesToOverview(estaciones), [estaciones]);
+  const aeStations = useMemo(
+    () => overviewGroups.find((group) => group.fase === "estacion_ae")?.estaciones ?? [],
+    [overviewGroups],
   );
 
   const current =
@@ -420,17 +427,47 @@ export default function AulaModuleShell({
     new Set(estaciones.flatMap((estacion) => estacion.aeCodigos)),
   );
   const selectedAe = current.aeCodigos[0] ?? aeCodes[0] ?? null;
-  const nextOpenStation =
-    estaciones.find(
-      (estacion) =>
-        !progress.completedIds.includes(estacion.id) &&
-        isStationOpen(estacion, progress.completedIds),
-    ) ?? current;
+  const overviewGroup = overviewGroupForEstacion(overviewGroups, current);
+  const overviewOrdinal = overviewGroup.n;
+  const overviewDurationHours = groupDurationHours(overviewGroup);
+  const overviewDuration =
+    overviewDurationHours >= 1
+      ? `${formatHoras(overviewDurationHours)} h`
+      : `${Math.round(overviewDurationHours * 60)} min`;
+  const stationNoteKey = `${meta.storageKey}-nota-${current.id}`;
   const plCounters = progress.plCounters ?? {
     situacion: 1,
     correctas: 0,
     reintentos: 0,
   };
+
+  const [stationNote, setStationNote] = useState("");
+  const [stationAck, setStationAck] = useState(false);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(stationNoteKey);
+      const saved = raw ? (JSON.parse(raw) as { nota?: string; leido?: boolean }) : null;
+      setStationNote(saved?.nota ?? "");
+      setStationAck(Boolean(saved?.leido));
+    } catch {
+      setStationNote("");
+      setStationAck(false);
+    }
+  }, [stationNoteKey]);
+
+  const saveStationNote = useCallback(
+    (nota: string, leido: boolean) => {
+      setStationNote(nota);
+      setStationAck(leido);
+      try {
+        localStorage.setItem(stationNoteKey, JSON.stringify({ nota, leido }));
+      } catch {
+        /* ignore */
+      }
+    },
+    [stationNoteKey],
+  );
 
   const goTo = useCallback(
     (est: EstacionBase) => {
@@ -647,142 +684,89 @@ export default function AulaModuleShell({
   return (
     <div
       className={`relative min-h-screen bg-[var(--aula-bg)] text-[var(--aula-text)] ${a11yClassNames(a11y)}`}
+      data-specialty="climatizacion"
     >
-      {/* Hero header */}
-      <header
-        className="aula-header-hero sticky top-0 z-30 shadow-md"
-        style={{
-          backgroundImage:
-            "linear-gradient(90deg, rgba(20,144,199,0.98) 0%, rgba(47,172,216,0.93) 56%, rgba(100,197,230,0.78) 100%), url('/images/climatizacion/climatizacion-module-header-bg-v1.png')",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-        }}
-      >
-        <div className="aula-header-top mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-3 sm:px-6">
-          <Link href="/curso/climatizacion" className="aula-header-brand mr-2 hidden sm:inline-flex" aria-label="Aula TP Chile">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/climatizacion/aula-tp-chile-logo-corporativo.jpg" alt="" className="aula-header-brand-logo h-9 w-9 rounded-lg border border-[var(--aula-line)] bg-white object-contain p-0.5 shadow-sm" />
+      {/* Cabecera del módulo: barra blanca + hero navy con la estación activa */}
+      <header className="aula-module-header">
+        <div className="aula-module-header__bar">
+          <Link href="/curso/climatizacion" className="aula-module-header__brand" aria-label="Aula TP Chile">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/climatizacion/aula-tp-chile-logo-corporativo.jpg" alt="" />
+            <small>Formación técnica con sentido</small>
           </Link>
-          <Link
-            href={meta.portalDocenteHref}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-white/90 hover:text-white hover:underline"
-          >
-            <span aria-hidden>←</span>
-            <span>Volver al curso</span>
+          <Link href="/curso/climatizacion" className="aula-module-header__back">
+            <span aria-hidden>←</span> Volver al curso
           </Link>
-          <span className="hidden text-white/40 sm:inline">|</span>
-          <div className="aula-header-course min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-full bg-white/15 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-                {meta.oa}
-              </span>
-              <span className="rounded-full bg-white/15 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-                Módulo {meta.moduloNumero}
-              </span>
-              <span className="rounded-full bg-white/20 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-                {estadoBadge}
-              </span>
-              {current.aeCodigos.slice(0, 2).map((ae) => (
-                <span
-                  key={ae}
-                  className="rounded-full bg-emerald-400/30 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
-                >
-                  {ae}
-                </span>
-              ))}
-            </div>
-            <p className="aula-header-specialty">◇ Aula TP Chile</p>
-            <h1 className="mt-1 truncate text-sm font-bold text-white sm:text-base">
-              {meta.especialidad}
+          <div className="aula-module-header__chips" aria-label="Ubicación en la ruta">
+            <span>{meta.oa}</span>
+            <span>Módulo {meta.moduloNumero}</span>
+            <span>{meta.especialidad}</span>
+          </div>
+          <div className="aula-module-header__session">
+            <ClimStudentAuth
+              studentId={studentId}
+              studentName={studentName ?? undefined}
+              cohort={CLIM_COHORT}
+              onSessionChange={onAuthSessionChange}
+              onDemoPick={onStudentChange}
+              compact
+            />
+          </div>
+        </div>
+
+        <div className="aula-module-header__hero">
+          <div className="aula-module-header__copy">
+            <h1>
+              Estación {overviewOrdinal}. {LMS_OVERVIEW_NAMES[current.fase]}
             </h1>
-            <p className="aula-header-module-title">
+            <p className="aula-module-header__module">
               Módulo {meta.moduloNumero} · {meta.nombre}
             </p>
-            <p className="aula-header-course-copy truncate text-[11px] text-white/75">
-              {meta.oaTexto ?? `${formatHoras(meta.horasAulaTp)} h Aula TP · Eval. ${meta.horasEvaluacionFinal} h`}
+            <p className="aula-module-header__station">
+              <span aria-hidden>◉</span>
+              Estación {overviewOrdinal} de {overviewGroups.length} · {LMS_OVERVIEW_NAMES[current.fase]}
             </p>
-          </div>
-          {meta.heroMediaUrl ? (
-            <div className="aula-header-media hidden h-12 w-16 shrink-0 overflow-hidden rounded-lg border border-white/25 bg-white/10 sm:block">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={meta.heroMediaUrl}
-                alt={meta.heroMediaAlt ?? meta.nombre}
-                className="h-full w-full object-cover opacity-90"
-              />
-            </div>
-          ) : null}
-          <ClimStudentAuth
-            studentId={studentId}
-            studentName={studentName ?? undefined}
-            cohort={CLIM_COHORT}
-            onSessionChange={onAuthSessionChange}
-            onDemoPick={onStudentChange}
-            compact
-          />
-        </div>
-        <div className="aula-header-progress mx-auto max-w-7xl px-4 pb-3 sm:px-6">
-          <div className="flex items-center gap-3">
-            <div
-              className="aula-progress-track h-2.5 flex-1 overflow-hidden rounded-full"
-              role="progressbar"
-              aria-valuenow={pct}
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-label="Progreso del módulo"
-            >
+            <p className="aula-module-header__lead">
+              {overviewGroup.purpose}. {current.preguntaPedagogica}
+            </p>
+            <div className="aula-module-header__progress">
               <div
-                className="aula-progress-fill h-full rounded-full transition-all"
-                style={{ width: `${pct}%` }}
-              />
-            </div>
-            <span className="whitespace-nowrap text-xs font-semibold text-white/90">
-              {completedCount}/{total} · {pct}%
-            </span>
-            <div className="ml-1 flex shrink-0 overflow-hidden rounded-full border border-white/30 bg-white/10 text-[11px] font-bold">
-              <button
-                type="button"
-                onClick={() => {
-                  setViewMode("mapa");
-                  if (typeof window !== "undefined") {
-                    window.history.replaceState(null, "", routeBase);
-                  }
-                }}
-                className={`px-2.5 py-1 ${
-                  viewMode === "mapa"
-                    ? "bg-white text-[var(--aula-navy)]"
-                    : "text-white/90 hover:bg-white/15"
-                }`}
-                aria-pressed={viewMode === "mapa"}
+                className="aula-module-header__bar-track"
+                role="progressbar"
+                aria-valuenow={Math.round((overviewOrdinal / overviewGroups.length) * 100)}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="Progreso del módulo"
               >
-                Ruta
-              </button>
-              <button
-                type="button"
-                onClick={() => setViewMode("estacion")}
-                className={`px-2.5 py-1 ${
-                  viewMode === "estacion"
-                    ? "bg-white text-[var(--aula-navy)]"
-                    : "text-white/90 hover:bg-white/15"
-                }`}
-                aria-pressed={viewMode === "estacion"}
-              >
-                Estación
-              </button>
+                <i style={{ width: `${Math.round((overviewOrdinal / overviewGroups.length) * 100)}%` }} />
+              </div>
+              <span>
+                {overviewOrdinal} / {overviewGroups.length} estaciones
+              </span>
             </div>
+          </div>
+
+          <div className="aula-module-header__aside">
+            <p className="aula-module-header__chip">
+              <span aria-hidden>◉</span>
+              <b>Estación {overviewOrdinal}</b>
+              <small>{LMS_OVERVIEW_NAMES[current.fase]}</small>
+            </p>
           </div>
         </div>
       </header>
 
-      <div className="mx-auto max-w-7xl px-4 pt-4 sm:px-6">
-        <CourseStatsCard
-          modules={`${meta.moduloNumero} de 8`}
-          hoursAnnual={`${HORAS_AULA_TP_POR_MODULO[meta.moduloNumero]?.oficiales ?? meta.horasAulaTp} h`}
-          hours3d={`${HORAS_AULA_TP_POR_MODULO[meta.moduloNumero]?.aulaTp ?? meta.horasAulaTp} h`}
-          status={isDone ? "Completado" : "En curso"}
-          label={`Resumen del módulo ${meta.moduloNumero}`}
-        />
-      </div>
+      {viewMode === "estacion" ? (
+        <div className="mx-auto max-w-7xl px-4 pt-4 sm:px-6">
+          <CourseStatsCard
+            modules={`${meta.moduloNumero} de 8`}
+            hoursAnnual={`${HORAS_AULA_TP_POR_MODULO[meta.moduloNumero]?.oficiales ?? meta.horasAulaTp} h`}
+            hours3d={`${HORAS_AULA_TP_POR_MODULO[meta.moduloNumero]?.aulaTp ?? meta.horasAulaTp} h`}
+            status={isDone ? "Completado" : "En curso"}
+            label={`Resumen del módulo ${meta.moduloNumero}`}
+          />
+        </div>
+      ) : null}
 
       {deepLinkBanner ? (
         <div
@@ -791,7 +775,7 @@ export default function AulaModuleShell({
         >
           <div className="flex-1 rounded-xl border border-sky-300 bg-sky-50 px-3 py-2 text-sm text-sky-950 shadow-sm">
             <p className="text-[10px] font-bold uppercase tracking-wide text-sky-800">
-              Acceso demo
+              Ruta del módulo
             </p>
             <p className="mt-0.5 leading-relaxed">{deepLinkBanner}</p>
           </div>
@@ -808,205 +792,267 @@ export default function AulaModuleShell({
 
       {viewMode === "mapa" ? (
         <main className="aula-module-overview aula-module-overview--guide mx-auto max-w-[1580px] px-4 py-4 sm:px-6">
+          <StationRail
+            items={overviewGroups.map((group) => {
+              const state = groupState(group, {
+                completedIds: progress.completedIds,
+                currentId: current.id,
+                isOpen: (estacion) => isStationOpen(estacion, progress.completedIds),
+              });
+              const item: StationRailItem = {
+                id: group.fase,
+                n: group.n,
+                title: `Estación ${group.n}`,
+                subtitle: group.name,
+                state,
+                tone: "blue",
+                icon: iconForFase(group.fase, group.n - 1),
+              };
+              return item;
+            })}
+            onSelect={(id) => {
+              const group = overviewGroups.find((item) => item.fase === id);
+              if (!group) return;
+              const next = firstOpenInGroup(group, (estacion) =>
+                isStationOpen(estacion, progress.completedIds),
+              );
+              if (next) goTo(next);
+            }}
+          />
+
           <div className="aula-module-overview-main">
-            <section className="aula-map-hero" aria-labelledby="map-hero-title">
-              <div className="aula-map-hero__copy">
-                <p className="aula-map-hero__eyebrow">Aula TP · Refrigeración y Climatización</p>
-                <h2 id="map-hero-title">{meta.especialidad}</h2>
-                <p className="aula-map-hero__module">
-                  Módulo {meta.moduloNumero} · {meta.nombre}
-                </p>
-                <p className="aula-map-hero__station">
-                  <span aria-hidden>★</span>
-                  Estación {current.orden + 1} de {total} · {shortTitle(current.titulo)}
-                </p>
-                <div className="aula-map-hero__progress">
-                  <div
-                    className="aula-map-hero__bar"
-                    role="progressbar"
-                    aria-valuenow={pct}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    aria-label="Progreso del módulo"
-                  >
-                    <i style={{ width: `${pct}%` }} />
-                  </div>
-                  <span>
-                    {completedCount} de {total} estaciones ({pct}%)
-                  </span>
+            <section className="aula-station-card" aria-labelledby="station-details-heading">
+              <header className="aula-station-card__head">
+                <span className="aula-station-card__icon" aria-hidden>
+                  {iconForFase(current.fase, current.orden)}
+                </span>
+                <div>
+                  <h2 id="station-details-heading">
+                    Estación {overviewOrdinal} · {LMS_OVERVIEW_NAMES[current.fase]}
+                  </h2>
+                  <p>{overviewGroup.purpose}</p>
                 </div>
-              </div>
-              <div className="aula-map-hero__visual" aria-hidden>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={CASE_IMAGES[meta.moduloNumero]?.src ?? meta.heroMediaUrl ?? "/images/climatizacion/caso-m3-vivienda-valparaiso.png"}
-                  alt=""
-                />
-                <p>Aprende · Haz · Practica · Avanza</p>
+                <span className="aula-station-card__time">
+                  <i aria-hidden>◷</i> {overviewDuration}
+                </span>
+              </header>
+
+              <div className="aula-station-card__body">
+                {current.fase === "estacion_ae" ? (
+                  <div className="lms-ae-template">
+                    <section className="lms-ae-card">
+                      <div className="lms-ae-tabs" role="tablist" aria-label="Aprendizajes esperados">
+                        {aeStations.map((estacion, index) => (
+                          <button
+                            key={estacion.id}
+                            type="button"
+                            role="tab"
+                            aria-selected={estacion.id === current.id}
+                            className={estacion.id === current.id ? "is-active" : undefined}
+                            onClick={() => {
+                              if (isStationOpen(estacion, progress.completedIds)) goTo(estacion);
+                            }}
+                          >
+                            AE {index + 1}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="lms-ae-copy">
+                        <small>
+                          APRENDIZAJE ESPERADO {Math.max(1, aeStations.findIndex((estacion) => estacion.id === current.id) + 1)} DE {aeStations.length}
+                        </small>
+                        <h3>{shortEstacionTitle(current.titulo)}</h3>
+                        <p>{current.escenario}</p>
+                      </div>
+                    </section>
+                    <section className="lms-ae-progression">
+                      <header>
+                        <h3>La progresión de aprendizaje en esta estación</h3>
+                        <p>Avanzarás siguiendo una ruta de 6 etapas.</p>
+                      </header>
+                      <div>
+                        {LMS_AE_STAGE_COPY.map((stage, index) => {
+                          const activeIndex = Math.max(
+                            0,
+                            aeStations.findIndex((estacion) => estacion.id === current.id),
+                          );
+                          const complete = index < activeIndex;
+                          const active = index === activeIndex;
+                          return (
+                            <article
+                              key={stage.id}
+                              className={complete ? "is-complete" : active ? "is-active" : undefined}
+                            >
+                              <span>{complete ? "✓" : index + 1}</span>
+                              <strong>{stage.title}</strong>
+                              <small>{stage.body}</small>
+                            </article>
+                          );
+                        })}
+                      </div>
+                    </section>
+                    <section className="aula-station-reflect" aria-labelledby="station-reflect-heading">
+                      <h3 id="station-reflect-heading">
+                        <span aria-hidden>✎</span> Tu reflexión en esta etapa
+                      </h3>
+                      <p>¿Qué aprendizaje esperado te resulta más exigente y por qué?</p>
+                      <textarea
+                        rows={3}
+                        value={stationNote}
+                        placeholder="Escribe aquí tu respuesta…"
+                        onChange={(event) => saveStationNote(event.target.value, stationAck)}
+                        aria-label="Tu reflexión sobre esta estación"
+                      />
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={stationAck}
+                          onChange={(event) => saveStationNote(stationNote, event.target.checked)}
+                        />
+                        He leído la información de esta estación y estoy listo/a para continuar.
+                      </label>
+                    </section>
+                  </div>
+                ) : (
+                  <>
+                <figure className="aula-station-case">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={CASE_IMAGES[meta.moduloNumero]?.src ?? meta.heroMediaUrl ?? "/images/climatizacion/caso-m1-oficinas-providencia.png"}
+                    alt={CASE_IMAGES[meta.moduloNumero]?.alt ?? meta.casoDemo.titulo}
+                  />
+                  <figcaption>
+                    <span>Caso profesional</span>
+                    <strong>{meta.casoDemo.titulo}</strong>
+                    <p>{meta.casoDemo.resumen ?? current.escenario}</p>
+                  </figcaption>
+                </figure>
+
+                <div className="aula-station-brief">
+                  <section className="aula-station-block">
+                    <h3>
+                      <span aria-hidden>✓</span> ¿Qué aprenderás en esta estación?
+                    </h3>
+                    <ul className="aula-station-check">
+                      <li>Comprender el escenario: {meta.casoDemo.titulo}</li>
+                      <li>Responder la pregunta pedagógica de la estación</li>
+                      <li>Registrar evidencia mínima: {current.evidenciaMinima}</li>
+                      {current.aeCodigos[0] ? (
+                        <li>Avanzar el aprendizaje esperado {current.aeCodigos.join(" · ")}</li>
+                      ) : null}
+                    </ul>
+                  </section>
+                  <section className="aula-station-block is-info">
+                    <h3>
+                      <span aria-hidden>ⓘ</span> Sobre {LMS_OVERVIEW_NAMES[current.fase].toLowerCase()}
+                    </h3>
+                    <p>{current.escenario}</p>
+                    <p className="aula-station-block__q">{current.preguntaPedagogica}</p>
+                  </section>
+                </div>
+
+                <section className="aula-station-reflect" aria-labelledby="station-reflect-heading">
+                  <h3 id="station-reflect-heading">
+                    <span aria-hidden>✎</span> Tu reflexión inicial
+                  </h3>
+                  <p>
+                    A partir de la situación presentada, escribe una idea o comentario que te
+                    gustaría recordar durante el módulo.
+                  </p>
+                  <textarea
+                    rows={5}
+                    value={stationNote}
+                    placeholder="Por ejemplo: en mi práctica he visto situaciones similares…"
+                    onChange={(event) => saveStationNote(event.target.value, stationAck)}
+                    aria-label="Tu reflexión inicial sobre esta estación"
+                  />
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={stationAck}
+                      onChange={(event) => saveStationNote(stationNote, event.target.checked)}
+                    />
+                    He leído la información de esta estación
+                  </label>
+                </section>
+                  </>
+                )}
               </div>
             </section>
 
-            <StationRail
-              items={estaciones.map((estacion, index) =>
-                railItemFromEstacion(estacion, {
-                  index,
-                  done: progress.completedIds.includes(estacion.id),
-                  active: estacion.id === current.id,
-                  open: isStationOpen(estacion, progress.completedIds),
-                }),
-              )}
-              onSelect={(id) => {
-                const next = estaciones.find((e) => e.id === id);
-                if (next) goTo(next);
-              }}
-            />
+            <footer className="aula-station-foot">
+              <p className="aula-station-foot__motto">
+                Aprender hoy
+                <br />
+                para un mejor mañana
+              </p>
+              <div className="aula-station-foot__actions">
+                <Link href="/curso/climatizacion" className="aula-station-foot__ghost">
+                  <span aria-hidden>←</span> Volver al curso
+                </Link>
+                <button
+                  type="button"
+                  className="aula-station-foot__primary"
+                  onClick={() => setViewMode("estacion")}
+                >
+                  {current.fase === "estacion_ae"
+                    ? "Comenzar aprendizajes esperados"
+                    : "Comenzar esta estación"}{" "}
+                  <span aria-hidden>→</span>
+                </button>
+              </div>
+              <p className="aula-station-foot__brand">
+                <strong>Aula TP Chile</strong>
+                <span>Formación técnica con sentido</span>
+              </p>
+            </footer>
+          </div>
 
-            <section className="aula-overview-card aula-station-details" aria-labelledby="station-details-heading">
-              <h2 id="station-details-heading">
-                <span aria-hidden>▤</span> Detalles de la estación
+          <aside className="aula-overview-sidebar" aria-label="Panel del módulo">
+            <section className="aula-overview-card aula-module-information">
+              <h2>
+                <span aria-hidden>ⓘ</span> Información del módulo
               </h2>
-              <dl className="aula-station-details-grid">
+              <dl>
                 <div>
                   <dt>
-                    <span aria-hidden>①</span> Estación
+                    <span aria-hidden>▦</span> Ruta del módulo
                   </dt>
                   <dd>
-                    {current.orden + 1}. {shortTitle(current.titulo)}
+                    {overviewOrdinal} / {overviewGroups.length}
                   </dd>
                 </div>
                 <div>
                   <dt>
-                    <span aria-hidden>◎</span> Tipo de actividad
+                    <span aria-hidden>⚑</span> Estación actual
                   </dt>
-                  <dd>{FASE_LABELS[current.fase]}</dd>
+                  <dd>{LMS_OVERVIEW_NAMES[current.fase]}</dd>
                 </div>
                 <div>
                   <dt>
-                    <span aria-hidden>☆</span> Objetivo / OA
+                    <span aria-hidden>▤</span> Módulo actual
                   </dt>
-                  <dd>{meta.oaTexto ?? meta.oa}</dd>
+                  <dd>{meta.moduloNumero} de 8</dd>
                 </div>
                 <div>
                   <dt>
-                    <span aria-hidden>◷</span> Duración estimada
+                    <span aria-hidden>☆</span> AE activo
                   </dt>
-                  <dd>{current.horas} h de estación</dd>
-                </div>
-                <div>
-                  <dt>
-                    <span aria-hidden>✦</span> Aprendizajes esperados
-                  </dt>
-                  <dd>{current.aeCodigos.length ? current.aeCodigos.join(", ") : "Según ruta del módulo"}</dd>
+                  <dd>{current.aeCodigos.length ? current.aeCodigos.join(", ") : (selectedAe ?? "—")}</dd>
                 </div>
                 <div>
                   <dt>
                     <span aria-hidden>✓</span> Estado
                   </dt>
                   <dd>
-                    <span className={`aula-status-pill is-${progress.completedIds.includes(current.id) ? "done" : "live"}`}>
-                      {estadoBadge}
-                    </span>
+                    <span className={`aula-status-pill is-${isDone ? "done" : "live"}`}>{estadoBadge}</span>
                   </dd>
                 </div>
-              </dl>
-            </section>
-
-            <div className="aula-map-focus-row">
-              <section className="aula-overview-card aula-map-learn" aria-labelledby="map-learn-heading">
-                <h2 id="map-learn-heading">
-                  <span aria-hidden>✓</span> ¿Qué aprenderás en esta estación?
-                </h2>
-                <ul>
-                  <li>Comprender el escenario: {meta.casoDemo.titulo}</li>
-                  <li>Orientarte con la pregunta pedagógica de la estación</li>
-                  <li>Registrar evidencia mínima: {current.evidenciaMinima}</li>
-                  {current.aeCodigos[0] ? <li>Avanzar el aprendizaje esperado {current.aeCodigos.join(" · ")}</li> : null}
-                </ul>
-              </section>
-              <section className="aula-overview-card aula-map-concepts" aria-labelledby="map-concepts-heading">
-                <h2 id="map-concepts-heading">
-                  <span aria-hidden>💡</span> Conceptos clave de esta estación
-                </h2>
-                <p className="aula-map-concepts__q">{current.preguntaPedagogica}</p>
-                <p className="aula-map-concepts__body">{current.escenario}</p>
-              </section>
-            </div>
-
-            <div className="aula-map-actions">
-              <Link href="/curso/climatizacion" className="aula-map-actions__ghost">
-                Volver al curso
-              </Link>
-              <button type="button" className="aula-map-actions__primary" onClick={() => goTo(nextOpenStation)}>
-                {nextOpenStation.id === current.id
-                  ? "Comenzar esta estación"
-                  : `Continuar: ${shortTitle(nextOpenStation.titulo)}`}{" "}
-                <span aria-hidden>→</span>
-              </button>
-            </div>
-          </div>
-
-          <aside className="aula-overview-sidebar" aria-label="Panel del módulo">
-            <div className="aula-map-quick" aria-label="Apoyos del módulo">
-              <button type="button" className="aula-map-quick__btn is-pl" onClick={() => setPlOpen(true)}>
-                <strong>Práctica libre</strong>
-                <span>
-                  Relacionada con {shortTitle(current.titulo)} · {plDoneCount}/{plDesafios.length}
-                </span>
-              </button>
-              <button
-                type="button"
-                className="aula-map-quick__btn is-agent"
-                onClick={() => window.dispatchEvent(new Event("aula-tp-open-tutor"))}
-                disabled={agentDisabled}
-              >
-                <strong>Agente pedagógico</strong>
-                <span>
-                  {agentDisabled
-                    ? "Deshabilitado en evaluación formal"
-                    : `Sobre: ${shortTitle(current.titulo)}`}
-                </span>
-              </button>
-              <button type="button" className="aula-map-quick__btn is-a11y" onClick={() => setA11yOpen(true)}>
-                <strong>Accesibilidad</strong>
-                <span>Texto, contraste y apoyo visual</span>
-              </button>
-            </div>
-
-            <section className="aula-overview-card aula-module-information">
-              <h2>
-                <span aria-hidden>ⓘ</span> Información general
-              </h2>
-              <dl>
                 <div>
                   <dt>
-                    <span aria-hidden>◌</span> Especialidad
+                    <span aria-hidden>◷</span> Duración estimada
                   </dt>
-                  <dd>{meta.especialidad}</dd>
-                </div>
-                <div>
-                  <dt>
-                    <span aria-hidden>▥</span> Nivel
-                  </dt>
-                  <dd>3° y 4° medio TP</dd>
-                </div>
-                <div>
-                  <dt>
-                    <span aria-hidden>◷</span> Período
-                  </dt>
-                  <dd>Ruta del módulo</dd>
-                </div>
-                <div>
-                  <dt>
-                    <span aria-hidden>▤</span> Programa
-                  </dt>
-                  <dd>Aula TP Chile</dd>
-                </div>
-                <div>
-                  <dt>
-                    <span className="aula-progress-ring" style={{ "--progress": `${pct * 3.6}deg` } as CSSProperties} aria-hidden />{" "}
-                    Progreso general
-                  </dt>
-                  <dd>{pct}%</dd>
+                  <dd>{overviewDuration}</dd>
                 </div>
               </dl>
               <div className="aula-module-progress-summary">
@@ -1020,44 +1066,43 @@ export default function AulaModuleShell({
               </div>
             </section>
 
-            <section className="aula-overview-card aula-module-current">
-              <div>
-                <span aria-hidden>▤</span>
-                <p>Módulo actual</p>
-                <strong>M{meta.moduloNumero}</strong>
-              </div>
-              <div>
-                <span aria-hidden>⚑</span>
-                <p>Estación</p>
-                <strong>
-                  {current.orden + 1}/{total}
-                </strong>
-              </div>
-              <div>
-                <span aria-hidden>☆</span>
-                <p>AE activo</p>
-                <strong>{selectedAe ?? "—"}</strong>
-              </div>
-              <div>
-                <span aria-hidden>✓</span>
-                <p>Estado</p>
-                <strong>{estadoBadge}</strong>
-              </div>
-            </section>
-
-            <section className="aula-overview-card aula-map-help">
-              <h2>
-                <span aria-hidden>💬</span> ¿Necesitas ayuda?
-              </h2>
-              <p>El agente pedagógico te orienta sin entregar la respuesta final.</p>
+            <div className="aula-map-quick" aria-label="Apoyos del módulo">
+              <button type="button" className="aula-map-quick__btn is-pl" onClick={() => setPlOpen(true)}>
+                <i aria-hidden>⚒</i>
+                <span>
+                  <strong>Práctica libre</strong>
+                  <small>
+                    Explora, experimenta y refuerza tus habilidades · {plDoneCount}/{plDesafios.length}
+                  </small>
+                </span>
+                <b aria-hidden>›</b>
+              </button>
               <button
                 type="button"
+                className="aula-map-quick__btn is-agent"
                 onClick={() => window.dispatchEvent(new Event("aula-tp-open-tutor"))}
                 disabled={agentDisabled}
               >
-                Abrir agente pedagógico
+                <i aria-hidden>💬</i>
+                <span>
+                  <strong>Agente pedagógico</strong>
+                  <small>
+                    {agentDisabled
+                      ? "Deshabilitado en evaluación formal"
+                      : "Te orienta y resuelve tus dudas"}
+                  </small>
+                </span>
+                <b aria-hidden>›</b>
               </button>
-            </section>
+              <button type="button" className="aula-map-quick__btn is-a11y" onClick={() => setA11yOpen(true)}>
+                <i aria-hidden>♿</i>
+                <span>
+                  <strong>Accesibilidad</strong>
+                  <small>Personaliza tu experiencia de aprendizaje</small>
+                </span>
+                <b aria-hidden>›</b>
+              </button>
+            </div>
           </aside>
         </main>
       ) : null}

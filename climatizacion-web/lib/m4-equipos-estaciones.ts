@@ -313,7 +313,7 @@ export const ESTACIONES_M4: EstacionM4[] = [
     orden: 5,
     slug: "situacion-integradora",
     titulo: "Situación Integradora — Montaje según plano/manual",
-    horas: 11,
+    horas: 9,
     fase: "situacion_integradora",
     aeCodigos: ["AE 4.1", "AE 4.2"],
     ceCodigos: [],
