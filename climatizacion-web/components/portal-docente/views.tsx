@@ -1105,6 +1105,7 @@ export function ReportesView() {
   const filtroOptions = [
     "Todas",
     "Electricidad",
+    "Atención de Enfermería",
     "Administración",
     "Refrigeración y Climatización",
     ...niveles,
