@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useState } from "react";
 import {
-  DEMO_TEACHER,
   NAV_SECTIONS,
   type SectionId,
 } from "@/lib/demo-data";
+import { LivePortalProvider } from "./live-data";
 import {
   CumplimientoView,
   CursosView,
@@ -25,12 +25,7 @@ export function PortalShell({ section }: PortalShellProps) {
 
   return (
     <div className="min-h-screen bg-[var(--aula-pale,#f7fbff)]">
-      <div className="border-b border-[var(--aula-line,#d9e5f6)] bg-[linear-gradient(100deg,#e7f9f1_0%,#edf6ff_55%,#f3e9ff_100%)] px-4 py-2.5 text-center text-sm font-semibold text-[var(--aula-text,#082b80)]">
-        Portal Docente — cursos vivos conectados (Enfermería, Electricidad, Climatización).
-        Algunas secciones aún muestran datos de ejemplo.
-      </div>
-
-      <div className="flex min-h-[calc(100vh-44px)]">
+      <div className="flex min-h-screen">
         <aside className="hidden w-64 shrink-0 flex-col bg-[linear-gradient(180deg,var(--aula-navy,#062f91)_0%,#041f66_100%)] text-white lg:flex">
           <div className="border-b border-white/15 px-5 py-5">
             <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--aula-cyan,#07a8b8)]">
@@ -101,27 +96,24 @@ export function PortalShell({ section }: PortalShellProps) {
                     <span className="font-normal text-[var(--aula-text-muted,#5e7596)]">|</span>{" "}
                     <span className="text-[var(--aula-blue,#0870ef)]">Aula TP Chile</span>
                   </span>
-                  <span className="rounded-full border border-[var(--aula-line,#d9e5f6)] bg-[var(--aula-surface-tint,#edf6ff)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--aula-blue-deep,#0549b8)]">
-                    Demo interactiva
-                  </span>
                 </p>
                 <p className="hidden text-xs text-[var(--aula-text-muted,#5e7596)] sm:block">
-                  {DEMO_TEACHER.school}
+                  Cursos vivos conectados al LMS
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <div className="hidden text-right sm:block">
                 <p className="text-sm font-semibold text-[var(--aula-text,#082b80)]">
-                  {DEMO_TEACHER.name}
+                  Equipo docente
                 </p>
-                <p className="text-xs text-[var(--aula-text-muted,#5e7596)]">{DEMO_TEACHER.role}</p>
+                <p className="text-xs text-[var(--aula-text-muted,#5e7596)]">Aula TP Chile</p>
               </div>
               <div
                 className="flex h-9 w-9 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--aula-blue,#0870ef),var(--aula-teal,#008b98))] text-sm font-bold text-white shadow-sm"
                 aria-hidden="true"
               >
-                CR
+                TP
               </div>
             </div>
           </header>
@@ -170,7 +162,9 @@ export function PortalShell({ section }: PortalShellProps) {
           ) : null}
 
           <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
-            <SectionBody section={section} />
+            <LivePortalProvider>
+              <SectionBody section={section} />
+            </LivePortalProvider>
           </main>
         </div>
       </div>

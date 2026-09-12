@@ -3,22 +3,17 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import {
-  APROBACION,
   CATALOGO_OA,
-  conteoEstudiantesPorOa,
   ESTADO_OA_AE_LABEL,
-  ESTUDIANTES,
-  EVOLUCION_PROMEDIO,
   especialidadFromCurso,
   getAeByCodigo,
   getOaByCodigo,
   oaCatalogKey,
-  pctLogroOa,
   RECURSOS,
   type EstadoOaAe,
   type EstudianteDemo,
 } from "@/lib/demo-data";
-import { BarChart, ChartPanel, CHART_HEX, DataBadge, DonutChart, LineChart, MiniDonut } from "./charts";
+import { BarChart, ChartPanel, CHART_HEX, DonutChart, MiniDonut } from "./charts";
 import {
   AlertList,
   KpiStrip,
@@ -39,7 +34,7 @@ import {
   CumplimientoView,
   LiveKpiRow,
 } from "./ConnectedCourses";
-import { SchedulePlanner } from "./SchedulePlanner";
+import { LiveStatusNote, useLivePortal } from "./live-data";
 import {
   BrowserSaveHint,
   usePortalStore,
@@ -80,6 +75,7 @@ function EstadoBadge({ estado }: { estado: EstadoOaAe }) {
 
 function ResumenStoreCounts() {
   const { planificacion, hydrated } = usePortalStore();
+  const { estudiantes, loading } = useLivePortal();
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       <div className="rounded-2xl border border-brand-200 bg-brand-50/60 p-4 shadow-sm">
@@ -93,10 +89,10 @@ function ResumenStoreCounts() {
       </div>
       <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-          Estudiantes (demo)
+          Cantidad de estudiantes (LMS)
         </p>
         <p className="mt-1 text-3xl font-bold tabular-nums text-slate-900">
-          {ESTUDIANTES.length}
+          {loading ? "…" : estudiantes.length}
         </p>
       </div>
     </div>
@@ -104,27 +100,27 @@ function ResumenStoreCounts() {
 }
 
 export function ResumenView() {
-  const oaEnFoco = CATALOGO_OA.filter((o) => o.enFoco);
-  const pcts = ESTUDIANTES.map((e) => e.avancePct);
+  const { estudiantes } = useLivePortal();
+  const pcts = estudiantes.map((e) => e.avancePct);
   const stats = tendenciaCentral(pcts);
-  const bandas = ESTUDIANTES.reduce(
+  const bandas = estudiantes.reduce(
     (acc, e) => {
       acc[bandaFromPct(e.avancePct)] += 1;
       return acc;
     },
     { logrado: 0, medianamente_logrado: 0, en_proceso: 0, no_logrado: 0 },
   );
-  const n = ESTUDIANTES.length || 1;
-  const descendidos = [...ESTUDIANTES].sort((a, b) => a.avancePct - b.avancePct).slice(0, 5);
+  const n = estudiantes.length || 1;
+  const descendidos = [...estudiantes].sort((a, b) => a.avancePct - b.avancePct).slice(0, 5);
   const oaCriticos = CATALOGO_OA.map((oa) => ({
     oa,
-    pct: pctLogroOa(oa.codigo, oa.especialidad),
-    conteo: conteoEstudiantesPorOa(oa.codigo, oa.especialidad),
+    pct: conteoOaGrupo(estudiantes, oa.codigo).pct,
+    conteo: conteoOaGrupo(estudiantes, oa.codigo),
   }))
     .filter((x) => x.conteo.total > 0)
     .sort((a, b) => a.pct - b.pct)
     .slice(0, 4);
-  const porCurso = groupEstudiantesBy(ESTUDIANTES, (e) => e.curso)
+  const porCurso = groupEstudiantesBy(estudiantes, (e) => e.curso)
     .slice()
     .sort((a, b) => a.avg - b.avg);
 
@@ -134,6 +130,7 @@ export function ResumenView() {
         title="Panel general"
         purpose="Vista institucional para leer en segundos el estado de cursos, estudiantes, avance y cumplimiento. Desde aquí identificas alertas y entras al detalle por el menú lateral."
       />
+      <LiveStatusNote />
 
       <ResumenStoreCounts />
       <LiveKpiRow />
@@ -151,9 +148,11 @@ export function ResumenView() {
             hint: "Cantidad de estudiantes que requieren apoyo",
           },
           {
-            label: "OA en foco esta semana",
-            value: String(oaEnFoco.length),
-            hint: "Cantidad de Objetivos de Aprendizaje priorizados",
+            label: "OA con menor porcentaje de logro",
+            value: oaCriticos[0] ? `${oaCriticos[0].pct}%` : "—",
+            hint: oaCriticos[0]
+              ? `${oaCriticos[0].oa.codigo} · ${oaCriticos[0].oa.especialidad}`
+              : "Sin evidencia LMS",
           },
           {
             label: "Cursos con menor avance",
@@ -194,11 +193,10 @@ export function ResumenView() {
         <ChartPanel
           title="Distribución de estudiantes según nivel de logro"
           subtitle="Cantidad de estudiantes (no porcentaje) agrupados por banda de Porcentaje de logro %."
-          badge="demo"
         >
           <DonutChart
             title="Cantidad de estudiantes por banda de logro institucional"
-            centerLabel={String(ESTUDIANTES.length)}
+            centerLabel={String(estudiantes.length)}
             slices={(Object.keys(BANDA_LOGRO_LABEL) as Array<keyof typeof BANDA_LOGRO_LABEL>).map(
               (k) => ({
                 label: BANDA_LOGRO_LABEL[k],
@@ -213,7 +211,6 @@ export function ResumenView() {
         <ChartPanel
           title="Avance promedio por curso"
           subtitle="Unidad: Porcentaje de logro % (promedio de estudiantes del curso)."
-          badge="demo"
         >
           <BarChart
             title="Comparación de cursos · Porcentaje de logro %"
@@ -233,23 +230,20 @@ export function ResumenView() {
 
       <ConnectedCursosGrid />
 
-      <div className="rounded-2xl border border-[var(--aula-warning,#e99300)]/35 bg-[var(--aula-warning-soft,#fff5dd)] p-3 text-xs text-[var(--aula-warning-ink,#9b3e13)]">
-        <span className="mr-2 inline-flex align-middle">
-          <DataBadge kind="demo" />
-        </span>
-        OA en foco y actividad reciente usan datos de ejemplo para la demo pedagógica.
-      </div>
-
       <div className="rounded-2xl border border-[var(--aula-line,#d9e5f6)] bg-[var(--aula-surface-tint,#edf6ff)] p-5 shadow-[var(--shadow-sm)]">
         <h2 className="text-sm font-semibold text-[var(--aula-text,#082b80)]">
-          OA, AE y criterios de evaluación en foco
+          OA, AE y criterios de evaluación con menor logro
         </h2>
         <p className="mt-1 text-xs text-[var(--aula-text-muted,#5e7596)]">
           Lectura general del nivel: cantidad de estudiantes por estado del OA, no casos individuales.
         </p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {oaEnFoco.map((oa) => {
-            const c = conteoEstudiantesPorOa(oa.codigo, oa.especialidad);
+          {oaCriticos.length === 0 ? (
+            <li className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500 shadow-sm">
+              Sin evidencia LMS de OA en este momento.
+            </li>
+          ) : null}
+          {oaCriticos.map(({ oa, conteo: c }) => {
             return (
               <li
                 key={oaCatalogKey(oa.especialidad, oa.codigo)}
@@ -281,7 +275,8 @@ export function CursosView() {
     savedFlash,
     hydrated,
   } = usePortalStore();
-  const porCurso = groupEstudiantesBy(ESTUDIANTES, (e) => e.curso);
+  const { estudiantes } = useLivePortal();
+  const porCurso = groupEstudiantesBy(estudiantes, (e) => e.curso);
 
   return (
     <div className="space-y-6">
@@ -289,6 +284,7 @@ export function CursosView() {
         title="Cursos / Planificación"
         purpose="Cursos publicados, comparación de avance entre grupos y horario semanal asociado a OA/AE. El acceso estudiantil único es el catálogo /portal/cursos/."
       />
+      <LiveStatusNote />
 
       <CursosVivosList />
 
@@ -310,7 +306,7 @@ export function CursosView() {
       <div className="flex flex-wrap gap-3 text-xs text-slate-600">
         <LegendDot className="bg-teal-500" label="Enfermería (viva)" />
         <LegendDot className="bg-brand-500" label="Electricidad" />
-        <LegendDot className="bg-emerald-500" label="Administración (demo)" />
+        <LegendDot className="bg-emerald-500" label="Administración" />
         <LegendDot className="bg-sky-500" label="Refrigeración y Climatización" />
         <LegendDot className="bg-amber-500" label="Taller / simulador" />
         <LegendDot className="bg-violet-500" label="Evaluación / normativa" />
@@ -374,63 +370,23 @@ export function EstudiantesView() {
     toggleFavorito,
     hydrated,
   } = usePortalStore();
-  const [openId, setOpenId] = useState<string | null>(ESTUDIANTES[0]?.id ?? null);
+  const { estudiantes: estudiantesLms } = useLivePortal();
+  const [openId, setOpenId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
-  const [climLivePct, setClimLivePct] = useState<Record<string, number> | null>(
-    null,
-  );
 
   useEffect(() => {
-    let cancelled = false;
-    void fetch("/api/lms/climatizacion/students")
-      .then(async (res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json() as Promise<{
-          students?: Array<{ id: string; overallPct: number }>;
-          fetchedAt?: string;
-        }>;
-      })
-      .then((data) => {
-        if (cancelled) return;
-        const map: Record<string, number> = {};
-        for (const s of data.students ?? []) {
-          map[s.id] = s.overallPct;
-        }
-        setClimLivePct(map);
-      })
-      .catch(() => {
-        if (!cancelled) setClimLivePct(null);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const estudiantesConLive = useMemo(() => {
-    if (!climLivePct) return ESTUDIANTES;
-    return ESTUDIANTES.map((e) => {
-      if (!e.id.startsWith("clim-")) return e;
-      const live = climLivePct[e.id];
-      if (live == null) return e;
-      return {
-        ...e,
-        avancePct: Math.round(live),
-        actividadesCompletadas: Math.round(
-          (live / 100) * e.actividadesTotales,
-        ),
-      };
-    });
-  }, [climLivePct]);
+    if (!openId && estudiantesLms[0]) setOpenId(estudiantesLms[0].id);
+  }, [openId, estudiantesLms]);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (!q) return estudiantesConLive;
-    return estudiantesConLive.filter(
+    if (!q) return estudiantesLms;
+    return estudiantesLms.filter(
       (e) =>
         e.nombre.toLowerCase().includes(q) ||
         e.curso.toLowerCase().includes(q),
     );
-  }, [search, estudiantesConLive]);
+  }, [search, estudiantesLms]);
 
   const porCurso = useMemo(
     () => groupEstudiantesBy(filtered, (e) => e.curso),
@@ -449,6 +405,7 @@ export function EstudiantesView() {
       >
         <BrowserSaveHint className="mt-1" />
       </SectionIntro>
+      <LiveStatusNote />
 
       <div className="flex flex-wrap items-center gap-3">
         <label className="block min-w-[16rem] flex-1 text-xs font-semibold text-slate-700">
@@ -462,11 +419,8 @@ export function EstudiantesView() {
           />
         </label>
         <p className="self-end pb-2 text-xs text-slate-500">
-          {pluralEstudiantes(filtered.length)} de {pluralEstudiantes(estudiantesConLive.length)} ·
-          Favoritos: {hydrated ? favoritos.length : "…"}
-          {climLivePct
-            ? " · Clim LMS en vivo"
-            : " · Clim: avance seed (LMS no disponible)"}
+          {pluralEstudiantes(filtered.length)} de {pluralEstudiantes(estudiantesLms.length)} ·
+          Favoritos: {hydrated ? favoritos.length : "…"} · LMS en vivo
         </p>
       </div>
 
@@ -818,49 +772,46 @@ export function OaAeView() {
   ];
   type OaVista = "todas" | "carrera" | "curso" | "estudiante" | "nivel";
   const { oaFiltro: filtro, setOaFiltro: setFiltro } = usePortalStore();
+  const { estudiantes } = useLivePortal();
   const [vista, setVista] = useState<OaVista>("todas");
   const [search, setSearch] = useState("");
   const [cursoSel, setCursoSel] = useState("");
   const [nivelSel, setNivelSel] = useState("");
-  const [estSel, setEstSel] = useState(ESTUDIANTES[0]?.id ?? "");
+  const [estSel, setEstSel] = useState("");
   const cursos = useMemo(
-    () => Array.from(new Set(ESTUDIANTES.map((e) => e.curso))).sort((a, b) => a.localeCompare(b, "es")),
-    [],
+    () => Array.from(new Set(estudiantes.map((e) => e.curso))).sort((a, b) => a.localeCompare(b, "es")),
+    [estudiantes],
   );
   const niveles = useMemo(
     () =>
-      Array.from(new Set(ESTUDIANTES.map((e) => nivelFromCurso(e.curso)))).sort((a, b) =>
+      Array.from(new Set(estudiantes.map((e) => nivelFromCurso(e.curso)))).sort((a, b) =>
         a.localeCompare(b, "es"),
       ),
-    [],
+    [estudiantes],
   );
 
   const recorte = useMemo(() => {
-    if (vista === "carrera") return estudiantesDeEspecialidad(ESTUDIANTES, filtro);
+    if (vista === "carrera") return estudiantesDeEspecialidad(estudiantes, filtro);
     if (vista === "curso") {
       const curso = cursoSel || cursos[0];
-      return ESTUDIANTES.filter((e) => e.curso === curso);
+      return estudiantes.filter((e) => e.curso === curso);
     }
     if (vista === "estudiante") {
-      return ESTUDIANTES.filter((e) => e.id === estSel);
+      return estudiantes.filter((e) => e.id === (estSel || estudiantes[0]?.id));
     }
     if (vista === "nivel") {
       const nivel = nivelSel || niveles[0];
-      return ESTUDIANTES.filter((e) => nivelFromCurso(e.curso) === nivel);
+      return estudiantes.filter((e) => nivelFromCurso(e.curso) === nivel);
     }
-    return filtro === "Todas" ? ESTUDIANTES : estudiantesDeEspecialidad(ESTUDIANTES, filtro);
-  }, [vista, filtro, cursoSel, cursos, estSel, nivelSel, niveles]);
+    return filtro === "Todas" ? estudiantes : estudiantesDeEspecialidad(estudiantes, filtro);
+  }, [vista, filtro, cursoSel, cursos, estSel, nivelSel, niveles, estudiantes]);
 
   const filtered = useMemo(() => {
-    const catalog = catalogoOaDeGrupo(recorte.length ? recorte : ESTUDIANTES);
+    const catalog = catalogoOaDeGrupo(recorte.length ? recorte : estudiantes);
     const byEsp =
       vista === "carrera" && filtro !== "Todas"
         ? catalog.filter((o) => o.especialidad === filtro)
-        : catalog.length
-          ? catalog
-          : filtro === "Todas"
-            ? CATALOGO_OA
-            : CATALOGO_OA.filter((o) => o.especialidad === filtro);
+        : catalog;
     const q = search.trim().toLowerCase();
     if (!q) return byEsp;
     return byEsp.filter(
@@ -869,7 +820,7 @@ export function OaAeView() {
         o.titulo.toLowerCase().includes(q) ||
         o.descripcion.toLowerCase().includes(q),
     );
-  }, [filtro, search, recorte, vista]);
+  }, [filtro, search, recorte, vista, estudiantes]);
   const [expanded, setExpanded] = useState<string | null>(
     CATALOGO_OA[0] ? oaCatalogKey(CATALOGO_OA[0].especialidad, CATALOGO_OA[0].codigo) : null,
   );
@@ -882,6 +833,7 @@ export function OaAeView() {
       >
         <BrowserSaveHint className="mt-1" />
       </SectionIntro>
+      <LiveStatusNote />
 
       <PerspectiveTabs
         label="Perspectiva de OA / AE / criterios de evaluación"
@@ -965,7 +917,7 @@ export function OaAeView() {
               onChange={(e) => setEstSel(e.target.value)}
               className="mt-1 block min-h-11 max-w-xs rounded-xl border-2 border-slate-300 bg-white px-3 py-2 text-sm"
             >
-              {ESTUDIANTES.map((e) => (
+              {estudiantes.map((e) => (
                 <option key={e.id} value={e.id}>
                   {e.nombre} · {e.curso}
                 </option>
@@ -985,7 +937,7 @@ export function OaAeView() {
       <div className="space-y-4">
         {filtered.length === 0 ? (
           <p className="rounded-2xl border border-slate-200 bg-white p-6 text-center text-sm text-slate-500">
-            Sin OA que coincidan con el filtro.
+            Sin OA con evidencia LMS en este recorte.
           </p>
         ) : null}
         {filtered.map((oa) => {
@@ -1012,11 +964,6 @@ export function OaAeView() {
                     <span className="text-xs font-medium text-slate-500">
                       {oa.especialidad}
                     </span>
-                    {oa.enFoco ? (
-                      <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-900">
-                        En foco esta semana
-                      </span>
-                    ) : null}
                   </div>
                   <h2 className="mt-2 text-base font-semibold text-slate-900">
                     {oa.titulo}
@@ -1138,43 +1085,10 @@ export function ReportesView() {
   type ReportesVista = "nivel" | "especialidad" | "curso" | "estudiante";
   type SortKey = "nombre" | "curso" | "especialidad" | "avance" | "ae";
   const { reportesFiltro, setReportesFiltro } = usePortalStore();
+  const { estudiantes: estudiantesBase } = useLivePortal();
   const [vista, setVista] = useState<ReportesVista>("nivel");
   const [sortKey, setSortKey] = useState<SortKey>("avance");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
-  const [climLivePct, setClimLivePct] = useState<Record<string, number> | null>(
-    null,
-  );
-  useEffect(() => {
-    let cancelled = false;
-    void fetch("/api/lms/climatizacion/students")
-      .then(async (res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json() as Promise<{
-          students?: Array<{ id: string; overallPct: number }>;
-        }>;
-      })
-      .then((data) => {
-        if (cancelled) return;
-        const map: Record<string, number> = {};
-        for (const s of data.students ?? []) map[s.id] = s.overallPct;
-        setClimLivePct(map);
-      })
-      .catch(() => {
-        if (!cancelled) setClimLivePct(null);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-  const estudiantesBase = useMemo(() => {
-    if (!climLivePct) return ESTUDIANTES;
-    return ESTUDIANTES.map((e) => {
-      if (!e.id.startsWith("clim-")) return e;
-      const live = climLivePct[e.id];
-      if (live == null) return e;
-      return { ...e, avancePct: Math.round(live) };
-    });
-  }, [climLivePct]);
   const cursosUnicos = useMemo(
     () => Array.from(new Set(estudiantesBase.map((e) => e.curso))).sort((a, b) => a.localeCompare(b, "es")),
     [estudiantesBase],
@@ -1248,9 +1162,14 @@ export function ReportesView() {
   );
   const stats = tendenciaCentral(estudiantesFiltrados.map((e) => e.avancePct));
   const n = estudiantesFiltrados.length;
-  const aprobadosN = Math.round((APROBACION.aprobadosPct / 100) * n);
-  const reprobadosN = Math.round((APROBACION.reprobadosPct / 100) * n);
-  const pendientesN = Math.max(0, n - aprobadosN - reprobadosN);
+  const bandas = estudiantesFiltrados.reduce(
+    (acc, e) => {
+      acc[bandaFromPct(e.avancePct)] += 1;
+      return acc;
+    },
+    { logrado: 0, medianamente_logrado: 0, en_proceso: 0, no_logrado: 0 },
+  );
+  const nSafe = n || 1;
 
   const sortedEstudiantes = useMemo(() => {
     const rows = [...estudiantesFiltrados];
@@ -1297,6 +1216,7 @@ export function ReportesView() {
           Exportar CSV
         </button>
       </div>
+      <LiveStatusNote />
 
       <PerspectiveTabs
         label="Perspectiva del reporte"
@@ -1346,9 +1266,9 @@ export function ReportesView() {
             hint: "AE logrados / AE totales del recorte",
           },
           {
-            label: "Porcentaje de aprobación (demo)",
-            value: `${APROBACION.aprobadosPct}%`,
-            hint: `${pluralEstudiantes(aprobadosN)} equivalentes en este recorte`,
+            label: "Estudiantes en logrado",
+            value: String(bandas.logrado),
+            hint: `${pluralEstudiantes(bandas.logrado)} con Porcentaje de logro % ≥ 85`,
           },
         ]}
       />
@@ -1361,7 +1281,6 @@ export function ReportesView() {
           <ChartPanel
             title="Porcentaje de logro % promedio por especialidad"
             subtitle="Comparación entre carreras. Unidad: Porcentaje de logro %."
-            badge="demo"
           >
             <BarChart
               title="Avance promedio por especialidad"
@@ -1378,7 +1297,6 @@ export function ReportesView() {
           <ChartPanel
             title="Cantidad de estudiantes por especialidad"
             subtitle="Unidad: cantidad de estudiantes."
-            badge="demo"
           >
             <BarChart
               title="Estudiantes considerados por especialidad"
@@ -1404,42 +1322,26 @@ export function ReportesView() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <ChartPanel
-          title="Distribución de aprobación"
-          subtitle="Cantidad estimada de estudiantes (demo institucional aplicada al recorte) y porcentaje."
-          badge="demo"
+          title="Distribución de logro"
+          subtitle="Cantidad de estudiantes del recorte LMS según banda de Porcentaje de logro %."
         >
           <DonutChart
-            title="Cantidad de estudiantes según estado de aprobación"
+            title="Cantidad de estudiantes según banda de logro"
             centerLabel={String(n)}
-            slices={[
-              {
-                label: "Aprobados",
-                pct: APROBACION.aprobadosPct,
-                count: aprobadosN,
+            slices={(Object.keys(BANDA_LOGRO_LABEL) as Array<keyof typeof BANDA_LOGRO_LABEL>).map(
+              (k) => ({
+                label: BANDA_LOGRO_LABEL[k],
+                pct: Math.round((bandas[k] / nSafe) * 100),
+                count: bandas[k],
                 unit: "estudiantes",
-                color: CHART_HEX.blue,
-              },
-              {
-                label: "Reprobados",
-                pct: APROBACION.reprobadosPct,
-                count: reprobadosN,
-                unit: "estudiantes",
-                color: CHART_HEX.danger,
-              },
-              {
-                label: "Pendientes",
-                pct: APROBACION.pendientesPct,
-                count: pendientesN,
-                unit: "estudiantes",
-                color: CHART_HEX.muted,
-              },
-            ]}
+                color: BANDA_LOGRO_COLOR[k],
+              }),
+            )}
           />
         </ChartPanel>
         <ChartPanel
           title="Cobertura AE del recorte"
           subtitle="Porcentaje de AE logrados vs pendientes (cobertura OA/AE)."
-          badge="demo"
         >
           <DonutChart
             title="Cobertura de AE (porcentaje)"
@@ -1459,7 +1361,6 @@ export function ReportesView() {
       <ChartPanel
         title="Cobertura de OA: cantidad de estudiantes que lograron cada objetivo"
         subtitle="Eje vertical: cantidad de estudiantes. Eje horizontal: OA."
-        badge="demo"
       >
         <BarChart
           title="Cantidad de estudiantes que lograron cada OA"
@@ -1470,7 +1371,7 @@ export function ReportesView() {
         />
       </ChartPanel>
 
-      <ChartPanel title="Tabla de estudiantes (ordenable)" badge="demo" className="overflow-x-auto">
+      <ChartPanel title="Tabla de estudiantes (ordenable)" className="overflow-x-auto">
         <table className="mt-1 min-w-[640px] w-full text-left text-sm">
           <thead>
             <tr className="border-b border-[var(--aula-line,#d9e5f6)] text-xs uppercase tracking-wide text-[var(--aula-text-muted,#5e7596)]">
@@ -1520,18 +1421,6 @@ export function ReportesView() {
             listado completo.
           </p>
         ) : null}
-      </ChartPanel>
-
-      <ChartPanel badge="demo">
-        <LineChart
-          title="Evolución del Porcentaje de logro % institucional en el tiempo"
-          yAxisTitle="Porcentaje de logro %"
-          xAxisTitle="Mes"
-          points={EVOLUCION_PROMEDIO.map((p) => ({
-            label: p.mes,
-            pct: p.pct,
-          }))}
-        />
       </ChartPanel>
     </div>
   );

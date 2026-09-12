@@ -1,14 +1,11 @@
-/** Persistencia localStorage del Portal Docente demo (prefijo aula-tp-portal-). */
+/** Persistencia localStorage del Portal Docente (prefijo aula-tp-portal-). */
 
-import {
-  PLANIFICACION_SEMANA,
-  type BloquePlan,
-} from "@/lib/demo-data";
+import type { BloquePlan } from "@/lib/demo-data";
 
 export const PORTAL_LS_PREFIX = "aula-tp-portal-";
 
 export const PORTAL_LS_KEYS = {
-  planificacion: `${PORTAL_LS_PREFIX}planificacion`,
+  planificacion: `${PORTAL_LS_PREFIX}planificacion-v2`,
   estudiantesTab: `${PORTAL_LS_PREFIX}estudiantes-tab`,
   favoritos: `${PORTAL_LS_PREFIX}favoritos`,
   oaFiltro: `${PORTAL_LS_PREFIX}oa-filtro`,
@@ -57,9 +54,7 @@ export function saveJson(key: string, value: unknown): void {
 
 export function loadPlanificacion(): BloquePlan[] {
   const data = loadJson<BloquePlan[] | null>(PORTAL_LS_KEYS.planificacion, null);
-  if (!Array.isArray(data) || data.length === 0) {
-    return PLANIFICACION_SEMANA.map((b) => ({ ...b, oaCodigos: [...b.oaCodigos] }));
-  }
+  if (!Array.isArray(data)) return [];
   return data;
 }
 
@@ -68,9 +63,5 @@ export function savePlanificacion(blocks: BloquePlan[]): void {
 }
 
 export function defaultPlanificacion(): BloquePlan[] {
-  return PLANIFICACION_SEMANA.map((b) => ({
-    ...b,
-    oaCodigos: [...b.oaCodigos],
-    aeCodigos: b.aeCodigos ? [...b.aeCodigos] : undefined,
-  }));
+  return [];
 }

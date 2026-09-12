@@ -44,7 +44,7 @@ export function DonutBandas({
   const bandas = bandasCount(estudiantes);
   const n = estudiantes.length || 1;
   return (
-    <ChartPanel title={title} subtitle={subtitle} badge="demo">
+    <ChartPanel title={title} subtitle={subtitle}>
       <DonutChart
         title={title}
         hideTitle
@@ -87,7 +87,6 @@ export function NivelAggregatePanel({ estudiantes }: { estudiantes: EstudianteDe
         <ChartPanel
           title="OA y porcentaje de logro"
           subtitle="Comparación: Objetivo de Aprendizaje (eje horizontal) vs Porcentaje de logro % (eje vertical)."
-          badge="demo"
         >
           <BarChart
             title="Porcentaje de logro % por OA del nivel"
@@ -105,7 +104,6 @@ export function NivelAggregatePanel({ estudiantes }: { estudiantes: EstudianteDe
         <ChartPanel
           title="AE y nivel de desempeño"
           subtitle="Comparación: Aprendizaje Esperado vs Porcentaje de logro %. Se muestran los 8 AE con menor logro."
-          badge="demo"
         >
           <BarChart
             title="Porcentaje de logro % por AE (focos más descendidos)"
@@ -121,7 +119,6 @@ export function NivelAggregatePanel({ estudiantes }: { estudiantes: EstudianteDe
         <ChartPanel
           title="Criterios de evaluación y resultados"
           subtitle="Cada criterio de evaluación hereda el Porcentaje de logro % de su AE. Se muestran los 8 más descendidos."
-          badge="demo"
         >
           <BarChart
             title="Porcentaje de logro % por criterio de evaluación"
@@ -246,7 +243,6 @@ export function CursoComparePanel({
       <ChartPanel
         title="Avance promedio por curso"
         subtitle="Comparación entre cursos. Unidad: Porcentaje de logro % (promedio de estudiantes del curso)."
-        badge="demo"
       >
         <BarChart
           title="Porcentaje de logro % promedio por curso"

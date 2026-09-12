@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Portal Docente — Demo",
+  title: "Portal Docente — Aula TP Chile",
   description:
-    "Demo interactiva del Portal Docente de Aula TP Chile. Vista docente con datos de ejemplo.",
+    "Panel docente de Aula TP Chile: cursos, estudiantes, OA/AE, cumplimiento y reportes desde el LMS.",
   robots: { index: false, follow: false },
 };
 

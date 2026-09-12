@@ -1,15 +1,10 @@
 /**
  * Catálogo de cursos vivos conectados al Portal Docente.
  * Enfermería / Electricidad: métricas LMS vía API institucional.
- * Climatización: hub Next + LMS local (JSON) + cohorte seed 160.
+ * Climatización: hub Next + LMS local (JSON).
  */
 
-import {
-  CLIMATIZACION_META,
-  MODULOS_CLIMATIZACION,
-  OA_ESPECIALIDAD,
-} from "@/lib/climatizacion-curso";
-import { ESTUDIANTES } from "@/lib/demo-data";
+import { OA_ESPECIALIDAD } from "@/lib/climatizacion-curso";
 
 export type MetricsKind = "enfermeria" | "electricidad" | "climatizacion" | "none";
 
@@ -146,66 +141,6 @@ export type InstitutionalMetrics = {
   source: "live" | "static";
   fetchedAt: string;
 };
-
-/** Resumen estático para Climatización (cohorte demo sintética, sin API LMS). */
-export function buildClimatizacionStaticMetrics(): InstitutionalMetrics {
-  const clim = ESTUDIANTES.filter((e) => /clim/i.test(e.curso));
-  const students = clim.length;
-  const average_progress = students
-    ? Math.round(
-        (clim.reduce((acc, e) => acc + e.avancePct, 0) / students) * 10,
-      ) / 10
-    : 0;
-  const completed = clim.filter((e) => e.avancePct >= 85).length;
-  const avgByModulo = average_progress;
-
-  return {
-    course: {
-      id: "climatizacion-hub",
-      kind: "climatizacion",
-      code: "RC-34M",
-      title: CLIMATIZACION_META.especialidad,
-      specialty: CLIMATIZACION_META.especialidad,
-      level: "3°–4° Medio",
-      period: "Anual",
-      program: "Diferenciado Técnico Profesional",
-      description: `Hub Aula TP con ${MODULOS_CLIMATIZACION.length} módulos (${CLIMATIZACION_META.horasTotales} h programa). Cohorte demo ${students} estudiantes (avance simulado alineado a OA/AE).`,
-      status: "publicado",
-    },
-    totals: {
-      students,
-      active_enrollments: students,
-      completed_enrollments: completed,
-      average_progress,
-      modules: MODULOS_CLIMATIZACION.length,
-      annual_hours: CLIMATIZACION_META.horasTotales,
-      activities: MODULOS_CLIMATIZACION.reduce(
-        (acc, m) => acc + (m.estaciones?.length ?? 0),
-        0,
-      ),
-      activity_completion: average_progress,
-      integrator_total: students,
-      integrator_completed: completed,
-      integrator_average_progress: average_progress,
-    },
-    modules: MODULOS_CLIMATIZACION.map((m) => ({
-      id: m.id,
-      sequence: m.numero,
-      code: String(m.numero).padStart(2, "0"),
-      oa_code: m.oaCodigos.join(" · "),
-      title: m.nombre,
-      short_title: m.nombre,
-      annual_hours: m.horasOficiales,
-      hours_3d: Math.round(m.horasAulaTp * 10) / 10,
-      activity_count: m.estaciones?.length ?? 0,
-      average_progress: avgByModulo,
-      completed_enrollments: completed,
-      in_progress_enrollments: Math.max(0, students - completed),
-    })),
-    source: "static",
-    fetchedAt: new Date().toISOString(),
-  };
-}
 
 export const CLIMATIZACION_OA_COUNT = OA_ESPECIALIDAD.length;
 

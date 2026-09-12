@@ -5,11 +5,10 @@ import {
   COLOR_ACCENT,
   COLOR_CARD,
   PORTAL_CURSOS,
-  buildClimatizacionStaticMetrics,
   type InstitutionalMetrics,
   type PortalCurso,
 } from "@/lib/portal-cursos";
-import { CATALOGO_OA, ESTUDIANTES, especialidadFromCurso, KPI } from "@/lib/demo-data";
+import { CATALOGO_OA, especialidadFromCurso } from "@/lib/demo-data";
 import { ChartPanel, CHART_HEX, DataBadge, MiniDonut, BarChart } from "./charts";
 import {
   KpiStrip,
@@ -18,6 +17,7 @@ import {
   TendenciaCard,
 } from "./analytics";
 import { CursoComparePanel, EstudiantePriorityPanel } from "./perspective-panels";
+import { useLivePortal } from "./live-data";
 import {
   bandaFromPct,
   BANDA_LOGRO_COLOR,
@@ -39,7 +39,10 @@ function useCourseMetrics(
 
   useEffect(() => {
     if (!apiPath) {
-      setState({ status: "ok", data: buildClimatizacionStaticMetrics() });
+      setState({
+        status: "error",
+        message: "Este curso no publica métricas LMS.",
+      });
       return;
     }
     let cancelled = false;
@@ -169,46 +172,51 @@ function useLiveKpis() {
   const clim = useCourseMetrics("/api/portal/metrics/climatizacion");
 
   return useMemo(() => {
-    const liveOk =
-      enf.status === "ok" && elec.status === "ok" && enf.data && elec.data;
-    if (!liveOk) {
+    const parts = [enf, elec, clim].filter(
+      (s): s is { status: "ok"; data: InstitutionalMetrics } => s.status === "ok",
+    );
+    const loading = [enf, elec, clim].some((s) => s.status === "loading");
+    if (loading && parts.length === 0) {
       return {
-        mode: "demo" as const,
-        cursosActivos: KPI.cursosActivos,
-        estudiantes: KPI.estudiantes,
-        actividadesPendientes: KPI.actividadesPendientes,
-        promedioGeneralPct: KPI.promedioGeneralPct,
+        mode: "loading" as const,
+        cursosActivos: PORTAL_CURSOS.filter((c) => c.metricsApiPath).length,
+        estudiantes: 0,
+        actividadesPendientes: 0,
+        promedioGeneralPct: 0,
       };
     }
-    const climData = clim.status === "ok" ? clim.data : null;
-    const students =
-      enf.data.totals.students +
-      elec.data.totals.students +
-      (climData?.totals.students ?? 0);
-    const weighted =
-      enf.data.totals.average_progress * enf.data.totals.students +
-      elec.data.totals.average_progress * elec.data.totals.students +
-      (climData
-        ? climData.totals.average_progress * climData.totals.students
-        : 0);
+    if (parts.length === 0) {
+      return {
+        mode: "error" as const,
+        cursosActivos: PORTAL_CURSOS.filter((c) => c.metricsApiPath).length,
+        estudiantes: 0,
+        actividadesPendientes: 0,
+        promedioGeneralPct: 0,
+      };
+    }
+    const students = parts.reduce((acc, p) => acc + p.data.totals.students, 0);
+    const weighted = parts.reduce(
+      (acc, p) => acc + (p.data.totals.average_progress ?? 0) * p.data.totals.students,
+      0,
+    );
     const avg = students > 0 ? weighted / students : 0;
+    const actividadesPendientes = Math.max(
+      0,
+      Math.round(
+        parts.reduce((acc, p) => {
+          const tot = p.data.totals;
+          return (
+            acc +
+            ((100 - (tot.activity_completion ?? 0)) / 100) * (tot.activities ?? 0)
+          );
+        }, 0),
+      ),
+    );
     return {
       mode: "live" as const,
-      cursosActivos: PORTAL_CURSOS.length,
+      cursosActivos: parts.length,
       estudiantes: students,
-      actividadesPendientes: Math.max(
-        0,
-        Math.round(
-          ((100 - (enf.data.totals.activity_completion ?? 0)) / 100) *
-            (enf.data.totals.activities ?? 0) +
-            ((100 - (elec.data.totals.activity_completion ?? 0)) / 100) *
-              (elec.data.totals.activities ?? 0) +
-            (climData
-              ? ((100 - (climData.totals.activity_completion ?? 0)) / 100) *
-                (climData.totals.activities ?? 0)
-              : 0),
-        ),
-      ),
+      actividadesPendientes,
       promedioGeneralPct: Math.round(avg),
     };
   }, [enf, elec, clim]);
@@ -236,7 +244,7 @@ export function ConnectedCursosGrid() {
         </div>
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
-        {PORTAL_CURSOS.map((c) => (
+        {PORTAL_CURSOS.filter((c) => c.metricsApiPath).map((c) => (
           <CourseMetricsCard key={c.id} curso={c} refreshKey={refreshKey} />
         ))}
       </div>
@@ -252,13 +260,12 @@ export function LiveKpiRow() {
         {kpi.mode === "live" ? (
           <>
             <DataBadge kind="live" />
-            <span>KPIs desde métricas reales (Enfermería + Electricidad + Climatización LMS).</span>
+            <span>KPIs desde métricas reales del LMS.</span>
           </>
+        ) : kpi.mode === "loading" ? (
+          <span>Cargando métricas del LMS…</span>
         ) : (
-          <>
-            <DataBadge kind="demo" />
-            <span>KPIs en modo demo (fallback mientras cargan o fallan las APIs).</span>
-          </>
+          <span>No se pudieron cargar las métricas del LMS.</span>
         )}
       </div>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -299,8 +306,8 @@ export function CursosVivosList() {
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <h2 className="text-sm font-semibold text-slate-900">Cursos vivos publicados</h2>
       <p className="mt-1 text-xs text-slate-600">
-        Especialidades con acceso estudiante en producción. Enfermería y Electricidad
-        usan LMS en vivo (Enfermería, Electricidad y Climatización).
+        Especialidades publicadas. Las métricas de Enfermería, Electricidad y
+        Climatización salen del LMS.
       </p>
       <ul className="mt-4 divide-y divide-slate-100">
         {PORTAL_CURSOS.map((c) => (
@@ -338,6 +345,7 @@ export function CumplimientoView() {
   );
   const [nivel, setNivel] = useState("Todos");
   const [oaFiltro, setOaFiltro] = useState("Todos");
+  const { estudiantes } = useLivePortal();
   const enf = useCourseMetrics("/api/portal/metrics/enfermeria", refreshKey);
   const elec = useCourseMetrics("/api/portal/metrics/electricidad", refreshKey);
   const clim = useCourseMetrics("/api/portal/metrics/climatizacion", refreshKey);
@@ -420,7 +428,7 @@ export function CumplimientoView() {
           }))
       : [],
   );
-  const recorteEstudiantes = ESTUDIANTES.filter((e) => {
+  const recorteEstudiantes = estudiantes.filter((e) => {
     if (nivel !== "Todos") {
       const n = e.curso.match(/([2-4])\s*°/)?.[1];
       if (`${n}° Medio` !== nivel) return false;
@@ -432,7 +440,7 @@ export function CumplimientoView() {
     return true;
   });
   const porCurso = (() => {
-    const map = new Map<string, typeof ESTUDIANTES>();
+    const map = new Map<string, typeof estudiantes>();
     for (const e of recorteEstudiantes) {
       const list = map.get(e.curso);
       if (list) list.push(e);
@@ -450,7 +458,7 @@ export function CumplimientoView() {
     }));
   })();
   const stats = tendenciaCentral(recorteEstudiantes.map((e) => e.avancePct));
-  const demoOaBars = oaPctBars(recorteEstudiantes);
+  const oaBarsNivel = oaPctBars(recorteEstudiantes);
 
   return (
     <div className="space-y-6">
@@ -546,7 +554,7 @@ export function CumplimientoView() {
             hint: "Avance promedio de actividades integradoras",
           },
           {
-            label: "Porcentaje de logro % (demo OA/AE)",
+            label: "Porcentaje de logro % (estudiantes LMS)",
             value: `${stats.media}`,
             hint: `Mediana ${stats.mediana} · moda ${stats.moda ?? "—"}`,
           },
@@ -572,16 +580,15 @@ export function CumplimientoView() {
 
       {vista === "nivel" ? (
         <ChartPanel
-          title="Cumplimiento de OA en el nivel (demo OA/AE)"
-          subtitle="Visión agregada del recorte. Unidad: Porcentaje de logro %."
-          badge="demo"
+          title="Cumplimiento de OA en el nivel"
+          subtitle="Visión agregada del recorte LMS. Unidad: Porcentaje de logro %."
         >
           <BarChart
             title="Porcentaje de logro % por OA del nivel"
             yAxisTitle="Porcentaje de logro %"
             xAxisTitle="OA"
             valueSuffix="%"
-            items={demoOaBars.map((item) => ({
+            items={oaBarsNivel.map((item) => ({
               ...item,
               color: BANDA_LOGRO_COLOR[bandaFromPct(item.value)],
             }))}

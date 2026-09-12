@@ -16,7 +16,7 @@ import {
 
 export type { EstudiantesTabId, OaFiltroId, ReportesFiltroId };
 
-/** Shared portal demo state backed by localStorage (aula-tp-portal-*). */
+/** Shared portal UI state backed by localStorage (aula-tp-portal-*). */
 export function usePortalStore() {
   const [hydrated, setHydrated] = useState(false);
   const [planificacion, setPlanificacionState] = useState<BloquePlan[]>([]);
