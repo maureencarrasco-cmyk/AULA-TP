@@ -48,8 +48,8 @@ export function PortalShell({ section }: PortalShellProps) {
                   href={item.href}
                   className={`block rounded-xl px-3 py-2.5 text-sm font-medium transition ${
                     active
-                      ? "bg-white/15 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] ring-1 ring-white/25"
-                      : "text-white/75 hover:bg-white/8 hover:text-white"
+                      ? "bg-[var(--color-blue,#1558A0)] text-white shadow-[0_6px_16px_rgba(21,88,160,0.35)] ring-2 ring-[var(--color-cyan,#3EC6E0)]"
+                      : "text-white/70 hover:bg-white/10 hover:text-white"
                   }`}
                   aria-current={active ? "page" : undefined}
                 >
@@ -140,10 +140,10 @@ export function PortalShell({ section }: PortalShellProps) {
                       key={item.id}
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`block rounded-xl border px-3 py-2.5 text-sm font-medium transition ${
+                      className={`block rounded-xl border-2 px-3 py-2.5 text-sm font-bold transition ${
                         active
-                          ? "border-[var(--aula-blue,#0870ef)]/30 bg-[var(--aula-surface-tint,#edf6ff)] text-[var(--aula-blue-deep,#0549b8)]"
-                          : "border-transparent text-[var(--aula-text,#082b80)] hover:bg-[var(--aula-surface-soft,#f5f9fe)]"
+                          ? "border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white shadow-[0_6px_16px_rgba(21,88,160,0.28)]"
+                          : "border-[var(--color-line,#D5DEE8)] bg-white text-[var(--color-slate,#3D5166)] hover:border-[var(--aula-blue,#1558A0)]/40"
                       }`}
                       aria-current={active ? "page" : undefined}
                     >

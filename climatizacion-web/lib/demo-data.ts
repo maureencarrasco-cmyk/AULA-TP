@@ -636,6 +636,8 @@ export type EstudianteDemo = {
   cobertura: CoberturaOa[];
   aeLogrados: number;
   aeTotales: number;
+  /** Porcentaje de logro % del periodo anterior registrado (agosto 2026). */
+  avancePctPeriodoAnterior: number;
   ultimaActividad?: { oaCodigo: string; aeCodigo?: string; texto: string };
 };
 
@@ -885,6 +887,7 @@ const ESTUDIANTES_MANUAL: EstudianteDemo[] = [
     actividadesCompletadas: 14,
     actividadesTotales: 18,
     avancePct: 78,
+    avancePctPeriodoAnterior: 58,
     ultimoAcceso: "Hoy",
     cobertura: _e1,
     aeLogrados: countAe(_e1).logrados,
@@ -902,6 +905,7 @@ const ESTUDIANTES_MANUAL: EstudianteDemo[] = [
     actividadesCompletadas: 16,
     actividadesTotales: 18,
     avancePct: 89,
+    avancePctPeriodoAnterior: 81,
     ultimoAcceso: "Hoy",
     cobertura: _e2,
     aeLogrados: countAe(_e2).logrados,
@@ -919,6 +923,7 @@ const ESTUDIANTES_MANUAL: EstudianteDemo[] = [
     actividadesCompletadas: 11,
     actividadesTotales: 18,
     avancePct: 61,
+    avancePctPeriodoAnterior: 49,
     ultimoAcceso: "Ayer",
     cobertura: _e3,
     aeLogrados: countAe(_e3).logrados,
@@ -936,6 +941,7 @@ const ESTUDIANTES_MANUAL: EstudianteDemo[] = [
     actividadesCompletadas: 15,
     actividadesTotales: 18,
     avancePct: 83,
+    avancePctPeriodoAnterior: 62,
     ultimoAcceso: "Ayer",
     cobertura: _e5,
     aeLogrados: countAe(_e5).logrados,
@@ -953,6 +959,7 @@ const ESTUDIANTES_MANUAL: EstudianteDemo[] = [
     actividadesCompletadas: 17,
     actividadesTotales: 18,
     avancePct: 94,
+    avancePctPeriodoAnterior: 88,
     ultimoAcceso: "Hoy",
     cobertura: _e6,
     aeLogrados: countAe(_e6).logrados,
@@ -970,6 +977,7 @@ const ESTUDIANTES_MANUAL: EstudianteDemo[] = [
     actividadesCompletadas: 13,
     actividadesTotales: 18,
     avancePct: 72,
+    avancePctPeriodoAnterior: 54,
     ultimoAcceso: "Ayer",
     cobertura: _e8,
     aeLogrados: countAe(_e8).logrados,
@@ -987,6 +995,7 @@ const ESTUDIANTES_MANUAL: EstudianteDemo[] = [
     actividadesCompletadas: 10,
     actividadesTotales: 16,
     avancePct: 63,
+    avancePctPeriodoAnterior: 51,
     ultimoAcceso: "Hoy",
     cobertura: _e9,
     aeLogrados: countAe(_e9).logrados,
@@ -1004,6 +1013,7 @@ const ESTUDIANTES_MANUAL: EstudianteDemo[] = [
     actividadesCompletadas: 12,
     actividadesTotales: 16,
     avancePct: 75,
+    avancePctPeriodoAnterior: 64,
     ultimoAcceso: "Hoy",
     cobertura: _e10,
     aeLogrados: countAe(_e10).logrados,
@@ -1165,10 +1175,10 @@ export const RECURSOS: RecursoDemo[] = [
 ];
 
 export const NAV_SECTIONS = [
-  { id: "resumen", label: "Resumen", href: "/portal-docente" },
-  { id: "cursos", label: "Mis cursos / Planificación", href: "/portal-docente/cursos" },
+  { id: "resumen", label: "Panel general", href: "/portal-docente" },
+  { id: "cursos", label: "Cursos / Planificación", href: "/portal-docente/cursos" },
   { id: "estudiantes", label: "Estudiantes", href: "/portal-docente/estudiantes" },
-  { id: "oa-ae", label: "OA y AE", href: "/portal-docente/oa-ae" },
+  { id: "oa-ae", label: "OA, AE y criterios de evaluación", href: "/portal-docente/oa-ae" },
   { id: "cumplimiento", label: "Cumplimiento", href: "/portal-docente/cumplimiento" },
   { id: "reportes", label: "Reportes", href: "/portal-docente/reportes" },
 ] as const;

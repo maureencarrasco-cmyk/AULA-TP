@@ -3,15 +3,11 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import {
-  ACTIVIDAD_RECIENTE,
   APROBACION,
   CATALOGO_OA,
   conteoEstudiantesPorOa,
   ESTADO_OA_AE_LABEL,
   ESTUDIANTES,
-  ESTUDIANTES_POR_COMPETENCIA,
-  ESTUDIANTES_POR_HABILIDAD,
-  estudiantesLogradosPorOa,
   EVOLUCION_PROMEDIO,
   especialidadFromCurso,
   getAeByCodigo,
@@ -23,6 +19,20 @@ import {
   type EstudianteDemo,
 } from "@/lib/demo-data";
 import { BarChart, ChartPanel, CHART_HEX, DataBadge, DonutChart, LineChart, MiniDonut } from "./charts";
+import {
+  AlertList,
+  KpiStrip,
+  PerspectiveTabs,
+  SectionIntro,
+  TendenciaCard,
+} from "./analytics";
+import {
+  CursoComparePanel,
+  EstudiantePriorityPanel,
+  NivelAggregatePanel,
+  OaEstadoCantidadChart,
+  CriteriosDeEvaluacionList,
+} from "./perspective-panels";
 import {
   ConnectedCursosGrid,
   CursosVivosList,
@@ -36,6 +46,19 @@ import {
   type EstudiantesTabId,
   type OaFiltroId,
 } from "./usePortalStore";
+import {
+  BANDA_LOGRO_COLOR,
+  BANDA_LOGRO_LABEL,
+  bandaFromPct,
+  catalogoOaDeGrupo,
+  conteoOaGrupo,
+  criteriosDeEvaluacion,
+  estudiantesDeEspecialidad,
+  oaCodesForGroup,
+  pctLogroAe,
+  pluralEstudiantes,
+  tendenciaCentral,
+} from "@/lib/portal-stats";
 
 export { CumplimientoView };
 
@@ -44,12 +67,6 @@ const ESTADO_BADGE: Record<EstadoOaAe, string> = {
   en_progreso: "bg-amber-100 text-amber-900 ring-amber-200",
   no_iniciado: "bg-slate-100 text-slate-600 ring-slate-200",
 };
-
-const ESTADO_BAR_COLORS = {
-  logrado: CHART_HEX.success,
-  en_progreso: CHART_HEX.warning,
-  no_iniciado: CHART_HEX.muted,
-} as const;
 
 function EstadoBadge({ estado }: { estado: EstadoOaAe }) {
   return (
@@ -88,50 +105,131 @@ function ResumenStoreCounts() {
 
 export function ResumenView() {
   const oaEnFoco = CATALOGO_OA.filter((o) => o.enFoco);
-  const progresoPorOa = CATALOGO_OA.map((oa) => {
-    const c = conteoEstudiantesPorOa(oa.codigo, oa.especialidad);
-    return {
-      key: oaCatalogKey(oa.especialidad, oa.codigo),
-      codigo: oa.codigo,
-      titulo: oa.titulo,
-      especialidad: oa.especialidad,
-      ...c,
-    };
-  }).filter((x) => x.total > 0);
+  const pcts = ESTUDIANTES.map((e) => e.avancePct);
+  const stats = tendenciaCentral(pcts);
+  const bandas = ESTUDIANTES.reduce(
+    (acc, e) => {
+      acc[bandaFromPct(e.avancePct)] += 1;
+      return acc;
+    },
+    { logrado: 0, medianamente_logrado: 0, en_proceso: 0, no_logrado: 0 },
+  );
+  const n = ESTUDIANTES.length || 1;
+  const descendidos = [...ESTUDIANTES].sort((a, b) => a.avancePct - b.avancePct).slice(0, 5);
+  const oaCriticos = CATALOGO_OA.map((oa) => ({
+    oa,
+    pct: pctLogroOa(oa.codigo, oa.especialidad),
+    conteo: conteoEstudiantesPorOa(oa.codigo, oa.especialidad),
+  }))
+    .filter((x) => x.conteo.total > 0)
+    .sort((a, b) => a.pct - b.pct)
+    .slice(0, 4);
+  const porCurso = groupEstudiantesBy(ESTUDIANTES, (e) => e.curso)
+    .slice()
+    .sort((a, b) => a.avg - b.avg);
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">Resumen</h1>
-        <p className="mt-1 text-sm text-slate-600">
-          Vista general de cursos vivos conectados y avance institucional.
-        </p>
-      </div>
-
-      <div className="flex flex-wrap gap-2">
-        <Link
-          href="/portal-docente/cursos"
-          className="rounded-xl border-2 border-brand-600 bg-brand-50 px-4 py-2 text-sm font-bold text-brand-800 hover:bg-brand-100"
-        >
-          Ir a Cursos / Planificación
-        </Link>
-        <Link
-          href="/portal-docente/estudiantes"
-          className="rounded-xl border-2 border-brand-600 bg-white px-4 py-2 text-sm font-bold text-brand-800 hover:bg-brand-50"
-        >
-          Ir a Estudiantes
-        </Link>
-        <Link
-          href="/portal-docente/cumplimiento"
-          className="rounded-xl border-2 border-brand-600 bg-white px-4 py-2 text-sm font-bold text-brand-800 hover:bg-brand-50"
-        >
-          Ir a Cumplimiento
-        </Link>
-      </div>
+      <SectionIntro
+        title="Panel general"
+        purpose="Vista institucional para leer en segundos el estado de cursos, estudiantes, avance y cumplimiento. Desde aquí identificas alertas y entras al detalle por el menú lateral."
+      />
 
       <ResumenStoreCounts />
-
       <LiveKpiRow />
+
+      <KpiStrip
+        items={[
+          {
+            label: "Porcentaje de logro % (media)",
+            value: `${stats.media}`,
+            hint: `Mediana ${stats.mediana} · moda ${stats.moda ?? "—"} · ${pluralEstudiantes(stats.n)}`,
+          },
+          {
+            label: "Estudiantes en proceso o no logrados",
+            value: String(bandas.en_proceso + bandas.no_logrado),
+            hint: "Cantidad de estudiantes que requieren apoyo",
+          },
+          {
+            label: "OA en foco esta semana",
+            value: String(oaEnFoco.length),
+            hint: "Cantidad de Objetivos de Aprendizaje priorizados",
+          },
+          {
+            label: "Cursos con menor avance",
+            value: porCurso[0] ? `${porCurso[0].avg}%` : "—",
+            hint: porCurso[0] ? porCurso[0].key : "Sin cursos",
+          },
+        ]}
+      />
+
+      <AlertList
+        title="Focos prioritarios (30 segundos)"
+        items={[
+          ...porCurso.slice(0, 2).map((c) => ({
+            id: `curso-${c.key}`,
+            title: `Curso con menor avance: ${c.key}`,
+            detail: `Avance promedio ${c.avg}% · ${pluralEstudiantes(c.estudiantes.length)}. Revisa Cumplimiento o Estudiantes para el detalle.`,
+            tone: "warn" as const,
+          })),
+          ...oaCriticos.slice(0, 2).map((o) => ({
+            id: `oa-${o.oa.especialidad}-${o.oa.codigo}`,
+            title: `${o.oa.codigo} crítico · ${o.oa.especialidad}`,
+            detail: `Porcentaje de logro ${o.pct}% · ${pluralEstudiantes(o.conteo.logrado)} logrados de ${o.conteo.total}.`,
+            tone: "warn" as const,
+          })),
+          {
+            id: "desc",
+            title: `${pluralEstudiantes(descendidos.length)} con menor porcentaje de logro`,
+            detail: descendidos
+              .slice(0, 3)
+              .map((e) => `${e.nombre} (${e.avancePct}%)`)
+              .join(" · "),
+            tone: "info" as const,
+          },
+        ]}
+      />
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <ChartPanel
+          title="Distribución de estudiantes según nivel de logro"
+          subtitle="Cantidad de estudiantes (no porcentaje) agrupados por banda de Porcentaje de logro %."
+          badge="demo"
+        >
+          <DonutChart
+            title="Cantidad de estudiantes por banda de logro institucional"
+            centerLabel={String(ESTUDIANTES.length)}
+            slices={(Object.keys(BANDA_LOGRO_LABEL) as Array<keyof typeof BANDA_LOGRO_LABEL>).map(
+              (k) => ({
+                label: BANDA_LOGRO_LABEL[k],
+                pct: Math.round((bandas[k] / n) * 100),
+                count: bandas[k],
+                unit: "estudiantes",
+                color: BANDA_LOGRO_COLOR[k],
+              }),
+            )}
+          />
+        </ChartPanel>
+        <ChartPanel
+          title="Avance promedio por curso"
+          subtitle="Unidad: Porcentaje de logro % (promedio de estudiantes del curso)."
+          badge="demo"
+        >
+          <BarChart
+            title="Comparación de cursos · Porcentaje de logro %"
+            yAxisTitle="Porcentaje de logro %"
+            xAxisTitle="Curso"
+            valueSuffix="%"
+            items={porCurso.map((c) => ({
+              label: c.key.replace("Medio ", "M. "),
+              value: c.avg,
+              color: BANDA_LOGRO_COLOR[bandaFromPct(c.avg)],
+            }))}
+          />
+        </ChartPanel>
+      </div>
+
+      <TendenciaCard stats={stats} />
 
       <ConnectedCursosGrid />
 
@@ -139,22 +237,16 @@ export function ResumenView() {
         <span className="mr-2 inline-flex align-middle">
           <DataBadge kind="demo" />
         </span>
-        Las secciones siguientes (OA en foco, habilidades, actividad reciente) usan{" "}
-        <strong>datos de ejemplo</strong> para la demo pedagógica.
+        OA en foco y actividad reciente usan datos de ejemplo para la demo pedagógica.
       </div>
 
       <div className="rounded-2xl border border-[var(--aula-line,#d9e5f6)] bg-[var(--aula-surface-tint,#edf6ff)] p-5 shadow-[var(--shadow-sm)]">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div>
-            <h2 className="text-sm font-semibold text-[var(--aula-text,#082b80)]">
-              Objetivos de Aprendizaje (OA) en foco esta semana
-            </h2>
-            <p className="mt-1 text-xs text-[var(--aula-text-muted,#5e7596)]">
-              OA priorizados en la planificación semanal (datos de ejemplo).
-            </p>
-          </div>
-          <DataBadge kind="demo" />
-        </div>
+        <h2 className="text-sm font-semibold text-[var(--aula-text,#082b80)]">
+          OA, AE y criterios de evaluación en foco
+        </h2>
+        <p className="mt-1 text-xs text-[var(--aula-text-muted,#5e7596)]">
+          Lectura general del nivel: cantidad de estudiantes por estado del OA, no casos individuales.
+        </p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {oaEnFoco.map((oa) => {
             const c = conteoEstudiantesPorOa(oa.codigo, oa.especialidad);
@@ -169,81 +261,14 @@ export function ResumenView() {
                 </p>
                 <p className="mt-1 text-sm font-semibold text-slate-900">{oa.titulo}</p>
                 <p className="mt-2 text-xs text-slate-600">
-                  <span className="font-semibold text-emerald-700">{c.logrado}</span> logrados ·{" "}
-                  <span className="font-semibold text-amber-700">{c.en_progreso}</span> en
-                  progreso ·{" "}
-                  <span className="font-semibold text-slate-500">{c.no_iniciado}</span> no
-                  iniciados
+                  {pluralEstudiantes(c.logrado)} logrados · {pluralEstudiantes(c.en_progreso)} en
+                  proceso · {pluralEstudiantes(c.no_iniciado)} no iniciados
                 </p>
               </li>
             );
           })}
         </ul>
       </div>
-
-      <div className="grid gap-6 lg:grid-cols-2">
-        <ChartPanel badge="demo">
-          <BarChart
-            title="Estudiantes por habilidad"
-            yAxisTitle="Estudiantes"
-            items={ESTUDIANTES_POR_HABILIDAD}
-            color={CHART_HEX.blue}
-          />
-        </ChartPanel>
-        <ChartPanel title="Avance de estudiantes por OA (cantidades)" badge="demo">
-          <ul className="space-y-3">
-            {progresoPorOa.map((p) => (
-              <li key={p.key} className="flex items-start justify-between gap-3 text-sm">
-                <div className="min-w-0">
-                  <p className="font-semibold text-[var(--aula-text,#082b80)]">
-                    {p.codigo}{" "}
-                    <span className="font-normal text-[var(--aula-text-secondary,#43628f)]">
-                      — {p.titulo}
-                    </span>
-                    <span className="mt-0.5 block text-[11px] font-normal text-[var(--aula-text-muted,#5e7596)]">
-                      {p.especialidad}
-                    </span>
-                  </p>
-                </div>
-                <p className="shrink-0 tabular-nums text-xs text-[var(--aula-text-muted,#5e7596)]">
-                  <span className="font-semibold text-[var(--aula-success-ink,#00784d)]">
-                    {p.logrado}
-                  </span>
-                  /{p.total} logr.
-                </p>
-              </li>
-            ))}
-          </ul>
-        </ChartPanel>
-      </div>
-
-      <ChartPanel title="Actividad reciente" badge="demo">
-        <ul className="divide-y divide-[var(--aula-line,#d9e5f6)]">
-          {ACTIVIDAD_RECIENTE.map((a) => (
-            <li key={a.id} className="py-3 first:pt-0 last:pb-0">
-              <p className="text-sm font-medium text-[var(--aula-text,#082b80)]">
-                {a.estudiante}{" "}
-                <span className="font-normal text-[var(--aula-text-secondary,#43628f)]">
-                  — {a.texto}
-                </span>
-              </p>
-              <p className="mt-0.5 text-xs text-[var(--aula-text-muted,#5e7596)]">
-                {a.curso} · {a.hace}
-                {a.oaCodigo ? (
-                  <>
-                    {" "}
-                    ·{" "}
-                    <span className="font-semibold text-[var(--aula-blue-deep,#0549b8)]">
-                      {a.oaCodigo}
-                      {a.aeCodigo ? ` / ${a.aeCodigo}` : ""}
-                    </span>
-                  </>
-                ) : null}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </ChartPanel>
     </div>
   );
 }
@@ -256,23 +281,18 @@ export function CursosView() {
     savedFlash,
     hydrated,
   } = usePortalStore();
+  const porCurso = groupEstudiantesBy(ESTUDIANTES, (e) => e.curso);
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">
-          Mis cursos / Planificación
-        </h1>
-        <p className="mt-1 text-sm text-slate-600">
-          Cursos vivos publicados. El acceso estudiantil único es el{" "}
-          <a className="font-semibold text-[var(--aula-blue)] underline" href="https://aulatpchile.cl/portal/cursos/">
-            catálogo /portal/cursos/
-          </a>
-          . Horario semanal editable con OA asociados; los cambios se guardan en este navegador.
-        </p>
-      </div>
+      <SectionIntro
+        title="Cursos / Planificación"
+        purpose="Cursos publicados, comparación de avance entre grupos y horario semanal asociado a OA/AE. El acceso estudiantil único es el catálogo /portal/cursos/."
+      />
 
       <CursosVivosList />
+
+      <CursoComparePanel grupos={porCurso} />
 
       {hydrated ? (
         <SchedulePlanner
@@ -423,15 +443,12 @@ export function EstudiantesView() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">Estudiantes</h1>
-        <p className="mt-1 text-sm text-slate-600">
-          Seguimiento de avance, actividades y cobertura de Objetivos de Aprendizaje
-          (OA) / Aprendizajes Esperados (AE). Explora por curso, por estudiante o por
-          nivel. Expande una fila para ver el detalle.
-        </p>
+      <SectionIntro
+        title="Estudiantes"
+        purpose="Lee el avance desde tres perspectivas. Por nivel: tendencias de OA, AE y criterios de evaluación. Por curso: comparación entre grupos. Por estudiante: quién requiere apoyo ahora."
+      >
         <BrowserSaveHint className="mt-1" />
-      </div>
+      </SectionIntro>
 
       <div className="flex flex-wrap items-center gap-3">
         <label className="block min-w-[16rem] flex-1 text-xs font-semibold text-slate-700">
@@ -444,50 +461,25 @@ export function EstudiantesView() {
             className="mt-1 w-full rounded-xl border-2 border-slate-300 px-3 py-2 text-sm font-medium text-slate-900 focus:border-brand-500 focus:outline-none"
           />
         </label>
-        <p className="text-xs text-slate-500 self-end pb-2">
-          {filtered.length} de {estudiantesConLive.length} · Favoritos:{" "}
-          {hydrated ? favoritos.length : "…"}
+        <p className="self-end pb-2 text-xs text-slate-500">
+          {pluralEstudiantes(filtered.length)} de {pluralEstudiantes(estudiantesConLive.length)} ·
+          Favoritos: {hydrated ? favoritos.length : "…"}
           {climLivePct
             ? " · Clim LMS en vivo"
             : " · Clim: avance seed (LMS no disponible)"}
         </p>
       </div>
 
-      <div
-        role="tablist"
-        aria-label="Vista de estudiantes"
-        className="inline-flex flex-wrap gap-2 rounded-2xl border border-slate-200 bg-white p-1.5 shadow-sm"
-      >
-        {ESTUDIANTES_TABS.map((t) => {
-          const selected = tab === t.id;
-          return (
-            <button
-              key={t.id}
-              type="button"
-              role="tab"
-              id={`estudiantes-tab-${t.id}`}
-              aria-selected={selected}
-              aria-controls={`estudiantes-panel-${t.id}`}
-              tabIndex={selected ? 0 : -1}
-              onClick={() => setTab(t.id)}
-              className={`min-w-[8.5rem] rounded-xl border-2 px-4 py-2.5 text-sm font-bold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 ${
-                selected
-                  ? "border-brand-600 bg-brand-600 text-white shadow-md"
-                  : "border-slate-300 bg-slate-50 text-slate-700 hover:border-brand-400 hover:bg-brand-50 hover:text-brand-800"
-              }`}
-            >
-              {t.label}
-            </button>
-          );
-        })}
-      </div>
+      <PerspectiveTabs
+        label="Vista de estudiantes"
+        value={tab}
+        options={ESTUDIANTES_TABS}
+        onChange={setTab}
+      />
 
       {tab === "estudiante" ? (
-        <div
-          role="tabpanel"
-          id="estudiantes-panel-estudiante"
-          aria-labelledby="estudiantes-tab-estudiante"
-        >
+        <div role="tabpanel" className="space-y-6">
+          <EstudiantePriorityPanel estudiantes={filtered} total={filtered.length} />
           <EstudiantesTable
             estudiantes={filtered}
             openId={openId}
@@ -500,12 +492,8 @@ export function EstudiantesView() {
       ) : null}
 
       {tab === "curso" ? (
-        <div
-          role="tabpanel"
-          id="estudiantes-panel-curso"
-          aria-labelledby="estudiantes-tab-curso"
-          className="space-y-4"
-        >
+        <div role="tabpanel" className="space-y-6">
+          <CursoComparePanel grupos={porCurso} />
           {porCurso.map((g) => (
             <EstudianteGroupCard
               key={g.key}
@@ -527,28 +515,20 @@ export function EstudiantesView() {
       ) : null}
 
       {tab === "nivel" ? (
-        <div
-          role="tabpanel"
-          id="estudiantes-panel-nivel"
-          aria-labelledby="estudiantes-tab-nivel"
-          className="space-y-4"
-        >
+        <div role="tabpanel" className="space-y-6">
           {porNivel.map((g) => (
-            <EstudianteGroupCard
-              key={g.key}
-              title={g.key}
-              count={g.estudiantes.length}
-              avg={g.avg}
-            >
-              <EstudiantesTable
-                estudiantes={g.estudiantes}
-                openId={openId}
-                setOpenId={setOpenId}
-                showCurso
-                favoritos={favoritos}
-                onToggleFavorito={toggleFavorito}
-              />
-            </EstudianteGroupCard>
+            <section key={g.key} className="space-y-4">
+              <header className="flex flex-wrap items-end justify-between gap-2">
+                <div>
+                  <h2 className="text-lg font-bold text-[var(--color-navy,#0B3A6B)]">{g.key}</h2>
+                  <p className="text-xs text-[var(--color-muted,#6B7C8E)]">
+                    {pluralEstudiantes(g.estudiantes.length)} · Porcentaje de logro % promedio{" "}
+                    {g.avg}
+                  </p>
+                </div>
+              </header>
+              <NivelAggregatePanel estudiantes={g.estudiantes} />
+            </section>
           ))}
         </div>
       ) : null}
@@ -573,12 +553,12 @@ function EstudianteGroupCard({
         <div>
           <h2 className="text-sm font-bold text-slate-900 sm:text-base">{title}</h2>
           <p className="mt-0.5 text-xs text-slate-500">
-            {count} estudiante{count === 1 ? "" : "s"}
+            {pluralEstudiantes(count)}
           </p>
         </div>
         <div className="text-right">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
-            Avance promedio
+            Porcentaje de logro % (promedio)
           </p>
           <p className="text-sm font-bold tabular-nums text-brand-700">{avg}%</p>
         </div>
@@ -619,7 +599,7 @@ function EstudiantesTable({
             <th className="px-4 py-3">Estudiante</th>
             {showCurso ? <th className="px-4 py-3">Curso</th> : null}
             <th className="px-4 py-3">AE logrados</th>
-            <th className="px-4 py-3">Avance</th>
+            <th className="px-4 py-3">Porcentaje de logro %</th>
             <th className="px-4 py-3">Último OA/AE</th>
           </tr>
         </thead>
@@ -730,7 +710,7 @@ function EstudianteRows({
               aria-valuenow={e.avancePct}
               aria-valuemin={0}
               aria-valuemax={100}
-              aria-label={`Avance ${e.avancePct}%`}
+              aria-label={`Porcentaje de logro ${e.avancePct}%`}
             >
               <div
                 className="h-full rounded-full bg-brand-600"
@@ -784,21 +764,36 @@ function EstudianteRows({
                     <ul className="mt-3 space-y-2">
                       {c.ae.map((a) => {
                         const aeMeta = getAeByCodigo(a.aeCodigo, esp);
+                        const criterios = aeMeta ? criteriosDeEvaluacion(aeMeta) : [];
                         return (
                           <li
                             key={a.aeCodigo}
-                            className="flex items-start justify-between gap-2 text-xs"
+                            className="space-y-1 text-xs"
                           >
-                            <div className="min-w-0">
-                              <span className="font-semibold text-slate-800">
-                                {a.aeCodigo}
-                              </span>
-                              <span className="text-slate-600">
-                                {" "}
-                                — {aeMeta?.descripcion ?? ""}
-                              </span>
+                            <div className="flex items-start justify-between gap-2">
+                              <div className="min-w-0">
+                                <span className="font-semibold text-slate-800">
+                                  {a.aeCodigo}
+                                </span>
+                                <span className="text-slate-600">
+                                  {" "}
+                                  — {aeMeta?.descripcion ?? ""}
+                                </span>
+                              </div>
+                              <EstadoBadge estado={a.estado} />
                             </div>
-                            <EstadoBadge estado={a.estado} />
+                            {criterios.length > 0 ? (
+                              <ul className="ml-2 space-y-0.5 border-l border-slate-200 pl-2 text-[11px] text-slate-600">
+                                {criterios.map((ce) => (
+                                  <li key={ce.codigo}>
+                                    <span className="font-semibold text-slate-700">
+                                      Criterio de evaluación {ce.codigo}:
+                                    </span>{" "}
+                                    {ce.descripcion}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : null}
                           </li>
                         );
                       })}
@@ -821,13 +816,51 @@ export function OaAeView() {
     "Administración",
     "Refrigeración y Climatización",
   ];
+  type OaVista = "todas" | "carrera" | "curso" | "estudiante" | "nivel";
   const { oaFiltro: filtro, setOaFiltro: setFiltro } = usePortalStore();
+  const [vista, setVista] = useState<OaVista>("todas");
   const [search, setSearch] = useState("");
+  const [cursoSel, setCursoSel] = useState("");
+  const [nivelSel, setNivelSel] = useState("");
+  const [estSel, setEstSel] = useState(ESTUDIANTES[0]?.id ?? "");
+  const cursos = useMemo(
+    () => Array.from(new Set(ESTUDIANTES.map((e) => e.curso))).sort((a, b) => a.localeCompare(b, "es")),
+    [],
+  );
+  const niveles = useMemo(
+    () =>
+      Array.from(new Set(ESTUDIANTES.map((e) => nivelFromCurso(e.curso)))).sort((a, b) =>
+        a.localeCompare(b, "es"),
+      ),
+    [],
+  );
+
+  const recorte = useMemo(() => {
+    if (vista === "carrera") return estudiantesDeEspecialidad(ESTUDIANTES, filtro);
+    if (vista === "curso") {
+      const curso = cursoSel || cursos[0];
+      return ESTUDIANTES.filter((e) => e.curso === curso);
+    }
+    if (vista === "estudiante") {
+      return ESTUDIANTES.filter((e) => e.id === estSel);
+    }
+    if (vista === "nivel") {
+      const nivel = nivelSel || niveles[0];
+      return ESTUDIANTES.filter((e) => nivelFromCurso(e.curso) === nivel);
+    }
+    return filtro === "Todas" ? ESTUDIANTES : estudiantesDeEspecialidad(ESTUDIANTES, filtro);
+  }, [vista, filtro, cursoSel, cursos, estSel, nivelSel, niveles]);
+
   const filtered = useMemo(() => {
+    const catalog = catalogoOaDeGrupo(recorte.length ? recorte : ESTUDIANTES);
     const byEsp =
-      filtro === "Todas"
-        ? CATALOGO_OA
-        : CATALOGO_OA.filter((o) => o.especialidad === filtro);
+      vista === "carrera" && filtro !== "Todas"
+        ? catalog.filter((o) => o.especialidad === filtro)
+        : catalog.length
+          ? catalog
+          : filtro === "Todas"
+            ? CATALOGO_OA
+            : CATALOGO_OA.filter((o) => o.especialidad === filtro);
     const q = search.trim().toLowerCase();
     if (!q) return byEsp;
     return byEsp.filter(
@@ -836,52 +869,118 @@ export function OaAeView() {
         o.titulo.toLowerCase().includes(q) ||
         o.descripcion.toLowerCase().includes(q),
     );
-  }, [filtro, search]);
+  }, [filtro, search, recorte, vista]);
   const [expanded, setExpanded] = useState<string | null>(
     CATALOGO_OA[0] ? oaCatalogKey(CATALOGO_OA[0].especialidad, CATALOGO_OA[0].codigo) : null,
   );
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">
-          Objetivos de Aprendizaje (OA) y Aprendizajes Esperados (AE)
-        </h1>
-        <p className="mt-1 text-sm text-slate-600">
-          Catálogo de ejemplo para especialidades TP (Electricidad, Administración y
-          Refrigeración y Climatización). Expande cada OA para ver AE y estudiantes
-          por estado.
-        </p>
+      <SectionIntro
+        title="OA, AE y criterios de evaluación"
+        purpose="Analiza Objetivos de Aprendizaje, Aprendizajes Esperados y criterios de evaluación desde todas las carreras, una carrera, un curso, un estudiante o el nivel completo."
+      >
         <BrowserSaveHint className="mt-1" />
+      </SectionIntro>
+
+      <PerspectiveTabs
+        label="Perspectiva de OA / AE / criterios de evaluación"
+        value={vista}
+        onChange={setVista}
+        options={[
+          { id: "todas", label: "Todas las carreras" },
+          { id: "carrera", label: "Por carrera" },
+          { id: "curso", label: "Por curso" },
+          { id: "estudiante", label: "Por estudiante" },
+          { id: "nivel", label: "Nivel completo" },
+        ]}
+      />
+
+      <div className="flex flex-wrap items-end gap-3">
+        <label className="block min-w-[16rem] flex-1 text-xs font-semibold text-slate-700">
+          Buscar por código o título
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Ej. OA 1, planos, motores…"
+            className="mt-1 w-full rounded-xl border-2 border-slate-300 px-3 py-2 text-sm font-medium text-slate-900 focus:border-brand-500 focus:outline-none"
+          />
+        </label>
+        {vista === "carrera" || vista === "todas" ? (
+          <div className="flex flex-wrap gap-2 pb-1">
+            {especialidades.map((esp) => (
+              <button
+                key={esp}
+                type="button"
+                onClick={() => setFiltro(esp)}
+                className={`min-h-11 rounded-xl border-2 px-3 py-2 text-xs font-bold transition ${
+                  filtro === esp
+                    ? "border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white"
+                    : "border-[var(--color-line,#D5DEE8)] bg-white text-[var(--color-slate,#3D5166)]"
+                }`}
+              >
+                {esp}
+              </button>
+            ))}
+          </div>
+        ) : null}
+        {vista === "curso" ? (
+          <label className="text-xs font-semibold text-slate-700">
+            Curso
+            <select
+              value={cursoSel || cursos[0]}
+              onChange={(e) => setCursoSel(e.target.value)}
+              className="mt-1 block min-h-11 rounded-xl border-2 border-slate-300 bg-white px-3 py-2 text-sm"
+            >
+              {cursos.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          </label>
+        ) : null}
+        {vista === "nivel" ? (
+          <label className="text-xs font-semibold text-slate-700">
+            Nivel
+            <select
+              value={nivelSel || niveles[0]}
+              onChange={(e) => setNivelSel(e.target.value)}
+              className="mt-1 block min-h-11 rounded-xl border-2 border-slate-300 bg-white px-3 py-2 text-sm"
+            >
+              {niveles.map((n) => (
+                <option key={n} value={n}>
+                  {n}
+                </option>
+              ))}
+            </select>
+          </label>
+        ) : null}
+        {vista === "estudiante" ? (
+          <label className="text-xs font-semibold text-slate-700">
+            Estudiante
+            <select
+              value={estSel}
+              onChange={(e) => setEstSel(e.target.value)}
+              className="mt-1 block min-h-11 max-w-xs rounded-xl border-2 border-slate-300 bg-white px-3 py-2 text-sm"
+            >
+              {ESTUDIANTES.map((e) => (
+                <option key={e.id} value={e.id}>
+                  {e.nombre} · {e.curso}
+                </option>
+              ))}
+            </select>
+          </label>
+        ) : null}
       </div>
 
-      <label className="block max-w-md text-xs font-semibold text-slate-700">
-        Buscar por código o título
-        <input
-          type="search"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Ej. OA 1, planos, motores…"
-          className="mt-1 w-full rounded-xl border-2 border-slate-300 px-3 py-2 text-sm font-medium text-slate-900 focus:border-brand-500 focus:outline-none"
-        />
-      </label>
+      <p className="text-xs text-[var(--color-muted,#6B7C8E)]">
+        Recorte actual: <strong>{pluralEstudiantes(recorte.length)}</strong>. Los gráficos muestran
+        cantidad de estudiantes o Porcentaje de logro %, según el título de cada eje.
+      </p>
 
-      <div className="flex flex-wrap gap-2">
-        {especialidades.map((esp) => (
-          <button
-            key={esp}
-            type="button"
-            onClick={() => setFiltro(esp)}
-            className={`rounded-full border-2 px-3 py-1.5 text-xs font-bold transition ${
-              filtro === esp
-                ? "border-brand-600 bg-brand-600 text-white"
-                : "border-slate-300 bg-white text-slate-700 hover:border-brand-400 hover:bg-brand-50"
-            }`}
-          >
-            {esp}
-          </button>
-        ))}
-      </div>
+      {vista === "nivel" ? <NivelAggregatePanel estudiantes={recorte} /> : null}
 
       <div className="space-y-4">
         {filtered.length === 0 ? (
@@ -892,8 +991,8 @@ export function OaAeView() {
         {filtered.map((oa) => {
           const key = oaCatalogKey(oa.especialidad, oa.codigo);
           const open = expanded === key;
-          const conteo = conteoEstudiantesPorOa(oa.codigo, oa.especialidad);
-          const pct = pctLogroOa(oa.codigo, oa.especialidad);
+          const conteo = conteoOaGrupo(recorte, oa.codigo);
+          const pct = conteo.pct;
           return (
             <article
               key={key}
@@ -923,6 +1022,11 @@ export function OaAeView() {
                     {oa.titulo}
                   </h2>
                   <p className="mt-1 text-sm text-slate-600">{oa.descripcion}</p>
+                  <p className="mt-2 text-xs text-slate-600">
+                    {pluralEstudiantes(conteo.logrado)} logrados ·{" "}
+                    {pluralEstudiantes(conteo.en_progreso)} en proceso ·{" "}
+                    {pluralEstudiantes(conteo.no_iniciado)} no iniciados
+                  </p>
                 </div>
                 <svg
                   width="18"
@@ -948,47 +1052,48 @@ export function OaAeView() {
                     Aprendizajes Esperados (AE)
                   </h3>
                   <ul className="mt-3 space-y-2">
-                    {oa.ae.map((ae) => (
-                      <li
-                        key={ae.codigo}
-                        className="flex gap-3 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2 text-sm"
-                      >
-                        <span className="shrink-0 font-bold text-brand-700">
-                          {ae.codigo}
-                        </span>
-                        <span className="text-slate-700">{ae.descripcion}</span>
-                      </li>
-                    ))}
+                    {oa.ae.map((ae) => {
+                      const aeConteo = pctLogroAe(recorte, oa.codigo, ae.codigo, oa.especialidad);
+                      return (
+                        <li
+                          key={ae.codigo}
+                          className="rounded-lg border border-slate-100 bg-slate-50 px-3 py-2 text-sm"
+                        >
+                          <div className="flex gap-3">
+                            <span className="shrink-0 font-bold text-brand-700">
+                              {ae.codigo}
+                            </span>
+                            <span className="text-slate-700">{ae.descripcion}</span>
+                          </div>
+                          <p className="mt-1 text-[11px] text-slate-500">
+                            {pluralEstudiantes(aeConteo.logrado)} logrados ·{" "}
+                            {pluralEstudiantes(aeConteo.en_progreso)} en proceso ·{" "}
+                            {pluralEstudiantes(aeConteo.no_iniciado)} no iniciados ·{" "}
+                            Porcentaje de logro {aeConteo.pct}%
+                          </p>
+                        </li>
+                      );
+                    })}
                   </ul>
 
+                  <div className="mt-6">
+                    <CriteriosDeEvaluacionList
+                      oaCodigo={oa.codigo}
+                      especialidad={oa.especialidad}
+                    />
+                  </div>
+
                   <div className="mt-6 grid gap-6 lg:grid-cols-2">
-                    <div>
-                      <BarChart
-                        title="Estudiantes por estado"
-                        yAxisTitle="Estudiantes"
-                        items={[
-                          {
-                            label: "Logrado",
-                            value: conteo.logrado,
-                            color: ESTADO_BAR_COLORS.logrado,
-                          },
-                          {
-                            label: "En progreso",
-                            value: conteo.en_progreso,
-                            color: ESTADO_BAR_COLORS.en_progreso,
-                          },
-                          {
-                            label: "No iniciado",
-                            value: conteo.no_iniciado,
-                            color: ESTADO_BAR_COLORS.no_iniciado,
-                          },
-                        ]}
-                      />
-                    </div>
+                    <OaEstadoCantidadChart
+                      oaCodigo={oa.codigo}
+                      logrado={conteo.logrado}
+                      enProgreso={conteo.en_progreso}
+                      noIniciado={conteo.no_iniciado}
+                    />
                     <div className="flex items-center justify-center rounded-xl border border-slate-100 bg-slate-50 p-4">
                       <MiniDonut
                         pct={pct}
-                        label={`% de logro del curso — ${oa.codigo}`}
+                        label={`Porcentaje de logro % · ${oa.codigo}`}
                         size={100}
                       />
                     </div>
@@ -1004,7 +1109,7 @@ export function OaAeView() {
 }
 
 function exportEstudiantesCsv(rows: EstudianteDemo[]) {
-  const header = ["nombre", "curso", "avance%", "aeLogrados", "aeTotales"];
+  const header = ["nombre", "curso", "porcentaje_logro_pct", "porcentaje_logro_periodo_anterior_pct", "aeLogrados", "aeTotales"];
   const lines = [
     header.join(","),
     ...rows.map((e) =>
@@ -1012,6 +1117,7 @@ function exportEstudiantesCsv(rows: EstudianteDemo[]) {
         `"${e.nombre.replace(/"/g, '""')}"`,
         `"${e.curso.replace(/"/g, '""')}"`,
         e.avancePct,
+        e.avancePctPeriodoAnterior,
         e.aeLogrados,
         e.aeTotales,
       ].join(","),
@@ -1029,7 +1135,12 @@ function exportEstudiantesCsv(rows: EstudianteDemo[]) {
 }
 
 export function ReportesView() {
+  type ReportesVista = "nivel" | "especialidad" | "curso" | "estudiante";
+  type SortKey = "nombre" | "curso" | "especialidad" | "avance" | "ae";
   const { reportesFiltro, setReportesFiltro } = usePortalStore();
+  const [vista, setVista] = useState<ReportesVista>("nivel");
+  const [sortKey, setSortKey] = useState<SortKey>("avance");
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
   const [climLivePct, setClimLivePct] = useState<Record<string, number> | null>(
     null,
   );
@@ -1068,11 +1179,19 @@ export function ReportesView() {
     () => Array.from(new Set(estudiantesBase.map((e) => e.curso))).sort((a, b) => a.localeCompare(b, "es")),
     [estudiantesBase],
   );
+  const niveles = useMemo(
+    () =>
+      Array.from(new Set(estudiantesBase.map((e) => nivelFromCurso(e.curso)))).sort((a, b) =>
+        a.localeCompare(b, "es"),
+      ),
+    [estudiantesBase],
+  );
   const filtroOptions = [
     "Todas",
     "Electricidad",
     "Administración",
     "Refrigeración y Climatización",
+    ...niveles,
     ...cursosUnicos,
   ];
 
@@ -1087,8 +1206,11 @@ export function ReportesView() {
         (e) => especialidadFromCurso(e.curso) === reportesFiltro,
       );
     }
+    if (niveles.includes(reportesFiltro)) {
+      return estudiantesBase.filter((e) => nivelFromCurso(e.curso) === reportesFiltro);
+    }
     return estudiantesBase.filter((e) => e.curso === reportesFiltro);
-  }, [reportesFiltro, estudiantesBase]);
+  }, [reportesFiltro, estudiantesBase, niveles]);
 
   const cobPct = useMemo(() => {
     if (estudiantesFiltrados.length === 0) return 0;
@@ -1102,54 +1224,71 @@ export function ReportesView() {
   }, [estudiantesFiltrados]);
 
   const logradosPorOa = useMemo(() => {
-    const all = estudiantesLogradosPorOa();
-    if (reportesFiltro === "Todas") return all;
-    if (
-      reportesFiltro === "Electricidad" ||
-      reportesFiltro === "Administración" ||
-      reportesFiltro === "Refrigeración y Climatización"
-    ) {
-      const filtered = all.filter((item) =>
-        CATALOGO_OA.some(
-          (o) =>
-            o.especialidad === reportesFiltro &&
-            (item.label.includes(o.codigo) || item.label.includes(o.titulo.slice(0, 12))),
-        ),
-      );
-      return filtered.length > 0 ? filtered : all;
-    }
-    // Course filter: keep chart labels; table below shows course students
-    return all;
-  }, [reportesFiltro]);
+    return oaCodesForGroup(estudiantesFiltrados).map((codigo) => {
+      const c = conteoOaGrupo(estudiantesFiltrados, codigo);
+      return {
+        label: codigo,
+        value: c.logrado,
+        valueLabel: pluralEstudiantes(c.logrado),
+      };
+    });
+  }, [estudiantesFiltrados]);
 
-  const competencias = useMemo(() => {
-    if (reportesFiltro === "Todas") return ESTUDIANTES_POR_COMPETENCIA;
-    // Soft filter: show labels matching specialty keywords, else keep all with note
-    const q = reportesFiltro.toLowerCase();
-    const filtered = ESTUDIANTES_POR_COMPETENCIA.filter((i) =>
-      i.label.toLowerCase().includes(q.slice(0, 6)),
-    );
-    return filtered.length > 0 ? filtered : ESTUDIANTES_POR_COMPETENCIA;
-  }, [reportesFiltro]);
+  const porEspecialidad = useMemo(
+    () =>
+      groupEstudiantesBy(
+        estudiantesFiltrados,
+        (e) => especialidadFromCurso(e.curso) ?? "Otra",
+      ),
+    [estudiantesFiltrados],
+  );
+  const porCurso = useMemo(
+    () => groupEstudiantesBy(estudiantesFiltrados, (e) => e.curso),
+    [estudiantesFiltrados],
+  );
+  const stats = tendenciaCentral(estudiantesFiltrados.map((e) => e.avancePct));
+  const n = estudiantesFiltrados.length;
+  const aprobadosN = Math.round((APROBACION.aprobadosPct / 100) * n);
+  const reprobadosN = Math.round((APROBACION.reprobadosPct / 100) * n);
+  const pendientesN = Math.max(0, n - aprobadosN - reprobadosN);
 
-  const avgAvanceFiltro =
-    estudiantesFiltrados.length === 0
-      ? 0
-      : Math.round(
-          estudiantesFiltrados.reduce((a, e) => a + e.avancePct, 0) /
-            estudiantesFiltrados.length,
+  const sortedEstudiantes = useMemo(() => {
+    const rows = [...estudiantesFiltrados];
+    const dir = sortDir === "asc" ? 1 : -1;
+    rows.sort((a, b) => {
+      if (sortKey === "nombre") return a.nombre.localeCompare(b.nombre, "es") * dir;
+      if (sortKey === "curso") return a.curso.localeCompare(b.curso, "es") * dir;
+      if (sortKey === "especialidad") {
+        return (
+          (especialidadFromCurso(a.curso) ?? "").localeCompare(
+            especialidadFromCurso(b.curso) ?? "",
+            "es",
+          ) * dir
         );
+      }
+      if (sortKey === "ae") return (a.aeLogrados - b.aeLogrados) * dir;
+      return (a.avancePct - b.avancePct) * dir;
+    });
+    return rows;
+  }, [estudiantesFiltrados, sortKey, sortDir]);
+
+  function toggleSort(key: SortKey) {
+    if (sortKey === key) setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    else {
+      setSortKey(key);
+      setSortDir(key === "avance" || key === "ae" ? "asc" : "asc");
+    }
+  }
 
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">Reportes</h1>
-          <p className="mt-1 text-sm text-slate-600">
-            Indicadores de aprobación, competencias, evolución y cobertura OA/AE.
-          </p>
+        <SectionIntro
+          title="Reportes"
+          purpose="De lo general a lo específico: nivel, especialidad, curso y estudiante. Cada gráfico indica si muestra cantidad de estudiantes, Porcentaje de logro %, cobertura OA/AE o evolución en el tiempo."
+        >
           <BrowserSaveHint className="mt-1" />
-        </div>
+        </SectionIntro>
         <button
           type="button"
           onClick={() => exportEstudiantesCsv(estudiantesFiltrados)}
@@ -1159,6 +1298,18 @@ export function ReportesView() {
         </button>
       </div>
 
+      <PerspectiveTabs
+        label="Perspectiva del reporte"
+        value={vista}
+        onChange={setVista}
+        options={[
+          { id: "nivel", label: "Por nivel" },
+          { id: "especialidad", label: "Por especialidad" },
+          { id: "curso", label: "Por curso" },
+          { id: "estudiante", label: "Por estudiante" },
+        ]}
+      />
+
       <div className="flex flex-wrap items-center gap-2">
         <span className="text-xs font-semibold text-slate-600">Filtro:</span>
         {filtroOptions.map((opt) => (
@@ -1166,10 +1317,10 @@ export function ReportesView() {
             key={opt}
             type="button"
             onClick={() => setReportesFiltro(opt)}
-            className={`rounded-full border-2 px-3 py-1 text-[11px] font-bold transition ${
+            className={`min-h-11 rounded-xl border-2 px-3 py-2 text-[11px] font-bold transition ${
               reportesFiltro === opt
-                ? "border-brand-600 bg-brand-600 text-white"
-                : "border-slate-300 bg-white text-slate-700 hover:border-brand-400"
+                ? "border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white"
+                : "border-[var(--color-line,#D5DEE8)] bg-white text-[var(--color-slate,#3D5166)]"
             }`}
           >
             {opt}
@@ -1177,95 +1328,182 @@ export function ReportesView() {
         ))}
       </div>
 
-      <p className="text-xs text-slate-600">
-        Mostrando <strong>{estudiantesFiltrados.length}</strong> estudiantes · avance
-        promedio <strong>{avgAvanceFiltro}%</strong>
-        {reportesFiltro !== "Todas" ? (
-          <>
-            {" "}
-            · filtro <strong>{reportesFiltro}</strong>
-          </>
-        ) : null}
-      </p>
+      <KpiStrip
+        items={[
+          {
+            label: "Cantidad de estudiantes considerados",
+            value: String(n),
+            hint: reportesFiltro === "Todas" ? "Nivel institucional" : reportesFiltro,
+          },
+          {
+            label: "Porcentaje de logro % (media)",
+            value: `${stats.media}`,
+            hint: `Mediana ${stats.mediana} · moda ${stats.moda ?? "—"}`,
+          },
+          {
+            label: "Cobertura OA/AE",
+            value: `${cobPct}%`,
+            hint: "AE logrados / AE totales del recorte",
+          },
+          {
+            label: "Porcentaje de aprobación (demo)",
+            value: `${APROBACION.aprobadosPct}%`,
+            hint: `${pluralEstudiantes(aprobadosN)} equivalentes en este recorte`,
+          },
+        ]}
+      />
+
+      <TendenciaCard stats={stats} />
+
+      {vista === "nivel" ? <NivelAggregatePanel estudiantes={estudiantesFiltrados} /> : null}
+      {vista === "especialidad" ? (
+        <div className="space-y-6">
+          <ChartPanel
+            title="Porcentaje de logro % promedio por especialidad"
+            subtitle="Comparación entre carreras. Unidad: Porcentaje de logro %."
+            badge="demo"
+          >
+            <BarChart
+              title="Avance promedio por especialidad"
+              yAxisTitle="Porcentaje de logro %"
+              xAxisTitle="Especialidad"
+              valueSuffix="%"
+              items={porEspecialidad.map((g) => ({
+                label: g.key,
+                value: g.avg,
+                color: BANDA_LOGRO_COLOR[bandaFromPct(g.avg)],
+              }))}
+            />
+          </ChartPanel>
+          <ChartPanel
+            title="Cantidad de estudiantes por especialidad"
+            subtitle="Unidad: cantidad de estudiantes."
+            badge="demo"
+          >
+            <BarChart
+              title="Estudiantes considerados por especialidad"
+              yAxisTitle="Cantidad de estudiantes"
+              xAxisTitle="Especialidad"
+              items={porEspecialidad.map((g) => ({
+                label: g.key,
+                value: g.estudiantes.length,
+                valueLabel: pluralEstudiantes(g.estudiantes.length),
+                color: CHART_HEX.blueDeep,
+              }))}
+            />
+          </ChartPanel>
+        </div>
+      ) : null}
+      {vista === "curso" ? <CursoComparePanel grupos={porCurso} /> : null}
+      {vista === "estudiante" ? (
+        <EstudiantePriorityPanel
+          estudiantes={estudiantesFiltrados}
+          total={estudiantesFiltrados.length}
+        />
+      ) : null}
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <ChartPanel badge="demo">
+        <ChartPanel
+          title="Distribución de aprobación"
+          subtitle="Cantidad estimada de estudiantes (demo institucional aplicada al recorte) y porcentaje."
+          badge="demo"
+        >
           <DonutChart
-            title={`Aprobación (${reportesFiltro === "Todas" ? "institucional" : reportesFiltro})`}
-            centerLabel={`${APROBACION.aprobadosPct}%`}
+            title="Cantidad de estudiantes según estado de aprobación"
+            centerLabel={String(n)}
             slices={[
               {
                 label: "Aprobados",
                 pct: APROBACION.aprobadosPct,
+                count: aprobadosN,
+                unit: "estudiantes",
                 color: CHART_HEX.blue,
               },
               {
                 label: "Reprobados",
                 pct: APROBACION.reprobadosPct,
+                count: reprobadosN,
+                unit: "estudiantes",
                 color: CHART_HEX.danger,
               },
               {
                 label: "Pendientes",
                 pct: APROBACION.pendientesPct,
+                count: pendientesN,
+                unit: "estudiantes",
                 color: CHART_HEX.muted,
               },
             ]}
           />
         </ChartPanel>
-        <ChartPanel badge="demo">
-          <BarChart
-            title="Estudiantes por competencia"
-            yAxisTitle="Estudiantes"
-            items={competencias}
-            color={CHART_HEX.blueDeep}
+        <ChartPanel
+          title="Cobertura AE del recorte"
+          subtitle="Porcentaje de AE logrados vs pendientes (cobertura OA/AE)."
+          badge="demo"
+        >
+          <DonutChart
+            title="Cobertura de AE (porcentaje)"
+            centerLabel={`${cobPct}%`}
+            slices={[
+              { label: "AE logrados", pct: cobPct, color: CHART_HEX.teal },
+              {
+                label: "AE pendientes",
+                pct: 100 - cobPct,
+                color: CHART_HEX.track,
+              },
+            ]}
           />
         </ChartPanel>
       </div>
 
       <ChartPanel
-        title="Cobertura Objetivos de Aprendizaje (OA) / Aprendizajes Esperados (AE)"
-        subtitle="Cantidad de estudiantes que lograron cada OA; donut según filtro de estudiantes seleccionado."
+        title="Cobertura de OA: cantidad de estudiantes que lograron cada objetivo"
+        subtitle="Eje vertical: cantidad de estudiantes. Eje horizontal: OA."
         badge="demo"
       >
-        <div className="grid gap-6 lg:grid-cols-2">
-          <BarChart
-            title="Estudiantes por OA (cantidad logrados)"
-            yAxisTitle="Estudiantes"
-            items={logradosPorOa}
-            color={CHART_HEX.success}
-          />
-          <div className="flex items-center justify-center">
-            <DonutChart
-              title="% cobertura AE (filtro actual)"
-              centerLabel={`${cobPct}%`}
-              slices={[
-                { label: "AE logrados", pct: cobPct, color: CHART_HEX.teal },
-                {
-                  label: "AE pendientes",
-                  pct: 100 - cobPct,
-                  color: CHART_HEX.track,
-                },
-              ]}
-            />
-          </div>
-        </div>
+        <BarChart
+          title="Cantidad de estudiantes que lograron cada OA"
+          yAxisTitle="Cantidad de estudiantes"
+          xAxisTitle="Objetivo de Aprendizaje (OA)"
+          items={logradosPorOa}
+          color={CHART_HEX.success}
+        />
       </ChartPanel>
 
-      <ChartPanel title="Tabla estudiantes (filtro actual)" badge="demo" className="overflow-x-auto">
-        <table className="mt-1 min-w-[560px] w-full text-left text-sm">
+      <ChartPanel title="Tabla de estudiantes (ordenable)" badge="demo" className="overflow-x-auto">
+        <table className="mt-1 min-w-[640px] w-full text-left text-sm">
           <thead>
             <tr className="border-b border-[var(--aula-line,#d9e5f6)] text-xs uppercase tracking-wide text-[var(--aula-text-muted,#5e7596)]">
-              <th className="px-2 py-2">Nombre</th>
-              <th className="px-2 py-2">Curso</th>
-              <th className="px-2 py-2">Avance</th>
-              <th className="px-2 py-2">AE</th>
+              {(
+                [
+                  ["nombre", "Nombre"],
+                  ["curso", "Curso"],
+                  ["especialidad", "Especialidad"],
+                  ["avance", "Porcentaje de logro %"],
+                  ["ae", "Cantidad de AE logrados"],
+                ] as Array<[SortKey, string]>
+              ).map(([key, label]) => (
+                <th key={key} className="px-2 py-2">
+                  <button
+                    type="button"
+                    onClick={() => toggleSort(key)}
+                    className="font-bold uppercase tracking-wide hover:text-[var(--aula-blue,#1558A0)]"
+                  >
+                    {label}
+                    {sortKey === key ? (sortDir === "asc" ? " ↑" : " ↓") : ""}
+                  </button>
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody className="divide-y divide-[var(--aula-line,#d9e5f6)]">
-            {estudiantesFiltrados.slice(0, 40).map((e) => (
+            {sortedEstudiantes.slice(0, 40).map((e) => (
               <tr key={e.id}>
                 <td className="px-2 py-1.5 font-medium text-[var(--aula-text,#082b80)]">{e.nombre}</td>
                 <td className="px-2 py-1.5 text-[var(--aula-text-secondary,#43628f)]">{e.curso}</td>
+                <td className="px-2 py-1.5 text-[var(--aula-text-secondary,#43628f)]">
+                  {especialidadFromCurso(e.curso) ?? "—"}
+                </td>
                 <td className="px-2 py-1.5 tabular-nums text-[var(--aula-text,#082b80)]">
                   {e.avancePct}%
                 </td>
@@ -1278,7 +1516,7 @@ export function ReportesView() {
         </table>
         {estudiantesFiltrados.length > 40 ? (
           <p className="mt-2 text-xs text-[var(--aula-text-muted,#5e7596)]">
-            Mostrando 40 de {estudiantesFiltrados.length}. Usa Exportar CSV para el
+            Mostrando 40 de {pluralEstudiantes(estudiantesFiltrados.length)}. Usa Exportar CSV para el
             listado completo.
           </p>
         ) : null}
@@ -1286,7 +1524,9 @@ export function ReportesView() {
 
       <ChartPanel badge="demo">
         <LineChart
-          title="Evolución del promedio general (%)"
+          title="Evolución del Porcentaje de logro % institucional en el tiempo"
+          yAxisTitle="Porcentaje de logro %"
+          xAxisTitle="Mes"
           points={EVOLUCION_PROMEDIO.map((p) => ({
             label: p.mes,
             pct: p.pct,
@@ -1335,10 +1575,10 @@ export function RecursosView() {
             key={id}
             type="button"
             onClick={() => setFiltro(id)}
-            className={`rounded-xl border-2 px-3 py-2 text-xs font-bold transition ${
+            className={`min-h-11 rounded-xl border-2 px-3 py-2 text-xs font-bold transition ${
               filtro === id
-                ? "border-brand-600 bg-brand-600 text-white"
-                : "border-slate-300 bg-white text-slate-700 hover:border-brand-400 hover:bg-brand-50"
+                ? "border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white"
+                : "border-[var(--color-line,#D5DEE8)] bg-white text-[var(--color-slate,#3D5166)]"
             }`}
           >
             {label}

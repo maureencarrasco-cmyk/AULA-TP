@@ -84,7 +84,7 @@ export function DataBadge({ kind }: { kind: "live" | "demo" | "hub" }) {
   );
 }
 
-type DonutSlice = { label: string; pct: number; color: string };
+type DonutSlice = { label: string; pct: number; color: string; count?: number; unit?: string };
 
 type DonutChartProps = {
   title: string;
@@ -117,7 +117,7 @@ export function DonutChart({
           height={size}
           viewBox={`0 0 ${size} ${size}`}
           role="img"
-          aria-label={`${title}: ${slices.map((s) => `${s.label} ${s.pct}%`).join(", ")}`}
+          aria-label={`${title}: ${slices.map((s) => `${s.label} ${s.count != null ? `${s.count} ${s.unit || "estudiantes"} · ` : ""}${s.pct}%`).join(", ")}`}
         >
           <circle
             cx={cx}
@@ -174,7 +174,7 @@ export function DonutChart({
               />
               <span className="flex-1 truncate">{s.label}</span>
               <span className="font-semibold tabular-nums text-[var(--aula-text,#082b80)]">
-                {s.pct}%
+                {s.count != null ? `${s.count} ${s.unit || "estudiantes"} · ${s.pct}%` : `${s.pct}%`}
               </span>
             </li>
           ))}
@@ -184,22 +184,26 @@ export function DonutChart({
   );
 }
 
-type BarItem = { label: string; value: number; color?: string };
+type BarItem = { label: string; value: number; color?: string; valueLabel?: string };
 
 type BarChartProps = {
   title: string;
   yAxisTitle: string;
+  xAxisTitle?: string;
   items: BarItem[];
   color?: string;
   hideTitle?: boolean;
+  valueSuffix?: string;
 };
 
 export function BarChart({
   title,
   yAxisTitle,
+  xAxisTitle,
   items,
   color = CHART_HEX.blue,
   hideTitle = false,
+  valueSuffix,
 }: BarChartProps) {
   const max = Math.max(...items.map((i) => i.value), 1);
 
@@ -208,7 +212,10 @@ export function BarChart({
       {!hideTitle ? (
         <>
           <h3 className="text-sm font-semibold text-[var(--aula-text,#082b80)]">{title}</h3>
-          <p className="mt-1 text-xs text-[var(--aula-text-muted,#5e7596)]">{yAxisTitle}</p>
+          <p className="mt-1 text-xs text-[var(--aula-text-muted,#5e7596)]">
+            Eje vertical: {yAxisTitle}
+            {xAxisTitle ? ` · Eje horizontal: ${xAxisTitle}` : ""}
+          </p>
         </>
       ) : (
         <p className="sr-only">
@@ -218,15 +225,17 @@ export function BarChart({
       <div
         className="mt-3 space-y-2.5 rounded-xl border border-[var(--aula-line,#d9e5f6)] bg-[var(--aula-surface-soft,#f5f9fe)] p-3 sm:p-4"
         role="img"
-        aria-label={`${title}. ${items.map((i) => `${i.label}: ${i.value}`).join("; ")}`}
+        aria-label={`${title}. ${items.map((i) => `${i.label}: ${i.valueLabel ?? `${i.value}${valueSuffix ? ` ${valueSuffix}` : ""}`}`).join("; ")}`}
       >
         {items.map((item) => {
           const pct = Math.max(2, Math.round((item.value / max) * 100));
           const barColor = item.color ?? color;
+          const shown =
+            item.valueLabel ?? `${item.value}${valueSuffix ? ` ${valueSuffix}` : ""}`;
           return (
             <div
               key={item.label}
-              className="grid grid-cols-[minmax(0,6.5rem)_1fr_2rem] items-center gap-2 sm:grid-cols-[minmax(0,11rem)_1fr_2.75rem] sm:gap-3"
+              className="grid grid-cols-[minmax(0,6.5rem)_1fr_minmax(2.5rem,auto)] items-center gap-2 sm:grid-cols-[minmax(0,11rem)_1fr_minmax(4.5rem,auto)] sm:gap-3"
             >
               <p
                 className="truncate text-right text-[11px] font-semibold leading-tight text-[var(--aula-text,#082b80)] sm:text-xs"
@@ -242,11 +251,11 @@ export function BarChart({
                     background: barColor,
                     minWidth: item.value > 0 ? "6px" : 0,
                   }}
-                  title={`${item.label}: ${item.value}`}
+                  title={`${item.label}: ${shown}`}
                 />
               </div>
-              <span className="text-right text-xs font-bold tabular-nums text-[var(--aula-text,#082b80)]">
-                {item.value}
+              <span className="text-right text-[11px] font-bold tabular-nums leading-tight text-[var(--aula-text,#082b80)] sm:text-xs">
+                {shown}
               </span>
             </div>
           );
@@ -265,9 +274,17 @@ type LineChartProps = {
   title: string;
   points: LinePoint[];
   hideTitle?: boolean;
+  yAxisTitle?: string;
+  xAxisTitle?: string;
 };
 
-export function LineChart({ title, points, hideTitle = false }: LineChartProps) {
+export function LineChart({
+  title,
+  points,
+  hideTitle = false,
+  yAxisTitle = "Porcentaje de logro %",
+  xAxisTitle = "Mes",
+}: LineChartProps) {
   const w = 560;
   const h = 220;
   const pad = { t: 28, r: 20, b: 40, l: 44 };
@@ -309,8 +326,17 @@ export function LineChart({ title, points, hideTitle = false }: LineChartProps) 
   return (
     <div>
       {!hideTitle ? (
-        <h3 className="text-sm font-semibold text-[var(--aula-text,#082b80)]">{title}</h3>
-      ) : null}
+        <>
+          <h3 className="text-sm font-semibold text-[var(--aula-text,#082b80)]">{title}</h3>
+          <p className="mt-1 text-xs text-[var(--aula-text-muted,#5e7596)]">
+            Eje vertical: {yAxisTitle} · Eje horizontal: {xAxisTitle}
+          </p>
+        </>
+      ) : (
+        <p className="sr-only">
+          {title}. Eje vertical: {yAxisTitle}. Eje horizontal: {xAxisTitle}.
+        </p>
+      )}
       <div className="mt-3 overflow-hidden rounded-xl border border-[var(--aula-line,#d9e5f6)] bg-[var(--aula-surface-soft,#f5f9fe)] p-2 sm:p-3">
         <svg
           viewBox={`0 0 ${w} ${h}`}

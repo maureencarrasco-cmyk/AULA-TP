@@ -30,6 +30,8 @@ export type EstudianteClimGen = {
   cobertura: CoberturaOaGen[];
   aeLogrados: number;
   aeTotales: number;
+  /** Porcentaje de logro % registrado en el periodo anterior (agosto 2026). */
+  avancePctPeriodoAnterior: number;
   ultimaActividad?: { oaCodigo: string; aeCodigo?: string; texto: string };
 };
 
@@ -310,6 +312,24 @@ function buildName(rng: () => number, used: Set<string>, index: number): string 
 }
 
 /**
+ * Snapshot de agosto 2026: porcentaje de logro registrado antes del periodo actual.
+ * Diseñado para que ~1 de cada 8 estudiantes ahora en verde (≥70%) estuviera
+ * en proceso (40–69%) el mes anterior, y el resto muestre un alza acotada.
+ */
+function periodoAnteriorRegistrado(avancePct: number, index: number): number {
+  if (avancePct >= 70 && index % 8 === 0) {
+    return 42 + (index % 4) * 6;
+  }
+  if (avancePct >= 70) {
+    return Math.max(70, avancePct - (6 + (index % 5)));
+  }
+  if (avancePct >= 40) {
+    return Math.max(18, avancePct - (4 + (index % 6)));
+  }
+  return Math.max(0, avancePct - 3);
+}
+
+/**
  * Genera `count` estudiantes de Climatización con progreso personalizado
  * alineado a OA/AE reales (3° → OA 1–4, 4° → OA 5–8).
  */
@@ -377,6 +397,7 @@ export function generateClimatizacionEstudiantes(
       actividadesCompletadas,
       actividadesTotales,
       avancePct,
+      avancePctPeriodoAnterior: periodoAnteriorRegistrado(avancePct, i),
       ultimoAcceso: ultimoAccesoLabel(rng),
       cobertura,
       aeLogrados: logrados,

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import {
   COLOR_ACCENT,
@@ -10,8 +9,22 @@ import {
   type InstitutionalMetrics,
   type PortalCurso,
 } from "@/lib/portal-cursos";
-import { KPI } from "@/lib/demo-data";
-import { ChartPanel, CHART_HEX, DataBadge, MiniDonut } from "./charts";
+import { CATALOGO_OA, ESTUDIANTES, especialidadFromCurso, KPI } from "@/lib/demo-data";
+import { ChartPanel, CHART_HEX, DataBadge, MiniDonut, BarChart } from "./charts";
+import {
+  KpiStrip,
+  PerspectiveTabs,
+  SectionIntro,
+  TendenciaCard,
+} from "./analytics";
+import { CursoComparePanel, EstudiantePriorityPanel } from "./perspective-panels";
+import {
+  bandaFromPct,
+  BANDA_LOGRO_COLOR,
+  oaPctBars,
+  pluralEstudiantes,
+  tendenciaCentral,
+} from "@/lib/portal-stats";
 
 type FetchState =
   | { status: "loading" }
@@ -105,11 +118,11 @@ function CourseMetricsCard({ curso, refreshKey = 0 }: { curso: PortalCurso; refr
         ) : (
           <>
             <Metric
-              label="Estudiantes"
+              label="Cantidad de estudiantes"
               value={String(state.data.totals.students)}
             />
             <Metric
-              label="Avance promedio"
+              label="Porcentaje de logro % (promedio)"
               value={
                 formatPct(state.data.totals.average_progress)
               }
@@ -220,12 +233,6 @@ export function ConnectedCursosGrid() {
           >
             Actualizar métricas
           </button>
-          <Link
-            href="/portal-docente/cumplimiento"
-            className="text-xs font-semibold text-brand-700 hover:underline"
-          >
-            Ver cumplimiento →
-          </Link>
         </div>
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
@@ -255,16 +262,19 @@ export function LiveKpiRow() {
         )}
       </div>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <KpiCard label="Cursos activos" value={String(kpi.cursosActivos)} />
-        <KpiCard label="Estudiantes (LMS)" value={String(kpi.estudiantes)} />
+        <KpiCard label="Cantidad de cursos activos" value={String(kpi.cursosActivos)} />
         <KpiCard
-          label="Actividades pendientes (est.)"
+          label="Cantidad de estudiantes registrados (LMS)"
+          value={String(kpi.estudiantes)}
+        />
+        <KpiCard
+          label="Cantidad estimada de actividades pendientes"
           value={String(kpi.actividadesPendientes)}
         />
         <ChartPanel className="flex items-center justify-center !p-4">
           <MiniDonut
             pct={kpi.promedioGeneralPct}
-            label="Avance promedio LMS"
+            label="Porcentaje de logro % (promedio LMS)"
             color={CHART_HEX.teal}
           />
         </ChartPanel>
@@ -320,21 +330,135 @@ export function CursosVivosList() {
 }
 
 export function CumplimientoView() {
+  type Vista = "nivel" | "curso" | "estudiante";
   const [refreshKey, setRefreshKey] = useState(0);
+  const [vista, setVista] = useState<Vista>("nivel");
+  const [carrera, setCarrera] = useState<"Todas" | "enfermeria" | "electricidad" | "climatizacion">(
+    "Todas",
+  );
+  const [nivel, setNivel] = useState("Todos");
+  const [oaFiltro, setOaFiltro] = useState("Todos");
   const enf = useCourseMetrics("/api/portal/metrics/enfermeria", refreshKey);
   const elec = useCourseMetrics("/api/portal/metrics/electricidad", refreshKey);
   const clim = useCourseMetrics("/api/portal/metrics/climatizacion", refreshKey);
 
+  const bloques = [
+    {
+      id: "enfermeria" as const,
+      title: "Atención de Enfermería",
+      href: "https://aulatpchile.cl/portal/simuladores/atencion_enfermeria/",
+      state: enf,
+    },
+    {
+      id: "electricidad" as const,
+      title: "Electricidad 3° Medio",
+      href: "https://aulatpchile.cl/portal/simuladores/electricidad_3_medio/",
+      state: elec,
+    },
+    {
+      id: "climatizacion" as const,
+      title: "Refrigeración y Climatización",
+      href: "https://aulatpchile.cl/curso/climatizacion",
+      state: clim,
+    },
+  ];
+  const visibles = bloques.filter((b) => carrera === "Todas" || b.id === carrera);
+  const okStates = visibles.filter((b) => b.state.status === "ok");
+  const studentsN = okStates.reduce(
+    (acc, b) => acc + (b.state.status === "ok" ? b.state.data.totals.students : 0),
+    0,
+  );
+  const avanceAvg =
+    studentsN === 0
+      ? 0
+      : Math.round(
+          okStates.reduce((acc, b) => {
+            if (b.state.status !== "ok") return acc;
+            return acc + (b.state.data.totals.average_progress ?? 0) * b.state.data.totals.students;
+          }, 0) / studentsN,
+        );
+  const actAvg =
+    okStates.length === 0
+      ? 0
+      : Math.round(
+          okStates.reduce(
+            (acc, b) =>
+              acc + (b.state.status === "ok" ? (b.state.data.totals.activity_completion ?? 0) : 0),
+            0,
+          ) / okStates.length,
+        );
+  const intAvg =
+    okStates.length === 0
+      ? 0
+      : Math.round(
+          okStates.reduce(
+            (acc, b) =>
+              acc +
+              (b.state.status === "ok"
+                ? (b.state.data.totals.integrator_average_progress ?? 0)
+                : 0),
+            0,
+          ) / okStates.length,
+        );
+  const oaCodes = Array.from(
+    new Set(
+      okStates.flatMap((b) =>
+        b.state.status === "ok"
+          ? b.state.data.modules.map((m) => m.oa_code).filter((x): x is string => Boolean(x))
+          : [],
+      ),
+    ),
+  ).sort((a, b) => a.localeCompare(b, "es"));
+  const oaBars = okStates.flatMap((b) =>
+    b.state.status === "ok"
+      ? b.state.data.modules
+          .filter((m) => oaFiltro === "Todos" || (m.oa_code ?? "").includes(oaFiltro))
+          .map((m) => ({
+            label: `${m.oa_code ?? m.code} · ${b.title.split(" ")[0]}`,
+            value: Math.round(m.average_progress ?? 0),
+            color: BANDA_LOGRO_COLOR[bandaFromPct(m.average_progress ?? 0)],
+          }))
+      : [],
+  );
+  const recorteEstudiantes = ESTUDIANTES.filter((e) => {
+    if (nivel !== "Todos") {
+      const n = e.curso.match(/([2-4])\s*°/)?.[1];
+      if (`${n}° Medio` !== nivel) return false;
+    }
+    if (carrera === "enfermeria") return /enferm/i.test(e.curso);
+    if (carrera === "electricidad") return especialidadFromCurso(e.curso) === "Electricidad";
+    if (carrera === "climatizacion")
+      return especialidadFromCurso(e.curso) === "Refrigeración y Climatización";
+    return true;
+  });
+  const porCurso = (() => {
+    const map = new Map<string, typeof ESTUDIANTES>();
+    for (const e of recorteEstudiantes) {
+      const list = map.get(e.curso);
+      if (list) list.push(e);
+      else map.set(e.curso, [e]);
+    }
+    return Array.from(map.entries()).map(([key, estudiantes]) => ({
+      key,
+      estudiantes,
+      avg:
+        estudiantes.length === 0
+          ? 0
+          : Math.round(
+              estudiantes.reduce((acc, x) => acc + x.avancePct, 0) / estudiantes.length,
+            ),
+    }));
+  })();
+  const stats = tendenciaCentral(recorteEstudiantes.map((e) => e.avancePct));
+  const demoOaBars = oaPctBars(recorteEstudiantes);
+
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">Cumplimiento</h1>
-          <p className="mt-1 text-sm text-slate-600">
-            Avance institucional por curso vivo: progreso, actividades e integradores
-            (Enfermería / Electricidad / Climatización LMS).
-          </p>
-        </div>
+        <SectionIntro
+          title="Cumplimiento"
+          purpose="Eje principal: cumplimiento de Objetivos de Aprendizaje (OA), actividades e integradores. Revisa por nivel, por curso o por estudiante."
+        />
         <button
           type="button"
           onClick={() => setRefreshKey((k) => k + 1)}
@@ -344,21 +468,145 @@ export function CumplimientoView() {
         </button>
       </div>
 
-      <CumplimientoCourseBlock
-        title="Atención de Enfermería"
-        href="https://aulatpchile.cl/portal/simuladores/atencion_enfermeria/"
-        state={enf}
+      <PerspectiveTabs
+        label="Perspectiva de cumplimiento"
+        value={vista}
+        onChange={setVista}
+        options={[
+          { id: "nivel", label: "Por nivel" },
+          { id: "curso", label: "Por curso" },
+          { id: "estudiante", label: "Por estudiante" },
+        ]}
       />
-      <CumplimientoCourseBlock
-        title="Electricidad 3° Medio"
-        href="https://aulatpchile.cl/portal/simuladores/electricidad_3_medio/"
-        state={elec}
+
+      <div className="flex flex-wrap gap-3">
+        <label className="text-xs font-semibold text-slate-700">
+          Carrera
+          <select
+            value={carrera}
+            onChange={(e) => setCarrera(e.target.value as typeof carrera)}
+            className="mt-1 block min-h-11 rounded-xl border-2 border-slate-300 bg-white px-3 py-2 text-sm"
+          >
+            <option value="Todas">Todas</option>
+            <option value="enfermeria">Atención de Enfermería</option>
+            <option value="electricidad">Electricidad</option>
+            <option value="climatizacion">Refrigeración y Climatización</option>
+          </select>
+        </label>
+        <label className="text-xs font-semibold text-slate-700">
+          Nivel
+          <select
+            value={nivel}
+            onChange={(e) => setNivel(e.target.value)}
+            className="mt-1 block min-h-11 rounded-xl border-2 border-slate-300 bg-white px-3 py-2 text-sm"
+          >
+            <option value="Todos">Todos</option>
+            <option value="2° Medio">2° Medio</option>
+            <option value="3° Medio">3° Medio</option>
+            <option value="4° Medio">4° Medio</option>
+          </select>
+        </label>
+        <label className="text-xs font-semibold text-slate-700">
+          OA
+          <select
+            value={oaFiltro}
+            onChange={(e) => setOaFiltro(e.target.value)}
+            className="mt-1 block min-h-11 rounded-xl border-2 border-slate-300 bg-white px-3 py-2 text-sm"
+          >
+            <option value="Todos">Todos los OA</option>
+            {oaCodes.map((oa) => (
+              <option key={oa} value={oa}>
+                {oa}
+              </option>
+            ))}
+            {CATALOGO_OA.map((oa) => (
+              <option key={`cat-${oa.especialidad}-${oa.codigo}`} value={oa.codigo}>
+                {oa.codigo} · {oa.especialidad}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <KpiStrip
+        items={[
+          {
+            label: "Porcentaje de logro % (promedio LMS)",
+            value: `${avanceAvg}`,
+            hint: `${pluralEstudiantes(studentsN)} en cursos vivos del recorte`,
+          },
+          {
+            label: "Actividades completadas",
+            value: `${actAvg}%`,
+            hint: "Promedio de cumplimiento de actividades",
+          },
+          {
+            label: "Cumplimiento del integrador",
+            value: `${intAvg}%`,
+            hint: "Avance promedio de actividades integradoras",
+          },
+          {
+            label: "Porcentaje de logro % (demo OA/AE)",
+            value: `${stats.media}`,
+            hint: `Mediana ${stats.mediana} · moda ${stats.moda ?? "—"}`,
+          },
+        ]}
       />
-      <CumplimientoCourseBlock
-        title="Refrigeración y Climatización"
-        href="https://aulatpchile.cl/curso/climatizacion"
-        state={clim}
-      />
+
+      <TendenciaCard stats={stats} />
+
+      {oaBars.length > 0 ? (
+        <ChartPanel
+          title="Cumplimiento por OA (cursos vivos)"
+          subtitle="Comparación: OA vs Porcentaje de logro % del módulo asociado."
+        >
+          <BarChart
+            title="Porcentaje de logro % por OA / módulo"
+            yAxisTitle="Porcentaje de logro %"
+            xAxisTitle="OA · curso"
+            valueSuffix="%"
+            items={oaBars.slice(0, 14)}
+          />
+        </ChartPanel>
+      ) : null}
+
+      {vista === "nivel" ? (
+        <ChartPanel
+          title="Cumplimiento de OA en el nivel (demo OA/AE)"
+          subtitle="Visión agregada del recorte. Unidad: Porcentaje de logro %."
+          badge="demo"
+        >
+          <BarChart
+            title="Porcentaje de logro % por OA del nivel"
+            yAxisTitle="Porcentaje de logro %"
+            xAxisTitle="OA"
+            valueSuffix="%"
+            items={demoOaBars.map((item) => ({
+              ...item,
+              color: BANDA_LOGRO_COLOR[bandaFromPct(item.value)],
+            }))}
+          />
+        </ChartPanel>
+      ) : null}
+
+      {vista === "curso" ? <CursoComparePanel grupos={porCurso} /> : null}
+
+      {vista === "estudiante" ? (
+        <EstudiantePriorityPanel
+          estudiantes={recorteEstudiantes}
+          total={recorteEstudiantes.length}
+        />
+      ) : null}
+
+      {visibles.map((b) => (
+        <CumplimientoCourseBlock
+          key={b.id}
+          title={b.title}
+          href={b.href}
+          state={b.state}
+          oaFiltro={oaFiltro}
+        />
+      ))}
     </div>
   );
 }
@@ -367,16 +615,24 @@ function CumplimientoCourseBlock({
   title,
   href,
   state,
+  oaFiltro = "Todos",
 }: {
   title: string;
   href: string;
   state: FetchState;
+  oaFiltro?: string;
 }) {
   const avance = state.status === "ok" ? state.data.totals.average_progress ?? 0 : 0;
   const actividades =
     state.status === "ok" ? state.data.totals.activity_completion ?? 0 : 0;
   const integrador =
     state.status === "ok" ? state.data.totals.integrator_average_progress ?? 0 : 0;
+  const modules =
+    state.status === "ok"
+      ? state.data.modules.filter(
+          (m) => oaFiltro === "Todos" || (m.oa_code ?? "").includes(oaFiltro),
+        )
+      : [];
 
   return (
     <div className="rounded-2xl border border-[var(--aula-line,#d9e5f6)] bg-white p-5 shadow-[var(--shadow-sm)]">
@@ -394,12 +650,12 @@ function CumplimientoCourseBlock({
             <p className="mt-1 text-sm text-[var(--aula-danger-ink,#a2334d)]">{state.message}</p>
           ) : (
             <p className="mt-1 text-sm text-[var(--aula-text-secondary,#43628f)]">
-              {state.data.totals.students} estudiantes · avance{" "}
+              {pluralEstudiantes(state.data.totals.students)} · Porcentaje de logro{" "}
               {formatPct(state.data.totals.average_progress)} · actividades{" "}
               {formatPct(state.data.totals.activity_completion)} · integrador{" "}
               {formatPct(state.data.totals.integrator_average_progress)} (
               {state.data.totals.integrator_completed}/
-              {state.data.totals.integrator_total})
+              {state.data.totals.integrator_total} estudiantes)
             </p>
           )}
         </div>
@@ -416,7 +672,7 @@ function CumplimientoCourseBlock({
       {state.status === "ok" ? (
         <>
           <div className="mt-5 grid grid-cols-3 gap-3 rounded-xl border border-[var(--aula-line,#d9e5f6)] bg-[var(--aula-surface-soft,#f5f9fe)] p-4">
-            <MiniDonut pct={avance} label="Avance" color={CHART_HEX.blue} size={76} />
+            <MiniDonut pct={avance} label="Porcentaje de logro %" color={CHART_HEX.blue} size={76} />
             <MiniDonut pct={actividades} label="Actividades" color={CHART_HEX.teal} size={76} />
             <MiniDonut pct={integrador} label="Integrador" color={CHART_HEX.violet} size={76} />
           </div>
@@ -427,13 +683,13 @@ function CumplimientoCourseBlock({
                   <th className="px-2 py-2">Módulo</th>
                   <th className="px-2 py-2">OA</th>
                   <th className="px-2 py-2">Avance</th>
-                  <th className="px-2 py-2">Actividades</th>
-                  <th className="px-2 py-2">Completados</th>
-                  <th className="px-2 py-2">Score</th>
+                  <th className="px-2 py-2">Cantidad de actividades</th>
+                  <th className="px-2 py-2">Estudiantes completados</th>
+                  <th className="px-2 py-2">Porcentaje de logro %</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--aula-line,#d9e5f6)]">
-                {state.data.modules.map((m) => (
+                {modules.map((m) => (
                   <tr key={m.id}>
                     <td className="px-2 py-2 font-medium text-[var(--aula-text,#082b80)]">
                       {m.code} · {m.short_title || m.title}
@@ -460,9 +716,11 @@ function CumplimientoCourseBlock({
                       {m.activity_count ?? "—"}
                     </td>
                     <td className="px-2 py-2 tabular-nums text-[var(--aula-text,#082b80)]">
-                      {m.completed_enrollments ?? 0}
+                      {m.completed_enrollments != null
+                        ? pluralEstudiantes(m.completed_enrollments)
+                        : "0 estudiantes"}
                       {m.in_progress_enrollments
-                        ? ` (+${m.in_progress_enrollments} en curso)`
+                        ? ` (+${pluralEstudiantes(m.in_progress_enrollments)} en curso)`
                         : ""}
                     </td>
                     <td className="px-2 py-2 tabular-nums text-[var(--aula-text,#082b80)]">
