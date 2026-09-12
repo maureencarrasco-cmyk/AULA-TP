@@ -194,8 +194,13 @@ export function useLivePortal(): LivePortalValue {
   return ctx;
 }
 
+function totalsEstudiantes(state: LiveCourseState): number {
+  return state.status === "ok" ? state.data.totals.students : 0;
+}
+
 export function LiveStatusNote() {
-  const { loading, errors, estudiantes } = useLivePortal();
+  const { loading, errors, estudiantes, enfermeria, electricidad, climatizacion } =
+    useLivePortal();
   if (loading) {
     return (
       <p className="text-sm text-[var(--color-muted,#6B7C8E)]">
@@ -210,12 +215,21 @@ export function LiveStatusNote() {
       </p>
     );
   }
+  const registrados =
+    totalsEstudiantes(enfermeria) +
+    totalsEstudiantes(electricidad) +
+    totalsEstudiantes(climatizacion);
+  const notes: string[] = [];
   if (errors.length > 0) {
-    return (
-      <p className="text-xs text-[var(--color-warn,#C47A12)]">
-        Algunas fuentes LMS no respondieron: {errors.join(" · ")}
-      </p>
+    notes.push(`Algunas fuentes LMS no respondieron: ${errors.join(" · ")}`);
+  }
+  if (registrados > estudiantes.length) {
+    notes.push(
+      `El listado por estudiante muestra ${estudiantes.length} de Climatización. Enfermería y Electricidad informan totales LMS (${registrados} en total) sin nómina individual.`,
     );
   }
-  return null;
+  if (notes.length === 0) return null;
+  return (
+    <p className="text-xs text-[var(--color-slate,#3D5166)]">{notes.join(" ")}</p>
+  );
 }

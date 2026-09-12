@@ -114,11 +114,12 @@ export function ResumenView() {
   );
   const n = estudiantes.length || 1;
   const descendidos = [...estudiantes].sort((a, b) => a.avancePct - b.avancePct).slice(0, 5);
-  const oaCriticos = CATALOGO_OA.map((oa) => ({
-    oa,
-    pct: conteoOaGrupo(estudiantes, oa.codigo).pct,
-    conteo: conteoOaGrupo(estudiantes, oa.codigo),
-  }))
+  const oaCriticos = catalogoOaDeGrupo(estudiantes)
+    .map((oa) => ({
+      oa,
+      pct: conteoOaGrupo(estudiantes, oa.codigo).pct,
+      conteo: conteoOaGrupo(estudiantes, oa.codigo),
+    }))
     .filter((x) => x.conteo.total > 0)
     .sort((a, b) => a.pct - b.pct)
     .slice(0, 4);
