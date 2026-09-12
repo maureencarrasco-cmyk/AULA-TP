@@ -35,6 +35,7 @@ import {
   LiveKpiRow,
 } from "./ConnectedCourses";
 import { LiveStatusNote, useLivePortal } from "./live-data";
+import { SchedulePlanner } from "./SchedulePlanner";
 import {
   BrowserSaveHint,
   usePortalStore,
