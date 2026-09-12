@@ -6,6 +6,7 @@ import {
   CATALOGO_OA,
   ESTADO_OA_AE_LABEL,
   especialidadFromCurso,
+  etiquetaEspecialidadCurso,
   getAeByCodigo,
   getOaByCodigo,
   oaCatalogKey,
@@ -1112,6 +1113,9 @@ export function ReportesView() {
 
   const estudiantesFiltrados = useMemo(() => {
     if (reportesFiltro === "Todas") return estudiantesBase;
+    if (reportesFiltro === "Atención de Enfermería") {
+      return estudiantesBase.filter((e) => /enferm/i.test(e.curso));
+    }
     if (
       reportesFiltro === "Electricidad" ||
       reportesFiltro === "Administración" ||
@@ -1153,7 +1157,7 @@ export function ReportesView() {
     () =>
       groupEstudiantesBy(
         estudiantesFiltrados,
-        (e) => especialidadFromCurso(e.curso) ?? "Otra",
+        (e) => etiquetaEspecialidadCurso(e.curso),
       ),
     [estudiantesFiltrados],
   );
@@ -1180,8 +1184,8 @@ export function ReportesView() {
       if (sortKey === "curso") return a.curso.localeCompare(b.curso, "es") * dir;
       if (sortKey === "especialidad") {
         return (
-          (especialidadFromCurso(a.curso) ?? "").localeCompare(
-            especialidadFromCurso(b.curso) ?? "",
+          (etiquetaEspecialidadCurso(a.curso)).localeCompare(
+            etiquetaEspecialidadCurso(b.curso),
             "es",
           ) * dir
         );
@@ -1404,7 +1408,7 @@ export function ReportesView() {
                 <td className="px-2 py-1.5 font-medium text-[var(--aula-text,#082b80)]">{e.nombre}</td>
                 <td className="px-2 py-1.5 text-[var(--aula-text-secondary,#43628f)]">{e.curso}</td>
                 <td className="px-2 py-1.5 text-[var(--aula-text-secondary,#43628f)]">
-                  {especialidadFromCurso(e.curso) ?? "—"}
+                  {etiquetaEspecialidadCurso(e.curso)}
                 </td>
                 <td className="px-2 py-1.5 tabular-nums text-[var(--aula-text,#082b80)]">
                   {e.avancePct}%

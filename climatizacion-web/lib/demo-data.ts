@@ -353,15 +353,17 @@ export function oaCatalogKey(especialidad: OaDemo["especialidad"], codigo: strin
   return `${especialidad}::${codigo}`;
 }
 
-export function especialidadFromCurso(
-  curso: string,
-): OaDemo["especialidad"] | "Atención de Enfermería" | undefined {
+export function especialidadFromCurso(curso: string): OaDemo["especialidad"] | undefined {
   const c = curso.toLowerCase();
   if (c.includes("clim") || c.includes("refriger")) return "Refrigeración y Climatización";
-  if (c.includes("enferm")) return "Atención de Enfermería";
   if (c.includes("elec")) return "Electricidad";
   if (c.includes("adm")) return "Administración";
   return undefined;
+}
+
+export function etiquetaEspecialidadCurso(curso: string): string {
+  if (curso.toLowerCase().includes("enferm")) return "Atención de Enfermería";
+  return especialidadFromCurso(curso) ?? "—";
 }
 
 export function getOaByCodigo(
