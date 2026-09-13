@@ -8,7 +8,7 @@ import {
   type InstitutionalMetrics,
   type PortalCurso,
 } from "@/lib/portal-cursos";
-import { CATALOGO_OA, especialidadFromCurso } from "@/lib/demo-data";
+import { especialidadFromCurso } from "@/lib/demo-data";
 import { ChartPanel, CHART_HEX, DataBadge, MiniDonut, BarChart } from "./charts";
 import {
   KpiStrip,
@@ -525,11 +525,6 @@ export function CumplimientoView() {
             {oaCodes.map((oa) => (
               <option key={oa} value={oa}>
                 {oa}
-              </option>
-            ))}
-            {CATALOGO_OA.map((oa) => (
-              <option key={`cat-${oa.especialidad}-${oa.codigo}`} value={oa.codigo}>
-                {oa.codigo} · {oa.especialidad}
               </option>
             ))}
           </select>
