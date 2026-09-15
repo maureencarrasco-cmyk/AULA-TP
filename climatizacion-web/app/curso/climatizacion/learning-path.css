@@ -1,11 +1,11 @@
 .aula-path {
-  --path-navy: #163a73;
-  --path-teal: #0b8a86;
-  --path-blue: #0870ef;
-  --path-pink: #e23d8a;
-  --path-done: #087c54;
-  --path-asphalt: #8d949c;
-  --path-asphalt-edge: #6d7670;
+  --path-navy: var(--color-navy);
+  --path-teal: var(--color-blue);
+  --path-blue: var(--color-blue);
+  --path-pink: var(--color-muted);
+  --path-done: var(--color-ok);
+  --path-asphalt: var(--color-muted);
+  --path-asphalt-edge: var(--color-slate);
   position: relative;
 }
 
@@ -217,106 +217,198 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aula-path-metro-stop.is-next .aula-path-metro-disc {
+  .aula-path-metro-stop.is-next .aula-path-metro-disc,
+  .aula-path-pin--glow.is-next {
     animation: none;
+  }
+  .aula-path-stop--journey .clim-hub-route-item:hover {
+    transform: none;
   }
 }
 
-/* Modelo E · Escalera de avance */
+/* Ruta pedagógica · paisaje + camino + cajas border-box */
+.aula-path--pedagogica,
+.aula-path--pedagogica * {
+  box-sizing: border-box;
+}
+
 .aula-path--pedagogica .clim-hub-route-item::after {
   display: none;
 }
 
+.clim-hub-route-panel.aula-path--pedagogica,
 .aula-path--pedagogica {
-  padding-bottom: 1.25rem;
-  background: transparent;
-  border: 0;
-  box-shadow: none;
+  /* Reafirma tokens de marca; el acento lo pone data-specialty. */
+  --color-navy: #0b3a6b;
+  --color-navy-deep: #072a4e;
+  --color-blue: #1558a0;
+  --color-blue-600: #1b6bc4;
+  --color-cyan: #3ec6e0;
+  --color-cyan-soft: #d6f4fa;
+  --color-ink: #122033;
+  --color-slate: #3d5166;
+  --color-muted: #6b7c8e;
+  --color-line: #d5dee8;
+  --color-surface: #f4f7fb;
+  --color-card: #ffffff;
+  --color-ok: #1f8a5b;
+  --color-ok-soft: #e6f6ee;
+  --color-info-soft: #e8f1fb;
+  --accent: var(--color-blue);
+  --path-navy: var(--color-navy);
+  --path-teal: var(--color-blue);
+  --path-blue: var(--color-blue);
+  --path-done: var(--color-ok);
+  position: relative;
+  overflow: hidden;
+  padding: 22px 22px 16px;
+  border: 1px solid var(--color-line);
+  border-radius: 28px;
+  background-color: var(--color-navy-deep);
+  background-image:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-navy-deep) 18%, transparent) 0%,
+      transparent 22%,
+      transparent 72%,
+      color-mix(in srgb, var(--color-navy) 22%, transparent) 100%
+    ),
+    url("/images/aula-tp-ruta-paisaje.png");
+  background-size: cover;
+  background-position: center 38%;
+  box-shadow: var(--shadow-2);
+}
+
+[data-specialty="climatizacion"] .aula-path--pedagogica {
+  --accent: #3ec6e0;
+}
+
+[data-specialty="electricidad"] .aula-path--pedagogica {
+  --accent: #f0b429;
+}
+
+[data-specialty="enfermeria"] .aula-path--pedagogica {
+  --accent: #2bb3a8;
+}
+
+[data-specialty="administracion"] .aula-path--pedagogica {
+  --accent: var(--color-blue);
 }
 
 .aula-path--pedagogica h2 {
-  background: rgba(255, 255, 255, 0.92);
+  background: color-mix(in srgb, var(--color-card) 88%, transparent);
+  color: var(--color-navy);
+  box-shadow: var(--shadow-1);
+  backdrop-filter: blur(10px);
+}
+
+.aula-path--pedagogica > p {
+  max-width: 46rem;
+  color: var(--color-slate);
+  background: color-mix(in srgb, var(--color-card) 78%, transparent);
+  backdrop-filter: blur(8px);
 }
 
 .aula-path-journey {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(176px, 210px);
-  grid-template-rows: auto minmax(220px, 1fr) minmax(220px, 1fr) auto;
-  grid-template-areas:
-    "brand brand tools"
-    "m1    m2    tools"
-    "m3    m4    tools"
-    "bar   bar   bar";
-  gap: 10px 18px;
-  min-height: 760px;
-  margin-top: 18px;
-  padding: 16px 16px 14px;
+  min-height: 680px;
+  margin-top: 12px;
+  padding: 12px 20px 96px;
   overflow: hidden;
-  border-radius: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  box-shadow: 0 18px 48px rgba(20, 60, 90, 0.14);
-  background: #cfe8f2;
+  border-radius: 22px;
 }
 
-.aula-path-journey > *:not(.aula-path-journey-bg):not(.aula-path-journey-veil):not(.aula-path-flags) {
+.aula-path-journey > *:not(.aula-path-journey-bg):not(.aula-path-journey-veil):not(.aula-path-journey-road) {
   z-index: 2;
 }
 
+.aula-path-journey-road {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
 .aula-path-stop--journey {
-  position: relative;
-  left: auto !important;
-  top: auto !important;
-  width: auto;
-  max-width: 340px;
-  min-width: 0;
-  justify-self: center;
-  align-self: stretch;
-  transform: none !important;
+  position: absolute;
+  left: auto;
+  top: auto;
+  width: min(268px, 24%);
+  min-width: 204px;
+  justify-self: unset;
+  align-self: unset;
+  transform: none;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  /* Margin: espacio entre cajas vecinas */
+  margin: 0;
+  padding: 8px;
+  background: color-mix(in srgb, var(--accent, var(--color-cyan)) 22%, transparent);
+  border-radius: 22px;
 }
 
-.aula-path-stop--journey[data-slot="0"] { grid-area: m1; }
-.aula-path-stop--journey[data-slot="1"] { grid-area: m2; }
-.aula-path-stop--journey[data-slot="2"] { grid-area: m3; }
-.aula-path-stop--journey[data-slot="3"] { grid-area: m4; }
-.aula-path-stop--journey[data-slot="4"] { grid-area: m5; }
-.aula-path-stop--journey[data-slot="5"] { grid-area: m6; }
+.aula-path-stop--journey[data-slot="0"] { left: 3%; top: 28%; }
+.aula-path-stop--journey[data-slot="1"] { left: 27%; top: 16%; }
+.aula-path-stop--journey[data-slot="2"] { left: 51%; top: 6%; }
+.aula-path-stop--journey[data-slot="3"] { left: 74%; top: 20%; }
+.aula-path-stop--journey[data-slot="4"] { left: 14%; top: 52%; }
+.aula-path-stop--journey[data-slot="5"] { left: 42%; top: 48%; }
 
-.aula-path-journey[data-count="2"] {
-  grid-template-rows: auto minmax(220px, 1fr) auto;
-  grid-template-areas:
-    "brand brand tools"
-    "m1    m2    tools"
-    "bar   bar   bar";
-}
+.aula-path-journey[data-count="2"] .aula-path-stop--journey[data-slot="0"] { left: 12%; top: 28%; }
+.aula-path-journey[data-count="2"] .aula-path-stop--journey[data-slot="1"] { left: 52%; top: 18%; }
 
+.aula-path-journey[data-count="3"] .aula-path-stop--journey[data-slot="0"] { left: 8%; top: 24%; }
+.aula-path-journey[data-count="3"] .aula-path-stop--journey[data-slot="1"] { left: 38%; top: 8%; }
+.aula-path-journey[data-count="3"] .aula-path-stop--journey[data-slot="2"] { left: 66%; top: 18%; }
+
+.aula-path-journey[data-count="5"],
 .aula-path-journey[data-count="6"] {
-  min-height: 980px;
-  grid-template-rows: auto minmax(170px, 1fr) minmax(170px, 1fr) minmax(170px, 1fr) auto;
-  grid-template-areas:
-    "brand brand tools"
-    "m1    m2    tools"
-    "m3    m4    tools"
-    "m5    m6    tools"
-    "bar   bar   bar";
+  min-height: 820px;
+  padding-bottom: 72px;
+}
+
+.aula-path-journey[data-count="5"] .aula-path-stop--journey,
+.aula-path-journey[data-count="6"] .aula-path-stop--journey {
+  width: min(248px, 28%);
+}
+
+.aula-path-journey[data-count="5"] .aula-path-stop--journey[data-slot="0"] { left: 4%; top: 6%; }
+.aula-path-journey[data-count="5"] .aula-path-stop--journey[data-slot="1"] { left: 36%; top: 2%; }
+.aula-path-journey[data-count="5"] .aula-path-stop--journey[data-slot="2"] { left: 68%; top: 8%; }
+.aula-path-journey[data-count="5"] .aula-path-stop--journey[data-slot="3"] { left: 12%; top: 48%; }
+.aula-path-journey[data-count="5"] .aula-path-stop--journey[data-slot="4"] { left: 46%; top: 46%; }
+
+.aula-path-journey[data-count="6"] .aula-path-stop--journey[data-slot="0"] { left: 3%; top: 4%; }
+.aula-path-journey[data-count="6"] .aula-path-stop--journey[data-slot="1"] { left: 36%; top: 1%; }
+.aula-path-journey[data-count="6"] .aula-path-stop--journey[data-slot="2"] { left: 68%; top: 6%; }
+.aula-path-journey[data-count="6"] .aula-path-stop--journey[data-slot="3"] { left: 3%; top: 48%; }
+.aula-path-journey[data-count="6"] .aula-path-stop--journey[data-slot="4"] { left: 36%; top: 46%; }
+.aula-path-journey[data-count="6"] .aula-path-stop--journey[data-slot="5"] { left: 68%; top: 50%; }
+
+.aula-path-journey[data-count="5"] .aula-path-meta,
+.aula-path-journey[data-count="6"] .aula-path-meta {
+  right: 16px;
+  bottom: 28px;
 }
 
 .aula-path-stop--journey .clim-hub-route-item {
   overflow: visible;
   flex: 1;
   width: 100%;
-  padding: 0 12px 14px;
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 14px 32px rgba(20, 50, 80, 0.16);
-  backdrop-filter: blur(12px);
+  /* Border + padding: el width incluye ambos (border-box) */
+  border: 3px solid var(--accent, var(--color-cyan));
+  padding: 14px 12px 12px;
+  background: color-mix(in srgb, var(--accent, var(--color-cyan)) 16%, var(--color-card));
+  box-shadow: var(--shadow-2);
+  backdrop-filter: none;
 }
 
-.aula-path-stop--journey .clim-hub-route-item::after {
-  display: none;
+.aula-path-stop--journey .clim-hub-route-icon {
+  color: var(--color-navy-deep);
+  background: var(--accent, var(--color-cyan));
 }
 
 .aula-path-stop--journey .clim-hub-route-step {
@@ -325,13 +417,16 @@
 
 .aula-path-stop--journey .clim-hub-route-body {
   align-items: stretch;
-  padding: 16px 8px 8px;
+  padding: 12px 10px 8px;
   text-align: left;
+  background: var(--color-card);
+  border-radius: 10px;
 }
 
 .aula-path-stop--journey .clim-hub-route-body h3 {
   min-height: 0;
   margin: 4px 0 8px;
+  color: var(--color-navy);
   font-size: 16px;
   line-height: 1.35;
   overflow: visible;
@@ -342,12 +437,11 @@
 .aula-path-stop--journey .route-state {
   display: flex;
   width: 100%;
-  box-sizing: border-box;
   margin: 4px 0 8px;
   padding: 5px 10px;
   border-radius: 999px;
-  background: #eef6ff;
-  color: #163a73;
+  background: var(--color-info-soft);
+  color: var(--color-navy);
   font-size: 11px;
   font-weight: 800;
   justify-content: center;
@@ -355,38 +449,49 @@
 
 .aula-path-stop--journey .route-done .route-state,
 .aula-path-stop--journey .clim-hub-route-item.route-done .route-state {
-  background: #e6f7ee;
-  color: #087c54;
+  background: var(--color-ok-soft);
+  color: var(--color-ok);
 }
 
 .aula-path-stop--journey .clim-hub-route-item.route-next .route-state {
-  background: #e7f0ff;
-  color: #0870ef;
+  background: var(--color-info-soft);
+  color: var(--color-blue);
 }
 
-.aula-path-stop--journey .route-pending {
-  display: block;
-  margin-top: 6px;
-  font-size: 12px;
-  line-height: 1.4;
+.aula-path-stop--journey .route-pending,
+.aula-path-stop--journey .clim-hub-route-hours,
+.aula-path-stop--journey .route-progress {
+  display: none;
+}
+
+.aula-path-stop--journey .route-count {
   white-space: normal;
   overflow: visible;
   overflow-wrap: anywhere;
 }
 
-.aula-path-stop--journey .route-count,
-.aula-path-stop--journey .clim-hub-route-hours {
-  white-space: normal;
-  overflow: visible;
-  overflow-wrap: anywhere;
+.aula-path-stop--journey .clim-hub-route-item.route-next {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent, var(--color-cyan)) 38%, transparent), var(--shadow-2);
 }
 
-.aula-path-stop--journey .clim-hub-route-enter {
-  margin-top: auto;
+.aula-path-stop--journey .clim-hub-route-enter,
+.aula-path-stop--journey .clim-hub-route-item.route-next .clim-hub-route-enter,
+.aula-path-stop--journey .clim-hub-route-item.tone-teal .clim-hub-route-enter,
+.aula-path-stop--journey .clim-hub-route-item.tone-blue .clim-hub-route-enter,
+.aula-path-stop--journey .clim-hub-route-item.tone-magenta .clim-hub-route-enter {
+  margin-top: 10px;
   padding: 10px 12px;
+  min-height: var(--touch);
   font-size: 13px;
   white-space: normal;
   line-height: 1.25;
+  background: var(--color-blue);
+  color: var(--color-card);
+}
+
+.aula-path-stop--journey .clim-hub-route-item:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
 }
 
 .aula-path-journey .aula-path-stop--journey .aula-path-pin {
@@ -399,35 +504,89 @@
 }
 
 .aula-path-journey .aula-path-journey-tools {
-  grid-area: tools;
-  position: relative;
-  top: auto;
-  right: auto;
-  width: auto;
-  align-self: start;
+  display: none;
 }
 
-.aula-path-flags--journey {
-  right: 24%;
-  top: 8%;
+.aula-path-meta {
+  position: absolute;
+  z-index: 3;
+  right: 18px;
+  bottom: 108px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 88px;
+  padding: 10px 12px 12px;
+  border: 3px solid var(--color-navy);
+  border-radius: 16px;
+  background: var(--color-card);
+  color: var(--color-navy);
+  box-shadow: var(--shadow-2);
+}
+
+.aula-path-journey:not(:has(.aula-path-journey-bar)) {
+  padding-bottom: 56px;
+}
+
+.aula-path-journey:not(:has(.aula-path-journey-bar)) .aula-path-meta {
+  bottom: 24px;
+}
+
+.aula-path-meta-flag {
+  width: 28px;
+  height: 36px;
+  border-radius: 2px 8px 8px 2px;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      var(--color-navy) 0 6px,
+      var(--color-card) 6px 12px
+    );
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--color-navy) 25%, transparent);
+}
+
+.aula-path-meta strong {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.aula-path-meta small {
+  color: var(--color-slate);
+  font-size: 11px;
+  text-align: center;
+}
+
+.aula-path-stop--journey.is-meta .aula-path-pin {
+  background: var(--color-navy);
 }
 
 .aula-path-journey-bg {
   position: absolute;
   inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 55%;
+  object-position: center 42%;
   pointer-events: none;
 }
 
 .aula-path-journey-veil {
   position: absolute;
   inset: 0;
+  z-index: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(247, 252, 255, 0.35) 0%, transparent 22%, transparent 78%, rgba(247, 252, 255, 0.28) 100%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-surface) 12%, transparent) 0%,
+      transparent 28%,
+      transparent 78%,
+      color-mix(in srgb, var(--color-navy) 14%, transparent) 100%
+    );
 }
 
 .aula-path-journey-brand {
@@ -484,10 +643,10 @@
 
 .aula-path-pin--glow.is-wait,
 .aula-path-pin--glow.is-ready {
-  background: var(--path-pink);
+  background: var(--color-blue);
   box-shadow:
-    0 0 0 5px rgba(255, 255, 255, 0.85),
-    0 0 16px rgba(226, 61, 138, 0.35);
+    0 0 0 5px color-mix(in srgb, var(--color-card) 85%, transparent),
+    0 0 16px color-mix(in srgb, var(--accent, var(--color-cyan)) 45%, transparent);
 }
 
 .aula-path-node.is-ready {
@@ -496,19 +655,18 @@
 }
 
 .aula-path-journey-bar {
-  grid-area: bar;
-  position: relative;
+  position: absolute;
   z-index: 4;
-  left: auto;
-  right: auto;
-  bottom: auto;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 10px 14px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 10px 28px rgba(20, 50, 80, 0.12);
+  background: color-mix(in srgb, var(--color-card) 92%, transparent);
+  box-shadow: var(--shadow-2);
   backdrop-filter: blur(10px);
 }
 
@@ -532,7 +690,7 @@
   inset: 0 auto 0 0;
   display: block;
   border-radius: inherit;
-  background: linear-gradient(90deg, #087c54, #0b8a86);
+  background: linear-gradient(90deg, var(--color-ok), var(--accent, var(--color-cyan)));
 }
 
 .aula-path-stairs {
@@ -757,9 +915,9 @@
 }
 
 .aula-path-journey .aula-path-stop--journey {
-  position: relative;
-  width: 100%;
-  max-width: 340px;
+  position: absolute;
+  width: min(268px, 24%);
+  transform: none;
 }
 
 .aula-path-stop .clim-hub-route-item {
@@ -798,6 +956,11 @@
 
 .aula-path-stop[data-side="down"] .aula-path-pin {
   top: -42px;
+}
+
+.aula-path-journey .aula-path-stop--journey[data-side="up"],
+.aula-path-journey .aula-path-stop--journey[data-side="down"] {
+  transform: none;
 }
 
 .aula-path-flags {
@@ -991,26 +1154,38 @@
     width: min(220px, 42%);
   }
   .aula-path-journey {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-rows: auto auto auto auto;
-    grid-template-areas:
-      "brand brand"
-      "m1 m2"
-      "m3 m4"
-      "bar bar";
-    min-height: 0;
-    gap: 14px 12px;
+    min-height: 720px;
   }
-  .aula-path-stop--journey {
-    width: auto;
+  .aula-path-stop--journey,
+  .aula-path-journey .aula-path-stop--journey {
+    width: min(220px, 42%);
+    min-width: 168px;
   }
+  .aula-path-stop--journey[data-slot="0"] { left: 3%; top: 8%; }
+  .aula-path-stop--journey[data-slot="1"] { left: 52%; top: 8%; }
+  .aula-path-stop--journey[data-slot="2"] { left: 3%; top: 48%; }
+  .aula-path-stop--journey[data-slot="3"] { left: 52%; top: 48%; }
+  .aula-path-journey[data-count="5"],
   .aula-path-journey[data-count="6"] {
-    grid-template-areas:
-      "brand brand"
-      "m1 m2"
-      "m3 m4"
-      "m5 m6"
-      "bar bar";
+    min-height: 1080px;
+  }
+  .aula-path-journey[data-count="5"] .aula-path-stop--journey[data-slot="0"],
+  .aula-path-journey[data-count="6"] .aula-path-stop--journey[data-slot="0"] { left: 3%; top: 4%; }
+  .aula-path-journey[data-count="5"] .aula-path-stop--journey[data-slot="1"],
+  .aula-path-journey[data-count="6"] .aula-path-stop--journey[data-slot="1"] { left: 52%; top: 4%; }
+  .aula-path-journey[data-count="5"] .aula-path-stop--journey[data-slot="2"],
+  .aula-path-journey[data-count="6"] .aula-path-stop--journey[data-slot="2"] { left: 3%; top: 34%; }
+  .aula-path-journey[data-count="5"] .aula-path-stop--journey[data-slot="3"],
+  .aula-path-journey[data-count="6"] .aula-path-stop--journey[data-slot="3"] { left: 52%; top: 34%; }
+  .aula-path-journey[data-count="5"] .aula-path-stop--journey[data-slot="4"],
+  .aula-path-journey[data-count="6"] .aula-path-stop--journey[data-slot="4"] { left: 3%; top: 64%; }
+  .aula-path-journey[data-count="6"] .aula-path-stop--journey[data-slot="5"] { left: 52%; top: 64%; }
+  .aula-path-meta {
+    right: 12px;
+    bottom: 92px;
+  }
+  .aula-path-journey .aula-path-journey-tools {
+    display: none;
   }
   .aula-path-board {
     min-height: 820px;
@@ -1027,24 +1202,42 @@
     display: flex;
     flex-direction: column;
     gap: 18px;
+    padding-bottom: 16px;
   }
   .aula-path-board svg.aula-path-svg,
   .aula-path-journey-bg,
   .aula-path-journey-veil,
+  .aula-path-journey-road,
   .aula-path-flags,
-  .aula-path-journey-brand,
-  .aula-path-journey-bar {
+  .aula-path-journey-brand {
     display: none;
   }
-  .aula-path-stop {
+  .aula-path-stop,
+  .aula-path-stop--journey,
+  .aula-path-journey .aula-path-stop--journey {
     position: relative;
     left: auto !important;
     top: auto !important;
     width: 100%;
+    min-width: 0;
     transform: none;
   }
   .aula-path-pin {
     display: none;
+  }
+  .aula-path-meta {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+  }
+  .aula-path-journey-bar {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
   }
   .aula-path-trail-row {
     grid-template-columns: 40px 1fr;

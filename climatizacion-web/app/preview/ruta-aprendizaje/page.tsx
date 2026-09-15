@@ -38,12 +38,12 @@ export default function RutaAprendizajePreviewPage() {
       </div>
       <div className="aula-preview-wrap">
         <p className="aula-preview-intro">
-          Esto ya no es una fila de tarjetas: es un <strong>viaje por estaciones</strong>. El camino recorre el paisaje; cada módulo es un hito luminoso; las banderas marcan la meta. Si te convence, lo replicamos en todos los cursos.
+          Esto ya no es una fila de tarjetas: es un <strong>viaje por estaciones</strong>. El camino recorre un paisaje realista; cada módulo es una caja con margen, borde, padding y contenido; la bandera marca la meta.
         </p>
 
         <section id="ruta-pedagogica" className="aula-preview-block">
           <h2>Ruta pedagógica · viaje por estaciones</h2>
-          <p>Montañas, costa, camino asfaltado, hitos 1–4 y barra de avance. Las tarjetas flotan como paradas del recorrido.</p>
+          <p>Montañas reales, camino asfaltado, hitos 1–4 y meta al cierre. Las tarjetas usan box-sizing: border-box.</p>
           <LearningPath
             variant="pedagogica"
             title="3° medio · M1–M4"

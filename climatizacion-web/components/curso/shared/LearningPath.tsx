@@ -63,12 +63,43 @@ function PedagogicaScene() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         className="aula-path-journey-bg"
-        src="/images/aula-tp-ruta-paisaje.jpg"
+        src="/images/aula-tp-ruta-paisaje.png"
         alt=""
         aria-hidden
       />
       <div className="aula-path-journey-veil" aria-hidden />
     </>
+  );
+}
+
+function RoadStroke({ d }: { d: string }) {
+  return (
+    <>
+      <path d={d} fill="none" stroke="var(--color-slate)" strokeWidth="54" strokeLinecap="round" />
+      <path d={d} fill="none" stroke="var(--color-muted)" strokeWidth="40" strokeLinecap="round" />
+      <path
+        d={d}
+        fill="none"
+        stroke="var(--color-card)"
+        strokeWidth="3"
+        strokeDasharray="18 16"
+        strokeLinecap="round"
+        opacity="0.92"
+      />
+    </>
+  );
+}
+
+function JourneyRoad({ count }: { count: number }) {
+  const upper = count >= 5
+    ? "M 40 250 C 180 230, 280 170, 420 210 S 680 310, 920 190"
+    : "M 40 520 C 180 500, 260 430, 360 470 S 560 620, 680 430 S 820 280, 970 390";
+  const lower = "M 40 560 C 200 530, 360 500, 540 540 S 780 620, 960 510";
+  return (
+    <svg className="aula-path-journey-road" viewBox="0 0 1000 640" preserveAspectRatio="none" aria-hidden>
+      <RoadStroke d={upper} />
+      {count >= 5 ? <RoadStroke d={lower} /> : null}
+    </svg>
   );
 }
 
@@ -412,15 +443,7 @@ export default function LearningPath({
       {variant === "pedagogica" ? (
         <div className="aula-path-journey" data-count={stations.length}>
           <PedagogicaScene />
-          <div className="aula-path-journey-brand" aria-hidden>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/climatizacion/aula-tp-chile-logo-corporativo.jpg" alt="" />
-            <span>Aula TP Chile</span>
-          </div>
-          <div className="aula-path-flags aula-path-flags--journey" aria-hidden>
-            <span />
-            <span />
-          </div>
+          <JourneyRoad count={stations.length} />
           {showSupportTools && firstModuleHref ? (
             <aside className="aula-path-journey-tools" aria-label="Herramientas de apoyo">
               <Link className="aula-path-journey-tool aula-path-journey-tool--pl" href={firstModuleHref}>
@@ -448,41 +471,51 @@ export default function LearningPath({
           ) : null}
           {stations.map(({ card, i, p, next }) => {
             const kind = stationState(p, next, card.available);
+            const isMeta = i === stations.length - 1;
             return (
               <div
                 key={card.numero}
-                className="aula-path-stop aula-path-stop--journey"
+                className={`aula-path-stop aula-path-stop--journey${isMeta ? " is-meta" : ""}`}
                 data-side="up"
                 data-slot={i}
               >
                 <StationCard card={card} i={i} p={p} next={next} compact {...cardProps} />
-                <span className={`aula-path-pin aula-path-pin--glow is-${kind}`}>{doneLabel(p, card.numero)}</span>
+                <span className={`aula-path-pin aula-path-pin--glow is-${kind}`}>
+                  {doneLabel(p, card.numero)}
+                </span>
               </div>
             );
           })}
-          <div className="aula-path-journey-bar">
-            <span className="aula-path-journey-bar-copy">
-              Tu progreso general
-              <small>
-                {stations.filter(({ p }) => p?.pct === 100).length} de {stations.length} módulos completados
-              </small>
-            </span>
-            <span className="aula-path-journey-bar-track">
-              <i
-                style={{
-                  width: `${Math.round(
-                    (stations.filter(({ p }) => p?.pct === 100).length / Math.max(stations.length, 1)) * 100,
-                  )}%`,
-                }}
-              />
-            </span>
-            <strong className="aula-path-journey-bar-copy" style={{ minWidth: "3rem", textAlign: "right" }}>
-              {Math.round(
-                (stations.filter(({ p }) => p?.pct === 100).length / Math.max(stations.length, 1)) * 100,
-              )}
-              %
-            </strong>
+          <div className="aula-path-meta" aria-label="Meta del tramo">
+            <span className="aula-path-meta-flag" aria-hidden />
+            <strong>Meta</strong>
+            <small>Cierre del tramo</small>
           </div>
+          {showProgress ? (
+            <div className="aula-path-journey-bar">
+              <span className="aula-path-journey-bar-copy">
+                Tu progreso general
+                <small>
+                  {stations.filter(({ p }) => p?.pct === 100).length} de {stations.length} módulos completados
+                </small>
+              </span>
+              <span className="aula-path-journey-bar-track">
+                <i
+                  style={{
+                    width: `${Math.round(
+                      (stations.filter(({ p }) => p?.pct === 100).length / Math.max(stations.length, 1)) * 100,
+                    )}%`,
+                  }}
+                />
+              </span>
+              <strong className="aula-path-journey-bar-copy" style={{ minWidth: "3rem", textAlign: "right" }}>
+                {Math.round(
+                  (stations.filter(({ p }) => p?.pct === 100).length / Math.max(stations.length, 1)) * 100,
+                )}
+                %
+              </strong>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </section>

@@ -1,0 +1,212 @@
+/* Course home: specialty accent at full strength. Tokens only. No rainbow. */
+
+.route-panel--camino {
+  --path-navy: var(--color-navy, #0b3a6b);
+  --path-blue: var(--color-blue, #1558a0);
+  --path-done: var(--color-ok, #1f8a5b);
+  --path-ready: var(--color-blue, #1558a0);
+  --path-wait: var(--color-muted, #6b7c8e);
+  --path-orange: var(--color-warn, #c47a12);
+  --path-accent: var(--accent, var(--color-cyan, #3ec6e0));
+  --cta-fg: var(--color-navy-deep, #072a4e);
+  background-color: color-mix(in srgb, var(--path-accent) 18%, #f4f7fb) !important;
+  background-image:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--path-accent) 28%, white) 0%,
+      rgba(255, 255, 255, 0.18) 38%,
+      color-mix(in srgb, var(--path-accent) 22%, white) 100%
+    ),
+    url("assets/aula-tp-ruta-paisaje.jpg") !important;
+  border-color: color-mix(in srgb, var(--path-accent) 40%, white) !important;
+}
+
+.route-panel--camino > h2 {
+  background: var(--path-accent) !important;
+  color: var(--cta-fg) !important;
+  border-color: transparent !important;
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--path-accent) 38%, transparent) !important;
+}
+
+.route-panel--camino .route-item {
+  background: color-mix(in srgb, var(--path-accent) 16%, white) !important;
+  color: var(--color-ink, #122033) !important;
+  border: 1px solid color-mix(in srgb, var(--path-accent) 42%, white) !important;
+  border-top: 5px solid var(--path-accent) !important;
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--path-accent) 28%, rgba(7, 42, 78, 0.12)) !important;
+}
+
+.route-panel--camino .route-select h3,
+.route-panel--camino .hours,
+.route-panel--camino .hours strong {
+  color: var(--color-navy, #0b3a6b) !important;
+}
+
+.route-panel--camino .module-code,
+.route-panel--camino .route-select small {
+  color: var(--color-navy, #0b3a6b) !important;
+  font-weight: 800;
+}
+
+.route-panel--camino .route-icon {
+  background: var(--path-accent) !important;
+  color: var(--cta-fg) !important;
+  border: 0 !important;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--path-accent) 45%, transparent) !important;
+}
+
+.route-panel--camino .route-state-badge,
+.route-item.completed .route-state-badge,
+.route-item.is-done .route-state-badge {
+  background: var(--color-ok, #1f8a5b) !important;
+  color: #fff !important;
+  border: 0 !important;
+}
+
+.route-panel--camino .route-item.is-next .route-state-badge,
+.route-panel--camino .route-item.selected .route-state-badge,
+.route-item[data-route-state="selected"] .route-state-badge {
+  background: var(--color-blue, #1558a0) !important;
+  color: #fff !important;
+}
+
+.route-panel--camino .route-item.is-ready .route-state-badge,
+.route-item[data-route-state="available"] .route-state-badge {
+  background: var(--path-accent) !important;
+  color: var(--cta-fg) !important;
+}
+
+.route-panel--camino .route-item.is-wait .route-state-badge,
+.route-item[data-route-state="locked"] .route-state-badge {
+  background: var(--color-surface, #f4f7fb) !important;
+  color: var(--color-muted, #6b7c8e) !important;
+}
+
+.route-panel--camino .route-item.is-done,
+.route-panel--camino .route-item.completed {
+  background: color-mix(in srgb, var(--path-accent) 10%, white) !important;
+}
+
+.route-panel--camino .route-item.is-next,
+.route-panel--camino .route-item.selected {
+  background: color-mix(in srgb, var(--path-accent) 28%, white) !important;
+  border-color: var(--path-accent) !important;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 5px var(--path-accent),
+    0 14px 32px color-mix(in srgb, var(--path-accent) 40%, transparent) !important;
+}
+
+.route-panel--camino .route-enter,
+.route-panel--camino .route-item.is-done .route-enter,
+.route-panel--camino .route-item.is-next .route-enter,
+.route-panel--camino .route-item.is-ready .route-enter,
+.detail-enter,
+.login-card > button,
+.portal-live-primary,
+.advance-stage {
+  background: var(--path-accent, var(--accent, #3ec6e0)) !important;
+  color: var(--cta-fg) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 20px color-mix(in srgb, var(--path-accent, var(--accent, #3ec6e0)) 42%, transparent) !important;
+  font-weight: 800 !important;
+}
+
+.route-panel--camino .step,
+.route-panel--camino .route-path-pin {
+  background: var(--path-accent) !important;
+  color: var(--cta-fg) !important;
+  border-color: #fff !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--path-accent) 45%, transparent) !important;
+}
+
+.route-panel--camino .route-item.is-done .step,
+.route-panel--camino .route-path-pin.is-done {
+  background: var(--color-ok, #1f8a5b) !important;
+  color: #fff !important;
+}
+
+.route-panel--camino .route-item.is-next .step,
+.route-panel--camino .route-path-pin.is-next {
+  background: var(--color-blue, #1558a0) !important;
+  color: #fff !important;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 5px var(--path-accent) !important;
+}
+
+.route-panel--camino .route-line--camino span {
+  background: linear-gradient(90deg, var(--path-accent), var(--color-blue, #1558a0)) !important;
+}
+
+.information-card > h2,
+.course-panel > h2 {
+  background: var(--color-navy, #0b3a6b) !important;
+  color: #fff !important;
+}
+
+body.course-electricidad-3m,
+body.course-electricidad-3m .route-panel--camino {
+  --color-navy: #0b3a6b;
+  --color-navy-deep: #072a4e;
+  --color-blue: #1558a0;
+  --color-ok: #1f8a5b;
+  --specialty-electricidad: #f0b429;
+  --accent: #f0b429;
+  --path-accent: #f0b429;
+  --cta-fg: #072a4e;
+}
+
+body.course-enfermeria-tens,
+body.course-enfermeria-tens .route-panel--camino {
+  --color-navy: #0b3a6b;
+  --color-navy-deep: #072a4e;
+  --color-blue: #1558a0;
+  --color-ok: #1f8a5b;
+  --specialty-enfermeria: #2bb3a8;
+  --accent: #2bb3a8;
+  --path-accent: #2bb3a8;
+  --cta-fg: #072a4e;
+}
+
+body.course-electricidad-3m #accessView .hero-banner {
+  --hero-accent: #f0b429;
+  background:
+    linear-gradient(90deg, #072a4e 0%, rgba(7, 42, 78, 0.55) 32%, transparent 62%),
+    var(--hero-photo, url("assets/electricity-hero-entry-v2.webp")) center / cover no-repeat !important;
+}
+
+body.course-enfermeria-tens #accessView .hero-banner {
+  --hero-accent: #2bb3a8;
+  background:
+    linear-gradient(90deg, #072a4e 0%, rgba(7, 42, 78, 0.55) 32%, transparent 62%),
+    var(--hero-photo, url("assets/nursing-team.webp")) center / cover no-repeat !important;
+}
+
+body.course-electricidad-3m .route-panel--camino .route-enter,
+body.course-electricidad-3m .route-panel--camino .route-item.is-done .route-enter,
+body.course-electricidad-3m .route-panel--camino .route-icon,
+body.course-electricidad-3m .route-panel--camino > h2,
+body.course-electricidad-3m .route-panel--camino .step,
+body.course-electricidad-3m .route-panel--camino .route-path-pin {
+  background: #f0b429 !important;
+  color: #072a4e !important;
+}
+
+body.course-enfermeria-tens .route-panel--camino .route-enter,
+body.course-enfermeria-tens .route-panel--camino .route-item.is-done .route-enter,
+body.course-enfermeria-tens .route-panel--camino .route-icon,
+body.course-enfermeria-tens .route-panel--camino > h2,
+body.course-enfermeria-tens .route-panel--camino .step,
+body.course-enfermeria-tens .route-panel--camino .route-path-pin {
+  background: #2bb3a8 !important;
+  color: #072a4e !important;
+}
+
+body.course-electricidad-3m .route-panel--camino .route-item.is-done .step,
+body.course-electricidad-3m .route-panel--camino .route-path-pin.is-done,
+body.course-enfermeria-tens .route-panel--camino .route-item.is-done .step,
+body.course-enfermeria-tens .route-panel--camino .route-path-pin.is-done {
+  background: #1f8a5b !important;
+  color: #fff !important;
+}

@@ -565,7 +565,7 @@
   background-color: #d7edf4;
   background-image:
     linear-gradient(180deg, rgba(247, 252, 255, 0.42) 0%, rgba(247, 252, 255, 0.12) 18%, rgba(255, 255, 255, 0.02) 52%, rgba(247, 252, 255, 0.28) 100%),
-    url("/images/aula-tp-ruta-pedagogica.jpg");
+    url("/images/aula-tp-ruta-paisaje.png");
   background-size: cover;
   background-position: center 68%;
 }
@@ -768,18 +768,22 @@
   display: block;
   width: 100%;
   padding: 8px 4px;
-  color: #fff;
-  background: var(--aula-navy);
+  color: var(--color-navy-deep);
+  background: var(--accent, var(--color-cyan));
   border: 0;
   border-radius: var(--radius-sm);
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   text-align: center;
 }
 
-.clim-hub-route-item.tone-teal .clim-hub-route-enter { background: var(--aula-teal); }
-.clim-hub-route-item.tone-blue .clim-hub-route-enter { background: var(--aula-blue); }
-.clim-hub-route-item.tone-magenta .clim-hub-route-enter { background: var(--pink); }
+.clim-hub-route-item.route-next .clim-hub-route-enter,
+.clim-hub-route-item.tone-teal .clim-hub-route-enter,
+.clim-hub-route-item.tone-blue .clim-hub-route-enter,
+.clim-hub-route-item.tone-magenta .clim-hub-route-enter {
+  background: var(--accent, var(--color-cyan));
+  color: var(--color-navy-deep);
+}
 
 .clim-hub-route-arrow {
   position: absolute;
@@ -928,17 +932,53 @@
 .student-dashboard-message { padding: 24px; }
 @media(max-width:700px) { .student-dashboard-grid { grid-template-columns: 1fr; } .student-dashboard-progress { border-left: 0; padding: 20px; } .student-dashboard-details dt,.student-dashboard-details dd { padding: 14px; } }
 
-.clim-hub-route-item.route-done { border-color: #76cba6; background: #f1fcf6; }
+.clim-hub-route-item.route-done {
+  border-color: color-mix(in srgb, var(--accent, var(--color-cyan)) 42%, white);
+  background: color-mix(in srgb, var(--accent, var(--color-cyan)) 12%, white);
+}
 .clim-hub-route-item.route-done::after,
-.clim-hub-route-item.route-done .clim-hub-route-step { background: #087c54; border-color: #087c54; color: white; }
-.clim-hub-route-item.route-next { border: 2px solid #0870ef; box-shadow: 0 0 0 4px #e0edff, 0 8px 22px #1255aa18; }
-.clim-hub-route-item.route-next::after { background: #0870ef; box-shadow: 0 0 0 5px #d9eaff; }
-.route-state { margin: 10px 0 8px; padding: 4px 10px; border-radius: 99px; background: #edf2f8; color: #3c536c; font-size: 12px; font-weight: 750; }
-.route-done .route-state { color: #066246; background: #d7f2e3; }
-.route-next .route-state { color: #124b9e; background: #deebff; }
-.route-progress { display: block; width: 100%; height: 8px; border: 0; border-radius: 9px; overflow: hidden; accent-color: #087c54; background: #dfe8f2; }
-.route-progress::-webkit-progress-bar { background: #dfe8f2; border-radius: 9px; }
-.route-progress::-webkit-progress-value { background: #087c54; border-radius: 9px; }
+.clim-hub-route-item.route-done .clim-hub-route-step {
+  background: var(--color-ok);
+  border-color: var(--color-ok);
+  color: #fff;
+}
+.clim-hub-route-item.route-next {
+  border: 2px solid var(--accent, var(--color-cyan));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent, var(--color-cyan)) 22%, white), var(--shadow-1);
+}
+.clim-hub-route-item.route-next::after {
+  background: var(--color-blue);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent, var(--color-cyan)) 24%, white);
+}
+.route-state {
+  margin: 10px 0 8px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: var(--color-info-soft);
+  color: var(--color-navy);
+  font-size: 12px;
+  font-weight: 750;
+}
+.route-done .route-state {
+  color: var(--color-ok);
+  background: var(--color-ok-soft);
+}
+.route-next .route-state {
+  color: var(--color-blue);
+  background: var(--color-info-soft);
+}
+.route-progress {
+  display: block;
+  width: 100%;
+  height: 8px;
+  border: 0;
+  border-radius: 9px;
+  overflow: hidden;
+  accent-color: var(--accent, var(--color-cyan));
+  background: var(--color-line);
+}
+.route-progress::-webkit-progress-bar { background: var(--color-line); border-radius: 9px; }
+.route-progress::-webkit-progress-value { background: var(--accent, var(--color-cyan)); border-radius: 9px; }
 .route-count { margin-top: 6px; color: #36536f; font-size: 12px; }
 .route-pending { margin-top: 10px; color: #163e76; font-size: 12px; line-height: 1.5; }
 .clim-hub-route-hours { margin-top: auto; padding-top: 12px; }
