@@ -1,0 +1,318 @@
+/* Bordes suaves y contextuales · Aula TP Chile
+   El borde orienta (número + verbo + color tenue). No encierra en negro.
+   Homogéneo en estilo; el color sigue la acción pedagógica, no un arcoíris. */
+
+:root{
+  --edge:#D5DEE8;
+  --edge-observe:#B8E8F2;
+  --edge-explore:#B8E8F2;
+  --edge-comprehend:#C5D7EA;
+  --edge-relate:#DDD4F0;
+  --edge-analyze:#D9D0EC;
+  --edge-apply:#B9E4DE;
+  --edge-decide:#F0DDB0;
+  --edge-justify:#E0D4F4;
+  --edge-verify:#C5E6D4;
+  --edge-feedback:#B7DCE6;
+  --shadow-soft:0 1px 4px rgba(7,42,78,.06);
+}
+
+/* Campos: sin trazo de agente de usuario (se lee como marco negro). */
+input:not([type="radio"]):not([type="checkbox"]):not([type="range"]):not([type="file"]),
+textarea,
+select{
+  appearance:none;
+  -webkit-appearance:none;
+  background:#fff;
+  border:1px solid var(--ped-edge, var(--edge));
+  border-radius:10px;
+  box-shadow:none;
+  color:#122033;
+}
+textarea:hover,
+input:not([type="radio"]):not([type="checkbox"]):not([type="range"]):hover,
+select:hover{
+  border-color:color-mix(in srgb, var(--ped-accent, #1558A0) 32%, #fff);
+}
+textarea:focus-visible,
+input:not([type="radio"]):not([type="checkbox"]):not([type="range"]):focus-visible,
+select:focus-visible{
+  outline:2px solid #3EC6E0;
+  outline-offset:2px;
+  border-color:#9BD7E8;
+}
+
+/* Superficies: 1 px pastel + sombra suave. Sin marco oscuro. */
+.panel,
+.soft,
+.work-card,
+.act-card,
+.course-card,
+.ped-step,
+.act-observe,
+.act-decide,
+.ae-evidence,
+.question-box,
+.option,
+.situation-card,
+.pf-stage,
+.pf-card,
+.pf-fam,
+.vis-fig,
+.vis-evidence,
+.vis-stage-wrap,
+.act-dossier,
+.act-hotspot-alt,
+.editor-detail,
+.welcome-note,
+.lesson-panel,
+.ctx-block,
+.feedback-score,
+.result-cards > .soft,
+.summary-columns > .soft{
+  border-width:1px;
+  border-style:solid;
+  border-color:var(--ped-edge, var(--edge));
+  box-shadow:var(--shadow-soft);
+}
+
+.ped-step,
+.act-observe,
+.act-decide,
+.ae-evidence,
+.case-step,
+.exam-q-step,
+.exam-dev-step,
+.ctx-step.ped-step,
+.work-zone-s1 .act-explore,
+.work-zone-s1 .ctx-block,
+.work-zone-s1 .work-card{
+  --ped-edge:var(--edge);
+  border:1px solid var(--ped-edge);
+  border-left:3px solid color-mix(in srgb, var(--ped-accent, #1558A0) 48%, #fff);
+  box-shadow:var(--shadow-soft);
+}
+
+/* Misma familia cromática por acción (solo bloques pedagógicos, no botones de apoyo). */
+.ped-step[data-action="observe"],
+.ped-route-item[data-action="observe"],
+.ped-step[data-action="explore"],
+.ped-route-item[data-action="explore"],
+.ped-step[data-action="locate"],
+.ped-route-item[data-action="locate"]{
+  --ped-edge:var(--edge-observe);
+}
+.ped-step[data-action="comprehend"],
+.ped-route-item[data-action="comprehend"],
+.learning-step[data-ped-action="comprehend"]{
+  --ped-edge:var(--edge-comprehend);
+}
+.ped-step[data-action="relate"],
+.ped-route-item[data-action="relate"],
+.learning-step[data-ped-action="relate"]{
+  --ped-edge:var(--edge-relate);
+}
+.ped-step[data-action="analyze"],
+.ped-route-item[data-action="analyze"],
+.learning-step[data-ped-action="analyze"]{
+  --ped-edge:var(--edge-analyze);
+}
+.ped-step[data-action="apply"],
+.ped-route-item[data-action="apply"]{
+  --ped-edge:var(--edge-apply);
+}
+.ped-step[data-action="decide"],
+.ped-route-item[data-action="decide"],
+.ped-step[data-action="resolve"],
+.ped-route-item[data-action="resolve"],
+.learning-step[data-ped-action="decide"]{
+  --ped-edge:var(--edge-decide);
+}
+.ped-step[data-action="justify"],
+.ped-route-item[data-action="justify"]{
+  --ped-edge:var(--edge-justify);
+}
+.ped-step[data-action="verify"],
+.ped-route-item[data-action="verify"],
+.ped-step[data-action="improve"],
+.ped-route-item[data-action="improve"],
+.ped-step[data-action="review"],
+.ped-route-item[data-action="review"],
+.ped-step[data-action="close"],
+.ped-route-item[data-action="close"],
+.learning-step[data-ped-action="verify"],
+.learning-step[data-ped-action="improve"]{
+  --ped-edge:var(--edge-verify);
+}
+
+.ped-step[data-state="current"],
+.ped-step[data-state="current"].ctx-step{
+  border-width:1.5px;
+  border-left-width:3px;
+  border-color:color-mix(in srgb, var(--ped-accent, #1558A0) 42%, #fff);
+  background:color-mix(in srgb, var(--ped-soft, #F4F7FB) 38%, #fff);
+}
+.ped-step[data-state="done"]{
+  --ped-edge:var(--edge-verify);
+  border-left-color:color-mix(in srgb, var(--ped-verify) 55%, #fff);
+}
+.ped-step:hover{
+  border-color:color-mix(in srgb, var(--ped-accent, #1558A0) 36%, #fff);
+}
+
+.ped-step textarea,
+.ped-step input:not([type="radio"]):not([type="checkbox"]):not([type="range"]),
+.act-anticipate textarea,
+.ctx-reply textarea,
+.ae-evidence textarea,
+#case-form textarea,
+#scene-form textarea,
+#exam-form textarea,
+#close-form textarea,
+#context-form textarea,
+#ae-form textarea,
+.pf-justify{
+  border:1px solid var(--ped-edge, var(--edge));
+  background:#fff;
+  box-shadow:none;
+}
+
+.option{
+  border:1px solid var(--ped-edge, var(--edge-decide));
+  box-shadow:none;
+}
+.option:hover{
+  border-color:color-mix(in srgb, var(--ped-accent, #C47A12) 34%, #fff);
+}
+.option:has(input:checked){
+  border:1.5px solid color-mix(in srgb, var(--ped-accent, #C47A12) 40%, #fff);
+  background:var(--ped-soft, #FFF8EC);
+}
+
+/* S2 · AE y progresión: comprender (azul pastel), no marco negro. */
+.ae-info,
+.progression,
+.work-zone-s2 .ae-challenge{
+  --ped-edge:var(--edge-comprehend);
+  --ped-accent:var(--ped-comprehend, #1558A0);
+  border:1px solid var(--edge-comprehend);
+  border-left:3px solid color-mix(in srgb, var(--ped-s2, #1558A0) 45%, #fff);
+  box-shadow:var(--shadow-soft);
+  background:#fff;
+}
+.work-zone-s2 .ae-evidence{
+  --ped-edge:var(--edge-justify);
+  border:1px solid var(--edge-justify);
+  border-left:3px solid color-mix(in srgb, var(--ped-justify, #6818ed) 45%, #fff);
+}
+.learning-step{
+  border:1px solid var(--ped-edge, var(--edge-comprehend));
+  box-shadow:none;
+}
+.learning-step.active{
+  border:1.5px solid color-mix(in srgb, var(--ped-accent, #1558A0) 50%, #fff);
+  box-shadow:0 0 0 2px color-mix(in srgb, var(--ped-accent, #1558A0) 18%, transparent);
+}
+
+/* S3 · selector y caso */
+.situation-card{
+  border:1px solid var(--edge-relate);
+  box-shadow:var(--shadow-soft);
+}
+.situation-card.selected,
+.situation-card[aria-pressed="true"]{
+  border:1.5px solid color-mix(in srgb, var(--ped-s3, #6818ed) 40%, #fff);
+  background:#fbfaff;
+  box-shadow:0 2px 10px rgba(104,24,237,.08);
+}
+.situation-card:hover:not(:disabled){
+  border-color:color-mix(in srgb, var(--ped-s3, #6818ed) 32%, #fff);
+}
+body[data-station="3"] #case-form{
+  border:1px solid var(--edge-relate);
+  box-shadow:var(--shadow-soft);
+}
+
+/* S4 · pregunta y alternativas: decidir (ámbar), no marco oscuro. */
+.question-box,
+.exam-q-step{
+  --ped-edge:var(--edge-decide);
+  border:1px solid var(--edge-decide);
+}
+.q-number{
+  border:1px solid var(--edge);
+  box-shadow:none;
+}
+.q-number.active{
+  border-color:color-mix(in srgb, var(--ped-s4, #C47A12) 45%, #fff);
+}
+
+/* S5 · cierre y retroalimentación */
+body[data-station="5"] #close-form,
+.feedback-include,
+.feedback-outcomes{
+  --ped-edge:var(--edge-verify);
+  border:1px solid var(--edge-verify);
+  box-shadow:var(--shadow-soft);
+}
+
+/* Práctica libre */
+.pf-stage,
+.pf-card{
+  border:1px solid var(--edge-apply);
+  box-shadow:var(--shadow-soft);
+}
+.pf-fb.is-ok{border:1px solid var(--edge-verify)}
+.pf-fb.is-help{border:1px solid var(--edge-comprehend)}
+
+/* Figuras e imágenes: recorte suave, no marco negro. */
+.vis-fig,
+.act-figure,
+.vis-stage-wrap,
+.vis-hotspot{
+  border:1px solid var(--edge);
+  box-shadow:var(--shadow-soft);
+}
+.vis-zoom button,
+.vis-cam-actions button{
+  border:1px solid var(--edge);
+  box-shadow:none;
+}
+
+/* Login, cursos, ruta: separación clara, trazo neutro. */
+body[data-screen="login"] #main,
+.course-card,
+.journey-card,
+.welcome-note{
+  border-color:var(--edge);
+}
+
+/* Foco de accesibilidad: cyan 2 px, no depende solo del color del borde. */
+.ped-step:focus-within textarea:focus-visible{
+  outline:2px solid #3EC6E0;
+  outline-offset:2px;
+}
+
+/* Alto contraste: conservar el trazo fuerte; es un canal de accesibilidad. */
+body.high-contrast .panel,
+body.high-contrast .soft,
+body.high-contrast .act-card,
+body.high-contrast .course-card,
+body.high-contrast .option,
+body.high-contrast .question-box,
+body.high-contrast .ae-info,
+body.high-contrast .progression,
+body.high-contrast .ped-step,
+body.high-contrast .work-card{
+  border:2px solid #000 !important;
+  box-shadow:none !important;
+}
+body.high-contrast input,
+body.high-contrast textarea,
+body.high-contrast select{
+  border:2px solid #000 !important;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .ped-step, .option, .situation-card, .learning-step{transition:none}
+}

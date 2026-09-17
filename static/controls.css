@@ -1,0 +1,158 @@
+/* Tokens únicos de affordance y pulsación · Aula TP Chile
+   Recuerda sin CTA y el texto/imagen de estímulo no usan estos estados. */
+:root{
+  --press-ms:140ms;
+  --press-min:48px;
+  --press-ease:cubic-bezier(.2,.7,.2,1);
+  --press-rest:0 1px 0 rgba(255,255,255,.85) inset, 0 2px 0 rgba(18,32,51,.08), 0 4px 10px rgba(18,32,51,.12);
+  --press-hover:0 1px 0 rgba(255,255,255,.9) inset, 0 4px 0 rgba(18,32,51,.06), 0 10px 18px rgba(18,32,51,.16);
+  --press-in:inset 0 2px 5px rgba(12,28,48,.22);
+}
+
+button:not(:disabled),
+a.primary, a.outline, a.journey-button, a.back-link, a.atp-hero-back,
+.topbar nav a,
+.learning-step:not(:disabled),
+.q-number,
+.option,
+.mcq-options .option,
+.act-choices .option,
+.pf-options .option,
+.tabs button,
+.support-card:not(:disabled),
+.situation-card:not(:disabled),
+.lr-card.station:not([aria-disabled="true"]),
+.vis-pin,
+.vis-zoom button,
+.vis-cam button,
+.carousel-arrow:not(:disabled),
+.pf-aside button,
+dialog#tool button{
+  min-height:var(--press-min);
+  cursor:pointer;
+  transform:translateY(0);
+  box-shadow:var(--press-rest);
+  transition:transform var(--press-ms) var(--press-ease), box-shadow var(--press-ms) var(--press-ease), filter var(--press-ms) var(--press-ease), background-color var(--press-ms) var(--press-ease), border-color var(--press-ms) var(--press-ease);
+}
+
+.q-number{min-width:var(--press-min)}
+.vis-pin{min-width:var(--press-min)}
+.carousel-arrow{min-width:var(--press-min);width:auto;height:var(--press-min)}
+
+button:hover:not(:disabled),
+a.primary:hover, a.outline:hover, a.journey-button:hover, a.back-link:hover, a.atp-hero-back:hover,
+.topbar nav a:hover,
+.learning-step:hover:not(:disabled),
+.q-number:hover,
+.option:hover,
+.mcq-options .option:hover,
+.act-choices .option:hover,
+.pf-options .option:hover,
+.tabs button:hover,
+.support-card:hover:not(:disabled),
+.situation-card:hover:not(:disabled),
+.lr-card.station:hover:not([aria-disabled="true"]),
+.vis-pin:hover,
+.vis-zoom button:hover,
+.vis-cam button:hover,
+.carousel-arrow:hover:not(:disabled),
+dialog#tool button:hover{
+  transform:translateY(-1px);
+  box-shadow:var(--press-hover);
+  filter:none;
+}
+
+button:focus-visible,
+a.primary:focus-visible, a.outline:focus-visible, a.journey-button:focus-visible,
+a.back-link:focus-visible, a.atp-hero-back:focus-visible,
+.topbar nav a:focus-visible,
+.learning-step:focus-visible,
+.q-number:focus-visible,
+.option:focus-within,
+.mcq-options .option:focus-within,
+.tabs button:focus-visible,
+.support-card:focus-visible,
+.situation-card:focus-visible,
+.lr-card.station:focus-visible,
+.vis-pin:focus-visible,
+.carousel-arrow:focus-visible{
+  outline:2px solid #1558A0;
+  outline-offset:2px;
+  transform:translateY(-1px);
+}
+
+button:active:not(:disabled),
+a.primary:active, a.outline:active, a.journey-button:active, a.back-link:active, a.atp-hero-back:active,
+.topbar nav a:active,
+.learning-step:active:not(:disabled),
+.q-number:active,
+.option:active,
+.mcq-options .option:active,
+.act-choices .option:active,
+.pf-options .option:active,
+.tabs button:active,
+.support-card:active:not(:disabled),
+.situation-card:active:not(:disabled),
+.lr-card.station:active:not([aria-disabled="true"]),
+.vis-pin:active,
+.vis-zoom button:active,
+.vis-cam button:active,
+.carousel-arrow:active:not(:disabled),
+dialog#tool button:active{
+  transform:translateY(2px) scale(.98);
+  box-shadow:var(--press-in);
+  filter:brightness(.9);
+}
+
+button:disabled,
+button[disabled],
+[aria-disabled="true"],
+.lr-stop.is-locked .lr-card.station,
+.situation-card:disabled,
+.learning-step:disabled,
+.carousel-arrow:disabled,
+.journey-button:disabled{
+  cursor:not-allowed;
+  opacity:.52;
+  transform:none !important;
+  box-shadow:none !important;
+  filter:none !important;
+  pointer-events:auto;
+}
+
+.recuerda,
+.recuerda *,
+.act-figure,
+.mcq-figure,
+.vis-env,
+.lr-progress,
+.lr-bar,
+img{
+  /* El recado informativo y el estímulo visual no se hunden. */
+}
+
+.recuerda.remember,
+.recuerda.remember:hover,
+.recuerda.remember:active{
+  transform:none !important;
+  box-shadow:0 8px 24px #1e3a5f18, 0 1px 3px #1e3a5f12 !important;
+  cursor:default;
+  filter:none !important;
+}
+
+@media (prefers-reduced-motion:reduce){
+  button, a.primary, a.outline, a.journey-button, .lr-card.station, .learning-step,
+  .q-number, .option, .support-card, .situation-card, .vis-pin, .tabs button{
+    transition:none;
+  }
+  button:hover:not(:disabled),
+  button:active:not(:disabled),
+  .lr-card.station:hover:not([aria-disabled="true"]),
+  .lr-card.station:active:not([aria-disabled="true"]){
+    transform:none;
+  }
+}
+body.reduce-motion button:active:not(:disabled),
+body.reduce-motion .lr-card.station:active{
+  transform:none;
+}

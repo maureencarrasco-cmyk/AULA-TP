@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00.000 --> 00:15.000
+Paso 1. Extrae valor, unidad y punto del visor.
+
+00:15.000 --> 00:30.000
+Paso 2. 25 sin unidad no es una lectura.
+
+00:30.000 --> 00:45.000
+Paso 3. Comprueba que el intervalo cubra el valor esperado.
+
+00:45.000 --> 00:60.000
+Paso 4. La presión se lee en la escala del manómetro.

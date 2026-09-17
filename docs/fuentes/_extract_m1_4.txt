@@ -1,0 +1,3642 @@
+Refrigeración y  
+Climatización
+Especialidad
+Sector Construcción
+Programa de Estudio
+Formación Diferenciada Técnico-Profesional
+3º y 4º año de Educación Media   Ministerio de Educación    Chile
+
+
+Programa de Estudio
+Formación Diferenciada Técnico-Profesional
+Especialidad
+Sector Construcción
+Refrigeración y  
+Climatización
+3º y 4º año de Educación Media   Ministerio de Educación    Chile
+Ministerio de Educación de Chile
+ESPECialiDaD REFRiGERaCiÓN Y CliMaTiZaCiÓN
+Programa de Estudio
+Formación Diferenciada Técnico-Profesional
+3° y 4° año de Educación Media
+Decreto Exento de Educación n° 0954/2015
+Unidad de Currículum y Evaluación
+Ministerio de Educación, República de Chile
+avenida Bernardo O’Higgins 1371, Santiago
+Primera edición: octubre de 2015
+iSBN 978-956-292-506-8
+Estimada Comunidad Educativa:
+Con el propósito de contribuir al desarrollo integral de los y las estudiantes de 
+Enseñanza Técnico-Profesional, el Ministerio de Educación hace entrega de una 
+serie de Programas de Estudio, los cuales se constituyen como una propuesta 
+pedagógica y didáctica que apoya a las instituciones educativas y a sus docentes 
+en la articulación y generación de experiencias de aprendizajes pertinentes, 
+relevantes y útiles.
+los presentes instrumentos curriculares son una propuesta de abordaje de los 
+Objetivos de a prendizaje definidos en las Bases Curriculares –tanto Genéricos 
+como de cada Especialidad–, dando un espacio para que las y los docentes los 
+vinculen con las necesidades y potencialidades propias de su contexto, y trabajen 
+considerando los intereses y características de sus estudiantes, y los énfasis 
+formativos declarados en su Proyecto Educativo institucional.
+Estos programas son una invitación a las comunidades educativas a enfrentar 
+un desafío de preparación y estudio, de compromiso con la vocación formadora 
+y de altas expectativas de los aprendizajes que pueden lograr todos nuestros y 
+nuestras estudiantes.
+Precisamente, la Formación Diferenciada Técnico-Profesional de la Educación 
+Media brinda un espacio para que los y las estudiantes de nuestro país puedan 
+prepararse para participar activamente en la sociedad como ciudadanos críticos y 
+trabajadores competentes en sus áreas de interés.
+En esta línea, la formación técnico-profesional se propone resguardar que los 
+estudiantes desarrollen un conjunto de competencias que les permitan enfrentar 
+las exigencias de vivir en comunidad.
+los Programas de Estudio de la Formación Diferenciada Técnico-Profesional 
+han sido elaborados por la Unidad de Currículum y Evaluación del Ministerio de 
+Educación, de acuerdo a las definiciones establecidas en las Bases Curriculares 
+(Decreto Supremo de Educación N° 452/2013) y han sido aprobados por el Consejo 
+Nacional de Educación para entrar en vigencia en 2016.
+los invito a analizar  activamente y trabajar de forma colaborativa y contextualizada 
+con estos programas en la formación integral de nuestros y nuestras estudiantes.
+ADRIANA DELPIANO PUELMA
+MINISTRA DE EDUCACIÓN
+GaBiNETE MiNiSTERial
+EDUCaCiON DE CaliDaD PaRa TODaS Y TODOS
+
+
+Índice
+6 Presentación
+8 Contexto de la especialidad
+10 Perfil de egreso de la especialidad
+13 Plan de Estudio
+14 Visión global del Programa de Estudio
+19 Estructura de los módulos
+20 adaptación del Plan de Estudio
+21 Orientaciones para implementar los Programas
+26 Orientaciones para la práctica profesional y titulación
+28 Orientaciones para el uso de la libre disposición
+31 Orientaciones para la formación profesional dual
+Módulos de la especialidad
+Refrigeración y Climatización 33
+Módulo 1 34 lectura de planos y cubicación de materiales de proyectos
+Módulo 2 46 instrumentos de medición y verificación
+Módulo 3 56 instalación y montaje de redes de refrigeración y climatización
+Módulo 4 68 instalación y montaje de equipos
+Módulo 5 78 Puesta en marcha de equipos de refrigeración y climatización
+Módulo 6 88 Diagnóstico de sistemas de refrigeración y climatización
+Módulo 7 98 Mantención de sistemas de refrigeración y climatización
+Módulo 8 106 Reciclaje y almacenamiento de refrigerantes
+Módulo común 116 Emprendimiento y empleabilidad
+la educación media, de acuerdo con la ley General de Educación, es el nivel que 
+tiene por finalidad procurar que cada estudiante expanda y profundice su formación 
+general y desarrolle los conocimientos, habilidades y actitudes que le permiten 
+ejercer una ciudadanía activa para integrarse a la sociedad. En los dos últimos 
+años de este nivel educativo, se consideran espacios de diversificación curricular 
+que, en el caso de la Formación Diferenciada Técnico-Profesional, ofrecen a los y 
+las estudiantes oportunidades para desarrollar aprendizajes en una determinada 
+especialidad y que les permiten obtener el título de técnico de nivel medio. En este 
+contexto, además de poder continuar estudios superiores, tienen la posibilidad de 
+acceder a una primera experiencia laboral remunerada, considerando sus intereses, 
+aptitudes y disposiciones vocacionales, que los y las prepara en forma efectiva 
+para el trabajo.
+Es necesario tener presente que esta preparación laboral inicial se construye 
+articulando el dominio de los aprendizajes propios de la especialidad con aquellos 
+comprendidos en los Objetivos de aprendizaje Genéricos y en los objetivos y 
+contenidos de la formación general de la educación media. Esta articulación implica 
+el desafío de concebir el proceso de enseñanza como un trabajo interdisciplinario 
+para el desarrollo de las competencias de cada estudiante. Por tanto, es la totalidad 
+de la experiencia en la enseñanza media –es decir, la formación general junto con 
+la formación diferenciada– la que permite alcanzar las competencias necesarias 
+para desempeñarse y prosperar en el medio laboral. a la vez, es el conjunto de 
+esta experiencia el que proporciona las habilidades para el aprendizaje permanente 
+mediante la capacitación, la experiencia laboral o la educación superior.
+En 2013, el Consejo Nacional de Educación aprobó las Bases Curriculares de 
+la Formación Diferenciada Técnico-Profesional de la educación media para 34 
+especialidades y 17 menciones, las que quedaron establecidas como obligatorias 
+para los establecimientos de Educación Media Técnico-Profesional (EMTP), mediante 
+el Decreto N° 452 del mismo año.
+En las Bases Curriculares de la Formación Diferenciada Técnico-Profesional de 
+la educación media se definió, para cada especialidad, un contexto laboral y un 
+conjunto de Objetivos de aprendizaje que deben ser logrados al final de los dos 
+años. Estos objetivos configuran el perfil de egreso, que expresa lo mínimo y 
+fundamental que debe aprender cada estudiante del país que curse una especialidad. 
+Presentación
+6
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+Se trata de un lineamiento de las capacidades que las instituciones educativas se 
+comprometen a desarrollar en sus estudiantes, que contemplan dos categorías de 
+Objetivos de aprendizaje: la primera alude a las competencias técnicas propias de la 
+especialidad o de la mención y la segunda se refiere a los Objetivos de aprendizaje 
+Genéricos de la formación técnico-profesional. Estos últimos son comunes a todas 
+las especialidades, ya que son competencias necesarias para desempeñarse en el 
+área técnica, independiente del sector económico. 
+Esta propuesta de Programa de Estudio ha sido diseñada con un enfoque curricular 
+de competencias laborales y posee una estructura modular en la que cada unidad 
+programática o módulo incluye una introducción, aprendizajes Esperados y 
+Criterios de Evaluación, ejemplos de actividades de aprendizaje y de evaluación y 
+bibliografía. En ella se ha optado por integrar los Objetivos de aprendizaje, tanto 
+genéricos como técnicos, en los módulos, para focalizar la atención pedagógica y 
+para dar mayor pertinencia a las necesidades que emanan desde el mundo laboral. 
+En la elaboración del Programa que se presenta a continuación se ha considerado 
+un marco temporal de 1.672 horas pedagógicas para la Formación Diferenciada 
+Técnico-Profesional, el que resguarda los módulos y la dedicación horaria mínima 
+que debe ser cumplida en la institución. las orientaciones pedagógicas incluidas 
+en esta propuesta pueden ser adaptadas según las necesidades propias del 
+contexto al que atiende cada establecimiento, resguardando el cumplimiento de 
+los Objetivos de aprendizaje establecidos en las Bases Curriculares de la Educación 
+Media Técnico-Profesional.
+Por último, en términos de su estructura, este documento contiene una descripción 
+del contexto de la especialidad y su perfil de egreso; el Plan de Estudio propuesto; 
+una visión global del Programa de Estudio; una descripción de la estructura de los 
+módulos y de las posibilidades de adaptación del Plan y del Programa de Estudio; 
+orientaciones para la implementación, para el uso de las horas de libre disposición 
+y para el desarrollo del proceso de titulación y de la formación dual; y, por último, 
+los módulos de aprendizaje.
+7
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+la especialidad de Refrigeración y Climatización busca que cada estudiante desarrolle 
+los conocimientos y las herramientas necesarias para llevar a cabo tareas como 
+el montaje, reparación, mantenimiento e instalación de equipos y piezas que los 
+componen. Se espera que, al momento de egresar, los y las estudiantes dominen 
+ciertos conocimientos que les ayudarán a desenvolverse asertivamente en el campo 
+laboral, considerando las normas técnicas establecidas en nuestro país.
+Específicamente, se pretende que sean capaces de establecer diagnósticos de las 
+fallas que presenten los equipos y las puedan solucionar; de identificar cuáles 
+son los repuestos e insumos necesarios y así poder realizar los presupuestos para 
+la ejecución del trabajo; y, de aplicar estrategias y habilidades para planificar su 
+trabajo y verificar su calidad una vez que lo hayan ejecutado.
+Esta especialidad se centra fundamentalmente en la instalación de equipos y 
+sistemas, más que en su fabricación. En el último tiempo ha tenido un importante 
+desarrollo vinculado a la expansión de otros sectores relacionados con la actividad, 
+como la construcción y la agroindustria. 
+El fuerte crecimiento y la modernización del negocio de la construcción han llevado 
+a instalar innovadores sistemas de climatización en obras nuevas, además de 
+rehabilitar y reponer equipos en edificios antiguos, por lo que la demanda de este 
+servicio ha aumentado notoriamente. a su vez, en el área de la agroindustria, esta 
+especialidad se ha dedicado a la instalación de cámaras de frigoríficos y sistemas 
+de frío para el transporte y la mantención de alimentos.
+la especialidad de Refrigeración y Climatización experimenta en la actualidad 
+presiones de adaptación tecnológica para acrecentar la eficiencia energética y la 
+protección del medio ambiente, lo que entre otros aspectos ha llevado a un mayor 
+auge en el uso de energías renovables. Estos factores han incidido en los niveles 
+de tecnificación e innovación de esta especialidad.
+Quien desarrolle esta especialidad técnica de nivel medio podrá desenvolverse 
+en pequeñas, medianas y grandes empresas del área de la construcción y de la 
+agroindustria. Como persona independiente será capaz de instalar, mantener y 
+reparar equipos de refrigeración, calefacción, climatización y ventilación en el 
+ámbito domiciliario y en oficinas.
+Contexto  
+de la especialidad
+8
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+Este Programa de Estudio promueve la participación activa del sector productivo 
+en el proceso educativo de las y los estudiantes, mediante prácticas formativas 
+y actividades de aprendizaje en las empresas durante los dos años de duración 
+de la Educación Media Técnico-Profesional y no solo después del egreso. Sin 
+embargo, en algunos casos, las empresas o las instituciones reguladoras del 
+sector productivo prohíben o limitan el acceso de menores de edad a los recintos 
+laborales, principalmente, por razones de seguridad. En el caso de la especialidad 
+Refrigeración y Climatización, no se ha observado esta limitación como una práctica 
+habitual de las empresas relacionadas.
+Es importante mencionar que, en algunos casos, dichas empresas e instituciones 
+exigen un certificado de salud compatible con el cargo a quienes postulen a él. Se 
+recomienda que esto sea informado a las y los estudiantes, durante el periodo de 
+formación, por cada establecimiento educacional que imparta la Formación Diferenciada 
+Técnico-Profesional en las especialidades en que se observe este requerimiento.
+9
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+OBJETiVOS DE aPRENDiZaJE GENÉRiCOS DE la FORMaCiÓN TÉCNiCO-PROFESiONal
+A Comunicarse oralmente y por escrito con claridad, utilizando registros de habla y de escritura 
+pertinentes a la situación laboral y a la relación con los interlocutores.
+B
+leer y utilizar distintos tipos de textos relacionados con el trabajo, tales como especificaciones 
+técnicas, normativas diversas, legislación laboral, así como noticias y artículos que enriquezcan 
+su experiencia laboral.
+C Realizar las tareas de manera prolija, cumpliendo plazos establecidos y estándares de calidad, y buscando 
+alternativas y soluciones cuando se presentan problemas pertinentes a las funciones desempeñadas.
+D Trabajar eficazmente en equipo, coordinando acciones con otros in situ o a distancia, solicitando 
+y prestando cooperación para el buen cumplimiento de sus tareas habituales o emergentes.
+E Tratar con respeto a subordinados, superiores, colegas, clientes, personas con discapacidades, sin 
+hacer distinciones de género, de clase social, de etnias u otras. 
+F
+Respetar y solicitar respeto de deberes y derechos laborales establecidos, así como de aquellas normas 
+culturales internas de la organización que influyen positivamente en el sentido de pertenencia y 
+en la motivación laboral.
+Perfil de egreso 
+de la especialidad
+10
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+G
+Participar en diversas situaciones de aprendizaje, formales e informales, y calificarse para desarrollar 
+mejor su trabajo actual o bien para asumir nuevas tareas o puestos de trabajo, en una perspectiva 
+de formación permanente.
+H Manejar tecnologías de la información y comunicación para obtener y procesar información 
+pertinente al trabajo, así como para comunicar resultados, instrucciones e ideas.
+I Utilizar eficientemente los insumos para los procesos productivos y disponer cuidadosamente los 
+desechos, en una perspectiva de eficiencia energética y cuidado ambiental.
+J Emprender iniciativas útiles en los lugares de trabajo y/o proyectos propios, aplicando principios 
+básicos de gestión financiera y administración para generarles viabilidad.
+K Prevenir situaciones de riesgo y enfermedades ocupacionales, evaluando las condiciones del entorno 
+del trabajo y utilizando los elementos de protección personal según la normativa correspondiente.
+L
+Tomar decisiones financieras bien informadas, con proyección a mediano y largo plazo, respecto 
+del ahorro, especialmente del ahorro previsional, de los seguros, y de los riesgos y oportunidades 
+del endeudamiento crediticio así como de la inversión.
+11
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+OBJETiVOS DE aPRENDiZaJE DE la ESPECialiDaD
+Según Decreto Supremo N° 452/2013, este es el listado único de Objetivos de aprendizaje de la especialidad 
+de Refrigeración y Climatización para tercero y cuarto medio.
+1
+leer y utilizar planos de redes de cañería y redes de ductos, simbología y especificaciones técnicas 
+de proyectos de refrigeración y climatización, verificando su adecuación a las condiciones reales de 
+la obra que facilitarían u obstaculizarían la realización del proyecto. 
+2 Cubicar elementos y materiales, de acuerdo a volúmenes y superficies, para la elaboración de proyectos de 
+refrigeración, climatización, calefacción y ventilación, utilizando programas computacionales apropiados. 
+3
+Realizar mediciones y controles de verificación de distintas magnitudes relacionadas con el proyecto, 
+de acuerdo a las especificaciones técnicas, normas de seguridad, prevención de riesgos y protección 
+del medio ambiente.
+4
+armar, instalar y aislar redes de ductos y cañerías para el flujo de refrigerantes, aire, agua y fluidos 
+especiales para los sistemas de refrigeración, ventilación, climatización y calefacción, realizando uniones 
+soldadas que aseguren la hermeticidad, de acuerdo a la Norma chilena NCh3241 de Buenas Prácticas.
+5
+instalar equipos y componentes de sistemas de refrigeración, calefacción, climatización y ventilación 
+de energías diversas, incluidos los dispositivos electrónicos de control automático, de acuerdo a las 
+especificaciones técnicas del proyecto y las orientaciones del profesional encargado, considerando la 
+Norma Chilena NCh3241 de Buenas Prácticas.
+6
+Cargar fluidos y poner en marcha sistemas de refrigeración, climatización, calefacción y ventilación 
+considerando las presiones y fuerzas indicadas por los fabricantes, el uso de refrigerantes amigables 
+con el medio ambiente y la Norma Chilena NCh3241 de Buenas Prácticas.
+7 inspeccionar y diagnosticar fallas del funcionamiento de los sistemas de refrigeración, climatización, 
+calefacción y ventilación, respecto de las especificaciones técnicas del fabricante. 
+8 Realizar el mantenimiento preventivo y correctivo de los sistemas de refrigeración, climatización, 
+calefacción y ventilación, considerando los parámetros establecidos en los manuales de fabricación.
+9
+Recuperar, reciclar y almacenar refrigerantes de los sistemas de refrigeración y climatización, utilizando 
+las herramientas y equipos apropiados para una manipulación adecuada y segura, con los contenedores 
+aprobados para la operación, de acuerdo a la Norma Chilena NCh3241 de Buenas Prácticas.
+12
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+PlaN DE ESTUDiO DE la ESPECialiDaD REFRIGERACIÓN Y CLIMATIZACIÓN
+NOMBRE DEl MÓDUlO
+TERCERO MEDiO CUaRTO MEDiO
+Duración (horas) Duración (horas)
+1. lectura de planos y cubicación de materiales de 
+proyectos 190
+2. instrumentos de medición y verificación 190
+3. instalación y montaje de redes de refrigeración y 
+climatización 228
+4. instalación y montaje de equipos 228
+5. Puesta en marcha de equipos de refrigeración y 
+climatización 228
+6. Diagnóstico en sistemas de refrigeración y 
+climatización 190
+7. Mantención de sistemas de refrigeración y 
+climatización 190
+8. Reciclaje y almacenamiento de refrigerantes 152
+9. Emprendimiento y empleabilidad 76
+Total 836 836
+Plan  
+de Estudio
+13
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+Visión global  
+del Programa de Estudio
+MÓDUlO OBJETiVOS DE aPRENDiZaJE DE 
+ESPECialiDaD aPRENDiZaJES ESPERaDOS
+1. 
+lectura de 
+planos y 
+cubicación de 
+materiales de 
+proyectos
+Oa 1
+leer y utilizar planos de redes de cañería y 
+redes de ductos, simbología y especificaciones 
+técnicas de proyectos de refrigeración y 
+climatización, verificando su adecuación 
+a las condiciones reales de la obra que 
+facilitarían u obstaculizarían la realización 
+del proyecto.
+Oa 2
+Cubicar elementos y materiales, de acuerdo a 
+volúmenes y superficies, para la elaboración 
+de proyectos de refrigeración, climatización, 
+calefacción y ventilación, utilizando 
+programas computacionales apropiados. 
+1 lee planos de refrigeración y climatización, 
+utilizando la simbología técnica respectiva para 
+reconocer el espacio físico donde se instalarán las 
+distintas redes de refrigeración y climatización, 
+en relación con las normas de dibujo técnico 
+establecidas de calefacción y ventilación.
+2 lee y utiliza las especificaciones técnicas de 
+proyectos de refrigeración y climatización, para 
+conocer las indicaciones técnicas y el tipo de 
+material que se empleará en la ejecución de los 
+trabajos y poder determinar posibles interferencias 
+o dificultades en las etapas del proyecto.
+3 Cubica elementos y materiales de acuerdo a los 
+requerimientos del lugar, indicados en el plano 
+respectivo mediante un software de diseño para 
+determinar cantidad de materiales y elementos 
+a emplear en la ejecución del proyecto. Se 
+consideran las indicaciones de la Norma Chilena 
+relativa a Cubicaciones (NCh353/2000), aplicada 
+a proyectos de refrigeración, climatización, 
+calefacción y ventilación.
+4 Elabora informe de cubicación de elementos 
+y materiales, estableciendo la cantidad de 
+materiales a utilizar y los costos totales del 
+proyecto, de acuerdo a lo establecido en la Norma 
+Chilena relativa a Cubicaciones (NCh353/2000).
+14
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+MÓDUlO OBJETiVOS DE aPRENDiZaJE DE 
+ESPECialiDaD aPRENDiZaJES ESPERaDOS
+2. 
+instrumentos 
+de medición y 
+verificación
+Oa 3
+Realizar mediciones y controles de verificación 
+de distintas magnitudes relacionadas con el 
+proyecto, de acuerdo a las especificaciones 
+técnicas, normas de seguridad, prevención 
+de riesgos y protección del medio ambiente.
+1 Utiliza instrumentos de medición y verificación 
+de distintos parámetros, de acuerdo a las 
+indicaciones establecidas desde fábrica, 
+considerando técnicas apropiadas y normas de 
+seguridad necesarias para el uso del instrumento.
+2 Verifica parámetros medidos por los instrumentos, 
+comparándolos con datos de manuales de 
+fabricación de los equipos, para determinar 
+posibles ajustes que deben realizarse a equipos 
+dentro del sistema de refrigeración.
+3. 
+instalación 
+y montaje 
+de redes de 
+refrigeración y 
+climatización
+Oa 4
+armar, instalar y aislar redes de ductos y 
+cañerías para el flujo de refrigerantes, aire, 
+agua y fluidos especiales para los sistemas 
+de refrigeración, ventilación, climatización y 
+calefacción, realizando uniones soldadas que 
+aseguren la hermeticidad, de acuerdo a la 
+Norma chilena NCh3241 de Buenas Prácticas.
+1 Realiza unión de diferentes tipos de materiales, 
+utilizando soldaduras autorizadas por la normativa 
+y considerando las técnicas establecidas desde 
+fábrica, la normativa técnica y de seguridad.
+2 arma diferentes redes de tuberías, utilizando 
+diversas soldaduras y considerando las técnicas 
+establecidas desde fábrica, la normativa técnica 
+y de seguridad respectiva.
+3 instala diferentes redes de tuberías para la 
+conducción de agua, aire y refrigerantes, asegurando 
+su estabilidad mediante fijaciones apropiadas al 
+plano y al material que las sustentará, considerando 
+las técnicas establecidas desde fábrica, la normativa 
+técnica y de seguridad respectiva.
+4 aísla redes de tuberías para la conducción de 
+agua, aire y refrigerantes, considerando las 
+técnicas establecidas desde fábrica, la normativa 
+técnica y de seguridad respectiva.
+15
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+MÓDUlO OBJETiVOS DE aPRENDiZaJE DE 
+ESPECialiDaD aPRENDiZaJES ESPERaDOS
+4. 
+instalación 
+y montaje de 
+equipos
+Oa 5
+instalar equipos y componentes de sistemas 
+de refrigeración, calefacción, climatización 
+y ventilación de energías diversas, incluidos 
+los dispositivos electrónicos de control 
+automático, de acuerdo a las especificaciones 
+técnicas del proyecto y las orientaciones 
+del profesional encargado, considerando la 
+Norma chilena NCh3241 de Buenas Prácticas.
+1 lee y utiliza planos, junto con las especificaciones 
+técnicas de distintos sistemas y equipos de 
+refrigeración y climatización, para identificar las 
+dificultades que podrían presentar en la instalación.
+2 instala equipos y componentes de sistemas de 
+refrigeración, climatización, calefacción y ventilación 
+disponibles para instalaciones domiciliarias, 
+considerando las especificaciones técnicas 
+establecidas por los manuales de instalación, la 
+normativa técnica y de seguridad respectiva.
+3 instala dispositivos de control automáticos, 
+considerando las especificaciones técnicas 
+establecidas desde fábrica, la normativa técnica 
+y de seguridad respectiva.
+5. 
+Puesta en 
+marcha de 
+equipos de 
+refrigeración y 
+climatización
+Oa 6
+Cargar fluidos y poner en marcha sistemas 
+de refrigeración, climatización, calefacción 
+y ventilación considerando las presiones y 
+fuerzas indicadas por los fabricantes, el uso 
+de refrigerantes amigables con el medio 
+ambiente y la Norma chilena NCh3241 de 
+Buenas Prácticas.
+1 Prepara el espacio físico y el equipamiento para 
+el correcto transporte del equipo de refrigeración 
+requerido en la carga de fluidos en sistemas 
+refrigerantes, aplicando las medidas de seguridad 
+y el cuidado del medio ambiente necesarios 
+para manipular fluidos en equipos de este 
+especialidad, establecidas en la Norma Chilena 
+de Buenas Prácticas (NCh3241).
+2 Carga fluidos en equipos de refrigeración, 
+aplicando las medidas de seguridad y cuidado del 
+medio ambiente necesarios para manipular fluidos 
+en equipos de refrigeración y climatización, 
+establecidos en la Norma Chilena de Buenas 
+Prácticas (NCh3241).
+3 Pone en marcha sistemas de refrigeración, 
+considerando las especificaciones técnicas 
+establecidas desde fábrica, la normativa técnica, 
+medio ambiental y de seguridad respectiva.
+16
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+MÓDUlO OBJETiVOS DE aPRENDiZaJE DE 
+ESPECialiDaD aPRENDiZaJES ESPERaDOS
+6. 
+Diagnóstico 
+en sistemas de 
+refrigeración y 
+climatización
+Oa 7
+inspeccionar y diagnosticar fallas del 
+funcionamiento de los sistemas de refrigeración, 
+climatización, calefacción y ventilación, 
+respecto de las especificaciones técnicas del 
+fabricante.
+1 inspecciona instalaciones y equipos de refrigeración, 
+climatización, calefacción y ventilación, 
+contrastando la información obtenida con los 
+manuales de funcionamiento y las especificaciones 
+técnicas de los equipos.
+2 Diagnostica posibles fallas con la información 
+obtenida a través de mediciones con instrumentos 
+e inspección visual y propone posibles soluciones, 
+de acuerdo con las especificaciones técnicas de 
+su fabricación.
+3 Establece los tipos de fallas o mal funcionamiento 
+que pueden corregirse en obra o en taller, de 
+acuerdo a las especificaciones técnicas de los 
+distintos equipos y sistemas.
+7. 
+Mantención de 
+sistemas de 
+refrigeración y 
+climatización
+Oa 8
+Realizar el mantenimiento preventivo y 
+correctivo de los sistemas de refrigeración, 
+climatización, calefacción y ventilación, 
+considerando los parámetros establecidos 
+en los manuales de fabricación.
+1 Realiza mantenimiento preventivo considerando 
+las especificaciones del proyecto, las condiciones 
+de obra y los manuales de funcionamiento desde 
+fábrica.
+2 Realiza mantenimiento correctivo, considerando las 
+especificaciones del proyecto, las condiciones de 
+obra y los manuales de funcionamiento y fabricación.
+17
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+MÓDUlO OBJETiVOS DE aPRENDiZaJE DE 
+ESPECialiDaD aPRENDiZaJES ESPERaDOS
+8. 
+Reciclaje y 
+almacenamiento 
+de refrigerantes
+Oa 9
+Recuperar, reciclar y almacenar refrigerantes de 
+los sistemas de refrigeración y climatización, 
+utilizando las herramientas y equipos 
+apropiados para una manipulación adecuada y 
+segura, con los contenedores aprobados para 
+la operación, de acuerdo a la Norma chilena 
+NCh3241 de Buenas Prácticas.
+1 Recupera refrigerantes en sistemas de refrigeración, 
+aplicando las medidas de seguridad y cuidado del 
+medio ambiente necesarios para manipular fluidos 
+en equipos de refrigeración y climatización 
+establecidos en la Norma Chilena de Buenas 
+Prácticas (NCh3241).
+2 Recicla refrigerantes de los sistemas de refrigeración, 
+aplicando protocolos de reciclaje de fluidos en 
+equipos de refrigeración y climatización, de acuerdo 
+con las indicaciones presentes en la Norma Chilena 
+(NCh3241/2011).
+3 almacena refrigerantes, aplicando los protocolos 
+de almacenamiento de fluidos en equipos de 
+refrigeración y climatización, de acuerdo con 
+las indicaciones presentes en la Norma Chilena 
+(NCh3241/2011).
+9. 
+Emprendimiento 
+y empleabilidad
+(Este módulo, en su diseño inicial, no está 
+asociado a Objetivos de Aprendizaje de la 
+Especialidad, sino a Genéricos. No obstante, 
+para su desarrollo, puede asociarse a un 
+Objetivo de la Especialidad como estrategia 
+didáctica).
+1 Diseña y ejecuta un proyecto para concretar 
+iniciativas de emprendimiento, identificando las 
+acciones a realizar, el cronograma de su ejecución 
+y los presupuestos, definiendo alternativas de 
+financiamiento y evaluando y controlando su avance.
+2 Maneja la legislación laboral y previsional chilena 
+como marco regulador de las relaciones entre 
+trabajadores y empleadores, identificando los 
+derechos y deberes de ambas partes, tanto 
+individuales como colectivos, y la reconoce como 
+base para establecer buenas relaciones laborales.
+3 Prepara los elementos necesarios para participar 
+de un proceso de incorporación al mundo del 
+trabajo, valorando y planificando su trayectoria 
+formativa y laboral.
+4 Selecciona alternativas de capacitación y de 
+educación superior para fortalecer sus competencias 
+o desarrollar nuevas y adquirir certificaciones, ya 
+sea e-learning o presenciales, evaluando las diversas 
+opciones de financiamiento.
+18
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+los Programas de Estudio desagregan los Objetivos 
+de aprendizaje de las Bases Curriculares (tanto de 
+la especialidad como los genéricos de la Formación 
+Técnico-Profesional) en aprendizajes Esperados y 
+Criterios de Evaluación. Estos se agrupan en módulos, 
+entendidos como bloques unitarios de aprendizaje 
+que integran habilidades, actitudes y conocimientos 
+requeridos para el desempeño efectivo en un área de 
+competencia, y cuyo desarrollo se basa en experiencias 
+y tareas complejas que provienen del trabajo en un 
+contexto real, cuya duración, combinación y secuencia 
+son variables.
+los módulos constan de los siguientes componentes:
+ › Introducción del módulo
+Entrega información general que incluye los Objetivos 
+de aprendizaje de la Especialidad y Genéricos de 
+la EMTP a los cuales responde el módulo, además 
+de la duración sugerida y algunas orientaciones 
+globales para su implementación. 
+ › Aprendizajes Esperados y Criterios de 
+Evaluación
+Esta sección define lo que se espera que logren los 
+y las estudiantes. los aprendizajes Esperados se 
+desprenden de los perfiles de egreso, y cada uno de 
+ellos se complementa con un conjunto de Criterios de 
+Evaluación que permite al cuerpo docente clarificar 
+el aprendizaje Esperado, conocer su alcance, 
+profundidad y monitorear su logro. Estos Criterios 
+de Evaluación tienen la forma de desempeños, 
+acciones concretas, precisas y ejecutables en el 
+ambiente educativo. En ellos quedan integrados 
+los Objetivos Genéricos de la EMTP.
+ › Ejemplos de actividades de aprendizaje 
+como un modelo didáctico para los y las 
+docentes
+El diseño de las actividades se ha orientado a la 
+coherencia con el enfoque de competencias laborales 
+y el contexto de estudiantes de la EMTP. Estas 
+actividades se presentan a modo de ejemplos y se 
+asocian a metodologías didácticas apropiadas que 
+describen las acciones de preparación, ejecución y 
+cierre que desarrollan tanto el o la docente como 
+las y los estudiantes. asimismo, se identifican los 
+recursos involucrados.
+ › Ejemplo de actividad de evaluación
+al igual que las actividades de aprendizaje, sirven 
+como un modelo didáctico para quienes imparten 
+docencia. Estas actividades detallan la reflexión 
+que debe realizar el o la docente para seleccionar 
+tanto el medio como el instrumento de evaluación.
+ › Bibliografía y sitios web recomendados
+Consiste en un listado de fuentes de información 
+que son deseables que dispongan tanto la o el 
+docente como los y las estudiantes durante el 
+desarrollo del módulo.
+Estructura  
+de los módulos
+19
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+los Programas fueron elaborados considerando un 
+Plan de Estudio de 22 horas semanales (836 anuales y 
+1.672 totales) destinadas a la Formación Diferenciada 
+Técnico-Profesional. Estas horas pueden ser aumentadas 
+mediante el tiempo de libre disposición. El Plan de 
+Estudio establece la duración en horas de los módulos 
+y define en qué año se ofrecen. No obstante, cada 
+establecimiento educativo podrá efectuar algunas 
+adaptaciones de acuerdo a las siguientes reglas:
+ > Es posible ajustar el tiempo sugerido para el desarrollo 
+de cada módulo, aumentándolo o reduciéndolo 
+en un 20%, para lo cual se deberá considerar 
+la disponibilidad de recursos de aprendizaje, el 
+acceso a equipamiento didáctico o productivo, la 
+disponibilidad de infraestructura y la capacidad 
+docente. además, la duración total de los módulos 
+no podrá exceder el tiempo total destinado a la 
+formación diferenciada que haya determinado la 
+institución educativa.
+ > Se puede incluir uno o más módulos elaborados por el 
+propio centro educativo o por el Ministerio de Educación 
+para otras especialidades o menciones afines.
+Es importante que la institución educativa realice 
+una reflexión permanente que permita una 
+contextualización de los Programas para responder 
+al entorno socioproductivo, con el fin de mejorar 
+la implementación curricular, asegurar los logros 
+educativos, facilitar la vinculación indispensable 
+liceo-sector productivo y detectar necesidades de 
+actualización de los Programas en forma oportuna. 
+Como resultado del proceso de contextualización, es 
+posible que se agreguen a los aprendizajes y a sus 
+Criterios de Evaluación contenidos que le permitan al 
+establecimiento aumentar la pertinencia del Programa. 
+adaptación  
+del Plan de Estudio
+Este sería el caso, por ejemplo, de un liceo que 
+imparte la especialidad de Mecánica industrial y que 
+se ubica en una región eminentemente minera; en 
+ese caso, es esperable que se agreguen contenidos 
+que respondan a las necesidades de ese sector en el 
+ámbito del mantenimiento. 
+En este proceso será posible agregar elementos o 
+contenidos del contexto a los aprendizajes o Criterios, 
+incluso se podrán agregar aprendizajes, pero en ningún 
+caso se podrán reducir los aprendizajes Esperados y 
+sus Criterios de Evaluación. las decisiones vinculadas 
+a este proceso son de gran importancia, por lo que 
+se recomienda que sean discutidas por el equipo de 
+gestión y sancionadas por quienes sean sostenedores. 
+20
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+En las orientaciones que se presentan a continuación 
+destacan elementos que son relevantes al momento 
+de implementar el Programa y que se vinculan 
+estrechamente con el logro de los Objetivos de 
+aprendizaje (Oa) de Especialidad y los Genéricos (OaG).
+Orientaciones para planificar el 
+aprendizaje
+Uno de los propósitos de la planificación es establecer 
+un plan anual de la Formación Diferenciada Técnico-
+Profesional, para lo cual se requiere efectuar las 
+siguientes tareas:
+ > Elaborar una calendarización de los módulos, ya sea 
+que se traten semestral o anualmente, calculando el 
+tiempo real disponible para trabajarlos, considerando 
+feriados, celebraciones y las actividades de cierre 
+de periodos lectivos.
+ > Contextualizar los contenidos de los aprendizajes 
+Esperados a las demandas productivas, y las prácticas 
+pedagógicas a la diversidad de estudiantes atendidos.
+Para identificar las demandas productivas se puede 
+recurrir a las estrategias regionales de desarrollo, 
+a las oficinas de planificación y colocación de 
+los municipios, a auditorías de los informes de la 
+práctica profesional, a avisos de prensa y de bolsas 
+de trabajo en internet, a entrevistas a egresados que 
+estén trabajando en la especialidad o supervisores 
+de práctica en las empresas, entre otras. 
+atender a la diversidad de estudiantes implica 
+poner atención a su composición en términos de 
+género, origen étnico, raíces culturales y opciones 
+religiosas, así como a sus diferentes estilos de 
+aprendizaje. la tarea pedagógica consiste en lograr 
+que todos alcancen los aprendizajes Esperados, en 
+sus diversas condiciones.
+ > integrar la formación general con la Formación 
+Diferenciada Técnico-Profesional para asegurar que 
+entre ambas perspectivas se establezcan puntos de 
+encuentro que potencien el aprendizaje.
+En un ámbito más circunscrito, la planificación se 
+concentra en organizar la enseñanza en torno a un módulo. 
+aquí la tarea se concentra en establecer la secuencia de 
+actividades que desarrollará el cuerpo estudiantil para 
+lograr un aprendizaje Esperado, especificando los recursos 
+que se utilizarán y determinando los procedimientos que se 
+emplearán para ir evaluando el logro del aprendizaje. Este 
+ordenamiento necesita considerar el grado de complejidad 
+o dificultad que presentan los contenidos asociados al 
+aprendizaje Esperado, partiendo por aquellos más simples 
+para avanzar progresivamente hacia los más complejos. 
+En el caso de la preparación técnica, se necesita tomar 
+en cuenta, además, el orden en que se llevan a cabo las 
+operaciones en el medio productivo.
+Orientaciones metodológicas 
+generales
+los Objetivos de aprendizaje que configuran el perfil 
+de egreso expresan lo mínimo y fundamental que debe 
+aprender cada integrante de la plana estudiantil del país 
+que curse una especialidad, en términos de capacidades que 
+preparan para iniciar una vida de trabajo. Se construyen 
+a partir de:
+ > Conocimientos, entendidos como información 
+vinculada a marcos explicativos e interpretativos.
+Orientaciones  
+para implementar los Programas
+21
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+ > Habilidades, expresadas en el dominio de procedimientos 
+y técnicas.
+ > actitudes, como expresión de valoraciones que inclinan 
+a determinado tipo de acción.
+Como estas tres dimensiones forman un todo indisoluble 
+bajo el concepto de competencia, tanto la experiencia 
+escolar como la práctica pedagógica y las metodologías 
+de enseñanza utilizadas deben ser coherentes con 
+este enfoque. la experiencia escolar debe ser rica en 
+oportunidades para que el estudiantado alcance no 
+solo los conocimientos conceptuales vinculados a su 
+especialidad, sino también las habilidades cognitivas, 
+las destrezas prácticas y las actitudes que requiere el 
+mundo productivo. Por lo tanto, resulta apropiado usar 
+metodologías que busquen la integración y vinculación 
+constante de estos tres ámbitos, independientemente 
+de si el proceso formativo se realiza en un lugar de 
+trabajo o en el establecimiento educativo. 
+además, es importante ampliar el espacio educativo más 
+allá de los muros escolares, procurando generar diversas 
+formas de vinculación con el sector productivo (por 
+ejemplo, por medio de visitas guiadas a las empresas) 
+como una forma de permitir que estudiantes y docentes 
+accedan a modelos y procesos reales, así como a equipos 
+y maquinarias de tecnología actualizada. 
+Se recomienda una enseñanza centrada en el 
+aprendizaje, que privilegie metodologías de tipo 
+inductivo basadas en la experiencia y la observación 
+de los hechos, con mucha ejercitación práctica y 
+con demostración de ejecuciones y desempeños 
+observables. al planificar la enseñanza y elegir los 
+métodos y actividades de aprendizaje, quienes imparten 
+docencia deben preocuparse de que cada estudiante sea 
+protagonista. Una pedagogía centrada en la persona 
+que estudia supone generar las condiciones para que 
+esta pueda asumir su propio aprendizaje de manera 
+autónoma y protagónica.
+a continuación, se describen brevemente algunas 
+metodologías que integran las orientaciones antes 
+mencionadas y que se pueden aplicar a la Formación 
+Técnico-Profesional en general:
+ › Aprendizaje basado en problemas 
+Es una metodología apropiada para desarrollar 
+aprendizajes que permite relacionar conocimientos y 
+destrezas en función de la solución de un problema 
+práctico o conceptual. Conviene empezar con 
+problemáticas simples para luego abordar otras 
+más complejas que interesen al grupo estudiantil; 
+es decir, partir por investigar hechos, materiales, 
+causas e información teórica para luego probar 
+eventuales soluciones hasta encontrar aquella que 
+resuelva el problema planteado. las principales 
+habilidades que fomenta son la capacidad de 
+aprender autónomamente y, a la vez, de trabajar en 
+equipo, además de la capacidad de análisis, síntesis 
+y evaluación, y de innovar, emprender y perseverar.
+ › Elaboración de proyectos
+Contribuye a fomentar, sobre todo, la creatividad y 
+la capacidad de innovar en el contexto del trabajo 
+en grupos para responder a diferentes necesidades 
+con diversas soluciones, e integrar las experiencias 
+y conocimientos anteriores del estudiante. incluye 
+etapas como la formulación de objetivos, la 
+planificación de actividades y la elaboración de 
+presupuestos en un lapso de tiempo previamente 
+definido. Requiere de un proceso que consiste en 
+informarse, decidir, realizar, controlar y evaluar el 
+proceso de trabajo y los resultados generados.
+ › Simulación de contextos laborales
+Desarrolla capacidades para desempeñarse en 
+situaciones que buscan imitar o reproducir la 
+realidad laboral, al permitir ensayar o ejercitar 
+una respuesta o tarea antes de efectuarla en un 
+contexto real. 
+ › Análisis o estudio de casos 
+El o la docente presenta –en forma escrita o 
+audiovisual– un caso real o simulado referido al 
+tema en cuestión. El caso no proporciona soluciones, 
+sino datos concretos y detalles relevantes de la 
+situación existente para ilustrar a cabalidad el 
+proceso o procedimiento que se quiere enseñar 
+o el problema que se quiere resolver. la idea es 
+reflexionar, analizar y discutir en grupo las posibles 
+22
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+salidas a una problemática. lleva a cada estudiante a 
+examinar realidades complejas, a generar soluciones 
+y a aplicar sus conocimientos a una situación 
+real. También permite aprender a contrastar sus 
+conclusiones con las de sus pares, a aceptarlas y 
+a expresar sus sugerencias, trabajando en forma 
+colaborativa y tomando decisiones en equipo.
+ › Observación de modelos de la realidad 
+productiva 
+Puede hacerse en terreno o mediante películas, y se 
+apoya en pautas elaboradas por el cuerpo docente 
+o por las y los estudiantes. Permite aprender por 
+imitación de modelos, desarrolla la capacidad de 
+observación sistemática y el aprendizaje de destrezas 
+en los puestos de trabajo, y posibilita comprender 
+el funcionamiento de la totalidad de los procesos 
+observados en una empresa. También puede motivar 
+hacia la especialización en un determinado oficio 
+o profesión.
+ › Juego de roles 
+Consiste principalmente en distribuir diferentes 
+roles entre estudiantes para que representen una 
+situación real del mundo del trabajo. las y los 
+estudiantes podrán elaborar los guiones de esos 
+roles para probar el nivel de conocimiento que 
+tienen sobre determinadas funciones laborales.
+ › Microenseñanza 
+Es un método que emplea la observación para corregir 
+errores de actuación o aplicación de un procedimiento. 
+la actividad se graba en video, lo que permite que, 
+por un lado, cada estudiante se vea y se escuche para 
+autoevaluarse y, por otro, que el grupo también ayude 
+en la evaluación (mediante cuestionarios referidos a 
+aspectos específicos de la actividad). Por medio de la 
+retroalimentación propia y de los demás, este método 
+ayuda al grupo curso a mejorar en determinados 
+aspectos de su actuación.
+ › Demostración guiada
+Se basa en la actuación de la o el docente, quien modela 
+y va señalando los pasos y conductas apropiadas para 
+llevar a cabo una actividad, como la operación de 
+una máquina, equipo o herramienta. Permite conocer 
+y replicar paso a paso un determinado proceso de 
+trabajo en la teoría y en la práctica; dominar en forma 
+independiente procesos productivos específicos; y 
+demostrar teórica y prácticamente trabajos complejos 
+e importantes para el proceso productivo.
+ › Texto guía 
+Resulta útil para cualquier actividad de aprendizaje. 
+Consiste en una guía elaborada por la o el docente 
+que, mediante preguntas, va orientando el proceso 
+de aprendizaje de sus estudiantes para la realización 
+de actividades en cada una de las fases de solución 
+de un problema o de elaboración de un proyecto. 
+Permite que las y los estudiantes reflexionen, tomen 
+decisiones basadas en los conocimientos que tienen 
+o que deben obtener y desarrollen la autonomía en 
+la búsqueda de información.
+Como puede apreciarse, varias de las metodologías 
+expuestas requieren que las y los estudiantes desarrollen 
+la habilidad de trabajar en equipo, lo cual les será 
+propicio en un contexto laboral futuro. Para ello, el 
+trabajo debe definirse con claridad y ejecutarse según 
+una planificación previa. Dicha planificación tiene que 
+considerar una secuencia de actividades y componentes 
+parciales, los que conducirán al logro del producto 
+final, además de una clara distribución de funciones 
+y responsabilidades entre los miembros del grupo y 
+los correspondientes plazos de entrega. a simismo, 
+la totalidad de integrantes del equipo tienen que 
+responsabilizarse del producto final y no solo de la parte 
+que corresponde a cada cual; para ello, es necesario que 
+se retroalimenten entre sí y que chequeen los atributos 
+de calidad de todos los componentes del proceso.
+Finalmente, es importante subrayar la necesaria 
+atención que se debe prestar a la incorporación de las 
+Tecnologías de la información y la Comunicación (TiC) 
+a la formación, tomando en cuenta que estas tienen un 
+papel transformador prácticamente en todos los campos 
+de la actividad humana, representando un aporte 
+relevante tanto a la enseñanza como al aprendizaje. 
+Hoy son herramientas imprescindibles para llevar a cabo 
+tanto los procesos de búsqueda, selección y análisis 
+23
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+de información, como para generarla, compartirla y 
+usarla como plataforma para la participación en redes. 
+Representan, además, el soporte de un número creciente 
+de procesos de automatización que debe dominar quien 
+se desempeñe en el área técnica de nivel medio.
+Orientaciones para evaluar el 
+aprendizaje
+la evaluación es una actividad cuyo propósito más 
+importante es ayudar a cada estudiante a progresar en 
+el aprendizaje. Para que así sea, debe ser un proceso 
+planificado y articulado con la enseñanza, que ayude 
+al y a la docente a reconocer qué han aprendido sus 
+estudiantes, conocer sus fortalezas y debilidades y, a 
+partir de eso, retroalimentar la enseñanza y el proceso 
+de aprendizaje. 
+la información que proporciona la evaluación es útil para 
+que las y los y las docentes, en forma individual y en 
+conjunto, reflexionen sobre sus estrategias de enseñanza 
+e identifiquen aquellas que han resultado eficaces, las 
+que pueden necesitar algunos ajustes y aquellas que 
+requieren de más trabajo con sus estudiantes. 
+las sugerencias de evaluación que se incluyen en 
+este Programa no agotan las estrategias ni las 
+oportunidades que puede movilizar cada docente 
+o equipo de docentes para evaluar y calificar el 
+desempeño de sus estudiantes. Por el contrario, se 
+deben complementar con otras tareas y actividades 
+de evaluación para obtener una visión completa y 
+detallada del aprendizaje de cada estudiante. 
+Dado que la Formación Técnico-Profesional tiene un 
+fuerte componente de aprendizajes prácticos, las 
+situaciones y las estrategias de evaluación deben ser 
+coherentes con esta característica. la mayoría de los 
+aprendizajes Esperados están formulados en términos 
+de desempeños, por lo que quienes imparten docencia 
+tienen que generar escenarios de evaluación que 
+permitan a sus estudiantes demostrar el dominio de 
+tales desempeños. El mejor escenario es que la tarea 
+consista en elaborar productos, servicios o proyectos 
+muy cercanos a aquellos que deberán desarrollar en 
+el futuro en el medio laboral.
+a continuación, se describen algunos ejemplos 
+habituales de esta clase de escenarios o estrategias:
+ › Demostraciones 
+Son situaciones en las que el o la estudiante debe 
+mostrar una destreza, en vivo y frente a su docente, 
+quien evaluará su desempeño mediante una pauta. 
+Todo esto en el contexto de la elaboración de un 
+producto o servicio. 
+ › Análisis de casos o situaciones 
+Son instancias de evaluación en las que el o la 
+docente entrega a sus estudiantes un caso (que 
+puede ser un plano, un estado financiero, un relato 
+de una situación laboral específica, una orden 
+de trabajo, etc.) acompañado de una pauta de 
+preguntas. Cada estudiante debe analizar el caso y 
+demostrar que lo comprende en todos sus parámetros 
+relevantes, detectando errores u omisiones. 
+ › Portafolio de productos 
+Es una carpeta o caja donde el estudiante guarda 
+trabajos hechos durante el proceso formativo, ya 
+sea en formato de prototipos concretos, fotografías 
+o videos. De este modo, se puede llevar un registro 
+de sus progresos, ya que permite comparar la 
+calidad de los productos elaborados al inicio y 
+al final del proceso educativo. Una característica 
+particularmente enriquecedora del portafolio es 
+que puede ser evaluado a lo largo de todo este 
+proceso y, sobre esa base, quien enseña orienta a 
+sus estudiantes a fomentar su progreso. 
+El énfasis en el aprendizaje de desempeños prácticos 
+no quiere decir que los conceptos y aspectos teóricos 
+estén ausentes de la formación técnico-profesional. 
+Cuando sea oportuno, quien imparte las clases debe 
+averiguar si sus estudiantes comprenden ciertos 
+conceptos claves, para lo cual se sugieren estrategias 
+o escenarios adecuados, como los siguientes:
+24
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+ › Organizadores gráficos y diagramas 
+instrumentos que exigen distribuir la información y 
+desarrollar relaciones entre conceptos, desafiando 
+a promover la máxima creatividad para resumir el 
+contenido que se aprende. las nuevas conexiones 
+y la síntesis elaborada permiten recoger evidencias 
+importantes del aprendizaje alcanzado.
+ › Mapas conceptuales 
+instrumentos que permiten desarrollar la capacidad 
+de establecer relaciones entre los diferentes 
+conceptos aprendidos y crear otras nuevas, mediante 
+el uso correcto de conectores entre ellos.
+Es fundamental que cada docente se apoye en pautas de 
+corrección frente a los desempeños de sus estudiantes, 
+utilizando los indicadores que reflejan el aprendizaje 
+específico que está siendo evaluado; por ejemplo:
+ › Rúbricas 
+Son escalas que presentan diferentes criterios por 
+evaluar y en cada uno de ellos se describen los 
+niveles de desempeño. Son particularmente útiles 
+para evaluar el logro en actividades prácticas 
+de laboratorio, presentaciones, construcción de 
+modelos o proyectos tecnológicos, entre otros.
+ › Escalas de valoración 
+Son instrumentos que miden, sobre la base de criterios 
+preestablecidos, una graduación en el desempeño de las 
+y los estudiantes de manera cuantitativa y cualitativa 
+(por ejemplo: Muy bien – Bien – Regular – insuficiente). 
+ › Lista de cotejo 
+Es un instrumento que señala de manera dicotómica los 
+diferentes aspectos que se quiere observar en las y los 
+estudiantes, de manera individual o colectiva; es decir: 
+Sí/No, logrado/No logrado, etc. Es especialmente útil 
+para evaluar el desarrollo de habilidades relacionadas 
+con el manejo de operaciones y la aplicación de las 
+normas de seguridad.
+la evaluación adquiere su mayor potencial si los y las 
+docentes tienen las siguientes consideraciones:
+ › Informar a sus estudiantes sobre los 
+aprendizajes que se evaluarán 
+Compartir las expectativas de aprendizaje y los Criterios 
+de Evaluación que se aplicarán favorece el logro de 
+dichos aprendizajes, ya que así tienen claro cuál es 
+el desempeño esperado. 
+ › Planificar las evaluaciones 
+Para que la evaluación apoye el aprendizaje, es necesario 
+planificarla de forma integrada con la enseñanza. al 
+diseñar esa planificación, se deben especificar los 
+procedimientos más pertinentes y las oportunidades 
+en que se recopilará la información respecto del logro 
+de los aprendizajes Esperados, determinando tareas 
+y momentos pertinentes para aplicarlas, a fin de 
+retroalimentar el proceso de aprendizaje.
+ › Analizar el desempeño de los y las 
+estudiantes para fundar juicios 
+evaluativos 
+Un análisis riguroso del trabajo de las y los estudiantes, 
+en términos de sus fortalezas y debilidades individuales 
+y colectivas, ayuda a elaborar un juicio evaluativo más 
+contundente sobre el aprendizaje construido. Dicho 
+análisis permite a las y los y las docentes reflexionar 
+sobre las estrategias utilizadas en el proceso de 
+enseñanza y tomar decisiones pedagógicas para mejorar 
+resultados durante el desarrollo de un módulo o de 
+un semestre, o al finalizar el año escolar y planificar 
+el periodo siguiente.
+ › Retroalimentar a las y los estudiantes 
+sobre sus fortalezas y debilidades 
+la información que arrojan las evaluaciones es una 
+oportunidad para involucrar a cada estudiante en el 
+análisis de sus estrategias de aprendizaje. Compartir 
+esta información con quienes cursan la especialidad, 
+en forma individual o grupal, es una ocasión para 
+consolidar aprendizajes y orientarlos acerca de los 
+pasos que deben seguir para avanzar. Este proceso 
+reflexivo y metacognitivo de las y los estudiantes se 
+puede fortalecer si se acompaña con procedimientos 
+de autoevaluación y coevaluación que les impulsen a 
+revisar sus logros, identificar sus fortalezas y debilidades 
+y analizar las estrategias de aprendizaje implementadas.
+25
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+El currículum de la formación técnico-profesional en 
+todo el mundo, Chile incluido, subraya la importancia 
+de que los establecimientos TP establezcan lazos de 
+cooperación con las empresas locales, principalmente 
+con aquellas relacionadas con las especialidades que 
+imparten, con la convicción de que la preparación para 
+el mundo del trabajo y el desarrollo de las respectivas 
+competencias, en general, se logran por el contacto 
+práctico con la situación de trabajo.
+Favorecer las prácticas y la formación en alternancia ha 
+sido una tendencia general de este tipo de formación 
+en el mundo que continúa siendo recomendada por 
+los expertos. Sin embargo, es preciso detenerse en las 
+diferencias que existen entre la práctica profesional y la 
+formación en lugares de trabajo. Este último concepto 
+se asocia a la estrategia utilizada en programas formales 
+para permitir que los y las estudiantes desarrollen sus 
+competencias compartiendo los espacios de formación 
+entre el establecimiento educacional y la empresa o 
+centro de entrenamiento, como puede ser la formación 
+dual u otros mecanismos de alternancia. Esto supone que 
+el o la estudiante, durante este proceso de aprendizaje 
+en dos lugares, desarrolla las competencias descritas 
+en el perfil de egreso de su especialidad, mientras que 
+la práctica profesional es un proceso de validación 
+de lo aprendido en la formación técnica-profesional 
+formal, por lo tanto, su objetivo es la aplicación y 
+puesta en práctica –en un contexto laboral real– de 
+las competencias desarrolladas.
+En Chile, para recibir el título de técnico de nivel 
+medio, se requiere realizar una práctica profesional en 
+un centro de práctica afín con las tareas y actividades 
+propias de la especialidad. El propósito fundamental de 
+este tipo de experiencia es que los y las estudiantes 
+validen los aprendizajes que desarrollan durante su 
+Orientaciones  
+para la práctica profesional y titulación
+formación y puedan integrarlos y aplicarlos en un 
+ambiente de trabajo real. además, les permite acceder 
+a experiencia laboral que les facilite la transición del 
+mundo educativo al empleo.
+El establecimiento educacional debe asumir la 
+responsabilidad de gestionar y supervisar la práctica 
+profesional, además de velar por la calidad del proceso. 
+asimismo, debe ubicar a la totalidad de estudiantes 
+en los diferentes centros de práctica para que puedan 
+iniciar este ciclo final que, aunque no es parte del Plan 
+de Estudio, es el requisito exigido para la certificación 
+oficial de la formación como técnico. a demás, el 
+establecimiento tiene que elaborar el Reglamento de 
+Práctica, conforme a las disposiciones legales, que debe 
+contener todos los aspectos técnicos, pedagógicos y 
+administrativos relacionados con este proceso.
+Estas prácticas profesionales permiten construir 
+un vínculo estrecho entre la formación técnica y el 
+mundo del trabajo, lo que posibilita una oportunidad 
+de retroalimentación de los centros de práctica 
+a los establecimientos respecto de los resultados 
+de aprendizajes logrados por sus estudiantes y 
+sobre aquellos ámbitos de la formación que deben 
+fortalecerse y actualizarse.
+El periodo de práctica profesional tiene una duración 
+mínima de 450 horas cronológicas, de acuerdo a la 
+normativa actual vigente. No obstante, para dar mayor 
+flexibilidad a su desarrollo, buscando potenciar y 
+facilitar la titulación y la continuidad de estudios, 
+es relevante permitir que las prácticas profesionales 
+comiencen antes del egreso de cuarto medio, una vez 
+que se haya dado cumplimiento a ciertas condiciones, 
+como la aprobación de aquellos módulos o asignaturas 
+directamente vinculados a la práctica a desarrollar. 
+26
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+así, en el caso de que el establecimiento tenga un 
+régimen anual para la aplicación de sus Programas 
+de Estudio, los y las estudiantes pueden comenzar 
+a realizar su práctica profesional al finalizar tercero 
+medio, es decir, en las vacaciones de verano. En el 
+caso de que el establecimiento tenga un régimen 
+semestral, las prácticas profesionales pueden iniciarse 
+una vez finalizado el primer semestre de tercer año 
+medio, es decir, durante las vacaciones de invierno.
+Con el propósito de tener el máximo de claridad 
+respecto de este proceso, se definen los principales 
+conceptos que se utilizan durante esta etapa:
+ › Proceso de titulación 
+Es el periodo comprendido desde la matrícula de 
+cada estudiante en un establecimiento de Educación 
+Media Técnico-Profesional para la realización 
+de la práctica profesional hasta su aprobación 
+final, incluyendo el cumplimiento de todos y cada 
+uno de los procedimientos necesarios para la 
+obtención y entrega del título de técnico de nivel 
+medio correspondiente, por parte del Ministerio 
+de Educación.
+ › Práctica profesional 
+Es una actividad que llevan a cabo los y las estudiantes 
+de la Educación Media Técnico-Profesional en un 
+centro de práctica como parte de su proceso de 
+titulación. En este periodo deberá cumplir como 
+mínimo 450 horas cronológicas. El objetivo central 
+de la práctica profesional es validar y aplicar, en un 
+contexto laboral real, los aprendizajes desarrollados 
+durante la formación técnica.
+ › Centro de práctica 
+Se refiere al espacio fuera del establecimiento 
+educacional, como empresas, reparticiones públicas, 
+fundaciones y otras instituciones productivas y de 
+servicios que desarrollan actividades relacionadas con 
+los Objetivos de aprendizaje de las especialidades 
+de la Formación Diferenciada Técnico-Profesional.
+ › Plan de práctica 
+Es el documento guía elaborado para el desarrollo de 
+la práctica profesional que se estructura de acuerdo 
+con el perfil de egreso del técnico de nivel medio 
+de la especialidad respectiva, en función de las 
+actividades y los criterios de desempeño acordados 
+con la empresa. Este instrumento debe ser firmado 
+por las tres partes involucradas: centro de práctica, 
+establecimiento educacional y estudiante.
+ › Profesor guía 
+Es el docente técnico designado por el establecimiento 
+para orientar, supervisar, acompañar, elaborar y 
+disponer los documentos de práctica y titulación.
+ › Supervisor 
+Es el funcionario o trabajador experto designado 
+por el centro de práctica para supervisar, orientar 
+y evaluar el desempeño de los y las estudiantes.
+27
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+la ley General de Educación establece que los 
+establecimientos con Jornada Escolar Completa 
+que utilicen los Programas de Estudio del Mineduc 
+cuentan con seis horas lectivas de libre disposición. 
+los establecimientos pueden disponer de estas horas 
+como lo estimen más conveniente para llevar a cabo su 
+proyecto educativo, distribuyéndolas en la formación 
+de manera pertinente. 
+Con el fin de apoyar el proceso de reflexión para la 
+toma de decisiones, se ha construido este documento 
+con orientaciones opcionales para los establecimientos 
+de Educación Media Técnico-Profesional.
+El desafío para los establecimientos que brindan 
+formación técnica es desarrollar las mejores estrategias 
+de gestión curricular y pedagógica, para que el tiempo 
+escolar disponible les permita lograr los objetivos 
+planteados en las Bases Curriculares y en sus propios 
+Proyectos Educativos institucionales (PEi), y así 
+responder con pertinencia a las necesidades educativas 
+de los y las estudiantes, las demandas de los sectores 
+productivos relacionados y de la sociedad en general.
+la toma de decisiones sobre la libre disposición tiene 
+que ver con cómo reestructurar y usar el tiempo y 
+en cómo ponerlo al servicio del mejoramiento del 
+aprendizaje y formación de los y las estudiantes. la 
+definición del uso del tiempo de cada establecimiento 
+educacional se inserta y adquiere sentido en el marco 
+de su PEi, de sus planes de mejora y planes de acción 
+de acuerdo a sus prioridades educativas.
+En este marco, el proceso de toma de decisión debería 
+resguardar los siguientes aspectos: 
+Orientaciones  
+para el uso de la libre disposición
+ › Considerar información relevante y de 
+calidad
+Se sugiere incluir la revisión del proyecto educativo 
+institucional; el análisis de los Programas de Estudio 
+del Mineduc y de los resultados de aprendizaje y 
+de sus estrategias remediales, el levantamiento de 
+información a través de entrevistas y encuestas 
+a actores del sector productivo y exalumnos; 
+análisis de estudios o estadísticas disponibles 
+sobre la situación educativa de los estudiantes de 
+la especialidad y sus intereses, entre otros. 
+ › Incluir participación
+Se debe considerar la participación de la comunidad 
+educativa y de actores relevantes en instancias 
+específicas, ya sea para el levantamiento de 
+información primaria como para la validación de 
+las propuestas elaboradas. 
+ › Contar con respaldo institucional
+Es muy relevante que en estas instancias de 
+análisis participe también el sostenedor, para que 
+las decisiones que tome sobre la libre disposición 
+sean coherentes con las conclusiones a las que se 
+llegue en dichas instancias.
+a continuación se presentan algunos criterios 
+metodológicos que deberían ser incluidos en la toma 
+de decisión del uso del tiempo de libre disposición:
+ › Requerimientos desde la Misión 
+institucional
+En el Programa de Estudio de una especialidad 
+deben estar incluidos el énfasis y los aspectos 
+que son distintivos del PEi. Un ejemplo de esta 
+situación es el caso de una institución que imparte 
+la especialidad de Servicios de Turismo, cuya 
+28
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+Misión incluye desarrollar el proceso educativo 
+con estrategias que aborden la interculturalidad. 
+En este caso, será necesario agregar un módulo o 
+asignatura que aborde este objetivo y asignarle el 
+tiempo requerido.
+En algunas situaciones, estos aspectos pueden ser 
+abordados sin requerir tiempo escolar, sino que, 
+más bien, mediante metodologías apropiadas y, por 
+ende, su inclusión no afectará al Plan de Estudio.
+ › Requerimientos desde el entorno 
+productivo
+Para incluir estos requerimientos, es preciso realizar 
+un levantamiento y análisis de información desde el 
+mundo productivo que tiene directa vinculación con 
+la especialidad. Este análisis puede hacer visible la 
+necesidad de incluir en el programa de formación 
+un ámbito de competencias que no está incluido 
+en las Bases Curriculares ni en los Programas de 
+la especialidad. En ese caso, al formular el Plan 
+se deben considerar las horas para el desarrollo 
+de un módulo que responda a ese requerimiento 
+específico que no está presente en los Programas. 
+Este análisis es fundamental en todas las especialidades 
+porque brindará mayor pertinencia y calidad a los 
+aprendizajes que logren los egresados y las egresadas, 
+lo que potenciará una mejor empleabilidad. En este 
+proceso puede surgir la necesidad de incorporar 
+competencias que son de otra mención u otra 
+especialidad. En ese caso, pueden tomarse módulos 
+de ellas para ser incluidos en el Plan de Estudio. Un 
+ejemplo de esto es el caso de un establecimiento 
+ubicado en una localidad con producción de vides 
+que imparte la especialidad agropecuaria, mención 
+agricultura, y que podría tener la necesidad de 
+incluir módulos de la mención de Vitivinicultura. 
+Otro ejemplo es el caso de un liceo ubicado en una 
+región minera que podría tener la necesidad de 
+incluir, en la especialidad de Mecánica industrial, 
+módulos de Hidráulica y neumática de la especialidad 
+de Mecánica automotriz.
+ › Fortalecimiento de la Formación General 
+o Diferenciada requerida por los y las 
+estudiantes
+En cuanto a los requerimientos vinculados a 
+las necesidades del cuerpo estudiantil, la toma 
+de decisiones debe atender a dos objetivos 
+fundamentales: asegurar la empleabilidad de las 
+egresadas y los egresados desarrollando con mayor 
+profundidad competencias básicas, y lograr un mejor 
+desempeño en la educación superior. Una respuesta 
+a estos objetivos podría ser incluir un módulo nuevo 
+que no es parte de los obligatorios para la EMTP, 
+pero que es necesario para potenciar los aprendizajes 
+requeridos para un mejor desempeño. Esto podría 
+significar, por ejemplo, que en la especialidad de 
+agropecuaria se incluyera un módulo denominado 
+“Ciencias aplicadas a la agricultura” que aborde 
+aspectos de Biología, Física y Química necesarios 
+para entender ciertos procesos de las plantas, 
+riego y suelos. 
+Una segunda respuesta podría ser ampliar las horas 
+destinadas a una de las asignaturas ya incluidas 
+en la Formación General que se imparten como 
+obligatorias, por ejemplo, de Matemática, en la 
+especialidad de Dibujo Técnico, para fortalecer los 
+contenidos de tercero medio relativos a Geometría. 
+Otra estrategia sería contemplar un tiempo para la 
+articulación de la Formación General y la Formación 
+Diferenciada, generando instancias de encuentro 
+29
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+no logrados en los ciclos y niveles anteriores. Esta 
+opción puede articularse con iniciativas como el 
+Programa de acompañamiento y acceso Efectivo 
+a la Educación Superior (PaCE), que trabaja en los 
+establecimientos educacionales que atienden a la 
+población más vulnerable y que busca preparar 
+a los y las estudiantes para que ingresen a la 
+Educación Superior y puedan mantenerse en ella 
+hasta la titulación.
+ › Requerimientos por las capacidades 
+técnicas disponibles para la especialidad
+Este criterio se refiere al análisis de las capacidades 
+de los y las docentes y de la disponibilidad de 
+acceso a infraestructura y recursos de aprendizajes 
+para el adecuado desarrollo de una especialidad. 
+Puede ocurrir que un establecimiento cuente con 
+docentes técnicos con una amplia experiencia, 
+pero que existan debilidades en la infraestructura y 
+recursos disponibles al interior del establecimiento, 
+lo cual se suple con convenios de colaboración 
+con empresas. Esta situación provoca que algunas 
+actividades de aprendizajes deban llevarse a cabo 
+fuera del establecimiento, lo cual implica mayor 
+tiempo para su desarrollo. En otros casos puede 
+ocurrir lo contrario, es decir, que la situación de 
+infraestructura y recursos sea sobresaliente, lo 
+que facilita el logro de los aprendizajes en los y 
+las estudiantes y que permite disminuir el tiempo 
+requerido para el desarrollo de algunos módulos.
+y discusión de docentes de ambas formaciones. 
+Esta alternativa permitiría a los y las estudiantes 
+apreciar de manera directa la contribución de la 
+Formación General al logro de las competencias 
+técnicas y genéricas, puesto que dicha formación 
+le da sentido a la ejecución de tareas específicas 
+propias de cada sector productivo.
+Para detectar la necesidad de fortalecimiento de 
+la Formación Diferenciada, puede llevarse a cabo 
+un levantamiento de información que considere 
+tanto al sector productivo como a exalumnos y 
+exalumnas, pues ambas partes pueden dar cuenta de 
+las carencias de aprendizajes técnicos o genéricos 
+que afectan el desempeño y posterior trayectoria 
+de aprendizaje y laboral de las y los estudiantes. 
+De esta manera puede determinarse la necesidad 
+de ampliar las horas de uno o más módulos de la 
+Formación Diferenciada para permitir un mejor 
+logro de los Objetivos de aprendizaje.
+ › Requerimientos desde la realidad social 
+de la comunidad educativa
+los establecimientos no son comunidades aisladas 
+de las realidades de sus entornos, y, en este 
+contexto, se pueden priorizar las necesidades de 
+dicha realidad para ser abordada en el tiempo 
+escolar disponible. Un ejemplo de esto puede ser 
+que, en aquellos lugares donde existan graves 
+problemas de salud asociados al sedentarismo y 
+consumo de drogas y alcohol, el establecimiento 
+incorpore en el Plan de Estudio un espacio para 
+Educación Física y Salud para apoyar el esfuerzo 
+de toda la comunidad en el desarrollo de hábitos 
+para el cuidado de la salud.
+ › Requerimientos de nivelación de 
+Formación General
+Este requerimiento puede surgir a partir de 
+la detección de déficit en aprendizajes de los 
+estudiantes que afecte su desempeño escolar y 
+su posterior trayectoria de aprendizaje y laboral. 
+la respuesta a este diagnóstico puede ser el 
+aumento de horas de Formación General como 
+parte de un proceso de nivelación de contenidos 
+30
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+la formación profesional dual se incorpora a la Educación 
+Media Técnico-Profesional (EMTP) como una estrategia 
+curricular que potencia el aprendizaje de los y las 
+estudiantes con una relación más directa entre los 
+establecimientos educacionales y el sector productivo.
+El propósito de la estrategia curricular dual es mejorar 
+la calidad de los aprendizajes de los y las estudiantes 
+de EMTP, además de aportar al requerimiento del país 
+de contar con más y mejores técnicos y técnicas en los 
+diferentes ámbitos de la producción de bienes y servicios.
+Desde la perspectiva señalada, la formación dual 
+contempla dos lugares de aprendizaje: el establecimiento 
+educacional y el mundo laboral representado por la 
+empresa, lo que implica armonizar los aprendizajes 
+que se desarrollan en el liceo con los que se trabajan 
+en la empresa. ambas instituciones (establecimiento 
+educacional y empresa) deben dar respuesta al perfil 
+de egreso señalado en las Bases Curriculares para cada 
+una de las especialidades que ofrece la Formación 
+Diferenciada Técnico-Profesional.
+El establecimiento educacional es el responsable de 
+brindar a los y las estudiantes una sólida formación 
+general y técnica. Por tanto, en el caso del dual, 
+este rol implica desarrollar las competencias básicas 
+y la comprensión técnica que requieren para dominar 
+los procesos productivos. la empresa, por su parte, 
+como colaboradora del proceso de aprendizaje, debe 
+ofrecer la oportunidad para que las y los jóvenes 
+desarrollen las competencias técnicas relacionadas 
+con la especialidad y sus respectivas menciones. 
+Orientaciones  
+para la formación profesional dual
+Para la implementación del Plan y del Programa de 
+Estudio de una especialidad, en un establecimiento 
+que opta por la formación profesional dual se debe 
+considerar lo siguiente:
+a. El Plan de Estudio se organizará sobre la base de 
+las siguientes alternativas (el liceo debe optar 
+por una de ellas)1: 
+ > Tres días en el liceo y dos días en la empresa.
+ > Otra especificada en la normativa respectiva.
+b. a su vez, dicho Plan de Estudio podrá ser abordado 
+por medio de alguna de las siguientes modalidades:
+ > Desarrollar todo el Plan de Estudio de la 
+Formación Diferenciada Técnico-Profesional 
+en dos lugares de aprendizaje: esto se organiza 
+en un proceso de formación compartida entre el 
+liceo y la empresa, que consiste en coparticipar 
+en distinta proporción en los procesos de 
+enseñanza-aprendizaje.
+ > Destinar parte del Plan de Estudio TP a la 
+empresa y, así, complementar los módulos que 
+se imparten en el liceo. Esto, comúnmente, se 
+denomina alternancia.
+ > Formación en centro de entrenamiento con 
+participación de la empresa, la que colabora 
+con equipamiento de vanguardia y expertos 
+y expertas para construir los aprendizajes.
+1 El Plan de Estudio deberá ser aprobado mediante Resolución 
+Exenta de la Secretaría Regional Ministerial de Educación, 
+quien a su vez informará por escrito de dicha resolución a la 
+Superintendencia de Educación y a la agencia de Calidad.
+31
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+c. Podrá optarse por la formación dual siempre y 
+cuando se cuente con un número de empresas 
+suficiente en la jurisdicción territorial en la cual 
+se encuentra el establecimiento. las empresas 
+deben estar formalmente constituidas, cumplir 
+con las normas de salud y seguridad y contar 
+con trabajadoras y trabajadores capacitadas y 
+capacitados que potencien en sus aprendices 
+la calidad de los aprendizajes, resguarden su 
+seguridad personal y den espacios de supervisión 
+al profesor o a la profesora tutor y a los organismos 
+fiscalizadores del Ministerio de Educación.
+d. Para la implementación del modelo dual, el 
+liceo deberá desarrollar un trabajo innovador, 
+planificado, programado y cooperativo. lo 
+anterior, junto con el Plan de Estudio para el liceo, 
+el plan de aprendizaje para los y las docentes 
+(elaboración del plan de enseñanza en el aula) 
+y el plan de desempeño para el aprendizaje en 
+la empresa, permitirán asegurar las condiciones 
+para el funcionamiento operativo de la formación 
+profesional dual y así, obtener la aprobación para 
+su implementación a partir del año siguiente.
+En la actualidad, la formación profesional dual alcanza 
+una cobertura de cerca del 13 % de la matrícula 
+de estudiantes de Formación Diferenciada Técnico-
+Profesional, por tanto, dado este nivel de cobertura, se 
+requiere una normativa que regule su funcionamiento 
+y resguarde los criterios de calidad y el cumplimiento 
+de sus objetivos; esta se encuentra actualmente en 
+fase de diseño por parte del Ministerio de Educación. 
+32
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+Módulos especialidad
+Refrigeración y 
+Climatización
+Plan Común
+iNTRODUCCiÓN
+Este módulo de 190 horas pedagógicas pretende que 
+los y las estudiantes desarrollen las competencias 
+necesarias para trabajar con planos y especificaciones 
+técnicas, además de implementar la metodología 
+adecuada para hacer los cálculos requeridos al momento 
+de efectuar las instalaciones y cubicaciones en 
+sistemas de climatización y refrigeración, herramientas 
+indispensables para su especialidad. Esto significa que 
+podrán familiarizarse con el lenguaje gráfico de los 
+planos y se espera que comprendan la importancia 
+de interpretarlos correctamente. También se busca 
+que logren interpretar las especificaciones técnicas y 
+que puedan efectuar diversos ejercicios para cubicar 
+variados proyectos utilizando software de uso común 
+en el mercado, destreza indispensable para enfrentar 
+cualquier proyecto en esta área. asimismo, se pretende 
+que conozcan las normas por las que se rigen los planos 
+y las especificaciones, como también la normativa 
+chilena que rige las cubicaciones y la forma adecuada 
+de aplicarlas.
+En este módulo se espera también que las y los 
+estudiantes sean capaces de reconocer y utilizar las 
+normas sobre dibujo técnico y la simbología presente 
+en los planos de esta especialidad, extraer información 
+relevante de dichos planos –como la ubicación espacial 
+del trazado de cañerías– y analizarlos para detectar 
+posibles interferencias entre equipos, tuberías, ductos 
+y elementos estructurales o de otras especialidades que 
+dificulten la ejecución del proyecto. Se busca, además, 
+que conozcan y empleen las unidades del sistema 
+internacional para los diferentes materiales y equipos; 
+que puedan calcular longitudes, áreas y volúmenes en 
+elementos geométricos regulares e irregulares; y, que 
+logren aplicar la Norma Chilena de Especificaciones 
+Técnicas (NCh1156) y la Norma relativa a Cubicaciones 
+(NCh353/2000). Se pretende también que sean capaces 
+de interpretar las especificaciones técnicas de proyectos 
+de climatización y refrigeración, contrastarlas con los 
+planos y buscar posibles incongruencias; analizar 
+dichas especificaciones en función de los materiales y 
+técnicas constructivas a utilizar, y detectar eventuales 
+interferencias del proyecto con elementos estructurales 
+o con otras especialidades.
+Se propone utilizar una metodología de aprendizaje 
+activa y participativa para que cada estudiante vaya 
+descubriendo progresivamente el lenguaje técnico 
+necesario para desenvolverse después en el mundo laboral.
+1. lectura de planos y cubicación 
+de materiales de proyectos
+34
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+aPRENDiZaJES ESPERaDOS Y CRiTERiOS DE EValUaCiÓN
+MÓDULO 1  · lECTURa DE PlaNOS Y CUBi CaCiÓN DE  
+MaTERialES DE PROYECTOS 190 HORaS TERCERO MEDiO
+OBJETiVOS DE aPRENDiZaJE DE la ESPECialiDaD
+OA 1
+leer y utilizar planos de redes de cañería y redes de ductos, simbología y especificaciones técnicas de proyectos de 
+refrigeración y climatización, verificando su adecuación a las condiciones reales de la obra que facilitarían u obstaculizarían 
+la realización del proyecto.
+OA 2
+Cubicar elementos y materiales, de acuerdo a volúmenes y superficies, para la elaboración de proyectos de refrigeración, 
+climatización, calefacción y ventilación, utilizando programas computacionales apropiados.
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE 
+aPRENDiZaJE GENÉRi COS
+1. lee planos de 
+refrigeración y 
+climatización, 
+utilizando la 
+simbología técnica 
+respectiva para 
+reconocer el espacio 
+físico donde se 
+instalarán las 
+distintas redes 
+de refrigeración y 
+climatización, en 
+relación con las 
+normas de dibujo 
+técnico establecidas 
+de calefacción y 
+ventilación.
+1.1
+Utiliza simbología técnica relativa a la especialidad y 
+normas de dibujo técnico, para diferenciar entre una 
+planta de cielo y una planta normal, en un plano de 
+refrigeración y climatización.
+B
+1.2
+Utiliza simbología técnica relativa a la especialidad y 
+normas de dibujo técnico, para identificar la ubicación 
+espacial del trazado de cañerías o ductos, en un plano 
+de refrigeración y climatización.
+B
+1.3
+Utiliza simbología técnica relativa a la especialidad y normas 
+de dibujo técnico para detectar posibles interferencias entre 
+equipos, tuberías, ductos y elementos estructurales o de 
+otros servicios, que dificulten la ejecución del proyecto 
+en un plano de refrigeración y climatización.
+B
+1.4
+Elabora un informe técnico indicando las posibles 
+anomalías encontradas en los planos analizados, utilizando 
+tecnologías de la información.
+A H
+1.
+35
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE 
+aPRENDiZaJE GENÉRi COS
+2. lee y utiliza las 
+especificaciones 
+técnicas de proyectos 
+de refrigeración 
+y climatización, 
+para conocer las 
+indicaciones técnicas 
+y el tipo de material 
+que se empleará en 
+la ejecución de los 
+trabajos y poder 
+determinar posibles 
+interferencias o 
+dificultades en las 
+etapas del proyecto.
+2.1
+lee las indicaciones entregadas en las especificaciones técnicas 
+relativas a la forma en que se deben realizar los trabajos en 
+la ejecución de proyectos de refrigeración y climatización.
+B
+2.2
+lee las especificaciones técnicas para conocer el tipo 
+de material a utilizar en la ejecución de proyectos de 
+refrigeración y climatización.
+B
+2.3
+lee las especificaciones técnicas para detectar posibles 
+interferencias entre equipos, tuberías y ductos en la 
+ejecución de proyectos de refrigeración y climatización.
+B
+2.4
+lee las especificaciones técnicas para detectar posibles 
+interferencias con elementos estructurales o de otros 
+servicios que dificulten la ejecución de proyectos de 
+refrigeración y climatización.
+B
+2.5
+Elabora un informe técnico de la actividad realizada, 
+indicando posibles anomalías encontradas en las 
+especificaciones técnicas, utilizando tecnologías de la 
+información.
+A H
+36
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE 
+aPRENDiZaJE GENÉRi COS
+3. Cubica elementos 
+y materiales de 
+acuerdo a los 
+requerimientos del 
+lugar, indicados en 
+el plano respectivo 
+mediante un software 
+de diseño para 
+determinar cantidad 
+de materiales y 
+elementos a emplear 
+en la ejecución 
+del proyecto. 
+Se consideran 
+las indicaciones 
+de la Norma 
+Chilena relativa 
+a Cubicaciones 
+(NCh353/2000), 
+aplicada a proyectos 
+de refrigeración, 
+climatización, 
+calefacción y 
+ventilación.
+3.1
+Realiza un listado de requerimientos para un recinto 
+determinado, en función de lo que se indica en la lectura 
+del plano entregado.
+C
+3.2
+Calcula superficies y volúmenes a partir de un recinto 
+determinado, de acuerdo a las mediciones obtenidas de 
+planos respectivos del proyecto, especificando la cantidad 
+de materiales y componentes a utilizar en la ejecución 
+del proyecto.
+C
+3.3
+Calcula la cantidad de elementos y materiales para un 
+determinado recinto, de acuerdo a lo establecido por el 
+proyecto, utilizando un software de diseño.
+C
+3.4
+Valoriza el costo de componentes y elementos a utilizar 
+en la ejecución del proyecto, para determinar el costo 
+final de la cubicación, considerando las indicaciones de 
+la Norma Chilena relativa a Cubicaciones (NCh353/2000).
+C
+4. Elabora informe 
+de cubicación 
+de elementos 
+y materiales, 
+estableciendo 
+la cantidad de 
+materiales a utilizar 
+y los costos totales 
+del proyecto, 
+de acuerdo a 
+lo establecido 
+en la Norma 
+Chilena relativa 
+a Cubicaciones 
+(NCh353/2000).
+4.1
+Realiza un listado de materiales de acuerdo a los cálculos 
+realizados, trabajando en equipos y utilizando procesadores 
+de texto y planillas de cálculo.
+A C
+4.2
+Realiza un listado de costos de materiales y equipos de 
+acuerdo a los cálculos realizados, trabajando en equipos 
+y utilizando procesadores de texto y planillas de cálculo.
+A C
+4.3
+Elabora un informe de cubicación de elementos y materiales, 
+según los cálculos realizados, para determinar el costo final 
+de la cubicación, de acuerdo con lo establecido en la Norma 
+Chilena relativa a Cubicaciones, trabajando en equipos y 
+utilizando procesadores de texto y planillas de cálculo.
+A C H
+ 
+1.
+37
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+EJEMPlO DE aCTiViDaD DE aPRENDiZaJE
+NOMBRE DEl MÓDUlO Lectura de planos y cubicación de materiales de proyectos
+NOMBRE DE la aCTiViDaD DE aPRENDiZaJE Recopilación de información contenida en planos
+DURaCiÓN DE la aCTiViDaD 5 horas
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN QUE iNClUYE
+1.
+lee planos de refrigeración y climatización, 
+utilizando la simbología técnica respectiva 
+para reconocer el espacio físico donde se 
+instalarán las distintas redes de refrigeración 
+y climatización, en relación con las normas 
+de dibujo técnico establecidas de calefacción 
+y ventilación
+1.2 Utiliza simbología técnica relativa a la especialidad y normas de 
+dibujo técnico, para identificar la ubicación espacial del trazado de 
+cañerías o ductos, en un plano de refrigeración y climatización.
+1.3 Utiliza simbología técnica relativa a la especialidad y normas de 
+dibujo técnico para detectar posibles interferencias entre equipos, 
+tuberías, ductos y elementos estructurales o de otros servicios, que 
+dificulten la ejecución del proyecto en un plano de refrigeración y 
+climatización.
+1.4 Elabora un informe técnico indicando las posibles anomalías encontradas 
+en los planos analizados, utilizando tecnologías de la información.
+METODOlOGÍaS SElECCiONaDaS Estudio de casos
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES, Y ESTUDiaNTES Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+PREPaRaCiÓN DE la 
+aCTiViDaD
+Docente:
+ › le enseña a sus estudiantes a leer un plano de refrigeración, indicando las partes que conforman 
+un plano normalizado, el significado de los símbolos presentes en el plano, señalando la forma 
+en que se aplican las normas de dibujo técnico y la importancia de recopilar correctamente 
+la información contenida en el plano. Guía a sus estudiantes indicándoles cuál es la finalidad 
+del plano y describe la actividad a desarrollar. 
+ › Motiva a sus estudiantes indicándoles la importancia de obtener una correcta información 
+de la lectura del plano, de manera de evitar errores posteriores en la ejecución del proyecto.
+Recursos:
+ › Sala apropiada (mesas de trabajo amplias para el estudio de los planos).
+ › Conexión a internet en buenas condiciones, para el traspaso de archivos.
+ › Computadores con los programas de dibujo asistido por computador, para cada estudiante. 
+ › Proyector multimedia.
+ › Planos de proyectos de refrigeración y climatización.
+38
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN  
+CaDa UNa DE laS SiGUiENTES ETaPaS:
+EJECUCiÓN Estudiantes:
+ › Examinan globalmente el caso. 
+ › Deberán contar con varios planos de proyectos de refrigeración, además de la simbología 
+técnica pertinente a los planos a utilizar, para que puedan practicar suficientemente la lectura 
+de estos, examinándolos respecto a su contenido.
+ › a través de la lectura de planos, deberán buscar posibles errores en las partes que conforman 
+el plano (formatos, rotulaciones, simbologías, diseño de circuitos, etc.), comparándolos con 
+las disposiciones establecidas por las normas de dibujo y diseño.
+ › Relacionan los elementos a través de la lectura de planos y analizan los posibles problemas que 
+pueden existir en la ejecución de las instalaciones de equipos y redes de tuberías contenidas 
+en los planos entregados por su docente.
+ › Explican las relaciones observadas y proponen conclusiones.
+ › Generan información a partir de los planos y explican si existen problemáticas que puedan 
+interferir en la ejecución de las instalaciones de equipos y redes de tuberías propuestas por su 
+docente, así como también los errores de dibujo detectados al compararlos con la normativa 
+respectiva.
+ › Jerarquizan las problemáticas encontradas, para establecer un orden de prioridad en las 
+soluciones planteadas.
+CiERRE Estudiantes:
+ › Elaboran un informe escrito en formato digital, describiendo los resultados obtenidos de la 
+lectura de planos. 
+ › al finalizar, envían el informe al correo electrónico de su docente.
+Docente:
+ › Proyecta los trabajos realizados por sus estudiantes, los que se analizan en conjunto con el 
+curso, y aclara las dudas que puedan surgir de la actividad.
+ › Se sugiere evaluar –de manera formativa– el uso del software.
+1.
+39
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+EJEMPlO DE aCTiViDaD DE aPRENDiZaJE
+NOMBRE DEl MÓDUlO Lectura de planos y cubicación de materiales de proyectos 
+NOMBRE DE la aCTiViDaD DE aPRENDiZaJE Recopilación de información contenida en planos
+DURaCiÓN DE la aCTiViDaD 5 horas
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN QUE iNClUYE
+2.
+lee y utiliza las especificaciones técnicas de 
+proyectos de refrigeración y climatización, 
+para conocer las indicaciones técnicas y 
+el tipo de material que se empleará en la 
+ejecución de los trabajos y poder determinar 
+posibles interferencias o dificultades en las 
+etapas del proyecto.
+2.1 lee las indicaciones entregadas en las especificaciones técnicas 
+relativas a la forma en que se deben realizar los trabajos en la 
+ejecución de proyectos de refrigeración y climatización.
+2.3 lee las especificaciones técnicas para detectar posibles interferencias 
+entre equipos, tuberías y ductos en la ejecución de proyectos de 
+refrigeración y climatización.
+2.5 Elabora un informe técnico de la actividad realizada, indicando 
+posibles anomalías encontradas en las especificaciones técnicas, 
+utilizando tecnologías de la información.
+METODOlOGÍaS SElECCiONaDaS  Estudio de casos
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+PREPaRaCiÓN DE la 
+aCTiViDaD
+Docente:
+ › Enseña a sus estudiantes las partes que conforman las especificaciones técnicas de un 
+proyecto de refrigeración, indicando la relación que tienen estas con un plano normalizado 
+de refrigeración, la relevancia de las especificaciones técnicas para la posterior ejecución 
+de un proyecto y la importancia de recopilar correctamente la información contenida en las 
+especificaciones técnicas.
+ › Guía a sus estudiantes, indicándoles cuál es la finalidad de las especificaciones técnicas y 
+explica la actividad a desarrollar.
+ › Motiva a sus estudiantes indicándoles la importancia de generar una correcta información 
+de la lectura de las especificaciones técnicas, para evitar errores posteriores en la ejecución 
+del proyecto.
+Recursos:
+ › Sala apropiada (amplia y con buena visibilidad de la pizarra).
+ › Conexión a internet en buenas condiciones para el traspaso de archivos.
+ › Computadores.
+ › Proyector multimedia.
+ › Planos y especificaciones técnicas de proyectos de refrigeración y climatización.
+40
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+EJECUCiÓN Estudiantes:
+ › Examinan globalmente el caso.
+ › Realizan una correcta lectura de planos, junto con las especificaciones que se relacionan a su 
+contenido (deberán contar con las especificaciones técnicas de los proyectos de refrigeración, 
+además de los planos correspondientes). 
+ › Caracterizan el caso, a través de la lectura de las especificaciones técnicas, identificando 
+posibles errores en las partes que conforman dicho documento, comparándolos con las 
+disposiciones establecidas por las normas respectivas.
+ › Relacionan los elementos a través de las especificaciones técnicas y lo contemplado en 
+los planos, analizando los posibles problemas que pueden existir en la ejecución de las 
+instalaciones de equipos y redes de tuberías contenidas en los planos y las especificaciones 
+técnicas entregadas por su docente.
+ › Explican las relaciones observadas y proponen sus conclusiones.
+ › Generan información a partir de las especificaciones técnicas y de los planos, identificando si 
+existen problemáticas que puedan interferir en la ejecución de las instalaciones de equipos 
+y redes de tuberías contenidas en las especificaciones técnicas y en los planos entregados 
+por cada docente.
+ › Jerarquizan las problemáticas encontradas, para establecer un orden de prioridad en las 
+soluciones planteadas.
+CiERRE Estudiantes:
+ › Elaboran un informe escrito en formato digital, en el cual describen los resultados obtenidos 
+de la lectura de las especificaciones técnicas.
+ › al finalizar, envían un informe al correo electrónico de su docente.
+Docente:
+ › Proyecta los trabajos realizados por sus estudiantes, los que se analizan en conjunto con el 
+curso, y aclara las dudas que puedan surgir de la actividad.
+ › Se sugiere evaluar –de manera formativa– el uso de software.
+1.
+41
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+EJEMPlO DE aCTiViDaD DE EValUaCiÓN
+NOMBRE DEl MÓDUlO Lectura de planos y cubicación de materiales de proyectos
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE aPRENDiZaJE  
+GENÉRiCOS a EValUaR
+1. lee planos de refrigeración 
+y climatización, utilizando 
+la simbología técnica 
+respectiva para reconocer 
+el espacio físico donde 
+se instalarán las distintas 
+redes de refrigeración y 
+climatización, en relación 
+con las normas de dibujo 
+técnico establecidas de 
+calefacción y ventilación.
+1.2
+Utiliza simbología técnica 
+relativa a la especialidad y 
+normas de dibujo técnico, 
+para identificar la ubicación 
+espacial del trazado de 
+cañerías o ductos, en un 
+plano de refrigeración y 
+climatización.
+1.3
+Utiliza simbología técnica 
+relativa a la especialidad y 
+normas de dibujo técnico para 
+detectar posibles interferencias 
+entre equipos, tuberías, ductos 
+y elementos estructurales o de 
+otros servicios, que dificulten 
+la ejecución del proyecto en 
+un plano de refrigeración y 
+climatización.
+1.4
+Elabora un informe técnico 
+indicando las posibles 
+anomalías encontradas en los 
+planos analizados, utilizando 
+tecnologías de la información.
+A
+Comunicarse oralmente y por escrito con claridad, 
+utilizando registros de habla y de escritura 
+pertinentes a la situación laboral y a la relación 
+con las o los interlocutores.
+B
+leer y utilizar distintos tipos de textos relacionados 
+con el trabajo, tales como especificaciones 
+técnicas, normativas diversas, legislación laboral, 
+así como noticias y artículos que enriquezcan su 
+experiencia  laboral.
+H
+Manejar tecnologías de la información y 
+comunicación para obtener y procesar información 
+pertinente al trabajo, así como para comunicar 
+resultados, instrucciones e ideas.
+Selección de cómo evaluar
+DESCRiPCiÓN DE a CTiViDaDES iNSTRUMENTOS DE EValUaCiÓN SElECCiONaDOS
+actividad mixta de evaluación (práctica y teórica):
+Ejercicio práctico de lectura de planos, especificaciones 
+técnicas y proyectos de refrigeración, en el que los y las 
+estudiantes –a través de la lectura y el análisis de estos 
+documentos– identifiquen problemas que afecten el futuro 
+desarrollo del proyecto.
+Pauta de cotejo con indicadores basados en los Criterios 
+de Evaluación y en los Objetivos de aprendizaje Genéricos.
+Se sugiere aplicar una escala de apreciación que dé cuenta 
+de los siguientes aspectos:
+ › Comunicación clara.
+ › Trabajo prolijo y de calidad.
+ › Cumplimiento de plazos.
+ › Trabajo de equipo.
+ › Respeto por los otros sin distinciones.
+42
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+BiBliOGRaFÍa 
+Normas chilenas
+Instituto Nacional de Normalización. (1971). NCh745/71: Arquitectura y construcción: 
+designación y representación gráfica de materiales y elementos. Santiago: autor.
+Instituto Nacional de Normalización.  (1993). NCh13/93 ISO 5457: Dibujos 
+técnicos: formatos y elementos gráficos de las hojas de dibujo. Santiago: autor.
+Instituto Nacional de Normalización.  (1993). NCh14/93 ISO 7200: Dibujos 
+técnicos: cuadro de rotulación. Santiago: autor.
+Instituto Nacional de Normalización. (1999). NCh1156/1 Of.1999: Construcción: 
+Especificaciones técnicas: Ordenación y designación de partidas: parte 1: generalidades. 
+Santiago: autor.
+Instituto Nacional de Normalización. (1999). NCh1156/5 Of.1999: Construcción 
+Especificaciones técnicas: Ordenación y designación de partidas. Parte 5: obras 
+complementarias. Santiago: autor.
+Instituto Nacional de Normalización. (1999). NCh1156/4 Of.1999: Construcción: 
+especificaciones técnicas, ordenación y designación de partidas. Parte 4: Instalaciones. 
+Santiago: autor. 
+Instituto Nacional de Normalización. (2000). NCh15/0 Of.2000: Documentación 
+técnica de productos: escritura: parte 0: requisitos generales. Santiago: autor.
+Interpretación de planos
+Cenalmor, M. (2009). Cómo interpretar un plano. Barcelona: Ceac.
+Fawcett, P. (1999). Arquitectura: Curso básico de proyectos. Barcelona: Gustavo Gili.
+Instituto Nacional de Normalización. (1991). NCh853/91: Acondicionamiento 
+térmico: envolvente térmica de edificios: cálculo de resistencias y transmitancias 
+térmicas. Santiago: autor.
+Instituto Nacional de normalización. (1998). Nch30/98: Unidades SI y 
+recomendaciones para el uso de sus múltiplos y de otras ciertas unidades. Santiago: 
+autor.
+Instituto Nacional de normalización. (2000). Nch353/00: Construcción: cubicación 
+de obras de edificación: requisitos. Santiago: autor.
+1.
+43
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+Software
+Manhey, A. (1991). Sistema de presupuestos, cubicaciones y control de costos en 
+base a computación. Santiago: CCHC.
+Sitios web recomendados
+Bibliocad. (2014). Aire Acondicionado. 
+Recuperado de: http://www.bibliocad.com/biblioteca/climatizacion/aire-
+acondicionado/1
+Chile Cubica. (2014). Vocabulario, descripciones y cubicaciones. 
+Recuperado de: http://www.chilecubica.com/vocabularios/4-cubicaciones/
+Municipalidad de la Ciudad de Santa Fe de la Vera Cruz – Secretaria de 
+Hacienda. (2014). Adquisición e instalación de equipos de aire acondicionado 
+para diferentes áreas del Palacio Municipal. 
+Recuperado de: http://www.santafeciudad.gov.ar/media/files/
+convocatorias/930/Especificaciones_Tecnicas_Completo.pdf 
+NTIC. (2014). Curso de interpretación de planos. 
+Recuperado de: http://ntic.educacion.es/w3/eos/MaterialesEducativos/
+mem2003/planos/index.swf 
+Rojas, P. (2014). Tutorial Básico Presto8.8 HD, 
+Recuperado de: http://www.youtube.com/watch?v=vD9rYziYeaE
+Scribad. (2014). Técnicas de Cubicación. 
+Recuperado de: http://es.scribd.com/doc/64271920/Tecnicas-de-Cubicacion
+SA de CV - www.arq.com.mx (2002-2014). Aire acondicionado. 
+Recuperado de: http://documentos.arq.com.mx/Detalles/50173.html
+(los sitios web y enlaces sugeridos en este Programa fueron revisados en septiembre 
+de 2014).
+44
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+
+iNTRODUCCiÓN
+En este módulo de 190 horas pedagógicas se pretende 
+que los y las estudiantes se familiaricen con el uso de 
+diversos instrumentos de medición y que aprendan a 
+realizar diversas mediciones confiables de longitud, 
+área, volumen, temperatura, flujo de aire, presión, 
+etc., todas ellas vinculadas con su quehacer profesional 
+futuro. asimismo, se espera que conozcan las formas 
+de transmisión de calor (por conducción, radiación 
+y convección) y que puedan entender y aplicar el 
+concepto de gradiente térmica y los mejores métodos 
+de aislación orientados a recintos, tuberías y ductos.
+En este módulo se espera, además, que las y los 
+estudiantes sean capaces de comprender en qué 
+contextos se requieren dichas mediciones y la forma 
+de mejorarlas para permitir que los sistemas de 
+calefacción, refrigeración y climatización funcionen 
+adecuadamente.
+Entre otros aspectos, se pretende que aprendan a 
+transformar las unidades de medida entre los distintos 
+sistemas de medición que se aplican a equipos y 
+2. instrumentos 
+de medición y verificación
+materiales presentes en las partidas de instalaciones 
+de climatización y refrigeración (sistemas CGS, referido 
+a centímetros, gramos y segundos, y sistema MKS 
+que se  catálogos de productos, sistemas y en Ti C. 
+Se espera que sean capaces de reconocer también las 
+unidades de medida que se usan en otros países, para 
+poder convertirlas a los sistemas que se usan en Chile. 
+De manera complementaria, se pretende que puedan 
+identificar la capacidad de aislación térmica de diversos 
+materiales y elementos (muros de ladrillo fiscal o 
+princesa, con o sin estucar, tabiques de madera con o 
+sin aislación, con o sin forro interior o exterior, etc.), 
+reconocer la hermeticidad de las tuberías y comparar 
+los parámetros existentes en un recinto (volúmenes, 
+flujos de aire, temperaturas, etc.) con los que exigen 
+las normas respectivas.
+46
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+aPRENDiZaJES ESPERaDOS Y CRiTERiOS DE EValUaCiÓN
+MÓDULO 2  ·  iNSTRUMENTOS DE MEDi CiÓN Y DE VERiFi CaCiÓN 190 HORaS TERCERO MEDiO
+OBJETiVOS DE aPRENDiZaJE DE la ESPECialiDaD
+OA 3 
+Realizar mediciones y controles de verificación de distintas magnitudes relacionadas con el proyecto, de acuerdo a 
+las especificaciones técnicas, normas de seguridad, prevención de riesgos y protección del medio ambiente. 
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE  
+aPRENDiZaJE GENÉRi COS
+1. Utiliza instrumentos 
+de medición y 
+verificación de 
+distintos parámetros, 
+de acuerdo a 
+las indicaciones 
+establecidas desde 
+fábrica, considerando 
+técnicas apropiadas y 
+normas de seguridad 
+necesarias para el 
+uso del instrumento.
+1.1
+lee y extrae información técnica y de seguridad de 
+instrumentos, desde el catálogo de fabricación, para un 
+buen uso del instrumento.
+A C D
+1.2
+Utiliza instrumentos de medición, considerando los 
+protocolos establecidos y de seguridad determinados 
+por el fabricante, trabajando en equipo y coordinando 
+acciones con otros en las tareas a realizar.
+B C D
+1.3
+Mide magnitudes físicas, para detectar posibles fallas 
+y verificar el correcto funcionamiento de los equipos, 
+considerando las indicaciones de seguridad establecidas 
+desde fábrica, trabajando en equipo y coordinando acciones 
+con otros en las tareas a realizar.
+B C D
+1.4
+Realiza cálculos matemáticos para convertir las unidades 
+de medida de distintas magnitudes físicas, de acuerdo a los 
+requerimientos propios de la utilización de los instrumentos.
+C
+1.5
+Registra valores obtenidos de la lectura de instrumentos 
+para elaborar informes de resultados, de acuerdo a 
+pautas entregadas.
+A H
+2.
+47
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE  
+aPRENDiZaJE GENÉRi COS
+2. Verifica parámetros 
+medidos por los 
+instrumentos, 
+comparándolos con 
+datos de manuales 
+de fabricación de 
+los equipos, para 
+determinar posibles 
+ajustes que deben 
+realizarse a equipos 
+dentro del sistema de 
+refrigeración.
+2.1
+Verifica que los valores medidos en los equipos de 
+refrigeración se ajusten a los establecidos en su fabricación, 
+comparándolos con resultados de otros equipos.
+B C D
+2.2
+Realiza ajustes respectivos a equipos de refrigeración, de 
+acuerdo con los datos entregados por los instrumentos 
+y la comparación con lo establecido en su fabricación.
+B C
+2.3
+Realiza un informe de resultados obtenidos, de acuerdo 
+a pautas establecidas, utilizando procesadores de textos 
+y entregándolos al o la docente.
+A H
+48
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+EJEMPlO DE aCTiViDaD DE aPRENDiZaJE
+NOMBRE DEl MÓDUlO Instrumentos de medición y de verificación
+NOMBRE DE la aCTiViDaD DE aPRENDiZaJE Uso de instrumentos de medición
+DURaCiÓN DE la aCTiViDaD 5 horas
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN QUE iNClUYE
+1.
+Utiliza instrumentos de medición y 
+verificación de distintos parámetros, de 
+acuerdo a las indicaciones establecidas desde 
+fábrica, considerando técnicas apropiadas y 
+normas de seguridad necesarias para el uso 
+del instrumento.
+1.2 Utiliza instrumentos de medición, considerando los protocolos 
+establecidos y de seguridad determinados por el fabricante, trabajando 
+en equipo y coordinando acciones con otros en las tareas a realizar.
+1.3 Mide magnitudes físicas, para detectar posibles fallas y verificar el 
+correcto funcionamiento de los equipos, considerando las indicaciones 
+de seguridad establecidas desde fábrica, trabajando en equipo y 
+coordinando acciones con otros en las tareas a realizar.
+METODOlOGÍaS SElECCiONaDaS Demostración guiada
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+PREPaRaCiÓN DE la 
+aCTiViDaD
+Docente:
+ › Enseña el procedimiento técnico y de seguridad para medir magnitudes físicas con instrumentos 
+de medición pertinentes.
+ › Guía a los y las estudiantes indicándoles la finalidad de la medición. a demás, los motiva 
+indicándoles la importancia de obtener una correcta   y el respeto por las normas de seguridad 
+para evitar accidentes.
+Recursos:
+ › Sala apropiada (laboratorio o taller).
+ › instrumentos de medición de variables físicas empleadas en refrigeración.
+ › Maquetas de trabajo de sistemas de refrigeración en los que se utilicen instrumentos pertinentes.
+ › Equipos de protección personal.
+2.
+49
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+EJECUCiÓN Docente:
+ › Mediante una demostración inicial, enseña a sus estudiantes la correcta utilización de los 
+instrumentos, indicando la forma de conexionado y cómo se lee la información registrada por 
+el instrumento. les explica el sentido de la lectura y señala las consideraciones de seguridad 
+a tener presentes para evitar accidentes en la ejecución de la tarea.
+ › Es importante resguardar que se cuente con un espacio de trabajo adecuado para la actividad 
+con instrumentos de medición, equipos y componentes del sistema de refrigeración para 
+realizar las mediciones respectivas.
+Estudiantes:
+ › Practican el procedimiento de medición, utilizando los instrumentos adecuados, registrando 
+los valores obtenidos en la lectura y analizándolos para determinar si se efectuó correctamente 
+la medición.
+ › Repiten el proceso de medición, aclarando dudas sobre su procedimiento y la lectura de las 
+magnitudes medidas.
+CiERRE Estudiantes:
+ › Elaboran un informe escrito en formato digital, en el que describen los resultados obtenidos 
+de la utilización y lectura de instrumentos. 
+ › al finalizar, envían el informe al correo electrónico de su docente.
+Docente:
+ › Proyecta los trabajos realizados por sus estudiantes, los que se analizan en conjunto con el 
+curso, y aclara las dudas que puedan surgir de la actividad.
+ › Se sugiere evaluar –de manera formativa– el uso de software.
+50
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+EJEMPlO DE aCTiViDaD DE aPRENDiZaJE
+NOMBRE DEl MÓDUlO Instrumentos de medición y de verificación
+NOMBRE DE la aCTiViDaD DE aPRENDiZaJE Verificación de mediciones
+DURaCiÓN DE la aCTiViDaD 5 horas
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN QUE iNClUYE
+2.
+Verifica parámetros medidos por los 
+instrumentos, comparándolos con datos 
+de manuales de fabricación de los equipos, 
+para determinar posibles ajustes que deben 
+realizarse a equipos dentro del sistema de 
+refrigeración.
+2.1 Verifica que los valores medidos en los equipos de refrigeración se 
+ajusten a los establecidos en su fabricación, comparándolos con 
+resultados de otros equipos.
+2.3 Realiza un informe de resultados obtenidos, de acuerdo a pautas 
+establecidas, utilizando procesadores de textos y entregándolos al 
+o la docente.
+METODOlOGÍaS SElECCiONaDaS Demostración guiada
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+PREPaRaCiÓN DE la 
+aCTiViDaD
+Docente:
+ › Explica a sus estudiantes el procedimiento de verificación de valores medidos con instrumentos, 
+de acuerdo con lo estipulado por los datos indicados por los fabricantes de los equipos.
+ › Guía a sus alumnos y alumnas, indicándoles la finalidad de realizar esta verificación de datos 
+por parte de los fabricantes. 
+ › además, motiva a las y los estudiantes indicándoles la importancia de obtener una correcta 
+verificación de datos y el respeto por las normas de seguridad para evitar accidentes.
+Recursos:
+ › Sala apropiada (laboratorio o taller).
+ › instrumentos de medición de variables físicas empleadas en refrigeración.
+ › Maquetas de trabajo en sistemas de refrigeración en los que se utilicen los instrumentos 
+pertinentes.
+ › Equipos de protección personal.
+2.
+51
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+EJECUCiÓN Docente:
+ › Mediante una demostración inicial, enseña a sus estudiantes la correcta utilización de los 
+instrumentos y la verificación de datos, indicando las forma de conexionado y cómo se lee la 
+información registrada por el instrumento, comparándolas con la registrada por el fabricante. 
+ › Explica a sus alumnos y alumnas el sentido de la verificación, y señala las consideraciones 
+de seguridad a tener presentes para evitar accidentes en la ejecución de la tarea.
+ › Es importante resguardar que se debe contar con un espacio de trabajo adecuado para la 
+realización de la actividad con instrumentos de medición, equipos y componentes del sistema 
+de refrigeración, para realizar las mediciones y verificaciones respectivas.
+Estudiantes:
+ › Practican el procedimiento de medición y verificación utilizando los instrumentos adecuados, 
+registrando valores obtenidos en la lectura y analizando estos valores con los indicados en 
+su fabricación, para determinar si se efectuó correctamente dicha medición.
+ › Para la ejercitación, repiten el proceso anterior, aclarando las dudas con su docente sobre el 
+procedimiento de verificación y lo estipulado por el fabricante de los equipos.
+CiERRE Estudiantes:
+ › Elaboran un informe escrito en formato digital, en el que describen los resultados obtenidos 
+de la verificación de las magnitudes medidas. 
+ › al finalizar, envían el informe al correo electrónico de su docente.
+Docente:
+ › Proyecta los trabajos realizados por sus estudiantes, los que se analizan en conjunto con el 
+curso, y aclara las dudas que puedan surgir de la actividad.
+ › Se sugiere evaluar –de manera formativa– el uso de software.
+52
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+EJEMPlO DE aCTiViDaD DE EValUaCiÓN
+NOMBRE DEl MÓDUlO Instrumentos de medicion y de verificación
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE aPRENDiZaJE  
+GENÉRiCOS a EValUaR
+1. Utiliza instrumentos de 
+medición y verificación de 
+distintos parámetros, de 
+acuerdo a las indicaciones 
+establecidas desde fábrica, 
+considerando técnicas 
+apropiadas y normas de 
+seguridad necesarias para el 
+uso del instrumento.
+1.2
+Utiliza instrumentos de 
+medición, considerando los 
+protocolos establecidos y de 
+seguridad determinados por el 
+fabricante, trabajando en equipo 
+y coordinando acciones con 
+otros en las tareas a realizar.
+1.3
+Mide magnitudes físicas, 
+para detectar posibles 
+fallas y verificar el correcto 
+funcionamiento de los equipos, 
+considerando las indicaciones 
+de seguridad establecidas desde 
+fábrica, trabajando en equipo y 
+coordinando acciones con otros 
+en las tareas a realizar.
+B
+leer y utilizar distintos tipos de textos relacionados 
+con el trabajo, tales como especificaciones 
+técnicas, normativas diversas, legislación laboral, 
+así como noticias y artículos que enriquezcan su 
+experiencia laboral.
+C
+Realizar las tareas de manera prolija, cumpliendo 
+plazos establecidos y estándares de calidad, y 
+buscando alternativas y soluciones cuando se 
+presentan problemas pertinentes a las funciones 
+desempeñadas.
+Selección de cómo evaluar
+DESCRiPCiÓN DE a CTiViDaDES iNSTRUMENTOS DE EValUaCiÓN SElECCiONaDOS
+actividad mixta de evaluación
+(práctica y teórica).
+Ejercicio práctico de utilización de instrumentos en la 
+medición de magnitudes físicas para determinar el estado 
+de equipos y componentes.
+Prueba de conocimientos sobre:
+ › Magnitudes físicas y conversión de unidades de medida.
+lista de cotejo con indicadores basados en los Criterios 
+de Evaluación y los Objetivos de aprendizaje Genéricos.
+Se sugiere aplicar una escala de apreciación que dé cuenta 
+de los siguientes aspectos:
+ › Comunicación clara.
+ › Trabajo prolijo y de calidad.
+ › Correcta utilización de instrumentos.
+ › Trabajo en equipo.
+ › Respeto por los otros sin distinciones.
+2.
+53
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+BiBliOGRaFÍa 
+Instituto Nacional de Normalización. (2010). Nch2450/2010 ISO/IEC Guide 
+99:2007: Vocabulario Internacional de Metrología: Conceptos fundamentales y 
+generales, y términos asociados (VIMI). Santiago: autor.
+Kreith, F., Herranz, J. y Bohn, M. (2002). Principios de transferencia de calor. 
+Madrid: international Thomson.
+Cengel, A. y Hernán, J. (2004). Transferencia de calor. Ciudad de México: McGraw-Hill.
+Ministerio de Vivienda y Urbanismo. (2007). Listado oficial de soluciones 
+constructivas para acondicionamiento térmico del Ministerio: Texto aprobado por 
+resolución exenta n.3582 (V. y U.) del 5 de julio de 2007. Santiago: autor.
+Sitios web recomendados
+Red nacional de Metrología. (2014). Metrología. 
+Recuperado de: http://www.metrologia.cl/link.cgi/Metrologia/
+Instituto Nacional de Normalización. (2014). Metrología.  
+Recuperado de: http://www.inn.cl/metrologia/portada/index.php
+Rodríguez, A. (2014). Sistemas de unidades. Metrología básica. 
+Recuperado de: http://metrologiabasica.blogspot.com/
+Inzunza, J. (2014). Mecanismo de Transferencia de Calor. 
+Recuperado de: http://www.dgeo.udec.cl/~juaninzunza/docencia/fisica/cap14.pdf
+Profesorenlínea. (2014). Transferencia en Calor. 
+Recuperado de: http://www.profesorenlinea.cl/fisica/CalorTransferencia.htm
+Cooperación de Desarrollo Tecnológico, CDT. (2014). Aislación térmica 
+exterior. 
+Recuperado de: http://www.cdt.cl/cdt/uploads/aislacion_termica_exterior_
+manual_diseno_soluciones_edificaciones.pdf
+Indalum. (2006). Consideraciones Técnicas para la Selección de una Ventana 
+Térmica. 
+Recuperado de: http://biblioteca.duoc.cl/bdigital/esco/ingenieria_y_%20
+tec_construccion/100.pdf
+(los sitios web y enlaces sugeridos en este Programa fueron revisados en septiembre 
+de 2014).
+54
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+
+iNTRODUCCiÓN
+Este módulo de 228 horas pedagógicas pretende 
+que los y las estudiantes desarrollen competencias 
+para el trabajo de taller y se familiaricen con las 
+técnicas de soldadura blanda y fuerte, con las uniones 
+emballetadas, y con todos los materiales que más 
+adelante encontrarán en el mundo laboral.
+Se espera que este proceso formativo constituya una 
+experiencia relevante para ellos y ellas, entregándoles 
+oportunidades para que reconozcan las principales 
+propiedades de los materiales que se usan para fabricar, 
+soldar redes de tuberías y ductos de instalaciones de 
+climatización y refrigeración. Se pretende también que 
+3. instalación y montaje de redes 
+de refrigeración y climatización
+aprendan a soldar con diversos tipos de soldaduras, 
+siguiendo los protocolos que exige la industria; que 
+puedan armar redes de agua, de refrigerantes y ductos 
+para transmitir aire, siguiendo las especificaciones y 
+los planos de un proyecto; que sepan aislar tuberías y 
+ductos; y, que aprendan a instalar redes de tuberías en 
+diversos planos (verticales, horizontales e inclinados) 
+en distintos materiales (hormigón, albañilería, 
+tabiquería, etc.), y con las fijaciones adecuadas, 
+efectuando las respectivas pruebas de hermeticidad.
+56
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+aPRENDiZaJES ESPERaDOS Y CRiTERiOS DE EValUaCiÓN
+MÓDULO 3  · iNST alaCiÓN Y MONTaJE DE REDES DE 
+REFRiGERaCiÓN Y CliMa TiZaCiÓN 228 HORaS TERCERO MEDiO
+OBJETiVOS DE aPRENDiZaJE DE la ESPECialiDaD
+OA 4
+armar, instalar y aislar redes de ductos y cañerías para el flujo de refrigerantes, aire, agua y fluidos especiales para 
+los sistemas de refrigeración, ventilación, climatización y calefacción, realizando uniones soldadas que aseguren la 
+hermeticidad, de acuerdo a la Norma chilena NCh3241 de Buenas Prácticas.
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE  
+aPRENDiZaJE GENÉRi COS
+1. Realiza unión de 
+diferentes tipos 
+de materiales, 
+utilizando soldaduras 
+autorizadas por 
+la normativa y 
+considerando las 
+técnicas establecidas 
+desde fábrica, la 
+normativa técnica y 
+de seguridad.
+1.1
+arma una unión de tuberías y hojalatería utilizando 
+soldadura blanda, de acuerdo a las características 
+técnicas de los materiales, aplicando las metodologías 
+establecidas desde fábrica junto con la normativa técnica 
+y de seguridad respectivas.
+B C K
+1.2
+Ejecuta uniones emballetadas de diversos tipos de hojalaterías, 
+de acuerdo a las características técnicas de los materiales, 
+aplicando las metodologías establecidas desde fábrica junto 
+con la normativa técnica y de seguridad respectivas.
+B C K
+1.3
+Realiza unión en tuberías de cobre utilizando soldadura fuerte, 
+de acuerdo a las características técnicas de los materiales, 
+aplicando las metodologías establecidas desde fábrica junto 
+con la normativa técnica y de seguridad respectivas.
+B C K
+57
+3.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE  
+aPRENDiZaJE GENÉRi COS
+1. Realiza unión de 
+diferentes tipos 
+de materiales, 
+utilizando soldaduras 
+autorizadas por 
+la normativa y 
+considerando las 
+técnicas establecidas 
+desde fábrica, la 
+normativa técnica y 
+de seguridad.
+1.4
+Realiza unión en tuberías saturadas utilizando soldadura 
+fuerte, de acuerdo a las características técnicas de los 
+materiales, aplicando las metodologías establecidas 
+desde fábrica junto con la normativa técnica y de 
+seguridad respectivas.
+B C K
+1.5
+Verifica que los distintos tipos de soldaduras realizadas 
+cumplan con las indicaciones establecidas por los fabricantes 
+y la Norma Chilena de Buenas Prácticas (NCh3241).
+B C K
+2. arma diferentes 
+redes de tuberías 
+utilizando diversas 
+soldaduras, 
+considerando las 
+técnicas establecidas 
+desde fábrica, la 
+normativa técnica 
+y de seguridad 
+respectiva.
+2.1
+Prepara el lugar de trabajo de tal manera que no existan 
+objetos que dificulten la tarea o que produzcan accidentes 
+en su ejecución.
+C K
+2.2
+Realiza un listado de materiales, equipos y herramientas 
+necesarias para la ejecución del armado de redes de tuberías.
+C
+2.3
+arma redes de tuberías de acuerdo a lo indicado por los 
+planos del proyecto, aplicando técnicas establecidas desde 
+su fabricación, la normativa técnica y seguridad respectiva.
+B C K
+2.4
+arma redes de tuberías soldando con diversos tipos de 
+soldadura, de acuerdo a características técnicas de los 
+materiales, aplicando técnicas establecidas desde fábrica, 
+junto con la normativa técnica y seguridad respectiva.
+B C K
+2.5
+Utiliza los equipos de protección personal para la ejecución 
+de los trabajos, de acuerdo a lo planteado por la normativa 
+técnica y seguridad respectiva.
+B C K
+2.6
+Verifica que los trabajos de armado realizados cumplan con 
+las indicaciones establecidas por las especificaciones técnicas.
+B C
+58
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE  
+aPRENDiZaJE GENÉRi COS
+3. instala diferentes 
+redes de tuberías 
+para la conducción 
+de agua, aire y 
+refrigerantes, 
+asegurando su 
+estabilidad mediante 
+fijaciones apropiadas 
+al plano y al material 
+que las sustentará, 
+considerando las 
+técnicas establecidas 
+desde fábrica, la 
+normativa técnica 
+y de seguridad 
+respectiva.
+3.1
+Realiza un listado de materiales, equipos y herramientas 
+necesarias para la instalación de redes de tuberías.
+C
+3.2
+Monta redes de tuberías sobre distintos materiales 
+(hormigón, albañilería, tabiquería, etc.), de acuerdo a las 
+especificaciones técnicas y planos respectivos, aplicando 
+técnicas establecidas por sus fabricantes, la normativa 
+técnica y seguridad respectiva.
+B C K
+3.3
+Realiza pruebas de hermeticidad de acuerdo a las 
+especificaciones técnicas, aplicando técnicas establecidas 
+desde fábrica, la normativa técnica y seguridad respectiva.
+B C K
+3.4
+Utiliza los equipos de protección personal para la ejecución 
+de los trabajos, de acuerdo a lo planteado por la normativa 
+técnica y seguridad respectiva.
+B C K
+3.5
+Verifica que la instalación de diferentes tipos de tuberías 
+cumplan con las indicaciones establecidas por los fabricantes 
+y la Norma chilena NCh3241 de Buenas Prácticas.
+B C K
+59
+3.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE  
+aPRENDiZaJE GENÉRi COS
+4. aísla redes de 
+tuberías para la 
+conducción de agua, 
+aire y refrigerantes, 
+considerando las 
+técnicas establecidas 
+desde fábrica, la 
+normativa técnica y de 
+seguridad respectiva.
+4.1
+Selecciona el aislante adecuado de acuerdo con el material 
+utilizado en la construcción de la tubería, según las 
+especificaciones técnicas establecidas desde fabricación.
+B C
+4.2
+Realiza un listado de materiales, equipos y herramientas 
+necesarias para la ejecución del aislamiento de redes 
+de tuberías.
+C
+4.3
+aísla tuberías utilizando materiales apropiados de acuerdo 
+a sus características técnicas, aplicando metodologías 
+establecidas desde fábrica, la normativa técnica y de 
+seguridad respectiva.
+B C K
+4.4
+Utiliza los equipos de protección personal para la ejecución 
+de los trabajos, de acuerdo a lo planteado por la normativa 
+técnica y seguridad respectiva.
+B C K
+4.5
+Verifica que la aislación de diferentes tipos de tuberías, 
+cumplan con las indicaciones establecidas por sus fabricantes 
+y la Norma chilena NCh3241 de Buenas Prácticas.
+B C K
+60
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+EJEMPlO DE aCTiViDaD DE aPRENDiZaJE
+NOMBRE DEl MÓDUlO Instalación y montaje de redes de refrigeración y climatización
+NOMBRE DE la aCTiViDaD DE aPRENDiZaJE armado de redes de tuberías
+DURaCiÓN DE la aCTiViDaD 6 horas
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN QUE iNClUYE
+2.
+arma diferentes redes de tuberías utilizando 
+diversas soldaduras, considerando las 
+técnicas establecidas desde fábrica, la 
+normativa técnica y de seguridad respectiva.
+2.2 Realiza un listado de materiales, equipos y herramientas necesarias 
+para la ejecución del armado de redes de tuberías.
+2.3 arma redes de tuberías de acuerdo a lo indicado por los planos del 
+proyecto, aplicando técnicas establecidas desde su fabricación, la 
+normativa técnica y seguridad respectiva.
+METODOlOGÍaS SElECCiONaDaS Demostración guiada
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+PREPaRaCiÓN DE la 
+aCTiViDaD
+Docente:
+ › Explica el procedimiento de armado de redes de tuberías, de acuerdo con lo estipulado por 
+los planos del proyecto y las especificaciones técnicas.
+ › además, las y los motiva, indicando la importancia de realizar un correcto trabajo de armado 
+y el respeto por las normas de seguridad para evitar accidentes.
+Recursos:
+ › Sala apropiada (laboratorio o taller).
+ › Materiales.
+ › Herramientas.
+ › instrumentos para el armado de redes de tuberías empleadas en refrigeración.
+ › Equipos de protección personal.
+61
+3.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+EJECUCiÓN Docente:
+ › Mediante una demostración inicial, enseña a sus estudiantes el correcto procedimiento 
+de armado de redes de tuberías, indicando las formas de armado y comparándolas con la 
+información registrada en planos y especificaciones técnicas.
+ › les explica cuáles son las consideraciones de seguridad a tener presentes para evitar accidentes 
+en la ejecución de la tarea.
+Estudiantes:
+ › Practican el procedimiento de armado de redes de tuberías, utilizando las herramientas 
+y materiales adecuados y comprobando si la tarea realizada es coherente con los planos 
+respectivos y las especificaciones técnicas, procurando realizar las tareas de forma correcta 
+y respetando las normas de seguridad.
+ › Repiten el proceso de armado, aclarando las dudas con su docente sobre el procedimiento de 
+armado de redes, lo estipulado por el plano y las especificaciones técnicas.
+CiERRE Estudiantes:
+ › Elaboran un informe escrito en formato digital, en donde describen el procedimiento de 
+armado de redes e identificando aspectos logrados y por lograr.
+ › al finalizar, envían el informe al correo electrónico de su docente.
+Docente:
+ › Proyecta los trabajos realizados por sus estudiantes, los que se analizan en conjunto, y aclara 
+las dudas que puedan surgir de la actividad.
+ › Se sugiere evaluar –de manera formativa– el uso de software.
+62
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+EJEMPlO DE aCTiViDaD DE aPRENDiZaJE
+NOMBRE DEl MÓDUlO Instalación y montaje de redes de refrigeración y climatización
+NOMBRE DE la aCTiViDaD DE aPRENDiZaJE instalación de redes de tuberías
+DURaCiÓN DE la aCTiViDaD 6 horas
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN QUE iNClUYE
+3.
+instala diferentes redes de tuberías para la 
+conducción de agua, aire y refrigerantes, 
+asegurando su estabilidad mediante fijaciones 
+apropiadas al plano y al material que las 
+sustentará, considerando las técnicas 
+establecidas desde fábrica, la normativa 
+técnica y de seguridad respectiva.
+3.2 Monta redes de tuberías sobre distintos materiales (hormigón, 
+albañilería, tabiquería, etc.), de acuerdo a las especificaciones 
+técnicas y planos respectivos, aplicando técnicas establecidas por 
+sus fabricantes, la normativa técnica y seguridad respectiva.
+3.4 Utiliza los equipos de protección personal para la ejecución de 
+los trabajos, de acuerdo a lo planteado por la normativa técnica y 
+seguridad respectiva.
+METODOlOGÍaS SElECCiONaDaS Demostración guiada
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+PREPaRaCiÓN DE la 
+aCTiViDaD
+Docente:
+ › Explica a sus estudiantes el procedimiento de montaje de las redes de tuberías, de acuerdo 
+con lo estipulado por los planos del proyecto y las especificaciones técnicas.
+ › las y los motiva, indicando la importancia de realizar un correcto trabajo de montaje y el 
+respeto por las normas de seguridad para evitar accidentes.
+Recursos:
+ › Sala apropiada (laboratorio o taller).
+ › Materiales.
+ › Herramientas.
+ › instrumentos necesarios para el montaje de redes de tuberías empleadas en refrigeración.
+ › Equipos de protección personal.
+63
+3.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+EJECUCiÓN Docente:
+ › Mediante una demostración inicial, explica a sus estudiantes el correcto procedimiento 
+de montaje de redes de tuberías, indicando las formas de montaje y comparándolas con la 
+información registrada en los planos y en las especificaciones técnicas.
+ › les explica cuáles son las consideraciones de seguridad a tener presentes para evitar accidentes 
+en la ejecución de la tarea.
+Estudiantes:
+ › Practican el procedimiento de montaje de redes de tuberías, utilizando las herramientas y materiales 
+adecuados, comprobando si la tarea realizada es coherente con los planos respectivos y las 
+especificaciones técnicas, procurando realizar las tareas y respetando las normas de seguridad.
+ › Repiten el proceso de montaje, aclarando las dudas con su docente sobre el procedimiento 
+de montaje de redes, y lo estipulado por el plano y las especificaciones técnicas.
+CiERRE Estudiantes:
+ › Participan de un plenario conducido por el o la docente, compartiendo aquellos aspectos 
+clave del procedimiento de instalación de tuberías.
+Docente:
+ › Conduce un plenario, invitando a sus estudiantes a compartir sus impresiones respecto 
+de la actividad realizada y señalando aspectos clave a los que prestar atención durante el 
+procedimiento.
+64
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+EJEMPlO DE aCTiViDaD DE EValUaCiÓN
+NOMBRE DEl MÓDUlO Instalación y montaje de redes de refrigeración y climatización
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE aPRENDiZaJE  
+GENÉRiCOS a EValUaR
+3. instala diferentes redes de 
+tuberías para la conducción 
+de agua, aire y refrigerantes, 
+asegurando su estabilidad 
+mediante fijaciones 
+apropiadas al plano y al 
+material que las sustentará, 
+considerando las técnicas 
+establecidas desde fábrica, 
+la normativa técnica y de 
+seguridad respectiva.
+3.2
+Monta redes de tuberías 
+sobre distintos materiales 
+(hormigón, albañilería, 
+tabiquería, etc.), de acuerdo a 
+las especificaciones técnicas y 
+planos respectivos, aplicando 
+técnicas establecidas por 
+sus fabricantes, la normativa 
+técnica y seguridad respectiva.
+3.4
+Utiliza los equipos de protección 
+personal para la ejecución de 
+los trabajos, de acuerdo a lo 
+planteado por la normativa 
+técnica y seguridad respectiva.
+B
+leer y utilizar distintos tipos de textos relacionados 
+con el trabajo, tales como especificaciones 
+técnicas, normativas diversas, legislación laboral, 
+así como noticias y artículos que enriquezcan su 
+experiencia laboral.
+C
+Realizar las tareas de manera prolija, cumpliendo 
+plazos establecidos y estándares de calidad, 
+y buscando alternativas y soluciones cuando 
+se presentan problemas pertinentes a las 
+funciones desempeñadas.
+K
+Prevenir situaciones de riesgo y enfermedades 
+ocupacionales, evaluando las condiciones del entorno 
+del trabajo y utilizando los elementos de protección 
+personal según la normativa correspondiente.
+Selección de cómo evaluar
+DESCRiPCiÓN DE a CTiViDaDES iNSTRUMENTOS DE EValUaCiÓN SElECCiONaDOS
+actividad mixta de evaluación
+(práctica y teórica)
+Ejercicio práctico de montaje de redes de tubería sobre 
+distintas superficies de materiales de construcción 
+(hormigón, albañilería, tabiquería, etc.), respetando las 
+especificaciones técnicas y planos respectivos, aplicando 
+técnicas de montaje establecidas desde fábrica, la 
+normativa técnica y de seguridad respectiva.
+Prueba de conocimientos sobre:
+ › Normativa sobre montaje de redes de tuberías.
+Pauta de cotejo con indicadores basados en los Criterios 
+de Evaluación y los Objetivos de aprendizaje Genéricos.
+Escala de valor o apreciación que dé cuenta de los 
+siguientes aspectos:
+ › Seguimiento de pauta de trabajo.
+ › Trabajo prolijo y de calidad.
+ › Correcta utilización de herramientas.
+ › adecuada utilización de equipos de protección personal.
+ › adecuada aplicación de normas de seguridad en la 
+ejecución de las tareas.
+ › Trabajo en equipo.
+ › Respeto por los otros sin hacer distinciones. 
+65
+3.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+BiBliOGRaFÍa 
+Fuentes, J. (2001). Usos del cobre: instalaciones sanitarias. Santiago: Procobre.
+Instituto Nacional de Normalización (Chile). (1978). Nch1462/78: Metales de 
+aporte para soldadura blanda y soldadura fuerte: código de símbolos. Santiago: autor. 
+Instituto Nacional de Normalización (Chile). (1978). Nch1442/78: Uniones hechas 
+mediante soldadura blanda o soldadura fuerte: determinación de la resistencia al 
+cizalle. Santiago: autor.
+Lobjois, C. (2004). Uniones y soldaduras: Provisionales y permanentes. Barcelona: Ceac.
+Mayagoitía, J. (2004). Tecnología e ingeniería de materiales. Ciudad de México: 
+McGraw-Hill interamericana.
+Sitios web recomendados
+Materialesnavarro. (2014). Soldadura blanda. 
+Recuperado de: http://www.youtube.com/watch?v=aG09Q2NJmYk
+Materialesnavarro. (2014). Soldadura fuerte. 
+Recuperado de: http://www.youtube.com/watch?v=qFgXuSeZaOU
+Rolynurse Balderrama. (2014). Refrigeración y Aire Acondicionado. 
+Recuperado de: http://www.youtube.com/watch?v=m5MF0JviFSk
+Comité Técnico de Certificación de Tubos y accesorios de cobre y otros componentes 
+para su instalación. (2014). La Soldadura blanda: Requisitos, normativa y consejos. 
+Recuperado de: http://www.afacosol.com/D aTa/ficheros/articulo%20
+T%C3%a9cnico%20SOlDaDURa%20BlaNDa%20Julio%202008%20DEF.pdf 
+Privacy Policy. (2013). Curso de Soldadura. 
+Recuperado de: http://www.soldexsa.com.pe/descarga/manual_sold_oer_exsa.pdf 
+Forofrio. (2011). Fabricación de Conductos. 
+Recuperado de: http://www.youtube.com/watch?v=0Z0CiBnst4g 
+(los sitios web y enlaces sugeridos en este Programa fueron revisados en septiembre 
+de 2014).
+66
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+
+iNTRODUCCiÓN
+En este módulo de 228 horas pedagógicas, se espera 
+que los y las estudiantes conozcan la instalación 
+y montaje de equipos de sistemas refrigeración y 
+climatización. además, se espera que aprendan a instalar 
+sus respectivos controles electrónicos automáticos. 
+Específicamente, se busca que sean capaces de 
+reconocer los principios de termodinámica y gases 
+compresibles, entre otros, que permiten identificar y 
+operar los diferentes sistemas y equipos de refrigeración 
+disponibles para diversas instalaciones; interpretar 
+las respectivas especificaciones y requerimientos 
+técnicos y detectar qué dificultades podrían presentar 
+en la instalación. a dicionalmente, se espera que 
+4. instalación  
+y montaje de equipos
+conozcan la planificación de la obra, qué requisitos 
+se deben cumplir antes de instalar los distintos 
+equipos y sistemas de refrigeración y climatización, 
+y que aprendan a instalar dichos equipos y sus 
+correspondientes dispositivos de control electrónico 
+automáticos.
+Este módulo integra los aprendizajes de módulos 
+anteriores y aborda conocimientos, habilidades y actitudes 
+que tendrán aportarán a la configuración del perfil del o 
+la estudiante de la especialidad, incluyendo aspectos que 
+lo o la destacarán de otros trabajadores y trabajadoras 
+del sector al comenzar a ejercer como profesionales.
+68
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+aPRENDiZaJES ESPERaDOS Y CRiTERiOS DE EValUaCiÓN
+MÓDULO 4  ·  iNST alaCiÓN Y MONTaJE DE EQUiPOS 228 HORaS TERCERO MEDiO
+OBJETiVOS DE aPRENDiZaJE DE la ESPECialiDaD
+OA 5
+instalar equipos y componentes de sistemas de refrigeración, calefacción, climatización y ventilación de energías 
+diversas, incluidos los dispositivos electrónicos de control automático, de acuerdo a las especificaciones técnicas del 
+proyecto y las orientaciones del profesional encargado, considerando la Norma chilena NCh3241 de Buenas Prácticas.
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE  
+aPRENDiZaJE GENÉRi COS
+1. lee y utiliza planos, 
+junto con las 
+especificaciones 
+técnicas de distintos 
+sistemas y equipos 
+de refrigeración 
+y climatización, 
+para identificar las 
+dificultades que 
+podrían presentar en 
+la instalación.
+1.1
+Establece posibles problemas en la instalación de equipos 
+y sistemas, a través de la lectura de las especificaciones 
+técnicas.
+B C
+1.2
+Chequea las especificaciones que deben tener las 
+obras previas en los recintos, de acuerdo a planos y 
+especificaciones técnicas del proyecto, para permitir la 
+correcta instalación de los distintos sistemas y equipos 
+de refrigeración y climatización.
+B C
+69
+4.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE  
+aPRENDiZaJE GENÉRi COS
+2. instala equipos 
+y componentes 
+de sistemas de 
+refrigeración, 
+climatización, 
+calefacción 
+y ventilación 
+disponibles para 
+instalaciones 
+domiciliarias, 
+considerando las 
+especificaciones 
+técnicas establecidas 
+por los manuales 
+de instalación, la 
+normativa técnica y de 
+seguridad respectiva.
+2.1
+Prepara el lugar de montaje de acuerdo a especificaciones 
+técnicas y planos respectivos, aplicando técnicas 
+establecidas por el fabricante, la normativa técnica y 
+seguridad respectiva.
+B C K
+2.2
+Realiza un listado de materiales, equipos y herramientas 
+necesarias para la instalación de equipos y componentes 
+de sistemas de refrigeración, de acuerdo a lo indicado por 
+los planos respectivos.
+B C
+2.3
+instala equipos y componentes de sistemas de refrigeración, 
+climatización, calefacción y ventilación, aplicando técnicas 
+establecidas por las especificaciones técnicas y planos 
+respectivos, considerando en el desarrollo de los trabajos 
+la normativa técnica y de seguridad respectiva.
+B C K
+2.4
+Verifica que la instalación de equipos y componentes del 
+sistema cumplan con las indicaciones establecidas por sus 
+fabricantes y la Norma chilena NCh3241 de Buenas Prácticas.
+B C K
+3. instala dispositivos de 
+control automáticos, 
+considerando las 
+especificaciones 
+técnicas establecidas 
+desde fábrica, la 
+normativa técnica y de 
+seguridad respectiva.
+3.1
+Realiza un listado de materiales, equipos y herramientas 
+necesarias para la instalación de dispositivos de control 
+automáticos, de acuerdo a planos y especificaciones técnicas.
+B C
+3.2
+instala dispositivos electrónicos de control de instalaciones 
+en distintos sistemas y equipos de refrigeración y 
+climatización, de acuerdo a las especificaciones técnicas 
+y planos respectivos, aplicando metodologías establecidas 
+desde fábrica, la normativa técnica y de seguridad 
+respectiva, utilizando los equipos de protección personal.
+B C K
+3.3
+Verifica que la instalación de dispositivos electrónicos de 
+control cumpla con las indicaciones establecidas por sus 
+fabricantes y la Norma chilena NCh3241 de Buenas Prácticas.
+B C K
+70
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+EJEMPlO DE aCTiViDaD DE aPRENDiZaJE
+NOMBRE DEl MÓDUlO Instalación y montaje de equipos
+NOMBRE DE la aCTiViDaD DE aPRENDiZaJE instalación de equipos y componentes
+DURaCiÓN DE la aCTiViDaD 6 horas
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN QUE iNClUYE
+2.
+instala equipos y componentes de sistemas 
+de refrigeración, climatización, calefacción 
+y ventilación disponibles para instalaciones 
+domiciliarias, considerando las especificaciones 
+técnicas establecidas por los manuales 
+de instalación, la normativa técnica y de 
+seguridad respectiva.
+2.3 instala equipos y componentes de sistemas de refrigeración, 
+climatización, calefacción y ventilación, aplicando técnicas establecidas 
+por las especificaciones técnicas y planos respectivos, considerando 
+en el desarrollo de los trabajos la normativa técnica y de seguridad 
+respectiva.
+2.4 Verifica que la instalación de equipos y componentes del sistema 
+cumpla con las indicaciones establecidas por sus fabricantes y la 
+Norma chilena NCh3241 de Buenas Prácticas.
+METODOlOGÍaS SElECCiONaDaS Demostración guiada
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+PREPaRaCiÓN DE la 
+aCTiViDaD
+Docente:
+ › Explica el procedimiento de instalación de equipos y componentes, de acuerdo con lo estipulado 
+por los planos del proyecto y las especificaciones técnicas.
+ › Guía a sus estudiantes, indicándoles la finalidad del procedimiento de instalación y montaje 
+de equipos y componentes, de acuerdo a lo indicado por los planos y las especificaciones 
+técnicas. 
+ › los motiva, indicando la importancia de realizar un correcto trabajo de instalación y montaje, 
+además del respeto por las normas de seguridad para evitar accidentes.
+Recursos:
+ › Sala apropiada (laboratorio o taller).
+ › Materiales, herramientas, equipos e instrumentos necesarios para la instalación y montaje 
+de equipos.
+ › Componentes de sistemas de refrigeración. 
+ › Equipos de protección personal.
+71
+4.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+EJECUCiÓN Docente:
+ › Mediante una demostración inicial, le enseña a sus estudiantes el correcto procedimiento 
+de instalación y montaje de equipos y componentes, indicando las formas de montaje y 
+comparándolas con la información registrada en planos y especificaciones técnicas. 
+ › Explica cuáles son las consideraciones de seguridad a tener presentes para evitar accidentes 
+en la ejecución de la tarea.
+Estudiantes:
+ › Practican el procedimiento de instalación y montaje de equipos y componentes, utilizando 
+las herramientas y materiales adecuados, comprobando si la tarea realizada es coherente con 
+los planos respectivos y las especificaciones técnicas, y respetando las normas de seguridad.
+ › Repiten el proceso de instalación y montaje, aclarando las dudas con su docente sobre su 
+procedimiento, verificando lo estipulado por el plano y las especificaciones técnicas.
+CiERRE Estudiantes:
+ › Elaboran un informe escrito en formato digital, en el que analizan el procedimiento de 
+instalación de equipos, haciendo alusión a puntos críticos que deben ser considerados.
+ › al finalizar, envían el informe al correo electrónico de su docente. 
+Docente:
+ › Proyecta los trabajos realizados por sus estudiantes, los que se analizan en conjunto con el 
+curso, y aclara las dudas que puedan surgir de la actividad.
+ › Se sugiere evaluar de manera formativa el uso de software.
+72
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+EJEMPlO DE aCTiViDaD DE aPRENDiZaJE
+NOMBRE DEl MÓDUlO Instalación y montaje de equipos
+NOMBRE DE la aCTiViDaD DE aPRENDiZaJE instalación de dispositivos de control automático
+DURaCiÓN DE la aCTiViDaD 6 horas
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN QUE iNClUYE
+3.
+instala dispositivos de control automáticos, 
+considerando las especificaciones técnicas 
+establecidas desde fábrica, la normativa 
+técnica y de seguridad respectiva.
+3.2 instala dispositivos electrónicos de control de instalaciones en 
+distintos sistemas y equipos de refrigeración y climatización, de 
+acuerdo a las especificaciones técnicas y planos respectivos, aplicando 
+metodologías establecidas desde fábrica, la normativa técnica y de 
+seguridad respectiva, utilizando los equipos de protección personal.
+3.3 Verifica que la instalación de dispositivos electrónicos de control 
+cumplan con las indicaciones establecidas por sus fabricantes y la 
+Norma chilena NCh3241 de Buenas Prácticas.
+METODOlOGÍaS SElECCiONaDaS Demostración guiada
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+PREPaRaCiÓN DE la 
+aCTiViDaD
+Docente:
+ › Explica a sus estudiantes el procedimiento de instalación de dispositivos de control automático, 
+de acuerdo con lo estipulado por los planos del proyecto y las especificaciones técnicas.
+ › además, los motiva, indicando la importancia de realizar un correcto trabajo de instalación 
+y montaje, respetando las normas de seguridad para evitar accidentes.
+Recursos:
+ › Sala apropiada (laboratorio o taller).
+ › Materiales, herramientas, equipos e instrumentos necesarios para la instalación y montaje 
+de dispositivos de control automático de sistemas de refrigeración.
+ › Equipos de protección personal.
+73
+4.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+EJECUCiÓN Docente:
+ › Mediante una demostración inicial, enseña el correcto procedimiento de instalación y montaje 
+de dispositivos de control automático, indicando las formas de montaje y comparándolas con 
+la información registrada en planos y especificaciones técnicas.
+ › además, les explica cuáles son las consideraciones de seguridad a tener presentes para evitar 
+accidentes en la ejecución de la tarea.
+Estudiantes:
+ › Practican el procedimiento de instalación y montaje de dispositivos de control automático, 
+utilizando las herramientas y los materiales adecuados, comprobando si la tarea realizada es 
+coherente con los planos respectivos y las especificaciones técnicas, y procurando respetar 
+las normas de seguridad.
+ › Repiten el proceso de instalación y montaje anterior, aclarando las dudas con su docente 
+sobre el procedimiento de instalación y montaje, verificando lo estipulado por el plano y las 
+especificaciones técnicas.
+CiERRE Estudiantes:
+ › Participan de un plenario conducido por el o la docente, compartiendo aquellos aspectos 
+clave del procedimiento de instalación de dispositivos de control automático. 
+Docente:
+ › Conduce un plenario, invitando a sus estudiantes a compartir sus impresiones respecto 
+de la actividad realizada y señalando aspectos clave a los que prestar atención durante el 
+procedimiento. 
+74
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+EJEMPlO DE aCTiViDaD DE EValUaCiÓN
+NOMBRE DEl MÓDUlO Instalación y montaje de equipos
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE aPRENDiZaJE  
+GENÉRiCOS a EValUaR
+2. instala equipos y 
+componentes de sistemas 
+de refrigeración, 
+climatización, calefacción 
+y ventilación disponibles 
+para instalaciones 
+domiciliarias, considerando 
+las especificaciones 
+técnicas establecidas por 
+los manuales de instalación, 
+la normativa técnica y de 
+seguridad respectiva.
+2.3
+instala equipos y componentes 
+de sistemas de refrigeración, 
+climatización, calefacción 
+y ventilación, aplicando 
+técnicas establecidas por las 
+especificaciones técnicas y 
+planos respectivos, considerando 
+en el desarrollo de los trabajos 
+la normativa técnica y de 
+seguridad respectiva.
+2.4
+Verifica que la instalación 
+de equipos y componentes 
+del sistema cumpla con las 
+indicaciones establecidas por sus 
+fabricantes y la Norma chilena 
+NCh3241 de Buenas Prácticas.
+B
+leer y utilizar distintos tipos de textos relacionados 
+con el trabajo, tales como especificaciones 
+técnicas, normativas diversas, legislación laboral, 
+así como noticias y artículos que enriquezcan su 
+experiencia laboral.
+C
+Realizar las tareas de manera prolija, cumpliendo 
+plazos establecidos y estándares de calidad, 
+y buscando alternativas y soluciones cuando 
+se presentan problemas pertinentes a las 
+funciones desempeñadas.
+K
+Prevenir situaciones de riesgo y enfermedades 
+ocupacionales, evaluando las condiciones del 
+entorno del trabajo y utilizando los elementos 
+de protección personal según la normativa 
+correspondiente.
+Selección de cómo evaluar
+DESCRiPCiÓN DE a CTiViDaDES iNSTRUMENTOS DE EValUaCiÓN SElECCiONaDOS
+actividad mixta de evaluación
+(práctica y teórica)
+Ejercicio práctico de instalación de equipos y componentes 
+de sistemas de refrigeración, climatización, calefacción 
+y ventilación, respetando y aplicando las técnicas 
+establecidas por las especificaciones técnicas y planos 
+respectivos, considerando en el desarrollo de los trabajos 
+la normativa técnica y de seguridad correspondiente.
+Prueba de conocimientos sobre:
+ › Normativa sobre instalación y montaje de equipos y 
+componentes de sistemas de refrigeración.
+Pauta de cotejo con indicadores basados en los Criterios 
+de Evaluación y los Objetivos de aprendizaje Genéricos.
+Escala de valor o apreciación que dé cuenta de los 
+siguientes aspectos: 
+ › Seguimiento de pauta de trabajo.
+ › Trabajo prolijo y de calidad.
+ › Correcta utilización de herramientas.
+ › Utilización de equipos de protección personal.
+ › aplicación de normas de seguridad. en la ejecución 
+de las tareas.
+ › Trabajo en equipo.
+ › Respeto por los otros sin hacer distinciones.
+75
+4.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+BiBliOGRaFÍa 
+De Andrés, J. y otros. (1994). Climatización: Acondicionamiento de aire. Madrid: 
+Universidad Nacional de Educación a Distancia, Escuela de la Edificación.
+Grimm, R. y Rosaler, C. (1996). Manual de diseño de calefacción, ventilación y 
+aire acondicionado. Madrid: McGraw-Hill.
+Godoy, F. (1999). Climatización: Instalaciones termofrigoríficas. Madrid: Paraninfo.
+Instituto Nacional de Normalización. (2011). NCh 3241/11: Buenas prácticas 
+en sistemas de refrigeración y climatización. Santiago: autor.
+Pita, G. (1994). Acondicionamiento de aire: Principios y sistemas: un enfoque 
+energético. Ciudad de México: Compañía Editorial Continental.
+Ramírez, J., Miranda, L. y Llorens, M. (2000). Nueva enciclopedia de la climatización. 
+Barcelona: Ceac.
+Tricomi, E. (1996). ABC del aire acondicionado. Ciudad de México: alfaomega.
+Sitios web recomendados
+Ramirez, J. (2014). Tipos de Termostatos. 
+Recuperado de: http://www.youtube.com/watch?v=E-k2Q2HwyMs 
+About.com. (2014). Como funciona su Aire Acondicionado. 
+Recuperado de: http://reparaciones.about.com/od/heatingcoolingrepair/ss/
+How-Your-Home-air-Conditioning-System-Works.htm 
+Representaciones Thermal System. (2014). Aire Acondicionado – Conceptos Básicos. 
+Recuperado de: http://www.thermal.com.ve/recursos/conceptos_basicos.html 
+(los sitios web y enlaces sugeridos en este Programa fueron revisados en septiembre 
+de 2014).
+76
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+
+iNTRODUCCiÓN
+En este módulo de 228 horas pedagógicas se pretende 
+que los y las estudiantes conozcan los distintos 
+tipos de fluidos que se utilizan en la refrigeración 
+y climatización, así como los riesgos asociados a 
+su manipulación y los procedimientos seguros para 
+operar con ellos. además, se espera que aprendan a 
+cargar y poner en marcha los equipos de climatización 
+y refrigeración. para ello, este módulo es de carácter 
+práctico de desarrollo en taller, en el que se podrán 
+familiarizar con materiales y procedimientos de uso 
+corriente en la industria.
+Específicamente, se espera que los y las estudiantes 
+reconozcan la composición de los distintos fluidos 
+que se emplean en la refrigeración y climatización, 
+5. Puesta en marcha de equipos 
+de refrigeración y climatización
+qué usos tienen según los equipos, su compatibilidad 
+con los lubricantes, las cargas máximas recomendadas, 
+su eficiencia, y las ventajas y desventajas de usarlos, 
+entre otros. adicionalmente, se busca que sean capaces 
+de analizar el impacto ambiental que provocan 
+dichos fluidos y que sepan detectar cuáles son más 
+amigables con el medio ambiente y sus respectivos 
+niveles de peligrosidad. asimismo, se pretende que 
+conozcan las especificaciones técnicas de los equipos 
+y que verifiquen que haya condiciones de seguridad 
+adecuadas para instalarlos. por último, se espera que 
+logren cargar los fluidos correspondientes, verificar 
+que se cumplan los parámetros adecuados y poner en 
+marcha los equipos.
+78
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+aPRENDiZaJES ESPERaDOS Y CRiTERiOS DE EValUaCiÓN
+MÓDULO 5  ·  PUESTa EN MaRCHa DE EQUiPOS DE 
+REFRiGERaCiÓN Y CliMa TiZaCiÓN 228 HORaS CUaRTO MEDiO
+OBJETiVOS DE aPRENDiZaJE DE la ESPECialiDaD
+OA 6
+Cargar fluidos y poner en marcha sistemas de refrigeración, climatización, calefacción y ventilación considerando las 
+presiones y fuerzas indicadas por los fabricantes, el uso de refrigerantes amigables con el medio ambiente y la Norma 
+Chilena NCh3241 de Buenas Prácticas.
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE  
+aPRENDiZaJE GENÉRi COS
+1. Prepara el 
+espacio físico y 
+el equipamiento 
+para el correcto 
+transporte del equipo 
+de refrigeración 
+requerido en la 
+carga de fluidos 
+en sistemas 
+refrigerantes, 
+aplicando las 
+medidas de seguridad 
+y el cuidado del 
+medio ambiente 
+necesarios para 
+manipular fluidos 
+en equipos de 
+esta especialidad, 
+establecidas en 
+la Norma chilena 
+NCh3241 de Buenas 
+Prácticas.
+1.1
+aplica las medidas de seguridad necesarias para manipular 
+los fluidos que se usan en equipos de climatización y 
+refrigeración, establecidas por la Norma chilena NCh3241 
+de Buenas Prácticas.
+B C I
+K
+1.2
+Chequea las condiciones que deben tener los recintos para 
+permitir la correcta manipulación de los distintos fluidos 
+que se usan en equipos de refrigeración y climatización. C I K
+1.3
+Transporta el equipo para realizar la carga de fluidos 
+en sistemas de refrigeración, aplicando las medidas de 
+seguridad para el traslado de estos equipos.
+C I K
+79
+5.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE  
+aPRENDiZaJE GENÉRi COS
+2. Carga fluidos 
+en equipos de 
+refrigeración, 
+aplicando las 
+medidas de seguridad 
+y cuidado del medio 
+ambiente necesarios 
+para manipular 
+fluidos en equipos 
+de refrigeración 
+y climatización, 
+establecidos en 
+la Norma Chilena 
+NCh3241 de Buenas 
+Prácticas.
+2.1
+Prepara el lugar de trabajo de acuerdo a las especificaciones 
+técnicas, aplicando metodologías establecidas desde 
+fábrica, la normativa técnica y de seguridad respectiva.
+B C K
+2.2
+Carga fluidos en equipos de refrigeración y climatización, 
+de acuerdo a las especificaciones técnicas y planos 
+respectivos, aplicando los procedimientos establecidos 
+desde fábrica, la normativa técnica y seguridad respectiva.
+B C I
+K
+2.3
+Verifica, con el equipamiento necesario, que los parámetros 
+sean seguros en la carga de fluidos, de acuerdo a las 
+especificaciones técnicas y aplicando los procedimientos 
+establecidos desde fábrica, la normativa técnica y de 
+seguridad respectiva.
+B C I
+K
+3. Pone en marcha 
+sistemas de 
+refrigeración, 
+considerando las 
+especificaciones 
+técnicas establecidas 
+desde fábrica, la 
+normativa técnica, 
+medio ambiental y de 
+seguridad respectiva.
+3.1
+Realiza un listado de materiales, equipos e instrumentos 
+necesarios para poner en marcha los sistemas de 
+refrigeración, de acuerdo a las especificaciones técnicas 
+desde fábrica. 
+B C K
+3.2
+Pone en marcha equipos de refrigeración y climatización, 
+de acuerdo a las especificaciones técnicas de fabricación, 
+la normativa técnica y de seguridad respectiva.
+B C K
+3.3
+Verifica, con el equipamiento necesario e instrumentos 
+de medición, que el sistema de refrigeración funcione de 
+manera segura, de acuerdo a las especificaciones técnicas, 
+aplicando metodologías establecidas desde fábrica, la 
+normativa técnica y de seguridad respectiva.
+B C K
+80
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+EJEMPlO DE aCTiViDaD DE aPRENDiZaJE
+NOMBRE DEl MÓDUlO Puesta en marcha de equipos de refrigeración y climatización
+NOMBRE DE la aCTiViDaD DE aPRENDiZaJE Procedimiento de carga de fluidos
+DURaCiÓN DE la aCTiViDaD 6 horas
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN QUE iNClUYE
+2.
+Carga fluidos en equipos de refrigeración, 
+aplicando las medidas de seguridad y 
+cuidado del medio ambiente necesarios para 
+manipular fluidos en equipos de refrigeración y 
+climatización, establecidos en la Norma chilena 
+NCh3241 de Buenas Prácticas.
+2.2 Carga fluidos en equipos de refrigeración y climatización, de acuerdo 
+a las especificaciones técnicas y planos respectivos, aplicando los 
+procedimientos establecidos desde fábrica, la normativa técnica y 
+seguridad respectiva.
+2.3 Verifica, con el equipamiento necesario, que los parámetros sean 
+seguros en la carga de fluidos, de acuerdo a las especificaciones 
+técnicas, aplicando los procedimientos establecidos desde fábrica, 
+la normativa técnica y de seguridad respectiva.
+METODOlOGÍaS SElECCiONaDaS Demostración guiada
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+PREPaRaCiÓN DE la 
+aCTiViDaD
+Docente:
+ › Enseña a sus estudiantes el procedimiento de carga de fluidos, de acuerdo con lo estipulado 
+por los planos del proyecto y las especificaciones técnicas establecidas por la Norma chilena 
+NCh3241 de Buenas Prácticas.
+ › además, los y las motiva indicando la importancia de realizar un correcto trabajo, considerando 
+los riesgos propios de la tarea y respetando las normas de seguridad para evitar accidentes.
+Recursos:
+ › Sala apropiada (laboratorio o taller).
+ › Materiales, herramientas, equipos e instrumentos necesarios para la ejecución del procedimiento 
+de carga de fluido.
+ › Equipos de protección personal.
+81
+5.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES Y lOS RECURSOS QUE SE UTiliZa EN CaD a 
+UNa DE laS SiGUiENTES ETaPaS:
+EJECUCiÓN Docente:
+ › Mediante una demostración inicial, explica el correcto procedimiento de carga de fluido, 
+indicando las formas de realizar el trabajo, de acuerdo con la información registrada en la 
+Norma chilena NCh3241 de Buenas Prácticas. 
+ › además, explica cuáles son las consideraciones de seguridad a tener presentes para evitar 
+accidentes en la ejecución de la tarea.
+ › acompaña y supervisa a las y los estudiantes en el proceso de carga de fluidos.
+Estudiantes:
+ › Practican el procedimiento de carga de fluido, utilizando las herramientas y materiales 
+adecuados, comprobando si la tarea realizada es coherente con la información registrada en 
+la Norma chilena NCh3241 de Buenas Prácticas y respetando las normas de seguridad.
+ › Repiten el proceso de procedimiento de carga de fluido, aclarando las dudas con su docente, 
+y verificando con instrumentos que el proceso fue bien ejecutado, no existiendo fallas como 
+fugas o filtraciones de fluido.
+CiERRE Estudiantes:
+ › Participan de un plenario conducido por el o la docente, generando hipótesis sobre consecuencias 
+asociadas a un mal manejo del procedimiento de carga de fluidos. 
+ › Vincula fugas o filtraciones con situaciones medioambientales y de salud y reflexiona sobre 
+la importancia de realizar con rigurosidad dicho procedimiento. 
+Docente:
+ › Conduce un plenario, invitando a sus estudiantes a elaborar hipótesis sobre las consecuencias 
+asociadas a una falla en el proceso de carga de fluidos. 
+ › Vincula las hipótesis de sus estudiantes con la importancia de cuidar el medioambiente y la 
+salud de las personas.
+82
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+EJEMPlO DE aCTiViDaD DE aPRENDiZaJE
+NOMBRE DEl MÓDUlO Puesta en marcha de equipos de refrigeración y climatización
+NOMBRE DE la aCTiViDaD DE aPRENDiZaJE Puesta en marcha de equipos
+DURaCiÓN DE la aCTiViDaD 6 horas
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN QUE iNClUYE
+3.
+Pone en marcha sistemas de refrigeración, 
+considerando las especificaciones técnicas 
+establecidas desde fábrica, la normativa 
+técnica, medio ambiental y de seguridad 
+respectiva.
+3.2 Pone en marcha equipos de refrigeración y climatización, de acuerdo 
+a las especificaciones técnicas de fabricación, la normativa técnica 
+y de seguridad respectiva.
+3.3 Verifica, con el equipamiento necesario e instrumentos de medición, 
+que el sistema de refrigeración funcione de manera segura, de acuerdo 
+a especificaciones técnicas, aplicando metodologías establecidas 
+desde fábrica, la normativa técnica y de seguridad respectiva.
+METODOlOGÍaS SElECCiONaDaS Demostración guiada
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+PREPaRaCiÓN DE la 
+aCTiViDaD
+Docente:
+ › Enseña a sus estudiantes el procedimiento de puesta en marcha de sistemas de refrigeración, 
+de acuerdo con lo estipulado en las especificaciones técnicas establecidas desde fabricación, 
+y a la Norma chilena NCh3241 de Buenas Prácticas.
+ › además, las y los motiva, indicando la importancia de considerar los riesgos asociados a la 
+tarea y respetando las normas de seguridad para evitar accidentes.
+Recursos:
+ › Sala apropiada (laboratorio o taller).
+ › Materiales, herramientas, equipos e instrumentos necesarios para la ejecución del procedimiento 
+de puesta en marcha.
+ › Equipos de protección personal para realizar un trabajo libre de accidentes.
+83
+5.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+DESCRiPCiÓN DE laS TaREaS QUE REaliZaN DOCENTES Y ESTUDiaNTES, Y lOS RECURSOS QUE SE UTiliZaN EN CaDa 
+UNa DE laS SiGUiENTES ETaPaS:
+EJECUCiÓN Docente:
+ › Mediante una demostración inicial, explica a sus estudiantes el correcto procedimiento de 
+puesta en marcha, indicando las formas de realizar el trabajo de acuerdo con la información 
+registrada desde fabricación y la Norma chilena NCh3241 de Buenas Prácticas. 
+ › además, explica cuáles son las consideraciones de seguridad a tener presentes para evitar 
+accidentes en la ejecución de la tarea.
+Estudiantes:
+ › Practican el procedimiento de puesta en marcha, utilizando las herramientas y materiales 
+adecuados, comprobando si la tarea realizada está de acuerdo con la información entregada 
+desde su fabricación y con la Norma chilena NCh3241 de Buenas Prácticas, respetando las 
+normas de seguridad establecidas.
+ › Repiten el procedimiento de puesta en marcha aclarando las dudas con su docente, y 
+verificando con instrumentos que el proceso fue bien ejecutado, no existiendo fallas ni mal 
+funcionamiento del sistema.
+CiERRE Estudiantes:
+ › Elaboran un mapa conceptual, en el que incluyen los aspectos (indicaciones de fabricación, 
+normas de seguridad e indicaciones del o la docente) que deben ser tomados en cuenta al 
+momento de poner en marcha un equipo. 
+ › al finalizar, envían dicho mapa al correo electrónico de su docente.
+Docente:
+ › Selecciona y proyecta algunos mapas conceptuales realizados por sus estudiantes, los que 
+se analizan en conjunto con el curso, y aclara las dudas que puedan surgir de la actividad.
+ › Se sugiere evaluar de manera formativa el uso de software.
+84
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+EJEMPlO DE aCTiViDaD DE EValUaCiÓN
+NOMBRE DEl MÓDUlO Puesta en marcha de equipos de refrigeración y climatización
+aPRENDiZaJES ESPERaDOS CRiTERiOS DE EValUaCiÓN OBJETiVOS DE aPRENDiZaJE  
+GENÉRiCOS a EValUaR
+2. Carga fluidos en equipos 
+de refrigeración, aplicando 
+las medidas de seguridad 
+y cuidado del medio 
+ambiente necesarios para 
+manipular fluidos en 
+equipos de refrigeración y 
+climatización, establecidos 
+en la Norma chilena 
+NCh3241 de Buenas 
+Prácticas.
+2.2
+Carga fluidos en equipos 
+de refrigeración y 
+climatización, de acuerdo 
+a las especificaciones 
+técnicas y planos respectivos, 
+aplicando los procedimientos 
+establecidos desde fábrica, 
+la normativa técnica y de 
+seguridad respectiva.
+2.3
+Verifica, con el equipamiento 
+necesario, que los parámetros 
+sean seguros en la carga 
+de fluidos, de acuerdo a las 
+especificaciones técnicas, 
+aplicando los procedimientos 
+establecidos desde fábrica, 
+la normativa técnica y de 
+seguridad respectiva.
+B
+leer y utilizar distintos tipos de textos relacionados 
+con el trabajo, tales como especificaciones 
+técnicas, normativas diversas, legislación laboral, 
+así como noticias y artículos que enriquezcan su 
+experiencia laboral.
+C
+Realizar las tareas de manera prolija, cumpliendo 
+plazos establecidos y estándares de calidad, 
+y buscando alternativas y soluciones cuando 
+se presentan problemas pertinentes a las 
+funciones desempeñadas.
+K
+Prevenir situaciones de riesgo y enfermedades 
+ocupacionales, evaluando las condiciones del 
+entorno del trabajo y utilizando los elementos 
+de protección personal según la normativa 
+correspondiente.
+85
+5.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+Selección de cómo evaluar
+DESCRiPCiÓN DE a CTiViDaDES iNSTRUMENTOS DE EValUaCiÓN SElECCiONaDOS
+actividad mixta de evaluación
+(práctica y teórica)
+Ejercicio práctico en el que cada estudiante aplique 
+procedimientos descritos desde fabricación y la 
+normativa técnica para la carga de fluidos, verificando 
+con equipamiento e instrumentos que la tarea ha sido 
+realizada de manera satisfactoria. 
+En el desarrollo del procedimiento, cada estudiante debe 
+aplicar la normativa de seguridad y usar los equipos de 
+protección personal.
+Prueba de conocimientos sobre:
+ › Características de fluidos refrigerantes y protocolos 
+de procedimiento de carga de fluidos, con sus 
+correspondientes normas de seguridad. 
+Pauta de cotejo con indicadores basados en los Criterios 
+de Evaluación y los Objetivos de aprendizaje Genéricos.
+Escala de valor o apreciación que dé cuenta de los 
+siguientes aspectos:
+ › Seguimiento de pauta de trabajo.
+ › Trabajo prolijo y de calidad.
+ › Correcta utilización de herramientas.
+ › Utilización de equipos de protección personal.
+ › aplicación de normas de seguridad en la ejecución de 
+las tareas.
+ › Trabajo en equipo.
+ › Respeto por los otros sin hacer distinciones.
+86
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio
+BiBliOGRaFÍa 
+De Andrés, J. y otros. (1994). Climatización: Acondicionamiento de aire. Madrid: 
+Universidad Nacional de Educación a Distancia, Escuela de la Edificación.
+Godoy, F. (1999). Climatización: Instalaciones termofrigoríficas. Madrid: Paraninfo.
+Instituto Internacional del Frío. (2000). El amoníaco como refrigerante. Madrid: 
+aMV.
+Instituto Nacional de Normalización. (2011). NCh3241/2011: Buenas prácticas 
+en sistemas de refrigeración y climatización. Santiago: autor.
+Miranda, L. (2012). Manual técnico de refrigerantes. Barcelona: Marcombo.
+Sitios web recomendados
+Administrator. (2014). Clasificación de los gases refrigerantes por grupos de seguridad. 
+Recuperado de: http://www.atix-eg.com/files/gases%20refrigerantes.pdf
+Zepeda, M. (2014). Refrigerantes. 
+Recuperado de: http://www.totaline.com.ar/site/uploads/file_7-
+2007118114423-0.pdf 
+(los sitios web y enlaces sugeridos en este Programa fueron revisados en septiembre 
+de 2014).
+87
+4.
+Programa de Estudio  |  3° y 4º medio  |  Especialidad REFRIGERACIÓN y CLIMATIZACIÓN
+iNTRODUCCiÓN
+En este módulo de 190 horas pedagógicas se pretende 
+que los y las estudiantes desarrollen las competencias 
+necesarias para diagnosticar fallas en los equipos 
+de refrigeración y climatización, y los mecanismos 
+pertinentes para repararlos y, posteriormente ejecutar 
+las mantenciones. Desde el punto de vista de la 
+empleabilidad, el presente módulo permite ampliar 
+las oportunidades de trabajo en diversas entidades e, 
+incluso, en el ejercicio libre de la profesión.
+6. Diagnóstico de sistemas de 
+refrigeración y climatización
+Para ello, se espera sean capaces de analizar los 
+respectivos manuales y especificaciones técnicas, y 
+extraer información relevante de ellos; verificar si 
+las instalaciones están bien hechas, contrastándolas 
+con lo que especifican los manuales; determinar las 
+fallas, aplicando el uso de los instrumentos y equipos 
+apropiados a la actividad; proponer soluciones y 
+elaborar un listado de fallas para una futura mantención. 
+88
+Especialidad REFRIGERACIÓN y CLIMATIZACIÓN  |  3° y 4º medio  |  Programa de Estudio

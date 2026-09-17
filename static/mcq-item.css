@@ -1,0 +1,88 @@
+/* Molde único A–D. Sin verde/rojo de corrección: eso queda en estación 5. */
+.mcq-card{
+  background:#fff;
+  border:1px solid #dceaf7;
+  border-radius:16px;
+  padding:22px 22px 18px;
+  box-shadow:0 2px 10px #195aa014;
+}
+.mcq-card[data-exam="1"]{border-top:5px solid #0878f9}
+.mcq-toolbar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:12px
+}
+.mcq-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;
+  background:#eef7ff;color:#0754c9;border:1px solid #d9e7f5
+}
+.mcq-chip.is-exam{background:#0878f9;color:#fff;border-color:#0754c9}
+.mcq-chip.is-pack{background:#f4f7ff;color:#163A9E}
+.mcq-stimulus{
+  margin:0 0 12px;color:#3D5166;font-size:15px;line-height:1.45
+}
+.mcq-media{
+  display:grid;gap:12px;margin:0 0 16px
+}
+.mcq-media.is-pair{grid-template-columns:1fr 1fr}
+.mcq-figure{
+  margin:0;border-radius:12px;overflow:hidden;background:#0B0E14;position:relative
+}
+.mcq-figure img{
+  display:block;width:100%;max-height:280px;object-fit:cover;object-position:center
+}
+.mcq-figure figcaption{
+  padding:8px 12px;font-size:12px;color:#61789c;background:#f8fbff
+}
+.mcq-pictos{
+  display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px
+}
+.mcq-picto{
+  display:inline-flex;align-items:center;gap:6px;padding:6px 10px;
+  border-radius:10px;background:#eef7ff;border:1px solid #d9e7f5;font-size:12px;color:#0754c9
+}
+.mcq-formula,.mcq-chart{
+  margin:0 0 8px;padding:12px 14px;border-radius:10px;background:#f8fbff;
+  border:1px dashed #c5d7ec;font-size:14px;color:#0B3A6B
+}
+.mcq-table-wrap{overflow:auto;border:1px solid #d9e7f5;border-radius:10px}
+.mcq-table{width:100%;border-collapse:collapse;font-size:13px}
+.mcq-table th,.mcq-table td{padding:8px 10px;border-bottom:1px solid #e8f1fb;text-align:left}
+.mcq-table th{background:#eef7ff;color:#0754c9}
+.mcq-prompt{
+  margin:0 0 14px;color:#0B3A6B;font-size:18px;line-height:1.35;font-weight:700
+}
+.mcq-options{
+  display:flex;flex-direction:column;gap:8px;margin:0;padding:0;border:0
+}
+.mcq-options .option{
+  display:flex;align-items:center;gap:12px;min-height:48px;
+  margin:0;padding:10px 14px;border-radius:12px;background:#fff;
+  border:1.5px solid #d9e7f5;cursor:pointer
+}
+.mcq-options .option:hover{border-color:#9ec0ea}
+.mcq-options .option:focus-within,
+.mcq-options .option:has(input:checked){
+  outline:2px solid #0878f9;outline-offset:1px;border-color:#0878f9;background:#f8fbff
+}
+.mcq-options .option input{position:absolute;opacity:0;pointer-events:none}
+.mcq-options .option b{
+  flex:0 0 28px;height:28px;border-radius:8px;display:grid;place-items:center;
+  background:#eef7ff;color:#0754c9;font-size:13px
+}
+.mcq-options .option:has(input:checked) b{background:#0878f9;color:#fff}
+.mcq-options .option span{padding-top:0;color:#122033;font-size:14px;line-height:1.35}
+.mcq-opt-img{
+  width:56px;height:40px;object-fit:cover;border-radius:6px;flex-shrink:0
+}
+.mcq-dev-banner{
+  margin:0 0 14px;padding:12px 14px;border-radius:12px;
+  background:#fff8e8;border:1px solid #f3e2b8;color:#8a5a12;font-weight:700
+}
+body[data-station="4"] .mcq-options .option:has(input:checked){
+  background:#f8fbff
+}
+@media(max-width:700px){
+  .mcq-media.is-pair{grid-template-columns:1fr}
+  .mcq-prompt{font-size:16px}
+  .mcq-card{padding:16px}
+}

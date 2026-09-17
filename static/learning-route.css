@@ -1,0 +1,578 @@
+/* Ruta de las 5 estaciones del módulo · Aula TP Chile
+   Un camino con cinco paradas. El borde organiza; no encierra. */
+
+.panel.route-panel.lr,
+.lr.learn-path{
+  --lr-line:#D5DEE8;
+  --lr-line-done:#8FB4C9;
+  background:#fff;
+  border:1px solid #D5DEE8;
+  border-radius:16px;
+  box-shadow:0 1px 4px rgba(7,42,78,.06);
+  padding:18px 20px 14px;
+  margin:0 0 12px;
+  scroll-margin-top:24px;
+}
+.lr-head{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin:0 0 16px;
+}
+.lr-head .work-ico{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  background:#E8F1FB;color:#1558A0;
+  box-shadow:inset 0 0 0 1px #C5D7EA;
+}
+.lr-head .work-ico svg{width:18px;height:18px}
+.lr-head h3{
+  margin:0;
+  font-size:14px;
+  color:#0B3A6B;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.lr-head p{
+  margin:4px 0 0;
+  font-size:13px;
+  color:#6B7C8E;
+}
+
+.lr-track{
+  --lr-fill:0%;
+  list-style:none;
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:10px;
+  position:relative;
+  margin:0;
+  padding:8px 4px 4px;
+}
+.lr-track::before,
+.lr-track::after{
+  content:"";
+  position:absolute;
+  top:30px;
+  left:10%;
+  right:10%;
+  height:3px;
+  border-radius:99px;
+  pointer-events:none;
+  z-index:0;
+}
+.lr-track::before{background:#E4EBF3}
+.lr-track::after{
+  right:auto;
+  width:calc(80% * var(--lr-fill) / 100);
+  background:#8FB4C9;
+}
+
+.lr-stop{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-width:0;
+  height:100%;
+  padding-top:56px;
+}
+.lr-stop.s1{--lr:#3EC6E0;--lr-soft:#D6F4FA;--lr-edge:#B8E8F2;--lr-ink:#0B3A6B}
+.lr-stop.s2{--lr:#1558A0;--lr-soft:#E8F1FB;--lr-edge:#C5D7EA;--lr-ink:#072A4E}
+.lr-stop.s3{--lr:#6A5A9A;--lr-soft:#F3EFFA;--lr-edge:#DDD4F0;--lr-ink:#3b1d7a}
+.lr-stop.s4{--lr:#C47A12;--lr-soft:#FFF4E0;--lr-edge:#F0DDB0;--lr-ink:#573613}
+.lr-stop.s5{--lr:#1F8A5B;--lr-soft:#E6F6EE;--lr-edge:#C5E6D4;--lr-ink:#0B3A6B}
+
+.lr-node{
+  width:44px;height:44px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#fff;
+  border:1.5px solid var(--lr-edge);
+  color:var(--lr-ink);
+  font-size:16px;font-weight:800;
+  position:absolute;
+  top:8px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+  margin:0;
+  box-shadow:0 1px 3px rgba(7,42,78,.06);
+}
+.lr-num{line-height:1}
+.lr-check{
+  position:absolute;top:-4px;right:-4px;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--lr);color:#fff;
+  display:grid;place-items:center;
+  box-shadow:0 0 0 2px #fff;
+}
+.lr-check .icon{width:10px;height:10px;display:block}
+.lr-stop.is-current .lr-node{
+  width:52px;height:52px;
+  top:4px;
+  border:2px solid var(--lr);
+  box-shadow:0 0 0 6px var(--lr-soft),0 4px 12px rgba(7,42,78,.1);
+  font-size:18px;
+}
+.lr-stop.is-goal .lr-node{
+  box-shadow:0 0 0 5px color-mix(in srgb, var(--lr-soft) 80%, #fff);
+}
+.lr-stop.is-goal.is-current .lr-node{
+  box-shadow:0 0 0 6px var(--lr-soft),0 4px 12px rgba(31,138,91,.16);
+}
+.lr-stop.is-locked .lr-node{
+  filter:saturate(.55);
+  border-color:#D5DEE8;
+  color:#6B7C8E;
+}
+.lr-stop.is-pending .lr-node,
+.lr-stop.is-next .lr-node{
+  border-color:var(--lr-edge);
+}
+
+.lr-card.station{
+  width:100%;
+  min-width:0;
+  min-height:168px;
+  margin:0;
+  padding:16px 12px 12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:6px;
+  flex:1;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--lr-soft) 92%,#fff) 0%,color-mix(in srgb,var(--lr-soft) 48%,#fff) 100%);
+  color:#122033;
+  border:1px solid var(--lr-edge) !important;
+  border-radius:14px;
+  box-shadow:inset 0 4px 0 color-mix(in srgb,var(--lr) 72%,#fff),0 1px 4px rgba(7,42,78,.05);
+  cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+  font:inherit;
+  filter:none;
+  opacity:1;
+}
+.lr-card.station > .icon,
+.lr-card.station > .station-number{display:none}
+.lr-card > .work-ico{
+  width:34px;height:34px;border-radius:10px;
+  background:#fff;color:var(--lr);
+  box-shadow:inset 0 0 0 1px var(--lr-edge);
+  margin:2px 0 4px;
+}
+.lr-card > .work-ico svg{width:18px;height:18px}
+.lr-name{
+  margin:0;
+  font-size:clamp(12px, 1.05vw, 14px);
+  font-weight:800;
+  color:#0B3A6B;
+  line-height:1.28;
+  letter-spacing:-0.02em;
+  overflow-wrap:normal;
+  word-break:normal;
+  hyphens:none;
+  -webkit-hyphens:none;
+  white-space:normal;
+  width:100%;
+  max-width:100%;
+}
+.lr-purpose{
+  font-size:12px;
+  color:#3D5166;
+  line-height:1.3;
+  font-weight:500;
+}
+.lr-cta{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  margin-top:auto;
+  min-height:48px;
+  padding:8px 10px;
+  border-radius:12px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  background:#fff;
+  color:var(--lr-ink);
+  border:1px solid var(--lr-edge);
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 3px 8px rgba(7,42,78,.08);
+}
+.lr-cta-ico{
+  width:26px;height:26px;border-radius:50%;
+  display:grid;place-items:center;
+  background:var(--lr-soft);
+  color:var(--lr);
+  flex-shrink:0;
+}
+.lr-cta-ico .work-ico{
+  width:26px;height:26px;margin:0;
+  background:transparent;box-shadow:none;color:inherit;
+}
+.lr-cta-ico .work-ico svg{width:14px;height:14px}
+.lr-cta-label{line-height:1.1}
+.lr-hint{
+  display:none;
+  margin:0;
+  font-size:11px;
+  color:#6B7C8E;
+  font-style:normal;
+  font-weight:600;
+}
+
+.lr-stop.is-completed .lr-card{
+  background:linear-gradient(180deg,color-mix(in srgb,var(--lr-soft) 86%,#fff),color-mix(in srgb,var(--lr-soft) 40%,#fff));
+}
+.lr-stop.is-completed .lr-cta{
+  background:#fff;
+  color:var(--lr-ink);
+  border:1.5px solid var(--lr);
+}
+.lr-stop.is-completed .lr-cta-ico{background:var(--lr);color:#fff}
+.lr-stop.is-current .lr-card{
+  background:linear-gradient(180deg,var(--lr-soft),color-mix(in srgb,var(--lr-soft) 55%,#fff));
+  border-color:color-mix(in srgb,var(--lr) 45%,#fff) !important;
+  box-shadow:inset 0 5px 0 var(--lr),0 8px 18px rgba(7,42,78,.1);
+}
+.lr-stop.is-current .lr-cta{
+  background:var(--lr);
+  color:#fff;
+  border-color:transparent;
+  box-shadow:0 8px 18px color-mix(in srgb,var(--lr) 38%,transparent);
+}
+.lr-stop.is-current .lr-cta-ico{background:#fff;color:var(--lr)}
+.lr-stop.is-current .lr-hint{display:block}
+.lr-stop.is-next .lr-cta{
+  background:#fff;
+  color:var(--lr-ink);
+  border:1.5px solid var(--lr);
+}
+.lr-stop.is-next .lr-cta-ico{background:var(--lr);color:#fff}
+.lr-stop.is-pending .lr-cta{
+  background:color-mix(in srgb,var(--lr-soft) 28%,#fff);
+}
+.lr-stop.is-locked .lr-card{
+  cursor:not-allowed;
+  background:linear-gradient(180deg,#f7f9fc,color-mix(in srgb,var(--lr-soft) 18%,#fff));
+  border-color:#E4EBF3 !important;
+  box-shadow:inset 0 4px 0 #D5DEE8,0 1px 4px rgba(7,42,78,.04);
+  filter:saturate(.7);
+}
+.lr-stop.is-locked .lr-cta{
+  background:#F4F7FB;
+  color:#6B7C8E;
+  border-color:#E4EBF3;
+  box-shadow:none;
+}
+.lr-stop.is-locked .lr-cta-ico{background:#E8EEF4;color:#6B7C8E}
+.lr-stop.is-goal:not(.is-locked) .lr-card{
+  box-shadow:inset 0 4px 0 color-mix(in srgb,var(--lr) 72%,#fff),0 1px 4px rgba(31,138,91,.08);
+}
+
+.lr-card.station:hover{
+  filter:none;
+  transform:translateY(-2px);
+  box-shadow:inset 0 4px 0 color-mix(in srgb,var(--lr) 85%,#fff),0 8px 16px rgba(7,42,78,.12);
+  border-color:color-mix(in srgb, var(--lr) 36%, #fff) !important;
+}
+.lr-stop.is-current .lr-card:hover{
+  box-shadow:inset 0 5px 0 var(--lr),0 10px 20px rgba(7,42,78,.12);
+}
+.lr-stop.is-locked .lr-card:hover{
+  transform:none;
+  filter:saturate(.7);
+  box-shadow:inset 0 4px 0 #D5DEE8,0 1px 4px rgba(7,42,78,.04);
+}
+.lr-card.station:focus-visible{
+  outline:2px solid #3EC6E0;
+  outline-offset:2px;
+}
+
+.lr-progress{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:14px 0 0;
+  padding:10px 12px 2px;
+  border-top:1px solid #E8EEF4;
+  font-size:12px;
+  color:#3D5166;
+}
+.lr-progress b{color:#0B3A6B;font-weight:800}
+.lr-bar{
+  flex:1;
+  min-width:120px;
+  height:8px;
+  border-radius:99px;
+  background:#E8EEF4;
+  overflow:hidden;
+  display:block;
+}
+.lr-bar>i{
+  display:block;
+  height:100%;
+  border-radius:99px;
+  background:color-mix(in srgb, #1558A0 55%, #3EC6E0);
+}
+
+/* Mini ruta en tarjetas de módulo (misma identidad, escala compacta). */
+.lr-mini{
+  --lr-fill:0%;
+  list-style:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:0;
+  position:relative;
+  margin:8px 0 10px;
+  padding:4px 2px;
+}
+.lr-mini::before,
+.lr-mini::after{
+  content:"";
+  position:absolute;
+  left:8px;right:8px;top:50%;
+  height:2px;border-radius:99px;
+  transform:translateY(-50%);
+  pointer-events:none;
+}
+.lr-mini::before{background:#E4EBF3}
+.lr-mini::after{
+  right:auto;
+  width:calc((100% - 16px) * var(--lr-fill) / 100);
+  background:color-mix(in srgb, #1558A0 42%, #3EC6E0);
+}
+.lr-mini-stop{
+  position:relative;z-index:1;
+  width:26px;height:26px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#fff;
+  border:1px solid #D5DEE8;
+  color:#3D5166;
+  font-size:11px;font-weight:800;
+}
+.lr-mini-stop.is-completed{
+  border-color:#C5E6D4;color:#1F8A5B;background:#E6F6EE;
+}
+.lr-mini-stop.is-current{
+  border-color:#1558A0;color:#1558A0;
+  box-shadow:0 0 0 3px #E8F1FB;
+  background:#fff;
+}
+.lr-mini-stop.is-s1.is-current{border-color:#3EC6E0;color:#0B3A6B;box-shadow:0 0 0 3px #D6F4FA}
+.lr-mini-stop.is-s2.is-current{border-color:#1558A0;color:#1558A0}
+.lr-mini-stop.is-s3.is-current{border-color:#6A5A9A;color:#6A5A9A;box-shadow:0 0 0 3px #F3EFFA}
+.lr-mini-stop.is-s4.is-current{border-color:#C47A12;color:#C47A12;box-shadow:0 0 0 3px #FFF4E0}
+.lr-mini-stop.is-s5.is-current{border-color:#1F8A5B;color:#1F8A5B;box-shadow:0 0 0 3px #E6F6EE}
+
+body[data-station="1"] .panel.route-panel.lr,
+body[data-station="2"] .panel.route-panel.lr,
+body[data-station="3"] .panel.route-panel.lr,
+body[data-station="4"] .panel.route-panel.lr,
+body[data-station="5"] .panel.route-panel.lr{
+  padding:16px 18px 12px;
+  border-radius:16px;
+  box-shadow:0 1px 4px rgba(7,42,78,.06);
+  background:#fff;
+}
+
+body.high-contrast .panel.route-panel.lr,
+body.high-contrast .lr-card.station,
+body.high-contrast .lr-node,
+body.high-contrast .lr-mini-stop{
+  border:2px solid #000 !important;
+  box-shadow:none !important;
+  background:#fff !important;
+  color:#000 !important;
+}
+body.high-contrast .lr-track::before,
+body.high-contrast .lr-mini::before{background:#000}
+body.high-contrast .lr-track::after,
+body.high-contrast .lr-mini::after{background:#000}
+body.high-contrast .lr-cta,
+body.high-contrast .lr-state{border:2px solid #000;background:#fff;color:#000;box-shadow:none}
+body.high-contrast .lr-stop.is-current .lr-cta,
+body.high-contrast .lr-stop.is-current .lr-state{background:#000;color:#fff}
+body.high-contrast .lr-cta-ico{background:#fff !important;color:#000 !important;box-shadow:none}
+
+body.hivis .lr-card.station,
+body.no-mouse .lr-card.station{border-width:2px !important}
+
+body.simple-visual .lr-hint{display:none !important}
+
+@media (max-width:1100px){
+  .lr-node{width:40px;height:40px;font-size:15px}
+  .lr-stop.is-current .lr-node{width:46px;height:46px}
+  .lr-name{font-size:13px;letter-spacing:-0.03em}
+  .lr-purpose{font-size:11px}
+  .lr-card.station{padding:10px 8px 8px}
+  .lr-track{gap:6px}
+  .lr-track::before,.lr-track::after{top:28px}
+}
+@media (max-width:700px){
+  .lr-track{
+    grid-template-columns:1fr;
+    gap:0;
+    padding:0;
+  }
+  .lr-track::before,
+  .lr-track::after{
+    left:21px;right:auto;top:22px;bottom:22px;
+    width:3px;height:auto;
+  }
+  .lr-track::after{
+    width:3px;
+    height:calc((100% - 44px) * var(--lr-fill) / 100);
+  }
+  .lr-stop{
+    flex-direction:row;
+    align-items:stretch;
+    gap:12px;
+    padding:8px 0;
+  }
+  .lr-node{
+    position:static;
+    transform:none;
+    margin:0;
+    flex-shrink:0;
+    align-self:center;
+  }
+  .lr-stop.is-current .lr-node{top:auto}
+  .lr-stop.is-current .lr-node{width:48px;height:48px}
+  .lr-card.station{
+    align-items:stretch;
+    text-align:left;
+    min-height:96px;
+    padding:12px 12px 10px;
+  }
+  .lr-cta{justify-content:flex-start}
+  .lr-card .work-ico{margin:0}
+  .lr-progress{padding-top:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  .lr-card.station,
+  .lr-node{transition:none}
+  .lr-card.station:hover{transform:none}
+}
+body.reduce-motion .lr-card.station:hover{transform:none}
+
+/* Mejora visual · tarjetas de estaciones (ruta de aprendizaje) */
+.lr-card.station{
+  position:relative;
+  overflow:hidden;
+  border-radius:20px;
+  min-height:172px;
+}
+/* burbuja orgánica decorativa abajo-derecha en el color de la estación */
+.lr-card.station::after{
+  content:"";
+  position:absolute;
+  right:-26px;bottom:-26px;
+  width:104px;height:104px;
+  border-radius:46% 54% 42% 58% / 54% 46% 54% 46%;
+  background:color-mix(in srgb, var(--lr) 13%, transparent);
+  pointer-events:none;
+  z-index:0;
+}
+.lr-card.station >*{position:relative;z-index:1}
+.lr-stop.is-current .lr-card.station::after{
+  background:color-mix(in srgb, var(--lr) 20%, transparent);
+}
+/* ícono en círculo pastel con anillo suave y destello */
+.lr-card > .work-ico{
+  width:38px;height:38px;
+  border-radius:50%;
+  background:color-mix(in srgb, var(--lr-soft) 62%, #fff);
+  box-shadow:inset 0 0 0 1.5px color-mix(in srgb, var(--lr) 24%, #fff);
+}
+.lr-card > .work-ico::after{
+  content:"";
+  position:absolute;
+  top:-5px;right:-5px;
+  width:9px;height:9px;
+  border-radius:50%;
+  background:color-mix(in srgb, var(--lr) 65%, #fff);
+  box-shadow:0 0 0 2px #fff;
+}
+/* nodo numerado con anillo temático y sombra suave */
+.lr-node{
+  box-shadow:0 0 0 4px #fff, 0 6px 14px rgba(7,42,78,.14);
+  background:color-mix(in srgb, var(--lr-soft) 55%, #fff);
+  border-color:color-mix(in srgb, var(--lr) 55%, #fff);
+}
+.lr-stop.is-current .lr-node{
+  background:var(--lr);
+  color:#fff;
+}
+.lr-stop.is-current .lr-node .lr-num{color:#fff}
+/* píldoras de estado más redondeadas y con jerarquía */
+.lr-cta{
+  border-radius:999px;
+  min-height:40px;
+}
+.lr-stop.is-current .lr-cta{
+  box-shadow:0 6px 14px color-mix(in srgb, var(--lr) 34%, transparent);
+}
+/* sombra y aire de tarjeta */
+.lr-card.station{
+  box-shadow:inset 0 4px 0 color-mix(in srgb,var(--lr) 72%,#fff),0 10px 24px rgba(7,42,78,.10);
+}
+
+/* Título grande de la ruta (referencia "Ruta de aprendizaje de las 5 Estaciones") */
+.lr-head-journey{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:14px;
+  padding-right:26px;
+  position:relative;
+}
+.lr-head-journey .lr-head-ico{
+  width:56px;height:56px;flex-shrink:0;
+  display:grid;place-items:center;
+  border-radius:16px;
+  background:#EAF1FF;
+  color:#2B6FC3;
+}
+.lr-head-journey .lr-head-ico .work-ico{width:26px;height:26px}
+.lr-head-journey .lr-head-ico .work-ico svg{width:26px;height:26px}
+.lr-head-journey .lr-head-text{min-width:0}
+.lr-head-journey .lr-head-text h3{
+  margin:0;font-size:15px;font-weight:800;color:#1B3FA0;line-height:1.1;
+}
+.lr-head-journey .lr-head-text h2{
+  margin:0;font-size:34px;font-weight:900;letter-spacing:-.02em;
+  color:#16A6C8;line-height:1.02;
+}
+.lr-head-journey .lr-head-sep{
+  width:2px;height:54px;flex-shrink:0;background:#D6DFF2;
+}
+.lr-head-journey .lr-head-lead{
+  margin:0;flex:1;min-width:0;
+  font-size:13px;color:#3D5166;line-height:1.45;font-weight:500;
+}
+.lr-head-journey .lr-head-motto{
+  flex-shrink:0;
+  font-style:italic;font-weight:700;color:#1B3FA0;
+  font-size:15px;text-align:right;line-height:1.25;
+  position:relative;padding-bottom:5px;
+  transform:rotate(-1.5deg);
+}
+.lr-head-journey .lr-head-motto::after{
+  content:"";position:absolute;left:0;right:4px;bottom:0;height:3px;
+  border-radius:99px;background:#2563EB;opacity:.5;
+}
+@media(max-width:900px){
+  .lr-head-journey{flex-wrap:wrap;gap:10px}
+  .lr-head-journey .lr-head-sep{display:none}
+  .lr-head-journey .lr-head-lead{flex-basis:100%}
+  .lr-head-journey .lr-head-motto{display:none}
+  .lr-head-journey .lr-head-text h2{font-size:26px}
+}

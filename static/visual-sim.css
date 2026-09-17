@@ -1,0 +1,298 @@
+/* Recursos visuales y simulación 3D — pedagogía, no adorno */
+
+.vis-fig {
+  margin: 0 0 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius, 14px);
+  overflow: hidden;
+}
+.vis-frame {
+  margin: 0;
+  background: #072A4E;
+  overflow: hidden;
+  max-height: min(52vh, 420px);
+}
+.vis-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(52vh, 420px);
+  object-fit: cover;
+  object-position: center;
+}
+.vis-cap {
+  margin: 8px 12px 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.vis-zoom {
+  display: flex;
+  gap: 6px;
+  padding: 8px 10px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+.vis-zoom button {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--navy);
+  font-weight: 800;
+  cursor: pointer;
+}
+.vis-zoom button:hover { border-color: var(--blue); }
+
+.vis-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 0 0 12px;
+}
+@media (max-width: 720px) {
+  .vis-compare { grid-template-columns: 1fr; }
+}
+.vis-compare .vis-fig { margin: 0; }
+
+.vis-sim {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  margin: 12px 0;
+  align-items: start;
+}
+.vis-sim:has(#vis-evidence:not([hidden])) {
+  grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.8fr);
+}
+@media (max-width: 900px) {
+  .vis-sim,
+  .vis-sim:has(#vis-evidence:not([hidden])) { grid-template-columns: 1fr; }
+}
+.scene-layout:has(.vis-sim) {
+  grid-template-columns: 1fr;
+}
+
+.vis-stage-wrap {
+  border: 1px solid var(--line);
+  border-radius: var(--radius, 14px);
+  overflow: hidden;
+  background: #072A4E;
+  width: 100%;
+  min-width: 0;
+}
+.vis-stage {
+  position: relative;
+  height: min(56vh, 420px);
+  width: 100%;
+  overflow: hidden;
+  cursor: grab;
+  perspective: 900px;
+  touch-action: none;
+}
+.vis-stage:active { cursor: grabbing; }
+.vis-stage-plane {
+  position: absolute;
+  inset: -8%;
+  width: 116%;
+  height: 116%;
+  transform-origin: 50% 48%;
+  will-change: transform;
+}
+.vis-env {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+}
+.vis-zoom-target {
+  position: relative;
+  display: block;
+  width: 100%;
+  transform-origin: 50% 50%;
+}
+.vis-frame .act-spot {
+  z-index: 2;
+}
+.vis-pin {
+  position: absolute;
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: color-mix(in srgb, var(--color-blue, #1558A0) 78%, #072A4E);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--navy, #0B3A6B) 35%, transparent);
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+.vis-pin span {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 6px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+  background: color-mix(in srgb, var(--navy, #0B3A6B) 82%, transparent);
+  border-radius: 6px;
+  padding: 2px 6px;
+  opacity: 0;
+  pointer-events: none;
+}
+.vis-pin:hover span,
+.vis-pin:focus-visible span {
+  opacity: 1;
+}
+.vis-pin:hover,
+.vis-pin:focus-visible {
+  outline: 2px solid var(--cyan, #3EC6E0);
+  outline-offset: 3px;
+}
+.vis-pin.is-focus {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cyan, #3EC6E0) 45%, transparent);
+}
+.vis-pin.is-done,
+.vis-pin.inspected {
+  background: #1F8A5B;
+}
+
+.vis-evidence {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius, 14px);
+  padding: 14px 16px;
+  min-height: 180px;
+}
+.vis-evidence h4 {
+  margin: 0 0 6px;
+  color: var(--navy);
+  font-size: 15px;
+}
+.vis-evidence p {
+  margin: 0;
+  color: var(--slate);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.vis-evidence-photo {
+  margin: 10px 0 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.vis-evidence-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 160px;
+  object-fit: cover;
+}
+
+.vis-cam {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+  padding: 10px 12px;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+}
+.vis-cam label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--slate);
+  font-size: 13px;
+  font-weight: 700;
+}
+.vis-cam input[type="range"] {
+  width: min(160px, 28vw);
+}
+.vis-cam-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: auto;
+}
+.vis-cam-actions button,
+.vis-cam > button {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--navy);
+  font-weight: 800;
+  cursor: pointer;
+}
+.vis-fig.act-figure {
+  max-height: none;
+}
+.vis-fig.act-figure img,
+.vis-hotspot .vis-zoom-target img {
+  height: auto;
+  max-height: min(52vh, 420px);
+  object-fit: cover;
+}
+.vis-hotspot .vis-frame.act-scene {
+  max-height: none;
+  min-height: 0;
+}
+
+.vis-cycle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+}
+.vis-cycle li {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 8px;
+}
+
+body.reduce-motion .vis-env,
+body.reduce-motion .vis-stage {
+  transition: none !important;
+}
+body.simple-visual .vis-pin {
+  width: 28px;
+  height: 28px;
+}
+body.low-stim .vis-stage {
+  height: min(42vh, 280px);
+}
+
+.vis-video video{
+  display:block;width:100%;max-height:min(52vh,420px);background:#072A4E
+}
+.vis-voice{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+  padding:8px 12px;border-top:1px solid var(--line);background:#F7FAFC
+}
+.vis-voice-cue{font-size:13px;color:#0B3A6B;font-weight:600}
+
+@media (max-width: 640px) {
+  .vis-frame { max-height: 46vh; }
+  .vis-frame img { max-height: 46vh; }
+  .vis-stage { height: min(46vh, 280px); }
+}

@@ -1,0 +1,24 @@
+Aula TP Chile — Campus LMS local
+================================
+
+1. Descomprime este ZIP.
+2. En una terminal:
+
+   cd aula-tp-local
+   ./start.sh
+
+3. Abre http://127.0.0.1:8000
+
+Cuentas demo:
+  estudiante / AulaTP2026!
+  docente    / DocenteTP2026!
+
+Requisitos: Python 3.10 o posterior con venv.
+En Linux x86_64, ./start.sh instala Flask desde wheelhouse/ sin Internet.
+
+No incluye .venv ni la base SQLite (data/). Esos se crean al arrancar.
+Para publicarlo en tu red local:
+
+   HOST=0.0.0.0 ./start.sh
+
+Luego entra desde otro equipo: http://IP-DE-ESTE-PC:8000

@@ -1,0 +1,13 @@
+const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
+const c=vm.createContext({document:{addEventListener(){}},current:{course_id:1,position:1,content:{cases:Array.from({length:15},(_,i)=>({title:'Caso '+i}))},state:{cases:{}}},auth:{user:{role:'student'}},courses:[{id:1}],isClimateSpecialty:()=>true});
+vm.runInContext(fs.readFileSync('static/integrated-station.js','utf8'),c);
+assert.equal(c.integrationCases().length,15);assert.equal(c.integrationUnlocked(0),true);assert.equal(c.integrationUnlocked(1),false);
+c.current.state.cases[0]={text:'Evidencia'};assert.equal(c.integrationUnlocked(1),true);assert.equal(c.integrationUnlocked(2),false);
+vm.runInContext("integrationFilter='Avanzada'",c);assert.equal(c.integrationCases().length,5);assert.equal(c.integrationCases()[0].i,10);assert.equal(c.integrationUnlocked(10),false);
+assert.equal(c.integrationPhoto(2),'/static/themes/oficio/oficio-plano-leyenda.png?v=4');
+c.current.position=3;
+assert.equal(c.integrationPhoto(2),'/static/themes/oficio/oficio-tramos.png?v=4');
+c.current.content.cases[2].image='/static/themes/oficio/oficio-cruce.png';
+assert.equal(c.integrationPhoto(2),'/static/themes/oficio/oficio-cruce.png?v=4');
+c.auth.user.role='teacher';assert.equal(c.integrationUnlocked(14),false);
+console.log('Integration UI: filtering preserves real indices, locks remain sequential, oficio fallback and teacher preview passed.');

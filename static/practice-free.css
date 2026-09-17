@@ -1,0 +1,148 @@
+/* Práctica Libre · Aula TP Chile. Familias con acento, no columnas pintadas. */
+.pf-shell{
+  position:fixed;inset:0;z-index:36;overflow:auto;
+  background:#F4F7FB;color:#122033;
+  padding-bottom:96px;
+}
+.pf-top{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:14px 22px;color:#fff;
+  background:linear-gradient(135deg,#072A4E 0%,#0B3A6B 42%,#1558A0 100%)
+}
+.pf-brand{display:flex;align-items:center;gap:14px;min-width:0}
+.pf-brand img{height:48px;width:auto;background:#fff;border-radius:10px;padding:4px}
+.pf-brand h1{margin:0;color:#fff;font-size:22px;letter-spacing:-.3px}
+.pf-brand small{display:block;opacity:.85;font-size:12px}
+.pf-top-photo{
+  width:min(280px,32vw);height:72px;border-radius:12px;overflow:hidden;flex-shrink:0;
+  background:#0B3A6B
+}
+.pf-top-photo img{width:100%;height:100%;object-fit:cover;opacity:.85}
+.pf-close,.pf-back{
+  min-height:44px;border-radius:10px;border:1px solid #ffffff55;background:#ffffff22;color:#fff
+}
+.pf-wrap{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:16px;padding:18px 22px 12px;align-items:start}
+.pf-hero{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  margin:0 0 14px
+}
+.pf-hero-mark{
+  display:flex;align-items:center;gap:12px
+}
+.pf-hero-mark .work-ico{
+  width:56px;height:56px;border-radius:50%;background:#1558A0;color:#fff
+}
+.pf-hero h2{margin:0;color:#0B3A6B;font-size:22px}
+.pf-hero p{margin:4px 0 0;color:#3D5166}
+.pf-try{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:14px;
+  background:#E6F6EE;border:1px solid #c5e6d4;color:#1F8A5B;font-weight:800
+}
+.pf-note{margin:0 0 12px;font-size:13px;color:#1558A0}
+.pf-grid{display:grid;grid-template-columns:1.05fr 1.15fr 1.05fr;gap:12px}
+.pf-fam{
+  background:#fff;border:1px solid #D5DEE8;border-radius:18px;padding:14px 14px 10px;
+  box-shadow:0 1px 2px rgba(7,42,78,.06)
+}
+.pf-fam-head{display:flex;align-items:flex-start;gap:10px;margin:0 0 10px}
+.pf-fam-head .work-ico{width:40px;height:40px;border-radius:50%;color:#fff}
+.pf-fam.is-choice{--pf:#1558A0;--pf-soft:#E8F1FB}
+.pf-fam.is-case{--pf:#0B7A8C;--pf-soft:#D6F4FA}
+.pf-fam.is-argue{--pf:#6818ed;--pf-soft:#f4f0ff}
+.pf-fam-head .work-ico{background:var(--pf)}
+.pf-fam-head b{display:block;color:var(--pf);font-size:14px}
+.pf-fam-head small{display:block;color:#6B7C8E;font-weight:600;font-size:12px;line-height:1.35}
+.pf-card{
+  width:100%;text-align:left;margin:0 0 8px;padding:10px 12px;min-height:56px;
+  border-radius:12px;border:1px solid #D5DEE8;background:#fff;color:#122033;
+  display:flex;align-items:center;gap:10px
+}
+.pf-card .work-ico{width:32px;height:32px;border-radius:10px;background:var(--pf-soft);color:var(--pf);flex-shrink:0}
+.pf-card span{flex:1;min-width:0}
+.pf-card b{display:block;font-size:13px;color:#0B3A6B}
+.pf-card small{display:block;font-size:11px;color:#6B7C8E;font-weight:500}
+.pf-card:hover:not(:disabled){border-color:var(--pf);box-shadow:0 4px 12px rgba(7,42,78,.08);transform:none}
+.pf-card.is-on{border-color:var(--pf);background:var(--pf-soft)}
+.pf-st{display:block;font-size:10px;font-weight:800;letter-spacing:.04em;color:#1558A0;margin-top:2px}
+.pf-aside{display:flex;flex-direction:column;gap:12px}
+.pf-aside .panel{background:#fff}
+.pf-aside dl{margin:0}
+.pf-aside dl>div{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid #E8F1FB;font-size:12px}
+.pf-pill{
+  display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;
+  background:#E6F6EE;color:#1F8A5B;font-weight:800;font-size:13px
+}
+.pf-pill.is-ok{background:#E6F6EE}
+.pf-bar{height:8px;border-radius:99px;background:#E8F1FB;overflow:hidden}
+.pf-bar>span{display:block;height:100%;background:#1558A0;border-radius:99px}
+.pf-principles{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;
+  margin:8px 22px 22px;padding:14px;border-radius:16px;
+  background:linear-gradient(135deg,#0B3A6B,#1558A0);color:#fff
+}
+.pf-principles li{list-style:none;display:flex;gap:8px;align-items:flex-start;font-size:11px;line-height:1.35}
+.pf-principles b{display:block;font-size:12px;margin-bottom:2px}
+.pf-principles .work-ico{width:28px;height:28px;background:#ffffff22;color:#fff;border-radius:50%;flex-shrink:0}
+
+.pf-play{padding:8px 0 24px}
+.pf-play-head{display:flex;align-items:flex-start;gap:12px;margin:0 0 12px}
+.pf-play-head .work-ico{width:44px;height:44px;border-radius:12px;color:#fff;background:var(--pf,#1558A0)}
+.pf-stage{background:#fff;border:1px solid #D5DEE8;border-radius:16px;padding:16px 18px;margin:0 0 12px}
+.pf-options{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.pf-options .option{min-height:48px;display:flex;align-items:flex-start;gap:10px;border:1px solid #D5DEE8;background:#fff}
+.pf-options .option b{color:#1558A0;min-width:1.2em}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;white-space:nowrap}
+.pf-fb{margin:12px 0 0;padding:12px 14px;border-radius:12px;border:1px solid #D5DEE8;background:#F4F7FB}
+.pf-fb.is-ok{background:#E6F6EE;border-color:#c5e6d4}
+.pf-fb.is-help{background:#FFF4E0;border-color:#f0ddb0}
+.pf-fb h3{margin:0 0 6px;font-size:15px}
+.pf-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.pf-actions button{min-height:44px}
+.pf-empty{padding:16px;border-radius:12px;background:#E8F1FB;color:#0B3A6B}
+body.simple-visual .pf-top-photo,
+body.low-stim .pf-top-photo{display:none}
+body.reduce-motion .pf-card:hover:not(:disabled){box-shadow:none}
+body.practice-open{overflow:hidden}
+body.practice-open .access-fab{display:flex!important}
+.pf-ax{
+  min-height:44px;border-radius:10px;border:0;background:#6B5CE7;color:#fff;font-weight:800
+}
+.pf-top-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pf-fam-id{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  background:var(--pf);color:#fff;font-size:11px;font-weight:800
+}
+.pf-ev{
+  margin:0 0 12px;padding:12px 14px;border-radius:12px;
+  border:1px solid #D5DEE8;background:#F4F7FB;white-space:pre-wrap;font-size:13px
+}
+.pf-ev img{max-width:100%;max-height:200px;object-fit:cover;border-radius:10px;display:block}
+.pf-fb{scroll-margin-top:16px}
+.pf-table{width:100%;border-collapse:collapse;font-size:13px}
+.pf-table th,.pf-table td{border:1px solid #D5DEE8;padding:8px 10px;text-align:left}
+.pf-table th{background:#E8F1FB;color:#0B3A6B}
+.pf-conseq{margin-top:10px;padding:12px;border-radius:12px;background:#E8F1FB;border:1px solid #c5d7ea}
+.pf-done{margin-top:12px;padding:14px;border-radius:14px;background:#E6F6EE;border:1px solid #c5e6d4}
+.pf-done h3{margin:0 0 6px;color:#1F8A5B}
+.pf-play .ped-route{margin:0 0 14px}
+.pf-lab{margin-top:8px}
+.pf-lab .practice-inputs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pf-justify{width:100%;min-height:110px;border-radius:12px;border:1px solid #D5DEE8;padding:10px}
+.pf-meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.pf-meta span{
+  font-size:11px;font-weight:700;color:#1558A0;background:#E8F1FB;
+  border-radius:999px;padding:4px 8px
+}
+
+@media(max-width:1100px){
+  .pf-wrap{grid-template-columns:1fr}
+  .pf-grid{grid-template-columns:1fr}
+  .pf-principles{grid-template-columns:1fr 1fr;margin:8px 16px 16px}
+  .pf-top-photo{display:none}
+}
+@media(max-width:640px){
+  .pf-principles{grid-template-columns:1fr}
+  .pf-top{padding:12px}
+  .pf-wrap{padding:12px}
+}

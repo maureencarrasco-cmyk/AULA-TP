@@ -1,0 +1,15 @@
+const vm=require('node:vm'), assert=require('node:assert/strict'), fs=require('node:fs');
+const data=new Map();
+const c=vm.createContext({localStorage:{getItem:k=>data.get(k)||null,setItem:(k,v)=>data.set(k,v)},auth:{user:{id:1,role:'student'}},current:{id:1,state:{ae:{},cases:{},exam:null,closed:false},completed:[true,true,true,false,false]},ae:0,step:0,caseIndex:0,tab:'development',examStarted:true,questionIndex:17});
+vm.runInContext('function stationUnlocked(n){return n===1||current.completed.slice(0,n-1).every(Boolean)};'+fs.readFileSync('static/resume.js','utf8')+';this.r=courseResume',c);
+const r=c.r;r.save(4);c.tab='';c.examStarted=false;c.questionIndex=0;r.restore(4);
+assert.equal(c.questionIndex,17);assert.equal(c.tab,'development');assert.equal(c.examStarted,true);
+c.auth.user.id=2;assert.equal(r.read(),null);c.auth.user.id=1;c.current.id=2;assert.equal(r.read(),null);c.current.id=1;
+assert.equal(r.station(1),4);c.current.completed[3]=true;assert.equal(r.station(5),5);
+c.current.completed[1]=false;assert.equal(r.station(2),2);
+c.ae=2;c.step=4;r.save(2);c.ae=0;c.step=0;r.restore(2);assert.equal(c.ae,0);assert.equal(c.step,0);
+c.current.state.ae={'0-0':'evidence'};c.step=1;r.save(2);c.step=0;r.restore(2);assert.equal(c.step,1);
+c.current.state.closed=true;assert.equal(r.read(),null);c.current.state.closed=false;c.auth.user.role='teacher';assert.equal(r.read(),null);c.auth.user.role='student';
+data.set(r.key(),'{broken');assert.equal(r.read(),null);
+c.localStorage.setItem=()=>{throw Error('quota')};assert.doesNotThrow(()=>r.save(2));
+console.log('Resume checks passed: reload, account/module isolation, completed/locked stations, locked AE, closed modules, teacher and unavailable storage.');

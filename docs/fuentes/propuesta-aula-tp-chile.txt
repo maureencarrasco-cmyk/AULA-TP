@@ -1,0 +1,255 @@
+1. Resumen
+Aula TP Chile es una propuesta de simulación educativa orientada a fortalecer la enseñanza-aprendizaje en la Educación Media Técnico-Profesional (EMTP) mediante experiencias digitales contextualizadas, progresivas y vinculadas con los desempeños propios de cada especialidad.
+Cada curso puede organizarse en diferentes cantidades de módulos. A su vez, cada módulo desarrolla un conjunto de Aprendizajes Esperados (AE) mediante una estructura común: Contextualización, Aprendizajes Esperados, Situación Integradora, Evaluación Final y Retroalimentación y Cierre.
+El sello de Aula TP está en la articulación de tres componentes pedagógicos: Agente pedagógico, Práctica libre y Retroalimentación. Estos componentes no funcionan de manera aislada, sino que acompañan intencionadamente el proceso para favorecer la participación, la toma de decisiones y una autonomía progresiva.
+La simulación permite al estudiante analizar, practicar, experimentar, tomar decisiones, verificar y mejorar dentro de un entorno seguro, antes de enfrentarse a situaciones propias del contexto técnico o laboral.
+Aula TP busca que el aprendizaje ocurra.
+La tecnología, por tanto, no constituye el propósito final. Es el medio que permite generar situaciones de enseñanza-aprendizaje intencionadas, donde el estudiante puede poner en acción lo aprendido.
+2. Presentación
+La Educación Media Técnico-Profesional requiere generar oportunidades para que los estudiantes no solo conozcan procedimientos y conceptos, sino que puedan aplicarlos en situaciones contextualizadas, analizar información y tomar decisiones relacionadas con su futura práctica profesional.
+En este contexto, Aula TP Chile propone incorporar la simulación educativa como un recurso que complementa las experiencias de enseñanza-aprendizaje desarrolladas por los establecimientos.
+El simulador permite recrear situaciones técnicas o laborales en un entorno controlado, donde el estudiante puede practicar, explorar alternativas, cometer errores y volver a intentarlo.
+De esta manera, se busca ampliar las oportunidades de aprendizaje y favorecer una progresión desde la comprensión hacia la aplicación y la toma de decisiones.
+3. Propósito de Aula TP Chile
+El propósito de Aula TP es fortalecer la formación técnico-profesional mediante experiencias de simulación que articulen currículo, contexto, práctica, toma de decisiones, evaluación y retroalimentación.
+La propuesta busca que el estudiante tenga un rol activo dentro de su proceso de enseñanza-aprendizaje y que pueda avanzar progresivamente desde una participación acompañada hacia una mayor capacidad para actuar de manera autónoma.
+La autonomía se entiende como la capacidad de:
+Analizar una situación;
+Comprender lo que se solicita;
+Relacionar información;
+Seleccionar alternativas;
+Tomar decisiones;
+Verificar los resultados;
+Reconocer errores;
+Utilizar la retroalimentación para mejorar.
+Por ello, autonomía no significa ausencia de acompañamiento. En Aula TP significa que el estudiante recibe los apoyos necesarios para avanzar gradualmente hacia una participación más independiente y reflexiva.
+4. Objetivo general
+Fortalecer la enseñanza-aprendizaje de la Formación Técnico-Profesional mediante simuladores educativos que permitan contextualizar, desarrollar e integrar los aprendizajes esperados de cada especialidad, favoreciendo la práctica, la toma de decisiones, la retroalimentación y el desarrollo progresivo de la autonomía del estudiante.
+5. Objetivos específicos
+5.1. Contextualizar los aprendizajes
+Introducir al estudiante en situaciones técnicas o laborales relacionadas con su especialidad, activando conocimientos previos y otorgando sentido al aprendizaje posterior.
+5.2. Desarrollar los Aprendizajes Esperados
+Abordar los AE en profundidad mediante una progresión que permita:
+analizar;
+comprender;
+relacionar;
+aplicar y decidir;
+verificar;
+retroalimentar.
+5.3. Favorecer la práctica
+Proporcionar oportunidades para explorar, experimentar y repetir procedimientos en un entorno seguro.
+5.4. Integrar los aprendizajes
+Presentar situaciones progresivamente complejas que requieran movilizar distintos aprendizajes de manera articulada.
+5.5. Favorecer la autonomía
+Desarrollar progresivamente la capacidad del estudiante para analizar situaciones, tomar decisiones, verificar sus acciones y utilizar la información recibida para mejorar.
+5.6. Apoyar la labor docente
+Entregar un recurso complementario para enriquecer la enseñanza-aprendizaje mediante situaciones prácticas, experiencias de simulación y evidencias del desempeño.
+6. Estructura general de los cursos
+Un curso de Aula TP no posee una cantidad fija de módulos.
+La cantidad de módulos puede variar de acuerdo con:
+la especialidad;
+los Aprendizajes Esperados que se aborden;
+la organización curricular;
+la propuesta formativa del establecimiento.
+Cada curso se estructura en módulos y cada módulo mantiene una estructura pedagógica común.
+Curso de simulación
+Módulo 1 → Módulo 2 → Módulo 3 → … → Módulo N
+Cada módulo aborda un conjunto de Aprendizajes Esperados y desarrolla el siguiente recorrido:
+Contextualización → Aprendizajes Esperados → Situación Integradora → Evaluación Final → Retroalimentación y Cierre
+Esta estructura permite mantener una lógica común, aunque los contenidos y situaciones cambien según la especialidad.
+Estructura de cada módulo
+7. Estación 1. Contextualización
+La contextualización tiene como objetivo introducir al estudiante en el contexto técnico o laboral relacionado con el Aprendizaje Esperado, activar conocimientos previos y prepararlo para el aprendizaje posterior.
+Busca que el estudiante comprenda desde el inicio:
+¿Dónde se aplica este aprendizaje?¿Por qué es relevante para la especialidad?
+La contextualización permite conectar el conocimiento previo con el nuevo aprendizaje y otorgar sentido a lo que posteriormente deberá desarrollar y aplicar.
+8. Estación 2. Aprendizajes Esperados
+En esta etapa se desarrollan en profundidad los aprendizajes esperados correspondientes al módulo.
+El proceso considera la siguiente progresión:
+1. Analizar2. Comprender3. Relacionar4. Aplicar y decidir5. Verificar6. Retroalimentar
+La finalidad es avanzar desde la comprensión hacia la utilización efectiva del conocimiento.
+El estudiante no solo recibe información: la interpreta, la relaciona, la aplica y toma decisiones a partir de ella.
+En esta etapa adquiere especial relevancia el Agente pedagógico, que acompaña el proceso mediante orientaciones, preguntas y apoyos oportunos.
+9. Estación 3. Situación Integradora
+La Situación Integradora permite movilizar los aprendizajes desarrollados durante el módulo en escenarios que requieren análisis, aplicación y toma de decisiones.
+Cada módulo contempla:
+15 situaciones integradoras vinculadas con los Aprendizajes Esperados.
+1 situación final en 3D, en la que el estudiante debe analizar, tomar decisiones y aplicar de manera integrada lo aprendido.
+La situación 3D forma parte de esta estación y no constituye una etapa independiente.
+Su propósito es aumentar la contextualización y complejidad de la experiencia, acercándola a escenarios en los que el estudiante debe actuar utilizando los aprendizajes construidos durante el módulo.
+10. Estación 4. Evaluación Final
+Cada módulo finaliza con una evaluación correspondiente a la especialidad.
+La evaluación contempla:
+25 preguntas + 1 situación de desarrollo
+La situación de desarrollo requiere aplicación y análisis, permitiendo integrar los aprendizajes abordados durante el módulo.
+Esta estación se diferencia de los espacios de práctica y acompañamiento. Durante la evaluación no intervienen el Agente pedagógico ni la Práctica libre como apoyos al desempeño evaluado.
+Esto permite obtener evidencia del nivel de aprendizaje alcanzado por el estudiante al finalizar el módulo.
+11. Estación 5. Retroalimentación y Cierre
+Luego de la evaluación final, el estudiante accede a una instancia de Retroalimentación y Cierre.
+La retroalimentación permite comprender el desempeño obtenido, reconocer avances e identificar oportunidades de mejora.
+El cierre busca consolidar lo aprendido y favorecer una reflexión sobre el propio proceso.
+La experiencia, por tanto, no termina simplemente con un resultado: el estudiante puede comprender qué logró, qué necesita mejorar y cómo puede seguir avanzando.
+12. El sello de Aula TP
+Agente pedagógico + Práctica libre + Retroalimentación
+El principal sello de Aula TP es la articulación pedagógica de estos tres componentes.
+No corresponden simplemente a funcionalidades de la plataforma. Cada uno cumple una función específica dentro del proceso de enseñanza-aprendizaje.
+Componente
+Propósito
+Agente pedagógico
+Orienta, acompaña, formula preguntas y desafía el pensamiento del estudiante.
+Práctica libre
+Permite explorar, experimentar, repetir y cometer errores sin riesgo.
+Retroalimentación
+Entrega información para comprender el desempeño, corregir y mejorar.
+13. Agente pedagógico
+El Agente pedagógico acompaña al estudiante durante el proceso de aprendizaje.
+Entrega:
+orientaciones oportunas;
+preguntas;
+sugerencias;
+apoyos;
+desafíos que promueven el razonamiento.
+Su función no es reemplazar el pensamiento del estudiante entregando permanentemente la respuesta.
+Busca que el estudiante piense, analice, decida y avance.
+Su propósito:
+Personaliza · Motiva · Guía
+14. Práctica libre
+La Práctica libre proporciona un espacio para explorar y experimentar sin las exigencias propias de una evaluación.
+El estudiante puede:
+probar alternativas;
+repetir procedimientos;
+cometer errores;
+revisar lo realizado;
+volver a intentarlo.
+Este espacio es fundamental para desarrollar una autonomía progresiva, porque permite que el estudiante tome decisiones y aprenda a partir de sus propios intentos.
+Su propósito:
+Explora · Experimenta · Aprende
+15. Retroalimentación
+La retroalimentación entrega información clara sobre el desempeño del estudiante.
+Su propósito es ayudar a comprender:
+qué se realizó correctamente;
+qué necesita ser revisado;
+por qué se produjo un error;
+qué puede hacerse para mejorar.
+De esta manera, el error deja de ser únicamente un resultado negativo y se transforma en información para continuar aprendiendo.
+Su propósito:
+Informa · Reflexiona · Mejora
+16. Articulación de los componentes
+La distribución de los componentes dentro de cada módulo es intencionada:
+Contextualización
+Aprendizajes esperados
+Situación integradora
+Evaluación final
+Retroalimentación y cierre
+Práctica libre
+✓
+✓
+✓
+–
+–
+Agente pedagógico
+–
+✓
+✓
+–
+✓
+Retroalimentación
+–
+✓
+✓
+–
+–
+Esta distribución permite diferenciar claramente los espacios de aprendizaje, práctica, acompañamiento y evaluación.
+La evaluación final mantiene su carácter evaluativo y la instancia posterior concentra la retroalimentación y el cierre.
+17. Enseñanza-aprendizaje y simulación
+Aula TP comprende la simulación como un recurso al servicio de la enseñanza-aprendizaje.
+El estudiante puede avanzar mediante una secuencia como:
+Comprender → Practicar → Aplicar → Decidir → Verificar → Mejorar
+La simulación permite que este proceso ocurra dentro de un entorno seguro y controlado.
+Por eso, el valor de Aula TP no está solamente en recrear escenarios mediante tecnología, sino en diseñar experiencias en las que el estudiante deba utilizar el conocimiento para actuar.
+La simulación crea condiciones para que el aprendizaje ocurra.
+18. Inclusión y acceso al aprendizaje
+Aula TP incorpora una perspectiva de inclusión mediante el uso de diferentes recursos para representar y comunicar la información.
+La experiencia puede integrar:
+texto;
+imágenes;
+elementos gráficos;
+interacción;
+simulación;
+recursos audiovisuales;
+instrucciones progresivas;
+apoyos visuales.
+Esta variedad permite disminuir barreras de acceso a la información y ofrecer diferentes formas de aproximarse al aprendizaje.
+Además, el diseño considera una jerarquía visual clara, diferenciación de tamaños de texto, instrucciones acotadas y recursos sonoros utilizados con propósito, buscando que el entorno sea comprensible, seguro y menos sobrecargado.
+La inclusión no se entiende como un elemento adicional, sino como parte del diseño de la experiencia de enseñanza-aprendizaje.
+19. Desarrollo de la autonomía
+La autonomía constituye un resultado progresivo del proceso.
+El estudiante comienza con una experiencia contextualizada y acompañada, desarrolla los Aprendizajes Esperados, practica, enfrenta situaciones integradoras y posteriormente demuestra sus aprendizajes mediante una evaluación.
+La articulación entre Práctica libre, Agente pedagógico y Retroalimentación permite que el estudiante avance progresivamente hacia una mayor independencia.
+La progresión esperada es:
+Recibe apoyo → comprende → practica → toma decisiones → verifica → mejora → actúa con mayor autonomía.
+Así, la autonomía adquiere un sentido pedagógico concreto: no consiste en trabajar sin apoyo, sino en desarrollar progresivamente la capacidad de utilizar los conocimientos y recursos disponibles para tomar decisiones fundamentadas.
+20. Rol del docente
+Aula TP no reemplaza al docente.
+El docente continúa siendo el principal mediador del proceso de enseñanza-aprendizaje y quien toma las decisiones pedagógicas relacionadas con el contexto de su establecimiento y especialidad.
+El simulador complementa su trabajo mediante:
+oportunidades adicionales de práctica;
+situaciones contextualizadas;
+espacios de experimentación;
+evidencia del desempeño;
+retroalimentación;
+seguimiento del progreso.
+De esta manera, Aula TP busca que la tecnología fortalezca la acción pedagógica del docente.
+21. Valor para el establecimiento educacional
+Ámbito
+Aporte de Aula TP
+Enseñanza-aprendizaje
+Complementa el trabajo pedagógico con experiencias prácticas y contextualizadas.
+Estudiantes
+Favorece práctica, análisis, toma de decisiones y autonomía progresiva.
+Docentes
+Incorpora situaciones de práctica y evidencia para apoyar el acompañamiento pedagógico.
+Especialidades TP
+Permite trabajar situaciones relacionadas con contextos técnicos y laborales.
+Inclusión
+Utiliza diferentes recursos y formas de representación para facilitar el acceso al aprendizaje.
+Gestión pedagógica
+Permite disponer de información sobre el desempeño y oportunidades de mejora.
+22. Fundamentos pedagógicos
+La propuesta integra elementos provenientes de distintos enfoques pedagógicos.
+Situaciones didácticas
+La utilización de situaciones problemáticas y contextos en los que el estudiante debe actuar y tomar decisiones recoge elementos de la Teoría de las Situaciones Didácticas de Guy Brousseau.
+Registros de representación
+La utilización de diferentes formas de representar información —texto, imágenes, elementos gráficos y simulación— recoge aportes asociados a los trabajos de Raymond Duval sobre los registros de representación y su importancia en los procesos de comprensión.
+Diseño Universal para el Aprendizaje
+La diversidad de recursos y formas de acceso al contenido se relaciona con los principios del Diseño Universal para el Aprendizaje (DUA), particularmente con la necesidad de ofrecer múltiples formas de representación, participación y acción.
+Formación Técnico-Profesional
+La propuesta se orienta a los aprendizajes y desempeños propios de las especialidades TP, buscando complementar la formación curricular mediante oportunidades de práctica y aplicación.
+23. Valor diferencial
+Aula TP Chile propone construir una experiencia de enseñanza-aprendizaje en la que el estudiante pueda:
+contextualizar → aprender → practicar → integrar → evaluar → reflexionar.
+Su principal diferenciador es la articulación entre:
+Agente pedagógico
+Acompaña y guía.
+Práctica libre
+Permite explorar y experimentar.
+Retroalimentación
+Permite comprender y mejorar.
+Estos tres componentes se integran dentro de una estructura de aprendizaje que busca favorecer una autonomía progresiva.
+24. Conclusión
+Aula TP Chile propone utilizar la simulación educativa para fortalecer la enseñanza-aprendizaje de la Educación Técnico-Profesional desde una perspectiva pedagógica, contextualizada, progresiva e inclusiva.
+Cada curso puede organizarse en diferentes cantidades de módulos y cada módulo mantiene una estructura que permite ordenar el proceso:
+Contextualización → Aprendizajes Esperados → Situación Integradora → Evaluación Final → Retroalimentación y Cierre.
+Dentro de este recorrido, el estudiante tiene oportunidades para practicar, experimentar, analizar, tomar decisiones y mejorar.
+El Agente pedagógico, la Práctica libre y la Retroalimentación constituyen el sello que articula la experiencia y permite avanzar desde el acompañamiento hacia una autonomía progresiva.
+En definitiva, Aula TP busca que la tecnología tenga un propósito claro: crear mejores condiciones para enseñar y aprender.
+Aula TP Chile
+Simulación educativa para fortalecer la formación técnico-profesional.
+Que el aprendizaje ocurra.
+Referencias bibliográficas
+Brousseau, G. (2002). Theory of Didactical Situations in Mathematics: Didactique des Mathématiques, 1970–1990. Springer.
+CAST. Universal Design for Learning Guidelines. CAST.CAST – Universal Design for Learning Guidelines
+Duval, R. (2006). A Cognitive Analysis of Problems of Comprehension in a Learning of Mathematics. Educational Studies in Mathematics, 61, 103–131.
+Duval, R. (2017). Understanding the Mathematical Way of Thinking – The Registers of Semiotic Representations. Springer.
+Ministerio de Educación de Chile. Currículum Nacional – Formación Diferenciada Técnico-Profesional.Currículum Nacional – Formación Diferenciada Técnico-Profesional
+Ministerio de Educación de Chile. Bases Curriculares de 3° y 4° Medio – Formación Diferenciada Técnico-Profesional.Bases Curriculares – Formación Diferenciada Técnico-Profesional
