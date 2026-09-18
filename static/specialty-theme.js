@@ -69,7 +69,7 @@ const HEADER_PHOTO_ALTS = {
     2: MODULE_OFICIO_ALTS[2],
     3: MODULE_OFICIO_ALTS[3],
     4: MODULE_OFICIO_ALTS[4],
-    5: 'Recorte del error: contrasta el estímulo con la decisión correcta'
+    5: 'Cierre: lo que cierras hoy abre tu próximo desafío.'
   },
   electricidad: {
     1: 'Entorno profesional de instalaciones eléctricas',
@@ -112,13 +112,7 @@ function stationHeaderAlt(n, course, aeIndex) {
       const ex = typeof current !== 'undefined' && current?.content?.explore;
       if (ex?.alt || ex?.caption) return ex.alt || ex.caption;
     }
-    if (i === 5) {
-      const pos = Number(typeof current !== 'undefined' && current?.position);
-      if (pos === 2) return 'Visor que muestra 25 sin unidad: recorte del error típico al interpretar una lectura';
-      const fail = climateFailedItem();
-      if (fail?.alt) return fail.alt;
-      if (fail) return 'Recorte del estímulo del ítem incorrecto. Contrasta lo que viste con la decisión correcta.';
-    }
+    if (i === 5) return 'Lo que cierras hoy abre tu próximo desafío. Tu esfuerzo también cuenta.';
     const pos = Math.max(1, Math.min(4, Number(typeof current !== 'undefined' && current?.position) || 1));
     return MODULE_OFICIO_ALTS[pos] || MODULE_OFICIO_ALTS[1];
   }
@@ -136,13 +130,7 @@ function stationHeaderArt(n, course, aeIndex) {
       const src = typeof current !== 'undefined' && current?.content?.explore?.image;
       if (src) return src;
     }
-    if (i === 5) {
-      const pos = Number(typeof current !== 'undefined' && current?.position);
-      if (pos === 2) return oficioPng('oficio-visor-25');
-      const fail = climateFailedItem();
-      if (fail?.image) return fail.image;
-      return '/static/themes/reflection.png';
-    }
+    if (i === 5) return '/static/themes/estacion5-hero.png?v=1';
     return climateModuleArt();
   }
   const key = specialtyKey(course);
