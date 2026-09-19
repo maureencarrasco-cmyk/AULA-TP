@@ -130,7 +130,7 @@ function stationHeaderArt(n, course, aeIndex) {
       const src = typeof current !== 'undefined' && current?.content?.explore?.image;
       if (src) return src;
     }
-    if (i === 5) return '/static/themes/estacion5-hero.png?v=1';
+    if (i === 5) return '/static/themes/estacion5-analiza.png?v=29';
     return climateModuleArt();
   }
   const key = specialtyKey(course);
