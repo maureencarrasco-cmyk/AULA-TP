@@ -405,7 +405,7 @@ body.high-contrast .atp-hero-copy h1{color:#000}
 /* Cartel, metas y mini-ruta · mismo sistema en las 5 estaciones */
 .atp-hero.is-station{
   height:auto;
-  min-height:26.5rem;
+  min-height:22.5rem;
   max-height:none;
   align-items:stretch;
   grid-template-columns:minmax(148px,14%) minmax(0,44%) minmax(0,42%);
@@ -906,4 +906,127 @@ body.low-stim .atp-hero-chip{display:inline-flex}
   /* keep student + left callouts in frame */
   object-position:42% 36% !important;
   filter:contrast(1.06) saturate(1.05);
+}
+
+/* Portadas de estación · experiencia panorámica y botonera claramente marcada */
+.atp-hero-progress{width:100%;margin-top:8px;padding:14px 10px;border-top:1px solid #e2ebf4;color:#0b3a6b}
+.atp-hero-progress b,.atp-hero-progress span{display:block;font-size:11px}.atp-hero-progress span{text-align:center;margin-top:5px;font-weight:700}
+.atp-hero-progress progress{width:100%;height:9px;margin-top:9px;accent-color:var(--hero-accent)}
+.atp-hero-quote{margin:14px 0 0 18px;color:#0c4385;font-family:Georgia,"Palatino Linotype",serif;font-size:20px;font-weight:700;font-style:italic;line-height:1.35;transform:rotate(-3deg)}
+.atp-hero-path em{display:flex;align-items:center;justify-content:center;gap:4px;min-height:25px;margin-top:3px;padding:4px 13px;border-radius:999px;background:#ffe69a;color:#0b3a6b;font-size:10px;font-style:normal;font-weight:850;white-space:nowrap}
+.atp-hero-path em.is-complete{padding:3px 7px;background:#e7f8f1;color:#16855d}.atp-hero-path em.is-complete .icon{width:13px;height:13px}
+.atp-hero-path li>button{transition:transform .18s ease,background .18s ease,box-shadow .18s ease;border-color .18s ease}
+.atp-hero-path li>button:hover:not(:disabled){transform:translateY(-3px)}
+.atp-hero-path li>button:active:not(:disabled){transform:translateY(-1px)}
+.atp-hero-path .is-current>button{border-radius:14px;background:color-mix(in srgb,var(--hero-soft) 72%,transparent)}
+.atp-hero-path .is-current>button:focus-visible{outline:3px solid color-mix(in srgb,var(--hero-accent) 42%,#fff);outline-offset:3px}
+.atp-hero-side a{transition:background .18s ease,transform .18s ease,box-shadow .18s ease}
+.atp-hero-side a:hover{transform:translateX(3px);background:var(--hero-soft);box-shadow:0 4px 10px rgba(11,58,107,.08)}
+.atp-hero-side .is-here{border:1px solid color-mix(in srgb,var(--hero-accent) 30%,#fff);box-shadow:inset 5px 0 0 var(--hero-accent),0 5px 12px rgba(11,58,107,.08)}
+
+@media(min-width:1200px){
+  .atp-hero.is-station{grid-template-columns:250px minmax(500px,46%) minmax(0,1fr);min-height:700px;height:700px;max-height:none;border-radius:22px}
+  .atp-hero.is-station .atp-hero-id{padding:20px 16px 22px;gap:14px;border-right:1px solid #dfeaf4}
+  .atp-hero.is-station .atp-hero-logo{max-width:210px;min-height:138px;padding:14px}.atp-hero.is-station .atp-hero-logo img{max-height:116px}
+  .atp-hero.is-station .atp-hero-back{width:100%;min-height:58px;border-radius:14px;font-size:15px;justify-content:flex-start;padding:10px 18px}
+  .atp-hero.is-station .atp-hero-side{gap:9px}.atp-hero.is-station .atp-hero-side a,.atp-hero.is-station .atp-hero-side .is-here{min-height:54px;padding:11px 14px;font-size:14px}
+  .atp-hero.is-station .atp-hero-side .icon{width:20px;height:20px}
+  .atp-hero.is-station .atp-hero-copy{max-width:none;padding:28px 32px 175px 46px;gap:13px;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.95) 58%,var(--hero-wash) 100%)}
+  .atp-hero.is-station .atp-hero-sign{min-height:62px}.atp-hero.is-station .atp-hero-sign-num{width:52px;height:52px;font-size:26px}
+  .atp-hero.is-station .atp-hero-kicker{font-size:14px;padding-right:22px}
+  .atp-hero.is-station .atp-hero-copy h1{font-size:clamp(48px,4.2vw,68px);line-height:1.02}
+  .atp-hero.is-station .atp-hero-detail{font-size:19px;line-height:1.35}.atp-hero.is-station .atp-hero-purpose{max-width:34rem;font-size:17px;line-height:1.5}
+  .atp-hero.is-station .atp-hero-goals{display:none}
+  .atp-hero.is-station .atp-hero-visual{padding-bottom:150px;background:#f4f7fa}.atp-hero.is-station .atp-hero-visual img{object-position:center center}
+  body[data-specialty=climate] .atp-hero.s1 .atp-hero-visual img{object-position:58% 50%}
+  body[data-specialty=climate] .atp-hero.s2 .atp-hero-visual img{object-position:62% 44%}
+  body[data-specialty=climate] .atp-hero.s3 .atp-hero-visual img{object-position:54% 48%}
+  body[data-specialty=climate] .atp-hero.s4 .atp-hero-visual img{object-position:68% 52%}
+  body[data-specialty=climate] .atp-hero.s5 .atp-hero-visual img{object-position:48% 38%!important}
+  .atp-hero.is-station .atp-hero-fade{width:42%}
+  .atp-hero.is-station .atp-hero-motto{top:22px;right:22px;max-width:250px;padding:14px 17px;font-size:15px}
+  .atp-hero.is-station .atp-hero-badge{display:none}
+  .atp-hero.is-station .atp-hero-path{position:absolute;z-index:5;left:250px;right:0;bottom:0;width:auto;max-width:none;height:150px;margin:0;padding:18px 70px 12px;background:rgba(255,255,255,.97);border-top:1px solid #d9e6f2;box-shadow:0 -5px 16px rgba(11,58,107,.05)}
+  .atp-hero.is-station .atp-hero-path li+li:before{top:24px;height:3px}.atp-hero.is-station .atp-hero-node{width:50px;height:50px}.atp-hero.is-station .atp-hero-node .work-ico{width:24px;height:24px}.atp-hero.is-station .atp-hero-node .work-ico svg{width:22px;height:22px}
+  .atp-hero.is-station .atp-hero-path .is-current .atp-hero-node{width:58px;height:58px}.atp-hero.is-station .atp-hero-path small{max-width:10rem;font-size:12px;line-height:1.25}
+  .atp-hero-account .avatar{width:42px;height:42px}.atp-hero-account .plain{font-size:13px;min-height:40px}
+}
+@media(max-width:1199px){.atp-hero-progress{display:none}.atp-hero-quote{font-size:16px}.atp-hero-path em{display:none}}
+
+/* Sistema común de las 5 estaciones · colores propios, ruta legible y frase semanal */
+.atp-hero.s5 .atp-hero-motto{display:flex!important}
+.atp-hero.s5 .atp-hero-badge{display:none!important}
+.atp-hero-path li:nth-child(1){--path-accent:#1599b5;--path-soft:#e4f8fc}
+.atp-hero-path li:nth-child(2){--path-accent:#286bb3;--path-soft:#e8f2fc}
+.atp-hero-path li:nth-child(3){--path-accent:#7357b5;--path-soft:#f0ecfb}
+.atp-hero-path li:nth-child(4){--path-accent:#c47a12;--path-soft:#fff3df}
+.atp-hero-path li:nth-child(5){--path-accent:#27865f;--path-soft:#e6f6ee}
+.atp-hero-path li>button,.atp-hero-path li>span{margin:0 5px;padding:8px 6px;border:1px solid color-mix(in srgb,var(--path-accent) 22%,#fff);border-radius:14px;background:var(--path-soft);color:#071f45}
+.atp-hero-path li>button small,.atp-hero-path li>span small,.atp-hero-path .is-current small,.atp-hero-path .is-wait small,.atp-hero-path .is-done small{color:#071f45!important;font-weight:850;opacity:1!important}
+.atp-hero-path .atp-hero-node,.atp-hero-path .is-wait .atp-hero-node,.atp-hero-path .is-done .atp-hero-node{border-color:color-mix(in srgb,var(--path-accent) 45%,#fff);background:#fff;color:var(--path-accent)}
+.atp-hero-path .is-current>button{border-color:color-mix(in srgb,var(--path-accent) 45%,#fff);background:var(--path-soft);box-shadow:0 7px 18px color-mix(in srgb,var(--path-accent) 18%,transparent)}
+.atp-hero-path .is-current .atp-hero-node{border-color:#fff;background:var(--path-accent);color:#fff;box-shadow:0 0 0 4px color-mix(in srgb,var(--path-accent) 24%,transparent),0 6px 15px rgba(11,58,107,.16)}
+.atp-hero-path .is-done em.is-complete{background:#fff;color:var(--path-accent);border:1px solid color-mix(in srgb,var(--path-accent) 28%,#fff)}
+.atp-hero-path .is-current em{background:color-mix(in srgb,var(--path-accent) 18%,#fff);color:#071f45;border:1px solid color-mix(in srgb,var(--path-accent) 30%,#fff)}
+.atp-hero-path li+li:before{background:#aec4dc}.atp-hero-path li.is-done+li.is-done:before,.atp-hero-path li.is-done+li.is-current:before{background:#7899bd}
+.atp-hero-path li>button:hover:not(:disabled){background:color-mix(in srgb,var(--path-soft) 70%,#fff);border-color:var(--path-accent)}
+.atp-hero-path li>button:hover:not(:disabled) .atp-hero-node{border-color:var(--path-accent);background:var(--path-accent);color:#fff}
+.atp-hero-motto.atp-spark{border-color:color-mix(in srgb,var(--hero-accent) 28%,#fff);background:rgba(255,255,255,.95)}
+.atp-hero-motto.atp-spark em,.atp-hero-quote{color:#082f67!important}
+.atp-hero-quote{max-width:360px;padding:10px 14px;border-left:4px solid var(--hero-accent);border-radius:0 12px 12px 0;background:color-mix(in srgb,var(--hero-soft) 68%,#fff);transform:rotate(-1deg)}
+
+@media(min-width:1200px){
+  .atp-hero.is-station,.atp-hero.is-station.s1,.atp-hero.is-station.s2,.atp-hero.is-station.s3,.atp-hero.is-station.s4,.atp-hero.is-station.s5{width:100%;height:580px;min-height:580px;max-height:580px;margin-inline:auto;grid-template-columns:220px minmax(470px,44%) minmax(0,1fr)}
+  .atp-hero.is-station .atp-hero-copy,.atp-hero.is-station.s5 .atp-hero-copy{padding:28px 32px 175px 46px}
+  .atp-hero.is-station .atp-hero-visual,.atp-hero.is-station.s5 .atp-hero-visual{min-height:0;height:580px;padding-bottom:150px;border-radius:0 22px 22px 0}
+  .atp-hero.is-station .atp-hero-path{align-items:stretch;padding:14px 55px 10px}.atp-hero.is-station .atp-hero-path li{align-items:stretch}
+  .atp-hero.is-station .atp-hero-path li>button,.atp-hero.is-station .atp-hero-path li>span{min-height:116px}
+  .atp-hero.is-station .atp-hero-path li+li:before{top:39px}
+}
+@media(max-width:1199px){.atp-hero-path li>button,.atp-hero-path li>span{margin:0 2px;padding:6px 3px}.atp-hero-quote{max-width:none}}
+
+/* La ruta inferior fue retirada: la fotografia vuelve a ocupar toda la portada. */
+@media(min-width:1200px){
+  .atp-hero.is-station .atp-hero-copy,
+  .atp-hero.is-station.s5 .atp-hero-copy{padding-bottom:28px}
+  .atp-hero.is-station .atp-hero-visual,
+  .atp-hero.is-station.s5 .atp-hero-visual{padding-bottom:0;background:var(--hero-wash)}
+  .atp-hero.is-station .atp-hero-visual img,
+  .atp-hero.is-station.s5 .atp-hero-visual img{width:100%;height:100%;min-height:100%;object-fit:cover}
+  body[data-specialty=climate] .atp-hero.s5 .atp-hero-visual img{object-position:30% 50%!important}
+}
+
+/* La altura se conserva: compactamos únicamente la columna lateral para evitar recortes. */
+@media(min-width:1200px){
+  .atp-hero.is-station .atp-hero-id{
+    gap:7px;
+    padding:10px 12px 10px;
+    overflow:visible;
+  }
+  .atp-hero.is-station .atp-hero-logo{
+    min-height:104px;
+    padding:8px 12px;
+  }
+  .atp-hero.is-station .atp-hero-logo img{max-height:88px}
+  .atp-hero.is-station .atp-hero-back{
+    min-height:46px;
+    padding:8px 14px;
+  }
+  .atp-hero.is-station .atp-hero-side{gap:6px}
+  .atp-hero.is-station .atp-hero-side a,
+  .atp-hero.is-station .atp-hero-side .is-here{
+    min-height:43px;
+    padding:8px 11px;
+    font-size:12px;
+  }
+  .atp-hero.is-station .atp-hero-side .icon{width:17px;height:17px}
+  .atp-hero.is-station .atp-hero-progress{
+    margin-top:3px;
+    padding:8px 8px 6px;
+  }
+  .atp-hero.is-station .atp-hero-progress progress{height:7px;margin-top:6px}
+  .atp-hero.is-station .atp-hero-progress span{margin-top:3px}
+  .atp-hero.is-station .atp-hero-account{min-height:34px}
+  .atp-hero.is-station .atp-hero-account .avatar{width:32px;height:32px}
+  .atp-hero.is-station .atp-hero-account .plain{min-height:32px;font-size:11px}
 }

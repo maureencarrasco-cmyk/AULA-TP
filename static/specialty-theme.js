@@ -126,11 +126,8 @@ function stationHeaderArt(n, course, aeIndex) {
       const exp = climateExperience();
       if (exp?.image) return exp.image;
     }
-    if (i === 4) {
-      const src = typeof current !== 'undefined' && current?.content?.explore?.image;
-      if (src) return src;
-    }
-    if (i === 5) return '/static/themes/estacion5-hero.png?v=38';
+    if (i === 4) return '/static/estacion4-evaluacion-climatizacion.png?v=1';
+    if (i === 5) return '/static/themes/estacion5-hero-v2.png?v=1';
     return climateModuleArt();
   }
   const key = specialtyKey(course);

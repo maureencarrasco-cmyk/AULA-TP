@@ -115,6 +115,12 @@ def create_app(test_config=None):
                 item=dict(c);item['modules']=[]
                 for m in con.execute('SELECT id,title,position,published FROM modules WHERE course_id=? ORDER BY position,id',(c['id'],)):
                     mod=dict(m);s=getstate(con,m['id']);mod['completed']=completed(s);mod['percent']=round(sum(mod['completed'])*20)
+                    exam=s.get('exam')
+                    mod['evaluation_scores']={
+                        'selection':exam.get('score') if exam else None,
+                        'development':(exam.get('review') or {}).get('score') if exam else None,
+                        'max_each':25,
+                    }
                     plan=module_plan(m['position'])
                     if plan:mod.update(plan)
                     pack=encargos_for(m['position'])

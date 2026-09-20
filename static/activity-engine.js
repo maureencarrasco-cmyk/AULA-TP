@@ -169,8 +169,10 @@ function renderExperience(exp) {
   const stemBlock = stem ? `<div class="act-observe ped-step" data-action="${stemAction.action}" data-state="current">${stemHead}${stem}</div><p class="act-flow ped-flow" aria-hidden="true">↓</p>` : '';
   const boardBlock = board ? `<div class="act-decide ped-step" data-action="${boardAction.action}" data-state="${stem && !imageFirst ? 'idle' : 'current'}">${boardHead}${board}</div>` : '';
   const hotspotFirst = exp.type === 'hotspot';
+  const contract=`<aside class="act-contract"><div><b>Acción</b><span>${esc(boardAction.title)}</span></div><div><b>Recurso</b><span>${stem?'Caso, imagen o información presentada':'Actividad interactiva'}</span></div><div><b>Producción</b><span>${exp.type==='choice'?'Una selección fundamentada':exp.type==='checklist'?'Una selección pertinente':'Una respuesta observable'}</span></div><div><b>Terminas cuando</b><span>Completas la interacción y explicas tu razonamiento.</span></div></aside>`;
   return `<section class="act-card act-task" data-act="${esc(exp.type)}" data-layout="${layout}" data-activity-prompt="${esc(exp.prompt)}">
     ${activityMeta(exp)}
+    ${contract}
     ${imageFirst ? stemBlock : ''}
     ${hotspotFirst ? boardBlock : ''}
     ${prompt}

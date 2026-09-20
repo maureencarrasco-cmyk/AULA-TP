@@ -31,7 +31,7 @@ function enrichedContext(){const c=current.content;const course=(typeof courses!
   : `<header class="ctx-step-head ctx-step-head-split">${ctxStepMark(4,'Verificación','Tu respuesta')}<span class="ctx-step-arrow" aria-hidden="true">→</span>${ctxStepMark(5,'Siguiente','Continuar a Aprendizajes esperados')}</header>`;
  return workZone(`${panelTitle(1,'Conoce el contexto y activa tus conocimientos previos.',typeof cargaLabel==='function'?cargaLabel(1,'Carga ×5'):'Carga ×5')}
  ${workSeq([{ico:'flag',label:'Dónde estás',hint:'Estación 1 de 5'},{ico:'eye',label:'Observa',hint:'Caso profesional'},{ico:'search',label:'Explora',hint:'Escenario'},{ico:'list',label:'Analiza',hint:'Anticipación'},{ico:'chat',label:'Justifica',hint:'Respuesta breve'},{ico:'check',label:'Verifica',hint:'Aprendizajes esperados'}])}
- <article class="work-card work-card-hero ctx-mission">${workIco('target')}<div><span class="work-kicker">Misión</span><h3>Tu misión</h3><p>${esc(c.context)}</p><p class="muted small">En esta estación: comprende, identifica y anticipa inconsistencias. No resuelvas ni cubiques.</p></div></article>
+ <article class="work-card work-card-hero ctx-mission">${workIco('target')}<div><span class="work-kicker">Misión</span><h3>Observa, reconoce y anticipa</h3><p>${esc(c.context)}</p><p class="muted small">Observa el caso y el escenario, reconoce los elementos técnicos que ya conoces y anticipa qué información necesitarías confirmar. No resuelvas ni cubiques todavía.</p></div></article>
  <div class="work-grid-2 ctx-prep-row">
   ${workCard('book','¿Qué aprenderás?',`<ul class="learning-objectives">${c.aes.map(a=>`<li>${esc(a.short_title||a.title)}</li>`).join('')}</ul><p class="muted small">En este módulo vas a llegar a esto. En esta estación solo observas y anticipas.</p>`,'work-card-purpose ctx-learn')}
   ${workCard('info','Antes de comenzar','<p>Lee el caso, identifica qué información tienes y distingue los datos de las suposiciones. Las actividades posteriores te ayudarán a fundamentar tus decisiones.</p><span class="badge">Simulación didáctica</span>','work-card-prep ctx-ready')}
@@ -52,7 +52,8 @@ function enrichedContext(){const c=current.content;const course=(typeof courses!
   <div class="ctx-flow-next" aria-hidden="true">↓</div>
   <section class="ctx-step ctx-step-close ped-step" data-action="justify" data-state="idle">
    ${closeHead}
-   <article class="ctx-block ctx-reply">${workIco('edit')}<div><span class="work-kicker">Tu respuesta</span>${reflectionForm('context-form',c.reflection_prompt||'¿Qué revisarías primero y qué información necesitarías confirmar?',current.state.context,'Continuar a Aprendizajes esperados')}<p class="muted small">Una decisión y un dato que falta. No cubiques.</p></div></article>
+   <article class="ctx-block ctx-reply">${workIco('edit')}<div><span class="work-kicker">✎ Tu respuesta</span>${reflectionForm('context-form',c.reflection_prompt||'¿Qué revisarías primero y qué información necesitarías confirmar?',current.state.context,'Continuar a Aprendizajes esperados')}<p class="muted small">Terminas cuando identificas un elemento reconocido, anticipas una revisión y señalas al menos un dato que falta. Esta estación no califica.</p></div></article>
+   <footer class="ctx-learning-close"><b>OBSERVA → RECONOCE → ACTIVA → ANTICIPA</b><span>Ya comprendes la situación inicial y qué necesitas aprender. Continúa para desarrollar los aprendizajes esperados.</span></footer>
   </section>
  </div>
  </section>${curriculumNote()}`,'work-zone-s1')}

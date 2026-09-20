@@ -1,6 +1,6 @@
 'use strict';
 const $=s=>document.querySelector(s), esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const BRAND_LOGO='/static/logo-aula-tp-oficial.png?v=1';
+const BRAND_LOGO='/static/logo-aula-tp-oficial.png?v=2';
 function brandImg(cls='logo'){return `<img class="${esc(cls)}" src="${BRAND_LOGO}" alt="Aula TP Chile · Formación técnica con sentido">`}
 const names=['Contextualización','Aprendizajes esperados','Situación integradora','Evaluación final','Retroalimentación y cierre'];
 const descriptions=['Comprender la situación','Analiza, comprende y aplica','Resuelve en contexto','Demuestra lo aprendido','Reflexiona y avanza'];
@@ -38,6 +38,69 @@ const screenSparks={
  teacher:'Acompañar también es formar.',
  editor:'Preparar con sentido abre caminos.'
 };
+const stationWeeklySparks={
+  1:[
+    'Observar con atención ya es aprender.',
+    'Cada detalle que descubres abre una nueva pregunta.',
+    'Comprender el contexto es el primer paso para transformar.',
+    'Tu curiosidad convierte una situación en aprendizaje.',
+    'Mira, pregunta y registra: así comienza una buena decisión.',
+    'Lo que hoy observas mañana será parte de tu experiencia.',
+    'Una mirada técnica también se entrena.',
+    'Reconocer el desafío te prepara para resolverlo.'
+  ],
+  2:[
+    'Lo que comprendes hoy, lo aplicas mañana.',
+    'Cada concepto nuevo amplía tus posibilidades.',
+    'Aprender paso a paso también es avanzar con seguridad.',
+    'Relacionar ideas fortalece tu criterio técnico.',
+    'Tu esfuerzo de hoy construye conocimiento duradero.',
+    'Preguntar, practicar y explicar hacen visible tu aprendizaje.',
+    'Comprender bien te permite actuar mejor.',
+    'Cada aprendizaje se convierte en una herramienta para tu futuro.'
+  ],
+  3:[
+    'Decide con criterio: el taller te espera.',
+    'Aplicar lo aprendido convierte ideas en soluciones.',
+    'Cada decisión fundamentada fortalece tu autonomía.',
+    'Conecta los datos antes de elegir el siguiente paso.',
+    'Resolver situaciones reales prepara tu futuro profesional.',
+    'Tu criterio crece cuando explicas por qué decides.',
+    'Prueba, verifica y mejora: así trabaja un profesional.',
+    'Una buena solución integra conocimiento, seguridad y propósito.'
+  ],
+  4:[
+    'Demuestra con calma lo que ya sabes hacer.',
+    'Confía en tu proceso y responde con criterio.',
+    'Cada respuesta es una oportunidad para mostrar tu avance.',
+    'Lee con atención, decide y verifica antes de continuar.',
+    'Tu preparación se refleja en cada decisión fundamentada.',
+    'Avanza con seguridad: has construido herramientas para este momento.',
+    'Más que recordar, demuestra cómo utilizas lo aprendido.',
+    'Respira, organiza tus ideas y muestra tu mejor trabajo.'
+  ],
+  5:[
+    'Tu aprendizaje también deja huella.',
+    'Mirar tus avances te ayuda a elegir el próximo desafío.',
+    'Cada error comprendido se convierte en una nueva herramienta.',
+    'Reconocer lo que sabes fortalece tu confianza para avanzar.',
+    'Reflexionar transforma la experiencia en aprendizaje.',
+    'Tu progreso cuenta: celébralo y sigue construyendo.',
+    'Cerrar una etapa abre nuevas posibilidades.',
+    'Lo aprendido hoy puede transformar tus decisiones de mañana.'
+  ]
+};
+function learningWeekNumber(date=new Date()){
+  const d=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()));
+  const day=d.getUTCDay()||7;
+  d.setUTCDate(d.getUTCDate()+4-day);
+  const yearStart=new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  return Math.ceil((((d-yearStart)/86400000)+1)/7);
+}
+function weeklyStationSpark(n,date=new Date()){
+  const bank=stationWeeklySparks[Number(n)]||[screenSparks[Number(n)]||screenSparks.course];
+  return bank[(learningWeekNumber(date)-1)%bank.length];
+}
 let auth={},courses=[],current=null,view={},ae=0,step=0,caseIndex=0,tab='',examStarted=false,questionIndex=0,examDraft={},inspected=new Set(),sceneRotation=-25,teacherData=null;
 function toast(s){$('#toast').textContent=s;$('#toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('#toast').classList.remove('show'),5000)}
 async function api(url,method='GET',data){const r=await fetch('/api'+url,{method,headers:{'Content-Type':'application/json','X-CSRF-Token':auth.csrf||''},body:data===undefined?undefined:JSON.stringify(data)});const x=await r.json();if(!r.ok)throw Error(x.error||'No se pudo completar la solicitud.');return x}
@@ -554,9 +617,11 @@ function aulaTPPageHero(opts={}){
  }).join('<span aria-hidden="true">›</span>');
  const sign=n>=1?`<p class="atp-hero-sign">${workIco(ico)}<span>Estación ${n} de 5</span><b class="atp-hero-sign-num">${n}</b></p>`:'';
  const goalHtml=goals.length?`<ul class="atp-hero-goals">${goals.map(([gi,gl])=>`<li>${workIco(gi)}<span>${esc(gl)}</span></li>`).join('')}</ul>`:'';
- const path=n>=1?heroStationPath(n):'';
+ const completedCount=(current?.completed||[]).filter(Boolean).length;
+ const sideProgress=n>=1?`<div class="atp-hero-progress"><b>Tu progreso en el módulo</b><progress value="${completedCount}" max="5"></progress><span>${completedCount} de 5 estaciones</span></div>`:'';
+ const quote=n?`<blockquote class="atp-hero-quote">${esc(spark)}</blockquote>`:'';
  return `<header class="atp-hero s${n}${n>=1?' is-station':''}" data-station-color="${n}">
-  <div class="atp-hero-id"><a class="atp-hero-logo" href="#courses"><img src="${BRAND_LOGO}" alt="Aula TP Chile · Formación técnica con sentido"></a>${showBack?`<a class="atp-hero-back" href="${backHref}">${icon('arrow')} Volver atrás</a>`:''}${sideNav}${account}</div>
+  <div class="atp-hero-id"><a class="atp-hero-logo" href="#courses"><img src="${BRAND_LOGO}" alt="Aula TP Chile · Formación técnica con sentido"></a>${showBack?`<a class="atp-hero-back" href="${backHref}">${icon('arrow')} Volver atrás</a>`:''}${sideNav}${sideProgress}${account}</div>
   <div class="atp-hero-copy">
    ${crumbHtml?`<nav class="atp-hero-crumb" aria-label="Ubicación">${crumbHtml}</nav>`:''}
    ${sign}
@@ -565,7 +630,8 @@ function aulaTPPageHero(opts={}){
    ${detail?`<p class="atp-hero-detail">${esc(detail)}</p>`:''}
    <p class="atp-hero-purpose">${esc(purpose)}</p>
    ${goalHtml}
-   ${n?path:`<p class="atp-hero-orient">${workIco('pin')}<span><b>${esc(orientLabel)}</b> <span aria-hidden="true">|</span> ${esc(String(orient).split('|').pop().trim())}</span></p>`}
+   ${quote}
+   ${n?'':`<p class="atp-hero-orient">${workIco('pin')}<span><b>${esc(orientLabel)}</b> <span aria-hidden="true">|</span> ${esc(String(orient).split('|').pop().trim())}</span></p>`}
    ${opts.meta||''}
   </div>
   <div class="atp-hero-visual">
@@ -575,23 +641,6 @@ function aulaTPPageHero(opts={}){
    ${showBadge?`<div class="atp-hero-badge">${workIco(ico)}<b>Estación ${n} de 5</b><small>${esc(opts.badgeName||names[n-1]||badgeNote)}</small></div>`:''}
   </div>
  </header>`;
-}
-function heroStationPath(n){
- const done=current?.completed||[];
- const short=['Contextualización','Aprendizajes','Situación Integradora','Evaluación Final','Retroalimentación'];
- const mid=current?.id||'';
- return `<ol class="atp-hero-path" aria-label="Tu lugar en las 5 estaciones">${names.map((_,i)=>{
-  const num=i+1;
-  const complete=!!done[i];
-  const here=num===n;
-  const open=auth.user?.role==='teacher'||num===1||done.slice(0,i).every(Boolean);
-  const cls=`is-${here?'current':complete?'done':'wait'}`;
-  const label=`${num}. ${short[i]}${here?' · Estás aquí':complete?' · Completada':''}`;
-  const inner=`<span class="atp-hero-node">${workIco(stationIcons[i])}</span><small>${num}. ${esc(short[i])}</small>`;
-  return open
-   ?`<li class="${cls}"><button type="button" data-action="station" data-n="${num}" data-module="${mid}" ${here?'aria-current="step"':''} aria-label="${esc(label)}">${inner}</button></li>`
-   :`<li class="${cls} is-locked"><span aria-label="${esc(label)}">${inner}</span></li>`;
- }).join('')}</ol>`;
 }
 const heroStationTitles=['Contextualización','Aprendizajes esperados','Situación Integradora','Evaluación Final','Retroalimentación y Cierre'];
 const heroGoals=[
@@ -624,7 +673,7 @@ function gpsStation(n){
 function stationHero(n){
  const course=courses.find(c=>c.id===current.course_id);
  const back=n===1?`#course/${current.course_id}`:`#module/${current.id}/${n-1}`;
- const purposes=['Conoce el contexto y activa tus conocimientos previos.','Desarrolla los conceptos clave para avanzar en el módulo.','Aplica lo aprendido en escenarios reales y toma decisiones.','Demuestra lo aprendido e integra tus conocimientos.','Consolida tu aprendizaje, reconoce tus avances e identifica nuevas oportunidades de mejora.'];
+ const purposes=['Conoce el contexto y activa tus conocimientos previos.','Desarrolla los conceptos clave para avanzar en el módulo.','Aplica lo aprendido en escenarios reales y toma decisiones.','En esta etapa aplicarás lo trabajado durante el módulo en una situación real, relacionando conocimientos y demostrando tus competencias técnicas.','Consolida tu aprendizaje, reconoce tus avances e identifica nuevas oportunidades de mejora.'];
  const orients=['Observa el escenario profesional','Avanza etapa por etapa','Avanza etapa por etapa','Demuestra lo aprendido','Reflexiona y avanza'];
  const aeN=n===2?ae+1:0;
  const aeTitle=n===2?aeLabel(current.content?.aes?.[ae]):'';
@@ -636,12 +685,12 @@ function stationHero(n){
   title:heroStationTitles[n-1],
   signName:names[n-1],
   badgeName:names[n-1],
-  detail:aeTitle?`AE${aeN}. ${aeTitle}`:'',
+  detail:aeTitle?`AE${aeN}. ${aeTitle}`:(n===4?'Demuestra lo aprendido e integra tus conocimientos.':''),
   purpose:purposes[n-1],
   orient:orients[n-1],
   goals:heroGoals[n-1],
   badgeNote:gpsStation(n),
-  spark:screenSparks[n],
+  spark:weeklyStationSpark(n),
   backHref:back,
   breadcrumb:[
    {label:'Inicio',href:'#courses'},
