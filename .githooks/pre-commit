@@ -1,0 +1,46 @@
+#!/bin/sh
+# Aula TP — pre-commit
+# Impide commitear paquetes, venv, caché y secretos obvios.
+
+set -e
+
+blocked='(^|/)?(\.venv/|wheelhouse/|__pycache__/|data/|backups/)'
+ext_blocked='\.(whl|pyc|pyd|so|dll|exe)$'
+secret_name='(\.env$|credentials|id_rsa|id_ed25519|\.pem$|\.pfx$)'
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -z "$staged" ] && exit 0
+
+fail=0
+for f in $staged; do
+  case "$f" in
+    *.whl|wheelhouse/*|.venv/*|__pycache__/*|*.pyc)
+      echo "pre-commit: no commitear $f (wheelhouse/venv/caché)"
+      fail=1
+      ;;
+  esac
+  echo "$f" | grep -Eq "$blocked" && { echo "pre-commit: ruta bloqueada: $f"; fail=1; }
+  echo "$f" | grep -Eq "$ext_blocked" && { echo "pre-commit: extensión bloqueada: $f"; fail=1; }
+  echo "$f" | grep -Eqi "$secret_name" && { echo "pre-commit: posible secreto: $f"; fail=1; }
+done
+
+# Python: sintaxis de archivos staged
+py=
+for c in python python3 py; do
+  command -v "$c" >/dev/null 2>&1 && py=$c && break
+done
+if [ -n "$py" ]; then
+  for f in $staged; do
+    case "$f" in
+      *.py)
+        "$py" -m py_compile "$f" || { echo "pre-commit: error de sintaxis en $f"; fail=1; }
+        ;;
+    esac
+  done
+fi
+
+if [ "$fail" -ne 0 ]; then
+  echo "pre-commit: corrige lo anterior o usa --no-verify solo si es imprescindible."
+  exit 1
+fi
+exit 0

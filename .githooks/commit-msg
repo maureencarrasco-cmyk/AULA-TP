@@ -1,0 +1,9 @@
+#!/bin/sh
+# Aula TP — commit-msg: mensaje no vacío y de al menos 8 caracteres.
+msg=$(sed -e '/^#/d' -e '/^$/d' "$1" | head -n 1)
+len=$(printf '%s' "$msg" | wc -c)
+if [ "$len" -lt 8 ]; then
+  echo "commit-msg: escribe un mensaje de al menos 8 caracteres."
+  exit 1
+fi
+exit 0

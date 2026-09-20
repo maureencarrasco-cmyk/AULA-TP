@@ -1,0 +1,27 @@
+#!/bin/sh
+# Aula TP — pre-push: compila Python del árbol y corre tests si existen.
+set -e
+
+py=
+for c in python python3 py; do
+  command -v "$c" >/dev/null 2>&1 && py=$c && break
+done
+
+if [ -n "$py" ]; then
+  files=$(git ls-files '*.py')
+  if [ -n "$files" ]; then
+    echo "pre-push: py_compile..."
+    echo "$files" | xargs "$py" -m py_compile
+  fi
+  if [ -f tests/test_lms.py ]; then
+    if "$py" -c "import pytest" >/dev/null 2>&1; then
+      echo "pre-push: pytest tests/test_lms.py..."
+      "$py" -m pytest -q tests/test_lms.py
+    else
+      echo "pre-push: pytest no instalado; se omite test_lms.py"
+    fi
+  fi
+else
+  echo "pre-push: Python no encontrado; se omite validación."
+fi
+exit 0
