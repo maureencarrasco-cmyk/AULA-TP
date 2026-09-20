@@ -331,3 +331,27 @@ aside .panel.support,
 }
 footer .footer-brand{display:flex;align-items:center;gap:12px}
 footer .footer-logo{height:48px;width:auto;max-width:120px}
+
+/* ux-contrast-20260919 */
+.side-nav a,
+.station-menu a,
+nav.course-nav a{
+  color:#0B3A6B;
+  font-weight:650;
+}
+.side-nav a:hover,
+.station-menu a:hover,
+nav.course-nav a:hover{
+  background:#E8F1FB;
+}
+.side-nav a.active,
+.side-nav a[aria-current="page"],
+.station-menu a.active,
+.station-menu a[aria-current="page"],
+nav.course-nav a.active,
+nav.course-nav a[aria-current="page"]{
+  background:#E6F6EE;
+  color:#0B3A6B;
+  font-weight:800;
+  box-shadow:inset 4px 0 0 #1F8A5B;
+}

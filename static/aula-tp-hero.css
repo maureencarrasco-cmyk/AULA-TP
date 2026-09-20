@@ -718,3 +718,192 @@ body.low-stim .atp-hero-chip{display:inline-flex}
   outline:2px solid #3EC6E0;
   outline-offset:2px;
 }
+
+/* e5-identity-single: collage already has motto + badge */
+.atp-hero.s5 .atp-hero-motto,
+.atp-hero.s5 .atp-hero-badge{display:none!important}
+
+/* ux-contrast-20260919 */
+.atp-hero-copy h1,
+.atp-hero.is-station .atp-hero-copy h1{
+  color:#071F45 !important;
+  font-weight:900;
+  letter-spacing:-.02em;
+  text-shadow:0 1px 0 rgba(255,255,255,.35);
+}
+.atp-hero h1 .atp-title-accent{font-weight:900}
+.atp-hero-purpose,
+.atp-hero.is-station .atp-hero-purpose,
+.atp-hero-detail{
+  color:#0B3A6B !important;
+  font-weight:650;
+  opacity:1 !important;
+}
+.atp-hero-path small,
+.atp-hero-path .is-wait small,
+.atp-hero-path .is-done small{
+  color:#0B3A6B !important;
+  opacity:1 !important;
+  font-weight:700;
+}
+.atp-hero-path .is-wait{opacity:1}
+.atp-hero-path .is-wait .atp-hero-node{
+  border-color:#8BA4C4;
+  background:#EEF4FB;
+  color:#0B3A6B;
+}
+.atp-hero-path li > button,
+.atp-hero-path li > span{
+  color:#0B3A6B;
+}
+.atp-hero-path li > button:hover:not(:disabled){
+  background:#E8F1FB;
+  transform:translateY(-1px);
+}
+.atp-hero-path .is-current small{
+  color:#071F45 !important;
+  font-weight:800;
+}
+.atp-hero-path .is-current .atp-hero-node{
+  box-shadow:0 0 0 3px rgba(31,138,91,.28),0 6px 16px rgba(11,58,107,.18);
+}
+.atp-hero-goals li{
+  border-color:#9BB8D6;
+  color:#0B3A6B;
+  font-weight:700;
+  background:#fff;
+}
+.atp-hero-goals li:hover,
+.atp-hero-goals li.is-on,
+.atp-hero-goals li[aria-current="true"]{
+  background:#0B3A6B;
+  color:#fff;
+  border-color:#0B3A6B;
+}
+.atp-hero-goals li.is-on .work-ico,
+.atp-hero-goals li[aria-current="true"] .work-ico{color:#fff}
+/* e5: collage keeps badge; motto sticker removed from image */
+.atp-hero.s5 .atp-hero-badge{display:none!important}
+.atp-hero.s5 .atp-hero-motto{display:none!important}
+
+/* hero-visual-fix-20260919 */
+.atp-hero.s5 .atp-hero-visual img{
+  object-fit:cover;
+  object-position:52% 36% !important;
+}
+.atp-hero.s5 .atp-hero-visual{
+  overflow:hidden;
+  border-radius:0 22px 22px 0;
+}
+.atp-hero.s5 .atp-hero-visual::after{
+  content:"";
+  position:absolute;inset:0 auto 0 0;width:18%;
+  background:linear-gradient(90deg,rgba(255,255,255,.72) 0%,transparent 100%);
+  pointer-events:none;z-index:1;
+}
+/* ux-mark-20260919 */
+.atp-hero-goals li{
+  cursor:pointer;
+  transition:background .15s ease,color .15s ease,border-color .15s ease,box-shadow .15s ease,transform .15s ease;
+}
+.atp-hero-goals li:hover,
+.atp-hero-goals li:focus-within{
+  background:#0B3A6B !important;
+  color:#fff !important;
+  border-color:#0B3A6B !important;
+  box-shadow:0 8px 18px rgba(11,58,107,.22);
+  transform:translateY(-1px);
+}
+.atp-hero-goals li:hover .work-ico,
+.atp-hero-goals li:focus-within .work-ico{color:#fff !important}
+.atp-hero-path li > button{
+  cursor:pointer;
+  transition:transform .15s ease;
+}
+.atp-hero-path li > button:hover:not(:disabled) .atp-hero-node{
+  border-color:#0B3A6B;
+  color:#0B3A6B;
+  background:#E8F1FB;
+  transform:scale(1.06);
+  box-shadow:0 0 0 4px rgba(11,58,107,.12);
+}
+.atp-hero-path li > button:hover:not(:disabled) small{
+  color:#071F45 !important;
+  font-weight:800;
+}
+.atp-hero-path .is-wait{opacity:1}
+.atp-hero-side a,
+.side-nav a,
+.station-menu a{
+  transition:background .15s ease,box-shadow .15s ease,color .15s ease;
+}
+.atp-hero-side a:hover,
+.side-nav a:hover,
+.station-menu a:hover{
+  background:#E8F1FB;
+  color:#071F45;
+}
+
+/* hero-fade-soft-20260919 */
+.atp-hero.s5{
+  --hero-wash:#F4FBF7;
+}
+.atp-hero.s5 .atp-hero-copy{
+  background:linear-gradient(90deg,#fff 0%,#F7FCFA 70%,var(--hero-wash) 100%);
+}
+.atp-hero.s5 .atp-hero-fade{
+  width:48%;
+  background:linear-gradient(
+    90deg,
+    var(--hero-wash) 0%,
+    color-mix(in srgb, var(--hero-wash) 78%, transparent) 28%,
+    color-mix(in srgb, var(--hero-wash) 42%, transparent) 58%,
+    color-mix(in srgb, var(--hero-wash) 12%, transparent) 82%,
+    transparent 100%
+  );
+  opacity:.95;
+}
+/* kill harsh white plate; rely on soft wash + image-edge blend */
+.atp-hero.s5 .atp-hero-visual::after{
+  width:42% !important;
+  background:linear-gradient(
+    90deg,
+    var(--hero-wash) 0%,
+    color-mix(in srgb, var(--hero-wash) 70%, transparent) 35%,
+    color-mix(in srgb, var(--hero-wash) 25%, transparent) 70%,
+    transparent 100%
+  ) !important;
+  opacity:.9;
+}
+.atp-hero.s5 .atp-hero-visual img{
+  object-position:64% 38% !important;
+}
+
+/* s5-hero-phrases-visible-v40
+   The station-5 photo already carries positive-reinforcement copy
+   (ampolleta + "Tu esfuerzo también cuenta"). A wide left wash was
+   covering it — keep only a thin seam so the phrases stay readable. */
+.atp-hero.s5 .atp-hero-fade{
+  width:14% !important;
+  opacity:.55 !important;
+  background:linear-gradient(
+    90deg,
+    var(--hero-wash) 0%,
+    color-mix(in srgb, var(--hero-wash) 45%, transparent) 55%,
+    transparent 100%
+  ) !important;
+}
+.atp-hero.s5 .atp-hero-visual::after{
+  width:12% !important;
+  opacity:.4 !important;
+  background:linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--hero-wash) 55%, transparent) 0%,
+    transparent 100%
+  ) !important;
+}
+.atp-hero.s5 .atp-hero-visual img{
+  /* keep student + left callouts in frame */
+  object-position:42% 36% !important;
+  filter:contrast(1.06) saturate(1.05);
+}

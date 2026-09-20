@@ -160,7 +160,8 @@ function stationCta(m){
  const st=stationStateLabel(m);
  return `<span class="lr-cta lr-state"><span class="lr-cta-ico" aria-hidden="true">${workIco(st.ico)}</span><span class="lr-cta-label">${esc(st.text)}</span></span>`;
 }
-function learningRoute({currentN=1,completed=[],moduleId=null,interactive=true,title='Ruta de las 5 estaciones del módulo',lead='Avanza paso a paso hasta completar tu recorrido de aprendizaje.'}={}){
+const stationPhotos=['/static/themes/plans.png?v=1','/static/themes/equipment.png?v=1','/static/themes/technician.png?v=1','/static/themes/assessment.png?v=1','/static/themes/reflection.png?v=15'];
+function learningRoute({currentN=1,completed=[],moduleId=null,interactive=true,title='Ruta de las 5 estaciones del módulo',lead='Diseño + tecnología + pedagogía: explora cada estación, conecta teoría con el oficio y haz visible tu aprendizaje.'}={}){
  const done=names.map((_,i)=>!!completed[i]);
  const doneCount=done.filter(Boolean).length;
  const reached=Math.max(currentN,doneCount||1);
@@ -169,19 +170,29 @@ function learningRoute({currentN=1,completed=[],moduleId=null,interactive=true,t
  const models=names.map((_,i)=>stationModel(i,currentN,done));
  const live=`Estás en la estación ${currentN} de 5. ${doneCount} de 5 estaciones completadas.`;
  return `<section class="panel route-panel lr" aria-label="${esc(title)}. ${esc(live)}">
-  <header class="lr-head lr-head-journey">
-   <span class="lr-head-ico">${workIco('pin')}</span>
-   <div class="lr-head-text"><h3>Ruta de aprendizaje de las</h3><h2>5 Estaciones</h2></div>
-   <span class="lr-head-sep" aria-hidden="true"></span>
-   <p class="lr-head-lead">${esc(lead)}</p>
-   <em class="lr-head-motto">Aprender también es un viaje</em>
+  <header class="lr-head lr-head-banner-full" aria-label="Ruta de aprendizaje de las 5 Estaciones">
+   <img class="lr-head-banner-img" src="/static/lr-head-banner.png?v=12" alt="Ruta de aprendizaje de las 5 Estaciones. Diseño + tecnología + pedagogía. Aprender también es un viaje." width="1600" height="280" loading="eager" decoding="async">
   </header>
+  <div class="lr-pedagogy" role="note">
+   <span class="lr-pedagogy-ico" aria-hidden="true">${workIco('bulb')}</span>
+   <div class="lr-pedagogy-copy">
+    <p class="lr-pedagogy-kicker">Innovación pedagógica y diseño educativo</p>
+    <p class="lr-pedagogy-text"><b>Aprendizaje interactivo y centrado en ti:</b> recursos visuales, experiencias dinámicas y conexión con situaciones reales del oficio.</p>
+    <p class="lr-pedagogy-sub">Explora, decide y avanza con autonomía.</p>
+   </div>
+   <p class="lr-pedagogy-formula" aria-label="Diseño más Tecnología más Pedagogía igual Experiencias significativas">
+    <span class="lr-pill"><span class="lr-pill-ico" aria-hidden="true">${workIco('palette')}</span><span class="lr-pill-txt">Diseño</span></span><i aria-hidden="true">+</i>
+    <span class="lr-pill"><span class="lr-pill-ico" aria-hidden="true">${workIco('monitor')}</span><span class="lr-pill-txt">Tecnología</span></span><i aria-hidden="true">+</i>
+    <span class="lr-pill"><span class="lr-pill-ico" aria-hidden="true">${workIco('book')}</span><span class="lr-pill-txt">Pedagogía</span></span><i aria-hidden="true">=</i>
+    <span class="lr-pill lr-pill-result"><span class="lr-pill-ico" aria-hidden="true">${workIco('star')}</span><span class="lr-pill-txt">Experiencias significativas</span></span>
+   </p>
+  </div>
   <ol class="lr-track" style="--lr-fill:${fill}%" role="list">${models.map((m,i)=>{
    const st=stationStateLabel(m);
    const cls=`lr-stop s${m.stationNumber} is-${m.stationStatus}${i===4?' is-goal':''}`;
    const label=`Estación ${m.stationNumber} de 5: ${m.stationName}. ${st.text}. ${descriptions[i]}.`;
    const badge=m.isCompleted?`<span class="lr-check" aria-hidden="true">${icon('check')}</span>`:'';
-   const hint=m.isCurrent?'<em class="lr-hint">Estás trabajando en esta etapa.</em>':'';
+   const hint=m.isCurrent?'<em class="lr-hint is-here">Estás trabajando en esta etapa.</em>':'';
    const attrs=interactive
     ?(m.isLocked
       ?`type="button" class="lr-card station s${m.stationNumber}" data-action="station-locked" aria-disabled="true" aria-label="${esc(label+' Completa la etapa anterior para continuar.')}"`
@@ -190,12 +201,21 @@ function learningRoute({currentN=1,completed=[],moduleId=null,interactive=true,t
    const Tag=interactive?'button':'div';
    return `<li class="${cls}" data-station-number="${m.stationNumber}" data-station-status="${m.stationStatus}" data-station-name="${esc(m.stationName)}" data-completed="${m.isCompleted}" data-available="${m.isAvailable}" data-locked="${m.isLocked}" data-current="${m.isCurrent}">
     <span class="lr-node" aria-hidden="true"><span class="lr-num">${m.stationNumber}</span>${badge}</span>
-    <${Tag} ${attrs}>${workIco(stationIcons[i])}<b class="lr-name">${stationTitleMarkup(m.stationName)}</b><small class="lr-purpose">${esc(descriptions[i])}</small>${hint}${stationCta(m)}</${Tag}>
+    <${Tag} ${attrs}><span class="lr-media" aria-hidden="true"><img src="${stationPhotos[i]}" alt="" loading="lazy" decoding="async"><span class="lr-media-shade"></span>${m.isCurrent?`<span class="lr-here-pill">Estás aquí</span>`:''}${m.isCompleted?`<span class="lr-done-pill">Completada</span>`:''}</span><span class="lr-body">${workIco(stationIcons[i])}<b class="lr-name">${stationTitleMarkup(m.stationName)}</b><small class="lr-purpose">${esc(descriptions[i])}</small>${hint}${stationCta(m)}</span></${Tag}>
    </li>`;
   }).join('')}</ol>
-  <p class="lr-progress"><span>Tu progreso</span><b>${doneCount} de 5 estaciones completadas</b><span class="lr-bar" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="${doneCount}" aria-label="${doneCount} de 5 estaciones completadas"><i style="width:${doneCount*20}%"></i></span></p>
+  <div class="lr-progress" role="group" aria-label="${doneCount} de 5 estaciones completadas">
+   <span class="lr-progress-label">${workIco('flag')}<span>Tu progreso <b>${doneCount} de 5 estaciones completadas</b></span></span>
+   <span class="lr-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="${doneCount}">
+    <i class="lr-progress-fill" style="width:${doneCount*20}%"></i>
+    <span class="lr-progress-dots" aria-hidden="true">${[0,1,2,3,4].map(d=>`<em class="${d<doneCount?'is-done':(d===currentN-1?'is-here':'')}"></em>`).join('')}</span>
+   </span>
+   <span class="lr-progress-goal" aria-hidden="true">${workIco('flag')}</span>
+  </div>
  </section>`;
 }
+
+
 function stationMiniRoute(completed=[]){
  const done=names.map((_,i)=>!!completed[i]);
  const doneCount=done.filter(Boolean).length;
@@ -238,12 +258,13 @@ function courseMap(id){
  <ol class="journey-stops" style="--mod-fill:${total>1?Math.round((done/Math.max(1,total-1))*100):finished?100:0}%" aria-label="Recorrido por la especialidad">${c.modules.map((m,i)=>`<li class="journey-stop color-${i%4} ${m.percent===100?'is-complete':''} ${i===here?'is-here':''}"><div class="journey-marker" aria-label="Módulo ${i+1}">${m.percent===100?icon('check'):String(i+1).padStart(2,'0')}</div><article class="journey-card"><div class="journey-photo"><img src="${moduleStopArt(c,i)}" alt="Escenario profesional del módulo ${i+1}: ${esc(m.title)}" decoding="async">${i===here&&!finished?`<span class="here-chip">${workIco('pin')} Estás aquí</span>`:''}</div><div class="journey-card-body"><div class="journey-card-top"><span class="journey-symbol">${icon(['file','search','link','tool'][i%4])}</span><span class="journey-state">${m.percent===100?'✓ Completado':m.percent?'● En curso':m.published?'Disponible':'En preparación'}</span></div><span class="eyebrow">MÓDULO ${String(i+1).padStart(2,'0')}${i===total-1?' · TRAMO FINAL':''}</span><h2>${esc(m.title)}</h2>${stationMiniRoute(m.completed)}<div class="progress-label"><span>${m.completed.filter(Boolean).length} de 5 estaciones</span><strong>${m.percent}%</strong></div>${m.encargos_count?`<p class="journey-encargos">${m.encargos_count} encargos de oficio · ${m.encargos_hours} h</p>`:''}<progress value="${m.percent}" max="100" aria-label="Progreso del módulo ${i+1}"></progress>${m.published||auth.user.role==='teacher'?`<a class="journey-button" href="${m.published?'#module/'+m.id:'#editor/'+m.id}">${m.published?(m.percent===100?'Revisar módulo':m.percent?'Continuar mi recorrido':'Comenzar módulo'):'Preparar contenido'} ${icon('arrow')}</a>`:'<button class="journey-button" disabled>Próximamente</button>'}</div></article></li>`).join('')}</ol>
  <div class="journey-finish ${finished?'reached':''}"><div class="finish-visual"><img src="${journeyGoalArt(c)}" alt="Cierre del recorrido de ${esc(c.specialty||c.title)}" decoding="async"><span class="finish-flag" aria-hidden="true">${icon('flag')}</span></div><div><span class="eyebrow">${finished?'META ALCANZADA':'TU META · AL FINAL DEL RECORRIDO'}</span><h2>${finished?'¡Completaste tu ruta!':'Llegar, integrar y seguir creciendo'}</h2><p>${finished?'Has completado las cinco estaciones de cada módulo. Revisa la retroalimentación docente para conocer tus resultados.':`Completa el módulo ${total} y el cierre de todos los módulos para alcanzar la meta.`}</p></div><strong>${done}<span> / ${total}<small>módulos completos</small></span></strong></div></div> <div class="journey-bottom"><section class="panel journey-overall"><span class="circle">${icon('chart')}</span><div><h2>Cada paso cuenta</h2><p>Tu progreso general</p><progress value="${pct}" max="100" aria-label="Progreso general del curso"></progress></div><strong>${pct}%</strong></section></div></div></div></section>`);
 }
-const stationTools={practice:[1,2,3],agent:[2,3,5],feedback:[2,3]};
+const stationTools={practice:[1,2,3,5],agent:[1,2,3,5],feedback:[1,2,3,5]};
 function toolsMarkup(station,withAccess,layout='stack'){
+ const s=Number(station)||0;
  const items=[];
- if(stationTools.practice.includes(station))items.push(supportCard('practice','Práctica libre','Explora, experimenta y refuerza tus habilidades','ok',icon('tool')));
- if(stationTools.agent.includes(station))items.push(supportCard('agent','Agente pedagógico','Te orienta y te ayuda a razonar','blue',icon('chat')));
- if(stationTools.feedback.includes(station))items.push(supportCard('feedback','Retroalimentación','Reconoce tus avances y qué revisar','cyan',icon('chart')));
+ if(stationTools.practice.includes(s))items.push(supportCard('practice','Práctica libre','Explora · Desafía · Investiga','ok',icon('tool')));
+ if(stationTools.agent.includes(s))items.push(supportCard('agent','Agente pedagógico','Te orienta y te ayuda a razonar','blue',icon('chat')));
+ if(stationTools.feedback.includes(s))items.push(supportCard('feedback','Retroalimentación','Reconoce tus avances y qué revisar','cyan',icon('chart')));
  if(withAccess)items.push(supportCard('access','Accesibilidad','Configura cómo percibes e interactúas','violet',accessGlyph()));
  if(!items.length)return '';
  const rail=layout==='rail';
@@ -252,10 +273,11 @@ function toolsMarkup(station,withAccess,layout='stack'){
 }
 function supportRail(station){return toolsMarkup(station,true,'rail')}
 function stationToolsCatalog(station){
+ const s=Number(station)||0;
  const items=[];
- if(stationTools.practice.includes(station))items.push({id:'practice',title:'Práctica libre',hint:'Explora, experimenta y refuerza tus habilidades',tone:'ok',glyph:icon('tool')});
- if(stationTools.agent.includes(station))items.push({id:'agent',title:'Agente pedagógico',hint:'Te orienta y te ayuda a razonar',tone:'blue',glyph:icon('chat')});
- if(stationTools.feedback.includes(station))items.push({id:'feedback',title:'Retroalimentación',hint:'Reconoce tus avances y qué revisar',tone:'cyan',glyph:icon('chart')});
+ if(stationTools.practice.includes(s))items.push({id:'practice',title:'Práctica libre',hint:'Explora · Desafía · Investiga — laboratorio autónomo',tone:'ok',glyph:icon('tool')});
+ if(stationTools.agent.includes(s))items.push({id:'agent',title:'Agente pedagógico',hint:'Te orienta y te ayuda a razonar',tone:'blue',glyph:icon('chat')});
+ if(stationTools.feedback.includes(s))items.push({id:'feedback',title:'Retroalimentación',hint:'Reconoce tus avances y qué revisar',tone:'cyan',glyph:icon('chart')});
  items.push({id:'access',title:'Accesibilidad',hint:'Configura cómo percibes e interactúas',tone:'violet',glyph:accessGlyph()});
  return items;
 }
@@ -275,10 +297,12 @@ function toolsFabClamp(x,y,el){
 }
 function toolsFabApplyPos(fab,pos){
  if(!fab||!pos)return;
- fab.style.left=pos.x+'px';
- fab.style.top=pos.y+'px';
- fab.style.right='auto';
- fab.style.bottom='auto';
+ fab.classList.add('is-placed');
+ fab.style.setProperty('left', pos.x+'px', 'important');
+ fab.style.setProperty('top', pos.y+'px', 'important');
+ fab.style.setProperty('right', 'auto', 'important');
+ fab.style.setProperty('bottom', 'auto', 'important');
+ fab.style.setProperty('transform', 'none', 'important');
 }
 function toolsFabSavePos(fab){
  const r=fab.getBoundingClientRect();
@@ -377,6 +401,9 @@ function bindToolsFabResize(){
  });
 }
 function mountToolsFab(station){
+ station=Number(station)||0;
+ if(view&&view.name==='module'&&station===0&&Number(view.station)>0)station=Number(view.station);
+
  document.querySelectorAll('.tools-fab, .tools-fab-backdrop, .tools-fab-layer').forEach(el=>el.remove());
  const html=toolsFabMarkup(station);
  if(!html)return;
@@ -666,8 +693,111 @@ function mcqPublishGaps(c){
 async function editor(mid){if(auth.user.role!=='teacher')throw Error('Se requiere el rol docente.');const m=await api('/modules/'+mid);let content=m.content;
  function draw(){shell(`<section class="page-heading"><div><a class="back-link" href="#teacher/courses">← Cursos y contenidos</a><h1>Preparar módulo ${m.position}</h1><p>Una misma estructura visual para todos los cursos. Personaliza los contenidos de cada estación.</p>${sparkPhrase(screenSparks.editor)}</div></section><form id="editor-form" class="panel"><label>Título del módulo<input name="title" value="${esc(m.title)}" minlength="3" required></label><label class="option"><input type="checkbox" name="published" ${m.published?'checked':''} ${(content.aes&&mcqPublishGaps(content).length)?'disabled':''}> Habilitar para estudiantes matriculados</label>${content.aes&&mcqPublishGaps(content).length?`<p class="info-strip">${esc(mcqPublishGaps(content)[0])} No publiques el módulo con ese hueco.</p>`:''}${!content.aes?`<div class="empty"><h2>Este módulo aún no tiene contenido</h2><p>Carga una base de demostración y reemplázala por los aprendizajes, situaciones y preguntas de tu especialidad.</p>${action('load-template','Cargar base editable','outline')}</div>`:`<label>Estación 1 · Contexto profesional<textarea data-field="context" minlength="20" required>${esc(content.context)}</textarea></label>${enrichmentEditor(content)}<h2>Estación 2 · Aprendizajes esperados</h2>${content.aes.map((a,i)=>`<details class="editor-detail"><summary>AE ${i+1} · ${esc(a.title)}</summary><label>Aprendizaje esperado<input data-ae="${i}" data-key="title" value="${esc(a.title)}" required></label><label>Descripción<textarea data-ae="${i}" data-key="description" required>${esc(a.description)}</textarea></label>${a.steps.map((s,j)=>`<label>${stages[j]}<textarea data-ae="${i}" data-step="${j}" required>${esc(s)}</textarea></label>`).join('')}</details>`).join('')}<h2>Estación 3 · 15 situaciones integradoras</h2>${content.cases.map((c,i)=>`<details class="editor-detail"><summary>Situación ${i+1} · ${esc(c.title)}</summary><label>Título<input data-case="${i}" data-key="title" value="${esc(c.title)}" required></label><label>Contexto<textarea data-case="${i}" data-key="context" required>${esc(c.context)}</textarea></label>${c.options.map((o,j)=>`<label>Opción ${j+1}<input data-case="${i}" data-option="${j}" value="${esc(o)}" required></label>`).join('')}<label>Decisión correcta<select data-case="${i}" data-key="answer">${(c.options||[]).map((_,j)=>`<option value="${j}" ${c.answer===j?'selected':''}>${'ABCD'[j]||(j+1)}</option>`).join('')}</select></label></details>`).join('')}<p class="info-strip">El escenario conceptual conserva tres elementos de inspección. Revisa sus etiquetas, datos y consigna en la sección de contexto y explicaciones.</p><h2>Estación 4 · 25 preguntas</h2>${content.questions.map((q,i)=>`<details class="editor-detail"><summary>Pregunta ${i+1} · ${esc(q.question)}</summary><label>Enunciado<textarea data-question="${i}" data-key="question" required>${esc(q.question)}</textarea></label>${q.options.map((o,j)=>`<label>Opción ${j+1}<input data-question="${i}" data-option="${j}" value="${esc(o)}" required></label>`).join('')}<label>Respuesta correcta<select data-question="${i}" data-key="answer">${q.options.map((_,j)=>`<option value="${j}" ${q.answer===j?'selected':''}>Opción ${j+1}</option>`).join('')}</select></label><label>Explicación para retroalimentación<textarea data-question="${i}" data-key="explanation" required>${esc(q.explanation)}</textarea></label></details>`).join('')}<label>Situación de desarrollo<textarea data-field="development" minlength="80" required>${esc(content.development)}</textarea></label><p class="muted">Estación 5: el resumen se genera con las evidencias reales y la revisión docente. Si ya hay evidencias, crea una nueva versión del módulo para cambiar su contenido.</p>`}<button class="primary">Guardar módulo</button><span class="save-status" role="status"></span></form>`);$('#editor-form').oninput=e=>{if(applyEnrichmentInput(e,content))return;const d=e.target.dataset,v=e.target.value;if(d.field)content[d.field]=v;else if(d.ae!==undefined){if(d.step!==undefined)content.aes[d.ae].steps[d.step]=v;else content.aes[d.ae][d.key]=v}else if(d.case!==undefined||d.question!==undefined){const o=d.case!==undefined?content.cases[d.case]:content.questions[d.question];if(d.option!==undefined)o.options[d.option]=v;else o[d.key]=d.key==='answer'?Number(v):v}};$('#editor-form').onsubmit=async e=>{e.preventDefault();try{const d=new FormData(e.target);await api('/teacher/modules/'+mid,'PUT',{title:d.get('title'),published:d.has('published'),content});toast('Contenido del módulo guardado.');$('.save-status').textContent='Guardado en este equipo.'}catch(err){toast(err.message)}};const b=$('[data-action="load-template"]');if(b)b.onclick=async()=>{content=await api('/teacher/template');draw()}}draw()}
 function showEvidence(i){const r=teacherData.records[i],s=r.state;$('#tool-content').innerHTML=`<h2>${esc(r.name)}</h2><p>${esc(r.title)}</p><details><summary>Contextualización</summary><p>${esc(s.context)}</p></details><details><summary>Aprendizajes esperados · ${Object.keys(s.ae).length} evidencias</summary>${Object.entries(s.ae).map(([k,v])=>`<h4>AE ${Number(k[0])+1} · ${stages[Number(k[2])]}</h4><p>${esc(v)}</p>`).join('')}</details><details><summary>Situaciones integradoras</summary>${Object.entries(s.cases).map(([k,v])=>`<p><b>Situación ${Number(k)+1}:</b> ${esc(v.text)}</p>`).join('')}<p><b>Escenario 3D:</b> ${esc(s.scene?.text||'Sin completar')}</p></details>${s.oficio&&Object.keys(s.oficio).length?`<details><summary>Actividades de oficio · ${Object.keys(s.oficio).length} registros</summary>${Object.entries(s.oficio).map(([k,v])=>`<p><b>${v.graded===false||v.station===1?'Observación · no califica':'Evidencia de oficio'} · ${esc(v.kind||k)}${v.paso?' · '+esc(v.paso):''}:</b> ${esc(v.text||'')}</p>`).join('')}</details>`:''}${s.encargos&&Object.keys(s.encargos).length?`<details><summary>Encargos de oficio · ${Object.keys(s.encargos).length} entregas</summary>${Object.entries(s.encargos).map(([k,v])=>`<p><b>${esc(v.title||k)} · Estación ${v.station} · AE ${v.ae}:</b> ${esc(v.text||'')}</p>`).join('')}</details>`:''}${s.exam?`<h3>Respuesta de desarrollo</h3><p class="written-response">${esc(s.exam.development)}</p><form id="review-form"><fieldset><legend>Rúbrica · 0 a 5 puntos por criterio</legend>${(r.rubric||[]).map((criterion,i)=>`<label class="rubric-row">${esc(criterion.name)}<input type="number" min="0" max="5" name="p${i}" value="${s.exam.review?.points[i]??''}" required></label>`).join('')}</fieldset><label>Retroalimentación docente<textarea name="feedback" minlength="20" required>${esc(s.exam.review?.feedback||'')}</textarea></label><button class="primary">Guardar revisión</button></form>`:'<p>La evaluación todavía no ha sido entregada.</p>'}<details><summary>Reflexión y plan de mejora</summary><p>${esc(s.reflection||'Pendiente')}</p><p>${esc(s.plan)}</p></details>`;$('#tool').showModal();if($('#review-form'))$('#review-form').onsubmit=async e=>{e.preventDefault();try{const d=new FormData(e.target);await api('/teacher/review','POST',{user_id:r.user_id,module_id:r.module_id,points:Array.from({length:5},(_,i)=>Number(d.get('p'+i))),feedback:d.get('feedback')});$('#tool').close();toast('Revisión guardada y disponible para el estudiante.');await route()}catch(err){toast(err.message)}}}
-function tool(kind){const n=view.station||0;if(kind!=='access'&&stationTools[kind]&&!stationTools[kind].includes(n))return;if(kind==='practice'){openModulePractice();return}let html='';if(kind==='access'){if(window.AulaAccess){window.AulaAccess.renderPanel($('#tool-content'));$('#tool').showModal();return}html=`<h2>Accesibilidad</h2><p>El sistema de accesibilidad no está disponible en este momento.</p>`}else if(kind==='agent'){if(view.station===4){html=`<h2>${icon('chat')} Agente pedagógico</h2><p>Durante la Evaluación Final el agente no está disponible como ayuda para responder. Si necesitas leer o ampliar el texto, usa Accesibilidad.</p>`;}else{html=`<h2>${icon('chat')} Agente pedagógico</h2><p>Guía local por reglas. Te propone preguntas para organizar tu razonamiento. No entrega la solución.</p><form id="agent-form"><label>¿Qué necesitas comprender?<textarea name="question" required minlength="3" placeholder="Por ejemplo: cómo revisar la simbología de un plano"></textarea></label><button class="primary">Recibir orientación</button></form><p id="agent-reply" class="soft" aria-live="polite">Empieza por describir qué observas, qué sabes y qué información te falta.</p>${typeof recuerdaMarkup==='function'?recuerdaMarkup('La retroalimentación te ayuda a convertir la experiencia en aprendizaje para tu futuro desempeño profesional.'):''}`}}else{html=`<h2>${icon('chart')} Retroalimentación</h2><p>Has registrado <b>${Object.keys(current?.state.ae||{}).length} de 18</b> etapas de aprendizaje, <b>${Object.keys(current?.state.cases||{}).length} de 15</b> situaciones integradoras y <b>${Object.keys(current?.state.encargos||{}).length} de ${(current?.content?.encargos?.count||0)}</b> encargos de oficio.</p><h3>Para revisar tu razonamiento</h3><p>¿Qué hiciste? ¿Qué ocurrió? ¿Por qué ocurrió? ¿Qué debes revisar? ¿Cómo puedes mejorar? ¿Puedes volver a intentarlo?</p>${typeof recuerdaMarkup==='function'?recuerdaMarkup('La retroalimentación te ayuda a convertir la experiencia en aprendizaje para tu futuro desempeño profesional.'):'<p class="muted">Este acompañamiento no asigna una calificación a tus respuestas abiertas ni a la Práctica libre.</p>'}`}$('#tool-content').innerHTML=html;$('#tool').classList.remove('is-access');$('#tool').showModal();if(kind==='agent'&&$('#agent-form'))$('#agent-form').onsubmit=e=>{e.preventDefault();const q=new FormData(e.target).get('question').toLowerCase();$('#agent-reply').textContent=moduleAgentReply(q)||(q.includes('escala')?'¿La copia conserva su escala original? Identifica la unidad de medida y explica cómo relacionarías una longitud en el plano con la longitud real.':q.includes('símb')||q.includes('simb')?'¿Qué dice la leyenda sobre ese símbolo? Busca su etiqueta en otro documento. ¿Coinciden ambas representaciones?':q.includes('error')||q.includes('difer')?'Separa lo que observaste de lo que supusiste. ¿Qué evidencia permite describir la diferencia y a quién formularías la consulta?':'Describe el problema con tus palabras. Identifica un documento que te ayude, compara dos alternativas y explica cómo verificarías tu decisión.');if(window.AulaAccess)window.AulaAccess.hydrate($('#tool'));};if(window.AulaAccess)window.AulaAccess.hydrate($('#tool'));}
+
+
+
+function bindAgentPanel(){
+  const form=document.getElementById('agent-form');
+  const ta=form&&form.querySelector('textarea[name="question"]');
+  const count=document.getElementById('agent-count');
+  const rep=document.getElementById('agent-repeat');
+  if(!form||!ta)return;
+  const sync=()=>{ if(count) count.textContent=ta.value.length+'/2000'; };
+  ta.addEventListener('input', sync); sync();
+  let lastQ='';
+  form.addEventListener('submit', ()=>{ lastQ=ta.value; if(rep) rep.hidden=false; }, true);
+  if(rep){
+    rep.onclick=()=>{ if(!lastQ)return; ta.value=lastQ; sync(); form.requestSubmit(); };
+  }
+}
+
+function tool(kind){
+  const n=view.station||0;
+  if(kind!=='access'&&stationTools[kind]&&!stationTools[kind].includes(n))return;
+  if(kind==='practice'){openModulePractice();return}
+  let html='';
+  if(kind==='access'){
+    if(window.AulaAccess){window.AulaAccess.renderPanel($('#tool-content'));$('#tool').showModal();return}
+    html=`<h2>Accesibilidad</h2><p>El sistema de accesibilidad no está disponible en este momento.</p>`;
+  }else if(kind==='agent'){
+    if(view.station===4){
+      html=`<h2>${icon('chat')} Agente pedagógico</h2><p>Durante la Evaluación Final el agente no está disponible como ayuda para responder. Si necesitas leer o ampliar el texto, usa Accesibilidad.</p>`;
+    }else{
+      const recuerda=typeof recuerdaMarkup==='function'
+        ?recuerdaMarkup('La retroalimentación te ayuda a convertir la experiencia en aprendizaje para tu futuro desempeño profesional.','agent-recuerda')
+        :'';
+      html=`<div class="agent-panel">
+  <header class="agent-head">
+    <div class="agent-head-main">
+      <span class="agent-head-ico" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="14" fill="#D9ECFF"/><circle cx="18.5" cy="17" r="6.2" stroke="#0B2A5C" stroke-width="2.4"/><path d="M9.5 34.5c1.8-5.2 5.4-8 9-8s7.2 2.8 9 8" stroke="#0B2A5C" stroke-width="2.4" stroke-linecap="round"/><rect x="27" y="12" width="14" height="11" rx="5.5" stroke="#0B2A5C" stroke-width="2.4"/><circle cx="31.2" cy="17.5" r="1.2" fill="#0B2A5C"/><circle cx="34.2" cy="17.5" r="1.2" fill="#0B2A5C"/><circle cx="37.2" cy="17.5" r="1.2" fill="#0B2A5C"/></svg>
+      </span>
+      <div class="agent-head-copy">
+        <h2>Agente pedagógico</h2>
+        <p>Aquí la IA te acompaña a planificar, diseñar y enriquecer tu aprendizaje. Haz tu consulta y te entregaré propuestas para organizar tu razonamiento. <b>No entrego la solución.</b></p>
+      </div>
+    </div>
+    <img class="agent-bulb-hero" src="/static/agent-bulb-hero.png?v=1" alt="" width="120" height="100" decoding="async">
+  </header>
+  <form id="agent-form" class="agent-form">
+    <label class="agent-label" for="agent-question">
+      <span class="agent-qmark" aria-hidden="true">?</span>
+      <span>¿Qué necesitas comprender?</span>
+    </label>
+    <div class="agent-field">
+      <textarea id="agent-question" name="question" required minlength="3" maxlength="2000" rows="4" placeholder="Por ejemplo: cómo revisar la simbología de un plano"></textarea>
+      <span class="agent-count" id="agent-count">0/2000</span>
+    </div>
+    <button type="submit" class="agent-submit">
+      <span class="agent-submit-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 11.5 19.5 4l-3.2 16.2-4.6-5.1L4 11.5Z" fill="#fff" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/><path d="m11.7 15.1 2.6 5.2" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </span>
+      <span>Recibir orientación</span>
+      <span class="agent-submit-arrow" aria-hidden="true">→</span>
+    </button>
+  </form>
+  <p class="agent-tip">
+    <span class="agent-tip-ico" aria-hidden="true">i</span>
+    <span>Empieza por describir qué observas, qué sabes y qué información te falta. Mientras más contexto entregues, mejores serán las orientaciones.</span>
+  </p>
+  <button type="button" class="agent-repeat" id="agent-repeat" hidden>
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 0 1 12.7-5.4M19.5 12a7.5 7.5 0 0 1-12.7 5.4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M17.2 3.8v4.2h4.2M6.8 20.2v-4.2H2.6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Repetir mensaje
+  </button>
+  <div id="agent-reply" class="agent-answer" aria-live="polite" hidden></div>
+  ${recuerda}
+</div>`;
+    }
+  }else{
+    html=`<h2>${icon('chart')} Retroalimentación</h2><p>Has registrado <b>${Object.keys(current?.state.ae||{}).length} de 18</b> etapas de aprendizaje, <b>${Object.keys(current?.state.cases||{}).length} de 15</b> situaciones integradoras y <b>${Object.keys(current?.state.encargos||{}).length} de ${(current?.content?.encargos?.count||0)}</b> encargos de oficio.</p><h3>Para revisar tu razonamiento</h3><p>¿Qué hiciste? ¿Qué ocurrió? ¿Por qué ocurrió? ¿Qué debes revisar? ¿Cómo puedes mejorar? ¿Puedes volver a intentarlo?</p>${typeof recuerdaMarkup==='function'?recuerdaMarkup('La retroalimentación te ayuda a convertir la experiencia en aprendizaje para tu futuro desempeño profesional.'):'<p class="muted">Este acompañamiento no asigna una calificación a tus respuestas abiertas ni a la Práctica libre.</p>'}`;
+  }
+  $('#tool-content').innerHTML=html;
+  $('#tool').classList.remove('is-access');
+  $('#tool').showModal();
+  if(kind==='agent'){
+    bindAgentPanel();
+    const form=$('#agent-form');
+    if(form){
+      form.onsubmit=e=>{
+        e.preventDefault();
+        const q=new FormData(e.target).get('question').toLowerCase();
+        const msg=moduleAgentReply(q)||(
+          q.includes('escala')?'¿La copia conserva su escala original? Identifica la unidad de medida y explica cómo relacionarías una longitud en el plano con la longitud real.':
+          q.includes('símb')||q.includes('simb')?'¿Qué dice la leyenda sobre ese símbolo? Busca su etiqueta en otro documento. ¿Coinciden ambas representaciones?':
+          q.includes('error')||q.includes('difer')?'Separa lo que observaste de lo que supusiste. ¿Qué evidencia permite describir la diferencia y a quién formularías la consulta?':
+          'Describe el problema con tus palabras. Identifica un documento que te ayude, compara dos alternativas y explica cómo verificarías tu decisión.'
+        );
+        const el=$('#agent-reply');
+        if(el){el.hidden=false;el.textContent=msg}
+        if(window.AulaAccess)window.AulaAccess.hydrate($('#tool'));
+      };
+    }
+  }
+  if(window.AulaAccess)window.AulaAccess.hydrate($('#tool'));
+}
+
 function applyAccess(){if(window.AulaAccess)window.AulaAccess.apply()}
-async function route(){try{if(!auth.user){login();return}courses=await api('/courses');let [name,id,num]=location.hash.slice(1).split('/');view={name,id,station:0};if(name==='module'){current=await api('/modules/'+Number(id));if(!current.content.aes){location.hash='editor/'+id;return}const fallback=Math.min(5,current.completed.findIndex(x=>!x)+1||5);const n=Number(num)||courseResume.station(fallback);if(n<1||n>5)throw Error('Estación inválida.');if(!stationUnlocked(n))throw Error('Completa las estaciones anteriores para continuar.');view.station=n;ae=Math.min(2,Math.floor(Object.keys(current.state.ae).length/6));step=Math.min(5,Object.keys(current.state.ae).length-ae*6);caseIndex=Math.min(14,Object.keys(current.state.cases).length);tab='';examStarted=false;questionIndex=0;examDraft=structuredClone(current.state.draft?.answers?current.state.draft:{answers:{},development:''});inspected=new Set(current.state.scene?.inspected||[]);courseResume.restore(n);integrationFilter='all';integrationActivity=false;integrationPage=Math.floor(caseIndex/5);renderModule(n)}else if(name==='course')courseMap(Number(id));else if(name==='teacher')await teacherPage(id||'evidence');else if(name==='editor')await editor(Number(id));else courseList();window.scrollTo(0,0)}catch(err){toast(err.message);if(auth.user)shell(`<section class="panel empty"><h2>Este contenido aún no está disponible</h2><p>${esc(err.message)}</p><a class="primary" href="#courses">Volver a mis cursos</a></section>`)}}
+let routeSeq=0;
+async function route(){const seq=++routeSeq;try{if(!auth.user){login();return}courses=await api('/courses');let [name,id,num]=location.hash.slice(1).split('/');view={name,id,station:0};if(name==='module'){current=await api('/modules/'+Number(id));if(!current.content.aes){location.hash='editor/'+id;return}const fallback=Math.min(5,current.completed.findIndex(x=>!x)+1||5);const n=Number(num)||courseResume.station(fallback);if(n<1||n>5)throw Error('Estación inválida.');if(!stationUnlocked(n))throw Error('Completa las estaciones anteriores para continuar.');view.station=n;ae=Math.min(2,Math.floor(Object.keys(current.state.ae).length/6));step=Math.min(5,Object.keys(current.state.ae).length-ae*6);caseIndex=Math.min(14,Object.keys(current.state.cases).length);tab='';examStarted=false;questionIndex=0;examDraft=structuredClone(current.state.draft?.answers?current.state.draft:{answers:{},development:''});inspected=new Set(current.state.scene?.inspected||[]);courseResume.restore(n);integrationFilter='all';integrationActivity=false;integrationPage=Math.floor(caseIndex/5);if(seq!==routeSeq)return;renderModule(n)}else if(name==='course'){if(seq!==routeSeq)return;courseMap(Number(id));}else if(name==='teacher')await teacherPage(id||'evidence');else if(name==='editor')await editor(Number(id));else{if(seq!==routeSeq)return;courseList();}if(seq!==routeSeq)return;window.scrollTo(0,0)}catch(err){if(seq!==routeSeq)return;toast(err.message);if(auth.user)shell(`<section class="panel empty"><h2>Este contenido aún no está disponible</h2><p>${esc(err.message)}</p><a class="primary" href="#courses">Volver a mis cursos</a></section>`)}}
 document.addEventListener('click',async e=>{const b=e.target.closest('[data-action]');if(!b||b.disabled)return;const a=b.dataset.action;try{if(a==='logout'){await api('/logout','POST',{});auth=await api('/session');current=null;location.hash='';login()}else if(a==='station-locked'){toast('Completa la etapa anterior para continuar.')}else if(a==='station'){const mid=b.dataset.module||current?.id;location.hash=`module/${mid}/${b.dataset.n}`}else if(a==='ae'){ae=Number(b.dataset.index);step=Math.min(5,Object.keys(current.state.ae).filter(k=>k.startsWith(ae+'-')).length);renderModule(2)}else if(a==='step'){step=Number(b.dataset.index);renderModule(2)}else if(a==='tab'){tab=b.dataset.tab;renderModule(view.station)}else if(a==='case'){caseIndex=Number(b.dataset.index);if(!integrationUnlocked(caseIndex))return;integrationActivity=false;renderModule(3)}else if(a==='inspect'){inspectPart(b.dataset.part)}else if(a==='start-exam'){examStarted=true;tab='questions';renderModule(4)}else if(a==='question'){questionIndex=Number(b.dataset.index);tab='questions';renderModule(4)}else if(a==='exam-tab'){tab=b.dataset.tab;renderModule(4)}else if(a==='save-draft'){await saveActivity({kind:'draft',...examDraft});$('#draft-status').textContent='Borrador guardado en este equipo.'}else if(a==='submit-exam'){await saveActivity({kind:'exam',...examDraft});renderModule(4)}else if(a==='tools-fab-toggle')toggleToolsFab();else if(a==='tools-fab-close')closeToolsFab();else if(['access','agent','practice','feedback'].includes(a)){closeToolsFab(false);tool(a)}else if(a==='evidence')showEvidence(Number(b.dataset.index))}catch(err){toast(err.message)}});
-$('#close-tool').onclick=()=>{$('#tool').classList.remove('is-access');$('#tool').close()};$('#tool').addEventListener('close',()=>$('#tool').classList.remove('is-access'));window.addEventListener('hashchange',route);applyAccess();api('/session').then(s=>{auth=s;route()}).catch(e=>{$('#app').innerHTML='<p>No se pudo conectar al servidor local. Inicia la plataforma y recarga esta página.</p>'});
+const __closeTool=$('#close-tool'); if(__closeTool) __closeTool.onclick=()=>{$('#tool').classList.remove('is-access');$('#tool').close()};$('#tool').addEventListener('close',()=>$('#tool').classList.remove('is-access'));window.addEventListener('hashchange',route);applyAccess();api('/session').then(s=>{auth=s;route()}).catch(e=>{$('#app').innerHTML='<p>No se pudo conectar al servidor local. Inicia la plataforma y recarga esta página.</p>'});

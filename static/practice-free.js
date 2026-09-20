@@ -45,6 +45,13 @@
     interpretacion_incompleta: 'interpretación incompleta'
   };
 
+  
+  const PRACTICE_MODES = [
+    {id:'explore', family:'choice', title:'Explorar', ask:'¿Qué pasa si…?', level:'Baja complejidad', scaffold:'Alto andamiaje', blurb:'Manipula, observa causa–efecto y reinicia sin presión evaluativa.', ico:'search', cls:'is-explore'},
+    {id:'challenge', family:'case', title:'Desafiar', ask:'¿Cómo logro que…?', level:'Complejidad media', scaffold:'Andamiaje medio', blurb:'Recibes una misión y condiciones; tú eliges la estrategia.', ico:'flag', cls:'is-challenge'},
+    {id:'investigate', family:'argue', title:'Investigar', ask:'¿Qué ocurre y por qué?', level:'Alta complejidad', scaffold:'Andamiaje adaptativo', blurb:'Hipótesis, evidencia, medición y decisión. LINKS como biblioteca, no solucionario.', ico:'chat', cls:'is-investigate'}
+  ];
+
   const FAMILIES = [
     {id: 'choice', n: '1', title: 'Selección múltiple', hint: 'Responder · interpretar · aplicar · decidir.', ico: 'list', cls: 'is-choice'},
     {id: 'case', n: '2', title: 'Situaciones contextualizadas', hint: 'Analizar · aplicar · resolver situaciones profesionales.', ico: 'person', cls: 'is-case'},
@@ -57,6 +64,7 @@
   function emptyState() {
     return {
       view: 'hub',
+      mode: null,
       activityId: null,
       itemIndex: 0,
       step: 0,
@@ -578,25 +586,65 @@
     const bank = buildActivities();
     const e = hx();
     const course = (typeof courses !== 'undefined' ? courses : []).find(c => c.id === current?.course_id);
+    const mode = PRACTICE_MODES.find(m => m.id === state.mode);
+    if (!mode) {
+      return `${chromeHtml('hub')}
+      <div class="pf-wrap pf-wrap-modes">
+        <section class="pf-launch" aria-labelledby="pf-launch-title">
+          <div class="pf-launch-badge" aria-hidden="true">🟢</div>
+          <h2 id="pf-launch-title">Práctica libre</h2>
+          <p class="pf-launch-tag">Explora · Desafía · Investiga</p>
+          <p class="pf-launch-lead">Elige cómo quieres aprender. Puedes volver a intentarlo cuando quieras. El sistema controla la variabilidad; tú decides el camino.</p>
+          <div class="pf-modes" role="list">
+            ${PRACTICE_MODES.map(m => `<button type="button" class="pf-mode ${m.cls}" data-pf="mode" data-mode="${m.id}" role="listitem">
+              <span class="pf-mode-ico" aria-hidden="true">${ico(m.ico)}</span>
+              <span class="pf-mode-copy">
+                <b>${e(m.title)}</b>
+                <em>${e(m.ask)}</em>
+                <small>${e(m.blurb)}</small>
+                <span class="pf-mode-meta"><i>${e(m.level)}</i><i>${e(m.scaffold)}</i></span>
+              </span>
+              <span class="pf-mode-go" aria-hidden="true">Abrir</span>
+            </button>`).join('')}
+          </div>
+          <div class="pf-launch-actions">
+            <button type="button" class="pf-new-situation" data-pf="new-situation">Nueva situación</button>
+          </div>
+          <p class="pf-launch-note">Laboratorio autónomo: sin nota, con trazabilidad. No es una segunda batería de ejercicios.</p>
+        </section>
+        ${asideHtml()}
+      </div>
+      ${principles()}
+      <p class="sr-only">${e(course?.title || '')}. Práctica formativa del módulo ${current?.position || 1}.</p>`;
+    }
+    const fam = FAMILIES.find(f => f.id === mode.family) || FAMILIES[0];
+    const list = bank[mode.family] || [];
     return `${chromeHtml('hub')}
     <div class="pf-wrap">
       <div>
-        <div class="pf-hero">
-          <div class="pf-hero-mark">${ico('edit')}<div><h2>Práctica libre</h2><p>Practica, repite y fortalece tus decisiones. Aquí puedes equivocarte sin nota.</p></div></div>
-          <div class="pf-try">${ico('check')} Aprender es intentar</div>
+        <div class="pf-hero pf-hero-mode ${mode.cls}">
+          <div class="pf-hero-mark">${ico(mode.ico)}<div>
+            <p class="pf-mode-kicker">Modo ${e(mode.title)}</p>
+            <h2>${e(mode.ask)}</h2>
+            <p>${e(mode.blurb)}</p>
+          </div></div>
+          <div class="pf-hero-actions">
+            <button type="button" class="pf-back-modes" data-pf="modes">← Cambiar modo</button>
+            <button type="button" class="pf-new-situation" data-pf="new-situation">Nueva situación</button>
+          </div>
         </div>
-        <p class="pf-note">Elige libremente. Los números 1, 2 y 3 identifican <b>familias de práctica</b>, no un orden: puedes entrar a situaciones o a corrección sin haber hecho selección múltiple.</p>
-        <div class="pf-grid">
-          ${FAMILIES.map(f => `<section class="pf-fam ${f.cls}">
-            <header class="pf-fam-head"><span class="pf-fam-id" aria-hidden="true">${f.n}</span>${ico(f.ico)}<div><b>${e(f.title)}</b><small>${e(f.hint)}</small></div></header>
-            ${(bank[f.id] || []).map(cardHtml).join('') || '<p class="pf-empty">No hay actividades de esta familia en el módulo actual.</p>'}
-          </section>`).join('')}
+        <p class="pf-note">Situaciones de <b>${e(fam.title)}</b> para este modo. Cada entrada es una variante distinta: puedes equivocarte y volver a comenzar.</p>
+        <div class="pf-grid pf-grid-single">
+          <section class="pf-fam ${fam.cls}">
+            <header class="pf-fam-head"><span class="pf-fam-id" aria-hidden="true">${fam.n}</span>${ico(fam.ico)}<div><b>${e(fam.title)}</b><small>${e(fam.hint)}</small></div></header>
+            ${list.map(cardHtml).join('') || '<p class="pf-empty">Aún no hay situaciones de este modo en el módulo. Prueba otra estación o genera una nueva situación.</p>'}
+          </section>
         </div>
       </div>
       ${asideHtml()}
     </div>
     ${principles()}
-    <p class="sr-only">${e(course?.title || '')}. Práctica formativa del módulo ${current?.position || 1}.</p>`;
+    <p class="sr-only">Modo ${e(mode.title)}. ${e(course?.title || '')}.</p>`;
   }
   function chromeHtml(mode) {
     const e = hx();
@@ -765,7 +813,17 @@
     ev.stopPropagation();
     const act = b.dataset.pf;
     if (act === 'close') close();
-    else if (act === 'hub' || act === 'other') { state = emptyState(); paint(); }
+    else if (act === 'hub' || act === 'other' || act === 'modes') { state = emptyState(); paint(); }
+    else if (act === 'mode') { state.mode = b.dataset.mode || null; paint(); }
+    else if (act === 'new-situation') {
+      if (!state.mode) state.mode = 'explore';
+      const bank = buildActivities();
+      const mode = PRACTICE_MODES.find(m => m.id === state.mode) || PRACTICE_MODES[0];
+      const list = bank[mode.family] || [];
+      if (!list.length) { state.lastFb = null; paint(); return; }
+      const pick = list[Math.floor(Math.random() * list.length)];
+      openActivity(pick.id);
+    }
     else if (act === 'open') openActivity(b.dataset.id);
     else if (act === 'next-step') nextStep();
     else if (act === 'check') { checkChoice(findActivity(state.activityId), currentItem(findActivity(state.activityId))); paint(); }

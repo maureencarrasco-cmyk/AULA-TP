@@ -130,3 +130,49 @@ dialog#tool .recuerda.remember{
   .recuerda.remember h3{font-size:18px}
   .recuerda-paper{padding:16px 16px 14px 20px}
 }
+
+/* recuerda-flat-bulb-v2 */
+.recuerda.remember{
+  --recuerda-rail:#FFF3B0;
+  --recuerda-paper:#FFF8E1;
+  --recuerda-title:#0B2A5C;
+  --recuerda-body:#3A4450;
+  --recuerda-gold:#F5A623;
+  align-items:center;
+  border-radius:18px;
+  box-shadow:0 6px 18px rgba(30,58,95,.08);
+}
+.recuerda-rail{
+  flex:0 0 auto;
+  max-width:none;
+  width:96px;
+  min-height:96px;
+  padding:12px;
+  background:var(--recuerda-rail);
+  border-radius:18px 0 0 18px;
+}
+.recuerda-rail::after{display:none !important}
+.ampolleta{
+  width:72px;height:72px;
+}
+.ampolleta-photo{
+  width:72px;height:72px;
+  object-fit:contain;
+  filter:drop-shadow(0 4px 10px rgba(245,166,35,.35));
+}
+.ampolleta-svg{display:none}
+.recuerda-paper{
+  padding:16px 18px 16px 14px;
+  border-left:3px solid #F5A623;
+}
+.recuerda.remember h3{
+  font-family:inherit;
+  font-size:18px;
+  font-weight:800;
+  color:var(--recuerda-title);
+}
+.recuerda-accent{
+  width:36px;height:3px;margin:6px 0 8px;
+  background:var(--recuerda-gold);
+  border-radius:3px;
+}

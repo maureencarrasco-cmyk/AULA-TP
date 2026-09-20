@@ -146,3 +146,67 @@ body.practice-open .access-fab{display:flex!important}
   .pf-top{padding:12px}
   .pf-wrap{padding:12px}
 }
+
+
+/* —— Hub modos Práctica libre (guía Explorar / Desafiar / Investigar) —— */
+.pf-wrap-modes{grid-template-columns:minmax(0,1.4fr) 260px}
+.pf-launch{
+  background:#fff;border:1px solid #D5DEE8;border-radius:22px;padding:22px 22px 18px;
+  box-shadow:0 8px 28px rgba(7,42,78,.08)
+}
+.pf-launch-badge{font-size:28px;line-height:1;margin:0 0 6px}
+.pf-launch h2{margin:0;color:#0B3A6B;font-size:28px;letter-spacing:-.4px}
+.pf-launch-tag{
+  margin:6px 0 0;font-weight:800;color:#1B8A4A;font-size:14px;letter-spacing:.02em
+}
+.pf-launch-lead{margin:10px 0 18px;color:#3D5166;max-width:52ch;line-height:1.45}
+.pf-modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.pf-mode{
+  display:flex;flex-direction:column;align-items:flex-start;gap:10px;text-align:left;
+  min-height:220px;padding:16px;border-radius:18px;border:1px solid #D5DEE8;background:#fff;
+  color:#122033;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease
+}
+.pf-mode:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(7,42,78,.1)}
+.pf-mode-ico{
+  width:48px;height:48px;border-radius:14px;display:grid;place-items:center;color:#fff
+}
+.pf-mode.is-explore{--m:#1B8A4A;--ms:#E6F6EE}
+.pf-mode.is-challenge{--m:#1558A0;--ms:#E8F1FB}
+.pf-mode.is-investigate{--m:#6B3BC7;--ms:#F3EEFF}
+.pf-mode .pf-mode-ico{background:var(--m)}
+.pf-mode{border-color:color-mix(in srgb, var(--m) 35%, #D5DEE8);background:linear-gradient(180deg,var(--ms),#fff 42%)}
+.pf-mode-copy{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.pf-mode-copy b{font-size:16px;color:var(--m)}
+.pf-mode-copy em{font-style:normal;font-weight:700;color:#0B3A6B;font-size:13px}
+.pf-mode-copy small{color:#6B7C8E;font-size:12px;line-height:1.4}
+.pf-mode-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.pf-mode-meta i{
+  font-style:normal;font-size:10px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;
+  padding:3px 8px;border-radius:999px;background:#fff;border:1px solid #D5DEE8;color:#3D5166
+}
+.pf-mode-go{
+  align-self:stretch;text-align:center;font-size:12px;font-weight:800;color:#fff;
+  background:var(--m);border-radius:10px;padding:8px 10px
+}
+.pf-launch-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 8px}
+.pf-new-situation{
+  min-height:44px;padding:10px 16px;border-radius:12px;border:1px solid #1B8A4A;
+  background:#1B8A4A;color:#fff;font-weight:800;cursor:pointer
+}
+.pf-new-situation:hover{filter:brightness(1.05)}
+.pf-back-modes{
+  min-height:44px;padding:10px 14px;border-radius:12px;border:1px solid #D5DEE8;
+  background:#fff;color:#0B3A6B;font-weight:700;cursor:pointer
+}
+.pf-launch-note{margin:8px 0 0;font-size:12px;color:#6B7C8E}
+.pf-hero-mode .pf-mode-kicker{margin:0;font-size:12px;font-weight:800;color:#1B8A4A;text-transform:uppercase;letter-spacing:.04em}
+.pf-hero-actions{display:flex;flex-wrap:wrap;gap:8px}
+.pf-grid-single{grid-template-columns:1fr}
+@media(max-width:960px){
+  .pf-modes{grid-template-columns:1fr}
+  .pf-wrap-modes{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion: reduce){
+  .pf-mode{transition:none}
+  .pf-mode:hover{transform:none}
+}
