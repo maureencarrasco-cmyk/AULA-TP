@@ -1,0 +1,144 @@
+'use strict';
+/**
+ * Aula TP · lógica de menús
+ * Tres chromes excluyentes: público, estudiante, docente.
+ * En Evaluación Final (estación 4) se apagan Tutor y Práctica Libre.
+ * Las herramientas de administrador no se muestran al estudiante.
+ */
+(function () {
+  const ADMIN_TEXT = /revisi[oó]n administrador|desbloquear navegaci[oó]n|avanzar pantalla|reiniciar revisi[oó]n|ir a situaci[oó]n integradora/i;
+  const PUBLISHED_ONLY = /refrigeraci[oó]n|climatizaci[oó]n/i;
+  const COMING = /electricidad|enfermer[ií]a|administraci[oó]n/i;
+
+  function role() {
+    const fromBody = document.body.dataset.role;
+    if (fromBody) return fromBody;
+    try {
+      if (typeof auth !== 'undefined' && auth && auth.user) return auth.user.role;
+    } catch (e) { /* app aún no hidrata */ }
+    return '';
+  }
+
+  function station() {
+    const ds = document.body.dataset.station;
+    if (ds) return Number(ds);
+    try {
+      if (typeof view !== 'undefined' && view && view.station) return Number(view.station);
+    } catch (e) { /* sin vista */ }
+    return 0;
+  }
+
+  function chrome() {
+    const r = role();
+    if (r === 'teacher') return 'teacher';
+    if (r === 'student') return 'student';
+    return 'public';
+  }
+
+  function applyChrome() {
+    const c = chrome();
+    const st = station();
+    const b = document.body;
+    b.dataset.chrome = c;
+    if (st) b.dataset.station = String(st);
+    else delete b.dataset.station;
+    b.classList.toggle('chrome-public', c === 'public');
+    b.classList.toggle('chrome-student', c === 'student');
+    b.classList.toggle('chrome-teacher', c === 'teacher');
+    b.classList.toggle('station-exam', st === 4);
+    hideAdminForStudent(c);
+    gateExamAids(st, c);
+    normalizeCatalogLabels();
+    labelPrimaryNav(c, st);
+  }
+
+  function hideAdminForStudent(c) {
+    if (c === 'teacher') return;
+    document.querySelectorAll('[data-admin-only], .admin-tools, .review-admin, [data-review-admin]').forEach(el => {
+      el.hidden = true;
+      el.setAttribute('aria-hidden', 'true');
+    });
+    document.querySelectorAll('button, a, [role="button"]').forEach(el => {
+      const t = (el.textContent || '').trim();
+      if (ADMIN_TEXT.test(t)) {
+        el.hidden = true;
+        el.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+
+  function gateExamAids(st, c) {
+    const exam = st === 4;
+    document.querySelectorAll('[data-action="practice"], [data-open="practice"], #practice-free, .practice-free, [data-practice-free]').forEach(el => {
+      if (exam && c !== 'teacher') {
+        el.hidden = true;
+        el.setAttribute('aria-disabled', 'true');
+      }
+    });
+    document.querySelectorAll('#agent-panel, .agent-panel, [data-agent], #tutor-panel').forEach(el => {
+      if (exam && c !== 'teacher') {
+        el.setAttribute('data-exam-silent', '1');
+        const input = el.querySelector('textarea, input[type="text"]');
+        if (input) {
+          input.disabled = true;
+          input.placeholder = 'En Evaluación Final el tutor no orienta el contenido.';
+        }
+      } else {
+        el.removeAttribute('data-exam-silent');
+      }
+    });
+  }
+
+  function normalizeCatalogLabels() {
+    document.querySelectorAll('[data-specialty], .course-card, .ruta-card, article.specialty').forEach(card => {
+      const title = (card.querySelector('h2, h3, .title, [data-title]') || card).textContent || '';
+      const badge = card.querySelector('.badge, [data-status], .status');
+      if (!badge) return;
+      if (PUBLISHED_ONLY.test(title) && !COMING.test(title)) {
+        badge.textContent = 'Publicada · 3° medio';
+        badge.dataset.status = 'published';
+      } else if (COMING.test(title) && !PUBLISHED_ONLY.test(title)) {
+        badge.textContent = 'Próximamente';
+        badge.dataset.status = 'soon';
+        const cta = card.querySelector('a, button');
+        if (cta && /abrir ruta/i.test(cta.textContent || '')) {
+          cta.textContent = 'Ver ficha';
+          cta.setAttribute('aria-disabled', 'true');
+        }
+      }
+    });
+  }
+
+  function labelPrimaryNav(c, st) {
+    const nav = document.querySelector('nav.primary, header nav, #app-nav');
+    if (!nav) return;
+    nav.dataset.chrome = c;
+    if (c === 'student') {
+      nav.querySelectorAll('[data-nav="editor"], [data-nav="teacher"], [data-nav="enroll"]').forEach(el => {
+        el.hidden = true;
+      });
+    }
+    if (c === 'teacher') {
+      nav.querySelectorAll('[data-nav="editor"], [data-nav="teacher"]').forEach(el => {
+        el.hidden = false;
+      });
+    }
+    const crumbs = document.getElementById('station-crumb');
+    if (crumbs && st) {
+      const names = ['', 'Contextualización', 'Aprendizajes esperados', 'Situación integradora', 'Evaluación final', 'Cierre'];
+      crumbs.textContent = names[st] || '';
+    }
+  }
+
+  const obs = new MutationObserver(() => applyChrome());
+  function boot() {
+    applyChrome();
+    obs.observe(document.body, {childList: true, subtree: true, attributes: true, attributeFilter: ['data-role', 'data-station', 'class']});
+    document.addEventListener('aula:view', applyChrome);
+    document.addEventListener('aula:station', applyChrome);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+
+  window.AulaMenu = {apply: applyChrome, chrome, station, role};
+})();

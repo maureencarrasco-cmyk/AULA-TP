@@ -1,0 +1,39 @@
+/* Menús por chrome · Aula TP */
+body.chrome-student [data-admin-only],
+body.chrome-student .admin-tools,
+body.chrome-student .review-admin,
+body.chrome-public [data-admin-only],
+body.chrome-public .admin-tools,
+body.chrome-public .review-admin {
+  display: none !important;
+}
+
+body.station-exam.chrome-student [data-action="practice"],
+body.station-exam.chrome-student [data-practice-free],
+body.station-exam.chrome-student #practice-free,
+body.station-exam.chrome-student .practice-free {
+  display: none !important;
+}
+
+body.station-exam.chrome-student #agent-panel[data-exam-silent] textarea,
+body.station-exam.chrome-student #agent-panel[data-exam-silent] input {
+  opacity: 0.55;
+}
+
+body.chrome-student [data-nav="editor"],
+body.chrome-student [data-nav="teacher"],
+body.chrome-student [data-nav="enroll"],
+body.chrome-public [data-nav="editor"],
+body.chrome-public [data-nav="teacher"] {
+  display: none !important;
+}
+
+[data-status="soon"] {
+  background: #eef2f7;
+  color: #334155;
+}
+
+[data-status="published"] {
+  background: #dcfce7;
+  color: #166534;
+}
