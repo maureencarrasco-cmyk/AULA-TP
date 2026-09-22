@@ -37,6 +37,24 @@ class LMSFlow(unittest.TestCase):
   content=self.s.get('/api/modules/1').json['content']
   self.assertTrue(all('answer' not in q and 'explanation' not in q for q in content['questions']))
   self.assertTrue(all('answer' not in q for q in content['cases']))
+ def test_student_progress_is_private_and_uses_saved_evidence(self):
+  self.assertEqual(self.app.test_client().get('/api/progress').status_code,401)
+  self.assertEqual(self.t.get('/api/progress').status_code,403)
+  report=self.s.get('/api/progress')
+  self.assertEqual(report.status_code,200)
+  first=next(m for m in report.json if m['id']==1)
+  self.assertFalse(any(first['completed']))
+  self.assertEqual(first['state']['context'],'')
+  self.assertTrue(first['aes'])
+  self.assertEqual(self.activity(kind='context',text=TEXT).status_code,200)
+  updated=next(m for m in self.s.get('/api/progress').json if m['id']==1)
+  self.assertTrue(updated['completed'][0])
+  self.assertEqual(updated['state']['context'],TEXT)
+  uid=self.req('/teacher/users',{'username':'alumnoprogreso','name':'Otra estudiante','password':'ClaveDePrueba2026'},teacher=True).json['id']
+  self.assertEqual(self.req('/teacher/enroll',{'user_id':uid,'course_id':1},teacher=True).status_code,200)
+  other=self.app.test_client();self.login(other,'alumnoprogreso','ClaveDePrueba2026')
+  private=next(m for m in other.get('/api/progress').json if m['id']==1)
+  self.assertEqual(private['state']['context'],'')
  def test_full_learning_grading_and_persistence(self):
   self.through_integration();count=DEFAULT_CONTENT['evaluation_plan']['question_count'];answers={str(i):q['answer'] for i,q in enumerate(DEFAULT_CONTENT['questions'][:count])};answers['0']=(answers['0']+1)%4
   self.assertEqual(self.activity(kind='draft',answers={'0':answers['0']},development=TEXT).status_code,200)

@@ -168,6 +168,27 @@ def create_app(test_config=None):
         if u['role']=='student':c=strip_for_student(c)
         m.update(content=c,state=s,completed=completed(s,c),stations=STATIONS,steps=STEPS,planning=active_plan or c.get('planning') or module_plan(m['position']))
         return jsonify(m)
+    @app.get('/api/progress')
+    @require('student')
+    def student_progress():
+        with db() as con:
+            rows=con.execute('''SELECT c.id AS course_id,c.title AS course_title,c.specialty,c.level,
+                m.id,m.title,m.position,m.published,m.content,p.state,p.updated
+                FROM enrollments e JOIN courses c ON c.id=e.course_id
+                JOIN modules m ON m.course_id=c.id
+                LEFT JOIN progress p ON p.module_id=m.id AND p.user_id=e.user_id
+                WHERE e.user_id=? AND m.published=1 ORDER BY c.id,m.position,m.id''',(session['uid'],)).fetchall()
+            result=[]
+            for row in rows:
+                c=load_content(row['content'],row['position'])
+                s=json.loads(row['state']) if row['state'] else empty()
+                result.append(dict(course_id=row['course_id'],course_title=row['course_title'],specialty=row['specialty'],
+                    level=row['level'],id=row['id'],title=row['title'],position=row['position'],
+                    aes=[{'label':a.get('title') or a.get('name') or f'AE {i+1}','description':a.get('description') or ''} for i,a in enumerate(c.get('aes') or [])],
+                    oa=(c.get('specialty_source') or {}).get('oa') or [],
+                    question_count=min(len(c.get('questions') or []),int((c.get('evaluation_plan') or {}).get('question_count') or 25)),
+                    state=s,completed=completed(s,c),updated=row['updated']))
+        return jsonify(result)
     @app.post('/api/modules/<int:mid>/activity')
     @require('student')
     def activity(mid):
