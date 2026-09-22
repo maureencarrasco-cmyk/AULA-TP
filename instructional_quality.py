@@ -44,10 +44,13 @@ def _didactic(kind, criterion):
         'cube': ('medidas y unidades', 'cálculo con unidad común'),
         'choice': ('caso o evidencia', 'decisión argumentada'),
     }.get(kind, ('evidencia técnica', 'respuesta profesional'))
+    same_register = kind in ('match', 'order', 'classify')
+    transformation = (f'Organiza y verifica {conversion[0]} como {conversion[1]} dentro del mismo registro.'
+                      if same_register else f'Relaciona {conversion[0]} con {conversion[1]}; verifica si cambia de registro.')
     return {
         'prior_knowledge': 'Distinguir dato observable, interpretación y supuesto.',
         'new_knowledge': criterion,
-        'cognitive_action': 'Analizar, transformar la representación, decidir y verificar.',
+        'cognitive_action': 'Analizar, organizar la evidencia, decidir y verificar.',
         'expected_difficulty': 'Relacionar evidencia parcial con un criterio sin completar datos por intuición.',
         'scaffolding': 'Ruta breve: observa, nombra el dato, aplica el criterio y declara el pendiente.',
         'evidence': conversion[1],
@@ -55,8 +58,8 @@ def _didactic(kind, criterion):
         'transfer': 'Aplicación posterior en una situación integradora del mismo módulo.',
         'initial_register': conversion[0],
         'final_register': conversion[1],
-        'transformation': f'Convierte {conversion[0]} en {conversion[1]}.',
-        'brousseau_cycle': 'Situación → información → acción → decisión → consecuencia → validación.',
+        'transformation': transformation,
+        'brousseau_cycle': 'Situación, información, acción y validación cuando la actividad ofrece esos pasos.',
     }
 
 
@@ -153,7 +156,7 @@ def _experience_contract(exp, ae, criterion):
     )
 
 
-def _pack_contract(item, ae_code, criterion):
+def _pack_contract(item, ae_code, criterion, ae_count=3):
     kind = item.get('kind') or 'actividad'
     prompt = _text(item.get('prompt') or item.get('label'))
     specs = {
@@ -164,7 +167,7 @@ def _pack_contract(item, ae_code, criterion):
         'procedure': ('Ordena los pasos del procedimiento y verifica su secuencia.', 'Ubica primero la preparación y al final la comprobación.', 'Tarjetas con los pasos del procedimiento.', 'Secuencia completa en el orden técnico esperado.', 'todos los pasos están ubicados y la verificación queda al cierre'),
         'cube': ('Calcula el resultado solicitado usando una sola unidad.', 'Convierte primero todas las medidas a la misma unidad y después opera.', 'Datos numéricos del plano o caso y campo de resultado.', 'Cálculo y resultado con unidad.', 'el valor y la unidad son correctos y el cálculo usa solo los datos entregados'),
         'pair': ('Relaciona cada elemento con su función, dato o proceso.', 'Lee todas las opciones antes de formar la primera pareja.', 'Tarjetas de términos y significados.', 'Todas las parejas completadas.', 'no quedan elementos sin relacionar y cada pareja responde al recurso'),
-        'integrate3d': ('Integra los tres AE al inspeccionar y explicar el recorrido.', 'Recorre los componentes en orden de preparación, ejecución y verificación.', 'Recorrido espacial interactivo, documentos y datos del módulo.', 'Componentes inspeccionados y conclusión que conecte los tres AE.', 'la conclusión usa evidencia de los tres AE y declara lo pendiente'),
+        'integrate3d': (f'Integra los {ae_count} AE al inspeccionar y explicar el recorrido.', 'Recorre los componentes en orden de preparación, ejecución y verificación.', 'Recorrido espacial interactivo y datos del módulo.', f'Componentes inspeccionados y conclusión que conecte los {ae_count} AE.', f'la conclusión usa evidencia de los {ae_count} AE y declara lo pendiente'),
     }
     action, start, resource, response, completion = specs.get(kind, (
         'Analiza la situación y registra una respuesta técnica basada en evidencia.',
@@ -195,17 +198,19 @@ def apply_instructional_quality(content, module_id=1):
         return content
     c = content
     mid = int(module_id or 1)
+    ae_codes = ' + '.join(_text(ae.get('official_code'), f'AE {i + 1}') for i, ae in enumerate(c['aes']))
+    ae_count = len(c['aes'])
 
     ae0, code0, criteria0 = _ae_data(c, 0)
     reflection = _text(c.get('reflection_prompt'))
     c['context_instruction'] = _contract(
         action='Observa el caso, distingue datos de suposiciones y anticipa qué debes verificar.',
         object_=_text(c.get('context')),
-        start='Lee el caso profesional, abre todos los puntos del escenario y anota primero solo lo que puedes observar.',
-        resource='Caso profesional, imagen interactiva, video y documentos simulados del módulo.',
-        response='Tres observaciones breves y una respuesta final que incluya un elemento reconocido, una revisión necesaria y un dato faltante.',
-        purpose='Activar conocimientos previos y preparar el trabajo de los tres AE sin resolver aún el proyecto.',
-        completion='Terminas cuando abriste todos los puntos y tu respuesta final identifica un dato, una revisión y una información pendiente.',
+        start='Lee el caso profesional y anota primero solo lo que puedes observar; explora los recursos disponibles antes de responder.',
+        resource='Caso profesional y recursos de exploración que aparecen en esta estación.',
+        response='Una respuesta inicial que incluya un elemento reconocido, una revisión necesaria y un dato faltante.',
+        purpose=f'Activar conocimientos previos y preparar el trabajo de {ae_count} AE sin resolver aún el proyecto.',
+        completion='Terminas cuando tu respuesta identifica un dato, una revisión y una información pendiente.',
         ae=code0,
         criterion=_criterion(criteria0),
         original=reflection,
@@ -226,11 +231,11 @@ def apply_instructional_quality(content, module_id=1):
     for i, item in enumerate(c.get('formative_pack') or []):
         ai = i % max(1, len(c.get('aes') or []))
         _, ae_code, criteria = _ae_data(c, ai)
-        item['instruction'] = _pack_contract(item, ae_code, _criterion(criteria, i))
+        item['instruction'] = _pack_contract(item, ae_code, _criterion(criteria, i), ae_count)
         item['didactic'] = _didactic(item.get('kind'), _criterion(criteria, i))
 
     for i, case in enumerate(c.get('cases') or []):
-        ai = int(case.get('ae', i % 3))
+        ai = int(case.get('ae', i % ae_count))
         _, ae_code, criteria = _ae_data(c, ai)
         criterion = _text(case.get('criterion'), _criterion(criteria, i))
         original = _text(case.get('question'), '¿Qué decisión tomarías?')
@@ -255,21 +260,21 @@ def apply_instructional_quality(content, module_id=1):
         action='Inspecciona todos los componentes del recorrido, relaciónalos y redacta una conclusión técnica.',
         object_=_text(scene.get('prompt') or scene.get('title')),
         start='Comienza por el primer paso numerado; gira, acerca y abre cada componente en orden.',
-        resource='Recorrido espacial interactivo, video del procedimiento, etiquetas y fichas de los componentes.',
+        resource='Recorrido espacial interactivo, etiquetas y fichas de los componentes; video cuando esté disponible.',
         response='Todos los componentes inspeccionados y una conclusión que conecte evidencia, decisión y pendiente.',
-        purpose='Integrar los tres AE del módulo en un mismo procedimiento profesional simulado.',
-        completion='Terminas cuando inspeccionaste todos los puntos y la conclusión usa evidencia de los tres AE sin afirmar lo que el escenario no demuestra.',
-        ae='AE 1 + AE 2 + AE 3',
+        purpose=f'Integrar los {ae_count} AE del módulo en un mismo procedimiento profesional simulado.',
+        completion=f'Terminas cuando inspeccionaste todos los puntos y la conclusión usa evidencia de los {ae_count} AE sin afirmar lo que el escenario no demuestra.',
+        ae=ae_codes,
         criterion='Integración de los criterios trabajados en el módulo',
         original=_text(scene.get('prompt')),
         status='Parcial',
-        problem='La consigna enumeraba componentes, pero no explicitaba la evidencia escrita esperada ni la relación con los tres AE.',
+        problem='La consigna enumeraba componentes, pero no explicitaba la evidencia escrita esperada ni la relación con los AE del módulo.',
     )
     scene['didactic'] = _didactic('walk3d', 'Integración de los criterios trabajados en el módulo')
     c['scene'] = scene
 
     for i, q in enumerate(c.get('questions') or []):
-        ai = int(q.get('ae', i % 3))
+        ai = int(q.get('ae', i % ae_count))
         _, ae_code, criteria = _ae_data(c, ai)
         criterion = _text(q.get('criterion'), _criterion(criteria, i))
         original = _text(q.get('question'))
@@ -297,9 +302,9 @@ def apply_instructional_quality(content, module_id=1):
         start='Organiza la respuesta en cinco apartados: evidencias, modelo o cálculo, decisión, argumento y verificación.',
         resource='Caso de desarrollo, antecedentes, restricciones y rúbrica de cinco criterios.',
         response='Un desarrollo escrito de al menos 80 caracteres que responda los cinco apartados y distinga datos de pendientes.',
-        purpose='Integrar los tres AE y producir evidencia evaluable con la rúbrica del módulo.',
+        purpose=f'Integrar los {ae_count} AE y producir evidencia evaluable con la rúbrica del módulo.',
         completion='Terminas cuando abordas los cinco criterios de la rúbrica y cada conclusión se puede rastrear a un dato del caso.',
-        ae='AE 1 + AE 2 + AE 3',
+        ae=ae_codes,
         criterion='Cinco criterios de la rúbrica de desarrollo',
         original=development,
         status='Parcial',
@@ -309,7 +314,7 @@ def apply_instructional_quality(content, module_id=1):
     c['development_pack'] = pack
 
     for item in (c.get('encargos') or {}).get('items') or []:
-        ai = max(0, min(2, int(item.get('ae') or 1) - 1))
+        ai = max(0, min(ae_count - 1, int(item.get('ae') or 1) - 1))
         _, ae_code, criteria = _ae_data(c, ai)
         product = _text(item.get('product'))
         original = _text(item.get('prompt') or item.get('title'))
@@ -355,7 +360,7 @@ def apply_instructional_quality(content, module_id=1):
         response='Una reflexión sobre el logro y una acción de mejora que indique recurso, plazo y forma de comprobación.',
         purpose='Convertir los resultados en una decisión de aprendizaje y preparar la transferencia al siguiente módulo.',
         completion='Terminas cuando identificas una fortaleza, una necesidad y un próximo paso que puedes comprobar.',
-        ae='AE 1 + AE 2 + AE 3',
+        ae=ae_codes,
         criterion='Reflexión, retroalimentación y transferencia del aprendizaje',
         original='Ruta de retroalimentación y cierre.',
         status='Completa',

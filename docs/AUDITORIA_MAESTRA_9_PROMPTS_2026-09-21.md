@@ -1,5 +1,7 @@
 # Auditoria maestra de los 9 prompts expertos
 
+> Informe historico limitado a cuatro modulos. Sus porcentajes no describen los 41 modulos publicados actualmente. Consulte [la auditoria completa del 22-09-2026](AUDITORIA_9_PROMPTS_41_MODULOS_2026-09-22.md).
+
 Fecha: 2026-09-21
 
 ## Resultado ejecutivo

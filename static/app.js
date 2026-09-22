@@ -749,6 +749,7 @@ function contextPanel(){
    ${workCard('info','Antes de comenzar','<p>Observa el caso, identifica qué información tienes y anota qué dato falta confirmar.</p><span class="badge">Simulación didáctica</span>','work-card-prep ctx-ready')}
   </div>
   <section class="work-card work-card-activity ctx-activity"><div class="work-activity-head">${workIco('edit')}<div><h3>Actividad que debes desarrollar</h3><p>Caso profesional y reflexión inicial.</p></div></div>
+   ${typeof instructionContract==='function'?instructionContract({instruction:c.context_instruction}):''}
    <article class="ctx-block ctx-case"><div class="ctx-case-copy"><span class="eyebrow">CASO PROFESIONAL · MÓDULO ${current.position}</span><h3>${esc(c.case_title||current.title)}</h3><p>${esc(c.case_blurb||c.application||'Revisa la información disponible antes de continuar.')}</p></div></article>
    ${reflectionForm('context-form',c.reflection_prompt||'¿Qué revisarías primero y qué información necesitarías confirmar?',current.state.context,'Continuar a Aprendizajes esperados')}
    <p class="muted small">Esta reflexión inicial no califica. Te ayuda a preparar el trabajo de las siguientes estaciones.</p>

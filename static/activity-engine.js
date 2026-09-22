@@ -59,7 +59,7 @@ function instructionContract(item, overrides) {
     ['Cómo comenzar', c.start],
     ['Recurso', c.resource],
     ['Qué debes entregar', c.response],
-    ['Terminas cuando', c.completion]
+    ['Condición de cierre', c.completion]
   ].filter(([, value]) => String(value || '').trim());
   if (!rows.length) return '';
   return `<aside class="act-contract" aria-label="Instrucción completa de la actividad">

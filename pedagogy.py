@@ -974,6 +974,8 @@ def enrich(content, module_id=1):
         apply_official(c, mid)
         plan = module_plan(mid) or _load(OFFICIAL_HP.get(mid, 190))
     c['planning'] = plan
+    ae_steps = max(1, len(c.get('aes') or [])) * 6
+    plan['station_minutes']['2_etapa'] = max(1, round(plan['station_minutes']['2'] / ae_steps))
     c['pass_percent'] = PASS_PERCENT
     c['hp_minutes'] = HP_MINUTES
     c['time_factor'] = TIME_FACTOR
