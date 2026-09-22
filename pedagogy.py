@@ -1005,6 +1005,8 @@ def enrich(content, module_id=1):
         'note': custom.get('evaluation_note') if custom else 'Los 25 ítems se distribuyen 5, 5, 7 y 8. El desarrollo integrador se realiza en el módulo 4.',
     }
     c['encargos'] = c.get('encargos') if custom and c.get('encargos') else encargos_for(mid)
+    curriculum_url = (c.get('curriculum') or {}).get('url') or (custom or {}).get('url') or ''
+    curriculum_url = curriculum_url if curriculum_url.startswith('https://www.curriculumnacional.cl/') else ''
     for i, ae in enumerate(c.get('aes', [])):
         if not ae.get('experiences') or len(ae.get('experiences', [])) != 6:
             ae['experiences'] = _x5(mid, i, ae)
@@ -1037,6 +1039,12 @@ def enrich(content, module_id=1):
         crits = (c['aes'][ae_i].get('criteria') if ae_i < len(c.get('aes') or []) else []) or []
         if crits:
             case['criterion'] = crits[i % len(crits)]
+        if curriculum_url:
+            case.setdefault('source_url', curriculum_url)
+            case.setdefault('source_claim', case.get('criterion') or c.get('official_source', {}).get('title'))
+            case.setdefault('source_scope', 'Respalda el aprendizaje curricular; los datos y decisiones del caso son una simulación didáctica.')
+        if c.get('specialty_key') == 'electricidad':
+            case.setdefault('regulatory_url', 'https://www.sec.cl/reglamento-de-seguridad-de-las-instalaciones-de-consumo-de-energia-electrica-decreto-08/')
         kinds = ['observe', 'read', 'cube', 'error', 'before', 'argue', 'pair', 'procedure', 'context',
                  'log', 'walk3d', 'video', 'error', 'cube', 'before']
         case['activity_kind'] = kinds[i % len(kinds)]
@@ -1062,6 +1070,12 @@ def enrich(content, module_id=1):
         if crits:
             q['criterion'] = crits[i % len(crits)]
             q['formative_footprint'] = True
+        if curriculum_url:
+            q.setdefault('source_url', curriculum_url)
+            q.setdefault('source_claim', q.get('criterion') or c.get('official_source', {}).get('title'))
+            q.setdefault('source_scope', 'Respalda el aprendizaje curricular; los datos y decisiones del ítem son una simulación didáctica.')
+        if c.get('specialty_key') == 'electricidad':
+            q.setdefault('regulatory_url', 'https://www.sec.cl/reglamento-de-seguridad-de-las-instalaciones-de-consumo-de-energia-electrica-decreto-08/')
     c['development_kind'] = 'desarrollo'
     if custom:
         key = c.get('specialty_key') or 'general'

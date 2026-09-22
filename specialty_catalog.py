@@ -101,42 +101,184 @@ def _rotate(correct, distractors, shift):
     return options, options.index(correct)
 
 
+SCENARIOS = {
+    'electricidad': [
+        ('El plano vigente identifica el motor M-02 y la placa del equipo recibido indica M-03.',
+         '¿Qué haces antes de aceptar ese equipo?',
+         'Contrasto la placa con la ficha de M-03 y el proyecto; registro la diferencia y consulto al responsable.',
+         'Instalo M-03 porque ambos equipos parecen equivalentes.',
+         'Cambio la etiqueta de la placa para que coincida con el plano.',
+         'Cierro la recepción sin informar la diferencia.',
+         'La coincidencia visual no demuestra que el equipo cumpla el proyecto.'),
+        ('Una planilla de verificación anota 3,2 para un conductor, pero omite magnitud, unidad e instrumento.',
+         '¿Qué permite interpretar ese resultado?',
+         'Solicito magnitud, unidad, instrumento y registro de medición antes de compararlo con el criterio.',
+         'Lo interpreto como amperios porque se trata de un circuito.',
+         'Lo doy por conforme porque el número es bajo.',
+         'Copio 3,2 en el acta de aprobación sin aclaraciones.',
+         'Un número sin magnitud ni unidad no permite una comparación técnica verificable.'),
+        ('La orden menciona una exigencia RIC, pero no identifica el pliego aplicable ni su versión.',
+         '¿Cómo fundamentas la decisión normativa?',
+         'Consulto el pliego RIC aplicable en la SEC y confirmo su alcance con la persona autorizada.',
+         'Aplico cualquier pliego porque todos cubren la misma instalación.',
+         'Sustituyo el pliego por una publicación sin fecha.',
+         'Declaro cumplimiento normativo sin identificar la regla usada.',
+         'La referencia normativa debe ser identificable y aplicable al caso.'),
+        ('El informe de ensayo dice «aprobado», pero no identifica fecha, responsable ni resultado medido.',
+         '¿Puede cerrarse la verificación?',
+         'Solicito el resultado trazable y la validación de quien esté autorizado antes de cerrar el informe.',
+         'Acepto el visto bueno verbal como resultado medido.',
+         'Agrego una fecha estimada para completar el documento.',
+         'Energizo para comprobarlo sin autorización.',
+         'Un resultado sin trazabilidad no acredita la verificación registrada.'),
+        ('La orden pide canalización C-04; el plano actualizado marca C-05 para ese tramo.',
+         '¿Cuál es la acción documentable?',
+         'Comparo revisiones, comunico la discrepancia y espero la definición autorizada antes de ejecutar.',
+         'Uso C-04 porque figura en la orden más antigua.',
+         'Uso C-05 sin registrar por qué cambió.',
+         'Borro una de las referencias para eliminar la diferencia.',
+         'Una discrepancia documental debe resolverse antes de ejecutar el tramo.'),
+    ],
+    'enfermeria': [
+        ('En el caso simulado, la identificación de la persona no coincide con la ficha de atención.',
+         '¿Qué corresponde dentro del rol técnico?',
+         'Detengo la acción, verifico la identidad según protocolo local y aviso al profesional responsable.',
+         'Continúo porque el nombre de pila es parecido.',
+         'Corrijo la identificación por intuición.',
+         'Registro la atención como completa sin resolver la diferencia.',
+         'La identidad debe confirmarse mediante el procedimiento institucional antes de actuar.'),
+        ('Una indicación del caso está incompleta y no permite conocer con certeza la acción solicitada.',
+         '¿Qué haces con esa indicación?',
+         'Pido aclaración al profesional responsable y dejo constancia del pendiente antes de ejecutar.',
+         'Interpreto el dato faltante según una experiencia anterior.',
+         'Realizo una acción distinta sin consultar.',
+         'Marco la indicación como ejecutada para cerrar el turno.',
+         'Una indicación ambigua requiere aclaración de quien tenga atribución para darla.'),
+        ('Durante la observación aparece un cambio respecto del registro previo; el caso no aporta diagnóstico.',
+         '¿Cómo comunicas el hallazgo?',
+         'Describo el dato observable, registro cuándo se observó y aviso según el protocolo local.',
+         'Escribo un diagnóstico propio sin evaluación profesional.',
+         'Omito el cambio porque podría ser transitorio.',
+         'Modifico el registro anterior para que ambas anotaciones coincidan.',
+         'Comunicar datos observables no equivale a formular un diagnóstico fuera del rol.'),
+        ('El material del caso contiene datos personales y una solicitud de compartirlos fuera del equipo autorizado.',
+         '¿Qué resguardo aplicas?',
+         'Protejo los datos y consulto el canal autorizado antes de compartir cualquier antecedente.',
+         'Envío una foto por mensajería personal para ahorrar tiempo.',
+         'Comparto todo el registro porque la solicitud parece urgente.',
+         'Elimino el antecedente para evitar una consulta.',
+         'El uso de datos personales requiere el canal y autorización correspondientes.'),
+        ('La entrega de turno cita una nota antigua como si describiera el estado actual.',
+         '¿Qué información debe verificarse?',
+         'Comparo fecha y fuente de las notas, registro la discrepancia y la comunico al equipo responsable.',
+         'Copio la nota antigua como observación actual.',
+         'Cambio su fecha para que coincida con el turno.',
+         'Descarto la nota nueva sin revisarla.',
+         'La vigencia y procedencia del registro importan para interpretar el caso.'),
+    ],
+    'climate': [
+        ('El plano identifica equipo EQ-02, mientras la placa del equipo recibido indica EQ-03.',
+         '¿Qué se verifica antes del montaje?',
+         'Contrasto placa, ficha y plano; documento la diferencia y solicito definición autorizada.',
+         'Monto EQ-03 porque la carcasa parece igual.',
+         'Reetiqueto el plano sin dejar registro.',
+         'Cierro la recepción sin comparar la ficha.',
+         'La compatibilidad no se establece por apariencia.'),
+        ('La lectura anotada es 24,5 y no aparecen magnitud, unidad ni instrumento.',
+         '¿Cómo interpretas esa lectura?',
+         'Solicito magnitud, unidad e instrumento antes de comparar la lectura con una especificación.',
+         'Asumo que representa grados Celsius.',
+         'La considero conforme porque parece un valor habitual.',
+         'Completo la unidad sin volver al registro original.',
+         'Una medición sin unidad ni instrumento no permite una conclusión técnica.'),
+        ('La etiqueta del cilindro del caso no coincide con el refrigerante indicado en la orden.',
+         '¿Qué haces con esa diferencia?',
+         'Suspendo la decisión de uso y pido verificar identificación y procedimiento a personal autorizado.',
+         'Uso el cilindro porque su color parece correcto.',
+         'Cambio la etiqueta por la indicada en la orden.',
+         'Omito la diferencia en el registro.',
+         'La identificación del fluido debe verificarse antes de cualquier intervención.'),
+        ('Dos trazados se cruzan en planta, pero no se muestran cotas de altura ni sección.',
+         '¿Qué permite concluir la evidencia?',
+         'Solicito sección y cotas de la revisión vigente antes de afirmar una interferencia.',
+         'Afirmo una colisión solo por el cruce dibujado.',
+         'Desvío un trazado sin autorización.',
+         'Doy por inexistente la interferencia sin revisar otra vista.',
+         'Una planta sin altura no basta para resolver un cruce espacial.'),
+        ('El acta de mantención enumera tareas, pero no incluye resultado de verificación ni responsable.',
+         '¿Cómo se cierra el trabajo?',
+         'Pido el resultado y la revisión autorizada; registro el pendiente antes de cerrar el acta.',
+         'Declaro conforme porque las tareas figuran en la lista.',
+         'Invento un resultado de ensayo probable.',
+         'Elimino el campo de verificación.',
+         'Una lista de tareas no sustituye evidencia de verificación.'),
+    ],
+    'empleabilidad': [
+        ('Un presupuesto del caso enumera materiales y horas, pero omite la cantidad de una partida.',
+         '¿Qué haces antes de informar el total?',
+         'Solicito la cantidad faltante y dejo el total como pendiente hasta recalcular.',
+         'Asigno una unidad a la partida sin consultar.',
+         'Excluyo la partida sin informarlo.',
+         'Presento el total como definitivo.',
+         'Un presupuesto requiere cantidades verificables.'),
+        ('La propuesta cita un plazo de cinco días y el calendario adjunto marca siete.',
+         '¿Cómo presentas el plazo?',
+         'Comparo las versiones y pido confirmar el plazo antes de comprometer la entrega.',
+         'Elijo cinco días porque parece más competitivo.',
+         'Cambio el calendario sin comunicarlo.',
+         'Omito el plazo en la propuesta.',
+         'El compromiso debe basarse en una versión acordada.'),
+        ('Una oferta de trabajo solicita una certificación que no figura en los antecedentes de la persona.',
+         '¿Qué registro es correcto?',
+         'Declaro solo formación acreditada y verifico si la certificación es requisito obligatorio.',
+         'Agrego la certificación porque podría obtenerse después.',
+         'Adjunto un certificado de otra persona.',
+         'Ignoro el requisito sin revisarlo.',
+         'Los antecedentes formativos deben ser trazables.'),
+        ('El contrato simulado cita una función diferente de la descrita en la oferta.',
+         '¿Qué haces antes de aceptar?',
+         'Pido aclaración escrita de la función y comparo ambos documentos.',
+         'Supongo que la diferencia es solo de redacción.',
+         'Cambio una copia del contrato por mi cuenta.',
+         'Acepto sin leer el detalle restante.',
+         'Una discrepancia contractual se aclara antes de decidir.'),
+        ('La ficha de servicio promete una tarea que el equipo aún no ha autorizado ni presupuestado.',
+         '¿Cómo informas al cliente simulado?',
+         'Distingo la tarea confirmada de la pendiente y solicito definición antes de comprometerla.',
+         'Prometo la tarea para cerrar la venta.',
+         'Facturo el trabajo como realizado.',
+         'Oculto la limitación del equipo.',
+         'Un alcance pendiente no debe presentarse como servicio confirmado.'),
+    ],
+}
+
+
+def _scenario(module, index):
+    title = module['title'].lower()
+    key = 'empleabilidad' if 'emprendimiento' in title or 'empleabilidad' in title else module.get('specialty_key')
+    return SCENARIOS.get(key, SCENARIOS['climate'])[index % 5]
+
+
 def _cases(module, image):
     aes = module['aes']
     ae_count = max(1, len(aes))
     electricity = module.get('specialty_key') == 'electricidad'
-    pressures = [
-        'El equipo solicita cerrar el registro antes de terminar el turno.',
-        'Falta un antecedente y otra persona propone avanzar por intuición.',
-        'Dos documentos del caso muestran información diferente.',
-        'La tarea debe entregarse sin omitir el resguardo de seguridad.',
-        'Una observación requiere ser comunicada con claridad y trazabilidad.',
-    ]
     rows = []
     for i in range(15):
         ae_index = i % ae_count
         criterion = aes[ae_index]['criteria'][i % len(aes[ae_index]['criteria'])]
-        correct = ('Consultar el RIC aplicable, contrastar el criterio y registrar el antecedente pendiente.'
-                   if electricity else
-                   'Detener la decisión, contrastar el criterio y registrar el antecedente pendiente.')
-        distractors = [
-            'Continuar porque la situación parece habitual.',
-            'Completar el dato faltante con una estimación personal.',
-            'Cerrar el registro sin informar la diferencia encontrada.',
-        ]
-        options, answer = _rotate(correct, distractors, i)
+        evidence, question, correct, *rest = _scenario(module, i)
+        options, answer = _rotate(correct, rest[:3], i)
         rows.append({
             'title': f'{module["title"]} · situación {i + 1}',
             'context': (
                 ('Consulta el RIC antes de tomar una decisión. ' if electricity else '')
-                + f'{pressures[i % len(pressures)]} Debes aplicar el criterio «{criterion}» usando solo la evidencia del caso simulado.'
+                + f'{evidence} Relaciona la decisión con «{criterion}» sin añadir datos que el caso no entrega.'
             ),
-            'pressure': pressures[i % len(pressures)],
-            'question': ('Consulta el RIC antes de tomar una decisión. ¿Qué acción corresponde y permite mantener la trazabilidad?'
-                         if electricity else
-                         '¿Qué decisión corresponde dentro de tu rol y permite mantener la trazabilidad?'),
+            'question': question,
             'options': options,
             'answer': answer,
+            'explanation': rest[3],
             'ae': ae_index,
             'criterion': criterion,
             'image': image,
@@ -157,23 +299,15 @@ def _questions(module, image):
     for i in range(25):
         ae_index = i % ae_count
         criterion = aes[ae_index]['criteria'][i % len(aes[ae_index]['criteria'])]
-        correct = ('Consultar el RIC aplicable, aplicar el criterio, conservar la evidencia y escalar lo que excede el rol.'
-                   if electricity else
-                   'Aplicar el criterio entregado, conservar la evidencia y escalar lo que excede el rol.')
-        distractors = [
-            'Actuar sin revisar la indicación porque el procedimiento es conocido.',
-            'Modificar el registro para que coincida con el resultado esperado.',
-            'Omitir el pendiente y comunicar solo que la tarea terminó.',
-        ]
-        options, answer = _rotate(correct, distractors, i + 1)
+        evidence, question, correct, *rest = _scenario(module, i)
+        options, answer = _rotate(correct, rest[:3], i + 1)
         rows.append({
             'id': i,
-            'question': (f'Caso simulado {i + 1}: consulta el RIC antes de tomar una decisión sobre «{criterion}». ¿Cuál es la opción mejor fundamentada?'
-                         if electricity else
-                         f'Caso simulado {i + 1}: al aplicar «{criterion}», ¿cuál es la decisión mejor fundamentada?'),
+            'stimulus': evidence,
+            'question': f'Caso simulado {i + 1}: {question} Criterio de aprendizaje: «{criterion}».',
             'options': options,
             'answer': answer,
-            'explanation': 'La respuesta correcta usa el criterio, conserva la trazabilidad y respeta los límites de actuación y seguridad.',
+            'explanation': rest[3],
             'ae': ae_index,
             'criterion': criterion,
             'image': image,
@@ -279,7 +413,7 @@ def _module(position, title, hp, aes, specialty_key, source, source_url, scope,
             'Relaciona tu decisión con el AE y con el criterio presentado.',
             'Explica el resguardo de seguridad, privacidad o supervisión que corresponde.',
         ],
-        'version': 'especialidades-mineduc-v2',
+        'version': 'especialidades-mineduc-v3',
     }
     if specialty_key == 'electricidad':
         content['regulatory_resource'] = {
@@ -460,7 +594,7 @@ def install_specialty_courses(con):
     import json
     from pedagogy import enrich
 
-    version = 'especialidades-electricidad-enfermeria-v2'
+    version = 'especialidades-electricidad-enfermeria-v3'
     con.execute('CREATE TABLE IF NOT EXISTS content_updates(version TEXT PRIMARY KEY,applied TEXT DEFAULT CURRENT_TIMESTAMP)')
     if con.execute('SELECT 1 FROM content_updates WHERE version=?', (version,)).fetchone():
         return
@@ -489,7 +623,9 @@ def install_specialty_courses(con):
             serialized = json.dumps(content, ensure_ascii=False)
             if found:
                 previous = json.loads(found['content'] or '{}')
-                if previous.get('version') not in ('especialidades-mineduc-v1', 'especialidades-mineduc-v2'):
+                if previous.get('version') not in ('especialidades-mineduc-v1', 'especialidades-mineduc-v2', 'especialidades-mineduc-v3'):
+                    continue
+                if con.execute('SELECT 1 FROM progress WHERE module_id=? LIMIT 1', (found['id'],)).fetchone():
                     continue
                 con.execute(
                     'UPDATE modules SET title=?,published=1,content=? WHERE id=?',

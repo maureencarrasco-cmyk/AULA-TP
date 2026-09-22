@@ -65,6 +65,19 @@ function mcqOptions(item, opts) {
   }).join('')}</fieldset>`;
 }
 
+function mcqSource(item) {
+  const curriculum = String(item.source_url || '');
+  if (!curriculum.startsWith('https://www.curriculumnacional.cl/')) return '';
+  const regulatory = String(item.regulatory_url || '');
+  const ric = regulatory.startsWith('https://www.sec.cl/')
+    ? `<p>Normativa eléctrica: <a href="${mcqEsc(regulatory)}" target="_blank" rel="noopener noreferrer">Pliegos RIC · SEC</a>. Verifica el pliego aplicable y su vigencia.</p>` : '';
+  return `<details class="mcq-source"><summary>Fuente y alcance</summary>
+    <p>Aprendizaje curricular: <a href="${mcqEsc(curriculum)}" target="_blank" rel="noopener noreferrer">Programa oficial MINEDUC</a>.</p>
+    ${item.source_claim ? `<p>Criterio vinculado: ${mcqEsc(item.source_claim)}</p>` : ''}
+    <p>${mcqEsc(item.source_scope || 'Los datos de este caso son simulados.')}</p>${ric}
+  </details>`;
+}
+
 function mcqItemMarkup(item, opts) {
   opts = opts || {};
   if (!item) return '';
@@ -81,6 +94,7 @@ function mcqItemMarkup(item, opts) {
     ${mcqMedia(item, exam)}
     <h3 class="mcq-prompt">${mcqEsc(prompt)}</h3>
     ${mcqOptions(item, opts)}
+    ${mcqSource(item)}
   </article>`;
 }
 

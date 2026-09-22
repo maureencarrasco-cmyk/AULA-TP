@@ -38,8 +38,26 @@ def activities(content):
 def bank_has_variety(items):
     if not items:
         return False
+    if any(not item.get('options') or not isinstance(item.get('answer'), int)
+           or not 0 <= item['answer'] < len(item['options']) for item in items):
+        return False
     signatures = [tuple(sorted(str(option).strip().casefold() for option in item.get('options') or [])) for item in items]
-    return len(set(signatures)) >= min(5, len(items))
+    correct = [str((item.get('options') or [''])[item.get('answer', 0)]).strip().casefold() for item in items]
+    evidence = [str(item.get('stimulus') or item.get('context') or item.get('question') or '').strip().casefold()
+                for item in items]
+    minimum = min(5, len(items))
+    return all(len(set(values)) >= minimum for values in (signatures, correct, evidence))
+
+
+def source_is_traceable(item, specialty, expected_url):
+    url = str(item.get('source_url') or '')
+    claim = str(item.get('source_claim') or '').strip()
+    scope = str(item.get('source_scope') or '').lower()
+    ric = str(item.get('regulatory_url') or '')
+    return (url.startswith('https://www.curriculumnacional.cl/') and url == expected_url and bool(claim)
+            and claim == str(item.get('criterion') or '').strip()
+            and 'simulaci' in scope
+            and (specialty != 'Electricidad' or ric.startswith('https://www.sec.cl/')))
 
 
 def pct(passed, total):
@@ -60,6 +78,7 @@ def main():
     scores = {}
     activity_rows = []
     media_rows = []
+    source_rows = []
     issues = []
     by_course = {}
     for row in rows:
@@ -96,9 +115,17 @@ def main():
         bucket[4][0] += bool(source)
         bucket[4][1] += 1
         for kind in ('cases', 'questions'):
-            for item in content.get(kind) or []:
-                bucket[4][0] += bool(item.get('source') or item.get('source_url') or item.get('citation'))
+            for index, item in enumerate(content.get(kind) or [], 1):
+                traceable = source_is_traceable(item, row['specialty'], (content.get('curriculum') or {}).get('url'))
+                bucket[4][0] += traceable
                 bucket[4][1] += 1
+                source_rows.append({
+                    'curso': course, 'modulo': row['module_title'], 'id_modulo': row['module_id'],
+                    'tipo': kind, 'numero': index, 'criterio': item.get('criterion'),
+                    'fuente_curricular': item.get('source_url'), 'afirmacion_respaldada': item.get('source_claim'),
+                    'alcance': item.get('source_scope'), 'fuente_normativa': item.get('regulatory_url', ''),
+                    'trazable': int(traceable),
+                })
                 if item.get('image'):
                     bucket[7][0] += bool(str(item.get('alt') or '').strip())
                     bucket[7][1] += 1
@@ -148,14 +175,15 @@ def main():
     docs = ROOT / 'docs'
     docs.mkdir(exist_ok=True)
     for name, data in (('AUDITORIA_41_MODULOS_ACTIVIDADES.csv', activity_rows),
-                       ('AUDITORIA_41_MODULOS_MEDIOS.csv', media_rows)):
+                       ('AUDITORIA_41_MODULOS_MEDIOS.csv', media_rows),
+                       ('AUDITORIA_41_MODULOS_FUENTES.csv', source_rows)):
         with (docs / name).open('w', encoding='utf-8-sig', newline='') as handle:
             writer = csv.DictWriter(handle, fieldnames=data[0])
             writer.writeheader()
             writer.writerows(data)
     labels = {
         1: 'Consignas y trazabilidad', 2: 'Variedad de casos y evaluación',
-        3: 'Horas oficiales y reparto', 4: 'Fuentes vinculadas a afirmaciones',
+        3: 'Horas oficiales y reparto', 4: 'Fuente curricular y alcance por ítem',
         5: 'Metadatos multimedia', 6: 'Estructura Aula TP',
         7: 'Texto alternativo en casos y preguntas', 8: 'Controles de publicación',
         9: 'Factor x5 y tiempos declarados',
@@ -181,20 +209,25 @@ def main():
     lines += [
         '', '## Límites y correcciones', '',
         '- P1: los contratos se generan para las actividades inventariadas; su presencia no prueba claridad para estudiantes. En 37 módulos los criterios son indicadores didácticos derivados del AE, no criterios oficiales transcritos.',
-        '- P2: se mide si cada banco de 15 casos y 25 preguntas tiene al menos cinco conjuntos distintos de alternativas. Los campos didácticos están presentes, pero no prueban un ciclo Brousseau o una conversión Duval efectiva.',
+        '- P2: se mide si cada banco de 15 casos y 25 preguntas tiene al menos cinco conjuntos de alternativas, decisiones correctas y evidencias distintas. Los campos didácticos están presentes, pero no prueban un ciclo Brousseau o una conversión Duval efectiva.',
         '- P3: el 30 %, las 2 HP por curso y el reparto se comprueban matemáticamente. No se ha cronometrado a estudiantes reales.',
-        '- P4: una fuente curricular por módulo no respalda cada afirmación técnica. Los casos y preguntas sin cita individual quedan pendientes de verificación disciplinar y vigencia normativa.',
+        '- P4: cada caso y pregunta debe vincular su criterio a un programa oficial MINEDUC y declarar que los datos y decisiones son simulados; Electricidad agrega SEC/RIC. El 100 % de esta trazabilidad NO demuestra que cada decisión técnica o clínica sea correcta ni que un protocolo local esté vigente. Se requiere revisión disciplinar del contenido.',
         '- P5: los metadatos completos no prueban exactitud visual o valor pedagógico; cada medio necesita inspección humana.',
         '- P6: se comprueba arquitectura, no la calidad de los 15 casos ni de la práctica/retroalimentación.',
         '- P7: solo se comprueba presencia de texto alternativo en imágenes de casos y preguntas. DUA y lectores de pantalla requieren pruebas con usuarios.',
         '- P8: ausencia de bloqueos de publicación no equivale a consistencia visual. Falta probar las 5 estaciones en móvil y escritorio con estudiantes y docentes.',
         '- P9: el factor x5 y tiempos declarados no equivalen a una estimación real de abajo arriba por acción ni validan la carga cognitiva.',
         '- Correcciones en el simulador: instrucciones de contexto ajustadas a recursos reales y visibles en la estación 1; referencia dinámica al número de AE; tiempo por etapa calculado con los AE reales; descripción didáctica más prudente sobre conversión de registros.',
-        f'- Bancos sin variedad suficiente de alternativas: {len(issues)} observaciones (ver lista). No se modificaron respuestas evaluadas automáticamente sin revisión de contenido.',
+        f'- Bancos sin variedad suficiente según la pauta automática: {len(issues)} observaciones (ver lista). Los bancos generados se actualizaron solo en módulos sin progreso; la calidad disciplinar de cada decisión aún requiere revisión docente.',
         '- El informe del 21-09-2026, limitado a cuatro módulos, no acredita 100 % para los 41 módulos actuales y queda reemplazado por esta medición.',
+        '', '## Fuentes oficiales de trazabilidad', '',
+        '- MINEDUC Refrigeración: https://www.curriculumnacional.cl/614/articles-34318_programa.pdf',
+        '- MINEDUC Electricidad: https://www.curriculumnacional.cl/614/articles-34320_programa.pdf',
+        '- MINEDUC Atención de Enfermería: https://www.curriculumnacional.cl/614/articles-34350_programa.pdf',
+        '- SEC Pliegos RIC: https://www.sec.cl/reglamento-de-seguridad-de-las-instalaciones-de-consumo-de-energia-electrica-decreto-08/',
         '', '## Observaciones por módulo', '',
     ]
-    lines += [f'- {issue}' for issue in issues]
+    lines += [f'- {issue}' for issue in issues] or ['- Ninguna observación automática pendiente.']
     (docs / 'AUDITORIA_9_PROMPTS_41_MODULOS_2026-09-22.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
     print(f'{len(rows)} modules, {len(activity_rows)} activities, {len(media_rows)} media, {len(issues)} issues')
     for key in labels:
