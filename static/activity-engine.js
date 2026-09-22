@@ -51,6 +51,22 @@ function activityMeta(exp) {
   if (!items.length) return '';
   return `<ul class="act-meta" aria-label="Datos de esta etapa">${items.map(([k, v, cls, ico]) => `<li class="act-meta-item act-meta-${cls}">${typeof workIco === 'function' ? workIco(ico) : ''}<span><small>${esc(k)}</small><b>${esc(v)}</b></span></li>`).join('')}</ul>`;
 }
+function instructionContract(item, overrides) {
+  const c = Object.assign({}, item?.instruction || {}, overrides || {});
+  const rows = [
+    ['Qué debes hacer', c.action],
+    ['Sobre qué', c.object],
+    ['Cómo comenzar', c.start],
+    ['Recurso', c.resource],
+    ['Qué debes entregar', c.response],
+    ['Terminas cuando', c.completion]
+  ].filter(([, value]) => String(value || '').trim());
+  if (!rows.length) return '';
+  return `<aside class="act-contract" aria-label="Instrucción completa de la actividad">
+    ${rows.map(([label, value]) => `<div><b>${esc(label)}</b><span>${esc(value)}</span></div>`).join('')}
+    ${c.purpose ? `<p><b>Para qué:</b> ${esc(c.purpose)}</p>` : ''}
+  </aside>`;
+}
 function professionalDocument(text) {
   const lines = String(text || '').split('\n').map(s => s.trim()).filter(Boolean);
   if (!lines.length) return '';
@@ -169,7 +185,14 @@ function renderExperience(exp) {
   const stemBlock = stem ? `<div class="act-observe ped-step" data-action="${stemAction.action}" data-state="current">${stemHead}${stem}</div><p class="act-flow ped-flow" aria-hidden="true">↓</p>` : '';
   const boardBlock = board ? `<div class="act-decide ped-step" data-action="${boardAction.action}" data-state="${stem && !imageFirst ? 'idle' : 'current'}">${boardHead}${board}</div>` : '';
   const hotspotFirst = exp.type === 'hotspot';
-  const contract=`<aside class="act-contract"><div><b>Acción</b><span>${esc(boardAction.title)}</span></div><div><b>Recurso</b><span>${stem?'Caso, imagen o información presentada':'Actividad interactiva'}</span></div><div><b>Producción</b><span>${exp.type==='choice'?'Una selección fundamentada':exp.type==='checklist'?'Una selección pertinente':'Una respuesta observable'}</span></div><div><b>Terminas cuando</b><span>Completas la interacción y explicas tu razonamiento.</span></div></aside>`;
+  const contract=instructionContract(exp, exp.instruction ? null : {
+    action:boardAction.title,
+    object:exp.prompt,
+    start:stem?'Revisa primero la evidencia presentada.':'Lee todas las opciones antes de actuar.',
+    resource:stem?'Caso, imagen o información presentada':'Actividad interactiva',
+    response:exp.type==='choice'?'Una selección fundamentada':exp.type==='checklist'?'Una selección pertinente':'Una respuesta observable',
+    completion:'Completas la interacción y explicas tu razonamiento.'
+  });
   return `<section class="act-card act-task" data-act="${esc(exp.type)}" data-layout="${layout}" data-activity-prompt="${esc(exp.prompt)}">
     ${activityMeta(exp)}
     ${contract}
@@ -195,12 +218,12 @@ function renderExplore(explore, saved) {
     <h3>Llegas a tu turno</h3>
     <p class="act-prompt">${esc(explore.shift)}</p>
     ${hotspotMap(explore, seen, {skipStem: true})}
-    <p class="muted small">Reconoce el signo. No resuelvas el plano.</p>
+    <p class="muted small">${esc(explore.guidance || 'Reconoce el signo. No resuelvas el plano.')}</p>
     <div class="ctx-flow-next ped-flow" aria-hidden="true">↓</div>
     <div class="ctx-step-action ped-step" data-step="3" data-action="analyze" data-state="idle">
       ${noteHead}
       <ol class="act-anticipate">${(explore.prompts || []).map(p => `<li><label>${esc(p)}<textarea maxlength="400" placeholder="Anota lo que viste. No resuelvas."></textarea></label></li>`).join('')}</ol>
-      <p class="muted small">No resuelvas el proyecto. Anota lo que viste. Separa dato de suposición.</p>
+      <p class="muted small">${esc(explore.analysis_guidance || 'No resuelvas el proyecto. Anota lo que viste. Separa dato de suposición.')}</p>
     </div>
     <p class="muted small">${esc(explore.purpose || '')}</p>
     ${explore.video ? `<div id="video-preview-contextualizacion">${window.AulaVisual ? AulaVisual.videoFigure({video: explore.video, vtt: explore.vtt, caption: 'Sirve para observar. No es una prueba.'}) : `<figure class="vis-fig vis-video" data-narrate="1"><video controls playsinline src="${esc(explore.video)}">${explore.vtt?`<track kind="subtitles" src="${esc(explore.vtt)}" srclang="es" label="Español de Chile" default>`:''}</video><figcaption>Sirve para observar. No es una prueba.</figcaption></figure>`}</div>` : ''}
@@ -302,6 +325,7 @@ function oficioVideoPanel(host, pack, activity){
       <div><span class="oficio-respond-chip">Respondes aquí</span><h5>La secuencia que viste arriba</h5></div>
       <button type="button" class="outline" data-oficio-close>Cerrar</button>
     </header>
+    ${instructionContract(pack)}
     <p class="oficio-task-prompt">${station===1?'Un video. Un paso. Un dato.':'El video de arriba ya mostró el método. Aquí eliges el paso y dejas el dato.'}</p>
     <ol class="oficio-lectura" id="oficio-ruta-lectura" aria-label="Ruta de lectura">${pasos.map((p,i)=>`<li><button type="button" class="oficio-paso${p.id===paso?' is-elegido':''}" data-tone="${esc(p.tone)}" data-paso="${esc(p.id)}" aria-pressed="${p.id===paso}"><span class="oficio-paso-n">${p.id===paso?'✓':i+1}</span><b>${esc(p.label)}</b><span>${esc(p.hint)}</span></button></li>`).join('')}</ol>
     <p class="oficio-pregunta">${esc(pregunta)}</p>
@@ -349,6 +373,7 @@ function openOficioActivity(host, activity){
     detail.innerHTML=`<article class="formative-item oficio-task" data-kind="${esc(pack.kind)}" data-oficio-id="${esc(activity.id)}">
       <header class="oficio-task-head"><div><span class="oficio-respond-chip">Respondes aquí</span><h5>${esc(activity.title||pack.label)}</h5></div><button type="button" class="outline" data-oficio-close>Cerrar</button></header>
       ${optional?'<p class="muted small">Opcional en esta estación. No es requisito para continuar.</p>':''}
+      ${instructionContract(pack)}
       <p class="oficio-task-prompt">${esc(pack.prompt||pack.action||'')}</p>
       <div class="formative-board">${formativeItemBoard(pack)}</div>
       <div class="formative-check"><button type="button" class="primary oficio-register" data-pack-check>Registrar evidencia</button>${optional?'<p class="muted small">Observación de contextualización. Esta estación no califica.</p>':'<p class="muted small">Evidencia docente de oficio.</p>'}<p class="act-feedback" aria-live="polite"></p></div>

@@ -242,3 +242,134 @@ Final result: blocked. Pasaron 11 pruebas LMS, las pruebas JavaScript de borrado
 Final result: blocked
 
 Blocker: falta una captura renderizada del desplegable abierto para realizar la comparación visual lado a lado obligatoria.
+
+# Design QA - Modulo 4, estacion 5 - referencia 2026-09-20
+
+- Source visual truth: `C:\Users\MARTN~1\AppData\Local\Temp\codex-clipboard-9af4b75d-60cf-4ce9-8f86-b3c059ce6023.png`
+- Source dimensions: 1668 x 523 px, Chrome at 80% zoom, desktop state `#module/4/5`.
+- Implementation: `http://127.0.0.1:8000/#module/4/5`
+- Implementation capture: live Chrome tab `123167795`, 1519 x 688 px at the same 80% browser zoom.
+- CSS viewport and density: desktop wide layout; device scale factor was browser-managed. The implementation was compared at the same zoom and state, with the vertical crop aligned to the station route and the internal five-step header.
+- State: teacher preview, station 5, `Analiza` active, 0 of 5 stations completed.
+
+## Full-view comparison evidence
+
+The reference and implementation show the same five station cards, pending/current states, progress rail, green station-5 border, pale-blue work area, `26-36 min` badge, five internal tabs, active blue `Analiza` chevron, and the three result filters in the same order. The implementation uses the wider available height to reveal more content below the filters; this is responsive crop behavior, not layout drift.
+
+## Focused region comparison evidence
+
+The station-5 header was inspected at 80% browser zoom. Typography hierarchy, blue/violet/green/orange accents, icon placement, chevron geometry, border radii, spacing, and copy match the supplied reference. The source image has no additional photographic or illustrative asset inside this focused region, so no asset substitution was required.
+
+## Fidelity surfaces
+
+- Fonts and typography: matching family, weights, line wrapping, and compact label scale in the route and tab header.
+- Spacing and layout rhythm: five equal responsive steps fit in one row on the wide desktop view; narrow views use horizontal scrolling without overlap.
+- Colors and tokens: active blue, semantic step accents, pale-blue surface, green current-state border, and white controls match the reference.
+- Image quality and asset fidelity: the existing route imagery remains sharp and correctly cropped; no placeholder or code-drawn image replacement was introduced.
+- Copy and content: all five labels, prompts, `26-36 min`, progress copy, and filter labels match the reference.
+
+## Interaction verification
+
+- `Analiza`, `Comprende`, `Conecta`, `Transfiere`, and `Proyecta` were opened successfully.
+- The view was restored to `Analiza` for handoff.
+- The local server responds successfully at the implementation URL.
+- Browser console check: no errors or warnings were reported in the verified module state.
+
+## Comparison history
+
+1. Initial finding, P1: the page was being served by an older checkout and displayed only three internal steps with `20 - 30 min`.
+2. Fix: stopped the stale local processes and restarted port 8000 from `C:\Respaldo\OneDrive\Aplicaciones\aula-tp-chile`.
+3. Post-fix evidence: the live implementation displays all five internal steps and `26-36 min`, matching the source visual. No remaining P0, P1, or P2 visual mismatch was found in the requested region.
+
+## Follow-up polish
+
+No required visual fixes remain for the supplied reference. The floating support control can cover lower-right content while scrolling, but it does not overlap the compared header region.
+
+final result: passed
+
+# Botón Atrás e identidad de marca unificada
+
+- Referencia: `codex-clipboard-e126fd39-04d6-4492-92d1-8d5c396b85d6.png`.
+- Implementación: `http://127.0.0.1:8000/#courses`.
+- Estados revisados: escritorio 1366 x 768 px y móvil 390 x 844 px.
+
+## Cambios y evidencia
+
+- Se añadió un botón flotante `Atrás` en la esquina superior izquierda, con flecha, etiqueta accesible, foco visible y separación suficiente respecto del logo.
+- En móvil, el botón baja bajo la barra principal para no cubrir la marca ni la navegación.
+- El control fue probado desde `#courses` y regresó correctamente a `#course/1`.
+- Todas las apariciones del logo usan `logo-aula-tp-oficial.png?v=2`, la clase compartida `brand-logo`, proporción sin distorsión y texto alternativo institucional.
+- Se verificaron las variantes de barra superior, inicio de sesión, panel lateral, módulos, Práctica libre, Proyecta y pie de página.
+
+## Comparación visual
+
+La composición original se mantiene: barra lateral blanca, logo institucional sobre la navegación y hero alineado a la derecha. El nuevo control ocupa el espacio superior libre y desplaza el logo hacia abajo en escritorio, sin superponer contenido. No quedan diferencias P0, P1 o P2 derivadas del cambio solicitado.
+
+final result: passed
+
+# Conversión de referencias a frontend funcional
+
+- Referencias visuales: pantalla de acceso y panel de cursos entregados por el usuario.
+- Implementación verificada: `http://127.0.0.1:8000/` y `http://127.0.0.1:8000/#courses`.
+- Viewports comprobados: 1536 x 1024 px y 390 x 844 px.
+
+## Cambios verificados
+
+- Las capturas completas `login-reference.png` y `dashboard-reference.png` fueron retiradas del proyecto.
+- La composición se reconstruyó con HTML y CSS: encabezados, navegación, formulario, recorrido, tarjetas, barras de progreso, widgets y pie de página.
+- Las imágenes restantes son fotografías o recursos de marca usados como contenido, no capturas de la interfaz.
+- El formulario conserva acceso local, recuperación informativa, visibilidad de contraseña, proveedores institucionales y cuentas de demostración.
+- El panel conserva navegación al curso real, mensajes en funciones todavía demostrativas y carrusel horizontal operativo.
+
+## Evidencia responsiva y funcional
+
+- En escritorio, ambas pantallas conservan jerarquía, composición y densidad coherentes con las referencias.
+- En móvil, la navegación se compacta, el recorrido y los cursos se desplazan horizontalmente y no hay desborde global.
+- Se cargaron correctamente todos los recursos visuales y no se registraron errores ni advertencias en la consola.
+- El carrusel avanzó de `2.4` a `260.8` px y la acción principal abrió `#course/1` con el contenido esperado.
+
+final result: passed
+
+# Acceso Aula TP Chile · referencia 2
+
+- Source visual truth: `C:\Users\MARTN~1\AppData\Local\Temp\codex-clipboard-185e8792-965c-41f6-8620-5ff4ead36a39.png`.
+- Source dimensions: 1380 × 1140 px.
+- Implementation: `http://127.0.0.1:8000/`.
+- Implementation evidence: browser-rendered Codex in-app capture at 1380 × 1140 CSS px and 1× density; responsive capture at 390 × 844 CSS px.
+- State: login form visible, password hidden, demonstration accounts collapsed.
+
+## Full-view comparison evidence
+
+The source and browser-rendered implementation were opened in the same session and compared at 1380 × 1140. The approved composition, workshop photograph, brand lockup, five-step route, feature row, Chilean decoration, quote and footer artwork use the supplied reference asset. The form card is live HTML aligned over the reference geometry.
+
+## Focused-region comparison evidence
+
+- Login card: heading wrapping, blue accent, field geometry, recovery link, primary action, separator, institutional provider buttons and demonstration disclosure were compared at readable size.
+- Mobile: 390 × 844 capture confirmed a 337.6 px card, no horizontal overflow and a usable single-column order.
+- Interaction: password visibility and demonstration disclosure changed state correctly; browser console reported no warnings or errors.
+
+## Required fidelity surfaces
+
+- Fonts and typography: Inter/Atkinson hierarchy matches the reference weight and line wrapping; letter spacing remains zero.
+- Spacing and layout rhythm: desktop split is 63.26% / 36.74%; the card starts at 9% vertically and preserves reference proportions.
+- Colors and visual tokens: navy, institutional blue, white surfaces and pale-blue fields match the supplied design.
+- Image quality and asset fidelity: the exact supplied 1380 × 1140 reference is served locally without recompression as the visual foundation.
+- Copy and content: all visible login copy matches the approved reference; demonstration credentials retain the existing local behavior.
+
+## Comparison history
+
+1. Pass 1 found a P1 conflict: the climate theme replaced the approved workshop photograph with the previous equipment image.
+2. Fix: scoped the approved background with a login-specific selector and removed the theme override only on this screen.
+3. Pass 2 confirmed the approved photograph and complete composition at 1380 × 1140, plus the responsive 390 × 844 state. No actionable P0, P1 or P2 mismatch remains.
+
+## Follow-up polish
+
+Este registro corresponde a una iteración anterior basada en una captura completa. Esa implementación fue reemplazada por el frontend funcional documentado en "Conversión de referencias a frontend funcional"; la captura ya no se sirve ni existe en el proyecto.
+
+final result: passed
+
+# Estado final de acceso y panel
+
+La última verificación confirma que ambas vistas están construidas con elementos HTML, estilos responsivos y controles funcionales. Las capturas completas usadas durante la comparación fueron eliminadas. Las fotografías conservadas son recursos editoriales independientes y todas cargan correctamente.
+
+final result: passed

@@ -653,7 +653,7 @@
       : `<button type="button" class="pf-close" data-pf="close">Cerrar</button>`;
     return `<header class="pf-top">
       <div class="pf-brand">
-        <img src="/static/logo-aula-tp-oficial.png?v=1" alt="Aula TP Chile">
+        <img class="brand-logo" src="/static/logo-aula-tp-oficial.png?v=2" alt="Aula TP Chile · Formación técnica con sentido">
         <div><h1>Práctica libre</h1><small>Aula TP Chile · Módulo ${e(current?.position || 1)} · ${(typeof names !== 'undefined' ? names[(view.station || 1) - 1] : 'Estación')}</small></div>
       </div>
       <div class="pf-top-photo"><img src="${photoSrc()}" alt=""></div>

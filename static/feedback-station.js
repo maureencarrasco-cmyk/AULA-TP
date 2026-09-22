@@ -29,14 +29,17 @@ function fbProfileAvg(map){
 }
 function fbAutoPct(){
   const e=current?.state?.exam;
-  if(e&&typeof e.score==='number')return Math.round((e.score/25)*100);
+  if(e&&typeof e.score==='number')return Math.round((e.score/Number(e.max_score||25))*100);
   const c=fbCaseScore();
   return c?c.percent:null;
 }
 function fbFinalPct(){
   const e=current?.state?.exam,rev=e?.review;
-  if(!e||!rev)return null;
-  return Math.round((e.score+rev.score)*2);
+  if(!e)return null;
+  const selection=Math.round((e.score/Number(e.max_score||25))*100);
+  if(!e.development_required)return selection;
+  if(!rev)return null;
+  return Math.round((selection+(rev.score/25)*100)/2);
 }
 function fbEvidenceCounts(){
   const s=current?.state||{};
@@ -98,7 +101,6 @@ function fbEvolution(){
   };
 }
 
-/** Demo snapshot matching attachment-2 mockup when live data is thin. */
 function analizaSnapshot(){
   const pass=fbPass();
   const auto=fbAutoPct();
@@ -106,43 +108,7 @@ function analizaSnapshot(){
   const live=final!=null?final:auto;
   const ev=fbEvidenceCounts();
   const aeLive=fbAeRows().filter(r=>r.pct!=null);
-  const useDemo=live==null && aeLive.length===0;
-  if(useDemo){
-    return {
-      demo:true,
-      moduleLabel:'Módulo 3 · Funciones',
-      modulePct:74,
-      pass,
-      over:14,
-      oa:[
-        {id:'OA 1',pct:82,tone:'green'},
-        {id:'OA 2',pct:76,tone:'blue'},
-        {id:'OA 3',pct:61,tone:'amber'},
-        {id:'OA 4',pct:79,tone:'violet'}
-      ],
-      weak:{id:'OA 3',pct:61,delta:1},
-      ae:[
-        {id:'AE 3.1',pct:72,tone:'green'},
-        {id:'AE 3.2',pct:48,tone:'amber',warn:true},
-        {id:'AE 3.3',pct:65,tone:'blue'}
-      ],
-      evid:{total:10,logradas:6,desarrollo:3,pendientes:1},
-      evolution:{
-        max:25,unit:'puntos',xTitle:'Módulos',yTitle:'Puntaje obtenido',demo:true,
-        series:[{label:'Selección múltiple',tone:'primary',points:[
-          {label:'Módulo 1',value:14},{label:'Módulo 2',value:16},{label:'Módulo 3',value:19}
-        ]}]
-      },
-      compare:[
-        {label:'Logro del módulo',value:'74%',tone:'violet'},
-        {label:'Evidencias logradas',value:'6 / 10',tone:'amber'},
-        {label:'Intentos realizados',value:'12',tone:'blue'},
-        {label:'Retroalimentaciones consultadas',value:'4',tone:'green'}
-      ],
-      filters:{mod:'Módulo 3',oa:'OA 3',ae:'AE 3.2'}
-    };
-  }
-  const modulePct=live!=null?live:0;
+  const modulePct=live!=null?live:null;
   const oaFromAe=aeLive.length?aeLive.map((r,i)=>({
     id:r.id,pct:r.pct,
     tone:r.pct>=pass?'green':(r.pct>=40?'amber':'red')
@@ -158,7 +124,7 @@ function analizaSnapshot(){
   const logradas=ev.scored||ev.first||0;
   return {
     demo:false,
-    moduleLabel:(current?.title||'Módulo actual'),
+    moduleLabel:`Módulo ${current?.position||''} · ${current?.title||'Módulo actual'}`,
     modulePct,
     pass,
     over:modulePct!=null?modulePct-pass:null,
@@ -173,12 +139,13 @@ function analizaSnapshot(){
       {label:'Intentos realizados',value:String(Object.keys(current?.state?.cases||{}).length||'—'),tone:'blue'},
       {label:'Retroalimentaciones consultadas',value:current?.state?.exam?.review?'1':'0',tone:'green'}
     ],
-    filters:{mod:'Módulo actual',oa:'Todos los OA',ae:'Todos los AE'}
+    filters:{mod:`Módulo ${current?.position||''}`,oa:'Todos los OA',ae:'Todos los AE'}
   };
 }
 
 function analizaDonut(pct,label,color){
-  const p=Math.max(0,Math.min(100,Number(pct)||0));
+  const has=pct!=null&&Number.isFinite(Number(pct));
+  const p=has?Math.max(0,Math.min(100,Number(pct))):0;
   const r=42,c=2*Math.PI*r,dash=(p/100)*c;
   return `<div class="az-donut" style="--az-c:${color}">
     <svg viewBox="0 0 100 100" aria-hidden="true">
@@ -186,7 +153,7 @@ function analizaDonut(pct,label,color){
       <circle class="az-donut-fill" cx="50" cy="50" r="${r}"
         stroke-dasharray="${dash} ${c}" transform="rotate(-90 50 50)"/>
     </svg>
-    <div class="az-donut-label"><b>${p}%</b><small>${esc(label)}</small></div>
+    <div class="az-donut-label"><b>${has?p+'%':'—'}</b><small>${esc(label)}</small></div>
   </div>`;
 }
 
@@ -295,7 +262,7 @@ function analizaDash(){
         <div class="az-module-body">
           ${analizaDonut(d.modulePct,'Logro del módulo','#14B8A6')}
           <div class="az-module-copy">
-            <p>Has alcanzado un <b>${d.modulePct}%</b> de logro considerando las evidencias evaluadas en este módulo.</p>
+            <p>${d.modulePct==null?'Aún no hay una evaluación entregada. Completa la estación 4 para visualizar tu logro.':`Has alcanzado un <b>${d.modulePct}%</b> de logro considerando las evidencias evaluadas en este módulo.`}</p>
             <div class="az-tip">${icon('bulb')}<span>${esc(overTxt||'Cuando haya más evidencias puntadas, aquí verás tu logro frente al umbral.')}</span></div>
           </div>
         </div>
@@ -709,7 +676,7 @@ function fbProyectaBodyV2(mode='proyecta'){
     </section>
 
     <section class="p3-section p3-map-section">
-      <header class="p3-title p3-map-head"><span>1</span><em>CONECTA</em><div><h3>Así se conecta lo que aprendiste</h3><p>Construye tu mapa de aprendizaje relacionando los conceptos principales del módulo.</p></div><div class="p3-map-progress"><div>${icon('bulb')}<span><small>Conceptos explorados</small><progress value="1" max="5"></progress></span><b data-p3-explored>1/5</b></div><div>${icon('link')}<span><small>Conexiones construidas</small><progress value="0" max="4"></progress></span><b data-p3-connected>0/4</b></div></div><img class="p3-map-logo" src="/static/logo-aula-tp-oficial.png?v=2" alt="Aula TP Chile"></header>
+      <header class="p3-title p3-map-head"><span>1</span><em>CONECTA</em><div><h3>Así se conecta lo que aprendiste</h3><p>Construye tu mapa de aprendizaje relacionando los conceptos principales del módulo.</p></div><div class="p3-map-progress"><div>${icon('bulb')}<span><small>Conceptos explorados</small><progress value="1" max="5"></progress></span><b data-p3-explored>1/5</b></div><div>${icon('link')}<span><small>Conexiones construidas</small><progress value="0" max="4"></progress></span><b data-p3-connected>0/4</b></div></div><img class="brand-logo p3-map-logo" src="/static/logo-aula-tp-oficial.png?v=2" alt="Aula TP Chile · Formación técnica con sentido"></header>
       <div class="p3-map-layout">
         <aside class="p3-map-guide"><span>${icon('bulb')}</span><div><h4>Tu misión</h4><p>Construye las conexiones principales de tu mapa de aprendizaje.</p><ol><li><b>1 · Explora</b><small>Selecciona un concepto.</small></li><li><b>2 · Relaciona</b><small>Selecciona otro concepto relacionado.</small></li><li><b>3 · Explica</b><small>Describe por qué se conectan.</small></li><li><b>4 · Contrasta</b><small>Compara con la relación técnica.</small></li></ol></div><strong>Explora, relaciona y construye tu criterio técnico.</strong></aside>
         <div class="p3-map" aria-label="Mapa visual interactivo de aprendizajes">
@@ -815,7 +782,7 @@ function proyectaFinalBody(){
       <textarea name="plan" data-pf-plan hidden required></textarea>
       <section class="pf-summary"><header>${icon('flag')}<div><h3>Así queda mi aprendizaje</h3><p>Tu síntesis se construye automáticamente con tus respuestas.</p></div></header><div><article><b>Aprendí</b><p data-pf-summary="learn">Completa tu síntesis.</p></article>${icon('arrow')}<article><b>Puedo utilizarlo en</b><p data-pf-summary="apply">Selecciona un contexto.</p></article>${icon('arrow')}<article><b>Mi próximo foco es</b><p data-pf-summary="focus">Selecciona tu próximo foco.</p></article></div></section>
       <footer class="pf-cognitive"><div>${['Observa','Interpreta','Relaciona','Decide','Aplica','Verifica','Reflexiona'].map((item,i)=>`<span class="${i===6?'is-current':'is-done'}">${i<6?icon('check'):`<i>7</i>`}<b>${item}</b></span>${i<6?icon('arrow'):''}`).join('')}</div></footer>
-      <section class="pf-complete"><header>${icon('check')}<div><h3>Recorrido completado</h3><b>Instalación y Montaje de Equipos</b></div></header><p>Analizaste tus resultados, interpretaste tus evidencias, relacionaste tus aprendizajes y los utilizaste para resolver una situación nueva. Ahora también reconoces qué aprendizaje te llevas y qué quieres seguir fortaleciendo.</p><strong>APRENDÍ → CONECTÉ → APLIQUÉ → ME PROYECTO</strong><nav><button type="button" data-pf-review>← Revisar mis respuestas</button><button type="submit" class="primary" ${disabled?'disabled':''}>${closed?'Recorrido finalizado':'✓ Finalizar mi recorrido'}</button></nav></section>
+      <section class="pf-complete"><header>${icon('check')}<div><h3>Recorrido completado</h3><b>${esc(current?.title||'Módulo actual')}</b></div></header><p>Analizaste tus resultados, interpretaste tus evidencias, relacionaste tus aprendizajes y los utilizaste para resolver una situación nueva. Ahora también reconoces qué aprendizaje te llevas y qué quieres seguir fortaleciendo.</p><strong>APRENDÍ → CONECTÉ → APLIQUÉ → ME PROYECTO</strong><nav><button type="button" data-pf-review>← Revisar mis respuestas</button><button type="submit" class="primary" ${disabled?'disabled':''}>${closed?'Recorrido finalizado':'✓ Finalizar mi recorrido'}</button></nav></section>
     </form>
   </div>`;
 }
@@ -846,7 +813,14 @@ function feedbackPanel(){
   if(viewTab==='results')viewTab='analiza';
   if(viewTab==='feedback')viewTab='comprende';
   if(viewTab==='plan')viewTab='proyecta';
-  return workZone(`${analizaTitle()}${analizaSteps(viewTab)}<div class="az-summary">${feedbackBody(viewTab)}</div>`,'work-zone-s5');
+  const instructions={
+    analiza:{action:'Compara tus resultados e identifica una fortaleza y una necesidad.',object:'Tus resultados por AE y las evidencias registradas.',start:'Comienza por el logro general y contrástalo con el detalle por AE.',resource:'Resultados reales del módulo, evidencias y evolución.',response:'Una fortaleza y un aspecto por reforzar.',purpose:'Interpretar el desempeño sin confundir participación con calificación.',completion:'Terminas cuando nombras ambos aspectos usando un dato de la pantalla.'},
+    comprende:{action:'Explica qué significan tus resultados y qué error necesitas corregir.',object:'La retroalimentación y tus respuestas evaluadas.',start:'Abre primero un ítem por reforzar y compara tu decisión con la explicación.',resource:'Correcciones automáticas y comentario docente cuando esté disponible.',response:'Una explicación del error y una acción de corrección.',purpose:'Comprender el razonamiento, no memorizar la alternativa.',completion:'Terminas cuando la acción propuesta puede comprobarse.'},
+    conecta:{action:'Relaciona conceptos y explica cada conexión.',object:'Los conceptos técnicos trabajados en el módulo.',start:'Selecciona dos conceptos que necesites usar juntos en una tarea.',resource:'Mapa de conceptos y evidencias previas.',response:'Conexiones acompañadas de una explicación.',purpose:'Organizar lo aprendido para recuperarlo en nuevos contextos.',completion:'Terminas cuando cada conexión tiene una razón técnica.'},
+    transfiere:{action:'Resuelve una situación nueva y justifica cómo verificarías tu decisión.',object:'El desafío técnico presentado.',start:'Identifica datos disponibles, criterio aplicable y dato pendiente.',resource:'Caso de transferencia y aprendizajes del módulo.',response:'Decisión, justificación y verificación.',purpose:'Transferir lo aprendido a un contexto diferente.',completion:'Terminas cuando la decisión usa evidencia y declara cómo comprobarla.'},
+    proyecta:{action:'Sintetiza tu aprendizaje y define un próximo foco.',object:'Tu recorrido y las evidencias construidas.',start:'Recupera una fortaleza y un aspecto por reforzar de las etapas anteriores.',resource:'Síntesis del recorrido y respuestas guardadas.',response:'Aprendizaje principal, contexto de uso y foco personal.',purpose:'Cerrar el módulo con autonomía y una acción futura concreta.',completion:'Terminas cuando completas los tres productos y finalizas el recorrido.'}
+  };
+  return workZone(`${analizaTitle()}${analizaSteps(viewTab)}${typeof instructionContract==='function'?instructionContract({instruction:instructions[viewTab]}):''}<div class="az-summary">${feedbackBody(viewTab)}</div>`,'work-zone-s5');
 }
 
 function feedbackBottom(){

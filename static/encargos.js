@@ -168,6 +168,7 @@ function openEncargo(host, item, draftText){
           </div>
           <button type="button" class="outline" data-encargo-close>Cerrar</button>
         </header>
+        ${typeof instructionContract==='function'?instructionContract(item):''}
         <p class="bitacora-intro">Esta hoja es tu cuaderno de taller. Anota el dato que viste, la consulta que harías y lo que todavía no puedes afirmar.</p>
         <label class="bitacora-field">Hoy vi<textarea class="bitacora-ruled" data-bit="vi" maxlength="4000" placeholder="Un dato del plano, la leyenda, la ficha o las notas.">${esc(parts.vi)}</textarea></label>
         <label class="bitacora-field">Consulté<textarea class="bitacora-ruled" data-bit="consult" maxlength="4000" placeholder="Qué pregunté, o a quién lo consultaría si el dato no aparece.">${esc(parts.consult)}</textarea></label>
@@ -187,6 +188,7 @@ function openEncargo(host, item, draftText){
         <div><span class="oficio-respond-chip">Respondes aquí</span><h5>${esc(item.title)}</h5></div>
         <button type="button" class="outline" data-encargo-close>Cerrar</button>
       </header>
+      ${typeof instructionContract==='function'?instructionContract(item):''}
       <p class="oficio-task-prompt">${esc(item.prompt||item.title)}</p>
       <p class="oficio-help"><b>Producto pedido:</b> ${esc(item.product)} · AE ${item.ae}</p>
       <ol class="oficio-how">

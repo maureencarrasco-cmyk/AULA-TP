@@ -332,7 +332,7 @@
         }
       }
       if (btn.dataset.action === 'station') items.push('<li class="is-wait">○ Completa la estación actual para continuar</li>');
-      if (btn.dataset.action === 'submit-exam') items.push('<li class="is-wait">○ Completa las 25 preguntas y el desarrollo</li>');
+      if (btn.dataset.action === 'submit-exam') items.push('<li class="is-wait">○ Completa todos los ítems asignados y el desarrollo cuando corresponda</li>');
       if (!items.length) items.push('<li class="is-wait">○ Aún no se cumplen los requisitos para continuar</li>');
       box.innerHTML = '<li><b>Para continuar falta:</b></li>' + items.join('');
     });

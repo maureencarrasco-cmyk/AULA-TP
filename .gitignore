@@ -4,6 +4,9 @@ __pycache__/
 data/
 backups/
 *.log
+server-*.out
+server-*.err
+tmp/
 wheelhouse/
 *.whl
 .DS_Store

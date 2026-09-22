@@ -24,12 +24,12 @@ function mcqChipLabel(item, opts) {
   return `Ítem ${index} de ${total}`;
 }
 
-function mcqMedia(item) {
+function mcqMedia(item, exam) {
   const form = Number(item.form || item.mcq_form || 1);
   const photo = mcqPhotoSrc(item);
-  const alt = item.alt || 'Foto real del oficio. El objeto está centrado para leer el dato, no la respuesta.';
+  const alt = exam ? 'Evidencia visual del ítem. Examina sus datos visibles antes de responder.' : (item.alt || 'Foto del oficio usada como evidencia de la actividad.');
   const photoFig = photo
-    ? `<figure class="mcq-figure"><img src="${mcqEsc(photo)}" alt="${mcqEsc(alt)}" decoding="async"><figcaption>${mcqEsc(item.caption || 'Foto real del oficio · simulación')}</figcaption></figure>`
+    ? `<figure class="mcq-figure"><img src="${mcqEsc(photo)}" alt="${mcqEsc(alt)}" decoding="async"><figcaption>${mcqEsc(exam ? 'Recurso visual del ítem' : (item.caption || 'Recurso visual del oficio'))}</figcaption></figure>`
     : `<p class="muted small">Falta la foto real de este ítem. No se publica un módulo sin imagen.</p>`;
   const illus = item.illustration
     ? `<figure class="mcq-figure"><img src="${mcqEsc(item.illustration)}" alt="Ilustración técnica del mismo equipo. Acompaña; no reemplaza la foto." decoding="async"><figcaption>Ilustración técnica del mismo equipo</figcaption></figure>`
@@ -76,8 +76,9 @@ function mcqItemMarkup(item, opts) {
   chips.push(`<span class="mcq-chip ${item.pack ? 'is-pack' : ''}">${mcqEsc(mcqChipLabel(item, opts))}</span>`);
   return `<article class="mcq-card" data-exam="${exam ? 1 : 0}" data-form="${Number(item.form || 1)}">
     <div class="mcq-toolbar">${chips.join('')}</div>
+    ${typeof instructionContract === 'function' ? instructionContract(item) : ''}
     ${stimulus ? `<p class="mcq-stimulus">${mcqEsc(stimulus)}</p>` : ''}
-    ${mcqMedia(item)}
+    ${mcqMedia(item, exam)}
     <h3 class="mcq-prompt">${mcqEsc(prompt)}</h3>
     ${mcqOptions(item, opts)}
   </article>`;

@@ -38,21 +38,19 @@ class LMSFlow(unittest.TestCase):
   self.assertTrue(all('answer' not in q and 'explanation' not in q for q in content['questions']))
   self.assertTrue(all('answer' not in q for q in content['cases']))
  def test_full_learning_grading_and_persistence(self):
-  self.through_integration();answers={str(i):q['answer'] for i,q in enumerate(DEFAULT_CONTENT['questions'])};answers['0']=(answers['0']+1)%4
+  self.through_integration();count=DEFAULT_CONTENT['evaluation_plan']['question_count'];answers={str(i):q['answer'] for i,q in enumerate(DEFAULT_CONTENT['questions'][:count])};answers['0']=(answers['0']+1)%4
   self.assertEqual(self.activity(kind='draft',answers={'0':answers['0']},development=TEXT).status_code,200)
   # Session replacement and a fresh app instance must retain the draft.
   fresh=create_app({'TESTING':True,'DATABASE':self.app.config['DATABASE'],'SECRET_KEY':'test-only'}).test_client();self.login(fresh,'estudiante','AulaTP2026!')
   self.assertEqual(fresh.get('/api/modules/1').json['state']['draft']['answers'],{'0':answers['0']})
   self.assertEqual(self.activity(kind='exam',answers={'0':0},development=TEXT).status_code,400)
   self.assertEqual(self.activity(kind='exam',answers=answers,development=TEXT).status_code,200)
-  s=self.s.get('/api/modules/1').json['state'];self.assertEqual(s['exam']['score'],24);self.assertIsNone(s['exam']['review'])
+  s=self.s.get('/api/modules/1').json['state'];self.assertEqual(s['exam']['score'],count-1);self.assertEqual(s['exam']['max_score'],count);self.assertFalse(s['exam']['development_required'])
   self.assertEqual(self.activity(kind='exam',answers=answers,development=TEXT).status_code,400)
-  r=self.req('/teacher/review',{'user_id':1,'module_id':1,'points':[5,4,3,4,5],'feedback':TEXT},teacher=True);self.assertEqual(r.status_code,200)
-  self.assertEqual(self.s.get('/api/modules/1').json['state']['exam']['review']['score'],21)
   self.assertEqual(self.activity(kind='close',reflection=TEXT,plan=TEXT).status_code,200)
   self.assertEqual(self.s.get('/api/modules/1').json['completed'],[True]*5)
   self.assertEqual(self.activity(kind='context',text=TEXT).status_code,400)
-  report=self.t.get('/api/teacher/export.csv');self.assertEqual(report.status_code,200);self.assertIn('24,21,45,Revisado',report.text)
+  report=self.t.get('/api/teacher/export.csv');self.assertEqual(report.status_code,200);self.assertIn('avance-aula-tp.csv',report.headers['Content-Disposition'])
  def test_authoring_enrollment_isolation(self):
   uid=self.req('/teacher/users',{'username':'alumno2','name':'Estudiante de prueba','password':'ClaveDePrueba2026'},teacher=True).json['id']
   second=self.app.test_client();self.login(second,'alumno2','ClaveDePrueba2026');self.assertEqual(second.get('/api/courses').json,[])
@@ -88,8 +86,12 @@ class LMSFlow(unittest.TestCase):
     self.assertEqual(call(kind='scene',inspected=['exterior','interior','control'],text=TEXT).status_code,400)
     self.assertEqual(call(kind='scene',inspected=[{},None,1],text=TEXT).status_code,400)
     self.assertEqual(call(kind='scene',inspected=[p['id'] for p in c['scene']['parts']],text=TEXT).status_code,200)
-    answers={str(i):q['answer'] for i,q in enumerate(c['questions'])}
-    self.assertEqual(call(kind='exam',answers=answers,development=TEXT).json['state']['exam']['score'],25)
+    count=c['evaluation_plan']['question_count']
+    answers={str(i):q['answer'] for i,q in enumerate(c['questions'][:count])}
+    delivered=call(kind='exam',answers=answers,development=TEXT)
+    self.assertEqual(delivered.status_code,200)
+    self.assertEqual(delivered.json['state']['exam']['score'],count)
+    self.assertEqual(delivered.json['state']['exam']['max_score'],count)
     self.assertEqual(call(kind='close',reflection=TEXT,plan=TEXT).json['completed'],[True]*5)
  def test_upgrade_preserves_progress_and_teacher_content(self):
   import sqlite3,json
@@ -123,10 +125,12 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual(TIME_FACTOR, 5)
   self.assertEqual(MODULE_HP[1], 190)
   courses=self.s.get('/api/courses').json
-  self.assertEqual(courses[0]['planning']['course_hp'], 836)
+  self.assertEqual(courses[0]['planning']['course_hp'], 1672)
   self.assertEqual(courses[0]['modules'][0]['hp'], 190)
   self.assertEqual(courses[0]['planning']['time_factor'], 5)
-  self.assertEqual(courses[0]['modules'][0]['exam_hp'], 2)
+  self.assertAlmostEqual(sum(m['exam_hp'] for m in courses[0]['modules']), 2)
+  self.assertEqual(courses[0]['planning']['course_aula_hp'], 501.6)
+  self.assertAlmostEqual(sum(m['formative_hp'] for m in courses[0]['modules']), 499.6)
   m=self.s.get('/api/modules/1').json
   self.assertEqual(len(m['content']['questions'][0]['options']), 4)
   self.assertTrue(all(q.get('image') for q in m['content']['questions']))
@@ -156,8 +160,68 @@ class LMSFlow(unittest.TestCase):
   ok, _=validate_experience(exp, {'ids': exp['answer']})
   self.assertTrue(ok)
   self.assertEqual(self.activity(kind='ae', ae=0, step=0, text=TEXT).status_code, 200)
+ def test_official_specialty_courses_and_thirty_percent_planning(self):
+  from pedagogy import publication_gaps
+  courses=self.s.get('/api/courses').json
+  expected={
+   'Electricidad':(1672,501.6,[152,228,228,228,228,228,152,152,76],[2,3,3,2,4,3,2,2,4]),
+   'Atención de Enfermería, mención Adulto Mayor':(1672,501.6,[228,152,190,190,76,228,76,76,114,76,114,76,76],[3,3,3,2,3,3,2,2,4,2,2,2,4]),
+   'Atención de Enfermería, mención Enfermería':(1672,501.6,[228,152,190,190,76,228,228,228,76,76],[3,3,3,2,3,3,4,3,2,4]),
+  }
+  by_title={course['title']:course for course in courses}
+  for title,(official,aula,module_hours,ae_counts) in expected.items():
+   with self.subTest(course=title):
+    course=by_title[title]
+    self.assertEqual(len(course['modules']),len(module_hours))
+    self.assertEqual(course['planning']['course_hp'],official)
+    self.assertEqual(course['planning']['course_aula_hp'],aula)
+    self.assertEqual([m['official_hp'] for m in course['modules']],module_hours)
+    self.assertAlmostEqual(sum(m['exam_hp'] for m in course['modules']),2)
+    for module,ae_count in zip(course['modules'],ae_counts):
+     content=self.s.get('/api/modules/'+str(module['id'])).json['content']
+     self.assertFalse(publication_gaps(content,course['specialty']))
+     self.assertEqual(len(content['aes']),ae_count)
+     self.assertEqual(len(content['cases']),15)
+     self.assertEqual(len(content['questions']),25)
+     self.assertTrue(content.get('specialty_source'))
+     self.assertEqual(content['specialty_source']['official_ae_count'],ae_count)
+     self.assertFalse(any('Integra los aprendizajes esperados' in ae['title'] for ae in content['aes']))
+     if title=='Electricidad':
+      self.assertTrue(any('Consulta el RIC antes de tomar una decisión' in case['context'] for case in content['cases']))
+  source=(Path(__file__).resolve().parents[1]/'static'/'app.js').read_text(encoding='utf-8')
+  self.assertIn('SEC · Pliegos RIC',source)
+  self.assertIn("specialtyKey(course)!=='electricidad'",source)
+ def test_refrigeration_fourth_middle_complete(self):
+  from pedagogy import publication_gaps
+  course=self.s.get('/api/courses').json[0]
+  expected=[
+   ('Puesta en marcha de equipos de refrigeración y climatización',228),
+   ('Diagnóstico en sistemas de refrigeración y climatización',190),
+   ('Mantención de sistemas de refrigeración y climatización',190),
+   ('Reciclaje y almacenamiento de refrigerantes',152),
+   ('Emprendimiento y empleabilidad',76),
+  ]
+  self.assertEqual(course['level'],'3° y 4° medio')
+  self.assertEqual(len(course['modules']),9)
+  self.assertEqual([(m['title'],m['official_hp']) for m in course['modules'][4:]],expected)
+  self.assertEqual(course['planning']['course_hp'],1672)
+  self.assertEqual(course['planning']['course_aula_hp'],501.6)
+  self.assertAlmostEqual(sum(m['exam_hp'] for m in course['modules']),2)
+  ae_counts=[3,3,2,3,4]
+  for module,ae_count in zip(course['modules'][4:],ae_counts):
+   with self.subTest(module=module['position']):
+    payload=self.s.get('/api/modules/'+str(module['id'])).json
+    content=payload['content']
+    self.assertEqual(len(content['aes']),ae_count)
+    self.assertEqual(len(content['cases']),15)
+    self.assertEqual(len(content['questions']),25)
+    self.assertEqual(content['specialty_source']['course_hp'],1672)
+    self.assertFalse(publication_gaps(content,course['specialty']))
+    self.assertNotIn('Leer la leyenda',content['aes'][0]['experiences'][2].get('items') or [])
+    self.assertEqual(payload['planning']['official_hp'],module['official_hp'])
  def test_mcq_publication_requires_photo_and_four_options(self):
   from pedagogy import publication_gaps
+  from catalog import EXTENDED_MODULES
   self.assertFalse(publication_gaps(DEFAULT_CONTENT))
   self.assertTrue(all(q.get('form') in range(1,10) for q in DEFAULT_CONTENT['questions']))
   self.assertTrue(all('/oficio/' in (q.get('image') or '') for q in DEFAULT_CONTENT['questions']))
@@ -166,9 +230,31 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual((DEFAULT_CONTENT.get('scene') or {}).get('media_kind'), '3d-procedure')
   self.assertTrue((DEFAULT_CONTENT.get('aes') or [{}])[0].get('official_code'))
   self.assertEqual(DEFAULT_CONTENT['planning']['time_factor'], 5)
+  self.assertEqual([DEFAULT_CONTENT['evaluation_plan']['question_count']]+[EXTENDED_MODULES[i]['evaluation_plan']['question_count'] for i in (2,3,4)],[5,5,7,8])
+  from instructional_quality import contract_is_complete
+  self.assertTrue(contract_is_complete(DEFAULT_CONTENT['context_instruction']))
+  self.assertTrue(all(contract_is_complete(e['instruction']) for a in DEFAULT_CONTENT['aes'] for e in a['experiences']))
+  didactic_fields={'prior_knowledge','new_knowledge','cognitive_action','expected_difficulty','scaffolding','evidence','feedback','transfer','initial_register','final_register','transformation','brousseau_cycle'}
+  from catalog import EXTENDED_MODULES
+  for mid,content in {1:DEFAULT_CONTENT,**EXTENDED_MODULES}.items():
+   with self.subTest(didactic_module=mid):
+    self.assertTrue(didactic_fields.issubset(content['context_didactic']))
+    self.assertTrue(didactic_fields.issubset(content['scene']['didactic']))
+    self.assertTrue(didactic_fields.issubset(content['practice']['didactic']))
+    self.assertTrue(didactic_fields.issubset(content['feedback_didactic']))
+    self.assertTrue(all(didactic_fields.issubset(i['didactic']) for i in content['encargos']['items']))
+    if content['evaluation_plan']['development_required']:
+     self.assertTrue(didactic_fields.issubset(content['development_pack']['didactic']))
   c=copy.deepcopy(DEFAULT_CONTENT);c['questions'][0]['image']=''
   mid=self.req('/teacher/modules',{'course_id':1,'title':'Hueco A-D'},teacher=True).json['id']
   self.assertEqual(self.req('/teacher/modules/'+str(mid),{'title':'Hueco A-D','published':True,'content':c},teacher=True,method='PUT').status_code,400)
+ def test_audit_ui_uses_module_plan_and_actor_evidence_matrix(self):
+  source=(Path(__file__).resolve().parents[1]/'static'/'app.js').read_text(encoding='utf-8')
+  self.assertIn('function evaluationPlan()',source)
+  self.assertIn('PREGUNTA ${questionIndex+1} DE ${plan.count}',source)
+  self.assertNotIn('Escenario 3D:',source)
+  self.assertIn('<th>Necesidad</th><th>Indicador</th><th>Evidencia</th><th>Acción posible</th>',source)
+  self.assertIn('curriculumSourcePanel()',source)
  def test_encargos_cover_hours_without_gating_exam(self):
   expected={1:32,2:36,3:38,4:36}
   hours={1:32.2,2:32.2,3:40.8,4:40.8}
@@ -190,7 +276,7 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual(r.json['completed'],[True,False,False,False,False])
   self.assertEqual(self.activity(kind='encargo',id='1.01',text=TEXT).status_code,403)
   counts=[m['encargos_count'] for m in self.s.get('/api/courses').json[0]['modules']]
-  self.assertEqual(counts,[32,36,38,36])
+  self.assertEqual(counts,[32,36,38,36,38,32,32,25,13])
   for mid,eid in ((2,'2.01'),(3,'3.05'),(4,'4.03')):
    with self.subTest(save=mid):
     call=lambda **d:self.req('/modules/'+str(mid)+'/activity',d)

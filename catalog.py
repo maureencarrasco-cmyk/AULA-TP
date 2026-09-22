@@ -284,6 +284,10 @@ def upgrade_catalog(con):
     _apply_mcq_mold(con)
     _apply_oficio_media(con)
     _apply_mineduc_3medio(con)
+    from specialty_catalog import install_specialty_courses
+    install_specialty_courses(con)
+    from refrigeration_fourth import install_refrigeration_fourth
+    install_refrigeration_fourth(con)
 
 
 def _fill_empty_third_medio(con):
@@ -396,7 +400,7 @@ def _apply_pedagogy(con):
 
 
 def _apply_mineduc_3medio(con):
-    """Transcribe AE/criterios del PDF, HP oficiales ×5, 3D de procedimiento y video."""
+    """Transcribe AE/criterios, aplica 30 % horario y agrega medios interactivos."""
     version='mineduc-3medio-x5-3'
     if con.execute('SELECT 1 FROM content_updates WHERE version=?',(version,)).fetchone():
         return

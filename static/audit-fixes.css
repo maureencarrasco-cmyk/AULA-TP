@@ -1,0 +1,158 @@
+/* Correcciones transversales de la auditoría pedagógica y de accesibilidad. */
+html,body{max-width:100%;overflow-x:hidden}
+*,*::before,*::after{min-width:0}
+h1,h2,h3,h4,h5,h6,.eyebrow,.work-kicker{letter-spacing:0!important}
+
+.act-contract{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1px;
+  margin:14px 0 18px;
+  border:1px solid #B8C8DA;
+  border-radius:8px;
+  overflow:hidden;
+  background:#B8C8DA;
+}
+.act-contract>div,.act-contract>p{
+  margin:0;
+  padding:10px 12px;
+  background:#F8FBFF;
+  color:#153454;
+  line-height:1.4;
+}
+.act-contract>div{display:flex;flex-direction:column;gap:3px}
+.act-contract b{font-size:11px;color:#0B3A6B}
+.act-contract span,.act-contract p{font-size:12px}
+.act-contract>p{grid-column:1/-1;background:#ECF8F1}
+
+.mcq-card .act-contract{grid-template-columns:repeat(2,minmax(0,1fr))}
+.station-body img,.station-body video,.station-body svg{max-width:100%}
+.question-nav,.integration-tabs,.az-steps{max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain}
+
+@media(max-width:767px){
+  body:has(.tools-fab){padding-bottom:84px}
+  .act-contract,.mcq-card .act-contract{grid-template-columns:1fr}
+  .act-contract>p{grid-column:auto}
+  .tools-fab:not(.is-open) .tools-fab-label,.tools-fab:not(.is-open) .tools-fab-grip{display:none!important}
+  .tools-fab:not(.is-open) button.tools-fab-btn{width:48px!important;height:48px!important;min-height:48px!important;padding:0!important;justify-content:center!important}
+  .az-grid,.summary-columns,.exam-summary-cards{grid-template-columns:1fr!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .tools-fab,.tools-fab::before,button.tools-fab-btn::before{animation:none!important;transition:none!important}
+}
+
+/* Identidad de marca única: mismo archivo, proporción y tratamiento en todo el campus. */
+img.brand-logo{
+  display:block;
+  width:auto;
+  height:auto;
+  max-width:100%;
+  object-fit:contain;
+  object-position:center;
+  image-rendering:auto;
+}
+.topbar img.brand-logo.logo{width:140px;height:56px;max-width:140px;padding:0;border:0;border-radius:0;background:transparent}
+.login-brand img.brand-logo.logo{width:144px;height:116px;max-width:144px;max-height:116px;padding:0;border:0;border-radius:0;background:transparent}
+img.brand-logo.dash-logo{width:150px;height:116px;max-width:150px;max-height:116px;padding:0;border:0;border-radius:0;background:transparent}
+footer img.brand-logo.footer-logo{width:112px;height:48px;max-width:112px;max-height:48px;padding:0;border:0;border-radius:0;background:transparent}
+.atp-hero-logo img.brand-logo{width:100%;height:72px;max-height:72px;padding:0;border:0;border-radius:0;background:transparent}
+.pf-brand img.brand-logo{width:auto;height:48px;max-width:92px;padding:4px;border-radius:10px;background:#fff}
+img.brand-logo.p3-map-logo{width:142px;height:58px;max-width:142px;max-height:58px;padding:0;border:0;border-radius:0;background:transparent}
+
+/* Navegación contextual solicitada para la pantalla principal. */
+.floating-back-button{
+  position:fixed;
+  z-index:90;
+  top:14px;
+  left:14px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:42px;
+  padding:9px 15px;
+  border:1px solid #BCD0E4;
+  border-radius:999px;
+  background:rgba(255,255,255,.96);
+  color:#0B4A96;
+  font-size:13px;
+  font-weight:800;
+  box-shadow:0 8px 22px rgba(12,55,105,.16);
+  backdrop-filter:blur(8px);
+}
+.floating-back-button .icon{width:17px;height:17px;transform:scaleX(-1)}
+.floating-back-button:hover{border-color:#7DA8D2;background:#EAF4FF;filter:none}
+.floating-back-button:focus-visible{outline:3px solid #EDAB00;outline-offset:3px}
+body[data-screen="courses"] .dash-sidebar{padding-top:70px}
+
+@media(max-width:760px){
+  .topbar img.brand-logo.logo{width:108px;height:48px;max-width:108px}
+  .login-brand img.brand-logo.logo{width:105px;height:82px;max-width:105px;max-height:82px}
+  img.brand-logo.dash-logo{width:86px;height:60px;max-width:86px;max-height:60px}
+  body[data-screen="courses"] .dash-sidebar{padding-top:8px}
+  .floating-back-button{top:82px;left:12px;min-height:40px;padding:8px 13px;background:rgba(255,255,255,.97)}
+}
+
+@media(prefers-reduced-motion:reduce){.floating-back-button{transition:none}}
+
+.source-strip{
+  margin:14px 0;
+  border:1px solid #B8CFE8;
+  border-radius:8px;
+  background:#F4F9FF;
+  color:#173F6B;
+}
+.source-strip summary{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-height:44px;
+  padding:10px 14px;
+  color:#0B4A96;
+  font-weight:800;
+  cursor:pointer;
+}
+.source-strip p{margin:0;padding:0 14px 10px;line-height:1.5}
+.source-strip a{display:inline-block;margin:0 14px 14px;color:#075BC8;font-weight:750}
+.source-strip .icon{width:18px;height:18px;flex:0 0 auto}
+
+/* Acceso normativo permanente para las cinco estaciones de Electricidad. */
+.sec-ric-fab{
+  position:fixed;
+  z-index:88;
+  right:18px;
+  bottom:106px;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  min-height:48px;
+  padding:11px 16px;
+  border:1px solid #6D28D9;
+  border-radius:8px;
+  background:#6D28D9;
+  color:#fff;
+  font-size:13px;
+  font-weight:850;
+  text-decoration:none;
+  box-shadow:0 10px 26px rgba(76,29,149,.3);
+}
+.sec-ric-fab .icon{width:19px;height:19px;flex:0 0 auto}
+.sec-ric-fab:hover{background:#5B21B6;color:#fff;filter:none}
+.sec-ric-fab:focus-visible{outline:3px solid #FACC15;outline-offset:3px}
+@media(max-width:760px){
+  body[data-screen="module"]:has(.sec-ric-fab){padding-bottom:76px}
+  .atp-hero.is-station .atp-hero-side{
+    flex:1 0 100%;
+    width:100%;
+    min-width:100%;
+    order:4;
+  }
+  .atp-hero.is-station .atp-hero-side a,
+  .atp-hero.is-station .atp-hero-side .is-here{
+    flex:1 1 150px;
+    overflow-wrap:normal;
+    word-break:normal;
+  }
+  .sec-ric-fab{left:12px;right:auto;bottom:14px;max-width:calc(100vw - 86px);padding:10px 13px}
+}

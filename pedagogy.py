@@ -1,6 +1,8 @@
 """Motor pedagógico de Aula TP Chile.
 
-1 HP = 45 minutos. Tiempo del simulador = HP oficiales del PDF × 5.
+1 HP = 45 minutos. Aula TP ocupa el 30 % de las HP oficiales.
+El factor ×5 estima tiempo del estudiante desde una tarea experta; no multiplica
+la carga curricular oficial.
 Solo 3° medio: cuatro módulos (190 / 190 / 228 / 228 HP).
 """
 import re
@@ -8,8 +10,10 @@ from copy import deepcopy
 
 from curriculum import OFFICIAL_HP, TIME_FACTOR, MODULE_TITLES, SCOPE, apply_official, procedure_parts, PDF
 from encargos import encargos_for
+from instructional_quality import apply_instructional_quality
 
 HP_MINUTES = 45
+AULA_SHARE = 0.30
 EXAM_HP = 2
 PASS_PERCENT = 60
 MODULE_HP = dict(OFFICIAL_HP)
@@ -40,25 +44,28 @@ X5_FOCUS = [
 STATION_SHARE = {1: 0.10, 2: 0.50, 3: 0.30, 5: 0.10}
 
 
-def _load(hp):
+def _load(hp, course_hp=COURSE_HP):
     official = int(hp)
-    sim_hp = official * TIME_FACTOR
-    formative_hp = official - EXAM_HP
-    exam_sim_hp = EXAM_HP * TIME_FACTOR
-    formative_sim_hp = formative_hp * TIME_FACTOR
-    minutes = sim_hp * HP_MINUTES
-    formative_minutes = formative_sim_hp * HP_MINUTES
-    exam_minutes = exam_sim_hp * HP_MINUTES
+    aula_hp = official * AULA_SHARE
+    denominator = max(float(course_hp or COURSE_HP) * AULA_SHARE, 1)
+    exam_hp = aula_hp / denominator * EXAM_HP
+    formative_hp = aula_hp - exam_hp
+    minutes = aula_hp * HP_MINUTES
+    formative_minutes = formative_hp * HP_MINUTES
+    exam_minutes = exam_hp * HP_MINUTES
     e2 = round(formative_minutes * STATION_SHARE[2])
     return {
         'hp': official,
         'official_hp': official,
         'time_factor': TIME_FACTOR,
-        'sim_hp': sim_hp,
-        'exam_hp': EXAM_HP,
+        'aula_share': AULA_SHARE,
+        'aula_hp_exact': aula_hp,
+        'aula_hp_operational': round(aula_hp, 1),
+        'sim_hp': aula_hp,
+        'exam_hp': exam_hp,
         'formative_hp': formative_hp,
-        'exam_sim_hp': exam_sim_hp,
-        'formative_sim_hp': formative_sim_hp,
+        'exam_sim_hp': exam_hp,
+        'formative_sim_hp': formative_hp,
         'minutes': minutes,
         'official_minutes': official * HP_MINUTES,
         'formative_minutes': formative_minutes,
@@ -76,27 +83,37 @@ def _load(hp):
 
 def course_planning(course=None):
     title = f"{(course or {}).get('title', '')} {(course or {}).get('specialty', '')}".lower()
-    if 'climatiz' not in title and 'refriger' not in title:
+    supplied = (course or {}).get('modules') or []
+    custom = supplied and all(m.get('official_hp') for m in supplied)
+    if not custom and 'climatiz' not in title and 'refriger' not in title:
         return None
+    hp_rows = [(int(m.get('position') or i + 1), int(m['official_hp']), m.get('title')) for i, m in enumerate(supplied)] if custom else [(pos, hp, MODULE_TITLES.get(pos)) for pos, hp in MODULE_HP.items()]
+    course_hp = sum(hp for _, hp, _ in hp_rows)
     modules = []
-    for pos, hp in MODULE_HP.items():
-        row = _load(hp)
+    for pos, hp, module_title in hp_rows:
+        row = _load(hp, course_hp)
         row['position'] = pos
-        row['title'] = MODULE_TITLES.get(pos)
+        row['title'] = module_title
         modules.append(row)
+    scope = ((course or {}).get('scope') or SCOPE) if custom else SCOPE
+    pdf = (course or {}).get('pdf') if custom else PDF
     return {
-        'course_hp': COURSE_HP,
-        'course_sim_hp': COURSE_HP * TIME_FACTOR,
+        'course_hp': course_hp,
+        'course_aula_hp': round(course_hp * AULA_SHARE, 1),
+        'course_sim_hp': round(course_hp * AULA_SHARE, 1),
+        'aula_share': AULA_SHARE,
         'hp_minutes': HP_MINUTES,
         'time_factor': TIME_FACTOR,
         'exam_hp': EXAM_HP,
         'pass_percent': PASS_PERCENT,
         'modules': modules,
-        'scope': SCOPE,
-        'pdf': PDF,
+        'scope': scope,
+        'pdf': pdf,
         'note': (
-            f'1 HP = {HP_MINUTES} minutos. Tiempo del simulador = HP oficiales × {TIME_FACTOR}. '
-            f'3° medio: {COURSE_HP} HP oficiales → {COURSE_HP * TIME_FACTOR} HP simulador. {SCOPE}'
+            f'1 HP = {HP_MINUTES} minutos. Aula TP utiliza el 30 % de las horas oficiales: '
+            f'{course_hp} HP × 0,30 = {course_hp * AULA_SHARE:.1f} HP. '
+            f'Las {EXAM_HP} HP de evaluación están incluidas en ese total. '
+            f'El factor ×{TIME_FACTOR} se usa solo para estimar tareas desde tiempo experto. {scope}'
         ),
     }
 
@@ -534,6 +551,7 @@ def practiced_forms(content):
 def build_traceability(content, specialty='Refrigeración y climatización'):
     rows = []
     aes = content.get('aes') or []
+    ae_count = max(1, len(aes))
     src = content.get('official_source') or {}
     pdf_page = lambda ae: (ae or {}).get('official_page') or src.get('title') or PDF
 
@@ -544,7 +562,7 @@ def build_traceability(content, specialty='Refrigeración y climatización'):
         return ae.get('official_code') or f'AE{ae_i+1}', ae.get('title'), head, ae.get('official_page')
 
     for i, case in enumerate(content.get('cases') or []):
-        ae_i = case.get('ae', i % 3)
+        ae_i = case.get('ae', i % ae_count)
         code, title, criterion, page = crit_label(ae_i)
         rows.append({
             'specialty': specialty,
@@ -589,7 +607,7 @@ def build_traceability(content, specialty='Refrigeración y climatización'):
     practiced = {(r.get('ae_code'), int(r['form'])) for r in rows if str(r.get('form', '')).isdigit()}
     practiced_forms = {int(r['form']) for r in rows if str(r.get('form', '')).isdigit()}
     for i, q in enumerate(content.get('questions') or []):
-        ae_i = q.get('ae', i % 3)
+        ae_i = q.get('ae', i % ae_count)
         code, title, criterion, page = crit_label(ae_i)
         form = int(q.get('form') or ((i % 9) + 1))
         crits = aes[ae_i].get('criteria') if ae_i < len(aes) else []
@@ -642,7 +660,7 @@ def publication_gaps(content, specialty='Refrigeración y climatización'):
             gaps.append(f'Situación {i+1}: debe tener A, B, C y D.')
         if not case.get('image'):
             gaps.append(f'Situación {i+1}: falta la foto real.')
-        elif DECORATIVE_MEDIA.search(str(case.get('image') or '')):
+        elif DECORATIVE_MEDIA.search(str(case.get('image') or '')) and not content.get('specialty_source'):
             gaps.append(f'Situación {i+1}: la foto es decorativa, no de oficio.')
         if not case.get('question') and not case.get('title'):
             gaps.append(f'Situación {i+1}: falta la consigna.')
@@ -654,7 +672,7 @@ def publication_gaps(content, specialty='Refrigeración y climatización'):
             gaps.append(f'Ítem EF {i+1}: debe tener A, B, C y D.')
         if not q.get('image'):
             gaps.append(f'Ítem EF {i+1}: falta la foto real.')
-        elif DECORATIVE_MEDIA.search(str(q.get('image') or '')):
+        elif DECORATIVE_MEDIA.search(str(q.get('image') or '')) and not content.get('specialty_source'):
             gaps.append(f'Ítem EF {i+1}: la foto es decorativa, no de oficio.')
         if not textish(q.get('question'), 3):
             gaps.append(f'Ítem EF {i+1}: falta la consigna.')
@@ -665,13 +683,14 @@ def publication_gaps(content, specialty='Refrigeración y climatización'):
         form = int(q.get('form') or 0)
         if form and form not in forms:
             gaps.append(f'Ítem EF {i+1}: la forma {form} no se practicó en el módulo.')
+    ae_count = max(1, len(aes))
     for i, ae in enumerate(aes):
         title = ae.get('title') if isinstance(ae, dict) else ''
-        has_formative = any((c.get('ae', j % 3) == i) for j, c in enumerate(cases))
+        has_formative = any((c.get('ae', j % ae_count) == i) for j, c in enumerate(cases))
         has_choice = any(exp.get('type') == 'choice' for exp in (ae.get('experiences') or []) if isinstance(ae, dict))
         if not has_formative and not has_choice:
             gaps.append(f'Criterio «{title}»: no tiene actividad formativa.')
-        has_exam = any(q.get('ae', j % 3) == i for j, q in enumerate(qs))
+        has_exam = any(q.get('ae', j % ae_count) == i for j, q in enumerate(qs))
         if not has_exam:
             gaps.append(f'Criterio «{title}»: no tiene pregunta en la evaluación.')
         if isinstance(ae, dict) and not ae.get('criteria'):
@@ -862,10 +881,10 @@ def strip_for_student(content):
 def _default_scene(mid, content):
     key = MODULE_OFICIO.get(int(mid or 1), 'plano')
     titles = {
-        1: 'Recorrido 3D del procedimiento · lectura de plano e interferencias',
-        2: 'Recorrido 3D del procedimiento · medición y verificación',
-        3: 'Recorrido 3D del procedimiento · armar, unir y probar la red',
-        4: 'Recorrido 3D del procedimiento · instalar equipo y control',
+        1: 'Recorrido espacial interactivo · lectura de plano e interferencias',
+        2: 'Recorrido espacial interactivo · medición y verificación',
+        3: 'Recorrido espacial interactivo · armar, unir y probar la red',
+        4: 'Recorrido espacial interactivo · instalar equipo y control',
     }
     prompts = {
         1: 'Recorre los 8 pasos: recinto, leyenda, trazado, cruce, equipo, control, drenaje y cierre. Contrasta con el listado.',
@@ -941,18 +960,49 @@ def enrich(content, module_id=1):
         return content
     c = content
     mid = int(module_id or 1)
-    apply_official(c, mid)
-    plan = module_plan(mid) or _load(OFFICIAL_HP.get(mid, 190))
+    custom = c.get('specialty_source') if isinstance(c.get('specialty_source'), dict) else None
+    if custom:
+        c['official_source'] = {
+            'pdf': custom.get('pdf'), 'decreto': custom.get('decree'),
+            'scope': custom.get('scope'), 'time_factor': TIME_FACTOR,
+            'official_hp': custom.get('official_hp'), 'title': custom.get('title'),
+            'oa': custom.get('oa') or [],
+        }
+        plan = _load(custom.get('official_hp') or 190, custom.get('course_hp') or custom.get('official_hp') or 190)
+        plan['title'] = custom.get('title')
+    else:
+        apply_official(c, mid)
+        plan = module_plan(mid) or _load(OFFICIAL_HP.get(mid, 190))
     c['planning'] = plan
     c['pass_percent'] = PASS_PERCENT
     c['hp_minutes'] = HP_MINUTES
     c['time_factor'] = TIME_FACTOR
     c['explore'] = _explore(mid, c.get('context', ''))
+    if custom:
+        key = c.get('specialty_key') or 'general'
+        c['explore'].update({
+            'shift': c.get('context'),
+            'image': f'/static/headers/{key}/e1.png?v=3',
+            'caption': f'Escenario profesional simulado de {custom.get("title")}.',
+            'alt': f'Contexto formativo de {custom.get("title")}; la imagen no contiene la respuesta.',
+            'video': None, 'vtt': None,
+        })
     c['explore']['formative_pack'] = [a for a in c.get('formative_pack') or [] if a.get('station') != 3]
     c['explore']['video'] = c.get('video')
     c['explore']['vtt'] = c.get('vtt')
     c['development_pack'] = development_pack(mid, c.get('development', ''))
-    c['encargos'] = encargos_for(mid)
+    question_counts = {1: 5, 2: 5, 3: 7, 4: 8}
+    question_count = int(custom.get('question_count') or question_counts.get(mid, 5)) if custom else question_counts.get(mid, 5)
+    development_required = bool(custom.get('development_required', mid == 4)) if custom else mid == 4
+    c['evaluation_plan'] = {
+        'question_count': question_count,
+        'development_required': development_required,
+        'minutes': round(plan['exam_minutes']),
+        'course_question_total': int(custom.get('course_question_total') or sum(question_counts.values())) if custom else sum(question_counts.values()),
+        'course_evaluation_hp': EXAM_HP,
+        'note': custom.get('evaluation_note') if custom else 'Los 25 ítems se distribuyen 5, 5, 7 y 8. El desarrollo integrador se realiza en el módulo 4.',
+    }
+    c['encargos'] = c.get('encargos') if custom and c.get('encargos') else encargos_for(mid)
     for i, ae in enumerate(c.get('aes', [])):
         if not ae.get('experiences') or len(ae.get('experiences', [])) != 6:
             ae['experiences'] = _x5(mid, i, ae)
@@ -980,7 +1030,8 @@ def enrich(content, module_id=1):
             else:
                 case.setdefault(k, v)
         ensure_mcq_fields(case, i, mid, 'case')
-        ae_i = case.get('ae', i % 3)
+        ae_count = max(1, len(c.get('aes') or []))
+        ae_i = case.get('ae', i % ae_count)
         crits = (c['aes'][ae_i].get('criteria') if ae_i < len(c.get('aes') or []) else []) or []
         if crits:
             case['criterion'] = crits[i % len(crits)]
@@ -990,7 +1041,11 @@ def enrich(content, module_id=1):
         if i in (2, 8):
             case['video'] = c.get('video')
             case['vtt'] = c.get('vtt')
-    c['scene'] = _default_scene(mid, c)
+    if custom:
+        c['scene'] = c.get('scene') or {}
+        c['scene'].setdefault('media_kind', 'interactive-procedure')
+    else:
+        c['scene'] = _default_scene(mid, c)
     for i, q in enumerate(c.get('questions', [])):
         _fourth_option(q)
         meta = _exam_meta(i)
@@ -999,12 +1054,31 @@ def enrich(content, module_id=1):
         _visual_stem(q, i, mid)
         q.setdefault('id', i)
         ensure_mcq_fields(q, i, mid, 'question')
-        ae_i = q.get('ae', i % 3)
+        ae_count = max(1, len(c.get('aes') or []))
+        ae_i = q.get('ae', i % ae_count)
         crits = (c['aes'][ae_i].get('criteria') if ae_i < len(c.get('aes') or []) else []) or []
         if crits:
             q['criterion'] = crits[i % len(crits)]
             q['formative_footprint'] = True
     c['development_kind'] = 'desarrollo'
+    if custom:
+        key = c.get('specialty_key') or 'general'
+        case_image = f'/static/headers/{key}/e3.png?v=3'
+        question_image = f'/static/headers/{key}/e4.png?v=3'
+        for item in c.get('cases') or []:
+            item['image'] = case_image
+            item['caption'] = 'Escenario profesional simulado; la ejecución real requiere protocolos y supervisión.'
+            item['alt'] = f'Evidencia contextual de {custom.get("title")}; no revela la respuesta.'
+        for item in c.get('questions') or []:
+            item['image'] = question_image
+            item['caption'] = 'Evidencia de evaluación en contexto simulado.'
+            item['alt'] = f'Evidencia neutral de {custom.get("title")}; no anticipa la alternativa correcta.'
+        for ai, ae_item in enumerate(c.get('aes') or []):
+            for exp in ae_item.get('experiences') or []:
+                exp['image'] = f'/static/headers/{key}/e2.png?v=3'
+                exp['caption'] = f'Recurso formativo del AE {ai + 1} de {custom.get("title")}.'
+                exp['alt'] = 'Recurso contextual para observar y argumentar; no contiene la solución.'
+    apply_instructional_quality(c, mid)
     c['traceability'] = build_traceability(c, c.get('specialty') or 'Refrigeración y climatización')
     if not c.get('agent_hints'):
         c['agent_hints'] = [

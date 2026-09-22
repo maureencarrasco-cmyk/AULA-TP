@@ -220,7 +220,7 @@ OFFICIAL = {
 
 ACTIVITY_KINDS = [
     ('observe', 'Observación anotada', 'Recorre la foto o el plano y marca las zonas que importan al oficio.'),
-    ('walk3d', 'Recorrido 3D', 'Gira, acerca y entra al equipo. El espacio enseña, no el texto.'),
+    ('walk3d', 'Recorrido espacial interactivo', 'Gira, acerca y abre los puntos del equipo. La representación espacial guía la inspección.'),
     ('video', 'Secuencia en video', 'Ve el procedimiento 45–90 s. Se detiene en el gesto que importa.'),
     ('read', 'Lectura de oficio', 'Saca el dato de un display, una etiqueta, un plano o una ficha técnica.'),
     ('procedure', 'Procedimiento', 'Ordena o ejecuta los pasos en el escenario (armar, instalar, verificar).'),
@@ -420,9 +420,9 @@ def pack_interact(mid, kind):
         4: {'field': 'Acceso en maqueta (cm)', 'ok': ['24', '24 cm', '24cm'], 'clue': 'La ficha pide 30 cm.'},
     }[mid]
     cube = {
-        1: {'ok': ['4', '4m', '4 m', '4.0', '4,0'], 'unit': 'm', 'clue': '2,5 m + 150 cm = 4 m. Unifica primero.'},
-        2: {'ok': ['0,8', '0.8', '80 cm', '80cm', '0,8 m'], 'unit': 'm o cm', 'clue': '80 cm = 0,8 m.'},
-        3: {'ok': ['7', '7m', '7 m', '7.0'], 'unit': 'm', 'clue': '2,5 + 1,5 + 3,0 = 7 m. Reserva solo si el enunciado la pide.'},
+        1: {'ok': ['4', '4m', '4 m', '4.0', '4,0'], 'unit': 'm', 'clue': 'Convierte todas las longitudes a metros antes de sumar.'},
+        2: {'ok': ['0,8', '0.8', '80 cm', '80cm', '0,8 m'], 'unit': 'm o cm', 'clue': 'Elige una unidad común y conserva esa unidad en el resultado.'},
+        3: {'ok': ['7', '7m', '7 m', '7.0'], 'unit': 'm', 'clue': 'Unifica las tres medidas antes de sumar. Agrega reserva solo si el enunciado la pide.'},
         4: {'ok': ['eq-02', 'ctrl', 'listado'], 'unit': 'piezas del plano', 'clue': 'Lista las piezas que figuran en el plano y el listado.'},
     }[mid]
     keys = {
