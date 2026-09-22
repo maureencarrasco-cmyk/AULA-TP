@@ -40,8 +40,12 @@
     const st = station();
     const b = document.body;
     b.dataset.chrome = c;
-    if (st) b.dataset.station = String(st);
-    else delete b.dataset.station;
+    if (st) {
+      const nextStation = String(st);
+      if (b.dataset.station !== nextStation) b.dataset.station = nextStation;
+    } else if (b.dataset.station !== undefined) {
+      delete b.dataset.station;
+    }
     b.classList.toggle('chrome-public', c === 'public');
     b.classList.toggle('chrome-student', c === 'student');
     b.classList.toggle('chrome-teacher', c === 'teacher');
