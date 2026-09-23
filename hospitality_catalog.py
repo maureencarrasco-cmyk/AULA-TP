@@ -75,6 +75,10 @@ def _make_module(item, position, key, source, url, dossier, scope):
                       oa=item['oa'], year=item['year'], plan_section='Plan de Estudio MINEDUC')
     content['specialty'] = 'Gastronomía' if key == 'gastronomia' else 'Servicios de Hotelería'
     content['context'] = f'{place}. {conflict} Dispones de {resource}. Tu producto es un {product}.'
+    content['application'] = (
+        f'Caso simulado de {place.lower()}; consulta {resource}, aplica el criterio oficial '
+        f'y deja trazabilidad en el {product}. La práctica presencial requiere supervisión docente.'
+    )
     content['development'] = (
         f'Analiza el caso de {place.lower()}: {conflict} Usa {resource}, identifica el AE y el criterio '
         f'que respaldan tu respuesta y entrega un {product}. Explica cómo comprobarías el resultado.'
@@ -111,20 +115,45 @@ def _make_module(item, position, key, source, url, dossier, scope):
         })
     content['specialty_source']['source_page'] = item['source_page']
     content['specialty_source']['official_criteria_count'] = sum(len(ae['criteria']) for ae in item['aes'])
-    content['version'] = 'hospitality-mineduc-v1'
+    content['version'] = 'hospitality-mineduc-v3'
+    def decision(stage, criterion):
+        checks = [
+            (f'Antes de entregar el {product}, ¿qué debes comprobar ante esta diferencia?',
+             f'Comparar el dato conflictivo con {resource} y aplicar «{criterion}».',
+             f'Entregar el {product} sin revisar la diferencia.',
+             'Suponer que el antecedente faltante coincide con lo esperado.',
+             'Reemplazar el dato original para que el registro no muestre discrepancias.'),
+            (f'¿Qué evidencia demuestra que el {product} responde al criterio evaluado?',
+             f'Un registro que identifica el dato de {resource}, el criterio «{criterion}» y la decisión.',
+             'Un resultado sin fuente ni relación con el criterio.',
+             'Una afirmación de cumplimiento basada solo en la experiencia previa.',
+             'Una copia de la solicitud sin revisión del dato discordante.'),
+            (f'El equipo necesita decidir qué hacer con el antecedente discordante. ¿Qué corresponde?',
+             f'Mantener el dato original, contrastarlo con {resource} y documentar el pendiente según «{criterion}».',
+             'Eliminar el dato discordante del documento.',
+             'Continuar como si la diferencia no afectara el servicio.',
+             'Completar la información no disponible con una cifra estimada sin avisar.'),
+            (f'¿Cómo verificas la calidad del {product} antes de cerrarlo?',
+             f'Revisar la correspondencia entre {resource}, «{criterion}» y el resultado registrado.',
+             'Confirmar solo que el documento tiene una fecha.',
+             'Aceptar el trabajo porque su presentación es ordenada.',
+             'Revisar únicamente la alternativa que eligió el equipo.'),
+            (f'Tras revisar el {product}, ¿qué retroalimentación permite mejorar el trabajo?',
+             f'Precisar el dato pendiente en {resource} y repetir la comprobación exigida por «{criterion}».',
+             'Indicar que todo está correcto sin señalar evidencia.',
+             'Cambiar el criterio para que se ajuste al resultado obtenido.',
+             'Omitir el antecedente faltante en la entrega final.'),
+        ]
+        return checks[stage % len(checks)]
+
     for index, case in enumerate(content['cases']):
         ae = aes[index % len(aes)]
         criterion = ae['criteria'][index % len(ae['criteria'])]
-        correct = f'Contrastar {resource} con «{criterion}» y documentar el resultado en el {product}.'
-        wrong = [
-            f'Dar por terminado el {product} sin revisar {resource}.',
-            'Completar el antecedente faltante con una suposición no identificada.',
-            'Omitir el criterio de evaluación aunque el registro muestre una diferencia.',
-        ]
+        question, correct, *wrong = decision(index, criterion)
         options, answer = _rotate(correct, wrong, index)
         case.update(title=f'{item["title"]} · evidencia {index + 1}',
-                    context=f'{place}. {conflict} Fuente disponible: {resource}. Criterio: {criterion}',
-                    question=f'¿Qué decisión permite avanzar hacia el {product} con evidencia trazable?',
+                    context=f'{place}. {conflict} Fuente disponible: {resource}. Tarea: {question} Criterio: {criterion}',
+                    question=question,
                     options=options, answer=answer,
                     explanation=f'La decisión debe sostenerse en {resource} y en el criterio {criterion}',
                     ae=index % len(aes), criterion=criterion, image=image,
@@ -132,14 +161,10 @@ def _make_module(item, position, key, source, url, dossier, scope):
     for index, question in enumerate(content['questions']):
         ae = aes[index % len(aes)]
         criterion = ae['criteria'][index % len(ae['criteria'])]
-        correct = f'Usar {resource} para comprobar «{criterion}» y registrar la conclusión en el {product}.'
-        options, answer = _rotate(correct, [
-            f'Aprobar el {product} antes de revisar {resource}.',
-            'Reemplazar el dato discordante por uno esperado sin dejar constancia.',
-            'Ignorar el criterio y responder solo con una impresión general.',
-        ], index + 1)
-        question.update(stimulus=f'{place}. {conflict}',
-                        question=f'Para evaluar el criterio «{criterion}», ¿qué evidencia debes producir?',
+        prompt, correct, *wrong = decision(index + 2, criterion)
+        options, answer = _rotate(correct, wrong, index + 1)
+        question.update(stimulus=f'{place}. {conflict} Etapa de revisión: {prompt}',
+                        question=prompt,
                         options=options, answer=answer,
                         explanation=f'El criterio {criterion} requiere evidencia comprobable en {resource}.',
                         ae=index % len(aes), criterion=criterion, image=image,
@@ -190,7 +215,7 @@ def courses():
 
 
 def install_hospitality_courses(con):
-    version = 'hospitality-mineduc-v1'
+    version = 'hospitality-mineduc-v3'
     if con.execute('SELECT 1 FROM content_updates WHERE version=?', (version,)).fetchone():
         return
     student = con.execute("SELECT id FROM users WHERE role='student' ORDER BY id LIMIT 1").fetchone()
@@ -213,7 +238,7 @@ def install_hospitality_courses(con):
             serialized = json.dumps(content, ensure_ascii=False)
             if found:
                 old = json.loads(found['content'] or '{}')
-                if old.get('version') != version or con.execute('SELECT 1 FROM progress WHERE module_id=?',
+                if old.get('version') not in ('hospitality-mineduc-v1', 'hospitality-mineduc-v2', version) or con.execute('SELECT 1 FROM progress WHERE module_id=?',
                                                                (found['id'],)).fetchone():
                     continue
                 con.execute('UPDATE modules SET title=?,content=?,published=1 WHERE id=?',

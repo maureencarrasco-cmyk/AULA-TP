@@ -53,7 +53,14 @@ const MODULE_OFICIO_ALTS = {
 function moduleStopArt(course, index) {
   const key = specialtyKey(course);
   if (key === 'climate') return MODULE_OFICIO[index % MODULE_OFICIO.length];
-  if (key === 'gastronomia' || key === 'hoteleria') return (typeof current !== 'undefined' && current?.content?.scene?.image) || specialtyCover(course);
+  if (key === 'gastronomia' || key === 'hoteleria') {
+    const title=String(course?.modules?.[index]?.title||'');
+    const image=/recepci[oó]n y almacenamiento|insumos/i.test(title)?'10-bodega'
+      :/emprendimiento/i.test(title)?'09-oficina'
+      :/informaci[oó]n tur[ií]stica|recreativas/i.test(title)?'11-terminal'
+      :/servicio de|hotel|habitaciones|eventos|cocteler|ingl[eé]s|biling/i.test(title)?'04-hotel':'06-cocina';
+    return `/static/themes/cases/${image}.png`;
+  }
   return `/static/headers/${key}/e${(index % 5) + 1}.png?v=3`;
 }
 function journeyGoalArt(course) {
@@ -108,6 +115,7 @@ const HEADER_PHOTO_ALTS = {
 function stationHeaderAlt(n, course, aeIndex) {
   const key = specialtyKey(course);
   const i = Math.min(5, Math.max(1, Number(n) || 1));
+  if (key === 'gastronomia' || key === 'hoteleria') return (typeof current !== 'undefined' && current?.content?.scene?.alt) || `Escenario profesional de ${course?.specialty||'la especialidad'}`;
   if (key === 'climate') {
     if (i === 2) {
       const exp = climateExperience();
