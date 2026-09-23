@@ -20,8 +20,18 @@ type PortalShellProps = {
   section: SectionId;
 };
 
+const PORTAL_SECTION_ART = {
+  resumen: { src: "/images/portal-docente/hero.png", alt: "Docentes acompañando aprendizajes" },
+  cursos: { src: "/images/portal-docente/frames/planificacion.png", alt: "Planificación de clases y cursos" },
+  estudiantes: { src: "/images/portal-docente/hero.png", alt: "Docentes revisando el progreso de sus estudiantes" },
+  "oa-ae": { src: "/images/portal-docente/frames/hero.png", alt: "Recursos curriculares para la enseñanza" },
+  cumplimiento: { src: "/images/portal-docente/frames/hero.png", alt: "Seguimiento del cumplimiento curricular" },
+  reportes: { src: "/images/portal-docente/frames/reportes.png", alt: "Reportes pedagógicos y análisis" },
+} satisfies Record<SectionId, { src: string; alt: string }>;
+
 export function PortalShell({ section }: PortalShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const sectionArt = PORTAL_SECTION_ART[section];
 
   return (
     <div className="min-h-screen bg-[var(--aula-pale,#f7fbff)]">
@@ -178,7 +188,7 @@ export function PortalShell({ section }: PortalShellProps) {
                   </div>
                   <div className="relative hidden w-full max-w-sm lg:block">
                     <div className="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl" />
-                    <img src="/images/portal-docente/hero.png" alt="Docente revisando el avance de sus estudiantes" className="relative h-44 w-full rounded-2xl object-cover object-center shadow-2xl ring-1 ring-white/30" />
+                    <img src={sectionArt.src} alt={sectionArt.alt} className="relative h-44 w-full rounded-2xl object-cover object-center shadow-2xl ring-1 ring-white/30" />
                   </div>
                 </div>
               </section>

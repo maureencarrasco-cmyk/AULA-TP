@@ -82,6 +82,8 @@ body {
 .portal-main button, .portal-main a { transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms ease; }
 .portal-main button:active, .portal-main a:active { transform: translateY(1px); }
 .portal-main [class*="rounded-2xl"], .portal-main [class*="rounded-[2rem]"] { border-color: #d8e6f5; box-shadow: 0 5px 18px rgba(46, 93, 155, .06); }
+.portal-main img { display: block; }
+.portal-main img:not([class*="object-"]) { max-width: 100%; }
 
 :focus-visible {
   outline: 2px solid var(--color-cyan);

@@ -90,6 +90,14 @@ function CourseMetricsCard({ curso, refreshKey = 0 }: { curso: PortalCurso; refr
     <article
       className={`flex flex-col rounded-2xl border p-5 shadow-sm ${COLOR_CARD[curso.color]}`}
     >
+      <div className="mb-4 overflow-hidden rounded-xl bg-white/70 ring-1 ring-black/5">
+        <img
+          src={curso.imagePath}
+          alt={`Imagen de ${curso.title}`}
+          className="h-28 w-full object-cover object-center"
+          loading="lazy"
+        />
+      </div>
       <div className="flex items-start justify-between gap-2">
         <div>
           <p className={`text-xs font-semibold uppercase tracking-wide ${COLOR_ACCENT[curso.color]}`}>
