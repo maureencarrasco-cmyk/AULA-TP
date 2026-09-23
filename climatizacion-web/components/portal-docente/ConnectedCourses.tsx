@@ -83,37 +83,84 @@ function formatPct(n: number | undefined): string {
   return `${Math.round(n * 10) / 10}%`;
 }
 
+type CourseIconName =
+  | "graduation"
+  | "users"
+  | "chart"
+  | "layers"
+  | "clipboard"
+  | "book"
+  | "arrow"
+  | "refresh"
+  | "info";
+
+const CONNECTED_COURSES_REFERENCE = "/images/portal-docente/frames/connected-courses-reference.png";
+
+function CourseIcon({ name, className = "h-5 w-5" }: { name: CourseIconName; className?: string }) {
+  const paths: Record<CourseIconName, string> = {
+    graduation: "M3 9.5 12 4l9 5.5-9 5.5-9-5.5Zm3.5 2.1V17c2.8 2.1 7.2 2.1 10 0v-5.4M21 10v5",
+    users: "M16 20v-1.5a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20m6.5-9a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm5.5-6.5a3 3 0 0 1 0 5.8M17 14.5h1a4 4 0 0 1 4 4V20",
+    chart: "M4 19V9m6 10V5m6 14v-7m6 7V3",
+    layers: "m12 3 9 4.5-9 4.5-9-4.5L12 3Zm-9 9 9 4.5 9-4.5M3 16.5l9 4.5 9-4.5",
+    clipboard: "M8 4h8m-7 0v2h6V4m-8 0H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1M8 12h8m-8 4h5",
+    book: "M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5v-16Zm0 0v16M8 7h8",
+    arrow: "m9 5 7 7-7 7",
+    refresh: "M20 11a8 8 0 0 0-14.8-3L3 11m0 0V5m0 6h6m-3 2a8 8 0 0 0 14.8 3L21 13m0 0v6m0-6h-6",
+    info: "M12 16v-4m0-4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z",
+  };
+  return (
+    <svg aria-hidden="true" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d={paths[name]} />
+    </svg>
+  );
+}
+
+function CourseReferenceBanner({ curso }: { curso: PortalCurso }) {
+  const bannerClass =
+    curso.id === "enfermeria"
+      ? "portal-course-reference-banner--enfermeria"
+      : curso.id === "electricidad"
+        ? "portal-course-reference-banner--electricidad"
+        : "portal-course-reference-banner--climatizacion";
+
+  return (
+    <div
+      role="img"
+      aria-label={`Imagen de ${curso.title}`}
+      className={`portal-course-reference-banner ${bannerClass} h-40 w-full bg-no-repeat sm:h-44 lg:h-48`}
+      style={{
+        backgroundImage: `url(${CONNECTED_COURSES_REFERENCE})`,
+      }}
+    />
+  );
+}
+
 function CourseMetricsCard({ curso, refreshKey = 0 }: { curso: PortalCurso; refreshKey?: number }) {
   const state = useCourseMetrics(curso.metricsApiPath, refreshKey);
 
   return (
     <article
-      className={`portal-course-card flex flex-col rounded-2xl border p-5 ${COLOR_CARD[curso.color]}`}
+      className={`portal-course-card flex flex-col rounded-[1.7rem] border p-4 sm:p-5 ${COLOR_CARD[curso.color]}`}
     >
-      <div className="mb-4 overflow-hidden rounded-xl bg-white/70 ring-1 ring-black/5">
-        <img
-          src={curso.imagePath}
-          alt={`Imagen de ${curso.title}`}
-          className="h-28 w-full object-cover object-center"
-          loading="lazy"
-        />
+      <div className="mb-4 overflow-hidden rounded-[1.45rem] bg-white/70 ring-1 ring-black/5">
+        <CourseReferenceBanner curso={curso} />
       </div>
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className={`text-xs font-semibold uppercase tracking-wide ${COLOR_ACCENT[curso.color]}`}>
+          <p className={`text-xs font-bold uppercase tracking-wide ${COLOR_ACCENT[curso.color]}`}>
             {curso.specialty}
           </p>
-          <h3 className="mt-1 text-base font-bold text-slate-900">{curso.title}</h3>
-          <p className="mt-0.5 text-xs text-slate-600">
+          <h3 className="mt-1 text-lg font-extrabold text-[var(--portal-heading-strong,#082b70)]">{curso.title}</h3>
+          <p className="mt-1 text-sm text-[var(--aula-text-muted,#5e7596)]">
             {curso.level} · {curso.statusLabel}
           </p>
         </div>
         {state.status === "ok" && state.data.source === "live" ? (
-          <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+          <span className="rounded-full bg-emerald-600 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide text-white shadow-sm">
             Real
           </span>
         ) : state.status === "ok" && state.data.source === "static" ? (
-          <span className="rounded-full bg-sky-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+          <span className="rounded-full bg-sky-600 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide text-white shadow-sm">
             Hub
           </span>
         ) : null}
@@ -121,24 +168,29 @@ function CourseMetricsCard({ curso, refreshKey = 0 }: { curso: PortalCurso; refr
 
       <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
         {state.status === "loading" ? (
-          <p className="col-span-2 text-xs text-slate-500">Cargando métricas…</p>
+          <p className="col-span-2 rounded-2xl bg-white/65 px-3 py-3 text-sm text-[var(--aula-text-muted,#5e7596)]">Cargando métricas…</p>
         ) : state.status === "error" ? (
-          <p className="col-span-2 text-xs text-rose-700">
-            No disponible: {state.message}
-          </p>
+          <div className="col-span-2 flex items-start gap-3 rounded-2xl border border-rose-100 bg-rose-50/85 px-3 py-3 text-sm text-rose-600">
+            <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-rose-500 text-white">
+              <CourseIcon name="info" className="h-3.5 w-3.5" />
+            </span>
+            <p><span className="font-bold">No disponible:</span> {state.message}</p>
+          </div>
         ) : (
           <>
             <Metric
               label="Cantidad de estudiantes"
               value={String(state.data.totals.students)}
+              icon="users"
             />
             <Metric
               label="Porcentaje de logro % (promedio)"
               value={
                 formatPct(state.data.totals.average_progress)
               }
+              icon="chart"
             />
-            <Metric label="Módulos" value={String(state.data.totals.modules)} />
+            <Metric label="Módulos" value={String(state.data.totals.modules)} icon="layers" />
             <Metric
               label="Actividades"
               value={
@@ -146,6 +198,7 @@ function CourseMetricsCard({ curso, refreshKey = 0 }: { curso: PortalCurso; refr
                   ? `${formatPct(state.data.totals.activity_completion)} compl.`
                   : String(state.data.totals.activities ?? "—")
               }
+              icon="clipboard"
             />
           </>
         )}
@@ -155,21 +208,36 @@ function CourseMetricsCard({ curso, refreshKey = 0 }: { curso: PortalCurso; refr
         href={curso.studentHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="portal-button portal-button-primary mt-5 inline-flex w-full items-center justify-center rounded-xl px-3 py-2 text-sm font-bold"
+        className="portal-button portal-button-primary mt-5 inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-gradient-to-r from-blue-600 to-sky-500 px-4 py-2.5 text-sm font-extrabold text-white shadow-[0_10px_20px_rgba(34,111,226,.18)]"
       >
+        <CourseIcon name="book" className="h-5 w-5" />
         Abrir curso estudiante
+        <CourseIcon name="arrow" className="h-5 w-5" />
       </a>
     </article>
   );
 }
 
-function Metric({ label, value }: { label: string; value: string }) {
+function Metric({
+  label,
+  value,
+  icon,
+}: {
+  label: string;
+  value: string;
+  icon: Extract<CourseIconName, "users" | "chart" | "layers" | "clipboard">;
+}) {
   return (
-    <div className="rounded-xl bg-white/80 px-3 py-2 ring-1 ring-black/5">
-      <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
-        {label}
-      </p>
-      <p className="mt-0.5 text-sm font-bold tabular-nums text-slate-900">{value}</p>
+    <div className="flex min-h-[4.25rem] items-center gap-2.5 rounded-2xl bg-white/75 px-3 py-2.5 ring-1 ring-black/5">
+      <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-sky-600">
+        <CourseIcon name={icon} className="h-5 w-5" />
+      </span>
+      <div className="min-w-0">
+        <p className="text-[10px] font-semibold uppercase leading-tight tracking-wide text-[var(--aula-text-muted,#5e7596)]">
+          {label}
+        </p>
+        <p className="mt-0.5 text-base font-extrabold tabular-nums text-[var(--portal-heading-strong,#082b70)]">{value}</p>
+      </div>
     </div>
   );
 }
@@ -235,18 +303,25 @@ export function ConnectedCursosGrid() {
 
   return (
     <div className="portal-connected-courses space-y-3">
-      <div className="flex flex-wrap items-end justify-between gap-2">
-        <div>
-          <h2 className="text-sm font-semibold text-[var(--color-navy,#0B3A6B)]">Cursos conectados</h2>
-          <p className="mt-0.5 text-xs text-[var(--color-muted,#6B7C8E)]">
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <span className="inline-flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border-2 border-blue-200 bg-blue-50 text-blue-600 shadow-sm">
+            <CourseIcon name="graduation" className="h-9 w-9" />
+          </span>
+          <div>
+            <h2 className="text-2xl font-extrabold text-[var(--portal-heading-strong,#082b70)] sm:text-3xl">Cursos conectados</h2>
+            <p className="mt-1 text-sm text-[var(--aula-text-muted,#5e7596)] sm:text-base">
             Métricas en vivo desde LMS. Cada tarjeta conserva el estado real de su curso.
-          </p>
+            </p>
+            <span className="mt-2 block h-1 w-11 rounded-full bg-gradient-to-r from-blue-500 to-violet-400" aria-hidden="true" />
+          </div>
         </div>
         <button
           type="button"
           onClick={() => setRefreshKey((k) => k + 1)}
-          className="portal-button portal-button-secondary rounded-xl border-2 px-3 py-1.5 text-xs font-bold"
+          className="portal-button portal-button-secondary inline-flex min-h-12 items-center gap-3 rounded-full border-2 px-5 py-2.5 text-sm font-extrabold"
         >
+          <CourseIcon name="refresh" className="h-6 w-6 text-blue-600" />
           Actualizar métricas
         </button>
       </div>

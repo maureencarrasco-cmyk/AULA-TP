@@ -21,13 +21,17 @@ type PortalShellProps = {
 };
 
 const PORTAL_SECTION_ART = {
-  resumen: { src: "/images/portal-docente/hero-docentes.png", alt: "Docentes de Aula TP acompañando aprendizajes" },
-  cursos: { src: "/images/portal-docente/frames/hero-cursos-planificacion.png", alt: "Banner de cursos y planificación del Portal Docente" },
-  estudiantes: { src: "/images/portal-docente/frames/hero-estudiantes.png", alt: "Banner de estudiantes y seguimiento de aprendizajes" },
-  "oa-ae": { src: "/images/portal-docente/frames/hero-oa-ae.png", alt: "Banner de objetivos de aprendizaje y aprendizajes esperados" },
-  cumplimiento: { src: "/images/portal-docente/frames/hero-cumplimiento.png", alt: "Banner de seguimiento de cumplimiento" },
-  reportes: { src: "/images/portal-docente/frames/hero-reportes.png", alt: "Banner de reportes y análisis pedagógico" },
-} satisfies Record<SectionId, { src: string; alt: string }>;
+  resumen: { src: "/images/portal-docente/frames/portal-context-reference.png", alt: "Panel docente con resultados, estudiantes y métricas de aprendizaje", trimVerticalWhitespace: false },
+  cursos: { src: "/images/portal-docente/frames/hero-cursos-planificacion.png", alt: "Banner de cursos y planificación del Portal Docente", trimVerticalWhitespace: false },
+  estudiantes: { src: "/images/portal-docente/frames/hero-estudiantes-reference.png", alt: "Banner de estudiantes y seguimiento de aprendizajes", trimVerticalWhitespace: false },
+  "oa-ae": { src: "/images/portal-docente/frames/hero-oa-ae.png", alt: "Banner de objetivos de aprendizaje y aprendizajes esperados", trimVerticalWhitespace: false },
+  cumplimiento: { src: "/images/portal-docente/frames/hero-cumplimiento.png", alt: "Banner de seguimiento de cumplimiento", trimVerticalWhitespace: false },
+  reportes: {
+    src: "/images/portal-docente/frames/hero-reportes-reference.png",
+    alt: "Banner de reportes y análisis pedagógico",
+    trimVerticalWhitespace: false,
+  },
+} satisfies Record<SectionId, { src: string; alt: string; trimVerticalWhitespace: boolean }>;
 
 const PORTAL_SECTION_COPY: Record<SectionId, { eyebrow: string; title: string; subtitle: string }> = {
   resumen: { eyebrow: "Bienvenido/a al Portal Docente", title: "Convierte los datos en mejores decisiones pedagógicas", subtitle: "Planifica, acompaña y potencia los aprendizajes de tus estudiantes en un solo lugar." },
@@ -51,22 +55,20 @@ export function PortalShell({ section }: PortalShellProps) {
             <img
               src="/images/portal-docente/brand/portal-sidebar-reference.png"
               alt="Portal Docente Aula TP Chile"
-              className="block h-auto w-full"
+              className="portal-sidebar-reference-art block h-auto w-full"
             />
-            <nav className="absolute inset-x-0 top-0 h-[75%]" aria-label="Secciones del Portal Docente">
-              {NAV_SECTIONS.map((item, index) => {
+            <nav className="portal-reference-nav absolute" aria-label="Secciones del Portal Docente">
+              {NAV_SECTIONS.map((item) => {
                 const active = item.id === section;
                 return (
                   <Link
                     key={item.id}
                     href={item.href}
-                    className={`portal-reference-link portal-reference-link-${index + 1} absolute block rounded-[1.25rem] ${
-                      active ? "portal-reference-link-active" : ""
-                    }`}
+                    className={`portal-reference-nav-item${active ? " portal-reference-nav-item-active" : ""}`}
                     aria-current={active ? "page" : undefined}
-                    aria-label={item.label}
                   >
-                    <span className="sr-only">{item.label}</span>
+                    <PortalNavIcon section={item.id} />
+                    <span>{item.label}</span>
                   </Link>
                 );
               })}
@@ -140,9 +142,9 @@ export function PortalShell({ section }: PortalShellProps) {
                       key={item.id}
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                    className={`portal-mobile-nav-link block rounded-xl border-2 px-3 py-2.5 text-sm font-bold transition ${
+                      className={`portal-mobile-nav-link block rounded-xl border-2 px-3 py-2.5 text-sm font-bold transition ${
                       active
-                        ? "portal-mobile-nav-link-active border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white shadow-[0_6px_16px_rgba(21,88,160,0.28)]"
+                        ? "portal-mobile-nav-link-active border-[var(--aula-blue,#1558A0)] bg-[#dcecff] text-[var(--aula-blue,#1558A0)] shadow-none"
                         : "border-[var(--color-line,#D5DEE8)] bg-white text-[var(--color-slate,#3D5166)] hover:border-[var(--aula-blue,#1558A0)]/40"
                       }`}
                       aria-current={active ? "page" : undefined}
@@ -193,7 +195,9 @@ export function PortalShell({ section }: PortalShellProps) {
                     </div>
                   </div>
                 ) : (
-                  <div className="portal-section-banner bg-white/20 p-2 sm:p-3">
+                  <div
+                    className={`portal-section-banner${sectionArt.trimVerticalWhitespace ? " portal-section-banner--trim-vertical" : ""} bg-white/20 p-2 sm:p-3`}
+                  >
                     <img src={sectionArt.src} alt={sectionArt.alt} className="block h-auto w-full rounded-[1rem] object-contain" />
                   </div>
                 )}
@@ -204,6 +208,25 @@ export function PortalShell({ section }: PortalShellProps) {
         </div>
       </div>
     </div>
+  );
+}
+
+function PortalNavIcon({ section }: { section: SectionId }) {
+  const paths: Record<SectionId, string> = {
+    resumen: "M3 10.5 10 4l7 6.5M5 9v7h10V9M8 16v-4h4v4",
+    cursos: "M3 6.5 10 4l7 2.5-7 2.5L3 6.5Zm2 3.5v3.5c2.7 2 7.3 2 10 0V10",
+    estudiantes: "M6.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm7 0a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM2.5 16c.3-3 2-4.5 4-4.5S10.2 13 10.5 16M9.5 16c.3-3 2-4.5 4-4.5s3.7 1.5 4 4.5",
+    "oa-ae": "M5 3.5h8l2.5 2.5v10.5H5V3.5Zm8 0V6h2.5M8 9h5M8 12h5M8 15h3",
+    cumplimiento: "M10 3.5 16 6v4.5c0 3.5-2.3 5.8-6 7-3.7-1.2-6-3.5-6-7V6l6-2.5Zm-2.5 6.5 1.7 1.7 3.5-3.5",
+    reportes: "M4 16V9h3v7H4Zm4.5 0V5h3v11h-3Zm4.5 0v-4h3v4h-3Z",
+  };
+
+  return (
+    <span className={`portal-reference-nav-icon portal-reference-nav-icon-${section}`} aria-hidden="true">
+      <svg viewBox="0 0 20 20" fill="none">
+        <path d={paths[section]} stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </span>
   );
 }
 
