@@ -35,7 +35,7 @@ export const PORTAL_CURSOS: PortalCurso[] = [
     metricsApiPath: "/api/portal/metrics/enfermeria",
     color: "teal",
     statusLabel: "Curso vivo · LMS",
-    imagePath: "/portal-docente/images/portal-docente/cursos/enfermeria.png",
+    imagePath: "/images/portal-docente/cursos/enfermeria.png",
   },
   {
     id: "electricidad",
@@ -47,7 +47,7 @@ export const PORTAL_CURSOS: PortalCurso[] = [
     metricsApiPath: "/api/portal/metrics/electricidad",
     color: "amber",
     statusLabel: "Curso vivo · LMS",
-    imagePath: "/portal-docente/images/portal-docente/cursos/electricidad.png",
+    imagePath: "/images/portal-docente/cursos/electricidad.png",
   },
   {
     id: "climatizacion",
@@ -59,7 +59,7 @@ export const PORTAL_CURSOS: PortalCurso[] = [
     metricsApiPath: "/api/portal/metrics/climatizacion",
     color: "sky",
     statusLabel: "Curso vivo · LMS",
-    imagePath: "/portal-docente/images/portal-docente/cursos/climatizacion.png",
+    imagePath: "/images/portal-docente/cursos/climatizacion.png",
   },
   {
     id: "administracion",
@@ -70,7 +70,7 @@ export const PORTAL_CURSOS: PortalCurso[] = [
     metricsKind: "none",
     color: "slate",
     statusLabel: "Curso vivo · ERP",
-    imagePath: "/portal-docente/images/especialidades/sector-administracion.png",
+    imagePath: "/images/especialidades/sector-administracion.png",
   },
 ];
 

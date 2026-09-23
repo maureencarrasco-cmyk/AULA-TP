@@ -21,24 +21,34 @@ type PortalShellProps = {
 };
 
 const PORTAL_SECTION_ART = {
-  resumen: { src: "/portal-docente/images/portal-docente/panel-general.png", alt: "Panel general del Portal Docente" },
-  cursos: { src: "/portal-docente/images/portal-docente/frames/planificacion.png", alt: "Planificación de clases y cursos" },
-  estudiantes: { src: "/portal-docente/images/portal-docente/hero.png", alt: "Docentes revisando el progreso de sus estudiantes" },
-  "oa-ae": { src: "/portal-docente/images/portal-docente/frames/hero.png", alt: "Recursos curriculares para la enseñanza" },
-  cumplimiento: { src: "/portal-docente/images/portal-docente/frames/hero.png", alt: "Seguimiento del cumplimiento curricular" },
-  reportes: { src: "/portal-docente/images/portal-docente/frames/reportes.png", alt: "Reportes pedagógicos y análisis" },
+  resumen: { src: "/images/portal-docente/panel-general.png", alt: "Panel general del Portal Docente" },
+  cursos: { src: "/images/portal-docente/frames/planificacion.png", alt: "Planificación de clases y cursos" },
+  estudiantes: { src: "/images/portal-docente/hero.png", alt: "Docentes revisando el progreso de sus estudiantes" },
+  "oa-ae": { src: "/images/portal-docente/frames/hero.png", alt: "Recursos curriculares para la enseñanza" },
+  cumplimiento: { src: "/images/portal-docente/frames/hero.png", alt: "Seguimiento del cumplimiento curricular" },
+  reportes: { src: "/images/portal-docente/frames/reportes.png", alt: "Reportes pedagógicos y análisis" },
 } satisfies Record<SectionId, { src: string; alt: string }>;
+
+const PORTAL_SECTION_COPY: Record<SectionId, { eyebrow: string; title: string; subtitle: string }> = {
+  resumen: { eyebrow: "Bienvenido/a al Portal Docente", title: "Convierte los datos en mejores decisiones pedagógicas", subtitle: "Planifica, acompaña y potencia los aprendizajes de tus estudiantes en un solo lugar." },
+  cursos: { eyebrow: "Inicio  ›  Cursos / Planificación", title: "Mis cursos / Planificación", subtitle: "Organiza, planifica y gestiona tus cursos en un solo lugar." },
+  estudiantes: { eyebrow: "Inicio  ›  Estudiantes", title: "Mis estudiantes", subtitle: "Conoce, acompaña y potencia sus aprendizajes." },
+  "oa-ae": { eyebrow: "Inicio  ›  OA / AE y criterios", title: "Objetivos de Aprendizaje (OA) y Aprendizajes Esperados (AE)", subtitle: "Explora, planifica y utiliza los OA, AE y criterios de evaluación de tus cursos." },
+  cumplimiento: { eyebrow: "Inicio  ›  Cumplimiento", title: "Seguimiento de Cumplimiento", subtitle: "Monitorea el avance, la cobertura y el cumplimiento de actividades, OA y evaluaciones en todos tus cursos." },
+  reportes: { eyebrow: "Inicio  ›  Reportes", title: "Reportes y análisis", subtitle: "Información clara para una mejor toma de decisiones pedagógicas." },
+};
 
 export function PortalShell({ section }: PortalShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const sectionArt = PORTAL_SECTION_ART[section];
+  const sectionCopy = PORTAL_SECTION_COPY[section];
 
   return (
     <div className="min-h-screen bg-[var(--aula-pale,#f7fbff)]">
       <div className="flex min-h-screen">
         <aside className="portal-sidebar hidden w-64 shrink-0 flex-col lg:flex">
           <div className="portal-brand border-b px-5 py-5">
-            <img src="/portal-docente/images/portal-docente/brand/aula-tp-chile-logo.png" alt="Aula TP Chile" className="h-20 w-full object-contain object-left" />
+            <img src="/images/portal-docente/brand/aula-tp-chile-logo.png" alt="Aula TP Chile" className="h-20 w-full object-contain object-left" />
             <p className="mt-2 text-center text-sm font-bold">Portal Docente</p>
             <p className="mt-1 text-center text-[11px]">Educación Técnico-Profesional para un mejor futuro</p>
           </div>
@@ -97,7 +107,11 @@ export function PortalShell({ section }: PortalShellProps) {
                   />
                 </svg>
               </button>
-              <div className="portal-header-copy">
+              <label className="portal-search hidden min-w-0 items-center gap-2 rounded-xl border px-3 py-2 sm:flex sm:w-[min(30rem,48vw)]">
+                <span aria-hidden="true" className="text-lg leading-none">⌕</span>
+                <input aria-label="Buscar en el portal docente" placeholder="Buscar cursos, estudiantes, módulos o actividades..." className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-slate-400" />
+              </label>
+              <div className="portal-header-copy sm:hidden">
                 <p className="flex flex-wrap items-center gap-2 text-sm font-bold sm:text-base">
                   <span>
                     Portal Docente{" "}
@@ -111,17 +125,16 @@ export function PortalShell({ section }: PortalShellProps) {
               </div>
             </div>
             <div className="flex items-center gap-3">
+              <button type="button" aria-label="Ver notificaciones" className="portal-icon-button hidden h-10 w-10 items-center justify-center rounded-full sm:flex">♧</button>
               <div className="hidden text-right sm:block">
-                <p className="text-sm font-semibold">
-                  Equipo docente
-                </p>
+                <p className="text-sm font-semibold">Sebastián Chamorro</p>
                 <p className="text-xs">Aula TP Chile</p>
               </div>
               <div
                 className="portal-avatar flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold shadow-sm"
                 aria-hidden="true"
               >
-                TP
+                SC
               </div>
             </div>
           </header>
@@ -176,10 +189,10 @@ export function PortalShell({ section }: PortalShellProps) {
                   <div className="relative z-10 max-w-2xl">
                     <div className="portal-eyebrow mb-3 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[.16em]">
                       <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_0_4px_rgba(110,231,183,.18)]" />
-                      Centro de gestión Aula TP
+                      {sectionCopy.eyebrow}
                     </div>
-                    <h1 className="text-2xl font-black tracking-tight sm:text-3xl">Convierte los datos en mejores decisiones pedagógicas.</h1>
-                    <p className="mt-2 max-w-xl text-sm leading-6 sm:text-base">Planifica, acompaña y potencia los aprendizajes de tus estudiantes en un solo lugar.</p>
+                    <h1 className="text-2xl font-black tracking-tight sm:text-3xl">{sectionCopy.title}</h1>
+                    <p className="mt-2 max-w-xl text-sm leading-6 sm:text-base">{sectionCopy.subtitle}</p>
                     <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
                       <span className="portal-pill rounded-full px-3 py-2">LMS conectado</span>
                       <span className="portal-pill rounded-full px-3 py-2">Datos en vivo</span>
