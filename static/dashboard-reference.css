@@ -29,5 +29,5 @@ body[data-screen="courses"] #main{width:100%;max-width:none;margin:0;padding:0}
 .dash-course-body>p{margin:0 0 11px;color:#4a6d99;font-size:11px}.progress-label{display:flex;justify-content:space-between;color:#0b3a79;font-size:12px;font-weight:800}.dash-course-card:first-child .dash-course-action{background:#087f71;color:#fff}
 @media(max-width:760px){.dash-sidebar nav button{justify-content:center;width:44px;min-height:44px;padding:0}.dash-sidebar nav button span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
 @media(max-width:760px){.dashboard-reference .dash-sidebar{padding-top:46px}.dash-sidebar .dash-logo{grid-column:1}.dash-sidebar nav{grid-column:2}}
-@media(max-width:760px){.dashboard-reference .dash-sidebar-map,.dashboard-reference .dash-sidebar>strong{display:none}}
+@media(max-width:760px){.dashboard-reference .dash-sidebar-map{display:block;grid-column:1/-1;width:min(182px,100%);margin:12px auto 0}.dashboard-reference .dash-sidebar>strong{display:block;grid-column:1/-1;padding:8px 0 4px;text-align:center}}
 @media(max-width:430px){.dash-sidebar nav button:nth-child(n+5){display:none}.dash-course-photo{height:142px}}
