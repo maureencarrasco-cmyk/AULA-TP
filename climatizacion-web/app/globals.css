@@ -48,7 +48,7 @@ body {
 .portal-main input,
 .portal-main select,
 .portal-main textarea {
-  font-family: var(--font-rounded), var(--font-inter), Arial, sans-serif;
+  font-family: var(--font-rounded, Arial), var(--font-inter, Arial), Arial, sans-serif;
   letter-spacing: -0.005em;
 }
 
@@ -56,8 +56,25 @@ body {
 .portal-main h2,
 .portal-main h3,
 .portal-main h4 {
-  font-family: var(--font-rounded), var(--font-display), Arial, sans-serif;
+  font-family: var(--font-rounded, Arial), var(--font-display, Arial), Arial, sans-serif;
   letter-spacing: -0.02em;
+}
+
+/* El portal usa una sola familia para evitar saltos serif/sans en fuentes remotas. */
+.portal-main,
+.portal-main * {
+  font-family: var(--font-rounded, Arial), var(--font-inter, Arial), Arial, sans-serif;
+}
+
+.portal-main h1,
+.portal-main h2,
+.portal-main h3,
+.portal-main h4,
+.portal-main button,
+.portal-main input,
+.portal-main select,
+.portal-main textarea {
+  font-family: var(--font-rounded, Arial), var(--font-inter, Arial), Arial, sans-serif;
 }
 
 /* Portal Docente visual system: pastel, editorial and distinct from the student LMS. */
