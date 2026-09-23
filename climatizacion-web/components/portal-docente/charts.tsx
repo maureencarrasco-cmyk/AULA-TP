@@ -48,7 +48,7 @@ export function ChartPanel({
 }: ChartPanelProps) {
   return (
     <section
-      className={`rounded-2xl border border-[var(--aula-line,#d9e5f6)] bg-[var(--aula-surface,#fff)] p-5 shadow-[var(--shadow-sm,0_3px_12px_rgba(17,70,147,0.10))] ${className}`}
+      className={`portal-chart-panel rounded-[1.5rem] border border-[var(--aula-line,#d9e5f6)] bg-[linear-gradient(135deg,rgba(255,255,255,.98),rgba(242,248,255,.98)_62%,rgba(247,244,255,.96))] p-5 shadow-[0_12px_28px_rgba(72,122,190,.10)] ${className}`}
     >
       {(title || badge) && (
         <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
@@ -223,7 +223,7 @@ export function BarChart({
         </p>
       )}
       <div
-        className="mt-3 space-y-2.5 rounded-xl border border-[var(--aula-line,#d9e5f6)] bg-[var(--aula-surface-soft,#f5f9fe)] p-3 sm:p-4"
+        className="portal-bar-chart mt-3 space-y-2.5 rounded-[1.25rem] border border-[var(--aula-line,#d9e5f6)] bg-[linear-gradient(135deg,rgba(255,255,255,.82),rgba(238,246,255,.95))] p-3 sm:p-4"
         role="img"
         aria-label={`${title}. ${items.map((i) => `${i.label}: ${i.valueLabel ?? `${i.value}${valueSuffix ? ` ${valueSuffix}` : ""}`}`).join("; ")}`}
       >
@@ -243,9 +243,9 @@ export function BarChart({
               >
                 {item.label}
               </p>
-              <div className="h-8 overflow-hidden rounded-lg bg-white/90 ring-1 ring-[var(--aula-line,#d9e5f6)] sm:h-9">
+              <div className="h-8 overflow-hidden rounded-full bg-white/90 ring-1 ring-[var(--aula-line,#d9e5f6)] sm:h-9">
                 <div
-                  className="h-full rounded-lg transition-[width] duration-500 ease-out"
+                  className="h-full rounded-full transition-[width] duration-500 ease-out"
                   style={{
                     width: `${pct}%`,
                     background: barColor,

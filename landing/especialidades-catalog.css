@@ -1,0 +1,185 @@
+/* Sector catalog: left sector card + right specialty chips */
+
+.sector-catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 0;
+}
+
+.sector-row {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.34fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.sector-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 100%;
+  padding: 18px 18px 18px 20px;
+  border-radius: 16px;
+  background: linear-gradient(165deg, #071b36 0%, #0a2748 55%, #0c3158 100%);
+  color: #fff;
+  box-shadow: 0 16px 34px rgba(7, 27, 54, 0.18);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sector-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: var(--sector-accent, #0b5ed7);
+  border-radius: 16px 0 0 16px;
+}
+
+.sector-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sector-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sector-card-media--placeholder {
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.55);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 55%),
+    rgba(255, 255, 255, 0.06);
+}
+
+.sector-card-body h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.sector-card-body p {
+  margin: 8px 0 0;
+  color: #d7e5f7;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.sector-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-content: flex-start;
+  padding: 16px;
+  border: 1px solid rgba(9, 40, 87, 0.12);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(7, 27, 54, 0.06);
+}
+
+.sector-chip {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 10px 14px;
+  border: 1px solid rgba(9, 40, 87, 0.14);
+  border-radius: 999px;
+  background: #f7faff;
+  color: #071b36;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(7, 27, 54, 0.04);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease, background 0.18s ease;
+}
+
+a.sector-chip:hover,
+a.sector-chip:focus-visible {
+  border-color: rgba(8, 112, 239, 0.55);
+  background: #eef5ff;
+  box-shadow: 0 10px 18px rgba(8, 112, 239, 0.12);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+span.sector-chip {
+  cursor: default;
+}
+
+.sector-chip--live {
+  border-color: rgba(8, 112, 239, 0.35);
+  background: linear-gradient(180deg, #ffffff, #eef5ff);
+}
+
+.sector-chip--live::after {
+  content: "↗";
+  margin-left: 6px;
+  color: #0870ef;
+  font-weight: 900;
+}
+
+/* Accent tokens */
+.sector-card[data-sector="maderero"] { --sector-accent: #2f9e44; }
+.sector-card[data-sector="agropecuario"] { --sector-accent: #82c91e; }
+.sector-card[data-sector="alimentacion"] { --sector-accent: #f76707; }
+.sector-card[data-sector="construccion"] { --sector-accent: #e6a817; }
+.sector-card[data-sector="metalmecanica"] { --sector-accent: #1c7ed6; }
+.sector-card[data-sector="electricidad"] { --sector-accent: #0870ef; }
+.sector-card[data-sector="maritimo"] { --sector-accent: #0b7285; }
+.sector-card[data-sector="minero"] { --sector-accent: #868e96; }
+.sector-card[data-sector="grafico"] { --sector-accent: #ae3ec9; }
+.sector-card[data-sector="confeccion"] { --sector-accent: #e64980; }
+.sector-card[data-sector="administracion"] { --sector-accent: #364fc7; }
+.sector-card[data-sector="salud"] { --sector-accent: #d6336c; }
+.sector-card[data-sector="quimica"] { --sector-accent: #12b886; }
+.sector-card[data-sector="tecnologia"] { --sector-accent: #4c6ef5; }
+.sector-card[data-sector="hoteleria"] { --sector-accent: #fd7e14; }
+
+body.landing-local-refactor .sector-catalog {
+  margin-top: 0;
+}
+
+@media (max-width: 980px) {
+  .sector-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sector-card {
+    min-height: auto;
+  }
+
+  .sector-card-media {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 680px) {
+  .sector-specs {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .sector-chip {
+    font-size: 0.82rem;
+    padding: 9px 12px;
+  }
+}

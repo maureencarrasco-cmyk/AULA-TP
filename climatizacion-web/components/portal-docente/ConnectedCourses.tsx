@@ -88,7 +88,7 @@ function CourseMetricsCard({ curso, refreshKey = 0 }: { curso: PortalCurso; refr
 
   return (
     <article
-      className={`flex flex-col rounded-2xl border p-5 shadow-sm ${COLOR_CARD[curso.color]}`}
+      className={`portal-course-card flex flex-col rounded-2xl border p-5 ${COLOR_CARD[curso.color]}`}
     >
       <div className="mb-4 overflow-hidden rounded-xl bg-white/70 ring-1 ring-black/5">
         <img
@@ -155,7 +155,7 @@ function CourseMetricsCard({ curso, refreshKey = 0 }: { curso: PortalCurso; refr
         href={curso.studentHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-[linear-gradient(100deg,#0747bb,#0878ea)] px-3 py-2 text-sm font-bold text-white shadow-[0_8px_18px_rgba(0,77,185,0.22)] transition hover:brightness-110"
+        className="portal-button portal-button-primary mt-5 inline-flex w-full items-center justify-center rounded-xl px-3 py-2 text-sm font-bold"
       >
         Abrir curso estudiante
       </a>
@@ -232,24 +232,23 @@ function useLiveKpis() {
 
 export function ConnectedCursosGrid() {
   const [refreshKey, setRefreshKey] = useState(0);
+
   return (
-    <div className="space-y-3">
+    <div className="portal-connected-courses space-y-3">
       <div className="flex flex-wrap items-end justify-between gap-2">
         <div>
-          <h2 className="text-sm font-semibold text-slate-900">Cursos conectados</h2>
-          <p className="mt-0.5 text-xs text-slate-600">
-            Métricas en vivo desde LMS (Enfermería, Electricidad y Climatización).
+          <h2 className="text-sm font-semibold text-[var(--color-navy,#0B3A6B)]">Cursos conectados</h2>
+          <p className="mt-0.5 text-xs text-[var(--color-muted,#6B7C8E)]">
+            Métricas en vivo desde LMS. Cada tarjeta conserva el estado real de su curso.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setRefreshKey((k) => k + 1)}
-            className="rounded-lg border-2 border-brand-600 bg-white px-3 py-1.5 text-xs font-bold text-brand-800 hover:bg-brand-50"
-          >
-            Actualizar métricas
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={() => setRefreshKey((k) => k + 1)}
+          className="portal-button portal-button-secondary rounded-xl border-2 px-3 py-1.5 text-xs font-bold"
+        >
+          Actualizar métricas
+        </button>
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
         {PORTAL_CURSOS.filter((c) => c.metricsApiPath).map((c) => (

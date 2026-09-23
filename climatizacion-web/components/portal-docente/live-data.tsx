@@ -203,14 +203,14 @@ export function LiveStatusNote() {
     useLivePortal();
   if (loading) {
     return (
-      <p className="text-sm text-[var(--color-muted,#6B7C8E)]">
+      <p className="portal-status-note text-sm text-[var(--color-muted,#6B7C8E)]">
         Cargando métricas reales del LMS…
       </p>
     );
   }
   if (errors.length > 0 && estudiantes.length === 0) {
     return (
-      <p className="rounded-xl border border-[var(--color-err,#C0392B)]/25 bg-[var(--color-err-soft,#FDECEA)] px-4 py-3 text-sm text-[var(--color-navy,#0B3A6B)]">
+      <p className="portal-status-note rounded-xl border border-[var(--color-err,#C0392B)]/25 bg-[var(--color-err-soft,#FDECEA)] px-4 py-3 text-sm text-[var(--color-navy,#0B3A6B)]">
         No hay datos del LMS en este momento. {errors.join(" · ")}
       </p>
     );
@@ -230,6 +230,6 @@ export function LiveStatusNote() {
   }
   if (notes.length === 0) return null;
   return (
-    <p className="text-xs text-[var(--color-slate,#3D5166)]">{notes.join(" ")}</p>
+    <p className="portal-status-note text-xs text-[var(--color-slate,#3D5166)]">{notes.join(" ")}</p>
   );
 }

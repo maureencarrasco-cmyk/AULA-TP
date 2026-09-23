@@ -1,0 +1,50 @@
+.hero-brand-claim {
+  max-width: 590px;
+  margin: 0 0 22px;
+  color: var(--navy);
+  font: 800 clamp(18px, 2vw, 25px)/1.25 'Manrope', Arial, sans-serif;
+  letter-spacing: -.45px;
+}
+
+.hero-brand-claim::before {
+  content: '';
+  display: block;
+  width: 42px;
+  height: 3px;
+  margin-bottom: 13px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--aqua), var(--red));
+}
+
+body.dark-original .hero-brand-claim {
+  color: #f6f9ff;
+}
+
+.brand-official-logo {
+  width: 182px;
+  min-height: 58px;
+  overflow: hidden;
+}
+
+.brand-official-logo img {
+  display: block;
+  width: 100%;
+  height: 58px;
+  object-fit: contain;
+}
+
+@media (max-width: 700px) {
+  .hero-brand-claim {
+    margin-bottom: 20px;
+    font-size: 19px;
+  }
+
+  .brand-official-logo {
+    width: 148px;
+    min-height: 48px;
+  }
+
+  .brand-official-logo img {
+    height: 48px;
+  }
+}

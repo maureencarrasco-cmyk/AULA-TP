@@ -46,44 +46,31 @@ export function PortalShell({ section }: PortalShellProps) {
   return (
     <div className="min-h-screen bg-[var(--aula-pale,#f7fbff)]">
       <div className="flex min-h-screen">
-        <aside className="portal-sidebar hidden w-64 shrink-0 flex-col lg:flex">
-          <div className="portal-brand border-b px-5 py-5">
-            <img src="/images/portal-docente/brand/aula-tp-chile-logo.png" alt="Aula TP Chile" className="h-20 w-full object-contain object-left" />
-            <p className="mt-2 text-center text-sm font-bold">Portal Docente</p>
-            <p className="mt-1 text-center text-[11px]">Educación Técnico-Profesional para un mejor futuro</p>
-          </div>
-          <nav className="flex-1 space-y-1 px-3 py-4" aria-label="Navegación principal">
-            {NAV_SECTIONS.map((item) => {
-              const active = item.id === section;
-              return (
-                <Link
-                  key={item.id}
-                  href={item.href}
-                  className={`portal-nav-item block rounded-xl px-3 py-2.5 text-sm font-medium transition ${
-                    active
-                      ? "portal-nav-active"
-                      : ""
-                  }`}
-                  aria-current={active ? "page" : undefined}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
-          <div className="portal-sidebar-footer space-y-2 border-t px-4 py-4 text-sm">
-            <Link
-              href="/"
-              className="block rounded-lg px-3 py-2 transition hover:bg-white"
-            >
-              ← Volver al sitio
-            </Link>
-            <Link
-              href="/#contacto"
-              className="portal-primary-button block rounded-xl px-3 py-2.5 text-center font-bold transition hover:brightness-105"
-            >
-              Solicitar demo real
-            </Link>
+        <aside className="portal-sidebar hidden min-h-screen w-64 shrink-0 flex-col overflow-y-auto lg:flex" aria-label="Navegación principal">
+          <div className="portal-sidebar-reference relative w-full shrink-0">
+            <img
+              src="/images/portal-docente/brand/portal-sidebar-reference.png"
+              alt="Portal Docente Aula TP Chile"
+              className="block h-auto w-full"
+            />
+            <nav className="absolute inset-x-0 top-0 h-[75%]" aria-label="Secciones del Portal Docente">
+              {NAV_SECTIONS.map((item, index) => {
+                const active = item.id === section;
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    className={`portal-reference-link portal-reference-link-${index + 1} absolute block rounded-[1.25rem] ${
+                      active ? "portal-reference-link-active" : ""
+                    }`}
+                    aria-current={active ? "page" : undefined}
+                    aria-label={item.label}
+                  >
+                    <span className="sr-only">{item.label}</span>
+                  </Link>
+                );
+              })}
+            </nav>
           </div>
         </aside>
 
@@ -153,10 +140,10 @@ export function PortalShell({ section }: PortalShellProps) {
                       key={item.id}
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`block rounded-xl border-2 px-3 py-2.5 text-sm font-bold transition ${
-                        active
-                          ? "border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white shadow-[0_6px_16px_rgba(21,88,160,0.28)]"
-                          : "border-[var(--color-line,#D5DEE8)] bg-white text-[var(--color-slate,#3D5166)] hover:border-[var(--aula-blue,#1558A0)]/40"
+                    className={`portal-mobile-nav-link block rounded-xl border-2 px-3 py-2.5 text-sm font-bold transition ${
+                      active
+                        ? "portal-mobile-nav-link-active border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white shadow-[0_6px_16px_rgba(21,88,160,0.28)]"
+                        : "border-[var(--color-line,#D5DEE8)] bg-white text-[var(--color-slate,#3D5166)] hover:border-[var(--aula-blue,#1558A0)]/40"
                       }`}
                       aria-current={active ? "page" : undefined}
                     >
@@ -174,7 +161,7 @@ export function PortalShell({ section }: PortalShellProps) {
                 </Link>
                 <Link
                   href="/#contacto"
-                  className="rounded-xl bg-[linear-gradient(100deg,#0747bb,#0878ea)] px-3 py-2 text-center text-sm font-bold text-white"
+                  className="portal-button portal-button-primary rounded-xl px-3 py-2 text-center text-sm font-bold"
                 >
                   Solicitar demo real
                 </Link>
@@ -182,9 +169,9 @@ export function PortalShell({ section }: PortalShellProps) {
             </nav>
           ) : null}
 
-          <main className="portal-main flex-1 px-4 py-6 sm:px-6 lg:px-8">
+          <main className="portal-main flex-1 px-3 py-4 sm:px-4 sm:py-5 lg:px-5 lg:py-5">
             <LivePortalProvider>
-              <section className="portal-welcome mb-6 overflow-hidden rounded-[1.25rem] border">
+              <section className="portal-welcome mb-4 overflow-hidden rounded-[1.25rem] border">
                 {section === "resumen" ? (
                   <div className="relative flex flex-col gap-6 p-5 sm:p-7 lg:flex-row lg:items-center lg:justify-between">
                     <div className="relative z-10 max-w-2xl">
@@ -206,7 +193,7 @@ export function PortalShell({ section }: PortalShellProps) {
                     </div>
                   </div>
                 ) : (
-                  <div className="bg-white/20 p-2 sm:p-3">
+                  <div className="portal-section-banner bg-white/20 p-2 sm:p-3">
                     <img src={sectionArt.src} alt={sectionArt.alt} className="block h-auto w-full rounded-[1rem] object-contain" />
                   </div>
                 )}

@@ -21,7 +21,7 @@ export function PerspectiveTabs<T extends string>({
   onChange: (id: T) => void;
 }) {
   return (
-    <div role="tablist" aria-label={label} className="flex flex-wrap gap-2">
+    <div role="tablist" aria-label={label} className="portal-tabs flex flex-wrap gap-2">
       {options.map((opt) => {
         const selected = value === opt.id;
         return (
@@ -31,7 +31,7 @@ export function PerspectiveTabs<T extends string>({
             role="tab"
             aria-selected={selected}
             onClick={() => onChange(opt.id)}
-            className={`min-h-11 min-w-[7.5rem] rounded-xl border-2 px-4 py-2.5 text-sm font-bold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--aula-cyan,#3EC6E0)] focus-visible:ring-offset-2 ${
+            className={`portal-tab min-h-11 min-w-[7.5rem] rounded-xl border-2 px-4 py-2.5 text-sm font-bold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--aula-cyan,#3EC6E0)] focus-visible:ring-offset-2 ${
               selected
                 ? "border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white shadow-[0_6px_16px_rgba(21,88,160,0.28)]"
                 : "border-[var(--color-line,#D5DEE8)] bg-[var(--color-card,#fff)] text-[var(--color-slate,#3D5166)] hover:border-[var(--aula-blue,#1558A0)]/40 hover:bg-[var(--color-surface,#F4F7FB)]"
@@ -53,38 +53,25 @@ export function TendenciaCard({
   unidad?: string;
 }) {
   return (
-    <section className="rounded-2xl border border-[var(--color-line,#D5DEE8)] bg-white p-4 shadow-[0_3px_12px_rgba(11,58,107,0.08)]">
-      <h3 className="text-sm font-bold text-[var(--color-navy,#0B3A6B)]">
+    <section className="portal-surface portal-tendency-card overflow-hidden rounded-2xl border p-4" aria-labelledby="portal-tendency-title">
+      <h3 id="portal-tendency-title" className="text-sm font-bold text-[var(--color-navy,#0B3A6B)]">
         Tendencia central · {unidad}
       </h3>
       <p className="mt-1 text-xs text-[var(--color-muted,#6B7C8E)]">
-        Calculado sobre {stats.n} {stats.n === 1 ? "dato" : "datos"}. La mediana evita que
-        extremos distorsionen la lectura.
+        Calculado sobre {stats.n} {stats.n === 1 ? "dato" : "datos"}. La mediana evita que extremos distorsionen la lectura.
       </p>
       <dl className="mt-3 grid grid-cols-3 gap-2 text-center">
-        <div className="rounded-xl bg-[var(--color-info-soft,#E8F1FB)] px-2 py-3">
-          <dt className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-blue,#1558A0)]">
-            Media
-          </dt>
-          <dd className="mt-1 text-lg font-extrabold tabular-nums text-[var(--color-navy,#0B3A6B)]">
-            {stats.media}
-          </dd>
+        <div className="portal-metric-card portal-tone-info rounded-xl px-2 py-3">
+          <dt className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-blue,#1558A0)]">Media</dt>
+          <dd className="mt-1 text-lg font-extrabold tabular-nums text-[var(--color-navy,#0B3A6B)]">{stats.media}</dd>
         </div>
-        <div className="rounded-xl bg-[var(--color-ok-soft,#E6F6EE)] px-2 py-3">
-          <dt className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-ok,#1F8A5B)]">
-            Mediana
-          </dt>
-          <dd className="mt-1 text-lg font-extrabold tabular-nums text-[var(--color-navy,#0B3A6B)]">
-            {stats.mediana}
-          </dd>
+        <div className="portal-metric-card portal-tone-success rounded-xl px-2 py-3">
+          <dt className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-ok,#1F8A5B)]">Mediana</dt>
+          <dd className="mt-1 text-lg font-extrabold tabular-nums text-[var(--color-navy,#0B3A6B)]">{stats.mediana}</dd>
         </div>
-        <div className="rounded-xl bg-[var(--color-warn-soft,#FFF4E0)] px-2 py-3">
-          <dt className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-warn,#C47A12)]">
-            Moda
-          </dt>
-          <dd className="mt-1 text-lg font-extrabold tabular-nums text-[var(--color-navy,#0B3A6B)]">
-            {stats.moda ?? "—"}
-          </dd>
+        <div className="portal-metric-card portal-tone-warning rounded-xl px-2 py-3">
+          <dt className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-warn,#C47A12)]">Moda</dt>
+          <dd className="mt-1 text-lg font-extrabold tabular-nums text-[var(--color-navy,#0B3A6B)]">{stats.moda ?? "—"}</dd>
         </div>
       </dl>
     </section>
@@ -227,22 +214,24 @@ export function AlertList({
   items: Array<{ id: string; title: string; detail: string; tone?: "warn" | "ok" | "info" }>;
 }) {
   return (
-    <section className="rounded-2xl border border-[var(--color-line,#D5DEE8)] bg-white p-5 shadow-[0_3px_12px_rgba(11,58,107,0.08)]">
-      <h2 className="text-sm font-bold text-[var(--color-navy,#0B3A6B)]">{title}</h2>
-      <ul className="mt-3 space-y-2">
-        {items.map((item) => (
-          <li
-            key={item.id}
-            className={`rounded-xl border px-3 py-2 text-sm ${
-              item.tone === "ok"
-                ? "border-[var(--color-ok,#1F8A5B)]/25 bg-[var(--color-ok-soft,#E6F6EE)]"
-                : item.tone === "info"
-                  ? "border-[var(--color-blue,#1558A0)]/20 bg-[var(--color-info-soft,#E8F1FB)]"
-                  : "border-[var(--color-warn,#C47A12)]/30 bg-[var(--color-warn-soft,#FFF4E0)]"
-            }`}
-          >
-            <p className="font-semibold text-[var(--color-navy,#0B3A6B)]">{item.title}</p>
-            <p className="mt-0.5 text-xs text-[var(--color-slate,#3D5166)]">{item.detail}</p>
+    <section className="portal-surface portal-priority-card overflow-hidden rounded-2xl border p-5" aria-labelledby="portal-priority-title">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h2 id="portal-priority-title" className="text-sm font-bold text-[var(--color-navy,#0B3A6B)]">{title}</h2>
+          <p className="mt-1 text-xs text-[var(--color-muted,#6B7C8E)]">Ordena los focos para decidir qué revisar primero.</p>
+        </div>
+        <span className="portal-icon-badge portal-tone-warning" aria-hidden="true">!</span>
+      </div>
+      <ul className="mt-3 grid gap-2 lg:grid-cols-2">
+        {items.map((item, index) => (
+          <li key={item.id} className={`portal-alert portal-alert-${item.tone ?? "warn"} rounded-xl border px-3 py-2`}>
+            <div className="flex items-start gap-3">
+              <span className="portal-alert-index" aria-hidden="true">{index + 1}</span>
+              <div className="min-w-0">
+                <p className="font-semibold text-[var(--color-navy,#0B3A6B)]">{item.title}</p>
+                <p className="mt-0.5 text-xs text-[var(--color-slate,#3D5166)]">{item.detail}</p>
+              </div>
+            </div>
           </li>
         ))}
       </ul>
@@ -262,7 +251,7 @@ export function RankingList({
   empty?: string;
 }) {
   return (
-    <section className="rounded-2xl border border-[var(--color-line,#D5DEE8)] bg-white p-4 shadow-[0_3px_12px_rgba(11,58,107,0.08)]">
+    <section className="portal-surface rounded-2xl border p-4">
       <h3 className="text-sm font-bold text-[var(--color-navy,#0B3A6B)]">{title}</h3>
       {subtitle ? <p className="mt-0.5 text-xs text-[var(--color-muted,#6B7C8E)]">{subtitle}</p> : null}
       {items.length === 0 ? (
@@ -299,11 +288,11 @@ export function KpiStrip({
   items: Array<{ label: string; value: string; hint?: string }>;
 }) {
   return (
-    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-      {items.map((item) => (
+    <div className="portal-kpi-grid grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      {items.map((item, index) => (
         <div
           key={item.label}
-          className="rounded-2xl border border-[var(--color-line,#D5DEE8)] bg-white p-4 shadow-[0_3px_12px_rgba(11,58,107,0.08)]"
+          className={`portal-surface portal-kpi-card portal-tone-${["info", "violet", "warning", "success"][index % 4]} rounded-2xl border p-4`}
         >
           <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--color-muted,#6B7C8E)]">
             {item.label}
@@ -330,9 +319,14 @@ export function SectionIntro({
   children?: ReactNode;
 }) {
   return (
-    <div>
-      <h1 className="text-xl font-bold text-[var(--color-navy,#0B3A6B)] sm:text-2xl">{title}</h1>
-      <p className="mt-1 max-w-3xl text-sm text-[var(--color-slate,#3D5166)]">{purpose}</p>
+    <div className="portal-section-intro">
+      <div className="flex items-start gap-3">
+        <span className="portal-section-mark" aria-hidden="true" />
+        <div>
+          <h1 className="text-xl font-bold text-[var(--color-navy,#0B3A6B)] sm:text-2xl">{title}</h1>
+          <p className="mt-1 max-w-3xl text-sm text-[var(--color-slate,#3D5166)]">{purpose}</p>
+        </div>
+      </div>
       {children}
     </div>
   );

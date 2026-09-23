@@ -80,22 +80,14 @@ function ResumenStoreCounts() {
   const { estudiantes, loading } = useLivePortal();
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      <div className="rounded-2xl border border-brand-200 bg-brand-50/60 p-4 shadow-sm">
-        <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">
-          Bloques en horario
-        </p>
-        <p className="mt-1 text-3xl font-bold tabular-nums text-slate-900">
-          {hydrated ? planificacion.length : "…"}
-        </p>
+      <div className="portal-surface portal-metric-panel rounded-2xl border p-4">
+        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-blue,#1558A0)]">Bloques en horario</p>
+        <p className="mt-1 text-3xl font-bold tabular-nums text-[var(--color-navy,#0B3A6B)]">{hydrated ? planificacion.length : "…"}</p>
         <BrowserSaveHint className="mt-1" />
       </div>
-      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-          Cantidad de estudiantes (LMS)
-        </p>
-        <p className="mt-1 text-3xl font-bold tabular-nums text-slate-900">
-          {loading ? "…" : estudiantes.length}
-        </p>
+      <div className="portal-surface portal-metric-panel rounded-2xl border p-4">
+        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-muted,#6B7C8E)]">Cantidad de estudiantes (LMS)</p>
+        <p className="mt-1 text-3xl font-bold tabular-nums text-[var(--color-navy,#0B3A6B)]">{loading ? "…" : estudiantes.length}</p>
       </div>
     </div>
   );
@@ -192,7 +184,7 @@ export function ResumenView() {
         ]}
       />
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-5 lg:grid-cols-2">
         <ChartPanel
           title="Distribución de estudiantes según nivel de logro"
           subtitle="Cantidad de estudiantes (no porcentaje) agrupados por banda de Porcentaje de logro %."
@@ -233,39 +225,22 @@ export function ResumenView() {
 
       <ConnectedCursosGrid />
 
-      <div className="rounded-2xl border border-[var(--aula-line,#d9e5f6)] bg-[var(--aula-surface-tint,#edf6ff)] p-5 shadow-[var(--shadow-sm)]">
-        <h2 className="text-sm font-semibold text-[var(--aula-text,#082b80)]">
-          OA, AE y criterios de evaluación con menor logro
-        </h2>
-        <p className="mt-1 text-xs text-[var(--aula-text-muted,#5e7596)]">
-          Lectura general del nivel: cantidad de estudiantes por estado del OA, no casos individuales.
-        </p>
+      <section className="portal-surface portal-oa-low-panel rounded-2xl border p-5">
+        <h2 className="text-sm font-semibold text-[var(--color-navy,#0B3A6B)]">OA, AE y criterios de evaluación con menor logro</h2>
+        <p className="mt-1 text-xs text-[var(--color-muted,#6B7C8E)]">Lectura general del nivel: cantidad de estudiantes por estado del OA, no casos individuales.</p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {oaCriticos.length === 0 ? (
-            <li className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500 shadow-sm">
-              Sin evidencia LMS de OA en este momento.
-            </li>
+            <li className="portal-empty-state rounded-xl border px-4 py-3 text-sm">Sin evidencia LMS de OA en este momento.</li>
           ) : null}
-          {oaCriticos.map(({ oa, conteo: c }) => {
-            return (
-              <li
-                key={oaCatalogKey(oa.especialidad, oa.codigo)}
-                className="rounded-xl border border-brand-100 bg-white px-4 py-3 shadow-sm"
-              >
-                <p className="text-xs font-bold uppercase tracking-wide text-brand-700">
-                  {oa.codigo}{" "}
-                  <span className="font-medium text-slate-500">· {oa.especialidad}</span>
-                </p>
-                <p className="mt-1 text-sm font-semibold text-slate-900">{oa.titulo}</p>
-                <p className="mt-2 text-xs text-slate-600">
-                  {pluralEstudiantes(c.logrado)} logrados · {pluralEstudiantes(c.en_progreso)} en
-                  proceso · {pluralEstudiantes(c.no_iniciado)} no iniciados
-                </p>
-              </li>
-            );
-          })}
+          {oaCriticos.map(({ oa, conteo: c }) => (
+            <li key={oaCatalogKey(oa.especialidad, oa.codigo)} className="portal-metric-card rounded-xl border px-4 py-3">
+              <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-blue,#1558A0)]">{oa.codigo} <span className="font-medium text-[var(--color-muted,#6B7C8E)]">· {oa.especialidad}</span></p>
+              <p className="mt-1 text-sm font-semibold text-[var(--color-navy,#0B3A6B)]">{oa.titulo}</p>
+              <p className="mt-2 text-xs text-[var(--color-slate,#3D5166)]">{pluralEstudiantes(c.logrado)} logrados · {pluralEstudiantes(c.en_progreso)} en proceso · {pluralEstudiantes(c.no_iniciado)} no iniciados</p>
+            </li>
+          ))}
         </ul>
-      </div>
+      </section>
     </div>
   );
 }
@@ -869,6 +844,7 @@ export function OaAeView() {
                 key={esp}
                 type="button"
                 onClick={() => setFiltro(esp)}
+                aria-pressed={filtro === esp}
                 className={`min-h-11 rounded-xl border-2 px-3 py-2 text-xs font-bold transition ${
                   filtro === esp
                     ? "border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white"
@@ -1244,6 +1220,7 @@ export function ReportesView() {
             key={opt}
             type="button"
             onClick={() => setReportesFiltro(opt)}
+            aria-pressed={reportesFiltro === opt}
             className={`min-h-11 rounded-xl border-2 px-3 py-2 text-[11px] font-bold transition ${
               reportesFiltro === opt
                 ? "border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white"
@@ -1471,6 +1448,7 @@ export function RecursosView() {
             key={id}
             type="button"
             onClick={() => setFiltro(id)}
+            aria-pressed={filtro === id}
             className={`min-h-11 rounded-xl border-2 px-3 py-2 text-xs font-bold transition ${
               filtro === id
                 ? "border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white"

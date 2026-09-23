@@ -94,10 +94,11 @@
 .course-home-banner__copy h1 {
   margin: 4px 0 0;
   color: #fff;
+  font-family: var(--font-heading), Outfit, Manrope, sans-serif;
   font-size: clamp(28px, 3.1vw, 42px);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.08;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
 }
 
 .course-home-banner__plan {
