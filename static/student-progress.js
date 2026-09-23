@@ -41,7 +41,7 @@
  }
  function cards(items){
   const all=items.flatMap(evidence);
-  return `<section class="sp-evidence-block"><h2>${icon('file')} Evidencias del módulo</h2><div class="sp-evidence-cards">${[['activities','Actividades','file'],['evaluations','Evaluaciones','check'],['practice','Práctica libre','tool']].map(([key,name,ico])=>`<article><div>${icon(ico)}<strong>${esc(name)}</strong></div><b>${all.filter(r=>r.kind===key).length}</b><small>${key==='practice'?'Registros locales, no calificables':'Evidencias registradas'}</small><button type="button" data-evidence="${key}" aria-expanded="${evidenceType===key}">${evidenceType===key?'Ocultar detalle':'Ver detalle'}</button></article>`).join('')}</div>${evidenceType?table(all.filter(r=>r.kind===evidenceType)):''}</section>`;
+  return `<section class="sp-evidence-block"><h2>${icon('file')} ${items.length===1?'Evidencias del módulo':'Evidencias generales'}</h2><div class="sp-evidence-cards">${[['activities','Actividades','file'],['evaluations','Evaluaciones','check'],['practice','Práctica libre','tool']].map(([key,name,ico])=>`<article><div>${icon(ico)}<strong>${esc(name)}</strong></div><b>${all.filter(r=>r.kind===key).length}</b><small>${key==='practice'?'Registros locales, no calificables':'Evidencias registradas'}</small><button type="button" data-evidence="${key}" aria-expanded="${evidenceType===key}">${evidenceType===key?'Ocultar detalle':'Ver detalle'}</button></article>`).join('')}</div>${evidenceType?table(all.filter(r=>r.kind===evidenceType)):''}</section>`;
  }
  function table(items){
   if(!items.length)return '<p class="sp-empty">Todavía no hay registros de este tipo.</p>';
