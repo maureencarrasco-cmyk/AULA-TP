@@ -21,7 +21,7 @@ type PortalShellProps = {
 };
 
 const PORTAL_SECTION_ART = {
-  resumen: { src: "/images/portal-docente/panel-general.png", alt: "Panel general del Portal Docente" },
+  resumen: { src: "/images/portal-docente/hero-docentes.png", alt: "Docentes de Aula TP acompañando aprendizajes" },
   cursos: { src: "/images/portal-docente/frames/planificacion.png", alt: "Planificación de clases y cursos" },
   estudiantes: { src: "/images/portal-docente/hero.png", alt: "Docentes revisando el progreso de sus estudiantes" },
   "oa-ae": { src: "/images/portal-docente/frames/hero.png", alt: "Recursos curriculares para la enseñanza" },
