@@ -819,7 +819,8 @@ function curriculumSourcePanel(){
  const label=source.label||official.title||'Fuente curricular oficial';
  const scope=source.status||official.scope||'Adaptación didáctica para simulación; no sustituye el programa oficial ni certifica una instalación real.';
  const link=source.url?`<a href="${esc(source.url)}" target="_blank" rel="noopener">Consultar fuente oficial</a>`:'';
- return `<details class="source-strip"><summary>${icon('book')} Fuente curricular y alcance de la simulación</summary><p><b>${esc(label)}</b></p><p>${esc(scope)}</p>${link}</details>`;
+ const references=(current?.content?.bibliography||[]).map(ref=>`<li><a href="${esc(ref.url)}" target="_blank" rel="noopener">${esc(ref.author)} · ${esc(ref.work)} (${esc(ref.year)})</a><span> ${esc(ref.concept)} · ${esc(ref.application)}</span></li>`).join('');
+ return `<details class="source-strip"><summary>${icon('book')} Fuente curricular y alcance de la simulación</summary><p><b>${esc(label)}</b></p><p>${esc(scope)}</p>${link}${references?`<ul>${references}</ul>`:''}</details>`;
 }
 function specialtyResourceButton(){
  const course=courses.find(item=>item.id===current?.course_id);

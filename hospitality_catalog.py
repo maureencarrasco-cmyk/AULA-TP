@@ -12,6 +12,9 @@ ROOT = Path(__file__).resolve().parent
 OFFICIAL = json.loads((ROOT / 'hospitality_official.json').read_text(encoding='utf-8'))
 GASTRONOMY_URL = 'https://www.curriculumnacional.cl/614/articles-34313_programa.pdf'
 HOTEL_URL = 'https://www.curriculumnacional.cl/614/articles-34324_programa.pdf'
+RSA_URL = 'https://www.bcn.cl/leychile/Navegar?idNorma=71271'
+SERNATUR_URL = 'https://www.sernatur.cl/wp-content/uploads/2018/11/MDH-Alojamiento-Turi%CC%81stico-1.pdf'
+FOOD_SAFETY_REVIEW_URL = 'https://pubmed.ncbi.nlm.nih.gov/28873718/'
 
 # The dossiers are local learning simulations. Titles, hours, OA, AE and criteria
 # come only from the MINEDUC programs represented in hospitality_official.json.
@@ -81,10 +84,34 @@ def _make_module(item, position, key, source, url, dossier, scope):
                             title=f'Caso de oficio · {item["title"]}',
                             prompt=f'Revisa {resource}; identifica el dato que falta y prepara un {product}.')
     content['curriculum']['consulted'] = '2026-09-22'
+    content['bibliography'] = [{
+        'author': 'Ministerio de Educación de Chile', 'work': 'Programa de Estudio de la especialidad',
+        'year': 2015, 'concept': 'Módulos, horas, OA, AE y criterios oficiales',
+        'application': item['title'], 'url': url,
+    }]
+    if key == 'gastronomia' and item['title'] != 'Emprendimiento y empleabilidad':
+        content['bibliography'].append({
+            'author': 'Ministerio de Salud de Chile', 'work': 'Reglamento Sanitario de los Alimentos, Decreto 977',
+            'year': 1996, 'concept': 'Condiciones sanitarias de la manipulación y producción de alimentos',
+            'application': f'Resguardos de inocuidad en {item["title"]}', 'url': RSA_URL,
+        })
+        if item['title'] == 'Higiene para la elaboración de alimentos':
+            content['bibliography'].append({
+                'author': 'Zanin et al.',
+                'work': 'Knowledge, attitudes and practices of food handlers in food safety: An integrative review',
+                'year': 2017, 'concept': 'La formación debe contrastar conocimientos con prácticas observables',
+                'application': 'Análisis de registros y decisiones de higiene', 'url': FOOD_SAFETY_REVIEW_URL,
+            })
+    if key == 'hoteleria' and item['title'] != 'Emprendimiento y empleabilidad':
+        content['bibliography'].append({
+            'author': 'Servicio Nacional de Turismo',
+            'work': 'Manual de Hospitalidad para Establecimientos de Alojamiento Turístico',
+            'year': 2018, 'concept': 'Atención, comunicación y buenas prácticas de servicio',
+            'application': f'Caso simulado de {item["title"]}', 'url': SERNATUR_URL,
+        })
     content['specialty_source']['source_page'] = item['source_page']
     content['specialty_source']['official_criteria_count'] = sum(len(ae['criteria']) for ae in item['aes'])
     content['version'] = 'hospitality-mineduc-v1'
-    module_ref = {'position': position, 'title': item['title'], 'aes': aes, 'specialty_key': key}
     for index, case in enumerate(content['cases']):
         ae = aes[index % len(aes)]
         criterion = ae['criteria'][index % len(ae['criteria'])]
