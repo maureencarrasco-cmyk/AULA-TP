@@ -22,11 +22,11 @@ type PortalShellProps = {
 
 const PORTAL_SECTION_ART = {
   resumen: { src: "/images/portal-docente/hero-docentes.png", alt: "Docentes de Aula TP acompañando aprendizajes" },
-  cursos: { src: "/images/portal-docente/frames/planificacion.png", alt: "Planificación de clases y cursos" },
-  estudiantes: { src: "/images/portal-docente/hero.png", alt: "Docentes revisando el progreso de sus estudiantes" },
-  "oa-ae": { src: "/images/portal-docente/frames/hero.png", alt: "Recursos curriculares para la enseñanza" },
-  cumplimiento: { src: "/images/portal-docente/frames/hero.png", alt: "Seguimiento del cumplimiento curricular" },
-  reportes: { src: "/images/portal-docente/frames/reportes.png", alt: "Reportes pedagógicos y análisis" },
+  cursos: { src: "/images/portal-docente/frames/hero-cursos-planificacion.png", alt: "Banner de cursos y planificación del Portal Docente" },
+  estudiantes: { src: "/images/portal-docente/frames/hero-estudiantes.png", alt: "Banner de estudiantes y seguimiento de aprendizajes" },
+  "oa-ae": { src: "/images/portal-docente/frames/hero-oa-ae.png", alt: "Banner de objetivos de aprendizaje y aprendizajes esperados" },
+  cumplimiento: { src: "/images/portal-docente/frames/hero-cumplimiento.png", alt: "Banner de seguimiento de cumplimiento" },
+  reportes: { src: "/images/portal-docente/frames/hero-reportes.png", alt: "Banner de reportes y análisis pedagógico" },
 } satisfies Record<SectionId, { src: string; alt: string }>;
 
 const PORTAL_SECTION_COPY: Record<SectionId, { eyebrow: string; title: string; subtitle: string }> = {
@@ -184,26 +184,32 @@ export function PortalShell({ section }: PortalShellProps) {
 
           <main className="portal-main flex-1 px-4 py-6 sm:px-6 lg:px-8">
             <LivePortalProvider>
-              <section className="portal-welcome mb-6 overflow-hidden rounded-[1.25rem] border p-5 sm:p-7">
-                <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-                  <div className="relative z-10 max-w-2xl">
-                    <div className="portal-eyebrow mb-3 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[.16em]">
-                      <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_0_4px_rgba(110,231,183,.18)]" />
-                      {sectionCopy.eyebrow}
+              <section className="portal-welcome mb-6 overflow-hidden rounded-[1.25rem] border">
+                {section === "resumen" ? (
+                  <div className="relative flex flex-col gap-6 p-5 sm:p-7 lg:flex-row lg:items-center lg:justify-between">
+                    <div className="relative z-10 max-w-2xl">
+                      <div className="portal-eyebrow mb-3 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[.16em]">
+                        <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_0_4px_rgba(110,231,183,.18)]" />
+                        {sectionCopy.eyebrow}
+                      </div>
+                      <h1 className="text-2xl font-black tracking-tight sm:text-3xl">{sectionCopy.title}</h1>
+                      <p className="mt-2 max-w-xl text-sm leading-6 sm:text-base">{sectionCopy.subtitle}</p>
+                      <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
+                        <span className="portal-pill rounded-full px-3 py-2">LMS conectado</span>
+                        <span className="portal-pill rounded-full px-3 py-2">Datos en vivo</span>
+                        <span className="portal-pill rounded-full px-3 py-2">Seguimiento por OA y AE</span>
+                      </div>
                     </div>
-                    <h1 className="text-2xl font-black tracking-tight sm:text-3xl">{sectionCopy.title}</h1>
-                    <p className="mt-2 max-w-xl text-sm leading-6 sm:text-base">{sectionCopy.subtitle}</p>
-                    <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
-                      <span className="portal-pill rounded-full px-3 py-2">LMS conectado</span>
-                      <span className="portal-pill rounded-full px-3 py-2">Datos en vivo</span>
-                      <span className="portal-pill rounded-full px-3 py-2">Seguimiento por OA y AE</span>
+                    <div className="relative hidden w-full max-w-sm lg:block">
+                      <div className="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl" />
+                      <img src={sectionArt.src} alt={sectionArt.alt} className="relative h-44 w-full rounded-2xl object-cover object-center shadow-2xl ring-1 ring-white/30" />
                     </div>
                   </div>
-                  <div className="relative hidden w-full max-w-sm lg:block">
-                    <div className="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl" />
-                    <img src={sectionArt.src} alt={sectionArt.alt} className="relative h-44 w-full rounded-2xl object-cover object-center shadow-2xl ring-1 ring-white/30" />
+                ) : (
+                  <div className="bg-white/20 p-2 sm:p-3">
+                    <img src={sectionArt.src} alt={sectionArt.alt} className="block h-auto w-full rounded-[1rem] object-contain" />
                   </div>
-                </div>
+                )}
               </section>
               <SectionBody section={section} />
             </LivePortalProvider>
