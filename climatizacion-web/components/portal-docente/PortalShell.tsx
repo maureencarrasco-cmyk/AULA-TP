@@ -21,12 +21,12 @@ type PortalShellProps = {
 };
 
 const PORTAL_SECTION_ART = {
-  resumen: { src: "/images/portal-docente/hero.png", alt: "Docentes acompañando aprendizajes" },
-  cursos: { src: "/images/portal-docente/frames/planificacion.png", alt: "Planificación de clases y cursos" },
-  estudiantes: { src: "/images/portal-docente/hero.png", alt: "Docentes revisando el progreso de sus estudiantes" },
-  "oa-ae": { src: "/images/portal-docente/frames/hero.png", alt: "Recursos curriculares para la enseñanza" },
-  cumplimiento: { src: "/images/portal-docente/frames/hero.png", alt: "Seguimiento del cumplimiento curricular" },
-  reportes: { src: "/images/portal-docente/frames/reportes.png", alt: "Reportes pedagógicos y análisis" },
+  resumen: { src: "/portal-docente/images/portal-docente/panel-general.png", alt: "Panel general del Portal Docente" },
+  cursos: { src: "/portal-docente/images/portal-docente/frames/planificacion.png", alt: "Planificación de clases y cursos" },
+  estudiantes: { src: "/portal-docente/images/portal-docente/hero.png", alt: "Docentes revisando el progreso de sus estudiantes" },
+  "oa-ae": { src: "/portal-docente/images/portal-docente/frames/hero.png", alt: "Recursos curriculares para la enseñanza" },
+  cumplimiento: { src: "/portal-docente/images/portal-docente/frames/hero.png", alt: "Seguimiento del cumplimiento curricular" },
+  reportes: { src: "/portal-docente/images/portal-docente/frames/reportes.png", alt: "Reportes pedagógicos y análisis" },
 } satisfies Record<SectionId, { src: string; alt: string }>;
 
 export function PortalShell({ section }: PortalShellProps) {
@@ -38,7 +38,7 @@ export function PortalShell({ section }: PortalShellProps) {
       <div className="flex min-h-screen">
         <aside className="portal-sidebar hidden w-64 shrink-0 flex-col lg:flex">
           <div className="portal-brand border-b px-5 py-5">
-            <img src="/images/portal-docente/brand/aula-tp-chile-logo.png" alt="Aula TP Chile" className="h-20 w-full object-contain object-left" />
+            <img src="/portal-docente/images/portal-docente/brand/aula-tp-chile-logo.png" alt="Aula TP Chile" className="h-20 w-full object-contain object-left" />
             <p className="mt-2 text-center text-sm font-bold">Portal Docente</p>
             <p className="mt-1 text-center text-[11px]">Educación Técnico-Profesional para un mejor futuro</p>
           </div>
