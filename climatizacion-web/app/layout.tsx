@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Inter } from "next/font/google";
+import { DM_Sans, IBM_Plex_Mono, Nunito, Outfit } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const dmSans = DM_Sans({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const outfit = Outfit({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
   display: "swap",
 });
 
@@ -12,6 +19,13 @@ const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
   subsets: ["latin"],
   weight: ["400", "500"],
+  display: "swap",
+});
+
+const nunito = Nunito({
+  variable: "--font-rounded",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -71,7 +85,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="/shared/aula-tp-design-tokens.css" />
       </head>
       <body
-        className={`${inter.variable} ${plexMono.variable} min-h-screen bg-[var(--color-surface)] font-sans text-[var(--color-ink)] antialiased`}
+        className={`${dmSans.variable} ${outfit.variable} ${plexMono.variable} ${nunito.variable} min-h-screen bg-[var(--color-surface)] font-sans text-[var(--color-ink)] antialiased`}
       >
         {children}
       </body>

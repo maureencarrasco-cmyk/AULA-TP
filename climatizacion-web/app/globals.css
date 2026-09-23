@@ -42,6 +42,24 @@ body {
   font-family: var(--aula-font);
 }
 
+/* Portal Docente: lectura amable, redondeada y contemporánea. */
+.portal-main,
+.portal-main button,
+.portal-main input,
+.portal-main select,
+.portal-main textarea {
+  font-family: var(--font-rounded), "Nunito", var(--font-sans);
+  letter-spacing: -0.005em;
+}
+
+.portal-main h1,
+.portal-main h2,
+.portal-main h3,
+.portal-main h4 {
+  font-family: var(--font-rounded), "Nunito", var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
 :focus-visible {
   outline: 2px solid var(--color-cyan);
   outline-offset: 2px;
