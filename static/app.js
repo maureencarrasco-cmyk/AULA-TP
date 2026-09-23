@@ -191,7 +191,7 @@ function courseList(){
  const allModules=courses.flatMap(course=>course.modules||[]);
  const progress=allModules.length?Math.round(allModules.reduce((sum,module)=>sum+(module.percent||0),0)/allModules.length):0;
  const unavailable='Esta especialidad se incorporará cuando tenga contenidos curriculares validados.';
- const tones={climate:'green',electricidad:'blue',enfermeria:'pink'};
+ const tones={climate:'green',electricidad:'blue',enfermeria:'pink',gastronomia:'orange',hoteleria:'mint'};
  const realCourses=courses.map(course=>({
   name:course.title,area:course.specialty,image:specialtyCover(course),
   pct:course.modules?.length?Math.round(course.modules.reduce((sum,module)=>sum+(module.percent||0),0)/course.modules.length):0,
@@ -200,7 +200,6 @@ function courseList(){
  }));
  const specialties=[...realCourses,
   {name:'Mantenimiento de Vehículos Automotores',area:'Mecánica Automotriz',image:'/static/themes/equipment.png',pct:15,tone:'violet',action:'Continuar'},
-  {name:'Gastronomía',area:'Gastronomía',image:'/static/themes/cases/06-cocina.png',pct:10,tone:'orange',action:'Continuar'},
   {name:'Construcción y Obras Civiles',area:'Construcción',image:'/static/themes/cases/07-obra.png',pct:5,tone:'mint',action:'Continuar'}
  ];
  const courseCards=specialties.map(item=>`<article class="dash-course-card tone-${item.tone}${item.href?' is-available':''}"${item.href?` data-course-href="${item.href}" role="link" tabindex="0" aria-label="Abrir ${esc(item.name)}"`:''}><div class="dash-course-photo"><img src="${item.image}" alt="Contexto profesional de ${esc(item.area)}"><span>${esc(item.level||'III medio')}</span><button type="button" data-dashboard-message="${item.available?'Opciones del curso disponibles dentro de la ruta.':'Especialidad demostrativa sin contenido publicado.'}" aria-label="Opciones de ${esc(item.name)}">•••</button></div><div class="dash-course-body"><small>${esc(item.area)}</small><h3>${esc(item.name)}</h3><p>${item.modules||4} módulos | 5 estaciones</p><div class="progress-label"><span>Tu progreso</span><b>${item.pct}%</b></div><progress value="${item.pct}" max="100"></progress>${item.href?`<a class="dash-course-action" href="${item.href}">${esc(item.action)} ${icon('arrow')}</a>`:`<button class="dash-course-action" type="button" data-dashboard-message="${esc(unavailable)}">${esc(item.action)} ${icon('arrow')}</button>`}</div></article>`).join('');

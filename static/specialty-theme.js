@@ -8,6 +8,8 @@ function specialtyKey(course) {
   if (/refrigeraci[oó]n|climatizaci[oó]n/i.test(s)) return 'climate';
   if (/electricidad|el[eé]ctric/i.test(s)) return 'electricidad';
   if (/enfermer/i.test(s)) return 'enfermeria';
+  if (/gastronom|pasteler|reposter/i.test(s)) return 'gastronomia';
+  if (/hoteler/i.test(s)) return 'hoteleria';
   if (/administraci[oó]n|contabil|oficina|gesti[oó]n/i.test(s)) return 'administracion';
   return 'general';
 }
@@ -26,6 +28,8 @@ function climateModuleArt() {
 }
 function specialtyCover(course) {
   if (isClimateSpecialty(course)) return oficioPng('oficio-equipo-ctrl');
+  if (specialtyKey(course) === 'gastronomia') return '/static/themes/cases/06-cocina.png';
+  if (specialtyKey(course) === 'hoteleria') return '/static/themes/cases/04-hotel.png';
   return `/static/headers/${specialtyKey(course)}/e1.png?v=3`;
 }
 function climateHeroArt() {
@@ -49,6 +53,7 @@ const MODULE_OFICIO_ALTS = {
 function moduleStopArt(course, index) {
   const key = specialtyKey(course);
   if (key === 'climate') return MODULE_OFICIO[index % MODULE_OFICIO.length];
+  if (key === 'gastronomia' || key === 'hoteleria') return (typeof current !== 'undefined' && current?.content?.scene?.image) || specialtyCover(course);
   return `/static/headers/${key}/e${(index % 5) + 1}.png?v=3`;
 }
 function journeyGoalArt(course) {
@@ -131,6 +136,7 @@ function stationHeaderArt(n, course, aeIndex) {
     return climateModuleArt();
   }
   const key = specialtyKey(course);
+  if (key === 'gastronomia' || key === 'hoteleria') return (typeof current !== 'undefined' && current?.content?.scene?.image) || specialtyCover(course);
   return `/static/headers/${key}/e${i}.png?v=3`;
 }
 function stationHeaderPhoto(n, course) {

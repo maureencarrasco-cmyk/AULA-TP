@@ -286,6 +286,8 @@ def upgrade_catalog(con):
     _apply_mineduc_3medio(con)
     from specialty_catalog import install_specialty_courses
     install_specialty_courses(con)
+    from hospitality_catalog import install_hospitality_courses
+    install_hospitality_courses(con)
     from refrigeration_fourth import install_refrigeration_fourth
     install_refrigeration_fourth(con)
 
