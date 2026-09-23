@@ -1,0 +1,1081 @@
+{
+  "gastronomia": [
+    {
+      "oa": [
+        {
+          "code": "OA 2",
+          "title": "Higienizar y limpiar materias primas, insumos, utensilios, equipos e infraestructura, utilizando productos químicos autorizados y cumpliendo con la normativa sanitaria vigente."
+        },
+        {
+          "code": "OA 6",
+          "title": "Monitorear el estado de materias primas, insumos y productos intermedios y finales, apoyándose en análisis físico- químicos, microbiológicos y sensoriales básicos de los mismos y aplicando técnicas y procedimientos de aseguramiento de calidad que permitan cumplir con los estándares de calidad e inocuidad establecidos, conforme a la normativa vigente."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M1-AE1",
+          "title": "Higieniza insumos, utensilios, equipos, infraestructura y áreas de trabajo, de acuerdo al trabajo a realizar, considerando los protocolos de seguridad alimentaria establecidos en el Reglamento Sanitario de los Alimentos (RSA).",
+          "criteria": [
+            "1.1 Aplica el lavado de manos de manera prolija y rigurosa y utiliza el vestuario de acuerdo a lo establecido por el Reglamento Sanitario de los Alimentos.",
+            "1.2 Aplica técnicas de higiene en utensilios, equipos, infraestructura y áreas de trabajo, de acuerdo al reglamento sanitario vigente.",
+            "1.3 Dosifica productos químicos necesarios para higienizar los lugares, utensilios y equipos, de acuerdo a indicaciones del fabricante y considera los riesgos propios de la actividad y lo establecido en el RSA."
+          ]
+        },
+        {
+          "code": "M1-AE2",
+          "title": "Manipula materias primas, insumos, alimentos, de acuerdo a las normas de higiene de la legislación vigente, considerando y aplicando estándares de calidad, y previniendo situaciones de riesgo.",
+          "criteria": [
+            "2.1 Aplica principios de higiene para evitar contaminación, ya sea microbiológica, física o química, durante la manipulación de insumos y alimentos.",
+            "2.2 Realiza controles regulares, durante la manipulación de materias primas, insumos y alimentos para prevenir situaciones de riesgo de acuerdo a los protocolos establecidos.",
+            "2.3 investiga de manera regular sobre fuentes y focos de contaminación que se estén presentando en la actualidad, con el fin de anticipar situaciones de riesgo."
+          ]
+        },
+        {
+          "code": "M1-AE3",
+          "title": "Aplica los siete principios del sistema de Análisis de Peligros y Puntos Críticos de Control (HACCP, sigla en inglés) en los procesos productivos.",
+          "criteria": [
+            "3.1 interpreta correctamente el diagrama de flujo del producto a elaborar, en todas las etapas del proceso productivo.",
+            "3.2 Evalúan los peligros físicos, químicos y microbiológicos en los procesos de elaboración respaldándose en el RSA y los registran en las correspondientes etapas del diagrama de flujo.",
+            "3.3 Controla el proceso en los Puntos Críticos de Control [PCC] de las etapas productivas, de acuerdo a las indicaciones contenidas en el diagrama de flujo.",
+            "3.4 Regula el proceso en los límites críticos de temperatura y tiempo del proceso productivo, según lo indicado en el protocolo productivo.",
+            "3.5 Aplica las medidas correctivas para los procesos productivos previamente establecidas en el protocolo de HACCP.",
+            "3.6 Registra en una planilla HACCP, los datos observados en el proceso productivo, emitiendo y comunicando a quien corresponda los informes de control de calidad."
+          ]
+        },
+        {
+          "code": "M1-AE4",
+          "title": "Controla la calidad de las materias primas, insumos, productos intermedios y finales con los sistemas establecidos por la normativa vigente y/o manuales pre establecidos.",
+          "criteria": [
+            "4.1 Efectúa la toma de muestras y las rotula de acuerdo a las características de los productos, en el momento, lugar, forma y cuantía indicada, basado en las Normas Chilenas correspondientes al tipo de alimento que esté procesando (NCh 1426, NCh 1011/1, NCh 1479, etc.).",
+            "4.2 Traslada muestras hasta el laboratorio, asegurando su inalterabilidad de acuerdo a criterios establecidos en la Norma Chilena correspondiente al tipo de muestra.",
+            "4.3 Analiza las muestras aplicando los procedimientos correspondientes (uso de pHmetro, refractómetro, control de humedad, control visual, etc.) y compara resultados con los estándares establecidos.",
+            "4.4 Rotula las fechas y observaciones de validez para el uso o consumo de los productos, según el alimento y su tratamiento."
+          ]
+        }
+      ],
+      "source_page": 47,
+      "title": "Higiene para la elaboración de alimentos",
+      "hp": 228,
+      "year": "3° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 3",
+          "title": "Elaborar productos de baja complejidad gastronómica utilizando equipos y utensilios para procesar las materias primas e insumos requeridos."
+        },
+        {
+          "code": "OA 5",
+          "title": "Elaborar alimentos de baja complejidad considerando productos o técnicas de base de acuerdo a lo indicado en la ficha técnica y/o en las instrucciones de la jefatura de cocina, aplicando técnicas de corte y cocción, utilizando equipos y utensilios, controlando los parámetros de temperatura y humedad mediante instrumentos apropiados."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M2-AE1",
+          "title": "Organiza equipos y utensilios, considerando uso, volumen de producción y normas de higiene y prevención de riesgos.",
+          "criteria": [
+            "1.1 Clasifica equipos y utensilios, teniendo en cuenta su uso y su capacidad considerando las indicaciones de la ficha técnica.",
+            "1.2 Selecciona equipos y utensilios de acuerdo a la producción que tenga que realizar, considerando las indicaciones de la ficha técnica.",
+            "1.3 Higieniza equipos y utensilios utilizando productos adecuados a cada maquinaria o utensilio, de acuerdo a la normativa del reglamento sanitario."
+          ]
+        },
+        {
+          "code": "M2-AE2",
+          "title": "Elabora productos gastronómicos fríos y calientes, con materias primas de origen vegetal o animal, utilizando equipos y utensilios, aplicando normas de higiene y de prevención de riesgos.",
+          "criteria": [
+            "2.1 Elabora ensaladas básicas nacionales e internacionales, de acuerdo a ficha técnica, utilizando equipos y utensilios apropiados, aplicando la higiene, cumpliendo con los estándares de calidad, distribuyendo las tareas en grupo de trabajo, haciendo uso eficiente de los insumos.",
+            "2.2 Elabora sopas y cremas básicas, nacionales e internacionales, de acuerdo a ficha técnica, aplicando la higiene, cumpliendo con el tiempo establecido, y los estándares de calidad, distribuyendo las tareas en grupo de trabajo, haciendo uso eficiente de los insumos."
+          ]
+        },
+        {
+          "code": "M2-AE3",
+          "title": "Aplica técnicas de cortes en alimentos de origen vegetal, aplicando las normas de higiene, haciendo uso eficiente de los insumos y disponiendo de los desechos de forma responsable, considerando la prevención de los riesgos propios de la actividad.",
+          "criteria": [
+            "3.1 Clasifica y selecciona alimentos de origen vegetal, de acuerdo a la clasificación, cumpliendo con los estándares de calidad y aplicando las normas de higiene necesarias para la inocuidad de los alimentos.",
+            "3.2 Selecciona utensilios para aplicar cortes, considerando la higienización de cada uno de ellos, así como también la prevención de los riesgos propios de la utilización de cuchillos.",
+            "3.3 Aplica distintos tipos de cortes, de acuerdo a instrucciones, considerando las medidas de higiene durante todas las etapas del proceso, haciendo uso eficiente de los recursos, y previniendo los riesgos asociados a la actividad."
+          ]
+        },
+        {
+          "code": "M2-AE4",
+          "title": "Aplica técnicas de cocción en distintos alimentos, de acuerdo al sistema productivo, aplicando las normas de higiene necesarias para la inocuidad de los alimentos, haciendo uso eficiente de los insumos y disponiendo de los desechos de forma responsable.",
+          "criteria": [
+            "4.1 Elabora productos aplicando distintos métodos de cocción por expansión: hervir, pochar, blanquear, al vapor; aplicando higiene durante todas las etapas del proceso, haciendo un uso eficiente de los recursos, y previniendo los riesgos asociados a la actividad.",
+            "4.2 Elabora productos aplicando distintos métodos de cocción por concentración: freír, asar, plancha, saltear, gratinar; aplicando higiene durante todas las etapas del proceso, haciendo un uso eficiente de los recursos, y previniendo los riesgos asociados a la actividad.",
+            "4.3 Elabora productos aplicando distintos métodos de cocción por temperaturas combinadas: estofar, guisar, brasear; aplicando higiene durante todas las etapas del proceso, haciendo un uso eficiente de los recursos, y previniendo los riesgos asociados a la actividad."
+          ]
+        },
+        {
+          "code": "M2-AE5",
+          "title": "Elabora platos de la cocina básica nacional e internacional, fríos y calientes, utilizando la ficha técnica y aplicando normas de higiene necesarias para la inocuidad de los alimentos, haciendo un uso eficiente de los insumos y disponiendo de los desechos de forma responsable.",
+          "criteria": [
+            "5.1 Clasifica y utiliza las funciones de ayuda de cocina; estructuradores de sabores y aroma, fondos, agentes espesantes, refinadores, aplicando higiene, realizando un trabajo prolijo, de acuerdo a instrucciones dadas, haciendo uso eficiente de los recursos, previniendo los riesgos asociados a la actividad.",
+            "5.2 Elabora fondos de base: blanco de vacuno, blanco de ave, blanco de pescado, fondo de verduras, fondo oscuro, aplicando normas de higiene y seguridad durante todas las etapas del proceso, realizando un trabajo prolijo, de acuerdo a instrucciones dadas, y haciendo uso eficiente de los recursos.",
+            "5.3 Elabora salsas de base: salsa española, salsa mayonesa, holandesa, bernesa, blancas, de tomates, dressing, salsas de base oscura: salsas blancas, de mantequilla, aplicando normas de higiene, cumpliendo con el tiempo establecido y cumpliendo con los estándares de calidad, haciendo uso eficiente de los insumos.",
+            "5.4 Elabora platos principales, de acuerdo a ficha técnica, aplicando normas de higiene, cumpliendo con el tiempo establecido, y los estándares de calidad, distribuyendo las tareas en grupo de trabajo, haciendo uso eficiente de los insumos.",
+            "5.5 Elabora postres básicos nacionales e internacionales, de acuerdo a ficha técnica, aplicando la higiene, cumpliendo con el tiempo establecido, con los estándares de calidad, distribuyendo las tareas en grupo de trabajo, haciendo uso eficiente de los insumos.",
+            "5.6 Elabora productos de pastelería básica, como masas batidas y quebradas, cumpliendo con el tiempo establecido, cumpliendo con los estándares de calidad, distribuyendo las tareas en grupo de trabajo, y haciendo uso eficiente de los insumos."
+          ]
+        },
+        {
+          "code": "M2-AE6",
+          "title": "Prepara alimentos de acuerdo a las especificaciones y dietas indicadas en la ficha técnica y /o por la jefatura directa, considerando las normas de higiene necesarias para la inocuidad de los alimentos, cumpliendo con los estándares de calidad, realizando las tareas de forma prolija, haciendo uso eficiente de los insumos y disponer de los desechos de forma responsable.",
+          "criteria": [
+            "6.1 Clasifica alimentos de acuerdo a los requerimientos nutricionales, considerando la normativa del RSA.",
+            "6.2 investiga sobre las dietas que se elaboran en base a indicaciones de fichas técnicas y requerimientos nutricionales.",
+            "6.3 Elabora fichas técnicas de dietas, de acuerdo a los requerimientos nutricionales del cliente, considerando las normas establecidas en el RSA.",
+            "6.4 Elabora preparaciones, siguiendo las instrucciones dadas en fichas técnicas, de acuerdo a los requisitos nutricionales, considerando las normas de higiene necesarias para la producción de alimentos inocuos."
+          ]
+        }
+      ],
+      "source_page": 57,
+      "title": "Elaboración de alimentos de baja complejidad",
+      "hp": 228,
+      "year": "3° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 1",
+          "title": "Solicitar, recepcionar, almacenar y rotular materias primas, insumos y materiales, aplicando los procedimientos establecidos y sistemas digitales y manuales de inventario para responder a los requerimientos de los servicios gastronómicos."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M3-AE1",
+          "title": "Solicita insumos y productos, de acuerdo a los requerimientos de la producción, considerando indicaciones específicas del pedido.",
+          "criteria": [
+            "1.1 Selecciona proveedores, de acuerdo a las necesidades de adquisición de materias primas y a instrucciones entregadas por sus jefaturas.",
+            "1.2 Solicita materias primas, de acuerdo a las necesidades y requerimientos de la empresa, manteniendo los estándares de calidad definidos en la orden de compra.",
+            "1.3 Completa formularios de solicitud de materias primas, ya sea impresos u online, de acuerdo a los requerimientos de los proveedores y exigencias de la compra."
+          ]
+        },
+        {
+          "code": "M3-AE2",
+          "title": "Recepciona mercadería, de acuerdo a protocolos definidos, considerando las normas establecidas en el Reglamento Sanitario de los Alimentos, aplicando estándares de calidad.",
+          "criteria": [
+            "2.1 Controla la calidad de los productos que ingresan de acuerdo a lo solicitado y respetando las normas del Reglamento Sanitario de los Alimentos, considerando cantidad, calidad, temperatura y todas las características solicitadas.",
+            "2.2 Recibe productos que cumplen el estándar solicitado e ingresa información sobre ellos en registros manuales o digitales definidos.",
+            "2.3 Rotula materias primas, insumos y materiales, de acuerdo a lo estipulado en el Reglamento Sanitario de los Alimentos, considerando las características de identificación; gramaje, naturaleza, fechas de elaboración ingreso, y vencimiento, temperatura de almacenaje, etc."
+          ]
+        },
+        {
+          "code": "M3-AE3",
+          "title": "Almacena mercadería de acuerdo a la naturaleza del producto y protocolos establecidos, considerando las normas del Reglamento Sanitario de los Alimentos y normas de seguridad.",
+          "criteria": [
+            "3.1 Verifica que el lugar de almacenamiento se encuentre limpio y en condiciones adecuadas para el almacenaje, de acuerdo a reglamento sanitario y a los requerimientos de cada producto.",
+            "3.2 Almacena los alimentos y productos ordenadamente y de acuerdo a su naturaleza: perecibles y semiperecibles, insumos y materiales considerando la norma del RSA.",
+            "3.3 Supervisa regularmente que el almacenaje se mantenga en las condiciones higiénicas y de ventilación necesarias para la adecuada conservación de los productos."
+          ]
+        }
+      ],
+      "source_page": 69,
+      "title": "Recepción y almacenamiento de insumos",
+      "hp": 76,
+      "year": "3° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 4",
+          "title": "Ordenar, organizar y disponer los productos intermedios, insumos, equipos y utensilios, de acuerdo con sus características organolépticas, al proceso de elaboración gastronómica y a las normativas de higiene e inocuidad."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M4-AE1",
+          "title": "Selecciona insumos, utensilios y equipos, de acuerdo al tipo de producción a elaborar, considerando las normas de higiene necesarias para la inocuidad de los alimentos.",
+          "criteria": [
+            "1.1 Organiza insumos, de acuerdo a la naturaleza, considerando la producción a elaborar, aplicando durante todo el proceso la normativa de higiene.",
+            "1.2 Selecciona utensilios y equipos, de acuerdo a la naturaleza de la producción a elaborar, aplicando permanentemente normas de higiene."
+          ]
+        },
+        {
+          "code": "M4-AE2",
+          "title": "Planifica la producción de acuerdo a la ficha técnica, considerando los estándares de calidad y realizando las tareas de forma prolija.",
+          "criteria": [
+            "2.1 Construye mapa con secuencias de elaboración y distribución de actividades, considerando los tiempos de preparación de productos que requieren cocciones prolongadas (carnes, helados, bavarois, etc.), aplicando las normas establecidas en el Reglamento Sanitario de los Alimentos RSA.",
+            "2.2 Programa las tareas de acuerdo a la ficha técnica, ciñéndose a las normas establecidas en el Reglamento Sanitario de los Alimentos, y en el formato definido para ello."
+          ]
+        },
+        {
+          "code": "M4-AE3",
+          "title": "Realiza mise en place de insumos alimenticios y utensilios, de acuerdo a la producción, aplicando las normas de higiene necesarias, actuando con prolijidad para prevenir riesgos ocupacionales y de los clientes.",
+          "criteria": [
+            "3.1 Selecciona utensilios e insumos alimenticios, de acuerdo a la planificación de la producción, considerando las normas de higiene necesarias para la inocuidad de los alimentos.",
+            "3.2 Realiza mise en place a insumos alimenticios, practicando cortes, de acuerdo a la ficha técnica y a los estándares establecidos a productos de origen animal y vegetal, considerando las normas de higiene y la prevención de los riesgos asociados.",
+            "3.3 Devuelve los utensilios utilizados de acuerdo al protocolo de limpieza, higiene y uso, a los lugares de acopio correspondientes."
+          ]
+        }
+      ],
+      "source_page": 81,
+      "title": "Planificación de la producción gastronómica",
+      "hp": 76,
+      "year": "3° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 7",
+          "title": "Armar, decorar y presentar distintos tipos de productos gastronómicos, utilizando técnicas culinarias básicas para servirlos, de acuerdo con las indicaciones de recetas, protocolo y tipo de servicio solicitado."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M5-AE1",
+          "title": "Planifica la decoración y presentación de productos, considerando las técnicas culinarias, los tiempos de preparación y el tipo de servicio solicitado.",
+          "criteria": [
+            "1.1 Clasifica distintos tipos de decoraciones que se utilizan en presentaciones de platos, considerando las normas internacionales.",
+            "1.2 Construye secuencias para la decoración y presentación de los productos gastronómicos, considerando los tiempos y tipos de servicios en los cuales se aplicarán."
+          ]
+        },
+        {
+          "code": "M5-AE2",
+          "title": "Elabora y realiza montaje de platos, aplicando normas de presentación, de acuerdo al tipo de menú o carta y tipo de servicio, considerando las normas de higiene necesarias para la producción de alimentos inocuos, haciendo uso eficiente de los insumos y disponiendo de los desechos de manera responsable.",
+          "criteria": [
+            "2.1 Prepara platos, aplicando normas internacionales de presentación, de acuerdo al tipo de servicio, equilibrio, unidad, punto focal, flujo, considerando normas de equilibrio para la presentación de los platos. Aplicando las normas de higiene, realizando un trabajo prolijo, haciendo uso eficiente de los insumos y disponiendo los desechos de forma responsable.",
+            "2.2 Monta platos; utilizando tonos tierras y colores brillantes, combinando diversas texturas, diferentes sabores, diferentes métodos de cocción, considerando las normas de higiene, el trabajo en equipo, el manejo de desechos y haciendo uso eficiente de los insumos.",
+            "2.3 Elabora productos de coctelería, fríos y calientes, aplicando las normas de internacionales de presentación y aplicando higiene en cada proceso."
+          ]
+        },
+        {
+          "code": "M5-AE3",
+          "title": "Diseña y monta diferentes tipos de buffet, de acuerdo a lo solicitado por el cliente, considerando las normas de higiene necesarias para la inocuidad de los alimentos, el personal necesario para el evento, produciendo un trabajo en equipo.",
+          "criteria": [
+            "3.1 Diseña distintos tipos de buffet, considerando los requisitos del cliente.",
+            "3.2 Realiza decoraciones para disponer en un buffet; tallados, esculturas en hielo, arreglos de frutas y florales, etc., considerando las normas de higiene y los riesgos propios de la actividad.",
+            "3.3 Monta secuencialmente las preparaciones en un buffet, de acuerdo a las características de él, armando bandejas de presentación, cumpliendo con los plazos establecidos, logrando un trabajo en equipo, cumpliendo con los estándares de calidad."
+          ]
+        }
+      ],
+      "source_page": 91,
+      "title": "Preparación, diseño y montaje de buffet",
+      "hp": 152,
+      "year": "3° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 8",
+          "title": "Disponer los implementos, ornamentos y utensilios en comedores, bares y salones de acuerdo con las características del evento o servicio a entregar, aplicando principios estéticos de higiene y de calidad."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M6-AE1",
+          "title": "Selecciona implementos, ornamentos y utensilios, de acuerdo al tipo de servicio a entregar, considerando las normas de higiene.",
+          "criteria": [
+            "1.1 Clasifica tipos de eventos, servicios y montajes, de acuerdo al objetivo y destinatarios de ellos, considerando el personal necesario para llevarlo a cabo.",
+            "1.2 Selecciona bigfour (mantelería, utensilios, petit menage, cristalería, cubiertos y lozas), de acuerdo al tipo de servicio y montaje que ofrecerá, considerando las normas establecidas, los requerimientos del cliente y protocolo internacional."
+          ]
+        },
+        {
+          "code": "M6-AE2",
+          "title": "Decora, con los implementos, ornamentos y utensilios seleccionados, los lugares definidos de acuerdo al tipo de servicio a entregar, considerando las normas de higiene, realizando un trabajo prolijo, y en equipo.",
+          "criteria": [
+            "2.1 Diseña montajes de lugares, de acuerdo al evento a realizar, considerando las normas de higiene, de protocolo y de prevención de riesgos.",
+            "2.2 Realiza el montaje de mesas de acuerdo al servicio a realizar, considerando elementos complementarios, como iluminación, arreglos florales, u otros, sin descuidar las normas de protocolo y las instrucciones recibidas.",
+            "2.3 Realiza las tareas de manera prolija y coordinada con otros puestos de trabajo considerando el tipo de evento."
+          ]
+        }
+      ],
+      "source_page": 101,
+      "title": "Servicio de comedores, bares y salones",
+      "hp": 76,
+      "year": "3° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 1",
+          "title": "Preparar una variedad de platos de cocina básica, de preparación rápida y lenta, de acuerdo a los gustos y costumbres culinarias de diversas zonas del país, así como de requerimientos de alimentación saludable, cumpliendo estándares de calidad."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M7-AE1",
+          "title": "Selecciona distintos tipos de productos típicos de la cocina chilena, considerando las zonas del país y la estacionalidad.",
+          "criteria": [
+            "1.1 Clasifica ingredientes y utensilios tradicionales de la cocina chilena, considerando la evolución histórica de la cocina. C",
+            "1.2 Selecciona y clasifica ingredientes típicos de la cocina chilena de las distintas zonas del país."
+          ]
+        },
+        {
+          "code": "M7-AE2",
+          "title": "Elabora preparaciones de la cocina tradicional chilena, propias de la zona norte, centro y sur del país, aplicando la higiene y los estándares de calidad requeridos.",
+          "criteria": [
+            "2.1 Elabora platos de la cocina tradicional chilena, considerando las características propias del territorio.",
+            "2.2 Aplica técnicas de higiene en todas las etapas del proceso, realizando un trabajo prolijo y cumpliendo con los estándares de calidad.",
+            "2.3 Organiza funciones y tareas a desarrollar por cada participante, para no interferir en el trabajo de otros."
+          ]
+        },
+        {
+          "code": "M7-AE3",
+          "title": "Elabora preparaciones de la cocina tradicional chilena, de las distintas zonas del país, considerando los requerimientos de alimentación saludable, aplicando la higiene y los estándares de calidad requeridos.",
+          "criteria": [
+            "3.1 investiga los requerimientos de una alimentación saludable, considerando las necesidades nutricionales propias de nuestro país.",
+            "3.2 Prepara platos típicos de la cocina chilena, utilizando alimentos de características saludables, aplicando las normas de higiene."
+          ]
+        }
+      ],
+      "source_page": 111,
+      "title": "Cocina chilena",
+      "hp": 228,
+      "year": "4° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 2",
+          "title": "Preparar productos gastronómicos básicos de cocina internacional, de países como Perú, México, China, Francia, italia, entre otros, cumpliendo especificaciones y estándares de calidad."
+        },
+        {
+          "code": "OA 4",
+          "title": "introducir variaciones en las recetas de productos gastronómicos de la cocina básica y/o en la manera de servirlos, buscando mejorar sabores y texturas para adaptarlas al gusto de una demanda diversa."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M8-AE1",
+          "title": "Clasifica los productos propios de la cocina de países tales como; Perú, China, México, Francia, italia, entre otros, participando de diversas situaciones de aprendizaje, considerando un trabajo prolijo.",
+          "criteria": [
+            "1.1 investiga sobre las características culinarias de países como Perú, China, México, Francia, i talia, entre otros, considerando las tradiciones culinarias de cada región.",
+            "1.2 Selecciona y clasifica productos y técnicas representativos de Perú, México, Chine, Francia, italia y Japón, considerando la cultura de cada país."
+          ]
+        },
+        {
+          "code": "M8-AE2",
+          "title": "Elabora platos de la cocina internacional de mayor presencia en Chile, como México, China, Perú, Japón, Francia e italia, considerando las normas de higiene necesarias para la inocuidad de los alimentos, cumpliendo con los estándares de calidad, realizando las tareas de forma prolija, haciendo uso eficiente de los insumos y disponer de los desechos de forma responsable.",
+          "criteria": [
+            "2.1 Realiza mise en place de insumos y utensilios, considerando lo que indica la ficha técnica y aplicando las normas higiénicas establecidas en el Reglamento Sanitario de los Alimentos.",
+            "2.2 Elabora platos de la cocina de Perú, México, Chine, Francia, italia y Japón, considerando las características propias de cada territorio, resguardando las características originarias de las recetas de cada país, haciendo uso eficiente de los insumos, aplicando técnicas de higiene, y coordinando acciones con otros.",
+            "2.3 Realiza presentaciones de los platos elaborados de los distintos países, considerando la cultura de cada país, la que se debe ver reflejada en la decoración, aplicando además las normas de higiene y realizando trabajo en equipo."
+          ]
+        },
+        {
+          "code": "M8-AE3",
+          "title": "Elabora productos gastronómicos, aplicando técnicas innovadoras en la producción, considerando las normas de higiene y realizando las tareas de forma prolija, cumpliendo con los estándares de calidad, haciendo uso eficiente de los insumos, previniendo situaciones de riesgo.",
+          "criteria": [
+            "3.1 investiga las técnicas y nuevas tendencias de la cocina moderna, considerando las normas internacionales.",
+            "3.2 Prepara productos gastronómicos, introduciendo tendencias innovadoras de la cocina internacional, considerando las normas de higiene y la prevención de riesgos propios de la actividad, trabajando en equipo y coordinando las acciones con otros en las tareas a realizar."
+          ]
+        },
+        {
+          "code": "M8-AE4",
+          "title": "Aplica técnicas innovadoras de decoración y montaje, para mejorar sabores, texturas y presentaciones en productos gastronómicos de la cocina básica, considerando las normas de higiene necesarias para la inocuidad de los alimentos y realizando las tareas de forma prolija, cumpliendo con los estándares de calidad, haciendo uso eficiente de los insumos, previniendo situaciones de riesgo.",
+          "criteria": [
+            "4.1 Realiza decoraciones a preparaciones de productos gastronómicos de la cocina básica, aplicando técnicas innovadoras, considerando la higiene necesaria para obtener productos inocuos y trabajando en equipo y coordinando las acciones con otros en las tareas a realizar.",
+            "4.2 Realiza montajes de platos aplicando técnicas innovadoras, considerando los estándares de calidad y las normas internacionales."
+          ]
+        }
+      ],
+      "source_page": 121,
+      "title": "Innovación y cocina internacional",
+      "hp": 228,
+      "year": "4° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 3",
+          "title": "Preparar diversos cocteles de consumo habitual con bebidas alcohólicas y no alcohólicas, de acuerdo a recetas nacionales e internacionales."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M9-AE1",
+          "title": "Elabora bebestibles alcohólicos, de acuerdo al recetario nacional e internacional, considerando las normas de higiene necesarias para inocuidad de los productos, haciendo uso eficiente de los insumos, trabajando de forma coordinada.",
+          "criteria": [
+            "1.1 investiga y clasifica los productos que se pueden utilizar para la elaboración de cocteles alcohólicos, considerando las fichas técnicas.",
+            "1.2 Realiza mise en place de utensilios y productos para la elaboración de los bebestibles, considerando las normas de higiene.",
+            "1.3 Elabora diversos bebestibles alcohólicos de acuerdo al recetario nacional e internacional, considerando las normas de higiene y el trabajo en equipo."
+          ]
+        },
+        {
+          "code": "M9-AE2",
+          "title": "Elabora cocteles con bebidas analcohólicas, de acuerdo al recetario nacional e internacional, aplicando las normas de higiene.",
+          "criteria": [
+            "2.1 investiga y clasifica los productos que se pueden utilizar para la elaboración de cocteles analcohólicos, considerando las fichas técnicas.",
+            "2.2 Realiza mise en place de utensilios e insumos para la elaboración de cocteles, aplicando normas de higiene.",
+            "2.3 Elabora cocteles analcohólicos, considerando las fichas técnicas, aplicando estándares de calidad."
+          ]
+        }
+      ],
+      "source_page": 131,
+      "title": "Elaboración de bebidas alcohólicas y analcohólicas",
+      "hp": 152,
+      "year": "4° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 5",
+          "title": "Elaborar cartas y menús para servicios y establecimientos de consumo frecuente o masivo, que consideren la estación del año, el tipo de cliente y sus requerimientos nutricionales, la disponibilidad de los insumos."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M10-AE1",
+          "title": "Diseña menú, teniendo en cuenta tipo de servicio y establecimiento, considerando la estacionalidad, tipo de cliente, y requerimientos nutricionales.",
+          "criteria": [
+            "1.1 Clasifica distintos los tipos de menús, considerando los servicios gastronómicos: alimentación colectiva, restaurantes, etc.",
+            "1.2 Calcula los requerimientos nutricionales que se deben considerar al elaborar menús, teniendo en cuenta el tipo de cliente, la actividad que desarrolla y el rango de edad.",
+            "1.3 Diseña menú, considerando el tipo de servicio, alimentación colectiva, restaurantes, etc., las demandas de los clientes, las normas internacionales de elaboración de menú, los requisitos nutricionales, aplicando técnicas de redacción, y normas de presentación gráfica."
+          ]
+        },
+        {
+          "code": "M10-AE2",
+          "title": "Diseña cartas, de acuerdo al establecimiento, al tipo de servicio, aplicando las normas de higiene necesarias para la inocuidad de los alimentos y realizando las tareas de forma prolija, cumpliendo con los estándares de calidad.",
+          "criteria": [
+            "2.1 Clasifica las distintas cartas, que se presentan en los servicios gastronómicos de acuerdo a su tipo.",
+            "2.2 Diseña Cartas, aplicando técnicas de redacción, considerando las normas de presentación, tipo de servicio y demanda de los clientes."
+          ]
+        }
+      ],
+      "source_page": 137,
+      "title": "Elaboración de menús y carta",
+      "hp": 152,
+      "year": "4° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 1",
+          "title": "Elaborar masas y pastas para la obtención de productos de pastelería-repostería básicos, de acuerdo a lo establecido en la formulación de recetas."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M11-AE1",
+          "title": "Elabora diferentes tipos de panes, de acuerdo a lo establecido en la receta, haciendo un uso eficiente de los insumos y recursos, manteniendo una actitud de acuerdo al trabajo realizado.",
+          "criteria": [
+            "1.1 Realiza mise en place de insumos y utensilios, de acuerdo a las fichas técnicas, aplicando higiene y prevención de riesgos.",
+            "1.2 Elabora distintas masas de pan: masas blandas, masas duras, masas de tipo integral, masas del tipo francesas, de acuerdo a las fichas técnicas establecidas, considerando las técnicas apropiadas y las normas de higiene, resguardando el uso de los insumos de manera eficiente, y disponiendo los desechos de acuerdo a los procedimientos establecidos.",
+            "1.3 Hornea las distintas producciones de pan, considerando las temperaturas indicadas en las fichas técnicas y la prevención de riesgos propia de la actividad."
+          ]
+        },
+        {
+          "code": "M11-AE2",
+          "title": "Elabora pizza, de acuerdo a receta establecida y demanda local, haciendo un uso eficiente de los insumos y recursos, manteniendo una actitud de acuerdo al trabajo realizado.",
+          "criteria": [
+            "2.1 Elabora masas para pizza; tradicional, a la piedra, fugazza, y otras, de acuerdo a las fichas técnicas establecidas, considerando las técnicas apropiadas, las normas de higiene, resguardando el uso de los insumos de manera eficiente y disponiendo de los desechos, de acuerdo a los procedimientos establecidos.",
+            "2.2 Hornea las distintas masas, considerando las temperaturas indicadas en las fichas técnicas y la prevención de riesgos propia de la actividad."
+          ]
+        }
+      ],
+      "source_page": 147,
+      "title": "Elaboración de masas y pastas",
+      "hp": 228,
+      "year": "4° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 2",
+          "title": "Elaborar diferentes tipos de dulces, cremas y glaseados para componer y /o decorar productos de pastelería y repostería, de acuerdo a recetas."
+        },
+        {
+          "code": "OA 3",
+          "title": "Preparar y armar una variedad de tortas, pasteles y postres de consumo habitual, de acuerdo a los gustos y costumbres culinarias de diversas zonas del país, cumpliendo especificaciones y estándares de calidad."
+        },
+        {
+          "code": "OA 4",
+          "title": "Manejar máquinas, equipos e instrumental para la elaboración de pastelería y repostería básica, para llevar a cabo las actividades de preparación, montaje y decoración de los productos de pastelería y repostería."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M12-AE1",
+          "title": "Organiza maquinarias, equipos e instrumental de producción, de acuerdo a su función en la producción considerando el espacio disponible, la frecuencia de uso y el tipo de limpieza y mantención que requieren.",
+          "criteria": [
+            "1.1 Clasifica el tipo de maquinaria, equipos e instrumental, de acuerdo a su función y tipo de limpieza que cada uno requiere.",
+            "1.2 Realiza limpieza de maquinaria, equipos e instrumental, considerando los productos químicos adecuados, sus dosificaciones y las medidas de prevención de riesgos propias dela actividad.",
+            "1.3 Distribuye los equipos, las maquinarias y el instrumental, dentro del espacio disponible en la cocina, considerando los riesgos propios de cada maquinaria (enchufes, salidas de agua, etc.)."
+          ]
+        },
+        {
+          "code": "M12-AE2",
+          "title": "Elabora productos de repostería, tales como semifríos, helados, postres de leche, en base a frutas y en base a masas, de acuerdo a fichas técnicas, normas de higiene, y haciendo uso eficiente de los equipos, maquinarias, instrumentos e insumos.",
+          "criteria": [
+            "2.1 Elabora semifríos, como bavarois, mousse, de acuerdo a ficha técnica, utilizando maquinarias apropiadas que permitan la conservación adecuada cumpliendo con los estándares de calidad e higiene.",
+            "2.2 Elabora postres congelados, tales como helados y sorbetes, utilizando la maquinaria adecuada para ello, considerando la ficha técnica y cumpliendo con los estándares de calidad y haciendo un uso eficiente de los insumos.",
+            "2.3 Elabora postres a base de leche; flanes, leche asada, leche nevada, sémola con leche, etc. de acuerdo a ficha técnica, utilizado eficientemente los insumos, equipos y maquinarias, de manera de asegurar la adecuada conservación e inocuidad, cumpliendo con los estándares de calidad y haciendo un uso eficiente de los insumos.",
+            "2.4 Elabora postres a base de masas; crepes, panqueques, repollitos, churros, etc., de acuerdo a ficha técnica, cumpliendo con los estándares de calidad y haciendo un uso eficiente de los insumos.",
+            "2.5 Elabora postres a base de frutas, como macedonias, ensaladas, compotas y mermeladas, de acuerdo a ficha técnica, cumpliendo con los estándares de calidad y haciendo un uso eficiente de los insumos."
+          ]
+        }
+      ],
+      "source_page": 155,
+      "title": "Elaboración de productos de repostería",
+      "hp": 114,
+      "year": "4° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 2",
+          "title": "Elaborar diferentes tipos de dulces, cremas y glaseados para componer y /o decorar productos de pastelería y repostería, de acuerdo a recetas."
+        },
+        {
+          "code": "OA 3",
+          "title": "Preparar y armar una variedad de tortas, pasteles y postres de consumo habitual, de acuerdo a los gustos y costumbres culinarias de diversas zonas del país, cumpliendo especificaciones y estándares de calidad."
+        },
+        {
+          "code": "OA 4",
+          "title": "Manejar máquinas, equipos e instrumental para la elaboración de pastelería y repostería básica, para llevar a cabo las actividades de preparación, montaje y decoración de los productos de pastelería y repostería."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M13-AE1",
+          "title": "Elabora bizcochos para tortas y pasteles, de acuerdo a fichas técnicas, considerando las técnicas apropiadas y las normas de higiene y haciendo uso eficiente de las maquinarias, equipos, instrumental e insumos, disponiendo cuidadosamente de los desechos.",
+          "criteria": [
+            "1.1 Elabora bizcochos para tortas y pasteles, de acuerdo a densidad; liviano, mediano, pesado, de acuerdo a ficha técnica, cumpliendo con los estándares de calidad y haciendo un uso eficiente de los insumos, equipos y maquinarias.",
+            "1.2 Elabora merengues de base para tortas y pasteles, según el tipo: suizo, japonés y francés, de acuerdo a ficha técnica, cumpliendo con los estándares de calidad y haciendo un uso eficiente de los insumos.",
+            "1.3 Prepara e higieniza maquinarias, equipos e implementos antes y después de su uso, con el fin de mantenerlos higienizados y en condiciones óptimas de uso."
+          ]
+        },
+        {
+          "code": "M13-AE2",
+          "title": "Elabora cremas para rellenar y cubrir y decorar; tortas, tartas y pasteles, según ficha técnica, considerando las técnicas apropiadas y las normas de higiene, haciendo uso eficiente de los insumos y disponiendo cuidadosamente de los desechos.",
+          "criteria": [
+            "2.1 Elabora cremas para rellenar tortas, tartas y pasteles; de acuerdo a las fichas técnicas establecidas, considerando las técnicas apropiadas y las normas de higiene, resguardando el uso de los insumos de manera eficiente, disponiendo de los desechos, de acuerdo a procedimientos establecidos.",
+            "2.2 Elabora cremas para para cubrir y decorar tortas, tartas y pasteles, de acuerdo a las fichas técnicas establecidas, y las normas de higiene, resguardando el uso de los insumos de manera eficiente, disponiendo de los desechos, de acuerdo a procedimientos establecidos."
+          ]
+        },
+        {
+          "code": "M13-AE3",
+          "title": "Rellena y decora tortas, tartas y pasteles, según ficha técnica o requerimientos del cliente, considerando las técnicas e instrumental apropiados, resguardando las normas de higiene, haciendo uso eficiente de los insumos, y eliminando los desechos en forma y lugares apropiados.",
+          "criteria": [
+            "3.1 Rellena tortas, tartas y pasteles, de acuerdo a normas internacionales, o requerimientos del cliente siguiendo las fichas técnicas, considerando las normas de higiene y utilizando insumos e instrumentos de manera eficiente, disponiendo de los desechos, de acuerdo a procedimientos establecidos.",
+            "3.2 Decora tortas, tartas y pasteles, de acuerdo a las normas internacionales y necesidades del cliente, siguiendo las fichas técnicas, considerando las normas de higiene."
+          ]
+        },
+        {
+          "code": "M13-AE4",
+          "title": "Elabora tartas dulces y saladas de acuerdo a receta establecida, necesidades del cliente, considerando las técnicas y equipos apropiados, resguardando las normas de higiene, y haciendo uso eficiente de los insumos, disponiendo cuidadosamente de los desechos.",
+          "criteria": [
+            "4.1 Elabora masa de tartas: brise y murbe, según ficha técnica, cumpliendo con los estándares de calidad y haciendo un uso eficiente de los insumos.",
+            "4.2 Elabora tartas dulces; tartaletas, pie, kuchen, etc., de acuerdo a ficha técnica, cumpliendo con los estándares de calidad y haciendo un uso eficiente de los insumos.",
+            "4.3 Elabora tartas saladas; quiche, tartas de verduras, de acuerdo a ficha técnica, cumpliendo con los estándares de calidad y haciendo un uso eficiente de los insumos."
+          ]
+        }
+      ],
+      "source_page": 165,
+      "title": "Elaboración de productos de pastelería",
+      "hp": 228,
+      "year": "4° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 5",
+          "title": "introducir variaciones en las recetas de productos de pastelería y repostería y/o la manera de servirlos, buscando mejorar sabores y texturas para adaptarlas al gusto de una demanda diversa."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M14-AE1",
+          "title": "Realiza innovaciones en recetas de pastelería y repostería, considerando normas de higiene, cumpliendo con los estándares de calidad, y haciendo uso eficiente de los insumos.",
+          "criteria": [
+            "1.1 introduce innovaciones en las fichas técnicas de productos de pastelería y repostería, considerando las normas internacionales.",
+            "1.2 Elabora productos de pastelería y repostería, introduciendo tendencias innovadoras, trabajando en equipo y coordinando las acciones con otros en las tareas a realizar."
+          ]
+        },
+        {
+          "code": "M14-AE2",
+          "title": "Aplica técnicas innovadoras, para presentaciones en productos de pastelería y repostería, considerando las normas de higiene, los estándares de calidad, haciendo un uso eficiente de los insumos y previniendo situaciones de riesgo.",
+          "criteria": [
+            "2.1 Realiza decoración y montaje de productos de pastelería, aplicando técnicas innovadoras, considerando la higiene necesaria para obtener productos inocuos y trabajando en equipo y coordinando las acciones con otros en las tareas a realizar.",
+            "2.2 Realiza decoración y montaje de productos de repostería, aplicando técnicas innovadoras, considerando la higiene necesaria para obtener productos inocuos y trabajando en equipo y coordinando las acciones con otros en las tareas a realizar."
+          ]
+        }
+      ],
+      "source_page": 175,
+      "title": "Innovación en la pastelería y repostería",
+      "hp": 190,
+      "year": "4° medio"
+    },
+    {
+      "oa": [],
+      "aes": [
+        {
+          "code": "M15-AE1",
+          "title": "Diseña y ejecuta un proyecto para concretar iniciativas de emprendimiento, identificando las acciones a realizar, el cronograma de su ejecución y los presupuestos, definiendo alternativas de financiamiento y evaluando y controlando su avance.",
+          "criteria": [
+            "1.1 Recolecta, organiza y analiza información para identificar oportunidades de emprendimiento en su propia comunidad y región, considerando diferentes ámbitos de aplicación (deporte, tecnología, medioambiente y energía, entre otros).",
+            "1.2 Evalúa las oportunidades de emprendimiento, tomando en cuenta sus fortalezas y debilidades, y considerando el contexto, los recursos existentes y las normativas vigentes relacionadas.",
+            "1.3 Formula los objetivos para un plan de acción de una iniciativa de emprendimiento personal, productivo o social, considerando las condiciones del entorno y personales.",
+            "1.4 Formula un presupuesto detallado, determinando los recursos (financieros, humanos, tecnológicos y otros) requeridos para el desarrollo de su iniciativa, los plazos y los factores externos que afectan su desarrollo.",
+            "1.5 Elabora un mecanismo de control de avance de su iniciativa de emprendimiento y evalúa las necesidades y las alternativas de financiamiento mediante aportes públicos y privados (créditos y ahorro).",
+            "1.6 Ejecuta las acciones para alcanzar los objetivos planteados según la planificación realizada, perseverando pese a circunstancias adversas, evaluando los resultados y las amenazas, ajustando sus acciones para asegurar el éxito y compartiendo su experiencia con otros.",
+            "1.6 Ejecuta las acciones para alcanzar los objetivos planteados según la planificación realizada, perseverando pese a circunstancias adversas, evaluando los resultados y las amenazas, ajustando sus acciones para asegurar el éxito y compartiendo su experiencia con otros."
+          ]
+        },
+        {
+          "code": "M15-AE2",
+          "title": "Maneja la legislación laboral y previsional chilena como marco regulador de las relaciones entre trabajadores y empleadores, identificando los derechos y deberes de ambas partes, tanto individuales como colectivos, y la reconoce como base para establecer buenas relaciones laborales.",
+          "criteria": [
+            "2.1 Selecciona la información relevante sobre los derechos laborales y previsionales de los trabajadores garantizados por la Constitución y el Código del Trabajo, para su propia contratación o de terceros a su cargo.",
+            "2.2 Determina elementos críticos de diversos tipos de contratos y de finiquitos, considerando la legislación laboral vigente. B F C",
+            "2.3 Elabora propuestas de creación y desarrollo de organización sindical de acuerdo a la realidad de diferentes tipos de empresas, respetando la legislación vigente y la defensa de los derechos de los trabajadores."
+          ]
+        },
+        {
+          "code": "M15-AE3",
+          "title": "Prepara los elementos necesarios para participar de un proceso de incorporación al mundo del trabajo, valorando y planificando su trayectoria formativa y laboral.",
+          "criteria": [
+            "3.1 Sistematiza información desde organismos y empresas especializadas en intermediación laboral que existen en su entorno, analizando las perspectivas laborales, sus propias condiciones laborales y las normativas relacionadas.",
+            "3.2 Elabora correctamente los documentos necesarios para iniciar una actividad laboral, como el curriculum vitae, reuniendo evidencias de cursos realizados, experiencia laboral previa y cartas de recomendación, y visualizando sus alternativas de acuerdo a sus expectativas y condiciones.",
+            "3.3 Prepara las entrevistas y las situaciones de ingreso y promoción, identificando a personas e instituciones que pueden brindarle apoyo en este proceso.",
+            "3.4 Evalúa si la remuneración mensual o semanal y el finiquito se han determinado de acuerdo al tipo de contrato firmado y a la legislación laboral vigente.",
+            "3.5 Selecciona la institución y la modalidad conveniente para su cobertura de salud y pensión, además del seguro de desempleo que le corresponde de acuerdo a su contrato y derechos, y lleva a cabo los trámites de afiliación."
+          ]
+        },
+        {
+          "code": "M15-AE4",
+          "title": "Selecciona alternativas de capacitación y de educación superior para fortalecer sus competencias o desarrollar nuevas y adquirir certificaciones, ya sea e-learning o presenciales, evaluando las diversas opciones de financiamiento.",
+          "criteria": [
+            "4.1 Evalúa las necesidades futuras del mundo laboral en el ámbito de su especialidad y sus desafíos de formación, considerando las dinámicas de empleo, tendencias e innovaciones tecnológicas.",
+            "4.2 Evalúa las ofertas de capacitación virtual y presencial disponibles en su entorno, incluyendo sus características (como duración, objetivos y costos) y requisitos generales.",
+            "4.3 Evalúa las ofertas de educación superior disponibles en su entorno, incluyendo sus características (duración, acreditación, posibilidades de reconocimiento de aprendizajes previos y alternativas de financiamiento y becas) y requisitos de entrada."
+          ]
+        }
+      ],
+      "source_page": 185,
+      "title": "Emprendimiento y empleabilidad",
+      "hp": 76,
+      "year": "4° medio"
+    }
+  ],
+  "hoteleria": [
+    {
+      "oa": [
+        {
+          "code": "OA 1",
+          "title": "atender clientes de acuerdo a sus necesidades, deseos y demandas, aplicando técnicas de comunicación efectiva, interactuando en idioma inglés básico cuando fuese necesario, orientando e informando de manera clara y precisa sobre los servicios del establecimiento, cumpliendo estándares definidos de presentación y aseo personal."
+        },
+        {
+          "code": "OA 5",
+          "title": "atender el centro de negocios con amabilidad y discreción, en español e inglés básico, para responder a los requerimientos de clientes, utilizando los equipos y sistemas de comunicación, siguiendo los protocolos establecidos."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M1-AE1",
+          "title": "Soluciona demandas y necesidades de los clientes, considerando los servicios disponibles en el establecimiento, utilizando un lenguaje adecuado.",
+          "criteria": [
+            "1.1 Discrimina entre tipos de demandas y necesidades de los clientes, considerando edad, género, si es una persona, una familia, un grupo y su nacionalidad",
+            "1.2 Responde a demandas y necesidades de los clientes de manera directa o derivando a otra unidad, si corresponde, teniendo en cuenta los servicios disponibles en el establecimiento.",
+            "1.3 Registra tipos de demandas y necesidades de los clientes, en los formatos definidos por el establecimiento, ya sea digitales o manuales, con el fin de sistematizar los eventos recurrentes."
+          ]
+        },
+        {
+          "code": "M1-AE2",
+          "title": "Orienta e informa a los clientes sobre los servicios del establecimiento, cumpliendo con los estándares de presentación y trato.",
+          "criteria": [
+            "2.1 informa a los clientes sobre los diversos servicios que tiene el establecimiento, teniendo en cuenta lo contratado, utilizando un trato formal y cordial en la comunicación.",
+            "2.2 Maneja las distintas ofertas de servicios que ofrece el establecimiento, de acuerdo a los tipos de clientes."
+          ]
+        },
+        {
+          "code": "M1-AE3",
+          "title": "atiende a los huéspedes en el centro de negocios de manera amable y cordial, hablando en español o inglés según sea necesario, aplicando criterios de discreción y los protocolos correspondientes.",
+          "criteria": [
+            "3.1 Escucha activamente a los huéspedes y responde adecuadamente en inglés o español, según corresponda.",
+            "3.2 Maneja la información acerca de los distintos servicios que presta el hotel, para informar correctamente a los diferentes tipos de huéspedes.",
+            "3.3 Registra la información entregada por el huésped en los formatos establecidos, asegurando la confidencialidad y la discreción necesaria, según sea el caso."
+          ]
+        },
+        {
+          "code": "M1-AE4",
+          "title": "Soluciona las necesidades y requerimientos de los huéspedes de manera cortés, utilizando un lenguaje acorde a la situación y aplicando los protocolos establecidos para ello.",
+          "criteria": [
+            "4.1 Responde a las demandas realizadas por los huéspedes, utilizando los medios disponibles para ello y los protocolos del establecimiento.",
+            "4.2 Canaliza al servicio del hotel que corresponda a la necesidad o requerimiento del huésped, verificando que se haya respondido adecuadamente y a tiempo.",
+            "4.3 Registra la información recibida por los huéspedes y la derivación correspondiente en sistemas manuales o digitales, de acuerdo a las políticas del establecimiento, distribuyéndola al departamento que corresponda."
+          ]
+        }
+      ],
+      "source_page": 35,
+      "title": "Atención al cliente en servicios de hotelería",
+      "hp": 114,
+      "year": "3° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 4",
+          "title": "Supervisar las actividades de servicios de habitaciones, cuidando que se realicen de acuerdo a los procedimientos y estándares establecidos, y elaborar informes diarios de estado de habitaciones."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M2-AE1",
+          "title": "Supervisa las habitaciones, de acuerdo a los procedimientos existentes en el establecimiento y a las orientaciones de la jefatura.",
+          "criteria": [
+            "1.1 Supervisa la calidad del trabajo realizado por el personal de habitaciones, teniendo en cuenta el estándar definido en el establecimiento y las funciones que a cada uno le corresponden.",
+            "1.2 Maneja procedimientos de limpieza de habitaciones y áreas públicas, según los estándares establecidos y normativas de higiene.",
+            "1.3 Controla la reposición de los productos y limpieza del mini bar, respetando los procedimientos establecidos por la empresa.",
+            "1.4 Elabora un informe de reposición de los productos del mini bar, de acuerdo a la documentación utilizada (servinota)."
+          ]
+        },
+        {
+          "code": "M2-AE2",
+          "title": "Supervisa la lavandería, considerando los estándares sanitarios y de seguridad del personal a cargo.",
+          "criteria": [
+            "2.1 Supervisa la calidad del trabajo realizado por el personal de lavandería, teniendo en cuenta el estándar definido en el establecimiento y las funciones que a cada uno le corresponden.",
+            "2.2 Verifica los procedimientos utilizados en el proceso de marcado y lavado de la ropa de huéspedes.",
+            "2.3 Realiza de manera manual o digital los cobros por servicio de lavandería en la cuenta de los huéspedes."
+          ]
+        },
+        {
+          "code": "M2-AE3",
+          "title": "Supervisa las áreas públicas del establecimiento, verificando condiciones de higiene y prevención de riesgos de trabajadores y huéspedes.",
+          "criteria": [
+            "3.1 Distribuye tareas a los aseadores y asigna los espacios del establecimiento, de acuerdo a los requerimientos del día y a los estándares del establecimiento.",
+            "3.2 Controla el trabajo realizado, de acuerdo a los procedimientos existentes, normas de higiene y seguridad. C E"
+          ]
+        },
+        {
+          "code": "M2-AE4",
+          "title": "Elabora informes de habitaciones y de todo lo correspondiente al departamento, de acuerdo a los formatos establecidos y con la regularidad requerida.",
+          "criteria": [
+            "4.1 Registra la información recabada en el proceso de supervisión del servicio de habitaciones, siguiendo los procedimientos estandarizados.",
+            "4.2 Realiza un informe de cierre del día, ya sea en forma manual o digital, siguiendo los formatos entregados y lo distribuye en las áreas correspondientes."
+          ]
+        }
+      ],
+      "source_page": 45,
+      "title": "Servicio de habitaciones",
+      "hp": 228,
+      "year": "3° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 7",
+          "title": "Organizar y realizar actividades de animación y recreativas utilizando técnicas comunicativas y de la especialidad, recursos necesarios de acuerdo a las características y requerimientos de cada grupo de turistas y aplicando normas de seguridad y prevención de riesgos."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M3-AE1",
+          "title": "Planifica actividades de esparcimiento y entretención según las características de cada grupo de turistas, de acuerdo a los estándares definidos por el establecimiento.",
+          "criteria": [
+            "1.1 Planifica actividades de esparcimiento o entretención, teniendo en cuenta las características de los huéspedes y el tipo de estándar y servicios del establecimiento.",
+            "1.2 Selecciona actividades de esparcimiento y/o entretención, de acuerdo las características del grupo.",
+            "1.3 Organiza los elementos necesarios para la realización de la actividad, incluyendo equipamiento para la prevención de riesgos y considerando el lugar físico y el clima."
+          ]
+        },
+        {
+          "code": "M3-AE2",
+          "title": "Ejecuta actividades de animación y recreativas, teniendo en cuenta las características y requerimientos de los turistas que atiende, incentivando a la participación con un lenguaje apropiado al contexto dado.",
+          "criteria": [
+            "2.1 Dispone, junto con su equipo de trabajo, los distintos elementos necesarios para la realización de la actividad de animación y/o recreativa en el espacio definido, teniendo en cuenta las normas de prevención de riesgos.",
+            "2.2 Realiza la actividad de acuerdo a lo planificado, promoviendo la participación de todos los huéspedes, respetando las características y motivaciones que ellos manifiestan.",
+            "2.3 Ordena, junto a su equipo de trabajo, el lugar donde fue realizada la actividad, respetando las normas de prevención de riesgos.",
+            "2.4 Evalúa, junto con su equipo, los resultados de la actividad ejecutada, teniendo en cuenta las opiniones de los clientes y de las jefaturas."
+          ]
+        }
+      ],
+      "source_page": 53,
+      "title": "Actividades recreativas y de animación",
+      "hp": 76,
+      "year": "3° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 8",
+          "title": "Realizar montaje de eventos y servicios, disponiendo los espacios, equipos, implementos y ornamentos de acuerdo a los objetivos y programa del evento y orientaciones del cliente y considerando normativa sanitaria, de seguridad y prevención de riesgos."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M4-AE1",
+          "title": "Ejecuta el servicio (atención a la mesa) de alimentos y bebidas, utilizando las técnicas de atención al cliente y tiempos de atención, respetando normas de presentación personal e higiene, según los requerimientos del evento.",
+          "criteria": [
+            "1.1 Clasifica tipos de eventos, los implementos según el tipo servicio, seleccionando bigfour (mantelería, utensilios, petit menaje y cristalería, cubiertos y vajilla) y los tipos de montaje, de acuerdo al objetivo y las orientaciones dadas por el cliente.",
+            "1.2 Selecciona implementos, utensilios y ornamentos, de acuerdo al tipo de servicio a entregar, considerando las normas de higiene, realizando un trabajo prolijo y en equipo.",
+            "1.3 Efectúa las operaciones de preservicio (mise en place), de acuerdo al tipo de servicio y montaje que ofrecerá, considerando las normas establecidas, los requerimientos del cliente y procedimientos vigentes.",
+            "1.4 Realiza el postservicio (achique) una vez terminado el evento, trabajando en equipo y siguiendo los procedimientos establecidos por la empresa hotelera."
+          ]
+        },
+        {
+          "code": "M4-AE2",
+          "title": "ambienta los lugares definidos con los implementos, utensilios, ornamentos seleccionados de acuerdo al tipo de servicio a entregar, considerando las normas de higiene, realizando un trabajo prolijo y en equipo.",
+          "criteria": [
+            "2.1 Diseña montajes de lugares, de acuerdo al evento a realizar, considerando las normas de higiene y de protocolo.",
+            "2.2 Realiza el montaje de mesas de acuerdo al servicio a realizar, considerando elementos complementarios, como iluminación, arreglos florales, u otros, sin descuidar las normas de protocolo.",
+            "2.3 Realiza las tareas de manera coordinada con otros puestos de trabajo, considerando el tipo de evento.",
+            "2.4 Realiza el postservicio (achique) una vez terminado el evento, trabajando en equipo y siguiendo los procedimientos establecidos por la empresa hotelera."
+          ]
+        }
+      ],
+      "source_page": 63,
+      "title": "Servicio de eventos",
+      "hp": 190,
+      "year": "3° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 9",
+          "title": "Comunicarse en inglés básico con los turistas, atendiendo sus necesidades y requerimientos."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M5-AE1",
+          "title": "interactúa en idioma inglés en conversaciones o situaciones comunicativas en la recepción, atención inicial y despedida de los huéspedes o clientes, considerando los servicios contratados.",
+          "criteria": [
+            "1.1 Recepciona a los huéspedes, les da la bienvenida o despedida y les informa sobre los servicios presentes en el hotel.",
+            "1.2 informa al huésped sobre protocolos de acción, de acuerdo a situaciones emergentes como: pérdida de equipaje, confirmación de vuelos, custodia de equipaje, reservas en restorán, etc.",
+            "1.3 Responde y ofrece información relacionada con: destinos turísticos, tarifas, tipos de cambio, medios de transporte y trayectos según las necesidades del cliente.",
+            "1.4 Resuelve situaciones de emergencia y deficiencias producidas durante la estadía en el hotel, directamente con huésped, o por vía telefónica y/o virtual.",
+            "1.5 Gestiona reservas y otros servicios de alojamientos, utilizando medios de comunicación como teléfono e internet."
+          ]
+        },
+        {
+          "code": "M5-AE2",
+          "title": "Produce mensajes orales con claridad y coherencia de acuerdo a situaciones específicas de comunicación, como descripciones, indicaciones, procedimientos y entregar información relevante.",
+          "criteria": [
+            "2.1 Comunica información importante relativa a procedimientos de evacuación (vías de escape, zona de tsunami, etc.), cuidados de la salud, indicaciones para llegar a un lugar, zonas no seguras en la ciudad.",
+            "2.2 Comunica información relevante al cliente en relación con buenas prácticas según el lugar donde se encuentren (por ejemplo: prohibición de tomar fotografías, vestimenta especial, zona de protección ecológica, etc.).",
+            "2.3 Describe lugares de importancia, hechos históricos, platos típicos, celebraciones, fiestas típicas, atractivos y equipamiento turístico, de una zona específica de acuerdo a las necesidades del cliente."
+          ]
+        },
+        {
+          "code": "M5-AE3",
+          "title": "atiende las mesas ofreciendo los servicios del restorán del establecimiento, en idioma inglés, considerando el menú disponible y entregando los detalles de cada plato ofertado.",
+          "criteria": [
+            "3.1 Describe los platos de la carta y/o el menú del establecimiento, dando cuenta de los ingredientes y la forma de preparación de los alimentos y bebidas.",
+            "3.2 Toma la orden de los clientes en una comanda y verifica con ellos los platos solicitados."
+          ]
+        }
+      ],
+      "source_page": 73,
+      "title": "Inglés técnico para la industria de la hospitalidad",
+      "hp": 228,
+      "year": "3° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 2",
+          "title": "Orientar e informar al turista sobre los atractivos turísticos de la zona y su correspondiente normativa de conservación, seleccionando información relevante sobre aspectos históricos, culturales, geográficos, económicos, de contingencia, requerimientos sanitarios, disposiciones legales vigentes, según corresponda, de acuerdo a las necesidades, deseos y demandas del turista, respetando los protocolos existentes y utilizando técnicas de comunicación efectiva en español e inglés básico."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M6-AE1",
+          "title": "Sistematiza información sobre atractivos turísticos de la zona seleccionada, considerando necesidades, demandas y/o intereses de los turistas.",
+          "criteria": [
+            "1.1 investiga en la web y/o en textos impresos sobre aspectos atractivos turísticos de la zona, en sus componentes históricos, culturales, geográficos, económicos, de contingencia, sociales, flora y fauna, de la zona seleccionada, incluyendo temas de protección del medio ambiente y del patrimonio.",
+            "1.2 Selecciona información de interés turístico, de acuerdo a tipología de turistas que visitan la zona seleccionada.",
+            "1.3 Categoriza la información de acuerdo a ámbitos relevantes (histórico-geográficos, patrimoniales, flora y fauna, económico-sociales, u otros), considerando intereses que expresan los turistas que visitan la zona."
+          ]
+        },
+        {
+          "code": "M6-AE2",
+          "title": "informa al turista sobre atractivos turísticos, como la configuración geográfica, climática, flora y fauna, de acuerdo al tipo de turista y a requerimientos planteados.",
+          "criteria": [
+            "2.1 Orienta a los turistas respecto de los destinos turísticos patrimoniales nacionales, indicando normas de seguridad, medidas de protección del ambiente y del patrimonio nacional, respetando protocolos y legislación vigente.",
+            "2.2 Señala a los turistas la configuración geográfica, climática y la flora y fauna de los destinos turísticos, considerando el tipo de turistas, sus intereses y necesidades.",
+            "2.3 Responde consultas orales, aclara dudas o profundiza explicaciones ante la demanda de los turistas integrantes del grupo, utilizando un lenguaje y un tono de voz adecuado.",
+            "2.4 Responde consultas por escrito de clientes, ya sea en español o inglés básico, sobre los principales atractivos turísticos naturales de diferentes zonas del país, empleando medios digitales y tecnológicos.",
+            "2.5 Utiliza y mantiene a disposición mapas geográficos para la entrega de información, proponiendo rutas turísticas, de acuerdo a las necesidades y características del cliente, considerando factores de tiempo, clima y medios de transporte."
+          ]
+        },
+        {
+          "code": "M6-AE3",
+          "title": "informa al turista, sobre aspectos históricos, sociales, culturales y económicos de la región o zona de referencia, de acuerdo al tipo de turista y a requerimientos planteados.",
+          "criteria": [
+            "3.1 Relata a los turistas aspectos históricos, sociales, culturales y económicos del destino seleccionado, adecuando las explicaciones a las condiciones actuales.",
+            "3.2 Responde consultas orales, aclara dudas o profundiza explicaciones frente a demandas de los turistas integrantes del grupo, utilizando un lenguaje y un tono de voz adecuado.",
+            "3.3 Responde consultas por escrito de clientes, ya sea en español o inglés básico, sobre hechos históricos, sociales, culturales y económicos de diferentes zonas del país, empleando medios digitales y tecnológicos.",
+            "3.4 Utiliza y mantiene a disposición mapas históricos, archivos digitales, portafolios u otros para la entrega de información en respuesta a las inquietudes del turista."
+          ]
+        }
+      ],
+      "source_page": 83,
+      "title": "Información turística",
+      "hp": 152,
+      "year": "4° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 3",
+          "title": "Realizar reservas, check in y check out de clientes, utilizando software de administración hotelera, de acuerdo a los protocolos e informando con claridad sobre los servicios, condiciones de pago, costos y otros aspectos, aplicando la normativa del consumidor."
+        },
+        {
+          "code": "OA 6",
+          "title": "Preparar el cierre de cuenta en los tiempos establecidos, notificando los cobros de cada servicio en la moneda que corresponda, utilizando documentación comercial y registrando toda la información requerida para cada transacción, de acuerdo a normativa tributaria y de protección al consumidor y haciendo uso de las TiC."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M7-AE1",
+          "title": "Realiza procedimientos de reservas, utilizando el software correspondiente y aplicando los protocolos definidos.",
+          "criteria": [
+            "1.1 informa a los clientes sobre los servicios del establecimiento y las condiciones de pago durante su estadía, de acuerdo a normativa vigente y a los protocolos del establecimiento.",
+            "1.2 Registra de manera computacional o manual la solicitud de reserva de los clientes, asegurándose que la información registrada sea la correcta."
+          ]
+        },
+        {
+          "code": "M7-AE2",
+          "title": "Realiza procedimientos de ingreso de clientes en el establecimiento hotelero, de acuerdo a los formatos y protocolos existentes.",
+          "criteria": [
+            "2.1 ingresa a clientes, realizando el check in, utilizando los formatos digitales o manuales de registro existentes en el establecimiento, de acuerdo a protocolos establecidos y al tipo de contrato con el cliente.",
+            "2.2 asigna las habitaciones según lo indicado por reservas, de acuerdo a los requerimientos del cliente y la disponibilidad existente.",
+            "2.3 informa al huésped de los servicios que tiene el establecimiento, de acuerdo a las condiciones asociadas a su reserva.",
+            "2.4 informa al cliente el costo de su estadía y las diferentes formas de pago, siguiendo las políticas de la empresa y respetando la normativa vigente."
+          ]
+        },
+        {
+          "code": "M7-AE3",
+          "title": "Prepara el cierre de la cuenta según los procedimientos establecidos por el establecimiento.",
+          "criteria": [
+            "3.1 Registra detalladamente la información de los consumos realizados por huéspedes en los distintos departamentos, para el cierre de la cuenta.",
+            "3.2 Presenta al huésped su estado de cuenta con el detalle de los distintos consumos realizados durante su estadía en el establecimiento, en el formato definido por el hotel y por la normativa tributaria correspondiente.",
+            "3.3 Señala las condiciones y modalidades de pago y de exención tributaria, si corresponde, según la nacionalidad del huésped."
+          ]
+        },
+        {
+          "code": "M7-AE4",
+          "title": "Utiliza comprobantes de pago (factura nacional, factura de exportación o boleta), de acuerdo a la normativa tributaria existente en el país, para realizar el cierre de la cuenta de huéspedes y/o clientes, utilizando las TiC que corresponda.",
+          "criteria": [
+            "4.1 Selecciona el comprobante de pago según nacionalidad del huésped para la cancelación de la estadía, según las normas tributarias existentes.",
+            "4.2 ingresa la información sobre el total de la estadía de los huéspedes para realizar cierre de la cuenta en los sistemas tecnológicos definidos por el establecimiento, considerando las diferentes formas de pago existentes."
+          ]
+        }
+      ],
+      "source_page": 95,
+      "title": "Servicio de recepción y reservas",
+      "hp": 228,
+      "year": "4° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 8",
+          "title": "Realizar montaje de eventos y servicios, disponiendo los espacios, equipos, implementos y ornamentos de acuerdo a los objetivos y programa del evento y orientaciones del cliente y considerando normativa sanitaria, de seguridad y prevención de riesgos."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M8-AE1",
+          "title": "Elabora los cócteles para el evento de acuerdo al servicio, cuidando normas de higiene y respetando los requerimientos del cliente.",
+          "criteria": [
+            "1.1 identifica los tipos de cócteles para eventos, utilizando técnicas de preparación según las características del evento y los requerimientos del cliente.",
+            "1.2 Calcula la cantidad de insumos para la preparación de cócteles en grandes cantidades, de acuerdo a los requerimientos del evento.",
+            "1.3 Prepara cócteles para diversos tipos de eventos, utilizando los implementos, utensilios e insumos adecuados, de acuerdo a lo solicitado por el cliente y aplicando normas de higiene en la preparación."
+          ]
+        },
+        {
+          "code": "M8-AE2",
+          "title": "Realiza el servicio de vinos aplicando las técnicas correspondientes, de acuerdo al servicio ofrecido en el evento.",
+          "criteria": [
+            "2.1 Maneja los diferentes tipos de servicio de vino, de acuerdo a las características del evento, según los servicios contratados por el cliente.",
+            "2.2 Determina maridaje (armonización de vinos y comidas según las características organolépticas de los alimentos), de acuerdo al servicio ofrecido a los clientes del evento."
+          ]
+        }
+      ],
+      "source_page": 105,
+      "title": "Servicio de coctelería y vinos",
+      "hp": 152,
+      "year": "4° medio"
+    },
+    {
+      "oa": [
+        {
+          "code": "OA 9",
+          "title": "Comunicarse en inglés básico con los turistas, atendiendo sus necesidades y requerimientos."
+        }
+      ],
+      "aes": [
+        {
+          "code": "M9-AE1",
+          "title": "lee y comprende información general y específica de textos en idioma inglés relacionados con la industria hotelera, como también conversaciones, descripciones, avisos, etc.",
+          "criteria": [
+            "1.1 Emplea y describe información general y específica presente en descripciones y avisos, por ejemplo, información acerca de cambios en horarios, ubicación de un atractivo o sitio turístico, reservas, etc.",
+            "1.2 Consulta e interpreta mapas turísticos, manuales, instructivos, folletos turísticos, para informar y orientar al huésped."
+          ]
+        },
+        {
+          "code": "M9-AE2",
+          "title": "lee, comprende y extrae información general y específica de diferentes textos escritos en el idioma inglés (como folletos, mapas, itinerarios, textos descriptivos) relacionados con la industria turística.",
+          "criteria": [
+            "2.1 Comunica información turística relevante, recopilada en mapas, folletos, boletas y menús a los clientes.",
+            "2.2 Extrae y comunica información general y detalles en textos descriptivos, como folletos o artículos acerca de lugares turísticos, instalaciones y equipamiento del hotel.",
+            "2.3 aplica vocabulario técnico relacionado con los sistemas de pago y antecedentes personales presentes en la documentación del hotel."
+          ]
+        },
+        {
+          "code": "M9-AE3",
+          "title": "Redacta textos informativos simples y breves en inglés (como e-mails, indicaciones, notas).",
+          "criteria": [
+            "3.1 Registra información del huésped, en formularios, consignando sus antecedentes de identificación, procedencia y otros relevantes en la atención turística.",
+            "3.2 Redacta y envía e-mails en los que dan indicaciones, ofrecen disculpas, describen un hotel, hacen confirmación de una reserva y/o servicio turístico, cotizan servicios turísticos, etc."
+          ]
+        }
+      ],
+      "source_page": 113,
+      "title": "Servicio de información bilingüe",
+      "hp": 228,
+      "year": "4° medio"
+    },
+    {
+      "oa": [],
+      "aes": [
+        {
+          "code": "M10-AE1",
+          "title": "Diseña y ejecuta un proyecto para concretar iniciativas de emprendimiento, identificando las acciones a realizar, el cronograma de su ejecución y los presupuestos, definiendo alternativas de financiamiento y evaluando y controlando su avance.",
+          "criteria": [
+            "1.1 Recolecta, organiza y analiza información para identificar oportunidades de emprendimiento en su propia comunidad y región, considerando diferentes ámbitos de aplicación (deporte, tecnología, medioambiente y energía, entre otros).",
+            "1.2 Evalúa las oportunidades de emprendimiento, tomando en cuenta sus fortalezas y debilidades, y considerando el contexto, los recursos existentes y las normativas vigentes relacionadas.",
+            "1.3 Formula los objetivos para un plan de acción de una iniciativa de emprendimiento personal, productivo o social, considerando las condiciones del entorno y personales.",
+            "1.4 Formula un presupuesto detallado, determinando los recursos (financieros, humanos, tecnológicos y otros) requeridos para el desarrollo de su iniciativa, los plazos y los factores externos que afectan su desarrollo.",
+            "1.5 Elabora un mecanismo de control de avance de su iniciativa de emprendimiento y evalúa las necesidades y las alternativas de financiamiento mediante aportes públicos y privados (créditos y ahorro).",
+            "1.6 Ejecuta las acciones para alcanzar los objetivos planteados según la planificación realizada, perseverando pese a circunstancias adversas, evaluando los resultados y las amenazas, ajustando sus acciones para asegurar el éxito y compartiendo su experiencia con otros."
+          ]
+        },
+        {
+          "code": "M10-AE2",
+          "title": "Maneja la legislación laboral y previsional chilena como marco regulador de las relaciones entre trabajadores y empleadores, identificando los derechos y deberes de ambas partes, tanto individuales como colectivos, y la reconoce como base para establecer buenas relaciones laborales.",
+          "criteria": [
+            "2.1 Selecciona la información relevante sobre los derechos laborales y previsionales de los trabajadores garantizados por la Constitución y el Código del Trabajo, para su propia contratación o de terceros a su cargo.",
+            "2.2 Determina elementos críticos de diversos tipos de contratos y de finiquitos, considerando la legislación laboral vigente. B F C",
+            "2.3 Elabora propuestas de creación y desarrollo de organización sindical de acuerdo a la realidad de diferentes tipos de empresas, respetando la legislación vigente y la defensa de los derechos de los trabajadores."
+          ]
+        },
+        {
+          "code": "M10-AE3",
+          "title": "Prepara los elementos necesarios para participar de un proceso de incorporación al mundo del trabajo, valorando y planificando su trayectoria formativa y laboral.",
+          "criteria": [
+            "3.1 Sistematiza información desde organismos y empresas especializadas en intermediación laboral que existen en su entorno, analizando las perspectivas laborales, sus propias condiciones laborales y las normativas relacionadas.",
+            "3.2 Elabora correctamente los documentos necesarios para iniciar una actividad laboral, como el curriculum vitae, reuniendo evidencias de cursos realizados, experiencia laboral previa y cartas de recomendación, y visualizando sus alternativas de acuerdo a sus expectativas y condiciones.",
+            "3.3 Prepara las entrevistas y las situaciones de ingreso y promoción, identificando a personas e instituciones que pueden brindarle apoyo en este proceso.",
+            "3.4 Evalúa si la remuneración mensual o semanal y el finiquito se han determinado de acuerdo al tipo de contrato firmado y a la legislación laboral vigente.",
+            "3.5 Selecciona la institución y la modalidad conveniente para su cobertura de salud y pensión, además del seguro de desempleo que le corresponde de acuerdo a su contrato y derechos, y lleva a cabo los trámites de afiliación."
+          ]
+        },
+        {
+          "code": "M10-AE4",
+          "title": "Selecciona alternativas de capacitación y de educación superior para fortalecer sus competencias o desarrollar nuevas y adquirir certificaciones, ya sea e-learning o presenciales, evaluando las diversas opciones de financiamiento.",
+          "criteria": [
+            "4.1 Evalúa las necesidades futuras del mundo laboral en el ámbito de su especialidad y sus desafíos de formación, considerando las dinámicas de empleo, tendencias e innovaciones tecnológicas.",
+            "4.2 Evalúa las ofertas de capacitación virtual y presencial disponibles en su entorno, incluyendo sus características (como duración, objetivos y costos) y requisitos generales.",
+            "4.3 Evalúa las ofertas de educación superior disponibles en su entorno, incluyendo sus características (duración, acreditación, posibilidades de reconocimiento de aprendizajes previos y alternativas de financiamiento y becas) y requisitos de entrada."
+          ]
+        }
+      ],
+      "source_page": 121,
+      "title": "Emprendimiento y empleabilidad",
+      "hp": 76,
+      "year": "4° medio"
+    }
+  ]
+}
