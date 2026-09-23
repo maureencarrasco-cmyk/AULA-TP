@@ -47,3 +47,58 @@ img.brand-logo.sp-hero-logo{flex:none;width:55px;height:55px;max-width:55px;max-
 @media(max-width:1200px){.sp-course-id{left:36%;max-width:35%}.sp-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sp-route-panel{grid-column:1/3}.sp-ae-panel{grid-column:1}.sp-oa-panel{grid-column:2}.sp-evidence-block{grid-column:1/3}.sp-chart-panel{grid-column:1/3}.sp-bottom-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sp-bottom-grid .sp-section:first-child{grid-column:1/3}}
 @media(max-width:760px){.sp-hero{min-height:310px}.sp-hero .sp-hero-photo{height:100%;object-position:42% center}.sp-hero:after{background:linear-gradient(180deg,rgba(255,255,255,.96) 0 66px,rgba(255,255,255,.03) 120px,rgba(255,255,255,.97) 245px)}.sp-brandline{height:58px;min-width:0;padding:5px 12px;font-size:17px}.sp-hero-logo{width:44px;height:44px}.sp-course-id{top:186px;left:12px;max-width:calc(100% - 24px);padding:4px 8px}.sp-course-id h1{font-size:18px}.sp-hero-account{top:9px;right:8px;min-width:0}.sp-hero-progress{position:absolute;right:12px;bottom:8px;left:12px;width:auto;margin:0;padding:8px 11px}.sp-hero-progress>b{font-size:11px}.sp-hero-progress>div{margin-top:4px}.sp-hero-progress strong{font-size:18px}.sp-hero-progress span{margin:0;font-size:10px}.sp-course-select{margin:7px 12px}.sp-tabs{padding:0 12px 7px}.sp-tabs button{min-width:145px}.sp-content{padding:8px 12px 18px}.sp-module-top,.sp-detail-grid,.sp-bottom-grid{grid-template-columns:1fr}.sp-route-panel,.sp-ae-panel,.sp-oa-panel,.sp-evidence-block,.sp-chart-panel,.sp-bottom-grid .sp-section:first-child{grid-column:1}.sp-route{overflow-x:auto;grid-template-columns:repeat(5,110px)}.sp-route:before{right:auto;width:500px}.sp-evidence-cards{grid-template-columns:repeat(3,minmax(145px,1fr));overflow-x:auto}.sp-bottom-grid .sp-insights{display:contents}}
 @media(max-width:760px){img.brand-logo.sp-hero-logo{width:44px;height:44px;max-width:44px;max-height:44px}}
+
+/* Orientacion pedagogica del progreso. Las preferencias de accesibilidad siguen en Herramientas de apoyo. */
+.sp-hero{--course-tint:#e8f5fc;--course-accent:#2077c9}
+.sp-hero[data-specialty="gastronomia"]{--course-tint:#f1faed;--course-accent:#258756}
+.sp-hero[data-specialty="hoteleria"]{--course-tint:#eaf7f5;--course-accent:#137c79}
+.sp-hero[data-specialty="climate"]{--course-tint:#eaf8fb;--course-accent:#197f9b}
+.sp-course-id{max-width:35%;border-left:4px solid var(--course-accent);border-radius:4px;background:var(--course-tint)}
+.sp-course-symbol{background:var(--course-accent)}
+.sp-course-id h1{font-size:22px;line-height:1.2}
+.sp-course-id .sp-hero-current{margin-top:5px;color:#183e67;font-size:12px;font-weight:700;line-height:1.3}
+.sp-tabs{gap:7px;padding-bottom:8px}
+.sp-tabs button{max-width:235px;min-height:70px;border-color:#d5e0e9;background:#f1f5f8;box-shadow:none;color:#173b65}
+.sp-tabs button small{color:#365b79;line-height:1.3;white-space:normal}
+.sp-tabs button em{font-size:11px;font-style:normal;font-weight:700;color:#496783}
+.sp-tabs button.sp-tab-working{border-color:#a8d5e6;background:#e9f6fc}
+.sp-tabs button.sp-tab-complete{border-color:#a8d9b9;background:#eaf8ee}
+.sp-tabs button.active{border:2px solid #236fbd;background:#e0efff;box-shadow:inset 0 -3px #236fbd;color:#0a3974}
+.sp-tabs button.active small,.sp-tabs button.active em{color:#0a3974}
+.sp-next{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 18px;border:1px solid #a6cfe9;border-left:5px solid #137ac5;border-radius:6px;background:#eaf6ff}
+.sp-next small{color:#115994;font-size:11px;font-weight:900}
+.sp-next h2{margin:4px 0;color:#103c75;font-size:18px}
+.sp-next p{margin:0;color:#385d80;font-size:13px;line-height:1.4}
+.sp-primary-action{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:125px;min-height:42px;padding:8px 13px;border-radius:5px;background:#0867bd;color:#fff;font-weight:800;text-decoration:none}
+.sp-primary-action:hover,.sp-primary-action:focus-visible{background:#084e90;color:#fff}
+.sp-module-state>div>span{font-size:11px;line-height:1.3;color:#385d80}
+.sp-route{gap:8px}.sp-route:before{display:none}
+.sp-route-item{padding:8px 4px;border:1px solid transparent;border-radius:5px}
+.sp-route-item.here{border-color:#78abd6;background:#e8f3fc}
+.sp-route-item.done{background:#edf8f0}
+.sp-route-item.pending{background:#f5f7fa}
+.sp-route-item b{font-size:12px;line-height:1.2}
+.sp-route-item small{min-height:0;font-size:11px;line-height:1.3}
+.sp-route-item strong{font-size:11px;line-height:1.2}
+.sp-route-item em{font-size:11px;font-weight:800;color:#385b7e}
+.sp-step.here{border-color:#d9ebfb;background:#2d79c2;color:#fff}
+.sp-step.done{background:#269257;color:#fff}
+.sp-learning-row{padding:9px 0;border-bottom:1px solid #e1eaf2}
+.sp-learning-row:last-of-type{border-bottom:0}
+.sp-learning-title{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 6px;align-items:start}
+.sp-learning-title b{color:#0b5aaf}.sp-learning-title strong{font-size:12px;line-height:1.35}
+.sp-learning-title span{grid-column:2;color:#4e6581;font-size:11px}
+.sp-learning-row p{margin:5px 0;color:#435d78;font-size:11px;line-height:1.45}
+.sp-learning-row progress{width:100%;height:7px;accent-color:#2079c8}
+.sp-oa-row{align-items:start;font-size:11px;line-height:1.4}
+.sp-oa-row span{overflow:visible;white-space:normal;text-overflow:clip}
+.sp-oa-row strong{padding-top:2px}
+.sp-ae-summary{border-bottom:1px solid #e1eaf2}
+.sp-ae-summary summary{display:flex;justify-content:space-between;gap:12px;padding:10px 4px;cursor:pointer;color:#163e6b;font-size:12px;font-weight:700}
+.sp-ae-summary summary b{white-space:nowrap;color:#0968b4}
+.sp-strengths{background:#f4fbf6}.sp-needs{background:#fff8f2}
+.sp-text-action{display:inline-flex;align-items:center;gap:6px;margin-top:10px;color:#075ca7;font-size:12px;font-weight:800}
+.sp-text-action .icon{width:15px;height:15px}
+.sp-tabs button:focus-visible,.sp-primary-action:focus-visible,.sp-ae-summary summary:focus-visible,.sp-text-action:focus-visible{outline:3px solid #d37b08;outline-offset:2px}
+@media(max-width:1200px){.sp-course-id{max-width:38%}}
+@media(max-width:760px){.sp-hero{min-height:380px}.sp-course-id{top:170px;max-width:calc(100% - 24px)}.sp-course-id h1{font-size:18px}.sp-course-id .sp-hero-current{font-size:11px}.sp-hero-progress{bottom:8px}.sp-tabs button{min-height:68px}.sp-next{align-items:stretch;flex-direction:column}.sp-primary-action{align-self:flex-start}.sp-route{gap:5px}.sp-route-item{min-width:110px}}
