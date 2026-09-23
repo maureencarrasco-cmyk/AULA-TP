@@ -1,0 +1,212 @@
+[
+  {
+    "slug": "administracion",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-administracion",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34310_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/administracion.pdf"
+  },
+  {
+    "slug": "contabilidad",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-contabilidad",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34311_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/contabilidad.pdf"
+  },
+  {
+    "slug": "agropecuaria",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-agropecuaria",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34312_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/agropecuaria.pdf"
+  },
+  {
+    "slug": "elaboracion-industrial-alimentos",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-elaboracion-industrial-alimentos",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34341_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/elaboracion-industrial-alimentos.pdf"
+  },
+  {
+    "slug": "gastronomia",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-gastronomia",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34313_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/gastronomia.pdf"
+  },
+  {
+    "slug": "vestuario-confeccion-textil",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-vestuario-confeccion-textil",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34314_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/vestuario-confeccion-textil.pdf"
+  },
+  {
+    "slug": "construccion",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-construccion",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34315_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/construccion.pdf"
+  },
+  {
+    "slug": "instalaciones-sanitarias",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-instalaciones-sanitarias",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34470_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/instalaciones-sanitarias.pdf"
+  },
+  {
+    "slug": "montaje-industrial",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-montaje-industrial",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34317_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/montaje-industrial.pdf"
+  },
+  {
+    "slug": "refrigeracion-climatizacion",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-refrigeracion-climatizacion",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34318_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/refrigeracion-climatizacion.pdf"
+  },
+  {
+    "slug": "electricidad",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-electricidad",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34320_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/electricidad.pdf"
+  },
+  {
+    "slug": "electronica",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-electronica",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34321_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/electronica.pdf"
+  },
+  {
+    "slug": "dibujo-tecnico",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-dibujo-tecnico",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34322_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/dibujo-tecnico.pdf"
+  },
+  {
+    "slug": "grafica",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-grafica",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34323_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/grafica.pdf"
+  },
+  {
+    "slug": "servicios-hoteleria",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-servicios-hoteleria",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34324_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/servicios-hoteleria.pdf"
+  },
+  {
+    "slug": "servicios-turismo",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-servicios-turismo",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34325_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/servicios-turismo.pdf"
+  },
+  {
+    "slug": "forestal",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-forestal",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34326_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/forestal.pdf"
+  },
+  {
+    "slug": "muebles-terminaciones-madera",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-muebles-terminaciones-madera",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34327_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/muebles-terminaciones-madera.pdf"
+  },
+  {
+    "slug": "acuicultura",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-acuicultura",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34302_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/acuicultura.pdf"
+  },
+  {
+    "slug": "operaciones-portuarias",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-operaciones-portuarias",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34306_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/operaciones-portuarias.pdf"
+  },
+  {
+    "slug": "pesqueria",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-pesqueria",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34308_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/pesqueria.pdf"
+  },
+  {
+    "slug": "tripulacion-naves-mercantes-especiales",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-tripulacion-naves-mercantes-especiales",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34309_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/tripulacion-naves-mercantes-especiales.pdf"
+  },
+  {
+    "slug": "construcciones-metalicas",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-construcciones-metalicas",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34329_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/construcciones-metalicas.pdf"
+  },
+  {
+    "slug": "mecanica-automotriz",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-mecanica-automotriz",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34330_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/mecanica-automotriz.pdf"
+  },
+  {
+    "slug": "mecanica-mantenimiento-aeronaves",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-mecanica-mantenimiento-aeronaves",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-37245_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/mecanica-mantenimiento-aeronaves.pdf"
+  },
+  {
+    "slug": "mecanica-industrial",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-mecanica-industrial",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34328_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/mecanica-industrial.pdf"
+  },
+  {
+    "slug": "asistencia-geologia",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-asistencia-geologia",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34333_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/asistencia-geologia.pdf"
+  },
+  {
+    "slug": "explotacion-minera",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-explotacion-minera",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34331_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/explotacion-minera.pdf"
+  },
+  {
+    "slug": "metalurgia-extractiva",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-metalurgia-extractiva",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34332_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/metalurgia-extractiva.pdf"
+  },
+  {
+    "slug": "quimica-industrial",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-quimica-industrial",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34334_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/quimica-industrial.pdf"
+  },
+  {
+    "slug": "atencion-enfermeria",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-atencion-enfermeria",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34350_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/atencion-enfermeria.pdf"
+  },
+  {
+    "slug": "atencion-parvulos",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-atencion-parvulos",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34352_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf"
+  },
+  {
+    "slug": "conectividad-redes",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-conectividad-redes",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34335_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/conectividad-redes.pdf"
+  },
+  {
+    "slug": "programacion",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-programacion",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34336_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/programacion.pdf"
+  },
+  {
+    "slug": "telecomunicaciones",
+    "resource_url": "https://www.curriculumnacional.cl/recursos/programa-estudio-especialidad-telecomunicaciones",
+    "pdf_url": "https://www.curriculumnacional.cl/sites/default/files/newtenberg/614/articles-34340_programa.pdf",
+    "pdf": "docs/fuentes/tp-programas/telecomunicaciones.pdf"
+  }
+]
