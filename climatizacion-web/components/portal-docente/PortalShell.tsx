@@ -200,9 +200,9 @@ export function PortalShell({ section }: PortalShellProps) {
                         <span className="portal-pill rounded-full px-3 py-2">Seguimiento por OA y AE</span>
                       </div>
                     </div>
-                    <div className="relative hidden w-full max-w-sm lg:block">
+                    <div className="relative hidden w-full max-w-2xl lg:block lg:flex-[1.35]">
                       <div className="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl" />
-                      <img src={sectionArt.src} alt={sectionArt.alt} className="relative h-44 w-full rounded-2xl object-cover object-center shadow-2xl ring-1 ring-white/30" />
+                      <img src={sectionArt.src} alt={sectionArt.alt} className="relative h-auto max-h-64 w-full rounded-2xl object-contain object-center shadow-2xl ring-1 ring-white/30" />
                     </div>
                   </div>
                 ) : (
