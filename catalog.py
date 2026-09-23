@@ -288,6 +288,8 @@ def upgrade_catalog(con):
     install_specialty_courses(con)
     from hospitality_catalog import install_hospitality_courses
     install_hospitality_courses(con)
+    from tp_catalog import install_pending_courses
+    install_pending_courses(con)
     from refrigeration_fourth import install_refrigeration_fourth
     install_refrigeration_fourth(con)
 
