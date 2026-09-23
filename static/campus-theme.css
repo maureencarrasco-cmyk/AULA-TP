@@ -55,7 +55,7 @@ body{background-image:none}
 body[data-specialty=climate] .course-header{background-image:linear-gradient(95deg,var(--campus-deep),#143c5560)}
 body[data-specialty=climate] .page-heading{background-image:none;background:#fffffff8}
 body[data-specialty=climate] .login-story{background-image:linear-gradient(90deg,#eaf6ffed,#eef8ffb8),url('/static/themes/oficio/oficio-equipo-ctrl.png')}
-body[data-specialty=climate] .journey-landscape{background-image:var(--screen-art)}
+body[data-specialty=climate] .journey-landscape{background-image:url('/static/themes/oficio/oficio-tuberias.png');background-position:center 42%;background-size:cover;filter:none}
 body[data-specialty=climate] .journey-landscape::before{background:linear-gradient(100deg,#f4f8fce6 0%,#eef5fbb8 40%,#edf6ff4d 70%,transparent 92%),linear-gradient(180deg,#ffffff66 0%,transparent 30%,#072A4E59 100%)}
 body[data-specialty=climate] .scene-viewport{background-image:linear-gradient(#e6f0ffdf,#edf3fae8),var(--screen-art)}
 body[data-specialty=climate] dialog#tool{background-image:linear-gradient(#fffffff7,#fffffff7),var(--screen-art);background-size:cover;background-position:center}

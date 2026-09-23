@@ -53,7 +53,15 @@ def _load(hp, course_hp=COURSE_HP):
     minutes = aula_hp * HP_MINUTES
     formative_minutes = formative_hp * HP_MINUTES
     exam_minutes = exam_hp * HP_MINUTES
-    e2 = round(formative_minutes * STATION_SHARE[2])
+    # Distribute operational minutes with largest remainders so the five
+    # station values add exactly to the rounded module total.
+    operational_formative = round(formative_minutes)
+    raw = {key: formative_minutes * share for key, share in STATION_SHARE.items()}
+    allocated = {key: int(raw[key]) for key in STATION_SHARE}
+    remaining = operational_formative - sum(allocated.values())
+    for key in sorted(STATION_SHARE, key=lambda value: raw[value] - allocated[value], reverse=True)[:remaining]:
+        allocated[key] += 1
+    e2 = allocated[2]
     return {
         'hp': official,
         'official_hp': official,
@@ -71,12 +79,19 @@ def _load(hp, course_hp=COURSE_HP):
         'formative_minutes': formative_minutes,
         'exam_minutes': exam_minutes,
         'station_minutes': {
-            '1': round(formative_minutes * STATION_SHARE[1]),
+            '1': allocated[1],
             '2': e2,
             '2_etapa': max(1, round(e2 / 18)),
-            '3': round(formative_minutes * STATION_SHARE[3]),
+            '3': allocated[3],
+            '4': round(exam_minutes),
+            '5': allocated[5],
+        },
+        'station_minutes_exact': {
+            '1': formative_minutes * STATION_SHARE[1],
+            '2': formative_minutes * STATION_SHARE[2],
+            '3': formative_minutes * STATION_SHARE[3],
             '4': exam_minutes,
-            '5': round(formative_minutes * STATION_SHARE[5]),
+            '5': formative_minutes * STATION_SHARE[5],
         },
     }
 
@@ -992,6 +1007,30 @@ def enrich(content, module_id=1):
     c['explore']['formative_pack'] = [a for a in c.get('formative_pack') or [] if a.get('station') != 3]
     c['explore']['video'] = c.get('video')
     c['explore']['vtt'] = c.get('vtt')
+    media_key = c.get('specialty_key') or 'general'
+    primary_ae = (c.get('aes') or [{}])[0]
+    primary_criterion = (primary_ae.get('criteria') or ['Reconocer y aplicar el procedimiento técnico']) [0]
+    media_root = f'/static/headers/{media_key}'
+    c['media_resources'] = [
+        {'kind': '3d', 'image': f'{media_root}/e2.png?v=3', 'title': 'Identifica componentes y relaciones',
+         'oa': (primary_ae.get('oa') or primary_ae.get('oa_code') or 'OA del módulo'), 'ae': primary_ae.get('title', ''),
+         'content': primary_criterion, 'activity': 'Observa e identifica antes de avanzar.',
+         'purpose': 'Distinguir partes, señales y condiciones relevantes del procedimiento.',
+         'observe': 'Qué componente interviene, qué función cumple y qué evidencia lo demuestra.'},
+        {'kind': '3d', 'image': f'{media_root}/e3.png?v=3', 'title': 'Analiza una situación de trabajo',
+         'oa': (primary_ae.get('oa') or primary_ae.get('oa_code') or 'OA del módulo'), 'ae': primary_ae.get('title', ''),
+         'content': primary_criterion, 'activity': 'Relaciona la representación con el caso y decide.',
+         'purpose': 'Comparar una condición segura con una decisión técnicamente fundada.',
+         'observe': 'Qué dato cambia la decisión y qué riesgo o consecuencia debes prevenir.'},
+        {'kind': '3d', 'image': f'{media_root}/e4.png?v=3', 'title': 'Verifica la aplicación',
+         'oa': (primary_ae.get('oa') or primary_ae.get('oa_code') or 'OA del módulo'), 'ae': primary_ae.get('title', ''),
+         'content': primary_criterion, 'activity': 'Aplica el criterio y comprueba tu respuesta.',
+         'purpose': 'Verificar el resultado del procedimiento usando evidencia observable.',
+         'observe': 'Qué indicador confirma que la aplicación es correcta y qué debes corregir.'},
+    ]
+    if c.get('video'):
+        c['media_resources'][0]['video'] = c.get('video')
+        c['media_resources'][0]['vtt'] = c.get('vtt')
     c['development_pack'] = development_pack(mid, c.get('development', ''))
     question_counts = {1: 5, 2: 5, 3: 7, 4: 8}
     question_count = int(custom.get('question_count') or question_counts.get(mid, 5)) if custom else question_counts.get(mid, 5)

@@ -1,35 +1,35 @@
 # Auditoría reproducible de los 9 prompts en todos los cursos
 
 Fecha: 2026-09-22. Fuente: los módulos publicados en la base local; cálculo de solo lectura.
-Alcance: 4 cursos, 41 módulos, 4242 actividades y 2465 registros multimedia. Evidencias de estudiantes en esta instalación: 0.
+Alcance: 7 cursos, 73 módulos, 7580 actividades y 4453 registros multimedia. Evidencias de estudiantes en esta instalación: 0.
 
 ## Porcentaje por ítem y curso
 
 Cada porcentaje es **solo el cumplimiento de los controles automáticos indicados abajo**, no una calificación global de calidad ni una certificación. N/D significa que el juicio experto no está automatizado.
 
-| Prompt y control medido | Refrigeración y Climatización | Electricidad | Atención de Enfermería, mención Adulto Mayor | Atención de Enfermería, mención Enfermería | Total |
-|---|---:|---:|---:|---:|---:|
-| P1 Consignas y trazabilidad | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| P2 Variedad de casos y evaluación | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| P3 Horas oficiales y reparto | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| P4 Fuente curricular y alcance por ítem | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| P5 Metadatos multimedia | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| P6 Estructura Aula TP | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| P7 Texto alternativo en casos y preguntas | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| P8 Controles de publicación | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| P9 Factor x5 y tiempos declarados | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Prompt y control medido | Refrigeración y Climatización | Electricidad | Atención de Enfermería, mención Adulto Mayor | Atención de Enfermería, mención Enfermería | Gastronomía, mención Cocina | Gastronomía, mención Pastelería y Repostería | Servicios de Hotelería | Total |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| P1 Consignas y trazabilidad | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| P2 Variedad de casos y evaluación | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| P3 Horas oficiales y reparto | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| P4 Fuente curricular y alcance por ítem | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| P5 Metadatos multimedia | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| P6 Estructura Aula TP | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| P7 Texto alternativo en casos y preguntas | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| P8 Controles de publicación | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| P9 Factor x5 y tiempos declarados | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
 
 ## Denominadores
 
-- P1: 4242/4242 controles; consignas y trazabilidad.
-- P2: 82/82 controles; variedad de casos y evaluación.
-- P3: 127/127 controles; horas oficiales y reparto.
-- P4: 1681/1681 controles; fuente curricular y alcance por ítem.
-- P5: 2465/2465 controles; metadatos multimedia.
-- P6: 205/205 controles; estructura aula tp.
-- P7: 1640/1640 controles; texto alternativo en casos y preguntas.
-- P8: 41/41 controles; controles de publicación.
-- P9: 164/164 controles; factor x5 y tiempos declarados.
+- P1: 7580/7580 controles; consignas y trazabilidad.
+- P2: 146/146 controles; variedad de casos y evaluación.
+- P3: 226/226 controles; horas oficiales y reparto.
+- P4: 2993/2993 controles; fuente curricular y alcance por ítem.
+- P5: 4453/4453 controles; metadatos multimedia.
+- P6: 365/365 controles; estructura aula tp.
+- P7: 2920/2920 controles; texto alternativo en casos y preguntas.
+- P8: 73/73 controles; controles de publicación.
+- P9: 292/292 controles; factor x5 y tiempos declarados.
 
 ## Límites y correcciones
 

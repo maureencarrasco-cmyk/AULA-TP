@@ -34,6 +34,7 @@ body[data-screen="module"] #main{padding-top:16px}
   margin:0 0 16px;
   isolation:isolate;
 }
+.atp-hero:not(.is-station){height:auto;max-height:none;min-height:340px}
 .atp-hero.s1{--hero-accent:#3EC6E0;--hero-soft:#D6F4FA;--hero-wash:#F4FBFD}
 .atp-hero.s2{--hero-accent:#1558A0;--hero-soft:#E8F1FB;--hero-wash:#F4F8FC}
 .atp-hero.s3{--hero-accent:#6A5A9A;--hero-soft:#F3EFFA;--hero-wash:#F7F5FC}

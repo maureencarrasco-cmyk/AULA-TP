@@ -115,7 +115,7 @@ def _make_module(item, position, key, source, url, dossier, scope):
         })
     content['specialty_source']['source_page'] = item['source_page']
     content['specialty_source']['official_criteria_count'] = sum(len(ae['criteria']) for ae in item['aes'])
-    content['version'] = 'hospitality-mineduc-v3'
+    content['version'] = 'hospitality-mineduc-v5'
     def decision(stage, criterion):
         checks = [
             (f'Antes de entregar el {product}, ¿qué debes comprobar ante esta diferencia?',
@@ -215,7 +215,7 @@ def courses():
 
 
 def install_hospitality_courses(con):
-    version = 'hospitality-mineduc-v3'
+    version = 'hospitality-mineduc-v5'
     if con.execute('SELECT 1 FROM content_updates WHERE version=?', (version,)).fetchone():
         return
     student = con.execute("SELECT id FROM users WHERE role='student' ORDER BY id LIMIT 1").fetchone()
@@ -238,7 +238,7 @@ def install_hospitality_courses(con):
             serialized = json.dumps(content, ensure_ascii=False)
             if found:
                 old = json.loads(found['content'] or '{}')
-                if old.get('version') not in ('hospitality-mineduc-v1', 'hospitality-mineduc-v2', version) or con.execute('SELECT 1 FROM progress WHERE module_id=?',
+                if old.get('version') not in ('hospitality-mineduc-v1', 'hospitality-mineduc-v2', 'hospitality-mineduc-v3', 'hospitality-mineduc-v4', version) or con.execute('SELECT 1 FROM progress WHERE module_id=?',
                                                                (found['id'],)).fetchone():
                     continue
                 con.execute('UPDATE modules SET title=?,content=?,published=1 WHERE id=?',
