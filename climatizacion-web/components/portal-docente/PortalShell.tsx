@@ -161,8 +161,29 @@ export function PortalShell({ section }: PortalShellProps) {
             </nav>
           ) : null}
 
-          <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
+          <main className="portal-main flex-1 px-4 py-6 sm:px-6 lg:px-8">
             <LivePortalProvider>
+              <section className="portal-welcome mb-6 overflow-hidden rounded-[2rem] border border-white/70 bg-[linear-gradient(118deg,#062f91_0%,#075fc7_55%,#08a8b8_100%)] p-5 text-white shadow-[0_18px_45px_rgba(7,74,170,.2)] sm:p-7">
+                <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                  <div className="relative z-10 max-w-2xl">
+                    <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/12 px-3 py-1 text-[11px] font-bold uppercase tracking-[.16em] text-cyan-100">
+                      <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_0_4px_rgba(110,231,183,.18)]" />
+                      Centro de gestión Aula TP
+                    </div>
+                    <h1 className="text-2xl font-black tracking-tight sm:text-3xl">Convierte los datos en mejores decisiones pedagógicas.</h1>
+                    <p className="mt-2 max-w-xl text-sm leading-6 text-blue-50/85 sm:text-base">Visualiza el avance real de tus cursos, detecta focos de apoyo y acompaña cada aprendizaje desde un solo lugar.</p>
+                    <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
+                      <span className="rounded-full bg-white/15 px-3 py-2 backdrop-blur">LMS conectado</span>
+                      <span className="rounded-full bg-white/15 px-3 py-2 backdrop-blur">Datos en vivo</span>
+                      <span className="rounded-full bg-white/15 px-3 py-2 backdrop-blur">Seguimiento por OA y AE</span>
+                    </div>
+                  </div>
+                  <div className="relative hidden w-full max-w-sm lg:block">
+                    <div className="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl" />
+                    <img src="/images/portal-docente/hero.png" alt="Docente revisando el avance de sus estudiantes" className="relative h-44 w-full rounded-2xl object-cover object-center shadow-2xl ring-1 ring-white/30" />
+                  </div>
+                </div>
+              </section>
               <SectionBody section={section} />
             </LivePortalProvider>
           </main>
