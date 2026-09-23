@@ -26,13 +26,11 @@ export function PortalShell({ section }: PortalShellProps) {
   return (
     <div className="min-h-screen bg-[var(--aula-pale,#f7fbff)]">
       <div className="flex min-h-screen">
-        <aside className="hidden w-64 shrink-0 flex-col bg-[linear-gradient(180deg,var(--aula-navy,#062f91)_0%,#041f66_100%)] text-white lg:flex">
-          <div className="border-b border-white/15 px-5 py-5">
-            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--aula-cyan,#07a8b8)]">
-              Portal Docente
-            </p>
-            <p className="mt-1 text-base font-bold">Aula TP Chile</p>
-            <p className="mt-1 text-[11px] text-white/65">Seguimiento pedagógico TP</p>
+        <aside className="portal-sidebar hidden w-64 shrink-0 flex-col lg:flex">
+          <div className="portal-brand border-b px-5 py-5">
+            <img src="/images/portal-docente/brand/aula-tp-chile-logo.png" alt="Aula TP Chile" className="h-20 w-full object-contain object-left" />
+            <p className="mt-2 text-center text-sm font-bold">Portal Docente</p>
+            <p className="mt-1 text-center text-[11px]">Educación Técnico-Profesional para un mejor futuro</p>
           </div>
           <nav className="flex-1 space-y-1 px-3 py-4" aria-label="Navegación principal">
             {NAV_SECTIONS.map((item) => {
@@ -41,10 +39,10 @@ export function PortalShell({ section }: PortalShellProps) {
                 <Link
                   key={item.id}
                   href={item.href}
-                  className={`block rounded-xl px-3 py-2.5 text-sm font-medium transition ${
+                  className={`portal-nav-item block rounded-xl px-3 py-2.5 text-sm font-medium transition ${
                     active
-                      ? "bg-[var(--color-blue,#1558A0)] text-white shadow-[0_6px_16px_rgba(21,88,160,0.35)] ring-2 ring-[var(--color-cyan,#3EC6E0)]"
-                      : "text-white/70 hover:bg-white/10 hover:text-white"
+                      ? "portal-nav-active"
+                      : ""
                   }`}
                   aria-current={active ? "page" : undefined}
                 >
@@ -53,16 +51,16 @@ export function PortalShell({ section }: PortalShellProps) {
               );
             })}
           </nav>
-          <div className="space-y-2 border-t border-white/15 px-4 py-4 text-sm">
+          <div className="portal-sidebar-footer space-y-2 border-t px-4 py-4 text-sm">
             <Link
               href="/"
-              className="block rounded-lg px-3 py-2 text-white/75 transition hover:bg-white/10 hover:text-white"
+              className="block rounded-lg px-3 py-2 transition hover:bg-white"
             >
               ← Volver al sitio
             </Link>
             <Link
               href="/#contacto"
-              className="block rounded-xl bg-[linear-gradient(100deg,#0747bb,#0878ea)] px-3 py-2.5 text-center font-bold text-white shadow-[0_8px_18px_rgba(0,77,185,0.28)] transition hover:brightness-110"
+              className="portal-primary-button block rounded-xl px-3 py-2.5 text-center font-bold transition hover:brightness-105"
             >
               Solicitar demo real
             </Link>
@@ -70,7 +68,7 @@ export function PortalShell({ section }: PortalShellProps) {
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-[var(--aula-line,#d9e5f6)] bg-white/92 px-4 py-3 shadow-[var(--shadow-xs,0_2px_6px_rgba(17,70,147,0.06))] backdrop-blur-md sm:px-6">
+          <header className="portal-header sticky top-0 z-20 flex items-center justify-between gap-3 border-b px-4 py-3 backdrop-blur-md sm:px-6">
             <div className="flex items-center gap-3">
               <button
                 type="button"
@@ -89,28 +87,28 @@ export function PortalShell({ section }: PortalShellProps) {
                   />
                 </svg>
               </button>
-              <div>
-                <p className="flex flex-wrap items-center gap-2 text-sm font-bold text-[var(--aula-text,#082b80)] sm:text-base">
+              <div className="portal-header-copy">
+                <p className="flex flex-wrap items-center gap-2 text-sm font-bold sm:text-base">
                   <span>
                     Portal Docente{" "}
                     <span className="font-normal text-[var(--aula-text-muted,#5e7596)]">|</span>{" "}
-                    <span className="text-[var(--aula-blue,#0870ef)]">Aula TP Chile</span>
+                    <span>Aula TP Chile</span>
                   </span>
                 </p>
-                <p className="hidden text-xs text-[var(--aula-text-muted,#5e7596)] sm:block">
+                <p className="hidden text-xs sm:block">
                   Cursos vivos conectados al LMS
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <div className="hidden text-right sm:block">
-                <p className="text-sm font-semibold text-[var(--aula-text,#082b80)]">
+                <p className="text-sm font-semibold">
                   Equipo docente
                 </p>
-                <p className="text-xs text-[var(--aula-text-muted,#5e7596)]">Aula TP Chile</p>
+                <p className="text-xs">Aula TP Chile</p>
               </div>
               <div
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--aula-blue,#0870ef),var(--aula-teal,#008b98))] text-sm font-bold text-white shadow-sm"
+                className="portal-avatar flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold shadow-sm"
                 aria-hidden="true"
               >
                 TP
@@ -163,19 +161,19 @@ export function PortalShell({ section }: PortalShellProps) {
 
           <main className="portal-main flex-1 px-4 py-6 sm:px-6 lg:px-8">
             <LivePortalProvider>
-              <section className="portal-welcome mb-6 overflow-hidden rounded-[2rem] border border-white/70 bg-[linear-gradient(118deg,#062f91_0%,#075fc7_55%,#08a8b8_100%)] p-5 text-white shadow-[0_18px_45px_rgba(7,74,170,.2)] sm:p-7">
+              <section className="portal-welcome mb-6 overflow-hidden rounded-[1.25rem] border p-5 sm:p-7">
                 <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                   <div className="relative z-10 max-w-2xl">
-                    <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/12 px-3 py-1 text-[11px] font-bold uppercase tracking-[.16em] text-cyan-100">
+                    <div className="portal-eyebrow mb-3 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[.16em]">
                       <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_0_4px_rgba(110,231,183,.18)]" />
                       Centro de gestión Aula TP
                     </div>
                     <h1 className="text-2xl font-black tracking-tight sm:text-3xl">Convierte los datos en mejores decisiones pedagógicas.</h1>
-                    <p className="mt-2 max-w-xl text-sm leading-6 text-blue-50/85 sm:text-base">Visualiza el avance real de tus cursos, detecta focos de apoyo y acompaña cada aprendizaje desde un solo lugar.</p>
+                    <p className="mt-2 max-w-xl text-sm leading-6 sm:text-base">Planifica, acompaña y potencia los aprendizajes de tus estudiantes en un solo lugar.</p>
                     <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
-                      <span className="rounded-full bg-white/15 px-3 py-2 backdrop-blur">LMS conectado</span>
-                      <span className="rounded-full bg-white/15 px-3 py-2 backdrop-blur">Datos en vivo</span>
-                      <span className="rounded-full bg-white/15 px-3 py-2 backdrop-blur">Seguimiento por OA y AE</span>
+                      <span className="portal-pill rounded-full px-3 py-2">LMS conectado</span>
+                      <span className="portal-pill rounded-full px-3 py-2">Datos en vivo</span>
+                      <span className="portal-pill rounded-full px-3 py-2">Seguimiento por OA y AE</span>
                     </div>
                   </div>
                   <div className="relative hidden w-full max-w-sm lg:block">

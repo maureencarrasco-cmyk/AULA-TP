@@ -60,6 +60,29 @@ body {
   letter-spacing: -0.02em;
 }
 
+/* Portal Docente visual system: pastel, editorial and distinct from the student LMS. */
+.portal-sidebar { background: linear-gradient(180deg, #f8fbff 0%, #edf5ff 100%); color: #143a78; border-right: 1px solid #dce9f8; }
+.portal-brand { border-color: #dce9f8; }
+.portal-brand p { color: #52709f; }
+.portal-brand p.text-center { color: #123474; }
+.portal-nav-item { color: #274c84; }
+.portal-nav-item:hover { background: #e4efff; color: #075ed8; transform: translateX(2px); }
+.portal-nav-active { background: #dceaff; color: #075ed8; box-shadow: inset 4px 0 #277be6, 0 6px 18px rgba(60, 126, 220, .12); }
+.portal-sidebar-footer { border-color: #dce9f8; color: #52709f; }
+.portal-primary-button { background: #277be6; color: white; box-shadow: 0 8px 18px rgba(39,123,230,.2); }
+.portal-header { background: rgba(255,255,255,.94); border-color: #dce9f8; color: #163875; box-shadow: 0 3px 14px rgba(54, 99, 160, .06); }
+.portal-header-copy p:last-child, .portal-header-copy span.font-normal, .portal-header-copy + * p:last-child { color: #7891b5; }
+.portal-avatar { background: linear-gradient(135deg, #4d9df8, #2876dd); color: white; }
+.portal-welcome { background: linear-gradient(110deg, #e8f2ff 0%, #dcecff 58%, #eee8ff 100%); border-color: #cfe0f5; color: #123574; box-shadow: 0 12px 32px rgba(72, 122, 190, .10); }
+.portal-welcome h1 { color: #102f6f; }
+.portal-welcome p { color: #52709f; }
+.portal-eyebrow { border-color: #bdd6f5; background: rgba(255,255,255,.58); color: #38679f; }
+.portal-eyebrow span { background: #35b98c; }
+.portal-pill { background: rgba(255,255,255,.62); color: #38679f; border: 1px solid rgba(141,181,229,.4); }
+.portal-main button, .portal-main a { transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms ease; }
+.portal-main button:active, .portal-main a:active { transform: translateY(1px); }
+.portal-main [class*="rounded-2xl"], .portal-main [class*="rounded-[2rem]"] { border-color: #d8e6f5; box-shadow: 0 5px 18px rgba(46, 93, 155, .06); }
+
 :focus-visible {
   outline: 2px solid var(--color-cyan);
   outline-offset: 2px;
