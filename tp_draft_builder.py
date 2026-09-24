@@ -2,6 +2,7 @@
 
 import json
 import re
+from copy import deepcopy
 from pathlib import Path
 
 from specialty_catalog import _ae, _module, _cases, _questions, _rotate
@@ -253,3 +254,37 @@ def install_draft(con, title, modules):
         con.execute('INSERT INTO modules(course_id,title,position,published,content) VALUES(?,?,?,?,?)',
                     (course['id'], item['title'], item['position'], 0,
                      json.dumps(content, ensure_ascii=False)))
+
+
+def install_course(con, title, modules, draft_version, published_version):
+    """Publish a source-linked draft only after every module passes quality checks."""
+    from pedagogy import enrich, publication_gaps
+
+    course = con.execute('SELECT id FROM courses WHERE title=?', (title,)).fetchone()
+    if not course:
+        return
+    for item, source_content in modules:
+        content = deepcopy(source_content)
+        content['version'] = published_version
+        enrich(content, item['position'])
+        gaps = publication_gaps(content, title)
+        if gaps:
+            raise ValueError(f'{title} módulo {item["position"]} no publicable: {gaps[:3]}')
+        existing = con.execute(
+            'SELECT id,content FROM modules WHERE course_id=? AND position=?',
+            (course['id'], item['position']),
+        ).fetchone()
+        serialized = json.dumps(content, ensure_ascii=False)
+        if existing:
+            previous = json.loads(existing['content'] or '{}')
+            if previous.get('version') not in (draft_version, published_version):
+                continue
+            con.execute(
+                'UPDATE modules SET title=?,published=1,content=? WHERE id=?',
+                (item['title'], serialized, existing['id']),
+            )
+        else:
+            con.execute(
+                'INSERT INTO modules(course_id,title,position,published,content) VALUES(?,?,?,?,?)',
+                (course['id'], item['title'], item['position'], 1, serialized),
+            )

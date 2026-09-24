@@ -1,12 +1,10 @@
 # Estado verificable de cursos en borrador
 
-Fecha: 2026-09-23. Alcance: 38 cursos y 378 módulos no publicados.
+Fecha: 2026-09-24. Alcance: 36 cursos y 359 módulos no publicados.
 Esta tabla mide presencia de datos y archivos locales, no calidad pedagógica ni autorización para publicar.
 
 | Curso | Módulos | PDF y página oficial | OA explícito | AE con criterios | Visuales 3D reales | Imágenes de evaluación reales | Videos reales |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Contabilidad | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
-| Elaboración Industrial de Alimentos | 9 | 9/9 | 8/9 | 9/9 | 0/27 mínimo | 0/360 | 0 |
 | Vestuario y Confección Textil | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
 | Instalaciones Sanitarias | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
 | Montaje Industrial | 9 | 9/9 | 8/9 | 9/9 | 0/27 mínimo | 0/360 | 0 |
@@ -46,11 +44,11 @@ Esta tabla mide presencia de datos y archivos locales, no calidad pedagógica ni
 
 ## Resultado y límites
 
-- PDF local y página curricular declarada: 378/378 módulos.
-- OA explícito en el registro: 336/378; los módulos sin OA requieren revisar el alcance del programa antes de asignarles uno.
-- AE con código y criterios: 378/378, con 1300 AE registrados.
-- Imágenes 3D verificadas: 0/1134 del mínimo solicitado.
-- Imágenes reales en casos y evaluación: 0/15120.
+- PDF local y página curricular declarada: 359/359 módulos.
+- OA explícito en el registro: 319/359; los módulos sin OA requieren revisar el alcance del programa antes de asignarles uno.
+- AE con código y criterios: 359/359, con 1245 AE registrados.
+- Imágenes 3D verificadas: 0/1077 del mínimo solicitado.
+- Imágenes reales en casos y evaluación: 0/14360.
 - Videos locales verificados: 0. La pertinencia se debe decidir por módulo; cero videos no demuestra que ninguno corresponda.
 - Estímulos distintos por banco de 25 preguntas: entre 1 y 1. La repetición requiere rediseño y revisión disciplinar.
 - No se ha certificado en estos borradores la exactitud técnica de cada decisión, la pertinencia de cada medio, accesibilidad con usuarios ni la experiencia completa de las cinco estaciones.

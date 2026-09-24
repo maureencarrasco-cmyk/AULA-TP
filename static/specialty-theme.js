@@ -8,7 +8,7 @@ function specialtyKey(course) {
   if (/refrigeraci[oó]n|climatizaci[oó]n/i.test(s)) return 'climate';
   if (/electricidad|el[eé]ctric/i.test(s)) return 'electricidad';
   if (/enfermer/i.test(s)) return 'enfermeria';
-  if (/gastronom|pasteler|reposter/i.test(s)) return 'gastronomia';
+  if (/gastronom|pasteler|reposter|aliment/i.test(s)) return 'gastronomia';
   if (/hoteler/i.test(s)) return 'hoteleria';
   if (/administraci[oó]n|contabil|oficina|gesti[oó]n/i.test(s)) return 'administracion';
   return 'general';

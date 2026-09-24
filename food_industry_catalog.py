@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from tp_draft_builder import build_draft, install_draft
+from tp_draft_builder import build_draft, install_course, install_draft
 
 
 ROOT = Path(__file__).resolve().parent
@@ -28,3 +28,13 @@ def draft_modules():
 
 def install_food_industry_draft(con):
     install_draft(con, 'Elaboración Industrial de Alimentos', draft_modules())
+
+
+def install_food_industry_course(con):
+    install_course(
+        con,
+        'Elaboración Industrial de Alimentos',
+        draft_modules(),
+        'elaboracion-industrial-alimentos-mineduc-draft-v1',
+        'elaboracion-industrial-alimentos-mineduc-v1',
+    )
