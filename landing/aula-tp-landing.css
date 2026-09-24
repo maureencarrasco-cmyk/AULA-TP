@@ -171,6 +171,21 @@ html {
 .experience-heading h2 { margin: 0; color: #0b347b; font-size: clamp(2rem, 4vw, 3.35rem); line-height: 1.08; letter-spacing: -.035em; }
 .experience-heading > p:last-child { margin: 12px 0 0; color: #52709a; font-size: 1.15rem; }
 
+.experience-journey-visual {
+  width: 100%;
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-color: rgba(21, 88, 160, .35) transparent;
+}
+
+.experience-journey-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .experience-step-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .experience-step-card {
   min-width: 0;
@@ -223,6 +238,7 @@ html {
   .experience-heading { margin-top: 38px; }
   .experience-heading h2 { font-size: 2rem; }
   .experience-step-media { height: 180px; }
+  .experience-journey-visual img { width: 960px; max-width: none; }
 }
 
 /* Metrics strip · reference visual with pastel icon blocks. */
