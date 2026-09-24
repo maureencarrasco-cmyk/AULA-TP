@@ -27,7 +27,7 @@ def _contextual_scenario(dossier, index):
          'Una versión corregida que borre la diferencia original.',
          'Una aprobación general sin identificar el antecedente revisado.',
          'El registro debe permitir reconstruir la evidencia y la decisión.'),
-        (f'¿Cuándo puedes entregar el {product}?',
+        (f'¿Cuándo puedes entregar el producto «{product}»?',
          'Cuando la diferencia esté resuelta con evidencia y la revisión correspondiente quede registrada.',
          'Cuando una de las fuentes parezca suficiente a primera vista.',
          'Antes de revisar la diferencia, para cumplir el plazo.',
@@ -40,7 +40,7 @@ def _contextual_scenario(dossier, index):
          'Aplicar una solución física sin autorización ni revisión.',
          'Una diferencia sin resolver debe comunicarse con sus antecedentes.'),
         ('¿Cómo verificarías el cierre del caso?',
-         f'Comparar nuevamente {resources} y comprobar que el {product} refleje la decisión autorizada.',
+         f'Comparar nuevamente {resources} y comprobar que el producto «{product}» refleje la decisión autorizada.',
          'Dar el caso por cerrado porque ya existe un documento.',
          'Repetir la misma conclusión sin revisar las fuentes.',
          'Cambiar la fecha del registro para aparentar una revisión.',
@@ -61,10 +61,10 @@ def contextualize_draft(content, dossier):
         )
         activities[1]['prompt'] = (
             f'Relaciona las fuentes del caso con el criterio «{criterion}», el resguardo '
-            f'necesario y el registro que respaldará el {product}.'
+            f'necesario y el registro que respaldará el producto «{product}».'
         )
         activities[2]['prompt'] = (
-            f'Ordena la revisión de {resources} antes de preparar el {product}. '
+            f'Ordena la revisión de {resources} antes de preparar el producto «{product}». '
             f'La diferencia detectada es: {conflict}'
         )
         activities[3]['prompt'] = (
@@ -72,12 +72,12 @@ def contextualize_draft(content, dossier):
             '¿qué corresponde hacer si todavía falta un antecedente verificable?'
         )
         activities[4]['prompt'] = (
-            f'Antes de entregar el {product}, ¿qué evidencia demuestra mejor '
+            f'Antes de entregar el producto «{product}», ¿qué evidencia demuestra mejor '
             f'el criterio «{ae["criteria"][-1]}» con fuentes y verificación identificables?'
         )
         activities[5]['prompt'] = (
             f'Revisa tu decisión ante esta diferencia: {conflict} Explica cómo mejorarías '
-            f'el {product} y comprobarías «{criterion}» sin exceder tu rol.'
+            f'el producto «{product}» y comprobarías «{criterion}» sin exceder tu rol.'
         )
     for field in ('cases', 'questions'):
         for index, item in enumerate(content[field]):
@@ -205,7 +205,7 @@ def build_draft(rows, dossiers, specialty, key, source):
             ae['lesson'] = [
                 row['title'],
                 f'En {place.lower()}, analiza {resources}. {conflict}',
-                f'Relaciona el {product} con un criterio de evaluación oficial.',
+                f'Relaciona el producto «{product}» con un criterio de evaluación oficial.',
             ]
             ae['example'] = f'{conflict} Revisa {resources} y entrega un {product}.'
             aes.append(ae)
@@ -214,12 +214,12 @@ def build_draft(rows, dossiers, specialty, key, source):
                           year=item['year'], plan_section='Plan de Estudio MINEDUC')
         content['specialty'] = specialty
         content['context'] = f'{place}. {conflict} Dispones de {resources}. Producto: {product}.'
-        content['application'] = f'Caso simulado de {place.lower()}; contrasta {resources} antes de entregar el {product}.'
+        content['application'] = f'Caso simulado de {place.lower()}; contrasta {resources} antes de entregar el producto «{product}».'
         content['development'] = (
             f'{conflict} Usa {resources}, identifica el AE y criterio oficial '
-            f'correspondiente y prepara el {product} con evidencia de verificación.'
+            f'correspondiente y prepara el producto «{product}» con evidencia de verificación.'
         )
-        content['reflection_prompt'] = f'¿Qué evidencia en {resources} respalda el {product} y qué falta comprobar?'
+        content['reflection_prompt'] = f'¿Qué evidencia en {resources} respalda el producto «{product}» y qué falta comprobar?'
         content['curriculum']['url'] = item['source_page']
         content['specialty_source']['source_page'] = item['source_page']
         content['specialty_source']['official_criteria_count'] = sum(len(ae['criteria']) for ae in item['aes'])

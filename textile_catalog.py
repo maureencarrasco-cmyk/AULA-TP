@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from tp_draft_builder import build_draft, install_draft
+from tp_draft_builder import build_draft, install_course, install_draft
 
 
 ROOT = Path(__file__).resolve().parent
@@ -29,3 +29,13 @@ def draft_modules():
 
 def install_textile_draft(con):
     install_draft(con, 'Vestuario y Confección Textil', draft_modules())
+
+
+def install_textile_course(con):
+    install_course(
+        con,
+        'Vestuario y Confección Textil',
+        draft_modules(),
+        'vestuario-confeccion-textil-mineduc-draft-v1',
+        'vestuario-confeccion-textil-mineduc-v1',
+    )

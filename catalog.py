@@ -314,8 +314,8 @@ def upgrade_catalog(con):
     install_metalworks_draft(con)
     from food_industry_catalog import install_food_industry_course
     install_food_industry_course(con)
-    from textile_catalog import install_textile_draft
-    install_textile_draft(con)
+    from textile_catalog import install_textile_course
+    install_textile_course(con)
     from forestry_catalog import install_forestry_draft
     install_forestry_draft(con)
     from furniture_catalog import install_furniture_draft
