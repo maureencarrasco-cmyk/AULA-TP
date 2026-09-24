@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from tp_draft_builder import build_draft, install_draft
+from tp_draft_builder import build_draft, install_course, install_draft
 
 
 ROOT = Path(__file__).resolve().parent
@@ -28,3 +28,13 @@ def draft_modules():
 
 def install_forestry_draft(con):
     install_draft(con, 'Forestal', draft_modules())
+
+
+def install_forestry_course(con):
+    install_course(
+        con,
+        'Forestal',
+        draft_modules(),
+        'forestal-mineduc-draft-v1',
+        'forestal-mineduc-v1',
+    )

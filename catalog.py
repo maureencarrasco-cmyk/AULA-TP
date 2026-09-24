@@ -316,8 +316,8 @@ def upgrade_catalog(con):
     install_food_industry_course(con)
     from textile_catalog import install_textile_course
     install_textile_course(con)
-    from forestry_catalog import install_forestry_draft
-    install_forestry_draft(con)
+    from forestry_catalog import install_forestry_course
+    install_forestry_course(con)
     from furniture_catalog import install_furniture_draft
     install_furniture_draft(con)
     from port_catalog import install_port_draft
