@@ -460,10 +460,31 @@ def _x5(mid, ae_index, ae):
     return out
 
 
-def _case_extra(i, mid, case):
+def _case_extra(i, mid, case, specialty_key=None):
     fmt = CASE_FORMATS[i % len(CASE_FORMATS)]
     extra = {'format': fmt, 'skill': SKILLS[i % 4], 'difficulty': DIFFICULTIES[min(2, i // 5)], 'ae': i % 3, 'minutes': 12 + (i % 3) * 4}
     extra['_module_id'] = mid
+    if specialty_key:
+        extra.update({
+            'image': f'/static/headers/{specialty_key}/e3.png?v=3',
+            'caption': 'Escenario profesional simulado. La imagen contextualiza la actividad y no revela la respuesta.',
+            'alt': f'Escenario profesional de {case.get("title") or "la actividad"}.',
+            'media_kind': 'foto', 'media_key': specialty_key,
+        })
+        if fmt == 'work-order':
+            extra['document'] = f"REGISTRO DE TRABAJO RT-{i+1:02d}\nSituación: {case.get('title','')}\n{case.get('context','')}"
+        elif fmt in ('table', 'data'):
+            extra['table'] = [['Antecedente', 'Estado'], ['Evidencia recibida', 'Disponible'], ['Criterio aplicable', 'Por verificar'], ['Decisión', 'Pendiente']]
+        elif fmt == 'hotspot':
+            labels = ['Evidencia', 'Criterio', 'Resguardo', 'Registro']
+            extra['spots'] = [
+                {'id': label.lower(), 'x': x, 'y': y, 'label': label, 'note': f'Identifica qué aporta {label.lower()} a la decisión.'}
+                for label, x, y in zip(labels, (22, 72, 30, 76), (28, 30, 72, 70))
+            ]
+            extra['inspect'] = ['evidencia']
+        elif fmt == 'document':
+            extra['document'] = case.get('context', '')
+        return extra
     apply_oficio_media(case if isinstance(case, dict) else extra, mid, i, force=True)
     extra['image'] = (case or extra).get('image') or oficio_src(MODULE_OFICIO.get(mid))
     extra['caption'] = (case or extra).get('caption')
@@ -730,9 +751,17 @@ def textish(v, n=1):
     return isinstance(v, str) and len(v.strip()) >= n
 
 
-def _visual_stem(q, i, mid):
+def _visual_stem(q, i, mid, specialty_key=None):
     rep = q.get('representation')
-    apply_oficio_media(q, mid, i, force=True)
+    if specialty_key:
+        q.update({
+            'image': f'/static/headers/{specialty_key}/e4.png?v=3',
+            'caption': 'Evidencia de evaluación en un escenario profesional simulado.',
+            'alt': 'Escenario profesional relacionado con la pregunta; no contiene la respuesta.',
+            'media_kind': 'foto', 'media_key': specialty_key,
+        })
+    else:
+        apply_oficio_media(q, mid, i, force=True)
     if rep == 'tabla':
         q.setdefault('table', [['Dato', 'Valor'], ['Revisión', 'B'], ['Cantidad declarada', '3'], ['Cantidad dibujada', '4']])
     elif rep == 'documento':
@@ -989,6 +1018,7 @@ def enrich(content, module_id=1):
     mid = int(module_id or 1)
     custom = c.get('specialty_source') if isinstance(c.get('specialty_source'), dict) else None
     custom_explore = deepcopy(c.get('explore')) if custom and c.get('explore') else None
+    custom_development = deepcopy(c.get('development_pack')) if custom and c.get('development_pack') else None
     if custom:
         c['official_source'] = {
             'pdf': custom.get('pdf'), 'decreto': custom.get('decree'),
@@ -1046,7 +1076,7 @@ def enrich(content, module_id=1):
     if c.get('video'):
         c['media_resources'][0]['video'] = c.get('video')
         c['media_resources'][0]['vtt'] = c.get('vtt')
-    c['development_pack'] = development_pack(mid, c.get('development', ''))
+    c['development_pack'] = custom_development or development_pack(mid, c.get('development', ''))
     question_counts = {1: 5, 2: 5, 3: 7, 4: 8}
     question_count = int(custom.get('question_count') or question_counts.get(mid, 5)) if custom else question_counts.get(mid, 5)
     development_required = bool(custom.get('development_required', mid == 4)) if custom else mid == 4
@@ -1066,7 +1096,14 @@ def enrich(content, module_id=1):
             ae['experiences'] = _x5(mid, i, ae)
         for si, exp in enumerate(ae.get('experiences') or []):
             exp.setdefault('title', ae.get('title', ''))
-            apply_oficio_media(exp, mid, i * 6 + si, force=True)
+            if custom:
+                exp.setdefault('image', f'/static/headers/{media_key}/e2.png?v=3')
+                exp.setdefault('caption', 'Recurso visual del aprendizaje esperado; analiza la evidencia antes de decidir.')
+                exp.setdefault('alt', f'Recurso profesional de {ae.get("short_title") or ae.get("title")}.')
+                exp['media_kind'] = '3d' if exp.get('type') == 'hotspot' else 'foto'
+                exp['media_key'] = media_key
+            else:
+                apply_oficio_media(exp, mid, i * 6 + si, force=True)
             if exp.get('type') == 'hotspot':
                 exp['media_kind'] = '3d'
             if si == 2:
@@ -1081,7 +1118,7 @@ def enrich(content, module_id=1):
             if plan:
                 exp['minutes'] = plan['station_minutes']['2_etapa']
     for i, case in enumerate(c.get('cases', [])):
-        extra = _case_extra(i, mid, case)
+        extra = _case_extra(i, mid, case, c.get('specialty_key') if custom else None)
         for k, v in extra.items():
             if k in ('image', 'caption', 'alt', 'media_kind', 'media_key'):
                 case[k] = v
@@ -1115,7 +1152,7 @@ def enrich(content, module_id=1):
         meta = _exam_meta(i)
         for k, v in meta.items():
             q.setdefault(k, v)
-        _visual_stem(q, i, mid)
+        _visual_stem(q, i, mid, c.get('specialty_key') if custom else None)
         q.setdefault('id', i)
         ensure_mcq_fields(q, i, mid, 'question')
         ae_count = max(1, len(c.get('aes') or []))

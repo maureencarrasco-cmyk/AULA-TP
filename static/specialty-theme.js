@@ -24,6 +24,8 @@ function climateModuleIndex() {
   return 0;
 }
 function climateModuleArt() {
+  const pos = Number(typeof current !== 'undefined' && current?.position);
+  if (pos > 4) return `/static/headers/climate/e${((pos - 5) % 5) + 1}.png?v=3`;
   return MODULE_OFICIO[climateModuleIndex()];
 }
 function specialtyCover(course) {
@@ -52,7 +54,7 @@ const MODULE_OFICIO_ALTS = {
 };
 function moduleStopArt(course, index) {
   const key = specialtyKey(course);
-  if (key === 'climate') return MODULE_OFICIO[index % MODULE_OFICIO.length];
+  if (key === 'climate') return index < 4 ? MODULE_OFICIO[index] : `/static/headers/climate/e${((index - 4) % 5) + 1}.png?v=3`;
   if (key === 'gastronomia' || key === 'hoteleria') {
     const title=String(course?.modules?.[index]?.title||'');
     const image=/recepci[oó]n y almacenamiento|insumos/i.test(title)?'10-bodega'
@@ -130,6 +132,11 @@ function stationHeaderAlt(n, course, aeIndex) {
     'Estudiante y docente revisan la evidencia de servicio y una mejora.'
   ][i-1];
   if (key === 'climate') {
+    const modulePosition = Number(typeof current !== 'undefined' && current?.position) || 1;
+    if (modulePosition > 4) {
+      const title = typeof current !== 'undefined' && current?.title ? current.title : 'Refrigeración y climatización';
+      return `Escenario profesional simulado del módulo ${modulePosition}: ${title}.`;
+    }
     if (i === 2) {
       const exp = climateExperience();
       if (exp?.alt || exp?.caption) return exp.alt || exp.caption;
@@ -147,6 +154,7 @@ function stationHeaderAlt(n, course, aeIndex) {
 function stationHeaderArt(n, course, aeIndex) {
   const i = Math.min(5, Math.max(1, Number(n) || 1));
   if (isClimateSpecialty(course)) {
+    if (Number(typeof current !== 'undefined' && current?.position) > 4) return `/static/themes/route/climate-${i}.webp?v=1`;
     if (i === 1) return '/static/themes/workshop.webp?v=1';
     if (i === 2) {
       const exp = climateExperience();

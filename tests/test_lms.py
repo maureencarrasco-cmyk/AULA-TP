@@ -233,7 +233,8 @@ class LMSFlow(unittest.TestCase):
    ['Etiqueta','Cilindro','Registro','Almacenamiento'],
    ['Oportunidad','Presupuesto','Contrato','Formación'],
   ]
-  for module,ae_count,labels in zip(course['modules'][4:],ae_counts,explore_labels):
+  scenario_signals=['área está despejada','baja capacidad','plan indica una tarea','cilindro de recuperación','presupuesto']
+  for module,ae_count,labels,signal in zip(course['modules'][4:],ae_counts,explore_labels,scenario_signals):
    with self.subTest(module=module['position']):
     payload=self.s.get('/api/modules/'+str(module['id'])).json
     content=payload['content']
@@ -245,6 +246,12 @@ class LMSFlow(unittest.TestCase):
     self.assertNotIn('Leer la leyenda',content['aes'][0]['experiences'][2].get('items') or [])
     self.assertEqual([spot['label'] for spot in content['explore']['spots']],labels)
     self.assertTrue(content['explore'].get('guidance'))
+    case_text=' '.join(case['context'] for case in content['cases']).lower()
+    self.assertIn(signal,case_text)
+    self.assertNotIn('el plano identifica equipo eq-02',case_text)
+    self.assertNotIn('dos trazados se cruzan en planta',case_text)
+    self.assertFalse(any(spot.get('label') in ('UE-01','UI-01','Leyenda','Drenaje') for case in content['cases'] for spot in case.get('spots',[])))
+    self.assertNotIn('UI-01',' '.join(content['development_pack'].get('evidence',[])))
     self.assertEqual(payload['planning']['official_hp'],module['official_hp'])
  def test_mcq_publication_requires_photo_and_four_options(self):
   from pedagogy import publication_gaps

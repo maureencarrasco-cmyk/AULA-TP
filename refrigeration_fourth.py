@@ -174,7 +174,7 @@ def fourth_content(position, title, hp, oa, official_ae_count, aes):
         'evaluation_note': 'Cuarto medio utiliza cinco preguntas por módulo; el módulo 9 incorpora además un desarrollo integrador.',
         'official_ae_count': official_ae_count,
     })
-    content['version'] = 'refrigeracion-cuarto-medio-v6'
+    content['version'] = 'refrigeracion-cuarto-medio-v7'
     return content
 
 
@@ -183,7 +183,7 @@ def install_refrigeration_fourth(con):
     import json
     from pedagogy import enrich
 
-    version = 'refrigeracion-cuarto-medio-v6'
+    version = 'refrigeracion-cuarto-medio-v7'
     con.execute('CREATE TABLE IF NOT EXISTS content_updates(version TEXT PRIMARY KEY,applied TEXT DEFAULT CURRENT_TIMESTAMP)')
     if con.execute('SELECT 1 FROM content_updates WHERE version=?', (version,)).fetchone():
         return
@@ -214,9 +214,7 @@ def install_refrigeration_fourth(con):
         serialized = json.dumps(content, ensure_ascii=False)
         if existing:
             previous = json.loads(existing['content'] or '{}')
-            if previous.get('version') not in ('refrigeracion-cuarto-medio-v4', 'refrigeracion-cuarto-medio-v5', 'refrigeracion-cuarto-medio-v6'):
-                continue
-            if con.execute('SELECT 1 FROM progress WHERE module_id=? LIMIT 1', (existing['id'],)).fetchone():
+            if previous.get('version') not in ('refrigeracion-cuarto-medio-v4', 'refrigeracion-cuarto-medio-v5', 'refrigeracion-cuarto-medio-v6', 'refrigeracion-cuarto-medio-v7'):
                 continue
             con.execute(
                 'UPDATE modules SET title=?,published=1,content=? WHERE id=?',

@@ -253,8 +253,48 @@ SCENARIOS = {
 }
 
 
+FOURTH_CLIMATE_SCENARIOS = {
+    'puesta': [
+        ('El área está despejada, pero falta confirmar anclaje, ventilación y acceso de servicio.', '¿Qué corresponde antes de posicionar el equipo?', 'Verifico las condiciones del fabricante, registro pendientes y preparo el área antes de mover el equipo.', 'Ubico el equipo y reviso el acceso al final.', 'Compenso la falta de acceso con una extensión.', 'Doy por conforme el recinto porque está despejado.', 'El espacio debe comprobarse antes del traslado y posicionamiento.'),
+        ('La orden indica un refrigerante y el cilindro recibido presenta otra identificación.', '¿Qué haces antes de la carga?', 'Detengo la tarea, verifico orden, equipo y cilindro con personal autorizado y registro la diferencia.', 'Cargo una pequeña cantidad para probar.', 'Cambio la etiqueta del cilindro.', 'Elijo el fluido por el color del envase.', 'La identidad del refrigerante debe ser trazable antes de manipularlo.'),
+        ('La ficha exige vacío y hermeticidad, pero el registro solo consigna la hora de inicio.', '¿Puede iniciarse la carga?', 'No; solicito resultados verificables de vacío y hermeticidad antes de continuar.', 'Sí, porque el procedimiento comenzó.', 'Completo resultados estimados.', 'Inicio y verifico fugas después.', 'El inicio del procedimiento no acredita sus resultados.'),
+        ('Los parámetros iniciales están en rango, pero faltan sentido de giro y protecciones.', '¿Cómo continúas la puesta en marcha?', 'Completo la secuencia del fabricante y registro cada resultado antes de cerrar.', 'Declaro operativo el sistema.', 'Anulo temporalmente las protecciones.', 'Omito el sentido de giro si no hay ruido.', 'La puesta en marcha exige completar todas las comprobaciones.'),
+        ('El acta tiene mediciones, pero no identifica instrumento, unidad ni responsable.', '¿Cómo se cierra el registro?', 'Completo la trazabilidad y obtengo la validación autorizada.', 'Agrego unidades probables.', 'Firmo por la persona responsable.', 'Archivo el acta porque contiene números.', 'Una medición sin trazabilidad no permite validar el resultado.'),
+    ],
+    'diagnostico': [
+        ('El sistema tiene baja capacidad y el registro histórico omite las condiciones de medición.', '¿Cuál es el primer paso diagnóstico?', 'Confirmo condiciones, instrumentos y valores comparables antes de formular hipótesis.', 'Concluyo falta de refrigerante.', 'Cambio un componente para descartar.', 'Ignoro el historial.', 'Un síntoma aislado no demuestra una causa.'),
+        ('La medición difiere del fabricante, pero el instrumento no tiene verificación vigente.', '¿Cómo interpretas el dato?', 'Lo dejo como antecedente no confirmado y solicito una medición con instrumento apto.', 'Lo uso como prueba definitiva.', 'Ajusto el valor al rango esperado.', 'Descarto la especificación.', 'La confiabilidad del instrumento condiciona la conclusión.'),
+        ('La inspección detecta escarcha, pero no hay datos de temperatura, presión ni flujo.', '¿Qué conclusión es válida?', 'Registro el signo y solicito datos antes de atribuir una causa.', 'Diagnostico una obstrucción.', 'Retiro la escarcha y cierro.', 'Declaro pérdida de refrigerante.', 'Un signo orienta la revisión, pero no basta para diagnosticar.'),
+        ('Dos hipótesis explican el mismo síntoma y requieren verificaciones distintas.', '¿Cómo decides la comprobación?', 'Priorizo una prueba segura que discrimine entre ambas y documento el resultado.', 'Elijo la causa más frecuente.', 'Ejecuto ambas reparaciones.', 'Cierro como indeterminado.', 'La prueba debe aportar evidencia para diferenciar causas.'),
+        ('La falla requiere una intervención que no puede hacerse con seguridad en terreno.', '¿Qué decisión corresponde?', 'Aíslo según procedimiento, registro el diagnóstico y derivo al taller o personal autorizado.', 'Improviso una reparación.', 'Mantengo el equipo funcionando.', 'Elimino la advertencia.', 'La factibilidad y el límite del rol determinan dónde corregir la falla.'),
+    ],
+    'mantencion': [
+        ('El plan indica una tarea preventiva que el historial registra como reciente.', '¿Qué debes verificar?', 'Confirmo fecha, condición actual y criterio del fabricante antes de reprogramar o ejecutar.', 'La repito sin revisar.', 'La elimino del plan.', 'Copio el registro anterior.', 'El historial y la condición actual orientan la mantención.'),
+        ('La inspección detecta suciedad y una conexión con deterioro.', '¿Cómo priorizas?', 'Evalúo el riesgo y separo la limpieza de una posible corrección técnica autorizada.', 'Limpio y doy todo por resuelto.', 'Ajusto la conexión energizada.', 'Ignoro la suciedad.', 'Cada hallazgo requiere una acción acorde con su riesgo.'),
+        ('La orden correctiva tiene un síntoma, pero no diagnóstico ni repuesto autorizado.', '¿Puede iniciarse la reparación?', 'No; confirmo diagnóstico, alcance, repuesto y autorización.', 'Sí, si el repuesto parece compatible.', 'Desarmo para descubrir la falla.', 'Sustituyo la pieza más económica.', 'La mantención correctiva requiere diagnóstico y alcance definidos.'),
+        ('Después de la mantención solo se registra que el equipo funciona.', '¿Qué falta?', 'Registrar pruebas, valores, criterio aplicado y responsable de la verificación.', 'Agregar una fotografía.', 'Cambiar “funciona” por “aprobado”.', 'Cerrar porque encendió.', 'El funcionamiento aparente no sustituye una verificación documentada.'),
+        ('El resultado posterior sigue fuera de especificación.', '¿Cómo cierras la orden?', 'La mantengo abierta, registro el resultado y escalo la decisión.', 'Escribo el valor esperado.', 'Ajusto otra parte sin diagnóstico.', 'Entrego sin observaciones.', 'Un resultado fuera de criterio exige continuar el tratamiento de la falla.'),
+    ],
+    'refrigerantes': [
+        ('El cilindro de recuperación no tiene identificación legible ni registro de contenido.', '¿Qué corresponde antes de usarlo?', 'Lo separo, impido su uso y solicito identificación conforme al protocolo.', 'Identifico por el color.', 'Lo uso brevemente.', 'Escribo el fluido más probable.', 'El almacenamiento exige identificación y trazabilidad.'),
+        ('No se ha comprobado capacidad ni condición del cilindro de recuperación.', '¿Cómo procedes?', 'Verifico cilindro, capacidad, equipo y conexiones antes de iniciar bajo supervisión.', 'Inicio y controlo visualmente.', 'Uso cualquier cilindro.', 'Libero presión si se completa.', 'La recuperación requiere comprobar los medios de contención.'),
+        ('El refrigerante recuperado presenta indicios de mezcla o contaminación.', '¿Puede reciclarse como puro?', 'No; identifico la condición, lo mantengo segregado y aplico el procedimiento autorizado.', 'Sí, después de filtrarlo.', 'Lo mezclo con refrigerante nuevo.', 'Cambio la etiqueta.', 'La factibilidad del reciclaje depende de la condición del fluido.'),
+        ('El recinto tiene ventilación insuficiente y cilindros sin sujeción.', '¿Qué acción corresponde?', 'Detengo el ingreso e informo que deben corregirse ventilación y sujeción.', 'Almaceno por poco tiempo.', 'Abro una puerta.', 'Apilo los cilindros.', 'Las condiciones del recinto forman parte del almacenamiento seguro.'),
+        ('El registro omite origen, tipo de refrigerante y destino.', '¿Está completa la trazabilidad?', 'No; completo origen, identificación, cantidad, responsable y destino.', 'Sí, porque tiene cantidad.', 'Agrego solo la fecha.', 'Elimino el campo de origen.', 'La gestión ambiental requiere seguir el refrigerante hasta su destino.'),
+    ],
+}
+
+
 def _scenario(module, index):
     title = module['title'].lower()
+    if 'puesta en marcha' in title:
+        return FOURTH_CLIMATE_SCENARIOS['puesta'][index % 5]
+    if 'diagnóstico' in title or 'diagnostico' in title:
+        return FOURTH_CLIMATE_SCENARIOS['diagnostico'][index % 5]
+    if 'mantención' in title or 'mantencion' in title:
+        return FOURTH_CLIMATE_SCENARIOS['mantencion'][index % 5]
+    if 'reciclaje' in title or 'refrigerantes' in title:
+        return FOURTH_CLIMATE_SCENARIOS['refrigerantes'][index % 5]
     key = 'empleabilidad' if 'emprendimiento' in title or 'empleabilidad' in title else module.get('specialty_key')
     return SCENARIOS.get(key, SCENARIOS['climate'])[index % 5]
 
