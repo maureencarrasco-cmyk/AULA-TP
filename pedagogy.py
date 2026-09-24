@@ -7,6 +7,7 @@ Solo 3° medio: cuatro módulos (190 / 190 / 228 / 228 HP).
 """
 import re
 from copy import deepcopy
+from pathlib import Path
 
 from curriculum import OFFICIAL_HP, TIME_FACTOR, MODULE_TITLES, SCOPE, apply_official, procedure_parts, PDF
 from encargos import encargos_for
@@ -16,6 +17,16 @@ HP_MINUTES = 45
 AULA_SHARE = 0.30
 EXAM_HP = 2
 PASS_PERCENT = 60
+
+
+def verified_static_asset(value):
+    if not isinstance(value, str) or not value.startswith('/static/'):
+        return False
+    static_root = (Path(__file__).resolve().parent / 'static').resolve()
+    path = (static_root.parent / value.split('?', 1)[0].lstrip('/')).resolve()
+    return path.is_relative_to(static_root) and path.is_file()
+
+
 MODULE_HP = dict(OFFICIAL_HP)
 COURSE_HP = sum(MODULE_HP.values())
 SKILLS = ['Representar', 'Modelar', 'Resolver problemas', 'Argumentar']
@@ -974,6 +985,7 @@ def enrich(content, module_id=1):
     if not isinstance(content, dict) or not content.get('aes'):
         return content
     c = content
+    draft = str(c.get('version', '')).endswith('-mineduc-draft-v1')
     mid = int(module_id or 1)
     custom = c.get('specialty_source') if isinstance(c.get('specialty_source'), dict) else None
     if custom:
@@ -1135,6 +1147,18 @@ def enrich(content, module_id=1):
                 exp['alt'] = 'Recurso contextual para observar y argumentar; no contiene la solución.'
     apply_instructional_quality(c, mid)
     c['traceability'] = build_traceability(c, c.get('specialty') or 'Refrigeración y climatización')
+    if draft:
+        media_items = [c.get('explore') or {}, c.get('scene') or {}, c]
+        media_items.extend(c.get('cases') or [])
+        media_items.extend(c.get('questions') or [])
+        media_items.extend(e for ae in c.get('aes') or [] for e in ae.get('experiences') or [])
+        media_items.extend(row.get('task') or {} for row in c.get('formative_pack') or [])
+        for item in media_items:
+            for field in ('image', 'video', 'vtt'):
+                if item.get(field) and not verified_static_asset(item[field]):
+                    item[field] = None
+        c['media_resources'] = [item for item in c.get('media_resources') or []
+                                if verified_static_asset(item.get('image'))]
     if not c.get('agent_hints'):
         c['agent_hints'] = [
             'Empieza por lo que observas. Separa datos, documentos y suposiciones.',
@@ -1142,7 +1166,7 @@ def enrich(content, module_id=1):
             '¿Qué evidencia te permitiría verificar tu conclusión?',
         ]
     c['pedagogy_version'] = 'mineduc-3medio-x5-1'
-    c['media_audit'] = media_audit(c, mid)
+    c['media_audit'] = [] if draft else media_audit(c, mid)
     return _scrub_inventes(c)
 
 

@@ -5,7 +5,7 @@ from copy import deepcopy
 from pathlib import Path
 
 from specialty_catalog import _ae, _module
-from tp_draft_builder import sync_official_oa
+from tp_draft_builder import contextualize_draft, sync_draft_activities, sync_draft_context, sync_official_oa
 
 
 ROOT = Path(__file__).resolve().parent
@@ -57,6 +57,7 @@ def draft_modules():
         content['curriculum']['url'] = item['source_page']
         content['specialty_source']['source_page'] = item['source_page']
         content['specialty_source']['official_criteria_count'] = sum(len(ae['criteria']) for ae in item['aes'])
+        contextualize_draft(content, (place, resources, conflict, product))
         content['bibliography'] = [{
             'author': 'Ministerio de Educación de Chile',
             'work': 'Programa de Estudio de la especialidad Contabilidad',
@@ -79,6 +80,10 @@ def install_accounting_draft(con):
         if existing:
             if not existing['published']:
                 sync_official_oa(con, existing['id'], existing['content'], item['oa'])
+                refreshed = con.execute('SELECT content FROM modules WHERE id=?', (existing['id'],)).fetchone()
+                sync_draft_context(con, existing['id'], refreshed['content'], content)
+                refreshed = con.execute('SELECT content FROM modules WHERE id=?', (existing['id'],)).fetchone()
+                sync_draft_activities(con, existing['id'], refreshed['content'], content)
             continue
         con.execute('INSERT INTO modules(course_id,title,position,published,content) VALUES(?,?,?,?,?)',
                     (course['id'], item['title'], item['position'], 0,

@@ -115,7 +115,20 @@ const HEADER_PHOTO_ALTS = {
 function stationHeaderAlt(n, course, aeIndex) {
   const key = specialtyKey(course);
   const i = Math.min(5, Math.max(1, Number(n) || 1));
-  if (key === 'gastronomia' || key === 'hoteleria') return (typeof current !== 'undefined' && current?.content?.scene?.alt) || `Escenario profesional de ${course?.specialty||'la especialidad'}`;
+  if (key === 'gastronomia') return [
+    'Estudiante revisa ingredientes y condiciones de cocina antes de comenzar.',
+    'Estudiante relaciona receta, insumos y criterios de higiene.',
+    'Estudiantes preparan y verifican un producto culinario.',
+    'Estudiante evalúa una preparación con una pauta de criterios.',
+    'Estudiante y docente revisan el resultado y una mejora posible.'
+  ][i-1];
+  if (key === 'hoteleria') return [
+    'Estudiante revisa una solicitud y la disponibilidad del hotel.',
+    'Estudiante relaciona reserva, estado de habitación y pauta de servicio.',
+    'Estudiantes coordinan la recepción y preparación de una habitación.',
+    'Estudiante evalúa una atención simulada con una pauta de criterios.',
+    'Estudiante y docente revisan la evidencia de servicio y una mejora.'
+  ][i-1];
   if (key === 'climate') {
     if (i === 2) {
       const exp = climateExperience();
@@ -134,21 +147,30 @@ function stationHeaderAlt(n, course, aeIndex) {
 function stationHeaderArt(n, course, aeIndex) {
   const i = Math.min(5, Math.max(1, Number(n) || 1));
   if (isClimateSpecialty(course)) {
-    if (i === 1) return '/static/themes/workshop.png';
+    if (i === 1) return '/static/themes/workshop.webp?v=1';
     if (i === 2) {
       const exp = climateExperience();
       if (exp?.image) return exp.image;
     }
-    if (i === 4) return '/static/estacion4-evaluacion-climatizacion.png?v=1';
-    if (i === 5) return '/static/themes/estacion5-hero-v2.png?v=1';
-    return climateModuleArt();
+    if (i === 4) return '/static/estacion4-evaluacion-climatizacion.webp?v=1';
+    if (i === 5) return '/static/themes/estacion5-hero-v2.webp?v=1';
+    return climateModuleArt().replace('.png?v=3', '.webp?v=1');
   }
   const key = specialtyKey(course);
-  if (key === 'gastronomia' || key === 'hoteleria') return (typeof current !== 'undefined' && current?.content?.scene?.image) || specialtyCover(course);
-  return `/static/headers/${key}/e${i}.png?v=3`;
+  if (key === 'gastronomia' || key === 'hoteleria') return stationRouteArt(i, course);
+  if (['electricidad', 'enfermeria', 'administracion'].includes(key)) return `/static/headers/${key}/e${i}.webp?v=1`;
+  return stationRouteArt(i, course);
 }
 function stationHeaderPhoto(n, course) {
-  return `<div class="header-photo-wrap"><img class="header-photo" src="${stationHeaderArt(n, course)}" alt="${esc(stationHeaderAlt(n, course))}" decoding="async"></div>`;
+  return `<div class="header-photo-wrap"><img class="header-photo" src="${stationHeaderArt(n, course)}" alt="${esc(stationHeaderAlt(n, course))}" width="1600" height="1000" loading="eager" fetchpriority="high" decoding="async"></div>`;
+}
+function stationRouteArt(n, course) {
+  const key = specialtyKey(course);
+  const stage = Math.min(5, Math.max(1, Number(n) || 1));
+  const contextual = ['climate', 'electricidad', 'enfermeria', 'administracion', 'gastronomia', 'hoteleria'];
+  return contextual.includes(key)
+    ? `/static/themes/route/${key}-${stage}.webp?v=1`
+    : `/static/themes/route/station-${stage}.webp?v=1`;
 }
 function applySpecialtyTheme() {
   const screen = document.body.dataset.screen;

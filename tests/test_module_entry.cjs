@@ -102,6 +102,12 @@ async function main() {
   });
   assert.equal(state.hash, '#module/1');
   assert.equal(state.screen, 'module');
+  const routeImages = await retry(async () => {
+    const value = await evaluate(`Array.from(document.querySelectorAll('.lr-track .lr-media img')).map(img=>({src:img.currentSrc,loaded:img.complete&&img.naturalWidth>0}))`);
+    if (value.length !== 5 || value.some(image => !image.loaded)) throw new Error('Las imágenes de estaciones aún no cargan');
+    return value;
+  });
+  assert.ok(routeImages.every(image => image.src.includes('/static/themes/route/climate-')));
   await Promise.race([send('Browser.close').catch(() => {}), wait(2000)]);
   socket.close();
   console.log('Module entry: the course button opens station 1 and its reflection form.');

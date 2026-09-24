@@ -259,8 +259,7 @@ function stationCta(m){
  const st=stationStateLabel(m);
  return `<span class="lr-cta lr-state"><span class="lr-cta-ico" aria-hidden="true">${workIco(st.ico)}</span><span class="lr-cta-label">${esc(st.text)}</span></span>`;
 }
-const stationPhotos=['/static/themes/plans.png?v=1','/static/themes/equipment.png?v=1','/static/themes/technician.png?v=1','/static/themes/assessment.png?v=1','/static/themes/reflection.png?v=15'];
-function learningRoute({currentN=1,completed=[],moduleId=null,interactive=true,title='Ruta de las 5 estaciones del módulo',lead='Diseño + tecnología + pedagogía: explora cada estación, conecta teoría con el oficio y haz visible tu aprendizaje.'}={}){
+function learningRoute({currentN=1,completed=[],moduleId=null,course=null,interactive=true,title='Ruta de las 5 estaciones del módulo',lead='Diseño + tecnología + pedagogía: explora cada estación, conecta teoría con el oficio y haz visible tu aprendizaje.'}={}){
  const done=names.map((_,i)=>!!completed[i]);
  const doneCount=done.filter(Boolean).length;
  const reached=Math.max(currentN,doneCount||1);
@@ -300,7 +299,7 @@ function learningRoute({currentN=1,completed=[],moduleId=null,interactive=true,t
    const Tag=interactive?'button':'div';
    return `<li class="${cls}" data-station-number="${m.stationNumber}" data-station-status="${m.stationStatus}" data-station-name="${esc(m.stationName)}" data-completed="${m.isCompleted}" data-available="${m.isAvailable}" data-locked="${m.isLocked}" data-current="${m.isCurrent}">
     <span class="lr-node" aria-hidden="true"><span class="lr-num">${m.stationNumber}</span>${badge}</span>
-    <${Tag} ${attrs}><span class="lr-media" aria-hidden="true"><img src="${stationPhotos[i]}" alt="" loading="lazy" decoding="async"><span class="lr-media-shade"></span>${m.isCurrent?`<span class="lr-here-pill">Estás aquí</span>`:''}${m.isCompleted?`<span class="lr-done-pill">Completada</span>`:''}</span><span class="lr-body">${workIco(stationIcons[i])}<b class="lr-name">${stationTitleMarkup(m.stationName)}</b><small class="lr-purpose">${esc(descriptions[i])}</small>${hint}${stationCta(m)}</span></${Tag}>
+    <${Tag} ${attrs}><span class="lr-media" aria-hidden="true"><img src="${stationRouteArt(i+1,course)}" alt="" width="960" height="640" loading="eager" fetchpriority="${i===0?'high':'low'}" decoding="async"><span class="lr-media-shade"></span>${m.isCurrent?`<span class="lr-here-pill">Estás aquí</span>`:''}${m.isCompleted?`<span class="lr-done-pill">Completada</span>`:''}</span><span class="lr-body">${workIco(stationIcons[i])}<b class="lr-name">${stationTitleMarkup(m.stationName)}</b><small class="lr-purpose">${esc(descriptions[i])}</small>${hint}${stationCta(m)}</span></${Tag}>
    </li>`;
   }).join('')}</ol>
   <div class="lr-progress" role="group" aria-label="${doneCount} de 5 estaciones completadas">
@@ -673,7 +672,7 @@ function aulaTPPageHero(opts={}){
    ${opts.meta||''}
   </div>
   <div class="atp-hero-visual">
-   <img src="${img}" alt="${esc(alt)}" decoding="async">
+   <img src="${img}" alt="${esc(alt)}" width="1600" height="1000" loading="eager" fetchpriority="high" decoding="async">
    <span class="atp-hero-fade" aria-hidden="true"></span>
    <aside class="atp-hero-motto atp-spark">${sparkLeaf()}<em>${esc(spark)}</em></aside>
    ${showBadge?`<div class="atp-hero-badge">${workIco(ico)}<b>Estación ${n} de 5</b><small>${esc(opts.badgeName||names[n-1]||badgeNote)}</small></div>`:''}
@@ -740,7 +739,7 @@ function stationHero(n){
  });
 }
 function moduleHeader(n){return stationHero(n)}
-function stationRoute(n){return learningRoute({currentN:n,completed:current.completed||[],moduleId:current.id,interactive:true})}
+function stationRoute(n){return learningRoute({currentN:n,completed:current.completed||[],moduleId:current.id,course:courses.find(c=>c.id===current.course_id),interactive:true})}
 function sidebar(n){const pct=current.completed.filter(Boolean).length*20;const aeTotal=Math.max(1,current.content?.aes?.length||1);const recado=n===1?'Separa lo que viste de lo que estás suponiendo. Qué no puedes afirmar aún.':n===4?'Responde de forma autónoma. Puedes guardar un borrador y continuar después.':n===3?'Tu reflexión importa tanto como tu respuesta. Explica por qué tomas cada decisión.':'Tu reflexión importa tanto como tu respuesta. Explica por qué tomas cada decisión.';return `<aside class="sidebar"><section class="panel"><h3>${icon('clock')} Tu avance</h3><dl><div><dt>Ruta del módulo</dt><dd>${n} / 5</dd></div><div><dt>Módulo actual</dt><dd>${typeof gpsModuleShort==='function'?gpsModuleShort():('Módulo '+current.position)}</dd></div><div><dt>AE ${n===2?'activo':'integrados'}</dt><dd>${n===2?'AE '+(ae+1)+' de '+aeTotal:aeTotal+' aprendizajes esperados'}</dd></div><div><dt>Estado</dt><dd>${current.state.closed?'Completada':'En curso'}</dd></div><div><dt>Modalidad</dt><dd>Autoguiada</dd></div></dl><div class="progress-label"><b>Progreso general</b><b>${pct}%</b></div><progress value="${pct}" max="100"></progress></section>${n===4?'<section class="panel outcomes"><h3>Al finalizar esta estación…</h3><p>✓ Obtendrás evidencia de tu aprendizaje.</p><p>✓ Integrarás todos los aprendizajes esperados.</p><p>✓ Reconocerás qué necesitas reforzar.</p></section>':''}${typeof recuerdaMarkup==='function'?recuerdaMarkup(recado):''}</aside>`}
 function panelTitle(n,subtitle,time){return `<div class="panel-title"><span class="big-number s${n}">${n}</span><div><span class="eyebrow">ESTACIÓN ${n} DE 5</span><h2>${names[n-1]}</h2>${typeof pedStationFn==='function'?pedStationFn(n):''}<p>${subtitle}</p></div><span class="time">${icon('clock')} ${time}</span></div>`}
 function reflectionForm(id,prompt,value='',label='Guardar y continuar'){const ae=id==='ae-form';const ctx=id==='context-form';const ph=ctx?'Una decisión y un dato que aún falta. No cubiques.':'Escribe tu respuesta y explica tu razonamiento…';return `<form id="${id}"><label class="${ae?'ae-justify-label':''}">${esc(prompt)}<textarea name="text" minlength="20" maxlength="10000" required placeholder="${esc(ph)}">${esc(value)}</textarea></label><div class="form-bottom">${ae?`<div class="ae-req"><p class="char-meter is-wait" data-ae-meter aria-live="polite">0 / mínimo 20 caracteres</p><ul class="ae-ready" data-ae-ready></ul></div>`:`<span class="muted small">${ctx?'Una decisión + un dato que falta. Esta estación no califica.':'Al menos 20 caracteres · Entrega y avance al continuar'}</span>`}<button class="primary" ${current?.state.closed||auth.user.role==='teacher'?'disabled':''}>${label} ${icon('arrow')}</button></div></form>`}
