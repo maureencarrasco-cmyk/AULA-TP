@@ -2,7 +2,8 @@ import json
 import sqlite3
 import unittest
 
-from furniture_catalog import OFFICIAL, draft_modules, install_furniture_draft
+from furniture_catalog import OFFICIAL, draft_modules, install_furniture_course, install_furniture_draft
+from pedagogy import publication_gaps
 
 
 class FurnitureCatalogTests(unittest.TestCase):
@@ -17,6 +18,11 @@ class FurnitureCatalogTests(unittest.TestCase):
             self.assertTrue(all(ae['criteria'] for ae in content['aes']))
             self.assertNotIn('\ufffd', json.dumps(content, ensure_ascii=False))
         self.assertTrue(any(row['source_warnings'] for row in OFFICIAL))
+        modules = list(draft_modules())
+        self.assertEqual(
+            OFFICIAL[1]['source_warnings'],
+            modules[1][1]['specialty_source']['source_warnings'],
+        )
 
     def test_unpublished_install_is_idempotent(self):
         con = sqlite3.connect(':memory:')
@@ -33,6 +39,26 @@ class FurnitureCatalogTests(unittest.TestCase):
         self.assertEqual(10, len(rows))
         self.assertTrue(all(not row['published'] for row in rows))
         self.assertEqual(1672, sum(json.loads(row['content'])['specialty_source']['official_hp'] for row in rows))
+        con.close()
+
+    def test_complete_course_is_publishable_and_idempotent(self):
+        con = sqlite3.connect(':memory:')
+        con.row_factory = sqlite3.Row
+        con.executescript('''
+            CREATE TABLE courses(id INTEGER PRIMARY KEY, title TEXT);
+            CREATE TABLE modules(id INTEGER PRIMARY KEY, course_id INTEGER, title TEXT,
+                position INTEGER, published INTEGER, content TEXT);
+            INSERT INTO courses(id,title) VALUES(1,'Muebles y Terminaciones en Madera');
+        ''')
+        install_furniture_course(con)
+        install_furniture_course(con)
+        rows = con.execute('SELECT published,content FROM modules ORDER BY position').fetchall()
+        self.assertEqual(10, len(rows))
+        self.assertTrue(all(row['published'] for row in rows))
+        for row in rows:
+            content = json.loads(row['content'])
+            self.assertEqual('muebles-terminaciones-madera-mineduc-v1', content['version'])
+            self.assertEqual([], publication_gaps(content, 'Muebles y Terminaciones en Madera'))
         con.close()
 
 

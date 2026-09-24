@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from tp_draft_builder import build_draft, install_draft
+from tp_draft_builder import build_draft, install_course, install_draft
 
 
 ROOT = Path(__file__).resolve().parent
@@ -29,3 +29,13 @@ def draft_modules():
 
 def install_furniture_draft(con):
     install_draft(con, 'Muebles y Terminaciones en Madera', draft_modules())
+
+
+def install_furniture_course(con):
+    install_course(
+        con,
+        'Muebles y Terminaciones en Madera',
+        draft_modules(),
+        'muebles-terminaciones-madera-mineduc-draft-v1',
+        'muebles-terminaciones-madera-mineduc-v1',
+    )
