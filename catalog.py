@@ -306,8 +306,8 @@ def upgrade_catalog(con):
     install_drawing_draft(con)
     from graphics_catalog import install_graphics_draft
     install_graphics_draft(con)
-    from sanitary_catalog import install_sanitary_draft
-    install_sanitary_draft(con)
+    from sanitary_catalog import install_sanitary_course
+    install_sanitary_course(con)
     from assembly_catalog import install_assembly_draft
     install_assembly_draft(con)
     from metalworks_catalog import install_metalworks_draft
