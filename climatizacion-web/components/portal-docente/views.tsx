@@ -845,9 +845,9 @@ export function OaAeView() {
                 type="button"
                 onClick={() => setFiltro(esp)}
                 aria-pressed={filtro === esp}
-                className={`min-h-11 rounded-xl border-2 px-3 py-2 text-xs font-bold transition ${
+                  className={`min-h-11 rounded-xl border-2 px-3 py-2 text-xs font-bold transition ${
                   filtro === esp
-                    ? "border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white"
+                    ? "border-teal-200 bg-teal-50 text-teal-900 shadow-[0_5px_14px_rgba(20,184,166,0.14)]"
                     : "border-[var(--color-line,#D5DEE8)] bg-white text-[var(--color-slate,#3D5166)]"
                 }`}
               >
@@ -1221,9 +1221,9 @@ export function ReportesView() {
             type="button"
             onClick={() => setReportesFiltro(opt)}
             aria-pressed={reportesFiltro === opt}
-            className={`min-h-11 rounded-xl border-2 px-3 py-2 text-[11px] font-bold transition ${
+              className={`min-h-11 rounded-xl border-2 px-3 py-2 text-[11px] font-bold transition ${
               reportesFiltro === opt
-                ? "border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white"
+                ? "border-violet-200 bg-violet-50 text-violet-900 shadow-[0_5px_14px_rgba(124,58,237,0.14)]"
                 : "border-[var(--color-line,#D5DEE8)] bg-white text-[var(--color-slate,#3D5166)]"
             }`}
           >
@@ -1449,9 +1449,9 @@ export function RecursosView() {
             type="button"
             onClick={() => setFiltro(id)}
             aria-pressed={filtro === id}
-            className={`min-h-11 rounded-xl border-2 px-3 py-2 text-xs font-bold transition ${
+              className={`min-h-11 rounded-xl border-2 px-3 py-2 text-xs font-bold transition ${
               filtro === id
-                ? "border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white"
+                ? "border-amber-200 bg-amber-50 text-amber-900 shadow-[0_5px_14px_rgba(245,158,11,0.14)]"
                 : "border-[var(--color-line,#D5DEE8)] bg-white text-[var(--color-slate,#3D5166)]"
             }`}
           >

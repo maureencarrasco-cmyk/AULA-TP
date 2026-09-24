@@ -139,6 +139,8 @@ export type InstitutionalMetrics = {
   /** Per-student live pct (Climatización LMS); optional for other courses. */
   students?: InstitutionalStudentRow[];
   source: "live" | "static";
+  /** True when the portal is using clearly labelled synthetic data for preview. */
+  demoData?: boolean;
   fetchedAt: string;
 };
 

@@ -10,6 +10,7 @@ import {
 } from "react";
 import {
   CATALOGO_OA,
+  ESTUDIANTES,
   type CoberturaOa,
   type EstadoOaAe,
   type EstudianteDemo,
@@ -17,8 +18,10 @@ import {
 import { MODULOS_CLIMATIZACION } from "@/lib/climatizacion-curso";
 import type {
   InstitutionalMetrics,
+  InstitutionalModule,
   InstitutionalStudentRow,
 } from "@/lib/portal-cursos";
+import { PORTAL_CURSOS } from "@/lib/portal-cursos";
 
 export type LiveCourseState =
   | { status: "loading" }
@@ -32,6 +35,7 @@ export type LivePortalValue = {
   estudiantes: EstudianteDemo[];
   loading: boolean;
   errors: string[];
+  usingDemoData: boolean;
 };
 
 const LivePortalContext = createContext<LivePortalValue | null>(null);
@@ -125,20 +129,101 @@ async function fetchMetrics(path: string): Promise<InstitutionalMetrics> {
   return body as InstitutionalMetrics;
 }
 
+const DEMO_COURSE_CONFIG: Record<string, { students: number; average: number; activities: number; integrator: number; modules: number }> = {
+  "/api/portal/metrics/enfermeria": { students: 40, average: 72, activities: 78, integrator: 68, modules: 6 },
+  "/api/portal/metrics/electricidad": { students: 40, average: 76, activities: 81, integrator: 73, modules: 6 },
+  "/api/portal/metrics/climatizacion": { students: 160, average: 71, activities: 74, integrator: 66, modules: 8 },
+};
+
+function demoModules(path: string, config: (typeof DEMO_COURSE_CONFIG)[string]): InstitutionalModule[] {
+  const catalog = CATALOGO_OA.filter((oa) =>
+    path.includes("climatizacion")
+      ? oa.especialidad === "Refrigeración y Climatización"
+      : oa.especialidad === "Electricidad",
+  );
+  return Array.from({ length: config.modules }, (_, index) => {
+    const oa = catalog[index % Math.max(1, catalog.length)];
+    const progress = Math.max(42, config.average + ((index % 3) - 1) * 6);
+    return {
+      id: `demo-${path.split("/").pop()}-${index + 1}`,
+      sequence: index + 1,
+      code: `M${index + 1}`,
+      oa_code: oa?.codigo ?? `OA ${index + 1}`,
+      title: oa?.titulo ?? `Módulo de aprendizaje ${index + 1}`,
+      short_title: oa?.titulo,
+      activity_count: 6 + (index % 3),
+      average_progress: progress,
+      completed_enrollments: Math.round(config.students * (progress / 100)),
+      in_progress_enrollments: Math.round(config.students * ((100 - progress) / 100)),
+      average_score: progress,
+    };
+  });
+}
+
+/**
+ * Synthetic preview data is used only when an LMS endpoint returns no usable
+ * records. It keeps every screen explorable without presenting it as live data.
+ */
+export function demoMetricsForPath(path: string): InstitutionalMetrics {
+  const config = DEMO_COURSE_CONFIG[path] ?? DEMO_COURSE_CONFIG["/api/portal/metrics/climatizacion"];
+  const course = PORTAL_CURSOS.find((item) => item.metricsApiPath === path);
+  const matchingStudents = path.includes("climatizacion")
+    ? ESTUDIANTES.filter((student) => /climatización/i.test(student.curso))
+    : [];
+  const students = matchingStudents.map((student) => ({
+    id: student.id,
+    name: student.nombre,
+    curso: student.curso,
+    overallPct: student.avancePct,
+  }));
+  const modules = demoModules(path, config);
+  return {
+    course: {
+      id: course?.id ?? "demo-course",
+      kind: "demo",
+      code: `DEMO-${course?.id ?? "course"}`,
+      title: course?.title ?? "Curso de demostración",
+      specialty: course?.specialty ?? "Aula TP",
+      level: course?.level ?? "3°–4° Medio",
+      status: "Datos sintéticos de demostración",
+    },
+    totals: {
+      students: config.students,
+      active_enrollments: config.students,
+      completed_enrollments: Math.round(config.students * 0.72),
+      average_progress: config.average,
+      modules: modules.length,
+      activities: modules.reduce((sum, module) => sum + (module.activity_count ?? 0), 0),
+      activity_completion: config.activities,
+      integrator_total: config.students,
+      integrator_completed: Math.round(config.students * (config.integrator / 100)),
+      integrator_average_progress: config.integrator,
+    },
+    modules,
+    students,
+    source: "static",
+    demoData: true,
+    fetchedAt: "demo",
+  };
+}
+
+export function shouldUseDemoMetrics(data: InstitutionalMetrics): boolean {
+  return data.totals.students === 0 || data.modules.length === 0;
+}
+
 function useCourse(path: string): LiveCourseState {
   const [state, setState] = useState<LiveCourseState>({ status: "loading" });
   useEffect(() => {
     let cancelled = false;
     fetchMetrics(path)
       .then((data) => {
-        if (!cancelled) setState({ status: "ok", data });
-      })
-      .catch((err: unknown) => {
         if (!cancelled) {
-          setState({
-            status: "error",
-            message: err instanceof Error ? err.message : "Error de red",
-          });
+          setState({ status: "ok", data: shouldUseDemoMetrics(data) ? demoMetricsForPath(path) : data });
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setState({ status: "ok", data: demoMetricsForPath(path) });
         }
       });
     return () => {
@@ -178,6 +263,7 @@ export function LivePortalProvider({ children }: { children: ReactNode }) {
           s.state.status === "error" ? `${s.label}: ${s.state.message}` : "",
         )
         .filter(Boolean),
+      usingDemoData: states.some((item) => item.state.status === "ok" && item.state.data.demoData === true),
     };
   }, [enfermeria, electricidad, climatizacion]);
 
@@ -199,7 +285,7 @@ function totalsEstudiantes(state: LiveCourseState): number {
 }
 
 export function LiveStatusNote() {
-  const { loading, errors, estudiantes, enfermeria, electricidad, climatizacion } =
+  const { loading, errors, estudiantes, enfermeria, electricidad, climatizacion, usingDemoData } =
     useLivePortal();
   if (loading) {
     return (
@@ -212,6 +298,13 @@ export function LiveStatusNote() {
     return (
       <p className="portal-status-note rounded-xl border border-[var(--color-err,#C0392B)]/25 bg-[var(--color-err-soft,#FDECEA)] px-4 py-3 text-sm text-[var(--color-navy,#0B3A6B)]">
         No hay datos del LMS en este momento. {errors.join(" · ")}
+      </p>
+    );
+  }
+  if (usingDemoData) {
+    return (
+      <p className="portal-status-note rounded-xl border border-[var(--color-warn,#C47A12)]/25 bg-[var(--color-warn-soft,#FFF4E0)] px-4 py-3 text-sm text-[var(--color-navy,#0B3A6B)]">
+        Mostrando datos sintéticos de demostración para visualizar resultados. No corresponden a estudiantes ni métricas reales del LMS.
       </p>
     );
   }

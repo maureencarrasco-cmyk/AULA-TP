@@ -20,6 +20,23 @@ export function PerspectiveTabs<T extends string>({
   options: Array<{ id: T; label: string }>;
   onChange: (id: T) => void;
 }) {
+  const selectedTone = (id: string) => {
+    const normalized = id.toLowerCase();
+    if (normalized.includes("estudiante")) {
+      return "border-emerald-200 bg-emerald-50 text-emerald-900 shadow-[0_6px_16px_rgba(16,185,129,0.14)]";
+    }
+    if (normalized.includes("curso")) {
+      return "border-violet-200 bg-violet-50 text-violet-900 shadow-[0_6px_16px_rgba(124,58,237,0.14)]";
+    }
+    if (normalized.includes("carrera")) {
+      return "border-teal-200 bg-teal-50 text-teal-900 shadow-[0_6px_16px_rgba(20,184,166,0.14)]";
+    }
+    if (normalized.includes("nivel")) {
+      return "border-blue-200 bg-blue-50 text-blue-900 shadow-[0_6px_16px_rgba(59,130,246,0.16)]";
+    }
+    return "border-sky-200 bg-sky-50 text-sky-900 shadow-[0_6px_16px_rgba(14,165,233,0.14)]";
+  };
+
   return (
     <div role="tablist" aria-label={label} className="portal-tabs flex flex-wrap gap-2">
       {options.map((opt) => {
@@ -33,7 +50,7 @@ export function PerspectiveTabs<T extends string>({
             onClick={() => onChange(opt.id)}
             className={`portal-tab min-h-11 min-w-[7.5rem] rounded-xl border-2 px-4 py-2.5 text-sm font-bold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--aula-cyan,#3EC6E0)] focus-visible:ring-offset-2 ${
               selected
-                ? "border-[var(--aula-blue,#1558A0)] bg-[var(--aula-blue,#1558A0)] text-white shadow-[0_6px_16px_rgba(21,88,160,0.28)]"
+                ? selectedTone(opt.id)
                 : "border-[var(--color-line,#D5DEE8)] bg-[var(--color-card,#fff)] text-[var(--color-slate,#3D5166)] hover:border-[var(--aula-blue,#1558A0)]/40 hover:bg-[var(--color-surface,#F4F7FB)]"
             }`}
           >
@@ -287,6 +304,13 @@ export function KpiStrip({
 }: {
   items: Array<{ label: string; value: string; hint?: string }>;
 }) {
+  const titleColors = [
+    "text-[var(--color-blue,#1558A0)]",
+    "text-[var(--color-a11y,#6B5CE7)]",
+    "text-[var(--color-warn,#C47A12)]",
+    "text-[var(--color-ok,#1F8A5B)]",
+  ];
+
   return (
     <div className="portal-kpi-grid grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
       {items.map((item, index) => (
@@ -294,7 +318,7 @@ export function KpiStrip({
           key={item.label}
           className={`portal-surface portal-kpi-card portal-tone-${["info", "violet", "warning", "success"][index % 4]} rounded-2xl border p-4`}
         >
-          <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--color-muted,#6B7C8E)]">
+          <p className={`text-[11px] font-extrabold uppercase tracking-wide ${titleColors[index % titleColors.length]}`}>
             {item.label}
           </p>
           <p className="mt-1 text-2xl font-extrabold tabular-nums text-[var(--color-navy,#0B3A6B)]">

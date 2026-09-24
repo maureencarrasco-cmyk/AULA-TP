@@ -17,7 +17,11 @@ import {
   TendenciaCard,
 } from "./analytics";
 import { CursoComparePanel, EstudiantePriorityPanel } from "./perspective-panels";
-import { useLivePortal } from "./live-data";
+import {
+  demoMetricsForPath,
+  shouldUseDemoMetrics,
+  useLivePortal,
+} from "./live-data";
 import {
   bandaFromPct,
   BANDA_LOGRO_COLOR,
@@ -60,14 +64,13 @@ function useCourseMetrics(
         return body as InstitutionalMetrics;
       })
       .then((data) => {
-        if (!cancelled) setState({ status: "ok", data });
-      })
-      .catch((err: unknown) => {
         if (!cancelled) {
-          setState({
-            status: "error",
-            message: err instanceof Error ? err.message : "Error de red",
-          });
+          setState({ status: "ok", data: shouldUseDemoMetrics(data) ? demoMetricsForPath(apiPath) : data });
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setState({ status: "ok", data: demoMetricsForPath(apiPath) });
         }
       });
     return () => {
@@ -289,7 +292,7 @@ function useLiveKpis() {
       ),
     );
     return {
-      mode: "live" as const,
+      mode: parts.some((part) => part.data.demoData) ? ("demo" as const) : ("live" as const),
       cursosActivos: parts.length,
       estudiantes: students,
       actividadesPendientes,
@@ -343,6 +346,11 @@ export function LiveKpiRow() {
           <>
             <DataBadge kind="live" />
             <span>KPIs desde métricas reales del LMS.</span>
+          </>
+        ) : kpi.mode === "demo" ? (
+          <>
+            <DataBadge kind="demo" />
+            <span>KPIs sintéticos para visualizar el portal.</span>
           </>
         ) : kpi.mode === "loading" ? (
           <span>Cargando métricas del LMS…</span>
@@ -725,7 +733,7 @@ function CumplimientoCourseBlock({
           <div className="flex flex-wrap items-center gap-2">
             <h2 className="text-base font-semibold text-[var(--aula-text,#082b80)]">{title}</h2>
             {state.status === "ok" ? (
-              <DataBadge kind={state.data.source === "live" ? "live" : "hub"} />
+              <DataBadge kind={state.data.demoData ? "demo" : state.data.source === "live" ? "live" : "hub"} />
             ) : null}
           </div>
           {state.status === "loading" ? (

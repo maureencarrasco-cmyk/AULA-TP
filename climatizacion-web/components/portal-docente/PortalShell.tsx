@@ -21,10 +21,10 @@ type PortalShellProps = {
 };
 
 const PORTAL_SECTION_ART = {
-  resumen: { src: "/images/portal-docente/frames/portal-context-reference.png", alt: "Panel docente con resultados, estudiantes y métricas de aprendizaje", trimVerticalWhitespace: false },
+  resumen: { src: "/images/portal-docente/frames/hero-resumen-reference.png", alt: "Portal Docente con docentes analizando resultados y decisiones pedagógicas", trimVerticalWhitespace: false },
   cursos: { src: "/images/portal-docente/frames/hero-cursos-planificacion.png", alt: "Banner de cursos y planificación del Portal Docente", trimVerticalWhitespace: false },
   estudiantes: { src: "/images/portal-docente/frames/hero-estudiantes-reference.png", alt: "Banner de estudiantes y seguimiento de aprendizajes", trimVerticalWhitespace: false },
-  "oa-ae": { src: "/images/portal-docente/frames/hero-oa-ae.png", alt: "Banner de objetivos de aprendizaje y aprendizajes esperados", trimVerticalWhitespace: false },
+  "oa-ae": { src: "/images/portal-docente/frames/hero-oa-ae-reference.png", alt: "Banner de objetivos de aprendizaje y aprendizajes esperados", trimVerticalWhitespace: false },
   cumplimiento: { src: "/images/portal-docente/frames/hero-cumplimiento.png", alt: "Banner de seguimiento de cumplimiento", trimVerticalWhitespace: false },
   reportes: {
     src: "/images/portal-docente/frames/hero-reportes-reference.png",
@@ -33,19 +33,9 @@ const PORTAL_SECTION_ART = {
   },
 } satisfies Record<SectionId, { src: string; alt: string; trimVerticalWhitespace: boolean }>;
 
-const PORTAL_SECTION_COPY: Record<SectionId, { eyebrow: string; title: string; subtitle: string }> = {
-  resumen: { eyebrow: "Bienvenido/a al Portal Docente", title: "Convierte los datos en mejores decisiones pedagógicas", subtitle: "Planifica, acompaña y potencia los aprendizajes de tus estudiantes en un solo lugar." },
-  cursos: { eyebrow: "Inicio  ›  Cursos / Planificación", title: "Mis cursos / Planificación", subtitle: "Organiza, planifica y gestiona tus cursos en un solo lugar." },
-  estudiantes: { eyebrow: "Inicio  ›  Estudiantes", title: "Mis estudiantes", subtitle: "Conoce, acompaña y potencia sus aprendizajes." },
-  "oa-ae": { eyebrow: "Inicio  ›  OA / AE y criterios", title: "Objetivos de Aprendizaje (OA) y Aprendizajes Esperados (AE)", subtitle: "Explora, planifica y utiliza los OA, AE y criterios de evaluación de tus cursos." },
-  cumplimiento: { eyebrow: "Inicio  ›  Cumplimiento", title: "Seguimiento de Cumplimiento", subtitle: "Monitorea el avance, la cobertura y el cumplimiento de actividades, OA y evaluaciones en todos tus cursos." },
-  reportes: { eyebrow: "Inicio  ›  Reportes", title: "Reportes y análisis", subtitle: "Información clara para una mejor toma de decisiones pedagógicas." },
-};
-
 export function PortalShell({ section }: PortalShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const sectionArt = PORTAL_SECTION_ART[section];
-  const sectionCopy = PORTAL_SECTION_COPY[section];
 
   return (
     <div className="min-h-screen bg-[var(--aula-pale,#f7fbff)]">
@@ -174,26 +164,8 @@ export function PortalShell({ section }: PortalShellProps) {
           <main className="portal-main flex-1 px-3 py-4 sm:px-4 sm:py-5 lg:px-5 lg:py-5">
             <LivePortalProvider>
               <section className="portal-welcome mb-4 overflow-hidden rounded-[1.25rem] border">
-                {section === "resumen" ? (
-                  <div className="relative flex flex-col gap-6 p-5 sm:p-7 lg:flex-row lg:items-center lg:justify-between">
-                    <div className="relative z-10 max-w-2xl">
-                      <div className="portal-eyebrow mb-3 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[.16em]">
-                        <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_0_4px_rgba(110,231,183,.18)]" />
-                        {sectionCopy.eyebrow}
-                      </div>
-                      <h1 className="text-2xl font-black tracking-tight sm:text-3xl">{sectionCopy.title}</h1>
-                      <p className="mt-2 max-w-xl text-sm leading-6 sm:text-base">{sectionCopy.subtitle}</p>
-                      <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
-                        <span className="portal-pill rounded-full px-3 py-2">LMS conectado</span>
-                        <span className="portal-pill rounded-full px-3 py-2">Datos en vivo</span>
-                        <span className="portal-pill rounded-full px-3 py-2">Seguimiento por OA y AE</span>
-                      </div>
-                    </div>
-                    <div className="relative hidden w-full max-w-2xl lg:block lg:flex-[1.35]">
-                      <div className="absolute -inset-5 rounded-full bg-cyan-300/20 blur-3xl" />
-                      <img src={sectionArt.src} alt={sectionArt.alt} className="relative h-auto max-h-64 w-full rounded-2xl object-contain object-center shadow-2xl ring-1 ring-white/30" />
-                    </div>
-                  </div>
+                {section === "resumen" || section === "oa-ae" ? (
+                  <img src={sectionArt.src} alt={sectionArt.alt} className="block h-auto w-full object-contain" />
                 ) : (
                   <div
                     className={`portal-section-banner${sectionArt.trimVerticalWhitespace ? " portal-section-banner--trim-vertical" : ""} bg-white/20 p-2 sm:p-3`}
