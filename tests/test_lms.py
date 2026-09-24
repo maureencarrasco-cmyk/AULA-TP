@@ -226,7 +226,14 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual(course['planning']['course_aula_hp'],501.6)
   self.assertAlmostEqual(sum(m['exam_hp'] for m in course['modules']),2)
   ae_counts=[3,3,2,3,4]
-  for module,ae_count in zip(course['modules'][4:],ae_counts):
+  explore_labels=[
+   ['Área de trabajo','Placa del equipo','Carga de fluido','EPP'],
+   ['Síntoma','Medición','Manual','Registro'],
+   ['Historial','Inspección','Procedimiento','Cierre'],
+   ['Etiqueta','Cilindro','Registro','Almacenamiento'],
+   ['Oportunidad','Presupuesto','Contrato','Formación'],
+  ]
+  for module,ae_count,labels in zip(course['modules'][4:],ae_counts,explore_labels):
    with self.subTest(module=module['position']):
     payload=self.s.get('/api/modules/'+str(module['id'])).json
     content=payload['content']
@@ -236,6 +243,8 @@ class LMSFlow(unittest.TestCase):
     self.assertEqual(content['specialty_source']['course_hp'],1672)
     self.assertFalse(publication_gaps(content,course['specialty']))
     self.assertNotIn('Leer la leyenda',content['aes'][0]['experiences'][2].get('items') or [])
+    self.assertEqual([spot['label'] for spot in content['explore']['spots']],labels)
+    self.assertTrue(content['explore'].get('guidance'))
     self.assertEqual(payload['planning']['official_hp'],module['official_hp'])
  def test_mcq_publication_requires_photo_and_four_options(self):
   from pedagogy import publication_gaps

@@ -988,6 +988,7 @@ def enrich(content, module_id=1):
     draft = str(c.get('version', '')).endswith('-mineduc-draft-v1')
     mid = int(module_id or 1)
     custom = c.get('specialty_source') if isinstance(c.get('specialty_source'), dict) else None
+    custom_explore = deepcopy(c.get('explore')) if custom and c.get('explore') else None
     if custom:
         c['official_source'] = {
             'pdf': custom.get('pdf'), 'decreto': custom.get('decree'),
@@ -1016,6 +1017,8 @@ def enrich(content, module_id=1):
             'alt': f'Contexto formativo de {custom.get("title")}; la imagen no contiene la respuesta.',
             'video': None, 'vtt': None,
         })
+        if custom_explore:
+            c['explore'].update(custom_explore)
     c['explore']['formative_pack'] = [a for a in c.get('formative_pack') or [] if a.get('station') != 3]
     c['explore']['video'] = c.get('video')
     c['explore']['vtt'] = c.get('vtt')
