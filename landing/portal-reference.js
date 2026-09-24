@@ -1,0 +1,1 @@
+const dialog=document.querySelector('[data-dialog]');document.querySelector('[data-video]')?.addEventListener('click',()=>dialog?.showModal());document.querySelector('[data-close]')?.addEventListener('click',()=>dialog?.close());dialog?.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
