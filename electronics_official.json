@@ -1,0 +1,605 @@
+[
+  {
+    "position": 1,
+    "title": "Proyectos electrónicos",
+    "hp": 190,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 1",
+        "title": "Leer y utilizar información técnica consignada en manuales, planos, croquis, instrucciones y proyectos de instalación electrónicos, relevando los datos necesarios para desarrollar correctamente su trabajo."
+      },
+      {
+        "code": "OA 4",
+        "title": "Instalar y montar equipos y sistemas electrónicos industriales y otros, de acuerdo al diseño y características técnicas del proyecto, utilizando las herramientas e instrumentos adecuados, respetando la normativa eléctrica, ambiental y de seguridad."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M1-AE1",
+        "title": "Realiza análisis técnico para la instalación de equipos electrónicos según manual de uso y especificaciones técnicas, respetando normas de seguridad y tiempos establecidos.",
+        "criteria": [
+          "1.1 Contrasta información técnica, verificando valores nominales de las magnitudes para instalación del equipo, utilizando instrumentos de medición.",
+          "1.2 Genera procedimiento de instalación de equipos de acuerdo a especificaciones y características técnicas, considerando normas seguridad.",
+          "1.3 Documenta los valores experimentales, para las pruebas de funcionamiento en equipos electrónicos, leyes y normativas.",
+          "1.4 Predice el comportamiento de equipos electrónicos, mediante la aplicación y análisis de teoremas, leyes de electricidad y electrónica, según manuales de uso y especificaciones técnicas."
+        ]
+      },
+      {
+        "code": "M1-AE2",
+        "title": "Instala equipos electrónicos, según requerimientos del usuario, e instrucciones consignadas en manuales.",
+        "criteria": [
+          "2.1 Prepara las condiciones necesarias para efectuar la instalación de equipos electrónicos, tales como selección de herramientas, interpretación de planos, y distribución de los tiempos.",
+          "2.2 Monta los equipos electrónicos y dispositivos asociados, de acuerdo al manual, siguiendo las instrucciones del proyecto, cumpliendo con los plazos establecidos.",
+          "2.3 Comprueba el funcionamiento de la instalación, midiendo parámetros en los puntos más relevantes, previendo situaciones de riesgo y enfermedades laborales.",
+          "2.4 Hace uso de las herramientas y elementos de seguridad requerida para el tipo de instalación, considerando las condiciones técnicas y de espacio."
+        ]
+      },
+      {
+        "code": "M1-AE3",
+        "title": "Mantiene equipos electrónicos conforme al tipo de sistema, considerando procedimientos establecidos y especificaciones técnicas del fabricante.",
+        "criteria": [
+          "3.1 Elabora un plan de mantenimiento, según uso e instrucciones consignadas en manuales.",
+          "3.2 Realiza tareas de mantenimiento en equipos electrónicos considerando zonas de instalación, materiales y herramientas requeridas, respetando los tiempos asignados.",
+          "3.3 Chequea operaciones de mantención en equipos electrónicos, realizando mediciones de parámetros y pruebas de funcionamiento, de acuerdo a procedimientos establecidos.",
+          "3.4 Elabora informes técnicos referidos a la mantención de equipos electrónicos, comunicando en forma clara y precisa los trabajos realizados."
+        ]
+      },
+      {
+        "code": "M1-AE4",
+        "title": "Analiza funcionamiento de equipos electrónicos y diagnostica fallas según manuales, considerando las normas de seguridad establecidas.",
+        "criteria": [
+          "4.1 Diagnostica fallas en equipos electrónicos en relación al tipo de síntoma presentado, siguiendo protocolos de búsqueda y localización de fallas, según protocolos.",
+          "4.2 Cambia componentes, partes o piezas de un equipo electrónico, aplicado las técnicas indicadas en manuales específicos de reparación.",
+          "4.3 Verifica el funcionamiento de equipos electrónicos según instrucciones consignadas en manuales técnicos y, respetando normativa de seguridad."
+        ]
+      },
+      {
+        "code": "M1-AE5",
+        "title": "Remplaza componentes y dispositivos electrónicos pasivos y activos de acuerdo a especificaciones técnicas de cada uno.",
+        "criteria": [
+          "5.1 Interpreta un esquema electrónico, reconociendo cada componente, con la finalidad de buscar el remplazo más adecuado.",
+          "5.2 Remplaza los componentes electrónicos tanto pasivos como activos, aplicando técnicas de soldadura y manejo de herramientas e instrumentos, de acuerdo a especificaciones técnicas.",
+          "5.3 Utiliza la información consignada en manuales, planos y otros con la finalidad de encontrar la alternativa más adecuada durante la intervención del circuito.",
+          "5.4 Crea o diseña en caso de ser necesario pequeños circuitos electrónicos, de características similares a las originales, con la finalidad de dejar operativo el equipo cuando no se encuentren los repuestos en el mercado, según especificaciones técnicas del sistema."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81895.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34321_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 2,
+    "title": "Armado y reparación de circuitos electrónicos",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 3",
+        "title": "Armar y ensamblar circuitos electrónicos básicos, analógicos y digitales, y repararlos cuando corresponda, de acuerdo a manuales de procedimiento."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M2-AE1",
+        "title": "Elabora circuitos electrónicos de ensayo, aplicando diversas técnicas de diseño, previendo situaciones de riesgo en la manipulación de químicos y herramientas.",
+        "criteria": [
+          "1.1 Dibuja las pistas para un circuito impreso, aplicando distintas técnicas de diseño, según la complejidad del diagrama electrónico.",
+          "1.2 Crea circuitos impresos básicos, según los requerimientos, previendo situaciones de riesgo en la manipulación de químicos y herramientas.",
+          "1.3 Selecciona los dispositivos y componentes adecuados, según el tipo de circuito a montar, considerando especificaciones técnicas de cada uno de ellos.",
+          "1.4 Utiliza herramientas de montaje y ensamblado para circuitos electrónicos, tales como estaciones de soldaduras, maquinarias e instrumentos de chequeo, considerando estándares de calidad."
+        ]
+      },
+      {
+        "code": "M2-AE2",
+        "title": "Arma circuitos electrónicos analógicos básicos de acuerdo a manuales de procedimiento, cumpliendo plazos establecidos y estándares de calidad.",
+        "criteria": [
+          "2.1 Selecciona los dispositivos y componentes electrónicos según el diagrama esquemático a montar, considerando manuales de especificaciones técnicas para componentes pasivos y activos.",
+          "2.2 Verifica el correcto funcionamiento de cada componente, correspondiente a un circuito electrónico analógico, utilizando instrumentos de medida y hojas de datos técnicos, según corresponda.",
+          "2.3 Arma circuitos electrónicos analógicos básicos, aplicando técnicas de manipulación y de montaje para componentes electrónicos, cumpliendo plazos establecidos, haciendo uso de las herramientas adecuadas y estándares de calidad de la industria.",
+          "2.4 Comprueba el correcto funcionamiento de circuitos electrónicos analógicos, realizando medición de parámetros, previendo situaciones de riesgo y enfermedades ocupacionales.",
+          "2.5 Modifica circuitos electrónicos básicos, utilizando software de diseño y simulación de circuitos, asociando distintos teoremas, en una perspectiva de eficiencia energética y cuidado ambiental."
+        ]
+      },
+      {
+        "code": "M2-AE3",
+        "title": "Repara y mantiene equipos electrónicos básicos, según requerimientos y especificaciones técnicas.",
+        "criteria": [
+          "3.1 Diagnostica fallas en equipos electrónicos básicos, empleando distintos medios en la búsqueda y diagnóstico de averías, emprendiendo iniciativas útiles en los lugares de trabajo.",
+          "3.2 Cambia componentes, partes o equipos dañados, en sistemas electrónicos básicos, considerando el tipo de avería, y las especificaciones técnicas.",
+          "3.3 Actualiza el sistema operativo, cuando corresponda, según indicaciones de los fabricantes, emprendiendo iniciativas útiles en los lugares de trabajo, resguardando la normativa vigente.",
+          "3.4 Elabora informes técnicos referidos a la mantención y reparación de equipos electrónicos, comunicando en forma clara y precisa los trabajos realizados."
+        ]
+      },
+      {
+        "code": "M2-AE4",
+        "title": "Ensambla circuitos electrónicos, analógicos y digitales, de acuerdo a manuales de procedimiento.",
+        "criteria": [
+          "4.1 Prepara las condiciones necesarias para realizar tareas de ensamblaje de equipos electrónicos, revisando herramientas e instrumentos, según normas de seguridad.",
+          "4.2 Clasifica las partes y piezas del equipo a ensamblar, dando un orden lógico para mayor fluidez del proceso, considerando el tipo de equipo a ensamblar, y las especificaciones técnicas del fabricante.",
+          "4.3 Ensambla y realiza pruebas de control de calidad, utilizando los instrumentos adecuados, según protocolos establecidos.",
+          "4.4 Elabora informes técnicos referidos a fallas reiterativas o defectos de fabricación en equipos electrónicos ensamblados, comunicando en forma clara y precisa los trabajos realizados."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81896.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34321_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 3,
+    "title": "Ensamblaje y mantención de sistemas y equipos digitales",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 3",
+        "title": "Armar y ensamblar circuitos electrónicos básicos, analógicos y digitales, y repararlos cuando corresponda, de acuerdo a manuales de procedimiento."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M3-AE1",
+        "title": "Ensambla circuitos electrónicos digitales para equipos básicos, comprobando su lógica de funcionamiento, de acuerdo a manuales de procedimiento.",
+        "criteria": [
+          "1.1 Predice el comportamiento de circuitos electrónicos digitales, basado en distintos teoremas, de acuerdo a manuales de procedimiento.",
+          "1.2 Selecciona circuitos integrados digitales, según el diagrama esquemático a montar, considerando manuales de especificaciones técnicas para componentes digitales.",
+          "1.3 Verifica el correcto funcionamiento de cada componente, correspondiente a un circuito electrónico digital, utilizando instrumentos de medida y hojas de datos técnicos, según corresponda.",
+          "1.4 Arma circuitos electrónicos digitales básicos, aplicando técnicas de manipulación y ensamblaje, cumpliendo plazos establecidos y estándares de calidad.",
+          "1.5 Comprueba el correcto funcionamiento circuitos electrónicos digitales, realizando mediciones de distintos parámetros, previendo situaciones de riesgo y enfermedades ocupacionales.",
+          "1.6 Modifica circuitos electrónicos básicos, mediante la aplicación de teoremas de lógica digital, en una perspectiva de eficiencia energética y cuidado ambiental.",
+          "1.7 Realiza pruebas de funcionamiento a circuitos electrónicos, mediante instrumentos y aplica protocolos establecidos y normas de seguridad."
+        ]
+      },
+      {
+        "code": "M3-AE2",
+        "title": "Arma y configura en forma prolija un computador, de acuerdo a manuales de procedimiento.",
+        "criteria": [
+          "2.1 Organiza y selecciona los materiales e insumos a utilizar, durante el armado de computadores, basándose en los manuales específicos de cada fabricante.",
+          "2.2 Ensambla el hardware de un computador, previendo los cuidados necesarios, indicados en manuales técnicos.",
+          "2.3 Instala y configura el sistema operativo en un computador, acorde a los requerimientos del usuario, considerando tecnologías de información pertinentes al trabajo.",
+          "2.4 Ejecuta los procedimientos de control y calidad, para los distintos tipos de computadores ensamblados, de acuerdo a protocolos establecidos y estándares de la industria.",
+          "2.5 Verifica el funcionamiento del equipo, haciendo uso de procedimientos establecidos."
+        ]
+      },
+      {
+        "code": "M3-AE3",
+        "title": "Repara y mantiene equipos electrónicos básicos, según requerimientos y especificaciones técnicas.",
+        "criteria": [
+          "3.1 Diagnostica fallas en equipos electrónicos básicos, empleando distintos medios en la búsqueda y diagnóstico de averías, emprendiendo iniciativas útiles en los lugares de trabajo.",
+          "3.2 Remplaza componentes, partes o equipos dañados, en sistemas electrónicos básicos, considerando el tipo de avería, y las especificaciones técnicas.",
+          "3.3 Actualiza el sistema operativo, cuando corresponda, de acuerdo a las indicaciones de los fabricantes, emprendiendo iniciativas útiles en los lugares de trabajo.",
+          "3.4 Realiza pruebas de funcionamiento, aplicando fórmulas, pautas y rutinas establecidas.",
+          "3.5 Elabora informes técnicos referidos a la mantención y reparación de equipos electrónicos, comunicando en forma clara y precisa los trabajos realizados."
+        ]
+      },
+      {
+        "code": "M3-AE4",
+        "title": "Realiza análisis técnico para la instalación de equipos electrónicos según manual de uso y especificaciones técnicas, respetando normas de seguridad y tiempos establecidos.",
+        "criteria": [
+          "4.1 Inspecciona espacios físicos para la instalación de equipos electrónicos de acuerdo a disposición y usabilidad.",
+          "4.2 Contrasta información técnica, verifica valores nominales de las magnitudes para instalación del equipo, utilizando instrumentos de medición de acuerdo a las normas.",
+          "4.3 Genera procedimiento de instalación de equipos de acuerdo a especificaciones y características técnicas, considerando normas seguridad."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81897.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34321_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 4,
+    "title": "Sistemas de control domótico",
+    "hp": 190,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 6",
+        "title": "Configurar el funcionamiento automático de sistemas y equipos electrónicos simples, tales como equipos de domótica, ascensores, portones eléctricos, riego automatizado, iluminación y otros, de acuerdo a los requerimientos del proyecto y las especificaciones técnicas del fabricante."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M4-AE1",
+        "title": "Utiliza equipos de domótica para el control de sistemas electrónicos, de acuerdo a requerimientos y especificaciones técnicas.",
+        "criteria": [
+          "1.1 Examina equipos de domótica, siguiendo especificaciones técnicas del fabricante, y los manuales de uso.",
+          "1.2 Instala equipos de domótica para el control de sistemas electrónicos, según proyecto, respetando protocolo de seguridad y privacidad.",
+          "1.3 Configura y programa equipos de domótica, de acuerdo a requerimientos y especificaciones técnicas.",
+          "1.4 Mantiene y mejora los sistemas de domótica, optimizando los recursos, respetando el medio ambiente y especificaciones técnicas.",
+          "1.5 Realiza pruebas de funcionamiento, aplicando pautas y rutinas establecidas para ello."
+        ]
+      },
+      {
+        "code": "M4-AE2",
+        "title": "Mantiene sistemas y equipos electrónicos automáticos, de acuerdo a instrucciones y procedimientos establecidos.",
+        "criteria": [
+          "2.1 Opera sistemas y equipo electrónicos considerando ahorro energético de acuerdo a manuales del fabricante y en consonancia con las normas de seguridad personal y de los equipos.",
+          "2.2 Mantiene sistemas y equipo electrónicos, haciendo uso de herramientas e instrumentos adecuados, de acuerdo a manuales del fabricante y pautas de mantención.",
+          "2.3 Realiza pruebas de funcionamiento de los equipos y sistemas electrónicos, haciendo uso de instrumentos, protocolos de prueba y normas de seguridad.",
+          "2.4 Elabora informes técnicos referidos a la mantención y reparación de equipos electrónicos, comunicando en forma clara y precisa los trabajos realizados."
+        ]
+      },
+      {
+        "code": "M4-AE3",
+        "title": "Implementa los distintos tipos de instalaciones de alumbrado eléctrico en baja tensión, de acuerdo a las indicaciones del proyecto.",
+        "criteria": [
+          "3.1 Chequea parámetros básicos de corriente y potencia eléctrica para la instalación de alumbrado, haciendo uso de manuales, instrumentos, de acuerdo a normas eléctricas y de seguridad.",
+          "3.2 Elabora una lista de insumos y materiales requeridos en la instalación de alumbrado de baja tensión, evaluando los costos y tiempos de implementación.",
+          "3.3 Organiza los elementos requeridos para la instalación de alumbrado, considerando herramientas, instrumentos y elementos de seguridad de acuerdo a la normativa vigente.",
+          "3.4 Monta los componentes y ductos requeridos para la instalación de alumbrado de baja tensión, respetando las normas eléctricas.",
+          "3.5 Verifica el funcionamiento de las diferentes instalaciones de alumbrado, haciendouso de herramientas e instrumentos apropiados, respetando la normativa establecida."
+        ]
+      },
+      {
+        "code": "M4-AE4",
+        "title": "Instala equipos electrónicos, según requerimientos del usuario, e instrucciones consignadas en manuales.",
+        "criteria": [
+          "4.1 Monta los equipos electrónicos y dispositivos asociados, de acuerdo al manual, siguiendo las instrucciones del proyecto, cumpliendo con los plazos establecidos.",
+          "4.2 Comprueba el funcionamiento de la instalación, midiendo parámetros en los puntos más relevantes, previendo situaciones de riesgo y enfermedades laborales.",
+          "4.3 Hace uso de las herramientas y elementos de seguridad requeridos para el tipo de instalación, considerando las condiciones técnicas y de espacio.",
+          "4.4 Verifica el funcionamiento de los equipos haciendo uso de herramientas e instrumentos apropiados, respetando la normativa establecida."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81898.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34321_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 5,
+    "title": "Mantención y operación de equipos de control electrónico de potencia",
+    "hp": 152,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 1",
+        "title": "Leer y utilizar información técnica consignada en manuales, planos croquis, instrucciones y proyectos de instalación electrónicos, relevando los datos necesarios para desarrollar correctamente su trabajo."
+      },
+      {
+        "code": "OA 5",
+        "title": "Mantener preventiva y correctivamente equipos, sistemas, dispositivos y componentes electrónicos, utilizando instrumentos y materiales apropiados, de acuerdo a la normativa de seguridad, especificaciones técnicas y planes de mantenimiento."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M5-AE1",
+        "title": "Elabora planes de mantenimientos preventivos y correctivos para sistemas electrónicos, de acuerdo a normativas y especificaciones técnicas.",
+        "criteria": [
+          "1.1 Recopila los datos necesarios para la elaboración de un plan de mantención, basado en distintos medios de información, propiciando el trabajo en equipo.",
+          "1.2 Dibuja planos, croquis y diagramas esquemáticos, considerando las especificaciones técnicas necesarias para la mantención de sistemas electrónicos, respetando las diversas normativas técnicas.",
+          "1.3 Diseña planes de mantenimientos preventivos y correctivos apoyándose en planos y datos obtenidos, integrándose a diversos grupos de profesionales.",
+          "1.4 Realiza un levantamiento del cableado, con la finalidad de optimizar los planes de mantención elaborados, utilizando los equipos de seguridad necesarios.",
+          "1.5 Propone plan de mantenimiento para sistemas electrónicos, considerando exigencias de la industria, protocolos de manejo y eficiencia energética."
+        ]
+      },
+      {
+        "code": "M5-AE2",
+        "title": "Mantiene preventivamente sistemas con dispositivos y componentes electrónicos, de acuerdo a especificaciones técnicas y planes de mantenimiento.",
+        "criteria": [
+          "2.1 Extrae información de manuales y protocolos de funcionamiento, para uso y manejo y mantención sistemas con dispositivos electrónicos.",
+          "2.2 Realiza mantención preventiva a sistemas con dispositivos y componentes electrónicos de generación y conversión de energía, de acuerdo a especificaciones técnicas y planes de mantenimiento.",
+          "2.3 Protege preventivamente sistemas con dispositivos y componentes electrónicos, de control, de acuerdo a especificaciones técnicas y planes de mantenimiento.",
+          "2.4 Inspecciona preventivamente sistemas electrónicos, industriales de acuerdo a especificaciones técnicas y planes de mantenimiento.",
+          "2.5 Diseña un plan de mantenimiento preventivo, en sistemas electro neumáticos y otros, utilizando los medios tecnológicos en la elaboración de estos planes."
+        ]
+      },
+      {
+        "code": "M5-AE3",
+        "title": "Realiza mantención correctiva a sistemas con dispositivos y componentes electrónicos y electroneumáticos, de acuerdo a especificaciones técnicas y planes de mantenimiento.",
+        "criteria": [
+          "3.1 Inspecciona sistemas electrónicos, haciendo uso de instrumentos y herramientas adecuadas, según manuales de uso y normas de seguridad.",
+          "3.2 Selecciona los equipos e insumos necesarios de acuerdo al diseño y características técnicas de sistema, según planos del proyecto.",
+          "3.3 Conecta y prueba equipos electrónicos industriales, de acuerdo a especificaciones técnicas y planes de mantenimiento.",
+          "3.4 Mantiene correctivamente sistemas con dispositivos y componentes electrónicos y electro neumáticos, de acuerdo a especificaciones técnicas y planes de mantención.",
+          "3.5 Comprueba el funcionamiento del sistema, midiendo parámetros en los puntos más relevantes, haciendo uso de procedimientos establecidos y previendo situaciones de riesgo."
+        ]
+      },
+      {
+        "code": "M5-AE4",
+        "title": "Realiza la mantención de servomecanismos con control electrónico industrial, de acuerdo a especificaciones técnicas y plan de mantenimiento.",
+        "criteria": [
+          "4.1 Inspecciona sistemas de servomecanismos electrónicos, tales como motor paso a paso, driver de control de posición y velocidad y servomotores y otros, haciendo uso de instrumentos y herramientas adecuadas, según manuales de uso y normas de seguridad.",
+          "4.2 Selecciona los equipos e insumos necesarios para el desarme de sistemas con servomecanismos, según planos de cada instalación.",
+          "4.3 Remplaza y/o repara partes y piezas dañadas o fatigadas, utilizando adecuadamente herramientas e instrumentos de precisión, de acuerdo a especificaciones técnicas y planes de mantenimiento.",
+          "4.4 Calcula, sincroniza y calibra los sistemas de control para servomecanismos electrónicos de acuerdo a especificaciones técnicas y planes de mantención establecidos.",
+          "4.5 Comprueba el funcionamiento de servomecanismos electrónicos, midiendo parámetros en los puntos más relevantes, visualizando imágenes y señales, haciendo uso de procedimientos establecidos y previendo situaciones de riesgo."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81899.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34321_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 6,
+    "title": "Detección de fallas industriales",
+    "hp": 152,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 2",
+        "title": "Inspeccionar y diagnosticar fallas de funcionamiento en circuitos electrónicos, equipos y sistemas electrónicos industriales, con o sin control automático, con referencia a las especificaciones técnicas del fabricante."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M6-AE1",
+        "title": "Inspecciona equipos y circuitos electrónicos industriales respetando protocolos y normas de seguridad.",
+        "criteria": [
+          "1.1 Examina circuitos electrónicos industriales, utilizando herramientas e instrumentos adecuados, respetando protocolos y normas de seguridad.",
+          "1.2 Revisa equipos electrónicos industriales haciendo uso de las herramientas específicas y aplicando las normas de seguridad establecidas para la tarea.",
+          "1.3 Verifica el funcionamiento de equipos y circuitos según instrucciones consignadas en manuales técnicos y, respetando normativa de seguridad."
+        ]
+      },
+      {
+        "code": "M6-AE2",
+        "title": "Diagnostica fallas en sistemas electrónicos industriales, respetando protocolos, normas de seguridad y especificaciones técnicas.",
+        "criteria": [
+          "2.1 Diagnostica fallas en sistemas de control automático usados en la industria, monitoreando y forzando variables, según protocolos de búsqueda y localización de averías en equipos de automatización industrial.",
+          "2.2 Remplaza los dispositivos, equipos e instrumentos industriales dañados, respetando normas de seguridad y protocolos establecidos.",
+          "2.3 Elabora informes técnicos referidos al diagnóstico y fallas de sistemas electrónicos, comunicando en forma clara y precisa los trabajos realizados."
+        ]
+      },
+      {
+        "code": "M6-AE3",
+        "title": "Mantiene equipos y sistemas electrónicos industriales, con y sin control automático, según manuales de mantención y especificaciones técnicas del fabricante.",
+        "criteria": [
+          "3.1 Elabora un plan de mantención, preventivo y correctivo, para los tres tipos de control industrial (control manual, semiautomático y automático), coordinando acciones con otros departamentos.",
+          "3.2 Realiza trabajos de mantenimiento preventivo, para los distintos tipos de control industrial, acorde al plan de mantención elaborado y especificaciones técnicas del fabricante.",
+          "3.3 Ejecuta mantenimiento correctivo, para control industrial, según diagnóstico de falla, aplicando técnicas de mantenimiento, herramientas adecuadas y respetando normas de seguridad.",
+          "3.4 Realiza pruebas de funcionamiento, aplicando pautas y rutinas establecidas."
+        ]
+      },
+      {
+        "code": "M6-AE4",
+        "title": "Analiza funcionamiento de equipos electrónicos y diagnostica fallas según manuales, considerando las normas de seguridad establecidas.",
+        "criteria": [
+          "4.1 Examina el funcionamiento de los equipos electrónicos haciendo uso de herramientas e instrumentos, considerando las especificaciones técnicas, previniendo las situaciones de riesgo personal y de los equipos.",
+          "4.2 Diagnostica fallas en equipos electrónicos en relación al tipo de síntoma presentado, siguiendo protocolos de búsqueda y localización de fallas, según protocolos establecidos.",
+          "4.3 Remplaza componentes, partes o piezas de un equipo electrónico, aplicando las técnicas indicadas en manuales específicos de reparación.",
+          "4.4 Verifica el funcionamiento de equipos electrónicos según instrucciones consignadas en manuales técnicos y, respetando normativa de seguridad."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81900.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34321_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 7,
+    "title": "Operación y programación de equipos de control eléctrico industrial",
+    "hp": 152,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 7",
+        "title": "Modificar programas y parámetros, en equipos y sistemas eléctricos y electrónicos utilizados en control de procesos, según requerimientos operacionales del equipo o planta y la normativa eléctrica vigente."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M7-AE1",
+        "title": "Opera sistemas de control eléctrico semiautomático, de acuerdo a requerimientos del equipo, considerando la normativa eléctrica vigente.",
+        "criteria": [
+          "1.1 Busca información en manuales acerca del funcionamiento de sistemas de control semiautomáticos, la estructura y especificaciones técnicas de operación.",
+          "1.2 Selecciona los dispositivos y componentes utilizados en el control eléctrico semiautomáticos, de acuerdo a los requerimientos del proyecto y especificaciones técnicas.",
+          "1.3 Monta equipos de control eléctrico, utilizados en diversos procesos industriales, de acuerdo a planos y requerimientos propios del proyecto.",
+          "1.4 Cambia los parámetros en circuitos eléctricos semiautomáticos, según requerimientos operacionales del equipo o planta y la normativa eléctrica vigente.",
+          "1.5 Realiza pruebas de funcionamiento, haciendo uso de instrumentos, aplicando medidas de seguridad personal."
+        ]
+      },
+      {
+        "code": "M7-AE2",
+        "title": "Modifica circuitos de control eléctrico, según requerimientos operacionales de la planta y la normativa eléctrica vigente.",
+        "criteria": [
+          "2.1 Selecciona los dispositivos y componentes utilizados en el control eléctrico automático, de acuerdo a los requerimientos del proyecto y especificaciones técnicas.",
+          "2.2 Monta equipos de control eléctrico automáticos, utilizados en diversos procesos industriales, de acuerdo a planos y requerimientos propios del proyecto.",
+          "2.3 Regula parámetros en circuitos eléctricos automáticos, considerando los tipos de sensores conectados, según requerimientos operacionales de la planta, respetando normativas vigentes."
+        ]
+      },
+      {
+        "code": "M7-AE3",
+        "title": "Conecta y programa equipos de control eléctrico, utilizados para el arranque y protección de procesos y maquinarias según requerimientos del proyecto.",
+        "criteria": [
+          "3.1 Interviene sistemas de partida suave e inversión de giro para máquinas industriales, previendo situaciones de riesgo.",
+          "3.2 Opera sistemas de control eléctrico programable, configurando equipos y sistemas de control de potencia, según requerimientos del proyecto e información técnica.",
+          "3.3 Conecta, programa y modifica sistemas de control eléctrico según requerimientos del proceso, basándose en las especificaciones técnicas de cada fabricante."
+        ]
+      },
+      {
+        "code": "M7-AE4",
+        "title": "Arma tableros de control y de fuerza considerando las características de los equipos y dispositivos industriales a modificar o programar, según planos y normativas vigentes.",
+        "criteria": [
+          "4.1 Monta dispositivos y equipos electrónicos en tableros de control y de fuerza para máquinas industriales, siguiendo planos eléctricos, previendo situaciones de riesgo, haciendo uso correcto de herramientas, respetando la normativa vigente.",
+          "4.2 Conecta los equipos y sistemas de control y de potencia, según requerimientos de cada equipo siguiendo instrucciones y de manuales técnicos.",
+          "4.3 Configura y programa los equipos y sistemas de control y de potencia, según requerimientos del proyecto.",
+          "4.5 Verifica el funcionamiento y puesta en marcha de tableros de control y de fuerza, haciendo uso de herramientas e instrumentos adecuados durante la revisión, respetando procedimientos establecidos para estas tareas."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81901.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34321_programa.pdf",
+    "source_warnings": [
+      "El sitio MINEDUC marca un posible criterio faltante en este AE; el PDF oficial omite 4.4."
+    ]
+  },
+  {
+    "position": 8,
+    "title": "Montaje de equipos industriales",
+    "hp": 152,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 4",
+        "title": "Instalar y montar equipos y sistemas electrónicos industriales y otros, de acuerdo al diseño y características técnicas del proyecto, utilizando las herramientas e instrumentos adecuados, respetando la normativa eléctrica, ambiental y de seguridad."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M8-AE1",
+        "title": "Instala equipos electrónicos Industriales, según requerimientos, respetando la normativa eléctrica, ambiental y de seguridad.",
+        "criteria": [
+          "1.1 Extrae información del proyecto para la instalación de equipos electrónicos, considerando tipo de equipo, parámetros y normas para la instalación.",
+          "1.2 Selecciona los insumos, herramientas y materiales necesarios para la instalación de acuerdo al diseño y características técnicas del proyecto electrónico Industrial.",
+          "1.3 Instala equipos y sistemas electrónicos Industriales, de acuerdo al diseño y características técnicas del proyecto, utilizando las herramientas e instrumentos adecuados, optimizando recursos.",
+          "1.4 Conecta y prueba los diversos equipos electrónicos industriales, de acuerdo al diseño y características técnicas del proyecto, respetando la normativa eléctrica, ambiental y de seguridad."
+        ]
+      },
+      {
+        "code": "M8-AE2",
+        "title": "Monta sistemas electrónicos industriales, según requerimientos de la industria respetando la normativa eléctrica, ambiental y de seguridad.",
+        "criteria": [
+          "2.1 Prepara los dispositivos y sistemas electrónicos industriales, (variadores de frecuencia, partidores suaves, actuadores, sensores y otros) según indicación de planos y manuales.",
+          "2.2 Manipula herramientas e instrumentos durante el montaje de equipos electrónicos industriales previendo situaciones de riesgo e integridad física.",
+          "2.3 Monta y configura distintos equipos electrónicos industriales según la lógica indicada en planos, manuales y/o proyectos industriales respetando la normativa eléctrica, ambiental y de seguridad.",
+          "2.4 Conecta y pone en marcha los distintos equipos electrónicos industriales según la lógica indicada en planos, manuales, respetando la normativa eléctrica, ambiental y de seguridad.",
+          "2.5 Elabora informes técnicos referidos al montaje de sistemas electrónicos, comunicando en forma clara y precisa los trabajos realizados."
+        ]
+      },
+      {
+        "code": "M8-AE3",
+        "title": "Opera equipos y sistemas eléctricos y electrónicos utilizados en la industria, según protocolos de manejo.",
+        "criteria": [
+          "3.1 Extrae información de manuales y protocolos de funcionamiento, para uso y manejo de equipos y sistemas electrónicos.",
+          "3.2 Realiza pruebas de funcionamiento en sistemas eléctricos y electrónicos utilizados en la industria de acuerdo a indicaciones o manuales propuestos para ello, respetando normas de seguridad.",
+          "3.3 Opera diversos equipos y sistemas eléctricos y electrónicos utilizados en la industria, previendo situaciones de riesgo y ambientales.",
+          "3.4 Elabora informes técnicos referidos a las pruebas de funcionamiento en equipos y sistemas eléctricos y electrónicos utilizados en la industria, Considerando protocolos de manejo."
+        ]
+      },
+      {
+        "code": "M8-AE4",
+        "title": "Ejecuta proyectos de Instalación de sistemas electrónicos industriales de acuerdo al diseño y características técnicas del proyecto, manuales específicos y normativa vigente.",
+        "criteria": [
+          "4.1 Extrae información de manuales y protocolos de funcionamiento, para uso y manejo de equipos y sistemas electrónicos relacionados con el proyecto a implementar.",
+          "4.2 Monta los equipos electrónicos de potencia en tableros de control y de Fuerza de acuerdo a indicaciones del proyecto, utilizando las herramientas e instrumentos adecuados, respetando normas de seguridad.",
+          "4.3 Conecta los equipos de electrónica de potencia y realiza pruebas de funcionamiento según protocolos utilizados en la industria, previendo situaciones de riesgo y ambientales.",
+          "4.4 Las pruebas de funcionamiento en la instalación de sistemas industriales, considerando protocolos de manejo técnico y normas de seguridad."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81902.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34321_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 9,
+    "title": "Automatización industrial",
+    "hp": 152,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 7",
+        "title": "Modificar programas y parámetros, en equipos y sistemas eléctricos y electrónicos utilizados en control de procesos, según requerimientos operacionales del equipo o planta y la normativa eléctrica vigente."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M9-AE1",
+        "title": "Monta y conecta relés programables utilizados en el control de procesos básicos, según requerimiento del proyecto.",
+        "criteria": [
+          "1.1 Selecciona los insumos y componentes a utilizar durante el montaje, según características de la planta y manuales técnicos.",
+          "1.2 Monta los equipos electrónicos, considerando el tipo de hardware, de acuerdo con la documentación técnica de cada proyecto.",
+          "1.3 Conecta la alimentación, entradas y salidas del relé programable con otros componentes, utilizando los implementos de seguridad correspondientes.",
+          "1.4 Maneja y cambia los parámetros eléctricos involucrados en la conexión de la red eléctrica, previendo situaciones de riesgo."
+        ]
+      },
+      {
+        "code": "M9-AE2",
+        "title": "Maneja equipos de control lógico de prestaciones menores, según normativas vigentes y requerimientos de la planta industrial.",
+        "criteria": [
+          "2.1 Utiliza las instrucciones básicas de un relé programable, durante la programación según requerimientos del proyecto.",
+          "2.2 Elabora programas de control básico, considerando las instrucciones de un relé programable, de acuerdo a normas.",
+          "2.3 Controla y monitorea el funcionamiento de un programa de control, detectando fallas y problemas de función con otros equipos, coordinando las tares con otras personas.",
+          "2.4 Modifica programas básicos de control, ajustándose al tipo de hardware conectado y requerimientos del proyecto."
+        ]
+      },
+      {
+        "code": "M9-AE3",
+        "title": "Opera el software de los controladores lógicos programables, según requerimientos operacionales del equipo o planta y la normativa eléctrica vigente.",
+        "criteria": [
+          "3.1 Escribe y lee programas de control de procesos, en los diferentes lenguajes de programación, considerando normas vigentes.",
+          "3.2 Utiliza tablas de símbolo para identificar cada elemento durante la programación, en forma ordenada y según normativas.",
+          "3.3 Activa y desactiva variables durante el monitoreo y control de programas, respetando protocolos para estos procedimientos.",
+          "3.4 Respalda la información obtenida en equipos electrónicos y otros medios de almacenamiento, prestando cooperación para el mejor desarrollo de esta tarea."
+        ]
+      },
+      {
+        "code": "M9-AE4",
+        "title": "Programa PLCs de gama baja y pantallas HM, según requerimientos del proceso industriales simples.",
+        "criteria": [
+          "4.1 Programa equipos de control industrial PLCS, en diferentes lenguajes, en una perspectiva de eficiencia energética y cuidado ambiental.",
+          "4.2 Modifica los programas en equipos y sistemas con controladores lógicos programables PLC, asociando a procesos industriales disponiendo cuidadosamente los desechos y cuidado ambiental.",
+          "4.3 Programa y opera equipos HMI según requerimientos operacionales del proceso o planta industrial, bajo la normativa eléctrica vigente.",
+          "4.4 Modifica parámetros y programas en equipos de control industrial, disponiendo cuidadosamente los desechos, en una perspectiva de eficiencia energética y cuidado ambiental."
+        ]
+      },
+      {
+        "code": "M9-AE5",
+        "title": "Mantiene equipos electrónicos de control automático industrial, conforme al tipo de sistema, considerando procedimientos establecidos y especificaciones técnicas del fabricante.",
+        "criteria": [
+          "5.1 Elabora un plan de mantenimiento para equipos automatizados, según uso e instrucciones consignadas en manuales, coordinando las tareas con otras personas.",
+          "5.2 Realiza tareas de mantenimiento en equipos electrónicos considerando zonas de instalación, materiales y herramientas requeridas, respetando los tiempos asignados.",
+          "5.3 Remplaza autómatas programables o módulos de este según corresponda al tipo y problema, cargando los programas necesarios para el correcto funcionamiento del sistema industrial. Realiza pruebas de funcionamiento."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81903.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34321_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 10,
+    "title": "Emprendimiento y empleabilidad",
+    "hp": 76,
+    "year": "4° medio",
+    "oa": [],
+    "aes": [
+      {
+        "code": "M10-AE1",
+        "title": "Diseña y ejecuta un proyecto para concretar iniciativas de emprendimiento, identificando las acciones a realizar, el cronograma de su ejecución y los presupuestos, definiendo alternativas de financiamiento y evaluando y controlando su avance.",
+        "criteria": [
+          "1.1 Recolecta, organiza y analiza información para identificar oportunidades de emprendimiento en su propia comunidad y región, considerando diferentes ámbitos de aplicación (deporte, tecnología, medioambiente y energía, entre otros).",
+          "1.2 Evalúa las oportunidades de emprendimiento, tomando en cuenta sus fortalezas y debilidades, y considerando el contexto, los recursos existentes y las normativas vigentes relacionadas.",
+          "1.3 Formula los objetivos para un plan de acción de una iniciativa de emprendimiento personal, productivo o social, considerando las condiciones del entorno y personales.",
+          "1.4 Formula un presupuesto detallado, determinando los recursos (financieros, humanos, tecnológicos y otros) requeridos para el desarrollo de su iniciativa, los plazos y los factores externos que afectan su desarrollo.",
+          "1.5 Elabora un mecanismo de control de avance de su iniciativa de emprendimiento y evalúa las necesidades y las alternativas de financiamiento mediante aportes públicos y privados (créditos y ahorro).",
+          "1.6 Ejecuta las acciones para alcanzar los objetivos planteados según la planificación realizada, perseverando pese a circunstancias adversas, evaluando los resultados y las amenazas, ajustando sus acciones para asegurar el éxito y compartiendo su experiencia con otros."
+        ]
+      },
+      {
+        "code": "M10-AE2",
+        "title": "Maneja la legislación laboral y previsional chilena como marco regulador de las relaciones entre trabajadores y empleadores, identificando los derechos y deberes de ambas partes, tanto individuales como colectivos, y la reconoce como base para establecer buenas relaciones laborales.",
+        "criteria": [
+          "2.1 Selecciona la información relevante sobre los derechos laborales y previsionales de los trabajadores garantizados por la Constitución y el Código del Trabajo, para su propia contratación o de terceros a su cargo.",
+          "2.2 Determina elementos críticos de diversos tipos de contratos y de finiquitos, considerando la legislación laboral vigente.",
+          "2.3 Elabora propuestas de creación y desarrollo de organización sindical de acuerdo a la realidad de diferentes tipos de empresas, respetando la legislación vigente y la defensa de los derechos de los trabajadores."
+        ]
+      },
+      {
+        "code": "M10-AE3",
+        "title": "Prepara los elementos necesarios para participar de un proceso de incorporación al mundo del trabajo, valorando y planificando su trayectoria formativa y laboral.",
+        "criteria": [
+          "3.1 Sistematiza información desde organismos y empresas especializadas en intermediación laboral que existen en su entorno, analizando las perspectivas laborales, sus propias condiciones laborales y las normativas relacionadas.",
+          "3.2 Elabora correctamente los documentos necesarios para iniciar una actividad laboral, como el curriculum vitae, reuniendo evidencias de cursos realizados, experiencia laboral previa y cartas de recomendación, y visualizando sus alternativas de acuerdo a sus expectativas y condiciones.",
+          "3.3 Prepara las entrevistas y las situaciones de ingreso y promoción, identificando a personas e instituciones que pueden brindarle apoyo en este proceso.",
+          "3.4 Evalúa si la remuneración mensual o semanal y el finiquito se han determinado de acuerdo al tipo de contrato firmado y a la legislación laboral vigente.",
+          "3.5 Selecciona la institución y la modalidad conveniente para su cobertura de salud y pensión, además del seguro de desempleo que le corresponde de acuerdo a su contrato y derechos, y lleva a cabo los trámites de afiliación."
+        ]
+      },
+      {
+        "code": "M10-AE4",
+        "title": "Selecciona alternativas de capacitación y de educación superior para fortalecer sus competencias o desarrollar nuevas y adquirir certificaciones, ya sea e-learning o presenciales, evaluando las diversas opciones de financiamiento.",
+        "criteria": [
+          "4.1 Evalúa las necesidades futuras del mundo laboral en el ámbito de su especialidad y sus desafíos de formación, considerando las dinámicas de empleo, tendencias e innovaciones tecnológicas.",
+          "4.2 Evalúa las ofertas de capacitación virtual y presencial disponibles en su entorno, incluyendo sus características (como duración, objetivos y costos) y requisitos generales.",
+          "4.3 Evalúa las ofertas de educación superior disponibles en su entorno, incluyendo sus características (duración, acreditación, posibilidades de reconocimiento de aprendizajes previos y alternativas de financiamiento y becas) y requisitos de entrada."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81894.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34321_programa.pdf",
+    "source_warnings": []
+  }
+]

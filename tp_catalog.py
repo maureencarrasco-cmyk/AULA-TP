@@ -46,6 +46,7 @@ PUBLISHED = {
     'gastronomia', 'refrigeracion-climatizacion', 'electricidad',
     'servicios-hoteleria', 'atencion-enfermeria',
 }
+MENTION_DRAFTS = {'administracion', 'agropecuaria', 'construccion', 'quimica-industrial', 'mecanica-industrial'}
 
 
 def official_programs():
@@ -60,7 +61,7 @@ def install_pending_courses(con):
     student = con.execute("SELECT id FROM users WHERE role='student' ORDER BY id LIMIT 1").fetchone()
     for item in official_programs():
         slug = item['slug']
-        if slug in PUBLISHED:
+        if slug in PUBLISHED or slug in MENTION_DRAFTS:
             continue
         title = TITLES[slug]
         row = con.execute('SELECT id FROM courses WHERE title=?', (title,)).fetchone()

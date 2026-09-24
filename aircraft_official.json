@@ -1,0 +1,651 @@
+[
+  {
+    "position": 1,
+    "title": "Reparación y remplazo de elementos estructurales de la aeronave",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 3",
+        "title": "Inspeccionar y reparar los elementos estructurales internos y externos de la aeronave, empenaje, fuselaje, alas, tren de aterrizaje e interior de la aeronave, de acuerdo a las especificaciones de los manuales de mantenimiento estructurales del fabricante de la aeronave."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M1-AE1",
+        "title": "Desarma y arma los elementos estructurales internos y externos de la aeronave para analizar su funcionamiento de acuerdo a los principios aerodinamicos y a lo establecido en el manual de mantenimiento.",
+        "criteria": [
+          "1.1 Desarma y arma el fuselaje, alas y empenaje de una aeronave para comprender elfuncionamiento ylos esfuerzos estructurales a los cuales estan sometidos cada uno de ellos, aplicando las técnicas de remocion y montaje, de acuerdoa lo establecidoenelmanualdemantenimiento.",
+          "1.2 Desarma y arma el tren de aterrizaje de una aeronave, para comprendersufuncionamientoylosesfuerzosaloscuales esta sometido,considerando el manual demantenimiento."
+        ]
+      },
+      {
+        "code": "M1-AE2",
+        "title": "Inspecciona los elementos estructurales internos y externos de la aeronave (fuselaje, alas, empenaje y tren de aterrizaje), mediante inspeccion visual y pruebas no destructivas de superficie, considerando los principios fisicos y la resistencia de los materiales y de acuerdo a los manuales de mantenimiento y documentacion técnica aplicable.",
+        "criteria": [
+          "2.1 Efectua inspeccion visual de la superficie de los elementos estructurales delaaeronaveutilizando instrumentos (espejos y lupas) para determinar el nivel de dano, de acuerdoadocumentaciontecnicaaplicableya losmanuales de mantenimiento preventivo.",
+          "2.2 Efectua pruebas no destructivas a los elementos estructurales de la aeronave, utilizando tintas penetrantes y particulas magnéticas,para determinar el tipo y el nivel de dano, considerando los principios fisicos y la resistencia de los materiales,de acuerdo a documentacion técnica aplicable y a los manuales de mantenimiento preventivo.",
+          "2.3 Registra e informa los resultados de inspeccion,usando lenguaje tecnico, de acuerdo a la normativa aeronautica vigente."
+        ]
+      },
+      {
+        "code": "M1-AE3",
+        "title": "Repara y remplaza elementos internos y externos de la aeronave, utilizando equipos y herramientas establecidos en los manuales de mantenimiento y documentacion técnica aplicable, respetando las normas ambientales, de higiene y actuacion humana.",
+        "criteria": [
+          "3.1 Prepara el lugar de trabajo para tener acceso a los elementos estructurales de la aeronave que seran reparados o remplazados, de acuerdo al manual de mantenimiento, respetando normas ambientales, de higiene y seguridad y actuacion humana.",
+          "3.2 Repara los elementos estructurales de la aeronave, utilizando equipos y herramientas que permiten efectuar el mantenimiento,de acuerdo a documentacion tecnica aplicable.",
+          "3.3 Remplaza los elementos estructurales de la aeronave, utilizandoequiposyherramientasquepermitenefectuar el mantenimiento,de acuerdo a documentacion técnica aplicable.",
+          "3.4 Registra e informa el mantenimiento efectuado, utilizando los formularios correspondientes,de acuerdo a la normativa aeronautica vigente."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82003.html",
+    "source_warnings": [
+      "AE y criterios leídos visualmente del PDF oficial; pendiente revisión humana de la transcripción OCR."
+    ],
+    "extraction_status": "pdf_ocr_review",
+    "source_pdf_pages": [
+      45,
+      46
+    ],
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-37245_programa.pdf"
+  },
+  {
+    "position": 2,
+    "title": "Detección de fallas en instrumentos y sistemas de navegación y comunicación de la aeronave",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 6",
+        "title": "Inspeccionar en forma visual, considerando los diagramas establecidos en el manual de mantenimiento de la aeronave, e identificar con instrumentos fallas y discrepancias de los sistemas eléctricos y electrónicos, además de informar oportunamente para su reparación."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M2-AE1",
+        "title": "Arma circuitos eléctricos y electronicos de la aeronave para comprender su funcionamiento, y aplicar las leyes y principios fisicos que los rigen de acuerdo al manual de mantenimiento.",
+        "criteria": [
+          "1.1 Lee e interpreta los diagramas de circuitos eléctricos y electronicos, considerando la normativa electrica, simbologia y las funciones que cumplen en la aeronave.",
+          "1.2 Aplica las leyes de la electricidad para comprender el funcionamiento de los circuitos electricos y electronicos de una aeronave.",
+          "1.3 Construye circuito electrico basico para comprender la funcion que cumple en la aeronave,utilizando componentes electricos, herramientas e instrumentos de acuerdo al manual de mantenimiento."
+        ]
+      },
+      {
+        "code": "M2-AE2",
+        "title": "Realiza inspeccion visual de los instrumentos y de los sistemas de navegacion y de comunicacion de la aeronave, de acuerdo al manual de mantenimiento.",
+        "criteria": [
+          "2.1 Revisa visualmente los instrumentos de la aeronave para comprobar su estado, considerando las discrepancias informadas de acuerdo al reglamento aeronautico.",
+          "2.2 Observa las partes externas de la aeronave para detectar posibles fisuras o averias que influyan en el sistema de navegacion, de acuerdo a los manuales de mantenimiento de la aeronave.",
+          "2.3 Revisa visualmente los cableados eléctrico y electronico que influyen en el sistema de comunicacion de la aeronave, de acuerdo a los planos y diagramas del manual de mantenimiento."
+        ]
+      },
+      {
+        "code": "M2-AE3",
+        "title": "Determina fallas en el funcionamiento de los instrumentos y de los sistemas de navegación y de comunicación de la aeronave, utilizando equipos, herramientas e instrumentos de medición de acuerdo a las discrepancias informadas.",
+        "criteria": [
+          "3.1 Prepara el lugardetrabajopara teneracceso a los instrumentos ya los sistemas denavegacion ycomunicaciondelaaeronave, de acuerdo al manual de mantenimiento, respetando las normas de higiene, seguridad y actuacion humana.",
+          "3.2 Lee e interpreta diagramas y esquemas, para detectar fallas especificas de los instrumentos y de los sistemas de navegacion y de comunicacion de la aeronave, de acuerdo con el manual de mantenimiento.",
+          "3.3 Utiliza instrumentos de medicion de diferentes magnitudes para detectar fallas de los sistemas electrico y electronico, de acuerdo a la documentacion téecnica aplicable.",
+          "3.4 Efectua pruebas funcionales de los sistemas eléctrico y electronico de la aeronave, de acuerdo a lo establecido en manual demantenimiento."
+        ]
+      },
+      {
+        "code": "M2-AE4",
+        "title": "Registra e informa lasfallasdetectadas considerando los procedimientos establecidos por la Direccion General de Aeronautica Civil y los manuales de mantenimiento de la aeronave.",
+        "criteria": [
+          "4.1 Usa las cartillas de trabajo y protocolo de registro en las diferentes etapas del mantenimiento,de acuerdo a los procedimientos establecidos.",
+          "4.2 Usa las herramientas tecnologicas digitales en el registro y sistematizacion de la informacion, de acuerdo a las normas de funcionamiento de las mismas.",
+          "4.3 Aplica los procedimientos relacionados con el registro e informacion de acuerdo a la normativa aeronautica vigente."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82004.html",
+    "source_warnings": [
+      "AE y criterios leídos visualmente del PDF oficial; pendiente revisión humana de la transcripción OCR."
+    ],
+    "extraction_status": "pdf_ocr_review",
+    "source_pdf_pages": [
+      55,
+      56
+    ],
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-37245_programa.pdf"
+  },
+  {
+    "position": 3,
+    "title": "Mantenimiento de los controles de vuelo de la aeronave",
+    "hp": 152,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 4",
+        "title": "Realizar mantenimiento de los controles de vuelo de la aeronave, superficies primarias, secundarias y auxiliares, aplicando los principios de la aerodinámica y de acuerdo al manual de mantenimiento de la aeronave."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M3-AE1",
+        "title": "Desarma y arma los componentes de los controles de vuelo para comprender su funcionamiento y la forma como afectan la aerodinamica de la aeronave, utilizando equipos, herramientas e instrumentos de acuerdo a los procedimientos establecido en el manual de mantenimiento, y respetando las normas ambientales, de higiene, de seguridad y de actuacion humana.",
+        "criteria": [
+          "1.1 Prepara el lugar de trabajo para tener acceso a los componentes de los controles de vuelo de la aeronave de acuerdo al manual de mantenimiento y respetando el reglamento de higiene, seguridad y actuacion humana contempladas en la normativa aeronautica vigente.",
+          "1.2 Desarma los componentes de los controles de vuelo de la aeronave, para comprender su funcionamiento,utilizando equipos, herramientas e instrumentos de acuerdo a lo establecido en el manual demantenimiento de la aeronave y respetando las normas ambientales, de higiene, de seguridad y actuacion humana.",
+          "1.3 Arma los componentes de los controles de vuelo de la aeronaveutilizandoequipos,herramientaseinstrumentos de acuerdo a los procedimientos establecidos en el manual de mantenimiento de la aeronave.",
+          "1.4 Registra y comunica la actividad de mantenimiento efectuada a los componentes de los controles de vuelo de la aeronave segun la normativa aeronautica vigente."
+        ]
+      },
+      {
+        "code": "M3-AE2",
+        "title": "Detecta fallas, en forma visual o por discrepancias informadas, en el funcionamiento de los controles de vuelo que afectan la aerodinamica de la aeronave, segun lo establecido en los diagramas y manuales del fabricante.",
+        "criteria": [
+          "2.1 Realiza inspeccionvisual delas superficies de los controles de vuelo y sus componentes, de acuerdo a la lectura de paneles de control electrico y electronico, el manual de mantenimiento,y lasdiscrepancias informadas en registros de mantenimiento de la aeronave.",
+          "2.2 Efectua pruebas de funcionamiento de los componentes de controles de vuelo para comprobar las fallas informadas y que afectan la aerodinamica de la aeronave, siguiendo los protocolos y manuales de mantenimiento.",
+          "2.3 Registra y comunica las fallas detectadas a los controles de vuelo de la aeronave en los formatos que corresponden y utilizando el lenguaje técnico apropiado."
+        ]
+      },
+      {
+        "code": "M3-AE3",
+        "title": "Remplaza e instala las superficies de los controles de vuelo que afectan la aerodinamica de la aeronave utilizando equipos, herramientas e instrumentos de acuerdo a deteccion de fallas o tiempo de vida util establecido en el manual de mantenimiento.",
+        "criteria": [
+          "3.1 Prepara el lugar de trabajo para tener acceso a las superficies de los controles de vuelo de acuerdo al manual de mantenimiento y respetando las normas de higiene, seguridad y actuacion humana.",
+          "3.2 Utiliza equipos, herramientas e instrumentos siguiendo el procedimiento de remocion e instalacion de las superficies de los controles de vuelo establecido en el manual de mantenimiento de la aeronave.",
+          "3.3 Registra y comunica la actividad de mantenimiento efectuada a las superficies de los controles de vuelo de la aeronave segun la normativa aeronautica vigente."
+        ]
+      },
+      {
+        "code": "M3-AE4",
+        "title": "Verifica el desplazamiento de los controles de vuelo mediante el uso de instrumentos de calibracion, de acuerdo con el manual de mantenimiento y los principios fisicos de aerodinamica asociados al sistema.",
+        "criteria": [
+          "4.1 Revisa la regulacion de las superficies de los controles de vuelo utilizando los instrumentos de calibracion requeridos y de acuerdo al manual de mantenimiento de la aeronave.",
+          "4.2 Verifica el funcionamiento de los controles de vuelo aplicandolosprocedimientosdetalladosenlosmanuales de mantenimiento y respetando las normas de higiene, seguridad y actuacion humana.",
+          "4.3 Registra y comunica el resultado de la prueba efectuada a los controles de vuelo de la aeronave de acuerdo a la normativa aeronautica vigente."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82005.html",
+    "source_warnings": [
+      "AE y criterios leídos visualmente del PDF oficial; pendiente revisión humana de la transcripción OCR."
+    ],
+    "extraction_status": "pdf_ocr_review",
+    "source_pdf_pages": [
+      65,
+      66
+    ],
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-37245_programa.pdf"
+  },
+  {
+    "position": 4,
+    "title": "Inglés técnico de estructura, controles de vuelo y sistemas de navegación y comunicación de la aeronave",
+    "hp": 76,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 5",
+        "title": "Llevar a cabo tareas de mantenimiento de aeronaves basándose en la comprensión y utilización de la información técnica contenida en manuales y documentos técnicos en idioma inglés."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M4-AE1",
+        "title": "Lee y comprende informacion general, especifica y vocabulario de textos en inglés relacionados con temas de la especialidad tales como la estructura de la aeronave, instrumentos, sistemas de navegacion y comunicacion, y controles de vuelo; presentes en manuales de mantenimiento de aeronaves.",
+        "criteria": [
+          "1.1 Distingue palabras y expresiones clave relacionadas con la estructura de la aeronave y sus sistemas.",
+          "1.2 Extrae la idea central o el tema al que se refiere un texto de los manuales de mantenimientode la aeronavepara demostrar comprension.",
+          "1.3 Extrae y selecciona detalles relevantes de los manuales de mantenimiento, referidos a la estructura de la aeronave y sus sistemas."
+        ]
+      },
+      {
+        "code": "M4-AE2",
+        "title": "Resume y organiza informacion relevante de graficos, diagramas y esquemas desde los manuales en inglés de la especialidad relacionados con la estructura, los controles de vuelo y los sistemas de navegacion y comunicacion de la aeronave.",
+        "criteria": [
+          "2.1 Reconoce la estructura de la aeronave y sus sistemas a partir de los graficos, diagramas y esquemas en manuales de mantenimiento de aeronaves.",
+          "2.2 Identifica palabras y expresiones clave relacionadas con la estructura,los controles de vueloy los sistemas de navegacion y comunicacion de la aeronave.",
+          "2.3 Grafica algun sistema de la aeronave contenido en los manuales demantenimiento,utilizando el léxicoy las palabras clave necesarias."
+        ]
+      },
+      {
+        "code": "M4-AE3",
+        "title": "Utiliza la informacion relevante de graficos, diagramas y esquemas desde los manuales en inglés de la especialidad como insumo para realizar los procesos de mantenimiento de las aeronaves.",
+        "criteria": [
+          "3.1 Asocia palabras y expresiones clave con graficos, diagramas y esquemas.",
+          "3.2 Compara y contrasta palabras y expresiones clave de graficos, diagramas y esquemas de los manuales de mantenimiento para demostrar comprension.",
+          "3.3 Completa informacion en formularios, listas de chequeo, con detalles obtenidos en graficos, diagramas y esquemas desde los manuales de mantenimiento.",
+          "3.4 Resuelveproblematicasysituacionesrelacionadasconlos diversos mecanismosde lasaeronaves usandola informacion extraida de los manuales y documentos técnicos."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82006.html",
+    "source_warnings": [
+      "AE y criterios leídos visualmente del PDF oficial; pendiente revisión humana de la transcripción OCR."
+    ],
+    "extraction_status": "pdf_ocr_review",
+    "source_pdf_pages": [
+      76,
+      77
+    ],
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-37245_programa.pdf"
+  },
+  {
+    "position": 5,
+    "title": "Lectura e interpretación de manuales de mantenimiento de aeronaves",
+    "hp": 76,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 5",
+        "title": "Llevar a cabo tareas de mantenimiento de aeronaves basándose en la comprensión y utilización de la información técnica contenida en manuales y documentos técnicos en idioma inglés."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M5-AE1",
+        "title": "Lee e interpreta manuales tecnicos para conocer la estructura comun que tienen las especificaciones técnicas entregadas por los fabricantes en los manuales de mantenimiento de la aeronave,utilizados en un Centro de Mantenimiento Aeronautico (CMA).",
+        "criteria": [
+          "1.1 Interpreta indicaciones entregadas en las especificaciones técnicas, normativa de seguridad, actuacion humana y medioambiental,y otras contenidas enmanualestécnicos de las aeronaves.",
+          "1.2 Lee e interpreta las especificaciones tecnicas del manual de mantenimiento y catalogos de partes, para ejecutar procesos demantenimiento yreparaciondeunaaeronave dentro de un CMA.",
+          "1.3 Organiza procesos de mantenimiento preventivo de una aeronave; utilizando pautas de mantenimiento periodico (diario/horas)."
+        ]
+      },
+      {
+        "code": "M5-AE2",
+        "title": "Lee e interpreta la informacion descrita en planos y diagramas de los distintos manuales para ejecutar procesos de mantenimiento y/o reparacion de una aeronave.",
+        "criteria": [
+          "2.1 Interpreta las nomenclaturas de las normas y simbologias utilizadas en los manuales de mantenimiento de las aeronaves.",
+          "2.2 Interpreta las funciones de los sistemas: hidraulico, neumatico y eléctrico,desde un plano normalizado de una aeronave incluido en el manual de mantenimiento.",
+          "2.3 Utiliza coordenadas de los planos hidraulicos, electricos y neumaticos, para organizar procesos de mantenimiento y reparacion de una aeronave."
+        ]
+      },
+      {
+        "code": "M5-AE3",
+        "title": "Detecta fallas en sistemas de aeronave, utilizando la informacion y los procedimientos de manuales de mantenimiento, considerando planos y diagramas conforme a la nomenclatura internacional.",
+        "criteria": [
+          "3.1 Lee e interpreta informacion contenida en manuales de diferentes aeronaves para determinar y resolver fallas, utilizando la nomenclatura internacional.",
+          "3.2 Interpreta indicaciones entregadas en documentos escritos, como especificaciones tecnicas, simbologia y normas nacionales einternacionales relacionadas conlaemision de gases, contaminacion acustica y conservacion del medio ambientE.",
+          "3.3 Aplica diagnostico y detecta fallas sectorizando un subsistema de un plano de aeronave, de acuerdo al manual de servicio y normas nacionales e internacionales."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82007.html",
+    "source_warnings": [
+      "AE y criterios leídos visualmente del PDF oficial; pendiente revisión humana de la transcripción OCR."
+    ],
+    "extraction_status": "pdf_ocr_review",
+    "source_pdf_pages": [
+      86,
+      87
+    ],
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-37245_programa.pdf"
+  },
+  {
+    "position": 6,
+    "title": "Normativa de mantenimiento aeronáutico",
+    "hp": 76,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 7",
+        "title": "Registrar e informar las acciones del mantenimiento efectuado, de acuerdo a la normativa vigente."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M6-AE1",
+        "title": "Aplica la normativa aeronautica vigente referente a los factores humanos en las actividades de mantenimiento de las aeronaves.",
+        "criteria": [
+          "1.1 Utiliza, durante el desarrollo de su trabajo, las normas de seguridad, los procedimientos y normas medioambientales correspondientes,asi como los elementos de proteccion personal, a fin de evitar accidentes e incumplimientos que afecten el normal desarrollo de las acciones de mantenimiento, de acuerdo a la normativa vigente.",
+          "1.2 Identifica los riesgos y las consecuencias para las personas de la manipulacion de los equipos y de las condiciones medioambientales, y evalua las acciones para evitar accidentes, de acuerdo a las normas vigentes.",
+          "1.3 Ubica las zonas de seguridad en el lugar donde realiza sus funciones, comunicandose con el grupo de trabajo ante cualquier situacion de emergencia, de acuerdo a protocolos del manual de procedimientos de la organizacion de mantenimiento (MPM), del Centro de Mantenimiento Aeronautico (CMA)y la normativa vigente.",
+          "1.4 Inspecciona e informa el estado y las condiciones de los equipos, las instalaciones y el sistema de deteccion y extincion de incendios para evitar riesgos innecesarios, de acuerdo a los procedimientos y normas vigentes.",
+          "1.5 Neutraliza derrames u otras emergencias ambientales, de acuerdo a los procedimientos y normas vigentes."
+        ]
+      },
+      {
+        "code": "M6-AE2",
+        "title": "Registra las actividades de mantenimiento en los formularios correspondientes, de acuerdo a las normativas establecidas por Direccion General de Aeronautica Civil (DGAC).",
+        "criteria": [
+          "2.1 Utiliza el marco legal aplicable a los procesos que se desarrollan en las operaciones del CMA, presentes en el MPM, para cumplir la normativa legal vigente.",
+          "2.2 Registra las tareas de mantenimiento,considerando las atribuciones del mecanico de mantenimiento y del CMA, de acuerdo a la normativa vigente.",
+          "2.3 Utiliza los formularios establecidos en el MPM del CMA para registrar las actividades de mantenimiento, reparaciones o alteraciones, de acuerdo a la normativa aeronautica vigente."
+        ]
+      },
+      {
+        "code": "M6-AE3",
+        "title": "Recepciona e informa las actividades de mantenimiento realizadas de acuerdo a los procedimientos establecidos en la normativa aeronautica vigente.",
+        "criteria": [
+          "3.1 Registra las actividades de mantenimiento en la Bitacora de mantenimiento de la aeronave, de acuerdo a los procedimientos del CMA, el manual del fabricante y la normativa vigente.",
+          "3.2 Transfiere y recepciona las actividades de mantenimiento que estan en progreso (cambios de turnos de trabajo, interrupciones, u otros), de acuerdo a los procedimientos del MPM del CMA y la normativa vigente."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82008.html",
+    "source_warnings": [
+      "AE y criterios leídos visualmente del PDF oficial; pendiente revisión humana de la transcripción OCR."
+    ],
+    "extraction_status": "pdf_ocr_review",
+    "source_pdf_pages": [
+      97,
+      98
+    ],
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-37245_programa.pdf"
+  },
+  {
+    "position": 7,
+    "title": "Mantenimiento de las unidades y sistemas asociados al motor recíproco",
+    "hp": 228,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 1",
+        "title": "Desarmar, armar y probar las unidades y sistemas asociados de los motores recíprocos y a reacción, de acuerdo a las indicaciones del manual de mantenimiento del fabricante y a las publicaciones técnicas aplicables, respetando las normas ambientales, de higiene, seguridad y actuación humana."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M7-AE1",
+        "title": "Desmonta y monta las unidades y sistemas asociados del motor reciproco, para analizar su funcion en el motor y en la aeronave, utilizando herramientas y equipos apropiados de acuerdo a especificaciones del manual de mantenimiento",
+        "criteria": [
+          "1.1 Prepara el lugar de trabajo para tener acceso a las unidades del motor de la aeronave, respetando las normas de seguridad.",
+          "1.2 Desinstala el radiador de aceite, magnetos, bomba de combustible, caja de accesorios para analizar su estructura, funcionamiento y finalidad utilizando tecnicas de remocion y montaje, segun el manual de mantenimiento.",
+          "1.3 Instala los componentes de las unidades y sistemas del motor reciproco de acuerdo a las instrucciones del manual de mantenimiento."
+        ]
+      },
+      {
+        "code": "M7-AE2",
+        "title": "Diagnostica el funcionamiento de las unidades y los sistemas asociados al motor reciproco, considerando los principios fisicos del motor, de acuerdo a los procedimientos de mantenimiento preventivo y correctivo establecidos en los manuales.",
+        "criteria": [
+          "2.1 Realiza inspeccion visual de cada uno de los componentes de las unidades y sistemas asociados al motor reciproco, para detectar fallas o problemas externos de acuerdo a los procedimientos establecidos en el manual de mantenimiento de la aeronave.",
+          "2.2 Utiliza los instrumentos de diagnostico para medir los parametros de funcionamiento de las unidades y los sistemas asociados al motorreciprocodeacuerdoal manual de mantenimiento",
+          "2.3 Analiza las fallas de las unidades y sistemas asociados al motor reciproco de acuerdo a los principios fisicos y al procedimiento descrito en el manual de mantenimiento.",
+          "2.4 Revisa el manual del fabricante para determinar el cambio o remplazo por tiempo de vida util de la unidad o del sistema asociado al motor reciproco.",
+          "2.5 Revisa la bitacora demantenimientode la aeronave para determinar discrepancias de las unidades que estan asociadas al motorreciproco.",
+          "2.6 Registra e informa fallas de las unidades y de los sistemas asociados al motor reciproco."
+        ]
+      },
+      {
+        "code": "M7-AE3",
+        "title": "Remplaza e instala las unidades y los sistemas asociados al motor reciproco, utilizando herramientas y equipos apropiados, de acuerdo a la documentacion tecnica aplicable.",
+        "criteria": [
+          "3.1 Prepara el lugar de trabajo para tener acceso a las unidades o a los sistemas asociados al motor reciproco que seran remplazados o desinstalados, de acuerdo al manual de mantenimiento.",
+          "3.2 Desinstala las unidades y los sistemas asociados al motor reciproco, utilizando herramientas comunes y especiales, de acuerdo a los procedimientos establecidos en el manual de mantenimiento y respetando las normas ambientales de higiene, seguridad y actuacion humana.",
+          "3.3 Instala las unidades y los sistemas asociados al motor reciproco, utilizando herramientas comunes y especiales, de acuerdo al manual de mantenimiento.",
+          "3.4 Registra e informa el mantenimiento efectuado de acuerdo a la normativa vigente."
+        ]
+      },
+      {
+        "code": "M7-AE4",
+        "title": "Registra y comunica las acciones del mantenimiento efectuado deacuerdo a la normativa aeronautica.",
+        "criteria": [
+          "4.1 Registra,manual ycomputacionalmente,lastareas efectuadas en las correspondientes cartillas ybitacora demantenimiento de acuerdo a la normativa aeronautica vigente.",
+          "4.2 Comunica de forma verbal y escrita las tareas realizadas de acuerdo a los procedimientos establecidos en la normativa aeronautica vigente.",
+          "4.3 Redacta cartillas, bitacoras e informes utilizando lenguaje técnico para describir las tareas efectuadas."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82009.html",
+    "source_warnings": [
+      "AE y criterios leídos visualmente del PDF oficial; pendiente revisión humana de la transcripción OCR."
+    ],
+    "extraction_status": "pdf_ocr_review",
+    "source_pdf_pages": [
+      106,
+      107,
+      108
+    ],
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-37245_programa.pdf"
+  },
+  {
+    "position": 8,
+    "title": "Mantenimiento de las unidades y sistemas asociados al motor a reacción",
+    "hp": 228,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 1",
+        "title": "Desarmar, armar y probar las unidades y sistemas asociados de los motores recíprocos y a reacción , de acuerdo a las indicaciones del manual de mantenimiento del fabricante y a las publicaciones técnicas aplicables, respetando las normas ambientales, de higiene, seguridad y actuación humana."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M8-AE1",
+        "title": "Desmonta y monta las unidades y sistemas asociados del motor a reacción, para analizar su función en el motor y en la aeronave, utilizando herramientas y equipos apropiados de acuerdo a especificaciones del manual de mantenimiento.",
+        "criteria": [
+          "1.1 Prepara el lugar de trabajo para tener acceso a las unidades del motor de la aeronave, respetando las normas de seguridad.",
+          "1.2 Desinstala bomba de aceite, bomba de combustible y generador para analizar su estructura, funcionamiento y finalidad utilizando téecnicas de remocion y montaje, segun el manual de mantenimiento.",
+          "1.3 Instala los componentes de las unidades y sistemas del motor a reaccion de acuerdo a las instrucciones del manual de mantenimiento."
+        ]
+      },
+      {
+        "code": "M8-AE2",
+        "title": "Diagnostica el funcionamiento de las unidades y los sistemas asociados al motor a reaccion, considerando los principios fisicos del motor, de acuerdo a los procedimientos de mantenimiento preventivo y correctivo establecidos en los manuales.",
+        "criteria": [
+          "2.1 Realiza inspeccion visual de cada uno de los componentes de las unidades y sistemas asociados al motor a reaccion, para detectar fallas o problemas externos de acuerdo a los procedimientos establecidos en el manual de mantenimiento de la aeronave.",
+          "2.2 Utiliza los instrumentos de diagnostico para medir los parametros de funcionamiento de las unidades y sistemas asociados al motor a reaccion de acuerdo al manual de mantenimiento.",
+          "2.3 Analiza las fallasdelas unidadesysistemas asociados al motor a reaccion de acuerdo a los principios fisicos y al procedimiento de analisis de fallas.",
+          "2.4 Revisa el manual del fabricante para determinar el cambio o remplazo por tiempo de vida util de la unidad o sistema asociado al motor a reaccion.",
+          "2.5 Revisa la bitacora de mantenimiento de la aeronave para determinar discrepancias de las unidades que estan asociadas al motor a reaccion.",
+          "2.6 Registra e informa la falla de las unidades y sistemas asociados al motor a reaccion."
+        ]
+      },
+      {
+        "code": "M8-AE3",
+        "title": "Remplaza e instala las unidades y los sistemas asociados al motora reaccion,utilizando herramientas y equipos apropiados, de acuerdo a lo indicado en la documentacion técnica aplicable.",
+        "criteria": [
+          "3.1 Prepara el lugar de trabajo para tener acceso a las unidades oalos sistemasasociados al motorareaccionqueseran remplazados o desinstalados, de acuerdo al manual de mantenimiento.",
+          "3.2 Desinstala las unidades y los sistemas asociados al motor a reaccion, utilizando herramientas comunes y especiales, de acuerdoa los procedimientos establecidos en el manual de mantenimiento y respetando las normas ambientales de higiene, seguridad y actuacion humana.",
+          "3.3 Instala las unidadesy los sistemas asociados al motora reaccion, utilizando herramientas comunes y especiales, de acuerdo a manual de mantenimiento.",
+          "3.4 Registra e informa el mantenimiento efectuado de acuerdo a la normativa vigente."
+        ]
+      },
+      {
+        "code": "M8-AE4",
+        "title": "Registra y comunica las acciones del mantenimiento efectuado de acuerdo a la normativa aeronautica.",
+        "criteria": [
+          "4.1 Registra,manual ycomputacionalmente,lastareas efectuadas en lascorrespondientes cartillasybitacoras demantenimiento de acuerdo a la normativa aeronautica vigente.",
+          "4.2 Comunica en forma verbal y escrita las tareas realizadas de acuerdo a los procedimientos establecidos en la normativa aeronautica vigente.",
+          "4.3 Redacta cartillas, bitacoras e informes utilizando lenguaje tecnico para describir las tareas efectuadas."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82010.html",
+    "source_warnings": [
+      "AE y criterios leídos visualmente del PDF oficial; pendiente revisión humana de la transcripción OCR."
+    ],
+    "extraction_status": "pdf_ocr_review",
+    "source_pdf_pages": [
+      117,
+      118,
+      119
+    ],
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-37245_programa.pdf"
+  },
+  {
+    "position": 9,
+    "title": "Mantenimiento de los sistemas de la aeronave",
+    "hp": 228,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 2",
+        "title": "Realizar el mantenimiento de los sistemas de la aeronave, utilizando diagramas y esquemas técnicos, de acuerdo a lo establecido en los manuales del fabricante y publicaciones técnicas relacionadas, respetando las normas ambientales de higiene, seguridad y actuación humana."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M9-AE1",
+        "title": "Desarma y arma las unidades asociadas a los sistemas de la aeronave utilizando equipos, herramientas e instrumentos y considerando la deteccion de fallas o tiempo de vida util establecidos en manual de mantenimiento.",
+        "criteria": [
+          "1.1 Prepara el lugar de trabajo para tener acceso a las unidades asociadas a los sistemas de la aeronave, de acuerdo al manual de mantenimiento, respetando normas ambientales, de higiene, seguridad y actuacion humana.",
+          "1.2 Desarma las unidades para comprender su funcionamiento, utilizando equipos, herramientas e instrumentos apropiados de acuerdo al manual de mantenimiento.",
+          "1.3 Arma las unidades asociadas a los sistemas de la aeronave utilizando equipos, herramientas e instrumentos adecuados, de acuerdo al manual de mantenimiento.",
+          "1.4 Registra e informa el mantenimiento efectuado de acuerdo a la normativa aeronautica vigente."
+        ]
+      },
+      {
+        "code": "M9-AE2",
+        "title": "Diagnostica el funcionamiento de los sistemas de la aeronave considerando los principios físicos de cada sistema, de acuerdo a los procedimientos de mantenimiento preventivo y correctivo establecidos en el manual de mantenimiento.",
+        "criteria": [
+          "2.1 Revisa la bitacora de vuelo de la aeronave para determinar discrepancias registradas durante su funcionamiento.",
+          "2.2 Detecta visualmente fallas de los sistemas de la aeronave e informa de acuerdo a la lista de chequeo establecida por el manual del fabricante.",
+          "2.3 Lee e interpreta los diagramas yesquemas técnicosde los diferentes sistemas de la aeronave.",
+          "2.4 Analiza las fallas de los sistemas de acuerdo a los principios fisicos y al procedimiento descrito en el manual de mantenimiento,utilizando losinstrumentos apropiados.",
+          "2.5 Verifica el tiempo de vida util de las unidades asociadas a los sistemas, de acuerdo al manual del fabricante.",
+          "2.6 Registra e informa el diagnostico efectuado, de acuerdo a la normativa aeronautica vigente."
+        ]
+      },
+      {
+        "code": "M9-AE3",
+        "title": "Remplaza e instala los circuitos de los sistemas de la aeronave, utilizando herramientas y equipos apropiados, de acuerdo a documentacion tecnica aplicable.",
+        "criteria": [
+          "3.1 Prepara el lugar de trabajo para tener acceso a las unidades de los circuitos que conforman los sistemas de la aeronave, considerando el manual de mantenimiento.",
+          "3.2 Desinstala las unidades de los circuitos de los sistemas: hidraulico, neumatico, combustible, antihielo, oxigeno, lubricacion, utilizando herramientas comunes y especiales de acuerdo a procedimientos establecidos en el manual de mantenimiento y respetando las normas ambientales, de higiene, seguridad y actuacion humana.",
+          "3.3 Instala las unidades de los circuitos de los sistemas de la aeronave, utilizando herramientas comunes y especiales de acuerdo a procedimientos establecidos en el manual de mantenimiento y respetando las normas ambientales, de higiene, seguridad y actuacion humana.",
+          "3.4 Registra e informa el mantenimiento efectuado, de acuerdo a la normativa vigente."
+        ]
+      },
+      {
+        "code": "M9-AE4",
+        "title": "Realiza las pruebas de funcionamiento de unidades asociadas a los sistemas de la aeronave utilizando los equipos, herramientas e instrumentos, de acuerdo al procedimiento de deteccion de fallas y al tiempo de vida util establecido en los manuales de mantenimiento.",
+        "criteria": [
+          "4.1 Selecciona equipos, herramientas e instrumentos adecuados para realizar las pruebas de funcionamiento a las unidades de los diferentes sistemas de la aeronave.",
+          "4.2 Comprueba el correcto funcionamiento de las unidades de los diferentes sistemas de la aeronave de acuerdo a lo establecido en el manual de mantenimiento y respetando las normas ambientales de higiene, seguridad y actuacion humana.",
+          "4.3 Revisa el funcionamiento de los sistemas de la aeronave para verificar fugas o filtraciones de acuerdo al manual de mantenimiento.",
+          "4.4 Registra e informa el mantenimiento efectuado de acuerdo a la normativa aeronautica vigente."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82011.html",
+    "source_warnings": [
+      "AE y criterios leídos visualmente del PDF oficial; pendiente revisión humana de la transcripción OCR."
+    ],
+    "extraction_status": "pdf_ocr_review",
+    "source_pdf_pages": [
+      130,
+      131,
+      132
+    ],
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-37245_programa.pdf"
+  },
+  {
+    "position": 10,
+    "title": "Inglés técnico de mantenimiento de aeronaves",
+    "hp": 76,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 5",
+        "title": "Llevar a cabo tareas de mantenimiento de aeronaves basándose en la comprensión y utilización de la información técnica contenida en manuales y documentos técnicos en idioma inglés."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M10-AE1",
+        "title": "Lee y comprende informacion general, especifica y vocabulario de textos en inglés relacionados con temas de la especialidad, tales como el mantenimiento de unidades y sistemas de motores reciprocos y a reaccion, y de los diversos sistemas de las aeronaves.",
+        "criteria": [
+          "1.1 Extrae informacion general y especifica de los manuales de mantenimiento de la aeronave.",
+          "1.2 Consulta e interpreta procedimientos o normas presentes en los manuales, para demostrar comprension.",
+          "1.3 Identifica palabras y expresiones clave referidas a la mecanica de aeronaves en manuales propios de la especialidad.",
+          "1.4 Utiliza una serie de estrategias de lectura para facilitar la comprension de la lectura en inglés.",
+          "1.5 Responde preguntas y resuelve con informacion extraida de los textos de los manuales de mantenimiento."
+        ]
+      },
+      {
+        "code": "M10-AE2",
+        "title": "Resume y organiza informacion relevante de graficos, diagramas y esquemas desde los textos en ingles acerca del mantenimiento de unidades y sistemas de motores reciprocos y a reaccion, y de los diversos sistemas de las aeronaves.",
+        "criteria": [
+          "2.1 Reconoce palabras y expresiones clave de la especialidad en los manuales de mantenimiento en ingles.",
+          "2.2 Organiza vocabulario especifico utilizando la informacion obtenida para disenar diagramas y mind-maps con la terminologia clave."
+        ]
+      },
+      {
+        "code": "M10-AE3",
+        "title": "Utiliza la informacion relevante de graficos, diagramas y esquemas desde los manuales en inglés de la especialidad como insumo para realizar los procesos de mantenimiento de las aeronaves.",
+        "criteria": [
+          "3.1 Reconoce palabras y expresiones clave en ingles relacionadas con diversos tipos de fallas y situaciones de seguridad presentes en los manuales de mantenimiento de la aeronave.",
+          "3.2 Asociapalabrasyexpresiones clavecongraficos,diagramas y esquemas de los manuales.",
+          "3.3 Comparaycontrasta condiccionario,vocabulario claveen ingles extraido de los textos de los manuales para facilitar la comprension del texto."
+        ]
+      },
+      {
+        "code": "M10-AE4",
+        "title": "Interpreta la informacion general y especifica de los textos y manuales en inglés para la solucion de problemas y el desarrollo del mantenimiento de unidades y sistemas de motores reciprocos y a reaccion, y de los diversos sistemas de las aeronaves.",
+        "criteria": [
+          "4.1 Completa informacion con detalles obtenidos de diagramas, esquemas y formularios.",
+          "4.2 Grafica los sistemas de control, seguridad y comunicacion de las aeronaves, por ejemplo, utilizando el lexico y las palabras clave necesarias.",
+          "4.3 Establece criterios de seleccion y toma de decisiones a base de la informacion obtenida en inglées desde los textos.",
+          "4.4 Utiliza la informacion en ingles de los manuales y textos como insumos para la resolucion de problemas y para el desarrollodemantenimientode los diversosmecanismos y sistemas de las aeronaves."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82012.html",
+    "source_warnings": [
+      "AE y criterios leídos visualmente del PDF oficial; pendiente revisión humana de la transcripción OCR."
+    ],
+    "extraction_status": "pdf_ocr_review",
+    "source_pdf_pages": [
+      141,
+      142
+    ],
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-37245_programa.pdf"
+  },
+  {
+    "position": 11,
+    "title": "Emprendimiento y empleabilidad",
+    "hp": 76,
+    "year": "4° medio",
+    "oa": [],
+    "aes": [
+      {
+        "code": "M11-AE1",
+        "title": "Disena y ejecuta un proyecto para concretar iniciativas de emprendimiento, identificando las acciones a realizar, el cronograma de su ejecucion y los presupuestos, definiendo alternativas de financiamiento y evaluando y controlando su avance.",
+        "criteria": [
+          "1.1 Recolecta,organiza y analiza informacion para identificar oportunidades de emprendimiento en su propia comunidad y region, considerando diferentes ambitos de aplicacion (deporte, tecnologia, medioambiente y energia, entre otros).",
+          "1.2 Evalua las oportunidades de emprendimiento, tomando en cuenta sus fortalezas ydebilidades,y considerando el contexto, los recursos existentes y las normativas vigentes relacionadas.",
+          "1.3 Formula los objetivos para un plan de accion de una iniciativa de emprendimiento personal, productivo o social, considerando las condiciones del entorno y personales.",
+          "1.4 Formula un presupuesto detallado,determinando los recursos (financieros,humanos,tecnologicos y otros) requeridos para el desarrollo de su iniciativa, los plazos y los factores externos que afectan su desarrollo.",
+          "1.5 Elabora un mecanismo decontrol de avance de su iniciativa de emprendimiento y evalua las necesidades y las alternativas de financiamiento mediante aportes publicos y privados (créditos y ahorro).",
+          "1.6 Ejecuta las acciones para alcanzar los objetivos planteados segun la planificacionrealizada,perseverandopesea circunstancias adversas,evaluandolos resultadosylas amenazas, ajustando sus acciones para asegurar el éxito y compartiendo su experiencia con otros."
+        ]
+      },
+      {
+        "code": "M11-AE2",
+        "title": "Maneja la legislacion laboral y previsional chilena como marco regulador de las relaciones entre trabajadores y empleadores, identificando los derechos y deberes de ambas partes, tanto individuales como colectivos, y la reconoce como base para establecer buenas relaciones laborales.",
+        "criteria": [
+          "2.1 Selecciona la informacionrelevante sobrelos derechos laborales y previsionales de los trabajadores garantizados por la Constitucion y el Codigo del Trabajo, para su propia contratacion o de terceros a su cargo.",
+          "2.2 Determina elementos criticos de diversos tipos de contratos y de finiquitos, considerando la legislacion laboral vigente.",
+          "2.3 Elabora propuestas de creacion y desarrollo de organizacion sindical de acuerdo a la realidad de diferentes tipos de empresas,respetandolalegislacionvigenteyladefensa de los derechos de los trabajadores."
+        ]
+      },
+      {
+        "code": "M11-AE3",
+        "title": "Prepara los elementos necesarios para participar de un proceso de incorporacion al mundo del trabajo, valorando y planificando su trayectoria formativa y laboral.",
+        "criteria": [
+          "3.1 Sistematiza informacion desde organismos y empresas especializadas en intermediacion laboral que existen en suentorno,analizandolasperspectivaslaborales,sus propias condiciones laborales y las normativas relacionadas.",
+          "3.2 Elabora correctamente los documentos necesarios para iniciar una actividad laboral, como el curriculum vitae, reuniendo evidencias de cursos realizados, experiencia laboral previa y cartas de recomendacion, y visualizando sus alternativas de acuerdo a sus expectativas y condiciones.",
+          "3.3 Prepara las entrevistas y las situaciones de ingreso y promocion, identificando a personas e instituciones que pueden brindarle apoyo en este proceso.",
+          "3.4 Evalia si la remuneracionmensual osemanal y elfiniquito se han determinado de acuerdo al tipo de contrato firmado y a la legislacion laboral vigente.",
+          "3.5 Selecciona la institucion y la modalidad conveniente para su cobertura de salud y pension, ademas del seguro de desempleo que le corresponde de acuerdo a su contrato y derechos, y Lleva a cabo los tramites de afiliacion."
+        ]
+      },
+      {
+        "code": "M11-AE4",
+        "title": "Selecciona alternativas de capacitacion y de educacion superior para fortalecer sus competencias o desarrollar nuevas y adquirir certificaciones, ya sea e-learning o presenciales, evaluando las diversas opciones de financiamiento.",
+        "criteria": [
+          "4.1 Evalua las necesidades futuras del mundo laboral en el ambito de su especialidad y sus desafios de formacion, considerando las dinamicas de empleo, tendencias e innovaciones tecnologicas.",
+          "4.2 Evalua las ofertas de capacitacion virtual y presencial disponibles en su entorno, incluyendo sus caracteristicas (como duracion, objetivos y costos) y requisitos generales.",
+          "4.3 Evalua las ofertas de educacion superior disponibles en su entorno, incluyendo sus caracteristicas (duracion, acreditacion, posibilidades de reconocimiento de aprendizajes previos y alternativas de financiamiento y becas)y requisitos de entrada."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82002.html",
+    "source_warnings": [
+      "AE y criterios leídos visualmente del PDF oficial; pendiente revisión humana de la transcripción OCR.",
+      "El módulo común de emprendimiento se vincula con OA genéricos, no con OA de especialidad."
+    ],
+    "extraction_status": "pdf_ocr_review",
+    "source_pdf_pages": [
+      152,
+      153,
+      154
+    ],
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-37245_programa.pdf"
+  }
+]

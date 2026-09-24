@@ -290,6 +290,66 @@ def upgrade_catalog(con):
     install_hospitality_courses(con)
     from tp_catalog import install_pending_courses
     install_pending_courses(con)
+    from programming_catalog import install_programming_draft
+    install_programming_draft(con)
+    from accounting_catalog import install_accounting_draft
+    install_accounting_draft(con)
+    from tourism_catalog import install_tourism_draft
+    install_tourism_draft(con)
+    from networks_catalog import install_networks_draft
+    install_networks_draft(con)
+    from electronics_catalog import install_electronics_draft
+    install_electronics_draft(con)
+    from telecom_catalog import install_telecom_draft
+    install_telecom_draft(con)
+    from drawing_catalog import install_drawing_draft
+    install_drawing_draft(con)
+    from graphics_catalog import install_graphics_draft
+    install_graphics_draft(con)
+    from sanitary_catalog import install_sanitary_draft
+    install_sanitary_draft(con)
+    from assembly_catalog import install_assembly_draft
+    install_assembly_draft(con)
+    from metalworks_catalog import install_metalworks_draft
+    install_metalworks_draft(con)
+    from food_industry_catalog import install_food_industry_draft
+    install_food_industry_draft(con)
+    from textile_catalog import install_textile_draft
+    install_textile_draft(con)
+    from forestry_catalog import install_forestry_draft
+    install_forestry_draft(con)
+    from furniture_catalog import install_furniture_draft
+    install_furniture_draft(con)
+    from port_catalog import install_port_draft
+    install_port_draft(con)
+    from aquaculture_catalog import install_aquaculture_draft
+    install_aquaculture_draft(con)
+    from fisheries_catalog import install_fisheries_draft
+    install_fisheries_draft(con)
+    from merchant_crew_catalog import install_merchant_crew_draft
+    install_merchant_crew_draft(con)
+    from automotive_catalog import install_automotive_draft
+    install_automotive_draft(con)
+    from early_childhood_catalog import install_early_childhood_draft
+    install_early_childhood_draft(con)
+    from geology_catalog import install_geology_draft
+    install_geology_draft(con)
+    from metallurgy_catalog import install_metallurgy_draft
+    install_metallurgy_draft(con)
+    from mining_catalog import install_mining_draft
+    install_mining_draft(con)
+    from administration_catalog import install_administration_drafts
+    install_administration_drafts(con)
+    from agriculture_catalog import install_agriculture_drafts
+    install_agriculture_drafts(con)
+    from construction_catalog import install_construction_drafts
+    install_construction_drafts(con)
+    from chemical_industry_catalog import install_chemical_industry_drafts
+    install_chemical_industry_drafts(con)
+    from mechanical_industry_catalog import install_mechanical_industry_drafts
+    install_mechanical_industry_drafts(con)
+    from aircraft_catalog import install_aircraft_draft
+    install_aircraft_draft(con)
     from refrigeration_fourth import install_refrigeration_fourth
     install_refrigeration_fourth(con)
 

@@ -1,0 +1,544 @@
+[
+  {
+    "position": 1,
+    "title": "Ajuste de motores",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 4",
+        "title": "Reparar y probar el funcionamiento de motores de gasolina, diésel, gas e híbridos, tanto convencionales como de inyección electrónica y sus sistemas de control de emisiones, conjunto o subconjuntos mecánicos del motor, de lubricación y refrigeración, entre otros, utilizando las herramientas e instrumentos apropiados, de acuerdo a las especificaciones técnicas del fabricante."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M1-AE1",
+        "title": "Diagnostica el estado del motor a gasolina y/o diésel, utilizando herramientas e instrumentos apropiados, y comparando los datos con los del manual de servicio.",
+        "criteria": [
+          "1.1 Lee el manual de servicio del automóvil, considerando y convirtiendo las unidades de medida, de acuerdo a los sistemas de unidades.",
+          "1.2 Desmonta y monta motor de combustión interna, respetando las normas de seguridad establecidas en el manual de servicio.",
+          "1.3 Desarma y arma el motor a gasolina y/o diésel, utilizando las herramientas apropiadas, los principios mecánicos de funcionamiento del motor, respetando las pautas establecidas en el manual de servicio y aplicando las normas de seguridad.",
+          "1.4 Mide los componentes del motor y su conjunto, utilizando los instrumentos apropiados, realizando tareas en forma prolija y comparando datos establecidos en el manual de servicio.",
+          "1.5 Diagnostica el estado del motor y entrega informe técnico de su reparación, respetando los estándares de orden y prolijidad requeridos por el manual de servicio técnico."
+        ]
+      },
+      {
+        "code": "M1-AE2",
+        "title": "Verifica y reemplaza componentes del conjunto móvil, del motor a gasolina y/o diésel (biela, pistón, eje cigüeñal), siguiendo indicaciones del manual de servicio.",
+        "criteria": [
+          "2.1 Comprueba las tolerancias al conjunto móvil, aplicando técnicas de medición en forma prolija (micrómetro, reloj comparador, plastigaje), de acuerdo a las indicaciones del manual de servicio.",
+          "2.2 Reemplaza los componentes del conjunto móvil (biela, cojinetes, pistón, anillos, eje cigüeñal, etc.), de acuerdo al resultado de la medición, disponiendo cuidadosamente los desechos y cuidados del medioambiente y las indicadas en el manual de servicio.",
+          "2.3 Arma y comprueba el armado correcto del motor, utilizando las herramientas apropiadas, los elementos de protección personal de la normativa vigente y siguiendo las indicaciones del manual de servicio."
+        ]
+      },
+      {
+        "code": "M1-AE3",
+        "title": "Verifica el estado de los integrantes del conjunto fijo del motor, del motor a gasolina y/o diésel (culata, block, cárter), siguiendo indicaciones del manual del fabricante.",
+        "criteria": [
+          "3.1 Comprueba las tolerancias de planitud, al conjunto fijo del motor, aplicando técnicas de medición (regla de pelo, feeller, azul de prussian), y concluye tipo de reparación a realizar, de acuerdo a las indicaciones del manual de servicio.",
+          "3.2 Ensambla componentes del conjunto fijo y comprueba su armado, respetando las normas de seguridad, de acuerdo al manual de servicio."
+        ]
+      },
+      {
+        "code": "M1-AE4",
+        "title": "Reemplaza y prueba componentes de sistemas del motor, aplicando normas de seguridad y medio ambientales, de acuerdo a instrucciones del manual del fabricante.",
+        "criteria": [
+          "4.1 Reemplaza y prueba componentes del sistema de refrigeración del motor, de acuerdo a pautas establecidas en el manual de servicio.",
+          "4.2 Reemplaza y prueba componentes del sistema de lubricación, utilizando los elementos de protección personal y respetando el medioambiente, de acuerdo a las pautas establecidas en el manual de servicio.",
+          "4.3 Reemplaza y prueba componentes del sistema de distribución del motor, utilizando los elementos de protección personal, de acuerdo a pautas establecidas en el manual de servicio.",
+          "4.4 Utiliza herramientas apropiadas para reemplazar componentes del motor y sus subsistemas, utilizando los elementos de protección personal y respetando las normas de seguridad, de acuerdo a las instrucciones del manual de servicio."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81988.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34330_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 2,
+    "title": "Lectura de planos y manuales técnicos",
+    "hp": 152,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 2",
+        "title": "Leer y utilizar la información contenida en manuales técnicos, planos y diagramas de vehículos motorizados, y normas nacionales e internacionales de emisiones de gases, para resolver diagnósticos o fallas."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M2-AE1",
+        "title": "Lee e interpreta manuales técnicos de diferentes vehículos para conocer las especificaciones técnicas entregadas por el fabricante.",
+        "criteria": [
+          "1.1 Interpreta las indicaciones entregadas en documentos escritos, como especificaciones técnicas, simbología, normativa de seguridad y medioambiental, legislación laboral y otras contenidas en manuales técnicos.",
+          "1.2 Lee e interpreta las especificaciones técnicas de un manual de taller, de operación y mantenimiento y/o catálogos de partes y piezas, para ejecutar procesos de mantenimiento y/o reparación de un vehículo automotriz.",
+          "1.3 Planifica acciones comunes e individuales para el logro del trabajo, proyecto o tarea. Además, asignan roles y los cumplen."
+        ]
+      },
+      {
+        "code": "M2-AE2",
+        "title": "Lee e interpreta la información descrita en planos y diagramas de los distintos manuales para ejecutar procesos de mantenimiento y/o reparación de un vehículo automotriz.",
+        "criteria": [
+          "2.1 Selecciona la información de los distintos manuales para realizar procesos de mantenimiento y/o reparación de un vehículo automotriz.",
+          "2.2 Describe las nomenclaturas de las normas y simbologías utilizadas en el rubro automotriz.",
+          "2.3 Realiza una descripción del plano, serie y fecha de fabricación, modelo y número de serie aplicada al equipo.",
+          "2.4 Utiliza coordenadas de los planos hidráulicos, eléctricos y neumáticos impresas en cada uno de ellos, para ejecutar procesos de mantenimiento y/o reparación de un vehículo automotriz.",
+          "2.5 Interpreta función de un sistema hidráulico, neumático y eléctrico desde un plano normalizado de un vehículo automotriz.",
+          "2.6 Utiliza pautas de mantenimiento periódico (diario / 250 horas) del manual de mantenimiento y operación, para ejecutar estos procesos y/o reparación de un vehículo automotriz.",
+          "2.7 Utiliza un cuadro de lubricación y engrase para ejecutar procesos de mantenimiento y/o reparación de un vehículo automotriz."
+        ]
+      },
+      {
+        "code": "M2-AE3",
+        "title": "Diagnostica y resuelve fallas interpretando manuales técnicos de diferentes vehículos motorizados, basado en las normas nacionales e internacionales de emisión de gases.",
+        "criteria": [
+          "3.1 Lee e interpreta información contenida en manuales de diferentes vehículos para determinar y resolver fallas.",
+          "3.2 Interpreta indicaciones entregadas en documentos escritos, como especificaciones técnicas, simbología, y normas nacionales e internacionales relacionadas con la emisión de gases y conservación del medioambiente.",
+          "3.3 Aplica diagnóstico y resuelve fallas sectorizando un subsistema de un plano automotriz, de acuerdo al manual de servicio y normas nacionales e internacionales."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81989.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34330_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 3,
+    "title": "Manejo de residuos y desechos automotrices",
+    "hp": 76,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 8",
+        "title": "Manipular residuos y desechos del mantenimiento de vehículos motorizados, aplicando técnicas compatibles con el cuidado del medio ambiente."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M3-AE1",
+        "title": "Reconoce los principales residuos y desechos de vehículos motorizados, aplicando técnicas compatibles con el cuidado y medioambiente, de acuerdo a la normativa vigente.",
+        "criteria": [
+          "1.1 Describe los principales desechos y residuos derivados de la mantención o reparación de los vehículos motorizados.",
+          "1.2 Clasifica residuos y desechos producto de la mantención de vehículos motorizados, de manera prolija, de acuerdo a procedimientos de clasificación nacional e internacional, de residuos y desechos en el taller.",
+          "1.3 Clasifica e informa el almacenamiento y transporte de residuos y desechos en el taller, aplicando procedimientos, de acuerdo a la norma vigente.",
+          "1.4 Aplica protocolos de emergencia respecto del procedimiento relacionado con residuos y desechos en el taller.",
+          "1.5 Dispone de los desechos, de acuerdo a los procedimientos establecidos en las hojas de seguridad.",
+          "1.6 Clasifica los tipos de fuegos que se pueden producir derivados de un accidente con materiales peligrosos.",
+          "1.7 Toma precauciones necesarias y las discute con sus integrantes de equipo de trabajo para prevenir situaciones de riesgo, conforme a la normativa vigente."
+        ]
+      },
+      {
+        "code": "M3-AE2",
+        "title": "Aplica procedimientos para la prevención y el control de emergencias en el almacenamiento, transporte, manejo y manipulación de materiales peligrosos en un taller mecánico, de acuerdo a los procedimientos y la normativa vigente.",
+        "criteria": [
+          "2.1 Identifica los materiales peligrosos presentes en un taller mecánico.",
+          "2.2 Clasifica las propiedades de riesgos de los materiales peligrosos disponibles en un taller mecánico.",
+          "2.3 Aplica procedimientos de clasificación e inscripción para el almacenamiento y transporte de materiales peligrosos, según la normativa y la legislación nacional.",
+          "2.4 Elabora plan de emergencia para manejar material peligroso en el taller, utilizando los elementos de protección personal, de acuerdo a normativas de estándares de seguridad.",
+          "2.5 Interpreta la simbología para manipular materiales peligrosos en el taller, de acuerdo a las normas vigentes.",
+          "2.6 Utiliza información que permite implementar material de difusión para el manejo seguro de materiales peligrosos en el taller.",
+          "2.7 Aplica protocolos de emergencia, utilizando elementos de protección personal, de acuerdo a la normativa vigente.",
+          "2.8 Dispone cuidadosamente de los desechos, respetando el medioambiente y previniendo situaciones de riesgo y enfermedades ocupacionales, de acuerdo a la normativa correspondiente."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81990.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34330_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 4,
+    "title": "Mantenimiento de sistemas de seguridad y confortabilidad",
+    "hp": 152,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 7",
+        "title": "Montar y desmontar sistemas de seguridad y de confortabilidad, tales como cinturones de seguridad, airbag, alarmas, aire acondicionado, sistema de audio, de acuerdo a las instrucciones del fabricante y a la normativa vigente."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M4-AE1",
+        "title": "Lee e interpreta circuitos eléctricos, esquemas o planos, de conjuntos o componentes, del sistema de seguridad, pasiva y activa, que aparecen en los documentos del manual del fabricante.",
+        "criteria": [
+          "1.1 Lee e interpreta circuitos eléctricos de componentes y conjuntos de los sistemas de seguridad pasiva y activa, incorporados en vehículos automotrices, contenidos en manuales de información técnica del fabricante.",
+          "1.2 Interpreta esquemas o planos identificando la función y sus componentes del sistema de seguridad pasiva y activa, de vehículos automotrices, trabajando en equipo, de acuerdo a las especificaciones técnicas del fabricante."
+        ]
+      },
+      {
+        "code": "M4-AE2",
+        "title": "Desmonta y monta sistemas de seguridad pasiva y activa de vehículos automotrices, siguiendo las instrucciones del manual de servicio y respetando las normas de seguridad y medioambiente.",
+        "criteria": [
+          "2.1 Desmonta y monta conjuntos y componentes del sistema de seguridad activa y pasiva, utilizando las herramientas apropiadas, realizando las tareas de manera prolija, respetando normas de seguridad, el medioambiente y especificaciones técnicas del manual de servicio.",
+          "2.2 Recambia componentes del sistema de seguridad activa y pasiva, utilizando herramientas adecuadas, respetando las normas de seguridad y cuidado del medioambiente, de acuerdo a instrucciones del manual de servicio.",
+          "2.3 Diagnostica el funcionamiento de sistemas de seguridad activa y pasiva de vehículos, utilizando instrumentos apropiados, respetando normas de seguridad y siguiendo instrucciones del manual de servicio."
+        ]
+      },
+      {
+        "code": "M4-AE3",
+        "title": "Lee e Interpreta circuitos eléctricos, esquemas o planos de conjuntos o componentes, determinando el diagnóstico y mantenimiento, el sistema de confortabilidad, de acuerdo a la información técnica del manual del fabricante.",
+        "criteria": [
+          "3.1 Lee e interpreta circuitos eléctricos esquemas o planos del sistema de confortabilidad, definiendo la constitución y funcionamiento de conjuntos o componentes, de acuerdo a información técnica del manual de servicio.",
+          "3.2 Realiza diagnóstico y mantenimiento del sistema de confortabilidad, incorporados de serie en vehículos automotrices, respetando las normas de seguridad y medioambiente, de acuerdo a especificaciones técnicas del fabricante."
+        ]
+      },
+      {
+        "code": "M4-AE4",
+        "title": "Desmonta y monta conjuntos y componentes de sistemas de confortabilidad de vehículos automotrices, siguiendo instrucciones del manual de servicio, respetando las normas de seguridad y del medioambiente.",
+        "criteria": [
+          "4.1 Interpreta esquemas o planos de sistemas de confortabilidad, identificando la función y sus componentes, de acuerdo a información contemplada en el manual de servicio.",
+          "4.2 Desmonta, recambia y monta conjuntos o componentes del sistema de confortabilidad, utilizando las herramientas apropiadas, respetando las normas de seguridad, cuidado del medioambiente y utilizando los elementos de protección personal, siguiendo instrucciones estipuladas en el manual de servicio.",
+          "4.3 Diagnostica el funcionamiento de sistemas de confortabilidad utilizando instrumentos apropiados, respetando normas de seguridad y medioambiente, de acuerdo a especificaciones técnicas del manual de servicio."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81991.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34330_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 5,
+    "title": "Mantenimiento de sistemas eléctricos y electrónicos",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 6",
+        "title": "Reemplazar y probar sistemas eléctricos y electrónicos de los vehículos automotrices, tales como sistemas de carga, de arranque, de encendido, de alumbrado y señalización, de cierre centralizado, según indicaciones del fabricante y estándares internacionales."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M5-AE1",
+        "title": "Diagnostica y detecta fallas a circuitos eléctricos de vehículos automotrices, respetando las normas de seguridad, de acuerdo a las indicaciones de quien fabrica y estándares internacionales.",
+        "criteria": [
+          "1.1 Determina el elemento a comprobar, asociado a los sistemas de alumbrado, señalización y accesorios, interpretando el plano o circuito eléctrico o electrónico, aplicando normas de seguridad e indicaciones del manual de servicio.",
+          "1.2 Detecta fallas de los sistemas eléctricos y electrónicos automotrices, interpretando la nomenclatura y simbología de planos y circuitos eléctricos, respetando normas de seguridad, de acuerdo a procedimiento de detección de fallas, e indicaciones del manual de servicio.",
+          "1.3 Diagnostica el estado de los sistemas eléctricos automotrices, utilizando instrumentos de medición y diagnóstico, teniendo presente las magnitudes, leyes y unidades asociadas a los circuitos eléctricos automotrices y los planos de circuitos eléctricos, respetando las normas de seguridad, de acuerdo a lo indicado en el manual de servicio técnico."
+        ]
+      },
+      {
+        "code": "M5-AE2",
+        "title": "Reemplaza y prueba componentes de los distintos sistemas eléctricos y electrónicos de los vehículos automotrices, respetando las normas de seguridad y de acuerdo a los procedimientos del manual de servicio.",
+        "criteria": [
+          "2.1 Reemplaza y prueba componentes y elementos del sistema de alumbrado, señalización y accesorios automotrices, realizando las tareas en forma cuidadosa, respetando las normas de seguridad y las especificaciones técnicas del fabricante.",
+          "2.2 Mide y comprueba el correcto funcionamiento de los sistemas eléctricos y electrónicos automotrices, utilizando los instrumentos o equipos apropiados, respetando las normas de seguridad y siguiendo las indicaciones del manual de servicio."
+        ]
+      },
+      {
+        "code": "M5-AE3",
+        "title": "Reemplaza y prueba componentes a los sistemas de encendido del motor Otto e inyección del motor de ciclo Otto y Diesel, respetando las normas de seguridad, de acuerdo a las especificaciones técnicas del fabricante.",
+        "criteria": [
+          "3.1 Prueba sistemas de encendido por efecto Hall e inductivo, siguiendo indicaciones del manual de servicio.",
+          "3.2 Reemplaza componentes de los sistemas de encendido por efecto Hall e inductivo, utilizando las herramientas y equipos, realizando las tareas de manera prolija, de acuerdo al procedimiento del manual de servicio.",
+          "3.3 Diagnostica sistema de encendido DIS, siguiendo indicaciones del manual de servicio del vehículo.",
+          "3.4 Realiza mantenimiento y comprueba el funcionamiento al sistema de encendido DIS, siguiendo los procedimientos descritos en el manual de servicio.",
+          "3.5 Realiza mantenimiento al sistema de inyección y encendido electrónico del motor Otto, confeccionando informe técnico del trabajo realizado, de acuerdo a pauta de mantenimiento indicada en el manual de servicio.",
+          "3.6 Comprueba el funcionamiento correcto del sistema de inyección y encendido del motor Otto, utilizando instrumentos de medición, aplicando normas de seguridad requeridas por el manual de servicio.",
+          "3.7 Comprueba el funcionamiento del sistema de inyección diésel, aplicando instrumentos de medición y control, aplicando normas de seguridad, utilizando los elementos de protección personal y siguiendo las instrucciones del manual de servicio."
+        ]
+      },
+      {
+        "code": "M5-AE4",
+        "title": "Aplica procedimientos de mantenimiento y diagnóstico comprobando y reemplazando componentes del sistema de carga y arranque del vehículo y respetando las normas de seguridad, de acuerdo a las especificaciones técnicas del fabricante.",
+        "criteria": [
+          "4.1 Aplica mantenimiento a conjuntos y componentes de los sistemas de carga y arranque del vehículo, realizando las tareas de manera prolija y comunicando los resultados, respetando las normas de seguridad, de acuerdo a las pautas establecidas en el manual de servicio.",
+          "4.2 Comprueba el funcionamiento correcto del sistema de carga y arranque del vehículo, comunicando el trabajo realizado y respetando las normas de seguridad, de acuerdo a instrucciones del manual de servicio técnico.",
+          "4.3 Diagnostica el estado de componentes y conductores, interpretando la representación eléctrica de los sistemas de carga y arranque del vehículo, respetando las normas de seguridad y siguiendo los procedimientos indicados en el manual de servicio."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81992.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34330_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 6,
+    "title": "Mantenimiento de motores",
+    "hp": 190,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 1",
+        "title": "Inspeccionar y diagnosticar averías y fallas en el funcionamiento mecánico, eléctrico o electrónico de vehículos motorizados, identificando el o los sistemas y componentes comprometidos, realizando mediciones y controles de verificación de distintas magnitudes mediante instrumentos análogos y digitales, con referencia a las especificaciones técnicas del fabricante."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M6-AE1",
+        "title": "Controla el funcionamiento mecánico del motor, verificando magnitudes con equipos e instrumentos análogos y digitales, respetando las normas de seguridad, de acuerdo a las especificaciones técnicas del fabricante.",
+        "criteria": [
+          "1.1 Pone en funcionamiento los motores Otto y diésel, mide compresión y lo compara con los datos del fabricante, respetando las normas de seguridad y medioambiente.",
+          "1.2 Comprueba gases producto de la combustión, con el instrumento apropiado, los coteja con las normas vigentes y registra en ficha técnica el estado del motor.",
+          "1.3 Aplica escáner y analiza datos con su grupo de trabajo y, en conjunto, determinan el correcto funcionamiento electrónico de los motores Otto y Diesel, de acuerdo con estándares de calidad estimados por el fabricante."
+        ]
+      },
+      {
+        "code": "M6-AE2",
+        "title": "Realiza mantenimiento correctivo en relación al funcionamiento mecánico, eléctrico o electrónico de los motores de combustión interna Otto y Diesel, de acuerdo con procedimiento de detección de fallas, respetando las normas de seguridad, de acuerdo con el manual del fabricante.",
+        "criteria": [
+          "2.1 Desmonta y monta componentes eléctricos y electrónicos de los motores Otto y Diesel, realizando las tareas en forma prolija y aplicando las normas de seguridad, extrae datos, los compara con los especificados en el manual de servicio y decide la mantención a realizar.",
+          "2.2 Diagnostica el estado del motor, aplicando instrumentos adecuados para el procedimiento, interpretando fallas entregadas por el mismo, utilizando las tecnologías de información disponible y comunicando sus conclusiones, teniendo presente lo contemplado en el manual de servicio.",
+          "2.3 Comprueba el funcionamiento correcto del motor, realizando mediciones y controles de verificación usando instrumentos análogos y digitales, aplicando normas de seguridad y siguiendo instrucciones del manual de servicio."
+        ]
+      },
+      {
+        "code": "M6-AE3",
+        "title": "Realiza mantenimiento programado a motores diésel y gasolina respetando normas de seguridad y medioambiente, de acuerdo con especificaciones técnicas del fabricante.",
+        "criteria": [
+          "3.1 Desmonta y monta componentes de los sistemas del motor, comprueba su funcionamiento con instrumentos análogos y digitales, realizando las tareas en forma prolija y respetando las normas de seguridad, de acuerdo con instrucciones del manual de servicio.",
+          "3.2 Realiza mantenimiento programado (10.000 km, 20.000 km, 40.000 km, etc.) a motores diésel y gasolina, utilizando los insumos en forma eficiente, interpretando fichas y manuales de servicio, evaluando las condiciones del entorno del trabajo y utilizando los elementos de protección personal, respetando el medioambiente, siguiendo pautas establecidas en el manual de servicio.",
+          "3.3 Comprueba el funcionamiento correcto del motor, aplicando instrumentos apropiados, respetando las normas de seguridad y confeccionando informe técnico de la mantención realizada."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81993.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34330_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 7,
+    "title": "Mantenimiento de sistemas hidráulicos y neumáticos",
+    "hp": 190,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 5",
+        "title": "Reparar y probar sistemas hidráulicos y neumáticos, responsables de diversas funciones en los vehículos, tales como suspensión, sistema de dirección, frenos y transmisión de potencia manual y automática, utilizando las herramientas e instrumentos apropiados, de acuerdo a las especificaciones técnicas del fabricante y estándares internacionales."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M7-AE1",
+        "title": "Prueba los diferentes sistemas hidráulicos y neumáticos y componentes de vehículos pesados, sobre la base de su funcionamiento y especificaciones técnicas del fabricante.",
+        "criteria": [
+          "1.1 Verifica el funcionamiento de los diferentes sistemas hidráulicos y neumáticos y componentes de vehículos pesados, interpretando símbolos, esquemas o planos, respetando los principios de la hidráulica y neumática, las normas de seguridad, cuidado del medioambiente, y las especificaciones técnicas del fabricante.",
+          "1.2 Comprueba la presión hidráulica de los diferentes sistemas de vehículos pesados, aplicando normas de seguridad y medio ambientales, y utilizando como referencia la información que entrega el fabricante.",
+          "1.3 Realiza mantenimiento a los sistemas hidráulicos y neumáticos y sus componentes de vehículos pesados, con dedicación y prolijidad, interpretando planos y diagramas, respetando normas de seguridad y medioambiente, de acuerdo con pautas del manual de servicio.",
+          "1.4 Realiza prueba de funcionamiento, a los diferentes sistemas hidráulicos y neumáticos y componentes de vehículos pesados, aplicando normas de seguridad y siguiendo las indicaciones del manual de servicio.",
+          "1.5 Cumple con los plazos establecidos para el desarrollo de la tarea encomendada.",
+          "1.6 Planifica acciones comunes e individuales para el logro del trabajo proyecto o tarea, asigna roles y los cumple."
+        ]
+      },
+      {
+        "code": "M7-AE2",
+        "title": "Realiza mantenimiento y diagnóstico a los sistemas neumáticos y sus componentes de vehículos pesados, aplicando las normas de seguridad y respeto del medioambiente, de acuerdo a las especificaciones técnicas del fabricante.",
+        "criteria": [
+          "2.1 Prueba los componentes de los diferentes sistemas neumáticos de vehículos pesados, con los instrumentos y equipos necesarios, respetando las normas de seguridad y de cuidado del medioambiente, de acuerdo con especificaciones técnicas del fabricante.",
+          "2.2 Realiza mantenimiento programado a los diferentes sistemas neumáticos de vehículos pesados, respetando las normas de seguridad y cuidado del medioambiente, de acuerdo con cartilla de mantención, especificada en el manual de servicio.",
+          "2.3 Aplica diagnóstico a los diferentes sistemas neumáticos y sus componentes de vehículos pesados, utilizando los instrumentos y equipos apropiados, respetando las normas de seguridad y siguiendo indicaciones del manual de servicio",
+          "2.4 Cumple con los plazos establecidos para el desarrollo de la tarea encomendada.",
+          "2.5 Planifica acciones comunes e individuales para el logro del trabajo, proyecto o tarea, asigna roles y los cumple."
+        ]
+      },
+      {
+        "code": "M7-AE3",
+        "title": "Realiza mantenimiento de los diferentes sistemas hidráulicos y componentes de vehículos pesados, respetando las normas de seguridad y medioambiente, de acuerdo con las especificaciones técnicas del fabricante y a los estándares internacionales.",
+        "criteria": [
+          "3.1 Mantiene componentes de los diferentes sistemas hidráulicos de vehículos pesados, utilizando instrumentos y equipos apropiados, respetando las normas de seguridad y cuidado del medioambiente, de acuerdo a especificaciones técnicas del fabricante y estándares internacionales.",
+          "3.2 Interpreta simbología técnica de componentes de los diferentes sistemas hidráulicos de vehículos pesados y detecta fallas, siguiendo instrucciones del manual de servicio.",
+          "3.3 Mantiene los diferentes sistemas hidráulicos de vehículos pesados, respetando las normas de seguridad, de acuerdo con especificaciones técnicas establecidas en el manual de servicio técnico.",
+          "3.4 Cumple con los plazos establecidos para el desarrollo de la tarea encomendada.",
+          "3.5 Planifica acciones comunes e individuales para el logro del trabajo, proyecto o tarea, asigna roles y los cumple."
+        ]
+      },
+      {
+        "code": "M7-AE4",
+        "title": "Realiza mantenimiento al sistema de transmisión de potencia manual y automática de vehículos pesados, utilizando herramientas e instrumentos apropiados, de acuerdo a los estándares internacionales y respetando normas de seguridad, de acuerdo a las especificaciones técnicas del fabricante.",
+        "criteria": [
+          "4.1 Desmonta, desarma, arma y monta mecanismos de transmisión de potencia manual y automática de vehículos pesados, utilizando las herramientas apropiadas, respetando normas de seguridad y cuidado del medioambiente, siguiendo las instrucciones técnicas del manual del fabricante.",
+          "4.2 Prueba componentes de la transmisión de potencia manual y automática de vehículos pesados, midiendo con los instrumentos apropiados, confrontando los resultados con el manual de servicio técnico y aplicando las normas de seguridad.",
+          "4.3 Comprueba especificaciones técnicas de componentes de transmisión de potencia manual y automática de vehículos pesados, respetando las normas de seguridad, utilizando elementos de protección personal y respetando el medioambiente, de acuerdo con las especificaciones técnicas establecidas en el manual de servicio técnico.",
+          "4.4 Cumple con los plazos establecidos para el desarrollo de la tarea encomendada.",
+          "4.5 Planifica acciones comunes e individuales para el logro del trabajo, proyecto o tarea, asigna roles y los cumple."
+        ]
+      },
+      {
+        "code": "M7-AE5",
+        "title": "Realiza un diagnóstico al sistema de transmisión de potencia manual y automática de vehículos pesados y prueba componentes, utilizando herramientas e instrumentos apropiados, de acuerdo con los estándares internacionales y respetando normas de seguridad, de acuerdo con las especificaciones técnicas del fabricante.",
+        "criteria": [
+          "5.1 Verifica el correcto funcionamiento de componentes de la transmisión de potencia manual y automática de vehículos pesados, midiendo con los instrumentos apropiados, confrontando los resultados con el manual de servicio técnico y aplicando normas de seguridad.",
+          "5.2 Diagnostica el funcionamiento de transmisión de potencia manual y automática de vehículos pesados, respetando las normas de seguridad, utilizando elementos de protección personal y respetando el medioambiente, de acuerdo con las especificaciones técnicas establecidas en el manual de servicio técnico.",
+          "5.3 Cumple con los plazos establecidos para el desarrollo de la tarea encomendada.",
+          "5.4 Planifica acciones comunes e individuales para el logro del trabajo proyecto o tarea, asigna roles y los cumple."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81994.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34330_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 8,
+    "title": "Mantenimiento de los sistemas de transmisión y frenos",
+    "hp": 190,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 3",
+        "title": "Realizar mantenimiento básico de diversos sistemas de vehículos automotrices livianos, semipesados y pesados, de acuerdo a las pautas de mantenimiento del fabricante, de inspección y diagnóstico de fallas."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M8-AE1",
+        "title": "Realiza mantenimiento al sistema de transmisión mecánica de vehículos livianos y semipesados, de acuerdo a las pautas de mantención del fabricante, de inspección y diagnóstico de fallas.",
+        "criteria": [
+          "1.1 Ejecuta mantenimiento al sistema de transmisión mecánica de vehículos livianos y semipesados, respetando las normas de seguridad y de acuerdo con las especificaciones técnicas del fabricante.",
+          "1.2 Comprueba el funcionamiento del sistema de transmisión mecánica, según protocolos e instrucciones del manual de servicio.",
+          "1.3 Realiza mantenimiento al conjunto de embrague, de mando mecánico y mando hidráulico, mecánica de vehículos livianos y semipesados, realizando las tareas de forma prolija, respetando normas de seguridad y siguiendo las instrucciones del manual de servicio.",
+          "1.4 Evalúa el funcionamiento del conjunto de embrague de mando mecánico y mando hidráulico, de acuerdo con protocolos e instrucciones del manual de servicio.",
+          "1.5 Ejecuta mantenimiento al conjunto diferencial de vehículos livianos y semipesados, utilizando las herramientas e instrumentos apropiados, realizando las tareas en forma prolija, respetando las normas de seguridad y siguiendo las instrucciones del manual de servicio.",
+          "1.6 Comprueba el funcionamiento del conjunto diferencial de vehículos livianos y semipesados, y elabora un informe técnico sobre el mantenimiento realizado.",
+          "1.7 Diagnostica al conjunto diferencial de vehículos livianos y semipesados, utilizando las herramientas e instrumentos apropiados, realizando las tareas en forma prolija, respetando las normas de seguridad y siguiendo las instrucciones del manual de servicio."
+        ]
+      },
+      {
+        "code": "M8-AE2",
+        "title": "Realiza mantenimiento al sistema de transmisión automática de vehículos livianos y semipesados, de acuerdo con las pautas del fabricante, de inspección y diagnóstico de fallas.",
+        "criteria": [
+          "2.1 Ejecuta mantenimiento de caja de cambios automática de vehículos livianos y semipesados, respetando normas de seguridad y de medioambiente, realizando las tareas de forma prolija y de acuerdo con las especificaciones del manual de servicio técnico.",
+          "2.2 Utiliza las herramientas adecuadas para el mantenimiento de la transmisión automática de vehículos livianos y semipesados, aplicando las normas de seguridad necesarias y respetando el medioambiente, según las instrucciones del manual de servicio técnico.",
+          "2.3 Desarma, limpia y rearma los componentes de una caja de cambios automática, según las especificaciones técnicas del fabricante.",
+          "2.4 Verifica el funcionamiento de la transmisión automática de vehículos livianos y semipesados, y elabora un informe técnico sobre el mantenimiento realizado, de acuerdo con la pauta solicitada.",
+          "2.5 Evalúa el sistema de transmisión automática y sus componentes en vehículos automotrices livianos y semipesados, utilizando herramientas e instrumentos apropiados, de acuerdo con las especificaciones técnicas del fabricante."
+        ]
+      },
+      {
+        "code": "M8-AE3",
+        "title": "Realiza mantenimiento, inspección y diagnóstico al sistema de frenos hidráulicos de vehículos livianos y semipesados, respetando las normas de seguridad y medioambiente, según las pautas especificadas por el fabricante.",
+        "criteria": [
+          "3.1 Ejecuta mantenimiento de manera prolija a los componentes mecánicos e hidráulicos del sistema de frenos de vehículos livianos y semipesados, respetando normas de seguridad y de medioambiente, utilizando elementos de protección personal, de acuerdo con indicaciones del manual de servicio.",
+          "3.2 Utiliza las herramientas adecuadas para el mantenimiento del sistema de frenos de vehículos livianos y semipesados, aplicando las normas de seguridad necesarias, que se indican en el manual de mantenimiento.",
+          "3.3 Realiza mantenimiento al conjunto hidráulico que compone el sistema antibloqueo de frenos (ABS), de vehículos livianos y semipesados, realizando las tareas en forma prolija, respetando las normas de seguridad y de medioambiente, y utilizando como referencia la información que entrega el fabricante.",
+          "3.4 Verifica el funcionamiento del sistema de frenos hidráulicos de vehículos livianos y semipesados, y elabora un informe técnico sobre el mantenimiento realizado, de acuerdo con el manual de servicio.",
+          "3.5 Evalúa el sistema de frenos hidráulicos y sus componentes en vehículos automotrices livianos y semipesados, según las especificaciones técnicas del fabricante."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81995.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34330_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 9,
+    "title": "Mantenimiento de sistemas de dirección y suspensión",
+    "hp": 190,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 3",
+        "title": "Realizar mantenimiento básico de diversos sistemas de vehículos automotrices livianos, semipesados y pesados, de acuerdo a las pautas de mantenimiento del fabricante, de inspección y diagnóstico de fallas."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M9-AE1",
+        "title": "Inspecciona los diferentes mecanismos de dirección mecánica de vehículos livianos y semipesados, de acuerdo con las pautas del fabricante, de inspección y diagnóstico de fallas.",
+        "criteria": [
+          "1.1 Compara los diferentes mecanismos de dirección mecánica y relaciona su funcionamiento, características y componentes, dependiendo de la aplicación en vehículos livianos y semipesados, según las especificaciones técnicas del fabricante.",
+          "1.2 Comprueba la relación del ángulo de giro de las ruedas directrices, en relación con el giro del volante de vehículos livianos y semipesados según la especificación del fabricante.",
+          "1.3 Planifica acciones comunes e individuales para conseguir objetivos en trabajos de equipo, proyecto o tarea. Se asignan roles y se cumplen."
+        ]
+      },
+      {
+        "code": "M9-AE2",
+        "title": "Aplica mantenimiento al sistema de dirección de vehículos livianos y semipesados, de acuerdo con pautas del fabricante, de inspección y diagnóstico de fallas.",
+        "criteria": [
+          "2.1 Comprueba el funcionamiento del sistema de dirección de vehículos livianos y semipesados, según las indicaciones técnicas del fabricante.",
+          "2.2 Utiliza las herramientas adecuadas en el mantenimiento del sistema de dirección de diferentes vehículos, aplicando las normas de seguridad necesarias.",
+          "2.3 Realiza mantenimiento al sistema de dirección y sus componentes de distintos vehículos automotrices livianos y semipesados, cumpliendo con los plazos establecidos, realizando las tareas en forma prolija, respetando las normas de seguridad y de medioambiente, y utilizando como referencia la información que entrega el fabricante.",
+          "2.4 Realiza cambios de piezas y componentes del mecanismo de dirección de vehículos livianos y semipesados, de acuerdo con las especificaciones técnicas del fabricante, cumpliendo con los plazos establecidos y respetando las normas de seguridad.",
+          "2.5 Planifica acciones comunes e individuales para el logro del trabajo, proyecto o tarea. Se asignan roles y se cumplen."
+        ]
+      },
+      {
+        "code": "M9-AE3",
+        "title": "Inspecciona diferentes sistemas de suspensión utilizados en vehículos livianos y semipesados, de acuerdo con las pautas del fabricante, de inspección y diagnóstico de fallas.",
+        "criteria": [
+          "3.1 Comprueba el funcionamiento de los diferentes tipos de sistemas de suspensión y sus componentes, utilizados en vehículos livianos y semipesados, de acuerdo con la información entregada por el fabricante.",
+          "3.2 Clasifica diferentes sistemas de suspensión y relaciona su funcionamiento y características técnicas, dependiendo de la aplicación, en vehículos livianos y semipesados, según información técnica del fabricante.",
+          "3.3 Planifica acciones comunes e individuales para el logro del trabajo, proyecto o tarea. Se asignan roles y se cumplen."
+        ]
+      },
+      {
+        "code": "M9-AE4",
+        "title": "Realiza mantenimiento, inspección y diagnóstico al sistema de suspensión de vehículos livianos y semipesados, de acuerdo a las pautas del fabricante, de inspección y diagnóstico de fallas.",
+        "criteria": [
+          "4.1 Utiliza las herramientas adecuadas para el mantenimiento del sistema de suspensión de vehículos livianos y semipesados, respetando las normas de seguridad establecidas en el manual de servicio técnico.",
+          "4.2 Realiza mantenimiento al sistema de suspensión y sus componentes en vehículos automotrices livianos y semipesados, respetando las normas de seguridad y utilizando como referencia la información que entrega el fabricante.",
+          "4.3 Diagnostica el funcionamiento del sistema de suspensión de vehículos automotrices livianos y semipesados, siguiendo indicaciones del manual de servicio técnico.",
+          "4.4 Realiza cambios de piezas y componentes del sistema de suspensión de vehículos livianos y semipesados, cumpliendo con los plazos establecidos, respetando las normas de seguridad y las especificaciones técnicas del fabricante.",
+          "4.5 Planifica acciones comunes e individuales para el logro del trabajo, proyecto o tareas. Se asignan roles y se cumplen."
+        ]
+      },
+      {
+        "code": "M9-AE5",
+        "title": "Realiza diagnóstico de detección y corrección de fallas en el tren trasero y/o delantero, de vehículos livianos y semipesados, operando equipos y herramientas de acuerdo con las especificaciones del fabricante.",
+        "criteria": [
+          "5.1 Opera equipo de balanceo de ruedas, de vehículos livianos y semipesados de manera prolija, determinando el desbalanceo y corrigiendo, utilizando equipos de protección personal y respetando las normas de seguridad, de acuerdo con especificaciones del equipo.",
+          "5.2 Realiza rotación de ruedas de vehículos livianos y semipesados, utilizando equipos de protección personal. Cumple con los plazos establecidos, respetando las normas de seguridad y medioambiente, según las especificaciones técnicas del fabricante.",
+          "5.3 Opera el equipo de alineación de manera prolija, verificando y corrigiendo la geometría del tren delantero y/o trasero de vehículos livianos y semipesados, respetando las normas de seguridad, y de acuerdo con la información del manual de servicio.",
+          "5.4 Planifica las acciones comunes e individuales para el logro del trabajo, proyecto o tarea. Se asignan roles y se cumplen."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81996.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34330_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 10,
+    "title": "Emprendimiento y empleabilidad",
+    "hp": 76,
+    "year": "4° medio",
+    "oa": [],
+    "aes": [
+      {
+        "code": "M10-AE1",
+        "title": "Diseña y ejecuta un proyecto para concretar iniciativas de emprendimiento, identificando las acciones a realizar, el cronograma de su ejecución y los presupuestos, definiendo alternativas de financiamiento y evaluando y controlando su avance.",
+        "criteria": [
+          "1.1 Recolecta, organiza y analiza información para identificar oportunidades de emprendimiento en su propia comunidad y región, considerando diferentes ámbitos de aplicación (deporte, tecnología, medioambiente y energía, entre otros).",
+          "1.2 Evalúa las oportunidades de emprendimiento, tomando en cuenta sus fortalezas y debilidades, y considerando el contexto, los recursos existentes y las normativas vigentes relacionadas.",
+          "1.3 Formula los objetivos para un plan de acción de una iniciativa de emprendimiento personal, productivo o social, considerando las condiciones del entorno y personales.",
+          "1.4 Formula un presupuesto detallado, determinando los recursos (financieros, humanos, tecnológicos y otros) requeridos para el desarrollo de su iniciativa, los plazos y los factores externos que afectan su desarrollo.",
+          "1.5 Elabora un mecanismo de control de avance de su iniciativa de emprendimiento y evalúa las necesidades y las alternativas de financiamiento mediante aportes públicos y privados (créditos y ahorro).",
+          "1.6 Ejecuta las acciones para alcanzar los objetivos planteados según la planificación realizada, perseverando pese a circunstancias adversas, evaluando los resultados y las amenazas, ajustando sus acciones para asegurar el éxito y compartiendo su experiencia con otros."
+        ]
+      },
+      {
+        "code": "M10-AE2",
+        "title": "Maneja la legislación laboral y previsional chilena como marco regulador de las relaciones entre trabajadores y empleadores, identificando los derechos y deberes de ambas partes, tanto individuales como colectivos, y la reconoce como base para establecer buenas relaciones laborales.",
+        "criteria": [
+          "2.1 Selecciona la información relevante sobre los derechos laborales y previsionales de los trabajadores garantizados por la Constitución y el Código del Trabajo, para su propia contratación o de terceros a su cargo.",
+          "2.2 Determina elementos críticos de diversos tipos de contratos y de finiquitos, considerando la legislación laboral vigente.",
+          "2.3 Elabora propuestas de creación y desarrollo de organización sindical de acuerdo a la realidad de diferentes tipos de empresas, respetando la legislación vigente y la defensa de los derechos de los trabajadores."
+        ]
+      },
+      {
+        "code": "M10-AE3",
+        "title": "Prepara los elementos necesarios para participar de un proceso de incorporación al mundo del trabajo, valorando y planificando su trayectoria formativa y laboral.",
+        "criteria": [
+          "3.1 Sistematiza información desde organismos y empresas especializadas en intermediación laboral que existen en su entorno, analizando las perspectivas laborales, sus propias condiciones laborales y las normativas relacionadas.",
+          "3.2 Elabora correctamente los documentos necesarios para iniciar una actividad laboral, como el curriculum vitae, reuniendo evidencias de cursos realizados, experiencia laboral previa y cartas de recomendación, y visualizando sus alternativas de acuerdo a sus expectativas y condiciones.",
+          "3.3 Prepara las entrevistas y las situaciones de ingreso y promoción, identificando a personas e instituciones que pueden brindarle apoyo en este proceso.",
+          "3.4 Evalúa si la remuneración mensual o semanal y el finiquito se han determinado de acuerdo al tipo de contrato firmado y a la legislación laboral vigente.",
+          "3.5 Selecciona la institución y la modalidad conveniente para su cobertura de salud y pensión, además del seguro de desempleo que le corresponde de acuerdo a su contrato y derechos, y lleva a cabo los trámites de afiliación."
+        ]
+      },
+      {
+        "code": "M10-AE4",
+        "title": "Selecciona alternativas de capacitación y de educación superior para fortalecer sus competencias o desarrollar nuevas y adquirir certificaciones, ya sea e-learning o presenciales, evaluando las diversas opciones de financiamiento.",
+        "criteria": [
+          "4.1 Evalúa las necesidades futuras del mundo laboral en el ámbito de su especialidad y sus desafíos de formación, considerando las dinámicas de empleo, tendencias e innovaciones tecnológicas.",
+          "4.2 Evalúa las ofertas de capacitación virtual y presencial disponibles en su entorno, incluyendo sus características (como duración, objetivos y costos) y requisitos generales.",
+          "4.3 Evalúa las ofertas de educación superior disponibles en su entorno, incluyendo sus características (duración, acreditación, posibilidades de reconocimiento de aprendizajes previos y alternativas de financiamiento y becas) y requisitos de entrada."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81987.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34330_programa.pdf",
+    "source_warnings": []
+  }
+]

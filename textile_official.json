@@ -1,0 +1,502 @@
+[
+  {
+    "position": 1,
+    "title": "Patronaje computacional",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 2",
+        "title": "Elaborar y transformar moldes para artículos textiles y vestuario de forma manual y digital de acuerdo con fichas técnicas."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M1-AE1",
+        "title": "Elabora moldes de artículos textiles para el hogar en forma digital, tomando en cuenta las necesidades del cliente y el mercado.",
+        "criteria": [
+          "1.1 Organiza los insumos para la elaboración de los modelos de artículos textiles para el hogar, de acuerdo a la ficha técnica recibida.",
+          "1.2 Selecciona el interfaz del programa para la elaboración de modelos, en forma digital, de acuerdo a la ficha técnica recibida.",
+          "1.3 Realiza modelo base en forma digital de artículos textiles, considerando la ficha técnica, según productos solicitados."
+        ]
+      },
+      {
+        "code": "M1-AE2",
+        "title": "Elabora modelos de prendas de vestir en forma digital, tomando en cuenta las necesidades del cliente y del mercado.",
+        "criteria": [
+          "2.1 Realiza modelo base de prendas de vestir, con las medidas de la talla elegida en forma digital de acuerdo a la ficha técnica recibida.",
+          "2.2 Desarrolla fichas técnicas de despiece incorporando cortes y formas con sus respectivas especificaciones y aplicaciones según las necesidades del cliente y mercado."
+        ]
+      },
+      {
+        "code": "M1-AE3",
+        "title": "Transforma moldes de artículos textiles para el hogar en forma digital, tomando en cuenta las necesidades del cliente y mercado.",
+        "criteria": [
+          "3.1 Transforma un modelo base en forma digital, de acuerdo a las necesidades del cliente y mercado, cumpliendo con los estándares de calidad.",
+          "3.2 Imprime el modelo para el corte, según ficha técnica, realizando la tarea de manera prolija."
+        ]
+      },
+      {
+        "code": "M1-AE4",
+        "title": "Transforma moldes de prendas de vestir en forma digital, tomando en cuenta las necesidades del cliente y mercado.",
+        "criteria": [
+          "4.1 Transforma un modelo base en forma digital, de acuerdo a las necesidades del cliente y mercado, cumpliendo con los estándares de calidad.",
+          "4.2 Comprueba las medidas de las diferentes piezas que componen el modelo transformado, para cumplir con los estándares de calidad.",
+          "4.3 Imprime las diferentes piezas del modelo, según ficha técnica entregada, realizando la tarea de manera prolija.",
+          "4.4 Codifica el modelo cortado para procesar la información y comunicar resultados, ingresándolo al sistema informático.",
+          "4.5 Entrega modelo con todas las especificaciones técnicas a la sección corte para que realice muestra prototipo o prueba, con una orden de corte y confección."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81825.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34314_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 2,
+    "title": "Elaboración de fichas técnicas",
+    "hp": 114,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 2",
+        "title": "Elaborar y transformar moldes para artículos textiles y vestuario de forma manual y digital de acuerdo con fichas técnicas."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M2-AE1",
+        "title": "Maneja a nivel usuario los diferentes programas digitales para la construcción de la ficha técnica, de acuerdo a los manuales de uso correspondientes.",
+        "criteria": [
+          "1.1 Aplica el interfaz del programa y trabaja las diferentes opciones de las herramientas digitales, para la construcción de la ficha de acuerdo al manual de funcionamiento del programa y la orden de trabajo.",
+          "1.2 Utiliza tecnología digital para hacer dibujos descriptivos con valoración de líneas, de acuerdo a la característica de cada cliente y el programa computacional."
+        ]
+      },
+      {
+        "code": "M2-AE2",
+        "title": "Elabora fichas técnicas para su aplicación en el proceso de confección, según las características de la tela, estampado, gramaje, temperatura cuidados y los estándares de calidad.",
+        "criteria": [
+          "2.1 Elabora dibujo en plano descriptivo de la prenda incluyendo las especificaciones necesarias, la interpretación de formas y cortes de la prenda en relación al diseño y los requerimientos del cliente.",
+          "2.2 Elabora dibujo o carta de color de la prenda, determinando características de la tela y estampado en relación a los requerimientos del cliente.",
+          "2.3 Elabora dibujo de composición de etiquetas determinando características en relación al gramaje de la tela, temperatura, cuidados y los requerimientos del cliente ."
+        ]
+      },
+      {
+        "code": "M2-AE3",
+        "title": "Dibuja formatos en relación a los requerimientos y características del vestuario y elabora la ficha técnica.",
+        "criteria": [
+          "3.1 Determina el formato de ficha que contiene mejor la información del artículo textil y la prenda de vestuario, de acuerdo a las solicitudes del cliente.",
+          "3.2 Dibuja el artículo textil y la prenda de vestuario, utilizando las opciones y herramientas del programa seleccionado y configura el formato de la ficha.",
+          "3.3 Elabora el dibujo en plano de la prenda y realiza su análisis técnico y específico, de acuerdo al boceto elaborado."
+        ]
+      },
+      {
+        "code": "M2-AE4",
+        "title": "Traspasa a la ficha información técnica de manera prolija y desarrolla dibujo plano de manera digital, de acuerdo a las especificaciones del programa.",
+        "criteria": [
+          "4.1 Escribe la información de la prenda de vestir y articulo textil y lo registra en la ficha técnica de manera clara y específica, de acuerdo a lo establecido en la orden de trabajo.",
+          "4.2 Confecciona diferentes tipos de fichas técnicas: Costo, Descriptiva, Tendido, Corte, Despiece, Instructiva, Control de calidad, Producción y Evaluación, para facilitar el proceso de modelaje, corte, confección, según las características del diseño a confeccionar."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81826.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34314_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 3,
+    "title": "Mantenimiento de máquinas",
+    "hp": 76,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 5",
+        "title": "Realizar mantenimiento y regulación de máquinas de coser, de cortar y de planchar para asegurar el funcionamiento óptimo, de acuerdo con instrucciones del fabricante."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M3-AE1",
+        "title": "Realiza mantenimiento preventivo a instrumentos, herramientas, maquinarias y equipos de costura y planchado, de acuerdo a pautas de mantenimiento y especificaciones del fabricante.",
+        "criteria": [
+          "1.1 Confecciona un listado de chequeo con apoyo de las TIC en formato digital, indicando todas las etapas de verificación y horas de uso de las máquinas rectas especiales, herramientas, y equipos de planchado, a utilizar en la especialidad de acuerdo al manual del fabricante.",
+          "1.2 Ejecuta el plan de mantenimiento básico (limpieza, engrase, lubricación, ajustes de las puntadas, fijación de prensatelas, corrección de puntadas y tensiones), de máquinas de coser rectas y especiales y herramientas de corte de acuerdo al plan de mantenimiento, el manual del fabricante, y las normas de higiene y prevención de riesgos."
+        ]
+      },
+      {
+        "code": "M3-AE2",
+        "title": "Elabora un informe del mantenimiento preventivo a instrumentos, máquinas y herramientas de acuerdo a pautas de mantenimiento y especificaciones del fabricante de manera digital.",
+        "criteria": [
+          "2.1 Elabora el informe digital detallado de mantenimiento preventivo y correctivo, las intervenciones, reflejando las actividades realizadas, las anomalías encontradas y las reparaciones realizadas, según los procedimientos, los formatos establecidos y las sugerencias de uso y mantenimiento establecidas en el manual del fabricante.",
+          "2.2 Determina el requerimiento de un servicio técnico autorizado, e informa por escrito cuándo un instrumento, una máquina o una herramienta debe ser enviada a reparación, señalando la falla de esta."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81827.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34314_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 4,
+    "title": "Tendido, trazado y corte de telas",
+    "hp": 190,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 3",
+        "title": "Marcar y cortar telas en forma manual o con máquina, considerando la ficha técnica, el modelo, tipo de tela, rendimiento, eficiencia del consumo del textil, normas de calidad y seguridad."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M4-AE1",
+        "title": "Prepara tendido de tela según requerimientos y necesidades de los modelos, siguiendo especificaciones de la ficha técnica.",
+        "criteria": [
+          "1.1 Ejecuta tendido de tela para ubicar los patrones de cada pieza con prolijidad y exactitud, según especificaciones de la ficha técnica.",
+          "1.2 Verifica metraje y determina las direcciones del corte con exactitud, según especificaciones de la ficha técnica.",
+          "1.3 Trabaja con ficha técnica de corte, siguiendo los estándares de calidad y requerimientos de la prenda."
+        ]
+      },
+      {
+        "code": "M4-AE2",
+        "title": "Desarrolla escalado de modelo o patrón industrial para producir vestuario en serie, cumpliendo con los estándares de calidad.",
+        "criteria": [
+          "2.1 Utiliza los insumos en las cantidades indicadas utilizando ficha de corte y disponiendo los desechos de acuerdo a los procedimientos establecidos.",
+          "2.2 Realiza escalado en serie según diferentes tallas y especificaciones de la ficha técnica, utilizando eficientemente los insumos para el proceso productivo."
+        ]
+      },
+      {
+        "code": "M4-AE3",
+        "title": "Realiza tizado en el tendido de tela de acuerdo a los diferentes plantillas según el diseño y la calidad del material, optimizando su rendimiento.",
+        "criteria": [
+          "3.1 Ubica los patrones del modelaje de cada pieza, teniendo en cuenta el hilo de tela, empalmes, piquetes, registrando la información en la ficha de consumo de corte, de acuerdo a los procedimientos de calidad.",
+          "3.2 Marca la tela manualmente, según sus características, en un tendido al doblez, de manera prolija y conforme a los estándares de calidad."
+        ]
+      },
+      {
+        "code": "M4-AE4",
+        "title": "Corta muestras y plantillas de acuerdo a las necesidades de la producción, según el despliegue del modelo; en forma manual o con máquina.",
+        "criteria": [
+          "4.1 Aplica técnicas de corte de muestras y plantillas en forma manual, según orden de corte, previniendo situaciones de riesgo, utilizando los elementos de seguridad y protección personal.",
+          "4.2 Ejecuta el corte de muestras y plantillas con máquina circular y de cuchillo recto, según orden de corte, previniendo situaciones de riesgo, utilizando los elementos de seguridad y protección personal."
+        ]
+      },
+      {
+        "code": "M4-AE5",
+        "title": "Folia las prendas cortadas, identificando cada pieza de manera clara.",
+        "criteria": [
+          "5.1 Folia las piezas de acuerdo a la orden de corte y a las normas establecidas, previniendo situaciones de riesgo y utilizando los elementos de protección personal.",
+          "5.2 Registra y revisa foliado de cada pieza según especificaciones de la ficha técnica."
+        ]
+      },
+      {
+        "code": "M4-AE6",
+        "title": "Arma paquetes de trabajo de acuerdo a las indicaciones de la ficha técnica.",
+        "criteria": [
+          "6.1 Organiza las piezas foliadas para iniciar la confección con eficiencia y según las especificaciones de la ficha técnica, con prolijidad y exactitud.",
+          "6.2 Conforma las partidas de piezas con el folio correspondiente y lo registra computacionalmente, según las especificaciones de la ficha técnica, con prolijidad y exactitud.",
+          "6.3 Elabora informe para indicar los procedimientos utilizados y realizar síntesis del trabajo."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81828.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34314_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 5,
+    "title": "Confección y terminaciones",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 6",
+        "title": "Confeccionar artículos textiles y de vestuario de acuerdo con la secuencia de operaciones definidas en la ficha técnica y los insumos requeridos, utilizando la maquinaria apropiada, controlando la calidad y la seguridad durante el proceso."
+      },
+      {
+        "code": "OA 7",
+        "title": "Ejecutar terminaciones, planchado y empaquetado de artículos textiles y prendas de vestir, utilizando la maquinaria apropiada, seleccionando los insumos y definiendo la secuencia óptima de acuerdo con la ficha técnica."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M5-AE1",
+        "title": "Determina las características de confección del artículo textil para el hogar y vestuario, y las máquinas necesarias para su elaboración de acuerdo a la ficha técnica, considerando los estándares de calidad y la seguridad durante el proceso.",
+        "criteria": [
+          "1.1 Transfiere la disposición o distribución de las máquinas a un plano, y determina cada posición según el sistema de fabricación y el tipo de prendas que se confecciona.",
+          "1.2 Realiza un análisis técnico-productivo de los diferentes artículos textiles para el hogar y prendas de vestir, identificando la maquinaria que se necesita para obtener un producto competitivo, de acuerdo a la ficha técnica y estándares de calidad."
+        ]
+      },
+      {
+        "code": "M5-AE2",
+        "title": "Realiza proceso de confección de artículos textiles para el hogar y vestuario, de acuerdo a la ficha técnica, considerando los estándares de calidad y la seguridad durante el proceso productivo industrial.",
+        "criteria": [
+          "2.1 Prepara con exactitud la ficha de producción u orden de trabajo con la secuencia de operaciones y la distribución del trabajo según las especificaciones de la ficha técnica.",
+          "2.2 Confecciona artículos textiles para el hogar y prendas de vestuario, según las especificaciones de la secuencia de operaciones y la ficha técnica utilizando insumos y disponiendo con cuidado los desechos, en una perspectiva de eficiencia energética y cuidado ambiental."
+        ]
+      },
+      {
+        "code": "M5-AE3",
+        "title": "Confecciona las terminaciones de artículos textiles para el hogar y prendas de vestir, utilizando la maquinaria apropiada previniendo situaciones de riesgos.",
+        "criteria": [
+          "3.1 Prepara maquinaria con los implementos necesarios como agujas y prénsatelas para optimizar su funcionamiento y cumplir con los estándares de calidad y requerimientos de la prenda.",
+          "3.2 Utiliza máquinas especiales como overlock, botonera y ojaladora para confeccionar terminaciones de la prenda, en una perspectiva de eficiencia energética y cuidado ambiental previniendo situaciones de riesgos."
+        ]
+      },
+      {
+        "code": "M5-AE4",
+        "title": "Ejecuta planchado de prendas terminadas, de acuerdo al tipo de tela y de prenda, usando la temperatura adecuada y elementos apropiados.",
+        "criteria": [
+          "4.1 Prepara equipo de planchado con la temperatura y niveles de agua necesarias para optimizar su funcionamiento y cumplir con los estándares de calidad y requerimientos de la prenda.",
+          "4.2 Plancha prendas terminadas, eligiendo con precaución la temperatura, humedad y elementos necesarios para una mejor terminación, según tipo de tela y de prenda, previniendo situaciones de riesgo y utilizando elementos de protección personal."
+        ]
+      },
+      {
+        "code": "M5-AE5",
+        "title": "5. Empaqueta artículos textiles para el hogar y prendas de vestir, utilizando los mecanismos e insumos apropiados, para su correcta distribución.",
+        "criteria": [
+          "5.1 Clasifica los diferentes artículos textiles para el hogar y prendas de vestir según talla, color y modelo, de acuerdo a pedidos del cliente.",
+          "5.2 Empaqueta prendas de artículos textiles para el hogar y prendas de vestir, utilizando los mecanismos e insumos apropiados, para su correcta distribución, realiza el trabajo en equipo coordinando su trabajo con otros."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81829.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34314_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 6,
+    "title": "Diseño computacional de artículos y vestuario",
+    "hp": 190,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 1",
+        "title": "Elaborar diseños básicos de artículos textiles y de vestuario, utilizando herramientas manuales e informáticas de diseño, aplicando cánones de figura humana según sexo y edad, tendencias de la moda e innovaciones con tipos de tela, colores, insumos y productos requeridos."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M6-AE1",
+        "title": "Diseña diversos artículos textiles para el hogar y prendas de vestir en forma digital, realizando las transformaciones necesarias, tomando en cuenta tipos de tela, colores y productos solicitados de acuerdo a las necesidades del mercado.",
+        "criteria": [
+          "1.1 Selecciona diferentes diseños que aparecen en revistas de vestuario, para transformarlos y adecuarlos con el apoyo del computador según las características solicitadas por la orden de trabajo y las necesidades del cliente.",
+          "1.2 Presenta propuesta de diseño digital de artículos textiles para el hogar y prendas de vestir, de acuerdo a las necesidades del cliente.",
+          "1.3 Realiza presentación de la figura humana, dibujandocomputacionalmente diferentes posturas con movimiento para obtener un aspecto armonioso y proporcionado, siguiendo cánones de tendencia, moda, tela, colores, sexo, edad y accesorios requeridos, de acuerdo a las necesidades del cliente y del mercado.",
+          "1.4 Dibuja la caída, pliegues, estampado transparencia, cortes, color y otras características de la prenda de vestir, trabajando de manera digital, de acuerdo a las características de telas y diseño.",
+          "1.5 Consulta revistas especializada de vestuario en internet, para elaborar diseños y sus transformaciones, investigando tendencias internacionales más representativas del vestuario, de acuerdo a tipos de silueta, formas textiles, colores de la tendencia y la temporada, en función de las necesidades del mercado.",
+          "1.6 Elabora ficha de dibujo computacional incorporando requerimientos técnicos y descriptivos del diseño, de acuerdo a las necesidades del cliente."
+        ]
+      },
+      {
+        "code": "M6-AE2",
+        "title": "Desarrolla ficha técnica en forma digital de acuerdo a las necesidades de la moda y necesidades del cliente.",
+        "criteria": [
+          "2.1 Utiliza tecnología digital para hacer dibujos descriptivos con valoración de líneas, de acuerdo a las características físicas de cada cliente.",
+          "2.2 Elabora ficha técnica descriptiva de la prenda incluyendo las especificaciones necesarias, la interpretación de formas y cortes en relación al diseño y los requerimientos del cliente.",
+          "2.3 Elabora ficha técnica de color de la prenda, determinando características de la tela y accesorios en relación a los requerimientos del cliente.",
+          "2.4 Elabora ficha técnica de composición determinando características de la tela en relación a la temporada, color y gramaje que cumpla con los requerimientos del cliente."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81830.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34314_programa.pdf",
+    "source_warnings": [
+      "El sitio MINEDUC separa los dígitos del código de un criterio; se normalizó solo el código."
+    ]
+  },
+  {
+    "position": 7,
+    "title": "Patronaje y escalado industrial",
+    "hp": 228,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 2",
+        "title": "Elaborar y transformar moldes para artículos textiles y vestuario de forma manual y digital de acuerdo con fichas técnicas."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M7-AE1",
+        "title": "Maneja herramientas digitales para verificar calce, seleccionar tabla de tallas y aplicar criterios de escalado de acuerdo a la ficha técnica recibida.",
+        "criteria": [
+          "1.1 Maneja las herramientas digitales para verificar calce, cuidando que las medidas digitalizadas sean exactas, según la ficha técnica.",
+          "1.2 Maneja las herramientas digitales para seleccionar tabla de tallaje, de acuerdo a lo establecido en la ficha técnica.",
+          "1.3 Maneja herramientas y funciones digitales para la impresión de las piezas, según diseño."
+        ]
+      },
+      {
+        "code": "M7-AE2",
+        "title": "Establece el escalado industrial utilizada en un diseño, para cumplir con las necesidades del mercado.",
+        "criteria": [
+          "2.1 Selecciona patrón base para decidir el estilo de la prenda, las amplitudes deseadas y las medidas a utilizar, según estudio antropométrico de los clientes.",
+          "2.2 Incorpora al patrón elegido, las líneas de construcción de la prenda sobre la cual se han de perfilar y situar los cortes, según diseño elegido.",
+          "2.3 Establece los estándares de medidas básicas utilizando la tabla de tallaje femenina y masculina según las proporciones del cuerpo humano."
+        ]
+      },
+      {
+        "code": "M7-AE3",
+        "title": "Realiza escalado industrial para ampliar o disminuir las tallas del patrón utilizado, según ficha técnica.",
+        "criteria": [
+          "3.1 Identifica los puntos en que se aplica el escalado al desplazar partes del contorno de cada una de las piezas que componen el patrón base.",
+          "3.2 Realiza el escalado de los patrones aplicando la degradación correspondiente en los puntos importantes del molde, según tabla de tallaje."
+        ]
+      },
+      {
+        "code": "M7-AE4",
+        "title": "Incrementa la pieza a talla superior (+) o disminuye la talla con signo (-), según los métodos establecidos para tal efecto en el programa computacional.",
+        "criteria": [
+          "4.1 Ejecuta movimientos simples de los puntos de escala con exactitud, para ampliar o disminuir las tallas, según métodos establecidos en el programa computacional.",
+          "4.2 Ejecuta movimientos compuestos de los puntos de escala, para ampliar o disminuir las tallas, según métodos establecidos en el programa computacional.",
+          "4.3 Ejecuta movimiento angular de los puntos de escala, para ampliar o disminuir las tallas, según métodos establecidos en el programa computacional.",
+          "4.4 Ejecuta movimiento subordinado de los puntos de escala, para ampliar o disminuir las tallas, según métodos establecidos en el programa computacional.",
+          "4.5 Ejecuta movimiento de extrapolación de los puntos de escala, para ampliar o disminuir las tallas, según métodos establecidos en el programa computacional."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81831.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34314_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 8,
+    "title": "Procesos de confección industrial",
+    "hp": 228,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 4",
+        "title": "Coser, cortar, fusionar, planchar, utilizando diferentes tipos de máquinas, industriales y semindustriales, de acuerdo con el manual de operaciones y aplicando normas de seguridad."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M8-AE1",
+        "title": "Prepara máquinas industriales de costura recta y especiales utilizadas en la confección de prendas de vestir y artículos textiles, considerando las especificaciones entregadas por los manuales de uso.",
+        "criteria": [
+          "1.1 Enhebra máquinas de costuras rectas y especiales, según el estándar de calidad de la ficha técnica del producto y las especificaciones del fabricante, entregado por los manuales de uso.",
+          "1.2 Selecciona todo tipo de insumos para elaborar muestrario y prepara las máquinas, siguiendo las indicaciones de los manuales de operación.",
+          "1.3 Elabora muestrario con diferentes tipos de costura, con máquina recta industrial, y máquinas industriales especiales, siguiendo indicaciones de prevención de riesgo y utilizando los elementos de protección personal."
+        ]
+      },
+      {
+        "code": "M8-AE2",
+        "title": "Fusiona las partes de la prenda, de acuerdo a la cantidad de piezas del modelo y la orden de confección.",
+        "criteria": [
+          "2.1 Prepara las telas y el material para el fusionado, utilizando la maquinaria apropiada, de acuerdo a la orden de confección.",
+          "2.2 Aplica las técnicas adecuadas para la fusión de las partes de la prenda, de acuerdo a las telas y las normas de seguridad.",
+          "2.3 Arma con eficiencia los paquetes de partes fusionadas según tipo y cantidad de piezas, de acuerdo a las especificaciones de la ficha de operaciones."
+        ]
+      },
+      {
+        "code": "M8-AE3",
+        "title": "Confecciona artículos para el hogar y piezas de prendas de vestir utilizando máquinas rectas industriales, especiales y herramientas asociadas a la industria de la confección, según diferentes tipos de costuras, considerando las especificaciones entregadas por los manuales de operación de las máquinas.",
+        "criteria": [
+          "3.1 Aplica técnicas de confección para elaborar diferentes tipos de piezas de prendas de vestir, tomando medidas de protección personal de acuerdo a la normativa vigente.",
+          "3.2 Confecciona piezas de prendas de vestir, en la línea de producción industrial, cumpliendo con los controles de calidad de cada proceso y los requerimientos del cliente y especificaciones de la ficha técnica de confección.",
+          "3.3 Utiliza la maquinaria y los elementos adecuados para preparar y confeccionar cierres, ubicar, broches, botones, pretinas, etiquetas, forro, hacer bastas y embolsados, tomando medidas de protección personal de acuerdo a la normativa vigente.",
+          "3.4 Opera la maquinaria adecuada para confeccionar cuellos, mangas, etiquetas, puños, tajalí, bolsillos, bebederos, botones y banda de abotonadura, y para ojalar y hacer bastas, tomando medidas de protección personal de acuerdo a la normativa vigente."
+        ]
+      },
+      {
+        "code": "M8-AE4",
+        "title": "Plancha diferentes partes de la prenda utilizando los diferentes equipos de planchado, según telas y tipos de prendas, de acuerdo con el manual de operaciones y aplicando normas de seguridad.",
+        "criteria": [
+          "4.1 Prepara equipo de planchado, controlando temperatura y humedad, de acuerdo al manual del fabricante, las especificaciones técnicas de la tela y normas de seguridad.",
+          "4.2 Plancha las diferentes partes de la prenda en el proceso de confección y armado de esta, de acuerdo a las especificaciones técnicas de las telas, utilizando eficientemente los insumos en una perspectiva de eficiencia energética y cuidado ambiental."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81832.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34314_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 9,
+    "title": "Control de calidad",
+    "hp": 114,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 8",
+        "title": "Realizar el control de calidad de los productos, considerando el formato estándar y las especificaciones técnicas de estos."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M9-AE1",
+        "title": "Realiza el control de calidad de artículos textiles y prendas de vestir, durante el proceso, de acuerdo a las especificaciones de ficha técnica y el prototipo.",
+        "criteria": [
+          "1.1 Comprueba, mediante la inspección durante el proceso, que los artículos textiles confeccionados y sus terminaciones, cumplen con las especificaciones de la ficha técnica y el prototipo, de acuerdo con los estándares de calidad.",
+          "1.2 Comprueba, mediante la inspección durante el proceso, que las prendas de vestir y sus terminaciones, cumplen con las especificaciones de la ficha técnica, de acuerdo con los estándares de calidad."
+        ]
+      },
+      {
+        "code": "M9-AE2",
+        "title": "Elabora informe con el cumplimiento de las normas de calidad de la confección realizada orientada a satisfacer las necesidades del cliente.",
+        "criteria": [
+          "2.1 Verifica y registra la calidad de los insumos respecto de las especificaciones preestablecidas, evaluando productos y proveedores.",
+          "2.2 Verifica y registra la calidad del diseño y patronaje, realizando una evaluación de la correcta interpretación del modelo, las especificaciones, el modelado y las medidas.",
+          "2.3 Verifica y registra, la calidad de corte, costura y terminaciones, evaluando, la calidad del tizado, fidelidad del corte, control de puntadas, planchado, entre otros."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81833.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34314_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 10,
+    "title": "Emprendimiento y empleabilidad",
+    "hp": 76,
+    "year": "4° medio",
+    "oa": [],
+    "aes": [
+      {
+        "code": "M10-AE1",
+        "title": "Diseña y ejecuta un proyecto para concretar iniciativas de emprendimiento, identificando las acciones a realizar, el cronograma de su ejecución y los presupuestos, definiendo alternativas de financiamiento y evaluando y controlando su avance.",
+        "criteria": [
+          "1.1 Recolecta, organiza y analiza información para identificar oportunidades de emprendimiento en su propia comunidad y región, considerando diferentes ámbitos de aplicación (deporte, tecnología, medioambiente y energía, entre otros).",
+          "1.2 Evalúa las oportunidades de emprendimiento, tomando en cuenta sus fortalezas y debilidades, y considerando el contexto, los recursos existentes y las normativas vigentes relacionadas.",
+          "1.3 Formula los objetivos para un plan de acción de una iniciativa de emprendimiento personal, productivo o social, considerando las condiciones del entorno y personales.",
+          "1.4 Formula un presupuesto detallado, determinando los recursos (financieros, humanos, tecnológicos y otros) requeridos para el desarrollo de su iniciativa, los plazos y los factores externos que afectan su desarrollo.",
+          "1.5 Elabora un mecanismo de control de avance de su iniciativa de emprendimiento y evalúa las necesidades y las alternativas de financiamiento mediante aportes públicos y privados (créditos y ahorro).",
+          "1.6 Ejecuta las acciones para alcanzar los objetivos planteados según la planificación realizada, perseverando pese a circunstancias adversas, evaluando los resultados y las amenazas, ajustando sus acciones para asegurar el éxito y compartiendo su experiencia con otros."
+        ]
+      },
+      {
+        "code": "M10-AE2",
+        "title": "Maneja la legislación laboral y previsional chilena como marco regulador de las relaciones entre trabajadores y empleadores, identificando los derechos y deberes de ambas partes, tanto individuales como colectivos, y la reconoce como base para establecer buenas relaciones laborales.",
+        "criteria": [
+          "2.1 Selecciona la información relevante sobre los derechos laborales y previsionales de los trabajadores garantizados por la Constitución y el Código del Trabajo, para su propia contratación o de terceros a su cargo.",
+          "2.2 Determina elementos críticos de diversos tipos de contratos y de finiquitos, considerando la legislación laboral vigente.",
+          "2.3 Elabora propuestas de creación y desarrollo de organización sindical de acuerdo a la realidad de diferentes tipos de empresas, respetando la legislación vigente y la defensa de los derechos de los trabajadores."
+        ]
+      },
+      {
+        "code": "M10-AE3",
+        "title": "Prepara los elementos necesarios para participar de un proceso de incorporación al mundo del trabajo, valorando y planificando su trayectoria formativa y laboral.",
+        "criteria": [
+          "3.1 Sistematiza información desde organismos y empresas especializadas en intermediación laboral que existen en su entorno, analizando las perspectivas laborales, sus propias condiciones laborales y las normativas relacionadas.",
+          "3.2 Elabora correctamente los documentos necesarios para iniciar una actividad laboral, como el curriculum vitae, reuniendo evidencias de cursos realizados, experiencia laboral previa y cartas de recomendación, y visualizando sus alternativas de acuerdo a sus expectativas y condiciones.",
+          "3.3 Prepara las entrevistas y las situaciones de ingreso y promoción, identificando a personas e instituciones que pueden brindarle apoyo en este proceso.",
+          "3.4 Evalúa si la remuneración mensual o semanal y el finiquito se han determinado de acuerdo al tipo de contrato firmado y a la legislación laboral vigente.",
+          "3.5 Selecciona la institución y la modalidad conveniente para su cobertura de salud y pensión, además del seguro de desempleo que le corresponde de acuerdo a su contrato y derechos, y lleva a cabo los trámites de afiliación."
+        ]
+      },
+      {
+        "code": "M10-AE4",
+        "title": "Selecciona alternativas de capacitación y de educación superior para fortalecer sus competencias o desarrollar nuevas y adquirir certificaciones, ya sea e-learning o presenciales, evaluando las diversas opciones de financiamiento.",
+        "criteria": [
+          "4.1 Evalúa las necesidades futuras del mundo laboral en el ámbito de su especialidad y sus desafíos de formación, considerando las dinámicas de empleo, tendencias e innovaciones tecnológicas.",
+          "4.2 Evalúa las ofertas de capacitación virtual y presencial disponibles en su entorno, incluyendo sus características (como duración, objetivos y costos) y requisitos generales.",
+          "4.3 Evalúa las ofertas de educación superior disponibles en su entorno, incluyendo sus características (duración, acreditación, posibilidades de reconocimiento de aprendizajes previos y alternativas de financiamiento y becas) y requisitos de entrada."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81824.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34314_programa.pdf",
+    "source_warnings": []
+  }
+]

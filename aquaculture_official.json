@@ -1,0 +1,479 @@
+[
+  {
+    "position": 1,
+    "title": "Manejo de reproductores, desove y crías de larvas de especies hidrobiológicas",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 1",
+        "title": "Manejar reproductores de especies hidrobiológicas, aplicando técnicas de cultivo que incluyan alimentación, obtención de gametos, fecundación manipulada y cría de embriones y larvas, de acuerdo a las características de las especies, resguardando parámetros ambientales, de bioseguridad, manejo ético de las especies y prevención de enfermedades transmisibles en ambientes controlados."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M1-AE1",
+        "title": "Mantiene los parámetros ambientales de los reproductores en forma eficaz, bajo los estándares requeridos según la especie.",
+        "criteria": [
+          "1.1 Acondiciona reproductores según criterios y estándares de tipo biológico (T°, O2, salinidad; pH, etc.) y productivo.",
+          "1.2 Mide periódicamente los parámetros biológicos de la especie, tales como T°, O2, salinidad; pH, etc., de acuerdo al plan de manejo.",
+          "1.3 Registra periódicamente los parámetros biológicos de la especie, tales como T°, O2, salinidad; pH, etc., de acuerdo al plan de manejo.",
+          "1.4 Informa situaciones anómalas resultantes de la medición de parámetros ambientales, de acuerdo a procedimientos establecidos.",
+          "1.5 Comprueba y registra el estado de salud de los ejemplares, observando su alimentación, movimiento y distribución en la jaula y estanque, siguiendo estándares de calidad.",
+          "1.6 Administra tratamientos a los reproductores (con antibióticos, vitaminas, entre otros), según las dosis determinadas en el plan de manejo."
+        ]
+      },
+      {
+        "code": "M1-AE2",
+        "title": "Alimenta reproductores en forma eficiente, según plan de manejo establecido.",
+        "criteria": [
+          "2.1 Comprueba la calidad organoléptica de las partidas de alimento (color, olor, sabor, textura, otros), según normativa de calidad establecida.",
+          "2.2 Planifica el tipo y las dosis de alimentación de los reproductores, utilizando insumos en las cantidades indicadas en el plan de manejo",
+          "2.3 Racionaliza el tipo y las dosis de alimentación de reproductores, utilizando insumos en las cantidades indicadas en el plan de manejo.",
+          "2.4 Alimenta reproductores cumpliendo con las cantidades, horarios y composición de la dieta, según plan de manejo.",
+          "2.5 Resguarda el crecimiento de reproductores, utilizando los insumos en forma eficiente de acuerdo al plan de manejo establecido."
+        ]
+      },
+      {
+        "code": "M1-AE3",
+        "title": "Obtiene gametos desde reproductores, resguardando estándares de acuerdo a la especie.",
+        "criteria": [
+          "3.1 Separa reproductores por sexo y grado de madurez para inducirlos al desove, siguiendo estándares de calidad de manejo.",
+          "3.2 Acondiciona reproductores para el momento del desove (alza temperatura, alimentación, entre otros), según plan de manejo.",
+          "3.3 Desova reproductores utilizando técnicas y procedimientos de operación y profilaxis, de acuerdo al plan de manejo establecido."
+        ]
+      },
+      {
+        "code": "M1-AE4",
+        "title": "Fecunda gametos, siguiendo normas de higiene-profilaxis y de acuerdo al plan de manejo.",
+        "criteria": [
+          "4.1 Muestrea gametos desovados para posterior análisis, siguiendo los estándares del plan de manejo del cultivo.",
+          "4.2 Incuba gametos, utilizando técnicas y procedimientos de operación y profilaxis, de acuerdo al plan de manejo establecido.",
+          "4.3 Comprueba el estado de desarrollo de la fecundación, tomando muestras del sistema de incubación de acuerdo al plan de manejo establecido."
+        ]
+      },
+      {
+        "code": "M1-AE5",
+        "title": "Cría los embriones y larvas, realizando las tareas de manera prolija.",
+        "criteria": [
+          "5.1 Separa huevos fecundados (embriones) utilizando técnicas y procedimientos de higiene y profilaxis.",
+          "5.2 Acondiciona y mantiene embriones en sistema de cultivo, de acuerdo a los requerimientos biológicos (T°, densidad, entre otros) y técnicos de la especie.",
+          "5.3 Distribuye larvas en los sistemas de cultivo larval, respetando las densidades de cultivo propias de la especie, de acuerdo al plan de manejo establecido.",
+          "5.4 Cultiva microalgas y zooplancton para la alimentación de larvas, utilizando técnicas y procedimientos de operación y profilaxis, de acuerdo al plan de manejo establecido.",
+          "5.5 Efectúa cambios de agua de estanques de cultivo larval, utilizando técnicas y procedimientos de operación y profilaxis y retirando la mortalidad con la ayuda de tamices, según el plan de manejo de la especie.",
+          "5.6 Comprueba el estado de desarrollo de las larvas (crecimiento y diferenciación), tomando muestras de cada unidad de cultivo de acuerdo al plan de manejo establecido."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82041.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34302_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 2,
+    "title": "Engorde de especies acuícolas",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 2",
+        "title": "Realizar labores de manejo de especies hidrobiológicas, tales como selección, alimentación, desdoble, tratamientos, muestreo, entre otras, de acuerdo al plan de manejo y resguardando parámetros acordes a cada especie."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M2-AE1",
+        "title": "Alimenta ejemplares en etapa de engorda, aplicando acciones eficientemente, según plan de manejo establecido.",
+        "criteria": [
+          "1.1 Comprueba la calidad organoléptica de las partidas de alimento (color, olor, sabor, textura, otros) para evitar posibles intoxicaciones en los peces, de acuerdo al plan de manejo establecido.",
+          "1.2 Racionaliza el tipo y las dosis de alimentación de la especie, utilizando insumos en las cantidades indicadas en el plan de manejo.",
+          "1.3 Alimenta ejemplares cumpliendo con las cantidades y horarios, según plan de manejo.",
+          "1.4 Resguarda el crecimiento del recurso hidrobiológico en el proceso de producción, utilizando los insumos en forma eficiente."
+        ]
+      },
+      {
+        "code": "M2-AE2",
+        "title": "Realiza desdobles (raleos) según los requerimientos de cada especie y el estado de crecimiento, según plan de manejo.",
+        "criteria": [
+          "2.1 Realiza el proceso de desdoble, según la especificaciones técnicas del plan de manejo de la especie.",
+          "2.2 Cuenta y selecciona ejemplares, según técnicas y procedimientos establecidos, de acuerdo a la normativa vigente.",
+          "2.3 Registra el número de ejemplares por sistema de cultivo, de a acuerdo al plan de manejo de la especie."
+        ]
+      },
+      {
+        "code": "M2-AE3",
+        "title": "Muestrea ejemplares en las etapas de producción, según plan de manejo establecido.",
+        "criteria": [
+          "3.1 Realiza en forma eficiente los muestreos, para identificación de enfermedades, crecimiento, fecundidad, etc., de acuerdo al plan de manejo de la especie.",
+          "3.2 Registra los datos obtenidos de los muestreos realizados, según el plan de manejo de la especie.",
+          "3.3 Registra e informa situaciones anómalas, detectadas en las labores de manejo y/o muestreos de la especie."
+        ]
+      },
+      {
+        "code": "M2-AE4",
+        "title": "Selecciona ejemplares (muertos, talla específica, enfermos, etc.) según plan de manejo establecido.",
+        "criteria": [
+          "4.1 Separa los ejemplares muertos, moribundos o enfermos observando características morfológicas anómalas.",
+          "4.2 Separa animales perjudiciales (fouling) desde sistema de cultivo y/o especie objetivo de cultivo.",
+          "4.3 Recolecta responsablemente los desechos orgánicos, como fouling, individuos muertos, almacenándolos en contenedores herméticos para su traslado al vertedero.",
+          "4.4 Mide individuos, separando por tamaño, según plan de manejo preestablecido.",
+          "4.5 Manipula los individuos correctamente, de manera de evitar mortalidades, según plan de manejo preestablecido.",
+          "4.6 Registra número de individuos muertos, características anómalas y tallas, en formularios específicos, según plan de manejo preestablecido."
+        ]
+      },
+      {
+        "code": "M2-AE5",
+        "title": "Detecta e informa las principales enfermedades que afectan el desarrollo de las especies en etapa de engorda, aplicando tratamientos estándares exigidos e indicaciones (dosis) determinadas por superiores.",
+        "criteria": [
+          "5.1 Comprueba y registra el estado de salud de los ejemplares, observando su alimentación, movimiento y distribución en el sistema de cultivo, de acuerdo al plan de manejo establecido y el cuidado del medio ambiente.",
+          "5.2 Informa el estado de salud de los ejemplares de acuerdo al plan de manejo de la especie.",
+          "5.3 Aplica tratamiento (antibióticos, vitaminas, etc.), según el plan de manejo de enfermedades."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82042.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34302_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 3,
+    "title": "Operación de sistemas, equipos y maquinarias",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 6",
+        "title": "Utilizar sistemas, equipos y maquinarias propias de las labores de cultivo de especies hidrobiológicas, incluyendo buceo, de manera responsable, siguiendo los manuales e instructivos del fabricante y aplicando normas de seguridad."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M3-AE1",
+        "title": "Manipula maquinaria e implementos de la instalación acuícola, de acuerdo a las especificaciones técnicas y normativa vigente (Reglamento Ambiental para la Acuicultura - RAMA).",
+        "criteria": [
+          "1.1 Prepara y organiza maquinaria e implementos que se usan en la instalación de sistemas de cultivo, de manera prolija y de acuerdo a las instrucciones del manual del fabricante.",
+          "1.2 Opera maquinaria e implementos que se usan en la instalación de sistemas de cultivo, de manera prolija y de acuerdo a las instrucciones del manual del fabricante.",
+          "1.3 Realiza limpieza y guardado de las maquinarias e implementos, posterior a su utilización de acuerdo a normas y plazos establecidos.",
+          "1.4 Chequea maquinaria e implementos utilizados, registrando e informando sobre su probable deterioro, de acuerdo al manual del fabricante."
+        ]
+      },
+      {
+        "code": "M3-AE2",
+        "title": "Manipula la maquinaria e implementos de la operación acuícola para la siembra, desdoble y cosecha, de acuerdo a las especificaciones técnicas y normativa vigente (RAMA).",
+        "criteria": [
+          "2.1 Opera maquinaria e implementos que se usan en las operaciones de cultivo (siembra, desdobles, cosecha), de manera prolija y de acuerdo a las instrucciones de manual del fabricante.",
+          "2.2 Opera maquinaria e implementos que se usan en las operaciones de cultivo (siembra, desdobles, cosecha), de manera prolija y de acuerdo a las instrucciones del manual del fabricante.",
+          "2.3 Realiza limpieza y guardado (almacenaje) de las maquinaria e implementos, posterior a su utilización, de acuerdo a normas y plazos establecidos.",
+          "2.4 Chequea maquinaria e implementos utilizados, registrando e informado sobre probable deterioro de ella, de acuerdo a las especificaciones técnicas de los fabricantes."
+        ]
+      },
+      {
+        "code": "M3-AE3",
+        "title": "Opera equipos de comunicación y navegación disponibles en la embarcación de cultivo.",
+        "criteria": [
+          "3.1 Maneja y opera los equipos de comunicaciones presentes en la embarcación, según instrucciones del fabricante.",
+          "3.2 Envía y recibe mensajes a través de medios electrónicos de comunicación utilizando la terminología adecuada, de acuerdo a la normativa vigente.",
+          "3.3 Mantiene el rumbo de la embarcación realizando los giros necesarios de la rueda de gobierno, de acuerdo a las técnicas de gobierno de una nave.",
+          "3.4 Adopta precauciones en la navegación, usando señales visuales y acústicas de alerta, según lo determinado por el Reglamento Internacional para Prevenir Abordajes."
+        ]
+      },
+      {
+        "code": "M3-AE4",
+        "title": "Desecha material fungible y dados de baja, aplicando la normativa ambiental vigente (RAMA).",
+        "criteria": [
+          "4.1 Elimina eficientemente material fungible que atenta contra el medio ambiente, aplicando los procedimientos pertinentes, de acuerdo a la normativa vigente.",
+          "4.2 Elimina eficientemente material dado de baja que atenta contra el medio ambiente, aplicando las normas referidas al destino final, según normativa vigente de cuidado del medio ambiente.",
+          "4.3 Registra material fungible desechado que atenta contra el medio ambiente según normativa vigente."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82043.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34302_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 4,
+    "title": "Seguridad, prevención de riesgos y cuidado del medio ambiente",
+    "hp": 152,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 8",
+        "title": "Aplicar constantemente el manejo ético de las especies, las normas de seguridad, la prevención de riesgos, el cuidado del medio ambiente y los ecosistemas, correspondientes al tipo de faenas y/o al sector productivo, incluyendo las normas emanadas de la autoridad marítima, para prevenir riesgos de accidentes y enfermedades profesionales, y daños ambientales."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M4-AE1",
+        "title": "Aplica medidas de seguridad de manera prolija para prevenir situaciones de riesgo en el trabajo en tierra, según las normativas, laboral y ambiental vigentes (RAMA).",
+        "criteria": [
+          "1.1 Planea acciones laborales que cumplan las normas contenidas en la Ley de Accidentes del Trabajo y Enfermedades Profesionales, y en el Reglamento Ambiental para la Acuicultura (RAMA).",
+          "1.2 Utiliza en forma correcta la indumentaria recomendada y los equipos de protección personal, estableciendo medidas de prevención para la etapa de producción de semillas y juveniles en cultivo de especies acuícolas y en la etapa de hatchery, de acuerdo a la normativa de seguridad.",
+          "1.3 Opera equipos empleados en el cultivo de especies acuícolas realizados en tierra, aplicando eficientemente medidas de seguridad y prevención de riesgos."
+        ]
+      },
+      {
+        "code": "M4-AE2",
+        "title": "Aplica medidas de seguridad de manera prolija para prevenir situaciones de riesgo en el trabajo en mar, según las normativas, laboral, marítima y ambiental vigentes (RAMA).",
+        "criteria": [
+          "2.1 Planea acciones laborales que cumplan las normas laborales, marítimas, ambientales, etc. según el Reglamento Ambiental para la Acuicultura.",
+          "2.2 Utiliza en forma correcta la indumentaria recomendada y los equipos de protección personal, estableciendo medidas de prevención para la etapa de engorda y crecimiento de juveniles en el mar en cultivos de especies acuícolas, de acuerdo a los estándares establecidos y las normas de la autoridad marítima.",
+          "2.3 Opera equipos empleados en el cultivo de especies acuícolas realizados en el mar, aplicando eficientemente medidas de seguridad y prevención de riesgos."
+        ]
+      },
+      {
+        "code": "M4-AE3",
+        "title": "Emplea técnicas de primeros auxilios eficientemente ante un accidente, según procedimientos preestablecidos.",
+        "criteria": [
+          "3.1 Evalúa en forma rápida los síntomas y sus posibles causas, adoptando los procedimientos de primeros auxilios.",
+          "3.2 Aplica las técnicas y procedimientos para la reanimación en situaciones de shock, paro cardiorrespiratorio, hemorragias, quemaduras, lesiones traumáticas e hipotermia, según procedimientos preestablecidos.",
+          "3.3 Realiza el traslado de lesionados empleando los medios adecuados para ello, según procedimientos preestablecidos."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82044.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34302_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 5,
+    "title": "Cosecha de especies acuícolas",
+    "hp": 228,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 3",
+        "title": "Realizar labores de cosecha de las especies hidrobiológicas, realizando los procedimientos que corresponda a cada especie y resguardando el cumplimiento de estándares de calidad propios del sector."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M5-AE1",
+        "title": "Cosecha ejemplares de la especie hidrobiológica cultivada, aplicando técnicas de acuerdo a los estándares de calidad establecidos.",
+        "criteria": [
+          "1.1 Prepara los equipos y materiales necesarios para realizar el proceso de cosecha, de acuerdo a los procedimientos pertinentes a la especie.",
+          "1.2 Comprueba que los ejemplares que serán cosechados cumplan con los requisitos de calidad exigidos por el mercado (tamaño, forma, color de carne y aspectos zoosanitarios) de acuerdo a los procedimientos establecidos.",
+          "1.3 Realiza la cosecha, extrayendo los ejemplares según la técnica definida para cada especie, las normas de seguridad y cuidado del medio ambiente."
+        ]
+      },
+      {
+        "code": "M5-AE2",
+        "title": "Aplica técnicas de manipulación e higiene de los productos cosechados, incluyendo el cuidado del medio ambiente.",
+        "criteria": [
+          "2.1 Emplea indumentaria apropiada para manipulación de los productos cosechados, de acuerdo a las normas de calidad e higiene.",
+          "2.2 Utiliza procedimientos de higiene y sanitización al manipular productos cosechados, de acuerdo a los estándares de calidad, considerando además el cuidado ambiental.",
+          "2.3 Utiliza los insumos indicados para el proceso productivo a desarrollar, de acuerdo a las instrucciones entregadas y los estándares de calidad establecidos."
+        ]
+      },
+      {
+        "code": "M5-AE3",
+        "title": "Utiliza técnicas de preservación, embalaje, almacenamiento y despacho del producto cosechado a la planta de proceso, de acuerdo a los estándares de calidad establecidos.",
+        "criteria": [
+          "3.1 Utiliza equipo de preservación y verifica temperaturas y tiempos usados en cada una de las etapas del proceso de acuerdo a los estándares de calidad establecidos según el sector productivo.",
+          "3.2 Utiliza el embalaje y la cantidad de hielo, en forma eficiente, según la especie extraída y el destino final, conservando la frescura y calidad de la cosecha realizada, de acuerdo a los procedimientos establecidos.",
+          "3.3 Utiliza las técnicas determinadas para almacenar y despachar el producto cosechado a la planta de proceso siguiendo plan de manejo.",
+          "3.4 Cumple con los plazos establecidos para desarrollar la tarea encomendada, según estándares de calidad propios del sector.",
+          "3.5 Cumple con los estándares de orden y prolijidad requeridos de acuerdo a las normas establecidas por el sector."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82045.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34302_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 6,
+    "title": "Captación de semillas",
+    "hp": 152,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 4",
+        "title": "Realizar la instalación básica y efectuar labores de mantenimiento primario de equipos de captación de semillas para diferentes especies hidrobiológicas, de acuerdo a especificaciones técnicas y procedimientos establecidos."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M6-AE1",
+        "title": "Selecciona materiales para dimensionar y construir sistemas de captación de semillas y de fondeo de acuerdo a las especificaciones técnicas y normativa vigente (RAMA).",
+        "criteria": [
+          "1.1 Selecciona hilos y cabos, considerando sus principales propiedades, para la instalación de sistemas flotantes y anclaje, de acuerdo a instrucciones de los fabricantes.",
+          "1.2 Selecciona cables de acero en función de sus principales propiedades, para ser utilizado considerando tipo de construcción, acordonamiento y resistencia a la ruptura, de acuerdo a instrucciones de los fabricantes.",
+          "1.3 Selecciona herrajes de maniobras de acuerdo a su destino y resistencia a la ruptura, según las instrucciones del fabricante.",
+          "1.4 Arma un sistema de captación de semillas y fondeo, de acuerdo a especificaciones técnicas del fabricante."
+        ]
+      },
+      {
+        "code": "M6-AE2",
+        "title": "Instala sistema captación de semillas y fondeo, aplicando la teoría de flotabilidad y técnicas de anclaje y nudaje, de acuerdo a las especificaciones técnicas y normativa vigente (RAMA).",
+        "criteria": [
+          "2.1 Instala sistemas de captación de semillas utilizando técnicas de anclaje y aplicando la teoría de la flotabilidad.",
+          "2.2 Instala sistemas de fondeo, utilizando técnicas de nudaje y aplicando la teoría de la flotabilidad.",
+          "2.3 Verifica la instalación de sistemas de captación de semillas y fondeo, de acuerdo a especificaciones técnicas del fabricante."
+        ]
+      },
+      {
+        "code": "M6-AE3",
+        "title": "Realiza mantenimiento de los sistemas de captación de semilla en forma periódica, según procedimientos establecidos.",
+        "criteria": [
+          "3.1 Prepara labores de mantenimiento, según plan de manejo preestablecido.",
+          "3.2 Detecta y repara puntos en los cuales existen fallas, según especificaciones técnicas del fabricante.",
+          "3.3 Registra la(s) zona(s) y fecha en la que se realiza mantenimiento, según plan de manejo preestablecido."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82046.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34302_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 7,
+    "title": "Trabajos subacuáticos en acuicultura",
+    "hp": 228,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 5",
+        "title": "Realizar tareas subacuáticas en profundidad de hasta 20 metros, para extraer mortalidad desde las unidades de cultivo, instalar y mantener redes, instalar y mantener estructuras subacuáticas, de acuerdo a las orientaciones del supervisor de buceo y aplicando las normativas entregadas por la autoridad marítima."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M7-AE1",
+        "title": "Utiliza el fenómeno de comportamiento de los gases a diferentes presiones, en equipos autónomos y semiautónomos; considerando las medidas de seguridad y prevención de riesgos.",
+        "criteria": [
+          "1.1 Aplica leyes de presión de los gases en ejercicios teóricos de actividad de buceo, considerando las recomendaciones de seguridad.",
+          "1.2 Compara las especificaciones técnicas de los diferentes equipos de buceo relacionadas con la presión, considerando las medidas de seguridad y prevención de riesgos.",
+          "1.3 Evalúa síntomas de posibles enfermedades derivadas del buceo, relacionados con el comportamiento de los gases.",
+          "1.4 Aplica tratamientos de primeros auxilios ante la identificación y diagnosis de efectos negativos en el personal que realiza la actividad de buceo, de acuerdo a los procedimientos de primeros auxilios.",
+          "1.5 Calcula eficientemente el consumo de gases en función del tiempo y la profundidad de inmersión, considerando las recomendaciones de seguridad en las instrucciones leídas.",
+          "1.6 Calcula eficientemente los tiempos y profundidades de descompresión, en función del tiempo y la profundidad de trabajo, considerando las recomendaciones de seguridad."
+        ]
+      },
+      {
+        "code": "M7-AE2",
+        "title": "Opera y manipula equipos y utensilios necesarios para el buceo, de manera prolija y de acuerdo a las especificaciones técnicas y normativa vigente.",
+        "criteria": [
+          "2.1 Comprueba el funcionamiento y estado de los equipos y utensilios de buceo autónomo (compresor, reguladores, trajes de inmersión, cinturones, máscaras, profundímetro, salvavidas y chalecos compensadores, etc.), de acuerdo a las especificaciones técnicas.",
+          "2.2 Comprueba el funcionamiento y estado de los equipos y utensilios de buceo semiautónomo (compresor, estanque de reserva, reguladores, trajes de inmersión, cinturones, máscaras, profundímetro, salvavidas, chalecos compensadores, etc.), de acuerdo a las especificaciones técnicas.",
+          "2.3 Realiza la mantención preventiva y la limpieza de los equipos y utensilios de buceo de acuerdo a normas y plazos establecidos."
+        ]
+      },
+      {
+        "code": "M7-AE3",
+        "title": "Utiliza técnicas de inmersión y descompresión en la actividad de buceo de acuerdo a las especificaciones técnicas y normativa vigente.",
+        "criteria": [
+          "3.1 Emplea diferentes técnicas de inmersión, según especificaciones técnicas del equipo utilizado.",
+          "3.2 Realiza actividades de buceo, utilizando en forma eficiente la técnica de Valsalva.",
+          "3.3 Dispone de los elementos necesarios para realizar una actividad de buceo segura, de acuerdo a los principios de seguridad y prevención de riesgos en el mar.",
+          "3.4 Emplea el lenguaje de signos internacionales durante sus actividades de buceo, de acuerdo a la normativa del sector.",
+          "3.5 Programa una actividad de buceo de duración determinada, considerando las tablas de descompresión de acuerdo a las normativas y la legislación laboral y la emanada de la autoridad marítima.",
+          "3.6 Usa en forma eficiente equipos utilizados en las etapas de inmersión y descompresión tales como trajes de inmersión, cinturones, máscaras, profundímetro, salvavidas y chalecos compensadores entre otros, de acuerdo a las instrucciones del fabricante."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82047.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34302_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 8,
+    "title": "Manejo de información acuícola",
+    "hp": 152,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 7",
+        "title": "Registrar, sistematizar y analizar información obtenida en los distintos procesos acuícolas, ingresándola en los formatos y documentos que corresponda, informando de anomalías de manera oportuna y acorde con los procedimientos establecidos."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M8-AE1",
+        "title": "Obtiene información (datos) desde observaciones y mediciones de muestreos para control estadístico de la producción según plan de manejo establecido.",
+        "criteria": [
+          "1.1 Determina crecimiento de ejemplares, a través de medición de peso y/o talla, según los procedimientos establecidos.",
+          "1.2 Determina mortalidad de la población del cultivo muestreado, de acuerdo a los datos que entrega la producción, según los procedimientos establecidos.",
+          "1.3 Determina la cantidad de alimentación natural o artificial, según requerimiento de la especie, considerando los datos entregados por el departamento correspondiente.",
+          "1.4 Determina la cantidad y uso de insumos de producción claves para la logística del proceso productivo, de acuerdo a los datos entregados.",
+          "1.5 Mide a través de instrumentos parámetros y variables ambientales, determinantes para el proceso de producción, de acuerdo a la normativa de seguridad y cuidado del medio ambiente."
+        ]
+      },
+      {
+        "code": "M8-AE2",
+        "title": "Registra y sistematiza datos claves en las diferentes etapas del proceso productivo (hatchery, nurse, engorde y cosecha) en forma eficiente para utilizar esta información en el proceso productivo.",
+        "criteria": [
+          "2.1 Usa satisfactoriamente los formularios y protocolos de registro de en diferentes etapas de producción de acuerdo a los procedimientos establecidos.",
+          "2.2 Recopila, ingresa, guarda y ordena información eficientemente y en forma periódica desde formularios de etapa de engorda (en carpetas del procesador de texto, nubes, hojas de cálculo, navegador), de acuerdo a criterios y procedimientos predefinidos.",
+          "2.3 Usa en forma autónoma y efectiva las herramientas tecnológicas/digitales, en el registro y sistematización de datos de acuerdo a las especificaciones técnicas del programa computacional.",
+          "2.4 Organiza la información periódicamente en categorías (temporal, especie, área, otros.) bajo los estándares y formatos determinados."
+        ]
+      },
+      {
+        "code": "M8-AE3",
+        "title": "Informa oportuna y eficientemente los datos regulares y/o anómalos en las instancias correspondientes, determinadas con anterioridad.",
+        "criteria": [
+          "3.1 Usa herramientas de comunicación oral y escrita en forma efectiva, para transmitir la información recopilada, según los procedimientos establecidos.",
+          "3.2 Usa herramientas tecnológicas en forma efectiva, para transmitir la información recopilada, según los procedimientos establecidos.",
+          "3.3 Desarrolla y presenta información mediante el uso de herramientas y aplicaciones gráficas, de acuerdo a las instrucciones de uso del programa computacional."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82048.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34302_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 9,
+    "title": "Emprendimiento y empleabilidad",
+    "hp": 76,
+    "year": "4° medio",
+    "oa": [],
+    "aes": [
+      {
+        "code": "M9-AE1",
+        "title": "Diseña y ejecuta un proyecto para concretar iniciativas de emprendimiento, identificando las acciones a realizar, el cronograma de su ejecución y los presupuestos, definiendo alternativas de financiamiento y evaluando y controlando su avance.",
+        "criteria": [
+          "1.1 Recolecta, organiza y analiza información para identificar oportunidades de emprendimiento en su propia comunidad y región, considerando diferentes ámbitos de aplicación (deporte, tecnología, medioambiente y energía, entre otros).",
+          "1.2 Evalúa las oportunidades de emprendimiento, tomando en cuenta sus fortalezas y debilidades, y considerando el contexto, los recursos existentes y las normativas vigentes relacionadas.",
+          "1.3 Formula los objetivos para un plan de acción de una iniciativa de emprendimiento personal, productivo o social, considerando las condiciones del entorno y personales.",
+          "1.4 Formula un presupuesto detallado, determinando los recursos (financieros, humanos, tecnológicos y otros) requeridos para el desarrollo de su iniciativa, los plazos y los factores externos que afectan su desarrollo.",
+          "1.5 Elabora un mecanismo de control de avance de su iniciativa de emprendimiento y evalúa las necesidades y las alternativas de financiamiento mediante aportes públicos y privados (créditos y ahorro).",
+          "1.6 Ejecuta las acciones para alcanzar los objetivos planteados según la planificación realizada, perseverando pese a circunstancias adversas, evaluando los resultados y las amenazas, ajustando sus acciones para asegurar el éxito y compartiendo su experiencia con otros."
+        ]
+      },
+      {
+        "code": "M9-AE2",
+        "title": "Maneja la legislación laboral y previsional chilena como marco regulador de las relaciones entre trabajadores y empleadores, identificando los derechos y deberes de ambas partes, tanto individuales como colectivos, y la reconoce como base para establecer buenas relaciones laborales.",
+        "criteria": [
+          "2.1 Selecciona la información relevante sobre los derechos laborales y previsionales de los trabajadores garantizados por la Constitución y el Código del Trabajo, para su propia contratación o de terceros a su cargo.",
+          "2.2 Determina elementos críticos de diversos tipos de contratos y de finiquitos, considerando la legislación laboral vigente.",
+          "2.3 Elabora propuestas de creación y desarrollo de organización sindical de acuerdo a la realidad de diferentes tipos de empresas, respetando la legislación vigente y la defensa de los derechos de los trabajadores."
+        ]
+      },
+      {
+        "code": "M9-AE3",
+        "title": "Prepara los elementos necesarios para participar de un proceso de incorporación al mundo del trabajo, valorando y planificando su trayectoria formativa y laboral.",
+        "criteria": [
+          "3.1 Sistematiza información desde organismos y empresas especializadas en intermediación laboral que existen en su entorno, analizando las perspectivas laborales, sus propias condiciones laborales y las normativas relacionadas.",
+          "3.2 Elabora correctamente los documentos necesarios para iniciar una actividad laboral, como el curriculum vitae, reuniendo evidencias de cursos realizados, experiencia laboral previa y cartas de recomendación, y visualizando sus alternativas de acuerdo a sus expectativas y condiciones.",
+          "3.3 Prepara las entrevistas y las situaciones de ingreso y promoción, identificando a personas e instituciones que pueden brindarle apoyo en este proceso.",
+          "3.4 Evalúa si la remuneración mensual o semanal y el finiquito se han determinado de acuerdo al tipo de contrato firmado y a la legislación laboral vigente.",
+          "3.5 Selecciona la institución y la modalidad conveniente para su cobertura de salud y pensión, además del seguro de desempleo que le corresponde de acuerdo a su contrato y derechos, y lleva a cabo los trámites de afiliación."
+        ]
+      },
+      {
+        "code": "M9-AE4",
+        "title": "Selecciona alternativas de capacitación y de educación superior para fortalecer sus competencias o desarrollar nuevas y adquirir certificaciones, ya sea e-learning o presenciales, evaluando las diversas opciones de financiamiento.",
+        "criteria": [
+          "4.1 Evalúa las necesidades futuras del mundo laboral en el ámbito de su especialidad y sus desafíos de formación, considerando las dinámicas de empleo, tendencias e innovaciones tecnológicas.",
+          "4.2 Evalúa las ofertas de capacitación virtual y presencial disponibles en su entorno, incluyendo sus características (como duración, objetivos y costos) y requisitos generales.",
+          "4.3 Evalúa las ofertas de educación superior disponibles en su entorno, incluyendo sus características (duración, acreditación, posibilidades de reconocimiento de aprendizajes previos y alternativas de financiamiento y becas) y requisitos de entrada."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82040.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34302_programa.pdf",
+    "source_warnings": []
+  }
+]

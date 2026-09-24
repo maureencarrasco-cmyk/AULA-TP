@@ -1,0 +1,532 @@
+[
+  {
+    "position": 1,
+    "title": "Operaciones y fundamentos de las telecomunicaciones",
+    "hp": 114,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 1",
+        "title": "Leer y utilizar esquemas, proyectos y en general todo el lenguaje simbólico asociado a las operaciones de montaje y mantenimiento de redes de telecomunicaciones."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M1-AE1",
+        "title": "Realiza análisis técnico para el montaje de un proyecto en sistemas de comunicación de telefonía, datos y radiocomunicaciones, considerando los estándares de la industria y las normas de seguridad vigentes.",
+        "criteria": [
+          "1.1 Interpreta diagramas y documentación técnica del sistema de comunicación, de acuerdo a los requerimientos del proyecto.",
+          "1.2 Analiza la estructura y los elementos que componen un sistema básico de telecomunicaciones, haciendo uso de instrumentos, manuales y herramientas, respetando las indicaciones de seguridad y las especificaciones del proyecto.",
+          "1.3 Examina las características principales y las funcionalidades de los protocolos utilizados en el montaje de sistemas de telecomunicaciones, de acuerdo al modelo OSI y estándares TCP/IP, IEEE e IETF.",
+          "1.4 Analiza la estructura y los elementos para el montaje de un sistema básico de radiocomunicaciones fijas y móviles, considerando los protocolos de análisis y normas de seguridad."
+        ]
+      },
+      {
+        "code": "M1-AE2",
+        "title": "Efectúa análisis técnico para el mantenimiento de hardware y software en sistemas de comunicación de telefonía, datos y radiocomunicaciones considerando las especificaciones del proyecto, los estándares de la industria y las normas de seguridad.",
+        "criteria": [
+          "2.1 Analiza las perturbaciones en la comunicación de datos y los efectos que estas producen en los enlaces, de acuerdo a las especificaciones técnicas de funcionamiento y estándares de la industria.",
+          "2.2 Mide los parámetros y la capacidad de los sistemas de comunicaciones haciendo uso de instrumentos, de acuerdo a diferentes unidades de medida normalizadas (Bps, bytes, db, dbm, HZ, etc.), especificadas por la industria.",
+          "2.3 Chequea los elementos de conexión, fijación mecánica, cables y otros elementos de la infraestructura física de los sistemas de telecomunicaciones, según las especificaciones del proyecto y considerando las normas de seguridad.",
+          "2.4 Aplica protocolo para el mantenimiento de hardware y software de un sistema básico en telecomunicaciones listando las herramientas requeridas por el proyecto."
+        ]
+      },
+      {
+        "code": "M1-AE3",
+        "title": "Realiza análisis técnico para el mantenimiento de equipos en un sistema de telecomunicaciones, según manuales técnicos y normas de seguridad.",
+        "criteria": [
+          "3.1 Chequea los elementos de hardware de los equipos de telecomunicaciones, según las especificaciones del fabricante.",
+          "3.2 Contrasta parámetros eléctricos medidos en los equipos con las especificaciones del fabricante.",
+          "3.3 Aplica protocolo para el mantenimiento de software de un equipo de telecomunicaciones, según las especificaciones técnicas.",
+          "3.4 Elabora un informe de los requerimientos técnicos para la mantención de los equipos de un sistema básico de telecomunicaciones, de acuerdo a los estándares nacionales e internacionales y protocolos establecidos."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82137.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34340_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 2,
+    "title": "Instalación y mantenimiento básico de un terminal informático",
+    "hp": 152,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 6",
+        "title": "Realizar mantenimiento y reparaciones menores en equipos y sistemas de telecomunicaciones, utilizando herramientas y pautas de mantención establecidas por el fabricante."
+      },
+      {
+        "code": "OA 7",
+        "title": "Aplicar la normativa y los implementos de seguridad y protección relativos al montaje y el mantenimiento de las instalaciones de telecomunicaciones y la normativa del medio ambiente."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M2-AE1",
+        "title": "Ejecuta mantenimiento de hardware y software de equipos y sistemas de telecomunicaciones, cumpliendo con los estándares de la industria y los protocolos de seguridad establecidos (según ANSI/TIA o ETSI u otro).",
+        "criteria": [
+          "1.1 Elabora un plan de mantenimiento preventivo y/o correctivo de acuerdo a las especificaciones técnicas y los requerimientos del usuario.",
+          "1.2 Aplica los procedimientos normalizados establecidos en el plan de mantenimiento preventivo, para verificar el funcionamiento del equipo terminal de telecomunicaciones.",
+          "1.3 Verifica el funcionamiento de los equipos y sistemas, de acuerdo al plan de mantenimiento preventivo y a las especificaciones técnicas.",
+          "1.4 Actualiza componentes de hardware y software de un equipo de telecomunicaciones, de acuerdo a los protocolos establecidos (según ANSI/TIA o ETSI, etc.).",
+          "1.5 Elabora un informe técnico del desarrollo del plan de mantenimiento empleando lenguaje técnico y herramientas informáticas."
+        ]
+      },
+      {
+        "code": "M2-AE2",
+        "title": "Realiza reparaciones en equipos y sistemas de telecomunicaciones cumpliendo con los estándares de la industria y los protocolos de seguridad establecidos (según ANSI/TIA o ETSI, etc.).",
+        "criteria": [
+          "2.1 Diagnostica fallas de hardware siguiendo el protocolo establecido, las especificaciones del fabricante, de acuerdo a normas de seguridad.",
+          "2.2 Aplica procedimientos técnicos normalizados para reemplazar y/o actualizar componentes internos de equipos terminales en telecomunicaciones, o periférico cumpliendo los protocolos de seguridad.",
+          "2.3 Utiliza herramientas de software que permiten diagnosticar anomalías en el funcionamiento de un equipo computacional, según las especificaciones de uso.",
+          "2.4 Configura dispositivos de hardware, de comunicaciones o periféricos según las especificaciones técnicas y requerimientos del usuario.",
+          "2.5 Comprueba el funcionamiento de las partes o equipos actualizados o ensamblados, de acuerdo a las especificaciones técnicas del fabricante y los requerimientos de las personas usuarias."
+        ]
+      },
+      {
+        "code": "M2-AE3",
+        "title": "Instala un sistema operativo y reinstala aplicaciones y/o programas en equipos de telecomunicaciones, según los protocolos de seguridad establecidos (según ANSI/TIA o ETSI, etc.), cumpliendo con los estándares de calidad y seguridad.",
+        "criteria": [
+          "3.1 Diagnostica fallas de software siguiendo el protocolo establecido, las especificaciones de origen, y las normas de seguridad.",
+          "3.2 Instala el sistema operativo y los controladores de dispositivos en equipos de telecomunicaciones, según las recomendaciones del desarrollador.",
+          "3.3 Configura el sistema operativo, los dispositivos de hardware y/o periféricos, según los requerimientos técnicos y de los usuarios, cumpliendo con los protocolos de seguridad normalizados.",
+          "3.4 Realiza pruebas de arranque del sistema para verificar la instalación y el funcionamiento según especificaciones del desarrollador del sistema operativo (SO), y elabora un informe de los resultados en formato normalizado."
+        ]
+      },
+      {
+        "code": "M2-AE4",
+        "title": "Aplica procedimientos de trabajo seguro en la mantención de sistemas y equipos en telecomunicaciones, de acuerdo a los protocolos establecidos y a las normas de seguridad del proyecto.",
+        "criteria": [
+          "4.1 Ejecuta planes de prevención de accidentes laborales en la mantención de sistemas y equipos de telecomunicaciones, de acuerdo a protocolos establecidos y a las normas medioambientales del proyecto.",
+          "4.2 Chequea los elementos de protección personal que se emplean en la mantención de equipos y sistemas de telecomunicaciones según la normativa."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82138.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34340_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 3,
+    "title": "Instalación y configuración de redes",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 2",
+        "title": "Instalar equipos y sistemas de telecomunicaciones de generación, transmisión, repetición, amplificación, recepción y distribución de señal de voz, imagen y datos, según solicitud de trabajo y especificaciones técnicas del proyecto."
+      },
+      {
+        "code": "OA 10",
+        "title": "Determinar los equipos y sistemas de comunicación necesarios para una conectividad efectiva y eficiente, de acuerdo a los requerimientos de los usuarios."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M3-AE1",
+        "title": "Instala equipos de transmisión de voz, datos y video, de acuerdo a los estándares de la industria y los requerimientos del usuario, respetando la normativa.",
+        "criteria": [
+          "1.1 Fija los elementos (canalizaciones, mástiles, soportes, bandejas, regletas, etc.), y materiales que cumplan con los requisitos técnicos y funcionales de una instalación para equipos de telecomunicaciones de voz, datos y/o video, de acuerdo a los requerimientos del proyecto.",
+          "1.2 Conecta cables (cobre/fibra óptica/ coaxial) de una instalación de telecomunicaciones, de acuerdo a los procedimientos y las especificaciones técnicas del fabricante, cumpliendo con los parámetros de calidad y de seguridad vigentes.",
+          "1.3 Maneja las herramientas y procedimientos para instalar componentes (antenas, rack, etc.), y equipos de telecomunicaciones de voz, datos y/o video, de acuerdo a los requerimientos del proyecto, las especificaciones del fabricante y las normas de seguridad establecidas."
+        ]
+      },
+      {
+        "code": "M3-AE2",
+        "title": "Configura equipos terminales de telecomunicaciones para comunicación de voz, datos y video (telefónicos, alarmas, cámaras IP, etc.), según los manuales técnicos y requerimientos del proyecto.",
+        "criteria": [
+          "2.1 Calcula los parámetros básicos de una instalación de telecomunicaciones para configurar los rangos que cumplen con las especificaciones requeridas en el proyecto.",
+          "2.2 Configura los parámetros de los equipos terminales de telecomunicaciones (cámaras IP, sistemas de alarmas, etc.), según requerimientos del usuario, características de los equipos y las especificaciones del fabricante.",
+          "2.3 Compara la información obtenida mediante un software especializado de control de tráfico, detección y corrección de errores, orientación de antenas y orientación satelital, entre otros, con las especificaciones técnicas del proyecto.",
+          "2.4 Comprueba la configuración de los equipos en función de los requerimientos del proyecto."
+        ]
+      },
+      {
+        "code": "M3-AE3",
+        "title": "Verifica el funcionamiento de un sistema básico de transmisión, repetición, generación y/o distribución de voz, datos y/o video de acuerdo a las especificaciones del fabricante, cumpliendo con la normativa de seguridad vigente.",
+        "criteria": [
+          "3.1 Verifica las conexiones eléctricas y mecánicas entre los equipos, dispositivos y sistemas de alimentación, para asegurar su conectividad según las especificaciones técnicas del sistema o proyecto.",
+          "3.2 Utiliza un software de control de tráfico especializado para comprobar el funcionamiento (ancho de banda, potencia, resolución, retardos) de los equipos de telecomunicaciones.",
+          "3.3 Realiza mantenimiento correctivo, según protocolos establecidos y recomendaciones del fabricante, cumpliendo con los procedimientos y las normas de seguridad.",
+          "3.4 Elabora informes técnicos sobre la instalación y pruebas de equipos de telecomunicaciones, de acuerdo a protocolos establecidos y en formato normalizado."
+        ]
+      },
+      {
+        "code": "M3-AE4",
+        "title": "Establece el medio de transmisión confinado correspondiente a sistemas de comunicación de datos, de acuerdo a los estándares de la industria y las normas de seguridad respectivas.",
+        "criteria": [
+          "4.1 Selecciona los medios de transmisión a partir de las normas de cableado estructurado (estándares TIA 568, 569, 606, 607, 942, etc.), según las especificaciones del proyecto.",
+          "4.2 Aplica procedimientos para asegurar que el cableado de red, los armarios (racks) y accesorios de una red de datos, cumplan con los parámetros de calidad y seguridad establecidas.",
+          "4.3 Elabora informes técnicos con los datos obtenidos en el proceso de certificación de redes, según formatos establecidos y normalizados."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82139.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34340_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 4,
+    "title": "Mantenimiento de circuitos electrónicos básicos",
+    "hp": 190,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 9",
+        "title": "Detectar y corregir fallas en circuitos de corriente continua de acuerdo a los requerimientos técnicos y de seguridad establecidos."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M4-AE1",
+        "title": "Realiza mantención preventiva en circuitos de corriente continua para equipos de telecomunicaciones, según proyecto y especificaciones del fabricante.",
+        "criteria": [
+          "1.1 Aplica el procedimiento normalizado establecido en el plan de mantenimiento para realizar el diagnóstico de un circuito eléctrico, según las especificaciones técnicas.",
+          "1.2 Chequea los parámetros y verifica el funcionamiento de los circuitos eléctricos, de acuerdo al plan de mantenimiento preventivo y a las especificaciones técnicas.",
+          "1.3 Aplica el procedimiento normalizado establecido en el plan de mantenimiento para realizar el diagnóstico de un circuito electrónico, según las especificaciones técnicas.",
+          "1.4 Chequea los parámetros y verifica el funcionamiento de los circuitos electrónicos, de acuerdo al plan de mantenimiento preventivo y a las especificaciones técnicas.",
+          "1.5 Corrige las fallas que se encuentren durante la aplicación del procedimiento de mantención preventiva establecido, según las especificaciones técnicas.",
+          "1.6 Elabora un informe técnico del desarrollo del plan de mantenimiento empleando lenguaje técnico y herramientas de informáticas."
+        ]
+      },
+      {
+        "code": "M4-AE2",
+        "title": "Realiza una mantención correctiva en circuitos de corriente continua para equipos de telecomunicaciones, según proyecto y especificaciones del fabricante en el manual de uso, cumpliendo con los estándares de seguridad de la industria.",
+        "criteria": [
+          "2.1 Diagnostica fallas de circuitos eléctricos, haciendo uso de instrumentos siguiendo el protocolo establecido, las especificaciones de fabricación y las normas de seguridad.",
+          "2.2 Aplica procedimientos técnicos normalizados para reemplazar y/o reparar materiales, componentes y piezas de circuitos eléctricos, utilizando las herramientas necesarias según las especificaciones técnicas, bajo el cumplimiento de protocolos de seguridad.",
+          "2.3 Usa instrumentos para diagnóstico de fallas de circuitos electrónicos siguiendo el protocolo establecido, las especificaciones del fabricante y las normas de seguridad.",
+          "2.4 Aplica procedimientos técnicos normalizados para reemplazar y/o reparar materiales componentes y piezas de circuitos electrónicos, utilizando las herramientas necesarias según las especificaciones técnicas y cumpliendo con los protocolos de seguridad.",
+          "2.5 Comprueba el funcionamiento de los circuitos, de acuerdo a las especificaciones técnicas del fabricante.",
+          "2.6 Ejecuta planes de prevención de accidentes laborales en la mantención de sistemas y equipos de telecomunicaciones, de acuerdo a protocolos establecidos y a las normas medio ambientales del proyecto."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82140.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34340_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 5,
+    "title": "Instalación de servicios básicos de telecomunicaciones",
+    "hp": 152,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 2",
+        "title": "Instalar equipos y sistemas de telecomunicaciones de generación, transmisión, repetición, amplificación, recepción y distribución de señal de voz, imagen y datos, según solicitud de trabajo y especificaciones técnicas del proyecto."
+      },
+      {
+        "code": "OA 4",
+        "title": "Realizar medidas y pruebas de conexión y de continuidad de señal –eléctrica, de voz, imagen y datos– en equipos, sistemas y redes de telecomunicaciones, utilizando instrumentos de medición y certificación de calidad de la señal autorizada por la normativa vigente."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M5-AE1",
+        "title": "Instala equipos de transmisión de voz, datos y video, de acuerdo a los estándares de la industria y los requerimientos del usuario, respetando la normativa.",
+        "criteria": [
+          "1.1 Fija los elementos (canalizaciones, mástiles, soportes, bandejas, regletas, etc.), y materiales que cumplan con los requisitos técnicos y funcionales de una instalación para equipos de telecomunicaciones de voz, datos y/o video, de acuerdo a los requerimientos del proyecto.",
+          "1.2 Conecta cables (cobre/fibra óptica/coaxial) de una instalación de telecomunicaciones, de acuerdo a los procedimientos y especificaciones técnicas desde fábrica, cumpliendo con los parámetros de calidad y seguridad vigentes.",
+          "1.3 Maneja las herramientas y procedimientos para instalar componentes (antenas, rack, etc.) y equipos de telecomunicaciones de voz, datos y/o video, de acuerdo a las necesidades del proyecto, las especificaciones de fabricación y las normas de seguridad establecidas."
+        ]
+      },
+      {
+        "code": "M5-AE2",
+        "title": "Realiza un análisis de calidad de las señales en redes de telecomunicaciones, para certificarlas según los estándares y especificaciones del fabricante, respetando las normas de seguridad.",
+        "criteria": [
+          "2.1 Mide los parámetros eléctricos de los equipos y de las señales que se transmiten en redes de telecomunicaciones (voz, datos y video), de acuerdo a las especificaciones del manual de uso.",
+          "2.2 Mide las limitaciones y perturbaciones eléctricas que afectan a los equipos y medios de transmisión de las redes de telecomunicaciones, según las especificaciones del fabricante y los estándares de la industria.",
+          "2.3 Utiliza los instrumentos para realizar pruebas y mediciones de parámetros específicos de los equipos y los compara con los valores establecidos por el fabricante, respetando las normas de seguridad vigentes."
+        ]
+      },
+      {
+        "code": "M5-AE3",
+        "title": "Verifica la conectividad y el funcionamiento de un sistema de comunicación de voz, datos y/o video, de acuerdo a las especificaciones del fabricante, cumpliendo con las normativas de seguridad.",
+        "criteria": [
+          "3.1 Realiza mediciones de parámetros específicos de las señales de los equipos y los compara con los valores establecidos por la industria fabricadora.",
+          "3.2 Verifica las conexiones eléctricas y mecánicas entre los equipos, dispositivos, sistemas de alimentación, etc., para asegurar su conectividad según las especificaciones técnicas del sistema o proyecto.",
+          "3.3 Utiliza un software de control de tráfico especializado para comprobar el funcionamiento de los sistemas de comunicación de voz, datos y/o video, de acuerdo a las especificaciones del proyecto.",
+          "3.4 Realiza mantenimiento correctivo, según protocolos establecidos y recomendaciones del fabricante, cumpliendo con los procedimientos y las normas de seguridad.",
+          "3.5 Elabora informes técnicos acerca del estado de la red y calidad de las señales de telecomunicaciones, de acuerdo a protocolos establecidos y en formato normalizado."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82141.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34340_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 6,
+    "title": "Comunicaciones inalámbricas",
+    "hp": 228,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 8",
+        "title": "Instalar y configurar una red inalámbrica según tecnologías y protocolos establecidos."
+      },
+      {
+        "code": "OA 7",
+        "title": "Aplicar la normativa y los implementos de seguridad y protección relativos al montaje y el mantenimiento de las instalaciones de telecomunicaciones y la normativa del medio ambiente."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M6-AE1",
+        "title": "Instala un enlace y/o una red inalámbrica, cumpliendo con los protocolos de instalación del proyecto, los estándares de la industria y las normas de seguridad.",
+        "criteria": [
+          "1.1 Examina el lugar de instalación de la red, de acuerdo a los planos y revisa los requerimientos técnicos del proyecto aplicando procedimientos establecidos.",
+          "1.2 Instala los equipos y dispositivos de transmisión y recepción inalámbricos, de acuerdo a los requerimientos técnicos planteados en el proyecto y a las especificaciones técnicas del fabricante, cumpliendo con los parámetros de calidad y seguridad.",
+          "1.3 Utiliza las herramientas, software e instrumentos durante la instalación de la red inalámbrica, de acuerdo a las especificaciones del manual de instalación.",
+          "1.4 Efectúa pruebas de directividad y ganancia de los enlaces de una red inalámbrica, según las especificaciones técnicas del proyecto."
+        ]
+      },
+      {
+        "code": "M6-AE2",
+        "title": "Configura un enlace y/o una red inalámbrica, de acuerdo a los requerimientos del proyecto, estándares de la industria y las normas de seguridad.",
+        "criteria": [
+          "2.1 Configura una red de área local inalámbrica, cumpliendo con los parámetros de calidad y siguiendo las especificaciones del fabricante y los requisitos del proyecto.",
+          "2.2 Orienta las antenas para obtener la máxima ganancia, comprobando por medio de instrumentos que cumplen con las especificaciones técnicas del proyecto.",
+          "2.3 Configura los parámetros de los equipos de comunicación inalámbrica (repetidores, transmisores, etc.), según requerimientos del proyecto y las especificaciones del fabricante.",
+          "2.4 Comprueba la configuración de los equipos de comunicación inalámbrica en función los requerimientos del proyecto."
+        ]
+      },
+      {
+        "code": "M6-AE3",
+        "title": "Verifica el funcionamiento y chequea la seguridad de la información en redes inalámbricas según los estándares de autentificación y encriptación, los requerimientos del proyecto y los protocolos de la industria.",
+        "criteria": [
+          "3.1 Aplica técnicas de seguridad estandarizadas (WAP y 802.11x) en una red inalámbrica con el propósito de mantener la integridad de los datos, según los requerimientos del usuario.",
+          "3.2 Comprueba el funcionamiento del software de seguridad instalado en los equipos de una red inalámbrica realizando pruebas mediante un protocolo establecido.",
+          "3.3 Verifica los parámetros de conectividad y transmisión, utilizando los instrumentos de prueba básicos y aplicando procedimientos de medición estandarizados.",
+          "3.4 Elabora informes técnicos de la instalación y pruebas de equipos de comunicaciones inalámbricas, de acuerdo a protocolos establecidos y en formato normalizado."
+        ]
+      },
+      {
+        "code": "M6-AE4",
+        "title": "Aplica procedimientos de trabajo seguro al montaje de sistemas y equipos de telecomunicaciones, de acuerdo a protocolos establecidos y normas de seguridad y medioambientales del proyecto.",
+        "criteria": [
+          "4.1 Ejecuta planes de prevención de accidentes laborales en el montaje de sistemas y equipos de telecomunicaciones, de acuerdo a protocolos establecidos y a las normas medioambientales del proyecto.",
+          "4.2 Aplica técnicas para la movilización y el traslado de objetos de acuerdo a los protocolos establecidos y a la normativa de seguridad.",
+          "4.3 Ejecuta planes de prevención de accidentes laborales en el montaje de sistemas y equipos de telecomunicaciones, según los protocolos establecidos y las normas medioambientales necesarias en el proyecto."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82142.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34340_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 7,
+    "title": "Instalación de redes telefónicas convergentes",
+    "hp": 190,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 5",
+        "title": "Instalar y configurar una red de telefonía (tradicional o IP) en una organización según los parámetros técnicos establecidos."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M7-AE1",
+        "title": "Instala y configura una red de citofonía análoga y digital, según los requerimientos del proyecto, las especificaciones del fabricante y las normas de seguridad.",
+        "criteria": [
+          "1.1 Interpreta instrucciones de instalación y configuración de un proyecto, haciendo uso del lenguaje técnico normalizado.",
+          "1.2 Aplica procedimientos de instalación de cableado estructurado de una red de citofonía, cumpliendo los protocolos, según las especificaciones técnicas.",
+          "1.3 Maneja las herramientas y procedimientos, siguiendo las normas de seguridad durante el proceso de instalación de un sistema de citofonía.",
+          "1.4 Instala los equipos que conforman el sistema de citofonía, de acuerdo a los requerimientos del proyecto y cumpliendo con los procedimientos establecidos por el fabricante."
+        ]
+      },
+      {
+        "code": "M7-AE2",
+        "title": "Implementa y configura una central telefónica tradicional, según las exigencias del proyecto, las especificaciones del fabricante y las normas de seguridad.",
+        "criteria": [
+          "2.1 Aplica procedimientos de instalación de cableado estructurado para una red telefónica, cumpliendo los protocolos y procedimientos, utilizando las herramientas según las especificaciones técnicas.",
+          "2.2 Instala los dispositivos del sistema de telefonía de acuerdo a las exigencias del proyecto y especificaciones del fabricante.",
+          "2.3 Configura una central telefónica de acuerdo a los requerimientos del proyecto y las especificaciones de fábrica.",
+          "2.4 Configura terminales telefónicas de acuerdo a los requerimientos del proyecto y las especificaciones de fabricación."
+        ]
+      },
+      {
+        "code": "M7-AE3",
+        "title": "Instala y configura una red de telefonía IP, cumpliendo con los protocolos de instalación del fabricante y según los estándares de la industria.",
+        "criteria": [
+          "3.1 Aplica procedimientos para instalar una red básica de telefonía IP con los equipos necesarios, cumpliendo con las especificaciones del proyecto y las normas de seguridad.",
+          "3.2 Maneja las herramientas y procedimientos siguiendo las normas de seguridad normalizadas durante el proceso de instalación.",
+          "3.3 Configura computadores (softphone) y teléfonos IP, de acuerdo a las necesidades del proyecto, y las normas de seguridad."
+        ]
+      },
+      {
+        "code": "M7-AE4",
+        "title": "Verifica el funcionamiento y puesta en marcha de un sistema telefónico tradicional e IP, de acuerdo a las especificaciones técnicas y los requerimientos del proyecto.",
+        "criteria": [
+          "4.1 Chequea el estado del cableado, los equipos de telefonía tradicional e IP, de acuerdo a los protocolos instaurados.",
+          "4.2 Realiza pruebas de funcionamiento utilizando las herramientas de software, y evalúa la calidad de la señal transmitida según los estándares de la industria.",
+          "4.3 Elabora informes técnicos de la instalación y pruebas de funcionamiento de una red telefónica tradicional de acuerdo a protocolos establecidos y en formato normalizado."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82143.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34340_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 8,
+    "title": "Sistemas operativos de redes",
+    "hp": 152,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 3",
+        "title": "Instalar y/o configurar sistemas operativos en computadores o servidores con el fin de incorporarlos a una red LAN, cumpliendo con los estándares de calidad y seguridad establecidos."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M8-AE1",
+        "title": "Instala un sistema operativo de red en un servidor según las especificaciones técnicas y los requerimientos del usuario, cumpliendo con los estándares de seguridad.",
+        "criteria": [
+          "1.1 Planifica la instalación de un sistema operativo de red de acuerdo al protocolo, considerando las recomendaciones de fabricación, exigencias por parte de la persona usuaria, y considerando las normas de seguridad vigentes.",
+          "1.2 Instala un sistema operativo de red, propietario o de libre distribución, de acuerdo a los procedimientos técnicos establecidos por el desarrollador y a los requerimientos del usuario.",
+          "1.3 Verifica el funcionamiento del sistema operativo y aplica reglas de seguridad y de respaldo de datos, según los requerimientos de la persona usuaria, y según las recomendaciones del desarrollador del software."
+        ]
+      },
+      {
+        "code": "M8-AE2",
+        "title": "Actualiza un sistema operativo de red en un servidor, según las recomendaciones del fabricante y de acuerdo a los requerimientos del usuario.",
+        "criteria": [
+          "2.1 Utiliza comandos y herramientas informáticas para actualizar un sistema operativo de red, y programa el sistema operativo para descargar actualizaciones de software y de seguridad de forma automática según las necesidades del usuario.",
+          "2.2 Aplica plan de actualización de los controladores de un sistema operativo de red, propietario o de libre distribución, de acuerdo a los procedimientos técnicos establecidos por el desarrollador y las normas de seguridad vigentes.",
+          "2.3 Verifica el funcionamiento del sistema operativo, después de la actualización de este, de acuerdo a las especificaciones técnicas y requerimientos del usuario."
+        ]
+      },
+      {
+        "code": "M8-AE3",
+        "title": "Configura servicios y/o dispositivos periféricos en un sistema operativo de red, de acuerdo a los requerimientos del usuario y según recomendaciones del desarrollador de software.",
+        "criteria": [
+          "3.1 Configura los parámetros y servicios básicos del sistema operativo de red en el servidor, según recomendaciones técnicas del fabricante.",
+          "3.2 Realiza configuraciones básicas de servicios de red (direcciones, máscaras de red, puerta de enlace, resolución de nombres, etc.) en una estación de trabajo cliente, de acuerdo a las especificaciones del usuario.",
+          "3.3 Comprueba la compatibilidad del sistema operativo instalado en la estación de trabajo con el SO de red, de acuerdo a las especificaciones técnicas de ambos sistemas.",
+          "3.4 Elabora un informe detallando la configuración y los parámetros utilizados conforme a los protocolos establecidos y en formatos normalizados."
+        ]
+      },
+      {
+        "code": "M8-AE4",
+        "title": "Respalda técnicamente información y datos de equipos y redes, aplicando reglas de seguridad según los requerimientos del usuario, los estándares y normas de seguridad.",
+        "criteria": [
+          "4.1 Aplica procedimientos de respaldo de información y/o recuperación de datos, de acuerdo a protocolos y requerimientos de uso.",
+          "4.2 Verifica la aplicación de reglas de seguridad y de respaldo de información y datos, según plan de seguridad establecido.",
+          "4.3 Elabora un informe, detallando las reglas de seguridad utilizadas, conforme a los protocolos establecidos y en formatos normalizados."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82144.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34340_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 9,
+    "title": "Mantenimiento de redes de acceso y banda ancha",
+    "hp": 190,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 10",
+        "title": "Determinar los equipos y sistemas de comunicación necesarios para una conectividad efectiva y eficiente, de acuerdo a los requerimientos de los usuarios."
+      },
+      {
+        "code": "OA 6",
+        "title": "Realizar mantenimiento y reparaciones menores en equipos y sistemas de telecomunicaciones, utilizando herramientas y pautas de mantención establecidas por el fabricante."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M9-AE1",
+        "title": "Determina los equipos que forman parte de un sistema de comunicación de datos, de acuerdo a las especificaciones del proyecto y los requerimientos del usuario cumpliendo con las normas de seguridad vigentes.",
+        "criteria": [
+          "1.1 Interpreta diagramas y sitúa los equipos de comunicación de datos de acuerdo al plano normalizado de la red de telecomunicaciones.",
+          "1.2 Establece la compatibilidad técnica de los equipos con el sistema de comunicaciones de acuerdo a las especificaciones técnicas de los equipos y estándares industriales.",
+          "1.3 Selecciona los equipos a usar en una instalación según la función que deben cumplir, basándose en un plano técnico, y considerando las especificaciones del manual de uso.",
+          "1.4 Coteja que la ubicación, compatibilidad y selección de los equipos se ejecutará cumpliendo los requerimientos del usuario y especificaciones del proyecto."
+        ]
+      },
+      {
+        "code": "M9-AE2",
+        "title": "Establece el medio de transmisión confinado correspondiente a sistemas de comunicación de datos, de acuerdo a los estándares de la industria y las normas de seguridad respectivas.",
+        "criteria": [
+          "2.1 Selecciona los medios de transmisión a partir de las normas de cableado estructurado (estándares TIA 568, 569, 606, 607, 942, etc.), según las especificaciones del proyecto.",
+          "2.2 Aplica normas y procedimientos para asegurar que el cableado de red, los armarios (racks) y accesorios de una red de datos, cumplan con los parámetros de calidad y seguridad."
+        ]
+      },
+      {
+        "code": "M9-AE3",
+        "title": "Ejecuta mantenimiento de hardware y software de equipos y sistemas de telecomunicaciones, cumpliendo con los estándares de la industria y los protocolos de seguridad establecidos (según ANSI/TIA o ETSI, etc.).",
+        "criteria": [
+          "3.1 Elabora un plan de mantenimiento preventivo y/o correctivo de acuerdo a las especificaciones técnicas y los requerimientos del usuario.",
+          "3.2 Aplica los procedimientos normalizados, incluyendo los de seguridad, que se establecen en el plan de mantención preventivo para verificar el funcionamiento del equipo terminal de telecomunicaciones.",
+          "3.3 Verifica el funcionamiento de los equipos y sistemas, de acuerdo al plan de mantenimiento preventivo junto con sus especificaciones técnicas.",
+          "3.4 Actualiza componentes de hardware y software de un equipo de telecomunicaciones, de acuerdo a los protocolos establecidos (según ANSI/TIA o ETSI, etc.).",
+          "3.5 Elabora informe técnico de desarrollo del plan de mantenimiento empleando lenguaje técnico y herramientas de informática."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82145.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34340_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 10,
+    "title": "Emprendimiento y empleabilidad",
+    "hp": 76,
+    "year": "4° medio",
+    "oa": [],
+    "aes": [
+      {
+        "code": "M10-AE1",
+        "title": "Diseña y ejecuta un proyecto para concretar iniciativas de emprendimiento, identificando las acciones a realizar, el cronograma de su ejecución y los presupuestos, definiendo alternativas de financiamiento y evaluando y controlando su avance.",
+        "criteria": [
+          "1.1 Recolecta, organiza y analiza información para identificar oportunidades de emprendimiento en su propia comunidad y región, considerando diferentes ámbitos de aplicación (deporte, tecnología, medioambiente y energía, entre otros).",
+          "1.2 Evalúa las oportunidades de emprendimiento, tomando en cuenta sus fortalezas y debilidades, y considerando el contexto, los recursos existentes y las normativas vigentes relacionadas.",
+          "1.3 Formula los objetivos para un plan de acción de una iniciativa de emprendimiento personal, productivo o social, considerando las condiciones del entorno y personales.",
+          "1.4 Formula un presupuesto detallado, determinando los recursos (financieros, humanos, tecnológicos y otros) requeridos para el desarrollo de su iniciativa, los plazos y los factores externos que afectan su desarrollo.",
+          "1.5 Elabora un mecanismo de control de avance de su iniciativa de emprendimiento y evalúa las necesidades y las alternativas de financiamiento mediante aportes públicos y privados (créditos y ahorro).",
+          "1.6 Ejecuta las acciones para alcanzar los objetivos planteados según la planificación realizada, perseverando pese a circunstancias adversas, evaluando los resultados y las amenazas, ajustando sus acciones para asegurar el éxito y compartiendo su experiencia con otros."
+        ]
+      },
+      {
+        "code": "M10-AE2",
+        "title": "Maneja la legislación laboral y previsional chilena como marco regulador de las relaciones entre trabajadores y empleadores, identificando los derechos y deberes de ambas partes, tanto individuales como colectivos, y la reconoce como base para establecer buenas relaciones laborales.",
+        "criteria": [
+          "2.1 Selecciona la información relevante sobre los derechos laborales y previsionales de los trabajadores garantizados por la Constitución y el Código del Trabajo, para su propia contratación o de terceros a su cargo.",
+          "2.2 Determina elementos críticos de diversos tipos de contratos y de finiquitos, considerando la legislación laboral vigente.",
+          "2.3 Elabora propuestas de creación y desarrollo de organización sindical de acuerdo a la realidad de diferentes tipos de empresas, respetando la legislación vigente y la defensa de los derechos de los trabajadores."
+        ]
+      },
+      {
+        "code": "M10-AE3",
+        "title": "Prepara los elementos necesarios para participar de un proceso de incorporación al mundo del trabajo, valorando y planificando su trayectoria formativa y laboral.",
+        "criteria": [
+          "3.1 Sistematiza información desde organismos y empresas especializadas en intermediación laboral que existen en su entorno, analizando las perspectivas laborales, sus propias condiciones laborales y las normativas relacionadas.",
+          "3.2 Elabora correctamente los documentos necesarios para iniciar una actividad laboral, como el curriculum vitae, reuniendo evidencias de cursos realizados, experiencia laboral previa y cartas de recomendación, y visualizando sus alternativas de acuerdo a sus expectativas y condiciones.",
+          "3.3 Prepara las entrevistas y las situaciones de ingreso y promoción, identificando a personas e instituciones que pueden brindarle apoyo en este proceso.",
+          "3.4 Evalúa si la remuneración mensual o semanal y el finiquito se han determinado de acuerdo al tipo de contrato firmado y a la legislación laboral vigente.",
+          "3.5 Selecciona la institución y la modalidad conveniente para su cobertura de salud y pensión, además del seguro de desempleo que le corresponde de acuerdo a su contrato y derechos, y lleva a cabo los trámites de afiliación."
+        ]
+      },
+      {
+        "code": "M10-AE4",
+        "title": "Selecciona alternativas de capacitación y de educación superior para fortalecer sus competencias o desarrollar nuevas y adquirir certificaciones, ya sea e-learning o presenciales, evaluando las diversas opciones de financiamiento.",
+        "criteria": [
+          "4.1 Evalúa las necesidades futuras del mundo laboral en el ámbito de su especialidad y sus desafíos de formación, considerando las dinámicas de empleo, tendencias e innovaciones tecnológicas.",
+          "4.2 Evalúa las ofertas de capacitación virtual y presencial disponibles en su entorno, incluyendo sus características (como duración, objetivos y costos) y requisitos generales.",
+          "4.3 Evalúa las ofertas de educación superior disponibles en su entorno, incluyendo sus características (duración, acreditación, posibilidades de reconocimiento de aprendizajes previos y alternativas de financiamiento y becas) y requisitos de entrada."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82136.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34340_programa.pdf",
+    "source_warnings": []
+  }
+]

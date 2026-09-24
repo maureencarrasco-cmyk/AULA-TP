@@ -1,0 +1,570 @@
+[
+  {
+    "position": 1,
+    "title": "Lectura de planos y documentos técnicos",
+    "hp": 76,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 1",
+        "title": "Leer y utilizar información técnica consignada en manuales, planos, croquis, informes, instrucciones entregadas por los usuarios, detectando errores y relevando los datos necesarios para desarrollar proyectos de dibujo técnico en general."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M1-AE1",
+        "title": "Lee croquis y planos en general, obteniendo información relevante para dibujar, complementar o modificar un proyecto.",
+        "criteria": [
+          "1.1 Elabora un plano de levantamientos de edificaciones y de piezas mecánicas, según indicaciones consignadas y detalles de elementos consignados en un croquis.",
+          "1.2 Elabora planos de conjuntos y piezas mecánicas en base a sistemas de representación ISO, identificando simbología consignada, según normas de dibujo técnico industrial.",
+          "1.3 Elabora planos de arquitectura y urbanismo, identificando tipos de línea, espesores de línea, acotado, unidades de medida, niveles de piso y simbología en general, según normas de dibujo técnico arquitectónico.",
+          "1.4 Elabora planos de especialidades de instalaciones sanitarias, instalaciones eléctricas y de gas, identificando sus simbologías, detalles, notas técnicas y cuadros de cálculos, según normativas vigentes de cada especialidad.",
+          "1.5 Elabora planos de sistemas constructivos de edificaciones de albañilerías, madera y hormigón armado, identificando sus elementos, detalles constructivos, cotas a ejes, simbologías y notas técnicas, según normativas chilenas vigentes para cada sistema constructivo (NCh)."
+        ]
+      },
+      {
+        "code": "M1-AE2",
+        "title": "Lee y utiliza manuales técnicos, normativas vigentes, informes e instrucciones escritas para obtener datos, condiciones y características específicas, según requerimientos del proyecto en desarrollo.",
+        "criteria": [
+          "2.1 Determina materialidad y características de los elementos constructivos de un proyecto, y los ítems y subítems de partidas de construcción, utilizando especificaciones técnicas y fichas técnicas de productos.",
+          "2.2 Determina normas vigentes de los proyectos de arquitectura y requisitos de tramitación municipal, con la información entregada en la Ordenanza General de Urbanismo y Construcciones (OGUC).",
+          "2.3 Determina normas vigentes en los proyectos sanitarios y requisitos de tramitación en organismos privados y públicos, buscando información en el Reglamento de Instalaciones Domiciliarias de Agua Potable y Alcantarillado (RIDAA).",
+          "2.4 Busca información en reglamentos y normas chilenas vigentes que rigen las instalaciones eléctricas y de gas, para indicar, en planos, requerimientos de tramitación en la Superintendencia de Electricidad y Combustibles (SEC)."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81905.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34322_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 2,
+    "title": "Dibujo manual de levantamientos",
+    "hp": 152,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 2",
+        "title": "Dibujar manualmente planos de levantamiento de arquitectura e ingeniería de obras civiles, y croquis de piezas y conjuntos mecánicos, de acuerdo a la información técnica levantada y especificaciones del mandante."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M2-AE1",
+        "title": "Dibuja manualmente levantamiento de edificaciones existentes mediante planos de plantas, cortes y elevaciones, acotando sus elementos según características de la edificación y normas de dibujo técnico.",
+        "criteria": [
+          "1.1 Mide elementos constructivos de una edificación existente utilizando instrumentos técnicos de medición, según requisitos del levantamiento.",
+          "1.2 Elabora croquis de plantas de emplazamiento y de arquitectura de edificación existente, registrando las dimensiones generales y específicas de sus elementos constructivos a través del trabajo en equipo, según requerimientos del levantamiento y normas de dibujo técnico.",
+          "1.3 Elabora croquis de cortes y fachadas de edificación existente, registrando las alturas generales y específicas de los elementos constructivos a través del trabajo en equipo, según requerimientos del levantamiento y normas de dibujo técnico.",
+          "1.4 Registra fotográficamente la edificación existente levantada, en vistas generales y específicas, según proceso de levantamiento para la coordinación de las imágenes con los croquis tomados."
+        ]
+      },
+      {
+        "code": "M2-AE2",
+        "title": "Dibuja manualmente levantamiento de piezas y conjuntos mecánicos consignando acotación y acabados en base a sistemas estandarizados de dibujo técnico.",
+        "criteria": [
+          "2.1 Mide piezas mecánicas mediante instrumentos técnicos de medición, registrando con exactitud las dimensiones constatadas, según requisitos del levantamiento.",
+          "2.2 Dibuja y dimensiona manualmente piezas y conjuntos mecánicos existentes según sistemas de representación ISO y normas de dibujo técnico industrial, cuidando la pulcritud del trabajo.",
+          "2.3 Dibuja manualmente acabados superficiales de piezas y conjuntos mecánicos levantados, según simbología técnica estandarizada, cuidando la pulcritud del trabajo."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81906.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34322_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 3,
+    "title": "Dibujo digital de proyectos de arquitectura",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 3",
+        "title": "Dibujar de manera gráfica digital los planos de proyectos arquitectónicos de viviendas y urbanismo, en diferentes plantas, fachadas y secciones, con los niveles de detalle requeridos, conforme a las reglamentaciones vigentes, que permitan la elaboración de expedientes de obras municipales."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M3-AE1",
+        "title": "Dibuja, mediante programa asistido por computación, planos de planta, cortes, elevaciones y detalles constructivos de viviendas de uno y más pisos, conforme a requerimientos de tramitación municipal.",
+        "criteria": [
+          "1.1 Realiza de manera digital el delineado inicial de planos de arquitectura a través de la inserción de imágenes de referencia (croquis de levantamiento u otro), según normas de dibujo técnico arquitectónico y herramientas provistas por el programa computacional.",
+          "1.2 Dibuja de manera digital planimetría base del proyecto de arquitectura (plantas, cortes y elevaciones), conforme a normas de dibujo técnico arquitectónico y requisitos de tramitación municipal.",
+          "1.3 Dibuja planimetría complementaria del proyecto de arquitectura (plano de ubicación, planta de emplazamiento, planta de cubiertas, plano de cierro y plano comparativo de sombras), conforme a normas de dibujo técnico arquitectónico y requisitos de tramitación municipal.",
+          "1.4 Incorpora cotas según normas de dibujo técnico a los planos elaborados, configurando herramienta de acotado en programa computacional.",
+          "1.5 Incorpora e inserta sombreados, texturas, bloques de ambientación e imágenes a planos elaborados, definiendo su escala y peso visual respecto a la escala trabajada, según requerimientos del proyecto y del programa computacional."
+        ]
+      },
+      {
+        "code": "M3-AE2",
+        "title": "Dibuja, mediante programa asistido por computación, planos de plantas, cortes y elevaciones de edificios de vivienda en altura, conforme a requerimientos de tramitación municipal.",
+        "criteria": [
+          "2.1 Dibuja plantas libres de estacionamientos en subterráneos considerando planos de estructura pertinentes y simbologías de circulaciones vehiculares/peatonales, según normas de dibujo técnico y requisitos de tramitación municipal.",
+          "2.2 Dibuja de manera digital planta de primer nivel y plantas tipo de pisos superiores indicando circulaciones verticales, shaft de instalaciones y niveles de piso, según normas de dibujo técnico y requisitos de tramitación municipal.",
+          "2.3 Dibuja corte transversal/longitudinal, y elevaciones de fachadas considerando ambientación y perfiles de calles, en base a normas de dibujo técnico y requisitos de tramitación municipal."
+        ]
+      },
+      {
+        "code": "M3-AE3",
+        "title": "Dibuja, mediante programa asistido por computación, planos de urbanismo, conforme a requerimientos de tramitación municipal.",
+        "criteria": [
+          "3.1 Dibuja planos de loteo, subdivisión y fusión de terrenos en base a información contenida en escritura(s) de propiedad(es) e informes técnicos, conforme a requisitos de tramitación municipal.",
+          "3.2 Dibuja perfiles de avenidas, calles y pasajes consignando sus dimensiones y características conforme a requisitos de tramitación municipal.",
+          "3.3 Dibuja planos de zonificación urbana indicando sus sectores a través de simbologías y achurados, según planos reguladores comunales y programa computacional."
+        ]
+      },
+      {
+        "code": "M3-AE4",
+        "title": "Dibuja, mediante programa asistido por computación, esquemas, cuadros de información y cuadros con normativas aplicadas del proyecto en desarrollo, conforme a requerimientos de tramitación municipal.",
+        "criteria": [
+          "4.1 Dibuja planta de superficies del proyecto mediante subdivisión de esta en polígonos regulares, según requisitos de tramitación municipal.",
+          "4.2 Dibuja cuadro de superficies, indicando m² por piso, total de m² construidos, medias superficies, m² de terreno y porcentajes parciales en relación a la superficie total de terreno, según requisitos de tramitación municipal.",
+          "4.3 Representa de manera gráfica digital normativa en los planos elaborados, indicando rasantes, líneas oficiales y de edificación, adosamientos, distanciamientos etc., conforme a requisitos de tramitación municipal.",
+          "4.4 Dibuja cuadros de normativas aplicadas al proyecto indicando requisito normativo y cumplimiento del proyecto en relación al mismo, conforme a requisitos de tramitación municipal."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81907.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34322_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 4,
+    "title": "Dibujo digital de piezas y conjuntos mecánicos",
+    "hp": 190,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 5",
+        "title": "Dibujar en forma gráfica digital piezas, partes y objetos mecánicos, tales como elementos que conforman herramientas o ensamblan una máquina, detallando con claridad las características esenciales para su comprensión y fabricación, conforme a normas y criterios técnicos establecidos."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M4-AE1",
+        "title": "Dibuja en forma gráfica digital vistas de piezas mecánicas, según sistemas de representación normalizados y normativa vigente.",
+        "criteria": [
+          "1.1 Dibuja y elabora formato de representación normalizado, considerando tipo de pieza y elemento mecánico a graficar, según Norma NCh 13 Of. 93.",
+          "1.2 Dibuja vistas y cortes de piezas mecánicas, utilizando el sistema de proyección estandarizado según Norma NCh 2268 Of. 96 (ISO 5456).",
+          "1.3 Detalla en el plano características necesarias para la identificación y fabricación de las piezas, conforme a la Norma NCh 1193 Of. 93 (ISO 128).",
+          "1.4 Delimita la forma y dimensiones de las piezas mecánicas aplicando la simbología técnica para indicar acabados superficiales de piezas mecánicas según Norma NCh 16 Of. 93 (ISO 129).",
+          "1.5 Diagrama el formato final, organizando las vistas y controlando la exactitud y proporcionalidad de las escalas utilizadas, incorporándolas en un formato estandarizado según NCh 14 Of. 93."
+        ]
+      },
+      {
+        "code": "M4-AE2",
+        "title": "Dibuja en forma gráfica digital órganos de máquinas, según sistemas de representación normalizados y normativa vigente.",
+        "criteria": [
+          "2.1 Dibuja y elabora formato de representación normalizado, considerando los órganos de máquinas y elementos mecánicos a graficar, según normativas vigentes.",
+          "2.2 Dibuja piezas y elementos mecánicos de sujeción, detallando las características necesarias para la identificación y fabricación de las piezas, conforme a las normativas vigentes.",
+          "2.3 Dibuja elementos mecánicos de transmisión de movimiento, detallando las características necesarias para la identificación y fabricación de las piezas, conforme a las normativas vigentes.",
+          "2.4 Dibuja elementos de acoplamientos mecánicos, detallando las características necesarias para la identificación y fabricación de las piezas, conforme a las normativas vigentes.",
+          "2.5 Diagrama el formato final, organizando las vistas y controlando la exactitud y proporcionalidad de las escalas utilizadas, incorporándolo en un formato estandarizado, de acuerdo a normativa vigente."
+        ]
+      },
+      {
+        "code": "M4-AE3",
+        "title": "Dibuja en forma gráfica digital proyectos simples de conjuntos y despieces mecánicos, de acuerdo a requerimientos de fabricación, sistemas de representación normalizados y normativa vigente.",
+        "criteria": [
+          "3.1 Dibuja y elabora formato de representación normalizado considerando los elementos y despieces mecánicos a graficar, según normativas vigentes.",
+          "3.2 Dibuja las vistas, cortes y detalles necesarios para un plano de conjunto mecánico, de acuerdo al sistema de representación normalizado.",
+          "3.3 Dibuja cada una de las piezas, aplicando las normas de acotado, cortes, acabado superficial y tolerancias, conforme a los requerimientos del proyecto mecánico y las normativas vigentes.",
+          "3.4 Dibuja cuadros explicativos con datos y notas técnicas necesarias para la identificación y fabricación de las piezas, conforme a los manuales técnicos, de diseño y fabricación de piezas, según las observaciones requeridas en el proyecto mecánico.",
+          "3.5 Diagrama el formato final, organizando las vistas y controlando la exactitud y proporcionalidad de las escalas utilizadas, incorporándolo en un formato estandarizado y normativa vigente."
+        ]
+      },
+      {
+        "code": "M4-AE4",
+        "title": "Dibuja en forma gráfica digital ductos y piezas de calderería, determinando la superficie necesaria de la plancha a utilizar, de acuerdo a requerimientos de fabricación, a sistemas de representación normalizados y a la normativa vigente.",
+        "criteria": [
+          "4.1 Dibuja ductos de sección circular y poligonal, utilizando el método de desarrollo por trazado de paralelas determinando la superficie necesaria de la plancha a utilizar, conforme a los requerimientos de fabricación y normativas de diseño estandarizadas.",
+          "4.2 Dibuja mediante gráfica digital el desarrollo de piezas cónicas, utilizando el método de trazado radial determinando la superficie necesaria de la plancha a utilizar, conforme a los requerimientos de fabricación y normativas de diseño estandarizadas.",
+          "4.3 Dibuja el desarrollo de piezas piramidales, utilizando el método de trazado por triangulación determinando la superficie necesaria de la plancha a utilizar, conforme a los requerimientos de fabricación y normativas de diseño estandarizadas.",
+          "4.4 Dibuja cuadros explicativos con datos y notas técnicas necesarias para la identificación y fabricación de los ductos y piezas de calderería, conforme a los manuales técnicos y normativas de diseño estandarizadas.",
+          "4.5 Diagrama el formato final, organizando las vistas y controlando la exactitud y proporcionalidad de las escalas utilizadas, incorporándolo en un formato estandarizado, de acuerdo a normativa vigente."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81908.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34322_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 5,
+    "title": "Maquetas virtuales",
+    "hp": 190,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 7",
+        "title": "Generar dibujos digitales en 3D que permitan la representación volumétrica de objetos, elementos, maquetas y detalles constructivos de proyectos arquitectónicos y de ingeniería de obras civiles, aplicando, texturas, renderizados, iluminación y animación audiovisuales."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M5-AE1",
+        "title": "Modela representaciones en 3D de objetos, edificaciones y obras civiles, configurando las herramientas del programa computacional en función de los requerimientos del proyecto.",
+        "criteria": [
+          "1.1 Configura las barras de herramientas del programa computacional para definir el espacio de trabajo y los recursos a utilizar, según requerimientos del proyecto.",
+          "1.2 Crea y edita modelos básicos 3D utilizando sistema de coordenadas cartesianas y sólidos primitivos que provee el programa, según características del proyecto solicitado.",
+          "1.3 Modela representaciones 3D de objetos, edificaciones y obras civiles utilizando polilíneas, extrusión, revolución, entidad guía o barrido en base a planimetría del proyecto.",
+          "1.4 Maneja diferentes tipos de vistas y estilos de visualización, controlando los ajustes de bordes y sombreados resultantes, según necesidades de visualización del proyecto.",
+          "1.5 Edita modelo 3D mediante operaciones de booleanas de unión, intersección y sustracción entre sólidos, según requerimientos del proyecto.",
+          "1.6 Dibuja diferentes tipos de mallas manejando las variables de control de visibilidad y superficies predefinidas para la complementación de presentaciones 3D, según requerimientos del proyecto."
+        ]
+      },
+      {
+        "code": "M5-AE2",
+        "title": "Incorpora materialidades, texturas, iluminación y ornamentaciones al modelo 3D en programa madre utilizado y en programa de edición de imágenes, controlando la escala y resolución de las imágenes.",
+        "criteria": [
+          "2.1 Configura opciones de renderizado utilizando ajustes predefinidos y personalizados, según requerimientos de presentación del proyecto.",
+          "2.2 Asigna materialidad y texturas a modelo 3D utilizando librerías estándar y personalizadas, considerando escala, contexto e imagen, requerimientos solicitados para el proyecto.",
+          "2.3 Asigna ambientación a modelo 3D, incorporando luces a la escena, asoleamientos, hora del día, figuras humanas y vegetación para obtener la imagen de proyecto solicitada por el mandante.",
+          "2.4 Realiza fotomontajes con fotografías de emplazamiento real de los proyectos, escalando los contenidos y manejando las perspectivas, mediante programa computacional de edición de imágenes."
+        ]
+      },
+      {
+        "code": "M5-AE3",
+        "title": "Produce recorridos virtuales y animaciones audiovisuales en base a modelos 3D realizados, conforme a requisitos de presentación del proyecto.",
+        "criteria": [
+          "3.1 Establece el recorrido virtual del proyecto controlando los movimientos, puntos de vista y la altura de cámara para la animación virtual, según requerimientos del mandante.",
+          "3.2 Genera recorrido virtual del proyecto grabándolo en archivo compatible con programas de reproducción, según requerimientos del mandante.",
+          "3.3 Edita video de maqueta virtual de proyectos de arquitectura e ingeniería, incorporando portada, audio, textos, conforme a requerimientos de presentación del proyecto."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81909.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34322_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 6,
+    "title": "Dibujo digital de instalaciones domiciliarias",
+    "hp": 190,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 4",
+        "title": "Dibujar en forma gráfica digital los proyectos de instalaciones de redes interiores de alcantarillado, agua potable, electricidad y gas de viviendas, según las normativas vigentes."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M6-AE1",
+        "title": "Dibuja los proyectos de redes interiores domiciliarias de alcantarillado con unión a colector público y solución de fosa séptica, utilizando programa de dibujo asistido por computador, conforme a normativa vigente.",
+        "criteria": [
+          "1.1 Elabora y grafica las simbologías, cuadros y notas técnicas explicativas que regulan el diseño de la red requerida, según normativas contenidas en el Reglamento de Instalaciones Domiciliarias de Agua Potable y Alcantarillado (RIDAA) y factibilidad técnica otorgada por organismo visador público o privado pertinente.",
+          "1.2 Dibuja la solución de la red indicando y detallando la ubicación de los elementos que la conforman (unión domiciliaria, pendientes, profundidades, largos, material, diámetros de tuberías, ramales, fosa séptica, etc.), de acuerdo al plano de diseño arquitectónico y las normativas vigentes (RIDAA).",
+          "1.3 Dibuja las diferentes vistas de las cámaras de inspección y fosa séptica a utilizar, indicando sus dimensiones, características técnicas y materialidad, según especificaciones técnicas de construcción o fabricante.",
+          "1.4 Dibuja la solución de incorporación de las aguas servidas al terreno mediante el uso de drenes o pozo absorbente, indicando sus dimensiones, características y materialidad según especificaciones técnicas de construcción o fabricante y normativa vigente (RIDAA).",
+          "1.5 Dibuja en perspectiva isométrica la solución de la red, indicando la piezometría a utilizar, conforme a catálogos de fabricación.",
+          "1.6 Diagrama el dibujo de las soluciones, elementos, cuadros y notas técnicas explicativas de la red, en un formato y viñeta estandarizado según requerimientos de organismo visador público o privado pertinente."
+        ]
+      },
+      {
+        "code": "M6-AE2",
+        "title": "Dibuja planos de proyectos de instalaciones de redes interiores domiciliarias de agua potable fría y caliente, utilizando programa de dibujo asistido por computador, conforme a normativa vigente.",
+        "criteria": [
+          "2.1 Elabora y grafica las simbologías, cuadros y notas técnicas explicativas, que regulan el diseño de la red requerida según normativas contenidas en el Reglamento de Instalaciones Domiciliarias de Agua Potable y Alcantarillado (RIDAA) y factibilidad técnica otorgada por organismo pertinente.",
+          "2.2 Determina la dotación por habitante, gasto máximo instalado y el gasto máximo probable según número de artefactos diseñados en la red, detallando el diámetro necesario del medidor para abastecer la solución del proyecto de agua potable según normativas contenidas en el Reglamento de Instalaciones Domiciliarias de Agua Potable y Alcantarillado (RIDAA).",
+          "2.3 Dibuja la solución de la red de agua potable fría y caliente, indicando los elementos que la conforman, sus materiales, diámetros y características relevantes, de acuerdo al plano de diseño arquitectónico y las normativas vigentes (RIDAA).",
+          "2.4 Dibuja en perspectiva isométrica la solución de la red, indicando la piezometría a utilizar conforme a los catálogos de fabricación.",
+          "2.5 Diagrama el dibujo de las soluciones, elementos, cuadros y notas técnicas explicativas de la red, en un formato y viñeta estandarizado según requerimientos de organismo visador público o privado pertinente."
+        ]
+      },
+      {
+        "code": "M6-AE3",
+        "title": "Dibuja planos de proyectos de instalaciones de redes interiores domiciliarias de gas y calefacción utilizando programa de dibujo asistido por computador, conforme a normativa vigente.",
+        "criteria": [
+          "3.1 Elabora y grafica las simbologías, cuadros y notas técnicas explicativas, que regulan el diseño de la red requerida según normativas contenidas en el Reglamento de Instalaciones Interiores de Gas DS Nº 66.",
+          "3.2 Dibuja las partes y funciones de una instalación interior de gas y calefacción con equipo de gas licuado de petróleo y gas natural de cañería, según normativas contenidas en el Reglamento de Instalaciones Interiores de Gas DS Nº 66.",
+          "3.3 Determina el consumo térmico y nominal de cada artefacto diseñado en la red, indicando la potencia total general instalada en el proyecto de gas y calefacción, según normativas contenidas en el Reglamento de Instalaciones Interiores de Gas DS Nº 66.",
+          "3.4 Grafica la solución de evacuación de los gases de combustión al exterior, según el tipo de tiro normado y detalles complementarios de los conductos colectivos y sombreretes (NCh 2423/1).",
+          "3.5 Dibuja detalles de construcción y dimensiones del nicho de medidores de gas y su distribución esquemática según especificaciones técnicas del fabricante.",
+          "3.6 Diagrama el dibujo de las soluciones y detalles de los elementos que conforman el proyecto, las notas técnicas y de seguridad de la red, incorporándolos en un formato estandarizado y normativa vigente."
+        ]
+      },
+      {
+        "code": "M6-AE4",
+        "title": "Dibuja planos de proyectos de instalaciones de redes interiores domiciliarias eléctricas de alumbrado y enchufes, utilizando programa de dibujo asistido por computador, conforme a normativa vigente.",
+        "criteria": [
+          "4.1 Elabora y grafica las simbologías, cuadros y notas técnicas explicativas contenidas en el plano, de acuerdo a NCh Electricidad 2/84 Electricidad, elaboración y presentación de proyectos.",
+          "4.2 Determina la cantidad de centros de alumbrado y enchufes según la planta de arquitectura y los requerimientos del proyecto, separando la cantidad de circuitos conforme a la cantidad de centros permitidos y la potencia instalada, según NCh Electricidad 4/2003.",
+          "4.3 Dibuja la solución de la red eléctrica de alumbrado y enchufes de una vivienda, según la planta de arquitectura y los requerimientos del proyecto, respetando el reglamento eléctrico de instalaciones de baja tensión (NCh Electricidad 4/2003).",
+          "4.4 Dibuja el cuadro de cargas y potencias máximas instaladas y el diagrama unilineal de los circuitos resultantes, indicando disyuntores, protectores diferenciales, tomas de tierras de servicio y protección, empalmes y tableros, según NCh Electricidad 4/2003.",
+          "4.5 Diagrama el dibujo de las soluciones y detalles de los elementos que conforman el proyecto, las notas técnicas y de seguridad de la red, incorporándolos en un formato estandarizado y normativa vigente (NCh electricidad 2/84. Electricidad, elaboración y presentación de proyectos)."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81910.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34322_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 7,
+    "title": "Dibujo digital de sistemas constructivos",
+    "hp": 190,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 6",
+        "title": "Dibujar en forma gráfica digital planos de montaje industrial, así como los elementos que conforman proyectos estructurales de ingeniería de obras civiles en madera, hormigón, albañilerías y acero conforme a normativas, manuales y catálogos de fabricación estandarizados."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M7-AE1",
+        "title": "Dibuja en ambiente asistido por computación, la estructura de una vivienda de madera tipo considerando las normativas de diseño vigentes, especificaciones técnicas del proyecto y catálogos de fabricación estandarizados.",
+        "criteria": [
+          "1.1 Dibuja plantas de fundaciones aisladas sobre poyos y la solución de envigado de piso para vivienda de madera tipo, indicando materialidad, escuadrías, dimensiones y ejes principales según requerimientos del proyecto de arquitectura, especificaciones técnicas y normativas OGUC.",
+          "1.2 Dibuja plantas de estructuras de muros, tabiques y techumbre de una vivienda de madera tipo, indicando materialidad, escuadrías, dimensiones, y ejes principales según requerimientos del proyecto de arquitectura, especificaciones técnicas y normativas OGUC.",
+          "1.3 Dibuja vistas, cortes, detalles de encuentros y uniones de estructuras de madera, de los muros, techumbres y tabiquerías proyectadas, según requerimientos del proyecto de arquitectura, especificaciones técnicas y normativas OGUC.",
+          "1.4 Dibuja cuadros y notas técnicas explicativas, indicando características especiales señaladas en las especificaciones técnicas del proyecto y catálogos de fabricación.",
+          "1.5 Diagrama el contenido de las diferentes plantas, vistas y detalles que conforman el formato definitivo, según escalas que permitan proporcionalidad y facilidad de interpretación de acuerdo a los requerimientos del proyecto."
+        ]
+      },
+      {
+        "code": "M7-AE2",
+        "title": "Dibuja en ambiente asistido por computación, la estructura de una vivienda de albañilería armada o confinada, considerando las normativas de diseño vigentes, las especificaciones técnicas del proyecto y catálogos de fabricación estandarizados.",
+        "criteria": [
+          "2.1 Dibuja plantas de muros y tabiquerías de albañilería de ladrillos dispuestos en distintos tipos de aparejo de una vivienda tipo indicando dimensiones y ejes principales según requerimientos del proyecto de arquitectura, especificaciones técnicas y normativas OGUC, NCh 2123 y NCh 1928.",
+          "2.2 Dibuja vistas, cortes y detalles de uniones y encuentros de muros de albañilería armada o confinada de una vivienda tipo, indicando materialidad, enfierradura, dimensiones y ejes principales según requerimientos del proyecto de arquitectura, especificaciones técnicas y normativas OGUC, NCh 2123 y NCh 1928.",
+          "2.3 Dibuja cuadros y notas técnicas explicativas, indicando características especiales señaladas en las especificaciones técnicas del proyecto y catálogos de fabricación.",
+          "2.4 Diagrama el contenido de las diferentes plantas, vistas y detalles que conforman el formato definitivo, según escalas que permitan proporcionalidad y facilidad de interpretación de acuerdo a los requerimientos del proyecto."
+        ]
+      },
+      {
+        "code": "M7-AE3",
+        "title": "Dibuja en ambiente asistido por computación, las estructuras de los elementos de hormigón de una vivienda de uno o más pisos, considerando las normativas de diseño vigentes, las especificaciones técnicas del proyecto y catálogos de fabricación estandarizados.",
+        "criteria": [
+          "3.1 Dibuja plantas de fundaciones de cimientos corridos y detalla cortes típicos de cimientos y sobrecimientos de una vivienda tipo indicando materialidad, enfierradura, dimensiones y ejes principales según requerimientos del proyecto de arquitectura, especificaciones técnicas y normativas OGUC y NCh 170.",
+          "3.2 Dibuja plantas de estructuras de muros, pilares, vigas y losas de hormigón armado de una vivienda tipo, indicando materialidad, enfierradura, dimensiones y ejes principales según requerimientos del proyecto de arquitectura, especificaciones técnicas y normativas OGUC y NCh 170.",
+          "3.3 Dibuja vistas, cortes y detalles constructivos de encuentros y uniones de muros, pilares, vigas y losas de hormigón armado de una vivienda tipo, indicando materialidad, enfierradura, dimensiones y ejes principales según requerimientos del proyecto de arquitectura, especificaciones técnicas y normativas OGUC y NCh 170.",
+          "3.4 Dibuja cuadros y notas técnicas explicativas, indicando características especiales señaladas en las especificaciones técnicas del proyecto y catálogos de fabricación.",
+          "3.5 Diagrama el contenido de las diferentes plantas, vistas y detalles que conforman el formato definitivo, según escalas que permitan proporcionalidad y facilidad de interpretación de acuerdo a los requerimientos del proyecto."
+        ]
+      },
+      {
+        "code": "M7-AE4",
+        "title": "Dibujar en ambiente asistido por computación, las estructuras de cadenas, vigas, losas y elevaciones de ingeniería de hormigón armado de edificaciones en altura, considerando las normativas de diseño vigentes, las especificaciones técnicas del proyecto y catálogos de fabricación estandarizados.",
+        "criteria": [
+          "4.1 Dibuja plantas de fundaciones de cimientos corridos y detalla cortes típicos de cimientos y sobrecimientos de una edificación en altura indicando materialidad, enfierradura, dimensiones y ejes principales según requerimientos del proyecto de arquitectura, especificaciones técnicas y normativas OGUC y NCh 170.",
+          "4.2 Dibuja plantas de estructuras de muros, pilares, vigas y losas de hormigón armado de una edificación en altura, indicando materialidad, enfierradura, dimensiones y ejes principales según requerimientos del proyecto de arquitectura, especificaciones técnicas y normativas OGUC y NCh 170.",
+          "4.3 Dibuja vistas, cortes y detalles constructivos de encuentros y uniones de muros, pilares, vigas y losas de hormigón armado de una edificación en altura, indicando materialidad, enfierradura, dimensiones y ejes principales según requerimientos del proyecto de arquitectura, especificaciones técnicas y normativas OGUC y NCh 170.",
+          "4.4 Dibuja cuadros y notas técnicas explicativas, indicando características especiales señaladas en las especificaciones técnicas del proyecto y catálogos de fabricación.",
+          "4.5 Diagrama el contenido de las diferentes plantas, vistas y detalles que conforman el formato definitivo, según escalas que permitan proporcionalidad y facilidad de interpretación de acuerdo a los requerimientos del proyecto."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81911.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34322_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 8,
+    "title": "Dibujo digital de montaje industrial",
+    "hp": 152,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 6",
+        "title": "Dibujar en forma gráfica digital planos de montaje industrial, así como los elementos que conforman proyectos estructurales de ingeniería de obras civiles en madera, hormigón, albañilerías y acero conforme a normativas, manuales y catálogos de fabricación estandarizados."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M8-AE1",
+        "title": "Lee e interpreta planos de estructuras, de terreno y de edificación, obteniendo información relevante para su ejecución, según normativas, manuales, especificaciones y catálogos de fabricación.",
+        "criteria": [
+          "1.1 Establece los requerimientos de ejecución de un proyecto, a partir de la lectura de planos de fundaciones y movimientos de tierra, considerando la simbología y obras civiles que componen el proyecto, especificaciones técnicas y normativa vigente.",
+          "1.2 Establece la distribución de los elementos estructurales principales y secundarios de un proyecto, a partir de la lectura de planos de estructuras, identificando simbología, ejes principales, niveles de piso, según las especificaciones técnicas y normativa vigente.",
+          "1.3 Determina la materialidad, dimensiones y requerimientos de ejecución de un proyecto, a partir de los planos de detalles, de piezas y uniones, según manuales, especificaciones y catálogos de fabricación.",
+          "1.4 Determina la distribución de las instalaciones correspondientes a muros estructurales, tabiques, vanos y especialidades que componen un proyecto, a partir de la lectura de los planos de edificación, identificando simbología y, según requerimientos de ejecución, especificaciones técnicas y normativa vigente."
+        ]
+      },
+      {
+        "code": "M8-AE2",
+        "title": "Utiliza manuales técnicos, normativas vigentes, informes e instrucciones escritas para obtener datos, condiciones y características específicas de elementos, según requerimientos del proyecto en desarrollo.",
+        "criteria": [
+          "2.1 Elabora manualmente pauta acerca de aspectos relevantes que va observando en planos del proyecto de arquitectura, según requisitos del proyecto de estructura en desarrollo.",
+          "2.2 Utiliza especificaciones técnicas del proyecto de estructura en desarrollo para detallar sus características y materialidad en los planos y detalles según requerimientos de ejecución y construcción.",
+          "2.3 Utiliza manuales técnicos de materiales y elementos constructivos del proyecto de estructura en desarrollo para especificar sus características en los planos y detalles, según indicaciones del fabricante.",
+          "2.4 Utiliza normativas vigentes de proyecto de estructura específico identificando condiciones y requerimientos especiales, según características técnicas del proyecto en desarrollo."
+        ]
+      },
+      {
+        "code": "M8-AE3",
+        "title": "Dibuja en ambiente asistido por computador plano de infraestructura y montaje del proyecto de edificación considerando las normativas de diseño vigentes, requerimientos específicos de cada especialidad, especificaciones técnicas, y catálogos de fabricación estandarizados.",
+        "criteria": [
+          "3.1 Dibuja planta de emplazamiento del proyecto en terreno según planos, deslindes y topografía considerando las normativas de diseño vigentes, especificaciones técnicas y requerimientos especiales del proyecto.",
+          "3.2 Dibuja el área para maniobras de montaje de diferentes especialidades como estructuras metálicas, hormigones prefabricados, calderería, según planos y requerimientos especiales del proyecto considerando las normativas de diseño vigentes, requerimientos específicos del proyecto, especificaciones técnicas, y catálogos de fabricación estandarizados.",
+          "3.3 Dibuja planta para montaje de estructuras metálicas, caldererías, equipos mecánicos y hormigones prefabricados, según planos y normativas de diseño vigentes, especificaciones técnicas, y catálogos de fabricación estandarizados.",
+          "3.4 Dibuja planta para montaje de ductos y cañerías, sistemas eléctricos, instrumentación y aislamiento, según planos y normativas de diseño vigentes, especificaciones técnicas, y catálogos de fabricación estandarizados."
+        ]
+      },
+      {
+        "code": "M8-AE4",
+        "title": "Dibuja en ambiente asistido por computador, planos que conforman un proyecto de estructuras metálicas con uniones soldadas y apernadas y su montaje, considerando las normativas de diseño vigente, las especificaciones técnicas, memoria de cálculo y catálogos de fabricación estandarizados.",
+        "criteria": [
+          "4.1 Dibuja la planta de fundaciones de un galpón tipo y representan a escala la ubicación y montaje de marcos típicos y columnas que conforman el proyecto estructural de uniones soldadas y apernadas, considerando los manuales de diseño, especificaciones técnicas, memoria de cálculo y las normativas vigentes NCh 2219.",
+          "4.2 Dibuja las elevaciones de los marcos típicos, columnas y vigas e indican las uniones a detallar, según el diseño del proyecto, considerando los manuales de diseño, especificaciones técnicas, memoria de cálculo y las normativas vigentes NCh 2219.",
+          "4.3 Dibuja los detalles constructivos de las secciones, uniones, encuentros y anclajes indicados en el proyecto de acuerdo con la escala normalizada que permita su proporcionalidad y facilidad de interpretación, considerando los manuales de diseño, especificaciones técnicas, memoria de cálculo y las normativas vigentes NCh 2219.",
+          "4.4 Dibuja cuadros y notas técnicas explicativas, indicando características especiales señaladas en las especificaciones técnicas del proyecto y catálogos de fabricación.",
+          "4.5 Diagrama el contenido de las diferentes plantas, vistas y detalles que conforman el formato definitivo, según escalas que permitan proporcionalidad y facilidad de interpretación de acuerdo a los requerimientos del proyecto."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81912.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34322_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 9,
+    "title": "Cubicación de proyectos",
+    "hp": 152,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 9",
+        "title": "Cubicar manual y digitalmente, volúmenes, superficies, elementos, materiales, considerando diversos sistemas de medida, utilizando los programas computacionales apropiados a los requerimientos del proyecto."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M9-AE1",
+        "title": "Calcula cantidades unitarias, superficies y volúmenes para cuantificar elementos, materiales y mano de obra involucrada en las diferentes partidas de construcción de un proyecto, según las respectivas especificaciones técnicas de forma manual y utilizando programas computacionales.",
+        "criteria": [
+          "1.1 Cuantifica elementos unitarios de un proyecto según su planimetría y especificaciones técnicas, considerando la reutilización y/o reciclaje de materiales.",
+          "1.2 Determina metros cuadrados de materiales para la edificación de un proyecto mediante diferenciación de zonas por materiales según sus especificaciones técnicas y planimetría, registrando el procedimiento y obteniendo resultados de forma manual y mediante herramientas computacionales.",
+          "1.3 Determina los metros cúbicos de las diferentes partidas de obra de un proyecto, conforme a sus especificaciones técnicas y a los requerimientos definidos en la planimetría, registrando el procedimiento y obteniendo resultados de forma manual y mediante herramientas computacionales.",
+          "1.4 Calcula la mano de obra necesaria según las actividades, etapas y partidas del proyecto, presentes en las especificaciones técnicas correspondientes, considerando normativa laboral vigente y utilizando programa computacional.",
+          "1.5 Confecciona el listado definitivo de elementos y materiales cubicados indicando unidad de medida y categorizándolos conforme a especificaciones técnicas mediante programa computacional."
+        ]
+      },
+      {
+        "code": "M9-AE2",
+        "title": "Cotiza materiales y mano de obra para las diferentes partidas de construcción de un proyecto, conforme a sus especificaciones técnicas, cubicaciones y a catálogos técnicos actualizados, considerando eficiencia energética, rendimiento y porcentaje de pérdida de los materiales.",
+        "criteria": [
+          "2.1 Determina mediante programa computacional el rendimiento de los materiales, en base a manuales de cubicación y catálogos técnicos del fabricante, considerando el uso eficiente de los recursos.",
+          "2.2 Calcula mediante programa computacional porcentajes de pérdida de materiales de acuerdo a especificaciones de catálogos de fabricación y manuales técnicos, considerando la reutilización y reciclaje de los recursos.",
+          "2.3 Cotiza materiales, productos y elementos de construcción, utilizando manuales de cubicación y presupuestos, catálogos técnicos y comparación de mercado, considerando precio, calidad y eficiencia energética de acuerdo a las especificaciones técnicas del proyecto.",
+          "2.4 Cotiza el valor de la mano de obra según el cálculo total de horas-hombre requeridas, considerando especialización de la misma y rendimiento, de acuerdo a las actividades, etapas y partidas del proyecto, conforme a las normativas tributarias y laborales.",
+          "2.5 Elabora en planillas de cálculo digital de cotización en base a cubicación realizada y análisis de precios unitarios de materiales, según itemizado de especificaciones técnicas del proyecto."
+        ]
+      },
+      {
+        "code": "M9-AE3",
+        "title": "Confecciona un presupuesto detallado mediante planilla de cálculo computacional de los elementos, materiales y mano de obra requeridos para la ejecución de las diferentes partidas del proyecto, elaborando los respectivos análisis de precios unitarios por partida y considerando las normativas tributarias y laborales vigentes.",
+        "criteria": [
+          "3.1 Completa tablas de análisis de precios unitarios por partida según cotización definida, especificaciones técnicas y catálogos de cubicación y presupuestos.",
+          "3.2 Elabora presupuesto digital en coordinación con ítems de especificaciones técnicas del proyecto, utilizando listado de cubicación final de materiales, mano de obra y análisis de precios unitarios considerando leyes tributarias y laborales vigentes.",
+          "3.3 Utiliza fórmulas de cálculo y herramientas de edición del programa computacional para elaborar el presupuesto con atención al formato, estructura y ortografía que asegure la calidad final.",
+          "3.4 Entrega presupuesto definitivo dentro de un plazo establecido para el proceso de evaluación de costos y adquisiciones."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81913.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34322_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 10,
+    "title": "Impresión y reproducción de planos",
+    "hp": 76,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 8",
+        "title": "Imprimir y reproducir las representaciones gráficas digitales elaboradas, definiendo los parámetros de los equipos de impresión y reproducción para garantizar reproducciones ajustadas a estándares de calidad."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M10-AE1",
+        "title": "Diagrama presentación final de lámina en ambiente layout utilizando las herramientas del programa para definir formato, escalas de cada plano, textos, diseño de viñeta, cuadros y esquemas de información complementaria, según requerimientos de la presentación.",
+        "criteria": [
+          "1.1 Define parámetros iniciales para crear una presentación de planos, configurando elección de impresora, tamaño de papel, área de trazado y escala de trazado, en base a requisitos de presentación de proyecto y herramientas del programa computacional.",
+          "1.2 Crea y edita ventanas de visualización para cada plano, cuadro informativo y/o esquema, definiendo sus escalas según requisitos de presentación del proyecto y herramientas del programa computacional.",
+          "1.3 Incorpora viñeta y rótulos de cada elemento de la presentación, en función de la escala y formato de papel requerido para la presentación del proyecto.",
+          "1.4 Diagrama lámina definitiva, determinando ubicación de las diferentes ventanas de visualización, estableciendo relación coherente entre los elementos requeridos para la presentación del proyecto."
+        ]
+      },
+      {
+        "code": "M10-AE2",
+        "title": "Configura parámetros de impresión para presentación layout definitiva realizando pruebas en vistas previas e impresiones digitales, según requerimientos de la presentación y manuales técnicos.",
+        "criteria": [
+          "2.1 Configura parámetros de salida para impresora digital, controlando formato de impresión, orientación y resolución en base a manual técnico.",
+          "2.2 Utiliza estilos de trazado por color CTB y estilos de trazado guardados por el usuario STB para la correcta impresión del color, tipo y grosor de las líneas a diferentes escalas, en base a manuales técnicos.",
+          "2.3 Genera vistas previas e impresiones digitales de prueba detectando desajustes en relación a los requerimientos de la presentación del proyecto.",
+          "2.4 Corrige desajustes detectados para la impresión digital definitiva del archivo en base a requisitos de presentación del proyecto."
+        ]
+      },
+      {
+        "code": "M10-AE3",
+        "title": "Plotea o imprime en papel lámina(s) definitiva(s) del proyecto, en base manuales técnicos del equipo y requerimientos de la presentación.",
+        "criteria": [
+          "3.1 Revisa adecuada colocación del papel en equipo de impresión corroborando formato y tipo (bond, fotográfico, alta resolución, vegetal, poliéster, etc.), según manual técnico del equipo.",
+          "3.2 Define parámetros de salida del programa de dibujo asistido por computador al equipo de impresión utilizando estilos de trazado CTB y STB, según manuales técnicos.",
+          "3.3 Obtiene impresión de lámina definitiva desde equipo de impresión controlando el resultado en función de los requerimientos de presentación del proyecto."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81914.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34322_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 11,
+    "title": "Emprendimiento y empleabilidad",
+    "hp": 76,
+    "year": "4° medio",
+    "oa": [],
+    "aes": [
+      {
+        "code": "M11-AE1",
+        "title": "Diseña y ejecuta un proyecto para concretar iniciativas de emprendimiento, identificando las acciones a realizar, el cronograma de su ejecución y los presupuestos, definiendo alternativas de financiamiento y evaluando y controlando su avance.",
+        "criteria": [
+          "1.1 Recolecta, organiza y analiza información para identificar oportunidades de emprendimiento en su propia comunidad y región, considerando diferentes ámbitos de aplicación (deporte, tecnología, medioambiente y energía, entre otros).",
+          "1.2 Evalúa las oportunidades de emprendimiento, tomando en cuenta sus fortalezas y debilidades, y considerando el contexto, los recursos existentes y las normativas vigentes relacionadas.",
+          "1.3 Formula los objetivos para un plan de acción de una iniciativa de emprendimiento personal, productivo o social, considerando las condiciones del entorno y personales.",
+          "1.4 Formula un presupuesto detallado, determinando los recursos (financieros, humanos, tecnológicos y otros) requeridos para el desarrollo de su iniciativa, los plazos y los factores externos que afectan su desarrollo.",
+          "1.5 Elabora un mecanismo de control de avance de su iniciativa de emprendimiento y evalúa las necesidades y las alternativas de financiamiento mediante aportes públicos y privados (créditos y ahorro).",
+          "1.6 Ejecuta las acciones para alcanzar los objetivos planteados según la planificación realizada, perseverando pese a circunstancias adversas, evaluando los resultados y las amenazas, ajustando sus acciones para asegurar el éxito y compartiendo su experiencia con otros."
+        ]
+      },
+      {
+        "code": "M11-AE2",
+        "title": "Maneja la legislación laboral y previsional chilena como marco regulador de las relaciones entre trabajadores y empleadores, identificando los derechos y deberes de ambas partes, tanto individuales como colectivos, y la reconoce como base para establecer buenas relaciones laborales.",
+        "criteria": [
+          "2.1 Selecciona la información relevante sobre los derechos laborales y previsionales de los trabajadores garantizados por la Constitución y el Código del Trabajo, para su propia contratación o de terceros a su cargo.",
+          "2.2 Determina elementos críticos de diversos tipos de contratos y de finiquitos, considerando la legislación laboral vigente.",
+          "2.3 Elabora propuestas de creación y desarrollo de organización sindical de acuerdo a la realidad de diferentes tipos de empresas, respetando la legislación vigente y la defensa de los derechos de los trabajadores."
+        ]
+      },
+      {
+        "code": "M11-AE3",
+        "title": "Prepara los elementos necesarios para participar de un proceso de incorporación al mundo del trabajo, valorando y planificando su trayectoria formativa y laboral.",
+        "criteria": [
+          "3.1 Sistematiza información desde organismos y empresas especializadas en intermediación laboral que existen en su entorno, analizando las perspectivas laborales, sus propias condiciones laborales y las normativas relacionadas.",
+          "3.2 Elabora correctamente los documentos necesarios para iniciar una actividad laboral, como el curriculum vitae, reuniendo evidencias de cursos realizados, experiencia laboral previa y cartas de recomendación, y visualizando sus alternativas de acuerdo a sus expectativas y condiciones.",
+          "3.3 Prepara las entrevistas y las situaciones de ingreso y promoción, identificando a personas e instituciones que pueden brindarle apoyo en este proceso.",
+          "3.4 Evalúa si la remuneración mensual o semanal y el finiquito se han determinado de acuerdo al tipo de contrato firmado y a la legislación laboral vigente.",
+          "3.5 Selecciona la institución y la modalidad conveniente para su cobertura de salud y pensión, además del seguro de desempleo que le corresponde de acuerdo a su contrato y derechos, y lleva a cabo los trámites de afiliación."
+        ]
+      },
+      {
+        "code": "M11-AE4",
+        "title": "Selecciona alternativas de capacitación y de educación superior para fortalecer sus competencias o desarrollar nuevas y adquirir certificaciones, ya sea e-learning o presenciales, evaluando las diversas opciones de financiamiento.",
+        "criteria": [
+          "4.1 Evalúa las necesidades futuras del mundo laboral en el ámbito de su especialidad y sus desafíos de formación, considerando las dinámicas de empleo, tendencias e innovaciones tecnológicas.",
+          "4.2 Evalúa las ofertas de capacitación virtual y presencial disponibles en su entorno, incluyendo sus características (como duración, objetivos y costos) y requisitos generales.",
+          "4.3 Evalúa las ofertas de educación superior disponibles en su entorno, incluyendo sus características (duración, acreditación, posibilidades de reconocimiento de aprendizajes previos y alternativas de financiamiento y becas) y requisitos de entrada."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81904.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34322_programa.pdf",
+    "source_warnings": []
+  }
+]

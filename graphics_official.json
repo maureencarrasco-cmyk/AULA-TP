@@ -1,0 +1,437 @@
+[
+  {
+    "position": 1,
+    "title": "Verificación y preparación de archivos digitales",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 1",
+        "title": "Diagramar y editar imágenes y textos originales, utilizando software gráficos, verificando el cumplimiento de las exigencias del diseño y acorde a los requerimientos técnicos de los diversos procesos en las áreas gráficas establecidos en la orden de trabajo."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M1-AE1",
+        "title": "Verifica los archivos digitales y los originales de acuerdo a los procedimientos y las normas de calidad establecidas para el proceso de pre-impresión, manejando tecnologías de la información, comunicación y notificando los resultados.",
+        "criteria": [
+          "1.1 Comprueba que el material recibido (archivos digitales y análogos) esté completo y sin daños con respecto a la orden de trabajo.",
+          "1.2 Detecta los errores contenidos en archivos digitales, aplicando un programa de verificación (preflight) y control visual de fotografías, tipografías, vínculos y colores.",
+          "1.3 Corrige errores básicos, utilizando las herramientas digitales de verificación, manejando tecnologías de la información y comunicación.",
+          "1.4 Elabora informes de identificación de errores y los comunican a las personas que corresponden."
+        ]
+      },
+      {
+        "code": "M1-AE2",
+        "title": "Arma y edita imágenes, vectores y textos de acuerdo a las indicaciones de las órdenes de trabajo y los procesamientos establecidos en la reproducción gráfica.",
+        "criteria": [
+          "2.1 Coloca imágenes y textos de acuerdo a prismados e indicaciones del cliente.",
+          "2.2 Define la resolución de imágenes, según los requisitos de impresión y considerando el factor de ampliación.",
+          "2.3 Edita y retoca imágenes, vectores, textos y colores según las instrucciones del cliente y las restricciones del proceso productivo.",
+          "2.4 Transforma el color de archivos a cuatricromía mediante perfiles ICC y restricciones de la impresión.",
+          "2.5 Aplica sobreimpresión y calados, según los requisitos de impresión."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81916.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34323_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 2,
+    "title": "Preparación de la máquina impresora",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 4",
+        "title": "Regular máquinas de impresión (tipográficas, offset de pliego y bobinas, flexo y serigráficas), de acuerdo a la orden de trabajo, manuales técnicos del fabricante, materias primas, insumos y estándares de calidad y seguridad establecidos."
+      },
+      {
+        "code": "OA 7",
+        "title": "Realizar operaciones de mantenimiento básico, limpieza, lubricación y reemplazo de elementos fungibles, a diferentes tipos de máquinas o equipos de pre-impresión, impresión y postimpresión, de acuerdo con los manuales de los fabricantes y las normas de seguridad."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M2-AE1",
+        "title": "Prepara la máquina para entrar en funcionamiento de acuerdo a las indicaciones de fabricación y aplicando criteriosde seguridad.",
+        "criteria": [
+          "1.1 Acciona y coloca en funcionamiento máquinas impresoras de acuerdo a indicaciones de fabricación y del manual de operación, resguardando la seguridad personal.",
+          "1.2 Ejecuta acciones y procedimientos de preparación de máquinas, cumpliendo con las normas de prevención de riesgos y seguridad laboral.",
+          "1.3 Limpia y ajusta la máquina impresora de acuerdo a las indicaciones de fabricación antes de la puesta en marcha cumpliendo con las normas de prevención de riesgos y seguridad laboral y cuidado del medio ambiente.",
+          "1.4 Lubrica máquinas impresoras de acuerdo a las indicaciones de fabricación y los manuales técnicos de operación, cumpliendo con las normas de prevención de riesgos y seguridad laboral y cuidado del medio ambiente."
+        ]
+      },
+      {
+        "code": "M2-AE2",
+        "title": "Prepara dispositivos de alimentación del sustrato a la máquina según la orden de trabajo, tamaño del sustrato, y evaluando las condiciones del entorno del trabajo que permitan prevenir situaciones de riesgo.",
+        "criteria": [
+          "2.1 Maneja adecuada y racionalmente materiales e insumos propios de los procesos de impresión, según la orden de trabajo, normas de seguridad y cuidado del medio ambiente.",
+          "2.2 Prepara y ajusta dispositivos y unidades de alimentación de las máquinas impresoras a pliegos o rollos, de acuerdo a las recomendaciones de fabricación y previniendo situaciones de riesgo.",
+          "2.3 Prepara el sustrato para alimentar la impresora, de acuerdo al tipo de impresora y según la orden de trabajo y utilizando los elementos de protección personal."
+        ]
+      },
+      {
+        "code": "M2-AE3",
+        "title": "Prepara unidades impresoras y de salida de la máquina según la orden de trabajo, y utilizando los elementos de protección personal según la normativa correspondiente.",
+        "criteria": [
+          "3.1 Prepara y ajusta unidades impresoras de las máquinas, efectuando tareas de montaje y limpieza de matrices impresoras y ajustando sus elementos según las recomendaciones de fabricación, los requerimientos de seguridad y cuidado del medio ambiente.",
+          "3.2 Maneja sistemas abastecedores de tinta, según el tipo de máquina impresora y de acuerdo a las indicaciones de fabricación, cumpliendo con las normas de prevención de riesgos, seguridad laboral y cuidado del medio ambiente.",
+          "3.3 Prepara diversas unidades de entintaje, de acuerdo a las tecnologías y máquinas impresoras, según las recomendaciones de fabricación, cumpliendo con las normas de prevención de riesgos, seguridad laboral y cuidado del medio ambiente.",
+          "3.4 Prepara y ajusta los dispositivos de salida del sustrato en máquinas impresoras, controlando los procesos de postimpresión en línea, según las recomendaciones de fabricación.",
+          "3.5 Toma las medidas necesarias para prevenir situaciones de riesgo, utilizando los elementos de protección personal según la normativacorrespondiente."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81917.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34323_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 3,
+    "title": "Impresión del producto gráfico",
+    "hp": 228,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 5",
+        "title": "Realizar la impresión del producto, controlando la calidad, limpieza y color, así como los ajustes de la máquina impresora y la salida del producto hasta obtener las condiciones exigidas en la orden de trabajo, según estándares establecidos y normas de seguridad."
+      },
+      {
+        "code": "OA 7",
+        "title": "Realizar operaciones de mantenimiento básico, limpieza, lubricación y reemplazo de elementos fungibles, a diferentes tipos de máquinas o equipos de pre-impresión, impresión y postimpresión, de acuerdo con los manuales de los fabricantes y las normas de seguridad."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M3-AE1",
+        "title": "Prepara la impresión, controlando y ajustando la imagen impresa, hasta obtener las condiciones exigidas según la orden de trabajo y utilizando eficientemente los recursos.",
+        "criteria": [
+          "1.1 Aplica responsablemente normas y dispositivos de seguridad en las operaciones de impresión según requerimientos de fabricación.",
+          "1.2 Evalúa visualmente el registro de imagen y color del impreso, de acuerdo a la prueba de color.",
+          "1.3 Ajusta los mecanismos de registro y de impresión de imagen que aseguren una óptima reproducción según el tipo de sustrato y la máquina impresora.",
+          "1.4 Obtiene las primeras pruebas de impresión, consiguiendo calce, limpieza y calidad de la imagen, y utilizando eficientemente los materiales.",
+          "1.5 Corrige defectos en los ajustes de impresión con precisión, de acuerdo al visto bueno y/o la prueba de color."
+        ]
+      },
+      {
+        "code": "M3-AE2",
+        "title": "Imprime controlando visual e instrumentalmente la calidad del producto, de acuerdo a indicaciones de la orden de trabajo, el uso óptimo de insumos y la aplicación de estándares de calidad.",
+        "criteria": [
+          "2.1 Imprime controlando el impreso, logrando la aprobación del cliente bajo los estándares de producción de la empresa.",
+          "2.2 Supervisa el proceso de impresión de forma visual e instrumental, para conseguir una calidad homogénea durante el tiraje de acuerdo a los estándares y las normas vigentes.",
+          "2.3 Controla la limpieza, color y mantiene el registro de la imagen en el impreso, de acuerdo a original o prueba de color entregado en la orden de trabajo.",
+          "2.4 Corrige fallas y problemas de impresión durante la tirada, aplicando con precisión acciones correctivas para obtener un producto de calidad.",
+          "2.5 Verifica las cargas de tinta en el impreso y mantiene valores densitométricos en el tiraje, midiendo las tiras de control de impresión, según las normas y los estándares vigentes.",
+          "2.6 Registra adecuadamente los datos del proceso y del producto impreso en un documento de producción, según la orden de trabajo."
+        ]
+      },
+      {
+        "code": "M3-AE3",
+        "title": "Abastece la máquina impresora con materia prima e insumos para el proceso de impresión, utilizando eficientemente los materiales y disponiendo cuidadosamente los desechos.",
+        "criteria": [
+          "3.1 Abastece de tinta la máquina impresora, según las condiciones y las necesidades del tiraje, utilizando los recursos en forma racional.",
+          "3.2 Abastece y alimenta la máquina impresora de sustrato para evitar interrupciones en la producción.",
+          "3.3 Utiliza los insumos en las cantidades indicadas, para optimizar eficientemente los recursos y cuidando el medio ambiente.",
+          "3.4 Vierte los desechos de impresión en contenedores habilitados para tal efecto conforme a las normas medioambientales para evitar la contaminación.",
+          "3.5 Finaliza la impresión, dejando la máquina impresora en óptimas condiciones de limpieza y funcionamiento, según las indicaciones de fabricación."
+        ]
+      },
+      {
+        "code": "M3-AE4",
+        "title": "Realiza el mantenimiento preventivo durante y una vez finalizada la impresión, según recomendaciones de fabricación y normas de seguridad.",
+        "criteria": [
+          "4.1 Interpreta el plan de mantenimiento preventivo básico de la máquina impresora recomendado por la fábrica en el manual de operación.",
+          "4.2 Ejecuta el mantenimiento preventivo básico conforme a las instrucciones y recomendaciones de fabricación, usando las herramientas y los elementos apropiados.",
+          "4.3 Realiza la limpieza y lubricación de la máquina impresora con responsabilidad y seguridad, de acuerdo a las especificaciones de fabricación y según las pautas de trabajo internas de la empresa.",
+          "4.4 Registra las tareas efectuadas de mantenimiento en un documento para tal efecto y los comunican a la persona que corresponde."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81918.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34323_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 4,
+    "title": "Materiales e insumos de la industria gráfica",
+    "hp": 152,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 3",
+        "title": "Seleccionar y acondicionar las materias primas e insumos (tintas, tipo y tamaño de sustrato, entre otros) de acuerdo a la orden de trabajo, manuales técnicos del fabricante y estándares de calidad establecidos."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M4-AE1",
+        "title": "Verifica y maneja sustratos en la máquina para la impresión según la orden de trabajo, utilizando eficientemente los insumos para los procesos productivos.",
+        "criteria": [
+          "1.1 Selecciona adecuadamente los tipos de sustratos para diversos productos, de acuerdo a las características ópticas y mecánicas, la tecnología de impresión, el uso eficiente y la orden de trabajo.",
+          "1.2 Reconoce correctamente familias de papeles de acuerdo a las normas de calidad vigentes, las tecnologías de impresión y los procesos de reproducción.",
+          "1.3 Controla las características ópticas y mecánicas de diversos sustratos, utilizando instrumentos apropiados según las necesidades de impresión, de la orden de trabajo y de la máquina impresora.",
+          "1.4 Maneja, calcula y dimensiona tamaños de papel de manera eficiente en formatos nacionales e internacionales de acuerdo a los equipos de impresión y la orden de trabajo.",
+          "1.5 Verifica que el sustrato presente el tratamiento necesario para obtener la calidad de impresión esperada, que permita optimizar el material."
+        ]
+      },
+      {
+        "code": "M4-AE2",
+        "title": "Verifica y maneja tintas en la máquina para la impresión según la orden de trabajo, y características del sustrato, disponiendo cuidadosamente los desechos, en una perspectiva de eficiencia energética y cuidado ambiental.",
+        "criteria": [
+          "2.1 Selecciona adecuadamente la tinta de acuerdo a la tecnología de impresión y a las necesidades del producto impreso, según la orden de trabajo.",
+          "2.2 Mezcla tintas, logrando tonos de color según muestras e indicaciones de la orden de trabajo.",
+          "2.3 Prepara la tinta para la impresión, controlando sus propiedades reológicas, según la tecnología de impresión y de acuerdo al tipo y tamaño del sustrato.",
+          "2.4 Prepara la tinta para la impresión, controlando sus propiedades para optimizar el correcto secado, según la eficiencia energética, el proceso de impresión y de acuerdo al tipo de sustrato.",
+          "2.5 Vierte los desechos de tinta en contenedores habilitados conforme a las normas medioambientales para evitar la contaminación."
+        ]
+      },
+      {
+        "code": "M4-AE3",
+        "title": "Verifica y maneja variados insumos utilizados en las tecnologías de impresión, según la orden de trabajo, y utilizándolos eficientemente.",
+        "criteria": [
+          "3.1 Selecciona adecuadamente insumos y materiales necesarios para la impresión como: solventes, lubricantes, accesorios y otros elementos, según el proceso, sus diferencias, propiedades técnicas y cuidado del medio ambiente.",
+          "3.2 Aplica y utiliza insumos y materiales gráficos con cuidado y eficiencia según los elementos especificados en una orden de trabajo, como productos de limpieza, solventes, lubricantes, accesorios, entre otros.",
+          "3.4 Manipula y abastece de los materiales e insumos con responsabilidad, según orden de trabajo y aplicando las normas de seguridad y cuidado del medio ambiente."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81919.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34323_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 5,
+    "title": "Encuadernación del producto impreso",
+    "hp": 152,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 6",
+        "title": "Realizar la postimpresión de los productos, operando máquinas de terminación y de corte de sustratos, procesando el material impreso para que cumpla con la orden de trabajo, con los estándares de calidad y las normas de seguridad requeridos."
+      },
+      {
+        "code": "OA 7",
+        "title": "Realizar operaciones de mantenimiento básico, limpieza, lubricación y reemplazo de elementos fungibles, a diferentes tipos de máquinas o equipos de preimpresión, impresión y postimpresión, de acuerdo con los manuales de los fabricantes y las normas de seguridad."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M5-AE1",
+        "title": "Ejecuta los procesos de corte en guillotina, de acuerdo a la orden de trabajo, las particularidades de cada producto, utilizando los elementos de protección personal según la normativa correspondiente.",
+        "criteria": [
+          "1.1 Prepara las materias primas y productos auxiliares, evaluando las características de calidad según las indicaciones de la orden de trabajo.",
+          "1.2 Prepara la guillotina, estableciendo los parámetros del corte y sincronizando el sistema de alimentación y salida, de acuerdo al producto final.",
+          "1.3 Ejecuta el programa de corte, identificando los defectos y aplicando las soluciones, de acuerdo al producto.",
+          "1.4 Realiza la limpieza y mantenimiento preventivo de la guillotina, interpretando el manual de operación y aplicando las medidas de seguridad y protección previstas.",
+          "1.5 Toma las medidas necesarias para prevenir situaciones de riesgo, utilizando los elementos de protección personal según la normativa correspondiente."
+        ]
+      },
+      {
+        "code": "M5-AE2",
+        "title": "Ejecuta los procesos de plegado mecánico del producto, según las indicaciones de la orden de trabajo y aplicando normas de seguridad.",
+        "criteria": [
+          "2.1 Regula la plegadora determinando los parámetros de plegado, registro y control de la máquina.",
+          "2.2 Realiza el plegado identificando los defectos y aplicando las soluciones.",
+          "2.3 Prepara los mecanismos de apilado y salida de la plegadora, deduciendo los procesos de almacenamiento según indicaciones de la orden de trabajo.",
+          "2.4 Realiza la limpieza y mantenimiento preventivo de la plegadora, interpretando la documentación técnica y aplicando las medidas de seguridad y protección previstas."
+        ]
+      },
+      {
+        "code": "M5-AE3",
+        "title": "Efectúa los procesos de encuadernación de costura alambre, rústica y en tapa dura, de acuerdo a la orden de trabajo, las particularidades de cada producto, y resguardando su seguridad.",
+        "criteria": [
+          "3.1 Realiza el alzado, aplicando las especificaciones técnicas del producto e indicaciones de la orden de trabajo.",
+          "3.2 Realiza la costura o pegado, ajustando los parámetros indicados en la orden de trabajo y aplicando las características del producto que hay que encuadernar.",
+          "3.3 Ajusta la línea de encuadernación, ajustando las estaciones y los módulos que se van a utilizar, de acuerdo al producto a encuadernar.",
+          "3.4 Realiza la encuadernación del producto, aplicando las especificaciones técnicas según orden de trabajo.",
+          "3.5 Regula la guillotina trilateral, estableciendo los parámetros de corte y el control de la máquina, de acuerdo a la orden de trabajo.",
+          "3.6 Realiza la limpieza y mantenimiento preventivo de la máquina de encuadernación, identificando la documentación técnica y aplicando las medidas de seguridad."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81920.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34323_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 6,
+    "title": "Imposición de archivos y obtención de prueba de color",
+    "hp": 228,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 1",
+        "title": "Diagramar y editar imágenes y textos originales, utilizando software gráficos, verificando el cumplimiento de las exigencias del diseño y acorde a los requerimientos técnicos de los diversos procesos en las áreas gráficas establecidos en la orden de trabajo."
+      },
+      {
+        "code": "OA 2",
+        "title": "Obtener una prueba de color, película, matriz de impresión e impreso digital, aplicando controles de calidad de acuerdo a normas vigentes."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M6-AE1",
+        "title": "Impone digitalmente páginas y pliegos de acuerdo a la orden de trabajo para obtener una prueba de imposición, manejando tecnologías de la información y comunicación.",
+        "criteria": [
+          "1.1 Realiza digitalmente el montaje del archivo o imposición de páginas con precisión, considerando formatos de impresión, características de sustratos y operaciones de postimpresión a realizar, de acuerdo a las especificaciones de la orden de trabajo, manejando tecnologías de la información y comunicación.",
+          "1.2 Obtiene una prueba impresa de montaje o imposición digital (improof), controlando visualmente elementos de referencia para la impresión y terminación según la orden de trabajo y las características de las máquinas de impresión y terminación, para detectar posibles errores y dar aviso a quien corresponda.",
+          "1.3 Archiva el trabajo realizado para su posterior proceso, según las normas de formatos digitales vigentes y la compatibilidad del flujo de trabajo de pre-impresión."
+        ]
+      },
+      {
+        "code": "M6-AE2",
+        "title": "Elabora una prueba de color digital de contrato, según los requisitos de impresión y las normas vigentes, realizando las tareas de manera prolija, y cumpliendo con los estándares de calidad.",
+        "criteria": [
+          "2.1 Evalúa visualmente la conformidad de la prueba de color, según la orden de trabajo y los requisitos del cliente y de impresión, para detectar posibles errores y avisar a quien corresponda.",
+          "2.3 Mide con espectrofotómetro y software de calibración, para permitir la obtención de una prueba de color certificada."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81921.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34323_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 7,
+    "title": "Salida del archivo a matriz impresora e impresión digital",
+    "hp": 228,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 2",
+        "title": "Obtener una prueba de color, película, matriz de impresión e impreso digital, aplicando controles de calidad de acuerdo a normas vigentes."
+      },
+      {
+        "code": "OA 7",
+        "title": "Realizar operaciones de mantenimiento básico, limpieza, lubricación y reemplazo de elementos fungibles, a diferentes tipos de máquinas o equipos de pre-impresión, impresión y postimpresión, de acuerdo con los manuales de los fabricantes y las normas de seguridad."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M7-AE1",
+        "title": "Procesa la matriz de impresión cumpliendo con los estándares de calidad, considerando el mantenimiento de equipos y aplicando los controles según normativa vigente.",
+        "criteria": [
+          "1.1 Fija tiempos de vacío y exposición para el copiado análogo de la forma impresora según las características de la trama, la sensibilidad del material y la norma de calidad vigente.",
+          "1.2 Expone de forma correcta la película y la matriz impresora según los requisitos técnicos del proveedor y la norma de calidad vigente.",
+          "1.3 Procesa la forma impresora en forma manual o automática, según los requisitos técnicos del proveedor.",
+          "1.4 Controla la película o forma impresora con instrumentos de medición y visualmente, de acuerdo a la orden de trabajo, las normas vigentes y los requisitos técnicos de los proveedores.",
+          "1.5 Aplica el mantenimiento preventivo y calibra los equipos para procesar matrices según las normas y los requisitos técnicos de los proveedores."
+        ]
+      },
+      {
+        "code": "M7-AE2",
+        "title": "Imprime el archivo de salida bajo tecnología de impresión digital, según requerimientos de producto y realizando las tareas de manera prolija.",
+        "criteria": [
+          "2.1 Prepara los archivos digitales para la salida de impresión digital ajustando parámetros de la impresión y según los requerimientos de la orden de trabajo.",
+          "2.2 Opera impresoras xerográficas y software para impresión digital de acuerdo a las indicaciones de la orden de trabajo, y según las instrucciones del fabricante.",
+          "2.3 Opera impresoras inkjet y software para impresión digital de acuerdo a las indicaciones de la orden de trabajo, y según las instrucciones del fabricante.",
+          "2.4 Imprime los archivos bajo tecnología digital de manera prolija y sin errores, buscando alternativas y soluciones cuando se presentan problemas pertinentes a las funciones desempeñadas."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81922.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34323_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 8,
+    "title": "Postimpresión en embalajes y recubrimientos a impresos",
+    "hp": 152,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 6",
+        "title": "Realizar la postimpresión de los productos, operando máquinas de terminación y de corte de sustratos, procesando el material impreso para que cumpla con la orden de trabajo, con los estándares de calidad y las normas de seguridad requeridos."
+      },
+      {
+        "code": "OA 7",
+        "title": "Realizar operaciones de mantenimiento básico, limpieza, lubricación y reemplazo de elementos fungibles, a diferentes tipos de máquinas o equipos de pre-impresión, impresión y postimpresión, de acuerdo con los manuales de los fabricantes y las normas de seguridad."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M8-AE1",
+        "title": "Efectúa el proceso de troquelado, de acuerdo a la orden de trabajo y resguardando su seguridad.",
+        "criteria": [
+          "1.1 Prepara el troquel para su colocación en la rama, identificando sus elementos y características técnicas, según indicaciones de la orden de trabajo.",
+          "1.2 Regula el paso del soporte interpretando los mecanismos de alimentación, transporte y salida en la troqueladora.",
+          "1.3 Prepara la contrapartida, reconociendo las características de los diferentes hendidos y las del soporte que se va a troquelar.",
+          "1.4 Realiza el arreglo interpretando las instrucciones y aplicando la nivelación de presiones mediante alzas.",
+          "1.5 Prepara el cuerpo expulsor de recortes y el separador, reconociendo los elementos mecánicos y aplicando la separación de los envases sin deterioro.",
+          "1.6 Realiza el troquelado del pliego impreso con la calidad requerida, aplicando las especificaciones técnicas señaladas en la orden de trabajo.",
+          "1.7 Realiza la limpieza y el mantenimiento preventivo de la troqueladora, según las especificaciones del fabricante, aplicando las normas de prevención de riesgos laborales y protección medioambiental."
+        ]
+      },
+      {
+        "code": "M8-AE2",
+        "title": "Aplica tratamiento superficial del impreso según orden de trabajo.",
+        "criteria": [
+          "2.1 Prepara la máquina determinando los elementos del proceso, según las características de la estampación por calor y del soporte impreso.",
+          "2.2 Realiza el estampado por calor estableciendo la carga del soporte y aplicando la presión adecuada para alcanzar la calidad en el proceso.",
+          "2.3 Prepara la máquina plastificadora, ajustando los elementos del proceso, en función de las características del film plástico y del soporte impreso.",
+          "2.4 Realiza el plastificado, interpretando y aplicando las especificaciones técnicas en el proceso.",
+          "2.5 Prepara la máquina barnizadora, ajustando los elementos del proceso en función de las características del tipo de barnizado y del soporte.",
+          "2.6 Realiza el barnizado organizando el proceso según las características del producto y de acuerdo a la orden de trabajo."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81923.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34323_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 9,
+    "title": "Emprendimiento y empleabilidad",
+    "hp": 76,
+    "year": "4° medio",
+    "oa": [],
+    "aes": [
+      {
+        "code": "M9-AE1",
+        "title": "Diseña y ejecuta un proyecto para concretar iniciativas de emprendimiento, identificando las acciones a realizar, el cronograma de su ejecución y los presupuestos, definiendo alternativas de financiamiento y evaluando y controlando su avance.",
+        "criteria": [
+          "1.1 Recolecta, organiza y analiza información para identificar oportunidades de emprendimiento en su propia comunidad y región, considerando diferentes ámbitos de aplicación (deporte, tecnología, medioambiente y energía, entre otros).",
+          "1.2 Evalúa las oportunidades de emprendimiento, tomando en cuenta sus fortalezas y debilidades, y considerando el contexto, los recursos existentes y las normativas vigentes relacionadas.",
+          "1.3 Formula los objetivos para un plan de acción de una iniciativa de emprendimiento personal, productivo o social, considerando las condiciones del entorno y personales.",
+          "1.4 Formula un presupuesto detallado, determinando los recursos (financieros, humanos, tecnológicos y otros) requeridos para el desarrollo de su iniciativa, los plazos y los factores externos que afectan su desarrollo.",
+          "1.5 Elabora un mecanismo de control de avance de su iniciativa de emprendimiento y evalúa las necesidades y las alternativas de financiamiento mediante aportes públicos y privados (créditos y ahorro).",
+          "1.6 Ejecuta las acciones para alcanzar los objetivos planteados según la planificación realizada, perseverando pese a circunstancias adversas, evaluando los resultados y las amenazas, ajustando sus acciones para asegurar el éxito y compartiendo su experiencia con otros."
+        ]
+      },
+      {
+        "code": "M9-AE2",
+        "title": "Maneja la legislación laboral y previsional chilena como marco regulador de las relaciones entre trabajadores y empleadores, identificando los derechos y deberes de ambas partes, tanto individuales como colectivos, y la reconoce como base para establecer buenas relaciones laborales.",
+        "criteria": [
+          "2.1 Selecciona la información relevante sobre los derechos laborales y previsionales de los trabajadores garantizados por la Constitución y el Código del Trabajo, para su propia contratación o de terceros a su cargo.",
+          "2.2 Determina elementos críticos de diversos tipos de contratos y de finiquitos, considerando la legislación laboral vigente.",
+          "2.3 Elabora propuestas de creación y desarrollo de organización sindical de acuerdo a la realidad de diferentes tipos de empresas, respetando la legislación vigente y la defensa de los derechos de los trabajadores."
+        ]
+      },
+      {
+        "code": "M9-AE3",
+        "title": "Prepara los elementos necesarios para participar de un proceso de incorporación al mundo del trabajo, valorando y planificando su trayectoria formativa y laboral.",
+        "criteria": [
+          "3.1 Sistematiza información desde organismos y empresas especializadas en intermediación laboral que existen en su entorno, analizando las perspectivas laborales, sus propias condiciones laborales y las normativas relacionadas.",
+          "3.2 Elabora correctamente los documentos necesarios para iniciar una actividad laboral, como el curriculum vitae, reuniendo evidencias de cursos realizados, experiencia laboral previa y cartas de recomendación, y visualizando sus alternativas de acuerdo a sus expectativas y condiciones.",
+          "3.3 Prepara las entrevistas y las situaciones de ingreso y promoción, identificando a personas e instituciones que pueden brindarle apoyo en este proceso.",
+          "3.4 Evalúa si la remuneración mensual o semanal y el finiquito se han determinado de acuerdo al tipo de contrato firmado y a la legislación laboral vigente.",
+          "3.5 Selecciona la institución y la modalidad conveniente para su cobertura de salud y pensión, además del seguro de desempleo que le corresponde de acuerdo a su contrato y derechos, y lleva a cabo los trámites de afiliación."
+        ]
+      },
+      {
+        "code": "M9-AE4",
+        "title": "Selecciona alternativas de capacitación y de educación superior para fortalecer sus competencias o desarrollar nuevas y adquirir certificaciones, ya sea e-learning o presenciales, evaluando las diversas opciones de financiamiento.",
+        "criteria": [
+          "4.1 Evalúa las necesidades futuras del mundo laboral en el ámbito de su especialidad y sus desafíos de formación, considerando las dinámicas de empleo, tendencias e innovaciones tecnológicas.",
+          "4.2 Evalúa las ofertas de capacitación virtual y presencial disponibles en su entorno, incluyendo sus características (como duración, objetivos y costos) y requisitos generales.",
+          "4.3 Evalúa las ofertas de educación superior disponibles en su entorno, incluyendo sus características (duración, acreditación, posibilidades de reconocimiento de aprendizajes previos y alternativas de financiamiento y becas) y requisitos de entrada."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-81915.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34323_programa.pdf",
+    "source_warnings": []
+  }
+]

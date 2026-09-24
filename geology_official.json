@@ -1,0 +1,444 @@
+[
+  {
+    "position": 1,
+    "title": "Preparación e instalación de campamentos",
+    "hp": 190,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 1",
+        "title": "Organizar, instalar y desarmar campamentos en terreno para la obtención de muestras geológicas, de acuerdo a las características del proyecto de prospección, aplicando normas de higiene, seguridad y protección del medioambiente."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M1-AE1",
+        "title": "Habilita el campamento en terreno, trabajando eficaz y colaborativamente en pro del objetivo, considerando las medidas de seguridad, protección del medioambiente y las disposiciones establecidas en el convenio 169 de la OIT sobre pueblos indígenas y tribales.",
+        "criteria": [
+          "1.1 Planifica materiales, insumos y medios de transporte, de acuerdo al número de participantes, el clima, el lugar y la situación social del lugar, en equipo y coordinando acciones con otros en las tareas a realizar.",
+          "1.2 Diseña el campamento, considerando las condiciones del entorno y el mapa temático disponible.",
+          "1.3 Instala el campamento, considerando los participantes, los indicadores de higiene y seguridad establecidos en la ley N° 16.744, el cuidado del medioambiente establecido en la ley N° 19.300 y las disposiciones establecidas en el convenio 169 de la OIT sobre pueblos indígenas y tribales, y las comunicaciones necesarias.",
+          "1.4 Dispone de elementos básicos de atención de salud, considerando eventuales requerimientos de primeros auxilios.",
+          "1.5 Comunica a las autoridades policiales más cercanas la ubicación de su área de trabajo y el período en el que permanecerán, considerando eventuales necesidades de apoyo frente a incidentes o accidentes."
+        ]
+      },
+      {
+        "code": "M1-AE2",
+        "title": "Desarma y desmantela el campamento, solicitando y prestando cooperación en función del buen cumplimiento de la tarea.",
+        "criteria": [
+          "2.1 Desarma las instalaciones habilitadas del campamento, considerando el carguío de los distintos embalajes en los vehículos de transporte, las medidas de seguridad y cuidados del medioambiente, trabajando de forma colaborativa.",
+          "2.2 Realiza un catastro de los materiales y accesorios utilizados durante la estadía en el área, considerando posibles pérdidas y contaminación ambiental.",
+          "2.3 Reconstituye el escenario y las condiciones previas a la instalación del campamento, retirando todo desecho generado durante la permanencia en el lugar, de acuerdo a las normas de seguridad vigente, cuidado del medioambiente y las disposiciones establecidas en el convenio 169 de la OIT sobre pueblos indígenas y tribales.",
+          "2.4 Trabaja colaborativamente en el desarme del campamento, respetando las normas de seguridad, protección del medioambiente y las disposiciones establecidas en el convenio 169 de la OIT sobre pueblos indígenas y tribales.",
+          "2.5 Comunica a las autoridades policiales más cercanas el desalojo del área de campamento, de acuerdo a los protocolos establecidos por la empresa."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82014.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34333_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 2,
+    "title": "Marco legal y seguridad en geología",
+    "hp": 190,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA K",
+        "title": "Prevenir situaciones de riesgo y enfermedades ocupacionales, evaluando las condiciones del entorno del trabajo y utilizando los elementos de protección personal según la normativa correspondiente."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M2-AE1",
+        "title": "Controla riesgos en campamentos geológicos, considerando la normativa de seguridad, protección del medioambiente y normativa chilena emanada del convenio 169 de la OIT.",
+        "criteria": [
+          "1.1 Evalúa las medidas de seguridad y protección del medioambiente que deben incluirse en el diseño del campamento, considerando las condiciones del entorno y la normativa vigente.",
+          "1.2 Elabora indicaciones para el adecuado funcionamiento del campamento, considerando los indicadores de higiene y seguridad establecidos en la ley N° 16.744, el cuidado del medioambiente establecido en la ley N° 19.300 y las disposiciones del convenio 169 de la OIT de protección de las tierras y cultura de los pueblos indígenas y tribales, y las comunicaciones necesarias.",
+          "1.3 Controla el estado y disponibilidad de los elementos básicos de atención de salud, considerando eventuales requerimientos de primeros auxilios básicos."
+        ]
+      },
+      {
+        "code": "M2-AE2",
+        "title": "Controla riesgos en operaciones mineras a cielo abierto, de acuerdo al Código del Trabajo y el Reglamento de Seguridad Minera.",
+        "criteria": [
+          "2.1 Evalúa riesgos sobre personas, equipos e instalaciones en las operaciones de perforación, según lo establecido en el Código del Trabajo, la Ley N° 16.744 sobre Accidentes del Trabajo y Enfermedades Profesionales, y el Reglamento de Seguridad Minera (DS 132).",
+          "2.2 Clasifica los riesgos de acuerdo a la probabilidad de ocurrencia, grado de exposición y consecuencias, aplicando técnicas de la Matriz de Riesgo de Seguridad y Salud Ocupacional Significativo (RSSOS).",
+          "2.3 Aplica las medidas de control de riesgo en las operaciones mineras de perforación, establecidas en el Método de Matriz de Riesgo de Seguridad y Salud Ocupacional Significativo (RSSOS)."
+        ]
+      },
+      {
+        "code": "M2-AE3",
+        "title": "Controla riesgos en operaciones mineras subterráneas, de acuerdo al Código del Trabajo y el Reglamento de Seguridad Minera.",
+        "criteria": [
+          "3.1 Evalúa riesgos sobre personas, equipos e instalaciones geológicas en las operaciones de perforación, de acuerdo a lo establecido en el Código del Trabajo, la Ley N° 16.744 sobre Accidentes del Trabajo y Enfermedades Profesionales, y el Reglamento de Seguridad Minera (DS 132).",
+          "3.2 Evalúa y clasifica los riesgos de acuerdo a la probabilidad de ocurrencia y el grado de exposición y consecuencias, aplicando técnicas de Matriz de Riesgo de Seguridad y Salud Ocupacional Significativo (RSSOS).",
+          "3.3 Evalúa las condiciones de ventilación en labores subterráneas, trabajando a lo menos dos personas, empleando instrumentos de aforo de acuerdo a lo establecido en el Reglamento de Seguridad Minera (DS 132) y el Reglamento sobre Condiciones Sanitarias y Ambientales Básicas en los Lugares de Trabajo (DS 594).",
+          "3.4 Aplica las medidas de control de riesgo en las operaciones mineras de perforación, ventilación, establecidas en el Método de Matriz de Riesgo de Seguridad y Salud Ocupacional Significativo (RSSOS).",
+          "3.5 Inspecciona equipos e instalaciones y observa actos personales de trabajo para controlar la formación de incendios, de acuerdo a lo establecido en el Reglamento de Seguridad Minera (DS 132)."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82015.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34333_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 3,
+    "title": "Clasificación de rocas y minerales",
+    "hp": 266,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 6",
+        "title": "Distinguir macroscópicamente diferentes tipos de minerales para estimar la calidad de estos, considerando su color, textura, dureza y otras características."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M3-AE1",
+        "title": "Distingue rocas y minerales en escenarios geológicos, valorando la importancia de la clasificación, utilizando el lenguaje técnico establecido en convenciones internacionales, y comunicando constantemente los avances de la actividad.",
+        "criteria": [
+          "1.1 Ubica el lugar en el cual se va a realizar la exploración geológica, a partir de un informe geológico proporcionado por la empresa, trabajando eficazmente en equipo.",
+          "1.2 Selecciona rocas, minerales, fósiles y agua en los puntos determinados por el informe geológico, de acuerdo a las características físicas que presentan los elementos descubiertos, trabajando en equipo de forma colaborativa y valorando la importancia del cuidado del medioambiente.",
+          "1.3 Usa técnicas de observación para identificar rocas y minerales, considerando color, textura, dureza, raya, densidad y otras propiedades físicas y/o químicas.",
+          "1.4 Elabora un informe técnico sobre los descubrimientos realizados, considerando testimonios fotográficos y otros, respetando el uso del lenguaje técnico y utilizando registros de habla y escritura pertinentes a la situación laboral."
+        ]
+      },
+      {
+        "code": "M3-AE2",
+        "title": "Selecciona los diferentes tipos de roca para determinar el uso adecuado de herramientas y equipos en las diferentes etapas de un proyecto minero.",
+        "criteria": [
+          "2.1 Distingue los diferentes tipos de textura de las rocas, utilizando la terminología de geología.",
+          "2.2 Determina los porcentajes de los minerales presentes en la roca, de acuerdo a sus características físicas.",
+          "2.3 Clasifica los diferentes tipos de rocas y las agrupa en ígneas, metamórficas y sedimentarias, de acuerdo a sus características físicas.",
+          "2.4 Determina tipo de rocas, según cuadros de clasificación.",
+          "2.5 Clasifica los diferentes tipos de roca en terreno, de acuerdo a sus propiedades físicas y comportamiento a movimiento de tierra, considerando las medidas de seguridad del Reglamento de Seguridad Minera (DS 132)."
+        ]
+      },
+      {
+        "code": "M3-AE3",
+        "title": "Distingue menas y gangas en labores productivas de la minería y comunica los avances de la actividad.",
+        "criteria": [
+          "3.1 Lee instrucciones técnicas que establecen los criterios mineros sobre la ley del mineral que separa menas y gangas, considerando las características físicas de los minerales.",
+          "3.2 Decide el destino de los materiales que se extraen de la mina, de acuerdo al criterio minero y a la reclasificación de las menas y gangas, trabajando en equipo de forma colaborativa.",
+          "3.3 Informa sobre la actividad realizada, señalando las novedades descubiertas en el proceso y las decisiones tomadas, considerando las instrucciones indicadas en el informe técnico."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82016.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34333_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 4,
+    "title": "Lectura y elaboración de mapas topográficos y geológicos",
+    "hp": 190,
+    "year": "3° medio",
+    "oa": [
+      {
+        "code": "OA 3",
+        "title": "Leer levantamientos topográficos en terreno y faenas, visibilizando los puntos topográficos, ubicando con precisión los sitios y puntos donde deben desarrollarse las faenas."
+      },
+      {
+        "code": "OA 7",
+        "title": "Confeccionar mapas de terreno o faenas en forma digital, para registrar y clasificar información topográfica de terreno y geológica, usando técnicas de dibujo de mapas, de acuerdo a requerimientos de información."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M4-AE1",
+        "title": "Lee mapas geológicos, utilizando la simbología y las especificaciones técnicas establecidas en convenciones internacionales.",
+        "criteria": [
+          "1.1 Lee elementos topográficos y geológicos en mapas temáticos, como fallas, geomorfología y macizos rocosos, considerando las convenciones gráficas internacionales.",
+          "1.2 Describe elementos topográficos y geológicos, considerando el lenguaje técnico del mapa temático geológico establecido en las convenciones internacionales.",
+          "1.3 Ubica puntos geológicos en el mapa temático, considerando los objetivos del programa y el muestreo establecido en el informe geológico, de acuerdo al Sistema de Coordenadas Geográficas y Sistema de Coordenadas Universal Transversal de Mercator (UTM)."
+        ]
+      },
+      {
+        "code": "M4-AE2",
+        "title": "Mide distancias en levantamientos topográficos y mapas en forma prolija, utilizando los instrumentos apropiados.",
+        "criteria": [
+          "2.1 Determina las dimensiones que hay entre puntos de mapas y levantamientos y las dimensiones reales, considerando la relación matemática de proporciones, la exactitud de las medidas y la utilización de los instrumentos apropiados.",
+          "2.2 Determina las distancias reales que existen entre los puntos de un levantamiento o mapa, empleando escalímetros y huinchas de medir de acuerdo a las leyes de proporciones.",
+          "2.3 Cumple con los formatos establecidos para el desarrollo del trabajo solicitado."
+        ]
+      },
+      {
+        "code": "M4-AE3",
+        "title": "Utiliza levantamientos y mapas geológicos en terreno para establecer puntos de perforaciones y de establecimiento del campamento.",
+        "criteria": [
+          "3.1 Reconoce en terreno la información contenida en planos y mapas, de acuerdo a los símbolos establecidos en estos.",
+          "3.2 Selecciona materiales, equipos y herramientas para fijar en terreno puntos de perforaciones y de establecimiento del campamento, de acuerdo a la información contenida en estos.",
+          "3.3 Fija en terreno, con prolijidad, la información de puntos de perforaciones y de establecimiento del campamento considerando la simbología gráfica establecida en los planos."
+        ]
+      },
+      {
+        "code": "M4-AE4",
+        "title": "Registra antecedentes de interés para elaborar mapas geológicos.",
+        "criteria": [
+          "4.1 Registra puntos de interés en terreno, utilizando herramientas como GPS y fotografías aéreas, de acuerdo a las características del entorno e informe geológico.",
+          "4.2 Registra antecedentes del área de interés, considerando los elementos constituyentes del ambiente geológico."
+        ]
+      },
+      {
+        "code": "M4-AE5",
+        "title": "Elabora mapas geológicos, respetando el uso de la simbología y las especificaciones técnicas.",
+        "criteria": [
+          "5.1 Dibuja un mapa preliminar, considerando las ubicaciones de elementos geológicos y los requerimientos de la empresa.",
+          "5.2 Dibuja un mapa geológico, considerando las convenciones gráficas internacionales."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82017.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34333_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 5,
+    "title": "Prospección geológica con sondajes",
+    "hp": 228,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 4",
+        "title": "Aplicar técnicas de perforación, sondaje y movimientos de tierra para obtener muestras geológicas, utilizando maquinarias y equipos apropiados, de acuerdo a características del terreno y tipo de muestras, considerando las normas de seguridad y medioambiente."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M5-AE1",
+        "title": "Analiza los riesgos de seguridad y medioambiente en el área de interés donde se realizará la prospección, tomando la iniciativa para prevenir situaciones de riesgo.",
+        "criteria": [
+          "1.1 Ubican el lugar de los sondeos utilizando informes geológicos, de acuerdo al objetivo establecido por la empresa.",
+          "1.2 Identifica los riesgos asociados al proceso de sondaje, chequeando visualmente en terreno que existan las condiciones necesarias y aplicando iniciativas de acuerdo a las normas de higiene y seguridad (Ley N° 16744), el cuidado de medioambiente (Ley N° 19300) y de seguridad en el entorno social.",
+          "1.3 Registra la información obtenida en el análisis de riesgos asociados al proceso de sondaje, utilizando formularios definidos por la empresa, como Análisis de Riesgos del Trabajo (ART) o equivalentes."
+        ]
+      },
+      {
+        "code": "M5-AE2",
+        "title": "Prepara plataformas de perforación y equipamiento de sondeo, trabajando colaborativamente para cumplir las tareas encomendadas.",
+        "criteria": [
+          "2.1 Determina los accesos a los puntos de perforación, considerando las coordenadas y las características del entorno indicadas en el informe geológico, trabajando colaborativamente y respetando las normas de seguridad y cuidado del medioambiente.",
+          "2.2 Chequea el estado y el funcionamiento de la maquinaria de apoyo y del equipo de sondeo, de acuerdo al informe técnico entregado por los operadores, respetando las instrucciones del fabricante y las normas de seguridad.",
+          "2.3 Planifica la distribución de las áreas operacionales y el equipamiento de perforación, considerando el método de sondeo y las normas de seguridad."
+        ]
+      },
+      {
+        "code": "M5-AE3",
+        "title": "Controla la ejecución de los procedimientos de sondeos geológicos de los distintos métodos de perforación, valorando la importancia de la seguridad y la prevención de riesgos asociados.",
+        "criteria": [
+          "3.1 Verifica que el equipamiento de perforación opere durante el proceso de sondaje según los parámetros establecidos en el informe geológico y las normas de seguridad.",
+          "3.2 Controla el proceso de sondeo geológico, considerando el tipo de perforación, las tasas de avance, la relación entre la longitud del sondeo y el tamaño de la muestra, y el protocolo establecido en el informe geológico, y comunican permanentemente los avances de la actividad.",
+          "3.3 Registra las desviaciones de la traza planificada durante todo el proceso de sondeo, de acuerdo al informe geológico."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82018.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34333_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 6,
+    "title": "Técnicas de muestreo geológico",
+    "hp": 266,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 5",
+        "title": "Tomar, rotular, envasar y almacenar muestras geológicas, siguiendo los procedimientos e instructivos asociados, registrando y documentando la información del proceso de acuerdo a los requerimientos de organización del data room de cada empresa."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M6-AE1",
+        "title": "Acondiciona el área de muestreo, previniendo situaciones de riesgo, y respetando las normas de seguridad y cuidado del medioambiente.",
+        "criteria": [
+          "1.1 Evalúa las condiciones del área de muestreo, de acuerdo a la operación a realizar y a las normas de seguridad establecidas por la empresa.",
+          "1.2 Reporta a sus superiores factores que puedan presentar riesgos, de acuerdo a procedimientos de seguridad de la empresa.",
+          "1.3 Define los accesos a lugares específicos de toma de muestras en el área de interés, de acuerdo a las condiciones del entorno y de seguridad."
+        ]
+      },
+      {
+        "code": "M6-AE2",
+        "title": "Aplica procedimientos de muestreo de rocas y acuíferos con los distintos métodos de recuperación de muestras, realizando las tareas de manera prolija, previniendo situaciones de riesgo, y respetando las normas de seguridad y cuidado del medioambiente.",
+        "criteria": [
+          "2.1 Utiliza los materiales y herramientas necesarias para la obtención de la muestra, según la técnica indicada en los protocolos establecidos en la empresa, de manera prolija.",
+          "2.2 Aplica diferentes técnicas de recuperación de muestras sólidas, tipo “chips”, “cuarteo” y “corte axial”, según el punto muestra de superficie, protocolos de sondaje establecidos por la empresa, los estándares internacionales y la prevención de situaciones de riesgo.",
+          "2.3 Realiza muestreo de sondajes de aire reverso y diamantino, de acuerdo a los protocolos de sondaje establecidos por la empresa, los estándares internacionales y la prevención de situaciones de riesgo."
+        ]
+      },
+      {
+        "code": "M6-AE3",
+        "title": "Muestrea variables de interés, realizando las tareas de manera prolija, previniendo situaciones de riesgo, y respetando las normas de seguridad y cuidado del medioambiente.",
+        "criteria": [
+          "3.1 Ubica puntos de muestreo en el área de interés, utilizando instrumentos como GPS u otras aplicaciones de georreferencia, de acuerdo a los procedimientos establecidos por la empresa.",
+          "3.2 Selecciona muestras geológicas representativas, según las indicaciones de los protocolos que contempla el informe geológico, utilizando los insumos apropiados y respetando las normas de seguridad y cuidado del medioambiente.",
+          "3.3 Realiza mediciones de manera prolija, a testigos y muestras extraídas, utilizando instrumentos, de acuerdo a los protocolos definidos por la empresa.",
+          "3.4 Registra muestras en terreno rotulando mediciones de testigos, ubicación, coordenadas y nombre, de acuerdo a protocolos establecidos en el informe geológico, y comunican el estado de avance del programa."
+        ]
+      },
+      {
+        "code": "M6-AE4",
+        "title": "Muestrea testigos procedentes de diferentes sondajes, considerando sus características, el envasado sin contaminación de las muestra, y las medidas de seguridad y medioambiental establecidas.",
+        "criteria": [
+          "4.1 Cuartea las muestras de sondajes con recuperación de polvo, de acuerdo al programa de muestreo, respetando normas de seguridad y del medioambiente.",
+          "4.2 Corta los testigos de sondaje con diamantina, en mitades longitudinales con equipos adecuados para evitar la contaminación de las muestras, respetando normas de seguridad y del medioambiente.",
+          "4.3 Deposita adecuadamente una muestra en las cajas portatestigo, respetando la posición del testigo.",
+          "4.4 Envasa la otra muestra evitando su contaminación, para su posterior envío a laboratorio."
+        ]
+      },
+      {
+        "code": "M6-AE5",
+        "title": "Almacena muestras geológicas, realizando las tareas de manera prolija, cumpliendo la normativa medioambiental del manejo de residuos, previniendo situaciones de riesgo y respetando las normas de seguridad.",
+        "criteria": [
+          "5.1 Controla que las muestras extraídas se encuentran limpias y libres de agentes contaminantes antes de su almacenaje, de acuerdo a los protocolos establecidos por la empresa y la normativa medioambiental del manejo de residuos.",
+          "5.2 Etiqueta muestras, considerando los códigos de muestreo y la metodología establecida por la empresa.",
+          "5.3 Aplica criterios de almacenaje temporal de las muestras obtenidas en la plataforma, de acuerdo a los procedimientos establecidos en los protocolos de la empresa.",
+          "5.4 Almacena los testigos y muestras en bolsas o cajas, de acuerdo a las instrucciones, las normas de seguridad y los procedimientos establecidos por la empresa.",
+          "5.5 Organiza el traslado y la entrega de las muestras a la testigoteca, de acuerdo a las normas de seguridad y cuidado del medioambiente, y los protocolos establecidos.",
+          "5.6 Controla la ejecución del proceso de almacenaje, verificando que las muestras y testigos se distribuyan en las secciones correspondientes, según los protocolos y las normas de seguridad."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82019.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34333_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 7,
+    "title": "Registro y transferencia de información geológica",
+    "hp": 152,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 8",
+        "title": "Leer, trasmitir y registrar información geológica desde puntos remotos, utilizando sistemas de posicionamiento global y tecnología de información y comunicación, de acuerdo a requerimientos de información."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M7-AE1",
+        "title": "Procesa información geológica pertinente al trabajo, utilizando tecnologías de la información.",
+        "criteria": [
+          "1.1 Organiza la información extraída de cada muestra y testigo, de acuerdo a las variables y los requerimientos establecidos en el data room de la empresa.",
+          "1.2 Valida la información recolectada, aplicando el plan de control QA/QC (Quality Assurance/Quality Control).",
+          "1.3 Tabula los datos parciales en el data room, considerando las variables establecidas, y la estructura definida por la empresa, con el uso de tecnologías de la información."
+        ]
+      },
+      {
+        "code": "M7-AE2",
+        "title": "Controla el procesamiento de la información geológica, utilizando tecnologías de la información, y comunica el estado de avance del programa.",
+        "criteria": [
+          "2.1 Valida la información ingresada que exige el informe geológico, de acuerdo a programas de control de calidad (QA/QC) y sus softwares asociados.",
+          "2.2 Realiza el seguimiento a los procesos analíticos de la información entregados por unidades o empresas externas (laboratorios), según las variables de control establecidas en el data room.",
+          "2.3 Actualiza la información geológica en el data room, de acuerdo a los resultados de análisis de laboratorio y los procedimientos de la empresa (QA/QC), usando tecnologías de la información.",
+          "2.4 Realiza el cierre de la información geológica actualizada en el data room, considerando el resultado definitivo del análisis elaborado por unidades externas."
+        ]
+      },
+      {
+        "code": "M7-AE3",
+        "title": "Transmite la información geológica, comunicándose oralmente y por escrito con claridad.",
+        "criteria": [
+          "3.1 Notifica el estado vigente de la información tabulada en el data room, enviando la información a los responsables del proceso geológico, de acuerdo a los protocolos de reportes.",
+          "3.2 Informa sobre el estado final de la base de datos del data room a los responsables, considerando los requerimientos de organización y el QA/QC."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82020.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34333_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 8,
+    "title": "Transporte y mantenimiento de equipos e instrumentos geológicos",
+    "hp": 114,
+    "year": "4° medio",
+    "oa": [
+      {
+        "code": "OA 2",
+        "title": "Transportar, instalar, armar y desarmar equipos, instrumentos y accesorios en terreno, necesarios para realizar la obtención de muestras geológicas, de acuerdo a las características del terreno, indicaciones de los fabricantes, normas de seguridad y protección del medioambiente."
+      }
+    ],
+    "aes": [
+      {
+        "code": "M8-AE1",
+        "title": "Transporta, arma y desarma equipos e instrumentos en terreno, solicitando y prestando cooperación en función del buen cumplimiento de la tarea.",
+        "criteria": [
+          "1.1 Prepara los equipos e instrumentos de acuerdo al proyecto de prospección entregado y las instrucciones del fabricante.",
+          "1.2 Almacena equipos e instrumentos geológicos, considerando las instrucciones del fabricante sobre almacenamiento.",
+          "1.3 Transporta los equipos e instrumentos, considerando el cuidado necesario indicado en el manual del fabricante.",
+          "1.4 Arma los equipos e instrumentos según su diseño, asegurando su funcionamiento, de acuerdo al manual del fabricante y las medidas de seguridad, y trabajando en equipo de forma colaborativa.",
+          "1.5 Desarma los equipos e instrumentos, considerando las instrucciones del fabricante y las medidas de seguridad, y trabajando en equipo de forma colaborativa."
+        ]
+      },
+      {
+        "code": "M8-AE2",
+        "title": "Realiza mantenimiento de equipos, instrumentos y accesorios geológicos necesarios para realizar la obtención de muestras, de acuerdo a las indicaciones del fabricante.",
+        "criteria": [
+          "2.1 Confecciona un listado de chequeo, en formato digital, indicando todas las etapas de verificación y horas de uso de los instrumentos y equipos geológicos, de acuerdo al manual del fabricante.",
+          "2.2 Ejecuta el plan de mantenimiento básico de acuerdo al plan de mantenimiento y el manual del fabricante, las normas de higiene, prevención de riesgos y en los tiempos establecidos.",
+          "2.3 Revisa, sustituye o repara piezas de instrumentos y equipos geológicos, de acuerdo a los procedimientos establecidos en el plan de mantenimiento del manual del fabricante.",
+          "2.4 Elabora detalladamente informe en forma digital de todas las intervenciones del mantenimiento preventivo, señalando las actividades realizadas, según los procedimientos del formato establecido."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82021.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34333_programa.pdf",
+    "source_warnings": []
+  },
+  {
+    "position": 9,
+    "title": "Emprendimiento y empleabilidad",
+    "hp": 76,
+    "year": "4° medio",
+    "oa": [],
+    "aes": [
+      {
+        "code": "M9-AE1",
+        "title": "Diseña y ejecuta un proyecto para concretar iniciativas de emprendimiento, identificando las acciones a realizar, el cronograma de su ejecución y los presupuestos, definiendo alternativas de financiamiento y evaluando y controlando su avance.",
+        "criteria": [
+          "1.1 Recolecta, organiza y analiza información para identificar oportunidades de emprendimiento en su propia comunidad y región, considerando diferentes ámbitos de aplicación (deporte, tecnología, medioambiente y energía, entre otros).",
+          "1.2 Evalúa las oportunidades de emprendimiento, tomando en cuenta sus fortalezas y debilidades, y considerando el contexto, los recursos existentes y las normativas vigentes relacionadas.",
+          "1.3 Formula los objetivos para un plan de acción de una iniciativa de emprendimiento personal, productivo o social, considerando las condiciones del entorno y personales.",
+          "1.4 Formula un presupuesto detallado, determinando los recursos (financieros, humanos, tecnológicos y otros) requeridos para el desarrollo de su iniciativa, los plazos y los factores externos que afectan su desarrollo.",
+          "1.5 Elabora un mecanismo de control de avance de su iniciativa de emprendimiento y evalúa las necesidades y las alternativas de financiamiento mediante aportes públicos y privados (créditos y ahorro).",
+          "1.6 Ejecuta las acciones para alcanzar los objetivos planteados según la planificación realizada, perseverando pese a circunstancias adversas, evaluando los resultados y las amenazas, ajustando sus acciones para asegurar el éxito y compartiendo su experiencia con otros."
+        ]
+      },
+      {
+        "code": "M9-AE2",
+        "title": "Maneja la legislación laboral y previsional chilena como marco regulador de las relaciones entre trabajadores y empleadores, identificando los derechos y deberes de ambas partes, tanto individuales como colectivos, y la reconoce como base para establecer buenas relaciones laborales.",
+        "criteria": [
+          "2.1 Selecciona la información relevante sobre los derechos laborales y previsionales de los trabajadores garantizados por la Constitución y el Código del Trabajo, para su propia contratación o de terceros a su cargo.",
+          "2.2 Determina elementos críticos de diversos tipos de contratos y de finiquitos, considerando la legislación laboral vigente.",
+          "2.3 Elabora propuestas de creación y desarrollo de organización sindical de acuerdo a la realidad de diferentes tipos de empresas, respetando la legislación vigente y la defensa de los derechos de los trabajadores."
+        ]
+      },
+      {
+        "code": "M9-AE3",
+        "title": "Prepara los elementos necesarios para participar de un proceso de incorporación al mundo del trabajo, valorando y planificando su trayectoria formativa y laboral.",
+        "criteria": [
+          "3.1 Sistematiza información desde organismos y empresas especializadas en intermediación laboral que existen en su entorno, analizando las perspectivas laborales, sus propias condiciones laborales y las normativas relacionadas.",
+          "3.2 Elabora correctamente los documentos necesarios para iniciar una actividad laboral, como el curriculum vitae, reuniendo evidencias de cursos realizados, experiencia laboral previa y cartas de recomendación, y visualizando sus alternativas de acuerdo a sus expectativas y condiciones.",
+          "3.3 Prepara las entrevistas y las situaciones de ingreso y promoción, identificando a personas e instituciones que pueden brindarle apoyo en este proceso.",
+          "3.4 Evalúa si la remuneración mensual o semanal y el finiquito se han determinado de acuerdo al tipo de contrato firmado y a la legislación laboral vigente.",
+          "3.5 Selecciona la institución y la modalidad conveniente para su cobertura de salud y pensión, además del seguro de desempleo que le corresponde de acuerdo a su contrato y derechos, y lleva a cabo los trámites de afiliación."
+        ]
+      },
+      {
+        "code": "M9-AE4",
+        "title": "Selecciona alternativas de capacitación y de educación superior para fortalecer sus competencias o desarrollar nuevas y adquirir certificaciones, ya sea e-learning o presenciales, evaluando las diversas opciones de financiamiento.",
+        "criteria": [
+          "4.1 Evalúa las necesidades futuras del mundo laboral en el ámbito de su especialidad y sus desafíos de formación, considerando las dinámicas de empleo, tendencias e innovaciones tecnológicas.",
+          "4.2 Evalúa las ofertas de capacitación virtual y presencial disponibles en su entorno, incluyendo sus características (como duración, objetivos y costos) y requisitos generales.",
+          "4.3 Evalúa las ofertas de educación superior disponibles en su entorno, incluyendo sus características (duración, acreditación, posibilidades de reconocimiento de aprendizajes previos y alternativas de financiamiento y becas) y requisitos de entrada."
+        ]
+      }
+    ],
+    "source_page": "https://www.curriculumnacional.cl/614/w3-article-82013.html",
+    "source_pdf": "https://www.curriculumnacional.cl/614/articles-34333_programa.pdf",
+    "source_warnings": []
+  }
+]
