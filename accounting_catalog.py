@@ -44,7 +44,7 @@ def draft_modules():
             ae['example'] = f'{conflict} Revisa {resources} y prepara un {product}.'
             aes.append(ae)
         content = _module(item['position'], item['title'], item['hp'], aes,
-                          'contabilidad', SOURCE, SOURCE_URL, scope,
+                          'administracion', SOURCE, SOURCE_URL, scope,
                           oa=item['oa'], year=item['year'], plan_section='Plan de Estudio MINEDUC')
         content['specialty'] = 'Contabilidad'
         content['context'] = f'{place}. {conflict} Dispones de {resources}. Producto: {product}.'
@@ -88,3 +88,36 @@ def install_accounting_draft(con):
         con.execute('INSERT INTO modules(course_id,title,position,published,content) VALUES(?,?,?,?,?)',
                     (course['id'], item['title'], item['position'], 0,
                      json.dumps(deepcopy(content), ensure_ascii=False)))
+
+
+def install_accounting_course(con):
+    """Publica Contabilidad solo cuando cada módulo supera el control pedagógico."""
+    from pedagogy import enrich, publication_gaps
+
+    course = con.execute('SELECT id FROM courses WHERE title=?', ('Contabilidad',)).fetchone()
+    if not course:
+        return
+    for item, content in draft_modules():
+        content['version'] = 'contabilidad-mineduc-v1'
+        enrich(content, item['position'])
+        gaps = publication_gaps(content, 'Contabilidad')
+        if gaps:
+            raise ValueError(f'Contabilidad módulo {item["position"]} no publicable: {gaps[:3]}')
+        existing = con.execute(
+            'SELECT id,content FROM modules WHERE course_id=? AND position=?',
+            (course['id'], item['position']),
+        ).fetchone()
+        serialized = json.dumps(content, ensure_ascii=False)
+        if existing:
+            previous = json.loads(existing['content'] or '{}')
+            if previous.get('version') not in ('contabilidad-mineduc-draft-v1', 'contabilidad-mineduc-v1'):
+                continue
+            con.execute(
+                'UPDATE modules SET title=?,published=1,content=? WHERE id=?',
+                (item['title'], serialized, existing['id']),
+            )
+        else:
+            con.execute(
+                'INSERT INTO modules(course_id,title,position,published,content) VALUES(?,?,?,?,?)',
+                (course['id'], item['title'], item['position'], 1, serialized),
+            )

@@ -2,7 +2,7 @@ import json
 import sqlite3
 import unittest
 
-from accounting_catalog import OFFICIAL, draft_modules, install_accounting_draft
+from accounting_catalog import OFFICIAL, draft_modules, install_accounting_course, install_accounting_draft
 
 
 class AccountingCatalogTests(unittest.TestCase):
@@ -32,6 +32,28 @@ class AccountingCatalogTests(unittest.TestCase):
         self.assertEqual(10, len(rows))
         self.assertTrue(all(not row['published'] for row in rows))
         self.assertEqual(1672, sum(json.loads(row['content'])['specialty_source']['official_hp'] for row in rows))
+        con.close()
+
+    def test_complete_course_is_publishable_and_idempotent(self):
+        from pedagogy import publication_gaps
+
+        con = sqlite3.connect(':memory:')
+        con.row_factory = sqlite3.Row
+        con.executescript('''
+            CREATE TABLE courses(id INTEGER PRIMARY KEY, title TEXT);
+            CREATE TABLE modules(id INTEGER PRIMARY KEY, course_id INTEGER, title TEXT,
+                position INTEGER, published INTEGER, content TEXT);
+            INSERT INTO courses(id,title) VALUES(1,'Contabilidad');
+        ''')
+        install_accounting_course(con)
+        install_accounting_course(con)
+        rows = con.execute('SELECT published,content FROM modules ORDER BY position').fetchall()
+        self.assertEqual(10, len(rows))
+        self.assertTrue(all(row['published'] for row in rows))
+        for row in rows:
+            content = json.loads(row['content'])
+            self.assertEqual('contabilidad-mineduc-v1', content['version'])
+            self.assertFalse(publication_gaps(content, 'Contabilidad'))
         con.close()
 
 
