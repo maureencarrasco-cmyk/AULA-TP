@@ -17,9 +17,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/landing/sound-accessibility.css?v=20260818.5" />
-    <link rel="stylesheet" href="/landing/especialidades-catalog.css?v=20260906.1" />
+    <link rel="stylesheet" href="/landing/especialidades-catalog.css?v=20260923.catalog-v1" />
     <link rel="stylesheet" href="/shared/aula-tp-design-tokens.css" />
-    <link rel="stylesheet" href="/landing/aula-tp-landing.css?v=20260910.landing-v6" />
+    <link rel="stylesheet" href="/landing/aula-tp-landing.css?v=20260923.footer-v4" />
     <script src="/landing/sound-accessibility.js?v=20260818.5" defer></script>
   </head>
   <body class="aula-landing landing-redesign landing-local-refactor">
@@ -29,8 +29,7 @@
       <div class="container header-inner">
         <a class="brand aulatp-brand" href="#inicio" aria-label="Aula TP Chile, inicio">
           <picture>
-            <source type="image/webp" srcset="/landing/assets/aula-tp-chile-official-v2-160.webp?v=20260824.2 160w, /landing/assets/aula-tp-chile-official-v2-320.webp?v=20260824.2 320w" sizes="44px" />
-            <img src="/landing/assets/aula-tp-chile-official-v2.png?v=20260824.2" alt="" width="44" height="44" />
+            <img src="/images/portal-docente/brand/aula-tp-chile-logo.png" alt="" width="44" height="44" />
           </picture>
           <span class="brand-text">
             <strong>Aula TP Chile</strong>
@@ -44,10 +43,8 @@
         </button>
 
         <nav class="main-nav aulatp-nav" id="main-nav" aria-label="Navegación principal" data-nav>
-          <a href="#rutas">Rutas</a>
           <a href="#beneficios">Beneficios</a>
           <a href="#recorrido">Recorrido</a>
-          <a href="#simuladores">Simuladores</a>
           <a href="#especialidades">Especialidades</a>
           <a href="#implementacion">Implementación</a>
           <a class="button button-ghost" href="/portal/cursos/">Ingresar a cursos</a>
@@ -96,152 +93,79 @@
         </div>
       </section>
 
-      <section class="live-routes" id="rutas">
+      <section class="experience-overview section-pad" id="beneficios">
+        <span id="recorrido" class="experience-anchor" aria-hidden="true"></span>
         <div class="container">
-          <div class="section-heading reveal">
-            <div>
-              <p class="eyebrow">Rutas publicadas</p>
-              <h2>Cuatro especialidades listas para entrar al aula</h2>
-            </div>
-            <p>El catálogo nacional agrupa 35 especialidades. Estas cuatro ya tienen ruta pedagógica publicada, con estaciones, práctica y evidencia para el docente.</p>
+          <div class="experience-purpose-grid">
+            <article class="experience-purpose-card experience-purpose-card--blue reveal">
+              <div class="experience-purpose-mark" aria-hidden="true">01</div>
+              <div>
+                <h2>¿Para qué sirve?</h2>
+                <p>Un espacio para ensayar procedimientos, tomar decisiones y aprender del error — sin riesgo — antes de llegar al taller, la industria o el servicio.</p>
+              </div>
+            </article>
+            <article class="experience-purpose-card experience-purpose-card--mint reveal">
+              <div class="experience-purpose-mark" aria-hidden="true">02</div>
+              <div>
+                <h2>¿Cuál es su beneficio?</h2>
+                <p>Más práctica efectiva para el estudiante, más seguridad al enfrentar lo real y reportes concretos que ayudan al docente y a la UTP a acompañar con evidencia.</p>
+              </div>
+            </article>
           </div>
-          <div class="live-grid">
-            <a class="live-card reveal" data-specialty="climatizacion" href="/curso/climatizacion">
-              <span class="chip">Publicada</span>
-              <h3>Refrigeración y Climatización</h3>
-              <p>Ocho módulos, planos, medición, puesta en marcha y mantención, con práctica guiada antes del taller.</p>
-              <span class="go">Abrir ruta</span>
-            </a>
-            <a class="live-card reveal" data-specialty="electricidad" href="/portal/simuladores/electricidad_3_medio/">
-              <span class="chip">Publicada</span>
-              <h3>Electricidad</h3>
-              <p>Ruta de 3° medio: instalaciones, diagnóstico y decisiones en un entorno seguro y repetible.</p>
-              <span class="go">Abrir ruta</span>
-            </a>
-            <a class="live-card reveal" data-specialty="enfermeria" href="/portal/simuladores/atencion_enfermeria/">
-              <span class="chip">Publicada</span>
-              <h3>Atención de Enfermería</h3>
-              <p>Procedimientos clínicos, cuidados básicos y evidencia para acompañar al estudiante TENS.</p>
-              <span class="go">Abrir ruta</span>
-            </a>
-            <a class="live-card reveal" data-specialty="administracion" href="/curso/administracion">
-              <span class="chip">Publicada</span>
-              <h3>Administración</h3>
-              <p>Gestión, procesos y taller con ERP Bazar Inteligente para practicar decisiones de un negocio real.</p>
-              <span class="go">Abrir ruta</span>
-            </a>
+
+          <div class="experience-benefit-grid" aria-label="Beneficios de Aula TP">
+            <article class="experience-benefit-card experience-benefit-card--blue reveal"><span>01</span><h3>Más práctica</h3><p>Ensayos repetibles antes de situaciones reales.</p><b aria-hidden="true">›</b></article>
+            <article class="experience-benefit-card experience-benefit-card--violet reveal"><span>02</span><h3>Mejor preparación</h3><p>Procedimientos, análisis y decisiones con feedback claro.</p><b aria-hidden="true">›</b></article>
+            <article class="experience-benefit-card experience-benefit-card--pink reveal"><span>03</span><h3>Apoyo al docente</h3><p>Retroalimentación y reportes pedagógicos, sin carga extra.</p><b aria-hidden="true">›</b></article>
+            <article class="experience-benefit-card experience-benefit-card--orange reveal"><span>04</span><h3>Innovación con propósito</h3><p>Tecnología al servicio del currículo TP, no al revés.</p><b aria-hidden="true">›</b></article>
           </div>
-        </div>
-      </section>
 
-      <section class="purpose-strip" id="beneficios">
-        <div class="container purpose-grid">
-          <article class="purpose-card reveal">
-            <h2>Para qué sirve</h2>
-            <p>Un espacio para ensayar procedimientos, tomar decisiones y aprender del error — sin riesgo — antes de llegar al taller, la industria o el servicio.</p>
-          </article>
-          <article class="purpose-card reveal">
-            <h2>Cuál es su beneficio</h2>
-            <p>Más práctica efectiva para el estudiante, más seguridad al enfrentar lo real, y reportes concretos que ayudan al docente y a la UTP a acompañar con evidencia.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="benefit-section section-pad">
-        <div class="container">
-          <div class="benefit-grid">
-            <article class="benefit-tile reveal"><span>01</span><h3>Más práctica</h3><p>Ensayos repetibles antes de situaciones reales.</p></article>
-            <article class="benefit-tile reveal"><span>02</span><h3>Mejor preparación</h3><p>Procedimientos, análisis y decisiones con feedback claro.</p></article>
-            <article class="benefit-tile reveal"><span>03</span><h3>Apoyo al docente</h3><p>Retroalimentación y reportes pedagógicos, sin carga extra.</p></article>
-            <article class="benefit-tile reveal"><span>04</span><h3>Innovación con propósito</h3><p>Tecnología al servicio del currículo TP, no al revés.</p></article>
-          </div>
-        </div>
-      </section>
-
-      <section class="experience-flow section-pad" id="recorrido">
-        <div class="container">
-          <div class="section-heading centered reveal">
+          <div class="experience-heading centered reveal">
             <p class="eyebrow">Recorrido del estudiante</p>
             <h2>Del contexto a la evidencia, en cinco pasos claros</h2>
+            <p>Una ruta simple y guiada para aprender, practicar y demostrar lo que sabes.</p>
           </div>
-          <div class="student-journey reveal" aria-label="Recorrido del estudiante en Aula TP">
-            <article><span>1</span><strong>Contextualiza</strong><p>Entiende el caso, el entorno y la meta de aprendizaje.</p></article>
-            <article><span>2</span><strong>Conecta</strong><p>Une habilidades, criterios y desempeños observables.</p></article>
-            <article><span>3</span><strong>Integra</strong><p>Resuelve un desafío cercano al taller, la industria o el servicio.</p></article>
-            <article><span>4</span><strong>Simula en 3D</strong><p>Practica decisiones en un entorno seguro y repetible.</p></article>
-            <article><span>5</span><strong>Evalúa</strong><p>Obtén resultados y evidencia para mejorar.</p></article>
-          </div>
-          <div class="journey-tools reveal">
-            <span>Práctica libre</span>
-            <span>Retroalimentación</span>
-            <span>Agente pedagógico</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="simulator-showcase section-pad" id="simuladores">
-        <div class="container">
-          <div class="section-heading reveal">
-            <div>
-              <p class="eyebrow">Simuladores destacados</p>
-              <h2>Listos para mostrar, probar y escalar</h2>
-            </div>
-            <p>Pensado para directivos, UTP y docentes: valor pedagógico visible, rutas claras y experiencias que puedes presentar hoy.</p>
-          </div>
-          <div class="simulator-highlight reveal">
-            <figure>
-              <img src="/landing/assets/aulatp-lab-electricidad-v1.png?v=20260905.vivid-copy-v2" alt="Laboratorio de electricidad con simulación educativa Aula TP" width="1536" height="1024" loading="lazy" decoding="async" />
-            </figure>
-            <div>
-              <p class="eyebrow">Rutas por especialidad</p>
-              <h3>Simulación aplicada a especialidades TP</h3>
-              <p>Cada módulo combina contenidos, práctica libre, retroalimentación, agente pedagógico y evaluación final. La meta: que el estudiante llegue más preparado al taller y al mundo laboral.</p>
-              <ul>
-                <li>Rutas guiadas por objetivos de aprendizaje</li>
-                <li>Entornos 3D para practicar sin riesgo</li>
-                <li>Evidencia para docentes y equipos directivos</li>
-                <li>Implementación gradual por especialidad</li>
-              </ul>
-              <a class="button button-primary" href="#contacto">Coordinar presentación</a>
-            </div>
-          </div>
-          <div class="demo-grid" id="recursos">
-            <article class="demo-card reveal">
-              <video controls preload="metadata" playsinline poster="/landing/simulador/mineria/assets/operator-console-context-1024.webp?v=20260818.1">
-                <source src="/landing/media/demo-mineria-jumbo.mp4?v=20260818.1" type="video/mp4" />
-                Tu navegador no puede reproducir este video.
-              </video>
-              <span>Simulador 01 · Explotación Minera</span>
-              <h3>Operación segura de Jumbo</h3>
-              <a href="/simulador/mineria">Abrir demo minera</a>
+          <div class="experience-step-grid" aria-label="Recorrido del estudiante en Aula TP">
+            <article class="experience-step-card experience-step-card--blue reveal">
+              <div class="experience-step-media"><img src="/images/portal-docente/frames/hero-estudiantes.png" alt="Estudiantes contextualizando una actividad técnico-profesional" loading="lazy" decoding="async" /><span>1</span></div>
+              <h3>Contextualiza</h3><p>Entiende el caso, el entorno y la meta de aprendizaje.</p>
             </article>
-            <article class="demo-card reveal">
-              <video controls preload="metadata" playsinline poster="/landing/assets/aulatp-sim-enfermeria-v1.png?v=20260905.vivid-copy-v2">
-                <source src="/landing/media/demo-teens-3d.mp4?v=20260818.1" type="video/mp4" />
-                Tu navegador no puede reproducir este video.
-              </video>
-              <span>Simulador 02 · Atención de Enfermería TENS</span>
-              <h3>Atención clínica y cuidados básicos</h3>
-              <a href="/simuladores/enfermeria">Abrir simulador clínico</a>
+            <article class="experience-step-card experience-step-card--violet reveal">
+              <div class="experience-step-media"><img src="/images/portal-docente/planificacion.png" alt="Planificación de una ruta de aprendizaje técnico-profesional" loading="lazy" decoding="async" /><span>2</span></div>
+              <h3>Conecta</h3><p>Une habilidades, criterios y desempeños observables.</p>
             </article>
-            <article class="demo-card youtube-card reveal">
-              <span>Canal oficial</span>
-              <h3>Más avances en YouTube Aula TP Chile</h3>
-              <p>YouTube como vitrina audiovisual; el servidor para experiencias interactivas.</p>
-              <a class="button button-primary" href="https://www.youtube.com/@AulaTPAula" target="_blank" rel="noopener noreferrer">Visitar canal</a>
+            <article class="experience-step-card experience-step-card--mint reveal">
+              <div class="experience-step-media"><img src="/images/portal-docente/cursos/electricidad.png" alt="Actividad práctica de electricidad en Aula TP" loading="lazy" decoding="async" /><span>3</span></div>
+              <h3>Integra</h3><p>Resuelve un desafío cercano al taller, la industria o el servicio.</p>
             </article>
+            <article class="experience-step-card experience-step-card--orange reveal">
+              <div class="experience-step-media"><img src="/images/portal-docente/cursos/climatizacion.png" alt="Simulación técnica de refrigeración y climatización" loading="lazy" decoding="async" /><span>4</span></div>
+              <h3>Simula en 3D</h3><p>Practica decisiones en un entorno seguro y repetible.</p>
+            </article>
+            <article class="experience-step-card experience-step-card--pink reveal">
+              <div class="experience-step-media"><img src="/images/portal-docente/reportes.png" alt="Reportes de resultados para acompañamiento docente" loading="lazy" decoding="async" /><span>5</span></div>
+              <h3>Evalúa</h3><p>Obtén resultados y evidencia para mejorar.</p>
+            </article>
+          </div>
+          <div class="experience-tools reveal" aria-label="Herramientas de apoyo">
+            <span class="experience-tool experience-tool--mint">Práctica libre</span>
+            <span class="experience-tool experience-tool--violet">Retroalimentación</span>
+            <span class="experience-tool experience-tool--blue">Agente pedagógico</span>
           </div>
         </div>
       </section>
 
       <section class="specialties section-pad" id="especialidades">
         <div class="container">
-          <div class="section-heading reveal">
-            <div>
-              <p class="eyebrow">Catálogo nacional TP</p>
+          <div class="catalog-hero reveal" aria-label="Resumen visual del catálogo nacional TP">
+            <div class="catalog-hero-copy">
+              <p class="catalog-hero-kicker">Catálogo nacional TP</p>
               <h2>Especialidades organizadas por sector económico</h2>
+              <p>Misma base de especialidades en el catálogo y el formulario. Tu establecimiento prioriza las rutas de mayor impacto según su oferta.</p>
             </div>
-            <p>Misma base de especialidades en el catálogo y el formulario. Tu establecimiento prioriza las rutas de mayor impacto según su oferta.</p>
+            <div class="catalog-hero-art" aria-hidden="true">
+              <img src="/images/portal-docente/hero-docentes.png" alt="" loading="lazy" decoding="async" />
+            </div>
           </div>
           <div class="catalog-summary reveal" aria-label="Resumen del catálogo nacional TP">
             <article><strong>15</strong><span>Sectores formativos</span></article>
@@ -441,11 +365,11 @@
 
       <section class="metrics-band" aria-label="Indicadores Aula TP">
         <div class="container metrics-grid">
-          <article><strong>3D</strong><span>Simulación final para practicar decisiones</span></article>
-          <article><strong>5 pasos</strong><span>Recorrido pedagógico claro para estudiantes</span></article>
-          <article><strong>35</strong><span>Especialidades TP en la base local</span></article>
-          <article><strong>24/7</strong><span>Práctica desde navegador y dispositivos</span></article>
-          <article><strong>Chile</strong><span>Diseñado para Educación TP nacional</span></article>
+          <article><div class="metrics-icon metrics-icon--blue"><img src="/images/portal-docente/kpi/cursos.png" alt="" aria-hidden="true" /></div><div><strong>3D</strong><span>Simulación final para practicar decisiones</span></div></article>
+          <article><div class="metrics-icon metrics-icon--violet"><img src="/images/portal-docente/kpi/actividades.png" alt="" aria-hidden="true" /></div><div><strong>5 pasos</strong><span>Recorrido pedagógico claro para estudiantes</span></div></article>
+          <article><div class="metrics-icon metrics-icon--mint"><img src="/images/portal-docente/kpi/estudiantes.png" alt="" aria-hidden="true" /></div><div><strong>35</strong><span>Especialidades TP en la base local</span></div></article>
+          <article><div class="metrics-icon metrics-icon--orange"><img src="/images/portal-docente/kpi/actividades.png" alt="" aria-hidden="true" /></div><div><strong>24/7</strong><span>Práctica desde navegador y dispositivos</span></div></article>
+          <article><div class="metrics-icon metrics-icon--pink"><img src="/images/portal-docente/brand/mark.png" alt="" aria-hidden="true" /></div><div><strong>Chile</strong><span>Diseñado para Educación TP nacional</span></div></article>
         </div>
       </section>
 
@@ -455,17 +379,41 @@
             <p class="eyebrow">Agenda una demo breve</p>
             <h2>Conversemos sobre tu establecimiento</h2>
             <p>Cuéntanos qué especialidad quieres fortalecer y armamos una demostración corta, enfocada en tu realidad pedagógica y técnica. Sin compromiso.</p>
+            <div class="contact-benefits" aria-label="Beneficios de agendar una demostración">
+              <article>
+                <span class="contact-benefit-icon contact-benefit-icon--blue"><img src="/images/portal-docente/kpi/cursos.png" alt="" aria-hidden="true" /></span>
+                <h3>Demostración<br />a tu medida</h3>
+                <p>Enfocada en tu especialidad.</p>
+              </article>
+              <article>
+                <span class="contact-benefit-icon contact-benefit-icon--violet"><img src="/images/portal-docente/kpi/estudiantes.png" alt="" aria-hidden="true" /></span>
+                <h3>Orientación<br />especializada</h3>
+                <p>Resolvemos tus dudas en vivo.</p>
+              </article>
+              <article>
+                <span class="contact-benefit-icon contact-benefit-icon--mint"><img src="/images/portal-docente/kpi/actividades.png" alt="" aria-hidden="true" /></span>
+                <h3>Decisiones<br />informadas</h3>
+                <p>Con evidencia real del aprendizaje.</p>
+              </article>
+            </div>
             <a class="contact-email-promo" data-contact-email href="mailto:aulatpchile@gmail.com?subject=Consulta%20desde%20Aula%20TP%20Chile">
-              <span class="contact-email-kicker">Contacto directo</span>
-              <strong>aulatpchile@gmail.com</strong>
-              <small>Escríbenos y coordinamos una presentación a tu ritmo.</small>
-              <b>Enviar correo</b>
+              <span class="contact-email-icon" aria-hidden="true"><img src="/images/portal-docente/brand/mark.png" alt="" /></span>
+              <span class="contact-email-content">
+                <span class="contact-email-kicker">Contacto directo</span>
+                <strong>aulatpchile@gmail.com</strong>
+                <small>Escríbenos y coordinamos una presentación a tu ritmo.</small>
+                <b>Enviar correo <span aria-hidden="true">›</span></b>
+              </span>
             </a>
+            <div class="contact-visual" aria-hidden="true">
+              <img src="/images/portal-docente/hero-docentes.png" alt="" loading="lazy" decoding="async" />
+              <span>Hablemos de las necesidades<br />de tu establecimiento</span>
+            </div>
           </div>
           <form class="contact-form reveal" data-contact-form>
             <div class="form-heading">
-              <span class="form-kicker">Aula TP Chile</span>
-              <h3>Agendar diagnóstico</h3>
+              <span class="form-heading-icon" aria-hidden="true"><img src="/images/portal-docente/kpi/cursos.png" alt="" /></span>
+              <div><span class="form-kicker">Aula TP Chile</span><h3>Agendar diagnóstico</h3><p>Completa el formulario y nos pondremos en contacto contigo para coordinar una demostración en la fecha que más te acomode.</p></div>
             </div>
             <div class="form-row">
               <label>Nombre completo<input type="text" name="name" placeholder="Nombre y apellido" required autocomplete="name" /></label>
@@ -490,8 +438,7 @@
       <div class="container footer-grid">
         <a class="brand footer-brand aulatp-brand" href="#inicio" aria-label="Aula TP Chile, inicio">
           <picture>
-            <source type="image/webp" srcset="/landing/assets/aula-tp-chile-official-v2-160.webp?v=20260824.2" />
-            <img src="/landing/assets/aula-tp-chile-official-v2.png?v=20260824.2" alt="" width="44" height="44" loading="lazy" decoding="async" />
+            <img src="/images/portal-docente/brand/aula-tp-chile-logo.png" alt="" width="44" height="44" loading="lazy" decoding="async" />
           </picture>
           <span class="brand-text">
             <strong>Aula TP Chile</strong>
@@ -502,20 +449,19 @@
           <p>Simulación segura, práctica guiada y evidencia docente para la Educación TP.</p>
           <span>© 2026 Aula TP Chile</span>
         </div>
-        <div class="footer-links">
+        <nav class="footer-links" aria-label="Enlaces del pie de página">
           <a href="/portal/cursos/">Cursos TP</a>
-          <a href="#simuladores">Simuladores</a>
           <a href="#especialidades">Especialidades</a>
           <a href="#implementacion">Implementación</a>
           <a href="#contacto">Contacto</a>
-        </div>
-        <div class="social-links">
-          <a href="https://www.youtube.com/@AulaTPAula" target="_blank" rel="noopener noreferrer">YouTube</a>
-          <a href="mailto:aulatpchile@gmail.com?subject=Consulta%20desde%20Aula%20TP%20Chile" data-contact-email>Correo</a>
+        </nav>
+        <div class="social-links" aria-label="Canales de contacto">
+          <a class="social-link" href="https://www.youtube.com/@AulaTPAula" target="_blank" rel="noopener noreferrer" aria-label="YouTube Aula TP Chile"><span aria-hidden="true">YT</span></a>
+          <a class="social-link" href="mailto:aulatpchile@gmail.com?subject=Consulta%20desde%20Aula%20TP%20Chile" data-contact-email aria-label="Correo Aula TP Chile"><span aria-hidden="true">@</span></a>
         </div>
       </div>
     </footer>
 
-    <script src="/landing/script.js?v=20260910.landing-v6" defer></script>
+    <script src="/landing/script.js?v=20260923.catalog-v1" defer></script>
   </body>
 </html>

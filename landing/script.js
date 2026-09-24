@@ -409,3 +409,270 @@ document.querySelectorAll('[data-testimonial-slot]').forEach((button) => {
     button.textContent = 'Disponible para incorporar contenido';
   });
 });
+
+/* === catálogo nacional TP: filtros, vista y detalle de especialidad === */
+(() => {
+  const catalog = document.querySelector('.sector-catalog');
+  if (!catalog) return;
+
+  const section = catalog.closest('.specialties');
+  if (!section) return;
+
+  const sectorRows = [...catalog.querySelectorAll(':scope > .sector-row')];
+  const normalize = (value) => String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+
+  const sectorImageKeys = {
+    maderero: 'maderero',
+    agropecuario: 'agropecuario',
+    alimentacion: 'alimentacion',
+    construccion: 'construccion',
+    metalmecanica: 'metalmecanica',
+    electricidad: 'electricidad',
+    maritimo: 'maritimo',
+    minero: 'minero',
+    grafico: 'grafico',
+    confeccion: 'confeccion',
+    administracion: 'administracion',
+    salud: 'salud',
+    quimica: 'quimica',
+    tecnologia: 'tecnologia',
+    hoteleria: 'hoteleria',
+  };
+
+  const specialtyImages = {
+    'Refrigeración y Climatización': '/images/climatizacion/climatizacion-hero-v2.png',
+    Electricidad: '/images/portal-docente/cursos/electricidad.png',
+    'Atención de Enfermería': '/images/portal-docente/cursos/enfermeria.png',
+    Administración: '/images/especialidades/sector-administracion.png',
+  };
+
+  // Estas descripciones corresponden al catálogo de rutas existente en course-hubs.ts.
+  const specialtyDescriptions = {
+    'Forestal': 'Silvicultura, operaciones de cosecha y seguridad en el recurso bosque.',
+    'Muebles y Terminaciones en Madera': 'Trazado, maquinado, ensamble y acabado de un mueble o terminación.',
+    'Agropecuaria': 'Producción vegetal y animal, recursos y prácticas sustentables en un predio formativo.',
+    'Elaboración Industrial de Alimentos': 'Líneas de proceso, inocuidad y control de calidad en planta de alimentos.',
+    'Gastronomía': 'Cocina, higiene de alimentos y servicio, con estaciones de mise en place, producción y servicio seguro.',
+    'Construcción': 'Obras, lectura de planos, seguridad en faena y ejecución de partidas constructivas.',
+    'Instalaciones Sanitarias': 'Agua potable y evacuación: planos, trazado, uniones y pruebas de hermeticidad.',
+    'Montaje Industrial': 'Montaje de estructuras y equipos con planos, izaje, alineación y seguridad.',
+    'Refrigeración y Climatización': 'Curso completo M1–M8 · 3° y 4° medio · ruta obligatoria + Práctica Libre. Entra por el módulo que te corresponde y avanza con estaciones AE.',
+    'Mecánica Automotriz': 'Diagnóstico y mantención de sistemas del vehículo con pauta y seguridad.',
+    'Mecánica Industrial': 'Mantenimiento de maquinaria: diagnóstico, ajuste y lubricación segura.',
+    'Mecánica de Mantenimiento de Aeronaves': 'Inspección, fichas técnicas y cultura de seguridad aeronáutica.',
+    'Construcciones Metálicas': 'Trazado, corte, soldadura y montaje de estructuras metálicas.',
+    'Electricidad': 'Ruta técnica M1–M4 · motores y calefacción, instalaciones domiciliarias, proyectos y mantenimiento.',
+    'Electrónica': 'Circuitos, ensamble, medición y diagnóstico de fallas en sistemas electrónicos básicos.',
+    'Acuicultura': 'Cultivo, calidad de agua y bioseguridad en un centro formativo.',
+    'Pesquería': 'Faena pesquera, conservación de la captura y seguridad a bordo.',
+    'Tripulación de Naves Mercantes y Especiales': 'Guardia, faenas de cubierta y procedimientos de emergencia a bordo.',
+    'Operaciones Portuarias': 'Transferencia de carga, señalización y seguridad en recinto portuario.',
+    'Explotación Minera': 'Ciclo de mina, seguridad y operación de equipos en un escenario formativo.',
+    'Metalurgia Extractiva': 'Chancado, molienda, flotación y control de proceso en planta piloto.',
+    'Asistencia en Geología': 'Muestreo, registro de terreno y apoyo a campañas geológicas.',
+    'Gráfica': 'Diseño y producción impresa/digital: originales, preprensa y control de color.',
+    'Dibujo Técnico': 'Representación gráfica, normas de acotado y comunicación visual de proyectos.',
+    'Vestuario y Confección Textil': 'Patronaje, corte, costura y terminaciones con control de calidad de prenda.',
+    'Administración': 'Plan 3° MINEDUC con el ERP Bazar Inteligente como taller: ventas, inventario, caja, proveedores y contabilidad.',
+    'Contabilidad': 'Registra operaciones, controla documentos tributarios y apoya la información económica del establecimiento o empresa.',
+    'Atención de Párvulos': 'Cuidado y educación inicial: bienestar, juego y registro en aula.',
+    'Atención de Enfermería': 'Ruta clínica M1–M5 · cuidados básicos, parámetros, promoción, bioseguridad y registro.',
+    'Química Industrial': 'Procesos, muestreo, control de calidad y seguridad de planta química.',
+    'Conectividad y Redes': 'Cableado, direccionamiento, verificación de enlace y documentación de red.',
+    'Telecomunicaciones': 'Enlaces, medición y puesta en servicio de un sistema de telecomunicaciones.',
+    'Programación': 'Lógica, desarrollo de un caso y pruebas: misma ruta de estaciones AE.',
+    'Servicios de Hotelería': 'Recepción, pisos y calidad de servicio en un hotel formativo.',
+    'Servicios de Turismo': 'Atención al visitante, diseño de experiencia e información territorial.',
+  };
+
+  const rows = sectorRows.map((row) => {
+    const card = row.querySelector('.sector-card');
+    const image = card?.querySelector('img');
+    const sector = card?.dataset.sector || '';
+    const sectorName = card?.querySelector('h3')?.textContent.trim() || sector;
+    const sectorDescription = card?.querySelector('.sector-card-body p')?.textContent.trim() || '';
+    const imagePath = `/images/especialidades/sector-${sectorImageKeys[sector] || sector}.png`;
+    if (image) {
+      image.src = imagePath;
+      image.addEventListener('error', () => {
+        image.closest('.sector-card-media')?.classList.add('sector-card-media--placeholder');
+      }, { once: true });
+    }
+    const specialties = [...row.querySelectorAll('.sector-chip')].map((chip) => ({
+      name: chip.textContent.trim(),
+      href: chip.getAttribute('href') || '#',
+      element: chip,
+    }));
+    return { row, card, sector, sectorName, sectorDescription, imagePath, specialties };
+  });
+
+  const allSpecialties = rows.flatMap((item) => item.specialties.map((specialty) => specialty.name));
+  const specialtyNames = [...new Set(allSpecialties)];
+  const sectorNames = rows.map((item) => item.sectorName);
+
+  const toolbar = document.createElement('div');
+  toolbar.className = 'catalog-toolbar';
+  toolbar.setAttribute('aria-label', 'Filtros y vista del catálogo nacional TP');
+  toolbar.innerHTML = `
+    <label class="catalog-search">
+      <span class="sr-only">Buscar sector o especialidad</span>
+      <input type="search" data-catalog-search placeholder="Buscar sector o especialidad…" autocomplete="off" />
+    </label>
+    <button type="button" class="catalog-filter-all is-active" data-catalog-all aria-pressed="true">Todos</button>
+    <select data-catalog-sector aria-label="Filtrar por sector">
+      <option value="">Todos</option>
+      ${sectorNames.map((name) => `<option value="${normalize(name)}">${name}</option>`).join('')}
+    </select>
+    <select data-catalog-specialty aria-label="Filtrar por especialidad">
+      <option value="">Especialidad</option>
+      ${specialtyNames.map((name) => `<option value="${normalize(name)}">${name}</option>`).join('')}
+    </select>
+    <button type="button" class="catalog-reset-button" data-catalog-reset>↻ Limpiar filtros</button>
+    <div class="catalog-toolbar-view" role="group" aria-label="Cambiar vista del catálogo">
+      <button type="button" class="catalog-view-toggle is-active" data-catalog-view="cards" aria-pressed="true">▦ Tarjetas</button>
+      <button type="button" class="catalog-view-toggle" data-catalog-view="list" aria-pressed="false">☷ Lista</button>
+    </div>
+    <output class="catalog-result-count" data-catalog-count></output>
+  `;
+  const summary = section.querySelector('.catalog-summary');
+  summary?.insertAdjacentElement('afterend', toolbar);
+
+  const detail = document.createElement('aside');
+  detail.className = 'catalog-specialty-detail';
+  detail.hidden = true;
+  detail.setAttribute('data-catalog-detail', '');
+  detail.setAttribute('aria-live', 'polite');
+  detail.innerHTML = `
+    <img data-catalog-detail-image alt="" loading="lazy" decoding="async" />
+    <div>
+      <small data-catalog-detail-sector></small>
+      <h3 data-catalog-detail-title></h3>
+      <p data-catalog-detail-description></p>
+      <a data-catalog-detail-link href="#">Abrir especialidad <span aria-hidden="true">›</span></a>
+    </div>
+  `;
+  toolbar.insertAdjacentElement('afterend', detail);
+
+  const searchInput = toolbar.querySelector('[data-catalog-search]');
+  const sectorSelect = toolbar.querySelector('[data-catalog-sector]');
+  const specialtySelect = toolbar.querySelector('[data-catalog-specialty]');
+  const countOutput = toolbar.querySelector('[data-catalog-count]');
+  const allButton = toolbar.querySelector('[data-catalog-all]');
+
+  const showDetail = (item, specialty) => {
+    if (!item || !specialty) return;
+    const image = detail.querySelector('[data-catalog-detail-image]');
+    const description = specialtyDescriptions[specialty.name] || item.sectorDescription;
+    const specialtyImage = specialtyImages[specialty.name] || item.imagePath;
+    image.src = specialtyImage;
+    image.alt = `${specialty.name} · ${item.sectorName}`;
+    image.onerror = () => { image.src = item.imagePath; };
+    detail.querySelector('[data-catalog-detail-sector]').textContent = `Sector · ${item.sectorName}`;
+    detail.querySelector('[data-catalog-detail-title]').textContent = specialty.name;
+    detail.querySelector('[data-catalog-detail-description]').textContent = description;
+    const link = detail.querySelector('[data-catalog-detail-link]');
+    link.href = specialty.href;
+    detail.hidden = false;
+    rows.forEach(({ specialties }) => specialties.forEach(({ element }) => element.classList.remove('is-selected')));
+    specialty.element.classList.add('is-selected');
+  };
+
+  const updateFilters = () => {
+    const query = normalize(searchInput.value);
+    const selectedSector = sectorSelect.value;
+    const selectedSpecialty = specialtySelect.value;
+    let visibleRows = 0;
+    let visibleSpecialties = 0;
+
+    rows.forEach((item) => {
+      const sectorMatches = !selectedSector || normalize(item.sectorName) === selectedSector;
+      const specialtyMatches = !selectedSpecialty || item.specialties.some(({ name }) => normalize(name) === selectedSpecialty);
+      const queryMatches = !query || normalize(`${item.sectorName} ${item.sectorDescription} ${item.specialties.map(({ name }) => name).join(' ')}`).includes(query);
+      const visible = sectorMatches && specialtyMatches && queryMatches;
+      item.row.hidden = !visible;
+      item.specialties.forEach(({ element }) => {
+        const matches = !selectedSpecialty || normalize(element.textContent) === selectedSpecialty;
+        element.hidden = !matches && Boolean(selectedSpecialty);
+      });
+      if (visible) {
+        visibleRows += 1;
+        visibleSpecialties += item.specialties.filter(({ element }) => !element.hidden).length;
+      }
+    });
+
+    countOutput.textContent = `${visibleRows} sectores · ${visibleSpecialties} especialidades`;
+    const allActive = !selectedSector && !selectedSpecialty;
+    allButton?.classList.toggle('is-active', allActive);
+    allButton?.setAttribute('aria-pressed', String(allActive));
+
+    if (selectedSpecialty) {
+      const match = rows.flatMap((item) => item.specialties.map((specialty) => ({ item, specialty })))
+        .find(({ specialty }) => normalize(specialty.name) === selectedSpecialty);
+      if (match) showDetail(match.item, match.specialty);
+    }
+  };
+
+  rows.forEach((item) => {
+    const action = document.createElement('button');
+    action.type = 'button';
+    action.className = 'sector-card-action';
+    action.textContent = 'Ver especialidades';
+    action.addEventListener('click', () => {
+      const firstSpecialty = item.specialties[0];
+      if (!firstSpecialty) return;
+      showDetail(item, firstSpecialty);
+      specialtySelect.value = normalize(firstSpecialty.name);
+      updateFilters();
+      detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+    item.card?.append(action);
+
+    item.specialties.forEach((specialty) => {
+      specialty.element.setAttribute('aria-label', `${specialty.name}, sector ${item.sectorName}`);
+      specialty.element.addEventListener('click', (event) => {
+        event.preventDefault();
+        showDetail(item, specialty);
+        specialtySelect.value = normalize(specialty.name);
+        updateFilters();
+      });
+    });
+  });
+
+  searchInput.addEventListener('input', updateFilters);
+  sectorSelect.addEventListener('change', updateFilters);
+  specialtySelect.addEventListener('change', updateFilters);
+  allButton?.addEventListener('click', () => {
+    sectorSelect.value = '';
+    specialtySelect.value = '';
+    detail.hidden = true;
+    updateFilters();
+  });
+  toolbar.querySelector('[data-catalog-reset]')?.addEventListener('click', () => {
+    searchInput.value = '';
+    sectorSelect.value = '';
+    specialtySelect.value = '';
+    detail.hidden = true;
+    updateFilters();
+  });
+
+  toolbar.querySelectorAll('[data-catalog-view]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const isList = button.dataset.catalogView === 'list';
+      catalog.classList.toggle('is-list', isList);
+      toolbar.querySelectorAll('[data-catalog-view]').forEach((toggle) => {
+        const active = toggle === button;
+        toggle.classList.toggle('is-active', active);
+        toggle.setAttribute('aria-pressed', String(active));
+      });
+    });
+  });
+
+  // Keep the visible count tied to the real DOM catalog (15 sectors / 35 specialties).
+  const catalogCount = section.querySelector('.catalog-summary article:nth-child(2) strong');
+  if (catalogCount) catalogCount.textContent = String(specialtyNames.length);
+  updateFilters();
+})();
