@@ -294,8 +294,8 @@ def upgrade_catalog(con):
     install_programming_draft(con)
     from accounting_catalog import install_accounting_course
     install_accounting_course(con)
-    from tourism_catalog import install_tourism_draft
-    install_tourism_draft(con)
+    from tourism_catalog import install_tourism_course
+    install_tourism_course(con)
     from networks_catalog import install_networks_draft
     install_networks_draft(con)
     from electronics_catalog import install_electronics_course

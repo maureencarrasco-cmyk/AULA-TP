@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from tp_draft_builder import build_draft, install_draft
+from tp_draft_builder import build_draft, install_course, install_draft
 
 
 ROOT = Path(__file__).resolve().parent
@@ -29,3 +29,13 @@ def draft_modules():
 
 def install_tourism_draft(con):
     install_draft(con, 'Servicios de Turismo', draft_modules())
+
+
+def install_tourism_course(con):
+    install_course(
+        con,
+        'Servicios de Turismo',
+        draft_modules(),
+        'turismo-mineduc-draft-v1',
+        'turismo-mineduc-v1',
+    )
