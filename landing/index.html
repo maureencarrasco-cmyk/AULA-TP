@@ -15,10 +15,11 @@
     <title>Aula TP Chile | Formación técnica con sentido</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="/images/portal-docente/hero-docentes.png?v=20260923.hero-poster-v2" fetchpriority="high" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/landing/especialidades-catalog.css?v=20260923.catalog-v1" />
     <link rel="stylesheet" href="/shared/aula-tp-design-tokens.css" />
-    <link rel="stylesheet" href="/landing/aula-tp-landing.css?v=20260923.footer-v4" />
+    <link rel="stylesheet" href="/landing/aula-tp-landing.css?v=20260923.images-v5" />
   </head>
   <body class="aula-landing landing-redesign landing-local-refactor">
     <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
@@ -78,11 +79,11 @@
           </div>
 
           <div class="hero-v2-visual landing-hero-visual reveal" aria-label="Vista de simulación educativa Aula TP Chile">
-            <video class="hero-students hero-video" autoplay muted loop playsinline preload="metadata" poster="/landing/assets/aulatp-hero-vivid-v1.png?v=20260905.vivid-copy-v2" aria-label="Video corporativo Aula TP Chile con simulación educativa técnico-profesional">
+            <video class="hero-students hero-video" muted loop playsinline preload="none" poster="/images/portal-docente/hero-docentes.png?v=20260923.hero-poster-v2" data-defer-video aria-label="Video corporativo Aula TP Chile con simulación educativa técnico-profesional">
               <source src="/landing/media/aula-tp-cuando-la-inteligencia.mp4?v=20260923.hero-video-v2" type="video/mp4" />
               Tu navegador no puede reproducir el video principal de Aula TP Chile.
             </video>
-            <img class="hero-vivid-fallback" src="/landing/assets/aulatp-hero-vivid-v1.png?v=20260905.vivid-copy-v2" alt="Estudiantes y docentes en simulación educativa Aula TP Chile" width="1536" height="1024" decoding="async" data-hero-fallback />
+            <img class="hero-vivid-fallback" src="/images/portal-docente/hero-docentes.png?v=20260923.hero-poster-v2" alt="Estudiantes y docentes en simulación educativa Aula TP Chile" width="2100" height="749" fetchpriority="high" decoding="async" data-hero-fallback />
             <div class="hero-caption">
               <strong>Simulación en el aula</strong>
               <span>Contexto · Práctica · Evaluación</span>
@@ -125,23 +126,23 @@
           </div>
           <div class="experience-step-grid" aria-label="Recorrido del estudiante en Aula TP">
             <article class="experience-step-card experience-step-card--blue reveal">
-              <div class="experience-step-media"><img src="/images/portal-docente/frames/hero-estudiantes.png" alt="Estudiantes contextualizando una actividad técnico-profesional" loading="lazy" decoding="async" /><span>1</span></div>
+              <div class="experience-step-media"><img src="/images/portal-docente/frames/hero-estudiantes.png" alt="Estudiantes contextualizando una actividad técnico-profesional" width="1476" height="323" loading="lazy" decoding="async" /><span>1</span></div>
               <h3>Contextualiza</h3><p>Entiende el caso, el entorno y la meta de aprendizaje.</p>
             </article>
             <article class="experience-step-card experience-step-card--violet reveal">
-              <div class="experience-step-media"><img src="/images/portal-docente/planificacion.png" alt="Planificación de una ruta de aprendizaje técnico-profesional" loading="lazy" decoding="async" /><span>2</span></div>
+              <div class="experience-step-media"><img src="/images/portal-docente/planificacion.png" alt="Planificación de una ruta de aprendizaje técnico-profesional" width="1280" height="720" loading="lazy" decoding="async" /><span>2</span></div>
               <h3>Conecta</h3><p>Une habilidades, criterios y desempeños observables.</p>
             </article>
             <article class="experience-step-card experience-step-card--mint reveal">
-              <div class="experience-step-media"><img src="/images/portal-docente/cursos/electricidad.png" alt="Actividad práctica de electricidad en Aula TP" loading="lazy" decoding="async" /><span>3</span></div>
+              <div class="experience-step-media"><img src="/images/portal-docente/cursos/electricidad.png" alt="Actividad práctica de electricidad en Aula TP" width="1280" height="720" loading="lazy" decoding="async" /><span>3</span></div>
               <h3>Integra</h3><p>Resuelve un desafío cercano al taller, la industria o el servicio.</p>
             </article>
             <article class="experience-step-card experience-step-card--orange reveal">
-              <div class="experience-step-media"><img src="/images/portal-docente/cursos/climatizacion.png" alt="Simulación técnica de refrigeración y climatización" loading="lazy" decoding="async" /><span>4</span></div>
+              <div class="experience-step-media"><img src="/images/portal-docente/cursos/climatizacion.png" alt="Simulación técnica de refrigeración y climatización" width="1280" height="720" loading="lazy" decoding="async" /><span>4</span></div>
               <h3>Simula en 3D</h3><p>Practica decisiones en un entorno seguro y repetible.</p>
             </article>
             <article class="experience-step-card experience-step-card--pink reveal">
-              <div class="experience-step-media"><img src="/images/portal-docente/reportes.png" alt="Reportes de resultados para acompañamiento docente" loading="lazy" decoding="async" /><span>5</span></div>
+              <div class="experience-step-media"><img src="/images/portal-docente/reportes.png" alt="Reportes de resultados para acompañamiento docente" width="1280" height="720" loading="lazy" decoding="async" /><span>5</span></div>
               <h3>Evalúa</h3><p>Obtén resultados y evidencia para mejorar.</p>
             </article>
           </div>
@@ -162,7 +163,7 @@
               <p>Misma base de especialidades en el catálogo y el formulario. Tu establecimiento prioriza las rutas de mayor impacto según su oferta.</p>
             </div>
             <div class="catalog-hero-art" aria-hidden="true">
-              <img src="/images/portal-docente/hero-docentes.png" alt="" loading="lazy" decoding="async" />
+              <img src="/images/portal-docente/hero-docentes.png" alt="" width="2100" height="749" loading="lazy" decoding="async" />
             </div>
           </div>
           <div class="catalog-summary reveal" aria-label="Resumen del catálogo nacional TP">
@@ -403,7 +404,7 @@
               </span>
             </a>
             <div class="contact-visual" aria-hidden="true">
-              <img src="/images/portal-docente/hero-docentes.png" alt="" loading="lazy" decoding="async" />
+              <img src="/images/portal-docente/hero-docentes.png" alt="" width="2100" height="749" loading="lazy" decoding="async" />
               <span>Hablemos de las necesidades<br />de tu establecimiento</span>
             </div>
           </div>
@@ -459,6 +460,6 @@
       </div>
     </footer>
 
-    <script src="/landing/script.js?v=20260923.catalog-v2" defer></script>
+    <script src="/landing/script.js?v=20260923.catalog-v3" defer></script>
   </body>
 </html>

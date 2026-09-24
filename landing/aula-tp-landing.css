@@ -848,12 +848,39 @@ a.button-navy {
   object-fit: cover;
 }
 
+.landing-hero-visual .hero-video {
+  display: none;
+}
+
+.landing-hero-visual .hero-vivid-fallback {
+  display: block;
+}
+
+.landing-hero-visual.has-video .hero-video {
+  display: block;
+}
+
+.landing-hero-visual.has-video .hero-vivid-fallback {
+  display: none;
+}
+
 .landing-hero-visual.video-failed .hero-video {
   display: none;
 }
 
-.landing-hero-visual:not(.video-failed) .hero-vivid-fallback {
-  display: none;
+.landing-hero-visual.video-failed .hero-vivid-fallback {
+  display: block;
+}
+
+/* Keep below-the-fold sections out of the initial render work while preserving scroll height. */
+.experience-overview,
+.specialties,
+.implementation,
+.metrics-band,
+.contact,
+.site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 720px;
 }
 
 .hero-caption {

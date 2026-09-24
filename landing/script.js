@@ -239,6 +239,28 @@ heroVideo?.addEventListener('error', markHeroFallback);
 heroVideo?.querySelectorAll('source').forEach((source) => {
   source.addEventListener('error', markHeroFallback);
 });
+const startHeroVideo = () => {
+  if (!heroVideo || heroVideo.dataset.loaded === 'true') return;
+  heroVideo.dataset.loaded = 'true';
+  heroVideo.preload = 'metadata';
+  heroVideo.load();
+  heroVideo.play()
+    .then(() => heroVisual?.classList.add('has-video'))
+    .catch(markHeroFallback);
+};
+if (heroVideo && heroVisual) {
+  heroVideo.addEventListener('canplay', () => heroVisual.classList.add('has-video'), { once: true, passive: true });
+  if ('IntersectionObserver' in window) {
+    const heroVideoObserver = new IntersectionObserver((entries, observer) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      startHeroVideo();
+      observer.disconnect();
+    }, { rootMargin: '240px 0px' });
+    heroVideoObserver.observe(heroVisual);
+  } else {
+    startHeroVideo();
+  }
+}
 /* === end text motion v2 === */
 
 // Los títulos se presentan como frases visuales, sin punto final.
