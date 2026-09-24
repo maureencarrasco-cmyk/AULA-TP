@@ -447,7 +447,7 @@ document.querySelectorAll('[data-testimonial-slot]').forEach((button) => {
     'Refrigeración y Climatización': '/images/climatizacion/climatizacion-hero-v2.png',
     Electricidad: '/images/portal-docente/cursos/electricidad.png',
     'Atención de Enfermería': '/images/portal-docente/cursos/enfermeria.png',
-    Administración: '/images/especialidades/sector-administracion.png',
+    Administración: '/landing/assets/especialidades/sector-administracion.png',
   };
 
   // Estas descripciones corresponden al catálogo de rutas existente en course-hubs.ts.
@@ -495,7 +495,7 @@ document.querySelectorAll('[data-testimonial-slot]').forEach((button) => {
     const sector = card?.dataset.sector || '';
     const sectorName = card?.querySelector('h3')?.textContent.trim() || sector;
     const sectorDescription = card?.querySelector('.sector-card-body p')?.textContent.trim() || '';
-    const imagePath = `/images/especialidades/sector-${sectorImageKeys[sector] || sector}.png`;
+    const imagePath = `/landing/assets/especialidades/sector-${sectorImageKeys[sector] || sector}.png`;
     if (image) {
       image.src = imagePath;
       image.addEventListener('error', () => {
