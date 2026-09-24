@@ -223,6 +223,7 @@ def build_draft(rows, dossiers, specialty, key, source):
         content['curriculum']['url'] = item['source_page']
         content['specialty_source']['source_page'] = item['source_page']
         content['specialty_source']['official_criteria_count'] = sum(len(ae['criteria']) for ae in item['aes'])
+        content['specialty_source']['source_warnings'] = item.get('source_warnings', [])
         contextualize_draft(content, dossier)
         content['bibliography'] = [{
             'author': 'Ministerio de Educación de Chile',

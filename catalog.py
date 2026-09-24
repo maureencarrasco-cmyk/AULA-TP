@@ -298,8 +298,8 @@ def upgrade_catalog(con):
     install_tourism_draft(con)
     from networks_catalog import install_networks_draft
     install_networks_draft(con)
-    from electronics_catalog import install_electronics_draft
-    install_electronics_draft(con)
+    from electronics_catalog import install_electronics_course
+    install_electronics_course(con)
     from telecom_catalog import install_telecom_draft
     install_telecom_draft(con)
     from drawing_catalog import install_drawing_draft
