@@ -1,11 +1,10 @@
 # Estado verificable de cursos en borrador
 
-Fecha: 2026-09-24. Alcance: 32 cursos y 320 módulos no publicados.
+Fecha: 2026-09-24. Alcance: 31 cursos y 309 módulos no publicados.
 Esta tabla mide presencia de datos y archivos locales, no calidad pedagógica ni autorización para publicar.
 
 | Curso | Módulos | PDF y página oficial | OA explícito | AE con criterios | Visuales 3D reales | Imágenes de evaluación reales | Videos reales |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Dibujo Técnico | 11 | 11/11 | 10/11 | 11/11 | 0/33 mínimo | 0/440 | 0 |
 | Gráfica | 9 | 9/9 | 8/9 | 9/9 | 0/27 mínimo | 0/360 | 0 |
 | Servicios de Turismo | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
 | Forestal | 9 | 9/9 | 8/9 | 9/9 | 0/27 mínimo | 0/360 | 0 |
@@ -40,11 +39,11 @@ Esta tabla mide presencia de datos y archivos locales, no calidad pedagógica ni
 
 ## Resultado y límites
 
-- PDF local y página curricular declarada: 320/320 módulos.
-- OA explícito en el registro: 284/320; los módulos sin OA requieren revisar el alcance del programa antes de asignarles uno.
-- AE con código y criterios: 320/320, con 1101 AE registrados.
-- Imágenes 3D verificadas: 0/960 del mínimo solicitado.
-- Imágenes reales en casos y evaluación: 0/12800.
+- PDF local y página curricular declarada: 309/309 módulos.
+- OA explícito en el registro: 274/309; los módulos sin OA requieren revisar el alcance del programa antes de asignarles uno.
+- AE con código y criterios: 309/309, con 1064 AE registrados.
+- Imágenes 3D verificadas: 0/927 del mínimo solicitado.
+- Imágenes reales en casos y evaluación: 0/12360.
 - Videos locales verificados: 0. La pertinencia se debe decidir por módulo; cero videos no demuestra que ninguno corresponda.
 - Estímulos distintos por banco de 25 preguntas: entre 1 y 1. La repetición requiere rediseño y revisión disciplinar.
 - No se ha certificado en estos borradores la exactitud técnica de cada decisión, la pertinencia de cada medio, accesibilidad con usuarios ni la experiencia completa de las cinco estaciones.
