@@ -42,10 +42,7 @@ TITLES = {
     'programacion': 'Programación',
     'telecomunicaciones': 'Telecomunicaciones',
 }
-PUBLISHED = {
-    'gastronomia', 'refrigeracion-climatizacion', 'electricidad',
-    'servicios-hoteleria', 'atencion-enfermeria',
-}
+PUBLISHED = set(TITLES)
 MENTION_DRAFTS = {'administracion', 'agropecuaria', 'construccion', 'quimica-industrial', 'mecanica-industrial'}
 
 

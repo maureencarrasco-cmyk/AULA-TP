@@ -52,6 +52,13 @@ class DraftContextMigrationTests(unittest.TestCase):
         self.assertEqual('Actividad docente personalizada', preserved['aes'][0]['experiences'][0]['prompt'])
         con.close()
 
+    def test_draft_exam_stimuli_are_distinct_per_item(self):
+        _, content = next(draft_modules())
+        stimuli = [item['stimulus'] for item in content['questions']]
+        contexts = [item['context'] for item in content['cases']]
+        self.assertEqual(len(stimuli), len(set(stimuli)))
+        self.assertEqual(len(contexts), len(set(contexts)))
+
     def test_new_draft_activities_use_module_case_and_official_criterion(self):
         _, content = next(draft_modules())
         ae = content['aes'][0]

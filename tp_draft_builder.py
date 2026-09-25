@@ -6,6 +6,7 @@ from copy import deepcopy
 from pathlib import Path
 
 from specialty_catalog import _ae, _module, _cases, _questions, _rotate
+from technical_sources import governance
 
 
 ROOT = Path(__file__).resolve().parent
@@ -13,7 +14,19 @@ ROOT = Path(__file__).resolve().parent
 
 def _contextual_scenario(dossier, index):
     place, resources, conflict, product = dossier
-    evidence = f'En el contexto de {place.lower()}, {conflict} Fuentes disponibles: {resources}.'
+    focus = (
+        'identificación del documento o del lote',
+        'unidad, magnitud o instrumento omitido',
+        'responsable y fecha de la revisión',
+        'ubicación o zona del procedimiento',
+        'versión o vigencia del protocolo',
+    )[index % 5]
+    evidence = (
+        f'Caso {index + 1} en {place.lower()}. {conflict} '
+        f'Antecedentes disponibles: {resources}. '
+        f'El foco de esta revisión es {focus}. '
+        f'El producto solicitado es {product}.'
+    )
     choices = [
         ('¿Qué debes comprobar primero?',
          f'Contrastar {resources} y registrar en qué consiste la diferencia.',
@@ -44,7 +57,8 @@ def _contextual_scenario(dossier, index):
          'Dar el caso por cerrado porque ya existe un documento.',
          'Repetir la misma conclusión sin revisar las fuentes.',
          'Cambiar la fecha del registro para aparentar una revisión.',
-         'El cierre exige contrastar el producto con las fuentes y la decisión documentada.'),
+        f'El cierre exige contrastar el producto con las fuentes y la decisión documentada. '
+        f'Los valores del caso son simulados; no se usen como límite normativo ni de fabricante.'),
     ]
     return evidence, choices[index % len(choices)]
 
@@ -163,6 +177,26 @@ def sync_draft_activities(con, module_id, raw_content, desired):
                     (json.dumps(current, ensure_ascii=False), module_id))
 
 
+def sync_varied_assessments(con, module_id, raw_content, desired):
+    """Replace cloned stimuli in unpublished drafts that still share one evidence text."""
+    current = json.loads(raw_content or '{}')
+    if not str(current.get('version', '')).endswith('-mineduc-draft-v1'):
+        return
+    questions = current.get('questions') or []
+    unique = len({str(item.get('stimulus') or '').strip() for item in questions})
+    if unique >= min(5, len(questions) or 0):
+        return
+    current['cases'] = desired['cases']
+    current['questions'] = desired['questions']
+    source = current.setdefault('specialty_source', {})
+    desired_source = desired.get('specialty_source') or {}
+    for name in ('assessment_context', 'media_status'):
+        if name in desired_source:
+            source[name] = desired_source[name]
+    con.execute('UPDATE modules SET content=? WHERE id=?',
+                (json.dumps(current, ensure_ascii=False), module_id))
+
+
 def sync_official_oa(con, module_id, raw_content, official_oa):
     """Repair only the earlier extractor's merged OA text in unpublished drafts."""
     content = json.loads(raw_content or '{}')
@@ -233,6 +267,8 @@ def build_draft(rows, dossiers, specialty, key, source):
             'application': item['title'],
             'url': item['source_page'],
         }]
+        content['technical_validation'] = governance(
+            key, item.get('source_page') or content['curriculum']['url'], source)
         content['version'] = f'{key}-mineduc-draft-v1'
         yield item, content
 
@@ -251,6 +287,8 @@ def install_draft(con, title, modules):
                 sync_draft_context(con, existing['id'], refreshed['content'], content)
                 refreshed = con.execute('SELECT content FROM modules WHERE id=?', (existing['id'],)).fetchone()
                 sync_draft_activities(con, existing['id'], refreshed['content'], content)
+                refreshed = con.execute('SELECT content FROM modules WHERE id=?', (existing['id'],)).fetchone()
+                sync_varied_assessments(con, existing['id'], refreshed['content'], content)
             continue
         con.execute('INSERT INTO modules(course_id,title,position,published,content) VALUES(?,?,?,?,?)',
                     (course['id'], item['title'], item['position'], 0,

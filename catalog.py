@@ -352,6 +352,9 @@ def upgrade_catalog(con):
     install_aircraft_draft(con)
     from refrigeration_fourth import install_refrigeration_fourth
     install_refrigeration_fourth(con)
+    from tp_publish import publish_remaining_courses
+    publish_remaining_courses(con)
+    apply_technical_governance(con)
 
 
 def _fill_empty_third_medio(con):
@@ -491,3 +494,28 @@ def _apply_mineduc_3medio(con):
             (title, json.dumps(c, ensure_ascii=False), mid),
         )
     con.execute('INSERT INTO content_updates(version) VALUES(?)', (version,))
+
+
+def apply_technical_governance(con):
+    """Marca los 45 cursos publicados como En revisión y adjunta mapas de fuentes verificadas."""
+    import json
+    from technical_sources import governance
+
+    rows = con.execute(
+        '''SELECT m.id, m.content FROM modules m WHERE m.published=1'''
+    ).fetchall()
+    for row in rows:
+        try:
+            content = json.loads(row['content'] or '{}')
+        except Exception:
+            continue
+        if not isinstance(content, dict) or not content.get('aes'):
+            continue
+        source = content.get('specialty_source') or {}
+        url = (content.get('curriculum') or {}).get('url') or source.get('url') or source.get('source_page') or ''
+        content['technical_validation'] = governance(
+            content.get('specialty_key') or '', url, source.get('pdf') or '')
+        con.execute(
+            'UPDATE modules SET content=? WHERE id=?',
+            (json.dumps(content, ensure_ascii=False), row['id']),
+        )

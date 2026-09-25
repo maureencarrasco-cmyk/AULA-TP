@@ -468,6 +468,8 @@ def _module(position, title, hp, aes, specialty_key, source, source_url, scope,
     content['questions'] = _questions(module, f'/static/headers/{specialty_key}/e4.png?v=3')
     content['formative_pack'] = _formative(module, image)
     content['encargos'] = _encargos(module, max(12, min(38, round(hp / 6))))
+    from technical_sources import governance
+    content['technical_validation'] = governance(specialty_key, source_url, source)
     return content
 
 
@@ -679,3 +681,47 @@ def install_specialty_courses(con):
         if student:
             con.execute('INSERT OR IGNORE INTO enrollments(user_id,course_id) VALUES(?,?)', (student['id'], course_id))
     con.execute('INSERT INTO content_updates(version) VALUES(?)', (version,))
+
+
+def publish_unpublished_electricity(con):
+    """Fill the Electricidad stub that the versioned installer skipped."""
+    import json
+    from pedagogy import enrich, publication_gaps
+
+    course = _official_electricity_course()
+    row = con.execute('SELECT id FROM courses WHERE title=?', (course['title'],)).fetchone()
+    if not row:
+        return
+    course_id = row['id']
+    course_hp = sum(int(m['content']['specialty_source']['official_hp']) for m in course['modules'])
+    course_question_total = len(course['modules']) * 5
+    for module in course['modules']:
+        found = con.execute(
+            'SELECT id,published FROM modules WHERE course_id=? AND position=?',
+            (course_id, module['position']),
+        ).fetchone()
+        if found and found['published']:
+            continue
+        content = deepcopy(module['content'])
+        content['specialty_source'].update({
+            'course_hp': course_hp,
+            'question_count': 5,
+            'course_question_total': course_question_total,
+            'development_required': module['position'] == len(course['modules']),
+            'evaluation_note': 'Cada módulo utiliza cinco preguntas; el último incorpora además un desarrollo integrador.',
+        })
+        enrich(content, module['position'])
+        gaps = publication_gaps(content, course['title'])
+        if gaps:
+            raise ValueError(f'Electricidad módulo {module["position"]} no publicable: {gaps[:3]}')
+        serialized = json.dumps(content, ensure_ascii=False)
+        if found:
+            con.execute(
+                'UPDATE modules SET title=?,published=1,content=? WHERE id=?',
+                (module['title'], serialized, found['id']),
+            )
+        else:
+            con.execute(
+                'INSERT INTO modules(course_id,title,position,published,content) VALUES(?,?,?,?,?)',
+                (course_id, module['title'], module['position'], 1, serialized),
+            )
