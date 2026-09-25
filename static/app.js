@@ -840,6 +840,7 @@ function renderModule(n){
    if(typeof bindActivity==='function')bindActivity(stationBody);
    if(window.AulaAccess)window.AulaAccess.hydrate(stationBody);
    if(window.AulaVisual)window.AulaVisual.hydrate(stationBody);
+   if(window.AulaCircuit)window.AulaCircuit.mount(document.getElementById('circuit-sim-root'));
    if(n===4&&examStarted&&!current.state.exam){
     $('#exam-form').onchange=e=>{if(e.target.name==='answer'){examDraft.answers[questionIndex]=Number(e.target.value);updateExamReady()}};
     if($('#development'))$('#development').oninput=e=>{examDraft.development=e.target.value;updateExamReady()};

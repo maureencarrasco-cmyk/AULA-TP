@@ -59,10 +59,22 @@ function enrichedContext(){const c=current.content;const course=(typeof courses!
  </div>
  </section>${curriculumNote()}`,'work-zone-s1')}
 function currentScene(){return current.content.scene||{title:'Inspección del sistema · Escenario 3D simplificado',prompt:'La planta identifica UI-01 y UE-01, pero el listado recibido omite el control. ¿Cómo comprobarías esa diferencia y qué registrarías?',parts:[{id:'exterior',label:'UE-01',value:'Exterior',detail:'UE-01 · Unidad exterior identificada en la planta. Contrasta su etiqueta con el listado.'},{id:'interior',label:'UI-01',value:'Interior',detail:'UI-01 · Unidad interior conectada en el esquema a UE-01. Verifica su ubicación en la planta.'},{id:'control',label:'CONTROL',value:'22°',detail:'Control · Representado en la escena, pero omitido en el listado. Registra la discrepancia.'}]}}
+function isElecModule(){
+ const course=(typeof courses!=='undefined'?courses:[]).find(x=>x.id===current?.course_id);
+ return typeof specialtyKey==='function'&&specialtyKey(course)==='electricidad';
+}
 function enrichedScene(){
  const scene=currentScene(),unlocked=auth.user.role==='teacher'||Object.keys(current.state.cases).length===15;
  const sceneRoute=typeof pedRoute==='function'?pedRoute([{action:'explore',title:'Explora el escenario'},{action:'observe',title:'Examina cada componente'},{action:'relate',title:'Relaciona lo observado'},{action:'justify',title:'Escribe tu conclusión'},{action:'verify',title:'Completa la estación'}],inspected.size?Math.min(2,inspected.size):0):'';
  const sceneHead=typeof pedStepHead==='function'?pedStepHead(4,'relate','Relaciona lo observado'):'<h3>Relaciona lo observado</h3>';
+ if(isElecModule()){
+  return `<div class="scene-layout cs-scene">${sceneRoute}
+  <h3>${esc(scene.title||'Simulador de circuitos eléctricos')}</h3>
+  ${typeof instructionContract==='function'?instructionContract(scene):''}
+  <p>Construye el lazo, prueba interruptores y observa voltaje, corriente y resistencia. Representación didáctica: no sustituye la práctica supervisada en taller.</p>
+  <div id="circuit-sim-root" class="circuit-sim-host"></div>
+  <form id="scene-form" class="soft ped-step" data-action="justify">${sceneHead}<p>${esc(scene.prompt)}</p><label>Tu conclusión<textarea name="text" minlength="20" maxlength="10000" required>${esc(current.state.scene?.text||'')}</textarea></label><button class="primary" ${!unlocked||auth.user.role==='teacher'||current.state.closed?'disabled':''}>Completar estación 3</button>${!unlocked?'<p>Completa antes las 15 situaciones integradoras.</p>':''}<p class="muted small">El simulador permite observar causa y efecto. No certifica una instalación real.</p></form></div>`;
+ }
  const vis=window.AulaVisual;
  const stage=vis?vis.sceneStage(scene):'';
   const cycle=vis?vis.cycle(['Preparar','Recorrer 3D','Ejecutar el paso','Verificar']):'';
@@ -95,6 +107,12 @@ function inspectPart(id){
 }
 function numberDisplay(n){return new Intl.NumberFormat('es-CL',{maximumFractionDigits:3}).format(n)}
 function openModulePractice(){
+ if(typeof isElecModule==='function'&&isElecModule()&&window.AulaCircuit){
+  $('#tool-content').innerHTML='<div id="circuit-sim-root" class="circuit-sim-host"></div>';
+  $('#tool').showModal();
+  window.AulaCircuit.mount(document.getElementById('circuit-sim-root'));
+  return;
+ }
  if(window.AulaPractice){window.AulaPractice.open();return}
  const p=view.station?current?.content.practice:null;let form='';const type=p?.type||'scale';const title=p?.title||'Explorador de escalas';
  if(type==='measurement')form=`<p>Modifica tres lecturas del mismo punto. Observa el promedio y la variación; no equivalen a un diagnóstico.</p><div class="practice-inputs">${p.values.map((v,i)=>`<label>Lectura ${i+1} (°C)<input type="number" class="practice-number" value="${v}" min="-1000" max="1000" step="0.1"></label>`).join('')}</div><p class="small">Criterio ficticio del ejercicio: de ${numberDisplay(p.reference[0])} a ${numberDisplay(p.reference[1])} °C, incluidos sus extremos.</p>`;
