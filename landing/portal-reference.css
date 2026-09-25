@@ -258,8 +258,8 @@ h1,h2,h3,h4{letter-spacing:0}
 .status-badge{position:absolute;z-index:2;top:12px;left:12px;padding:5px 9px;border-radius:999px;background:#0f8a5a;color:#fff;font-size:.68rem;font-weight:800;letter-spacing:.02em}
 .status-badge.is-soon{background:#e8eef5;color:#526d8e}
 .specialty-card{position:relative}
-.specialty-card > span:not(.status-badge){display:grid;width:100%;gap:3px;min-height:78px;padding:17px;background:#fffffff2;border-top:1px solid var(--line)}
-.specialty-card .status-badge{display:inline-flex;align-items:center;width:max-content;max-width:calc(100% - 24px);min-height:0;padding:6px 10px;border:1px solid #ffffff55;background:#0f8a5a;color:#fff;box-shadow:0 6px 16px #082b6733}
+.specialty-card > span:not(.status-badge){display:grid;width:100%;gap:3px;min-height:78px;padding:22px 17px 16px;background:#fffffff2;border-top:1px solid var(--line);position:relative}
+.specialty-card .status-badge{display:inline-flex;align-items:center;width:max-content;max-width:calc(100% - 24px);min-height:0;padding:6px 10px;border:1px solid #ffffff55;background:#0f8a5a;color:#fff;box-shadow:0 6px 16px #082b6733;top:0;left:14px;transform:translateY(-50%)}
 .specialty-card .status-badge.is-soon{border-color:#c5d4e4;background:#1e3a5f;color:#fff}
 .journey-audience{margin:0 0 8px;color:#087b77;font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
@@ -348,3 +348,5 @@ h1,h2,h3,h4{letter-spacing:0}
 @media(min-width:1051px){.nav .nav-cta{display:none}}
 @media(max-width:950px){.lead-form{margin:16px}}
 @media(max-width:650px){.lead-form{margin:16px 12px}.visual-footer a{min-width:0;flex:1;padding:8px 4px;font-size:.58rem}}
+.additional-card-content{position:relative;padding-top:22px}
+.additional-card .status-badge{top:0;left:14px;transform:translateY(-50%);width:max-content;max-width:calc(100% - 28px);min-height:0}
