@@ -2,7 +2,8 @@ import json
 import sqlite3
 import unittest
 
-from merchant_crew_catalog import OFFICIAL, draft_modules, install_merchant_crew_draft
+from merchant_crew_catalog import OFFICIAL, draft_modules, install_merchant_crew_course, install_merchant_crew_draft
+from pedagogy import publication_gaps
 
 
 class MerchantCrewCatalogTests(unittest.TestCase):
@@ -32,6 +33,26 @@ class MerchantCrewCatalogTests(unittest.TestCase):
         self.assertEqual(9, len(rows))
         self.assertTrue(all(not row['published'] for row in rows))
         self.assertEqual(1672, sum(json.loads(row['content'])['specialty_source']['official_hp'] for row in rows))
+        con.close()
+
+    def test_complete_course_is_publishable_and_idempotent(self):
+        con = sqlite3.connect(':memory:')
+        con.row_factory = sqlite3.Row
+        con.executescript('''
+            CREATE TABLE courses(id INTEGER PRIMARY KEY, title TEXT);
+            CREATE TABLE modules(id INTEGER PRIMARY KEY, course_id INTEGER, title TEXT,
+                position INTEGER, published INTEGER, content TEXT);
+            INSERT INTO courses(id,title) VALUES(1,'Tripulación de Naves Mercantes y Especiales');
+        ''')
+        install_merchant_crew_course(con)
+        install_merchant_crew_course(con)
+        rows = con.execute('SELECT published,content FROM modules ORDER BY position').fetchall()
+        self.assertEqual(9, len(rows))
+        self.assertTrue(all(row['published'] for row in rows))
+        for row in rows:
+            content = json.loads(row['content'])
+            self.assertEqual('tripulacion-naves-mercantes-especiales-mineduc-v1', content['version'])
+            self.assertEqual([], publication_gaps(content, 'Tripulación de Naves Mercantes y Especiales'))
         con.close()
 
 

@@ -12,6 +12,12 @@ function specialtyKey(course) {
   if (/hoteler/i.test(s)) return 'hoteleria';
   if (/acuicultura|acu[ií]cola/i.test(s)) return 'acuicultura';
   if (/operaciones portuarias|portuari/i.test(s)) return 'portuaria';
+  if (/pesquer[ií]a|pesquer/i.test(s)) return 'pesqueria';
+  if (/tripulaci[oó]n.*naves|naves mercantes/i.test(s)) return 'tripulacion';
+  if (/mec[aá]nica automotriz|automotriz/i.test(s)) return 'automotriz';
+  if (/mantenimiento de aeronaves|aeron[aá]utic/i.test(s)) return 'aeronaves';
+  if (/asistencia en geolog[ií]a|geolog[ií]a/i.test(s)) return 'geologia';
+  if (/explotaci[oó]n minera/i.test(s)) return 'mineria';
   if (/administraci[oó]n|contabil|oficina|gesti[oó]n/i.test(s)) return 'administracion';
   return 'general';
 }
@@ -36,6 +42,12 @@ function specialtyCover(course) {
   if (specialtyKey(course) === 'hoteleria') return '/static/themes/cases/04-hotel.png';
   if (specialtyKey(course) === 'acuicultura') return '/static/themes/aquaculture-hero.png?v=1';
   if (specialtyKey(course) === 'portuaria') return '/static/themes/port-operations-hero.png?v=1';
+  if (specialtyKey(course) === 'pesqueria') return '/static/themes/fisheries-hero.png?v=1';
+  if (specialtyKey(course) === 'tripulacion') return '/static/themes/merchant-crew-hero.png?v=1';
+  if (specialtyKey(course) === 'automotriz') return '/static/themes/automotive-hero.png?v=1';
+  if (specialtyKey(course) === 'aeronaves') return '/static/themes/aircraft-maintenance-hero.png?v=1';
+  if (specialtyKey(course) === 'geologia') return '/static/themes/geology-hero.png?v=1';
+  if (specialtyKey(course) === 'mineria') return '/static/themes/mining-hero.png?v=1';
   return `/static/headers/${specialtyKey(course)}/e1.png?v=3`;
 }
 function climateHeroArt() {
@@ -69,6 +81,12 @@ function moduleStopArt(course, index) {
   }
   if (key === 'acuicultura') return '/static/themes/aquaculture-hero.png?v=1';
   if (key === 'portuaria') return '/static/themes/port-operations-hero.png?v=1';
+  if (key === 'pesqueria') return '/static/themes/fisheries-hero.png?v=1';
+  if (key === 'tripulacion') return '/static/themes/merchant-crew-hero.png?v=1';
+  if (key === 'automotriz') return '/static/themes/automotive-hero.png?v=1';
+  if (key === 'aeronaves') return '/static/themes/aircraft-maintenance-hero.png?v=1';
+  if (key === 'geologia') return '/static/themes/geology-hero.png?v=1';
+  if (key === 'mineria') return '/static/themes/mining-hero.png?v=1';
   return `/static/headers/${key}/e${(index % 5) + 1}.png?v=3`;
 }
 function journeyGoalArt(course) {
@@ -125,6 +143,41 @@ const HEADER_PHOTO_ALTS = {
     3: 'Equipo TP analiza una operación logística en un terminal portuario simulado',
     4: 'Evaluación de decisiones técnicas, trazabilidad y prevención de riesgos portuarios',
     5: 'Revisión de evidencias y oportunidades de mejora en operaciones portuarias'
+  },
+  pesqueria: {
+    1: 'Estudiantes de pesquería revisan una faena marítima segura a bordo de una embarcación de instrucción',
+    2: 'Estudiantes relacionan navegación, artes de pesca, trazabilidad y conservación de recursos',
+    3: 'Equipo TP analiza una operación pesquera responsable en un entorno marítimo simulado',
+    4: 'Evaluación de decisiones técnicas, seguridad y sostenibilidad en pesquería',
+    5: 'Revisión de evidencias y oportunidades de mejora en la operación pesquera'
+  },
+  tripulacion: {
+    1: 'Estudiantes de tripulación practican navegación segura en el puente de una nave de instrucción',
+    2: 'Estudiantes relacionan instrumentos, maniobras, máquinas y comunicaciones marítimas',
+    3: 'Equipo TP analiza una operación integrada de una nave mercante simulada',
+    4: 'Evaluación de decisiones técnicas, seguridad y coordinación de la tripulación',
+    5: 'Revisión de evidencias y oportunidades de mejora en el servicio a bordo'
+  },
+  aeronaves: {
+    1: 'Estudiantes de mantenimiento aeronáutico inspeccionan una aeronave con protección personal y documentación técnica',
+    2: 'Estudiantes relacionan manuales, diagramas y registros con los sistemas de una aeronave',
+    3: 'Equipo TP analiza una situación integrada de mantenimiento aeronáutico en un hangar de formación',
+    4: 'Evaluación de decisiones técnicas, seguridad, normativa y trazabilidad del mantenimiento aeronáutico',
+    5: 'Revisión de evidencias y oportunidades de mejora en el mantenimiento de aeronaves'
+  },
+  geologia: {
+    1: 'Estudiantes de geología observan un afloramiento rocoso con protección personal y equipos de terreno',
+    2: 'Estudiantes relacionan mapas, muestras, registros y criterios de clasificación geológica',
+    3: 'Equipo TP analiza una campaña geológica simulada con trazabilidad de muestras y datos',
+    4: 'Evaluación de decisiones técnicas, seguridad y calidad de la información geológica',
+    5: 'Revisión de evidencias y oportunidades de mejora en el trabajo de asistencia geológica'
+  },
+  mineria: {
+    1: 'Estudiantes de explotación minera revisan una faena desde una zona segura con protección personal completa',
+    2: 'Estudiantes relacionan planos, normativa, procesos y registros de una operación minera',
+    3: 'Equipo TP analiza una situación integrada de explotación minera en un entorno controlado',
+    4: 'Evaluación de decisiones técnicas, seguridad, trazabilidad y cuidado ambiental en minería',
+    5: 'Revisión de evidencias y oportunidades de mejora en la operación minera'
   },
   general: {
     1: 'Contexto profesional de la especialidad',

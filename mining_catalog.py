@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from tp_draft_builder import build_draft, install_draft
+from tp_draft_builder import build_draft, install_course, install_draft
 
 
 ROOT = Path(__file__).resolve().parent
@@ -28,3 +28,9 @@ def draft_modules():
 
 def install_mining_draft(con):
     install_draft(con, 'Explotación Minera', draft_modules())
+
+
+def install_mining_course(con):
+    install_course(con, 'Explotación Minera', draft_modules(),
+                   'explotacion-minera-mineduc-draft-v1',
+                   'explotacion-minera-mineduc-v1')

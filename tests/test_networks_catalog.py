@@ -2,7 +2,8 @@ import json
 import sqlite3
 import unittest
 
-from networks_catalog import OFFICIAL, draft_modules, install_networks_draft
+from networks_catalog import OFFICIAL, draft_modules, install_networks_course, install_networks_draft
+from pedagogy import publication_gaps
 from tp_draft_builder import sync_official_oa
 
 
@@ -49,6 +50,26 @@ class NetworksCatalogTests(unittest.TestCase):
         updated = json.loads(con.execute('SELECT content FROM modules WHERE id=1').fetchone()[0])
         self.assertEqual(official, updated['specialty_source']['oa'])
         self.assertEqual('Conservar', updated['teacher_note'])
+        con.close()
+
+    def test_complete_course_is_publishable_and_idempotent(self):
+        con = sqlite3.connect(':memory:')
+        con.row_factory = sqlite3.Row
+        con.executescript('''
+            CREATE TABLE courses(id INTEGER PRIMARY KEY, title TEXT);
+            CREATE TABLE modules(id INTEGER PRIMARY KEY, course_id INTEGER, title TEXT,
+                position INTEGER, published INTEGER, content TEXT);
+            INSERT INTO courses(id,title) VALUES(1,'Conectividad y Redes');
+        ''')
+        install_networks_course(con)
+        install_networks_course(con)
+        rows = con.execute('SELECT published,content FROM modules ORDER BY position').fetchall()
+        self.assertEqual(9, len(rows))
+        self.assertTrue(all(row['published'] for row in rows))
+        for row in rows:
+            content = json.loads(row['content'])
+            self.assertEqual('redes-mineduc-v1', content['version'])
+            self.assertEqual([], publication_gaps(content, 'Conectividad y Redes'))
         con.close()
 
 

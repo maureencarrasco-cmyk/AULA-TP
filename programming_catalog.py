@@ -5,7 +5,7 @@ from copy import deepcopy
 from pathlib import Path
 
 from specialty_catalog import _ae, _module
-from tp_draft_builder import contextualize_draft, sync_draft_activities, sync_draft_context, sync_official_oa
+from tp_draft_builder import contextualize_draft, install_course, sync_draft_activities, sync_draft_context, sync_official_oa
 
 
 ROOT = Path(__file__).resolve().parent
@@ -88,3 +88,8 @@ def install_programming_draft(con):
         con.execute('INSERT INTO modules(course_id,title,position,published,content) VALUES(?,?,?,?,?)',
                     (course['id'], item['title'], item['position'], 0,
                      json.dumps(deepcopy(content), ensure_ascii=False)))
+
+
+def install_programming_course(con):
+    install_course(con, 'Programación', draft_modules(),
+                   'programacion-mineduc-draft-v1', 'programacion-mineduc-v1')

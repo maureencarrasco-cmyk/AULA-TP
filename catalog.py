@@ -290,14 +290,14 @@ def upgrade_catalog(con):
     install_hospitality_courses(con)
     from tp_catalog import install_pending_courses
     install_pending_courses(con)
-    from programming_catalog import install_programming_draft
-    install_programming_draft(con)
+    from programming_catalog import install_programming_course
+    install_programming_course(con)
     from accounting_catalog import install_accounting_course
     install_accounting_course(con)
     from tourism_catalog import install_tourism_course
     install_tourism_course(con)
-    from networks_catalog import install_networks_draft
-    install_networks_draft(con)
+    from networks_catalog import install_networks_course
+    install_networks_course(con)
     from electronics_catalog import install_electronics_course
     install_electronics_course(con)
     from telecom_catalog import install_telecom_draft
@@ -324,20 +324,20 @@ def upgrade_catalog(con):
     install_port_course(con)
     from aquaculture_catalog import install_aquaculture_course
     install_aquaculture_course(con)
-    from fisheries_catalog import install_fisheries_draft
-    install_fisheries_draft(con)
-    from merchant_crew_catalog import install_merchant_crew_draft
-    install_merchant_crew_draft(con)
-    from automotive_catalog import install_automotive_draft
-    install_automotive_draft(con)
-    from early_childhood_catalog import install_early_childhood_draft
-    install_early_childhood_draft(con)
-    from geology_catalog import install_geology_draft
-    install_geology_draft(con)
-    from metallurgy_catalog import install_metallurgy_draft
-    install_metallurgy_draft(con)
-    from mining_catalog import install_mining_draft
-    install_mining_draft(con)
+    from fisheries_catalog import install_fisheries_course
+    install_fisheries_course(con)
+    from merchant_crew_catalog import install_merchant_crew_course
+    install_merchant_crew_course(con)
+    from automotive_catalog import install_automotive_course
+    install_automotive_course(con)
+    from early_childhood_catalog import install_early_childhood_course
+    install_early_childhood_course(con)
+    from geology_catalog import install_geology_course
+    install_geology_course(con)
+    from metallurgy_catalog import install_metallurgy_course
+    install_metallurgy_course(con)
+    from mining_catalog import install_mining_course
+    install_mining_course(con)
     from administration_catalog import install_administration_drafts
     install_administration_drafts(con)
     from agriculture_catalog import install_agriculture_drafts
@@ -348,8 +348,8 @@ def upgrade_catalog(con):
     install_chemical_industry_drafts(con)
     from mechanical_industry_catalog import install_mechanical_industry_drafts
     install_mechanical_industry_drafts(con)
-    from aircraft_catalog import install_aircraft_draft
-    install_aircraft_draft(con)
+    from aircraft_catalog import install_aircraft_course
+    install_aircraft_course(con)
     from refrigeration_fourth import install_refrigeration_fourth
     install_refrigeration_fourth(con)
 

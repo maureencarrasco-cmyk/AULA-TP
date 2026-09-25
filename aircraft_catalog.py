@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from tp_draft_builder import build_draft, install_draft
+from tp_draft_builder import build_draft, install_course, install_draft
 
 
 ROOT = Path(__file__).resolve().parent
@@ -47,3 +47,9 @@ def install_aircraft_draft(con):
         con.execute('INSERT OR IGNORE INTO enrollments(user_id,course_id) VALUES(?,?)',
                     (student['id'], course_id))
     install_draft(con, TITLE, draft_modules())
+
+
+def install_aircraft_course(con):
+    install_course(con, TITLE, draft_modules(),
+                   'mecanica-mantenimiento-aeronaves-mineduc-draft-v1',
+                   'mecanica-mantenimiento-aeronaves-mineduc-v1')

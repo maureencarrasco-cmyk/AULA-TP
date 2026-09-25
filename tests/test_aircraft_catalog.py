@@ -2,7 +2,8 @@ import json
 import sqlite3
 import unittest
 
-from aircraft_catalog import OFFICIAL, draft_modules, install_aircraft_draft
+from aircraft_catalog import OFFICIAL, draft_modules, install_aircraft_course, install_aircraft_draft
+from pedagogy import publication_gaps
 
 
 class AircraftCatalogTests(unittest.TestCase):
@@ -36,6 +37,27 @@ class AircraftCatalogTests(unittest.TestCase):
         self.assertTrue(all(not row['published'] for row in rows))
         self.assertEqual(1, con.execute('SELECT COUNT(*) FROM courses').fetchone()[0])
         self.assertEqual(1, con.execute('SELECT COUNT(*) FROM enrollments').fetchone()[0])
+        con.close()
+
+    def test_complete_course_is_publishable_and_idempotent(self):
+        con = sqlite3.connect(':memory:')
+        con.row_factory = sqlite3.Row
+        con.executescript('''
+            CREATE TABLE courses(id INTEGER PRIMARY KEY,title TEXT,specialty TEXT,level TEXT);
+            CREATE TABLE modules(id INTEGER PRIMARY KEY,course_id INTEGER,title TEXT,
+                position INTEGER,published INTEGER,content TEXT);
+            INSERT INTO courses VALUES(1,'Mecánica de Mantenimiento de Aeronaves',
+                'Mecánica de Mantenimiento de Aeronaves','3° y 4° medio');
+        ''')
+        install_aircraft_course(con)
+        install_aircraft_course(con)
+        rows = con.execute('SELECT published,content FROM modules ORDER BY position').fetchall()
+        self.assertEqual(11, len(rows))
+        self.assertTrue(all(row['published'] for row in rows))
+        for row in rows:
+            content = json.loads(row['content'])
+            self.assertEqual('mecanica-mantenimiento-aeronaves-mineduc-v1', content['version'])
+            self.assertEqual([], publication_gaps(content, 'Mecánica de Mantenimiento de Aeronaves'))
         con.close()
 
 

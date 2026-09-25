@@ -1,20 +1,10 @@
 # Estado verificable de cursos en borrador
 
-Fecha: 2026-09-25. Alcance: 24 cursos y 244 módulos no publicados.
+Fecha: 2026-09-25. Alcance: 14 cursos y 150 módulos no publicados.
 Esta tabla mide presencia de datos y archivos locales, no calidad pedagógica ni autorización para publicar.
 
 | Curso | Módulos | PDF y página oficial | OA explícito | AE con criterios | Visuales 3D reales | Imágenes de evaluación reales | Videos reales |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Pesquería | 9 | 9/9 | 8/9 | 9/9 | 0/27 mínimo | 0/360 | 0 |
-| Tripulación de Naves Mercantes y Especiales | 9 | 9/9 | 8/9 | 9/9 | 0/27 mínimo | 0/360 | 0 |
-| Mecánica Automotriz | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
-| Mecánica de Mantenimiento de Aeronaves | 11 | 11/11 | 10/11 | 11/11 | 0/33 mínimo | 0/440 | 0 |
-| Asistencia en Geología | 9 | 9/9 | 8/9 | 9/9 | 0/27 mínimo | 0/360 | 0 |
-| Explotación Minera | 9 | 9/9 | 8/9 | 9/9 | 0/27 mínimo | 0/360 | 0 |
-| Metalurgia Extractiva | 9 | 9/9 | 8/9 | 9/9 | 0/27 mínimo | 0/360 | 0 |
-| Atención de Párvulos | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
-| Conectividad y Redes | 9 | 9/9 | 8/9 | 9/9 | 0/27 mínimo | 0/360 | 0 |
-| Programación | 9 | 9/9 | 8/9 | 9/9 | 0/27 mínimo | 0/360 | 0 |
 | Telecomunicaciones | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
 | Administración, mención Logística | 11 | 11/11 | 8/11 | 11/11 | 0/33 mínimo | 0/440 | 0 |
 | Administración, mención Recursos Humanos | 11 | 11/11 | 8/11 | 11/11 | 0/33 mínimo | 0/440 | 0 |
@@ -32,11 +22,11 @@ Esta tabla mide presencia de datos y archivos locales, no calidad pedagógica ni
 
 ## Resultado y límites
 
-- PDF local y página curricular declarada: 244/244 módulos.
-- OA explícito en el registro: 216/244; los módulos sin OA requieren revisar el alcance del programa antes de asignarles uno.
-- AE con código y criterios: 244/244, con 839 AE registrados.
-- Imágenes 3D verificadas: 0/732 del mínimo solicitado.
-- Imágenes reales en casos y evaluación: 0/9760.
+- PDF local y página curricular declarada: 216/216 módulos.
+- OA explícito en el registro: 132/150; los módulos sin OA requieren revisar el alcance del programa antes de asignarles uno.
+- AE con código y criterios: 150/150, con 497 AE registrados.
+- Imágenes 3D verificadas: 0/450 del mínimo solicitado.
+- Imágenes reales en casos y evaluación: 0/6000.
 - Videos locales verificados: 0. La pertinencia se debe decidir por módulo; cero videos no demuestra que ninguno corresponda.
 - Estímulos distintos por banco de 25 preguntas: entre 1 y 1. La repetición requiere rediseño y revisión disciplinar.
 - No se ha certificado en estos borradores la exactitud técnica de cada decisión, la pertinencia de cada medio, accesibilidad con usuarios ni la experiencia completa de las cinco estaciones.

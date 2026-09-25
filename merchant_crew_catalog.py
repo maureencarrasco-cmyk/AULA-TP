@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from tp_draft_builder import build_draft, install_draft
+from tp_draft_builder import build_draft, install_course, install_draft
 
 
 ROOT = Path(__file__).resolve().parent
@@ -28,3 +28,13 @@ def draft_modules():
 
 def install_merchant_crew_draft(con):
     install_draft(con, 'Tripulación de Naves Mercantes y Especiales', draft_modules())
+
+
+def install_merchant_crew_course(con):
+    install_course(
+        con,
+        'Tripulación de Naves Mercantes y Especiales',
+        draft_modules(),
+        'tripulacion-naves-mercantes-especiales-mineduc-draft-v1',
+        'tripulacion-naves-mercantes-especiales-mineduc-v1',
+    )
