@@ -37,6 +37,11 @@ class LMSFlow(unittest.TestCase):
   content=self.s.get('/api/modules/1').json['content']
   self.assertTrue(all('answer' not in q and 'explanation' not in q for q in content['questions']))
   self.assertTrue(all('answer' not in q for q in content['cases']))
+  payload={'note':'El valor del caso no coincide con el programa MINEDUC citado.','claim':'dato-simulado','station':3}
+  self.assertEqual(self.req('/modules/1/content-report',payload).status_code,200)
+  teacher=self.t.get('/api/teacher').json
+  self.assertTrue(teacher['content_health'])
+  self.assertEqual(1,len(teacher['incidents']))
  def test_student_progress_is_private_and_uses_saved_evidence(self):
   self.assertEqual(self.app.test_client().get('/api/progress').status_code,401)
   self.assertEqual(self.t.get('/api/progress').status_code,403)
@@ -284,11 +289,25 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual(self.req('/teacher/modules/'+str(mid),{'title':'Hueco A-D','published':True,'content':c},teacher=True,method='PUT').status_code,400)
  def test_audit_ui_uses_module_plan_and_actor_evidence_matrix(self):
   source=(Path(__file__).resolve().parents[1]/'static'/'app.js').read_text(encoding='utf-8')
+  portal=(Path(__file__).resolve().parents[1]/'static'/'teacher-portal.js').read_text(encoding='utf-8')
   self.assertIn('function evaluationPlan()',source)
   self.assertIn('PREGUNTA ${questionIndex+1} DE ${plan.count}',source)
   self.assertNotIn('Escenario 3D:',source)
-  self.assertIn('<th>Necesidad</th><th>Indicador</th><th>Evidencia</th><th>Acción posible</th>',source)
+  self.assertIn('<th>Necesidad</th><th>Indicador</th><th>Evidencia</th><th>Acción posible</th>',portal)
+  self.assertNotIn('250,8',portal)
+  self.assertIn('Curso y planificación',portal)
+  self.assertIn('AE y OA',portal)
   self.assertIn('curriculumSourcePanel()',source)
+ def test_teacher_portal_traceability(self):
+  teacher=self.t.get('/api/teacher').json
+  self.assertIn('formula',teacher['kpi']['avance_porcentaje'])
+  self.assertIn('completed()',teacher['kpi']['avance_porcentaje']['fuente'])
+  courses=self.t.get('/api/courses').json
+  self.assertTrue(courses[0]['modules'][0].get('aes') is not None)
+  self.assertEqual(self.s.get('/api/courses').json[0]['modules'][0].get('aes'),None)
+  csv=self.t.get('/api/teacher/export.csv').get_data(as_text=True)
+  self.assertIn('Estaciones completadas / 5',csv)
+  self.assertIn('Curso',csv)
  def test_encargos_cover_hours_without_gating_exam(self):
   expected={1:32,2:36,3:38,4:36}
   hours={1:32.2,2:32.2,3:40.8,4:40.8}

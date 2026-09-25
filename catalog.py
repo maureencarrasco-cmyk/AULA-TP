@@ -266,6 +266,8 @@ def upgrade_catalog(con):
     Nunca sobrescribe ediciones docentes, evidencias ni módulos de otros cursos.
     """
     con.execute('CREATE TABLE IF NOT EXISTS content_updates(version TEXT PRIMARY KEY,applied TEXT DEFAULT CURRENT_TIMESTAMP)')
+    con.execute('CREATE TABLE IF NOT EXISTS content_incidents(id INTEGER PRIMARY KEY,user_id INTEGER REFERENCES users(id),module_id INTEGER REFERENCES modules(id),station INTEGER,claim TEXT NOT NULL,note TEXT NOT NULL,created TEXT DEFAULT CURRENT_TIMESTAMP)')
+    con.execute('CREATE TABLE IF NOT EXISTS specialist_reviews(id INTEGER PRIMARY KEY,module_id INTEGER REFERENCES modules(id),teacher_id INTEGER REFERENCES users(id),verdict TEXT NOT NULL,note TEXT NOT NULL,created TEXT DEFAULT CURRENT_TIMESTAMP)')
     _fill_empty_third_medio(con)
     version='curso-local-2'
     if not con.execute('SELECT 1 FROM content_updates WHERE version=?',(version,)).fetchone():
@@ -497,12 +499,13 @@ def _apply_mineduc_3medio(con):
 
 
 def apply_technical_governance(con):
-    """Marca los 45 cursos publicados como En revisión y adjunta mapas de fuentes verificadas."""
+    """Aplica expedientes técnicos y el inventario multimedia a módulos publicados."""
     import json
-    from technical_sources import governance
+    from content_assurance import apply_content_assurance
 
+    version = 'media-protocolo-v1'
     rows = con.execute(
-        '''SELECT m.id, m.content FROM modules m WHERE m.published=1'''
+        '''SELECT m.id, m.position, m.content FROM modules m WHERE m.published=1'''
     ).fetchall()
     for row in rows:
         try:
@@ -511,11 +514,14 @@ def apply_technical_governance(con):
             continue
         if not isinstance(content, dict) or not content.get('aes'):
             continue
-        source = content.get('specialty_source') or {}
-        url = (content.get('curriculum') or {}).get('url') or source.get('url') or source.get('source_page') or ''
-        content['technical_validation'] = governance(
-            content.get('specialty_key') or '', url, source.get('pdf') or '')
+        exp_ver = (content.get('technical_expedition') or {}).get('version')
+        media_ok = (content.get('media_inventory') or {}).get('protocol_version') == 'media-v2'
+        if exp_ver == 'tecnico-protocolo-v2' and media_ok:
+            continue
+        apply_content_assurance(content, row['position'] or 1)
         con.execute(
             'UPDATE modules SET content=? WHERE id=?',
             (json.dumps(content, ensure_ascii=False), row['id']),
         )
+    if not con.execute('SELECT 1 FROM content_updates WHERE version=?', (version,)).fetchone():
+        con.execute('INSERT INTO content_updates(version) VALUES(?)', (version,))

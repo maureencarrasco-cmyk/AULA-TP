@@ -15,7 +15,45 @@ function learningNotes(a){
  if(!a.lesson?.length){const notes=initialReadingNotes[a.title];if(!notes)return '';a={...a,...notes}}
  return `<details class="lesson-panel lesson-support" open><summary class="lesson-heading"><span class="circle">${icon('book')}</span><div><span class="eyebrow">Apoyo previo · comprender antes de responder</span><h3>Claves para este aprendizaje</h3></div></summary><div class="lesson-columns"><div>${a.lesson.map(p=>`<p>${esc(p)}</p>`).join('')}</div><div class="worked-example"><b>Ejemplo resuelto</b><p>${esc(a.example)}</p><small>Datos ficticios para la simulación. Explica después tu propia decisión.</small></div></div></details>`;
 }
-function curriculumNote(){const c=current.content.curriculum;if(!c)return '';const url=typeof c.url==='string'&&c.url.startsWith('https://www.curriculumnacional.cl/')?c.url:null;return `<details class="curriculum-note"><summary>Acerca de estos contenidos</summary><p>${esc(c.status)}</p>${url?`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(c.label)} ↗</a><small>Enlace externo opcional. Las actividades del curso funcionan sin Internet.</small>`:''}</details>`}
+function curriculumNote(){
+ const content=current.content||{};
+ const c=content.curriculum||{};
+ const gov=content.technical_validation||{};
+ const exp=content.technical_expedition||{};
+ const url=typeof c.url==='string'&&c.url.startsWith('https://www.curriculumnacional.cl/')?c.url:null;
+ const maps=(gov.source_map||exp.source_map||[]).filter(s=>s&&s.url).slice(0,6);
+ const debt=(exp.debt||[]).slice(0,4);
+ const layers=exp.layers||{};
+ const layerRows=Object.entries(layers).map(([k,v])=>`<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join('');
+ return `<details class="curriculum-note"><summary>Acerca de estos contenidos · simulación didáctica</summary>
+  <p>${esc(c.status||gov.scope||'Simulación documental de 3° y 4° medio TP. Los datos de casos no son valores de fabricante ni límites normativos.')}</p>
+  <p><b>Estado técnico:</b> ${esc(gov.status||exp.status||'En revisión')}. No se emite el sello CONTENIDO TÉCNICO VALIDADO.</p>
+  ${exp.protocol_scope?`<p class="muted small">${esc(exp.protocol_scope)}</p>`:''}
+  ${layerRows?`<ul>${layerRows}</ul>`:''}
+  ${url?`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(c.label||'Programa MINEDUC')} ↗</a><small>Enlace externo opcional. Las actividades del curso funcionan sin Internet.</small>`:''}
+  ${maps.length?`<p>Fuentes ya presentes en el repositorio</p><ul>${maps.map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.name||s.url)}</a></li>`).join('')}</ul>`:''}
+  ${debt.length?`<p>Deuda que bloquea el sello interno</p><ul>${debt.map(d=>`<li>${esc(d)}</li>`).join('')}</ul>`:''}
+  ${(() => {const ind=(content.media_inventory||{}).indicators||{}; if(!ind.universo) return ''; return `<p><b>Medios (prompt 3):</b> inventario ${ind.inventariados_pct}% de ${ind.universo} referencias. Archivo o interactivo: ${ind.archivo_o_interactivo_pct}%. APTO pedagógico: ${ind.apto_pedagogicamente_pct}%. Validación técnica de imagen: ${ind.tecnicamente_validado_pct}%. ${esc((content.media_inventory||{}).scope||'')}</p>`;})()}
+  <form id="content-report-form" class="soft">
+   <label>Reportar un error de contenido<textarea name="note" minlength="20" maxlength="2000" required placeholder="Describe el error, el dato observado y la fuente que contrastaste."></textarea></label>
+   <input type="hidden" name="claim" value="afirmacion-modulo">
+   <button class="outline" type="submit">Enviar reporte al docente</button>
+  </form>
+ </details>`;
+}
+function bindContentReport(){
+ const f=document.getElementById('content-report-form');
+ if(!f||!current)return;
+ f.onsubmit=async e=>{
+  e.preventDefault();
+  const d=Object.fromEntries(new FormData(f));
+  try{
+   await api(`/modules/${current.id}/content-report`,'POST',{note:d.note,claim:d.claim,station:view.station||1});
+   toast('Reporte enviado. Gracias por ayudar a corregir el contenido.');
+   f.reset();
+  }catch(err){toast(err.message)}
+ };
+}
 function ctxStepMark(n,kicker,title){return `<span class="ctx-step-n">${n}</span><div><span class="work-kicker">${kicker}</span><h4>${title}</h4></div>`}
 function ctxStepHead(n,kicker,title){return `<header class="ctx-step-head">${ctxStepMark(n,kicker,title)}</header>`}
 function enrichedContext(){const c=current.content;const course=(typeof courses!=='undefined'?courses:[]).find(x=>x.id===current.course_id);const s1Route=typeof pedRoute==='function'?pedRoute([{action:'observe',title:'Observa'},{action:'explore',title:'Explora'},{action:'analyze',title:'Analiza'},{action:'justify',title:'Justifica'},{action:'verify',title:'Verifica'}],0):`<ol class="ctx-mini-route" aria-label="Secuencia de esta actividad">

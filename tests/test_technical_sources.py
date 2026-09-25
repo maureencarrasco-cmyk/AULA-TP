@@ -8,7 +8,16 @@ class TechnicalSourcesTests(unittest.TestCase):
         rows = source_map('electricidad', 'https://www.curriculumnacional.cl/614/articles-34320_programa.pdf')
         urls = {row.get('url') for row in rows}
         self.assertIn(SEC_RIC, urls)
+        from technical_sources import RIC_N07
+        self.assertIn(RIC_N07, urls)
         self.assertTrue(any(row['level'] == 1 for row in rows))
+
+    def test_nursing_map_cites_minsal_without_invented_url(self):
+        from technical_sources import MINSAL_CITED, source_map
+        rows = source_map('enfermeria', 'https://www.curriculumnacional.cl/x')
+        names = [row.get('name') for row in rows]
+        self.assertIn(MINSAL_CITED, names)
+        self.assertFalse(any(row.get('name') == MINSAL_CITED and row.get('url') for row in rows))
 
     def test_governance_does_not_claim_validation(self):
         stamp = governance('enfermeria', 'https://www.curriculumnacional.cl/x')

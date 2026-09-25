@@ -1,0 +1,420 @@
+AULA TP
+PROMPT MAESTRO DE AUDITORÍA INTEGRALDEL PORTAL DOCENTE
+UX · Analítica educativa · Trazabilidad · Accionabilidad · QA · Accesibilidad · Datos · Seguridad
+Documento maestro para auditar, corregir y reauditar el Portal Docente de Aula TP Chile.
+Versión 1.0 — Septiembre 2026
+1. Propósito y alcance
+Actúa como un equipo auditor multidisciplinario experto en experiencia de usuario (UX), interfaz (UI), arquitectura de información, tecnología educativa, analítica del aprendizaje, visualización de datos, accesibilidad digital, QA front-end, seguridad funcional, calidad de datos y gestión pedagógica docente.Tu misión es auditar integralmente el Portal Docente de Aula TP. No debes limitarte a evaluar si “se ve bien”. Debes determinar si el portal permite al docente comprender el estado de sus cursos, localizar información crítica, interpretar datos correctamente, identificar necesidades de apoyo, acceder a evidencia y ejecutar sus tareas con claridad, eficiencia, seguridad y mínima carga cognitiva.
+Esta auditoría es independiente de los documentos maestros de Auditoría Pedagógica/Didáctica de los cursos y Auditoría Experta de Contenidos Técnicos. No dupliques la revisión profunda del contenido curricular, de actividades o de conocimientos técnicos del curso. Aquí el objeto auditado es el Portal Docente como herramienta de gestión, seguimiento, análisis y toma de decisiones.
+2. Contexto funcional mínimo a considerar
+Secciones principales: Curso y Planificación; Estudiantes; AE y OA; Cumplimiento; Reportes.
+El portal debe permitir trabajar con múltiples cursos, módulos, especialidades, estudiantes, OA, AE, actividades, evidencias e indicadores.
+Debe existir coherencia con el Portal Estudiante cuando ambos representen el mismo dato o estado.
+Las métricas no deben ser meramente decorativas: cada indicador debe tener definición, fuente, período, fórmula y utilidad.
+El diseño debe poder escalar a una operación real con muchos cursos y estudiantes sin perder legibilidad ni orientación.
+3. Principios obligatorios de auditoría
+No inventar hallazgos. Cada hallazgo debe estar respaldado por una pantalla, interacción, dato, comportamiento o evidencia observable.
+No asignar porcentajes arbitrarios. Todo porcentaje debe derivarse de criterios evaluados mediante una rúbrica explícita.
+Distinguir error funcional, problema UX, problema visual, problema de accesibilidad, problema de datos y oportunidad de mejora.
+No considerar aprobado un elemento solo porque existe; comprobar si es comprensible, usable, consistente y útil.
+Auditar tareas completas, no únicamente pantallas aisladas.
+Comprobar estados normales y casos extremos.
+Para cada problema, proponer una corrección concreta y verificable.
+Después de corregir, ejecutar una reauditoría y comparar antes versus después.
+4. Escala de evaluación y cálculo
+Evalúa cada criterio con la siguiente escala de cumplimiento:
+Puntuación
+Interpretación
+Definición
+0
+No cumple
+Ausente, incorrecto, inutilizable o genera un riesgo crítico.
+1
+Cumplimiento bajo
+Existe parcialmente, pero presenta fallas importantes.
+2
+Cumplimiento medio
+Funciona, aunque requiere mejoras relevantes.
+3
+Cumplimiento alto
+Cumple correctamente con observaciones menores.
+4
+Cumplimiento completo
+Cumple de forma clara, consistente, verificable y sin hallazgos relevantes.
+Fórmula por dimensión: (puntos obtenidos ÷ puntos máximos aplicables) × 100. Los criterios N/A se excluyen del denominador. El resultado global debe calcularse usando las ponderaciones definidas; nunca promediar porcentajes sin considerar sus pesos.
+5. Ponderación recomendada
+Dimensión
+Peso
+UX y usabilidad docente
+8%
+Arquitectura de información
+5%
+Flujos y eficiencia docente
+7%
+Analítica educativa y dashboard
+7%
+Accionabilidad pedagógica
+8%
+Trazabilidad e integridad del dato
+8%
+Visualización de datos
+5%
+Accesibilidad e inclusión
+6%
+UI y sistema de diseño
+4%
+QA funcional / Front-End
+8%
+Calidad y consistencia de datos
+6%
+Filtros y segmentación
+4%
+Alertas y priorización docente
+4%
+Reportabilidad
+3%
+Responsive
+3%
+Rendimiento percibido
+3%
+Privacidad, roles y seguridad funcional
+5%
+Errores y recuperación
+3%
+Escalabilidad
+2%
+Consistencia Portal Docente–Estudiante
+2%
+Onboarding, terminología y microcopy
+2%
+Total: 100 %. Ajusta un peso solo si el alcance real del portal lo justifica y documenta el cambio antes de comenzar la auditoría.
+6. Dimensiones de auditoría
+6.1 UX y usabilidad docente
+Claridad del objetivo de cada pantalla y facilidad para reconocer dónde se encuentra el usuario.
+Navegación predecible; rutas de retorno; persistencia del contexto de curso, módulo, período y estudiante.
+Visibilidad del estado activo en botones, pestañas, filtros y menú.
+Cantidad de clics, pasos redundantes y retrocesos necesarios para tareas frecuentes.
+Consistencia de patrones de interacción y prevención de desorientación.
+Capacidad de encontrar información sin depender de capacitación previa.
+6.2 Arquitectura de información
+Jerarquía entre Curso y Planificación, Estudiantes, AE/OA, Cumplimiento y Reportes.
+Agrupación lógica y ausencia de información duplicada o ubicada en secciones inesperadas.
+Relación visible entre curso, módulo, OA, AE, actividades, estudiantes, evidencias y resultados.
+Escaneabilidad de títulos, subtítulos, tarjetas, tablas y navegación.
+6.3 Flujos y eficiencia docente
+Auditar tareas completas desde el punto de entrada hasta su resultado.
+Medir tiempo, número de clics, errores, retrocesos y necesidad de ayuda.
+Detectar pasos sin valor, pantallas intermedias innecesarias y pérdida de contexto.
+Comparar el camino esperado con el camino real del usuario.
+6.4 Dashboard y analítica educativa
+Determinar si cada KPI responde una pregunta docente concreta.
+Revisar definición, unidad, período, población y fuente de cada indicador.
+Evitar métricas vanidosas o decorativas que no aportan interpretación.
+Comprobar que resúmenes y detalles sean coherentes y permitan profundizar.
+6.5 Accionabilidad pedagógica
+Para cada indicador preguntar: ¿qué puede comprender o revisar el docente gracias a este dato?
+Permitir progresión desde un resumen hacia AE/OA, estudiantes, actividades y evidencia relacionada.
+Diferenciar información descriptiva de información que requiere atención.
+No convertir alertas automáticas en diagnósticos pedagógicos; mostrar evidencia para que el docente interprete.
+6.6 Trazabilidad e integridad del dato
+Todo porcentaje o total relevante debe poder rastrearse hasta su origen.
+Comprobar fórmula, período, actividades incluidas/excluidas, estudiantes considerados y fecha de actualización.
+Verificar que el mismo dato no cambie injustificadamente entre pantallas.
+Señalar indicadores cuyo origen no pueda ser explicado o auditado.
+6.7 Visualización de datos
+Elegir el gráfico según la variable y la pregunta que se desea responder.
+Etiquetas, ejes, leyendas, unidades, escalas y períodos explícitos.
+Evitar gráficos circulares cuando las categorías no constituyen partes de un total.
+Evitar comparaciones visuales engañosas, ejes truncados injustificados o exceso de categorías.
+Proporcionar valores accesibles además del color.
+6.8 Accesibilidad e inclusión
+Contraste, tamaño de texto, foco visible, teclado, estados interactivos y orden lógico.
+No depender exclusivamente del color para transmitir significado.
+Legibilidad de tablas y gráficos; etiquetas y textos alternativos cuando corresponda.
+Reducir saturación visual y carga cognitiva; instrucciones explícitas.
+Comprobar compatibilidad razonable con criterios WCAG aplicables.
+6.9 UI y sistema de diseño
+Homogeneidad de tipografía, iconos, colores, espaciados, bordes, tarjetas, botones y tablas.
+Estados normal, hover, foco, activo, deshabilitado, cargando, éxito y error.
+Jerarquía visual coherente y uso consistente de componentes.
+Evitar elementos decorativos que compitan con información pedagógica.
+6.10 QA funcional / Front-End
+Probar todos los botones, enlaces, pestañas, filtros, buscadores, selectores, tablas y modales.
+Comprobar rutas, enlaces rotos, dobles clics, recargas, persistencia de filtros y navegación hacia atrás.
+Validar estados vacíos, cargas parciales, errores del servidor y datos faltantes.
+Comprobar que ningún control aparente ser interactivo si no tiene función.
+6.11 Calidad y consistencia de datos
+Totales, subtotales, porcentajes y denominadores coherentes.
+Ausencia de duplicados, registros huérfanos o estados incompatibles.
+Coherencia entre resumen, tabla de detalle, exportación y reporte.
+Tratamiento explícito de datos pendientes, no evaluados o sin evidencia.
+6.12 Filtros y segmentación
+Filtros útiles por curso, módulo, estudiante, OA/AE, período y estado cuando correspondan.
+Filtros visibles, reversibles y con estado aplicado claramente identificable.
+Resultados y totales recalculados de manera consistente.
+Evitar que un filtro permanezca ocultamente activo al cambiar de pantalla.
+6.13 Alertas y priorización docente
+Identificar situaciones que merecen revisión sin sustituir el juicio profesional del docente.
+Mostrar por qué se genera una alerta y qué evidencia la respalda.
+Evitar alertas excesivas, repetidas o sin jerarquía.
+Permitir llegar desde la alerta al contexto que la originó.
+6.14 Reportabilidad
+Reportes comprensibles fuera de la pantalla donde fueron generados.
+Identificación de curso, período, fecha, filtros y población analizada.
+Exportaciones coherentes con lo visualizado.
+Tablas y gráficos aptos para impresión o revisión posterior.
+6.15 Responsive
+Probar escritorio, notebook, tablet y móvil según alcance real.
+Tablas, menús, filtros, tarjetas y gráficos sin superposición ni recortes.
+Evitar pérdida de funciones críticas en anchos reducidos.
+Revisar targets táctiles y legibilidad.
+6.16 Rendimiento percibido
+Tiempo hasta contenido útil y respuesta de interacciones frecuentes.
+Indicadores de carga cuando la operación no es inmediata.
+Evitar bloqueos completos por cargar un gráfico o componente secundario.
+Detectar imágenes o recursos excesivamente pesados.
+6.17 Privacidad, roles y seguridad funcional
+Verificar que cada rol visualice únicamente información y acciones autorizadas.
+Probar acceso directo por URL a vistas restringidas.
+Revisar exposición innecesaria de datos personales.
+Confirmaciones para acciones sensibles y sesiones manejadas de forma coherente.
+6.18 Manejo de errores y recuperación
+Mensajes comprensibles, específicos y orientados a recuperación.
+No borrar trabajo o filtros ante fallas evitables.
+Permitir reintentar operaciones cuando corresponda.
+Diferenciar 'sin datos' de 'error al cargar datos'.
+6.19 Escalabilidad
+Simular muchos cursos, estudiantes, módulos, OA, AE y años académicos.
+Revisar paginación, búsqueda, filtros y densidad de tablas.
+Comprobar nombres largos y cantidades máximas razonables.
+Evitar diseños que funcionen solo con datos de demostración.
+6.20 Consistencia Portal Docente–Portal Estudiante
+Cuando ambos portales muestran el mismo concepto, verificar definición y estado.
+Progreso, actividades, módulos y evidencias deben corresponder cuando provengan de la misma fuente.
+Documentar diferencias intencionales de perspectiva o cálculo.
+6.21 Onboarding, terminología y microcopy
+Un docente nuevo debe comprender la navegación y los conceptos esenciales.
+Usar OA, AE, módulo, evidencia, logro, cumplimiento y progreso de forma consistente.
+Botones deben expresar la acción que ejecutan.
+Mensajes de error, ayudas y estados vacíos deben orientar el siguiente paso.
+6.22 Carga cognitiva
+Evitar demasiados KPI, colores, gráficos o llamadas de atención simultáneas.
+Priorizar información esencial y permitir profundización progresiva.
+Reducir memoria de trabajo necesaria para comparar pantallas.
+Usar agrupación, jerarquía y espacios para facilitar escaneo.
+6.23 Casos extremos
+Curso sin estudiantes; estudiante sin actividades; 0 % y 100 % de avance.
+AE/OA sin evidencia; datos incompletos; nombres muy largos; gran cantidad de registros.
+Sin conexión, error de servidor, respuesta lenta y gráfico sin información.
+Curso recién creado y períodos sin actividad.
+6.24 Comparabilidad temporal
+Comprobar que las comparaciones entre períodos utilicen la misma definición y población o lo indiquen claramente.
+No presentar evolución cuando los datos no son comparables.
+Explicitar fechas, cortes y cambios metodológicos.
+Permitir distinguir estado actual de tendencia histórica.
+6.25 Prevención de errores humanos
+Confirmaciones para acciones irreversibles.
+Validaciones antes de guardar o enviar.
+Prevención de doble acción y botones bloqueados durante procesos.
+Opciones de cancelar o deshacer cuando sea técnicamente razonable.
+7. Prueba de trazabilidad pedagógica
+Comprueba que el portal permita recorrer, cuando los datos existan, una cadena verificable como:
+CURSO → MÓDULO → OA → AE → ACTIVIDAD → ESTUDIANTE → EVIDENCIA → RESULTADO → REVISIÓN DOCENTE
+Selecciona al menos tres indicadores reales y documenta si el docente puede descender desde el resumen hasta la evidencia que explica el resultado. Registra cada ruptura de trazabilidad como hallazgo.
+8. Pruebas de tareas docentes
+Tarea
+Éxito
+Tiempo
+Clics
+Errores
+Ayuda
+Observaciones
+Identificar el curso y módulo actualmente visualizados.
+Sí/No
+___
+___
+___
+Sí/No
+Conocer el avance general del curso.
+Sí/No
+___
+___
+___
+Sí/No
+Encontrar los AE/OA asociados al módulo.
+Sí/No
+___
+___
+___
+Sí/No
+Identificar estudiantes con menor progreso o actividades pendientes.
+Sí/No
+___
+___
+___
+Sí/No
+Determinar por qué un estudiante aparece en esa situación.
+Sí/No
+___
+___
+___
+Sí/No
+Abrir la evidencia o detalle que sustenta el resultado.
+Sí/No
+___
+___
+___
+Sí/No
+Comparar el desempeño o progreso entre módulos/períodos cuando sea metodológicamente válido.
+Sí/No
+___
+___
+___
+Sí/No
+Aplicar un filtro y volver al estado general sin perder orientación.
+Sí/No
+___
+___
+___
+Sí/No
+Generar o revisar un reporte.
+Sí/No
+___
+___
+___
+Sí/No
+Cambiar a otro curso y comprobar que no queden filtros o datos residuales del curso anterior.
+Sí/No
+___
+___
+___
+Sí/No
+9. Preguntas que el Portal Docente debe poder responder
+¿Qué curso y período estoy revisando?
+¿Qué módulo está activo y cuál es su estado?
+¿Cuántos estudiantes estoy analizando?
+¿Cuál es el avance o cumplimiento y cómo se calculó?
+¿Qué OA y AE se están trabajando?
+¿Qué estudiantes requieren revisión y por qué?
+¿Qué actividades están pendientes, completadas o sin evidencia?
+¿Qué evidencia sustenta un porcentaje o estado?
+¿Existen cambios relevantes respecto de un período comparable?
+¿Qué información debería revisar primero?
+¿Puedo llegar desde un indicador agregado al detalle que lo explica?
+10. Severidad de hallazgos
+Nivel
+Criterio
+Tratamiento
+Crítico
+Impide una tarea esencial, compromete seguridad/privacidad o induce una interpretación gravemente incorrecta.
+Corregir antes de liberar.
+Alto
+Afecta significativamente una tarea frecuente, dato importante o accesibilidad.
+Prioridad inmediata.
+Medio
+Genera fricción, confusión o inconsistencia sin bloquear el objetivo principal.
+Planificar corrección.
+Bajo
+Detalle menor de consistencia, presentación o optimización.
+Corregir en mejora continua.
+11. Tabla obligatoria de hallazgos
+ID
+Pantalla
+Dimensión
+Hallazgo
+Evidencia
+Impacto
+Severidad
+Corrección
+Estado
+12. Informe de porcentaje de logro
+Genera una tabla de resultados. Para cada dimensión informa: criterios aplicables, puntos obtenidos, máximo, porcentaje, principales hallazgos y cantidad de hallazgos por severidad.
+Dimensión
+Aplicables
+Puntos
+Máx.
+Logro
+Hallazgos
+Prioridad
+UX y usabilidad docente
+Arquitectura de información
+Flujos y eficiencia docente
+Analítica educativa y dashboard
+Accionabilidad pedagógica
+Trazabilidad e integridad del dato
+Visualización de datos
+Accesibilidad e inclusión
+UI y sistema de diseño
+QA funcional / Front-End
+Calidad y consistencia de datos
+Filtros y segmentación
+Alertas y priorización docente
+Reportabilidad
+Responsive
+Rendimiento percibido
+Privacidad, roles y seguridad funcional
+Errores y recuperación
+Escalabilidad
+Consistencia Portal Docente–Estudiante
+Onboarding, terminología y microcopy
+13. Metodología de ejecución
+Inventariar pantallas, rutas, controles, tablas, gráficos, filtros y reportes.
+Definir datos y escenarios de prueba, incluyendo casos normales y extremos.
+Ejecutar auditoría heurística UX/UI y arquitectura de información.
+Ejecutar tareas docentes medibles y registrar tiempo, clics, errores y éxito.
+Auditar analítica, visualización, accionabilidad y trazabilidad de los indicadores.
+Auditar accesibilidad, responsive, estados y carga cognitiva.
+Ejecutar QA funcional de controles y navegación.
+Auditar calidad, consistencia y origen de los datos.
+Revisar roles, privacidad, seguridad funcional, errores y recuperación.
+Calcular puntuaciones mediante la rúbrica y ponderaciones predefinidas.
+Crear tabla priorizada de hallazgos y correcciones.
+Aplicar correcciones autorizadas sin alterar elementos fuera del alcance.
+Repetir exactamente las pruebas afectadas.
+Presentar comparación antes/después y porcentaje final.
+14. Instrucción de corrección posterior
+Una vez terminada la auditoría, corrige los hallazgos comenzando por severidad Crítica y Alta. No realices cambios no respaldados por un hallazgo. Para cada corrección registra: ID del hallazgo, cambio realizado, componente afectado, riesgo de regresión y prueba que debe repetirse. Conserva la estructura y funcionalidades correctas existentes. No rediseñes por preferencia estética personal.
+15. Reauditoría obligatoria
+Después de las correcciones, vuelve a ejecutar los mismos criterios y tareas. No declares un hallazgo resuelto solo porque se modificó el código o el diseño: debe superar la prueba que originalmente falló. Calcula nuevamente los porcentajes utilizando exactamente la misma rúbrica y ponderación, salvo que exista una justificación documentada.
+Dimensión
+Antes
+Después
+Variación
+Estado
+UX y usabilidad docente
+Arquitectura de información
+Flujos y eficiencia docente
+Analítica educativa y dashboard
+Accionabilidad pedagógica
+Trazabilidad e integridad del dato
+Visualización de datos
+Accesibilidad e inclusión
+UI y sistema de diseño
+QA funcional / Front-End
+Calidad y consistencia de datos
+Filtros y segmentación
+Alertas y priorización docente
+Reportabilidad
+Responsive
+Rendimiento percibido
+Privacidad, roles y seguridad funcional
+Errores y recuperación
+Escalabilidad
+Consistencia Portal Docente–Estudiante
+Onboarding, terminología y microcopy
+16. Formato obligatorio de salida del auditor
+Resumen ejecutivo: alcance, principales riesgos y estado general.
+Tabla de porcentaje de logro por dimensión y cálculo global.
+Hallazgos críticos y altos primero.
+Tabla completa de hallazgos con evidencia y corrección propuesta.
+Resultados de pruebas de tareas docentes.
+Resultados de trazabilidad de indicadores.
+Resultados de accesibilidad, responsive y QA funcional.
+Casos extremos fallidos.
+Plan de corrección priorizado.
+Reauditoría con comparación antes/después.
+Pendientes o elementos que no pudieron verificarse, indicando la causa.
+17. Prompt maestro listo para ejecutar
+AUDITA INTEGRALMENTE EL PORTAL DOCENTE DE AULA TP.Actúa como un equipo auditor experto en UX/UI, arquitectura de información, tecnología educativa, analítica del aprendizaje, visualización de datos, accesibilidad, QA front-end, calidad de datos, seguridad funcional y gestión pedagógica docente.Aplica íntegramente la metodología, rúbrica, ponderaciones, dimensiones, pruebas de tareas, trazabilidad, severidades, tablas y criterios establecidos en este documento.REGLAS:1. No inventes hallazgos ni porcentajes.2. Cada hallazgo debe tener evidencia observable.3. Calcula el porcentaje únicamente desde criterios puntuados 0–4; excluye N/A.4. Usa las ponderaciones definidas para el resultado global.5. Audita tareas completas y mide éxito, tiempo, clics, errores y ayuda requerida.6. Comprueba la trazabilidad Curso → Módulo → OA → AE → Actividad → Estudiante → Evidencia → Resultado → Revisión docente cuando corresponda.7. Para cada indicador determina su definición, fórmula, período, población, fuente, trazabilidad y utilidad.8. Comprueba si el dato es accionable para el docente sin sustituir su juicio profesional.9. Prueba estados normales, vacíos, errores, datos incompletos y casos extremos.10. Audita todos los controles funcionales y sus estados.11. Revisa accesibilidad, responsive, rendimiento percibido, privacidad, roles y recuperación ante errores.12. Mantén esta auditoría separada de la auditoría pedagógica/didáctica de cursos y de la auditoría técnica de contenidos.13. Entrega primero los hallazgos; después propone correcciones concretas.14. Corrige solo lo respaldado por hallazgos autorizados.15. Reaudita después de corregir utilizando exactamente la misma metodología.16. Entrega una tabla Antes/Después y explica qué cambió.OBJETIVO FINAL:Determinar si el Portal Docente permite al profesor comprender rápidamente qué está ocurriendo en sus cursos, localizar evidencia, interpretar correctamente los datos, identificar qué requiere revisión, navegar sin desorientarse y ejecutar sus tareas de forma eficiente, accesible, segura y verificable.No consideres que una pantalla está correcta solo porque funciona o se ve moderna. Debe demostrar utilidad, comprensión, consistencia, trazabilidad y eficiencia docente.
+18. Criterio de cierre
+La auditoría termina únicamente cuando: (a) se han evaluado todos los criterios aplicables; (b) los porcentajes pueden reproducirse desde la rúbrica; (c) cada hallazgo posee evidencia; (d) las correcciones ejecutadas fueron reprobadas mediante la misma prueba; y (e) se documentaron claramente los elementos pendientes o no verificables.

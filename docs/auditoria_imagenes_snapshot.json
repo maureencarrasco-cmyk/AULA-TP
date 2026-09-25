@@ -1,0 +1,24 @@
+{
+  "inicial": {
+    "referencias": 29085,
+    "archivo_presente_pct": 11.2,
+    "etiquetados_3d_sin_verificar": 2852,
+    "apto_pedagogicamente_pct": 0.0,
+    "tecnicamente_validado_pct": 0.0,
+    "ia_revisado_pct": 0.0,
+    "archivos": 3258
+  },
+  "protocolo": {
+    "inventariados_pct": 100.0,
+    "archivo_o_interactivo_pct": 12.2,
+    "alt_o_contingencia_pct": 99.5,
+    "oa_ae_pct": 100.0,
+    "proposito_y_accion_pct": 100.0,
+    "videos_con_archivo": 24,
+    "videos_en_inventario": 24,
+    "3d_o_simulacion": 9,
+    "contingencia_textual": 25826,
+    "apto_pedagogicamente_pct": 0.0,
+    "tecnicamente_validado_pct": 0.0
+  }
+}

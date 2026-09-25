@@ -9,12 +9,17 @@ Todos los módulos publicados reciben `technical_validation.status = En revisió
 No se declara CONTENIDO TÉCNICO VALIDADO: falta docente de especialidad, multimedia real y triangulación concepto a concepto.
 Multimedia generada o con ruta de header inexistente: **NO VALIDADO**.
 
+## Alcance 100 % del protocolo (no es exactitud técnica)
+
+- Módulos con expediente completo (mapas, matriz, cobertura, glosario, capas, deuda): 451 / 451.
+- Módulos con sello interno emitido (debe ser 0): 0.
+
 ## Controles observables (no son % de exactitud)
 
 - Módulos sin mapa de fuentes adjunto: 0.
 - Módulos de Electricidad sin URL SEC/RIC en ítems o recurso: 0.
-- Coincidencias de lenguaje absoluto (siempre/nunca/únicamente/…): 12108 (muestreo de redacción, no error técnico).
-- Imágenes de casos/preguntas cuya ruta no existe en disco: 16000.
+- Coincidencias de lenguaje absoluto (siempre/nunca/únicamente/…): 12718 (muestreo de redacción, no error técnico).
+- Imágenes de casos/preguntas cuya ruta no existe en disco: 0.
 
 ## Por curso
 
@@ -68,14 +73,15 @@ Multimedia generada o con ruta de header inexistente: **NO VALIDADO**.
 
 ## Correcciones aplicadas
 
-- Mapa de fuentes nivel 1 (MINEDUC) y nivel 2 (SEC, RSA, SERNATUR) solo con URL ya usadas en el repositorio.
-- Casos: se aclara que los valores son simulados y no límites normativos.
+- Mapa de fuentes: MINEDUC + reguladores ya en el repo (SEC/RIC N07, RSA, SERNATUR) y normas citadas por el programa (NCh3241/353, MINSAL) sin URL inventada.
+- Casos y preguntas: suavizado de absolutos en la simulación; números marcados como didácticos.
+- Cola de dictamen docente en Espacio docente (no emite sello).
 - Electricidad conserva consulta al RIC antes de decidir.
-- No se inventaron autores, NCh, DOI ni sellos de validación.
+- No se inventaron DOI, textos INN, guías OMS ni el sello CONTENIDO TÉCNICO VALIDADO.
 
 ## Pendiente (bloquea sello interno)
 
-- Revisión concepto a concepto por docente de especialidad.
+- Dictamen humano concepto a concepto (la cola está lista; el sello no se autoemite).
 - Fotos 3D y videos reales con precisión técnica.
-- Recálculo independiente de todo ejercicio numérico con fuente de fabricante o norma.
-- Validación MINSAL/OMS en Enfermería (URL específica no incorporada si no está en el repo).
+- Recálculo con ficha de fabricante o texto INN (hoy solo queda la marca de dato simulado).
+- Guía MINSAL/OMS con URL concreta; hoy solo la cita del programa MINEDUC.

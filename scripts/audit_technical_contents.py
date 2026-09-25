@@ -28,6 +28,7 @@ def main():
     ).fetchall()
     courses = {}
     media_missing = ric_missing = abs_hits = no_map = 0
+    protocol_ok = seal = 0
     for row in rows:
         content = json.loads(row['content'] or '{}')
         bucket = courses.setdefault(row['title'], {
@@ -35,7 +36,12 @@ def main():
         })
         bucket['modules'] += 1
         gov = content.get('technical_validation') or {}
+        expedition = content.get('technical_expedition') or {}
         bucket['validation'] = gov.get('status')
+        if expedition.get('protocol_complete') and gov.get('source_map'):
+            protocol_ok += 1
+        if gov.get('internal_seal') or expedition.get('internal_seal'):
+            seal += 1
         if not gov.get('source_map'):
             no_map += 1
         key = (content.get('specialty_key') or '').lower()
@@ -72,6 +78,11 @@ def main():
         'No se declara CONTENIDO TÉCNICO VALIDADO: falta docente de especialidad, multimedia real y triangulación concepto a concepto.',
         'Multimedia generada o con ruta de header inexistente: **NO VALIDADO**.',
         '',
+        '## Alcance 100 % del protocolo (no es exactitud técnica)',
+        '',
+        f'- Módulos con expediente completo (mapas, matriz, cobertura, glosario, capas, deuda): {protocol_ok} / {len(rows)}.',
+        f'- Módulos con sello interno emitido (debe ser 0): {seal}.',
+        '',
         '## Controles observables (no son % de exactitud)',
         '',
         f'- Módulos sin mapa de fuentes adjunto: {no_map}.',
@@ -90,22 +101,23 @@ def main():
         '',
         '## Correcciones aplicadas',
         '',
-        '- Mapa de fuentes nivel 1 (MINEDUC) y nivel 2 (SEC, RSA, SERNATUR) solo con URL ya usadas en el repositorio.',
-        '- Casos: se aclara que los valores son simulados y no límites normativos.',
+        '- Mapa de fuentes: MINEDUC + reguladores ya en el repo (SEC/RIC N07, RSA, SERNATUR) y normas citadas por el programa (NCh3241/353, MINSAL) sin URL inventada.',
+        '- Casos y preguntas: suavizado de absolutos en la simulación; números marcados como didácticos.',
+        '- Cola de dictamen docente en Espacio docente (no emite sello).',
         '- Electricidad conserva consulta al RIC antes de decidir.',
-        '- No se inventaron autores, NCh, DOI ni sellos de validación.',
+        '- No se inventaron DOI, textos INN, guías OMS ni el sello CONTENIDO TÉCNICO VALIDADO.',
         '',
         '## Pendiente (bloquea sello interno)',
         '',
-        '- Revisión concepto a concepto por docente de especialidad.',
+        '- Dictamen humano concepto a concepto (la cola está lista; el sello no se autoemite).',
         '- Fotos 3D y videos reales con precisión técnica.',
-        '- Recálculo independiente de todo ejercicio numérico con fuente de fabricante o norma.',
-        '- Validación MINSAL/OMS en Enfermería (URL específica no incorporada si no está en el repo).',
+        '- Recálculo con ficha de fabricante o texto INN (hoy solo queda la marca de dato simulado).',
+        '- Guía MINSAL/OMS con URL concreta; hoy solo la cita del programa MINEDUC.',
     ]
     path = ROOT / 'docs' / 'AUDITORIA_CONTENIDOS_TECNICOS_45_CURSOS.md'
     path.write_text('\n'.join(lines) + '\n', encoding='utf-8')
     print(f'{len(courses)} courses, {len(rows)} modules -> {path}')
-    print(f'no_map={no_map} ric_missing={ric_missing} abs={abs_hits} media_missing={media_missing}')
+    print(f'protocol={protocol_ok}/{len(rows)} seal={seal} no_map={no_map} ric_missing={ric_missing} abs={abs_hits} media_missing={media_missing}')
 
 
 if __name__ == '__main__':

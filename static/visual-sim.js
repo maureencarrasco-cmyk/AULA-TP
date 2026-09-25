@@ -70,15 +70,20 @@
 
   function videoFigure(exp) {
     if (!exp?.video) return '';
+    const proto=exp.video_protocol||{};
     const vtt = exp.vtt ? `<track kind="subtitles" src="${hx(exp.vtt)}" srclang="es" label="Español de Chile" default>` : '';
-    return `<figure class="vis-fig vis-video" data-narrate="1">
+    return `<div class="vis-video-protocol">
+      ${proto.before||proto.observation_prompt?`<p class="vis-video-before"><b>Antes:</b> ${hx(proto.observation_prompt||proto.before)}</p>`:''}
+      <figure class="vis-fig vis-video" data-narrate="1">
       <video controls playsinline controlslist="nodownload" src="${hx(exp.video)}">${vtt}</video>
       <div class="vis-voice">
         <button type="button" class="outline" data-voice="toggle" aria-pressed="true">Voz guía: encendida</button>
         <span class="vis-voice-cue" aria-live="polite"></span>
       </div>
-      <figcaption class="act-media-caption vis-cap">${hx(exp.caption || 'Secuencia del procedimiento. Play o pausa cuando quieras. La voz de Chile te guía con calma.')}</figcaption>
-    </figure>`;
+      <figcaption class="act-media-caption vis-cap">${hx(exp.caption || proto.during || 'Secuencia del procedimiento. Play o pausa cuando quieras.')}</figcaption>
+    </figure>
+      ${proto.after?`<p class="vis-video-after"><b>Después:</b> ${hx(proto.after)}</p>`:''}
+    </div>`;
   }
 
   function mediaFor(exp, opts) {

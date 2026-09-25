@@ -28,6 +28,8 @@ def create_app(test_config=None):
         CREATE TABLE IF NOT EXISTS modules(id INTEGER PRIMARY KEY,course_id INTEGER REFERENCES courses(id),title TEXT NOT NULL,position INTEGER NOT NULL,published INTEGER DEFAULT 0,content TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS enrollments(user_id INTEGER REFERENCES users(id),course_id INTEGER REFERENCES courses(id),PRIMARY KEY(user_id,course_id));
         CREATE TABLE IF NOT EXISTS progress(user_id INTEGER REFERENCES users(id),module_id INTEGER REFERENCES modules(id),state TEXT NOT NULL,updated TEXT DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(user_id,module_id));
+        CREATE TABLE IF NOT EXISTS content_incidents(id INTEGER PRIMARY KEY,user_id INTEGER REFERENCES users(id),module_id INTEGER REFERENCES modules(id),station INTEGER,claim TEXT NOT NULL,note TEXT NOT NULL,created TEXT DEFAULT CURRENT_TIMESTAMP);
+        CREATE TABLE IF NOT EXISTS specialist_reviews(id INTEGER PRIMARY KEY,module_id INTEGER REFERENCES modules(id),teacher_id INTEGER REFERENCES users(id),verdict TEXT NOT NULL,note TEXT NOT NULL,created TEXT DEFAULT CURRENT_TIMESTAMP);
         ''')
         if not con.execute('SELECT 1 FROM users').fetchone():
             for u,n,p,r in [('estudiante','Estudiante Demo','AulaTP2026!','student'),('docente','Docente Demo','DocenteTP2026!','teacher')]:
@@ -129,6 +131,8 @@ def create_app(test_config=None):
                         mod['official_hp']=source.get('official_hp')
                         item.setdefault('scope',source.get('scope'))
                         item.setdefault('pdf',source.get('pdf'))
+                    if u['role']=='teacher':
+                        mod['aes']=[{'title':(a or {}).get('title') or '','code':(a or {}).get('official_code') or (a or {}).get('code') or ''} for a in (raw_content.get('aes') or [])]
                     plan=None if source else module_plan(m['position'])
                     if plan:mod.update(plan)
                     pack=(raw_content.get('encargos') or {}) if source else encargos_for(m['position'])
@@ -168,6 +172,21 @@ def create_app(test_config=None):
         if u['role']=='student':c=strip_for_student(c)
         m.update(content=c,state=s,completed=completed(s,c),stations=STATIONS,steps=STEPS,planning=active_plan or c.get('planning') or module_plan(m['position']))
         return jsonify(m)
+    @app.post('/api/modules/<int:mid>/content-report')
+    @require()
+    def content_report(mid):
+        m,err=accessible(mid)
+        if err:return err
+        b=body();note=b.get('note');claim=str(b.get('claim') or 'afirmacion')[:200]
+        if not text_valid(note,20):return fail('Describe el error con al menos 20 caracteres.')
+        try:station=int(b.get('station') or 0)
+        except (TypeError,ValueError):station=0
+        with db() as con:
+            con.execute(
+                'INSERT INTO content_incidents(user_id,module_id,station,claim,note) VALUES(?,?,?,?,?)',
+                (session['uid'],mid,station,claim,note.strip()[:2000]),
+            )
+        return jsonify(ok=True)
     @app.get('/api/progress')
     @require('student')
     def student_progress():
@@ -307,10 +326,39 @@ def create_app(test_config=None):
         with db() as con:
             users=[dict(r) for r in con.execute("SELECT id,username,name FROM users WHERE role='student'")]
             records=[]
-            for r in con.execute('SELECT p.*,u.name,m.title,m.content AS module_content FROM progress p JOIN users u ON u.id=p.user_id JOIN modules m ON m.id=p.module_id'):
+            for r in con.execute('SELECT p.*,u.name,m.title,m.course_id,m.position,c.title AS course_title,m.content AS module_content FROM progress p JOIN users u ON u.id=p.user_id JOIN modules m ON m.id=p.module_id JOIN courses c ON c.id=m.course_id'):
                 x=dict(r);module_content=json.loads(x.pop('module_content'));x['rubric']=module_content.get('rubric',DEFAULT_CONTENT['rubric']);x['state']=json.loads(x['state']);x['percent']=sum(completed(x['state'],module_content))*20;records.append(x)
             enrollments=[dict(r) for r in con.execute('SELECT * FROM enrollments')]
-        return jsonify(users=users,records=records,enrollments=enrollments)
+            incidents=[dict(r) for r in con.execute(
+                'SELECT i.id,i.module_id,i.station,i.claim,i.note,i.created,u.name,m.title FROM content_incidents i JOIN users u ON u.id=i.user_id JOIN modules m ON m.id=i.module_id ORDER BY i.id DESC LIMIT 200'
+            )]
+            reviews=[dict(r) for r in con.execute(
+                'SELECT s.id,s.module_id,s.verdict,s.note,s.created,u.name,m.title FROM specialist_reviews s JOIN users u ON u.id=s.teacher_id JOIN modules m ON m.id=s.module_id ORDER BY s.id DESC LIMIT 200'
+            )]
+            health=[]
+            for r in con.execute('SELECT c.title AS course, m.id, m.title, m.content FROM modules m JOIN courses c ON c.id=m.course_id WHERE m.published=1 ORDER BY c.id,m.position,m.id'):
+                try:content=json.loads(r['content'] or '{}')
+                except Exception:content={}
+                exp=content.get('technical_expedition') or {}
+                gov=content.get('technical_validation') or {}
+                health.append({
+                    'module_id':r['id'],'course':r['course'],'title':r['title'],
+                    'status':gov.get('status') or 'sin marca',
+                    'protocol_complete':bool(exp.get('protocol_complete')),
+                    'seal':gov.get('internal_seal'),
+                    'media':exp.get('media') or {},
+                    'debt':(exp.get('debt') or [])[:3],
+                })
+        kpi={
+            'avance_porcentaje':{
+                'pregunta':'¿Cuál es el avance de cada estudiante en el módulo?',
+                'formula':'estaciones_completadas / 5 × 100',
+                'fuente':'progress.state y la misma función completed() del portal estudiante',
+                'periodo':'estado actual; no hay serie histórica comparable',
+                'poblacion':'estudiantes con al menos un registro de progreso',
+            }
+        }
+        return jsonify(users=users,records=records,enrollments=enrollments,incidents=incidents,specialist_reviews=reviews,content_health=health,kpi=kpi)
     @app.post('/api/teacher/users')
     @require('teacher')
     def adduser():
@@ -417,15 +465,36 @@ def create_app(test_config=None):
             s['exam']['review']={'points':points,'score':sum(points),'feedback':b['feedback'].strip(),'teacher_id':session['uid']}
             con.execute('UPDATE progress SET state=?,updated=CURRENT_TIMESTAMP WHERE user_id=? AND module_id=?',(json.dumps(s,ensure_ascii=False),b['user_id'],b['module_id']))
         return jsonify(ok=True)
+    @app.post('/api/teacher/specialist-review')
+    @require('teacher')
+    def specialist_review():
+        b=body();note=b.get('note');verdict=str(b.get('verdict') or '')
+        allowed={'Correcto con observaciones','Requiere corrección','Evidencia insuficiente'}
+        if verdict not in allowed or not text_valid(note,20):return fail('Elige un dictamen y escribe al menos 20 caracteres.')
+        mid=b.get('module_id')
+        with db() as con:
+            if not con.execute('SELECT 1 FROM modules WHERE id=?',(mid,)).fetchone():return fail('Módulo inexistente.',404)
+            con.execute(
+                'INSERT INTO specialist_reviews(module_id,teacher_id,verdict,note) VALUES(?,?,?,?)',
+                (mid,session['uid'],verdict,note.strip()[:2000]),
+            )
+        return jsonify(ok=True,internal_seal=None)
     @app.get('/api/teacher/export.csv')
     @require('teacher')
     def export():
-        stream=io.StringIO();w=csv.writer(stream);w.writerow(['Estudiante','Módulo','Avance %','Selección /25','Desarrollo /25','Total /50','Estado revisión'])
+        from datetime import date as date_cls
+        stream=io.StringIO();w=csv.writer(stream)
+        w.writerow(['Aula TP Chile · exportación docente'])
+        w.writerow(['Fecha',date_cls.today().isoformat()])
+        w.writerow(['Fórmula de avance %','Estaciones completadas / 5 × 100 (misma definición que el portal estudiante)'])
+        w.writerow(['Población','Estudiantes con al menos un registro de progreso'])
+        w.writerow([])
+        w.writerow(['Estudiante','Curso','Módulo','Avance %','Selección','Desarrollo /25','Estado revisión'])
         with db() as con:
-            for r in con.execute('SELECT u.name,m.title,m.content,p.state FROM progress p JOIN users u ON u.id=p.user_id JOIN modules m ON m.id=p.module_id'):
+            for r in con.execute('SELECT u.name,c.title AS course,m.title,m.content,p.state FROM progress p JOIN users u ON u.id=p.user_id JOIN modules m ON m.id=p.module_id JOIN courses c ON c.id=m.course_id ORDER BY c.id,m.position,u.name'):
                 s=json.loads(r['state']);content=json.loads(r['content']);ex=s['exam'];rev=ex and ex['review']
-                safe=lambda v:"'"+v if v.startswith(('=','+','-','@','\t','\r')) else v
-                w.writerow([safe(r['name']),safe(r['title']),sum(completed(s,content))*20,ex['score'] if ex else '',rev['score'] if rev else '',ex['score']+rev['score'] if rev else '', 'Revisado' if rev else 'Pendiente'])
+                safe=lambda v:"'"+v if isinstance(v,str) and v.startswith(('=','+','-','@','\t','\r')) else v
+                w.writerow([safe(r['name']),safe(r['course']),safe(r['title']),sum(completed(s,content))*20,ex['score'] if ex else '',rev['score'] if rev else '', 'Revisado' if rev else ('Evaluación pendiente de revisión' if ex else 'Sin evaluación')])
         return Response('\ufeff'+stream.getvalue(),mimetype='text/csv',headers={'Content-Disposition':'attachment; filename=avance-aula-tp.csv'})
     @app.errorhandler(413)
     def too_big(e):return fail('El contenido excede el límite de 2 MB.',413)

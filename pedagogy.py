@@ -930,6 +930,29 @@ def strip_for_student(content):
             exp.pop('answer', None)
             exp.pop('hints', None)
     c.pop('media_audit', None)
+    expedition = c.get('technical_expedition')
+    if isinstance(expedition, dict):
+        c['technical_expedition'] = {
+            'status': expedition.get('status'),
+            'internal_seal': None,
+            'protocol_complete': expedition.get('protocol_complete'),
+            'protocol_scope': expedition.get('protocol_scope'),
+            'layers': expedition.get('layers'),
+            'glossary': expedition.get('glossary'),
+            'debt': expedition.get('debt'),
+            'media': expedition.get('media'),
+            'source_map': expedition.get('source_map'),
+            'coverage': expedition.get('coverage'),
+        }
+    inventory = c.get('media_inventory')
+    if isinstance(inventory, dict):
+        c['media_inventory'] = {
+            'protocol_version': inventory.get('protocol_version'),
+            'indicators': inventory.get('indicators'),
+            'scope': inventory.get('scope'),
+            'internal_seal': None,
+            'apto_pedagogicamente': 0,
+        }
     return c
 
 
@@ -1057,17 +1080,17 @@ def enrich(content, module_id=1):
     primary_criterion = (primary_ae.get('criteria') or ['Reconocer y aplicar el procedimiento técnico']) [0]
     media_root = f'/static/headers/{media_key}'
     c['media_resources'] = [
-        {'kind': '3d', 'image': f'{media_root}/e2.png?v=3', 'title': 'Identifica componentes y relaciones',
+        {'kind': 'ilustracion-2d', 'image': f'{media_root}/e2.png?v=3', 'title': 'Identifica componentes y relaciones',
          'oa': (primary_ae.get('oa') or primary_ae.get('oa_code') or 'OA del módulo'), 'ae': primary_ae.get('title', ''),
          'content': primary_criterion, 'activity': 'Observa e identifica antes de avanzar.',
          'purpose': 'Distinguir partes, señales y condiciones relevantes del procedimiento.',
          'observe': 'Qué componente interviene, qué función cumple y qué evidencia lo demuestra.'},
-        {'kind': '3d', 'image': f'{media_root}/e3.png?v=3', 'title': 'Analiza una situación de trabajo',
+        {'kind': 'ilustracion-2d', 'image': f'{media_root}/e3.png?v=3', 'title': 'Analiza una situación de trabajo',
          'oa': (primary_ae.get('oa') or primary_ae.get('oa_code') or 'OA del módulo'), 'ae': primary_ae.get('title', ''),
          'content': primary_criterion, 'activity': 'Relaciona la representación con el caso y decide.',
          'purpose': 'Comparar una condición segura con una decisión técnicamente fundada.',
          'observe': 'Qué dato cambia la decisión y qué riesgo o consecuencia debes prevenir.'},
-        {'kind': '3d', 'image': f'{media_root}/e4.png?v=3', 'title': 'Verifica la aplicación',
+        {'kind': 'ilustracion-2d', 'image': f'{media_root}/e4.png?v=3', 'title': 'Verifica la aplicación',
          'oa': (primary_ae.get('oa') or primary_ae.get('oa_code') or 'OA del módulo'), 'ae': primary_ae.get('title', ''),
          'content': primary_criterion, 'activity': 'Aplica el criterio y comprueba tu respuesta.',
          'purpose': 'Verificar el resultado del procedimiento usando evidencia observable.',
@@ -1207,7 +1230,8 @@ def enrich(content, module_id=1):
         ]
     c['pedagogy_version'] = 'mineduc-3medio-x5-1'
     c['media_audit'] = [] if draft else media_audit(c, mid)
-    return _scrub_inventes(c)
+    from content_assurance import apply_content_assurance
+    return apply_content_assurance(_scrub_inventes(c), mid)
 
 
 def _scrub_inventes(value):
