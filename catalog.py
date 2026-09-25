@@ -338,16 +338,16 @@ def upgrade_catalog(con):
     install_metallurgy_course(con)
     from mining_catalog import install_mining_course
     install_mining_course(con)
-    from administration_catalog import install_administration_drafts
-    install_administration_drafts(con)
-    from agriculture_catalog import install_agriculture_drafts
-    install_agriculture_drafts(con)
-    from construction_catalog import install_construction_drafts
-    install_construction_drafts(con)
-    from chemical_industry_catalog import install_chemical_industry_drafts
-    install_chemical_industry_drafts(con)
-    from mechanical_industry_catalog import install_mechanical_industry_drafts
-    install_mechanical_industry_drafts(con)
+    from administration_catalog import install_administration_catalog
+    install_administration_catalog(con)
+    from agriculture_catalog import install_agriculture_courses
+    install_agriculture_courses(con)
+    from construction_catalog import install_construction_courses
+    install_construction_courses(con)
+    from chemical_industry_catalog import install_chemical_industry_courses
+    install_chemical_industry_courses(con)
+    from mechanical_industry_catalog import install_mechanical_industry_courses
+    install_mechanical_industry_courses(con)
     from aircraft_catalog import install_aircraft_course
     install_aircraft_course(con)
     from refrigeration_fourth import install_refrigeration_fourth

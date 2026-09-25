@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from tp_draft_builder import build_draft, install_draft
+from tp_draft_builder import build_draft, install_course, install_draft
 
 
 ROOT = Path(__file__).resolve().parent
@@ -61,3 +61,25 @@ def install_administration_drafts(con):
             con.execute('INSERT OR IGNORE INTO enrollments(user_id,course_id) VALUES(?,?)',
                         (student['id'], course_id))
         install_draft(con, title, draft_modules(key))
+
+
+def install_administration_catalog(con):
+    """Install both reviewed Administration mentions as complete courses."""
+    generic = con.execute("SELECT id FROM courses WHERE title='Administración'").fetchone()
+    if generic and not con.execute('SELECT 1 FROM modules WHERE course_id=?', (generic['id'],)).fetchone():
+        con.execute("UPDATE courses SET title=?,specialty=? WHERE id=?",
+                    (TRACKS[0][1], TRACKS[0][1], generic['id']))
+    student = con.execute("SELECT id FROM users WHERE role='student' ORDER BY id LIMIT 1").fetchone()
+    for key, title, _, _ in TRACKS:
+        course = con.execute('SELECT id FROM courses WHERE title=?', (title,)).fetchone()
+        if not course:
+            course_id = con.execute('INSERT INTO courses(title,specialty,level) VALUES(?,?,?)',
+                                    (title, title, '3° y 4° medio')).lastrowid
+        else:
+            course_id = course['id']
+        if student:
+            con.execute('INSERT OR IGNORE INTO enrollments(user_id,course_id) VALUES(?,?)',
+                        (student['id'], course_id))
+        version_slug = 'administracion-logistica' if key == 'logistica' else 'administracion-recursos-humanos'
+        install_course(con, title, draft_modules(key),
+                       f'{version_slug}-mineduc-draft-v1', f'{version_slug}-mineduc-v1')

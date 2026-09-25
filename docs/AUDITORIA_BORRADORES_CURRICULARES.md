@@ -1,31 +1,16 @@
 # Estado verificable de cursos en borrador
 
-Fecha: 2026-09-25. Alcance: 13 cursos y 140 módulos no publicados.
+Fecha: 2026-09-25. Alcance: 0 cursos y 0 módulos no publicados.
 Esta tabla mide presencia de datos y archivos locales, no calidad pedagógica ni autorización para publicar.
 
 | Curso | Módulos | PDF y página oficial | OA explícito | AE con criterios | Visuales 3D reales | Imágenes de evaluación reales | Videos reales |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Administración, mención Logística | 11 | 11/11 | 8/11 | 11/11 | 0/33 mínimo | 0/440 | 0 |
-| Administración, mención Recursos Humanos | 11 | 11/11 | 8/11 | 11/11 | 0/33 mínimo | 0/440 | 0 |
-| Agropecuaria, mención Agricultura | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
-| Agropecuaria, mención Pecuaria | 11 | 11/11 | 10/11 | 11/11 | 0/33 mínimo | 0/440 | 0 |
-| Agropecuaria, mención Vitivinícola | 11 | 11/11 | 10/11 | 11/11 | 0/33 mínimo | 0/440 | 0 |
-| Construcción, mención Edificación | 12 | 12/12 | 11/12 | 12/12 | 0/36 mínimo | 0/480 | 0 |
-| Construcción, mención Terminaciones de la Construcción | 12 | 12/12 | 11/12 | 12/12 | 0/36 mínimo | 0/480 | 0 |
-| Construcción, mención Obras Viales e Infraestructura | 13 | 13/13 | 12/13 | 13/13 | 0/39 mínimo | 0/520 | 0 |
-| Química Industrial, mención Laboratorio Químico | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
-| Química Industrial, mención Planta Química | 9 | 9/9 | 8/9 | 9/9 | 0/27 mínimo | 0/360 | 0 |
-| Mecánica Industrial, mención Máquinas-Herramientas | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
-| Mecánica Industrial, mención Matricería | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
-| Mecánica Industrial, mención Mantenimiento Electromecánico | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
 
 ## Resultado y límites
 
-- PDF local y página curricular declarada: 216/216 módulos.
-- OA explícito en el registro: 123/140; los módulos sin OA requieren revisar el alcance del programa antes de asignarles uno.
-- AE con código y criterios: 140/140, con 462 AE registrados.
-- Imágenes 3D verificadas: 0/420 del mínimo solicitado.
-- Imágenes reales en casos y evaluación: 0/5600.
+- Todos los cursos incluidos en esta auditoría ya fueron trasladados al catálogo publicado.
+- La trazabilidad curricular, los criterios y la idempotencia se verifican ahora en las pruebas de cada especialidad.
+- Los recursos visuales especializados continúan como una línea de mejora independiente del estado de publicación curricular.
 - Videos locales verificados: 0. La pertinencia se debe decidir por módulo; cero videos no demuestra que ninguno corresponda.
 - Estímulos distintos por banco de 25 preguntas: entre 1 y 1. La repetición requiere rediseño y revisión disciplinar.
 - No se ha certificado en estos borradores la exactitud técnica de cada decisión, la pertinencia de cada medio, accesibilidad con usuarios ni la experiencia completa de las cinco estaciones.

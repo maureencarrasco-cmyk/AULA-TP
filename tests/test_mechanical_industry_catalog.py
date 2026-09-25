@@ -2,7 +2,8 @@ import json
 import sqlite3
 import unittest
 
-from mechanical_industry_catalog import OFFICIAL, draft_modules, install_mechanical_industry_drafts
+from mechanical_industry_catalog import OFFICIAL, TRACKS, draft_modules, install_mechanical_industry_courses, install_mechanical_industry_drafts
+from pedagogy import publication_gaps
 
 
 class MechanicalIndustryCatalogTests(unittest.TestCase):
@@ -49,6 +50,29 @@ class MechanicalIndustryCatalogTests(unittest.TestCase):
             self.assertEqual(10, len(rows))
             self.assertTrue(all(not row['published'] for row in rows))
         self.assertEqual(3, con.execute('SELECT COUNT(*) FROM enrollments').fetchone()[0])
+        con.close()
+
+    def test_three_mentions_are_publishable_and_idempotent(self):
+        con = sqlite3.connect(':memory:')
+        con.row_factory = sqlite3.Row
+        con.executescript('''
+            CREATE TABLE users(id INTEGER PRIMARY KEY,role TEXT);
+            CREATE TABLE courses(id INTEGER PRIMARY KEY,title TEXT,specialty TEXT,level TEXT);
+            CREATE TABLE enrollments(user_id INTEGER,course_id INTEGER,UNIQUE(user_id,course_id));
+            CREATE TABLE modules(id INTEGER PRIMARY KEY,course_id INTEGER,title TEXT,
+                position INTEGER,published INTEGER,content TEXT);
+            INSERT INTO users VALUES(1,'student');
+        ''')
+        install_mechanical_industry_courses(con)
+        install_mechanical_industry_courses(con)
+        for _, title, _, _ in TRACKS:
+            course = con.execute('SELECT id FROM courses WHERE title=?', (title,)).fetchone()
+            rows = con.execute('SELECT published,content FROM modules WHERE course_id=? ORDER BY position',
+                               (course['id'],)).fetchall()
+            self.assertEqual(10, len(rows))
+            self.assertTrue(all(row['published'] for row in rows))
+            for row in rows:
+                self.assertEqual([], publication_gaps(json.loads(row['content']), title))
         con.close()
 
 
