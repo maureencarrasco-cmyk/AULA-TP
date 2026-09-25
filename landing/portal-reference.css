@@ -265,9 +265,21 @@ h1,h2,h3,h4{letter-spacing:0}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 
 /* Audit 2026-09-25: catalog photos, capsules, tablet journey, footer labels, form, buttons. */
-.specialty-card.photo-electricidad{background-image:url('/images/especialidades/sector-electricidad.png');background-size:cover;background-position:center}
-.specialty-card.photo-enfermeria{background-image:url('/images/portal-docente/cursos/enfermeria.png');background-size:cover;background-position:center 30%}
-.specialty-card.photo-climatizacion{background-image:url('/images/climatizacion/climatizacion-hero-v2.png');background-size:cover;background-position:center 40%}
+.specialty-card.photo-electricidad,.dialog-photo.photo-electricidad,.additional-card-photo.photo-electricidad{
+  background-image:url('/images/especialidades/especialidades-fotograficas-v2.png');
+  background-size:500% auto;
+  background-position:25% 18%;
+}
+.specialty-card.photo-enfermeria,.dialog-photo.photo-enfermeria,.additional-card-photo.photo-enfermeria{
+  background-image:url('/images/especialidades/sector-salud.png');
+  background-size:148% auto;
+  background-position:48% 46%;
+}
+.specialty-card.photo-climatizacion,.dialog-photo.photo-climatizacion,.additional-card-photo.photo-climatizacion{
+  background-image:url('/images/portal-hero-taller-v2.png');
+  background-size:cover;
+  background-position:center 22%;
+}
 .social-proof{display:flex;align-items:flex-start;gap:8px;max-width:610px;margin:14px 0 0;padding:10px 12px;border:1px solid #cfe8e4;border-radius:8px;background:#f3fbf9;color:#0a5f5b;font-size:.82rem;font-weight:700;line-height:1.4}
 .social-proof svg{flex:0 0 auto;width:18px;height:18px;margin-top:2px;color:#0d8c88}
 .header .campus-button,.header .demo-link{display:flex}
