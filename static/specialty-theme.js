@@ -10,6 +10,8 @@ function specialtyKey(course) {
   if (/enfermer/i.test(s)) return 'enfermeria';
   if (/gastronom|pasteler|reposter|aliment/i.test(s)) return 'gastronomia';
   if (/hoteler/i.test(s)) return 'hoteleria';
+  if (/acuicultura|acu[ií]cola/i.test(s)) return 'acuicultura';
+  if (/operaciones portuarias|portuari/i.test(s)) return 'portuaria';
   if (/administraci[oó]n|contabil|oficina|gesti[oó]n/i.test(s)) return 'administracion';
   return 'general';
 }
@@ -32,6 +34,8 @@ function specialtyCover(course) {
   if (isClimateSpecialty(course)) return oficioPng('oficio-equipo-ctrl');
   if (specialtyKey(course) === 'gastronomia') return '/static/themes/cases/06-cocina.png';
   if (specialtyKey(course) === 'hoteleria') return '/static/themes/cases/04-hotel.png';
+  if (specialtyKey(course) === 'acuicultura') return '/static/themes/aquaculture-hero.png?v=1';
+  if (specialtyKey(course) === 'portuaria') return '/static/themes/port-operations-hero.png?v=1';
   return `/static/headers/${specialtyKey(course)}/e1.png?v=3`;
 }
 function climateHeroArt() {
@@ -63,6 +67,8 @@ function moduleStopArt(course, index) {
       :/servicio de|hotel|habitaciones|eventos|cocteler|ingl[eé]s|biling/i.test(title)?'04-hotel':'06-cocina';
     return `/static/themes/cases/${image}.png`;
   }
+  if (key === 'acuicultura') return '/static/themes/aquaculture-hero.png?v=1';
+  if (key === 'portuaria') return '/static/themes/port-operations-hero.png?v=1';
   return `/static/headers/${key}/e${(index % 5) + 1}.png?v=3`;
 }
 function journeyGoalArt(course) {
@@ -105,6 +111,20 @@ const HEADER_PHOTO_ALTS = {
     3: 'Situación profesional de administración en contexto',
     4: 'Espacio sobrio para demostrar criterios administrativos',
     5: 'Cierre y proyección del desempeño administrativo'
+  },
+  acuicultura: {
+    1: 'Estudiantes de acuicultura inspeccionan un sistema de cultivo con estanques y control de calidad del agua',
+    2: 'Estudiantes relacionan parámetros ambientales, registros y manejo responsable de especies acuícolas',
+    3: 'Equipo TP analiza una situación profesional en un centro de cultivo acuícola',
+    4: 'Evaluación de decisiones técnicas, seguridad y trazabilidad en acuicultura',
+    5: 'Revisión de evidencias y oportunidades de mejora en el proceso acuícola'
+  },
+  portuaria: {
+    1: 'Estudiantes de operaciones portuarias observan un terminal de contenedores con protección personal completa',
+    2: 'Estudiantes relacionan documentación, planificación de carga y seguridad portuaria',
+    3: 'Equipo TP analiza una operación logística en un terminal portuario simulado',
+    4: 'Evaluación de decisiones técnicas, trazabilidad y prevención de riesgos portuarios',
+    5: 'Revisión de evidencias y oportunidades de mejora en operaciones portuarias'
   },
   general: {
     1: 'Contexto profesional de la especialidad',

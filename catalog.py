@@ -310,8 +310,8 @@ def upgrade_catalog(con):
     install_sanitary_course(con)
     from assembly_catalog import install_assembly_course
     install_assembly_course(con)
-    from metalworks_catalog import install_metalworks_draft
-    install_metalworks_draft(con)
+    from metalworks_catalog import install_metalworks_course
+    install_metalworks_course(con)
     from food_industry_catalog import install_food_industry_course
     install_food_industry_course(con)
     from textile_catalog import install_textile_course
@@ -320,10 +320,10 @@ def upgrade_catalog(con):
     install_forestry_course(con)
     from furniture_catalog import install_furniture_course
     install_furniture_course(con)
-    from port_catalog import install_port_draft
-    install_port_draft(con)
-    from aquaculture_catalog import install_aquaculture_draft
-    install_aquaculture_draft(con)
+    from port_catalog import install_port_course
+    install_port_course(con)
+    from aquaculture_catalog import install_aquaculture_course
+    install_aquaculture_course(con)
     from fisheries_catalog import install_fisheries_draft
     install_fisheries_draft(con)
     from merchant_crew_catalog import install_merchant_crew_draft

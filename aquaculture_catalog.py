@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from tp_draft_builder import build_draft, install_draft
+from tp_draft_builder import build_draft, install_course, install_draft
 
 
 ROOT = Path(__file__).resolve().parent
@@ -28,3 +28,13 @@ def draft_modules():
 
 def install_aquaculture_draft(con):
     install_draft(con, 'Acuicultura', draft_modules())
+
+
+def install_aquaculture_course(con):
+    install_course(
+        con,
+        'Acuicultura',
+        draft_modules(),
+        'acuicultura-mineduc-draft-v1',
+        'acuicultura-mineduc-v1',
+    )
