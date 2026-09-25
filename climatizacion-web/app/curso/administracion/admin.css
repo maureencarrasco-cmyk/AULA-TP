@@ -1,0 +1,409 @@
+.admin-shell {
+  min-height: 100vh;
+  background: var(--color-surface);
+  --accent: var(--specialty-administracion);
+}
+
+.admin-station {
+  margin-top: var(--space-2);
+  padding: 22px 22px 18px;
+  border-radius: var(--radius-lg);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-1);
+}
+
+.admin-station-head {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  align-items: flex-start;
+  margin-bottom: var(--space-3);
+}
+
+.admin-station-head p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-blue);
+  font: var(--text-label);
+  font-weight: 600;
+}
+
+.admin-station-head h2,
+.admin-erp h3,
+.admin-quiz legend {
+  margin: 0;
+  color: var(--color-navy);
+}
+
+.admin-station p,
+.admin-station li,
+.admin-quiz small,
+.admin-erp-foot {
+  color: var(--color-slate);
+  line-height: 1.45;
+}
+
+.admin-station ul {
+  margin: var(--space-2) 0 var(--space-4);
+  padding-left: 1.1rem;
+}
+
+.admin-pill {
+  flex: none;
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-info-soft);
+  color: var(--color-navy);
+  font: var(--text-label);
+  font-weight: 600;
+}
+
+.admin-pill.is-done {
+  background: var(--color-ok-soft);
+  color: var(--color-ok);
+}
+
+.admin-erp {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) 1fr;
+  gap: var(--space-4);
+  margin: 18px 0;
+  padding: 14px;
+  border-radius: var(--radius-lg);
+  background: var(--color-info-soft);
+  border: 1px solid var(--color-line);
+}
+
+.admin-erp-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-1);
+  color: var(--color-navy);
+  font: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-erp ol {
+  margin: 10px 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.admin-erp li + li {
+  margin-top: var(--space-2);
+}
+
+.admin-erp label,
+.admin-quiz label {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.admin-erp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.admin-erp-frame {
+  width: 100%;
+  min-height: 520px;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-card);
+  box-shadow: var(--shadow-2);
+}
+
+.admin-erp-frame--lab {
+  min-height: 72vh;
+}
+
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch);
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  border: 0;
+  background: var(--color-blue);
+  color: var(--color-card);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.admin-btn.ghost {
+  background: transparent;
+  color: var(--color-blue);
+  border: 1px solid var(--color-blue);
+}
+
+.admin-btn:disabled {
+  background: var(--color-line);
+  color: var(--color-muted);
+  border-color: var(--color-line);
+  cursor: not-allowed;
+}
+
+.admin-station-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: 18px;
+}
+
+.admin-quiz {
+  display: grid;
+  gap: 14px;
+  margin: var(--space-4) 0;
+}
+
+.admin-quiz fieldset {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+}
+
+.admin-quiz label.is-ok {
+  background: var(--color-ok-soft);
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+}
+
+.admin-quiz small {
+  display: block;
+  margin-top: var(--space-2);
+}
+
+.admin-next-mod {
+  margin: var(--space-4) var(--space-1) var(--space-2);
+  font-weight: 700;
+}
+
+.admin-next-mod a {
+  color: var(--color-blue);
+}
+
+@media (max-width: 900px) {
+  .admin-erp {
+    grid-template-columns: 1fr;
+  }
+  .admin-erp-frame {
+    min-height: 64vh;
+  }
+}
+
+.admin-shell--erp {
+  background: var(--color-surface);
+}
+
+.admin-erp-hero {
+  width: 100%;
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  color: var(--color-card);
+  background: var(--color-navy-deep);
+  border-bottom: 6px solid var(--color-cyan);
+}
+
+.admin-erp-hero-nav,
+.admin-erp-hero-copy {
+  max-width: var(--max-main);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.admin-erp-hero-nav {
+  display: flex;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+  font: var(--text-label);
+  font-weight: 600;
+}
+
+.admin-erp-hero-nav a {
+  color: var(--color-card);
+  text-decoration: none;
+}
+
+.admin-erp-hero-copy h1 {
+  margin: 6px 0 var(--space-2);
+  font: var(--text-title);
+  color: var(--color-card);
+}
+
+.admin-erp-hero-copy p {
+  max-width: 46rem;
+  margin: 0;
+  color: var(--color-card);
+  font: var(--text-body);
+}
+
+.admin-erp-badge {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-cyan-soft);
+  color: var(--color-navy);
+  font: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-erp-main {
+  max-width: var(--max-main);
+  margin: 0 auto;
+  padding: 0 var(--space-4) var(--space-6);
+}
+
+.admin-erp-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 14px;
+}
+
+.admin-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch);
+  padding: 6px 12px 6px 6px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-line);
+  background: var(--color-info-soft);
+  color: var(--color-blue);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.admin-chip small {
+  display: block;
+  color: var(--color-muted);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-chip-ico {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--color-card);
+  color: var(--color-navy);
+  flex: none;
+}
+
+.admin-chip.is-on {
+  background: var(--color-cyan-soft);
+  border: 2px solid var(--color-cyan);
+  color: var(--color-navy);
+}
+
+.admin-chip.is-on small,
+.admin-chip.is-on .admin-chip-ico {
+  color: var(--color-navy);
+  background: var(--color-card);
+}
+
+.admin-chip--go {
+  margin-left: auto;
+  background: var(--color-blue);
+  border-color: var(--color-blue);
+  color: var(--color-card);
+}
+
+.admin-chip--go .admin-chip-ico,
+.admin-chip--go small {
+  background: transparent;
+  color: var(--color-card);
+}
+
+.admin-erp-stage {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--accent);
+  background: var(--color-card);
+  box-shadow: var(--shadow-2);
+}
+
+.admin-erp-stage-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--color-navy);
+  color: var(--color-card);
+  font: var(--text-label);
+}
+
+.admin-erp-stage-bar strong {
+  font-weight: 700;
+}
+
+.admin-erp-stage-bar span {
+  margin-left: auto;
+  opacity: 0.85;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-erp-stage .admin-erp-frame {
+  border-radius: 0;
+  box-shadow: none;
+  min-height: 70vh;
+}
+
+.admin-erp-kicker .admin-chip-ico {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: var(--color-card);
+  color: var(--color-navy);
+}
+
+.admin-module-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 252px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  max-width: 1580px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+.admin-module-layout > .aula-module-route--panel {
+  position: sticky;
+  top: 14px;
+}
+
+.admin-module-layout .admin-station {
+  margin-top: 0;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .admin-module-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-module-layout > .aula-module-route--panel {
+    position: static;
+  }
+}

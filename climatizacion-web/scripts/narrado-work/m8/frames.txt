@@ -1,0 +1,4 @@
+/workspace/aula-tp-landing/public/images/climatizacion/frames-m8-recuperacion/f01.png
+/workspace/aula-tp-landing/public/images/climatizacion/frames-m8-recuperacion/f02.png
+/workspace/aula-tp-landing/public/images/climatizacion/frames-m8-recuperacion/f03.png
+/workspace/aula-tp-landing/public/images/climatizacion/frames-m8-recuperacion/f04.png

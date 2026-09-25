@@ -1,0 +1,4 @@
+/workspace/aula-tp-landing/public/images/climatizacion/frames-m7-mantencion/f01.png
+/workspace/aula-tp-landing/public/images/climatizacion/frames-m7-mantencion/f02.png
+/workspace/aula-tp-landing/public/images/climatizacion/frames-m7-mantencion/f03.png
+/workspace/aula-tp-landing/public/images/climatizacion/frames-m7-mantencion/f04.png

@@ -1,0 +1,235 @@
+.sites-strip {
+  margin: 0 0 1.1rem;
+  padding: 1rem 1.1rem 1.15rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-1);
+}
+
+.sites-strip-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.sites-strip-head h2 {
+  margin: 0;
+  color: var(--color-navy);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.sites-strip-head p {
+  margin: 0;
+  color: var(--color-blue);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.sites-strip-track {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sites-strip-step {
+  position: relative;
+  min-width: 0;
+}
+
+.sites-strip-arrow {
+  display: none;
+}
+
+.sites-strip-step button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  width: 100%;
+  min-height: 132px;
+  padding: 0.85rem 0.75rem 0.75rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+  text-align: left;
+  cursor: pointer;
+  background: var(--color-info-soft);
+  color: var(--color-blue);
+}
+
+.sites-strip-step.is-wait button {
+  background: var(--color-surface);
+  color: var(--color-slate);
+}
+
+.sites-strip-step.is-done button {
+  background: var(--color-ok-soft);
+  color: var(--color-ok);
+}
+
+.sites-strip-step.is-partial button {
+  background: var(--color-info-soft);
+  color: var(--color-blue);
+}
+
+.sites-strip-step.is-active button {
+  background: var(--color-cyan-soft);
+  color: var(--color-navy);
+  border: 2px solid var(--color-cyan);
+}
+
+.sites-strip-num {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-bottom: 0.15rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-card);
+  color: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.sites-strip-step button strong {
+  color: var(--color-navy);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.sites-strip-step button em {
+  color: var(--color-slate);
+  font-size: 0.72rem;
+  font-style: normal;
+  line-height: 1.3;
+}
+
+.sites-strip-step button small {
+  margin-top: auto;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-card);
+  color: inherit;
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.sites-hub {
+  min-height: 100vh;
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.sites-hub-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding: 0.85rem 1.25rem;
+}
+
+.sites-hub-top a {
+  color: var(--color-blue);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.sites-hub-top a:hover {
+  text-decoration: underline;
+}
+
+.sites-hub-main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1rem 2.5rem;
+}
+
+.aula-path-journey-tools {
+  position: absolute;
+  z-index: 5;
+  top: 86px;
+  right: 16px;
+  display: grid;
+  gap: 8px;
+  width: 188px;
+}
+
+.aula-path-journey-tool {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 10px 24px rgba(20, 50, 80, 0.12);
+  color: #163a73;
+  text-decoration: none;
+}
+
+.aula-path-journey-tool b {
+  display: block;
+  font-size: 0.78rem;
+}
+
+.aula-path-journey-tool span {
+  display: block;
+  color: #5a7188;
+  font-size: 0.68rem;
+  line-height: 1.3;
+}
+
+.aula-path-journey-tool i {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  color: #fff;
+  font-style: normal;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.aula-path-journey-tool--pl i { background: var(--color-ok); }
+.aula-path-journey-tool--tutor i { background: var(--color-blue); }
+.aula-path-journey-tool--a11y i { background: var(--color-a11y); }
+
+.aula-path-journey-bar-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 9rem;
+  color: #163a73;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.aula-path-journey-bar-copy small {
+  color: #5a7188;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .sites-strip-track {
+    grid-template-columns: 1fr 1fr;
+  }
+  .aula-path-journey-tools {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .sites-strip-track {
+    grid-template-columns: 1fr;
+  }
+}
