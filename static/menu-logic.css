@@ -28,6 +28,12 @@ body.chrome-public [data-nav="teacher"] {
   display: none !important;
 }
 
+body.chrome-public .floating-back-button,
+body[data-screen="courses"] .floating-back-button,
+body[data-screen="login"] .floating-back-button {
+  display: none !important;
+}
+
 [data-status="soon"] {
   background: #eef2f7;
   color: #334155;
@@ -36,4 +42,27 @@ body.chrome-public [data-nav="teacher"] {
 [data-status="published"] {
   background: #dcfce7;
   color: #166534;
+}
+
+.catalog-filter-bar {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #eff6ff;
+  color: #1e3a5f;
+  font-size: 0.95rem;
+}
+
+.catalog-filter-bar strong {
+  font-weight: 650;
+}
+
+.catalog-filter-clear {
+  margin-left: 10px;
+  border: 0;
+  background: #1d4ed8;
+  color: #fff;
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
 }

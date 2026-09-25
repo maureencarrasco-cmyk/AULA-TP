@@ -3,12 +3,11 @@
  * Aula TP · lógica de menús
  * Tres chromes excluyentes: público, estudiante, docente.
  * En Evaluación Final (estación 4) se apagan Tutor y Práctica Libre.
- * Las herramientas de administrador no se muestran al estudiante.
+ * El catálogo ya no marca Electricidad / Enfermería como «próximamente»:
+ * el estado sale de data-status o de módulos publicados.
  */
 (function () {
   const ADMIN_TEXT = /revisi[oó]n administrador|desbloquear navegaci[oó]n|avanzar pantalla|reiniciar revisi[oó]n|ir a situaci[oó]n integradora/i;
-  const PUBLISHED_ONLY = /refrigeraci[oó]n|climatizaci[oó]n/i;
-  const COMING = /electricidad|enfermer[ií]a|administraci[oó]n/i;
 
   function role() {
     const fromBody = document.body.dataset.role;
@@ -43,8 +42,6 @@
     if (st) {
       const nextStation = String(st);
       if (b.dataset.station !== nextStation) b.dataset.station = nextStation;
-    } else if (b.dataset.station !== undefined) {
-      delete b.dataset.station;
     }
     b.classList.toggle('chrome-public', c === 'public');
     b.classList.toggle('chrome-student', c === 'student');
@@ -52,7 +49,7 @@
     b.classList.toggle('station-exam', st === 4);
     hideAdminForStudent(c);
     gateExamAids(st, c);
-    normalizeCatalogLabels();
+    hideHomeBack(c);
     labelPrimaryNav(c, st);
   }
 
@@ -63,8 +60,8 @@
       el.setAttribute('aria-hidden', 'true');
     });
     document.querySelectorAll('button, a, [role="button"]').forEach(el => {
-      const t = (el.textContent || '').trim();
-      if (ADMIN_TEXT.test(t)) {
+      const txt = (el.textContent || '').trim();
+      if (ADMIN_TEXT.test(txt)) {
         el.hidden = true;
         el.setAttribute('aria-hidden', 'true');
       }
@@ -77,6 +74,9 @@
       if (exam && c !== 'teacher') {
         el.hidden = true;
         el.setAttribute('aria-disabled', 'true');
+      } else {
+        el.hidden = false;
+        el.removeAttribute('aria-disabled');
       }
     });
     document.querySelectorAll('#agent-panel, .agent-panel, [data-agent], #tutor-panel').forEach(el => {
@@ -89,27 +89,18 @@
         }
       } else {
         el.removeAttribute('data-exam-silent');
+        const input = el.querySelector('textarea, input[type="text"]');
+        if (input) input.disabled = false;
       }
     });
   }
 
-  function normalizeCatalogLabels() {
-    document.querySelectorAll('[data-specialty], .course-card, .ruta-card, article.specialty').forEach(card => {
-      const title = (card.querySelector('h2, h3, .title, [data-title]') || card).textContent || '';
-      const badge = card.querySelector('.badge, [data-status], .status');
-      if (!badge) return;
-      if (PUBLISHED_ONLY.test(title) && !COMING.test(title)) {
-        badge.textContent = 'Publicada · 3° medio';
-        badge.dataset.status = 'published';
-      } else if (COMING.test(title) && !PUBLISHED_ONLY.test(title)) {
-        badge.textContent = 'Próximamente';
-        badge.dataset.status = 'soon';
-        const cta = card.querySelector('a, button');
-        if (cta && /abrir ruta/i.test(cta.textContent || '')) {
-          cta.textContent = 'Ver ficha';
-          cta.setAttribute('aria-disabled', 'true');
-        }
-      }
+  function hideHomeBack(c) {
+    const screen = document.body.dataset.screen;
+    document.querySelectorAll('.floating-back-button').forEach(el => {
+      const hide = c === 'public' || screen === 'courses' || screen === 'login';
+      el.hidden = hide;
+      el.setAttribute('aria-hidden', hide ? 'true' : 'false');
     });
   }
 
@@ -117,12 +108,11 @@
     const nav = document.querySelector('nav.primary, header nav, #app-nav');
     if (!nav) return;
     nav.dataset.chrome = c;
-    if (c === 'student') {
+    if (c !== 'teacher') {
       nav.querySelectorAll('[data-nav="editor"], [data-nav="teacher"], [data-nav="enroll"]').forEach(el => {
         el.hidden = true;
       });
-    }
-    if (c === 'teacher') {
+    } else {
       nav.querySelectorAll('[data-nav="editor"], [data-nav="teacher"]').forEach(el => {
         el.hidden = false;
       });
@@ -137,7 +127,7 @@
   const obs = new MutationObserver(() => applyChrome());
   function boot() {
     applyChrome();
-    obs.observe(document.body, {childList: true, subtree: true, attributes: true, attributeFilter: ['data-role', 'data-station', 'class']});
+    obs.observe(document.body, {childList: true, subtree: true, attributes: true, attributeFilter: ['data-role', 'data-station', 'data-screen', 'class']});
     document.addEventListener('aula:view', applyChrome);
     document.addEventListener('aula:station', applyChrome);
   }
