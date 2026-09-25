@@ -1,11 +1,10 @@
 # Estado verificable de cursos en borrador
 
-Fecha: 2026-09-25. Alcance: 14 cursos y 150 módulos no publicados.
+Fecha: 2026-09-25. Alcance: 13 cursos y 140 módulos no publicados.
 Esta tabla mide presencia de datos y archivos locales, no calidad pedagógica ni autorización para publicar.
 
 | Curso | Módulos | PDF y página oficial | OA explícito | AE con criterios | Visuales 3D reales | Imágenes de evaluación reales | Videos reales |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Telecomunicaciones | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
 | Administración, mención Logística | 11 | 11/11 | 8/11 | 11/11 | 0/33 mínimo | 0/440 | 0 |
 | Administración, mención Recursos Humanos | 11 | 11/11 | 8/11 | 11/11 | 0/33 mínimo | 0/440 | 0 |
 | Agropecuaria, mención Agricultura | 10 | 10/10 | 9/10 | 10/10 | 0/30 mínimo | 0/400 | 0 |
@@ -23,10 +22,10 @@ Esta tabla mide presencia de datos y archivos locales, no calidad pedagógica ni
 ## Resultado y límites
 
 - PDF local y página curricular declarada: 216/216 módulos.
-- OA explícito en el registro: 132/150; los módulos sin OA requieren revisar el alcance del programa antes de asignarles uno.
-- AE con código y criterios: 150/150, con 497 AE registrados.
-- Imágenes 3D verificadas: 0/450 del mínimo solicitado.
-- Imágenes reales en casos y evaluación: 0/6000.
+- OA explícito en el registro: 123/140; los módulos sin OA requieren revisar el alcance del programa antes de asignarles uno.
+- AE con código y criterios: 140/140, con 462 AE registrados.
+- Imágenes 3D verificadas: 0/420 del mínimo solicitado.
+- Imágenes reales en casos y evaluación: 0/5600.
 - Videos locales verificados: 0. La pertinencia se debe decidir por módulo; cero videos no demuestra que ninguno corresponda.
 - Estímulos distintos por banco de 25 preguntas: entre 1 y 1. La repetición requiere rediseño y revisión disciplinar.
 - No se ha certificado en estos borradores la exactitud técnica de cada decisión, la pertinencia de cada medio, accesibilidad con usuarios ni la experiencia completa de las cinco estaciones.

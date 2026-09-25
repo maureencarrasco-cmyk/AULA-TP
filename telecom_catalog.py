@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from tp_draft_builder import build_draft, install_draft
+from tp_draft_builder import build_draft, install_course, install_draft
 
 
 ROOT = Path(__file__).resolve().parent
@@ -29,3 +29,9 @@ def draft_modules():
 
 def install_telecom_draft(con):
     install_draft(con, 'Telecomunicaciones', draft_modules())
+
+
+def install_telecom_course(con):
+    install_course(con, 'Telecomunicaciones', draft_modules(),
+                   'telecomunicaciones-mineduc-draft-v1',
+                   'telecomunicaciones-mineduc-v1')

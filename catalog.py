@@ -300,8 +300,8 @@ def upgrade_catalog(con):
     install_networks_course(con)
     from electronics_catalog import install_electronics_course
     install_electronics_course(con)
-    from telecom_catalog import install_telecom_draft
-    install_telecom_draft(con)
+    from telecom_catalog import install_telecom_course
+    install_telecom_course(con)
     from drawing_catalog import install_drawing_course
     install_drawing_course(con)
     from graphics_catalog import install_graphics_course
