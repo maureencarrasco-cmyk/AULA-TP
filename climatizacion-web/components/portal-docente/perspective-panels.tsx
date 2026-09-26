@@ -74,15 +74,15 @@ export function NivelAggregatePanel({ estudiantes }: { estudiantes: EstudianteDe
     <div className="space-y-6">
       <p className="rounded-xl border border-[var(--color-info-soft,#E8F1FB)] bg-[var(--color-info-soft,#E8F1FB)] px-4 py-3 text-sm text-[var(--color-navy,#0B3A6B)]">
         Vista general del nivel: OA, AE y criterios de evaluación agregados. No se
-        listan casos individuales. Sirve para ver tendencias, fortalezas y focos de
+        listan casos individuales. Sirve para ver patrones, fortalezas y focos de
         refuerzo pedagógico.
       </p>
       <TendenciaCard stats={stats} />
       <div className="grid gap-6 lg:grid-cols-2">
         <DonutBandas
           estudiantes={estudiantes}
-          title="Distribución del nivel según banda de logro"
-          subtitle="Cantidad de estudiantes en logrado, medianamente logrado, en proceso o no logrado. El centro indica la cantidad total de estudiantes del recorte."
+          title="¿Cómo se encuentran los estudiantes del nivel?"
+          subtitle="Cantidad de estudiantes que consolidaron, están avanzando o todavía requieren apoyo. El centro indica el total del grupo seleccionado."
         />
         <ChartPanel
           title="OA y porcentaje de logro"
@@ -106,7 +106,7 @@ export function NivelAggregatePanel({ estudiantes }: { estudiantes: EstudianteDe
           subtitle="Comparación: Aprendizaje Esperado vs Porcentaje de logro %. Se muestran los 8 AE con menor logro."
         >
           <BarChart
-            title="Porcentaje de logro % por AE (focos más descendidos)"
+            title="¿Qué aprendizajes esperados requieren atención primero?"
             yAxisTitle="Porcentaje de logro %"
             xAxisTitle="Aprendizaje Esperado (AE)"
             valueSuffix="%"
@@ -118,7 +118,7 @@ export function NivelAggregatePanel({ estudiantes }: { estudiantes: EstudianteDe
         </ChartPanel>
         <ChartPanel
           title="Criterios de evaluación y resultados"
-          subtitle="Cada criterio de evaluación hereda el Porcentaje de logro % de su AE. Se muestran los 8 más descendidos."
+          subtitle="Cada criterio se relaciona con su Aprendizaje Esperado. Se muestran los 8 que requieren mayor apoyo."
         >
           <BarChart
             title="Porcentaje de logro % por criterio de evaluación"
@@ -178,8 +178,8 @@ export function EstudiantePriorityPanel({
       </p>
       <TendenciaCard stats={stats} />
       <HeatmapGrid
-        title="Mapa de calor por estudiante (prioridad de apoyo)"
-        subtitle="Orden descendente de dificultad. Color = Porcentaje de logro % del OA. Pasa el cursor para ver el OA/AE crítico."
+        title="¿Qué estudiantes necesitan apoyo y en qué OA?"
+        subtitle="Cada fila corresponde a un estudiante y cada columna a un OA. El texto y el color indican el nivel de logro; pasa el cursor para ver el aprendizaje prioritario."
         xAxisTitle="Objetivo de Aprendizaje (OA)"
         yAxisTitle="Estudiante"
         columns={oaCols}
@@ -187,8 +187,8 @@ export function EstudiantePriorityPanel({
       />
       <div className="grid gap-4 lg:grid-cols-3">
         <RankingList
-          title="10 estudiantes con mayor porcentaje de logro"
-          subtitle="Unidad: Porcentaje de logro %"
+          title="Estudiantes que consolidaron más aprendizajes"
+          subtitle="Úsalos como referencia de logro, no como una competencia entre estudiantes."
           items={topAltos.map((e) => ({
             id: e.id,
             label: e.nombre,
@@ -197,8 +197,8 @@ export function EstudiantePriorityPanel({
           }))}
         />
         <RankingList
-          title="10 estudiantes más descendidos"
-          subtitle="Menor Porcentaje de logro % · OA/AE crítico"
+          title="Estudiantes que necesitan apoyo prioritario"
+          subtitle="Se indica el aprendizaje específico que conviene reforzar primero."
           items={topBajos.map((e) => ({
             id: e.id,
             label: e.nombre,
@@ -207,9 +207,9 @@ export function EstudiantePriorityPanel({
           }))}
         />
         <RankingList
-          title="10 estudiantes que pasaron de amarillo a verde"
-          subtitle={`Comparación con ${PERIODO_ANTERIOR_LABEL}: en proceso (40–69%) → medianamente logrado o logrado (≥70%)`}
-          empty="Nadie transitó de amarillo a verde respecto del periodo anterior."
+          title="Estudiantes que avanzaron desde en proceso a logrado"
+          subtitle={`Comparación con ${PERIODO_ANTERIOR_LABEL}: desde en proceso (40–69%) hasta medianamente logrado o logrado (≥70%).`}
+          empty="Todavía no se observan estudiantes que hayan cambiado a una banda de logro superior respecto del periodo anterior."
           items={transito.map((e) => ({
             id: e.id,
             label: e.nombre,
@@ -237,7 +237,7 @@ export function CursoComparePanel({
       <p className="rounded-xl border border-[var(--color-info-soft,#E8F1FB)] bg-[var(--color-info-soft,#E8F1FB)] px-4 py-3 text-sm text-[var(--color-navy,#0B3A6B)]">
         Comparación entre cursos del recorte: avance promedio, cantidad de
         estudiantes, AE logrados y último OA/AE trabajado. El mapa de calor del
-        curso más descendido ayuda a priorizar apoyo dentro del grupo.
+        curso que requiere más apoyo ayuda a priorizar acciones dentro del grupo.
       </p>
       <TendenciaCard stats={stats} />
       <ChartPanel
@@ -300,7 +300,7 @@ export function CursoComparePanel({
       </div>
       {peor ? (
         <HeatmapGrid
-          title={`Mapa de calor del curso más descendido: ${peor.key}`}
+          title={`Aprendizajes prioritarios del curso que requiere más apoyo: ${peor.key}`}
           subtitle={`Orden de menor a mayor Porcentaje de logro %. ${pluralEstudiantes(peor.estudiantes.length)} en este curso.`}
           xAxisTitle="OA"
           yAxisTitle="Estudiante"

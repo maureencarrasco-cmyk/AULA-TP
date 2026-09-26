@@ -4,10 +4,12 @@ import { isValidSection } from "@/lib/demo-data";
 
 type Props = {
   params: Promise<{ section: string }>;
+  searchParams: Promise<{ vista?: string | string[] }>;
 };
 
-export default async function PortalSectionPage({ params }: Props) {
+export default async function PortalSectionPage({ params, searchParams }: Props) {
   const { section } = await params;
+  const { vista } = await searchParams;
 
   if (section === "resumen") {
     redirect("/portal-docente");
@@ -18,9 +20,18 @@ export default async function PortalSectionPage({ params }: Props) {
     redirect("/portal-docente");
   }
 
+  if (section === "cumplimiento") {
+    redirect("/portal-docente/reportes?vista=cobertura");
+  }
+
   if (!isValidSection(section)) {
     notFound();
   }
 
-  return <PortalShell section={section} />;
+  return (
+    <PortalShell
+      section={section}
+      defaultReportArea={section === "reportes" && vista === "cobertura" ? "cobertura" : "analisis"}
+    />
+  );
 }

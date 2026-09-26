@@ -12,11 +12,12 @@ import { especialidadFromCurso } from "@/lib/demo-data";
 import { ChartPanel, CHART_HEX, DataBadge, MiniDonut, BarChart } from "./charts";
 import {
   KpiStrip,
+  PedagogicalGuide,
   PerspectiveTabs,
   SectionIntro,
   TendenciaCard,
 } from "./analytics";
-import { CursoComparePanel, EstudiantePriorityPanel } from "./perspective-panels";
+import { CursoComparePanel } from "./perspective-panels";
 import {
   demoMetricsForPath,
   shouldUseDemoMetrics,
@@ -394,7 +395,7 @@ function KpiCard({ label, value }: { label: string; value: string }) {
 export function CursosVivosList() {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <h2 className="text-sm font-semibold text-slate-900">Cursos vivos publicados</h2>
+      <h2 className="text-sm font-semibold text-slate-900">Por cursos publicados</h2>
       <p className="mt-1 text-xs text-slate-600">
         Especialidades publicadas. Las métricas de Enfermería, Electricidad y
         Climatización salen del LMS.
@@ -426,8 +427,8 @@ export function CursosVivosList() {
   );
 }
 
-export function CumplimientoView() {
-  type Vista = "nivel" | "curso" | "estudiante";
+export function CumplimientoView({ embedded = false }: { embedded?: boolean } = {}) {
+  type Vista = "nivel" | "curso";
   const [refreshKey, setRefreshKey] = useState(0);
   const [vista, setVista] = useState<Vista>("nivel");
   const [carrera, setCarrera] = useState<"Todas" | "enfermeria" | "electricidad" | "climatizacion">(
@@ -518,6 +519,36 @@ export function CumplimientoView() {
           }))
       : [],
   );
+  const coverageRows = Array.from(
+    okStates
+      .flatMap((b) =>
+        b.state.status === "ok"
+          ? b.state.data.modules.map((module) => ({
+              oa: module.oa_code ?? module.code,
+              title: module.short_title ?? module.title,
+              planned: true,
+              worked: (module.activity_count ?? 0) > 0,
+              evidenced:
+                (module.completed_enrollments ?? 0) > 0 || (module.attempts ?? 0) > 0,
+            }))
+          : [],
+      )
+      .filter((row) => oaFiltro === "Todos" || row.oa.includes(oaFiltro))
+      .reduce((rows, row) => {
+        const current = rows.get(row.oa);
+        if (!current) {
+          rows.set(row.oa, row);
+          return rows;
+        }
+        rows.set(row.oa, {
+          ...current,
+          worked: current.worked || row.worked,
+          evidenced: current.evidenced || row.evidenced,
+        });
+        return rows;
+      }, new Map<string, { oa: string; title: string; planned: boolean; worked: boolean; evidenced: boolean }>())
+      .values(),
+  ).sort((a, b) => a.oa.localeCompare(b.oa, "es"));
   const recorteEstudiantes = estudiantes.filter((e) => {
     if (nivel !== "Todos") {
       const n = e.curso.match(/([2-4])\s*°/)?.[1];
@@ -553,10 +584,19 @@ export function CumplimientoView() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <SectionIntro
-          title="Cumplimiento"
-          purpose="Eje principal: cumplimiento de Objetivos de Aprendizaje (OA), actividades e integradores. Revisa por nivel, por curso o por estudiante."
-        />
+        {embedded ? (
+          <div>
+            <h2 className="text-lg font-extrabold text-[var(--color-navy,#0B3A6B)]">Cobertura curricular</h2>
+            <p className="mt-1 max-w-3xl text-sm text-[var(--color-slate,#3D5166)]">
+              Distingue lo planificado, lo trabajado y lo que ya cuenta con evidencia. Úsalo para decidir qué aprendizaje falta abordar o comprobar. No etiqueta a estudiantes.
+            </p>
+          </div>
+        ) : (
+          <SectionIntro
+            title="Cobertura curricular"
+            purpose="Distingue lo planificado, lo trabajado y lo que ya cuenta con evidencia. Describe el trabajo pedagógico; no etiqueta estudiantes."
+          />
+        )}
         <button
           type="button"
           onClick={() => setRefreshKey((k) => k + 1)}
@@ -566,20 +606,26 @@ export function CumplimientoView() {
         </button>
       </div>
 
+      <PedagogicalGuide
+        observe="Revisa qué OA, actividades e integradores muestran menor cumplimiento."
+        interpret="Cumplir una actividad no siempre significa haber consolidado el aprendizaje."
+        act="Abre el curso y refuerza el OA con una práctica vinculada a la dificultad observada."
+        followUp="Actualiza las métricas y compara logro, actividades y nueva evidencia."
+      />
+
       <PerspectiveTabs
-        label="Perspectiva de cumplimiento"
+        label="Perspectiva de cobertura curricular"
         value={vista}
         onChange={setVista}
         options={[
           { id: "nivel", label: "Por nivel" },
           { id: "curso", label: "Por curso" },
-          { id: "estudiante", label: "Por estudiante" },
         ]}
       />
 
       <div className="flex flex-wrap gap-3">
         <label className="text-xs font-semibold text-slate-700">
-          Carrera
+          Especialidad
           <select
             value={carrera}
             onChange={(e) => setCarrera(e.target.value as typeof carrera)}
@@ -621,6 +667,13 @@ export function CumplimientoView() {
         </label>
       </div>
 
+      <p className="portal-status-note text-sm">
+        Estás viendo: {vista === "nivel" ? "resumen del nivel" : vista === "curso" ? "comparación por curso" : "detalle por estudiante"}
+        {carrera === "Todas" ? " · todas las especialidades" : ` · ${bloques.find((b) => b.id === carrera)?.title ?? carrera}`}
+        {nivel === "Todos" ? " · todos los niveles" : ` · ${nivel}`}
+        {oaFiltro === "Todos" ? " · todos los OA" : ` · ${oaFiltro}`}.
+      </p>
+
       <KpiStrip
         items={[
           {
@@ -629,29 +682,69 @@ export function CumplimientoView() {
             hint: `${pluralEstudiantes(studentsN)} en cursos vivos del recorte`,
           },
           {
-            label: "Actividades completadas",
+            label: "Aprendizajes trabajados",
             value: `${actAvg}%`,
-            hint: "Promedio de cumplimiento de actividades",
+            hint: "Actividades realizadas vinculadas al recorte",
           },
           {
-            label: "Cumplimiento del integrador",
+            label: "Evidencia recogida",
             value: `${intAvg}%`,
-            hint: "Avance promedio de actividades integradoras",
+            hint: "Resultados observables en actividades integradoras",
           },
           {
-            label: "Porcentaje de logro % (estudiantes LMS)",
+            label: "Logro promedio de estudiantes",
             value: `${stats.media}`,
-            hint: `Mediana ${stats.mediana} · moda ${stats.moda ?? "—"}`,
+            hint: `Punto medio ${stats.mediana} · valor más frecuente ${stats.moda ?? "—"}`,
           },
         ]}
       />
+
+      <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm" aria-labelledby="coverage-matrix-title">
+        <div className="border-b border-slate-200 bg-slate-50 px-5 py-4">
+          <h3 id="coverage-matrix-title" className="text-base font-extrabold text-[var(--color-navy,#0B3A6B)]">
+            Matriz de cobertura curricular
+          </h3>
+          <p className="mt-1 text-sm text-slate-600">
+            Separa la presencia del OA en los cursos publicados, su trabajo mediante actividades y la evidencia registrada.
+          </p>
+        </div>
+        {coverageRows.length > 0 ? (
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-left text-sm">
+              <thead>
+                <tr>
+                  <th scope="col" className="px-5 py-3 font-bold text-slate-700">Objetivo de aprendizaje</th>
+                  <th scope="col" className="px-4 py-3 font-bold text-slate-700">Planificado</th>
+                  <th scope="col" className="px-4 py-3 font-bold text-slate-700">Trabajado</th>
+                  <th scope="col" className="px-4 py-3 font-bold text-slate-700">Con evidencia</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {coverageRows.map((row) => (
+                  <tr key={row.oa}>
+                    <th scope="row" className="max-w-xl px-5 py-3 font-semibold text-slate-800">
+                      <span className="mr-2 inline-block font-extrabold text-brand-800">{row.oa}</span>
+                      {row.title}
+                    </th>
+                    <CoverageState active={row.planned} activeLabel="Sí" />
+                    <CoverageState active={row.worked} activeLabel="Sí" />
+                    <CoverageState active={row.evidenced} activeLabel="Sí" />
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p className="px-5 py-6 text-sm text-slate-600">No hay OA publicados para el recorte seleccionado.</p>
+        )}
+      </section>
 
       <TendenciaCard stats={stats} />
 
       {oaBars.length > 0 ? (
         <ChartPanel
-          title="Cumplimiento por OA (cursos vivos)"
-          subtitle="Comparación: OA vs Porcentaje de logro % del módulo asociado."
+          title="Cobertura por OA en cursos publicados"
+          subtitle="Muestra qué OA han sido trabajados y cuentan con evidencia en el módulo asociado."
         >
           <BarChart
             title="Porcentaje de logro % por OA / módulo"
@@ -665,8 +758,8 @@ export function CumplimientoView() {
 
       {vista === "nivel" ? (
         <ChartPanel
-          title="Cumplimiento de OA en el nivel"
-          subtitle="Visión agregada del recorte LMS. Unidad: Porcentaje de logro %."
+          title="Cobertura de OA en el nivel"
+          subtitle="Visión agregada del recorte. Revisa qué OA falta abordar o comprobar."
         >
           <BarChart
             title="Porcentaje de logro % por OA del nivel"
@@ -683,13 +776,6 @@ export function CumplimientoView() {
 
       {vista === "curso" ? <CursoComparePanel grupos={porCurso} /> : null}
 
-      {vista === "estudiante" ? (
-        <EstudiantePriorityPanel
-          estudiantes={recorteEstudiantes}
-          total={recorteEstudiantes.length}
-        />
-      ) : null}
-
       {visibles.map((b) => (
         <CumplimientoCourseBlock
           key={b.id}
@@ -700,6 +786,21 @@ export function CumplimientoView() {
         />
       ))}
     </div>
+  );
+}
+
+function CoverageState({ active, activeLabel }: { active: boolean; activeLabel: string }) {
+  return (
+    <td className="px-4 py-3">
+      <span
+        className={`inline-flex min-w-24 items-center justify-center rounded-full px-3 py-1 text-xs font-bold ${
+          active ? "bg-emerald-50 text-emerald-800" : "bg-slate-100 text-slate-600"
+        }`}
+      >
+        <span aria-hidden="true" className="mr-1.5">{active ? "✓" : "—"}</span>
+        {active ? activeLabel : "Sin registro"}
+      </span>
+    </td>
   );
 }
 
