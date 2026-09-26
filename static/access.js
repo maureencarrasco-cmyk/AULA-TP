@@ -179,11 +179,15 @@
     clearSpeakHl();
     el.classList.add('access-speak-hl');
     const utt = new SpeechSynthesisUtterance(text);
-    const voice = window.AulaNarration?.pickVoice?.();
-    utt.lang = 'es-CL';
-    utt.rate = Math.min(1, Number(prefs.speechRate) || 0.92);
-    utt.pitch = 1.08;
-    if (voice) utt.voice = voice;
+    if (window.AulaNarration && typeof AulaNarration.applyTo === 'function') {
+      AulaNarration.applyTo(utt, 'instruction', (Number(prefs.speechRate) || 0.88) / 0.88);
+    } else {
+      const voice = window.AulaNarration?.pickVoice?.();
+      utt.lang = 'es-CL';
+      utt.rate = Math.min(1, Number(prefs.speechRate) || 0.88);
+      utt.pitch = 1.02;
+      if (voice) utt.voice = voice;
+    }
     utt.onend = () => { if (!speech.paused) nextChunk(); };
     utt.onerror = () => nextChunk();
     speech.utt = utt;
@@ -347,11 +351,15 @@
     btn.addEventListener('click', () => {
       if (!window.speechSynthesis) return;
       speechSynthesis.cancel();
+      if (window.AulaNarration && typeof AulaNarration.speak === 'function') {
+        AulaNarration.speak(reply.textContent, {intent: 'instruction'});
+        return;
+      }
       const utt = new SpeechSynthesisUtterance(reply.textContent);
       const voice = window.AulaNarration?.pickVoice?.();
       utt.lang = 'es-CL';
-      utt.rate = Math.min(1, Number(prefs.speechRate) || 0.92);
-      utt.pitch = 1.08;
+      utt.rate = Math.min(1, Number(prefs.speechRate) || 0.88);
+      utt.pitch = 1.02;
       if (voice) utt.voice = voice;
       speechSynthesis.speak(utt);
     });

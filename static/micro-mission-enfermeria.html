@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Microexperiencias 3D · Atención de Enfermería</title>
+<link rel="stylesheet" href="/static/micro-mission-enfermeria.css?v=10">
+<style>
+  html, body { margin: 0; min-height: 100%; background: #12181c; color: #e8eef0; font-family: Segoe UI, system-ui, sans-serif; }
+  .mm-page { max-width: 1100px; margin: 0 auto; padding: 18px 18px 36px; }
+  .mm-page > h1 { font-size: 1.25rem; margin: 0 0 6px; color: #fff; }
+  .mm-page > p { margin: 0 0 16px; color: #b7c4ca; max-width: 68ch; }
+  .mm-page:has(.is-in-world) { max-width: none; padding: 0; }
+  .mm-page:has(.is-in-world) > h1,
+  .mm-page:has(.is-in-world) > p { display: none; }
+</style>
+</head>
+<body>
+<div class="mm-page">
+  <h1>Colección de misiones · Atención de Enfermería</h1>
+  <p>El mundo es el recurso pedagógico. Observas, interpretas, decides y ves la consecuencia en la clínica. Los recuadros solo guían. Oficio 2–3 min. Fuera del campus.</p>
+  <div id="micro-mission-root"></div>
+</div>
+<script src="/static/narration.js?v=8"></script>
+<script src="/static/micro-mission-enfermeria.js?v=10"></script>
+<script>AulaMicroEnfermeria.mount(document.getElementById('micro-mission-root'));</script>
+</body>
+</html>

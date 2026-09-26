@@ -1279,8 +1279,14 @@ function onS5AccessChange(e){
   if(k==='tts'){
     document.body.classList.toggle('tts-on',on);
     if(on&&'speechSynthesis' in window){
-      const u=new SpeechSynthesisUtterance(document.querySelector('.s5c-board, .s5p-board')?.innerText?.slice(0,400)||'Accesibilidad activada');
-      u.lang='es-CL'; speechSynthesis.cancel(); speechSynthesis.speak(u);
+      const line=document.querySelector('.s5c-board, .s5p-board')?.innerText?.slice(0,400)||'Accesibilidad activada';
+      if(window.AulaNarration&&typeof AulaNarration.speak==='function'){
+        AulaNarration.speak(line,{intent:'instruction'});
+      }else{
+        const u=new SpeechSynthesisUtterance(line);
+        u.lang='es-CL'; u.rate=0.88; u.pitch=1.02; u.volume=0.92;
+        speechSynthesis.cancel(); speechSynthesis.speak(u);
+      }
     }else if('speechSynthesis' in window){speechSynthesis.cancel()}
   }
   if(window.AulaAccess&&typeof window.AulaAccess.apply==='function')window.AulaAccess.apply();
