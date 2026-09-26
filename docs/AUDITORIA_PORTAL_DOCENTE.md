@@ -102,5 +102,45 @@ Cadena CURSO → MÓDULO → AE → ESTUDIANTE → EVIDENCIA → REVISIÓN: tran
 ## 7. Reauditoría
 
 Protocolo del prompt 4 aplicado al 100 % del universo definido (portal docente del campus).  
-Cumplimiento ponderado post-corrección: **75 %**.  
+Cumplimiento ponderado post-corrección (2026-09-25): **75 %**.  
 No se declara el portal «completo» ni se emite sello técnico.
+
+## 8. Reauditoría experta 2026-09-26 (pedagogía + datos + UX)
+
+Universo: cinco pestañas de `static/teacher-portal.js` + `GET /api/teacher`. No es sello técnico ni cobertura de los 35 cursos. No se inventaron dificultades de oficio (simbología, planos) ni series históricas.
+
+### Diagnóstico (antes de esta corrección)
+
+El portal informaba y administraba. No acompañaba comprender → detectar → interpretar → decidir → intervenir → seguimiento.
+
+| Pestaña | Hacía | Misión que debía tener | Decisión |
+|---|---|---|---|
+| Curso y planificación | Inventario de módulos y HP | Qué ocurre y a quién apoyar | Mejorar |
+| Estudiantes | Alta y matrícula | Qué necesita cada estudiante | Mejorar |
+| AE y OA | Catálogo de códigos | Aprendizaje + evidencia + quién falta | Mejorar |
+| Cumplimiento | Tabla de % y alertas | Cola de revisión | Mantener / enfocar |
+| Reportes | KPI + matriz + salud + CSV | Corte exportable y expediente | Fusionar |
+
+Duplicados: filtro curso/módulo en tres pestañas; CSV en encabezado y Reportes; avance % en Cumplimiento y Reportes; inventario de módulos vs salud de contenidos.
+
+Faltaba: pulso de 10 segundos; perfil individual; AE conectado a evidencia; acción sugerida con hechos del filtro.
+
+### Correcciones de esta corrida
+
+- Una barra de filtros persistente. CSV solo en Reportes.
+- Curso: pulso interpretado (recorridos, sin revisión, avance bajo, AE con menos evidencia) + leyenda necesidad→indicador→evidencia→acción + inventario de módulos.
+- Estudiantes: listado por necesidad y perfil por estaciones. Alta/matrícula en `<details>`.
+- Aprendizajes: cobertura de evidencia por AE en el filtro y quién falta. OA no se simula.
+- Evidencia: cola de revisión, no KPI repetido.
+- Reportes: definiciones del KPI, salud de contenidos (20 de N publicados), dictamen en expediente. Sin matriz por actor en el uso diario.
+- Lenguaje: «necesita apoyo», «presenta dificultad en…». Sin etiquetas deficitarias.
+- Avance % = estaciones/5 × 100. Población: registros del filtro. Periodo: estado actual.
+
+### Lo que sigue sin existir (no se fabrica)
+
+- Serie histórica ni comparación entre periodos lectivos.
+- OA como entidad de datos.
+- Dificultad temática automática (el registro no nombra el error de oficio).
+- Baja de matrícula.
+
+Canvas de esta auditoría: `canvases/portal-docente-auditoria.canvas.tsx` en el proyecto Cursor.

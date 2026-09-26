@@ -216,7 +216,11 @@ function courseList(){
  $('.dash-scroll-next')?.addEventListener('click',()=>scrollCourses(1));
 }
 function dashboardSideNav(active=''){
- return `<button type="button" data-action="home-login">${icon('home')}<span>Inicio</span></button><a class="${active==='progress'?'is-active':''}" href="#progress">${icon('chart')}<span>Mi progreso</span></a>`;
+ const home=`<a class="${!active||active==='courses'?'is-active':''}" href="#courses">${icon('home')}<span>Inicio</span></a>`;
+ const teacher=auth.user&&auth.user.role==='teacher'
+  ?`<a class="${active==='teacher'?'is-active':''}" href="#teacher/planning">${icon('chart')}<span>Espacio docente</span></a>`
+  :`<a class="${active==='progress'?'is-active':''}" href="#progress">${icon('chart')}<span>Mi progreso</span></a>`;
+ return home+teacher;
 }
 function dashboardExitButton(){return '<button type="button" class="dash-exit" data-action="home-login">Salir</button>'}
 function bindHomeLogin(){

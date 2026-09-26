@@ -705,3 +705,75 @@ body[data-station="2"] .bottom-nav>.primary:not(:disabled){
   .work-zone-s2 .ae-evidence .primary{width:100%;margin-left:0}
   .work-zone-s2 .act-dossier-fields div{grid-template-columns:1fr}
 }
+
+/* Portal docente: pulso, perfil y cola de revisión */
+.work-zone-teacher .teacher-tabs{gap:6px;flex-wrap:wrap}
+.work-zone-teacher .teacher-filters{margin-top:4px}
+.teacher-pulse{display:grid;gap:14px;margin:4px 0 8px}
+.teacher-read{
+  background:#f4f8f6;
+  border:1px solid #d6e6e8;
+  border-radius:16px;
+  padding:16px 18px;
+}
+.teacher-read h2{margin:0 0 8px}
+.teacher-read p{margin:0 0 10px;color:#2a3f4a}
+.teacher-action{color:#1a3a44}
+.teacher-pulse-facts{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:10px;
+  margin:0;
+}
+.teacher-pulse-facts div{
+  background:#fff;
+  border:1px solid #dce7ea;
+  border-radius:12px;
+  padding:10px 12px;
+}
+.teacher-pulse-facts dt{
+  font-size:11px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:#5c6b72;
+}
+.teacher-pulse-facts dd{
+  margin:4px 0 0;
+  font-size:22px;
+  font-weight:700;
+  color:#0b3a6b;
+}
+.teacher-formula{font-size:12px}
+.teacher-need{color:#3d4f58;font-size:15px}
+.teacher-stations{list-style:none;padding:0;margin:10px 0;display:grid;gap:8px}
+.teacher-stations li{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  background:#fff;
+  border:1px solid #dde6ea;
+  border-radius:10px;
+  padding:8px 12px;
+}
+.teacher-stations .is-done{border-color:#b7d8c8;background:#f3faf6}
+.teacher-stations .is-open{border-color:#ead9b8;background:#fffaf0}
+.teacher-alerts{list-style:none;padding:0;margin:0 0 16px;display:grid;gap:10px}
+.teacher-alerts li{
+  background:#fff8ee;
+  border:1px solid #ead9b8;
+  border-radius:12px;
+  padding:12px 14px;
+}
+.teacher-profile-mod{
+  background:#fff;
+  border:1px solid #dce7ea;
+  border-radius:14px;
+  padding:14px 16px;
+  margin-bottom:12px;
+}
+.teacher-admin{margin-top:18px}
+.teacher-admin summary{cursor:pointer;font-weight:700;color:#0b3a6b}
+.linkish{padding:0;background:none;border:0;color:#1558a0;font-weight:700;text-align:left}
+@media(max-width:800px){
+  .teacher-pulse-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
