@@ -11,13 +11,13 @@ body.chrome-public .review-admin {
 body.station-exam.chrome-student [data-action="practice"],
 body.station-exam.chrome-student [data-practice-free],
 body.station-exam.chrome-student #practice-free,
-body.station-exam.chrome-student .practice-free {
+body.station-exam.chrome-student .practice-free,
+body.station-exam.chrome-student #agent-panel,
+body.station-exam.chrome-student .agent-panel,
+body.station-exam.chrome-student #tutor-panel,
+body.station-exam.chrome-student [data-action="tutor"],
+body.station-exam.chrome-student [data-open="tutor"] {
   display: none !important;
-}
-
-body.station-exam.chrome-student #agent-panel[data-exam-silent] textarea,
-body.station-exam.chrome-student #agent-panel[data-exam-silent] input {
-  opacity: 0.55;
 }
 
 body.chrome-student [data-nav="editor"],
@@ -29,10 +29,32 @@ body.chrome-public [data-nav="teacher"] {
 }
 
 body.chrome-public .floating-back-button,
+body.chrome-public .tools-fab,
+body.chrome-public .tools-fab-backdrop,
+body.chrome-public .tools-fab-layer,
 body[data-screen="courses"] .floating-back-button,
-body[data-screen="login"] .floating-back-button {
+body[data-screen="courses"] .tools-fab,
+body[data-screen="courses"] .tools-fab-backdrop,
+body[data-screen="courses"] .tools-fab-layer,
+body[data-screen="login"] .floating-back-button,
+body[data-screen="login"] .tools-fab,
+body[data-screen="login"] .tools-fab-backdrop,
+body[data-screen="login"] .tools-fab-layer {
   display: none !important;
 }
+
+#station-route {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.82rem;
+}
+#station-route li[data-state="done"] { color: #166534; }
+#station-route li[data-state="current"] { color: #1d4ed8; font-weight: 650; }
+#station-route li[data-state="todo"] { color: #64748b; }
 
 [data-status="soon"] {
   background: #eef2f7;
@@ -65,4 +87,15 @@ body[data-screen="login"] .floating-back-button {
   border-radius: 999px;
   padding: 4px 12px;
   cursor: pointer;
+}
+
+.media-missing {
+  display: grid;
+  place-items: center;
+  min-height: 160px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: #334155;
+  text-align: center;
 }
