@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import {
   BANDA_LOGRO_COLOR,
   BANDA_LOGRO_LABEL,
@@ -69,9 +69,11 @@ export function TendenciaCard({
   stats: TendenciaCentral;
   unidad?: string;
 }) {
+  const titleId = useId();
+
   return (
-    <section className="portal-surface portal-tendency-card overflow-hidden rounded-2xl border p-4" aria-labelledby="portal-tendency-title">
-      <h3 id="portal-tendency-title" className="text-sm font-bold text-[var(--color-navy,#0B3A6B)]">
+    <section className="portal-surface portal-tendency-card overflow-hidden rounded-2xl border p-4" aria-labelledby={titleId}>
+      <h3 id={titleId} className="text-sm font-bold text-[var(--color-navy,#0B3A6B)]">
         Tendencia central · {unidad}
       </h3>
       <p className="mt-1 text-xs text-[var(--color-muted,#6B7C8E)]">

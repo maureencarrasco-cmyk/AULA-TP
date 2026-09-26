@@ -87,7 +87,10 @@ export function PortalShell({ section }: PortalShellProps) {
                 </svg>
               </button>
               <label className="portal-search hidden min-w-0 items-center gap-2 rounded-xl border px-3 py-2 sm:flex sm:w-[min(30rem,48vw)]">
-                <span aria-hidden="true" className="text-lg leading-none">⌕</span>
+                <svg className="h-4 w-4 shrink-0" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="8.5" cy="8.5" r="5.25" stroke="currentColor" strokeWidth="1.7" />
+                  <path d="m12.5 12.5 4 4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+                </svg>
                 <input aria-label="Buscar en el portal docente" placeholder="Buscar cursos, estudiantes, módulos o actividades..." className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-slate-400" />
               </label>
               <div className="portal-header-copy sm:hidden">
@@ -104,7 +107,12 @@ export function PortalShell({ section }: PortalShellProps) {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <button type="button" aria-label="Ver notificaciones" className="portal-icon-button hidden h-10 w-10 items-center justify-center rounded-full sm:flex">♧</button>
+              <button type="button" aria-label="Ver notificaciones" className="portal-icon-button hidden h-11 w-11 items-center justify-center rounded-full sm:flex">
+                <svg className="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5.5 8.25a4.5 4.5 0 0 1 9 0c0 4.25 1.75 4.5 1.75 5.75H3.75c0-1.25 1.75-1.5 1.75-5.75Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+                  <path d="M8 16a2.2 2.2 0 0 0 4 0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>
+              </button>
               <div className="hidden text-right sm:block">
                 <p className="text-sm font-semibold">Sebastián Chamorro</p>
                 <p className="text-xs">Aula TP Chile</p>
@@ -164,15 +172,9 @@ export function PortalShell({ section }: PortalShellProps) {
           <main className="portal-main flex-1 px-3 py-4 sm:px-4 sm:py-5 lg:px-5 lg:py-5">
             <LivePortalProvider>
               <section className="portal-welcome mb-4 overflow-hidden rounded-[1.25rem] border">
-                {section === "resumen" || section === "oa-ae" ? (
+                <div className={`portal-section-banner portal-section-banner--edge-to-edge${sectionArt.trimVerticalWhitespace ? " portal-section-banner--trim-vertical" : ""}`}>
                   <img src={sectionArt.src} alt={sectionArt.alt} className="block h-auto w-full object-contain" />
-                ) : (
-                  <div
-                    className={`portal-section-banner${sectionArt.trimVerticalWhitespace ? " portal-section-banner--trim-vertical" : ""} bg-white/20 p-2 sm:p-3`}
-                  >
-                    <img src={sectionArt.src} alt={sectionArt.alt} className="block h-auto w-full rounded-[1rem] object-contain" />
-                  </div>
-                )}
+                </div>
               </section>
               <SectionBody section={section} />
             </LivePortalProvider>

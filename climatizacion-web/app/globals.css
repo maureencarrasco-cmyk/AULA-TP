@@ -49,7 +49,7 @@ body {
 .portal-main select,
 .portal-main textarea {
   font-family: var(--font-rounded, Arial), var(--font-inter, Arial), Arial, sans-serif;
-  letter-spacing: -0.005em;
+  letter-spacing: 0;
 }
 
 .portal-main h1,
@@ -57,7 +57,7 @@ body {
 .portal-main h3,
 .portal-main h4 {
   font-family: var(--font-rounded, Arial), var(--font-display, Arial), Arial, sans-serif;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 /* El portal usa una sola familia para evitar saltos serif/sans en fuentes remotas. */
@@ -138,9 +138,7 @@ body {
 .portal-eyebrow { border-color: #bdd6f5; background: rgba(255,255,255,.58); color: #38679f; }
 .portal-eyebrow span { background: #35b98c; }
 .portal-pill { background: rgba(255,255,255,.62); color: #38679f; border: 1px solid rgba(141,181,229,.4); }
-.portal-main button, .portal-main a { transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms ease; }
-.portal-main button:hover:not(:disabled), .portal-main a:hover { transform: translateY(-1px); }
-.portal-main button:active:not(:disabled), .portal-main a:active { transform: translateY(0) scale(.98); transition-duration: 100ms; }
+.portal-main button, .portal-main a { transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease; }
 .portal-main button:focus-visible, .portal-main a:focus-visible, .portal-main select:focus-visible, .portal-main input:focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 2px; box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-cyan) 18%, transparent); }
 .portal-main button:disabled { cursor: not-allowed; opacity: .62; }
 .portal-mobile-nav-link { position: relative; min-height: var(--touch); }
@@ -181,12 +179,12 @@ body {
 .portal-main h1 {
   color: var(--portal-heading-strong);
   font-weight: 900;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
   text-shadow: 0 1px 0 rgba(255, 255, 255, .7);
 }
 .portal-main h2 {
   font-weight: 800;
-  letter-spacing: -0.022em;
+  letter-spacing: 0;
 }
 .portal-main h3,
 .portal-main h4 {
@@ -201,12 +199,14 @@ body {
 }
 
 .portal-section-banner {
-  border: 1px solid var(--portal-border);
-  border-radius: var(--radius-lg);
+  border: 0;
+  border-radius: inherit;
   background: var(--portal-surface);
-  box-shadow: var(--portal-shadow);
+  box-shadow: none;
+  overflow: hidden;
 }
-.portal-section-banner img { border-radius: calc(var(--radius-lg) - 4px); }
+.portal-section-banner img { border-radius: inherit; }
+.portal-section-banner--edge-to-edge { width: 100%; }
 .portal-section-banner--trim-vertical {
   aspect-ratio: 5.3 / 1;
   overflow: hidden;
@@ -234,12 +234,12 @@ body {
 .portal-section-intro > .flex > div { min-width: 0; }
 .portal-button { min-height: var(--touch); font-weight: var(--btn-fw); transition: var(--btn-transition), box-shadow var(--motion-base), transform var(--motion-base); }
 .portal-button-primary { background: var(--btn-primary-bg); color: var(--btn-primary-fg); box-shadow: var(--btn-primary-shadow); }
-.portal-button-primary:hover { background: var(--color-blue-600); box-shadow: var(--shadow-2); transform: translateY(-1px); }
+.portal-button-primary:hover { background: var(--color-blue-600); box-shadow: var(--shadow-2); }
 .portal-button-secondary { background: var(--btn-secondary-bg); color: var(--btn-secondary-fg); border-color: var(--btn-secondary-border); }
-.portal-button-secondary:hover { background: var(--color-info-soft); box-shadow: var(--shadow-1); transform: translateY(-1px); }
+.portal-button-secondary:hover { background: var(--color-info-soft); box-shadow: var(--shadow-1); }
 .portal-icon-badge { display: inline-flex; width: 2.25rem; height: 2.25rem; align-items: center; justify-content: center; border: 1px solid; border-radius: 999px; font-weight: 800; }
-.portal-alert { transition: box-shadow var(--motion-base), transform var(--motion-base); }
-.portal-alert:hover { box-shadow: var(--shadow-1); transform: translateY(-1px); }
+.portal-alert { transition: box-shadow var(--motion-base); }
+.portal-alert:hover { box-shadow: var(--shadow-1); }
 .portal-alert-warn { background: var(--color-warn-soft); border-color: color-mix(in srgb, var(--color-warn) 28%, white); }
 .portal-alert-ok { background: var(--color-ok-soft); border-color: color-mix(in srgb, var(--color-ok) 22%, white); }
 .portal-alert-info { background: var(--color-info-soft); border-color: color-mix(in srgb, var(--color-blue) 22%, white); }
@@ -247,8 +247,8 @@ body {
 .portal-alert-warn .portal-alert-index { background: var(--color-warn); }
 .portal-alert-ok .portal-alert-index { background: var(--color-ok); }
 .portal-metric-card { border-color: var(--portal-border); }
-.portal-course-card { box-shadow: var(--portal-shadow); transition: box-shadow var(--motion-base), transform var(--motion-base); }
-.portal-course-card:hover { box-shadow: var(--portal-shadow-hover); transform: translateY(-2px); }
+.portal-course-card { box-shadow: var(--portal-shadow); transition: box-shadow var(--motion-base); }
+.portal-course-card:hover { box-shadow: var(--portal-shadow-hover); }
 .portal-course-reference-banner {
   background-size: auto 362%;
   background-position-y: 27%;
@@ -269,6 +269,28 @@ body {
 .portal-empty-state { background: var(--portal-surface-soft); border-color: var(--portal-border); color: var(--color-muted); }
 .portal-status-note { display: flex; align-items: flex-start; gap: .5rem; color: var(--color-slate); }
 .portal-status-note::before { content: "i"; display: inline-flex; width: 1.25rem; height: 1.25rem; flex: 0 0 auto; align-items: center; justify-content: center; border-radius: 999px; background: var(--color-cyan-soft); color: var(--color-blue); font-size: .75rem; font-weight: 800; }
+
+/* Auditoría Aula TP: legibilidad, estabilidad y controles consistentes en todas las pestañas. */
+.portal-main [class~="text-[10px]"],
+.portal-main [class~="text-[11px]"] { font-size: .75rem; }
+.portal-main [class*="tracking-"] { letter-spacing: 0; }
+.portal-main button,
+.portal-main select,
+.portal-main input[type="button"],
+.portal-main input[type="submit"],
+.portal-main a.portal-button { min-height: 2.75rem; }
+.portal-main table th { line-height: 1.35; }
+.portal-main table td { line-height: 1.45; }
+.portal-main img { height: auto; }
+.portal-welcome,
+.portal-chart-panel,
+.portal-surface { isolation: isolate; }
+
+@media (max-width: 639px) {
+  .portal-welcome { border-radius: 1rem; }
+  .portal-section-banner { border-radius: inherit; }
+  .portal-main .portal-chart-panel { padding: 1rem; }
+}
 
 :focus-visible {
   outline: 2px solid var(--color-cyan);

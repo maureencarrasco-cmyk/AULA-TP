@@ -1,6 +1,6 @@
 /** Gráficos SVG/CSS alineados a tokens Aula TP — donut (%), barras (cantidades), línea (evolución). */
 
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 
 export const CHART = {
   blue: "var(--aula-blue, #0870ef)",
@@ -285,6 +285,7 @@ export function LineChart({
   yAxisTitle = "Porcentaje de logro %",
   xAxisTitle = "Mes",
 }: LineChartProps) {
+  const gradientId = useId();
   const w = 560;
   const h = 220;
   const pad = { t: 28, r: 20, b: 40, l: 44 };
@@ -345,7 +346,7 @@ export function LineChart({
           aria-label={`${title}. Incluye resultado y recta de tendencia`}
         >
           <defs>
-            <linearGradient id="aulaLineFill" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor={CHART_HEX.blue} stopOpacity="0.22" />
               <stop offset="100%" stopColor={CHART_HEX.blue} stopOpacity="0.02" />
             </linearGradient>
@@ -374,7 +375,7 @@ export function LineChart({
               </g>
             );
           })}
-          {areaPath ? <path d={areaPath} fill="url(#aulaLineFill)" /> : null}
+          {areaPath ? <path d={areaPath} fill={`url(#${gradientId})`} /> : null}
           <path
             d={trendPath}
             fill="none"
