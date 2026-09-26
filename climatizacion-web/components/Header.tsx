@@ -1,9 +1,9 @@
 import { Logo } from "./Logo";
 
 const LINKS = [
-  { href: "/portal/cursos/", label: "Cursos" },
+  { href: "/portal/cursos/", label: "Campus" },
+  { href: "#productos", label: "Especialidades" },
   { href: "#beneficios", label: "Beneficios" },
-  { href: "#productos", label: "Productos" },
   { href: "#testimonios", label: "Experiencias" },
   { href: "#faq", label: "FAQ" },
   { href: "#contacto", label: "Contacto" },
@@ -25,6 +25,22 @@ export function Header() {
             </a>
           ))}
         </nav>
+        <details className="relative md:hidden">
+          <summary className="cursor-pointer list-none rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700">
+            Menú
+          </summary>
+          <nav className="absolute right-0 mt-2 w-52 rounded-xl border border-slate-200 bg-white p-2 shadow-lg" aria-label="Móvil">
+            {LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+        </details>
         <a
           href="#contacto"
           className="inline-flex items-center justify-center rounded-lg bg-brand-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
