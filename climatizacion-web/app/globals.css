@@ -81,29 +81,27 @@ body {
 .portal-sidebar,
 .portal-sidebar button,
 .portal-sidebar a { font-family: var(--font-rounded, Arial), var(--font-inter, Arial), Arial, sans-serif; }
-.portal-sidebar { background: linear-gradient(180deg, #f8fbff 0%, #edf5ff 100%); color: #143a78; border-right: 1px solid #dce9f8; }
-.portal-sidebar-reference { background: #f5f9ff; }
+.portal-sidebar { background: linear-gradient(180deg, #f6f4ee 0%, #eef3ea 100%); color: #3d4a3c; border-right: 1px solid #ddd6c8; }
+.portal-sidebar-reference { background: #f7f3ea; }
 .portal-sidebar-reference-art { height: 100%; object-fit: cover; object-position: center top; }
-.portal-reference-nav { left: 0; right: 0; top: 26%; height: 49%; z-index: 2; display: flex; flex-direction: column; gap: 2%; padding: 1.5% 7%; border-radius: 1.25rem; background: linear-gradient(180deg, #f7fbff 0%, #eff7ff 100%); box-shadow: 0 10px 24px rgba(48, 104, 190, .08); }
-.portal-reference-nav-item { min-height: 0; flex: 1 1 0; display: flex; align-items: center; gap: 8%; padding: 0 8%; border: 1px solid transparent; border-radius: 1.25rem; color: #123474; font-size: clamp(.58rem, 1.05vw, .82rem); font-weight: 700; line-height: 1.2; transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease; }
-.portal-reference-nav-item:hover { background: #edf5ff; border-color: #cfe0f5; transform: translateY(-1px); }
+.portal-reference-nav { left: 0; right: 0; top: 26%; height: 49%; z-index: 2; display: flex; flex-direction: column; gap: 2%; padding: 1.5% 7%; border-radius: 1.25rem; background: linear-gradient(180deg, #fbf8f1 0%, #eef4ea 100%); box-shadow: 0 10px 24px rgba(80, 90, 70, .08); }
+.portal-reference-nav-item { min-height: 0; flex: 1 1 0; display: flex; align-items: center; gap: 8%; padding: 0 8%; border: 1px solid transparent; border-radius: 1.25rem; color: #3d4a3c; font-size: clamp(.58rem, 1.05vw, .82rem); font-weight: 700; line-height: 1.2; transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease; }
+.portal-reference-nav-item:hover { background: #f3ead9; border-color: #e4d4b8; transform: translateY(-1px); }
 .portal-reference-nav-item:active { transform: scale(.98); transition-duration: 100ms; }
 .portal-reference-nav-item:focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 2px; }
-.portal-reference-nav-item-active { background: #dcecff; border-color: #c1dcfb; color: #1558a0; }
+.portal-reference-nav-item-active { background: #e4eee6; border-color: #c5d6c8; color: #2f4a38; }
 .portal-reference-nav-icon { display: inline-flex; width: 2.15rem; height: 2.15rem; flex: 0 0 2.15rem; align-items: center; justify-content: center; border-radius: 999px; }
 .portal-reference-nav-icon svg { width: 1.35rem; height: 1.35rem; }
-.portal-reference-nav-icon-resumen { background: #d8eaff; color: #277be6; }
-.portal-reference-nav-icon-cursos { background: #e9dcff; color: #8452dc; }
-.portal-reference-nav-icon-estudiantes { background: #d2f4ea; color: #16af8a; }
-.portal-reference-nav-icon-oa-ae { background: #ffedc4; color: #ee9d12; }
-.portal-reference-nav-icon-cumplimiento { background: #ffdce4; color: #ef4f70; }
-.portal-reference-nav-icon-reportes { background: #e8dcff; color: #7a4de0; }
-.portal-reference-nav-item-active .portal-reference-nav-icon-resumen { background: #4d9df8; color: white; }
-.portal-reference-nav-item-active .portal-reference-nav-icon-cursos { background: #8452dc; color: white; }
-.portal-reference-nav-item-active .portal-reference-nav-icon-estudiantes { background: #16af8a; color: white; }
-.portal-reference-nav-item-active .portal-reference-nav-icon-oa-ae { background: #ee9d12; color: white; }
-.portal-reference-nav-item-active .portal-reference-nav-icon-cumplimiento { background: #ef4f70; color: white; }
-.portal-reference-nav-item-active .portal-reference-nav-icon-reportes { background: #7a4de0; color: white; }
+.portal-reference-nav-icon-resumen { background: #e4eee6; color: #3d5c45; }
+.portal-reference-nav-icon-cursos { background: #f3ead9; color: #8a6230; }
+.portal-reference-nav-icon-estudiantes { background: #e8f0e6; color: #3d5c45; }
+.portal-reference-nav-icon-oa-ae { background: #f7e4d4; color: #a45a32; }
+.portal-reference-nav-icon-reportes { background: #efe6d8; color: #6b5344; }
+.portal-reference-nav-item-active .portal-reference-nav-icon-resumen { background: #3d5c45; color: white; }
+.portal-reference-nav-item-active .portal-reference-nav-icon-cursos { background: #8a6230; color: white; }
+.portal-reference-nav-item-active .portal-reference-nav-icon-estudiantes { background: #3d5c45; color: white; }
+.portal-reference-nav-item-active .portal-reference-nav-icon-oa-ae { background: #a45a32; color: white; }
+.portal-reference-nav-item-active .portal-reference-nav-icon-reportes { background: #6b5344; color: white; }
 @media (min-width: 1024px) {
   .portal-sidebar {
     position: sticky;
@@ -199,6 +197,7 @@ body {
 }
 
 .portal-section-banner {
+  position: relative;
   border: 0;
   border-radius: inherit;
   background: var(--portal-surface);
@@ -207,6 +206,49 @@ body {
 }
 .portal-section-banner img { border-radius: inherit; }
 .portal-section-banner--edge-to-edge { width: 100%; }
+.portal-section-banner--students-crop {
+  aspect-ratio: 4.15 / 1;
+  overflow: hidden;
+}
+.portal-main .portal-section-banner--students-crop img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 48%;
+  transform: scale(1.09);
+  transform-origin: center;
+}
+.portal-all-specialties-label {
+  position: absolute;
+  top: 15.8%;
+  left: 3.35%;
+  display: inline-flex;
+  min-height: 7.1%;
+  align-items: center;
+  gap: clamp(.22rem, .55vw, .5rem);
+  padding: .2% 1.05%;
+  border: 1px solid #c9dff7;
+  border-radius: 999px;
+  background: rgba(250, 253, 255, .98);
+  color: #315d9a;
+  box-shadow: 0 2px 8px rgba(38, 92, 160, .1);
+  font-size: clamp(.32rem, .74vw, .72rem);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.portal-all-specialties-label > span {
+  width: clamp(.32rem, .68vw, .62rem);
+  height: clamp(.32rem, .68vw, .62rem);
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: #23cfa5;
+  box-shadow: 0 0 0 4px rgba(35, 207, 165, .14);
+}
 .portal-section-banner--trim-vertical {
   aspect-ratio: 5.3 / 1;
   overflow: hidden;
@@ -232,6 +274,10 @@ body {
 .portal-section-intro { min-width: 0; }
 .portal-section-mark { width: 4px; min-height: 2.5rem; flex: 0 0 auto; border-radius: var(--radius-pill); background: linear-gradient(180deg, var(--color-blue), var(--color-cyan)); }
 .portal-section-intro > .flex > div { min-width: 0; }
+.portal-glossary { background: color-mix(in srgb, var(--color-info-soft) 72%, white); border-color: color-mix(in srgb, var(--color-blue) 18%, white); }
+.portal-glossary summary::marker { color: var(--color-blue); }
+.portal-pedagogical-guide { background: linear-gradient(110deg, #f7fbff, #eef8f5); border-color: color-mix(in srgb, var(--color-blue) 18%, white); box-shadow: var(--portal-shadow); }
+.portal-decision-step { border-color: var(--portal-border); box-shadow: 0 2px 8px rgba(46, 93, 155, .05); }
 .portal-button { min-height: var(--touch); font-weight: var(--btn-fw); transition: var(--btn-transition), box-shadow var(--motion-base), transform var(--motion-base); }
 .portal-button-primary { background: var(--btn-primary-bg); color: var(--btn-primary-fg); box-shadow: var(--btn-primary-shadow); }
 .portal-button-primary:hover { background: var(--color-blue-600); box-shadow: var(--shadow-2); }

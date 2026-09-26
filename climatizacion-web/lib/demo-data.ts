@@ -1184,7 +1184,6 @@ export const NAV_SECTIONS = [
   { id: "cursos", label: "Cursos / Planificación", href: "/portal-docente/cursos" },
   { id: "estudiantes", label: "Estudiantes", href: "/portal-docente/estudiantes" },
   { id: "oa-ae", label: "OA, AE y criterios de evaluación", href: "/portal-docente/oa-ae" },
-  { id: "cumplimiento", label: "Cumplimiento", href: "/portal-docente/cumplimiento" },
   { id: "reportes", label: "Reportes", href: "/portal-docente/reportes" },
 ] as const;
 

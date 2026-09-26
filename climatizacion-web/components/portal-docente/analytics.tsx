@@ -74,22 +74,22 @@ export function TendenciaCard({
   return (
     <section className="portal-surface portal-tendency-card overflow-hidden rounded-2xl border p-4" aria-labelledby={titleId}>
       <h3 id={titleId} className="text-sm font-bold text-[var(--color-navy,#0B3A6B)]">
-        Tendencia central · {unidad}
+        Resumen del grupo · {unidad}
       </h3>
       <p className="mt-1 text-xs text-[var(--color-muted,#6B7C8E)]">
-        Calculado sobre {stats.n} {stats.n === 1 ? "dato" : "datos"}. La mediana evita que extremos distorsionen la lectura.
+        Calculado con {stats.n} {stats.n === 1 ? "estudiante" : "estudiantes"}. Compara el promedio con el punto medio para evitar conclusiones basadas en un solo número.
       </p>
       <dl className="mt-3 grid grid-cols-3 gap-2 text-center">
         <div className="portal-metric-card portal-tone-info rounded-xl px-2 py-3">
-          <dt className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-blue,#1558A0)]">Media</dt>
+          <dt className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-blue,#1558A0)]">Promedio</dt>
           <dd className="mt-1 text-lg font-extrabold tabular-nums text-[var(--color-navy,#0B3A6B)]">{stats.media}</dd>
         </div>
         <div className="portal-metric-card portal-tone-success rounded-xl px-2 py-3">
-          <dt className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-ok,#1F8A5B)]">Mediana</dt>
+          <dt className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-ok,#1F8A5B)]">Punto medio</dt>
           <dd className="mt-1 text-lg font-extrabold tabular-nums text-[var(--color-navy,#0B3A6B)]">{stats.mediana}</dd>
         </div>
         <div className="portal-metric-card portal-tone-warning rounded-xl px-2 py-3">
-          <dt className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-warn,#C47A12)]">Moda</dt>
+          <dt className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-warn,#C47A12)]">Valor más frecuente</dt>
           <dd className="mt-1 text-lg font-extrabold tabular-nums text-[var(--color-navy,#0B3A6B)]">{stats.moda ?? "—"}</dd>
         </div>
       </dl>
@@ -262,7 +262,7 @@ export function RankingList({
   title,
   subtitle,
   items,
-  empty = "Sin datos en este recorte.",
+  empty = "Todavía no hay suficientes actividades realizadas para generar esta información.",
 }: {
   title: string;
   subtitle?: string;
@@ -353,8 +353,55 @@ export function SectionIntro({
           <p className="mt-1 max-w-3xl text-sm text-[var(--color-slate,#3D5166)]">{purpose}</p>
         </div>
       </div>
+      <details className="portal-glossary mt-3 max-w-3xl rounded-xl border px-3 py-2 text-sm">
+        <summary className="cursor-pointer font-bold text-[var(--color-blue,#1558A0)]">
+          ¿Qué significan estos indicadores?
+        </summary>
+        <dl className="mt-3 grid gap-3 text-xs text-[var(--color-slate,#3D5166)] sm:grid-cols-2">
+          <div><dt className="font-bold text-[var(--color-navy,#0B3A6B)]">Logro</dt><dd>Nivel de aprendizaje que el estudiante evidencia actualmente.</dd></div>
+          <div><dt className="font-bold text-[var(--color-navy,#0B3A6B)]">Progreso</dt><dd>Cambio observado respecto de una actividad o periodo anterior.</dd></div>
+          <div><dt className="font-bold text-[var(--color-navy,#0B3A6B)]">OA y AE</dt><dd>Objetivo de Aprendizaje y Aprendizaje Esperado que orientan qué debe aprender.</dd></div>
+          <div><dt className="font-bold text-[var(--color-navy,#0B3A6B)]">Evidencia</dt><dd>Resultado observable de una práctica, actividad o evaluación realizada.</dd></div>
+        </dl>
+      </details>
       {children}
     </div>
+  );
+}
+
+export function PedagogicalGuide({
+  observe,
+  interpret,
+  act,
+  followUp,
+}: {
+  observe: string;
+  interpret: string;
+  act: string;
+  followUp: string;
+}) {
+  const steps = [
+    { label: "1. Observa", text: observe },
+    { label: "2. Interpreta", text: interpret },
+    { label: "3. Actúa", text: act },
+    { label: "4. Comprueba", text: followUp },
+  ];
+
+  return (
+    <section className="portal-pedagogical-guide rounded-2xl border p-4" aria-label="Ruta de decisión pedagógica">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h2 className="text-sm font-extrabold text-[var(--color-navy,#0B3A6B)]">Ruta de decisión docente</h2>
+        <span className="text-xs font-semibold text-[var(--color-muted,#6B7C8E)]">Del dato a una acción concreta</span>
+      </div>
+      <ol className="mt-3 grid grid-cols-2 gap-2 xl:grid-cols-4">
+        {steps.map((step) => (
+          <li key={step.label} className="portal-decision-step rounded-xl border bg-white px-2.5 py-2.5 sm:px-3 sm:py-3">
+            <p className="text-xs font-extrabold text-[var(--color-blue,#1558A0)]">{step.label}</p>
+            <p className="mt-1 text-xs leading-relaxed text-[var(--color-slate,#3D5166)] sm:text-sm">{step.text}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
   );
 }
 

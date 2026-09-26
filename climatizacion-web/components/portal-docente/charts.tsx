@@ -227,14 +227,14 @@ export function BarChart({
         role="img"
         aria-label={`${title}. ${items.map((i) => `${i.label}: ${i.valueLabel ?? `${i.value}${valueSuffix ? ` ${valueSuffix}` : ""}`}`).join("; ")}`}
       >
-        {items.map((item) => {
+        {items.map((item, index) => {
           const pct = Math.max(2, Math.round((item.value / max) * 100));
           const barColor = item.color ?? color;
           const shown =
             item.valueLabel ?? `${item.value}${valueSuffix ? ` ${valueSuffix}` : ""}`;
           return (
             <div
-              key={item.label}
+              key={`${item.label}-${index}`}
               className="grid grid-cols-[minmax(0,6.5rem)_1fr_minmax(2.5rem,auto)] items-center gap-2 sm:grid-cols-[minmax(0,11rem)_1fr_minmax(4.5rem,auto)] sm:gap-3"
             >
               <p
@@ -343,7 +343,7 @@ export function LineChart({
           viewBox={`0 0 ${w} ${h}`}
           className="h-auto w-full"
           role="img"
-          aria-label={`${title}. Incluye resultado y recta de tendencia`}
+          aria-label={`${title}. Incluye resultado y dirección general del progreso`}
         >
           <defs>
             <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
@@ -383,7 +383,7 @@ export function LineChart({
             strokeWidth={2}
             strokeDasharray="6 5"
           >
-            <title>Recta de tendencia lineal</title>
+            <title>Dirección general del progreso</title>
           </path>
           <path d={path} fill="none" stroke={CHART_HEX.blue} strokeWidth={2.75} strokeLinejoin="round" strokeLinecap="round" />
           {safePoints.map((p, i) => (
@@ -438,7 +438,7 @@ export function LineChart({
             className="h-0.5 w-6 border-t-2 border-dashed"
             style={{ borderColor: CHART_HEX.violet }}
           />
-          Recta de tendencia
+          Dirección general del progreso
         </span>
       </div>
     </div>

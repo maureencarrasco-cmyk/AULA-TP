@@ -8,7 +8,6 @@ import {
 } from "@/lib/demo-data";
 import { LivePortalProvider } from "./live-data";
 import {
-  CumplimientoView,
   CursosView,
   EstudiantesView,
   OaAeView,
@@ -18,14 +17,14 @@ import {
 
 type PortalShellProps = {
   section: SectionId;
+  defaultReportArea?: "analisis" | "cobertura";
 };
 
 const PORTAL_SECTION_ART = {
-  resumen: { src: "/images/portal-docente/frames/hero-resumen-reference.png", alt: "Portal Docente con docentes analizando resultados y decisiones pedagógicas", trimVerticalWhitespace: false },
+  resumen: { src: "/images/portal-docente/frames/hero-resumen-reference.png", alt: "Portal Docente para todas las especialidades con docentes analizando resultados y decisiones pedagógicas", trimVerticalWhitespace: false },
   cursos: { src: "/images/portal-docente/frames/hero-cursos-planificacion.png", alt: "Banner de cursos y planificación del Portal Docente", trimVerticalWhitespace: false },
   estudiantes: { src: "/images/portal-docente/frames/hero-estudiantes-reference.png", alt: "Banner de estudiantes y seguimiento de aprendizajes", trimVerticalWhitespace: false },
   "oa-ae": { src: "/images/portal-docente/frames/hero-oa-ae-reference.png", alt: "Banner de objetivos de aprendizaje y aprendizajes esperados", trimVerticalWhitespace: false },
-  cumplimiento: { src: "/images/portal-docente/frames/hero-cumplimiento.png", alt: "Banner de seguimiento de cumplimiento", trimVerticalWhitespace: false },
   reportes: {
     src: "/images/portal-docente/frames/hero-reportes-reference.png",
     alt: "Banner de reportes y análisis pedagógico",
@@ -33,7 +32,7 @@ const PORTAL_SECTION_ART = {
   },
 } satisfies Record<SectionId, { src: string; alt: string; trimVerticalWhitespace: boolean }>;
 
-export function PortalShell({ section }: PortalShellProps) {
+export function PortalShell({ section, defaultReportArea = "analisis" }: PortalShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const sectionArt = PORTAL_SECTION_ART[section];
 
@@ -172,11 +171,17 @@ export function PortalShell({ section }: PortalShellProps) {
           <main className="portal-main flex-1 px-3 py-4 sm:px-4 sm:py-5 lg:px-5 lg:py-5">
             <LivePortalProvider>
               <section className="portal-welcome mb-4 overflow-hidden rounded-[1.25rem] border">
-                <div className={`portal-section-banner portal-section-banner--edge-to-edge${sectionArt.trimVerticalWhitespace ? " portal-section-banner--trim-vertical" : ""}`}>
-                  <img src={sectionArt.src} alt={sectionArt.alt} className="block h-auto w-full object-contain" />
+                <div className={`portal-section-banner portal-section-banner--edge-to-edge${sectionArt.trimVerticalWhitespace ? " portal-section-banner--trim-vertical" : ""}${section === "estudiantes" ? " portal-section-banner--students-crop" : ""}`}>
+                  <img src={sectionArt.src} alt={sectionArt.alt} className={`block h-auto w-full ${section === "estudiantes" ? "object-cover" : "object-contain"}`} />
+                  {section === "resumen" ? (
+                    <span className="portal-all-specialties-label" aria-hidden="true">
+                      <span />
+                      Todas las especialidades
+                    </span>
+                  ) : null}
                 </div>
               </section>
-              <SectionBody section={section} />
+            <SectionBody section={section} defaultReportArea={defaultReportArea} />
             </LivePortalProvider>
           </main>
         </div>
@@ -191,7 +196,6 @@ function PortalNavIcon({ section }: { section: SectionId }) {
     cursos: "M3 6.5 10 4l7 2.5-7 2.5L3 6.5Zm2 3.5v3.5c2.7 2 7.3 2 10 0V10",
     estudiantes: "M6.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm7 0a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM2.5 16c.3-3 2-4.5 4-4.5S10.2 13 10.5 16M9.5 16c.3-3 2-4.5 4-4.5s3.7 1.5 4 4.5",
     "oa-ae": "M5 3.5h8l2.5 2.5v10.5H5V3.5Zm8 0V6h2.5M8 9h5M8 12h5M8 15h3",
-    cumplimiento: "M10 3.5 16 6v4.5c0 3.5-2.3 5.8-6 7-3.7-1.2-6-3.5-6-7V6l6-2.5Zm-2.5 6.5 1.7 1.7 3.5-3.5",
     reportes: "M4 16V9h3v7H4Zm4.5 0V5h3v11h-3Zm4.5 0v-4h3v4h-3Z",
   };
 
@@ -204,7 +208,13 @@ function PortalNavIcon({ section }: { section: SectionId }) {
   );
 }
 
-function SectionBody({ section }: { section: SectionId }) {
+function SectionBody({
+  section,
+  defaultReportArea,
+}: {
+  section: SectionId;
+  defaultReportArea: "analisis" | "cobertura";
+}) {
   switch (section) {
     case "resumen":
       return <ResumenView />;
@@ -215,9 +225,7 @@ function SectionBody({ section }: { section: SectionId }) {
     case "oa-ae":
       return <OaAeView />;
     case "reportes":
-      return <ReportesView />;
-    case "cumplimiento":
-      return <CumplimientoView />;
+      return <ReportesView defaultArea={defaultReportArea} />;
     default:
       return <ResumenView />;
   }
