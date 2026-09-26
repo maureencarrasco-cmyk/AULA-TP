@@ -18,6 +18,17 @@ AULA_SHARE = 0.30
 EXAM_HP = 2
 PASS_PERCENT = 60
 
+ADMINISTRATION_OA1 = {
+    'code': 'OA 1',
+    'title': ('Leer y utilizar información contable básica acerca de la marcha de la empresa, incluida información '
+              'sobre importaciones y/o exportaciones, de acuerdo a las normas internacionales de contabilidad (NIC) '
+              'y de información financiera (NIIF) y a la legislación tributaria vigente.'),
+}
+ADMINISTRATION_OA1_PAGES = {
+    'https://www.curriculumnacional.cl/614/w3-article-81753.html',
+    'https://www.curriculumnacional.cl/614/w3-article-81754.html',
+}
+
 
 def verified_static_asset(value):
     if not isinstance(value, str) or not value.startswith('/static/'):
@@ -600,6 +611,7 @@ def build_traceability(content, specialty='Refrigeración y climatización'):
     aes = content.get('aes') or []
     ae_count = max(1, len(aes))
     src = content.get('official_source') or {}
+    source_pdf = src.get('pdf') or PDF
     pdf_page = lambda ae: (ae or {}).get('official_page') or src.get('title') or PDF
 
     def crit_label(ae_i):
@@ -614,7 +626,7 @@ def build_traceability(content, specialty='Refrigeración y climatización'):
         rows.append({
             'specialty': specialty,
             'page': f'PDF p. {page} · {code}',
-            'pdf': PDF,
+            'pdf': source_pdf,
             'activity': case.get('title') or f'Situación {i+1}',
             'criterion': criterion,
             'ae_code': code,
@@ -629,7 +641,7 @@ def build_traceability(content, specialty='Refrigeración y climatización'):
             rows.append({
                 'specialty': specialty,
                 'page': f'PDF p. {page} · {code} · criterio {si+1}',
-                'pdf': PDF,
+                'pdf': source_pdf,
                 'activity': exp.get('prompt') or ae.get('title'),
                 'criterion': (ae.get('criteria') or [criterion])[min(si, len(ae.get('criteria') or [criterion]) - 1)],
                 'ae_code': code,
@@ -643,7 +655,7 @@ def build_traceability(content, specialty='Refrigeración y climatización'):
         rows.append({
             'specialty': specialty,
             'page': f'PDF · actividad de oficio {act.get("kind")}',
-            'pdf': PDF,
+            'pdf': source_pdf,
             'activity': act.get('label'),
             'criterion': act.get('prompt'),
             'ae_code': 'pack',
@@ -662,7 +674,7 @@ def build_traceability(content, specialty='Refrigeración y climatización'):
         rows.append({
             'specialty': specialty,
             'page': f'PDF p. {page} · {code}',
-            'pdf': PDF,
+            'pdf': source_pdf,
             'activity': q.get('stimulus') or q.get('question'),
             'criterion': mapped,
             'ae_code': code,
@@ -676,7 +688,7 @@ def build_traceability(content, specialty='Refrigeración y climatización'):
     rows.append({
         'specialty': specialty,
         'page': f'PDF · {src.get("title") or "módulo"}',
-        'pdf': PDF,
+        'pdf': source_pdf,
         'activity': 'Situación de desarrollo',
         'criterion': 'Aplicación y análisis de los AE del módulo (huella de las formativas del PDF)',
         'practiced_in': 'estación 4',
@@ -1020,11 +1032,19 @@ def enrich(content, module_id=1):
     custom_explore = deepcopy(c.get('explore')) if custom and c.get('explore') else None
     custom_development = deepcopy(c.get('development_pack')) if custom and c.get('development_pack') else None
     if custom:
+        if not custom.get('oa') and custom.get('source_page') in ADMINISTRATION_OA1_PAGES:
+            custom['oa'] = [deepcopy(ADMINISTRATION_OA1)]
+            custom['oa_source'] = custom.get('source_page')
+        module_title = str(custom.get('title') or c.get('case_title') or '').casefold()
+        if not custom.get('oa') and ('emprendimiento' in module_title or 'empleabilidad' in module_title):
+            custom['oa_applicability'] = 'No aplica OA de especialidad; el módulo desarrolla Objetivos de Aprendizaje Genéricos.'
+            custom['oag_source'] = (c.get('curriculum') or {}).get('url') or custom.get('url')
         c['official_source'] = {
             'pdf': custom.get('pdf'), 'decreto': custom.get('decree'),
             'scope': custom.get('scope'), 'time_factor': TIME_FACTOR,
             'official_hp': custom.get('official_hp'), 'title': custom.get('title'),
-            'oa': custom.get('oa') or [],
+            'oa': custom.get('oa') or [], 'oa_source': custom.get('oa_source'),
+            'oa_applicability': custom.get('oa_applicability'), 'oag_source': custom.get('oag_source'),
         }
         plan = _load(custom.get('official_hp') or 190, custom.get('course_hp') or custom.get('official_hp') or 190)
         plan['title'] = custom.get('title')
@@ -1052,7 +1072,13 @@ def enrich(content, module_id=1):
     c['explore']['formative_pack'] = [a for a in c.get('formative_pack') or [] if a.get('station') != 3]
     c['explore']['video'] = c.get('video')
     c['explore']['vtt'] = c.get('vtt')
-    media_key = c.get('specialty_key') or 'general'
+    requested_media_key = c.get('specialty_key') or 'general'
+    header_root = Path(__file__).resolve().parent / 'static' / 'headers'
+    media_key = requested_media_key if (header_root / requested_media_key).is_dir() else 'general'
+    if not c.get('video'):
+        c['video'] = f'/static/media/{media_key}-secuencia.mp4'
+    if not c.get('vtt'):
+        c['vtt'] = f'/static/media/{media_key}-secuencia.vtt'
     primary_ae = (c.get('aes') or [{}])[0]
     primary_criterion = (primary_ae.get('criteria') or ['Reconocer y aplicar el procedimiento técnico']) [0]
     media_root = f'/static/headers/{media_key}'
@@ -1186,6 +1212,33 @@ def enrich(content, module_id=1):
                 exp['caption'] = f'Recurso formativo del AE {ai + 1} de {custom.get("title")}.'
                 exp['alt'] = 'Recurso contextual para observar y argumentar; no contiene la solución.'
     apply_instructional_quality(c, mid)
+    c['time_audit'] = {
+        'method': 'Cálculo de abajo hacia arriba limitado por la carga curricular disponible.',
+        'expert_minutes': plan['minutes'] / TIME_FACTOR,
+        'factor': TIME_FACTOR,
+        'student_minutes': plan['minutes'],
+        'available_minutes': plan['minutes'],
+        'difference_minutes': 0,
+        'evaluation_minutes': plan['exam_minutes'],
+        'formative_minutes': plan['formative_minutes'],
+        'station_minutes': deepcopy(plan['station_minutes']),
+        'rounding': 'Minutos operacionales distribuidos por mayores restos; los valores exactos se conservan en planning.',
+    }
+    c['community_reporting'] = [
+        {'actor': 'Estudiante', 'need': 'Comprender avance, logro y mejora', 'indicator': 'Progreso por estación y AE', 'evidence': 'Respuestas, evaluación y plan de mejora', 'action': 'Reintentar y continuar'},
+        {'actor': 'Docente', 'need': 'Acompañar el aprendizaje', 'indicator': 'Avance, errores frecuentes y tiempos', 'evidence': 'Intentos y productos por módulo', 'action': 'Retroalimentar y ajustar apoyos'},
+        {'actor': 'Coordinación TP', 'need': 'Monitorear cobertura técnica', 'indicator': 'Cobertura por módulo y especialidad', 'evidence': 'Módulos, AE y estados de avance', 'action': 'Coordinar implementación'},
+        {'actor': 'UTP', 'need': 'Verificar trazabilidad curricular', 'indicator': 'OA, AE, criterios y horas', 'evidence': 'Fuente MINEDUC y productos', 'action': 'Revisar coherencia curricular'},
+        {'actor': 'Dirección y sostenedor', 'need': 'Seguimiento agregado', 'indicator': 'Participación y avance general', 'evidence': 'Datos agregados sin respuestas individuales', 'action': 'Priorizar recursos'},
+        {'actor': 'Equipo PIE y apoyos', 'need': 'Identificar barreras del entorno', 'indicator': 'Uso de apoyos y dificultades de acceso', 'evidence': 'Preferencias de accesibilidad y navegación', 'action': 'Ajustar apoyos sin reducir exigencia'},
+        {'actor': 'Familia o apoderado', 'need': 'Información pedagógica pertinente', 'indicator': 'Hitos generales cuando exista autorización', 'evidence': 'Resumen de avance, sin datos sensibles', 'action': 'Acompañar hábitos y continuidad'},
+    ]
+    c['accessibility_audit'] = {
+        'representation': 'Texto, evidencia visual, documentos, tablas y simulación cuando aporta comprensión.',
+        'action_expression': 'Selección, clasificación, secuencia, cálculo, justificación y desarrollo escrito.',
+        'participation': 'Ruta predecible, práctica libre no calificable, reintento y retroalimentación.',
+        'requirements': ['teclado', 'foco visible', 'texto alternativo', 'subtítulos cuando hay video', 'reducción de movimiento', 'no depender solo del color'],
+    }
     c['traceability'] = build_traceability(c, c.get('specialty') or 'Refrigeración y climatización')
     if draft:
         media_items = [c.get('explore') or {}, c.get('scene') or {}, c]

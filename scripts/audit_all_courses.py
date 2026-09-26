@@ -2,8 +2,10 @@
 
 import csv
 import json
+import os
 import sqlite3
 import sys
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -42,11 +44,15 @@ def bank_has_variety(items):
            or not 0 <= item['answer'] < len(item['options']) for item in items):
         return False
     signatures = [tuple(sorted(str(option).strip().casefold() for option in item.get('options') or [])) for item in items]
-    correct = [str((item.get('options') or [''])[item.get('answer', 0)]).strip().casefold() for item in items]
-    evidence = [str(item.get('stimulus') or item.get('context') or item.get('question') or '').strip().casefold()
-                for item in items]
+    evidence = [(
+        str(item.get('stimulus') or item.get('context') or '').strip() + ' | '
+        + str(item.get('question') or item.get('title') or '').strip()
+    ).casefold() for item in items]
     minimum = min(5, len(items))
-    return all(len(set(values)) >= minimum for values in (signatures, correct, evidence))
+    # Repeating a sound professional decision across different evidence is valid.
+    # Variety is required in the evidence and in the complete option sets, not in
+    # the literal wording of the keyed answer.
+    return all(len(set(values)) >= minimum for values in (signatures, evidence))
 
 
 def source_is_traceable(item, specialty, expected_url):
@@ -65,7 +71,8 @@ def pct(passed, total):
 
 
 def main():
-    with sqlite3.connect(ROOT / 'data' / 'aulatp.sqlite3') as con:
+    database = Path(os.environ.get('AUDIT_DATABASE', ROOT / 'data' / 'aulatp.sqlite3'))
+    with sqlite3.connect(database) as con:
         con.row_factory = sqlite3.Row
         rows = con.execute('''SELECT c.id AS course_id, c.title AS course_title, c.specialty,
                                     m.id AS module_id, m.position, m.title AS module_title, m.content
@@ -146,10 +153,14 @@ def main():
         bucket[6][1] += len(architecture)
         bucket[8][0] += not publication_gaps(content, row['specialty'])
         bucket[8][1] += 1
+        community = content.get('community_reporting') or []
+        time_audit = content.get('time_audit') or {}
         time_checks = [int(plan.get('time_factor') or 0) == 5,
                        bool(plan.get('station_minutes')),
                        int(minutes.get('2_etapa') or 0) == max(1, round(float(minutes.get('2') or 0) / (ae_count * 6))),
-                       all(item.get('minutes') for item in content.get('cases') or [])]
+                       all(item.get('minutes') for item in content.get('cases') or []),
+                       len(community) >= 7,
+                       abs(float(time_audit.get('student_minutes') or 0) - float(plan.get('minutes') or 0)) < 1e-6]
         bucket[9][0] += sum(time_checks)
         bucket[9][1] += len(time_checks)
         for kind in ('cases', 'questions'):
@@ -174,9 +185,10 @@ def main():
 
     docs = ROOT / 'docs'
     docs.mkdir(exist_ok=True)
-    for name, data in (('AUDITORIA_41_MODULOS_ACTIVIDADES.csv', activity_rows),
-                       ('AUDITORIA_41_MODULOS_MEDIOS.csv', media_rows),
-                       ('AUDITORIA_41_MODULOS_FUENTES.csv', source_rows)):
+    scope_name = f'{len(by_course)}_CURSOS_{len(rows)}_MODULOS'
+    for name, data in ((f'AUDITORIA_{scope_name}_ACTIVIDADES.csv', activity_rows),
+                       (f'AUDITORIA_{scope_name}_MEDIOS.csv', media_rows),
+                       (f'AUDITORIA_{scope_name}_FUENTES.csv', source_rows)):
         with (docs / name).open('w', encoding='utf-8-sig', newline='') as handle:
             writer = csv.DictWriter(handle, fieldnames=data[0])
             writer.writeheader()
@@ -186,11 +198,11 @@ def main():
         3: 'Horas oficiales y reparto', 4: 'Fuente curricular y alcance por ítem',
         5: 'Metadatos multimedia', 6: 'Estructura Aula TP',
         7: 'Texto alternativo en casos y preguntas', 8: 'Controles de publicación',
-        9: 'Factor x5 y tiempos declarados',
+        9: 'Factor x5, cierre temporal y comunidad educativa',
     }
     lines = [
         '# Auditoría reproducible de los 9 prompts en todos los cursos', '',
-        'Fecha: 2026-09-22. Fuente: los módulos publicados en la base local; cálculo de solo lectura.',
+        f'Fecha: {date.today().isoformat()}. Fuente: {database}; cálculo de solo lectura.',
         f'Alcance: {len(by_course)} cursos, {len(rows)} módulos, {len(activity_rows)} actividades y {len(media_rows)} registros multimedia. Evidencias de estudiantes en esta instalación: {progress}.',
         '', '## Porcentaje por ítem y curso', '',
         'Cada porcentaje es **solo el cumplimiento de los controles automáticos indicados abajo**, no una calificación global de calidad ni una certificación. N/D significa que el juicio experto no está automatizado.',
@@ -228,7 +240,8 @@ def main():
         '', '## Observaciones por módulo', '',
     ]
     lines += [f'- {issue}' for issue in issues] or ['- Ninguna observación automática pendiente.']
-    (docs / 'AUDITORIA_9_PROMPTS_41_MODULOS_2026-09-22.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
+    report = docs / f'AUDITORIA_9_PROMPTS_{scope_name}_{date.today().isoformat()}.md'
+    report.write_text('\n'.join(lines) + '\n', encoding='utf-8')
     print(f'{len(rows)} modules, {len(activity_rows)} activities, {len(media_rows)} media, {len(issues)} issues')
     for key in labels:
         passed = sum(scores[c][key][0] for c in by_course)

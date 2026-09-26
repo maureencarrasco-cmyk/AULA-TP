@@ -5,7 +5,12 @@
       "title": "Utilización de información contable",
       "hp": 152,
       "year": "3° medio",
-      "oa": [],
+      "oa": [
+        {
+          "code": "OA 1",
+          "title": "Leer y utilizar información contable básica acerca de la marcha de la empresa, incluida información sobre importaciones y/o exportaciones, de acuerdo a las normas internacionales de contabilidad (NIC) y de información financiera (NIIF) y a la legislación tributaria vigente."
+        }
+      ],
       "aes": [
         {
           "code": "M1-AE1",
@@ -36,7 +41,12 @@
       "title": "Gestión comercial y tributaria",
       "hp": 152,
       "year": "3° medio",
-      "oa": [],
+      "oa": [
+        {
+          "code": "OA 1",
+          "title": "Leer y utilizar información contable básica acerca de la marcha de la empresa, incluida información sobre importaciones y/o exportaciones, de acuerdo a las normas internacionales de contabilidad (NIC) y de información financiera (NIIF) y a la legislación tributaria vigente."
+        }
+      ],
       "aes": [
         {
           "code": "M2-AE1",
@@ -512,7 +522,12 @@
       "title": "Utilización de información contable",
       "hp": 152,
       "year": "3° medio",
-      "oa": [],
+      "oa": [
+        {
+          "code": "OA 1",
+          "title": "Leer y utilizar información contable básica acerca de la marcha de la empresa, incluida información sobre importaciones y/o exportaciones, de acuerdo a las normas internacionales de contabilidad (NIC) y de información financiera (NIIF) y a la legislación tributaria vigente."
+        }
+      ],
       "aes": [
         {
           "code": "M1-AE1",
@@ -543,7 +558,12 @@
       "title": "Gestión comercial y tributaria",
       "hp": 152,
       "year": "3° medio",
-      "oa": [],
+      "oa": [
+        {
+          "code": "OA 1",
+          "title": "Leer y utilizar información contable básica acerca de la marcha de la empresa, incluida información sobre importaciones y/o exportaciones, de acuerdo a las normas internacionales de contabilidad (NIC) y de información financiera (NIIF) y a la legislación tributaria vigente."
+        }
+      ],
       "aes": [
         {
           "code": "M2-AE1",

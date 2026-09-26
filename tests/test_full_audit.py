@@ -7,7 +7,7 @@ from pathlib import Path
 
 from content import DEFAULT_CONTENT
 from instructional_quality import contract_is_complete
-from pedagogy import enrich
+from pedagogy import enrich, verified_static_asset
 from scripts.audit_all_courses import activities, bank_has_variety, source_is_traceable
 from specialty_catalog import SPECIALTY_COURSES, _scenario
 
@@ -31,6 +31,10 @@ class FullAuditTests(unittest.TestCase):
                 self.assertEqual(result['feedback_instruction']['ae'], codes)
                 self.assertTrue(all(contract_is_complete(instruction)
                                     for _, _, instruction, _ in activities(result)))
+                self.assertEqual(result['planning']['minutes'], result['time_audit']['student_minutes'])
+                self.assertEqual(0, result['time_audit']['difference_minutes'])
+                self.assertGreaterEqual(len(result['community_reporting']), 7)
+                self.assertIn('requirements', result['accessibility_audit'])
 
     def test_bank_variety_does_not_count_rotated_options(self):
         same = [{'options': ['A', 'B', 'C', 'D'], 'answer': 0, 'context': 'Mismo dato'},
@@ -50,6 +54,16 @@ class FullAuditTests(unittest.TestCase):
                     for item in content['cases'] + content['questions']:
                         self.assertTrue(source_is_traceable(item, course['specialty'], content['curriculum']['url']))
                         self.assertIn(item['options'][item['answer']], item['options'])
+
+    def test_declared_media_assets_exist(self):
+        for course in SPECIALTY_COURSES:
+            for module in course['modules']:
+                with self.subTest(course=course['title'], module=module['title']):
+                    content = enrich(deepcopy(module['content']), module['position'])
+                    self.assertTrue(verified_static_asset(content['video']))
+                    self.assertTrue(verified_static_asset(content['vtt']))
+                    for medium in content['media_resources']:
+                        self.assertTrue(verified_static_asset(medium['image']))
 
     def test_employment_and_climate_scenarios_are_not_clinical(self):
         for key, title in [('climate', 'Montaje de equipos'), ('enfermeria', 'Emprendimiento y empleabilidad')]:

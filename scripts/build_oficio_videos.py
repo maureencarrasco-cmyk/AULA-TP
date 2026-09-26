@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OFICIO = ROOT / 'static' / 'themes' / 'oficio'
 OUT = ROOT / 'static' / 'media'
 OUT.mkdir(parents=True, exist_ok=True)
+HEADERS = ROOT / 'static' / 'headers'
 
 FRAMES = {
     1: ['oficio-plano-leyenda.png', 'oficio-escala.png', 'oficio-cruce.png', 'oficio-drenaje.png'],
@@ -78,6 +79,28 @@ def main():
         dest = OUT / f'm{mid}-secuencia.mp4'
         imageio.mimsave(dest, frames, fps=fps, codec='libx264', quality=7)
         write_vtt(OUT / f'm{mid}-secuencia.vtt', cues)
+        print('wrote', dest, 'frames', len(frames))
+    generic_cues = [
+        (0, 5, 'Paso 1. Observa la evidencia antes de decidir.'),
+        (5, 10, 'Paso 2. Relaciona el dato con el criterio del aprendizaje.'),
+        (10, 15, 'Paso 3. Verifica el resultado y registra lo pendiente.'),
+    ]
+    for family in ('general', 'electricidad', 'enfermeria', 'climate'):
+        frames = []
+        for index, (_, _, caption) in enumerate(generic_cues, 2):
+            image_path = HEADERS / family / f'e{index}.png'
+            image = Image.open(image_path).convert('RGB').resize((960, 540), Image.Resampling.LANCZOS)
+            draw = ImageDraw.Draw(image)
+            draw.rectangle((0, 468, 960, 540), fill=(11, 58, 107))
+            try:
+                font = ImageFont.truetype('arial.ttf', 22)
+            except OSError:
+                font = ImageFont.load_default()
+            draw.text((24, 488), caption, fill=(247, 241, 227), font=font)
+            frames.extend([np.array(image)] * (5 * fps))
+        dest = OUT / f'{family}-secuencia.mp4'
+        imageio.mimsave(dest, frames, fps=fps, codec='libx264', quality=7)
+        write_vtt(OUT / f'{family}-secuencia.vtt', generic_cues)
         print('wrote', dest, 'frames', len(frames))
 
 
