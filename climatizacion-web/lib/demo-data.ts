@@ -1131,7 +1131,7 @@ export const RECURSOS: RecursoDemo[] = [
     tipo: "Simulador LMS",
     duracion: "836 h programa",
     nivel: "3° Medio",
-    href: "https://aulatpchile.cl/portal/simuladores/atencion_enfermeria/",
+    href: "/curso/enfermeria",
   },
   {
     id: "r-elec",
@@ -1140,7 +1140,7 @@ export const RECURSOS: RecursoDemo[] = [
     tipo: "Simulador LMS",
     duracion: "646 h programa",
     nivel: "3° Medio",
-    href: "https://aulatpchile.cl/portal/simuladores/electricidad_3_medio/",
+    href: "/curso/electricidad",
   },
   {
     id: "r7",

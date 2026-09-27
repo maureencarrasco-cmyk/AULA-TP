@@ -3,7 +3,7 @@
 Documento operativo para diseñar, facilitar y acompañar el aprendizaje en el portal, alineado a lo observado en el curso real (agente pedagógico / Tutor Aula TP, práctica libre y accesibilidad).
 
 **Curso:** Electricidad 3° Medio · Plan común  
-**Portal:** https://aulatpchile.cl/portal/simuladores/electricidad_3_medio/  
+**Portal:** https://aulatpchile.cl/curso/electricidad  
 **Enfoque:** simulación guiada + práctica sin penalización + acompañamiento gradual + acceso universal
 
 ---

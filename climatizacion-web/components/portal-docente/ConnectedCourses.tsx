@@ -445,13 +445,13 @@ export function CumplimientoView({ embedded = false }: { embedded?: boolean } = 
     {
       id: "enfermeria" as const,
       title: "Atención de Enfermería",
-      href: "https://aulatpchile.cl/portal/simuladores/atencion_enfermeria/",
+      href: "/curso/enfermeria",
       state: enf,
     },
     {
       id: "electricidad" as const,
       title: "Electricidad 3° Medio",
-      href: "https://aulatpchile.cl/portal/simuladores/electricidad_3_medio/",
+      href: "/curso/electricidad",
       state: elec,
     },
     {

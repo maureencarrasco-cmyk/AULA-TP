@@ -3,7 +3,7 @@
 Referencia visual y de presentación para reutilizar el lenguaje del portal al crear pantallas, materiales, feedback o componentes alineados al curso.
 
 **Fuente:** variables CSS y UI observadas en  
-https://aulatpchile.cl/portal/simuladores/electricidad_3_medio/
+https://aulatpchile.cl/curso/electricidad
 
 ---
 
