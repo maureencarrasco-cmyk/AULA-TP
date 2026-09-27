@@ -1,6 +1,15 @@
 'use strict';
 /* Multimedia faltante: video de secuencia por especialidad + fallback visual. */
 (function () {
+  const SEQUENCE = {
+    electricidad: 'electricidad-secuencia',
+    enfermeria: 'enfermeria-secuencia',
+    climate: 'climate-secuencia',
+    climatizacion: 'climate-secuencia',
+    administracion: 'general-secuencia',
+    administration: 'general-secuencia'
+  };
+
   function keyOf(course) {
     return typeof specialtyKey === 'function' ? specialtyKey(course) : 'general';
   }
@@ -8,15 +17,11 @@
   function sequenceFor(course, position) {
     const key = keyOf(course);
     const pos = Number(position || (typeof current !== 'undefined' && current?.position) || 0);
-    if (key === 'climate' && pos >= 1 && pos <= 4) {
-      return {video: `/static/media/m${pos}-secuencia.mp4`, vtt: `/static/media/m${pos}-secuencia.vtt`};
+    if ((key === 'climate' || key === 'climatizacion') && pos >= 1 && pos <= 8) {
+      const clip = pos <= 4 ? `m${pos}-secuencia` : 'climate-secuencia';
+      return {video: `/static/media/${clip}.mp4`, vtt: `/static/media/${clip}.vtt`};
     }
-    const map = {
-      electricidad: 'electricidad-secuencia',
-      enfermeria: 'enfermeria-secuencia',
-      climate: 'climate-secuencia'
-    };
-    const file = map[key] || 'general-secuencia';
+    const file = SEQUENCE[key] || 'general-secuencia';
     return {video: `/static/media/${file}.mp4`, vtt: `/static/media/${file}.vtt`};
   }
 
