@@ -189,27 +189,25 @@ function stdev(values) {
   return Math.sqrt(values.reduce((sum, value) => sum + (value - avg) ** 2, 0) / (values.length - 1));
 }
 function central(values, noun) {
-  const glossary = '<p class="pd-def"><strong>Cómo leer estas cifras.</strong> La media es el promedio. La mediana es el valor del medio cuando los resultados se ordenan de menor a mayor. La desviación estándar, en puntos, dice qué tan lejos quedan los resultados de esa media: si es baja, el grupo se parece; si es alta, el promedio esconde diferencias.</p>';
+  const who = noun.indexOf('logro') >= 0 ? 'estudiante' : 'registro';
   if (values.length < 2) {
-    const only = values.length === 1 ? ` Hay un registro: ${noun} ${Math.round(values[0])} %.` : '';
-    return `${glossary}<p class="pd-interp">Con menos de dos observaciones no se informan media ni mediana.${only}</p>`;
+    const only = values.length === 1 ? ` Hay un solo dato: ${Math.round(values[0])} %.` : '';
+    return `<p class="pd-interp">Con menos de dos datos no hay promedio ni valor del medio.${only}</p>`;
   }
-  const avg = mean(values);
-  const mid = median(values);
+  const avgR = Math.round(mean(values));
+  const midR = Math.round(median(values));
   const spread = values.length >= 8 ? stdev(values) : null;
-  const avgR = Math.round(avg);
-  const midR = Math.round(mid);
-  let shape;
-  if (midR > avgR + 3) shape = 'La mediana queda sobre la media: unos pocos resultados bajos tiran el promedio hacia abajo. Antes de comunicar solo ese promedio, conviene mirar el tramo inferior.';
-  else if (avgR > midR + 3) shape = 'La media queda sobre la mediana: unos pocos resultados altos suben el promedio. El valor central describe mejor al estudiante típico.';
-  else shape = 'Media y mediana están cerca. El promedio no está escondiendo, por sí solo, un grupo extremo.';
-  let dispersion;
-  if (spread == null) dispersion = 'Hay menos de 8 registros, así que no se informa la desviación estándar: con tan pocos datos esa dispersión es inestable.';
-  else if (spread < 8) dispersion = `La desviación estándar es ${Math.round(spread)} puntos. Los resultados están concentrados junto a la media: en este indicador el grupo es homogéneo.`;
-  else if (spread < 12) dispersion = `La desviación estándar es ${Math.round(spread)} puntos. Hay una dispersión moderada: el promedio resume al curso, pero no a cada estudiante.`;
-  else dispersion = `La desviación estándar es ${Math.round(spread)} puntos. La dispersión es amplia: hay diferencias relevantes y un solo porcentaje no representa al curso.`;
-  const extra = spread != null ? `<span>Desviación estándar: ${Math.round(spread)} pts</span>` : '';
-  return `<p class="pd-stats"><span>Media: ${pct(avg)}</span><span>Mediana: ${pct(mid)}</span>${extra}<span>Observaciones: ${values.length}</span></p>${glossary}<p class="pd-interp">En ${noun} hay ${values.length} observaciones con este dato: media ${avgR} % y mediana ${midR} %. ${shape} ${dispersion} Quien no tiene el dato no entra en el cálculo.</p>`;
+  const spreadR = spread == null ? null : Math.round(spread);
+  let result;
+  if (midR > avgR + 3) result = `El ${who} del medio está en ${midR} %. El promedio baja a ${avgR} % por unos pocos resultados bajos.`;
+  else if (avgR > midR + 3) result = `El ${who} del medio está en ${midR} %. El promedio sube a ${avgR} % por unos pocos resultados altos.`;
+  else result = `Promedio y ${who} del medio coinciden, cerca de ${avgR} %.`;
+  let spreadLine = ' Son pocos datos para ver si el curso está parejo.';
+  if (spreadR != null && spreadR < 8) spreadLine = ' El curso está parejo.';
+  else if (spreadR != null && spreadR < 12) spreadLine = ' Hay diferencias moderadas: el promedio no describe a cada uno.';
+  else if (spreadR != null) spreadLine = ' Hay diferencias grandes: un solo porcentaje no representa al curso.';
+  const extra = spreadR != null ? `<span>Desviación estándar: ${spreadR} pts</span>` : '';
+  return `<p class="pd-stats"><span>Media: ${avgR} %</span><span>Mediana: ${midR} %</span>${extra}<span>Datos: ${values.length}</span></p><p class="pd-interp"><strong>${result}</strong>${spreadLine}</p>`;
 }
 function bars(items) {
   return `<div class="pd-bars">${items.map(item => {
@@ -511,7 +509,7 @@ function panel() {
     quad(3, 'menta', 'Estado', 'Cómo se distribuye el curso', `<p class="pd-note">Una persona, una señal. Si tiene varios módulos, cuenta la señal más exigente.</p>${pie}`),
     quad(4, 'ambar', 'Recorrido', 'Cuánto del proceso está registrado', chart),
     quad(5, 'lila', 'Evolución', 'Cómo cambia el módulo 1', trend, { wide: true }),
-    quad(6, 'celeste', 'Decisión', 'Práctica y logro, leídos por separado', `<h3>Logro de la evaluación de selección</h3><p class="pd-note">Unidad: % sobre el máximo de la prueba. Cada estudiante aporta un solo valor, el promedio de las pruebas que sí rindió. No es el total de la cohorte ni el perfil de egreso.</p>${central(logroValues, 'el logro de selección')}<h3>Relación con la frecuencia de práctica</h3>${scatterChart(scatterPoints)}<p class="pd-interp">${practiceRead(rows, entries)}</p><p><a href="${href('/portal-docente/estudiantes')}">Analizar práctica por estudiante</a></p>`, { wide: true })
+    quad(6, 'celeste', 'Decisión', 'Práctica y logro, leídos por separado', `<h3>Logro de la evaluación de selección</h3><p class="pd-note">Un valor por estudiante que rindió la prueba. No es perfil de egreso.</p>${central(logroValues, 'el logro de selección')}<h3>Relación con la frecuencia de práctica</h3>${scatterChart(scatterPoints)}<p class="pd-interp">${practiceRead(rows, entries)}</p><p><a href="${href('/portal-docente/estudiantes')}">Analizar práctica por estudiante</a></p>`, { wide: true })
   ].join(''));
 }
 function weakestAe() {
@@ -616,8 +614,8 @@ function reports() {
   const mid = values.length ? Math.round(median(values)) : null;
   const lowLine = low ? ` El módulo ${low.module.position} tiene la media de cumplimiento más baja de esta vista (${Math.round(low.value)} %).` : '';
   const headline = avg == null
-    ? 'No hay registros en el filtro para redactar una lectura del curso.'
-    : `En esta vista, la media de cumplimiento es ${avg} % y la mediana es ${mid} %, sobre ${values.length} registros. ${counts.support} ${counts.support === 1 ? 'estudiante requiere' : 'estudiantes requieren'} mayor apoyo, a ${counts.watch} conviene observar, ${counts.ok} ${counts.ok === 1 ? 'va' : 'van'} con progreso esperado y ${counts.none} ${counts.none === 1 ? 'está' : 'están'} sin recorrido.${lowLine} Estas cifras describen estaciones registradas y señales de acompañamiento. No son perfil de egreso.`;
+    ? 'No hay registros para leer el curso.'
+    : `El registro del medio está en ${mid} % de recorrido y el promedio en ${avg} %. ${counts.support} estudiantes requieren mayor apoyo.${lowLine} Esto cuenta estaciones hechas, no el nivel de logro.`;
   const fields = [
     ['Pregunta', '¿Cuánto del recorrido de cinco estaciones está registrado?'],
     ['Fórmula', kpi.formula || 'estaciones_completadas / 5 × 100'],
