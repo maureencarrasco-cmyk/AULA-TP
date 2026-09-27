@@ -11,7 +11,7 @@ const TABS = [
   { id: 'resumen', path: '/portal-docente', label: 'Panel general', question: '¿Qué está ocurriendo actualmente en mi curso?' },
   { id: 'cursos', path: '/portal-docente/cursos', label: 'Cursos / Planificación', question: '¿Qué estamos trabajando y qué debería estar ocurriendo?' },
   { id: 'estudiantes', path: '/portal-docente/estudiantes', label: 'Estudiantes', question: '¿Cómo está cada estudiante y quién necesita mayor apoyo?' },
-  { id: 'oa-ae', path: '/portal-docente/oa-ae', label: 'OA, AE y criterios de evaluación', question: '¿Qué aprendizajes están siendo desarrollados y cuáles requieren mayor atención?' },
+  { id: 'oa-ae', path: '/portal-docente/oa-ae', label: 'OA, AE y criterios de evaluación', question: '¿Qué aprendizajes se están desarrollando y cuáles requieren más atención?' },
   { id: 'cumplimiento', path: '/portal-docente/cumplimiento', label: 'Cumplimiento', question: '¿Cuánto del proceso formativo se ha realizado?' },
   { id: 'reportes', path: '/portal-docente/reportes', label: 'Reportes', question: '¿Qué información necesito consolidar o comunicar?' }
 ];
@@ -86,14 +86,23 @@ function courseTitle() {
   const course = fiveCourse();
   return (course && course.title) || 'Refrigeración y Climatización';
 }
-function contextBar() {
+function orientFacts() {
   const q = state.q.trim();
   const rows = scopedRecords();
   const mods = scopedModules();
-  const search = q ? `Búsqueda activa: «${q}».` : 'Sin búsqueda.';
-  const period = state.cohort ? 'Periodo: 12 semanas de la cohorte de demostración.' : 'Periodo: estado actual, sin serie histórica.';
-  const cohort = state.cohort ? ' Cohorte de demostración: 200 estudiantes.' : '';
-  return `<p class="pd-context">Curso: ${esc(courseTitle())}. Módulos 1 a 5. ${period}${cohort} ${esc(search)} Universo de esta vista: ${rows.length} registro${rows.length === 1 ? '' : 's'} en ${mods.length} módulo${mods.length === 1 ? '' : 's'}.</p>`;
+  const facts = [
+    ['Curso', courseTitle()],
+    ['Alcance', 'Módulos 1 a 5'],
+    ['Periodo', state.cohort ? '12 semanas de demostración' : 'Estado actual'],
+    ['Estudiantes', state.cohort ? '200, cohorte de demostración' : 'Registros del campus'],
+    ['Registros', `${rows.length} en ${mods.length} módulo${mods.length === 1 ? '' : 's'}`],
+    ['Búsqueda', q ? `«${q}»` : 'Ninguna']
+  ];
+  return `<dl class="pd-facts">${facts.map(([label, value]) => `<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>`;
+}
+function orient(lead, extra) {
+  const more = extra ? `<div class="pd-orient-extra">${extra}</div>` : '';
+  return `<p class="pd-orient-lead">${lead}</p>${more}${orientFacts()}`;
 }
 function frame(body) {
   const tab = currentTab();
@@ -162,8 +171,8 @@ function signal(record) {
   if (support.length && (done < 2 || (score != null && score < 60))) return { level: 'support', label: 'Requiere mayor apoyo', reasons: support };
   const watch = [];
   if (done >= 2 && done <= 3) watch.push(`${done} de 5 estaciones.`);
-  if (score != null && score >= 60 && score < 80) watch.push(`Logro de selección ${score} %. Conviene mirar la distribución de ese resultado.`);
-  if (done >= 4 && score == null) watch.push('El recorrido marca la evaluación, pero este registro no trae puntaje de selección.');
+  if (score != null && score >= 60 && score < 80) watch.push(`Logro de selección ${score} %. Conviene observar ese resultado.`);
+  if (done >= 4 && score == null) watch.push('La evaluación está marcada, pero no hay puntaje.');
   if (watch.length) return { level: 'watch', label: 'Conviene observar', reasons: watch };
   const ok = [`${done} de 5 estaciones.`];
   if (score != null) ok.push(`Logro de selección ${score} %.`);
@@ -291,9 +300,9 @@ function lineChart(points, title) {
     const projected = reg.intercept + reg.slope * next;
     trend += `<line x1="${sx(maxX)}" y1="${sy(y2)}" x2="${sx(next)}" y2="${sy(Math.max(0, Math.min(100, projected)))}" stroke="#c9843a" stroke-width="2" stroke-dasharray="5 4"></line>`;
     const direction = reg.slope > 0.4 ? 'ascendente' : reg.slope < -0.4 ? 'descendente' : 'estable';
-    note = `Los resultados presentan una tendencia ${direction} en ${reg.n} observaciones semanales. La línea continua es la tendencia de los datos observados. El tramo punteado es una proyección estadística orientativa de la semana siguiente, no un resultado futuro.`;
+    note = `La tendencia es ${direction}, con ${reg.n} semanas comparables. La línea continua resume lo observado. El tramo punteado estima la semana siguiente: no es un resultado ya obtenido.`;
   }
-  return `<p class="pd-note">Eje X: semana. Eje Y: desempeño medio (%). Puntos: datos observados. Línea: tendencia. Universo: registros con serie en la misma escala.</p><svg class="pd-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}"><line x1="${left}" y1="${sy(0)}" x2="${w - right}" y2="${sy(0)}" stroke="#d7e4f5"></line><line x1="${left}" y1="${sy(100)}" x2="${left}" y2="${sy(0)}" stroke="#8aa4c4"></line><text x="4" y="${sy(100) + 4}" font-size="11" fill="#5e7596">100 %</text><text x="8" y="${sy(0)}" font-size="11" fill="#5e7596">0 %</text><text x="${w / 2}" y="${h - 8}" font-size="11" fill="#5e7596">Semana</text><polyline fill="none" stroke="#4d7eb8" stroke-width="2" points="${observed}"></polyline>${dots}${trend}</svg><p class="pd-interp">${note} Evolución: ${trendWord(points)}.</p>`;
+  return `<p class="pd-note">Eje horizontal: semana. Eje vertical: desempeño medio (%). Cada punto es una semana observada. La línea es la tendencia. Solo entran registros con serie en la misma escala.</p><svg class="pd-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}"><line x1="${left}" y1="${sy(0)}" x2="${w - right}" y2="${sy(0)}" stroke="#d7e4f5"></line><line x1="${left}" y1="${sy(100)}" x2="${left}" y2="${sy(0)}" stroke="#8aa4c4"></line><text x="4" y="${sy(100) + 4}" font-size="11" fill="#5e7596">100 %</text><text x="8" y="${sy(0)}" font-size="11" fill="#5e7596">0 %</text><text x="${w / 2}" y="${h - 8}" font-size="11" fill="#5e7596">Semana</text><polyline fill="none" stroke="#4d7eb8" stroke-width="2" points="${observed}"></polyline>${dots}${trend}</svg><p class="pd-interp">${note} Evolución: ${trendWord(points)}.</p>`;
 }
 function pieChart(parts, title) {
   const total = parts.reduce((sum, part) => sum + part.value, 0);
@@ -332,7 +341,7 @@ function scatterChart(points) {
     else if (!highP && highL) quadrants.lh += 1;
     else if (!highP && lowL) quadrants.ll += 1;
   });
-  return `<p class="pd-note">Eje X: cantidad de prácticas. Eje Y: logro de selección (%). Un punto es un estudiante. La línea es la tendencia de los puntos, no una causa.</p><svg class="pd-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="Relación entre frecuencia de práctica y desempeño">${dots}${trend}<text x="4" y="24" font-size="11" fill="#5e7596">100 %</text><text x="${w / 2}" y="${h - 8}" font-size="11" fill="#5e7596">Prácticas</text></svg><p class="pd-interp">Se observa la asociación entre la frecuencia de práctica y el logro de selección en ${points.length} estudiantes. Alta práctica y alto logro: ${quadrants.hh}. Alta práctica y logro bajo 60 %: ${quadrants.hl}; conviene revisar esa dificultad. Baja práctica y alto logro: ${quadrants.lh}; conviene mirar otras evidencias antes de interpretar. Baja práctica y bajo logro: ${quadrants.ll}. Esta asociación no demuestra que practicar produzca el resultado.</p>`;
+  return `<p class="pd-note">Eje horizontal: cantidad de prácticas. Eje vertical: logro de selección (%). Un punto es un estudiante. La línea resume los puntos; no indica una causa.</p><svg class="pd-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="Relación entre frecuencia de práctica y desempeño">${dots}${trend}<text x="4" y="24" font-size="11" fill="#5e7596">100 %</text><text x="${w / 2}" y="${h - 8}" font-size="11" fill="#5e7596">Prácticas</text></svg><p class="pd-interp">Se observa la asociación entre la frecuencia de práctica y el logro de selección en ${points.length} estudiantes. Alta práctica y alto logro: ${quadrants.hh}. Alta práctica y logro bajo 60 %: ${quadrants.hl}; conviene revisar esa dificultad. Baja práctica y alto logro: ${quadrants.lh}; conviene mirar otras evidencias antes de interpretar. Baja práctica y bajo logro: ${quadrants.ll}. Esta asociación no demuestra que practicar produzca el resultado.</p>`;
 }
 function studentGroups() {
   const groups = new Map();
@@ -403,9 +412,9 @@ function modulePlan(module) {
   const hechos = rows.reduce((sum, record) => sum + practica(record), 0);
   const previstos = Number(module.encargos_count || 0);
   const photo = PHOTOS[module.position];
-  const oa = (module.oa || []).slice(0, 4).map(item => `<li>${esc(item)}</li>`).join('') || '<li>Este módulo no trae OA en el contenido cargado.</li>';
-  const image = photo ? `<img class="pd-photo" src="${photo[0]}" alt="${esc(photo[1])}">` : '<p class="pd-note">Sin fotografía propia de puesta en marcha. No se reutiliza una imagen de otro módulo ni un afiche genérico.</p>';
-  return `<article class="pd-card pd-plan">${image}<div><h3>Módulo ${module.position}. ${esc(module.title)}</h3><p class="pd-note">${module.official_hp || module.hours || 0} HP oficiales en el contenido. Recorrido planificado: 5 estaciones.</p><p>Ejecutado en esta vista: ${rows.length} registro${rows.length === 1 ? '' : 's'}. Encargos previstos: ${previstos}. Encargos u oficios registrados: ${hechos}.</p><h3>OA cargados</h3><ul>${oa}</ul></div></article>`;
+  const oa = (module.oa || []).slice(0, 4).map(item => `<li>${esc(item)}</li>`).join('') || '<li>Este módulo no trae objetivos de aprendizaje en el contenido.</li>';
+  const image = photo ? `<img class="pd-photo" src="${photo[0]}" alt="${esc(photo[1])}">` : '<p class="pd-note">Este módulo no tiene una fotografía de la puesta en marcha.</p>';
+  return `<article class="pd-card pd-plan">${image}<div><h3>Módulo ${module.position}. ${esc(module.title)}</h3><p class="pd-note">${module.official_hp || module.hours || 0} HP oficiales en el contenido. Recorrido planificado: 5 estaciones.</p><p>Ejecutado en esta vista: ${rows.length} registro${rows.length === 1 ? '' : 's'}. Encargos previstos: ${previstos}. Encargos u oficios registrados: ${hechos}.</p><h3>Objetivos de aprendizaje</h3><ul>${oa}</ul></div></article>`;
 }
 function modulePlans(list) {
   if (!list.length) return '<p class="pd-interp">Ningún módulo de este tramo coincide con la búsqueda.</p>';
@@ -436,9 +445,9 @@ function aeArticles(list) {
       const who = (item && item.missing) || [];
       const whoText = !item || !item.total ? '' : !who.length ? 'Todos los registros de la vista tienen algún paso en este AE.' : who.length > 6 ? `Sin evidencia en este AE: ${esc(who.slice(0, 6).join(', '))} y ${who.length - 6} más.` : `Sin evidencia en este AE: ${esc(who.join(', '))}.`;
       const bar = ratio == null ? '<p class="pd-note">Sin registros: no se calcula un porcentaje de evidencia.</p>' : `${bars([{ label: ae.code || `AE ${index + 1}`, value: ratio }])}<p class="pd-interp">El ${ratio} % de los registros de este módulo tiene al menos un paso guardado en este AE. Es cobertura de evidencia, no nivel de logro. ${whoText}</p>`;
-      return `<article class="pd-card"><h3>${esc(ae.code || `AE ${index + 1}`)}</h3><p>${esc(ae.title || 'Sin enunciado cargado.')}</p>${bar}${criteria ? `<details><summary>Ver criterios de evaluación</summary><ul>${criteria}</ul></details>` : '<p class="pd-note">Este AE no trae criterios en el contenido cargado.</p>'}</article>`;
-    }).join('') : '<p class="pd-card">Sin aprendizajes esperados cargados en este módulo.</p>';
-    const oa = (module.oa || []).map(item => `<li>${esc(item)}</li>`).join('') || '<li>Sin OA en el contenido cargado. No se inventa un objetivo.</li>';
+      return `<article class="pd-card"><h3>${esc(ae.code || `AE ${index + 1}`)}</h3><p>${esc(ae.title || 'Sin enunciado en el contenido.')}</p>${bar}${criteria ? `<details><summary>Ver criterios de evaluación</summary><ul>${criteria}</ul></details>` : '<p class="pd-note">Este aprendizaje esperado no trae criterios en el contenido.</p>'}</article>`;
+    }).join('') : '<p class="pd-card">Este módulo no trae aprendizajes esperados en el contenido.</p>';
+    const oa = (module.oa || []).map(item => `<li>${esc(item)}</li>`).join('') || '<li>Sin objetivo en el contenido. No se inventa uno.</li>';
     return `<section class="pd-card"><h3>Módulo ${module.position}. ${esc(module.title)}</h3><p class="pd-note">OA del módulo</p><ul>${oa}</ul>${items}</section>`;
   }).join('')}</div>`;
 }
@@ -470,7 +479,7 @@ function profileMap() {
       : marks.some(item => item.level === 'watch') ? 'Conviene observar'
       : marks.some(item => item.level === 'ok') ? 'Progreso esperado'
       : 'Sin evidencia';
-    const codes = (module.oa || []).map(item => String(item).split('.')[0]).filter(Boolean).join(' y ') || 'Sin OA cargado';
+    const codes = (module.oa || []).map(item => String(item).split('.')[0]).filter(Boolean).join(' y ') || 'Sin objetivo en el contenido';
     const last = entries[0]
       ? `${entries[0].kind}${entries[0].paso ? ` · ${entries[0].paso}` : ''}${entries[0].station != null ? ` · estación ${entries[0].station}` : ''}`
       : (steps ? `${steps} pasos de AE` : 'Sin registro');
@@ -497,7 +506,7 @@ function panel() {
   const attention = [
     names.length
       ? `<a href="${href('/portal-docente/estudiantes')}">Ver estudiantes</a>: ${esc(shown.join(', '))}${rest ? ` y ${rest} más` : ''} ${shown.length === 1 && !rest ? 'tiene' : 'tienen'} una señal de mayor apoyo.`
-      : 'Ningún registro del universo filtrado reúne la señal de mayor apoyo.',
+      : 'En esta vista nadie tiene la señal de mayor apoyo.',
     weakestLine,
     ae
       ? `<a href="${href('/portal-docente/oa-ae')}">Revisar AE</a>: ${esc(ae.code || ae.title)} tiene evidencia en ${ae.withEvidence} de ${ae.total} registros del módulo.`
@@ -509,8 +518,8 @@ function panel() {
       ? `Solo el módulo ${groups[0].module.position} tiene registros en esta vista: cumplimiento ${Math.round(groups[0].value)} %${groups[0].rows.length === 1 ? ', en un solo registro' : ''}.`
       : `El módulo ${weakest.module.position} concentra el cumplimiento medio más bajo (${Math.round(weakest.value)} %). Esa cifra dice cuánto recorrido hay registrado; el nivel de logro se revisa en la evaluación de selección, cuando existe.`;
   const chart = groups.length
-    ? `<p class="pd-note">Unidad: %. Universo: registros con recorrido en el filtro. El cumplimiento es estaciones completadas ÷ 5. No es logro.</p>${bars(groups.map(item => ({ label: `Módulo ${item.module.position}`, value: item.value })))}<p class="pd-interp">${solo}</p>`
-    : '<p class="pd-interp">No hay registros en esta vista, así que no se dibuja un porcentaje de cumplimiento. Un gráfico en 0 % significaría recorrido nulo, y aquí la ausencia es falta de registros.</p>';
+    ? `<p class="pd-note">El porcentaje es estaciones completadas ÷ 5. No es logro. Solo entran los registros con recorrido de esta vista.</p>${bars(groups.map(item => ({ label: `Módulo ${item.module.position}`, value: item.value })))}<p class="pd-interp">${solo}</p>`
+    : '<p class="pd-interp">No hay registros en esta vista, así que no se muestra un porcentaje. Un 0 % sería un recorrido vacío; aquí faltan registros.</p>';
   const people = studentGroups();
   const counts = signalCounts(people);
   const pie = pieChart([
@@ -530,7 +539,7 @@ function panel() {
     return { name: group[0].name, x: group.reduce((sum, record) => sum + practica(record), 0), y: mean(scores) };
   }).filter(Boolean);
   return frame([
-    quad(1, 'cielo', 'Orientación', 'De qué curso y de qué periodo se habla', `${contextBar()}<p>Esta lectura dice qué ocurre ahora en los módulos 1 a 5. El cumplimiento cuenta estaciones del recorrido. El logro, cuando existe, es la evaluación de selección. Ninguno de los dos es el perfil de egreso.</p>`),
+    quad(1, 'cielo', 'Orientación', 'De qué curso y de qué periodo se habla', orient('El cumplimiento cuenta el recorrido hecho. No es el logro de la prueba ni el perfil de egreso.')),
     quad(2, 'rosa', 'Atención', 'A quién acompañar ahora', `<ul class="pd-attention">${attention.map(item => `<li>${item}</li>`).join('')}</ul>`, { lead: true }),
     quad(3, 'menta', 'Estado', 'Cómo se distribuye el curso', `<p class="pd-note">Una persona, una señal. Si tiene varios módulos, cuenta la señal más exigente.</p>${pie}`),
     quad(4, 'ambar', 'Recorrido', 'Cuánto del proceso está registrado', chart),
@@ -553,14 +562,14 @@ function weakestAe() {
 }
 function cursos() {
   const course = fiveCourse();
-  const scope = (course && course.scope) || 'Alcance cargado: módulos 1 a 5 de Refrigeración y Climatización.';
+  const scope = (course && course.scope) || 'Alcance: módulos 1 a 5 de Refrigeración y Climatización.';
   const modules = scopedModules();
   const rows = scopedRecords();
   const hechos = rows.reduce((sum, record) => sum + practica(record), 0);
   const previstos = modules.reduce((sum, module) => sum + Number(module.encargos_count || 0), 0);
   const withRows = modules.filter(module => moduleRows(module).length).length;
   return frame([
-    quad(1, 'cielo', 'Orientación', 'Qué abarca esta planificación', `${contextBar()}<p>${esc(scope)} Esta sección muestra lo planificado y lo ejecutado. El porcentaje de cumplimiento está en Cumplimiento, para no repetir el mismo gráfico.</p>`),
+    quad(1, 'cielo', 'Orientación', 'Qué abarca esta planificación', orient('Aquí se compara el plan con lo ya ejecutado. El porcentaje de cumplimiento se lee en Cumplimiento.', `<p>${esc(scope)}</p>`)),
     quad(2, 'rosa', 'Atención', 'Lo que ya se está ejecutando', `<p>En esta vista hay ${rows.length} registro${rows.length === 1 ? '' : 's'} en ${withRows} de ${modules.length} módulo${modules.length === 1 ? '' : 's'} visibles. Encargos previstos en el contenido: ${previstos}. Encargos u oficios registrados: ${hechos}.</p><p class="pd-interp">La comparación sirve para ver si el recorrido planificado tiene evidencia. No convierte esa evidencia en nivel de logro.</p>`, { lead: true }),
     quad(3, 'menta', 'Estado', 'Módulos 1 y 2. Planos y medición', modulePlans(modulesIn(1, 2)), { wide: true }),
     quad(4, 'ambar', 'Evidencia', 'Módulos 3 y 4. Instalación y montaje', modulePlans(modulesIn(3, 4)), { wide: true }),
@@ -579,8 +588,8 @@ function students() {
   const rest = support.length - shown.length;
   const names = shown.length ? `${esc(shown.join(', '))}${rest ? ` y ${rest} más` : ''}.` : 'Nadie en esta vista está en ese grupo.';
   return frame([
-    quad(1, 'cielo', 'Orientación', 'Cómo se lee la señal', `${contextBar()}<p>Una fila por estudiante. La señal usa el módulo más exigente: estaciones del recorrido y, si existe, el logro de selección. Requiere mayor apoyo: menos de 2 estaciones con recorrido iniciado, o logro bajo 60 %. Conviene observar: 2 o 3 estaciones, o logro entre 60 % y 79 %. Progreso esperado: 4 o 5 estaciones sin esas alertas.</p>`),
-    quad(2, 'rosa', 'Atención', 'Requiere mayor apoyo', `<p>${support.length} estudiante${support.length === 1 ? '' : 's'}. ${names}</p><p class="pd-note">También hay ${counts.watch} a quienes conviene observar, ${counts.ok} con progreso esperado y ${counts.none} sin recorrido.</p>${peopleTable(support)}`, { lead: true, wide: true }),
+    quad(1, 'cielo', 'Orientación', 'Cómo se lee la señal', orient('Una fila es un estudiante. La señal usa el módulo que pide más apoyo.', '<ul class="pd-rules"><li><strong>Mayor apoyo.</strong> Menos de 2 estaciones, o logro bajo 60 %.</li><li><strong>Conviene observar.</strong> 2 o 3 estaciones, o logro de 60 % a 79 %.</li><li><strong>Progreso esperado.</strong> 4 o 5 estaciones, sin esas alertas.</li></ul>')),
+    quad(2, 'rosa', 'Atención', 'Requiere mayor apoyo', `<p>${support.length} estudiante${support.length === 1 ? '' : 's'}. ${names}</p><p class="pd-note">También hay ${counts.watch} estudiantes por observar, ${counts.ok} con progreso esperado y ${counts.none} sin recorrido.</p>${peopleTable(support)}`, { lead: true, wide: true }),
     quad(3, 'ambar', 'Observación', 'Conviene observar', peopleTable(watch), { wide: true }),
     quad(4, 'menta', 'Avance', 'Progreso esperado', peopleTable(ok), { wide: true }),
     quad(5, 'lila', 'Sin recorrido', 'Todavía sin estaciones registradas', peopleTable(none)),
@@ -593,13 +602,13 @@ function learning() {
     const ratio = Math.round(item.ratio * 100);
     const who = item.missing;
     const whoText = !who.length ? 'Todos los registros de la vista tienen algún paso en este AE.' : who.length > 6 ? `Sin evidencia en este AE: ${esc(who.slice(0, 6).join(', '))} y ${who.length - 6} más.` : `Sin evidencia en este AE: ${esc(who.join(', '))}.`;
-    return `<article class="pd-card"><h3>${esc(item.ae.code || item.ae.title || 'AE')} · módulo ${item.module.position}</h3><p>${esc(item.ae.title || 'Sin enunciado cargado.')}</p>${bars([{ label: 'Con evidencia', value: ratio }])}<p class="pd-interp">${item.covered} de ${item.total} registros tienen algún paso. Es cobertura de evidencia, no nivel de logro. ${whoText}</p></article>`;
+    return `<article class="pd-card"><h3>${esc(item.ae.code || item.ae.title || 'AE')} · módulo ${item.module.position}</h3><p>${esc(item.ae.title || 'Sin enunciado en el contenido.')}</p>${bars([{ label: 'Con evidencia', value: ratio }])}<p class="pd-interp">${item.covered} de ${item.total} registros tienen algún paso. Es cobertura de evidencia, no nivel de logro. ${whoText}</p></article>`;
   }).join('')}</div>` : '<p class="pd-interp">No hay AE con registros suficientes para comparar evidencia.</p>';
   return frame([
-    quad(1, 'cielo', 'Orientación', 'Qué parte del perfil se observa aquí', `${contextBar()}<p>El perfil de egreso de Refrigeración y Climatización es el conjunto de Objetivos de Aprendizaje de la especialidad y los Objetivos de Aprendizaje Genéricos. Esta vista observa los OA de los módulos 1 a 5. Los OA 7, 8 y 9 quedan en módulos posteriores.</p>`),
+    quad(1, 'cielo', 'Orientación', 'Qué parte del perfil se observa aquí', orient('Esta vista mira los objetivos de los módulos 1 a 5.', '<p>El perfil de egreso reúne los objetivos de la especialidad y los objetivos genéricos. Los OA 7, 8 y 9 están en módulos posteriores.</p>')),
     quad(2, 'rosa', 'Atención', 'Aprendizajes con menos evidencia', lowBody, { lead: true }),
     quad(3, 'menta', 'Estado', 'Mapa de aprendizajes observados', `<p class="pd-note">El estado usa la misma señal de acompañamiento. La evolución compara las primeras y las últimas semanas cuando hay al menos 8 observaciones.</p>${profileMap()}`, { wide: true }),
-    quad(4, 'ambar', 'Referencia', 'Objetivos de Aprendizaje Genéricos', `<p class="pd-note">Textos del programa de Refrigeración y Climatización. La columna «Dónde se observa» cita el criterio o el OA ya cargado. No es un porcentaje de perfil.</p>${oagTable()}`, { wide: true }),
+    quad(4, 'ambar', 'Referencia', 'Objetivos de Aprendizaje Genéricos', `<p class="pd-note">Textos del programa de Refrigeración y Climatización. La columna «Dónde se observa» cita el criterio o el objetivo ya presente en el contenido. No es un porcentaje de perfil.</p>${oagTable()}`, { wide: true }),
     quad(5, 'lila', 'Evidencia', 'AE de los módulos 1 y 2', `<p>El porcentaje de cada barra es cobertura de evidencia en los registros del módulo.</p>${aeArticles(modulesIn(1, 2))}`, { wide: true }),
     quad(6, 'celeste', 'Decisión', 'AE de los módulos 3, 4 y 5', `${aeArticles(modulesIn(3, 5))}<p><a href="${href('/portal-docente/estudiantes')}">Ver estudiantes</a></p>`, { wide: true })
   ].join(''));
@@ -623,7 +632,7 @@ function compliance() {
       ? '<p class="pd-interp">Solo hay un módulo con registros, así que no hay un extremo alto distinto del anterior.</p>'
       : `<p>Módulo ${high.module.position}. ${esc(high.module.title)}</p><p class="pd-interp">Media de cumplimiento ${Math.round(high.value)} % en ${high.rows.length} registro${high.rows.length === 1 ? '' : 's'}.</p>`;
   return frame([
-    quad(1, 'cielo', 'Orientación', 'Qué cuenta este indicador', `${contextBar()}<p>Cumplimiento cuenta estaciones del recorrido: contexto, AE, casos, evaluación y cierre. Logro, cuando existe, es el puntaje de la evaluación de selección sobre su máximo. Completar las cinco estaciones no equivale a un nivel de logro ni al perfil de egreso.</p>`),
+    quad(1, 'cielo', 'Orientación', 'Qué cuenta este indicador', orient('Este número cuenta estaciones del recorrido. No mide el nivel de logro.', '<p>Las estaciones son: contexto, aprendizajes esperados, casos, evaluación y cierre. Completar las cinco no equivale al perfil de egreso.</p>')),
     quad(2, 'rosa', 'Atención', 'Lectura del curso completo', central(values, 'el cumplimiento'), { lead: true }),
     quad(3, 'menta', 'Estado', 'Módulo con menor recorrido', lowText),
     quad(4, 'ambar', 'Comparación', 'Módulo con mayor recorrido', highText),
@@ -646,10 +655,10 @@ function reports() {
     ['Pregunta', '¿Cuánto del recorrido de cinco estaciones está registrado?'],
     ['Fórmula', kpi.formula || 'estaciones_completadas / 5 × 100'],
     ['Periodo', state.cohort ? '12 semanas de prácticas comparables en la cohorte de demostración.' : (kpi.periodo || 'Estado actual')],
-    ['Población', 'Módulos 1 a 5, acotados por la búsqueda activa.']
+    ['Población', 'Módulos 1 a 5 de esta vista.']
   ];
   return frame([
-    quad(1, 'cielo', 'Orientación', 'Para qué sirve este reporte', `${contextBar()}<p>Este reporte deja por escrito qué se está midiendo y qué se puede comunicar. Los gráficos de tendencia están en el Panel general.</p>`),
+    quad(1, 'cielo', 'Orientación', 'Para qué sirve este reporte', orient('Este reporte deja escrito qué se mide y qué se puede comunicar.', '<p>Los gráficos de tendencia están en el Panel general.</p>')),
     quad(2, 'rosa', 'Atención', 'Lectura que se puede comunicar', `<p>${esc(headline)}</p>`, { lead: true }),
     quad(3, 'menta', 'Definición', 'El indicador, con su fórmula', `<div class="pd-table-wrap"><table><thead><tr><th>Campo</th><th>Definición</th></tr></thead><tbody>${fields.map(([key, value]) => `<tr><td>${esc(key)}</td><td>${esc(value)}</td></tr>`).join('')}</tbody></table></div>`),
     quad(4, 'ambar', 'Pantalla', 'Qué muestra esta vista', '<p>La pantalla usa la cohorte de demostración de 200 estudiantes para que las medias, la dispersión y las señales se puedan leer. Esos nombres no son el registro real del campus.</p>'),
