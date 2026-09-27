@@ -1,5 +1,21 @@
 'use strict';
 const teacherFilters={course:'',module:'',q:'',student:''};
+function teacherPortalScope(){return typeof isTeacherPortal==='function'&&isTeacherPortal()}
+function teacherFiveCourse(){
+  return (courses||[]).find(c=>/refrigeraci[oó]n y climatizaci[oó]n/i.test(c.title||''))||null;
+}
+function teacherFiveModules(){
+  const course=teacherFiveCourse();
+  if(!course)return [];
+  return (course.modules||[]).filter(m=>Number(m.position)>=1&&Number(m.position)<=5).slice(0,5);
+}
+function applyTeacherPortalScope(){
+  if(!teacherPortalScope())return;
+  const course=teacherFiveCourse();
+  if(course)teacherFilters.course=String(course.id);
+  const allowed=new Set(teacherFiveModules().map(m=>String(m.id)));
+  if(teacherFilters.module&&!allowed.has(teacherFilters.module))teacherFilters.module='';
+}
 function teacherTabFromHash(){
   const hash=(location.hash||'').replace(/^#/,'');
   const known=['planning','students','curriculum','evidence','management'];
@@ -10,15 +26,18 @@ function teacherTabFromHash(){
   return 'planning';
 }
 function teacherModules(){
-  return (courses||[]).flatMap(c=>(c.modules||[]).map(m=>({
+  const source=teacherPortalScope()&&teacherFiveCourse()?[teacherFiveCourse()]:(courses||[]);
+  const allowed=teacherPortalScope()?new Set(teacherFiveModules().map(m=>String(m.id))):null;
+  return source.flatMap(c=>(c.modules||[]).map(m=>({
     id:m.id,
     title:m.title,
+    position:m.position,
     published:m.published,
     hours:m.official_hp||m.hours||0,
     aes:m.aes||[],
     courseId:c.id,
     courseTitle:c.title
-  })));
+  }))).filter(m=>!allowed||allowed.has(String(m.id)));
 }
 function teacherVisibleModules(){
   return teacherModules().filter(m=>{
@@ -35,6 +54,10 @@ function teacherFilteredRecords(){
   return teacherRecords().filter(r=>{
     if(teacherFilters.course&&String(r.course_id)!==teacherFilters.course)return false;
     if(teacherFilters.module&&String(r.module_id)!==teacherFilters.module)return false;
+    if(teacherPortalScope()){
+      const allowed=new Set(teacherFiveModules().map(m=>String(m.id)));
+      if(!allowed.has(String(r.module_id)))return false;
+    }
     const name=(r.name||'').toLowerCase();
     const mod=(r.title||'').toLowerCase();
     if(q&&!(name.includes(q)||mod.includes(q)))return false;
@@ -42,11 +65,14 @@ function teacherFilteredRecords(){
   });
 }
 function teacherCourseSelect(){
-  return `<label>Curso<select id="teacher-course"><option value="">Todos los cursos</option>${(courses||[]).map(c=>`<option value="${c.id}" ${String(c.id)===teacherFilters.course?'selected':''}>${esc(c.title)}</option>`).join('')}</select></label>`;
+  const list=teacherPortalScope()&&teacherFiveCourse()?[teacherFiveCourse()]:(courses||[]);
+  const all=teacherPortalScope()?'':`<option value="">Todos los cursos</option>`;
+  return `<label>Curso<select id="teacher-course">${all}${list.map(c=>`<option value="${c.id}" ${String(c.id)===teacherFilters.course?'selected':''}>${esc(c.title)}</option>`).join('')}</select></label>`;
 }
 function teacherModuleSelect(){
   const mods=teacherModules().filter(m=>!teacherFilters.course||String(m.courseId)===teacherFilters.course);
-  return `<label>Módulo<select id="teacher-module"><option value="">Todos los módulos</option>${mods.map(m=>`<option value="${m.id}" ${String(m.id)===teacherFilters.module?'selected':''}>${esc(m.title)}</option>`).join('')}</select></label>`;
+  const label=teacherPortalScope()?'Los 5 módulos':'Todos los módulos';
+  return `<label>Módulo<select id="teacher-module"><option value="">${label}</option>${mods.map(m=>`<option value="${m.id}" ${String(m.id)===teacherFilters.module?'selected':''}>${teacherPortalScope()?`Módulo ${m.position} · `:''}${esc(m.title)}</option>`).join('')}</select></label>`;
 }
 function teacherFilterBar(opts){
   const showSearch=opts&&opts.search;
@@ -202,7 +228,7 @@ function teacherPlanning(){
   const mods=teacherVisibleModules();
   return teacherWrap('planning',{
     title:'Curso y planificación',
-    lead:'En unos segundos: qué ocurre en el filtro, a quién afecta y qué módulo preparar. El inventario de módulos queda aquí; el corte exportable está en Reportes.'
+    lead:teacherPortalScope()?'Refrigeración y Climatización · versión de 5 módulos: planos, medición, redes, equipos y puesta en marcha.':'En unos segundos: qué ocurre en el filtro, a quién afecta y qué módulo preparar. El inventario de módulos queda aquí; el corte exportable está en Reportes.'
   },`${teacherPulseCard()}
     <h2>Módulos del filtro</h2>
     <p class="muted">Publicar o preparar no reemplaza la lectura pedagógica de arriba.</p>
@@ -406,7 +432,7 @@ function bindTeacherPortal(tab){
     const nq=$('#teacher-q');
     if(nq){nq.focus();try{nq.setSelectionRange(pos,pos);}catch(err){/* ignore */}}
   };
-  if(reset)reset.onclick=()=>{teacherFilters.course='';teacherFilters.module='';teacherFilters.q='';teacherFilters.student='';teacherDraw(tab);};
+  if(reset)reset.onclick=()=>{teacherFilters.course='';teacherFilters.module='';teacherFilters.q='';teacherFilters.student='';applyTeacherPortalScope();teacherDraw(tab);};
   const go=$('#teacher-pulse-go');
   if(go)go.onclick=()=>{
     const next=teacherPulseFacts().next;
@@ -454,5 +480,6 @@ function bindTeacherPortal(tab){
 async function teacherPageLegacy(t){
   const tab=t||teacherTabFromHash();
   if(!teacherData)teacherData=await api('/teacher');
+  applyTeacherPortalScope();
   teacherDraw(tab);
 }

@@ -5,7 +5,7 @@ from flask import Flask, request, session, jsonify, send_from_directory, Respons
 from werkzeug.security import generate_password_hash, check_password_hash
 from content import DEFAULT_CONTENT, STATIONS, STEPS
 from catalog import upgrade_catalog, EXTENDED_MODULES
-from curriculum import MODULE_TITLES
+from curriculum import MODULE_TITLES, OFFICIAL
 from pedagogy import enrich, strip_for_student, validate_experience, hint_for, summarize_response, exam_profile, course_planning, module_plan, publication_gaps
 from encargos import encargos_for
 
@@ -44,11 +44,24 @@ def create_app(test_config=None):
     def body():return request.get_json(silent=True) or {}
     def user():
         with db() as con:return con.execute('SELECT id,username,name,role FROM users WHERE id=?',(session.get('uid'),)).fetchone()
+    def portal_teacher():
+        tid=session.get('teacher_uid')
+        if not tid:return None
+        with db() as con:return con.execute("SELECT id,username,name,role FROM users WHERE id=? AND role='teacher'",(tid,)).fetchone()
+    def actor():
+        # El portal docente no comparte la sesión del campus de cursos.
+        if request.headers.get('X-Aula-Portal')=='docente' or request.path.startswith('/api/teacher'):
+            teacher=portal_teacher()
+            if teacher:return teacher
+        return user()
+    def subject_id():
+        u=actor()
+        return u['id'] if u else session.get('uid')
     def require(role=None):
         def deco(fn):
             @wraps(fn)
             def run(*a,**kw):
-                u=user()
+                u=actor()
                 if not u:return fail('Inicia sesión para continuar.',401)
                 if role and u['role']!=role:return fail('Esta acción requiere el rol '+('docente' if role=='teacher' else 'estudiante')+'.',403)
                 return fn(*a,**kw)
@@ -73,34 +86,71 @@ def create_app(test_config=None):
         s.setdefault('trace', []).append(dict(kind=kind, estado='COMPLETADO', **extra))
         if len(s['trace'])>400:s['trace']=s['trace'][-400:]
     def getstate(con,mid):
-        row=con.execute('SELECT state FROM progress WHERE user_id=? AND module_id=?',(session['uid'],mid)).fetchone()
+        row=con.execute('SELECT state FROM progress WHERE user_id=? AND module_id=?',(subject_id(),mid)).fetchone()
         s=json.loads(row['state']) if row else empty()
         s.setdefault('oficio',{});s.setdefault('encargos',{})
         return s
     def putstate(con,mid,state):
-        con.execute('INSERT INTO progress(user_id,module_id,state) VALUES(?,?,?) ON CONFLICT(user_id,module_id) DO UPDATE SET state=excluded.state,updated=CURRENT_TIMESTAMP',(session['uid'],mid,json.dumps(state,ensure_ascii=False)))
+        con.execute('INSERT INTO progress(user_id,module_id,state) VALUES(?,?,?) ON CONFLICT(user_id,module_id) DO UPDATE SET state=excluded.state,updated=CURRENT_TIMESTAMP',(subject_id(),mid,json.dumps(state,ensure_ascii=False)))
     def completed(s, content=None):
         ae_count=len((content or {}).get('aes') or []) if isinstance(content,dict) else 3
         expected_steps=max(1,ae_count)*6
         return [bool(s['context']),len(s['ae'])==expected_steps,len(s['cases'])==15 and bool(s['scene']),bool(s['exam']),s['closed']]
     def accessible(mid):
         with db() as con:
-            m=con.execute('SELECT * FROM modules WHERE id=?',(mid,)).fetchone();u=user()
+            m=con.execute('SELECT * FROM modules WHERE id=?',(mid,)).fetchone();u=actor()
             if not m:return None,fail('Módulo inexistente.',404)
             if u['role']=='student':
                 if not m['published']:return None,fail('El módulo está en preparación.',403)
                 if not con.execute('SELECT 1 FROM enrollments WHERE user_id=? AND course_id=?',(u['id'],m['course_id'])).fetchone():return None,fail('No tienes matrícula en este curso.',403)
             return dict(m),None
     def text_valid(v,n=20):return isinstance(v,str) and n<=len(v.strip())<=10000
+    def public_ae(a):
+        a=a or {}
+        criteria=[]
+        for item in (a.get('criteria') or [])[:8]:
+            if isinstance(item,str) and item.strip():criteria.append(item.strip())
+            elif isinstance(item,dict):
+                text=item.get('text') or item.get('title') or ''
+                if text.strip():criteria.append(text.strip())
+        return {'title':a.get('title') or '','code':a.get('official_code') or a.get('code') or '','criteria':criteria}
+    def public_oa(raw):
+        if isinstance(raw,str):return [raw.strip()] if raw.strip() else []
+        out=[]
+        for item in raw or []:
+            if isinstance(item,str) and item.strip():out.append(item.strip())
+            elif isinstance(item,dict):
+                code=(item.get('code') or '').strip()
+                text=(item.get('text') or item.get('title') or '').strip()
+                line=f'{code}. {text}' if code and text else (text or code)
+                if line:out.append(line)
+            if len(out)>=8:break
+        return out
+    def send_index():
+        r=send_from_directory(app.static_folder,'index.html')
+        r.headers['Cache-Control']='no-store'
+        return r
     @app.get('/')
     def index():
-        r=send_from_directory(app.static_folder,'index.html')
+        return send_index()
+    @app.get('/portal-docente')
+    @app.get('/portal-docente/')
+    @app.get('/portal-docente/<section>')
+    def portal_docente_page(section=None):
+        r=send_from_directory(app.static_folder,'portal-docente.html')
         r.headers['Cache-Control']='no-store'
         return r
     @app.get('/api/session')
     def me():
         session.setdefault('csrf',secrets.token_hex(24));u=user()
         return jsonify(user=dict(u) if u else None,csrf=session['csrf'])
+    @app.get('/api/portal-docente/enter')
+    def portal_docente_enter():
+        with db() as con:u=con.execute("SELECT id,username,name,role FROM users WHERE role='teacher' ORDER BY id LIMIT 1").fetchone()
+        if not u:return fail('El portal docente no está disponible.',503)
+        session['teacher_uid']=u['id']
+        session.setdefault('csrf',secrets.token_hex(24))
+        return jsonify(user=dict(u),csrf=session['csrf'],portal='docente')
     @app.post('/api/login')
     def login():
         b=body()
@@ -114,7 +164,7 @@ def create_app(test_config=None):
     @require()
     def courses():
         with db() as con:
-            u=user();rows=con.execute('SELECT * FROM courses ORDER BY id').fetchall() if u['role']=='teacher' else con.execute('SELECT c.* FROM courses c JOIN enrollments e ON e.course_id=c.id WHERE e.user_id=? ORDER BY c.id',(u['id'],)).fetchall()
+            u=actor();rows=con.execute('SELECT * FROM courses ORDER BY id').fetchall() if u['role']=='teacher' else con.execute('SELECT c.* FROM courses c JOIN enrollments e ON e.course_id=c.id WHERE e.user_id=? ORDER BY c.id',(u['id'],)).fetchall()
             result=[]
             for c in rows:
                 item=dict(c);item['modules']=[]
@@ -132,7 +182,11 @@ def create_app(test_config=None):
                         item.setdefault('scope',source.get('scope'))
                         item.setdefault('pdf',source.get('pdf'))
                     if u['role']=='teacher':
-                        mod['aes']=[{'title':(a or {}).get('title') or '','code':(a or {}).get('official_code') or (a or {}).get('code') or ''} for a in (raw_content.get('aes') or [])]
+                        mod['aes']=[public_ae(a) for a in (raw_content.get('aes') or [])]
+                        oa=public_oa(raw_content.get('oa')) or public_oa((raw_content.get('specialty_source') or {}).get('oa'))
+                        if not oa:
+                            oa=public_oa((OFFICIAL.get(m['position']) or {}).get('oa'))
+                        mod['oa']=oa
                     plan=None if source else module_plan(m['position'])
                     if plan:mod.update(plan)
                     pack=(raw_content.get('encargos') or {}) if source else encargos_for(m['position'])
@@ -153,7 +207,7 @@ def create_app(test_config=None):
     def module(mid):
         m,err=accessible(mid)
         if err:return err
-        c=load_content(m.pop('content'), m['position']);u=user()
+        c=load_content(m.pop('content'), m['position']);u=actor()
         active_plan=None
         with db() as con:
             s=getstate(con,mid)
@@ -184,7 +238,7 @@ def create_app(test_config=None):
         with db() as con:
             con.execute(
                 'INSERT INTO content_incidents(user_id,module_id,station,claim,note) VALUES(?,?,?,?,?)',
-                (session['uid'],mid,station,claim,note.strip()[:2000]),
+                (subject_id(),mid,station,claim,note.strip()[:2000]),
             )
         return jsonify(ok=True)
     @app.get('/api/progress')
@@ -196,7 +250,7 @@ def create_app(test_config=None):
                 FROM enrollments e JOIN courses c ON c.id=e.course_id
                 JOIN modules m ON m.course_id=c.id
                 LEFT JOIN progress p ON p.module_id=m.id AND p.user_id=e.user_id
-                WHERE e.user_id=? AND m.published=1 ORDER BY c.id,m.position,m.id''',(session['uid'],)).fetchall()
+                WHERE e.user_id=? AND m.published=1 ORDER BY c.id,m.position,m.id''',(subject_id(),)).fetchall()
             result=[]
             for row in rows:
                 c=load_content(row['content'],row['position'])
@@ -462,7 +516,7 @@ def create_app(test_config=None):
             if not row:return fail('Entrega inexistente.',404)
             s=json.loads(row['state'])
             if not s['exam']:return fail('La evaluación no ha sido entregada.')
-            s['exam']['review']={'points':points,'score':sum(points),'feedback':b['feedback'].strip(),'teacher_id':session['uid']}
+            s['exam']['review']={'points':points,'score':sum(points),'feedback':b['feedback'].strip(),'teacher_id':actor()['id']}
             con.execute('UPDATE progress SET state=?,updated=CURRENT_TIMESTAMP WHERE user_id=? AND module_id=?',(json.dumps(s,ensure_ascii=False),b['user_id'],b['module_id']))
         return jsonify(ok=True)
     @app.post('/api/teacher/specialist-review')
@@ -476,7 +530,7 @@ def create_app(test_config=None):
             if not con.execute('SELECT 1 FROM modules WHERE id=?',(mid,)).fetchone():return fail('Módulo inexistente.',404)
             con.execute(
                 'INSERT INTO specialist_reviews(module_id,teacher_id,verdict,note) VALUES(?,?,?,?)',
-                (mid,session['uid'],verdict,note.strip()[:2000]),
+                (mid,actor()['id'],verdict,note.strip()[:2000]),
             )
         return jsonify(ok=True,internal_seal=None)
     @app.get('/api/teacher/export.csv')
