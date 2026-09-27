@@ -185,7 +185,7 @@ function login(){
  toggle.onclick=()=>{const show=password.type==='password';password.type=show?'text':'password';toggle.setAttribute('aria-pressed',String(show));toggle.setAttribute('aria-label',show?'Ocultar contraseña':'Mostrar contraseña')};
  $('[data-action="recover-password"]').onclick=e=>{e.preventDefault();toast('Solicita al administrador local el restablecimiento de tu contraseña.')};
  document.querySelectorAll('.login-provider').forEach(button=>button.onclick=()=>toast(`${button.dataset.provider==='google'?'Google':'Microsoft'} estará disponible cuando se configure el acceso institucional.`));
- $('#login-form').onsubmit=async e=>{e.preventDefault();try{auth=await api('/login','POST',Object.fromEntries(new FormData(e.target)));navigateHash('courses')}catch(err){$('.form-error').textContent=err.message}};
+ $('#login-form').onsubmit=async e=>{e.preventDefault();const errEl=$('.form-error');errEl.textContent='';const data=Object.fromEntries(new FormData(e.target));data.username=String(data.username||'').trim();data.password=String(data.password||'').trim();const tryLogin=async()=>api('/login','POST',data);try{auth=await tryLogin();navigateHash('courses')}catch(err){if(/sesión cambió/i.test(err.message||'')){try{auth=await api('/session');auth=await tryLogin();navigateHash('courses');return}catch(retryErr){errEl.textContent=retryErr.message;return}}errEl.textContent=err.message}};
 }
 function courseList(){
  const allModules=courses.flatMap(course=>course.modules||[]);

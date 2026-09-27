@@ -102,8 +102,10 @@ def create_app(test_config=None):
     @app.post('/api/login')
     def login():
         b=body()
-        with db() as con:u=con.execute('SELECT * FROM users WHERE username=?',(str(b.get('username','')),)).fetchone()
-        if not u or not check_password_hash(u['password'],str(b.get('password',''))):return fail('Usuario o contraseña incorrectos.',401)
+        username=str(b.get('username') or '').strip()
+        password=str(b.get('password') or '').strip()
+        with db() as con:u=con.execute('SELECT * FROM users WHERE username=?',(username,)).fetchone()
+        if not u or not check_password_hash(u['password'],password):return fail('Usuario o contraseña incorrectos.',401)
         session.clear();session['uid']=u['id'];session['csrf']=secrets.token_hex(24)
         return me()
     @app.post('/api/logout')
