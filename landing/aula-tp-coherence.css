@@ -1,0 +1,55 @@
+/* Aula TP · parche 2026-09-27: cards, hero y menú */
+.capability-card{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-height:92px;
+  padding:17px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:#fff;
+}
+.capability-card .capability-copy{
+  display:grid;
+  gap:2px;
+  min-width:0;
+  line-height:1.2;
+}
+.capability-card .capability-copy b{
+  display:block;
+  color:var(--navy);
+  font-weight:800;
+  letter-spacing:0;
+}
+.capability-card .capability-copy small{
+  display:block;
+  color:var(--muted);
+  font-weight:600;
+  font-size:.82rem;
+}
+.hero-media{
+  position:relative;
+}
+.hero-media > img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:18px 18px 0 0;
+  object-fit:cover;
+}
+.hero-media video{
+  position:absolute;
+  inset:auto 16px 58px auto;
+  width:min(42%, 280px);
+  border-radius:12px;
+  box-shadow:0 10px 24px #082b6733;
+  background:#041428;
+}
+.specialty-card.photo-administracion{
+  background-image:url('/images/especialidades/sector-administracion.png');
+  background-size:cover;
+  background-position:center;
+}
+@media(max-width:780px){
+  .hero-media video{position:static;width:100%;margin-top:10px;}
+}
