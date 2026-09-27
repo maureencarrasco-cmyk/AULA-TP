@@ -11,7 +11,7 @@ import { ESTACIONES_M7 } from '@/lib/m7-mantencion-estaciones';
 import { ESTACIONES_M8 } from '@/lib/m8-reciclaje-estaciones';
 export const dynamic = 'force-dynamic';
 export async function GET(req: NextRequest) {
- const id = getSessionStudentId(req) || req.nextUrl.searchParams.get('studentId');
+ const id = req.nextUrl.searchParams.get('studentId')?.trim() || getSessionStudentId(req);
  if (!id) return NextResponse.json({error:'Selecciona un estudiante'}, {status:400});
  const data=getStudentProgress(id);
  if (!data.student) return NextResponse.json({error:'Estudiante no encontrado'}, {status:404});

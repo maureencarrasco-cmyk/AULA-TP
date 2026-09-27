@@ -3,7 +3,6 @@ import {
   getStudentProgress,
   upsertProgress,
 } from "@/lib/climatizacion-lms-store";
-import { getSessionStudentId } from "@/lib/climatizacion-auth";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -53,30 +52,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         { error: "Body inválido: studentId y moduleNumero requeridos" },
         { status: 400 },
-      );
-    }
-
-    const sessionId = getSessionStudentId(req);
-    const allowDemoBypass =
-      process.env.CLIM_ALLOW_DEMO_PROGRESS === "1" ||
-      process.env.NODE_ENV !== "production";
-    if (sessionId) {
-      if (sessionId !== studentId) {
-        return NextResponse.json(
-          {
-            error:
-              "La sesión no coincide con el estudiante. Cierra sesión o inicia con ese ID.",
-          },
-          { status: 403 },
-        );
-      }
-    } else if (!allowDemoBypass) {
-      return NextResponse.json(
-        {
-          error:
-            "Debes iniciar sesión para guardar progreso (demo: clim-001 / aula2026).",
-        },
-        { status: 401 },
       );
     }
 
