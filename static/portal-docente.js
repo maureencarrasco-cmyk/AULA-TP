@@ -183,6 +183,18 @@ function median(values) {
   return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
 }
 function pct(value) { return value == null ? '—' : `${Math.round(value)} %`; }
+function modeOf(values) {
+  const counts = new Map();
+  values.forEach(value => {
+    const rounded = Math.round(value);
+    counts.set(rounded, (counts.get(rounded) || 0) + 1);
+  });
+  let best = 0;
+  counts.forEach(count => { if (count > best) best = count; });
+  if (best < 2) return null;
+  const valuesAtBest = [...counts.entries()].filter(([, count]) => count === best).map(([value]) => value).sort((a, b) => a - b);
+  return { values: valuesAtBest, count: best };
+}
 function stdev(values) {
   if (values.length < 2) return null;
   const avg = mean(values);
@@ -198,16 +210,30 @@ function central(values, noun) {
   const midR = Math.round(median(values));
   const spread = values.length >= 8 ? stdev(values) : null;
   const spreadR = spread == null ? null : Math.round(spread);
+  const mode = modeOf(values);
+  const modeText = !mode ? '—' : mode.values.length > 2 ? 'Varias' : mode.values.map(value => `${value} %`).join(' y ');
+  const modeHint = !mode ? 'Ningún valor se repite más que otro.' : mode.values.length > 2 ? 'Hay varios resultados igual de frecuentes.' : `Se repite ${mode.count} veces.`;
+  let spreadValue = '—';
+  let spreadHint = 'Hacen falta al menos 8 datos.';
+  if (spreadR != null && spreadR < 8) { spreadValue = `${spreadR} pts`; spreadHint = 'Pequeña: datos más agrupados.'; }
+  else if (spreadR != null && spreadR < 12) { spreadValue = `${spreadR} pts`; spreadHint = 'Moderada.'; }
+  else if (spreadR != null) { spreadValue = `${spreadR} pts`; spreadHint = 'Grande: datos más dispersos.'; }
   let result;
   if (midR > avgR + 3) result = `El ${who} del medio está en ${midR} %. El promedio baja a ${avgR} % por unos pocos resultados bajos.`;
   else if (avgR > midR + 3) result = `El ${who} del medio está en ${midR} %. El promedio sube a ${avgR} % por unos pocos resultados altos.`;
   else result = `Promedio y ${who} del medio coinciden, cerca de ${avgR} %.`;
-  let spreadLine = ' Son pocos datos para ver si el curso está parejo.';
-  if (spreadR != null && spreadR < 8) spreadLine = ' El curso está parejo.';
-  else if (spreadR != null && spreadR < 12) spreadLine = ' Hay diferencias moderadas: el promedio no describe a cada uno.';
-  else if (spreadR != null) spreadLine = ' Hay diferencias grandes: un solo porcentaje no representa al curso.';
-  const extra = spreadR != null ? `<span>Desviación estándar: ${spreadR} pts</span>` : '';
-  return `<p class="pd-stats"><span>Media: ${avgR} %</span><span>Mediana: ${midR} %</span>${extra}<span>Datos: ${values.length}</span></p><p class="pd-interp"><strong>${result}</strong>${spreadLine}</p>`;
+  if (mode && mode.values.length === 1) result += ` Lo más frecuente es ${mode.values[0]} %.`;
+  else if (mode && mode.values.length === 2) result += ` Lo más frecuente son ${mode.values[0]} % y ${mode.values[1]} %.`;
+  const spreadLine = spreadR == null ? ' Son pocos datos para ver si el curso está parejo.' : spreadR < 8 ? ' El curso está parejo.' : spreadR < 12 ? ' Hay diferencias moderadas: el promedio no describe a cada uno.' : ' Hay diferencias grandes: un solo porcentaje no representa al curso.';
+  const cards = [
+    ['media', 'Media → promedio', `${avgR} %`, 'Valor representativo del conjunto.'],
+    ['mediana', 'Mediana → centro', `${midR} %`, 'Divide los datos en dos partes iguales.'],
+    ['moda', 'Moda → más frecuente', modeText, modeHint],
+    ['de', 'Desviación → dispersión', spreadValue, spreadHint]
+  ];
+  const grid = `<div class="pd-measures">${cards.map(([kind, label, value, hint]) => `<article class="pd-measure m-${kind}"><p>${label}</p><b>${value}</b><span>${hint}</span></article>`).join('')}</div>`;
+  const example = '<p class="pd-example"><strong>Ejemplo.</strong> Notas 4, 5, 5, 6 y 10: media 6, mediana 5, moda 5. La desviación es alta porque el 10 está alejado del resto.</p>';
+  return `${grid}<p class="pd-interp"><strong>${result}</strong>${spreadLine}</p>${example}`;
 }
 function bars(items) {
   return `<div class="pd-bars">${items.map(item => {
