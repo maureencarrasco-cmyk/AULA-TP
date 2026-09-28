@@ -25,7 +25,7 @@ const PHOTOS = {
 const HEAD = {
   resumen: PHOTOS[2],
   cursos: PHOTOS[1],
-  estudiantes: PHOTOS[3],
+  estudiantes: ['/static/themes/student-electricity-workshop.png', 'Estudiantes de enseñanza media trabajando juntos en un taller técnico.', '28% center'],
   'oa-ae': PHOTOS[4],
   cumplimiento: PHOTOS[5],
   reportes: PHOTOS[2]
@@ -120,7 +120,8 @@ function spotlight(lead, pairs, rest) {
 function frame(body) {
   const tab = currentTab();
   const photo = HEAD[tab.id] || PHOTOS[2];
-  return `<header class="pd-pagehead"><div class="pd-pagehead-copy"><p class="pd-kicker-page">${esc(tab.label)}</p><h1>${esc(tab.question)}</h1></div><div class="pd-pagehead-photo"><img src="${photo[0]}" alt="${esc(photo[1])}"></div></header><div class="pd-board">${body}</div>`;
+  const pos = photo[2] ? ` style="object-position:${photo[2]}"` : '';
+  return `<header class="pd-pagehead"><div class="pd-pagehead-copy"><p class="pd-kicker-page">${esc(tab.label)}</p><h1>${esc(tab.question)}</h1></div><div class="pd-pagehead-photo"><img src="${photo[0]}" alt="${esc(photo[1])}"${pos}></div></header><div class="pd-board">${body}</div>`;
 }
 function quad(index, tone, kicker, title, body, flags) {
   const options = flags || {};
@@ -258,11 +259,32 @@ function central(values, noun) {
   const example = '<p class="pd-example"><strong>Ejemplo.</strong> Notas 4, 5, 5, 6 y 10: media 6, mediana 5, moda 5. La desviación es alta porque el 10 está alejado del resto.</p>';
   return `<p class="pd-orient-lead">${result}</p>${grid}<p class="pd-interp">${spreadLine.trim()}</p>${example}`;
 }
-function bars(items) {
-  return `<div class="pd-bars">${items.map(item => {
+function bars(items, meta) {
+  const info = meta || {};
+  const rows = items.map(item => {
     const value = Math.max(0, Math.min(100, Math.round(item.value)));
     return `<div class="pd-bar"><span>${esc(item.label)}</span><div class="pd-track"><div class="pd-fill" style="width:${value}%"></div></div><strong>${value} %</strong></div>`;
-  }).join('')}</div>`;
+  }).join('');
+  const title = info.title ? `<figcaption class="pd-chart-title">${esc(info.title)}</figcaption>` : '';
+  const head = (info.y || info.x) ? `<p class="pd-axis-head"><span>${esc(info.y || '')}</span><span></span><span>${esc(info.x || '')}</span></p>` : '';
+  return `<figure class="pd-figure">${title}<div class="pd-bars" role="img" aria-label="${esc(info.title || 'Gráfico de barras')}">${head}${rows}</div></figure>`;
+}
+function chartSvg(w, h, title, body) {
+  return `<svg class="pd-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}" font-family="Segoe UI, Arial, sans-serif"><text x="${w / 2}" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#143a78">${esc(title)}</text>${body}</svg>`;
+}
+function percentFrame(w, h, yName, xName, xTicks, sx) {
+  const left = 86, right = 22, top = 42, bottom = 52;
+  const sy = y => top + (1 - y / 100) * (h - top - bottom);
+  const grid = [0, 25, 50, 75, 100].map(value => {
+    const y = sy(value);
+    return `<line x1="${left}" y1="${y}" x2="${w - right}" y2="${y}" stroke="#e4eef8"></line><text x="${left - 8}" y="${y + 4}" text-anchor="end" font-size="11" fill="#5e7596">${value} %</text>`;
+  }).join('');
+  const labels = xTicks.map(value => `<text x="${sx(value)}" y="${h - bottom + 18}" text-anchor="middle" font-size="11" fill="#5e7596">${esc(value)}</text>`).join('');
+  const midY = top + (h - top - bottom) / 2;
+  const midX = left + (w - left - right) / 2;
+  const axis = `<line x1="${left}" y1="${top}" x2="${left}" y2="${h - bottom}" stroke="#8aa4c4"></line><line x1="${left}" y1="${h - bottom}" x2="${w - right}" y2="${h - bottom}" stroke="#8aa4c4"></line>`;
+  const names = `<text x="0" y="0" text-anchor="middle" font-size="12" fill="#3d5270" transform="translate(16, ${midY}) rotate(-90)">${esc(yName)}</text><text x="${midX}" y="${h - 12}" text-anchor="middle" font-size="12" fill="#3d5270">${esc(xName)}</text>`;
+  return { left, right, top, bottom, sy, marks: `${grid}${labels}${axis}${names}` };
 }
 function linreg(points) {
   const n = points.length;
@@ -297,13 +319,18 @@ function trendWord(points) {
 function lineChart(points, title) {
   if (!points.length) return spotlight('No hay una serie semanal con suficientes observaciones comparables.');
   const reg = linreg(points);
-  const w = 640, h = 230, left = 42, right = 16, top = 16, bottom = 36;
+  const w = 680, h = 320;
   const xs = points.map(point => point.x);
   const minX = Math.min(...xs), maxX = Math.max(...xs);
-  const sx = x => left + ((x - minX) / Math.max(1, maxX - minX)) * (w - left - right);
-  const sy = y => top + (1 - y / 100) * (h - top - bottom);
+  const plotMax = reg ? maxX + 1 : maxX;
+  const left = 86, right = 22;
+  const sx = x => left + ((x - minX) / Math.max(1, plotMax - minX)) * (w - left - right);
+  const weeks = [];
+  for (let week = minX; week <= plotMax; week += 1) weeks.push(week);
+  const drawn = percentFrame(w, h, 'Desempeño medio (%)', 'Semana', weeks, sx);
+  const sy = drawn.sy;
   const observed = points.map(point => `${sx(point.x)},${sy(point.y)}`).join(' ');
-  const dots = points.map(point => `<circle cx="${sx(point.x)}" cy="${sy(point.y)}" r="3.5" fill="#4d7eb8"></circle>`).join('');
+  const dots = points.map(point => `<circle cx="${sx(point.x)}" cy="${sy(point.y)}" r="3.5" fill="#4d7eb8"><title>Semana ${point.x}: ${Math.round(point.y)} %</title></circle>`).join('');
   let trend = '';
   let note = 'Menos de 8 observaciones comparables: no se traza regresión.';
   if (reg) {
@@ -311,13 +338,13 @@ function lineChart(points, title) {
     const y2 = reg.intercept + reg.slope * maxX;
     trend = `<line x1="${sx(minX)}" y1="${sy(y1)}" x2="${sx(maxX)}" y2="${sy(y2)}" stroke="#c9843a" stroke-width="2"></line>`;
     const next = maxX + 1;
-    const projected = reg.intercept + reg.slope * next;
-    trend += `<line x1="${sx(maxX)}" y1="${sy(y2)}" x2="${sx(next)}" y2="${sy(Math.max(0, Math.min(100, projected)))}" stroke="#c9843a" stroke-width="2" stroke-dasharray="5 4"></line>`;
+    const projected = Math.max(0, Math.min(100, reg.intercept + reg.slope * next));
+    trend += `<line x1="${sx(maxX)}" y1="${sy(y2)}" x2="${sx(next)}" y2="${sy(projected)}" stroke="#c9843a" stroke-width="2" stroke-dasharray="5 4"></line>`;
     const direction = reg.slope > 0.4 ? 'ascendente' : reg.slope < -0.4 ? 'descendente' : 'estable';
     note = `La tendencia es ${direction}, con ${reg.n} semanas comparables. La línea continua resume lo observado. El tramo punteado estima la semana siguiente: no es un resultado ya obtenido.`;
   }
-  const svg = `<svg class="pd-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}"><line x1="${left}" y1="${sy(0)}" x2="${w - right}" y2="${sy(0)}" stroke="#d7e4f5"></line><line x1="${left}" y1="${sy(100)}" x2="${left}" y2="${sy(0)}" stroke="#8aa4c4"></line><text x="4" y="${sy(100) + 4}" font-size="11" fill="#5e7596">100 %</text><text x="8" y="${sy(0)}" font-size="11" fill="#5e7596">0 %</text><text x="${w / 2}" y="${h - 8}" font-size="11" fill="#5e7596">Semana</text><polyline fill="none" stroke="#4d7eb8" stroke-width="2" points="${observed}"></polyline>${dots}${trend}</svg>`;
-  return spotlight(note, [['Semanas', String(points.length)], ['Evolución', trendWord(points)]], `<p class="pd-note">Eje horizontal: semana. Eje vertical: desempeño medio (%). La línea continua es lo observado. El tramo punteado estima la semana siguiente.</p>${svg}`);
+  const svg = chartSvg(w, h, title, `${drawn.marks}<polyline fill="none" stroke="#4d7eb8" stroke-width="2" points="${observed}"></polyline>${dots}${trend}`);
+  return spotlight(note, [['Semanas', String(points.length)], ['Evolución', trendWord(points)]], svg);
 }
 function pieChart(parts, title) {
   const total = parts.reduce((sum, part) => sum + part.value, 0);
@@ -334,17 +361,23 @@ function pieChart(parts, title) {
     return `<path d="M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${large} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z" fill="${part.color}"></path>`;
   }).join('');
   const legend = parts.map(part => `<li><i class="pd-swatch" style="background:${part.color}"></i>${esc(part.label)}: ${part.value} (${total ? Math.round(part.value / total * 100) : 0} %)</li>`).join('');
-  return `<div class="pd-pie"><svg viewBox="0 0 180 180" role="img" aria-label="${esc(title)}">${paths}</svg><ul>${legend}</ul></div>`;
+  return `<figure class="pd-figure"><figcaption class="pd-chart-title">${esc(title)}</figcaption><div class="pd-pie"><svg viewBox="0 0 180 180" role="img" aria-label="${esc(title)}">${paths}</svg><div><p class="pd-axis-name">Señal de acompañamiento · estudiantes</p><ul>${legend}</ul></div></div></figure>`;
 }
 function scatterChart(points) {
   if (points.length < 8) return spotlight('Menos de 8 estudiantes con práctica y logro: no se dibuja la relación.');
-  const w = 640, h = 240, left = 42, right = 16, top = 16, bottom = 36;
+  const title = 'Relación entre práctica y logro de selección';
+  const w = 680, h = 340, left = 86, right = 22;
   const maxX = Math.max(...points.map(point => point.x), 1);
+  const step = Math.max(1, Math.ceil(maxX / 4));
+  const ticks = [];
+  for (let value = 0; value <= maxX; value += step) ticks.push(value);
+  if (ticks[ticks.length - 1] !== maxX) ticks.push(maxX);
   const sx = x => left + (x / maxX) * (w - left - right);
-  const sy = y => top + (1 - y / 100) * (h - top - bottom);
+  const drawn = percentFrame(w, h, 'Logro de selección (%)', 'Cantidad de prácticas', ticks, sx);
+  const sy = drawn.sy;
   const dots = points.map(point => `<circle cx="${sx(point.x)}" cy="${sy(point.y)}" r="3.2" fill="#5b8fbf" opacity="0.85"><title>${esc(point.name)}: ${point.x} prácticas, ${Math.round(point.y)} %</title></circle>`).join('');
   const reg = linreg(points);
-  const trend = reg ? `<line x1="${sx(0)}" y1="${sy(reg.intercept)}" x2="${sx(maxX)}" y2="${sy(reg.intercept + reg.slope * maxX)}" stroke="#c9843a" stroke-width="2"></line>` : '';
+  const trend = reg ? `<line x1="${sx(0)}" y1="${sy(Math.max(0, Math.min(100, reg.intercept)))}" x2="${sx(maxX)}" y2="${sy(Math.max(0, Math.min(100, reg.intercept + reg.slope * maxX)))}" stroke="#c9843a" stroke-width="2"></line>` : '';
   const highX = median(points.map(point => point.x));
   const quadrants = { hh: 0, hl: 0, lh: 0, ll: 0 };
   points.forEach(point => {
@@ -356,16 +389,16 @@ function scatterChart(points) {
     else if (!highP && highL) quadrants.lh += 1;
     else if (!highP && lowL) quadrants.ll += 1;
   });
-  const svg = `<svg class="pd-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="Relación entre frecuencia de práctica y desempeño">${dots}${trend}<text x="4" y="24" font-size="11" fill="#5e7596">100 %</text><text x="${w / 2}" y="${h - 8}" font-size="11" fill="#5e7596">Prácticas</text></svg>`;
+  const svg = chartSvg(w, h, title, `${drawn.marks}${dots}${trend}`);
   return spotlight(
-    `En ${points.length} estudiantes se ven juntas la práctica y el logro. Eso no demuestra que practicar produzca el resultado.`,
+    `En ${points.length} estudiantes se ven juntas la práctica y el logro. Un punto es un estudiante. Eso no demuestra que practicar produzca el resultado.`,
     [
       ['Alta práctica y alto logro', String(quadrants.hh)],
       ['Alta práctica y logro bajo', String(quadrants.hl)],
       ['Baja práctica y alto logro', String(quadrants.lh)],
       ['Baja práctica y bajo logro', String(quadrants.ll)]
     ],
-    `<p class="pd-note">Eje horizontal: cantidad de prácticas. Eje vertical: logro de selección (%). Un punto es un estudiante.</p>${svg}`
+    svg
   );
 }
 function studentGroups() {
@@ -477,7 +510,7 @@ function aeArticles(list) {
       const lead = ratio == null
         ? 'Sin registros: no se calcula un porcentaje de evidencia.'
         : `${ratio} % de los registros tiene al menos un paso. Es cobertura, no nivel de logro.`;
-      const bar = ratio == null ? '' : bars([{ label: ae.code || `AE ${index + 1}`, value: ratio }]);
+      const bar = ratio == null ? '' : bars([{ label: ae.code || `AE ${index + 1}`, value: ratio }], { title: 'Cobertura de evidencia', y: 'Aprendizaje', x: 'Con evidencia (%)' });
       const missing = whoText ? `<p class="pd-note">${whoText}</p>` : '';
       return `<article class="pd-card"><h3>${esc(ae.code || `AE ${index + 1}`)}</h3><p class="pd-orient-lead">${lead}</p><p>${esc(ae.title || 'Sin enunciado en el contenido.')}</p>${bar}${missing}${criteria ? `<details><summary>Ver criterios de evaluación</summary><ul>${criteria}</ul></details>` : '<p class="pd-note">Este aprendizaje esperado no trae criterios en el contenido.</p>'}</article>`;
     }).join('') : '<p class="pd-card">Este módulo no trae aprendizajes esperados en el contenido.</p>';
@@ -551,7 +584,7 @@ function panel() {
       ? `Solo el módulo ${groups[0].module.position} tiene registros en esta vista: cumplimiento ${Math.round(groups[0].value)} %${groups[0].rows.length === 1 ? ', en un solo registro' : ''}.`
       : `El módulo ${weakest.module.position} concentra el cumplimiento medio más bajo (${Math.round(weakest.value)} %). Esa cifra dice cuánto recorrido hay registrado; el nivel de logro se revisa en la evaluación de selección, cuando existe.`;
   const chart = groups.length
-    ? spotlight(solo, groups.map(item => [`Módulo ${item.module.position}`, `${Math.round(item.value)} %`]), `<p class="pd-note">El porcentaje es estaciones completadas ÷ 5. No es logro.</p>${bars(groups.map(item => ({ label: `Módulo ${item.module.position}`, value: item.value })))}`)
+    ? spotlight(solo, groups.map(item => [`Módulo ${item.module.position}`, `${Math.round(item.value)} %`]), `<p class="pd-note">El porcentaje es estaciones completadas ÷ 5. No es logro.</p>${bars(groups.map(item => ({ label: `Módulo ${item.module.position}`, value: item.value })), { title: 'Cumplimiento medio por módulo', y: 'Módulo', x: 'Cumplimiento (%)' })}`)
     : spotlight('No hay registros en esta vista, así que no se muestra un porcentaje. Un 0 % sería un recorrido vacío; aquí faltan registros.');
   const pie = pieChart([
     { label: 'Requiere mayor apoyo', value: counts.support, color: '#f0b0b0' },
@@ -633,7 +666,7 @@ function learning() {
     const ratio = Math.round(item.ratio * 100);
     const who = item.missing;
     const whoText = !who.length ? 'Todos los registros de la vista tienen algún paso en este AE.' : who.length > 6 ? `Sin evidencia en este AE: ${esc(who.slice(0, 6).join(', '))} y ${who.length - 6} más.` : `Sin evidencia en este AE: ${esc(who.join(', '))}.`;
-    return `<article class="pd-card"><h3>${esc(item.ae.code || item.ae.title || 'AE')} · módulo ${item.module.position}</h3><p class="pd-orient-lead">${ratio} % tiene al menos un paso. Es cobertura, no nivel de logro.</p><p>${esc(item.ae.title || 'Sin enunciado en el contenido.')}</p>${bars([{ label: 'Con evidencia', value: ratio }])}<p class="pd-note">${item.covered} de ${item.total}. ${whoText}</p></article>`;
+    return `<article class="pd-card"><h3>${esc(item.ae.code || item.ae.title || 'AE')} · módulo ${item.module.position}</h3><p class="pd-orient-lead">${ratio} % tiene al menos un paso. Es cobertura, no nivel de logro.</p><p>${esc(item.ae.title || 'Sin enunciado en el contenido.')}</p>${bars([{ label: 'Con evidencia', value: ratio }], { title: 'Cobertura de evidencia', y: 'Indicador', x: 'Con evidencia (%)' })}<p class="pd-note">${item.covered} de ${item.total}. ${whoText}</p></article>`;
   }).join('')}</div>` : '<p class="pd-interp">No hay AE con registros suficientes para comparar evidencia.</p>';
   const first = low[0];
   const lowLead = first
