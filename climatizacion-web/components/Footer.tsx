@@ -1,4 +1,5 @@
 import { Logo } from "./Logo";
+import { CAMPUS_HREF, COURSE_CATALOG_HREF, DEMO_HREF } from "@/lib/course-portal";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -16,17 +17,17 @@ export function Footer() {
             <p className="font-semibold text-white">Navegación</p>
             <ul className="mt-3 space-y-2">
               <li>
-                <a href="#beneficios" className="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400">
-                  Beneficios
+                <a href={COURSE_CATALOG_HREF} className="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400">
+                  Cursos vivos
                 </a>
               </li>
               <li>
-                <a href="#productos" className="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400">
-                  Productos
+                <a href={CAMPUS_HREF} className="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400">
+                  Campus
                 </a>
               </li>
               <li>
-                <a href="#contacto" className="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400">
+                <a href={DEMO_HREF} className="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400">
                   Solicitar demo
                 </a>
               </li>
