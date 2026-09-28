@@ -11,6 +11,83 @@ from encargos import encargos_for
 
 ROOT=Path(__file__).resolve().parent
 
+def ensure_module_catalog_table(con):
+    con.execute('''CREATE TABLE IF NOT EXISTS module_catalog(
+        module_id INTEGER PRIMARY KEY,
+        content_len INTEGER NOT NULL,
+        ae_count INTEGER NOT NULL,
+        ae_json TEXT NOT NULL,
+        oa_json TEXT NOT NULL,
+        encargos_count INTEGER NOT NULL,
+        encargos_hours REAL NOT NULL,
+        official_hp INTEGER,
+        scope TEXT,
+        pdf TEXT,
+        question_count INTEGER NOT NULL
+    )''')
+
+def catalog_payload(content, position):
+    if isinstance(content, str):
+        content=json.loads(content or '{}')
+    content=content or {}
+    source=content.get('specialty_source') or {}
+    aes_raw=content.get('aes') if isinstance(content.get('aes'), list) else []
+    aes=[]
+    for item in aes_raw[:8]:
+        if not isinstance(item, dict):
+            continue
+        criteria=[]
+        for raw in (item.get('criteria') or [])[:6]:
+            text=raw if isinstance(raw, str) else (raw.get('text') or raw.get('title') or '') if isinstance(raw, dict) else ''
+            text=str(text).strip()
+            if text:
+                criteria.append(text[:240])
+        aes.append({
+            'title':str(item.get('title') or '')[:240],
+            'code':str(item.get('official_code') or item.get('code') or ''),
+            'criteria':criteria,
+            'description':str(item.get('description') or '').strip()[:280],
+        })
+    oa=[]
+    raw_oa=content.get('oa') or source.get('oa') or []
+    if isinstance(raw_oa, str):
+        raw_oa=[raw_oa]
+    if isinstance(raw_oa, list):
+        for item in raw_oa[:12]:
+            text=item.strip() if isinstance(item, str) else ''
+            if text:
+                oa.append(text[:400])
+    pack=content.get('encargos') if isinstance(content.get('encargos'), dict) else {}
+    if not source and not pack.get('count'):
+        pack=encargos_for(position) or {}
+    questions=content.get('questions') if isinstance(content.get('questions'), list) else []
+    question_count=len(questions)
+    plan=content.get('evaluation_plan') if isinstance(content.get('evaluation_plan'), dict) else {}
+    if plan.get('question_count'):
+        question_count=min(question_count, int(plan['question_count']))
+    hp=source.get('official_hp')
+    return {
+        'ae_count':len(aes_raw),
+        'ae_json':json.dumps(aes, ensure_ascii=False),
+        'oa_json':json.dumps(oa, ensure_ascii=False),
+        'encargos_count':int(pack.get('count') or 0),
+        'encargos_hours':float(pack.get('hours') or 0),
+        'official_hp':int(hp) if isinstance(hp, (int, float)) else None,
+        'scope':str(source.get('scope') or ''),
+        'pdf':str(source.get('pdf') or ''),
+        'question_count':question_count,
+    }
+
+def upsert_module_catalog(con, module_id, position, content, content_len=None):
+    ensure_module_catalog_table(con)
+    raw=content if isinstance(content, str) else json.dumps(content or {}, ensure_ascii=False)
+    fields=catalog_payload(raw, position)
+    con.execute('''INSERT INTO module_catalog(module_id,content_len,ae_count,ae_json,oa_json,encargos_count,encargos_hours,official_hp,scope,pdf,question_count)
+        VALUES(?,?,?,?,?,?,?,?,?,?,?)
+        ON CONFLICT(module_id) DO UPDATE SET content_len=excluded.content_len,ae_count=excluded.ae_count,ae_json=excluded.ae_json,oa_json=excluded.oa_json,
+        encargos_count=excluded.encargos_count,encargos_hours=excluded.encargos_hours,official_hp=excluded.official_hp,scope=excluded.scope,pdf=excluded.pdf,question_count=excluded.question_count''',
+        (module_id, content_len if content_len is not None else len(raw), fields['ae_count'], fields['ae_json'], fields['oa_json'], fields['encargos_count'], fields['encargos_hours'], fields['official_hp'], fields['scope'], fields['pdf'], fields['question_count']))
+
 def create_app(test_config=None):
     app=Flask(__name__,static_folder='static')
     data=Path(os.environ.get('AULATP_DATA',str(ROOT/'data')));data.mkdir(parents=True,exist_ok=True)
@@ -164,35 +241,52 @@ def create_app(test_config=None):
     @require()
     def courses():
         with db() as con:
+            ensure_module_catalog_table(con)
             u=actor();rows=con.execute('SELECT * FROM courses ORDER BY id').fetchall() if u['role']=='teacher' else con.execute('SELECT c.* FROM courses c JOIN enrollments e ON e.course_id=c.id WHERE e.user_id=? ORDER BY c.id',(u['id'],)).fetchall()
             result=[]
             for c in rows:
                 item=dict(c);item['modules']=[]
-                for m in con.execute('SELECT id,title,position,published,content FROM modules WHERE course_id=? ORDER BY position,id',(c['id'],)):
-                    mod=dict(m);raw_content=json.loads(mod.pop('content') or '{}');source=raw_content.get('specialty_source') or {};s=getstate(con,m['id']);mod['completed']=completed(s,raw_content);mod['percent']=round(sum(mod['completed'])*20)
-                    exam=s.get('exam')
+                modules=con.execute('''SELECT m.id,m.title,m.position,m.published,cat.ae_count,cat.ae_json,cat.oa_json,cat.encargos_count,cat.encargos_hours,cat.official_hp,cat.scope,cat.pdf,p.state
+                    FROM modules m LEFT JOIN module_catalog cat ON cat.module_id=m.id
+                    LEFT JOIN progress p ON p.module_id=m.id AND p.user_id=?
+                    WHERE m.course_id=? ORDER BY m.position,m.id''',(subject_id(),c['id'])).fetchall()
+                for m in modules:
+                    if m['ae_count'] is None:
+                        raw=con.execute('SELECT content FROM modules WHERE id=?',(m['id'],)).fetchone()
+                        upsert_module_catalog(con,m['id'],m['position'],(raw['content'] if raw else '{}'))
+                        m=con.execute('''SELECT m.id,m.title,m.position,m.published,cat.ae_count,cat.ae_json,cat.oa_json,cat.encargos_count,cat.encargos_hours,cat.official_hp,cat.scope,cat.pdf,p.state
+                            FROM modules m LEFT JOIN module_catalog cat ON cat.module_id=m.id
+                            LEFT JOIN progress p ON p.module_id=m.id AND p.user_id=?
+                            WHERE m.id=?''',(subject_id(),m['id'])).fetchone()
+                    state=json.loads(m['state']) if m['state'] else empty()
+                    done=completed(state,{'aes':[None]*(m['ae_count'] or 0)})
+                    mod={'id':m['id'],'title':m['title'],'position':m['position'],'published':m['published'],'completed':done,'percent':round(sum(done)*20)}
+                    exam=state.get('exam')
                     selection_max=(exam or {}).get('max_score') or {1:5,2:5,3:7,4:8}.get(m['position'],5)
                     mod['evaluation_scores']={
                         'selection':round(exam.get('score',0)/selection_max*25,1) if exam else None,
                         'development':(exam.get('review') or {}).get('score') if exam else None,
                         'max_each':25,
                     }
-                    if source:
-                        mod['official_hp']=source.get('official_hp')
-                        item.setdefault('scope',source.get('scope'))
-                        item.setdefault('pdf',source.get('pdf'))
+                    if m['official_hp']:
+                        mod['official_hp']=m['official_hp']
+                    if m['scope']:
+                        item.setdefault('scope',m['scope'])
+                    if m['pdf']:
+                        item.setdefault('pdf',m['pdf'])
                     if u['role']=='teacher':
-                        mod['aes']=[public_ae(a) for a in (raw_content.get('aes') or [])]
-                        oa=public_oa(raw_content.get('oa')) or public_oa((raw_content.get('specialty_source') or {}).get('oa'))
-                        if not oa:
+                        aes=json.loads(m['ae_json'] or '[]')
+                        mod['aes']=[{'title':a.get('title') or '','code':a.get('code') or '','criteria':a.get('criteria') or []} for a in aes]
+                        oa=json.loads(m['oa_json'] or '[]')
+                        if not oa and not m['scope']:
                             oa=public_oa((OFFICIAL.get(m['position']) or {}).get('oa'))
                         mod['oa']=oa
+                    source=bool(m['scope'] or m['official_hp'])
                     plan=None if source else module_plan(m['position'])
                     if plan:mod.update(plan)
-                    pack=(raw_content.get('encargos') or {}) if source else encargos_for(m['position'])
-                    if pack.get('count'):
-                        mod['encargos_count']=pack['count']
-                        mod['encargos_hours']=pack['hours']
+                    if m['encargos_count']:
+                        mod['encargos_count']=m['encargos_count']
+                        mod['encargos_hours']=m['encargos_hours']
                     item['modules'].append(mod)
                 plan=course_planning(item)
                 if plan:
@@ -213,12 +307,16 @@ def create_app(test_config=None):
             s=getstate(con,mid)
             course=dict(con.execute('SELECT * FROM courses WHERE id=?',(m['course_id'],)).fetchone())
             course['modules']=[]
-            for row in con.execute('SELECT title,position,content FROM modules WHERE course_id=? ORDER BY position,id',(m['course_id'],)):
-                raw=json.loads(row['content'] or '{}');source=raw.get('specialty_source') or {}
+            ensure_module_catalog_table(con)
+            for row in con.execute('''SELECT m.title,m.position,cat.official_hp,cat.scope,cat.pdf
+                FROM modules m LEFT JOIN module_catalog cat ON cat.module_id=m.id
+                WHERE m.course_id=? ORDER BY m.position,m.id''',(m['course_id'],)):
                 base=module_plan(row['position']) or {}
-                course['modules'].append({'title':row['title'],'position':row['position'],'official_hp':source.get('official_hp') or base.get('official_hp')})
-                if source:
-                    course.setdefault('scope',source.get('scope'));course.setdefault('pdf',source.get('pdf'))
+                course['modules'].append({'title':row['title'],'position':row['position'],'official_hp':row['official_hp'] or base.get('official_hp')})
+                if row['scope']:
+                    course.setdefault('scope',row['scope'])
+                if row['pdf']:
+                    course.setdefault('pdf',row['pdf'])
             whole_plan=course_planning(course)
             if whole_plan:
                 active_plan=next((p for p in whole_plan['modules'] if p['position']==m['position']),None)
@@ -242,25 +340,32 @@ def create_app(test_config=None):
             )
         return jsonify(ok=True)
     @app.get('/api/progress')
-    @require('student')
+    @require()
     def student_progress():
         with db() as con:
+            ensure_module_catalog_table(con)
+            u=actor();uid=u['id']
+            if u['role']!='student':
+                student=con.execute("SELECT id FROM users WHERE role='student' ORDER BY id LIMIT 1").fetchone()
+                if not student:return jsonify([])
+                uid=student['id']
             rows=con.execute('''SELECT c.id AS course_id,c.title AS course_title,c.specialty,c.level,
-                m.id,m.title,m.position,m.published,m.content,p.state,p.updated
+                m.id,m.title,m.position,cat.ae_count,cat.ae_json,cat.oa_json,cat.question_count,p.state,p.updated
                 FROM enrollments e JOIN courses c ON c.id=e.course_id
                 JOIN modules m ON m.course_id=c.id
+                LEFT JOIN module_catalog cat ON cat.module_id=m.id
                 LEFT JOIN progress p ON p.module_id=m.id AND p.user_id=e.user_id
-                WHERE e.user_id=? AND m.published=1 ORDER BY c.id,m.position,m.id''',(subject_id(),)).fetchall()
+                WHERE e.user_id=? ORDER BY c.id,m.position,m.id''',(uid,)).fetchall()
             result=[]
             for row in rows:
-                c=load_content(row['content'],row['position'])
+                aes=json.loads(row['ae_json'] or '[]')
                 s=json.loads(row['state']) if row['state'] else empty()
                 result.append(dict(course_id=row['course_id'],course_title=row['course_title'],specialty=row['specialty'],
                     level=row['level'],id=row['id'],title=row['title'],position=row['position'],
-                    aes=[{'label':a.get('title') or a.get('name') or f'AE {i+1}','description':a.get('description') or ''} for i,a in enumerate(c.get('aes') or [])],
-                    oa=(c.get('specialty_source') or {}).get('oa') or [],
-                    question_count=min(len(c.get('questions') or []),int((c.get('evaluation_plan') or {}).get('question_count') or 25)),
-                    state=s,completed=completed(s,c),updated=row['updated']))
+                    aes=[{'label':a.get('title') or f'AE {i+1}','description':a.get('description') or ''} for i,a in enumerate(aes)],
+                    oa=json.loads(row['oa_json'] or '[]'),
+                    question_count=row['question_count'] or 0,
+                    state=s,completed=completed(s,{'aes':[None]*(row['ae_count'] or 0)}),updated=row['updated']))
         return jsonify(result)
     @app.post('/api/modules/<int:mid>/activity')
     @require('student')
@@ -501,7 +606,9 @@ def create_app(test_config=None):
                 gaps=publication_gaps(c)
                 if gaps:return fail(gaps[0]+' No publiques el módulo con ese hueco.')
             if con.execute('SELECT 1 FROM progress WHERE module_id=?',(mid,)).fetchone() and json.loads(existing['content'])!=c:return fail('Este módulo tiene evidencias. Crea otro módulo para una nueva versión del contenido.')
-            con.execute('UPDATE modules SET title=?,content=?,published=? WHERE id=?',(b['title'],json.dumps(c,ensure_ascii=False),int(published),mid))
+            stored=json.dumps(c,ensure_ascii=False)
+            con.execute('UPDATE modules SET title=?,content=?,published=? WHERE id=?',(b['title'],stored,int(published),mid))
+            upsert_module_catalog(con,mid,existing['position'] or 1,stored,len(stored))
         return jsonify(ok=True)
     @app.get('/api/teacher/template')
     @require('teacher')

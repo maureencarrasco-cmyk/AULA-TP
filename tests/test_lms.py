@@ -44,7 +44,9 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual(1,len(teacher['incidents']))
  def test_student_progress_is_private_and_uses_saved_evidence(self):
   self.assertEqual(self.app.test_client().get('/api/progress').status_code,401)
-  self.assertEqual(self.t.get('/api/progress').status_code,403)
+  teacher_view=self.t.get('/api/progress')
+  self.assertEqual(teacher_view.status_code,200)
+  self.assertTrue(teacher_view.json)
   report=self.s.get('/api/progress')
   self.assertEqual(report.status_code,200)
   first=next(m for m in report.json if m['id']==1)
