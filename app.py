@@ -42,6 +42,8 @@ def create_app(test_config=None):
     def body():return request.get_json(silent=True) or {}
     def user():
         with db() as con:return con.execute('SELECT id,username,name,role FROM users WHERE id=?',(session.get('uid'),)).fetchone()
+    def is_demo_student(u):
+        return bool(u and u['role']=='student' and u['username']=='estudiante')
     def require(role=None):
         def deco(fn):
             @wraps(fn)
@@ -87,16 +89,24 @@ def create_app(test_config=None):
             if not m:return None,fail('Módulo inexistente.',404)
             if u['role']=='student':
                 if not m['published']:return None,fail('El módulo está en preparación.',403)
-                if not con.execute('SELECT 1 FROM enrollments WHERE user_id=? AND course_id=?',(u['id'],m['course_id'])).fetchone():return None,fail('No tienes matrícula en este curso.',403)
+                if not is_demo_student(u) and not con.execute('SELECT 1 FROM enrollments WHERE user_id=? AND course_id=?',(u['id'],m['course_id'])).fetchone():return None,fail('No tienes matrícula en este curso.',403)
             return dict(m),None
     def text_valid(v,n=20):return isinstance(v,str) and n<=len(v.strip())<=10000
     @app.get('/')
+    @app.get('/portal/cursos')
+    @app.get('/portal/cursos/')
     def index():
         r=send_from_directory(app.static_folder,'index.html')
         r.headers['Cache-Control']='no-store'
         return r
     @app.get('/api/session')
     def me():
+        # El campus público abre directamente el perfil de demostración. Las
+        # cuentas institucionales siguen pudiendo reemplazar esta sesión.
+        if not session.get('uid'):
+            with db() as con:
+                demo=con.execute("SELECT id FROM users WHERE username='estudiante' AND role='student'").fetchone()
+            if demo:session['uid']=demo['id']
         session.setdefault('csrf',secrets.token_hex(24));u=user()
         return jsonify(user=dict(u) if u else None,csrf=session['csrf'])
     @app.post('/api/login')
@@ -114,7 +124,7 @@ def create_app(test_config=None):
     @require()
     def courses():
         with db() as con:
-            u=user();rows=con.execute('SELECT * FROM courses ORDER BY id').fetchall() if u['role']=='teacher' else con.execute('SELECT c.* FROM courses c JOIN enrollments e ON e.course_id=c.id WHERE e.user_id=? ORDER BY c.id',(u['id'],)).fetchall()
+            u=user();rows=con.execute('SELECT * FROM courses ORDER BY id').fetchall() if u['role']=='teacher' or is_demo_student(u) else con.execute('SELECT c.* FROM courses c JOIN enrollments e ON e.course_id=c.id WHERE e.user_id=? ORDER BY c.id',(u['id'],)).fetchall()
             result=[]
             for c in rows:
                 item=dict(c);item['modules']=[]

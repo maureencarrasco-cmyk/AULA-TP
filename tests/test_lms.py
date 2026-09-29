@@ -14,6 +14,16 @@ class LMSFlow(unittest.TestCase):
  def req(self,path,data,teacher=False,method='POST'):
   return (self.t if teacher else self.s).open('/api'+path,method=method,json=data,headers={'X-CSRF-Token':self.tt if teacher else self.st})
  def activity(self,**kw):return self.req('/modules/1/activity',kw)
+ def test_demo_catalog_opens_without_credentials(self):
+  visitor=self.app.test_client()
+  session_response=visitor.get('/api/session')
+  self.assertEqual(session_response.status_code,200)
+  self.assertEqual(session_response.json['user']['username'],'estudiante')
+  courses=visitor.get('/api/courses')
+  self.assertEqual(courses.status_code,200)
+  self.assertEqual(len(courses.json),45)
+  last_published=next(module for module in courses.json[-1]['modules'] if module['published'])
+  self.assertEqual(visitor.get('/api/modules/'+str(last_published['id'])).status_code,200)
  def through_integration(self):
   self.assertEqual(self.activity(kind='context',text=TEXT).status_code,200)
   for a in range(3):

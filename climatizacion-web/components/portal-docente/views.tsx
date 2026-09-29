@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { COURSE_CATALOG_HREF } from "@/lib/course-portal";
 import {
   CATALOGO_OA,
   ESTADO_OA_AE_LABEL,
@@ -265,8 +266,16 @@ export function CursosView() {
     <div className="space-y-6">
       <SectionIntro
         title="Cursos / Planificación"
-        purpose="Cursos publicados, comparación de avance entre grupos y horario semanal asociado a OA/AE. El acceso estudiantil único es el catálogo /portal/cursos/."
-      />
+        purpose="Cursos publicados, comparación de avance entre grupos y horario semanal asociado a OA/AE."
+      >
+        <a
+          href={COURSE_CATALOG_HREF}
+          className="portal-button portal-button-primary mt-3 inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-extrabold"
+        >
+          Abrir catálogo de 45 cursos
+          <span aria-hidden="true">→</span>
+        </a>
+      </SectionIntro>
       <LiveStatusNote />
       <PedagogicalGuide
         observe="Confirma qué cursos están publicados y revisa su avance general."
