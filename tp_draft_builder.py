@@ -5,6 +5,7 @@ import re
 from copy import deepcopy
 from pathlib import Path
 
+from level_audit import balance_items, cover_every_ae, vary_conflicts
 from specialty_catalog import _ae, _module, _cases, _questions, _rotate
 from technical_sources import governance
 
@@ -103,7 +104,7 @@ def contextualize_draft(content, dossier):
                 item['question'] = question
             else:
                 item['stimulus'] = evidence
-                item['question'] = f'Caso simulado {index + 1}: {question} Criterio: «{item["criterion"]}».'
+                item['question'] = f'{evidence} {question}'
             item['options'] = options
             item['answer'] = answer
             item['explanation'] = wrong_and_explanation[3]
@@ -248,7 +249,7 @@ def build_draft(rows, dossiers, specialty, key, source):
                           year=item['year'], plan_section='Plan de Estudio MINEDUC')
         content['specialty'] = specialty
         content['context'] = f'{place}. {conflict} Dispones de {resources}. Producto: {product}.'
-        content['application'] = f'Caso simulado de {place.lower()}; contrasta {resources} antes de entregar el producto «{product}».'
+        content['application'] = f'En el caso de {place.lower()}; contrasta {resources} antes de entregar el producto «{product}».'
         content['development'] = (
             f'{conflict} Usa {resources}, identifica el AE y criterio oficial '
             f'correspondiente y prepara el producto «{product}» con evidencia de verificación.'
@@ -259,6 +260,9 @@ def build_draft(rows, dossiers, specialty, key, source):
         content['specialty_source']['official_criteria_count'] = sum(len(ae['criteria']) for ae in item['aes'])
         content['specialty_source']['source_warnings'] = item.get('source_warnings', [])
         contextualize_draft(content, dossier)
+        cover_every_ae(content)
+        balance_items(content, position)
+        vary_conflicts(content)
         content['bibliography'] = [{
             'author': 'Ministerio de Educación de Chile',
             'work': f'Programa de Estudio de la especialidad {specialty}',

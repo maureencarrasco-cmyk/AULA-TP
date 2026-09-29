@@ -166,7 +166,7 @@ function shell(body,title='Mi aprendizaje',sub='Tu campus de formación técnico
  document.body.dataset.screen=['module','course','teacher','editor','progress'].includes(view.name)?view.name:'courses';document.body.dataset.station=String(view.station||0);document.body.dataset.module=String(view.name==='module'?current?.position||1:0);document.body.dataset.role=auth.user?.role||'';document.body.dataset.portal=isTeacherPortal()?'docente':'cursos';applySpecialtyTheme();
  const header=isTeacherPortal()
   ?`<header class="topbar"><a href="#teacher/planning" aria-label="Portal docente">${brandImg()}</a><nav><a href="#teacher/planning" class="selected">${icon('chart')} Portal docente</a></nav><div class="account"><span class="local-dot"></span><span class="local-label">Portal docente</span><span class="avatar">${esc(auth.user.name[0])}</span><span>${esc(auth.user.name)}<small>Docente</small></span></div></header>`
-  :`<header class="topbar"><a href="#courses" aria-label="Inicio Aula TP Chile">${brandImg()}</a><nav><a class="${auth.user.role==='student'?'selected':''}" href="#courses">${icon('book')} Mis cursos</a>${auth.user.role==='teacher'?'<a href="#teacher" class="selected">'+icon('chart')+' Espacio docente</a>':''}</nav><div class="account"><span class="local-dot"></span><span class="local-label">Campus local</span><span class="avatar">${esc(auth.user.name[0])}</span><span>${esc(auth.user.name)}<small>${auth.user.role==='teacher'?'Docente':'Estudiante'}</small></span>${action('logout','Salir','plain')}</div></header>`;
+  :`<header class="topbar"><a href="#courses" aria-label="Inicio Aula TP Chile">${brandImg()}</a><nav><a class="selected" href="#courses">${icon('book')} Mis cursos</a></nav><div class="account"><span class="local-dot"></span><span class="local-label">Campus local</span><span class="avatar">${esc(auth.user.name[0])}</span><span>${esc(auth.user.name)}<small>${auth.user.role==='teacher'?'Docente':'Estudiante'}</small></span>${action('logout','Salir','plain')}</div></header>`;
  $('#app').innerHTML=`${header}<main id="main" tabindex="-1">${body}</main><footer><span class="footer-brand">${brandImg('logo footer-logo')}<span>Aprender hoy, construir el mañana.</span></span><span><b>Aula TP Chile</b> · Formación técnica con sentido</span></footer>${accessButton()}`;
  if(document.body.dataset.screen==='courses'){
   $('#app').insertAdjacentHTML('beforeend',floatingBackButton());
@@ -226,12 +226,11 @@ function courseList(){
  $('.dash-scroll-next')?.addEventListener('click',()=>scrollCourses(1));
 }
 function dashboardSideNav(active=''){
- const home=`<a class="${!active||active==='courses'?'is-active':''}" href="#courses">${icon('home')}<span>Inicio</span></a>`;
- const progress=`<a class="${active==='progress'?'is-active':''}" href="#progress">${icon('chart')}<span>Mi progreso</span></a>`;
- const teacher=auth.user&&auth.user.role==='teacher'
-  ?`<a class="${active==='teacher'?'is-active':''}" href="#teacher/planning">${icon('file')}<span>Espacio docente</span></a>`
-  :'';
- return home+progress+teacher;
+ const onHome=!active||active==='courses';
+ const onProgress=active==='progress';
+ const home=`<a class="dash-nav-home${onHome?' is-active':''}" href="#courses"${onHome?' aria-current="page"':''}>${icon('home')}<span><b>Inicio</b><small>Tus cursos</small></span></a>`;
+ const progress=`<a class="dash-nav-progress${onProgress?' is-active':''}" href="#progress"${onProgress?' aria-current="page"':''}>${icon('chart')}<span><b>Mi progreso</b><small>Cómo vas</small></span></a>`;
+ return home+progress;
 }
 function dashboardExitButton(){return '<button type="button" class="dash-exit" data-action="home-login">Salir</button>'}
 function sidebarJourney(){
@@ -371,7 +370,7 @@ function courseMap(id){
   spark:screenSparks.course
  })}<div class="page-with-support"><div class="page-with-support-main"><div class="journey-landscape">
  <p class="journey-bridge"><span class="eyebrow">TU RECORRIDO POR LA ESPECIALIDAD</span><small>Módulo ${trail} → Meta</small></p>
- <ol class="journey-stops" style="--mod-fill:${total>1?Math.round((done/Math.max(1,total-1))*100):finished?100:0}%" aria-label="Recorrido por la especialidad">${c.modules.map((m,i)=>`<li class="journey-stop color-${i%4} ${m.percent===100?'is-complete':''} ${i===here?'is-here':''}"><div class="journey-marker" aria-label="Módulo ${i+1}">${m.percent===100?icon('check'):String(i+1).padStart(2,'0')}</div><article class="journey-card"><div class="journey-photo"><img src="${moduleStopArt(c,i)}" alt="Escenario profesional del módulo ${i+1}: ${esc(m.title)}" decoding="async">${i===here&&!finished?`<span class="here-chip">${workIco('pin')} Estás aquí</span>`:''}</div><div class="journey-card-body"><div class="journey-card-top"><span class="journey-symbol">${icon(['file','search','link','tool'][i%4])}</span><span class="journey-state">${m.percent===100?'✓ Completado':m.percent?'● En curso':m.published?'Disponible':'En preparación'}</span></div><span class="eyebrow">MÓDULO ${String(i+1).padStart(2,'0')}${i===total-1?' · TRAMO FINAL':''}</span><h2>${esc(m.title)}</h2>${stationMiniRoute(m.completed)}<div class="progress-label"><span>${m.completed.filter(Boolean).length} de 5 estaciones</span><strong>${m.percent}%</strong></div>${m.encargos_count?`<p class="journey-encargos">${m.encargos_count} encargos de oficio · ${m.encargos_hours} h</p>`:''}<progress value="${m.percent}" max="100" aria-label="Progreso del módulo ${i+1}"></progress>${m.published||auth.user.role==='teacher'?`<button class="journey-button" type="button" data-route-href="${m.published?'#module/'+m.id:'#editor/'+m.id}">${m.published?(m.percent===100?'Revisar módulo':m.percent?'Continuar mi recorrido':'Comenzar módulo'):'Preparar contenido'} ${icon('arrow')}</button>`:'<button class="journey-button" disabled>Próximamente</button>'}</div></article></li>`).join('')}</ol>
+ <ol class="journey-stops" style="--mod-fill:${total>1?Math.round((done/Math.max(1,total-1))*100):finished?100:0}%" aria-label="Recorrido por la especialidad">${c.modules.map((m,i)=>`${i&&c.modules[i-1].year&&m.year&&c.modules[i-1].year!==m.year?`<li class="journey-grade"><p>Ruta de ${esc(m.year)}. Aquí planificas, marcas el límite de tu rol y defines cómo verificar.</p></li>`:''}<li class="journey-stop color-${i%4} ${m.percent===100?'is-complete':''} ${i===here?'is-here':''}"><div class="journey-marker" aria-label="Módulo ${i+1}">${m.percent===100?icon('check'):String(i+1).padStart(2,'0')}</div><article class="journey-card"><div class="journey-photo"><img src="${moduleStopArt(c,i)}" alt="Escenario profesional del módulo ${i+1}: ${esc(m.title)}" decoding="async">${i===here&&!finished?`<span class="here-chip">${workIco('pin')} Estás aquí</span>`:''}</div><div class="journey-card-body"><div class="journey-card-top"><span class="journey-symbol">${icon(['file','search','link','tool'][i%4])}</span><span class="journey-state">${m.percent===100?'✓ Completado':m.percent?'● En curso':m.published?'Disponible':'En preparación'}</span></div><span class="eyebrow">MÓDULO ${String(i+1).padStart(2,'0')}${m.year?` · ${esc(m.year)}`:''}${m.draft?' · BORRADOR':''}</span><h2>${esc(m.title)}</h2>${m.draft?'<p class="journey-draft">Borrador de 4° medio: la simulación todavía no tiene un caso propio con la profundidad del programa.</p>':''}${stationMiniRoute(m.completed)}<div class="progress-label"><span>${m.completed.filter(Boolean).length} de 5 estaciones</span><strong>${m.percent}%</strong></div>${m.encargos_count?`<p class="journey-encargos">${m.encargos_count} encargos de oficio · ${m.encargos_hours} h</p>`:''}<progress value="${m.percent}" max="100" aria-label="Progreso del módulo ${i+1}"></progress>${m.published||auth.user.role==='teacher'?`<button class="journey-button" type="button" data-route-href="${m.published?'#module/'+m.id:'#editor/'+m.id}">${m.published?(m.percent===100?'Revisar módulo':m.percent?'Continuar mi recorrido':'Comenzar módulo'):'Preparar contenido'} ${icon('arrow')}</button>`:'<button class="journey-button" disabled>Próximamente</button>'}</div></article></li>`).join('')}</ol>
  <div class="journey-finish ${finished?'reached':''}"><div class="finish-visual"><span class="finish-flag" aria-hidden="true">${icon('flag')}</span></div><div><span class="eyebrow">${finished?'META ALCANZADA':'TU META · AL FINAL DEL RECORRIDO'}</span><h2>${finished?'¡Completaste tu ruta!':'Llegar, integrar y seguir creciendo'}</h2><p>${finished?'Has completado las cinco estaciones de cada módulo. Revisa la retroalimentación docente para conocer tus resultados.':`Completa el módulo ${total} y el cierre de todos los módulos para alcanzar la meta.`}</p></div><strong>${done}<span> / ${total}<small>módulos completos</small></span></strong></div></div> <div class="journey-bottom"><section class="panel journey-overall"><span class="circle">${icon('chart')}</span><div><h2>Cada paso cuenta</h2><p>Tu progreso general</p><progress value="${pct}" max="100" aria-label="Progreso general del curso"></progress></div><strong>${pct}%</strong></section></div></div></div></section>`);
  document.querySelectorAll('[data-route-href]').forEach(button=>button.addEventListener('click',()=>navigateHash(button.dataset.routeHref)));
 }
@@ -763,21 +762,50 @@ function sidebar(n){const pct=current.completed.filter(Boolean).length*20;const 
 function panelTitle(n,subtitle,time){const clock=time?`<span class="time">${icon('clock')} ${time}</span>`:'';return `<div class="panel-title"><span class="big-number s${n}">${n}</span><div><span class="eyebrow">ESTACIÓN ${n} DE 5</span><h2>${names[n-1]}</h2>${typeof pedStationFn==='function'?pedStationFn(n):''}<p>${subtitle}</p></div>${clock}</div>`}
 function reflectionForm(id,prompt,value='',label='Guardar y continuar'){const ae=id==='ae-form';const ctx=id==='context-form';const ph=ctx?'Una decisión y un dato que aún falta. No cubiques.':'Escribe tu respuesta y explica tu razonamiento…';return `<form id="${id}"><label class="${ae?'ae-justify-label':''}">${esc(prompt)}<textarea name="text" minlength="20" maxlength="10000" required placeholder="${esc(ph)}">${esc(value)}</textarea></label><div class="form-bottom">${ae?`<div class="ae-req"><p class="char-meter is-wait" data-ae-meter aria-live="polite">0 / mínimo 20 caracteres</p><ul class="ae-ready" data-ae-ready></ul></div>`:`<span class="muted small">${ctx?'Una decisión + un dato que falta. Esta estación no califica.':'Al menos 20 caracteres · Entrega y avance al continuar'}</span>`}<button class="primary" ${current?.state.closed||auth.user.role==='teacher'?'disabled':''}>${label} ${icon('arrow')}</button></div></form>`}
 function moduleMediaMarkup(){const item=(current?.content?.media_resources||[]).find(m=>m.image);if(!item)return '';return `<section class="module-media panel" aria-label="Recurso visual de la actividad"><header><span class="eyebrow">RECURSO PARA COMPRENDER</span><h3>Observa e identifica antes de responder</h3><p>Relaciona esta representación con el aprendizaje esperado y con la decisión de la actividad.</p></header><div class="module-media-grid"><article class="module-media-card"><img src="${esc(item.image)}" alt="${esc(item.title)}" loading="lazy"><div><span class="media-kind">Visualización 3D</span><h4>${esc(item.title)}</h4><p><b>AE:</b> ${esc(item.ae||'Aprendizaje esperado del módulo')}</p><p><b>Contenido:</b> ${esc(item.content)}</p><p><b>Acción:</b> ${esc(item.activity)}</p><details><summary>Qué observar</summary><p>${esc(item.observe)}</p><p class="muted small">Propósito: ${esc(item.purpose)}</p></details></div></article></div></section>`}
+function oaEntries(content){
+ const out=[],push=item=>{
+  if(!item)return;
+  if(typeof item==='string'){const text=item.trim();if(text)out.push(text);return}
+  if(typeof item==='object'){
+   const code=String(item.code||'').trim(),title=String(item.title||item.text||'').trim();
+   const line=code&&title?`${code}. ${title}`:(title||code);
+   if(line)out.push(line);
+  }
+ };
+ [content?.oa,content?.specialty_source?.oa,content?.official_source?.oa].forEach(bag=>{(Array.isArray(bag)?bag:[bag]).forEach(push)});
+ (content?.aes||[]).forEach(ae=>{(Array.isArray(ae?.oa)?ae.oa:[ae?.oa]).forEach(push)});
+ return [...new Set(out)].slice(0,8);
+}
+function moduleYear(content){return content?.route_year||content?.specialty_source?.year||content?.official_source?.year||''}
 function contextPanel(){
  const c=current.content||{};
  const objectives=(c.aes||[]).slice(0,4).map(a=>`<li>${esc(a.short_title||a.title)}</li>`).join('');
+ const year=moduleYear(c);
+ const oa=oaEntries(c);
+ const yearNote=year?`<p class="muted small">Tramo ${esc(year)}. ${String(year).startsWith('4')?'Planifica, marca el límite de tu rol y define cómo verificar.':'Observa el recurso, registra el dato y confirma qué falta, con supervisión.'}</p>`:'';
+ const draftNote=c.route_draft?'<p class="info-strip">Borrador de 4° medio. La simulación todavía no tiene un caso propio con la profundidad del programa. Practica aquí la decisión y el límite del rol.</p>':'';
+ const oaTitle=c.oa_note?'Aprendizajes del programa':'Objetivo del programa';
+ const seal=current.teacher_seal;
+ const sealNote=seal?`<p class="muted small">Sello del docente: ${esc(seal.name)} revisó el ítem, la norma y el procedimiento de este módulo.</p>`:'<p class="muted small">La exactitud técnica de este módulo sigue en revisión por un docente de la especialidad.</p>';
+ const oaNote=oa.length?`<section class="ctx-more-block"><h3>${oaTitle}</h3><ul class="learning-objectives">${oa.map(item=>`<li>${esc(item)}</li>`).join('')}</ul><p class="muted small">${esc(c.oa_note||'Este objetivo orienta el módulo. No es una nota: se evidencia en los aprendizajes esperados y en la evaluación.')}</p></section>`:'';
+ const programDetails=`<details class="ctx-more"><summary>${oaTitle} y lo que aprenderás en el módulo</summary>${oaNote}<section class="ctx-more-block"><h3>¿Qué aprenderás?</h3>${objectives?`<ul class="learning-objectives">${objectives}</ul>`:'<p>Interpretar y relacionar la información técnica del proyecto.</p>'}</section></details>`;
+ const fourth=year&&String(year).startsWith('4');
+ const bank=Array.isArray(c.questions)?c.questions:[];
+ const examCount=Math.min(bank.length,Number(c.evaluation_plan?.question_count||25));
+ const model=fourth&&bank.length>examCount?bank[bank.length-1]:null;
+ const modelOk=model&&Array.isArray(model.options)&&Number.isInteger(model.answer)&&model.options[model.answer];
+ const sibling=fourth&&c.worked_example&&c.worked_example.decision?c.worked_example:null;
+ const example=sibling||(modelOk?{stimulus:model.stimulus||model.question,decision:model.options[model.answer],explanation:model.explanation}:null);
+ const worked=example?`<article class="ctx-block ctx-worked"><span class="eyebrow">DECISIÓN RESUELTA · EJEMPLO</span>${sibling?.module?`<p class="muted small">Tomado del módulo «${esc(sibling.module)}» de tu especialidad.</p>`:''}<p><b>Dato:</b> ${esc(String(example.stimulus||'').replace(/^Caso \d+ en (\S)/,(m,ch)=>'En '+ch))}</p><p><b>Decisión:</b> ${esc(example.decision)}</p>${example.explanation?`<p><b>Por qué:</b> ${esc(example.explanation)}</p>`:''}<p class="muted small">Este ejemplo no aparece en tu evaluación. Ahora decide tú con los datos del caso de arriba.</p></article>`:'';
  return workZone(`${panelTitle(1,'Conoce el contexto y activa tus conocimientos previos.',typeof cargaLabel==='function'?cargaLabel(1,'Carga x5'):'Carga x5')}${moduleMediaMarkup()}
-  <article class="work-card work-card-hero ctx-mission">${workIco('target')}<div><span class="work-kicker">Misión</span><h3>Observa, reconoce y anticipa</h3><p>${esc(c.context||'Lee el caso profesional y reconoce la información que necesitas confirmar.')}</p><p class="muted small">${esc(c.context_guidance||'Distingue los datos visibles de tus suposiciones antes de tomar una decisión.')}</p></div></article>
-  <div class="work-grid-2 ctx-prep-row">
-   ${workCard('book','¿Qué aprenderás?',objectives?`<ul class="learning-objectives">${objectives}</ul>`:'<p>Interpretar y relacionar la información técnica del proyecto.</p>','work-card-purpose ctx-learn')}
-   ${workCard('info','Antes de comenzar','<p>Observa el caso, identifica qué información tienes y anota qué dato falta confirmar.</p><span class="badge">Simulación didáctica</span>','work-card-prep ctx-ready')}
-  </div>
-  <section class="work-card work-card-activity ctx-activity"><div class="work-activity-head">${workIco('edit')}<div><h3>Actividad que debes desarrollar</h3><p>Caso profesional y reflexión inicial.</p></div></div>
+  <article class="work-card work-card-hero ctx-mission">${workIco('target')}<div><span class="work-kicker">Misión</span><h3>${fourth?'Planifica, limita tu rol y verifica':'Observa, reconoce y anticipa'}</h3><p>${esc(c.context||'Lee el caso profesional y reconoce la información que necesitas confirmar.')}</p>${yearNote}<p class="muted small">${esc(c.context_guidance||'Distingue los datos visibles de tus suposiciones antes de tomar una decisión.')}</p>${draftNote}</div></article>
+  <section class="work-card work-card-activity ctx-activity"><div class="work-activity-head">${workIco('edit')}<div><h3>Actividad que debes desarrollar</h3><p>${fourth?'Lee la decisión resuelta y escribe la tuya.':'Lee el caso y escribe tu reflexión inicial.'}</p></div></div>
    ${typeof instructionContract==='function'?instructionContract({instruction:c.context_instruction}):''}
    <article class="ctx-block ctx-case"><div class="ctx-case-copy"><span class="eyebrow">CASO PROFESIONAL · MÓDULO ${current.position}</span><h3>${esc(c.case_title||current.title)}</h3><p>${esc(c.case_blurb||c.application||'Revisa la información disponible antes de continuar.')}</p></div></article>
+   ${worked}
    ${reflectionForm('context-form',c.reflection_prompt||'¿Qué revisarías primero y qué información necesitarías confirmar?',current.state.context,'Continuar a Aprendizajes esperados')}
    <p class="muted small">Esta reflexión inicial no califica. Te ayuda a preparar el trabajo de las siguientes estaciones.</p>
-  </section>${curriculumNote()}`,'work-zone-s1');
+  </section>${sealNote}${programDetails}${curriculumNote()}`,'work-zone-s1');
 }
 function aeRoute(){
  const aeTotal=Math.max(1,current.content?.aes?.length||1);

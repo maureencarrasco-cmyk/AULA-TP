@@ -357,6 +357,7 @@ def upgrade_catalog(con):
     from tp_publish import publish_remaining_courses
     publish_remaining_courses(con)
     apply_technical_governance(con)
+    apply_module_media(con)
 
 
 def _fill_empty_third_medio(con):
@@ -525,3 +526,45 @@ def apply_technical_governance(con):
         )
     if not con.execute('SELECT 1 FROM content_updates WHERE version=?', (version,)).fetchone():
         con.execute('INSERT INTO content_updates(version) VALUES(?)', (version,))
+
+
+MODULE_VIDEO_CAPTION = (
+    'Animación didáctica 2D construida con los aprendizajes esperados y criterios oficiales del módulo, '
+    'sobre imágenes de referencia de la especialidad no validadas por especialista. No es una grabación '
+    'de un procedimiento real. Pausa en cada paso y anota la evidencia.'
+)
+
+
+def apply_module_media(con):
+    """Conflictos variados, imágenes de especialidad y video + VTT de static/media/procedimientos."""
+    import json
+    from content_assurance import apply_header_files
+    from level_audit import vary_conflicts
+    from media_assurance import apply_media_assurance
+    from pedagogy import verified_static_asset
+
+    version = 'medios-360-v1'
+    if con.execute('SELECT 1 FROM content_updates WHERE version=?', (version,)).fetchone():
+        return
+    rows = con.execute('SELECT id, course_id, position, content FROM modules WHERE published=1').fetchall()
+    for row in rows:
+        try:
+            content = json.loads(row['content'] or '{}')
+        except Exception:
+            continue
+        if not isinstance(content, dict) or not content.get('aes') or not isinstance(content.get('specialty_source'), dict):
+            continue
+        vary_conflicts(content)
+        scene = content.setdefault('scene', {})
+        video = f"/static/media/procedimientos/{content.get('specialty_key') or 'general'}-c{row['course_id']}-m{row['position']}.mp4"
+        vtt = video.replace('.mp4', '.vtt')
+        if verified_static_asset(video) and verified_static_asset(vtt):
+            scene.update(
+                video=video, vtt=vtt, video_caption=MODULE_VIDEO_CAPTION, video_format='animacion-2d',
+                purpose='Orientar el recorrido de la estación 3: revisar en secuencia los aprendizajes esperados del módulo antes de inspeccionar el escenario.',
+                observe='Qué criterio oficial verifica cada paso y qué dato queda pendiente de confirmar.',
+            )
+        apply_header_files(content)
+        apply_media_assurance(content, row['position'] or 1)
+        con.execute('UPDATE modules SET content=? WHERE id=?', (json.dumps(content, ensure_ascii=False), row['id']))
+    con.execute('INSERT INTO content_updates(version) VALUES(?)', (version,))

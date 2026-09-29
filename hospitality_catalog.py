@@ -76,7 +76,7 @@ def _make_module(item, position, key, source, url, dossier, scope):
     content['specialty'] = 'Gastronomía' if key == 'gastronomia' else 'Servicios de Hotelería'
     content['context'] = f'{place}. {conflict} Dispones de {resource}. Tu producto es un {product}.'
     content['application'] = (
-        f'Caso simulado de {place.lower()}; consulta {resource}, aplica el criterio oficial '
+        f'En el caso de {place.lower()}; consulta {resource}, aplica el criterio oficial '
         f'y deja trazabilidad en el {product}. La práctica presencial requiere supervisión docente.'
     )
     content['development'] = (
@@ -128,7 +128,7 @@ def _make_module(item, position, key, source, url, dossier, scope):
              'Un resultado sin fuente ni relación con el criterio.',
              'Una afirmación de cumplimiento basada solo en la experiencia previa.',
              'Una copia de la solicitud sin revisión del dato discordante.'),
-            (f'El equipo necesita decidir qué hacer con el antecedente discordante. ¿Qué corresponde?',
+            (f'{conflict} Dispones de {resource}. Antes de cerrar el {product}, ¿qué corresponde con el antecedente que no coincide?',
              f'Mantener el dato original, contrastarlo con {resource} y documentar el pendiente según «{criterion}».',
              'Eliminar el dato discordante del documento.',
              'Continuar como si la diferencia no afectara el servicio.',

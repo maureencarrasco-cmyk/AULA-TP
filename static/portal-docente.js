@@ -679,7 +679,7 @@ function learning() {
     quad(3, 'menta', 'Estado', 'Mapa de aprendizajes observados', spotlight('El estado usa la misma señal de acompañamiento.', [['Evolución', 'Compara las primeras y las últimas semanas'], ['Mínimo', '8 observaciones']], profileMap()), { wide: true }),
     quad(4, 'ambar', 'Referencia', 'Objetivos de Aprendizaje Genéricos', spotlight('Estos textos son del programa. No forman un porcentaje de perfil.', [['En estos 5 módulos', 'OAG A a I y K'], ['Fuera de esta vista', 'OAG J y L']], oagTable()), { wide: true }),
     quad(5, 'lila', 'Evidencia', 'AE de los módulos 1 y 2', spotlight('Cada porcentaje es cobertura de evidencia, no nivel de logro.', [], aeArticles(modulesIn(1, 2))), { wide: true }),
-    quad(6, 'celeste', 'Decisión', 'AE de los módulos 3, 4 y 5', `${spotlight('Los módulos 3, 4 y 5 se leen con la misma regla de cobertura.', [], aeArticles(modulesIn(3, 5)))}<p><a href="${href('/portal-docente/estudiantes')}">Ver estudiantes</a></p>`, { wide: true })
+    quad(6, 'celeste', 'Decisión', 'AE de los módulos 3, 4 y 5', `${spotlight('Los módulos 3, 4 y 5 se leen con la misma regla de cobertura.', [], aeArticles(modulesIn(3, 5)))}${sealForm()}`, { wide: true })
   ].join(''));
 }
 function compliance() {
@@ -731,12 +731,71 @@ function reports() {
     quad(6, 'celeste', 'Decisión', 'Dónde está el resto de la evidencia', spotlight('La tendencia, el listado y el plan están en otras pestañas.', [['Tendencia y logro', 'Panel general'], ['Por estudiante', 'Estudiantes'], ['Plan', 'Cursos']], `<p><a href="${href('/portal-docente')}">Abrir el panel</a> · <a href="${href('/portal-docente/estudiantes')}">Ver estudiantes</a> · <a href="${href('/portal-docente/cursos')}">Ver la planificación</a></p>`))
   ].join(''));
 }
+function sealRows() {
+  return ((state.teacher && state.teacher.specialist_reviews) || []).filter(row => row.verdict === 'Sello del docente de la especialidad');
+}
+function sealForm() {
+  const courses = state.courses || [];
+  const selected = state.sealCourse || (courses[0] && courses[0].id);
+  const course = courses.find(item => String(item.id) === String(selected)) || courses[0];
+  const modules = ((course && course.modules) || []).slice().sort((a, b) => Number(a.position) - Number(b.position));
+  const sealed = new Set(sealRows().map(row => String(row.module_id)));
+  const pending = modules.filter(module => !sealed.has(String(module.id)));
+  const courseOptions = courses.map(item => `<option value="${item.id}" ${String(item.id) === String(course && course.id) ? 'selected' : ''}>${esc(item.title)}</option>`).join('');
+  const moduleOptions = modules.map(module => `<option value="${module.id}" ${pending[0] && pending[0].id === module.id ? 'selected' : ''}>Módulo ${module.position}. ${esc(module.title)}${sealed.has(String(module.id)) ? ' · con sello' : ''}</option>`).join('');
+  const progress = `${modules.length - pending.length} de ${modules.length} módulos de esta especialidad tienen sello.`;
+  const done = sealRows().filter(row => course && row.course === course.title);
+  const list = done.length
+    ? `<ul>${done.slice(0, 6).map(row => `<li>${esc(row.name)} selló el módulo ${esc(row.title)}.</li>`).join('')}</ul>`
+    : '<p class="pd-note">Esta especialidad todavía no tiene un sello. El registro queda a nombre de quien confirma la revisión.</p>';
+  return `<form id="pd-seal" class="pd-card pd-seal"><h3>Sello por especialidad</h3><p>${esc(progress)} Confirma el módulo cuyo ítem, norma y procedimiento revisaste. El sello no cubre el resto de la especialidad.</p><label>Especialidad<select name="course_id">${courseOptions}</select></label><label>Módulo<select name="module_id">${moduleOptions}</select></label><label>Qué revisaste<textarea name="note" minlength="20" maxlength="2000" required placeholder="Describe el ítem, la norma y el procedimiento que revisaste."></textarea></label><label class="pd-check"><input type="checkbox" name="confirm"> Revisé el ítem, la norma y el procedimiento de este módulo.</label><button type="submit">Guardar sello de este módulo</button>${list}</form>`;
+}
+function bindSeal() {
+  const form = document.getElementById('pd-seal');
+  if (!form) return;
+  const courseSelect = form.querySelector('[name="course_id"]');
+  if (courseSelect) courseSelect.onchange = () => { state.sealCourse = Number(courseSelect.value); draw(); };
+  form.onsubmit = async event => {
+    event.preventDefault();
+    const data = Object.fromEntries(new FormData(form));
+    if (!data.confirm) {
+      form.querySelector('.pd-seal-error')?.remove();
+      form.insertAdjacentHTML('beforeend', '<p class="pd-seal-error">Marca la confirmación para guardar el sello de este módulo.</p>');
+      return;
+    }
+    try {
+      await post('/api/teacher/specialist-review', {
+        module_id: Number(data.module_id),
+        verdict: 'Sello del docente de la especialidad',
+        note: data.note,
+        confirm: true
+      });
+      state.teacher = await api('/api/teacher');
+      applyCohort();
+      draw();
+    } catch (error) {
+      form.querySelector('.pd-seal-error')?.remove();
+      form.insertAdjacentHTML('beforeend', `<p class="pd-seal-error">${esc(error.message)}</p>`);
+    }
+  };
+}
 function draw() {
   const tab = currentTab();
   nav();
   const body = { resumen: panel, cursos, estudiantes: students, 'oa-ae': learning, cumplimiento: compliance, reportes: reports }[tab.id]();
   document.getElementById('pd-main').innerHTML = body;
   document.title = `${tab.label} · Portal Docente`;
+  bindSeal();
+}
+async function post(url, data) {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Aula-Portal': 'docente', 'X-CSRF-Token': state.csrf || '' },
+    body: JSON.stringify(data)
+  });
+  const payload = await response.json();
+  if (!response.ok) throw new Error(payload.error || 'No se pudo registrar el sello.');
+  return payload;
 }
 async function api(url) {
   const response = await fetch(url, { headers: { 'X-Aula-Portal': 'docente' } });
@@ -755,6 +814,7 @@ async function boot() {
   }
   const entered = await api('/api/portal-docente/enter');
   state.user = entered.user;
+  state.csrf = entered.csrf || '';
   const name = (entered.user && entered.user.name) || 'Docente';
   document.getElementById('pd-name').textContent = name;
   document.getElementById('pd-avatar').textContent = name.slice(0, 1).toUpperCase();

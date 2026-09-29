@@ -80,7 +80,7 @@
         <button type="button" class="outline" data-voice="toggle" aria-pressed="true">Voz guía: encendida</button>
         <span class="vis-voice-cue" aria-live="polite"></span>
       </div>
-      <figcaption class="act-media-caption vis-cap">${hx(exp.caption || proto.during || 'Secuencia del procedimiento. Play o pausa cuando quieras.')}</figcaption>
+      <figcaption class="act-media-caption vis-cap">${hx(exp.video_caption || exp.caption || proto.during || 'Secuencia del procedimiento. Play o pausa cuando quieras.')}</figcaption>
     </figure>
       ${proto.after?`<p class="vis-video-after"><b>Después:</b> ${hx(proto.after)}</p>`:''}
     </div>`;

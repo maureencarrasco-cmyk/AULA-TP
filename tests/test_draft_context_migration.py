@@ -71,10 +71,10 @@ class DraftContextMigrationTests(unittest.TestCase):
         preview = enrich(deepcopy(content), 1)
         self.assertEqual([], preview['media_resources'])
         self.assertEqual([], preview['media_audit'])
-        self.assertIsNone(preview['explore']['image'])
-        self.assertIsNone(preview['cases'][0]['image'])
-        self.assertIsNone(preview['questions'][0]['image'])
-        self.assertIsNone(preview['aes'][0]['experiences'][0]['image'])
+        for item in (preview['explore'], preview['cases'][0], preview['questions'][0],
+                     preview['aes'][0]['experiences'][0]):
+            self.assertTrue(item.get('image') is None or verified_static_asset(item['image']))
+            self.assertFalse(item.get('image_missing'))
         self.assertFalse(verified_static_asset('/static/../app.py'))
 
 

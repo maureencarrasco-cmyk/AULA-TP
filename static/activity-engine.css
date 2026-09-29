@@ -148,6 +148,7 @@
 .act-chip.is-on{background:#E6F6EE;border-color:#1F8A5B}
 .act-bucket{border:1px dashed #D5DEE8;border-radius:12px;padding:10px;min-height:88px;background:#F4F7FB}
 .act-bucket h4{margin:0 0 8px;font-size:12px;color:#1558A0}
+.act-bucket-drop{min-height:44px;margin:0 0 8px;padding:6px 12px;border:1px solid #9CC1E6;border-radius:10px;background:#fff;color:#1558A0;font-weight:700;cursor:pointer}
 .act-bucket-list{display:flex;flex-direction:column;gap:6px}
 .act-order{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .act-order li{

@@ -155,6 +155,8 @@ def apply_media_assurance(content, module_id=1):
             item['image_missing'] = image
             item['image'] = None
             image = None
+        elif image:
+            item.pop('image_missing', None)
         fmt = classify_format(item, slot)
         present = bool(image or video or (fmt in ('escena-interactiva', 'simulacion-2d') and item.get('parts')))
         ia = 'NO VALIDADO' if (str(item.get('image') or item.get('image_missing') or '').find('/headers/') >= 0) else (

@@ -7,6 +7,7 @@ from content import DEFAULT_CONTENT, STATIONS, STEPS
 from catalog import upgrade_catalog, EXTENDED_MODULES
 from curriculum import MODULE_TITLES, OFFICIAL
 from pedagogy import enrich, strip_for_student, validate_experience, hint_for, summarize_response, exam_profile, course_planning, module_plan, publication_gaps
+from level_audit import collect_oa, module_year
 from encargos import encargos_for
 
 ROOT=Path(__file__).resolve().parent
@@ -23,14 +24,21 @@ def ensure_module_catalog_table(con):
         official_hp INTEGER,
         scope TEXT,
         pdf TEXT,
-        question_count INTEGER NOT NULL
+        question_count INTEGER NOT NULL,
+        year TEXT,
+        draft INTEGER NOT NULL DEFAULT 0
     )''')
+    cols={row[1] for row in con.execute('PRAGMA table_info(module_catalog)')}
+    if 'year' not in cols:
+        con.execute('ALTER TABLE module_catalog ADD COLUMN year TEXT')
+    if 'draft' not in cols:
+        con.execute('ALTER TABLE module_catalog ADD COLUMN draft INTEGER NOT NULL DEFAULT 0')
 
 def catalog_payload(content, position):
     if isinstance(content, str):
         content=json.loads(content or '{}')
     content=content or {}
-    source=content.get('specialty_source') or {}
+    source=content.get('specialty_source') or content.get('official_source') or {}
     aes_raw=content.get('aes') if isinstance(content.get('aes'), list) else []
     aes=[]
     for item in aes_raw[:8]:
@@ -48,15 +56,7 @@ def catalog_payload(content, position):
             'criteria':criteria,
             'description':str(item.get('description') or '').strip()[:280],
         })
-    oa=[]
-    raw_oa=content.get('oa') or source.get('oa') or []
-    if isinstance(raw_oa, str):
-        raw_oa=[raw_oa]
-    if isinstance(raw_oa, list):
-        for item in raw_oa[:12]:
-            text=item.strip() if isinstance(item, str) else ''
-            if text:
-                oa.append(text[:400])
+    oa=collect_oa(content)
     pack=content.get('encargos') if isinstance(content.get('encargos'), dict) else {}
     if not source and not pack.get('count'):
         pack=encargos_for(position) or {}
@@ -76,17 +76,20 @@ def catalog_payload(content, position):
         'scope':str(source.get('scope') or ''),
         'pdf':str(source.get('pdf') or ''),
         'question_count':question_count,
+        'year':module_year(content, position) or str(content.get('route_year') or ''),
+        'draft':1 if content.get('route_draft') else 0,
     }
 
 def upsert_module_catalog(con, module_id, position, content, content_len=None):
     ensure_module_catalog_table(con)
     raw=content if isinstance(content, str) else json.dumps(content or {}, ensure_ascii=False)
     fields=catalog_payload(raw, position)
-    con.execute('''INSERT INTO module_catalog(module_id,content_len,ae_count,ae_json,oa_json,encargos_count,encargos_hours,official_hp,scope,pdf,question_count)
-        VALUES(?,?,?,?,?,?,?,?,?,?,?)
+    con.execute('''INSERT INTO module_catalog(module_id,content_len,ae_count,ae_json,oa_json,encargos_count,encargos_hours,official_hp,scope,pdf,question_count,year,draft)
+        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)
         ON CONFLICT(module_id) DO UPDATE SET content_len=excluded.content_len,ae_count=excluded.ae_count,ae_json=excluded.ae_json,oa_json=excluded.oa_json,
-        encargos_count=excluded.encargos_count,encargos_hours=excluded.encargos_hours,official_hp=excluded.official_hp,scope=excluded.scope,pdf=excluded.pdf,question_count=excluded.question_count''',
-        (module_id, content_len if content_len is not None else len(raw), fields['ae_count'], fields['ae_json'], fields['oa_json'], fields['encargos_count'], fields['encargos_hours'], fields['official_hp'], fields['scope'], fields['pdf'], fields['question_count']))
+        encargos_count=excluded.encargos_count,encargos_hours=excluded.encargos_hours,official_hp=excluded.official_hp,scope=excluded.scope,pdf=excluded.pdf,question_count=excluded.question_count,
+        year=excluded.year,draft=excluded.draft''',
+        (module_id, content_len if content_len is not None else len(raw), fields['ae_count'], fields['ae_json'], fields['oa_json'], fields['encargos_count'], fields['encargos_hours'], fields['official_hp'], fields['scope'], fields['pdf'], fields['question_count'], fields['year'], fields['draft']))
 
 def create_app(test_config=None):
     app=Flask(__name__,static_folder='static')
@@ -246,7 +249,7 @@ def create_app(test_config=None):
             result=[]
             for c in rows:
                 item=dict(c);item['modules']=[]
-                modules=con.execute('''SELECT m.id,m.title,m.position,m.published,cat.ae_count,cat.ae_json,cat.oa_json,cat.encargos_count,cat.encargos_hours,cat.official_hp,cat.scope,cat.pdf,p.state
+                modules=con.execute('''SELECT m.id,m.title,m.position,m.published,cat.ae_count,cat.ae_json,cat.oa_json,cat.encargos_count,cat.encargos_hours,cat.official_hp,cat.scope,cat.pdf,cat.year,cat.draft,p.state
                     FROM modules m LEFT JOIN module_catalog cat ON cat.module_id=m.id
                     LEFT JOIN progress p ON p.module_id=m.id AND p.user_id=?
                     WHERE m.course_id=? ORDER BY m.position,m.id''',(subject_id(),c['id'])).fetchall()
@@ -254,13 +257,13 @@ def create_app(test_config=None):
                     if m['ae_count'] is None:
                         raw=con.execute('SELECT content FROM modules WHERE id=?',(m['id'],)).fetchone()
                         upsert_module_catalog(con,m['id'],m['position'],(raw['content'] if raw else '{}'))
-                        m=con.execute('''SELECT m.id,m.title,m.position,m.published,cat.ae_count,cat.ae_json,cat.oa_json,cat.encargos_count,cat.encargos_hours,cat.official_hp,cat.scope,cat.pdf,p.state
+                        m=con.execute('''SELECT m.id,m.title,m.position,m.published,cat.ae_count,cat.ae_json,cat.oa_json,cat.encargos_count,cat.encargos_hours,cat.official_hp,cat.scope,cat.pdf,cat.year,cat.draft,p.state
                             FROM modules m LEFT JOIN module_catalog cat ON cat.module_id=m.id
                             LEFT JOIN progress p ON p.module_id=m.id AND p.user_id=?
                             WHERE m.id=?''',(subject_id(),m['id'])).fetchone()
                     state=json.loads(m['state']) if m['state'] else empty()
                     done=completed(state,{'aes':[None]*(m['ae_count'] or 0)})
-                    mod={'id':m['id'],'title':m['title'],'position':m['position'],'published':m['published'],'completed':done,'percent':round(sum(done)*20)}
+                    mod={'id':m['id'],'title':m['title'],'position':m['position'],'published':m['published'],'completed':done,'percent':round(sum(done)*20),'year':m['year'] or '','draft':bool(m['draft'])}
                     exam=state.get('exam')
                     selection_max=(exam or {}).get('max_score') or {1:5,2:5,3:7,4:8}.get(m['position'],5)
                     mod['evaluation_scores']={
@@ -317,12 +320,19 @@ def create_app(test_config=None):
                     course.setdefault('scope',row['scope'])
                 if row['pdf']:
                     course.setdefault('pdf',row['pdf'])
+            seal=con.execute(
+                '''SELECT u.name,s.created,s.note FROM specialist_reviews s
+                   JOIN users u ON u.id=s.teacher_id
+                   WHERE s.module_id=? AND s.verdict=? ORDER BY s.id DESC LIMIT 1''',
+                (mid,'Sello del docente de la especialidad'),
+            ).fetchone()
             whole_plan=course_planning(course)
             if whole_plan:
                 active_plan=next((p for p in whole_plan['modules'] if p['position']==m['position']),None)
                 if active_plan:c['planning']=active_plan
         if u['role']=='student':c=strip_for_student(c)
         m.update(content=c,state=s,completed=completed(s,c),stations=STATIONS,steps=STEPS,planning=active_plan or c.get('planning') or module_plan(m['position']))
+        if seal:m['teacher_seal']={'name':seal['name'],'created':seal['created'],'note':seal['note']}
         return jsonify(m)
     @app.post('/api/modules/<int:mid>/content-report')
     @require()
@@ -349,8 +359,11 @@ def create_app(test_config=None):
                 student=con.execute("SELECT id FROM users WHERE role='student' ORDER BY id LIMIT 1").fetchone()
                 if not student:return jsonify([])
                 uid=student['id']
+            for m in con.execute('''SELECT m.id,m.position,m.content FROM modules m
+                LEFT JOIN module_catalog cat ON cat.module_id=m.id WHERE cat.module_id IS NULL''').fetchall():
+                upsert_module_catalog(con,m['id'],m['position'],m['content'] or '{}')
             rows=con.execute('''SELECT c.id AS course_id,c.title AS course_title,c.specialty,c.level,
-                m.id,m.title,m.position,cat.ae_count,cat.ae_json,cat.oa_json,cat.question_count,p.state,p.updated
+                m.id,m.title,m.position,cat.ae_count,cat.ae_json,cat.oa_json,cat.question_count,cat.year,cat.draft,p.state,p.updated
                 FROM enrollments e JOIN courses c ON c.id=e.course_id
                 JOIN modules m ON m.course_id=c.id
                 LEFT JOIN module_catalog cat ON cat.module_id=m.id
@@ -364,6 +377,7 @@ def create_app(test_config=None):
                     level=row['level'],id=row['id'],title=row['title'],position=row['position'],
                     aes=[{'label':a.get('title') or f'AE {i+1}','description':a.get('description') or ''} for i,a in enumerate(aes)],
                     oa=json.loads(row['oa_json'] or '[]'),
+                    year=row['year'] or '',draft=bool(row['draft']),
                     question_count=row['question_count'] or 0,
                     state=s,completed=completed(s,{'aes':[None]*(row['ae_count'] or 0)}),updated=row['updated']))
         return jsonify(result)
@@ -492,7 +506,10 @@ def create_app(test_config=None):
                 'SELECT i.id,i.module_id,i.station,i.claim,i.note,i.created,u.name,m.title FROM content_incidents i JOIN users u ON u.id=i.user_id JOIN modules m ON m.id=i.module_id ORDER BY i.id DESC LIMIT 200'
             )]
             reviews=[dict(r) for r in con.execute(
-                'SELECT s.id,s.module_id,s.verdict,s.note,s.created,u.name,m.title FROM specialist_reviews s JOIN users u ON u.id=s.teacher_id JOIN modules m ON m.id=s.module_id ORDER BY s.id DESC LIMIT 200'
+                '''SELECT s.id,s.module_id,s.verdict,s.note,s.created,u.name,m.title,c.title AS course
+                   FROM specialist_reviews s JOIN users u ON u.id=s.teacher_id
+                   JOIN modules m ON m.id=s.module_id JOIN courses c ON c.id=m.course_id
+                   ORDER BY s.id DESC LIMIT 2000'''
             )]
             health=[]
             for r in con.execute('SELECT c.title AS course, m.id, m.title, m.content FROM modules m JOIN courses c ON c.id=m.course_id WHERE m.published=1 ORDER BY c.id,m.position,m.id'):
@@ -630,8 +647,9 @@ def create_app(test_config=None):
     @require('teacher')
     def specialist_review():
         b=body();note=b.get('note');verdict=str(b.get('verdict') or '')
-        allowed={'Correcto con observaciones','Requiere corrección','Evidencia insuficiente'}
+        allowed={'Correcto con observaciones','Requiere corrección','Evidencia insuficiente','Sello del docente de la especialidad'}
         if verdict not in allowed or not text_valid(note,20):return fail('Elige un dictamen y escribe al menos 20 caracteres.')
+        if verdict=='Sello del docente de la especialidad' and b.get('confirm') is not True:return fail('Confirma que revisaste el ítem, la norma y el procedimiento de este módulo.')
         mid=b.get('module_id')
         with db() as con:
             if not con.execute('SELECT 1 FROM modules WHERE id=?',(mid,)).fetchone():return fail('Módulo inexistente.',404)

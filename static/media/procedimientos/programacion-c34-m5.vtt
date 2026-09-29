@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.000
+Diseño de bases de datos relacionales. Antes de ver: anota qué verifica cada aprendizaje esperado y qué dato quedaría pendiente de confirmar.
+
+00:00:07.000 --> 00:00:16.000
+Instala sistemas de manejo de datos y entornos de diagramación gráfica para representa. Criterio que se observa: Selecciona software y herramientas informáticas adecuadas al tipo de manipulación de datos, entorno de diagramación gráfica y programación, considerando diseño, codificación y tipo de consulta entre otros, considerando estándar de la industria. Pausa y anota: ¿qué evidencia demostraría este criterio?
+
+00:00:16.000 --> 00:00:25.000
+Construye tablas de datos para representar la estructura de los datos requeridos para . Criterio que se observa: Determina los datos necesarios, para una base de información simple requerida por un usuario, y los ordena representativamente en una tabla, siguiendo una estructura común de atributos y valores, utilizando asistentes, herramientas gráficas y lenguajes de definición y control de datos. Pausa y anota: ¿qué evidencia demostraría este criterio?
+
+00:00:25.000 --> 00:00:34.000
+Construye modelos de datos que respondan a las necesidades de información transacciona. Criterio que se observa: Crea un esquema en forma gráfica con los distintos elementos que componen un diagrama entidad-relación para representar un caso medianamente complejo, usando de diagramación y aplicando técnicas y procedimientos establecidos. Pausa y anota: ¿qué evidencia demostraría este criterio?
+
+00:00:34.000 --> 00:00:43.000
+Implementa modelos de representación gráfica en una base de datos (BBDD); según protoc. Criterio que se observa: Desarrolla la normalización de una base de datos hasta la tercera forma normal, en un caso de mediana complejidad, considerando dependencias funcionales. Pausa y anota: ¿qué evidencia demostraría este criterio?
+
+00:00:43.000 --> 00:00:49.000
+Puntos de inspección. EVIDENCIA → CRITERIO → RESGUARDO → REGISTRO. Abre cada punto y relaciónalo con un aprendizaje esperado.
+
+00:00:49.000 --> 00:00:56.000
+Registra tu conclusión con evidencia. Revisa estos antecedentes del caso (requerimiento de clientes y pedidos, entidades y diccionario de datos). Redacta una conclusión, el límite de tu rol y cómo lo verificarías.

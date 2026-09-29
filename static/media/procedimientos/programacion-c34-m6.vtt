@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.000
+Programación orientada a objetos. Antes de ver: anota qué verifica cada aprendizaje esperado y qué dato quedaría pendiente de confirmar.
+
+00:00:07.000 --> 00:00:16.000
+Construye unidades de prueba para verificar el correcto funcionamiento de la codificac. Criterio que se observa: Realiza pruebas para detectar problemas previos a la codificación de una unidad de software con una herramienta de software disponible en el mercado. Pausa y anota: ¿qué evidencia demostraría este criterio?
+
+00:00:16.000 --> 00:00:25.000
+Detecta y corrige errores de codificación. Criterio que se observa: Utiliza la herramienta de depuración de un entorno de desarrollo, para revisar la codificación de clases programadas. Pausa y anota: ¿qué evidencia demostraría este criterio?
+
+00:00:25.000 --> 00:00:34.000
+Construye aplicaciones con clases predefinidas. Criterio que se observa: Usa clases complejas propias del marco de aplicación, que permiten establecer la conexión con la base de dato, para gestionar solicitudes del usuario. Pausa y anota: ¿qué evidencia demostraría este criterio?
+
+00:00:34.000 --> 00:00:43.000
+Utiliza componentes reutilizables en un lenguaje de uso estándar. Criterio que se observa: Desarrolla clases asociadas a la presentación que puedan ser reutilizadas, para satisfacer el requerimiento de visualización por parte de un usuario para aplicación Web, comprobando errores y calidad de comunicación. Pausa y anota: ¿qué evidencia demostraría este criterio?
+
+00:00:43.000 --> 00:00:49.000
+Puntos de inspección. EVIDENCIA → CRITERIO → RESGUARDO → REGISTRO. Abre cada punto y relaciónalo con un aprendizaje esperado.
+
+00:00:49.000 --> 00:00:56.000
+Registra tu conclusión con evidencia. Revisa estos antecedentes del caso (historias de usuario, diagrama de clases y pruebas unitarias). Redacta una conclusión, el límite de tu rol y cómo lo verificarías.

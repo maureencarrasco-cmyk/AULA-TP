@@ -106,10 +106,12 @@ function enrichedScene(){
  const sceneRoute=typeof pedRoute==='function'?pedRoute([{action:'explore',title:'Explora el escenario'},{action:'observe',title:'Examina cada componente'},{action:'relate',title:'Relaciona lo observado'},{action:'justify',title:'Escribe tu conclusión'},{action:'verify',title:'Completa la estación'}],inspected.size?Math.min(2,inspected.size):0):'';
  const sceneHead=typeof pedStepHead==='function'?pedStepHead(4,'relate','Relaciona lo observado'):'<h3>Relaciona lo observado</h3>';
  if(isElecModule()){
+  const elecVideo=window.AulaVisual&&scene.video?`<div id="video-lectura-oficio">${window.AulaVisual.videoFigure(scene)}</div>`:'';
   return `<div class="scene-layout cs-scene">${sceneRoute}
   <h3>${esc(scene.title||'Simulador de circuitos eléctricos')}</h3>
   ${typeof instructionContract==='function'?instructionContract(scene):''}
   <p>Predice I en el rango ±5 %, lee las bandas de R1/R2/R3, diagnostica una falla oculta y registra a 3 V, 9 V y 12 V. Banco de prueba CC: no modela 220 V CA ni el RIC.</p>
+  ${elecVideo}
   <div id="circuit-sim-root" class="circuit-sim-host"></div>
   <form id="scene-form" class="soft ped-step" data-action="justify">${sceneHead}<p>${esc(scene.prompt)}</p><label>Tu conclusión<textarea name="text" minlength="20" maxlength="10000" required>${esc(current.state.scene?.text||'')}</textarea></label><button class="primary" ${!unlocked||auth.user.role==='teacher'||current.state.closed?'disabled':''}>Completar estación 3</button>${!unlocked?'<p>Completa antes las 15 situaciones integradoras.</p>':''}<p class="muted small">El simulador permite observar causa y efecto. No certifica una instalación real.</p></form></div>`;
  }

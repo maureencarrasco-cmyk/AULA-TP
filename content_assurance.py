@@ -6,6 +6,7 @@ nombradas. El 100 % que sí se declara es de alcance: todos los módulos publica
 reciben el mismo expediente reproducible, sin inventar autores ni normas.
 """
 
+import json
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -257,6 +258,24 @@ def build_expedition(content):
     }
 
 
+_HEADER_ALTS = {}
+
+
+def header_alt(url):
+    """Descripción del archivo en static/headers/<key>/alt.json; la imagen no revela respuestas."""
+    parts = str(url or '').split('?', 1)[0].split('/')
+    if len(parts) < 5 or parts[1:3] != ['static', 'headers']:
+        return None
+    key, name = parts[3], parts[4]
+    if key not in _HEADER_ALTS:
+        manifest = HEADER_ROOT / key / 'alt.json'
+        try:
+            _HEADER_ALTS[key] = json.loads(manifest.read_text(encoding='utf-8')) if manifest.is_file() else {}
+        except (OSError, ValueError):
+            _HEADER_ALTS[key] = {}
+    return _HEADER_ALTS[key].get(name)
+
+
 def apply_header_files(content):
     key = content.get('specialty_key') or ''
     if not key:
@@ -278,6 +297,9 @@ def apply_header_files(content):
             current = str(item.get('image') or '')
             if (not current) or '/static/headers/' in current:
                 item['image'] = resolved
+                alt = header_alt(resolved)
+                if alt:
+                    item['alt'] = alt
     return content
 
 

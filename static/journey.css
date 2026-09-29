@@ -259,6 +259,9 @@
   width:calc((100% - 20%) * var(--mod-fill) / 100);
   background:#1558A0;
 }
+.journey-grade{grid-column:1/-1;margin:4px 0 0}
+.journey-grade p{margin:0;padding:12px 14px;border:1px solid #d4e4f4;border-radius:14px;background:#eef5fc;color:#163e68;font-size:14px;font-weight:700;line-height:1.4}
+.journey-draft{margin:6px 0 0;color:#6a4a10;font-size:12px;line-height:1.35}
 .journey-stop{--accent:#1F8A5B;--tint:#E6F6EE;min-width:0;position:relative;display:flex;flex-direction:column}
 .journey-stop.color-1{--accent:#1558A0;--tint:#E8F1FB}
 .journey-stop.color-2{--accent:#6818ed;--tint:#fcfaff}
@@ -510,3 +513,11 @@
   .journey-stop.is-here .journey-marker{transform:none}
   .learn-path-node,.journey-card,.journey-marker{transition:none}
 }
+.ctx-more{margin:14px 0 0;border:1px solid #d7e2ee;border-radius:10px;background:#fbfdff;padding:0 14px}
+.ctx-more>summary{cursor:pointer;padding:12px 0;font-size:13px;font-weight:700;color:#1d3552}
+.ctx-more>summary:focus-visible{outline:3px solid #1558A0;outline-offset:2px}
+.ctx-more-block{padding:0 0 12px}
+.ctx-more-block h3{margin:4px 0 6px;font-size:14px}
+.work-zone-s1 .ctx-block.ctx-worked{display:block;margin:12px 0;padding:12px 14px;border:1px solid #cfe7da;border-left:4px solid #1F8A5B;background:#f3faf6;border-radius:0 10px 10px 0}
+.work-zone-s1 .ctx-worked p{margin:6px 0;font-size:13px;line-height:1.5}
+.work-zone-s1 .ctx-worked .eyebrow{color:#146b45}

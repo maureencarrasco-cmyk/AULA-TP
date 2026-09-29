@@ -140,8 +140,9 @@ function orderBoard(exp) {
 }
 function classifyBoard(exp) {
   return `<div class="act-classify" data-field="classify">
-    <div class="act-classify-items">${(exp.items || []).map(it => `<button type="button" class="act-chip" data-item="${esc(it)}">${esc(it)}</button>`).join('')}</div>
-    <div class="act-buckets">${(exp.buckets || []).map(b => `<div class="act-bucket" data-bucket="${esc(b)}"><h4>${esc(b)}</h4><div class="act-bucket-list"></div></div>`).join('')}</div>
+    <div class="act-classify-items">${(exp.items || []).map(it => `<button type="button" class="act-chip" data-item="${esc(it)}" aria-pressed="false">${esc(it)}</button>`).join('')}</div>
+    <div class="act-buckets">${(exp.buckets || []).map(b => `<div class="act-bucket" data-bucket="${esc(b)}"><h4>${esc(b)}</h4><button type="button" class="act-bucket-drop" aria-label="Colocar el elemento elegido en ${esc(b)}">Colocar aquí</button><div class="act-bucket-list"></div></div>`).join('')}</div>
+    <p class="act-classify-log muted small" aria-live="polite">Elige un elemento y luego la categoría donde corresponde.</p>
   </div>`;
 }
 function choiceOptions(exp) {
@@ -583,13 +584,18 @@ function bindClassify(root) {
   root.querySelectorAll('[data-item]').forEach(btn => {
     btn.onclick = () => {
       item = btn.dataset.item;
-      root.querySelectorAll('[data-item]').forEach(b => b.classList.remove('is-pick'));
+      root.querySelectorAll('[data-item]').forEach(b => { b.classList.remove('is-pick'); if (b.tagName === 'BUTTON') b.setAttribute('aria-pressed', 'false'); });
       btn.classList.add('is-pick');
+      btn.setAttribute('aria-pressed', 'true');
     };
   });
+  const log = root.querySelector('.act-classify-log');
   root.querySelectorAll('.act-bucket').forEach(bucket => {
     bucket.onclick = () => {
-      if (!item) return;
+      if (!item) {
+        if (log) log.textContent = 'Primero elige un elemento de la lista.';
+        return;
+      }
       const source = [...root.querySelectorAll('[data-item]')].find(b => b.dataset.item === item && !b.closest('.act-bucket'));
       if (source) source.style.visibility = 'hidden';
       const hold = document.createElement('span');
@@ -597,7 +603,10 @@ function bindClassify(root) {
       hold.textContent = item;
       hold.dataset.item = item;
       bucket.querySelector('.act-bucket-list').appendChild(hold);
+      if (log) log.textContent = `«${item}» quedó en ${bucket.dataset.bucket}.`;
       item = null;
+      const next = [...root.querySelectorAll('.act-classify-items [data-item]')].find(b => b.style.visibility !== 'hidden');
+      if (next && bucket.contains(document.activeElement)) next.focus();
     };
   });
 }

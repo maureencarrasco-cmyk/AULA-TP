@@ -47,7 +47,7 @@ def draft_modules():
                           oa=item['oa'], year=item['year'], plan_section='Plan de Estudio MINEDUC')
         content['specialty'] = 'Programación'
         content['context'] = f'{place}. {conflict} Dispones de {resources}. Producto: {product}.'
-        content['application'] = f'Caso simulado de {place.lower()}; coteja {resources} antes de entregar el {product}.'
+        content['application'] = f'En el caso de {place.lower()}; coteja {resources} antes de entregar el {product}.'
         content['development'] = (
             f'{conflict} Con los datos de {resources}, explica el problema, cita el AE y criterio '
             f'oficial que corresponde, prepara el {product} y describe una verificación reproducible.'

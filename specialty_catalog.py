@@ -344,7 +344,7 @@ def _questions(module, image):
         rows.append({
             'id': i,
             'stimulus': evidence,
-            'question': f'Caso simulado {i + 1}: {question} Criterio de aprendizaje: «{criterion}».',
+            'question': f'{evidence} {question}',
             'options': options,
             'answer': answer,
             'explanation': rest[3],
