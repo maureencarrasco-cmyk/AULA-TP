@@ -254,6 +254,7 @@ function analizaDash(){
   const logrPct=Math.round((d.evid.logradas/Math.max(1,d.evid.total))*100);
 
   return `<div class="az-board">
+    ${typeof achievementProgressTable==='function'?achievementProgressTable():''}
     ${analizaFilters(d)}
     <section class="az-instruction"><span>${icon('search')}</span><div><h2>Observa, compara e identifica</h2><p>Observa tus resultados por AE, tu evolución y tus evidencias. Identifica una fortaleza y un aspecto que necesites seguir trabajando.</p></div></section>
     <div class="az-grid">

@@ -64,7 +64,10 @@
         v.replaceWith(note);
       });
     });
-    (root || document).querySelectorAll('img.header-photo, .vis-env, .vis-zoom-target img').forEach(img => {
+    (root || document).querySelectorAll('img.header-photo, .vis-env, .vis-zoom-target img, .situation-photo img, .module-media-card img, .case-scene img').forEach(img => {
+      if (img.complete && img.naturalWidth === 0 && img.src.indexOf('workshop.webp') === -1) {
+        img.src = '/static/themes/workshop.webp';
+      }
       if (img.dataset.fallbackBound) return;
       img.dataset.fallbackBound = '1';
       img.addEventListener('error', () => {
@@ -76,6 +79,14 @@
   function boot() {
     attach();
     bindBrokenMedia(document);
+    if (!window.__aulaMediaFallbackObserver && document.body) {
+      window.__aulaMediaFallbackObserver = new MutationObserver(records => {
+        records.forEach(record => record.addedNodes.forEach(node => {
+          if (node.nodeType === 1) bindBrokenMedia(node.matches?.('img,video') ? node.parentElement : node);
+        }));
+      });
+      window.__aulaMediaFallbackObserver.observe(document.body, {childList: true, subtree: true});
+    }
   }
   document.addEventListener('aula:view', () => { attach(); bindBrokenMedia(document); });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

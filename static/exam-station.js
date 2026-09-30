@@ -25,6 +25,7 @@ function examLanding(){
  const cfg=examConfig(),dev=cfg.dev&&tab==='development';
  const startLabel=Object.keys(current.state.draft?.answers||{}).length?'Continuar borrador':'Comenzar evaluación';
  return workZone(`${examTitle('Demuestra que puedes integrar el módulo, reconocer tus avances y continuar al siguiente desafío.')}
+ ${typeof initialAchievementPanel==='function'?initialAchievementPanel():''}
  ${typeof pedRoute==='function'?pedRoute([{action:'decide',title:`${cfg.count} ítems`},...(cfg.dev?[{action:'justify',title:'1 desarrollo'}]:[]),{action:'verify',title:'Entrega'}],0):''}
  <div class="exam-brief">
   <article class="exam-include"><h3>${examIco('list')} ¿Qué incluye?</h3><ul><li><b>${cfg.count} ítems</b> de selección múltiple</li>${cfg.dev?'<li><b>1 situación de desarrollo integradora</b></li>':''}</ul><small>Los 25 ítems del curso se distribuyen 5, 5, 7 y 8 entre los módulos.</small></article>
@@ -50,7 +51,7 @@ function examLanding(){
 }
 function examPanel(){
  const cfg=examConfig();
- if(current.state.exam)return workZone(`${examTitle('Evaluación entregada. Tus respuestas están guardadas.')}<div class="exam-summary">${workCard('check','Has entregado tu evaluación',`<p>Selección múltiple: <b>${current.state.exam.score} / ${current.state.exam.max_score||cfg.count} puntos</b>.</p><p>${cfg.dev?(current.state.exam.review?'Desarrollo revisado por el docente.':'Desarrollo pendiente de revisión docente.'):'Esta evaluación de módulo no incluye desarrollo escrito.'}</p>`,'work-card-ok')}<a class="primary exam-start" href="#module/${current.id}/5">Continuar a retroalimentación ${icon('arrow')}</a></div>`,'work-zone-s4');
+ if(current.state.exam)return workZone(`${examTitle('Evaluación entregada. Tus respuestas están guardadas.')}${typeof initialAchievementPanel==='function'?initialAchievementPanel():''}<div class="exam-summary">${workCard('check','Has entregado tu evaluación',`<p>Selección múltiple: <b>${current.state.exam.score} / ${current.state.exam.max_score||cfg.count} puntos</b>.</p><p>${cfg.dev?(current.state.exam.review?'Desarrollo revisado por el docente.':'Desarrollo pendiente de revisión docente.'):'Esta evaluación de módulo no incluye desarrollo escrito.'}</p>`,'work-card-ok')}<a class="primary exam-start" href="#module/${current.id}/5">Continuar a retroalimentación ${icon('arrow')}</a></div>`,'work-zone-s4');
  if(!examStarted)return examLanding();
  return workZone(`${examTitle('Demuestra lo aprendido e integra tus conocimientos.')}${examForm()}`,'work-zone-s4');
 }

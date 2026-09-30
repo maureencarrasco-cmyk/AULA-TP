@@ -1,6 +1,6 @@
 from pathlib import Path
 import csv, io, json, os, secrets, sqlite3
-from functools import wraps
+from functools import lru_cache, wraps
 from flask import Flask, request, session, jsonify, send_from_directory, Response
 from werkzeug.security import generate_password_hash, check_password_hash
 from content import DEFAULT_CONTENT, STATIONS, STEPS
@@ -65,8 +65,14 @@ def create_app(test_config=None):
         if request.path.startswith('/api/'):response.headers['Cache-Control']='no-store'
         return response
     def empty():return {'context':'','ae':{},'cases':{},'scene':None,'exam':None,'draft':{},'reflection':'','plan':'','closed':False,'explore':{},'ae_meta':{},'trace':[],'oficio':{},'encargos':{}}
+    @lru_cache(maxsize=32)
+    def cached_content(raw, position):
+        c=json.loads(raw or '{}')
+        if c.get('aes'):c=enrich(c, position)
+        return json.dumps(c,ensure_ascii=False,separators=(',',':'))
     def load_content(raw, position=1):
-        c=json.loads(raw) if isinstance(raw,str) else dict(raw or {})
+        if isinstance(raw,str):return json.loads(cached_content(raw,position))
+        c=dict(raw or {})
         if c.get('aes'):c=enrich(c, position)
         return c
     def trace(s, kind, **extra):
@@ -125,11 +131,25 @@ def create_app(test_config=None):
     def courses():
         with db() as con:
             u=user();rows=con.execute('SELECT * FROM courses ORDER BY id').fetchall() if u['role']=='teacher' or is_demo_student(u) else con.execute('SELECT c.* FROM courses c JOIN enrollments e ON e.course_id=c.id WHERE e.user_id=? ORDER BY c.id',(u['id'],)).fetchall()
+            course_ids=[c['id'] for c in rows]
+            modules_by_course={cid:[] for cid in course_ids}
+            if course_ids:
+                marks=','.join('?' for _ in course_ids)
+                module_rows=con.execute(f'''SELECT id,course_id,title,position,published,
+                    json_extract(content,'$.specialty_source.official_hp') AS official_hp,
+                    json_extract(content,'$.specialty_source.scope') AS source_scope,
+                    json_extract(content,'$.specialty_source.pdf') AS source_pdf,
+                    json_extract(content,'$.encargos.count') AS encargos_count,
+                    json_extract(content,'$.encargos.hours') AS encargos_hours,
+                    json_array_length(json_extract(content,'$.aes')) AS ae_count
+                    FROM modules WHERE course_id IN ({marks}) ORDER BY course_id,position,id''',course_ids).fetchall()
+                states={r['module_id']:json.loads(r['state']) for r in con.execute('SELECT module_id,state FROM progress WHERE user_id=?',(u['id'],)).fetchall()}
+                for m in module_rows:modules_by_course[m['course_id']].append(m)
             result=[]
             for c in rows:
                 item=dict(c);item['modules']=[]
-                for m in con.execute('SELECT id,title,position,published,content FROM modules WHERE course_id=? ORDER BY position,id',(c['id'],)):
-                    mod=dict(m);raw_content=json.loads(mod.pop('content') or '{}');source=raw_content.get('specialty_source') or {};s=getstate(con,m['id']);mod['completed']=completed(s,raw_content);mod['percent']=round(sum(mod['completed'])*20)
+                for m in modules_by_course.get(c['id'],[]):
+                    mod=dict(m);mod.pop('course_id',None);s=states.get(m['id']) or empty();s.setdefault('oficio',{});s.setdefault('encargos',{});ae_count=int(mod.pop('ae_count') or 3);expected_steps=max(1,ae_count)*6;mod['completed']=[bool(s['context']),len(s['ae'])==expected_steps,len(s['cases'])==15 and bool(s['scene']),bool(s['exam']),s['closed']];mod['percent']=round(sum(mod['completed'])*20)
                     exam=s.get('exam')
                     selection_max=(exam or {}).get('max_score') or {1:5,2:5,3:7,4:8}.get(m['position'],5)
                     mod['evaluation_scores']={
@@ -137,16 +157,20 @@ def create_app(test_config=None):
                         'development':(exam.get('review') or {}).get('score') if exam else None,
                         'max_each':25,
                     }
-                    if source:
-                        mod['official_hp']=source.get('official_hp')
-                        item.setdefault('scope',source.get('scope'))
-                        item.setdefault('pdf',source.get('pdf'))
-                    plan=None if source else module_plan(m['position'])
+                    official_hp=mod.get('official_hp')
+                    if official_hp:
+                        item.setdefault('scope',mod.pop('source_scope',None))
+                        item.setdefault('pdf',mod.pop('source_pdf',None))
+                    else:
+                        mod.pop('source_scope',None);mod.pop('source_pdf',None)
+                    plan=None if official_hp else module_plan(m['position'])
                     if plan:mod.update(plan)
-                    pack=(raw_content.get('encargos') or {}) if source else encargos_for(m['position'])
-                    if pack.get('count'):
-                        mod['encargos_count']=pack['count']
-                        mod['encargos_hours']=pack['hours']
+                    if official_hp:
+                        count=mod.pop('encargos_count',None);hours=mod.pop('encargos_hours',None)
+                        if count:mod['encargos_count']=count;mod['encargos_hours']=hours
+                    else:
+                        mod.pop('encargos_count',None);mod.pop('encargos_hours',None);pack=encargos_for(m['position'])
+                        if pack.get('count'):mod['encargos_count']=pack['count'];mod['encargos_hours']=pack['hours']
                     item['modules'].append(mod)
                 plan=course_planning(item)
                 if plan:
