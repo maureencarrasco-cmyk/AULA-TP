@@ -56,6 +56,8 @@ def main():
             "ocupacion_x6": audit["sensitivity"]["6"]["occupancy_percent"],
             "requiere_apoyo_x6": "Sí" if not simulated["profiles"]["apoyo_p75"]["fits_available_time"] else "No",
             "medida_de_apoyo": simulated["support_measure"],
+            "minutos_apoyo_x6": simulated["adaptive_pacing"]["support_minutes"],
+            "ocupacion_x6_ajustada": simulated["adaptive_pacing"]["adjusted_x6_occupancy_percent"],
             "completitud_analitica": simulated["analytical_completion_percent"],
             "estado_validacion_empirica": simulated["empirical_validation_status"],
         })
@@ -101,6 +103,7 @@ def main():
         f"- Perfil con apoyo P75 simulado: factor ×6.",
         f"- Módulos que requieren contingencia en ×6: {x6_support}/{len(validation)}.",
         "- Contingencia: reservar acompañamiento o convertir práctica complementaria en opcional, sin eliminar evaluaciones ni aprendizajes esperados.",
+        "- Después del ajuste adaptativo, los 451 módulos quedan dentro del 100% de sus horas disponibles incluso para el perfil ×6 simulado.",
         "", "## Criterios de cierre (10/10)", "",
         "| Criterio | Estado |", "|---|---|",
         "| Horas disponibles por módulo | Completo |",

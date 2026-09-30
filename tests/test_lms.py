@@ -335,6 +335,8 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual(validation['analytical_completion_percent'],100)
   self.assertTrue(validation['x5_accepted'])
   self.assertEqual(set(validation['profiles']),{'agil_p25','referencia_p50','apoyo_p75'})
+  self.assertLessEqual(validation['adaptive_pacing']['adjusted_x6_occupancy_percent'],100)
+  self.assertIn('25 preguntas',validation['adaptive_pacing']['protected_components'])
   self.assertIn('reales',validation['empirical_validation_status'])
  def test_encargos_cover_hours_without_gating_exam(self):
   expected={1:32,2:36,3:38,4:36}

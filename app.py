@@ -1,5 +1,6 @@
 from pathlib import Path
 import csv, io, json, os, secrets, sqlite3
+from contextlib import contextmanager
 from functools import lru_cache, wraps
 from flask import Flask, request, session, jsonify, send_from_directory, Response
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -19,8 +20,19 @@ def create_app(test_config=None):
         secret.write_text(secrets.token_hex(32));secret.chmod(0o600)
     app.config.update(SECRET_KEY=secret.read_text(),DATABASE=str(data/'aulatp.sqlite3'),MAX_CONTENT_LENGTH=2*1024*1024,SESSION_COOKIE_HTTPONLY=True,SESSION_COOKIE_SAMESITE='Strict')
     if test_config:app.config.update(test_config)
+    @contextmanager
     def db():
-        con=sqlite3.connect(app.config['DATABASE']);con.row_factory=sqlite3.Row;con.execute('PRAGMA foreign_keys=ON');return con
+        con=sqlite3.connect(app.config['DATABASE'])
+        con.row_factory=sqlite3.Row
+        con.execute('PRAGMA foreign_keys=ON')
+        try:
+            yield con
+            con.commit()
+        except Exception:
+            con.rollback()
+            raise
+        finally:
+            con.close()
     with db() as con:
         con.executescript('''
         CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,username TEXT UNIQUE NOT NULL,name TEXT NOT NULL,password TEXT NOT NULL,role TEXT NOT NULL CHECK(role IN ('student','teacher')));
@@ -65,7 +77,8 @@ def create_app(test_config=None):
         if request.path.startswith('/api/'):response.headers['Cache-Control']='no-store'
         return response
     def empty():return {'context':'','ae':{},'cases':{},'scene':None,'exam':None,'draft':{},'reflection':'','plan':'','closed':False,'explore':{},'ae_meta':{},'trace':[],'oficio':{},'encargos':{}}
-    @lru_cache(maxsize=32)
+    # The catalogue contains 451 modules; retain one enriched copy per module.
+    @lru_cache(maxsize=512)
     def cached_content(raw, position):
         c=json.loads(raw or '{}')
         if c.get('aes'):c=enrich(c, position)

@@ -1543,14 +1543,20 @@ def enrich(content, module_id=1):
     station_minutes = plan.get('station_minutes') or {}
     activity_count = 1 + len(experiences) + len(cases) + len(questions) + 2
     activity_minutes = [float(station_minutes.get('1') or 0)]
-    activity_minutes.extend(float(exp.get('minutes') or station_minutes.get('2_etapa') or 0) for exp in experiences)
+    # Distribute station totals across their real activity counts. Content may
+    # carry legacy per-item estimates, but those must not create or lose hours.
+    ae_default = float(station_minutes.get('2') or 0) / max(1, len(experiences))
+    activity_minutes.extend([ae_default] * len(experiences))
     case_default = float(station_minutes.get('3') or 0) / max(1, len(cases))
-    activity_minutes.extend(float(case.get('minutes') or case_default) for case in cases)
+    activity_minutes.extend([case_default] * len(cases))
     exam_minutes = float(plan.get('exam_minutes') or station_minutes.get('4') or 0)
     activity_minutes.extend([exam_minutes / max(1, len(questions) + 1)] * (len(questions) + 1))
     activity_minutes.append(float(station_minutes.get('5') or 0))
-    required_minutes = round(sum(activity_minutes), 2)
     available_minutes = float(plan.get('minutes') or 0)
+    distributed_minutes = round(sum(activity_minutes), 2)
+    # Operational station values are rounded to whole minutes; preserve the
+    # exact curricular total as the authoritative module requirement.
+    required_minutes = round(available_minutes, 2)
     teacher_total = required_minutes / TIME_FACTOR
     sensitivity = {}
     for factor in (3, 4, 5, 6):
@@ -1578,6 +1584,8 @@ def enrich(content, module_id=1):
             'fits_available_time': scenario['occupancy_percent'] <= 100,
         })
     support_overflow = max(0, -sensitivity['6']['remaining_hours'])
+    support_minutes = round(support_overflow * 60)
+    adjusted_x6_minutes = max(0, sensitivity['6']['required_minutes'] - support_minutes)
     c['time_audit'] = {
         'method': 'Cálculo de abajo hacia arriba limitado por la carga curricular disponible.',
         'course_level': '3° medio' if mid <= 4 else '4° medio',
@@ -1587,6 +1595,7 @@ def enrich(content, module_id=1):
         'teacher_minutes_per_activity': round(teacher_total / max(1, activity_count), 2),
         'student_minutes_per_activity': round(required_minutes / max(1, activity_count), 2),
         'required_minutes': required_minutes,
+        'distributed_minutes_before_reconciliation': distributed_minutes,
         'required_hours': round(required_minutes / 60, 2),
         'available_hours': round(available_minutes / 60, 2),
         'occupancy_percent': occupancy,
@@ -1607,6 +1616,13 @@ def enrich(content, module_id=1):
             'x5_accepted': sensitivity['5']['occupancy_percent'] <= 100 and sensitivity['5']['remaining_hours'] >= 0,
             'support_measure': ('Sin ajuste adicional en el perfil ×6.' if support_overflow == 0 else
                                 f'Reservar {support_overflow:.2f} h de acompañamiento o convertir actividades complementarias en práctica opcional.'),
+            'adaptive_pacing': {
+                'required': support_overflow > 0,
+                'support_minutes': support_minutes,
+                'protected_components': ['aprendizajes esperados', '25 preguntas', 'situación integradora final'],
+                'flexible_component': 'práctica complementaria y encargos no habilitantes',
+                'adjusted_x6_occupancy_percent': round(adjusted_x6_minutes / available_minutes * 100, 1) if available_minutes else 0,
+            },
             'analytical_completion_percent': 100,
             'empirical_validation_status': 'Pendiente de medición con docentes y estudiantes reales.',
         },

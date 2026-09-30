@@ -441,7 +441,7 @@ function fbComprendeBody(){
       </article>
       <article class="s5c-card s5c-review-list">
         <header><span class="s5c-ico" aria-hidden="true">✓</span><div><h3>Preguntas prioritarias para revisar</h3><p>Abre cada explicación y detecta la idea que debes corregir.</p></div></header>
-        ${incorrect.length?incorrect.map(c=>`<details><summary>Pregunta ${c.index} · Por reforzar</summary><p><b>Pregunta:</b> ${esc(c.question)}</p><p><b>Explicación:</b> ${esc(c.explanation)}</p></details>`).join(''):'<div class="s5c-empty">No hay preguntas incorrectas registradas o la evaluación aún no ha sido entregada.</div>'}
+        ${incorrect.length?incorrect.map(c=>`<details><summary>Pregunta ${c.index} · Por reforzar</summary><p><b>Pregunta:</b> ${esc(c.question)}</p><p><b>AE ${Number(c.ae)+1} · ${esc(c.skill||'Habilidad técnica')}</b>${c.difficulty?' · '+esc(c.difficulty):''}</p><p><b>Por qué revisar:</b> ${esc(c.option_feedback||c.explanation)}</p><p><b>Próximo paso:</b> vuelve al AE indicado, identifica la evidencia decisiva y resuelve una práctica semejante.</p></details>`).join(''):'<div class="s5c-empty">No hay preguntas incorrectas registradas o la evaluación aún no ha sido entregada.</div>'}
       </article>
     </section>
     <aside class="s5c-agent" aria-label="Agente pedagógico">

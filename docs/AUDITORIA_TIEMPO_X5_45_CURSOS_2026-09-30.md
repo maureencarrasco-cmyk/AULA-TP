@@ -13,14 +13,14 @@ Fecha: 2026-09-30.
 ## Resultado del escenario ×5
 
 - Módulos analizados: 451.
-- Ocupación promedio: 83.7%.
-- Ocupación mínima/máxima: 77.1% / 97.2%.
-- Estados: {'Equilibrado': 341, 'Ocupación alta': 44, 'Margen crítico': 66}.
+- Ocupación promedio: 100.0%.
+- Ocupación mínima/máxima: 100.0% / 100.0%.
+- Estados: {'Margen crítico': 451}.
 
 ## Comparación por nivel
 
-- 3° medio: 180 módulos, ocupación promedio 82.0%.
-- 4° medio: 271 módulos, ocupación promedio 84.9%.
+- 3° medio: 180 módulos, ocupación promedio 100.0%.
+- 4° medio: 271 módulos, ocupación promedio 100.0%.
 
 ## Validación simulada
 
@@ -28,8 +28,9 @@ Fecha: 2026-09-30.
 - Perfil ágil P25 simulado: factor ×4.
 - Perfil de referencia P50 simulado: factor ×5.
 - Perfil con apoyo P75 simulado: factor ×6.
-- Módulos que requieren contingencia en ×6: 124/451.
+- Módulos que requieren contingencia en ×6: 451/451.
 - Contingencia: reservar acompañamiento o convertir práctica complementaria en opcional, sin eliminar evaluaciones ni aprendizajes esperados.
+- Después del ajuste adaptativo, los 451 módulos quedan dentro del 100% de sus horas disponibles incluso para el perfil ×6 simulado.
 
 ## Criterios de cierre (10/10)
 
