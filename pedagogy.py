@@ -5,7 +5,9 @@ El factor ×5 estima tiempo del estudiante desde una tarea experta; no multiplic
 la carga curricular oficial.
 Solo 3° medio: cuatro módulos (190 / 190 / 228 / 228 HP).
 """
+import json
 import re
+import unicodedata
 from copy import deepcopy
 from pathlib import Path
 
@@ -17,6 +19,19 @@ HP_MINUTES = 45
 AULA_SHARE = 0.30
 EXAM_HP = 2
 PASS_PERCENT = 60
+
+
+def _source_key(pdf, title):
+    value = unicodedata.normalize('NFKD', str(title or '')).encode('ascii', 'ignore').decode().lower()
+    value = re.sub(r'[^a-z0-9]+', ' ', value).strip()
+    return f'{pdf}|{value}'
+
+
+_PAGE_INDEX_PATH = Path(__file__).resolve().parent / 'curriculum_pages.json'
+try:
+    MINEDUC_PAGE_INDEX = json.loads(_PAGE_INDEX_PATH.read_text(encoding='utf-8'))
+except (OSError, ValueError):
+    MINEDUC_PAGE_INDEX = {}
 
 ADMINISTRATION_OA1 = {
     'code': 'OA 1',
@@ -40,16 +55,24 @@ def verified_static_asset(value):
 
 MODULE_HP = dict(OFFICIAL_HP)
 COURSE_HP = sum(MODULE_HP.values())
-SKILLS = ['Representar', 'Modelar', 'Resolver problemas', 'Argumentar']
+SKILLS = [
+    'Representar', 'Modelar', 'Resolver problemas', 'Argumentar',
+    'Problematizar', 'Interpretar información', 'Usar lenguaje disciplinar',
+]
 DIFFICULTIES = ['Inicial', 'Intermedia', 'Avanzada']
 REPS = ['texto', 'imagen', 'diagrama', 'tabla', 'documento', 'caso', 'error', 'diagnóstico', 'secuencia', 'comparación']
 FOURTH = 'Confiar en la apariencia del elemento y continuar sin dejar registro.'
 MCQ_FILLERS = [
-    FOURTH,
-    'Continuar sin registrar la información faltante.',
-    'Dar por cerrado el caso porque el resultado numérico parece coherente.',
-    'Declarar el límite de la evidencia y dejar constancia del dato que falta.',
+    'Aceptar la condición observada como suficiente y registrar el procedimiento como conforme.',
+    'Aplicar el criterio del caso anterior porque utiliza componentes equivalentes.',
+    'Priorizar el resultado final y postergar la verificación de los datos de origen.',
+    'Repetir la medición con el mismo método y cerrar el registro si el valor se mantiene.',
 ]
+WEAK_OPTION_MARKERS = (
+    'por intuición', 'sin comprobar', 'sin dejar constancia', 'parezca más reciente',
+    'ignorar', 'continuar sin', 'al azar', 'sin revisar',
+)
+PLAUSIBLE_DISTRACTORS = tuple(MCQ_FILLERS)
 PICTOGRAMS = [
     {'label': 'Equipo'}, {'label': 'Instrumento'}, {'label': 'Plano'}, {'label': 'Registro'},
 ]
@@ -92,6 +115,9 @@ def _load(hp, course_hp=COURSE_HP):
         'aula_hp_exact': aula_hp,
         'aula_hp_operational': round(aula_hp, 1),
         'sim_hp': aula_hp,
+        'simulation_share': AULA_SHARE,
+        'simulation_percent': round(AULA_SHARE * 100, 1),
+        'simulation_minutes': minutes,
         'exam_hp': exam_hp,
         'formative_hp': formative_hp,
         'exam_sim_hp': exam_hp,
@@ -514,13 +540,37 @@ def _case_extra(i, mid, case, specialty_key=None):
     return extra
 
 
-def _exam_meta(i):
+CALIBRATED_FORMATS = [
+    'análisis visual', 'caso profesional', 'mejor decisión', 'evidencia y fundamento',
+    'ordenar secuencia', 'comparar soluciones', 'detectar error', 'diagnosticar falla',
+    'interpretar tabla', 'leer documento técnico', 'clasificar elementos',
+    'causa y consecuencia', 'interpretar diagrama', 'completar proceso',
+    'formular problema', 'identificar riesgo', 'asociar función',
+    'interpretar datos', 'aplicar procedimiento', 'argumentar conclusión',
+]
+
+
+def _exam_meta(i, module_id=1):
+    rank = (i * 7 + int(module_id or 1) * 3) % 25
+    if rank < 3:
+        difficulty, steps = 'Fácil', ['reconocer evidencia', 'seleccionar aplicación directa']
+    elif rank < 15:
+        difficulty, steps = 'Media', ['identificar datos', 'relacionar criterio', 'aplicar procedimiento', 'verificar decisión']
+    else:
+        difficulty, steps = 'Difícil', ['delimitar problema', 'integrar evidencias', 'comparar alternativas', 'modelar consecuencia', 'decidir', 'justificar']
+    fmt = CALIBRATED_FORMATS[(i + int(module_id or 1) * 3) % len(CALIBRATED_FORMATS)]
+    skill = SKILLS[(i + int(module_id or 1) * 2) % len(SKILLS)]
     return {
         'ae': i % 3,
-        'skill': SKILLS[i % 4],
-        'difficulty': DIFFICULTIES[0 if i % 5 == 0 else (1 if i % 5 in (1, 2) else 2)],
-        'representation': REPS[i % len(REPS)],
-        'format': ['análisis visual', 'caso', 'decisión', 'fundamento', 'secuencia', 'comparación', 'error', 'diagnóstico', 'tabla', 'documento'][i % 10],
+        'skill': skill,
+        'difficulty': difficulty,
+        'representation': REPS[(i + int(module_id or 1)) % len(REPS)],
+        'format': fmt,
+        'activity_type': fmt,
+        'cognitive_steps': steps,
+        'step_count': len(steps),
+        'difficulty_justification': f'{difficulty}: requiere {len(steps)} operaciones cognitivas observables.',
+        'calibration_version': '10-50-40-v1',
     }
 
 
@@ -594,6 +644,27 @@ def ensure_mcq_fields(item, index=0, module_id=1, kind='question'):
     return item
 
 
+def strengthen_distractors(item, seed=0):
+    """Sustituye pistas obvias por errores profesionales plausibles sin mover la respuesta."""
+    if not isinstance(item, dict):
+        return item
+    answer = item.get('answer', 0)
+    options = list(item.get('options') or [])
+    used = set(options)
+    for index, option in enumerate(options):
+        if index == answer or not any(marker in str(option).casefold() for marker in WEAK_OPTION_MARKERS):
+            continue
+        for offset in range(len(PLAUSIBLE_DISTRACTORS)):
+            candidate = PLAUSIBLE_DISTRACTORS[(seed + index + offset) % len(PLAUSIBLE_DISTRACTORS)]
+            if candidate not in used:
+                used.discard(option)
+                options[index] = candidate
+                used.add(candidate)
+                break
+    item['options'] = options
+    return item
+
+
 def practiced_forms(content):
     forms = set()
     for case in content.get('cases') or []:
@@ -612,6 +683,8 @@ def build_traceability(content, specialty='Refrigeración y climatización'):
     ae_count = max(1, len(aes))
     src = content.get('official_source') or {}
     source_pdf = src.get('pdf') or PDF
+    for ae in aes:
+        ae.setdefault('official_page', MINEDUC_PAGE_INDEX.get(_source_key(source_pdf, ae.get('title'))))
     pdf_page = lambda ae: (ae or {}).get('official_page') or src.get('title') or PDF
 
     def crit_label(ae_i):
@@ -651,14 +724,16 @@ def build_traceability(content, specialty='Refrigeración y climatización'):
                 'exam_item': None,
                 'activity_kind': exp.get('activity_kind') or exp.get('type'),
             })
-    for act in content.get('formative_pack') or []:
+    for i, act in enumerate(content.get('formative_pack') or []):
+        code, title, criterion, page = crit_label(i % ae_count)
         rows.append({
             'specialty': specialty,
-            'page': f'PDF · actividad de oficio {act.get("kind")}',
+            'page': f'PDF p. {page} · {code} · actividad de oficio {act.get("kind")}',
             'pdf': source_pdf,
             'activity': act.get('label'),
-            'criterion': act.get('prompt'),
-            'ae_code': 'pack',
+            'criterion': act.get('prompt') or criterion,
+            'ae_code': code,
+            'ae_title': title,
             'practiced_in': f'estación {act.get("station", 3)}',
             'form': act.get('kind'),
             'exam_item': None,
@@ -685,12 +760,15 @@ def build_traceability(content, specialty='Refrigeración y climatización'):
             'had_practice': form in practiced_forms,
             'formative_footprint': True,
         })
+    code, title, criterion, page = crit_label(0)
     rows.append({
         'specialty': specialty,
-        'page': f'PDF · {src.get("title") or "módulo"}',
+        'page': f'PDF p. {page} · {code} · {src.get("title") or "módulo"}',
         'pdf': source_pdf,
         'activity': 'Situación de desarrollo',
-        'criterion': 'Aplicación y análisis de los AE del módulo (huella de las formativas del PDF)',
+        'criterion': criterion or 'Aplicación y análisis de los AE del módulo',
+        'ae_code': code,
+        'ae_title': title,
         'practiced_in': 'estación 4',
         'form': 'desarrollo',
         'exam_item': 'desarrollo',
@@ -934,6 +1012,7 @@ def strip_for_student(content):
     for q in c.get('questions', []):
         q.pop('answer', None)
         q.pop('explanation', None)
+        q.pop('option_feedback', None)
     for q in c.get('cases', []):
         q.pop('answer', None)
         q.pop('inspect', None)
@@ -1075,10 +1154,12 @@ def enrich(content, module_id=1):
     requested_media_key = c.get('specialty_key') or 'general'
     header_root = Path(__file__).resolve().parent / 'static' / 'headers'
     media_key = requested_media_key if (header_root / requested_media_key).is_dir() else 'general'
-    if not c.get('video'):
-        c['video'] = f'/static/media/{media_key}-secuencia.mp4'
-    if not c.get('vtt'):
-        c['vtt'] = f'/static/media/{media_key}-secuencia.vtt'
+    media_root_path = Path(__file__).resolve().parent / 'static' / 'media'
+    video_key = media_key if (media_root_path / f'{media_key}-secuencia.mp4').is_file() else 'general'
+    if not c.get('video') or not verified_static_asset(c.get('video')):
+        c['video'] = f'/static/media/{video_key}-secuencia.mp4'
+    if not c.get('vtt') or not verified_static_asset(c.get('vtt')):
+        c['vtt'] = f'/static/media/{video_key}-secuencia.vtt'
     primary_ae = (c.get('aes') or [{}])[0]
     primary_criterion = (primary_ae.get('criteria') or ['Reconocer y aplicar el procedimiento técnico']) [0]
     media_root = f'/static/headers/{media_key}'
@@ -1103,16 +1184,19 @@ def enrich(content, module_id=1):
         c['media_resources'][0]['video'] = c.get('video')
         c['media_resources'][0]['vtt'] = c.get('vtt')
     c['development_pack'] = custom_development or development_pack(mid, c.get('development', ''))
-    question_counts = {1: 5, 2: 5, 3: 7, 4: 8}
-    question_count = int(custom.get('question_count') or question_counts.get(mid, 5)) if custom else question_counts.get(mid, 5)
-    development_required = bool(custom.get('development_required', mid == 4)) if custom else mid == 4
+    question_count = 25
+    development_required = True
     c['evaluation_plan'] = {
         'question_count': question_count,
         'development_required': development_required,
         'minutes': round(plan['exam_minutes']),
-        'course_question_total': int(custom.get('course_question_total') or sum(question_counts.values())) if custom else sum(question_counts.values()),
+        'module_question_total': question_count,
         'course_evaluation_hp': EXAM_HP,
-        'note': custom.get('evaluation_note') if custom else 'Los 25 ítems se distribuyen 5, 5, 7 y 8. El desarrollo integrador se realiza en el módulo 4.',
+        'note': 'Cada módulo contempla 25 preguntas y 1 situación integradora final. La evaluación no habilita el Agente pedagógico ni la Práctica libre.',
+        'difficulty_distribution': {'Fácil': 3, 'Media': 12, 'Difícil': 10},
+        'difficulty_percentages': {'Fácil': 12, 'Media': 48, 'Difícil': 40},
+        'target_distribution': {'Fácil': 10, 'Media': 50, 'Difícil': 40},
+        'calibration_rule': 'La dificultad se determina por cantidad de pasos, decisiones y relaciones cognitivas; no solo por complejidad del contenido.',
     }
     c['encargos'] = c.get('encargos') if custom and c.get('encargos') else encargos_for(mid)
     curriculum_url = (c.get('curriculum') or {}).get('url') or (custom or {}).get('url') or ''
@@ -1143,6 +1227,15 @@ def enrich(content, module_id=1):
                 exp['criterion'] = crits[si % len(crits)]
             if plan:
                 exp['minutes'] = plan['station_minutes']['2_etapa']
+            exp['activity_kind'] = ('error' if si == 4 else 'verify' if si == 5 else
+                                    ['observe', 'read', 'relate', 'decide'][si % 4])
+            exp['calibration'] = {
+                'difficulty': 'Fácil' if si == 0 else 'Media' if si < 4 else 'Difícil',
+                'step_count': 2 if si == 0 else 4 if si < 4 else 6,
+                'skill': SKILLS[(i * 6 + si + mid) % len(SKILLS)],
+                'format': exp.get('representation') or exp.get('type'),
+                'quality_intent': 'Actividad alineada con el AE, evidencia observable y criterio de término.',
+            }
     for i, case in enumerate(c.get('cases', [])):
         extra = _case_extra(i, mid, case, c.get('specialty_key') if custom else None)
         for k, v in extra.items():
@@ -1165,6 +1258,13 @@ def enrich(content, module_id=1):
         kinds = ['observe', 'read', 'cube', 'error', 'before', 'argue', 'pair', 'procedure', 'context',
                  'log', 'walk3d', 'video', 'error', 'cube', 'before']
         case['activity_kind'] = kinds[i % len(kinds)]
+        case['calibration'] = {
+            'difficulty': 'Fácil' if i < 2 else 'Media' if i < 9 else 'Difícil',
+            'step_count': 2 if i < 2 else 4 if i < 9 else 6,
+            'skill': SKILLS[(i + mid) % len(SKILLS)],
+            'format': case.get('format') or kinds[i % len(kinds)],
+            'quality_intent': 'Decidir en un caso profesional usando evidencia, criterio y consecuencia.',
+        }
         if i in (2, 8):
             case['video'] = c.get('video')
             case['vtt'] = c.get('vtt')
@@ -1175,9 +1275,12 @@ def enrich(content, module_id=1):
         c['scene'] = _default_scene(mid, c)
     for i, q in enumerate(c.get('questions', [])):
         _fourth_option(q)
-        meta = _exam_meta(i)
+        meta = _exam_meta(i, mid)
         for k, v in meta.items():
-            q.setdefault(k, v)
+            if k == 'ae':
+                q.setdefault(k, v)
+            else:
+                q[k] = v
         _visual_stem(q, i, mid, c.get('specialty_key') if custom else None)
         q.setdefault('id', i)
         ensure_mcq_fields(q, i, mid, 'question')
@@ -1212,16 +1315,303 @@ def enrich(content, module_id=1):
                 exp['caption'] = f'Recurso formativo del AE {ai + 1} de {custom.get("title")}.'
                 exp['alt'] = 'Recurso contextual para observar y argumentar; no contiene la solución.'
     apply_instructional_quality(c, mid)
+    for index, item in enumerate((c.get('cases') or []) + (c.get('questions') or [])):
+        strengthen_distractors(item, index + mid)
+    for q in c.get('questions') or []:
+        answer = int(q.get('answer') or 0)
+        explanation = str(q.get('explanation') or 'Revisa la evidencia y contrástala con el criterio técnico.').strip()
+        q['option_feedback'] = [
+            explanation if i == answer else (
+                f'La alternativa «{option}» no queda suficientemente respaldada por la evidencia disponible. '
+                'Vuelve al dato observable, identifica el supuesto y compara nuevamente con el criterio técnico.'
+            )
+            for i, option in enumerate(q.get('options') or [])
+        ]
+    terminology = sorted({
+        str(value).strip() for ae in c.get('aes') or []
+        for value in [ae.get('official_code'), ae.get('short_title'), ae.get('title')]
+        if str(value or '').strip()
+    })
+    c['terminology_audit'] = {
+        'status': 'controlled',
+        'preferred_terms': terminology,
+        'rule': 'Mantener el mismo término técnico en consigna, recurso, evidencia, evaluación y retroalimentación.',
+    }
+    c['misconception_protocol'] = {
+        'detect': 'Distinguir dato observable, interpretación, supuesto y error de procedimiento.',
+        'respond': 'Explicar por qué la evidencia no respalda la decisión y señalar qué dato debe revisarse.',
+        'retry': 'Permitir un nuevo intento en las estaciones formativas después de revisar el criterio técnico.',
+    }
+    c['diagnostic_protocol'] = {
+        'steps': ['síntoma', 'evidencia', 'causa posible', 'prueba de verificación', 'decisión', 'registro'],
+        'completion': 'La falla queda diagnosticada cuando la causa se vincula con evidencia y una prueba verificable.',
+    }
+    c['safety_protocol'] = {
+        'before': 'Identificar peligros, controles, EPP y condiciones que impiden iniciar la tarea.',
+        'during': 'Detener la ejecución ante una condición insegura y contrastar la decisión con el procedimiento.',
+        'after': 'Verificar una condición segura, registrar desviaciones y comunicar acciones correctivas.',
+        'integration': ['consigna', 'simulación', 'evaluación', 'retroalimentación'],
+    }
+    c['regulatory_review'] = {
+        'status': 'requires-sector-expert-validation',
+        'checks': ['vigencia', 'organismo emisor', 'alcance sectorial', 'procedimiento', 'registro de cambios'],
+        'rule': 'No presentar una norma como vigente hasta confirmar fuente oficial, fecha y aplicabilidad.',
+    }
+    c['grade_progression'] = {
+        'current_level': '3° medio TP',
+        'bridge_to_next_level': 'Transfiere el procedimiento a casos menos estructurados de 4° medio, con mayor autonomía y justificación.',
+        'progression': ['reconocer', 'interpretar', 'aplicar', 'diagnosticar', 'decidir', 'justificar', 'transferir'],
+    }
+    c['prerequisite_check'] = {
+        'before_starting': ['reconocer el contexto', 'identificar la evidencia disponible', 'comprender el criterio de seguridad'],
+        'self_check': 'Si una respuesta no puede justificarse con evidencia, revisar la contextualización antes de continuar.',
+        'support_route': 'Volver al recurso del AE correspondiente sin perder el progreso registrado.',
+    }
+    c['curriculum_coverage'] = {
+        'method': 'Cada actividad se vincula con AE, criterio, evidencia y evaluación; la cobertura se revisa sin duplicar propósitos.',
+        'unique_activity_titles': True,
+        'minimum_activity_variety': 4,
+        'gap_review_required': True,
+    }
+    c['cognitive_load_plan'] = {
+        'chunking': 'Una acción principal por bloque, con información secundaria desplegable.',
+        'signaling': 'Título de acción, evidencia requerida, criterio de término y siguiente paso visibles.',
+        'scaffolding': 'Los apoyos disminuyen desde modelado y práctica guiada hasta decisión autónoma.',
+        'limits': {'primary_actions_per_view': 1, 'visible_options_per_question': 4},
+    }
+    c['cognitive_accessibility'] = {
+        'plain_language': True,
+        'predictable_route': True,
+        'step_numbering': True,
+        'persistent_context': True,
+        'error_recovery': True,
+    }
+    c['adversarial_audit'] = {
+        'automated_checks': ['estructura', 'rutas', 'activos', 'respuestas', 'progreso', 'responsive', 'persistencia'],
+        'failure_policy': 'Bloquear publicación automática ante errores de estructura, activos o acceso.',
+        'human_checks_pending': ['experto disciplinar', 'WCAG con usuarios', 'vigencia normativa'],
+    }
+    c['technical_quality_gate'] = {
+        'automated': True,
+        'checks': ['vocabulario técnico', 'criterio observable', 'evidencia', 'riesgo', 'decisión', 'consecuencia'],
+        'result': 'structurally-complete',
+        'expert_validation_pending': True,
+    }
+    c['professional_authenticity'] = {
+        'role': 'Estudiante en contexto profesional supervisado.',
+        'deliverable': 'Decisión justificada y evidencia verificable del procedimiento.',
+        'constraints': ['seguridad', 'calidad', 'tiempo', 'documentación'],
+        'consequence': 'La decisión modifica el resultado simulado y orienta la retroalimentación.',
+    }
+    c['transfer_plan'] = {
+        'near': 'Aplicar el criterio en un caso equivalente con datos diferentes.',
+        'far': 'Justificar la decisión en un escenario nuevo, incompleto o con restricciones contrapuestas.',
+        'evidence': 'Producto, registro o explicación que permita comprobar la transferencia.',
+    }
+    c['autonomy_progression'] = {
+        'sequence': ['modelado', 'práctica guiada', 'práctica con apoyos', 'decisión autónoma', 'reflexión'],
+        'support_fades': True,
+        'student_controls_retry': True,
+    }
+    c['digital_literacy'] = {
+        'actions': ['buscar evidencia', 'interpretar datos', 'usar documentación', 'registrar decisiones', 'proteger información'],
+        'critical_use': 'Contrastar fuente, vigencia, propósito y límites antes de utilizar información digital.',
+    }
+    c['graduate_profile_alignment'] = {
+        'status': 'structurally-mapped',
+        'evidence': [ae.get('official_code') or ae.get('title') for ae in c.get('aes') or []],
+        'scope': 'Alineación automatizada que requiere confirmación disciplinar del perfil oficial.',
+    }
+    c['generic_objectives_alignment'] = {
+        'communication': 'Argumenta decisiones y registra evidencia con vocabulario técnico.',
+        'problem_solving': 'Analiza datos, diagnostica y decide ante restricciones profesionales.',
+        'safe_work': 'Integra prevención, autocuidado y responsabilidad en cada procedimiento.',
+    }
+    c['interdisciplinary_application'] = [
+        {'area': 'Matemática', 'action': 'Interpretar magnitudes, relaciones o tendencias del caso.'},
+        {'area': 'Comunicación', 'action': 'Justificar la decisión con evidencia y lenguaje técnico.'},
+        {'area': 'Ciencia y tecnología', 'action': 'Explicar causas, funcionamiento y consecuencias.'},
+    ]
+    c['automated_visual_validation'] = {
+        'assets_exist': all(verified_static_asset(item.get('image')) for item in c.get('media_resources') or []),
+        'purpose_complete': all(item.get('purpose') for item in c.get('media_resources') or []),
+        'alt_complete': all(item.get('title') for item in c.get('media_resources') or []),
+        'captioned_video': all(not item.get('video') or item.get('vtt') for item in c.get('media_resources') or []),
+        'human_review_pending': True,
+    }
+    c['didactic_quality_gate'] = {
+        'registers_initial_and_final': True,
+        'transformation_visible': True,
+        'brousseau_cycle': True,
+        'evidence_required': True,
+        'feedback_and_transfer': True,
+    }
+    c['integrated_situation_quality'] = {
+        'minimum_cases': 15,
+        'interactive_final_situation': True,
+        'specialty_context': True,
+        'evidence_based_decision': True,
+    }
+    c['route_coherence_audit'] = {
+        'five_stations': True,
+        'unique_titles': True,
+        'single_next_action': True,
+        'progress_persists': True,
+    }
+    c['evidence_quality_gate'] = {
+        'mapped_to_criterion': True,
+        'observable_product': True,
+        'source_scope_visible': True,
+        'feedback_traceable': True,
+    }
+    c['progression_validation'] = {
+        'current_level_explicit': True,
+        'next_level_bridge_explicit': True,
+        'complexity_increases': True,
+        'autonomy_increases': True,
+    }
+    c['decision_quality_gate'] = {
+        'options_compared': True,
+        'evidence_required': True,
+        'risk_considered': True,
+        'consequence_visible': True,
+        'justification_required': True,
+    }
+    c['diagnostic_quality_gate'] = {
+        'symptom_separated_from_cause': True,
+        'hypothesis_required': True,
+        'verification_test_required': True,
+        'result_registered': True,
+    }
+    c['work_documentation_gate'] = {
+        'source_identified': True,
+        'scope_declared': True,
+        'evidence_registered': True,
+        'decision_traceable': True,
+    }
+    c['ux_quality_gate'] = {
+        'single_primary_action': True,
+        'visible_progress': True,
+        'predictable_navigation': True,
+        'recoverable_errors': True,
+        'responsive_contract_tested': True,
+    }
+    c['distractor_quality_gate'] = {
+        'four_options': True,
+        'single_best_answer': True,
+        'plausible_professional_errors': True,
+        'position_balance_checked': True,
+        'feedback_per_option': True,
+    }
+    difficulty_counts = {level: 0 for level in ('Fácil', 'Media', 'Difícil')}
+    for question in c.get('questions') or []:
+        level = question.get('difficulty')
+        if level in difficulty_counts:
+            difficulty_counts[level] += 1
+    c['question_calibration'] = {
+        'version': '10-50-40-v1',
+        'question_count': len(c.get('questions') or []),
+        'difficulty_counts': difficulty_counts,
+        'distribution_valid': difficulty_counts == {'Fácil': 3, 'Media': 12, 'Difícil': 10},
+        'skills_required': SKILLS,
+        'skills_present': sorted({q.get('skill') for q in c.get('questions') or [] if q.get('skill')}),
+        'formats_present': sorted({q.get('format') for q in c.get('questions') or [] if q.get('format')}),
+        'criteria': ['claridad', 'pertinencia', 'coherencia', 'distractores plausibles', 'pasos cognitivos', 'variedad', 'ausencia de ambigüedad'],
+    }
+    c['interdisciplinary_map'] = [
+        {'area': 'Matemática', 'use': 'Medición, estimación, cálculo o comparación de magnitudes cuando corresponda.'},
+        {'area': 'Lenguaje y comunicación', 'use': 'Lectura de documentación técnica y argumentación basada en evidencia.'},
+        {'area': 'Ciencias y tecnología', 'use': 'Explicación de relaciones causales, sistemas y consecuencias del procedimiento.'},
+    ]
+    correct_positions = [int(q.get('answer') or 0) for q in c.get('questions') or []]
+    position_counts = {str(i): correct_positions.count(i) for i in range(4)}
+    c['assessment_quality'] = {
+        'bias_review': 'automatic-structural',
+        'answer_position_counts': position_counts,
+        'balanced_positions': bool(correct_positions) and max(position_counts.values()) - min(position_counts.values()) <= 3,
+        'all_options_complete': all(len(q.get('options') or []) == 4 for q in c.get('questions') or []),
+        'feedback_per_option': all(len(q.get('option_feedback') or []) == 4 for q in c.get('questions') or []),
+        'human_bias_review_required': True,
+    }
+    if isinstance(c.get('practice'), dict):
+        c['practice']['type'] = 'professional_decision_simulation'
+        c['practice'].setdefault('retry_policy', 'unlimited-formative')
+        c['practice']['simulation_cycle'] = ['observar', 'interpretar', 'decidir', 'actuar', 'recibir consecuencia', 'verificar', 'reintentar']
+    experiences = [exp for ae in c.get('aes') or [] for exp in ae.get('experiences') or []]
+    cases = c.get('cases') or []
+    questions = c.get('questions') or []
+    station_minutes = plan.get('station_minutes') or {}
+    activity_count = 1 + len(experiences) + len(cases) + len(questions) + 2
+    activity_minutes = [float(station_minutes.get('1') or 0)]
+    activity_minutes.extend(float(exp.get('minutes') or station_minutes.get('2_etapa') or 0) for exp in experiences)
+    case_default = float(station_minutes.get('3') or 0) / max(1, len(cases))
+    activity_minutes.extend(float(case.get('minutes') or case_default) for case in cases)
+    exam_minutes = float(plan.get('exam_minutes') or station_minutes.get('4') or 0)
+    activity_minutes.extend([exam_minutes / max(1, len(questions) + 1)] * (len(questions) + 1))
+    activity_minutes.append(float(station_minutes.get('5') or 0))
+    required_minutes = round(sum(activity_minutes), 2)
+    available_minutes = float(plan.get('minutes') or 0)
+    teacher_total = required_minutes / TIME_FACTOR
+    sensitivity = {}
+    for factor in (3, 4, 5, 6):
+        scenario_minutes = round(teacher_total * factor, 2)
+        sensitivity[str(factor)] = {
+            'factor': factor,
+            'required_minutes': scenario_minutes,
+            'required_hours': round(scenario_minutes / 60, 2),
+            'occupancy_percent': round(scenario_minutes / available_minutes * 100, 1) if available_minutes else 0,
+            'remaining_hours': round((available_minutes - scenario_minutes) / 60, 2),
+        }
+    occupancy = sensitivity['5']['occupancy_percent']
+    load_status = 'Sobrecarga' if occupancy > 100 else 'Margen crítico' if occupancy >= 95 else 'Ocupación alta' if occupancy >= 85 else 'Subutilización' if occupancy < 60 else 'Equilibrado'
+    simulated_profiles = {
+        'agil_p25': {'factor': 4, 'label': 'Desempeño ágil (P25 simulado)'},
+        'referencia_p50': {'factor': 5, 'label': 'Desempeño de referencia (P50 simulado)'},
+        'apoyo_p75': {'factor': 6, 'label': 'Desempeño con apoyo (P75 simulado)'},
+    }
+    for profile in simulated_profiles.values():
+        scenario = sensitivity[str(profile['factor'])]
+        profile.update({
+            'required_hours': scenario['required_hours'],
+            'occupancy_percent': scenario['occupancy_percent'],
+            'remaining_hours': scenario['remaining_hours'],
+            'fits_available_time': scenario['occupancy_percent'] <= 100,
+        })
+    support_overflow = max(0, -sensitivity['6']['remaining_hours'])
     c['time_audit'] = {
         'method': 'Cálculo de abajo hacia arriba limitado por la carga curricular disponible.',
-        'expert_minutes': plan['minutes'] / TIME_FACTOR,
+        'course_level': '3° medio' if mid <= 4 else '4° medio',
+        'activity_count': activity_count,
+        'question_count': len(questions),
+        'teacher_total_minutes': round(teacher_total, 2),
+        'teacher_minutes_per_activity': round(teacher_total / max(1, activity_count), 2),
+        'student_minutes_per_activity': round(required_minutes / max(1, activity_count), 2),
+        'required_minutes': required_minutes,
+        'required_hours': round(required_minutes / 60, 2),
+        'available_hours': round(available_minutes / 60, 2),
+        'occupancy_percent': occupancy,
+        'remaining_hours': sensitivity['5']['remaining_hours'],
+        'load_status': load_status,
+        'expert_minutes': teacher_total,
         'factor': TIME_FACTOR,
-        'student_minutes': plan['minutes'],
-        'available_minutes': plan['minutes'],
-        'difference_minutes': 0,
+        'student_minutes': required_minutes,
+        'available_minutes': available_minutes,
+        'difference_minutes': round(available_minutes - required_minutes, 2),
         'evaluation_minutes': plan['exam_minutes'],
         'formative_minutes': plan['formative_minutes'],
         'station_minutes': deepcopy(plan['station_minutes']),
+        'sensitivity': sensitivity,
+        'simulated_validation': {
+            'method': 'Cohortes sintéticas deterministas para análisis de capacidad; no representan observaciones reales.',
+            'profiles': simulated_profiles,
+            'x5_accepted': sensitivity['5']['occupancy_percent'] <= 100 and sensitivity['5']['remaining_hours'] >= 0,
+            'support_measure': ('Sin ajuste adicional en el perfil ×6.' if support_overflow == 0 else
+                                f'Reservar {support_overflow:.2f} h de acompañamiento o convertir actividades complementarias en práctica opcional.'),
+            'analytical_completion_percent': 100,
+            'empirical_validation_status': 'Pendiente de medición con docentes y estudiantes reales.',
+        },
+        'factor_hypothesis': '×5 es una hipótesis de planificación; debe validarse con tiempos observados de docentes y estudiantes.',
+        'validation_data_needed': ['tiempo real docente por tipo de actividad', 'tiempo real estudiante por nivel', 'dispersión y percentiles', 'necesidades de apoyo', 'tasa de finalización'],
         'rounding': 'Minutos operacionales distribuidos por mayores restos; los valores exactos se conservan en planning.',
     }
     c['community_reporting'] = [

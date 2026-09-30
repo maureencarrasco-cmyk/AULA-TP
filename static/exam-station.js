@@ -5,13 +5,13 @@ function examIco(kind){
  const d={file:icons.file,edit:icons.edit,target:'M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20 M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12 M12 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4',trophy:'M8 4h8v3a4 4 0 0 1-8 0V4Z M8 4H5v3a3 3 0 0 0 3 3 M16 4h3v3a3 3 0 0 1-3 3 M9 20h6 M12 11v9',info:'M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20 M12 11v6 M12 8h.01',leaf:'M20 3C6 1 2 9 7 16s15 2 13-13ZM4 21 17 7',list:'M8 6h13 M8 12h13 M8 18h13 M3 6h.01 M3 12h.01 M3 18h.01'};
  return `<span class="exam-ico">${examSvg(d[kind]||icons.file)}</span>`;
 }
-function examPhoto(){const src=(typeof current!=='undefined'&&current.content?.explore?.image)||(typeof oficioPng==='function'?oficioPng('oficio-plano-leyenda'):'/static/themes/oficio/oficio-plano-leyenda.png?v=3');return `<figure class="exam-photo-note"><img src="${src}" alt="Recorte de oficio del módulo. La evaluación usa el mismo banco visual, no una imagen decorativa." decoding="async"><figcaption>Banco de oficio del módulo · evidencia de evaluación</figcaption></figure>`}
+function examPhoto(){return `<figure class="exam-visual" aria-label="Evaluación final: observa, decide y demuestra"><div class="exam-visual-icons"><span>${examIco('file')}</span><i aria-hidden="true">→</i><span>${examIco('target')}</span><i aria-hidden="true">→</i><span>${examIco('check')}</span></div><figcaption><b>Observa · decide · demuestra</b><small>Tu evidencia refleja lo que puedes aplicar de manera autónoma.</small></figcaption></figure>`}
 function examHeader(){return stationHero(4)}
 function examStationRoute(){return stationRoute(4)}
 function examSidebar(){return ''}
 function examConfig(){
  const p=current?.content?.evaluation_plan||{};
- return {count:Number(p.question_count||25),dev:!!p.development_required,minutes:Number(p.minutes||0)};
+ return {count:Number(p.question_count||25),total:Number(p.module_question_total||p.question_count||25),dev:p.development_required!==false,minutes:Number(p.minutes||0)};
 }
 
 function examTitle(subtitle){
@@ -19,7 +19,7 @@ function examTitle(subtitle){
 }
 function examTabs(dev){
  const cfg=examConfig();
- return `<div class="tabs integration-tabs exam-tabs">${action('exam-tab',icon('file')+` Ítems (1 – ${cfg.count})`,!dev?'active':'','data-tab="questions"')}${cfg.dev?action('exam-tab',icon('edit')+' Situación de desarrollo',dev?'active':'','data-tab="development"'):''}</div>`;
+ return `<div class="tabs integration-tabs exam-tabs">${action('exam-tab',icon('file')+` Preguntas (1 – ${cfg.count})`,!dev?'active':'','data-tab="questions"')}${cfg.dev?action('exam-tab',icon('edit')+' Situación integradora final',dev?'active':'','data-tab="development"'):''}</div>`;
 }
 function examLanding(){
  const cfg=examConfig(),dev=cfg.dev&&tab==='development';
@@ -27,14 +27,15 @@ function examLanding(){
  return workZone(`${examTitle('Demuestra que puedes integrar el módulo, reconocer tus avances y continuar al siguiente desafío.')}
  ${typeof initialAchievementPanel==='function'?initialAchievementPanel():''}
  ${typeof pedRoute==='function'?pedRoute([{action:'decide',title:`${cfg.count} ítems`},...(cfg.dev?[{action:'justify',title:'1 desarrollo'}]:[]),{action:'verify',title:'Entrega'}],0):''}
+ <section class="exam-course-plan" aria-label="Plan de evaluación del módulo"><div class="exam-course-plan-title">${examIco('trophy')}<div><span>DESAFÍO DE CIERRE</span><h3>Demuestra lo que sabes hacer</h3><p>Una evaluación completa, conectada con decisiones del mundo profesional.</p></div></div><div class="exam-course-plan-metrics"><article><strong>${cfg.total}</strong><span>preguntas<br>del módulo</span></article><i aria-hidden="true">+</i><article><strong>1</strong><span>situación<br>integradora final</span></article></div><small>Completa ambas partes para cerrar la evaluación del módulo.</small></section>
  <div class="exam-brief">
-  <article class="exam-include"><h3>${examIco('list')} ¿Qué incluye?</h3><ul><li><b>${cfg.count} ítems</b> de selección múltiple</li>${cfg.dev?'<li><b>1 situación de desarrollo integradora</b></li>':''}</ul><small>Los 25 ítems del curso se distribuyen 5, 5, 7 y 8 entre los módulos.</small></article>
+  <article class="exam-include"><h3>${examIco('list')} ¿Qué realizarás ahora?</h3><ul><li><b>${cfg.count} preguntas</b> de selección múltiple</li>${cfg.dev?'<li><b>1 situación integradora final</b></li>':''}</ul><small>Ambas partes recogen evidencia de los aprendizajes esperados de este módulo.</small></article>
   <article class="exam-purpose"><h3>${examIco('target')} ¿Cuál es el propósito?</h3><p>Evaluar tu nivel de logro, aplicando y analizando los conocimientos en un escenario integrador.</p><p>Al finalizar obtendrás evidencia de tus aprendizajes.</p></article>
   <article class="exam-important"><div><h3>Importante</h3><ul><li>La Práctica libre y el Agente pedagógico no forman parte de la calificación.</li><li>Las herramientas de accesibilidad permanecen disponibles para facilitar la lectura.</li><li>Lee la evidencia de cada ítem; los textos alternativos no anticipan la respuesta.</li><li>Las respuestas se registran automáticamente.</li></ul></div>${examPhoto()}</article>
  </div>
  <ol class="exam-path" aria-label="Recorrido de la evaluación">
   <li><span class="exam-path-n">1</span><span class="exam-path-ico">${examIco('list')}</span><b>${cfg.count} ítems</b><small>Selección múltiple</small></li>
-  ${cfg.dev?'<li class="exam-path-arrow" aria-hidden="true">→</li><li><span class="exam-path-n">2</span><span class="exam-path-ico">'+examIco('edit')+'</span><b>1 desarrollo</b><small>Caso integrador</small></li>':''}
+  ${cfg.dev?'<li class="exam-path-arrow" aria-hidden="true">→</li><li><span class="exam-path-n">2</span><span class="exam-path-ico">'+examIco('edit')+'</span><b>1 situación final</b><small>Integra y fundamenta</small></li>':''}
   <li class="exam-path-arrow" aria-hidden="true">→</li>
   <li class="exam-path-goal"><span class="exam-path-n">3</span>${examIco('check')}<b>Evidencia de logro</b><small>${cfg.dev?'Selección y desarrollo':'Selección múltiple'}</small></li>
  </ol>
@@ -43,7 +44,7 @@ function examLanding(){
   <div class="exam-summary-head"><div><h3>Resumen de la evaluación</h3><p>Completa los ${cfg.count} ítems${cfg.dev?' y luego desarrolla la situación final':''}. Puedes revisar tu progreso antes de entregar.</p></div><span class="exam-total-chip">${cfg.minutes} min · incluidos en las 2 HP del curso</span></div>
   <div class="exam-summary-cards">
    <section class="exam-card-q"><span class="exam-count">${cfg.count}</span><div><b>Ítems</b><small>Selección múltiple<br>1 punto cada uno</small></div></section>
-   ${cfg.dev?'<section class="exam-card-d"><span class="exam-count">1</span><div><b>Situación de desarrollo</b><small>Integración final del curso · 25 puntos</small></div></section>':''}
+   ${cfg.dev?'<section class="exam-card-d"><span class="exam-count">1</span><div><b>Situación integradora final</b><small>Integración final del curso · 25 puntos</small></div></section>':''}
    <section class="exam-card-total">${examIco('file')}<div><b>Culminación del módulo</b><small>Al entregar reconoces tu avance y cierras la evaluación con evidencia de logro.</small></div></section>
   </div>
   <div class="exam-summary-cta">${examIco('info')}<p>${cfg.dev?'El desarrollo final integra evidencia, cálculo o modelo, decisión, argumento y verificación.':'Esta evaluación recoge una parte de los 25 ítems planificados para el curso completo.'}</p>${action('start-exam',startLabel+' '+icon('arrow'),'primary exam-start')}</div>

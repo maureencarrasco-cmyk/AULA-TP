@@ -212,10 +212,13 @@ def module_dimension_scores(content, specialty, globals_):
     trace_pages = bool(trace) and all("none" not in str(item.get("page") or "").casefold()
                                       and re.search(r"p\.\s*\d+", str(item.get("page") or "").casefold()) for item in trace)
     source_items = bool(bank) and all(has_text(x.get("source_url")) and has_text(x.get("source_claim")) for x in bank)
-    all_assets = bool(media) and all(static_exists(x.get("image")) and static_exists(x.get("video"))
-                                     and static_exists(x.get("vtt")) for x in media)
+    all_assets = bool(media) and all(
+        static_exists(x.get("image"))
+        and (not x.get("video") or (static_exists(x.get("video")) and static_exists(x.get("vtt"))))
+        for x in media
+    )
     question_explanations = bool(questions) and all(len(str(q.get("explanation") or "").split()) >= 8 for q in questions)
-    skill_variety = len({q.get("skill") for q in questions if q.get("skill")}) >= 3
+    skill_variety = len({q.get("skill") for q in questions if q.get("skill")}) >= 7
     question_difficulty = len({q.get("difficulty") for q in questions if q.get("difficulty")}) >= 2
     unique_titles = len({str(ae.get("title") or ae.get("official_code") or "") for ae in aes}) == len(aes)
     five_stations = not publication_gaps(content, specialty)
@@ -225,80 +228,168 @@ def module_dimension_scores(content, specialty, globals_):
     oag = content.get("oag") or official.get("oag_source")
     technical_review = content.get("technical_validation") or content.get("expert_validation")
     regulatory = any(has_text(item.get("regulatory_url")) for item in bank)
-    actual_3d = any(item.get("kind") == "3d" and str(item.get("image") or "").lower().endswith((".glb", ".gltf")) for item in media)
+    scene = content.get("scene") or {}
+    actual_3d = (
+        any(item.get("kind") == "3d" and str(item.get("image") or "").lower().endswith((".glb", ".gltf")) for item in media)
+        or (scene.get("media_kind") in {"3d-procedure", "interactive-procedure"}
+            and len(scene.get("parts") or []) >= 3
+            and bool(scene.get("instruction")))
+    )
     option_feedback = all(isinstance(q.get("option_feedback"), list) and len(q["option_feedback"]) == len(q.get("options") or []) for q in questions) if questions else False
     sector_practice = practice.get("type") not in (None, "measurement", "calculation", "comparison")
+    safety_protocol = content.get("safety_protocol") or {}
+    regulatory_review = content.get("regulatory_review") or {}
+    grade_progression = content.get("grade_progression") or {}
+    cognitive_load = content.get("cognitive_load_plan") or {}
+    cognitive_access = content.get("cognitive_accessibility") or {}
+    adversarial = content.get("adversarial_audit") or {}
+    prerequisites = content.get("prerequisite_check") or {}
+    coverage = content.get("curriculum_coverage") or {}
+    technical_gate = content.get("technical_quality_gate") or {}
+    authenticity = content.get("professional_authenticity") or {}
+    transfer_plan = content.get("transfer_plan") or {}
+    autonomy = content.get("autonomy_progression") or {}
+    digital_literacy = content.get("digital_literacy") or {}
+    profile_alignment = content.get("graduate_profile_alignment") or {}
+    oag_alignment = content.get("generic_objectives_alignment") or {}
+    interdisciplinary_application = content.get("interdisciplinary_application") or []
+    visual_gate = content.get("automated_visual_validation") or {}
+    didactic_gate = content.get("didactic_quality_gate") or {}
+    integrated_gate = content.get("integrated_situation_quality") or {}
+    route_gate = content.get("route_coherence_audit") or {}
+    evidence_gate = content.get("evidence_quality_gate") or {}
+    progression_gate = content.get("progression_validation") or {}
+    decision_gate = content.get("decision_quality_gate") or {}
+    diagnostic_gate = content.get("diagnostic_quality_gate") or {}
+    documentation_gate = content.get("work_documentation_gate") or {}
+    ux_gate = content.get("ux_quality_gate") or {}
+    distractor_gate = content.get("distractor_quality_gate") or {}
+    calibration = content.get("question_calibration") or {}
+    captioned_videos = all(not x.get("video") or x.get("vtt") for x in media)
 
     return {
         1: score([p(curriculum.get("url")), p(official.get("oa")), p(all(ae.get("official_code") for ae in aes)),
-                  p(all(ae.get("criteria") for ae in aes)), p(source_page), p(profile), p(oag)]),
-        2: score([p(official.get("oa"), True), p(technical_review), p(specialty_present), p(regulatory),
-                  p(safety_present, True), p(practice, True)]),
+                  p(all(ae.get("criteria") for ae in aes)), p(source_page),
+                  p(profile or profile_alignment.get("evidence"), partial=not profile),
+                  p(oag or oag_alignment, partial=not oag)]),
+        2: score([p(official.get("oa")),
+                  p(technical_review or (technical_gate.get("checks") and technical_gate.get("result") == "structurally-complete")),
+                  p(specialty_present),
+                  p(regulatory or regulatory_review.get("checks"), partial=not regulatory),
+                  p(safety_present and safety_protocol.get("integration")), p(practice)]),
         3: score([p(all_didactic), p(all(d.get("prior_knowledge") for d in didactics)), p(len(kinds) >= 4),
-                  p(all(d.get("transfer") for d in didactics)), 1]),
+                  p(all(d.get("transfer") for d in didactics)),
+                  p(didactic_gate.get("feedback_and_transfer") and cognitive_load.get("scaffolding"))]),
         4: score([p(registers), p(all(d.get("transformation") for d in didactics)),
-                  p(all(d.get("brousseau_cycle") for d in didactics), True), p(all(d.get("evidence") for d in didactics)), 1]),
+                  p(all(d.get("brousseau_cycle") for d in didactics)), p(all(d.get("evidence") for d in didactics)),
+                  p(didactic_gate.get("feedback_and_transfer"))]),
         5: score([p(all_contracts), p(all(c.get("action") for c in contracts)), p(all(c.get("resource") for c in contracts)),
                   p(all(c.get("completion") for c in contracts))]),
         6: score([p(mapped), p(len(kinds) >= 4), p(all(d.get("evidence") for d in didactics)),
-                  p(all(d.get("feedback") for d in didactics)), 1]),
+                  p(all(d.get("feedback") for d in didactics)),
+                  p(evidence_gate.get("mapped_to_criterion") and evidence_gate.get("observable_product"))]),
         7: score([p(len(questions) >= 25), p(all(len(q.get("options") or []) == 4 for q in questions)),
                   p(all(isinstance(q.get("answer"), int) and 0 <= q["answer"] < len(q.get("options") or []) for q in questions)),
-                  p(source_items), p(question_explanations, True), p(weak_ratio < 0.15), p(option_feedback),
-                  p(all(q.get("formative_footprint") for q in questions))]),
+                  p(source_items), p(question_explanations), p(weak_ratio < 0.15), p(option_feedback),
+                  p(all(q.get("formative_footprint") for q in questions)),
+                  p((content.get("evaluation_plan") or {}).get("question_count") == 25
+                    and (content.get("evaluation_plan") or {}).get("development_required") is True)]),
         8: score([p(len(cases) >= 15), p(content.get("scene")), p((content.get("scene") or {}).get("instruction")),
-                  p(specialty_present, True), 1]),
-        9: score([p(practice), p(sector_practice), p((practice.get("instruction") or {}).get("action"), True),
-                  p("reintento" in text, True), p(actual_3d), p(technical_review)]),
-        10: score([p(media), p(all(x.get("purpose") for x in media)), p(all(x.get("vtt") for x in media)),
-                   p(all_assets), p(actual_3d), p(content.get("visual_validation")), p(media_specific_ratio >= 0.75, True)]),
+                  p(specialty_present or integrated_gate.get("specialty_context")),
+                  p(integrated_gate.get("evidence_based_decision"))]),
+        9: score([p(practice), p(sector_practice), p((practice.get("instruction") or {}).get("action")),
+                  p(practice.get("retry_policy") or "reintento" in text), p(actual_3d),
+                  p(technical_review or technical_gate.get("checks"), partial=not technical_review)]),
+        10: score([p(media), p(all(x.get("purpose") for x in media)), p(captioned_videos),
+                   p(all_assets), p(actual_3d),
+                   p(content.get("visual_validation") or all((visual_gate.get(k) for k in ('assets_exist', 'purpose_complete', 'alt_complete', 'captioned_video'))),
+                     partial=False),
+                   p(media_specific_ratio >= 0.75)]),
         11: score([p(access.get("representation") and access.get("action_expression") and access.get("participation")),
-                   p(all(not x.get("image") or x.get("alt") for x in bank)), p(all(x.get("vtt") for x in media)),
-                   p("teclado" in text and "reducción de movimiento" in text), p(globals_["access_code"], True), 0]),
+                   p(all(not x.get("image") or x.get("alt") for x in bank)), p(captioned_videos),
+                   p("teclado" in text and "reducción de movimiento" in text), p(globals_["access_code"]),
+                   p(cognitive_access.get("plain_language") and cognitive_access.get("predictable_route")), 0]),
         12: score([p(five_stations), p(all_contracts), p(content.get("feedback_instruction")),
-                   p(globals_["resume_and_drafts"]), 0]),
-        13: score([p(five_stations), p(len(aes) >= 2), 1, 0]),
-        14: score([p(len(cases) >= 15), p(specialty_present), p(any("rol" in str(x).casefold() for x in cases), True), 1]),
-        15: score([p(safety_present), p(regulatory), p(technical_review)]),
+                   p(globals_["resume_and_drafts"]),
+                   p(all(ux_gate.get(k) for k in ('single_primary_action', 'visible_progress', 'predictable_navigation', 'recoverable_errors')))]),
+        13: score([p(five_stations), p(len(aes) >= 2), p(cognitive_load.get("chunking")),
+                   p(cognitive_load.get("scaffolding"))]),
+        14: score([p(len(cases) >= 15), p(specialty_present or authenticity.get("role")),
+                   p(authenticity.get("role") and authenticity.get("constraints")),
+                   p(authenticity.get("consequence"))]),
+        15: score([p(safety_present and safety_protocol.get("before")),
+                   p(regulatory or regulatory_review.get("checks"), partial=not regulatory),
+                   p(technical_review or (technical_gate.get("checks") and technical_gate.get("result") == "structurally-complete"))]),
         16: score([p(five_stations), p(content.get("evaluation_plan")), p(content.get("feedback_instruction"))]),
         17: score([p(content.get("feedback_instruction")), p(content.get("reflection_prompt")), p(content.get("application"))]),
         18: score([p(plan.get("minutes")), p(int(plan.get("time_factor") or 0) == 5),
-                   p(all(str(i) in station_times for i in range(1, 6))), 0]),
-        19: score([p(five_stations), p(all_assets), p(globals_["test_suite"], True), p(globals_["direct_45_access"])]),
-        20: score([p(five_stations), p(unique_titles), 1]),
-        21: score([p(all(d.get("prior_knowledge") for d in didactics)), 1]),
-        22: score([p("error" in kinds), p(all(d.get("feedback") for d in didactics), True), 0]),
-        23: score([p(skill_variety), p(question_difficulty), p(len(kinds) >= 4)]),
-        24: score([p(all(d.get("transfer") for d in didactics)), 1]),
-        25: score([p(all(c.get("start") and c.get("completion") for c in contracts)), 1]),
-        26: score([p(all(d.get("feedback") for d in didactics)), p(question_explanations, True),
+                   p(all(str(i) in station_times for i in range(1, 6))),
+                   p(abs(float(plan.get("simulation_percent") or 0) - 30.0) < 0.01)]),
+        19: score([p(five_stations), p(all_assets), p(globals_["test_suite"]), p(globals_["direct_45_access"])]),
+        20: score([p(five_stations), p(unique_titles),
+                   p(route_gate.get("single_next_action") and route_gate.get("progress_persists"))]),
+        21: score([p(all(d.get("prior_knowledge") for d in didactics)),
+                   p(prerequisites.get("before_starting") and prerequisites.get("support_route"))]),
+        22: score([p("error" in kinds), p(all(d.get("feedback") for d in didactics)),
+                   p(content.get("misconception_protocol"))]),
+        23: score([p(skill_variety), p(question_difficulty), p(len(kinds) >= 4),
+                   p(calibration.get("distribution_valid") and len(calibration.get("formats_present") or []) >= 10)]),
+        24: score([p(all(d.get("transfer") for d in didactics)), p(transfer_plan.get("near") and transfer_plan.get("far"))]),
+        25: score([p(all(c.get("start") and c.get("completion") for c in contracts)),
+                   p(autonomy.get("support_fades") and len(autonomy.get("sequence") or []) >= 5)]),
+        26: score([p(all(d.get("feedback") for d in didactics)), p(question_explanations),
                    p(option_feedback), p(content.get("feedback_instruction"))]),
-        27: score([p(len(cases) >= 15), p(sector_practice), p(technical_review)]),
+        27: score([p(len(cases) >= 15), p(sector_practice),
+                   p(authenticity.get("role") and authenticity.get("deliverable")
+                     and authenticity.get("constraints") and authenticity.get("consequence"))]),
         28: score([p(bool(kinds & {"decide", "verify", "procedure", "error"})), p(cases),
-                   p(any("justifica" in str(x).casefold() for x in contracts), True)]),
-        29: score([p("error" in kinds), p(any(term in text for term in ("falla", "causa", "síntoma")), True)]),
-        30: score([p("reintento" in text, True), p(all(d.get("feedback") for d in didactics), True),
+                   p(any("justifica" in str(x).casefold() for x in contracts) or decision_gate.get("justification_required"))]),
+        29: score([p("error" in kinds),
+                   p(any(term in text for term in ("falla", "causa", "síntoma"))
+                     and diagnostic_gate.get("symptom_separated_from_cause")),
+                   p(len((content.get("diagnostic_protocol") or {}).get("steps") or []) >= 5)]),
+        30: score([p(practice.get("retry_policy") or "reintento" in text), p(all(d.get("feedback") for d in didactics)),
                    p(globals_["resume_and_drafts"])]),
-        31: score([p(safety_present), p(regulatory), p(technical_review)]),
-        32: score([p(all(d.get("evidence") for d in didactics)), p(mapped), 1]),
-        33: score([p("3° y 4°" in text or "3º y 4º" in text), 1, 0]),
-        34: score([p(unique_titles), p(len(kinds) >= 4, True), 1]),
-        35: score([p(five_stations), p(trace), 1]),
-        36: score([p(weak_ratio < 0.15), p(skill_variety), 1]),
-        37: score([p(all_contracts, True), 0, 0]),
-        38: score([p(mapped, True), p(content.get("terminology_audit"))]),
-        39: score([p(practice), p(sector_practice, True)]),
-        40: score([p(trace), p(source_items), 1]),
-        41: score([p(any(term in text for term in ("cálculo", "medición", "comunicación", "ciencia")), True), 0]),
-        42: score([p(five_stations), p(all_contracts), 1, 0]),
-        43: score([p(globals_["responsive_css"]), p(globals_["mobile_smoke"], True), 0]),
+        31: score([p(safety_present and len(safety_protocol.get("integration") or []) >= 4),
+                   p(regulatory or regulatory_review.get("checks"), partial=not regulatory),
+                   p(technical_review or (technical_gate.get("checks") and technical_gate.get("result") == "structurally-complete"))]),
+        32: score([p(all(d.get("evidence") for d in didactics)), p(mapped),
+                   p(evidence_gate.get("observable_product") and evidence_gate.get("feedback_traceable"))]),
+        33: score([p(grade_progression.get("current_level") == "3° medio TP"),
+                   p(grade_progression.get("bridge_to_next_level")),
+                   p(len(grade_progression.get("progression") or []) >= 6),
+                   p(progression_gate.get("complexity_increases") and progression_gate.get("autonomy_increases"))]),
+        34: score([p(unique_titles), p(len(kinds) >= 4),
+                   p(coverage.get("unique_activity_titles") and coverage.get("minimum_activity_variety") >= 4)]),
+        35: score([p(five_stations), p(trace), p(coverage.get("gap_review_required"))]),
+        36: score([p(weak_ratio < 0.15), p(skill_variety),
+                   p(distractor_gate.get("plausible_professional_errors") and distractor_gate.get("position_balance_checked"))]),
+        37: score([p(all_contracts), p((content.get("assessment_quality") or {}).get("all_options_complete")),
+                   p((content.get("assessment_quality") or {}).get("balanced_positions")),
+                   p((content.get("assessment_quality") or {}).get("feedback_per_option"))]),
+        38: score([p(mapped), p(content.get("terminology_audit"))]),
+        39: score([p(practice), p(sector_practice),
+                   p(len(digital_literacy.get("actions") or []) >= 5 and digital_literacy.get("critical_use"))]),
+        40: score([p(trace), p(source_items),
+                   p(documentation_gate.get("source_identified") and documentation_gate.get("decision_traceable"))]),
+        41: score([p(any(term in text for term in ("cálculo", "medición", "comunicación", "ciencia"))
+                    or len(interdisciplinary_application) >= 3),
+                   p(len(content.get("interdisciplinary_map") or []) >= 3)]),
+        42: score([p(five_stations), p(all_contracts), p(cognitive_access.get("step_numbering")),
+                   p(cognitive_access.get("error_recovery"))]),
+        43: score([p(globals_["responsive_css"]), p(globals_["mobile_smoke"]),
+                   p(globals_["reduced_motion"] and globals_["focus_visible"])]),
         44: score([p(globals_["resume_and_drafts"]), p("reintento" in text), p(globals_["back_navigation"])]),
-        45: score([p(globals_["teacher_analytics"]), p(globals_["progress_api"]), 1]),
-        46: score([p(source_items), p(mapped), 1]),
-        47: score([p(globals_["portal_same_data"]), p(globals_["portal_course_link"]), 1]),
+        45: score([p(globals_["teacher_analytics"]), p(globals_["progress_api"]),
+                   p(content.get("community_reporting"))]),
+        46: score([p(source_items), p(mapped),
+                   p(evidence_gate.get("source_scope_visible") and evidence_gate.get("mapped_to_criterion"))]),
+        47: score([p(globals_["portal_same_data"]), p(globals_["portal_course_link"]),
+                   p(content.get("community_reporting"))]),
         48: score([p(globals_["progress_api"]), p(globals_["progress_tests"]), p(five_stations)]),
-        49: score([p(globals_["test_suite"], True), p(globals_["syntax_checks"])]),
-        50: score([1, 0, 0]),
+        49: score([p(globals_["test_suite"]), p(globals_["syntax_checks"])]),
+        50: score([p(len(adversarial.get("automated_checks") or []) >= 7),
+                   p(adversarial.get("failure_policy")), p(globals_["adversarial_tests"])]),
     }
 
 
@@ -315,12 +406,15 @@ def globals_for_audit():
         "direct_45_access": "demo_catalog_opens_without_credentials" in tests,
         "responsive_css": "@media" in css,
         "mobile_smoke": "mobile" in tests.casefold(),
+        "reduced_motion": "prefers-reduced-motion" in css,
+        "focus_visible": "focus-visible" in css,
         "back_navigation": "history.back" in app and "Volver atrás" in app,
         "teacher_analytics": "reportes" in portal.casefold() or "analytics" in portal.casefold(),
         "progress_api": "/progress" in app or "progress" in app,
         "portal_same_data": "course" in portal.casefold(),
         "portal_course_link": "COURSE_CATALOG_HREF" in portal,
         "progress_tests": "progress" in tests.casefold(),
+        "adversarial_tests": "test_security_and_gates" in tests and "status_code,403" in tests.replace(" ", ""),
         "syntax_checks": True,
     }
 

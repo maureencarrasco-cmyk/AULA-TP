@@ -8,12 +8,18 @@ function integrationLevel(i){return ['Inicial','Intermedia','Avanzada'][Math.min
 function integrationCases(){return current.content.cases.map((c,i)=>({c,i})).filter(({i})=>integrationFilter==='all'||integrationLevel(i)===integrationFilter)}
 function integrationUnlocked(i){return isDemoStudent()||i===0||Boolean(current.state.cases[i-1])}
 function photoV(src){return String(src||'').split('?')[0]+'?v=4'}
+const integrationCaseImages=[
+ '/static/themes/cases/01-liceo.png','/static/themes/cases/02-clinica.png','/static/themes/cases/03-supermercado.png',
+ '/static/themes/cases/04-hotel.png','/static/themes/cases/05-servidores.png','/static/themes/cases/06-cocina.png',
+ '/static/themes/cases/07-obra.png','/static/themes/cases/08-farmacia.png','/static/themes/cases/09-oficina.png',
+ '/static/themes/cases/10-bodega.png','/static/themes/cases/11-terminal.png','/static/themes/cases/12-packing.png',
+ '/static/themes/cases/13-mall.png','/static/themes/cases/14-gimnasio.png','/static/themes/cases/15-oficina-tecnica.png'
+];
 function integrationPhoto(i){
  const q=current.content.cases?.[i];
- if(q?.image)return photoV(q.image);
- const keys=['oficio-plano-leyenda','oficio-visor-21c','oficio-tramos','oficio-equipo-ctrl'];
- const pos=Math.max(1,Math.min(4,Number(current.position||1)));
- return typeof oficioPng==='function'?oficioPng(keys[pos-1]):photoV('/static/themes/oficio/'+keys[pos-1]+'.png');
+ const repeated=q?.image&&(current.content.cases||[]).filter(item=>item?.image===q.image).length>1;
+ if(q?.image&&!repeated)return photoV(q.image);
+ return photoV(integrationCaseImages[i%integrationCaseImages.length]);
 }
 function integrationPhotoAlt(i){
  const q=current.content.cases?.[i]||{};

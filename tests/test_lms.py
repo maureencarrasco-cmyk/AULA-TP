@@ -46,6 +46,7 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual(self.activity(kind='ae',ae=1,step=0,text=TEXT).status_code,403)
   content=self.s.get('/api/modules/1').json['content']
   self.assertTrue(all('answer' not in q and 'explanation' not in q for q in content['questions']))
+  self.assertTrue(all('option_feedback' not in q for q in content['questions']))
   self.assertTrue(all('answer' not in q for q in content['cases']))
  def test_student_progress_is_private_and_uses_saved_evidence(self):
   self.assertEqual(self.app.test_client().get('/api/progress').status_code,401)
@@ -73,7 +74,8 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual(fresh.get('/api/modules/1').json['state']['draft']['answers'],{'0':answers['0']})
   self.assertEqual(self.activity(kind='exam',answers={'0':0},development=TEXT).status_code,400)
   self.assertEqual(self.activity(kind='exam',answers=answers,development=TEXT).status_code,200)
-  s=self.s.get('/api/modules/1').json['state'];self.assertEqual(s['exam']['score'],count-1);self.assertEqual(s['exam']['max_score'],count);self.assertFalse(s['exam']['development_required'])
+  s=self.s.get('/api/modules/1').json['state'];self.assertEqual(s['exam']['score'],count-1);self.assertEqual(s['exam']['max_score'],count);self.assertTrue(s['exam']['development_required'])
+  self.assertTrue(all(c.get('option_feedback') for c in s['exam']['corrections']))
   self.assertEqual(self.activity(kind='exam',answers=answers,development=TEXT).status_code,400)
   self.assertEqual(self.activity(kind='close',reflection=TEXT,plan=TEXT).status_code,200)
   self.assertEqual(self.s.get('/api/modules/1').json['completed'],[True]*5)
@@ -274,7 +276,8 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual((DEFAULT_CONTENT.get('scene') or {}).get('media_kind'), '3d-procedure')
   self.assertTrue((DEFAULT_CONTENT.get('aes') or [{}])[0].get('official_code'))
   self.assertEqual(DEFAULT_CONTENT['planning']['time_factor'], 5)
-  self.assertEqual([DEFAULT_CONTENT['evaluation_plan']['question_count']]+[EXTENDED_MODULES[i]['evaluation_plan']['question_count'] for i in (2,3,4)],[5,5,7,8])
+  self.assertEqual([DEFAULT_CONTENT['evaluation_plan']['question_count']]+[EXTENDED_MODULES[i]['evaluation_plan']['question_count'] for i in (2,3,4)],[25,25,25,25])
+  self.assertTrue(all(content['evaluation_plan']['development_required'] for content in [DEFAULT_CONTENT,*[EXTENDED_MODULES[i] for i in (2,3,4)]]))
   from instructional_quality import contract_is_complete
   self.assertTrue(contract_is_complete(DEFAULT_CONTENT['context_instruction']))
   self.assertTrue(all(contract_is_complete(e['instruction']) for a in DEFAULT_CONTENT['aes'] for e in a['experiences']))
@@ -299,6 +302,40 @@ class LMSFlow(unittest.TestCase):
   self.assertNotIn('Escenario 3D:',source)
   self.assertIn('<th>Necesidad</th><th>Indicador</th><th>Evidencia</th><th>Acción posible</th>',source)
   self.assertIn('curriculumSourcePanel()',source)
+ def test_mobile_responsive_contract_for_learning_route_and_assessment(self):
+  root=Path(__file__).resolve().parents[1]
+  css=(root/'static'/'pedagogical-unity.css').read_text(encoding='utf-8')
+  self.assertIn('@media(max-width:620px)',css)
+  self.assertIn('.learning-route{grid-template-columns:1fr}',css)
+  self.assertIn('.exam-course-plan-metrics{display:grid;grid-template-columns:1fr}',css)
+ def test_official_page_index_populates_traceability(self):
+  trace=self.s.get('/api/modules/1').json['content']['traceability']
+  self.assertTrue(trace)
+  self.assertTrue(all('PDF p. ' in row['page'] for row in trace))
+  self.assertTrue(all('None' not in row['page'] for row in trace))
+ def test_question_calibration_distribution_and_variety(self):
+  content=self.s.get('/api/modules/1').json['content']
+  calibration=content['question_calibration']
+  self.assertTrue(calibration['distribution_valid'])
+  self.assertEqual(calibration['difficulty_counts'],{'Fácil':3,'Media':12,'Difícil':10})
+  self.assertEqual(len(calibration['skills_present']),7)
+  self.assertGreaterEqual(len(calibration['formats_present']),10)
+  self.assertTrue(all(q['step_count']==len(q['cognitive_steps']) for q in content['questions']))
+ def test_time_x5_sensitivity_and_capacity_contract(self):
+  audit=self.s.get('/api/modules/1').json['content']['time_audit']
+  self.assertEqual(set(audit['sensitivity']),{'3','4','5','6'})
+  self.assertIn(audit['course_level'],('3° medio','4° medio'))
+  self.assertGreater(audit['activity_count'],0)
+  self.assertGreater(audit['teacher_minutes_per_activity'],0)
+  self.assertLessEqual(audit['occupancy_percent'],100)
+  self.assertGreaterEqual(audit['remaining_hours'],0)
+  self.assertLess(audit['sensitivity']['3']['occupancy_percent'],audit['sensitivity']['5']['occupancy_percent'])
+  self.assertGreater(audit['sensitivity']['6']['occupancy_percent'],audit['sensitivity']['5']['occupancy_percent'])
+  validation=audit['simulated_validation']
+  self.assertEqual(validation['analytical_completion_percent'],100)
+  self.assertTrue(validation['x5_accepted'])
+  self.assertEqual(set(validation['profiles']),{'agil_p25','referencia_p50','apoyo_p75'})
+  self.assertIn('reales',validation['empirical_validation_status'])
  def test_encargos_cover_hours_without_gating_exam(self):
   expected={1:32,2:36,3:38,4:36}
   hours={1:32.2,2:32.2,3:40.8,4:40.8}

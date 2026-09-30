@@ -302,7 +302,7 @@ def create_app(test_config=None):
                     s['exam']={'answers':answers,'development':dev.strip() if development_required else '',
                         'development_required':development_required,'score':score,'max_score':question_count,
                         'review':None,'profile':exam_profile(exam_questions,answers),
-                        'corrections':[{'question':q['question'],'correct':answers[str(i)]==q['answer'],'explanation':q['explanation'],'ae':q.get('ae'),'skill':q.get('skill'),'difficulty':q.get('difficulty'),'image':q.get('image'),'caption':q.get('caption'),'alt':q.get('alt')} for i,q in enumerate(exam_questions)]};s['draft']={}
+                        'corrections':[{'question':q['question'],'correct':answers[str(i)]==q['answer'],'explanation':q['explanation'],'option_feedback':(q.get('option_feedback') or [q['explanation']]*len(q.get('options') or []))[answers[str(i)]],'ae':q.get('ae'),'skill':q.get('skill'),'difficulty':q.get('difficulty'),'image':q.get('image'),'caption':q.get('caption'),'alt':q.get('alt')} for i,q in enumerate(exam_questions)]};s['draft']={}
                     trace(s,'exam',puntaje=score)
             elif kind=='oficio':
                 item_id=str(b.get('id') or '')[:40]
