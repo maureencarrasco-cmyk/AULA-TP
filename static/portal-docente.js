@@ -368,7 +368,7 @@ function pieChart(parts, title) {
 }
 function scatterChart(points) {
   if (points.length < 8) return spotlight('Menos de 8 estudiantes con práctica y logro: no se dibuja la relación.');
-  const title = 'Relación entre práctica y logro de selección';
+  const title = 'Cantidad de prácticas vs logro de selección (%)';
   const w = 680, h = 340, left = 86, right = 22;
   const maxX = Math.max(...points.map(point => point.x), 1);
   const step = Math.max(1, Math.ceil(maxX / 4));
@@ -513,7 +513,7 @@ function aeArticles(list) {
       const lead = ratio == null
         ? 'Sin registros: no se calcula un porcentaje de evidencia.'
         : `${ratio} % de los registros tiene al menos un paso. Es cobertura, no nivel de logro.`;
-      const bar = ratio == null ? '' : bars([{ label: ae.code || `AE ${index + 1}`, value: ratio }], { title: 'Cobertura de evidencia', y: 'Aprendizaje', x: 'Con evidencia (%)' });
+      const bar = ratio == null ? '' : bars([{ label: ae.code || `AE ${index + 1}`, value: ratio }], { title: 'Aprendizaje Esperado vs cobertura de evidencia (%)', y: 'Aprendizaje Esperado (AE)', x: 'Registros con evidencia (%)' });
       const missing = whoText ? `<p class="pd-note">${whoText}</p>` : '';
       return `<article class="pd-card"><h3>${esc(ae.code || `AE ${index + 1}`)}</h3><p class="pd-orient-lead">${lead}</p><p>${esc(ae.title || 'Sin enunciado en el contenido.')}</p>${bar}${missing}${criteria ? `<details><summary>Ver criterios de evaluación</summary><ul>${criteria}</ul></details>` : '<p class="pd-note">Este aprendizaje esperado no trae criterios en el contenido.</p>'}</article>`;
     }).join('') : '<p class="pd-card">Este módulo no trae aprendizajes esperados en el contenido.</p>';
@@ -587,19 +587,19 @@ function panel() {
       ? `Solo el módulo ${groups[0].module.position} tiene registros en esta vista: cumplimiento ${Math.round(groups[0].value)} %${groups[0].rows.length === 1 ? ', en un solo registro' : ''}.`
       : `El módulo ${weakest.module.position} concentra el cumplimiento medio más bajo (${Math.round(weakest.value)} %). Esa cifra dice cuánto recorrido hay registrado; el nivel de logro se revisa en la evaluación de selección, cuando existe.`;
   const chart = groups.length
-    ? spotlight(solo, groups.map(item => [`Módulo ${item.module.position}`, `${Math.round(item.value)} %`]), `<p class="pd-note">El porcentaje es estaciones completadas ÷ 5. No es logro.</p>${bars(groups.map(item => ({ label: `Módulo ${item.module.position}`, value: item.value })), { title: 'Cumplimiento medio por módulo', y: 'Módulo', x: 'Cumplimiento (%)' })}`)
+    ? spotlight(solo, groups.map(item => [`Módulo ${item.module.position}`, `${Math.round(item.value)} %`]), `<p class="pd-note">El porcentaje es estaciones completadas ÷ 5. No es logro.</p>${bars(groups.map(item => ({ label: `Módulo ${item.module.position}`, value: item.value })), { title: 'Módulo vs cumplimiento medio del recorrido (%)', y: 'Módulo formativo', x: 'Cumplimiento medio (%)' })}`)
     : spotlight('No hay registros en esta vista, así que no se muestra un porcentaje. Un 0 % sería un recorrido vacío; aquí faltan registros.');
   const pie = pieChart([
     { label: 'Requiere mayor apoyo', value: counts.support, color: '#f0b0b0' },
     { label: 'Conviene observar', value: counts.watch, color: '#f3d48a' },
     { label: 'Progreso esperado', value: counts.ok, color: '#8fd4b8' },
     { label: 'Sin recorrido', value: counts.none, color: '#d5e0ee' }
-  ], 'Distribución del curso por señal de acompañamiento');
+  ], 'Señal de acompañamiento vs cantidad de estudiantes');
   const logroValues = people.map(group => {
     const scores = group.map(logro).filter(value => value != null);
     return scores.length ? mean(scores) : null;
   }).filter(value => value != null);
-  const trend = lineChart(weeklyPoints(rows.filter(record => Number(record.position) === 1)), 'Evolución del desempeño del módulo 1');
+  const trend = lineChart(weeklyPoints(rows.filter(record => Number(record.position) === 1)), 'Semana vs desempeño medio del módulo 1 (%)');
   const scatterPoints = people.map(group => {
     const scores = group.map(logro).filter(value => value != null);
     if (!scores.length) return null;
@@ -669,7 +669,7 @@ function learning() {
     const ratio = Math.round(item.ratio * 100);
     const who = item.missing;
     const whoText = !who.length ? 'Todos los registros de la vista tienen algún paso en este AE.' : who.length > 6 ? `Sin evidencia en este AE: ${esc(who.slice(0, 6).join(', '))} y ${who.length - 6} más.` : `Sin evidencia en este AE: ${esc(who.join(', '))}.`;
-    return `<article class="pd-card"><h3>${esc(item.ae.code || item.ae.title || 'AE')} · módulo ${item.module.position}</h3><p class="pd-orient-lead">${ratio} % tiene al menos un paso. Es cobertura, no nivel de logro.</p><p>${esc(item.ae.title || 'Sin enunciado en el contenido.')}</p>${bars([{ label: 'Con evidencia', value: ratio }], { title: 'Cobertura de evidencia', y: 'Indicador', x: 'Con evidencia (%)' })}<p class="pd-note">${item.covered} de ${item.total}. ${whoText}</p></article>`;
+    return `<article class="pd-card"><h3>${esc(item.ae.code || item.ae.title || 'AE')} · módulo ${item.module.position}</h3><p class="pd-orient-lead">${ratio} % tiene al menos un paso. Es cobertura, no nivel de logro.</p><p>${esc(item.ae.title || 'Sin enunciado en el contenido.')}</p>${bars([{ label: item.ae.code || 'AE seleccionado', value: ratio }], { title: 'Aprendizaje Esperado vs cobertura de evidencia (%)', y: 'Aprendizaje Esperado (AE)', x: 'Registros con evidencia (%)' })}<p class="pd-note">${item.covered} de ${item.total}. ${whoText}</p></article>`;
   }).join('')}</div>` : '<p class="pd-interp">No hay AE con registros suficientes para comparar evidencia.</p>';
   const first = low[0];
   const lowLead = first
