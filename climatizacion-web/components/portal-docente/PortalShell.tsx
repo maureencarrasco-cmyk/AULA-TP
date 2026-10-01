@@ -40,13 +40,22 @@ export function PortalShell({ section, defaultReportArea = "analisis" }: PortalS
     <div className="min-h-screen bg-[var(--aula-pale,#f7fbff)]">
       <div className="flex min-h-screen">
         <aside className="portal-sidebar hidden min-h-screen w-64 shrink-0 flex-col overflow-y-auto lg:flex" aria-label="Navegación principal">
-          <div className="portal-sidebar-reference relative w-full shrink-0">
+          <div className="portal-sidebar-brand">
             <img
-              src="/images/portal-docente/brand/portal-sidebar-reference.png"
-              alt="Portal Docente Aula TP Chile"
-              className="portal-sidebar-reference-art block h-auto w-full"
+              src="/images/portal-docente/brand/aula-tp-chile-logo.png"
+              alt="Aula TP Chile"
             />
-            <nav className="portal-reference-nav absolute" aria-label="Secciones del Portal Docente">
+            <div>
+              <strong>Portal Docente</strong>
+              <span>Gestión pedagógica</span>
+            </div>
+          </div>
+          <div className="portal-sidebar-context">
+            <span>ESPACIO DE TRABAJO</span>
+            <strong>Enseñanza Media TP</strong>
+            <small>Todas las especialidades</small>
+          </div>
+          <nav className="portal-reference-nav" aria-label="Secciones del Portal Docente">
               {NAV_SECTIONS.map((item) => {
                 const active = item.id === section;
                 return (
@@ -61,7 +70,10 @@ export function PortalShell({ section, defaultReportArea = "analisis" }: PortalS
                   </Link>
                 );
               })}
-            </nav>
+          </nav>
+          <div className="portal-sidebar-footer">
+            <span className="portal-sidebar-status"><i /> Datos locales conectados</span>
+            <Link href="/" className="portal-sidebar-site-link">Volver al sitio</Link>
           </div>
         </aside>
 
@@ -168,9 +180,9 @@ export function PortalShell({ section, defaultReportArea = "analisis" }: PortalS
             </nav>
           ) : null}
 
-          <main className="portal-main flex-1 px-3 py-4 sm:px-4 sm:py-5 lg:px-5 lg:py-5">
+          <main className="portal-main flex-1 px-3 py-4 sm:px-4 sm:py-5 lg:px-6 lg:py-6">
             <LivePortalProvider>
-              <section className="portal-welcome mb-4 overflow-hidden rounded-[1.25rem] border">
+              <section className="portal-welcome mb-5 overflow-hidden rounded-lg border">
                 <div className={`portal-section-banner portal-section-banner--edge-to-edge${sectionArt.trimVerticalWhitespace ? " portal-section-banner--trim-vertical" : ""}${section === "estudiantes" ? " portal-section-banner--students-crop" : ""}`}>
                   <img src={sectionArt.src} alt={sectionArt.alt} className={`block h-auto w-full ${section === "estudiantes" ? "object-cover" : "object-contain"}`} />
                   {section === "resumen" ? (

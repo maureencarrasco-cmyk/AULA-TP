@@ -1,0 +1,1645 @@
+{
+  "generated_at": "2026-10-01T11:40:05.778912+00:00",
+  "seed": 1202026,
+  "students": 120,
+  "specialties": {
+    "Electricidad": {
+      "students": 60,
+      "average": 72.7,
+      "minimum": 38,
+      "maximum": 98,
+      "modules": [
+        {
+          "module": 1,
+          "average": 67.6,
+          "minimum": 38,
+          "maximum": 91
+        },
+        {
+          "module": 2,
+          "average": 71.3,
+          "minimum": 38,
+          "maximum": 92
+        },
+        {
+          "module": 3,
+          "average": 74.9,
+          "minimum": 46,
+          "maximum": 96
+        },
+        {
+          "module": 4,
+          "average": 77.0,
+          "minimum": 52,
+          "maximum": 98
+        }
+      ]
+    },
+    "Refrigeración y Climatización": {
+      "students": 60,
+      "average": 75.4,
+      "minimum": 49,
+      "maximum": 98,
+      "modules": [
+        {
+          "module": 1,
+          "average": 72.5,
+          "minimum": 49,
+          "maximum": 94
+        },
+        {
+          "module": 2,
+          "average": 73.9,
+          "minimum": 51,
+          "maximum": 95
+        },
+        {
+          "module": 3,
+          "average": 76.3,
+          "minimum": 55,
+          "maximum": 98
+        },
+        {
+          "module": 4,
+          "average": 78.8,
+          "minimum": 58,
+          "maximum": 98
+        }
+      ]
+    }
+  },
+  "database_checks": [
+    {
+      "title": "Refrigeración y Climatización",
+      "students": 60,
+      "completed_records": 240
+    },
+    {
+      "title": "Electricidad",
+      "students": 60,
+      "completed_records": 240
+    }
+  ],
+  "cohort": [
+    {
+      "student_id": 1,
+      "name": "Estudiante Demo",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 72.2,
+      "scores": [
+        68,
+        69,
+        72,
+        80
+      ]
+    },
+    {
+      "student_id": 3,
+      "name": "Martina Soto",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 70.0,
+      "scores": [
+        57,
+        75,
+        69,
+        79
+      ]
+    },
+    {
+      "student_id": 4,
+      "name": "Valentina Morales",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 60.2,
+      "scores": [
+        63,
+        59,
+        57,
+        62
+      ]
+    },
+    {
+      "student_id": 5,
+      "name": "Antonia Díaz",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 59.8,
+      "scores": [
+        58,
+        57,
+        62,
+        62
+      ]
+    },
+    {
+      "student_id": 6,
+      "name": "Isidora Martínez",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 82.5,
+      "scores": [
+        73,
+        89,
+        85,
+        83
+      ]
+    },
+    {
+      "student_id": 7,
+      "name": "Javiera Muñoz",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 77.0,
+      "scores": [
+        82,
+        66,
+        81,
+        79
+      ]
+    },
+    {
+      "student_id": 8,
+      "name": "Benjamín Contreras",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 71.2,
+      "scores": [
+        65,
+        73,
+        73,
+        74
+      ]
+    },
+    {
+      "student_id": 9,
+      "name": "Vicente Araya",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 81.5,
+      "scores": [
+        82,
+        78,
+        89,
+        77
+      ]
+    },
+    {
+      "student_id": 10,
+      "name": "Matías Pérez",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 85.0,
+      "scores": [
+        75,
+        81,
+        95,
+        89
+      ]
+    },
+    {
+      "student_id": 11,
+      "name": "Tomás Sepúlveda",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 78.0,
+      "scores": [
+        73,
+        72,
+        84,
+        83
+      ]
+    },
+    {
+      "student_id": 12,
+      "name": "Diego Rojas",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 71.8,
+      "scores": [
+        73,
+        67,
+        75,
+        72
+      ]
+    },
+    {
+      "student_id": 13,
+      "name": "Sebastián Silva",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 45.2,
+      "scores": [
+        45,
+        38,
+        46,
+        52
+      ]
+    },
+    {
+      "student_id": 14,
+      "name": "Camila González",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 69.2,
+      "scores": [
+        55,
+        69,
+        77,
+        76
+      ]
+    },
+    {
+      "student_id": 15,
+      "name": "Martina Soto",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 74.2,
+      "scores": [
+        71,
+        73,
+        69,
+        84
+      ]
+    },
+    {
+      "student_id": 16,
+      "name": "Valentina Morales",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 68.5,
+      "scores": [
+        61,
+        70,
+        77,
+        66
+      ]
+    },
+    {
+      "student_id": 17,
+      "name": "Antonia Díaz",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 89.0,
+      "scores": [
+        91,
+        84,
+        89,
+        92
+      ]
+    },
+    {
+      "student_id": 18,
+      "name": "Isidora Martínez",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 90.2,
+      "scores": [
+        82,
+        90,
+        91,
+        98
+      ]
+    },
+    {
+      "student_id": 19,
+      "name": "Javiera Muñoz",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 50.5,
+      "scores": [
+        47,
+        48,
+        53,
+        54
+      ]
+    },
+    {
+      "student_id": 20,
+      "name": "Benjamín Contreras",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 79.0,
+      "scores": [
+        74,
+        78,
+        84,
+        80
+      ]
+    },
+    {
+      "student_id": 21,
+      "name": "Vicente Araya",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 85.0,
+      "scores": [
+        83,
+        75,
+        85,
+        97
+      ]
+    },
+    {
+      "student_id": 22,
+      "name": "Matías Pérez",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 76.5,
+      "scores": [
+        72,
+        76,
+        75,
+        83
+      ]
+    },
+    {
+      "student_id": 23,
+      "name": "Tomás Sepúlveda",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 48.2,
+      "scores": [
+        38,
+        50,
+        50,
+        55
+      ]
+    },
+    {
+      "student_id": 24,
+      "name": "Diego Rojas",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 63.5,
+      "scores": [
+        59,
+        62,
+        61,
+        72
+      ]
+    },
+    {
+      "student_id": 25,
+      "name": "Sebastián Silva",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 71.2,
+      "scores": [
+        70,
+        69,
+        75,
+        71
+      ]
+    },
+    {
+      "student_id": 26,
+      "name": "Camila González",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 65.8,
+      "scores": [
+        62,
+        66,
+        65,
+        70
+      ]
+    },
+    {
+      "student_id": 27,
+      "name": "Martina Soto",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 71.8,
+      "scores": [
+        62,
+        75,
+        70,
+        80
+      ]
+    },
+    {
+      "student_id": 28,
+      "name": "Valentina Morales",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 77.2,
+      "scores": [
+        70,
+        75,
+        79,
+        85
+      ]
+    },
+    {
+      "student_id": 29,
+      "name": "Antonia Díaz",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 86.2,
+      "scores": [
+        78,
+        92,
+        96,
+        79
+      ]
+    },
+    {
+      "student_id": 30,
+      "name": "Isidora Martínez",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 66.5,
+      "scores": [
+        54,
+        74,
+        68,
+        70
+      ]
+    },
+    {
+      "student_id": 31,
+      "name": "Javiera Muñoz",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 90.5,
+      "scores": [
+        84,
+        89,
+        91,
+        98
+      ]
+    },
+    {
+      "student_id": 32,
+      "name": "Benjamín Contreras",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 82.5,
+      "scores": [
+        79,
+        83,
+        86,
+        82
+      ]
+    },
+    {
+      "student_id": 33,
+      "name": "Vicente Araya",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 70.2,
+      "scores": [
+        65,
+        72,
+        75,
+        69
+      ]
+    },
+    {
+      "student_id": 34,
+      "name": "Matías Pérez",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 67.8,
+      "scores": [
+        66,
+        66,
+        71,
+        68
+      ]
+    },
+    {
+      "student_id": 35,
+      "name": "Tomás Sepúlveda",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 74.8,
+      "scores": [
+        73,
+        72,
+        75,
+        79
+      ]
+    },
+    {
+      "student_id": 36,
+      "name": "Diego Rojas",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 66.8,
+      "scores": [
+        65,
+        58,
+        64,
+        80
+      ]
+    },
+    {
+      "student_id": 37,
+      "name": "Sebastián Silva",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 79.5,
+      "scores": [
+        75,
+        75,
+        84,
+        84
+      ]
+    },
+    {
+      "student_id": 38,
+      "name": "Camila González",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 60.2,
+      "scores": [
+        54,
+        53,
+        69,
+        65
+      ]
+    },
+    {
+      "student_id": 39,
+      "name": "Martina Soto",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 79.5,
+      "scores": [
+        75,
+        73,
+        90,
+        80
+      ]
+    },
+    {
+      "student_id": 40,
+      "name": "Valentina Morales",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 59.0,
+      "scores": [
+        58,
+        59,
+        57,
+        62
+      ]
+    },
+    {
+      "student_id": 41,
+      "name": "Antonia Díaz",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 60.5,
+      "scores": [
+        52,
+        55,
+        65,
+        70
+      ]
+    },
+    {
+      "student_id": 42,
+      "name": "Isidora Martínez",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 77.8,
+      "scores": [
+        71,
+        73,
+        81,
+        86
+      ]
+    },
+    {
+      "student_id": 43,
+      "name": "Javiera Muñoz",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 76.2,
+      "scores": [
+        64,
+        81,
+        82,
+        78
+      ]
+    },
+    {
+      "student_id": 44,
+      "name": "Benjamín Contreras",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 86.0,
+      "scores": [
+        79,
+        79,
+        95,
+        91
+      ]
+    },
+    {
+      "student_id": 45,
+      "name": "Vicente Araya",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 78.2,
+      "scores": [
+        75,
+        75,
+        83,
+        80
+      ]
+    },
+    {
+      "student_id": 46,
+      "name": "Matías Pérez",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 72.8,
+      "scores": [
+        66,
+        76,
+        72,
+        77
+      ]
+    },
+    {
+      "student_id": 47,
+      "name": "Tomás Sepúlveda",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 69.0,
+      "scores": [
+        64,
+        70,
+        70,
+        72
+      ]
+    },
+    {
+      "student_id": 48,
+      "name": "Diego Rojas",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 79.8,
+      "scores": [
+        68,
+        79,
+        85,
+        87
+      ]
+    },
+    {
+      "student_id": 49,
+      "name": "Sebastián Silva",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 83.8,
+      "scores": [
+        83,
+        78,
+        85,
+        89
+      ]
+    },
+    {
+      "student_id": 50,
+      "name": "Camila González",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 80.5,
+      "scores": [
+        80,
+        81,
+        72,
+        89
+      ]
+    },
+    {
+      "student_id": 51,
+      "name": "Martina Soto",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 72.5,
+      "scores": [
+        60,
+        83,
+        72,
+        75
+      ]
+    },
+    {
+      "student_id": 52,
+      "name": "Valentina Morales",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 70.8,
+      "scores": [
+        63,
+        66,
+        79,
+        75
+      ]
+    },
+    {
+      "student_id": 53,
+      "name": "Antonia Díaz",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 73.2,
+      "scores": [
+        67,
+        74,
+        78,
+        74
+      ]
+    },
+    {
+      "student_id": 54,
+      "name": "Isidora Martínez",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 69.2,
+      "scores": [
+        61,
+        60,
+        73,
+        83
+      ]
+    },
+    {
+      "student_id": 55,
+      "name": "Javiera Muñoz",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 64.8,
+      "scores": [
+        63,
+        70,
+        65,
+        61
+      ]
+    },
+    {
+      "student_id": 56,
+      "name": "Benjamín Contreras",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 74.5,
+      "scores": [
+        64,
+        78,
+        72,
+        84
+      ]
+    },
+    {
+      "student_id": 57,
+      "name": "Vicente Araya",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 75.5,
+      "scores": [
+        73,
+        76,
+        69,
+        84
+      ]
+    },
+    {
+      "student_id": 58,
+      "name": "Matías Pérez",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 56.2,
+      "scores": [
+        60,
+        53,
+        53,
+        59
+      ]
+    },
+    {
+      "student_id": 59,
+      "name": "Tomás Sepúlveda",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 79.0,
+      "scores": [
+        71,
+        77,
+        84,
+        84
+      ]
+    },
+    {
+      "student_id": 60,
+      "name": "Diego Rojas",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 62.0,
+      "scores": [
+        63,
+        65,
+        62,
+        58
+      ]
+    },
+    {
+      "student_id": 61,
+      "name": "Sebastián Silva",
+      "specialty": "Electricidad",
+      "completed_modules": 4,
+      "average": 80.8,
+      "scores": [
+        72,
+        78,
+        83,
+        90
+      ]
+    },
+    {
+      "student_id": 62,
+      "name": "Camila González",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 77.5,
+      "scores": [
+        75,
+        76,
+        74,
+        85
+      ]
+    },
+    {
+      "student_id": 63,
+      "name": "Martina Soto",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 82.0,
+      "scores": [
+        76,
+        80,
+        88,
+        84
+      ]
+    },
+    {
+      "student_id": 64,
+      "name": "Valentina Morales",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 87.8,
+      "scores": [
+        86,
+        85,
+        97,
+        83
+      ]
+    },
+    {
+      "student_id": 65,
+      "name": "Antonia Díaz",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 59.0,
+      "scores": [
+        62,
+        51,
+        63,
+        60
+      ]
+    },
+    {
+      "student_id": 66,
+      "name": "Isidora Martínez",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 81.0,
+      "scores": [
+        75,
+        81,
+        87,
+        81
+      ]
+    },
+    {
+      "student_id": 67,
+      "name": "Javiera Muñoz",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 81.5,
+      "scores": [
+        73,
+        79,
+        82,
+        92
+      ]
+    },
+    {
+      "student_id": 68,
+      "name": "Benjamín Contreras",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 72.2,
+      "scores": [
+        65,
+        71,
+        71,
+        82
+      ]
+    },
+    {
+      "student_id": 69,
+      "name": "Vicente Araya",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 59.2,
+      "scores": [
+        58,
+        58,
+        62,
+        59
+      ]
+    },
+    {
+      "student_id": 70,
+      "name": "Matías Pérez",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 72.0,
+      "scores": [
+        72,
+        63,
+        77,
+        76
+      ]
+    },
+    {
+      "student_id": 71,
+      "name": "Tomás Sepúlveda",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 89.5,
+      "scores": [
+        80,
+        84,
+        98,
+        96
+      ]
+    },
+    {
+      "student_id": 72,
+      "name": "Diego Rojas",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 74.8,
+      "scores": [
+        75,
+        65,
+        77,
+        82
+      ]
+    },
+    {
+      "student_id": 73,
+      "name": "Sebastián Silva",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 59.5,
+      "scores": [
+        63,
+        56,
+        60,
+        59
+      ]
+    },
+    {
+      "student_id": 74,
+      "name": "Camila González",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 81.0,
+      "scores": [
+        76,
+        84,
+        73,
+        91
+      ]
+    },
+    {
+      "student_id": 75,
+      "name": "Martina Soto",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 68.0,
+      "scores": [
+        61,
+        69,
+        66,
+        76
+      ]
+    },
+    {
+      "student_id": 76,
+      "name": "Valentina Morales",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 89.5,
+      "scores": [
+        84,
+        89,
+        87,
+        98
+      ]
+    },
+    {
+      "student_id": 77,
+      "name": "Antonia Díaz",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 57.8,
+      "scores": [
+        51,
+        61,
+        57,
+        62
+      ]
+    },
+    {
+      "student_id": 78,
+      "name": "Isidora Martínez",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 78.5,
+      "scores": [
+        67,
+        82,
+        81,
+        84
+      ]
+    },
+    {
+      "student_id": 79,
+      "name": "Javiera Muñoz",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 76.2,
+      "scores": [
+        67,
+        79,
+        81,
+        78
+      ]
+    },
+    {
+      "student_id": 80,
+      "name": "Benjamín Contreras",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 86.8,
+      "scores": [
+        81,
+        87,
+        81,
+        98
+      ]
+    },
+    {
+      "student_id": 81,
+      "name": "Vicente Araya",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 75.0,
+      "scores": [
+        75,
+        77,
+        78,
+        70
+      ]
+    },
+    {
+      "student_id": 82,
+      "name": "Matías Pérez",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 77.2,
+      "scores": [
+        74,
+        65,
+        81,
+        89
+      ]
+    },
+    {
+      "student_id": 83,
+      "name": "Tomás Sepúlveda",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 88.5,
+      "scores": [
+        82,
+        80,
+        94,
+        98
+      ]
+    },
+    {
+      "student_id": 84,
+      "name": "Diego Rojas",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 72.2,
+      "scores": [
+        75,
+        70,
+        67,
+        77
+      ]
+    },
+    {
+      "student_id": 85,
+      "name": "Sebastián Silva",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 63.5,
+      "scores": [
+        64,
+        60,
+        59,
+        71
+      ]
+    },
+    {
+      "student_id": 86,
+      "name": "Camila González",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 76.8,
+      "scores": [
+        78,
+        70,
+        80,
+        79
+      ]
+    },
+    {
+      "student_id": 87,
+      "name": "Martina Soto",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 68.0,
+      "scores": [
+        68,
+        66,
+        70,
+        68
+      ]
+    },
+    {
+      "student_id": 88,
+      "name": "Valentina Morales",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 93.0,
+      "scores": [
+        88,
+        95,
+        91,
+        98
+      ]
+    },
+    {
+      "student_id": 89,
+      "name": "Antonia Díaz",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 93.0,
+      "scores": [
+        94,
+        95,
+        88,
+        95
+      ]
+    },
+    {
+      "student_id": 90,
+      "name": "Isidora Martínez",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 72.8,
+      "scores": [
+        73,
+        70,
+        76,
+        72
+      ]
+    },
+    {
+      "student_id": 91,
+      "name": "Javiera Muñoz",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 77.0,
+      "scores": [
+        82,
+        74,
+        78,
+        74
+      ]
+    },
+    {
+      "student_id": 92,
+      "name": "Benjamín Contreras",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 73.8,
+      "scores": [
+        76,
+        68,
+        77,
+        74
+      ]
+    },
+    {
+      "student_id": 93,
+      "name": "Vicente Araya",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 84.5,
+      "scores": [
+        83,
+        87,
+        77,
+        91
+      ]
+    },
+    {
+      "student_id": 94,
+      "name": "Matías Pérez",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 89.8,
+      "scores": [
+        84,
+        89,
+        88,
+        98
+      ]
+    },
+    {
+      "student_id": 95,
+      "name": "Tomás Sepúlveda",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 90.8,
+      "scores": [
+        91,
+        88,
+        90,
+        94
+      ]
+    },
+    {
+      "student_id": 96,
+      "name": "Diego Rojas",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 64.0,
+      "scores": [
+        49,
+        62,
+        68,
+        77
+      ]
+    },
+    {
+      "student_id": 97,
+      "name": "Sebastián Silva",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 78.2,
+      "scores": [
+        77,
+        76,
+        85,
+        75
+      ]
+    },
+    {
+      "student_id": 98,
+      "name": "Camila González",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 67.2,
+      "scores": [
+        70,
+        60,
+        68,
+        71
+      ]
+    },
+    {
+      "student_id": 99,
+      "name": "Martina Soto",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 83.2,
+      "scores": [
+        79,
+        79,
+        87,
+        88
+      ]
+    },
+    {
+      "student_id": 100,
+      "name": "Valentina Morales",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 86.2,
+      "scores": [
+        82,
+        88,
+        87,
+        88
+      ]
+    },
+    {
+      "student_id": 101,
+      "name": "Antonia Díaz",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 75.0,
+      "scores": [
+        67,
+        76,
+        75,
+        82
+      ]
+    },
+    {
+      "student_id": 102,
+      "name": "Isidora Martínez",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 94.2,
+      "scores": [
+        94,
+        92,
+        93,
+        98
+      ]
+    },
+    {
+      "student_id": 103,
+      "name": "Javiera Muñoz",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 88.5,
+      "scores": [
+        87,
+        93,
+        92,
+        82
+      ]
+    },
+    {
+      "student_id": 104,
+      "name": "Benjamín Contreras",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 62.5,
+      "scores": [
+        60,
+        66,
+        55,
+        69
+      ]
+    },
+    {
+      "student_id": 105,
+      "name": "Vicente Araya",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 80.5,
+      "scores": [
+        80,
+        76,
+        82,
+        84
+      ]
+    },
+    {
+      "student_id": 106,
+      "name": "Matías Pérez",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 68.2,
+      "scores": [
+        60,
+        72,
+        63,
+        78
+      ]
+    },
+    {
+      "student_id": 107,
+      "name": "Tomás Sepúlveda",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 76.5,
+      "scores": [
+        71,
+        80,
+        70,
+        85
+      ]
+    },
+    {
+      "student_id": 108,
+      "name": "Diego Rojas",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 60.2,
+      "scores": [
+        57,
+        65,
+        59,
+        60
+      ]
+    },
+    {
+      "student_id": 109,
+      "name": "Sebastián Silva",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 79.2,
+      "scores": [
+        80,
+        78,
+        83,
+        76
+      ]
+    },
+    {
+      "student_id": 110,
+      "name": "Camila González",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 77.0,
+      "scores": [
+        65,
+        85,
+        75,
+        83
+      ]
+    },
+    {
+      "student_id": 111,
+      "name": "Martina Soto",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 70.8,
+      "scores": [
+        64,
+        61,
+        79,
+        79
+      ]
+    },
+    {
+      "student_id": 112,
+      "name": "Valentina Morales",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 64.8,
+      "scores": [
+        64,
+        68,
+        69,
+        58
+      ]
+    },
+    {
+      "student_id": 113,
+      "name": "Antonia Díaz",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 79.2,
+      "scores": [
+        75,
+        80,
+        79,
+        83
+      ]
+    },
+    {
+      "student_id": 114,
+      "name": "Isidora Martínez",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 62.8,
+      "scores": [
+        59,
+        64,
+        66,
+        62
+      ]
+    },
+    {
+      "student_id": 115,
+      "name": "Javiera Muñoz",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 76.2,
+      "scores": [
+        76,
+        78,
+        78,
+        73
+      ]
+    },
+    {
+      "student_id": 116,
+      "name": "Benjamín Contreras",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 63.0,
+      "scores": [
+        64,
+        55,
+        68,
+        65
+      ]
+    },
+    {
+      "student_id": 117,
+      "name": "Vicente Araya",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 70.8,
+      "scores": [
+        76,
+        66,
+        75,
+        66
+      ]
+    },
+    {
+      "student_id": 118,
+      "name": "Matías Pérez",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 65.8,
+      "scores": [
+        59,
+        71,
+        73,
+        60
+      ]
+    },
+    {
+      "student_id": 119,
+      "name": "Tomás Sepúlveda",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 59.2,
+      "scores": [
+        58,
+        55,
+        57,
+        67
+      ]
+    },
+    {
+      "student_id": 120,
+      "name": "Diego Rojas",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 66.0,
+      "scores": [
+        70,
+        58,
+        66,
+        70
+      ]
+    },
+    {
+      "student_id": 121,
+      "name": "Sebastián Silva",
+      "specialty": "Refrigeración y Climatización",
+      "completed_modules": 4,
+      "average": 74.0,
+      "scores": [
+        73,
+        74,
+        72,
+        77
+      ]
+    }
+  ]
+}

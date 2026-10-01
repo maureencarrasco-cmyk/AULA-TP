@@ -142,6 +142,7 @@ def create_app(test_config=None):
     @app.get('/api/courses')
     @require()
     def courses():
+        compact=request.args.get('compact')=='1'
         with db() as con:
             u=user();rows=con.execute('SELECT * FROM courses ORDER BY id').fetchall() if u['role']=='teacher' or is_demo_student(u) else con.execute('SELECT c.* FROM courses c JOIN enrollments e ON e.course_id=c.id WHERE e.user_id=? ORDER BY c.id',(u['id'],)).fetchall()
             course_ids=[c['id'] for c in rows]
@@ -185,6 +186,11 @@ def create_app(test_config=None):
                         mod.pop('encargos_count',None);mod.pop('encargos_hours',None);pack=encargos_for(m['position'])
                         if pack.get('count'):mod['encargos_count']=pack['count'];mod['encargos_hours']=pack['hours']
                     item['modules'].append(mod)
+                if compact:
+                    keep={'id','title','position','published','completed','percent','evaluation_scores','official_hp','encargos_count','encargos_hours'}
+                    item['modules']=[{k:v for k,v in mod.items() if k in keep} for mod in item['modules']]
+                    result.append(item)
+                    continue
                 plan=course_planning(item)
                 if plan:
                     item['planning']=plan
@@ -220,16 +226,26 @@ def create_app(test_config=None):
     @app.get('/api/progress')
     @require('student')
     def student_progress():
+        requested_course=request.args.get('course_id',type=int)
         with db() as con:
-            rows=con.execute('''SELECT c.id AS course_id,c.title AS course_title,c.specialty,c.level,
+            query='''SELECT c.id AS course_id,c.title AS course_title,c.specialty,c.level,
                 m.id,m.title,m.position,m.published,m.content,p.state,p.updated
                 FROM enrollments e JOIN courses c ON c.id=e.course_id
                 JOIN modules m ON m.course_id=c.id
                 LEFT JOIN progress p ON p.module_id=m.id AND p.user_id=e.user_id
-                WHERE e.user_id=? AND m.published=1 ORDER BY c.id,m.position,m.id''',(session['uid'],)).fetchall()
+                WHERE e.user_id=? AND m.published=1'''
+            params=[session['uid']]
+            if requested_course is not None:
+                query+=' AND c.id=?'
+                params.append(requested_course)
+            query+=' ORDER BY c.id,m.position,m.id'
+            rows=con.execute(query,params).fetchall()
             result=[]
             for row in rows:
-                c=load_content(row['content'],row['position'])
+                # Progress needs curricular labels and saved state, not the fully
+                # enriched simulator payload. Avoid rebuilding hundreds of modules
+                # before the report can be displayed.
+                c=json.loads(row['content'] or '{}')
                 s=json.loads(row['state']) if row['state'] else empty()
                 result.append(dict(course_id=row['course_id'],course_title=row['course_title'],specialty=row['specialty'],
                     level=row['level'],id=row['id'],title=row['title'],position=row['position'],
