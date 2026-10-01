@@ -206,6 +206,7 @@ export function BarChart({
   valueSuffix,
 }: BarChartProps) {
   const max = Math.max(...items.map((i) => i.value), 1);
+  const horizontalAxis = xAxisTitle ?? "Categoría";
 
   return (
     <div>
@@ -219,9 +220,17 @@ export function BarChart({
         </>
       ) : (
         <p className="sr-only">
-          {title}. {yAxisTitle}
+          {title}.
         </p>
       )}
+      <div className="mt-2 flex flex-wrap gap-2 text-[11px] font-semibold text-[var(--aula-text-secondary,#43628f)]">
+        <span className="rounded-md bg-[#e8f4ff] px-2.5 py-1">
+          Eje horizontal: <strong className="text-[var(--aula-text,#082b80)]">{horizontalAxis}</strong>
+        </span>
+        <span className="rounded-md bg-[#eef9f5] px-2.5 py-1">
+          Eje vertical: <strong className="text-[var(--aula-text,#082b80)]">{yAxisTitle}</strong>
+        </span>
+      </div>
       <div
         className="portal-bar-chart mt-3 space-y-2.5 rounded-[1.25rem] border border-[var(--aula-line,#d9e5f6)] bg-[linear-gradient(135deg,rgba(255,255,255,.82),rgba(238,246,255,.95))] p-3 sm:p-4"
         role="img"
@@ -287,8 +296,8 @@ export function LineChart({
 }: LineChartProps) {
   const gradientId = useId();
   const w = 560;
-  const h = 220;
-  const pad = { t: 28, r: 20, b: 40, l: 44 };
+  const h = 250;
+  const pad = { t: 28, r: 20, b: 62, l: 64 };
   const innerW = w - pad.l - pad.r;
   const innerH = h - pad.t - pad.b;
   const safePoints = points.map((point) => ({
@@ -338,6 +347,14 @@ export function LineChart({
           {title}. Eje vertical: {yAxisTitle}. Eje horizontal: {xAxisTitle}.
         </p>
       )}
+      <div className="mt-2 flex flex-wrap gap-2 text-[11px] font-semibold text-[var(--aula-text-secondary,#43628f)]">
+        <span className="rounded-md bg-[#e8f4ff] px-2.5 py-1">
+          Eje horizontal: <strong className="text-[var(--aula-text,#082b80)]">{xAxisTitle}</strong>
+        </span>
+        <span className="rounded-md bg-[#eef9f5] px-2.5 py-1">
+          Eje vertical: <strong className="text-[var(--aula-text,#082b80)]">{yAxisTitle}</strong>
+        </span>
+      </div>
       <div className="mt-3 overflow-hidden rounded-xl border border-[var(--aula-line,#d9e5f6)] bg-[var(--aula-surface-soft,#f5f9fe)] p-2 sm:p-3">
         <svg
           viewBox={`0 0 ${w} ${h}`}
@@ -420,6 +437,27 @@ export function LineChart({
               </text>
             </g>
           ))}
+          <text
+            x={pad.l + innerW / 2}
+            y={h - 5}
+            textAnchor="middle"
+            fill={CHART_HEX.ink}
+            fontSize="11"
+            fontWeight="700"
+          >
+            {xAxisTitle}
+          </text>
+          <text
+            x={14}
+            y={pad.t + innerH / 2}
+            textAnchor="middle"
+            fill={CHART_HEX.ink}
+            fontSize="11"
+            fontWeight="700"
+            transform={`rotate(-90 14 ${pad.t + innerH / 2})`}
+          >
+            {yAxisTitle}
+          </text>
         </svg>
       </div>
       <div
