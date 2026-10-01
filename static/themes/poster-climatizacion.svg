@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Poster Climatización">
+  <rect width="1280" height="720" fill="#10243f"/>
+  <rect x="80" y="90" width="1120" height="540" rx="28" fill="#1a3d66"/>
+  <rect x="190" y="250" width="180" height="180" rx="16" fill="#7eb6ff"/>
+  <path d="M220 300h120M220 340h120M220 380h80" stroke="#10243f" stroke-width="12" stroke-linecap="round"/>
+  <text x="430" y="320" fill="#fff" font-family="Segoe UI, sans-serif" font-size="48" font-weight="700">Refrigeración y climatización</text>
+  <text x="430" y="390" fill="#d7e6ff" font-family="Segoe UI, sans-serif" font-size="28">Planos, medición, redes y equipos. Sin refrigerante real.</text>
+</svg>
