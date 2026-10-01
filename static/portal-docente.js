@@ -612,14 +612,59 @@ function panel() {
     if (!scores.length) return null;
     return { name: group[0].name, x: group.reduce((sum, record) => sum + practica(record), 0), y: mean(scores) };
   }).filter(Boolean);
-  return frame([
-    quad(1, 'cielo', 'Orientación', 'De qué curso y de qué periodo se habla', orient('El cumplimiento cuenta el recorrido hecho. No es el logro de la prueba ni el perfil de egreso.')),
-    quad(2, 'rosa', 'Atención', 'A quién acompañar ahora', spotlight(names.length ? `${names.length} estudiantes requieren mayor apoyo.` : 'En esta vista nadie tiene la señal de mayor apoyo.', attentionFacts, `${nameLine}<p><a href="${href('/portal-docente/estudiantes')}">Ver estudiantes</a> · <a href="${href('/portal-docente/cumplimiento')}">Ver cumplimiento</a>${ae ? ` · <a href="${href('/portal-docente/oa-ae')}">Revisar AE</a>` : ''}</p>`), { lead: true }),
-    quad(3, 'menta', 'Estado', 'Cómo se distribuye el curso', spotlight(`De ${people.length} estudiantes, ${counts.support} requieren mayor apoyo.`, attentionFacts.slice(0, 4), `<p class="pd-note">Una persona, una señal. Si tiene varios módulos, cuenta la más exigente.</p>${pie}`)),
-    quad(4, 'ambar', 'Recorrido', 'Cuánto del proceso está registrado', chart),
-    quad(5, 'lila', 'Evolución', 'Cómo cambia el módulo 1', trend, { wide: true }),
-    quad(6, 'celeste', 'Decisión', 'Práctica y logro, leídos por separado', `<h3>Logro de la evaluación de selección</h3><p class="pd-note">Un valor por estudiante que rindió la prueba. No es perfil de egreso.</p>${central(logroValues, 'el logro de selección')}<h3>Relación con la frecuencia de práctica</h3>${scatterChart(scatterPoints)}<div class="pd-orient-extra"><p>${practiceRead(rows, entries)}</p><p><a href="${href('/portal-docente/estudiantes')}">Analizar práctica por estudiante</a></p></div>`, { wide: true })
-  ].join(''));
+  const validProgress = groups.map(item => item.value).filter(value => value != null);
+  const progress = validProgress.length ? Math.round(mean(validProgress)) : 0;
+  const greeting = new Date().getHours() < 12 ? 'Buenos días' : new Date().getHours() < 20 ? 'Buenas tardes' : 'Buenas noches';
+  const teacherName = ((state.user && state.user.name) || (state.teacher && state.teacher.name) || 'docente').split(' ')[0];
+  const weakestAeLabel = ae ? (ae.code || ae.title || 'AE prioritario') : 'Sin AE pendiente';
+  const dots = people.map(group => {
+    const mark = groupSignal(group);
+    return `<i class="pd-student-dot is-${esc(mark.level)}" title="${esc(group[0].name)} · ${esc(mark.label)}" aria-hidden="true"></i>`;
+  }).join('');
+  const routeNames = ['Contextualización', 'Aprendizajes esperados', 'Situación integradora', 'Evaluación', 'Cierre'];
+  const routePosition = Math.min(5, Math.max(1, Math.floor(progress / 20) + 1));
+  const route = routeNames.map((label, index) => {
+    const step = index + 1;
+    const stateClass = step < routePosition ? 'is-done' : step === routePosition ? 'is-current' : 'is-next';
+    return `<li class="${stateClass}"><span>${step < routePosition ? '✓' : String(step).padStart(2, '0')}</span><b>${esc(label)}</b></li>`;
+  }).join('');
+  return `<div class="pd-home">
+    <section class="pd-home-hero">
+      <div><p class="pd-home-kicker">Tu aula está viva</p><h1>${esc(greeting)}, ${esc(teacherName)}</h1><p>¿Cómo están avanzando tus estudiantes y qué conviene mirar hoy?</p></div>
+      <img src="${PHOTOS[2][0]}" alt="${esc(PHOTOS[2][1])}">
+    </section>
+    <section class="pd-home-metrics" aria-label="Indicadores esenciales">
+      <article class="is-blue"><span>↗</span><b>${progress}%</b><p>avance general del recorrido</p></article>
+      <article class="is-coral"><span>!</span><b>${counts.support}</b><p>estudiantes necesitan apoyo</p></article>
+      <article class="is-mint"><span>✓</span><b>${counts.ok}</b><p>avanzan según lo esperado</p></article>
+      <article class="is-lilac"><span>◎</span><b>${scopedModules().length}</b><p>módulos activos en la vista</p></article>
+    </section>
+    <section class="pd-today" aria-labelledby="pd-today-title">
+      <div class="pd-section-heading"><div><p>Acciones sugeridas</p><h2 id="pd-today-title">Para ti hoy</h2></div><span>Del dato a una decisión pedagógica</span></div>
+      <div class="pd-today-grid">
+        <article class="pd-action-card is-attention"><i>👀</i><div><b>${counts.support} estudiantes requieren atención</b><p>Comienza por quienes tienen menor recorrido o logro.</p></div><a href="${href('/portal-docente/estudiantes')}">Ver estudiantes →</a></article>
+        <article class="pd-action-card is-target"><i>🎯</i><div><b>Aprendizaje para reforzar</b><p>${esc(weakestAeLabel)} · revisa evidencia y criterios.</p></div><a href="${href('/portal-docente/oa-ae')}">Revisar resultados →</a></article>
+        <article class="pd-action-card is-progress"><i>✨</i><div><b>${counts.ok} estudiantes con buen avance</b><p>Reconoce el progreso y comprueba el siguiente paso.</p></div><a href="${href('/portal-docente/cumplimiento')}">Ver recorrido →</a></article>
+      </div>
+    </section>
+    <section class="pd-home-main-grid">
+      <article class="pd-live-card">
+        <div class="pd-section-heading"><div><p>Lectura humana del grupo</p><h2>¿Cómo está el curso?</h2></div><a href="${href('/portal-docente/estudiantes')}">Abrir detalle →</a></div>
+        <p class="pd-live-copy">Cada punto representa a un estudiante. El color orienta el acompañamiento; no etiqueta su capacidad.</p>
+        <div class="pd-dot-field" role="img" aria-label="${counts.ok} con progreso esperado, ${counts.watch} por observar, ${counts.support} requieren apoyo y ${counts.none} sin recorrido">${dots || '<span class="pd-note">Todavía no hay estudiantes en esta vista.</span>'}</div>
+        <div class="pd-dot-legend"><span class="ok">Progreso esperado · ${counts.ok}</span><span class="watch">Conviene observar · ${counts.watch}</span><span class="support">Requiere apoyo · ${counts.support}</span><span class="none">Sin recorrido · ${counts.none}</span></div>
+      </article>
+      <article class="pd-course-feature">
+        <img src="${PHOTOS[3][0]}" alt="${esc(PHOTOS[3][1])}">
+        <div><p class="pd-course-label">Mi curso</p><h2>${esc(courseTitle())}</h2><p>3° y 4° medio · ${people.length} estudiantes</p><div class="pd-course-progress"><span style="width:${progress}%"></span></div><b>${progress}% de avance del recorrido</b><a href="${href('/portal-docente/cursos')}">Abrir curso →</a></div>
+      </article>
+    </section>
+    <section class="pd-route-card">
+      <div class="pd-section-heading"><div><p>Ruta del curso</p><h2>El grupo está aquí</h2></div><a href="${href('/portal-docente/cumplimiento')}">Ver cumplimiento →</a></div>
+      <ol class="pd-learning-route">${route}</ol>
+    </section>
+    <details class="pd-home-depth"><summary>Ver análisis estadístico y evidencia detallada</summary><div class="pd-board">${quad(1, 'ambar', 'Recorrido', 'Cumplimiento por módulo', chart, { wide: true })}${quad(2, 'lila', 'Evolución', 'Semana vs desempeño medio', trend, { wide: true })}${quad(3, 'celeste', 'Decisión', 'Práctica y logro', `<h3>Logro de la evaluación de selección</h3>${central(logroValues, 'el logro de selección')}<h3>Relación con la frecuencia de práctica</h3>${scatterChart(scatterPoints)}<p>${practiceRead(rows, entries)}</p>`, { wide: true })}</div></details>
+  </div>`;
 }
 function weakestAe() {
   const found = [];
