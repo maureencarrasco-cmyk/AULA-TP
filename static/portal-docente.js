@@ -266,11 +266,14 @@ function bars(items, meta) {
     return `<div class="pd-bar"><span>${esc(item.label)}</span><div class="pd-track"><div class="pd-fill" style="width:${value}%"></div></div><strong>${value} %</strong></div>`;
   }).join('');
   const title = info.title ? `<figcaption class="pd-chart-title">${esc(info.title)}</figcaption>` : '';
-  const head = (info.y || info.x) ? `<p class="pd-axis-head"><span>${esc(info.y || '')}</span><span></span><span>${esc(info.x || '')}</span></p>` : '';
-  return `<figure class="pd-figure">${title}<div class="pd-bars" role="img" aria-label="${esc(info.title || 'Gráfico de barras')}">${head}${rows}</div></figure>`;
+  const axes = (info.y || info.x)
+    ? `<p class="pd-axis-summary"><span><b>Eje vertical:</b> ${esc(info.y || 'Categoría')}</span><span><b>Eje horizontal:</b> ${esc(info.x || 'Valor')}</span></p>`
+    : '';
+  const aria = `${info.title || 'Gráfico de barras'}. Eje vertical: ${info.y || 'Categoría'}. Eje horizontal: ${info.x || 'Valor'}.`;
+  return `<figure class="pd-figure">${title}${axes}<div class="pd-bars" role="img" aria-label="${esc(aria)}">${rows}</div></figure>`;
 }
 function chartSvg(w, h, title, body) {
-  return `<svg class="pd-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}" font-family="Segoe UI, Arial, sans-serif"><text x="${w / 2}" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#143a78">${esc(title)}</text>${body}</svg>`;
+  return `<svg class="pd-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}" font-family="Segoe UI, Arial, sans-serif"><title>${esc(title)}</title><text x="${w / 2}" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#143a78">${esc(title)}</text>${body}</svg>`;
 }
 function percentFrame(w, h, yName, xName, xTicks, sx) {
   const left = 86, right = 22, top = 42, bottom = 52;

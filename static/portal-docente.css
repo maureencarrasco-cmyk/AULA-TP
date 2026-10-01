@@ -340,6 +340,22 @@ body {
 .pd-content a { color: #1558a0; font-weight: 700; }
 .pd-figure { margin: .35rem 0 .7rem; }
 .pd-chart-title { margin: 0 0 .45rem; font-size: 1rem; font-weight: 800; color: #143a78; }
+.pd-axis-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem .7rem;
+  margin: 0 0 .65rem;
+  color: #3d5270;
+  font-size: .76rem;
+}
+.pd-axis-summary span {
+  padding: .32rem .55rem;
+  border: 1px solid #d7e6f5;
+  border-radius: .55rem;
+  background: #f4f9ff;
+}
+.pd-axis-summary span:first-child { background: #eef9f5; border-color: #d4ebe2; }
+.pd-axis-summary b { color: #143a78; }
 .pd-axis-head {
   display: grid;
   grid-template-columns: minmax(6.5rem, 9rem) 1fr auto;
