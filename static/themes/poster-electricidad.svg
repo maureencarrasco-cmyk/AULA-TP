@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Poster Electricidad">
+  <rect width="1280" height="720" fill="#0b1f3a"/>
+  <rect x="80" y="90" width="1120" height="540" rx="28" fill="#12315c"/>
+  <circle cx="280" cy="340" r="92" fill="#f5c518"/>
+  <path d="M250 250h60l-20 90h50l-70 130 18-90h-48z" fill="#0b1f3a"/>
+  <text x="430" y="320" fill="#fff" font-family="Segoe UI, sans-serif" font-size="54" font-weight="700">Electricidad</text>
+  <text x="430" y="390" fill="#d7e6ff" font-family="Segoe UI, sans-serif" font-size="28">Circuito, medición y norma. No reemplaza el taller.</text>
+</svg>

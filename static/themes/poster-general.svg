@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Poster especialidad TP">
+  <rect width="1280" height="720" fill="#102033"/>
+  <rect x="80" y="90" width="1120" height="540" rx="28" fill="#1b3554"/>
+  <text x="140" y="330" fill="#fff" font-family="Segoe UI, sans-serif" font-size="52" font-weight="700">Aula TP Chile</text>
+  <text x="140" y="400" fill="#d5e4f7" font-family="Segoe UI, sans-serif" font-size="28">Recurso de oficio no disponible. Sigue con la consigna escrita.</text>
+</svg>
