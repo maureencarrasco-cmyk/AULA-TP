@@ -343,6 +343,7 @@ body {
 .pd-axis-summary {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: .45rem .7rem;
   margin: 0 0 .65rem;
   color: #3d5270;
@@ -356,6 +357,36 @@ body {
 }
 .pd-axis-summary span:first-child { background: #eef9f5; border-color: #d4ebe2; }
 .pd-axis-summary b { color: #143a78; }
+.pd-cartesian-layout {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: .35rem;
+  align-items: stretch;
+}
+.pd-chart-stage { min-width: 0; }
+.pd-axis-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #143a78;
+  font-size: .75rem;
+  font-weight: 800;
+  line-height: 1.1;
+  text-align: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.pd-axis-bottom {
+  margin-top: .35rem;
+  color: #143a78;
+  font-size: .75rem;
+  font-weight: 800;
+  text-align: center;
+}
+@media (max-width: 680px) {
+  .pd-cartesian-layout { grid-template-columns: 1.35rem minmax(0, 1fr); }
+  .pd-axis-side, .pd-axis-bottom { font-size: .68rem; }
+}
 .pd-axis-head {
   display: grid;
   grid-template-columns: minmax(6.5rem, 9rem) 1fr auto;

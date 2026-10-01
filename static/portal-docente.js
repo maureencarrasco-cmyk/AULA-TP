@@ -273,7 +273,10 @@ function bars(items, meta) {
   return `<figure class="pd-figure">${title}${axes}<div class="pd-bars" role="img" aria-label="${esc(aria)}">${rows}</div></figure>`;
 }
 function chartSvg(w, h, title, body) {
-  return `<svg class="pd-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}" font-family="Segoe UI, Arial, sans-serif"><title>${esc(title)}</title><text x="${w / 2}" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#143a78">${esc(title)}</text>${body}</svg>`;
+  return `<svg class="pd-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}" font-family="Segoe UI, Arial, sans-serif"><title>${esc(title)}</title>${body}</svg>`;
+}
+function cartesianFigure(title, yName, xName, svg) {
+  return `<figure class="pd-figure pd-cartesian"><figcaption class="pd-chart-title">${esc(title)}</figcaption><p class="pd-axis-summary"><span><b>Eje vertical:</b> ${esc(yName)}</span><span><b>Eje horizontal:</b> ${esc(xName)}</span></p><div class="pd-cartesian-layout"><div class="pd-axis-side" aria-hidden="true">${esc(yName)}</div><div class="pd-chart-stage">${svg}<div class="pd-axis-bottom" aria-hidden="true">${esc(xName)}</div></div></div></figure>`;
 }
 function percentFrame(w, h, yName, xName, xTicks, sx) {
   const left = 86, right = 22, top = 42, bottom = 52;
@@ -346,8 +349,10 @@ function lineChart(points, title) {
     const direction = reg.slope > 0.4 ? 'ascendente' : reg.slope < -0.4 ? 'descendente' : 'estable';
     note = `La tendencia es ${direction}, con ${reg.n} semanas comparables. La línea continua resume lo observado. El tramo punteado estima la semana siguiente: no es un resultado ya obtenido.`;
   }
+  const yName = 'Desempeño medio (%)';
+  const xName = 'Semana';
   const svg = chartSvg(w, h, title, `${drawn.marks}<polyline fill="none" stroke="#4d7eb8" stroke-width="2" points="${observed}"></polyline>${dots}${trend}`);
-  return spotlight(note, [['Semanas', String(points.length)], ['Evolución', trendWord(points)]], svg);
+  return spotlight(note, [['Semanas', String(points.length)], ['Evolución', trendWord(points)]], cartesianFigure(title, yName, xName, svg));
 }
 function pieChart(parts, title) {
   const total = parts.reduce((sum, part) => sum + part.value, 0);
@@ -364,7 +369,7 @@ function pieChart(parts, title) {
     return `<path d="M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${large} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z" fill="${part.color}"></path>`;
   }).join('');
   const legend = parts.map(part => `<li><i class="pd-swatch" style="background:${part.color}"></i>${esc(part.label)}: ${part.value} (${total ? Math.round(part.value / total * 100) : 0} %)</li>`).join('');
-  return `<figure class="pd-figure"><figcaption class="pd-chart-title">${esc(title)}</figcaption><div class="pd-pie"><svg viewBox="0 0 180 180" role="img" aria-label="${esc(title)}">${paths}</svg><div><p class="pd-axis-name">Señal de acompañamiento · estudiantes</p><ul>${legend}</ul></div></div></figure>`;
+  return `<figure class="pd-figure"><figcaption class="pd-chart-title">${esc(title)}</figcaption><p class="pd-axis-summary"><span><b>Variable:</b> Señal de acompañamiento</span><span><b>Medida:</b> Cantidad de estudiantes</span></p><div class="pd-pie"><svg viewBox="0 0 180 180" role="img" aria-label="${esc(title)}"><title>${esc(title)}</title>${paths}</svg><div><p class="pd-axis-name">Señal de acompañamiento · estudiantes</p><ul>${legend}</ul></div></div></figure>`;
 }
 function scatterChart(points) {
   if (points.length < 8) return spotlight('Menos de 8 estudiantes con práctica y logro: no se dibuja la relación.');
@@ -392,6 +397,8 @@ function scatterChart(points) {
     else if (!highP && highL) quadrants.lh += 1;
     else if (!highP && lowL) quadrants.ll += 1;
   });
+  const yName = 'Logro de selección (%)';
+  const xName = 'Cantidad de prácticas';
   const svg = chartSvg(w, h, title, `${drawn.marks}${dots}${trend}`);
   return spotlight(
     `En ${points.length} estudiantes se ven juntas la práctica y el logro. Un punto es un estudiante. Eso no demuestra que practicar produzca el resultado.`,
@@ -401,7 +408,7 @@ function scatterChart(points) {
       ['Baja práctica y alto logro', String(quadrants.lh)],
       ['Baja práctica y bajo logro', String(quadrants.ll)]
     ],
-    svg
+    cartesianFigure(title, yName, xName, svg)
   );
 }
 function studentGroups() {
