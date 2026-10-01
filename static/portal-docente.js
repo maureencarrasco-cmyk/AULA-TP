@@ -336,40 +336,33 @@ function lineChart(points, title) {
   const drawn = percentFrame(w, h, 'Desempeño medio (%)', 'Semana', weeks, sx);
   const sy = drawn.sy;
   const observed = points.map(point => `${sx(point.x)},${sy(point.y)}`).join(' ');
-  const dots = points.map(point => `<circle cx="${sx(point.x)}" cy="${sy(point.y)}" r="3.5" fill="#4d7eb8"><title>Semana ${point.x}: ${Math.round(point.y)} %</title></circle>`).join('');
+  const baseline = sy(0);
+  const area = points.length > 1
+    ? `<polygon points="${sx(points[0].x)},${baseline} ${observed} ${sx(points[points.length - 1].x)},${baseline}" fill="#d8ebfb" opacity="0.86"></polygon>`
+    : '';
+  const dots = points.map(point => `<circle cx="${sx(point.x)}" cy="${sy(point.y)}" r="4.6" fill="#fff" stroke="#168bf0" stroke-width="2.5"><title>Semana ${point.x}: ${Math.round(point.y)} %</title></circle>`).join('');
   let trend = '';
   let note = 'Menos de 8 observaciones comparables: no se traza regresión.';
   if (reg) {
     const y1 = reg.intercept + reg.slope * minX;
     const y2 = reg.intercept + reg.slope * maxX;
-    trend = `<line x1="${sx(minX)}" y1="${sy(y1)}" x2="${sx(maxX)}" y2="${sy(y2)}" stroke="#c9843a" stroke-width="2"></line>`;
+    trend = `<line x1="${sx(minX)}" y1="${sy(y1)}" x2="${sx(maxX)}" y2="${sy(y2)}" stroke="#ed6b32" stroke-width="2.4"></line>`;
     const next = maxX + 1;
     const projected = Math.max(0, Math.min(100, reg.intercept + reg.slope * next));
-    trend += `<line x1="${sx(maxX)}" y1="${sy(y2)}" x2="${sx(next)}" y2="${sy(projected)}" stroke="#c9843a" stroke-width="2" stroke-dasharray="5 4"></line>`;
+    trend += `<line x1="${sx(maxX)}" y1="${sy(y2)}" x2="${sx(next)}" y2="${sy(projected)}" stroke="#ed6b32" stroke-width="2.4" stroke-dasharray="6 5"></line>`;
     const direction = reg.slope > 0.4 ? 'ascendente' : reg.slope < -0.4 ? 'descendente' : 'estable';
     note = `La tendencia es ${direction}, con ${reg.n} semanas comparables. La línea continua resume lo observado. El tramo punteado estima la semana siguiente: no es un resultado ya obtenido.`;
   }
   const yName = 'Desempeño medio (%)';
   const xName = 'Semana';
-  const svg = chartSvg(w, h, title, `${drawn.marks}<polyline fill="none" stroke="#4d7eb8" stroke-width="2" points="${observed}"></polyline>${dots}${trend}`);
+  const svg = chartSvg(w, h, title, `${drawn.marks}${area}<polyline fill="none" stroke="#168bf0" stroke-width="2.5" points="${observed}"></polyline>${dots}${trend}`);
   return spotlight(note, [['Semanas', String(points.length)], ['Evolución', trendWord(points)]], cartesianFigure(title, yName, xName, svg));
 }
 function pieChart(parts, title) {
   const total = parts.reduce((sum, part) => sum + part.value, 0);
-  let angle = -Math.PI / 2;
-  const r = 68, cx = 90, cy = 90;
-  const paths = parts.filter(part => part.value > 0).map(part => {
-    const slice = total ? (part.value / total) * Math.PI * 2 : 0;
-    const x1 = cx + r * Math.cos(angle);
-    const y1 = cy + r * Math.sin(angle);
-    angle += slice;
-    const x2 = cx + r * Math.cos(angle);
-    const y2 = cy + r * Math.sin(angle);
-    const large = slice > Math.PI ? 1 : 0;
-    return `<path d="M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${large} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z" fill="${part.color}"></path>`;
-  }).join('');
+  const dots = parts.map(part => Array.from({ length: Math.max(0, part.value) }, () => `<i class="pd-distribution-dot" style="--dot-color:${part.color}" title="${esc(part.label)}"></i>`).join('')).join('');
   const legend = parts.map(part => `<li><i class="pd-swatch" style="background:${part.color}"></i>${esc(part.label)}: ${part.value} (${total ? Math.round(part.value / total * 100) : 0} %)</li>`).join('');
-  return `<figure class="pd-figure"><figcaption class="pd-chart-title">${esc(title)}</figcaption><p class="pd-axis-summary"><span><b>Variable:</b> Señal de acompañamiento</span><span><b>Medida:</b> Cantidad de estudiantes</span></p><div class="pd-pie"><svg viewBox="0 0 180 180" role="img" aria-label="${esc(title)}"><title>${esc(title)}</title>${paths}</svg><div><p class="pd-axis-name">Señal de acompañamiento · estudiantes</p><ul>${legend}</ul></div></div></figure>`;
+  return `<figure class="pd-figure"><figcaption class="pd-chart-title">${esc(title)}</figcaption><p class="pd-axis-summary"><span><b>Variable:</b> Señal de acompañamiento</span><span><b>Medida:</b> Cantidad de estudiantes</span></p><div class="pd-distribution" role="img" aria-label="${esc(title)}. Cada punto representa a un estudiante."><div class="pd-distribution-field">${dots || '<span class="pd-note">Sin estudiantes en esta selección.</span>'}</div><div><p class="pd-axis-name">Cada punto representa a un estudiante</p><ul>${legend}</ul></div></div></figure>`;
 }
 function scatterChart(points) {
   if (points.length < 8) return spotlight('Menos de 8 estudiantes con práctica y logro: no se dibuja la relación.');
@@ -383,9 +376,9 @@ function scatterChart(points) {
   const sx = x => left + (x / maxX) * (w - left - right);
   const drawn = percentFrame(w, h, 'Logro de selección (%)', 'Cantidad de prácticas', ticks, sx);
   const sy = drawn.sy;
-  const dots = points.map(point => `<circle cx="${sx(point.x)}" cy="${sy(point.y)}" r="3.2" fill="#5b8fbf" opacity="0.85"><title>${esc(point.name)}: ${point.x} prácticas, ${Math.round(point.y)} %</title></circle>`).join('');
+  const dots = points.map(point => `<circle cx="${sx(point.x)}" cy="${sy(point.y)}" r="4.2" fill="#fff" stroke="#168bf0" stroke-width="2.2" opacity="0.92"><title>${esc(point.name)}: ${point.x} prácticas, ${Math.round(point.y)} %</title></circle>`).join('');
   const reg = linreg(points);
-  const trend = reg ? `<line x1="${sx(0)}" y1="${sy(Math.max(0, Math.min(100, reg.intercept)))}" x2="${sx(maxX)}" y2="${sy(Math.max(0, Math.min(100, reg.intercept + reg.slope * maxX)))}" stroke="#c9843a" stroke-width="2"></line>` : '';
+  const trend = reg ? `<line x1="${sx(0)}" y1="${sy(Math.max(0, Math.min(100, reg.intercept)))}" x2="${sx(maxX)}" y2="${sy(Math.max(0, Math.min(100, reg.intercept + reg.slope * maxX)))}" stroke="#ed6b32" stroke-width="2.4"></line>` : '';
   const highX = median(points.map(point => point.x));
   const quadrants = { hh: 0, hl: 0, lh: 0, ll: 0 };
   points.forEach(point => {
