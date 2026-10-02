@@ -115,15 +115,23 @@
       const onProgress = location.hash === '#progress';
       const count = Array.isArray(courses) ? courses.length : 0;
       top.setAttribute('aria-label', 'Menú del campus');
-      top.innerHTML = teacher
+      const menu = teacher
         ? `<a class="${onTeacher ? '' : 'selected'}" href="#courses">${icon('book')} ${count || 'Cursos'} cursos</a><a class="${onTeacher ? 'selected' : ''}" href="#teacher">${icon('chart')} Espacio docente</a>`
         : `<a class="${onProgress ? '' : 'selected'}" href="#courses">${icon('book')} Mis cursos</a><a class="${onProgress ? 'selected' : ''}" href="#progress">${icon('chart')} Portal estudiante</a>`;
+      const menuKey = `${teacher ? 'teacher' : 'student'}:${onTeacher ? 'teacher' : onProgress ? 'progress' : 'courses'}:${count}`;
+      if (top.dataset.menuKey !== menuKey) {
+        top.innerHTML = menu;
+        top.dataset.menuKey = menuKey;
+      }
       const small = document.querySelector('header.topbar .account small');
-      if (small) small.textContent = teacher ? 'Docente' : 'Estudiante';
+      const roleLabel = teacher ? 'Docente' : 'Estudiante';
+      if (small && small.textContent !== roleLabel) small.textContent = roleLabel;
       const back = document.querySelector('header.topbar .account a.plain');
       if (back) {
-        back.href = teacher ? '#teacher' : '#courses';
-        back.textContent = teacher ? 'Espacio docente' : 'Mis cursos';
+        const backHref = teacher ? '#teacher' : '#courses';
+        const backLabel = teacher ? 'Espacio docente' : 'Mis cursos';
+        if (back.getAttribute('href') !== backHref) back.setAttribute('href', backHref);
+        if (back.textContent !== backLabel) back.textContent = backLabel;
       }
     }
     document.querySelectorAll('.dash-footer nav a, footer nav a').forEach(a => {
@@ -143,9 +151,10 @@
       const copy = card.querySelector('.dash-course-body p');
       const action = card.querySelector('.dash-course-action');
       if (!card.classList.contains('is-available')) return;
-      if (badge) badge.textContent = SIM.has(key) ? 'SIMULADOR' : 'RUTA CURRICULAR';
-      if (copy && !SIM.has(key)) copy.textContent = copy.textContent.replace('5 estaciones', 'ruta curricular · multimedia en preparación');
-      if (action && !SIM.has(key)) action.childNodes[0].textContent = 'Ver ruta curricular ';
+      const badgeLabel = SIM.has(key) ? 'SIMULADOR' : 'RUTA CURRICULAR';
+      if (badge && badge.textContent !== badgeLabel) badge.textContent = badgeLabel;
+      if (copy && !SIM.has(key) && copy.textContent.includes('5 estaciones')) copy.textContent = copy.textContent.replace('5 estaciones', 'ruta curricular · multimedia en preparación');
+      if (action && !SIM.has(key) && action.childNodes[0]?.textContent !== 'Ver ruta curricular ') action.childNodes[0].textContent = 'Ver ruta curricular ';
     });
     document.querySelectorAll('.sp-overview-visual img, .sp-next-module img').forEach(img => {
       if (!/electricidad-/.test(img.getAttribute('src') || '')) return;
@@ -156,11 +165,15 @@
     if (window.AulaMenu?.STATION_NAMES) window.AulaMenu.STATION_NAMES[5] = 'Retroalimentación y cierre';
   }
 
-  const obs = new MutationObserver(() => rewriteMenus());
-  function boot() {
+  let refreshTimer = 0;
+  function refreshMenus() {
     rewriteMenus();
-    if (document.body) obs.observe(document.body, {childList: true, subtree: true});
-    window.addEventListener('hashchange', rewriteMenus);
+    clearTimeout(refreshTimer);
+    refreshTimer = window.setTimeout(rewriteMenus, 350);
+  }
+  function boot() {
+    refreshMenus();
+    window.addEventListener('hashchange', refreshMenus);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
