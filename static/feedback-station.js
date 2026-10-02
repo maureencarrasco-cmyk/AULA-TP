@@ -207,6 +207,22 @@ function analizaFilters(d){
   </div>`;
 }
 
+function analizaDemoCohort(studentPct){
+  const bands=[
+    {label:'0–39%',count:0},{label:'40–49%',count:2},{label:'50–59%',count:9},
+    {label:'60–69%',count:27},{label:'70–79%',count:50},{label:'80–89%',count:26},{label:'90–100%',count:6}
+  ];
+  const total=bands.reduce((sum,b)=>sum+b.count,0),max=Math.max(...bands.map(b=>b.count));
+  const W=720,H=238,left=58,right=24,top=34,bottom=54,plotW=W-left-right,plotH=H-top-bottom;
+  const step=plotW/bands.length,barW=Math.min(58,step*.62);
+  const grid=[0,10,20,30,40,50].map(v=>{const y=top+plotH-(v/50)*plotH;return `<line x1="${left}" y1="${y}" x2="${W-right}" y2="${y}"/><text x="${left-10}" y="${y+4}" text-anchor="end">${v}</text>`}).join('');
+  const bars=bands.map((b,i)=>{const h=(b.count/max)*plotH,x=left+i*step+(step-barW)/2,y=top+plotH-h;return `<g><rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="7"/><text class="az-cohort-value" x="${x+barW/2}" y="${y-8}" text-anchor="middle">${b.count}</text><text class="az-cohort-band" x="${x+barW/2}" y="${H-29}" text-anchor="middle">${b.label}</text></g>`}).join('');
+  const hasStudent=studentPct!=null&&Number.isFinite(Number(studentPct));
+  const markerX=hasStudent?left+(Math.max(0,Math.min(100,Number(studentPct)))/100)*plotW:null;
+  const marker=hasStudent?`<g class="az-cohort-marker"><line x1="${markerX}" y1="${top-5}" x2="${markerX}" y2="${top+plotH}"/><rect x="${Math.max(left,Math.min(W-right-82,markerX-41))}" y="4" width="82" height="23" rx="11"/><text x="${Math.max(left+41,Math.min(W-right-41,markerX))}" y="20" text-anchor="middle">Tú · ${studentPct}%</text></g>`:'';
+  return `<section class="az-card az-cohort" aria-labelledby="az-cohort-title"><header><div><span class="az-cohort-kicker">DATOS SIMULADOS PARA EXPLORAR</span><h3 id="az-cohort-title">Resultados de una cohorte de demostración</h3><p>Compara la distribución de logro de <b>${total} estudiantes de ejemplo</b>. No corresponde a calificaciones reales.</p></div><div class="az-cohort-stats"><span><b>120</b> estudiantes</span><span><b>74%</b> promedio</span><span><b>75%</b> mediana</span></div></header><svg class="az-cohort-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribución de 120 estudiantes de ejemplo por rango de logro">${grid}<line class="az-cohort-axis" x1="${left}" y1="${top+plotH}" x2="${W-right}" y2="${top+plotH}"/>${bars}${marker}<text class="az-cohort-axis-title" x="${left+plotW/2}" y="${H-5}" text-anchor="middle">Porcentaje de logro</text><text class="az-cohort-axis-title" x="14" y="${top+plotH/2}" text-anchor="middle" transform="rotate(-90 14 ${top+plotH/2})">Cantidad de estudiantes</text></svg><footer>${icon('info')} <span>Úsalo para aprender a interpretar resultados grupales; tu retroalimentación personal se basa únicamente en tus evidencias.</span></footer></section>`;
+}
+
 function analizaDash(){
   const d=analizaSnapshot();
   const oaBars=d.oa.map(o=>`<li class="az-oa tone-${o.tone}">
@@ -257,6 +273,7 @@ function analizaDash(){
     ${typeof achievementProgressTable==='function'?achievementProgressTable():''}
     ${analizaFilters(d)}
     <section class="az-instruction"><span>${icon('search')}</span><div><h2>Observa, compara e identifica</h2><p>Observa tus resultados por AE, tu evolución y tus evidencias. Identifica una fortaleza y un aspecto que necesites seguir trabajando.</p></div></section>
+    ${analizaDemoCohort(d.modulePct)}
     <div class="az-grid">
       <section class="az-card az-module">
         <h3>${esc(d.moduleLabel)}</h3>
