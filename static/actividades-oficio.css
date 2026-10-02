@@ -22,14 +22,12 @@
   gap:12px;
 }
 .oficio-plus{
-  position:relative;width:48px;height:48px;border-radius:12px;
+  width:48px;height:48px;border-radius:12px;
   background:#E1F4F0;color:var(--oficio-teal);border:1px solid #BCE2DA;
   display:grid;place-items:center;
-  flex-shrink:0;margin-top:2px;
+  flex:0 0 48px;margin:2px 2px 0 0;
 }
-.oficio-plus>.icon{width:26px;height:26px}
-.oficio-plus i{position:absolute;right:-5px;top:-6px;display:grid;place-items:center;width:20px;height:20px;border:2px solid #fff;border-radius:50%;background:#F6C65B;color:#815508;font-style:normal}
-.oficio-plus i .icon{width:11px;height:11px}
+.oficio-plus>.icon{width:27px;height:27px}
 .oficio-titles{flex:1;min-width:0}
 .oficio-kicker{
   display:block;

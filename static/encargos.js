@@ -126,7 +126,7 @@ function paintEncargos(host){
   host.hidden=false;
   host.innerHTML=`
     <header class="oficio-head">
-      <span class="oficio-plus" aria-hidden="true">${oficioIcon(oficioSpecialtyIcon())}<i>${oficioIcon('star')}</i></span>
+      <span class="oficio-plus" aria-hidden="true">${oficioIcon(oficioSpecialtyIcon())}</span>
       <div class="oficio-titles">
         <span class="oficio-kicker">${esc(kicker)}</span>
         <h4>${esc(title)}</h4>
