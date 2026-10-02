@@ -320,16 +320,23 @@ function oficioVideoPanel(host, pack, activity){
   const registerHelp=station===1?'':'Evidencia registrada.';
   return `<article class="formative-item oficio-task oficio-video-panel" data-kind="video" data-oficio-id="${esc(activity.id)}" data-paso="${esc(paso)}">
     <header class="oficio-task-head">
-      <div><span class="oficio-respond-chip">Respondes aquí</span><h5>La secuencia que viste arriba</h5></div>
+      <span class="oficio-task-symbol" aria-hidden="true">${icon('tool')}</span>
+      <div class="oficio-task-title"><span class="oficio-respond-chip">Actividad guiada</span><h5>Aplica la secuencia del oficio</h5><p>Elige un momento del procedimiento y registra el dato técnico que observaste.</p></div>
       <button type="button" class="outline" data-oficio-close>Cerrar</button>
     </header>
     ${instructionContract(pack)}
-    <p class="oficio-task-prompt">${station===1?'Un video. Un paso. Un dato.':'El video de arriba ya mostró el método. Aquí eliges el paso y dejas el dato.'}</p>
-    <ol class="oficio-lectura" id="oficio-ruta-lectura" aria-label="Ruta de lectura">${pasos.map((p,i)=>`<li><button type="button" class="oficio-paso${p.id===paso?' is-elegido':''}" data-tone="${esc(p.tone)}" data-paso="${esc(p.id)}" aria-pressed="${p.id===paso}"><span class="oficio-paso-n">${p.id===paso?'✓':i+1}</span><b>${esc(p.label)}</b><span>${esc(p.hint)}</span></button></li>`).join('')}</ol>
-    <p class="oficio-pregunta">${esc(pregunta)}</p>
-    <label class="oficio-field">Escribe aquí<textarea id="oficio-evidencia" maxlength="400" data-pack-field="video-note" placeholder="Paso: ${esc(chosen.label)}&#10;Dato que vi: …&#10;Por eso freno o confirmo: …">${esc(draft)}</textarea></label>
-    <p class="oficio-help">Un paso. Un dato. No resumas el video.</p>
-    <div class="formative-check"><button type="button" class="primary oficio-register" data-pack-check>Registrar evidencia</button>${registerHelp?`<p class="muted small">${esc(registerHelp)}</p>`:''}<p class="act-feedback" aria-live="polite"></p></div>
+    <p class="oficio-task-prompt">${icon('eye')}<span>${station===1?'Observa el método y selecciona un paso.':'El video de arriba ya mostró el método. Ahora selecciona el paso que analizarás.'}</span></p>
+    <section class="oficio-route-block" aria-labelledby="oficio-route-title">
+      <header><span>${icon('flag')}</span><div><small>PASO 1</small><h6 id="oficio-route-title">Elige el momento que vas a analizar</h6></div></header>
+      <ol class="oficio-lectura" id="oficio-ruta-lectura" aria-label="Ruta de lectura">${pasos.map((p,i)=>`<li><button type="button" class="oficio-paso${p.id===paso?' is-elegido':''}" data-tone="${esc(p.tone)}" data-paso="${esc(p.id)}" aria-pressed="${p.id===paso}"><span class="oficio-paso-n">${p.id===paso?'✓':i+1}</span><b>${esc(p.label)}</b><span>${esc(p.hint)}</span></button></li>`).join('')}</ol>
+    </section>
+    <section class="oficio-evidence-workspace" aria-labelledby="oficio-evidence-title">
+      <header><span>${icon('file')}</span><div><small>PASO 2</small><h6 id="oficio-evidence-title">Registra una evidencia breve</h6></div></header>
+      <p class="oficio-pregunta">${esc(pregunta)}</p>
+      <label class="oficio-field"><span>Tu evidencia técnica</span><textarea id="oficio-evidencia" maxlength="400" data-pack-field="video-note" placeholder="Paso: ${esc(chosen.label)}&#10;Dato que vi: …&#10;Por eso freno o confirmo: …">${esc(draft)}</textarea></label>
+      <p class="oficio-help">${icon('check')} Un paso, un dato y una decisión. No necesitas resumir el video.</p>
+      <div class="formative-check"><button type="button" class="primary oficio-register" data-pack-check>${icon('check')} Registrar evidencia</button>${registerHelp?`<p class="muted small">${esc(registerHelp)}</p>`:''}<p class="act-feedback" aria-live="polite"></p></div>
+    </section>
   </article>`;
 }
 function bindOficioVideoPanel(host, article){
