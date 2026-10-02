@@ -975,3 +975,79 @@ body[data-screen="module"] .lr-context summary .work-ico,body[data-screen="modul
 body[data-screen="module"] .lr-context p{margin:0;padding:0 12px 12px;font-size:11px;line-height:1.45;color:#35566a}
 @media(max-width:1050px){body[data-screen="module"] .lr .lr-track{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory;padding:18px 4px 10px!important}body[data-screen="module"] .lr .lr-stop{flex:0 0 220px!important;scroll-snap-align:start}}
 @media(max-width:620px){body[data-screen="module"] .route-panel.lr{padding:10px!important}body[data-screen="module"] .lr .lr-stop{flex-basis:min(235px,76vw)!important}body[data-screen="module"] .lr .lr-card.station{min-height:180px!important}body[data-screen="module"] .bottom-nav{position:sticky;bottom:8px;z-index:20;padding:7px;border:1px solid #bfd3e4;border-radius:11px;background:rgba(247,251,255,.96);box-shadow:0 8px 24px rgba(10,43,76,.18);backdrop-filter:blur(8px)}body[data-screen="module"] .bottom-nav .primary{font-weight:800;box-shadow:0 4px 10px rgba(0,104,239,.2)}}
+
+/* Jerarquia, agrupacion y continuidad comunes a los 45 cursos */
+body[data-screen="module"] .module-main{width:100%;min-width:0}
+body[data-screen="module"] .station-body{padding:clamp(14px,1.6vw,24px)!important}
+body[data-screen="module"] .station-body>.activity-primer{margin-bottom:18px!important}
+body[data-screen="module"] .ordered-activity{
+  position:relative;
+  margin:18px 0!important;
+  padding:16px!important;
+  border:1px solid #ccdbe8!important;
+  border-left:5px solid var(--station-color,var(--ped-blue))!important;
+  border-radius:10px!important;
+  background:#fff!important;
+  box-shadow:0 6px 18px rgba(12,48,80,.07)!important;
+}
+body[data-screen="module"] .ordered-activity+.ordered-activity{margin-top:24px!important}
+body[data-screen="module"] .activity-order-badge{margin:-16px -16px 15px!important;border-radius:8px 8px 0 0!important;border-bottom:1px solid #cfdeea!important;background:#f2f7fb!important}
+body[data-screen="module"] .activity-focus-guide{margin:0 0 16px!important;border:1px solid #d2e0eb!important;border-radius:8px!important;overflow:hidden!important;background:#fff!important}
+body[data-screen="module"] .activity-focus-guide>div{background:#f8fbfd!important}
+body[data-screen="module"] .activity-focus-guide>div+div{border-left:1px solid #d2e0eb!important}
+body[data-screen="module"] .activity-focus-signal{background:#e8f5f0!important;color:#176d53!important}
+
+/* Las tarjetas informativas permanecen visualmente estables; solo los controles se elevan. */
+@media(hover:hover){
+  body[data-screen="module"] .work-card:not(button):not(a):hover,
+  body[data-screen="module"] .soft:not(button):not(a):hover{transform:none!important;box-shadow:0 1px 3px rgba(8,43,85,.06)!important}
+}
+body[data-screen="module"] button,
+body[data-screen="module"] a.primary,
+body[data-screen="module"] a.outline{min-height:44px;border-radius:8px;font-weight:800}
+body[data-screen="module"] button.primary,
+body[data-screen="module"] a.primary{background:#0869d7;border-color:#0869d7;color:#fff;box-shadow:0 4px 10px rgba(8,105,215,.22)}
+body[data-screen="module"] button.primary:hover:not(:disabled),
+body[data-screen="module"] a.primary:hover{background:#075bb9;border-color:#075bb9}
+body[data-screen="module"] button:disabled,
+body[data-screen="module"] [aria-disabled="true"]{opacity:.62;filter:saturate(.45)}
+body[data-screen="module"] .bottom-nav{justify-content:flex-end;align-items:center;gap:10px;padding:12px 0;margin:22px 0 8px;border-top:1px solid #d5e1eb}
+body[data-screen="module"] .bottom-nav .outline{margin-right:auto}
+body[data-screen="module"] .bottom-nav .primary{min-width:min(100%,260px)}
+
+/* Respuestas: seleccion y foco reconocibles tambien sin depender del color. */
+body[data-screen="module"] .option,
+body[data-screen="module"] .mcq-options .option,
+body[data-screen="module"] .act-choices .option{position:relative;min-height:48px;border:1px solid #c8d8e6;background:#fff;box-shadow:none}
+body[data-screen="module"] .option:has(input:checked),
+body[data-screen="module"] .mcq-options .option:has(input:checked),
+body[data-screen="module"] .act-choices .option:has(input:checked){padding-right:104px;border:2px solid #176bbb;background:#eef6ff;box-shadow:0 0 0 3px #dcecff}
+body[data-screen="module"] .option:has(input:checked)::after,
+body[data-screen="module"] .mcq-options .option:has(input:checked)::after,
+body[data-screen="module"] .act-choices .option:has(input:checked)::after{content:"Seleccionada";position:absolute;right:10px;top:50%;transform:translateY(-50%);padding:3px 7px;border-radius:5px;background:#176bbb;color:#fff;font-size:9px;font-weight:900}
+body[data-screen="module"] textarea{min-height:110px;border-radius:8px;line-height:1.55}
+body[data-screen="module"] textarea:focus-visible,
+body[data-screen="module"] input:focus-visible,
+body[data-screen="module"] select:focus-visible{outline:3px solid #f2b529!important;outline-offset:2px!important}
+
+/* Retroalimentacion distinguible de la consigna. */
+body[data-screen="module"] .practice-result,
+body[data-screen="module"] .feedback,
+body[data-screen="module"] [class*="feedback-message"]{margin-top:14px;padding:13px 15px;border:1px solid #b9ddcf;border-left:5px solid #25825f;border-radius:8px;background:#eef9f4;color:#174f3f}
+
+@media(max-width:760px){
+  body[data-screen="module"] .ordered-activity{padding:12px!important;margin:14px 0!important}
+  body[data-screen="module"] .activity-order-badge{margin:-12px -12px 12px!important}
+  body[data-screen="module"] .activity-focus-guide{display:grid!important;grid-template-columns:1fr!important}
+  body[data-screen="module"] .activity-focus-guide>div+div{border-left:0!important;border-top:1px solid #d2e0eb!important}
+  body[data-screen="module"] .activity-focus-signal{width:100%;justify-content:center}
+  body[data-screen="module"] .bottom-nav{bottom:10px!important;padding:8px!important;margin-bottom:86px!important}
+  body[data-screen="module"] .bottom-nav .outline,
+  body[data-screen="module"] .bottom-nav .primary{min-width:0;flex:1;font-size:11px;padding:9px 10px}
+  body[data-screen="module"] .tools-fab,
+  body[data-screen="module"] #aula-tools-fab{right:8px!important;bottom:82px!important;max-width:calc(100vw - 16px)!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;opacity:.9}
+  body[data-screen="module"] .tools-fab:hover,
+  body[data-screen="module"] #aula-tools-fab:hover,
+  body[data-screen="module"] .tools-fab:focus-visible,
+  body[data-screen="module"] #aula-tools-fab:focus-visible{opacity:1}
+}
