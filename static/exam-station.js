@@ -6,7 +6,7 @@ function examIco(kind){
  return `<span class="exam-ico">${examSvg(d[kind]||icons.file)}</span>`;
 }
 function examPhoto(){return `<figure class="exam-visual" aria-label="Evaluación final: observa, decide y demuestra"><div class="exam-visual-icons"><span>${examIco('file')}</span><i aria-hidden="true">→</i><span>${examIco('target')}</span><i aria-hidden="true">→</i><span>${examIco('check')}</span></div><figcaption><b>Observa · decide · demuestra</b><small>Tu evidencia refleja lo que puedes aplicar de manera autónoma.</small></figcaption></figure>`}
-function examHeroPhoto(){return `<figure class="exam-assessment-photo"><img src="/static/themes/exam-checklist.png?v=20261002" alt="Evaluación técnica con pauta de respuestas y reconocimiento de logro"><figcaption>${examIco('check')}<span><b>Tu desafío final</b><small>Lee, decide, fundamenta y revisa antes de entregar.</small></span></figcaption></figure>`}
+function examHeroPhoto(){return `<figure class="exam-assessment-photo"><span class="exam-near-badge">Ya estás cerca</span><img src="/static/themes/evaluation-trophy.png?v=20261002" alt="Copa dorada que representa la cercanía del logro"><figcaption>${examIco('check')}<span><b>Avanza hacia tu logro</b><small>Lee, decide, fundamenta y revisa antes de entregar.</small></span></figcaption></figure>`}
 function examHeader(){return stationHero(4)}
 function examStationRoute(){return stationRoute(4)}
 function examSidebar(){return ''}
