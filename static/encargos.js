@@ -3,6 +3,30 @@
 const ENCARGO_TONES = ['lila', 'celeste', 'menta', 'indigo', 'arena', 'sage'];
 const ENCARGO_TILE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="2.5" width="8" height="3.5" rx="1"/><rect x="5" y="4.5" width="14" height="16.5" rx="2"/><path d="M9 11h6M9 15h6"/></svg>';
 const BITACORA_TILE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 3.5h11.5A1.5 1.5 0 0120 5v14.5A1.5 1.5 0 0118.5 21H7A2 2 0 015 19V5a1.5 1.5 0 011.5-1.5H7z"/><path d="M8 3.5v17.5"/><path d="M11.5 8H17M11.5 12H17M11.5 16h3.5"/></svg>';
+function oficioIcon(kind){
+  if(typeof workIco==='function') return workIco(kind);
+  return typeof icon==='function'?icon(kind):ENCARGO_TILE;
+}
+function oficioSpecialtyIcon(){
+  const list=typeof courses!=='undefined'?courses:[];
+  const course=list.find(item=>item.id===current?.course_id)||{};
+  const key=typeof specialtyKey==='function'?specialtyKey(course):'';
+  if(/informatica|telecom|electronica/.test(key)) return 'monitor';
+  if(/grafica|vestuario|muebles|construccion/.test(key)) return 'palette';
+  if(/administracion|contabilidad|secretariado|logistica/.test(key)) return 'file';
+  if(/enfermeria|parvulo|social/.test(key)) return 'person';
+  if(/gastronomia|alimentacion|agro|acuicultura|pesqueria/.test(key)) return 'cube';
+  return 'tool';
+}
+function encargoIcon(item){
+  const text=`${item?.title||''} ${item?.product||''} ${item?.prompt||''}`.toLowerCase();
+  if(isBitacora(item)||/registro|diario/.test(text)) return 'book';
+  if(/plano|diseñ|croquis|prototipo/.test(text)) return 'edit';
+  if(/inspecci|diagn[oó]st|an[aá]lis|revisi/.test(text)) return 'search';
+  if(/procedimiento|secuencia|lista|plan/.test(text)) return 'list';
+  if(/informe|ficha|reporte|document/.test(text)) return 'file';
+  return oficioSpecialtyIcon();
+}
 function isBitacora(item){
   return /bit[aá]cora/i.test(`${item?.title||''} ${item?.product||''} ${item?.prompt||''} ${item?.kind||''}`);
 }
@@ -56,14 +80,16 @@ function encargoCardHtml(item, index, openId, done){
   const tone=ENCARGO_TONES[index%ENCARGO_TONES.length];
   const open=String(openId)===String(item.id)?' is-open':'';
   const notebook=isBitacora(item);
+  const taskIcon=encargoIcon(item);
   return `<button type="button" class="oficio-card is-${status}${open}${notebook?' is-bitacora':''}" data-encargo-id="${esc(item.id)}" data-tone="${tone}">
-    <span class="oficio-tile" aria-hidden="true">${notebook?BITACORA_TILE:ENCARGO_TILE}</span>
+    <span class="oficio-tile" aria-hidden="true">${oficioIcon(taskIcon)}</span>
     <span class="oficio-card-body">
+      <span class="oficio-product-label">Producto esperado</span>
       <b>${esc(item.title)}</b>
       <span class="oficio-card-kicker">AE ${item.ae} · ${notebook?'tu bitácora':'producto escrito'}</span>
       <span class="oficio-card-meta">
-        <span class="oficio-min">${Number(item.minutes)||60} min</span>
-        <span class="oficio-chip is-${status}">${saved?'Entregado':'Pendiente'}</span>
+        <span class="oficio-min">${oficioIcon('clock')} ${Number(item.minutes)||60} min</span>
+        <span class="oficio-chip is-${status}">${saved?oficioIcon('check'):oficioIcon('arrow')} ${saved?'Entregado':'Abrir encargo'}</span>
       </span>
     </span>
   </button>`;
@@ -100,21 +126,21 @@ function paintEncargos(host){
   host.hidden=false;
   host.innerHTML=`
     <header class="oficio-head">
-      <span class="oficio-plus" aria-hidden="true">+</span>
+      <span class="oficio-plus" aria-hidden="true">${oficioIcon(oficioSpecialtyIcon())}<i>${oficioIcon('star')}</i></span>
       <div class="oficio-titles">
         <span class="oficio-kicker">${esc(kicker)}</span>
         <h4>${esc(title)}</h4>
       </div>
       <div class="oficio-pills">
-        <span class="oficio-pill is-station">Estación ${station} de 5${aePill}</span>
-        <span class="oficio-pill is-count">${esc(countPill)}</span>
+        <span class="oficio-pill is-station">${oficioIcon('pin')} Estación ${station} de 5${aePill}</span>
+        <span class="oficio-pill is-count">${oficioIcon('list')} ${esc(countPill)}</span>
       </div>
     </header>
     <p class="oficio-lead">${esc(lead)}</p>
     <div class="oficio-do" role="group" aria-label="Qué debes hacer">
-      <button type="button" class="oficio-do-btn is-video${hasOpen?'':' is-ahora'}" data-encargo-do="pick"><span class="oficio-do-n">1</span><small>Elige un encargo</small>${hasOpen?'':'<span class="oficio-ahora">Ahora</span>'}</button>
-      <button type="button" class="oficio-do-btn is-paso" data-encargo-do="read"><span class="oficio-do-n">2</span><small>Lee el producto pedido</small></button>
-      <button type="button" class="oficio-do-btn is-write${hasOpen?' is-ahora':''}" data-encargo-do="write">${hasOpen?'<span class="oficio-ahora">Ahora</span>':''}<span class="oficio-do-n">3</span><small>Escribe tu evidencia</small></button>
+      <button type="button" class="oficio-do-btn is-video${hasOpen?'':' is-ahora'}" data-encargo-do="pick"><span class="oficio-do-n">1</span><span class="oficio-do-icon">${oficioIcon('target')}</span><small>Elige un encargo</small>${hasOpen?'':'<span class="oficio-ahora">Ahora</span>'}</button>
+      <button type="button" class="oficio-do-btn is-paso" data-encargo-do="read"><span class="oficio-do-n">2</span><span class="oficio-do-icon">${oficioIcon('book')}</span><small>Lee el producto pedido</small></button>
+      <button type="button" class="oficio-do-btn is-write${hasOpen?' is-ahora':''}" data-encargo-do="write">${hasOpen?'<span class="oficio-ahora">Ahora</span>':''}<span class="oficio-do-n">3</span><span class="oficio-do-icon">${oficioIcon('edit')}</span><small>Escribe tu evidencia</small></button>
     </div>
     <p class="oficio-do-note">${esc(stripNote)}</p>
     <ol class="oficio-guide" aria-label="Cómo trabajar este encargo">
@@ -177,7 +203,6 @@ function openEncargo(host, item, draftText){
         <p class="oficio-help encargo-meter" data-encargo-meter>0 / mínimo 80 caracteres</p>
         <div class="formative-check bitacora-actions">
           <button type="button" class="primary oficio-register" data-encargo-save ${locked?'disabled':''}>Guardar esta hoja</button>
-          <p class="muted small">Hoja formativa. No califica ni abre la evaluación.</p>
           <p class="act-feedback" aria-live="polite"></p>
         </div>
       </div>
@@ -201,7 +226,6 @@ function openEncargo(host, item, draftText){
       <p class="oficio-help encargo-meter" data-encargo-meter>0 / mínimo 80 caracteres</p>
       <div class="formative-check">
         <button type="button" class="primary oficio-register" data-encargo-save ${locked?'disabled':''}>Registrar evidencia</button>
-        <p class="muted small">Evidencia formativa. No califica ni abre la evaluación.</p>
         <p class="act-feedback" aria-live="polite"></p>
       </div>
     </article>`;

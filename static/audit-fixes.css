@@ -99,23 +99,41 @@ body[data-screen="courses"] .dash-sidebar{padding-top:70px}
 .source-strip{
   margin:14px 0;
   border:1px solid #B8CFE8;
+  border-left:5px solid #347DB2;
   border-radius:8px;
-  background:#F4F9FF;
+  background:#F8FBFD;
   color:#173F6B;
+  box-shadow:0 4px 14px rgba(22,72,112,.06);
 }
 .source-strip summary{
-  display:flex;
+  display:grid;
+  grid-template-columns:48px minmax(0,1fr) 30px;
   align-items:center;
-  gap:8px;
-  min-height:44px;
-  padding:10px 14px;
+  gap:12px;
+  min-height:64px;
+  padding:8px 12px 8px 10px;
   color:#0B4A96;
   font-weight:800;
   cursor:pointer;
+  list-style:none;
 }
-.source-strip p{margin:0;padding:0 14px 10px;line-height:1.5}
-.source-strip a{display:inline-block;margin:0 14px 14px;color:#075BC8;font-weight:750}
-.source-strip .icon{width:18px;height:18px;flex:0 0 auto}
+.source-strip summary::-webkit-details-marker{display:none}
+.source-strip-icon{display:grid;place-items:center;width:46px;height:46px;border:1px solid #BFD8E9;border-radius:10px;background:#E5F3FA;color:#176394}
+.source-strip-icon svg{width:31px;height:31px;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.source-strip-icon .source-strip-spark{fill:#F5B94C;stroke:#A86709;stroke-width:1}
+.source-strip-copy{display:flex;min-width:0;flex-direction:column;gap:2px}
+.source-strip-copy small{color:#51809F;font-size:9px;font-weight:900}
+.source-strip-copy b{color:#0B477D;font-size:14px;line-height:1.25}
+.source-strip-toggle{position:relative;width:28px;height:28px;border:1px solid #C8DAE8;border-radius:50%;background:#fff}
+.source-strip-toggle::before,.source-strip-toggle::after{content:"";position:absolute;left:8px;right:8px;top:13px;height:2px;border-radius:2px;background:#246C9F;transition:transform .18s ease}
+.source-strip-toggle::after{transform:rotate(90deg)}
+.source-strip[open] .source-strip-toggle::after{transform:rotate(0)}
+.source-strip[open] summary{border-bottom:1px solid #D4E1EB;background:#EEF6FB}
+.source-strip-body{padding:12px 0 2px}
+.source-strip p{margin:0;padding:0 16px 10px;line-height:1.5}
+.source-strip a{display:inline-block;margin:0 16px 14px;color:#075BC8;font-weight:750}
+.source-strip ul{margin:0 16px 14px;padding-left:20px}
+@media(max-width:560px){.source-strip summary{grid-template-columns:42px minmax(0,1fr) 28px;gap:9px}.source-strip-icon{width:40px;height:40px}.source-strip-icon svg{width:27px;height:27px}.source-strip-copy b{font-size:13px}}
 
 /* Acceso normativo permanente para las cinco estaciones de Electricidad. */
 .sec-ric-fab{

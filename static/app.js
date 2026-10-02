@@ -892,7 +892,8 @@ function curriculumSourcePanel(){
  const scope=source.status||official.scope||'Adaptación didáctica para simulación; no sustituye el programa oficial ni certifica una instalación real.';
  const link=source.url?`<a href="${esc(source.url)}" target="_blank" rel="noopener">Consultar fuente oficial</a>`:'';
  const references=(current?.content?.bibliography||[]).map(ref=>`<li><a href="${esc(ref.url)}" target="_blank" rel="noopener">${esc(ref.author)} · ${esc(ref.work)} (${esc(ref.year)})</a><span> ${esc(ref.concept)} · ${esc(ref.application)}</span></li>`).join('');
- return `<details class="source-strip"><summary>${icon('book')} Fuente curricular y alcance de la simulación</summary><p><b>${esc(label)}</b></p><p>${esc(scope)}</p>${link}${references?`<ul>${references}</ul>`:''}</details>`;
+ const sourceIcon=`<span class="source-strip-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M4.5 7.5c4.2-1 7.8-.2 11.5 2.2v16c-3.7-2.4-7.3-3.2-11.5-2.2v-16Z"/><path d="M27.5 7.5c-4.2-1-7.8-.2-11.5 2.2v16c3.7-2.4 7.3-3.2 11.5-2.2v-16Z"/><path d="M8 12.2c1.8-.1 3.4.3 4.9 1.1M8 16.2c1.8-.1 3.4.3 4.9 1.1M24 12.2c-1.8-.1-3.4.3-4.9 1.1M24 16.2c-1.8-.1-3.4.3-4.9 1.1"/><path class="source-strip-spark" d="m25.2 3 .7 1.5 1.6.7-1.6.7-.7 1.6-.7-1.6-1.5-.7 1.5-.7.7-1.5Z"/></svg></span>`;
+ return `<details class="source-strip"><summary>${sourceIcon}<span class="source-strip-copy"><small>RESPALDO CURRICULAR</small><b>Fuente curricular y alcance de la simulación</b></span><span class="source-strip-toggle" aria-hidden="true"></span></summary><div class="source-strip-body"><p><b>${esc(label)}</b></p><p>${esc(scope)}</p>${link}${references?`<ul>${references}</ul>`:''}</div></details>`;
 }
 function specialtyResourceButton(){
  const course=courses.find(item=>item.id===current?.course_id);
@@ -926,23 +927,23 @@ function decorateStationActivities(root,station){
   if(!found.includes(el)&&!found.some(parent=>parent.contains(el)))found.push(el);
  }));
  const profiles={
-  1:[{verb:'Observa',title:'Reconoce el contexto',purpose:'Distinguir datos visibles de suposiciones.',instruction:'Revisa el caso y anota una decisión y el dato que aún falta.',mode:'LEE Y RESPONDE',minutes:15}],
+  1:[{verb:'Observa',title:'Reconoce el contexto',purpose:'Distinguir datos visibles de suposiciones.',instruction:'Revisa el caso y anota una decisión y el dato que aún falta.',mode:'LEE Y RESPONDE',icon:'eye',minutes:15}],
   2:[
-   {verb:['Analiza','Comprende','Relaciona','Decide','Revisa','Mejora'][step]||'Analiza',title:'Trabaja el aprendizaje',purpose:'Comprender el criterio antes de aplicarlo.',instruction:'Realiza solo la acción indicada y revisa el resultado.',mode:'PRACTICA',minutes:Math.max(10,Number(current?.planning?.station_minutes?.['2_etapa']||15))},
-   {verb:'Responde',title:'Registra tu evidencia',purpose:'Hacer visible cómo pensaste y qué aprendiste.',instruction:'Escribe una respuesta breve y fundamentada; luego guarda para continuar.',mode:'ENTREGA',minutes:8}
+   {verb:['Analiza','Comprende','Relaciona','Decide','Revisa','Mejora'][step]||'Analiza',title:'Trabaja el aprendizaje',purpose:'Comprender el criterio antes de aplicarlo.',instruction:'Realiza solo la acción indicada y revisa el resultado.',mode:'PRACTICA',icon:'book',minutes:Math.max(10,Number(current?.planning?.station_minutes?.['2_etapa']||15))},
+   {verb:'Responde',title:'Registra tu evidencia',purpose:'Hacer visible cómo pensaste y qué aprendiste.',instruction:'Escribe una respuesta breve y fundamentada; luego guarda para continuar.',mode:'ENTREGA',icon:'file',minutes:8}
   ],
   3:[
-   {verb:'Decide',title:'Resuelve la situación',purpose:'Aplicar lo aprendido en un contexto profesional.',instruction:'Lee el caso, elige una acción y fundamenta tu decisión.',mode:'ANALIZA Y RESPONDE',minutes:15},
-   {verb:'Explora',title:'Revisa el escenario',purpose:'Relacionar evidencias del entorno antes de decidir.',instruction:'Abre cada punto, identifica un dato y explica qué demuestra.',mode:'OBSERVA Y RESPONDE',minutes:15}
+   {verb:'Decide',title:'Resuelve la situación',purpose:'Aplicar lo aprendido en un contexto profesional.',instruction:'Lee el caso, elige una acción y fundamenta tu decisión.',mode:'ANALIZA Y RESPONDE',icon:'flag',minutes:15},
+   {verb:'Explora',title:'Revisa el escenario',purpose:'Relacionar evidencias del entorno antes de decidir.',instruction:'Abre cada punto, identifica un dato y explica qué demuestra.',mode:'OBSERVA Y RESPONDE',icon:'search',minutes:15}
   ],
   4:[
-   {verb:'Revisa',title:'Prepárate para demostrar',purpose:'Organizar tu trabajo antes de comenzar la evaluación.',instruction:'Lee las condiciones y comienza cuando estés preparado.',mode:'LEE',minutes:3},
-   {verb:'Responde',title:'Demuestra lo aprendido',purpose:'Comprobar cómo utilizas los aprendizajes del módulo.',instruction:'Resuelve una pregunta a la vez y revisa antes de entregar.',mode:'RESPONDE',minutes:Math.max(10,Number(current?.planning?.station_minutes?.['4']||20))}
+   {verb:'Revisa',title:'Prepárate para demostrar',purpose:'Organizar tu trabajo antes de comenzar la evaluación.',instruction:'Lee las condiciones y comienza cuando estés preparado.',mode:'LEE',icon:'file',minutes:3},
+   {verb:'Responde',title:'Demuestra lo aprendido',purpose:'Comprobar cómo utilizas los aprendizajes del módulo.',instruction:'Resuelve una pregunta a la vez y revisa antes de entregar.',mode:'RESPONDE',icon:'check',minutes:Math.max(10,Number(current?.planning?.station_minutes?.['4']||20))}
   ],
   5:[
-   {verb:'Revisa',title:'Reconoce tu desempeño',purpose:'Identificar avances y oportunidades de mejora.',instruction:'Observa tus resultados y selecciona el aspecto que revisarás.',mode:'LEE Y REVISA',minutes:8},
-   {verb:'Practica',title:'Refuerza lo necesario',purpose:'Convertir la retroalimentación en una mejora concreta.',instruction:'Realiza una práctica breve y comprueba tu respuesta.',mode:'PRACTICA',minutes:10},
-   {verb:'Responde',title:'Cierra tu aprendizaje',purpose:'Definir un siguiente paso personal y alcanzable.',instruction:'Escribe qué lograste y una acción concreta para mejorar.',mode:'ENTREGA',minutes:8}
+   {verb:'Revisa',title:'Reconoce tu desempeño',purpose:'Identificar avances y oportunidades de mejora.',instruction:'Observa tus resultados y selecciona el aspecto que revisarás.',mode:'LEE Y REVISA',icon:'chart',minutes:8},
+   {verb:'Practica',title:'Refuerza lo necesario',purpose:'Convertir la retroalimentación en una mejora concreta.',instruction:'Realiza una práctica breve y comprueba tu respuesta.',mode:'PRACTICA',icon:'tool',minutes:10},
+   {verb:'Responde',title:'Cierra tu aprendizaje',purpose:'Definir un siguiente paso personal y alcanzable.',instruction:'Escribe qué lograste y una acción concreta para mejorar.',mode:'ENTREGA',icon:'flag',minutes:8}
   ]
  };
  const stationDone=Boolean(current?.completed?.[station-1]);
@@ -953,7 +954,7 @@ function decorateStationActivities(root,station){
   const complete=stationDone||el.matches('#case-form')&&Boolean(current?.state?.cases?.[caseIndex])||el.matches('#scene-form')&&Boolean(current?.state?.scene)||el.matches('#close-form')&&Boolean(current?.state?.closed);
   el.classList.add('ordered-activity',`activity-tone-${index%5+1}`);
   el.dataset.activityState=complete?'complete':'current';
-  el.insertAdjacentHTML('afterbegin',`<header class="activity-order-badge activity-focus" aria-label="Actividad ${index+1} de ${found.length}. ${esc(profile.verb)}: ${esc(profile.title)}"><strong>${number}</strong><span>${icon('edit')}</span><div class="activity-focus-title"><small>PASO ${index+1} DE ${found.length} · ${esc(profile.mode)}</small><b><em>${esc(profile.verb)}</em> · ${esc(profile.title)}</b></div><div class="activity-focus-time">${icon('clock')}<span><small>TIEMPO ESTIMADO</small><b>${profile.minutes} min</b></span></div></header><section class="activity-focus-guide" aria-label="Qué harás y para qué"><div><small>QUÉ HARÁS AHORA</small><b>${esc(profile.instruction)}</b></div><div><small>¿PARA QUÉ HAGO ESTO?</small><b>${esc(profile.purpose)}</b></div><span class="activity-focus-signal">${icon(profile.mode.includes('LEE')||profile.mode.includes('OBSERVA')?'eye':'tool')} ${esc(profile.mode)}</span></section>`);
+  el.insertAdjacentHTML('afterbegin',`<header class="activity-order-badge activity-focus" aria-label="Actividad ${index+1} de ${found.length}. ${esc(profile.verb)}: ${esc(profile.title)}"><strong>${number}</strong><span class="activity-focus-main-icon">${icon(profile.icon||'file')}</span><div class="activity-focus-title"><small>PASO ${index+1} DE ${found.length} · ${esc(profile.mode)}</small><b><em>${esc(profile.verb)}</em> · ${esc(profile.title)}</b></div><div class="activity-focus-time">${icon('clock')}<span><small>TIEMPO ESTIMADO</small><b>${profile.minutes} min</b></span></div></header><section class="activity-focus-guide" aria-label="Qué harás y para qué"><div><i>${icon('arrow')}</i><span><small>QUÉ HARÁS AHORA</small><b>${esc(profile.instruction)}</b></span></div><div><i>${icon('flag')}</i><span><small>¿PARA QUÉ HAGO ESTO?</small><b>${esc(profile.purpose)}</b></span></div><strong class="activity-focus-signal">${icon(profile.mode.includes('LEE')||profile.mode.includes('OBSERVA')?'eye':'tool')} ${esc(profile.mode)}</strong></section>`);
  });
 }
 function renderModule(n){
