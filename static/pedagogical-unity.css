@@ -799,6 +799,51 @@ body[data-screen="module"][data-station="1"] .ordered-activity{--focus:#2879b2;-
 body[data-screen="module"][data-station="2"] .ordered-activity{--focus:#7a58b4;--focus-soft:#f0eafa;--focus-line:#d7c7ee}
 body[data-screen="module"][data-station="3"] .ordered-activity{--focus:#087f78;--focus-soft:#e4f5f2;--focus-line:#b8dfda}
 body[data-screen="module"][data-station="4"] .ordered-activity{--focus:#b36b08;--focus-soft:#fff2dc;--focus-line:#eed09e}
+
+/* Evaluación final: base serena; el dorado queda reservado para el logro. */
+body[data-screen="module"][data-station="4"] .station-body.s4>.work-zone{
+  background:#f5f9fc;
+  border-color:#cbdce9;
+}
+body[data-screen="module"][data-station="4"] .activity-primer.s4{
+  --station-color:#176da6;
+  border-top-color:#2e82b8;
+  background:linear-gradient(90deg,#f5faff,#fff);
+}
+body[data-screen="module"][data-station="4"] .activity-primer.s4 .activity-primer-icon{
+  background:#e8f3fb;
+  border-color:#bdd8ea;
+}
+body[data-screen="module"][data-station="4"] .activity-primer.s4 .activity-primer-index{
+  background:#176da6;
+  box-shadow:0 4px 10px rgba(23,109,166,.18);
+}
+body[data-screen="module"][data-station="4"] .activity-primer.s4 .activity-primer-status{
+  color:#16725f;
+}
+body[data-screen="module"][data-station="4"] .work-zone>.exam-title{
+  padding:16px 18px;
+  border:1px solid #d2e1ec;
+  border-left:5px solid #2e82b8;
+  border-radius:8px;
+  background:#fff;
+  box-shadow:0 4px 14px rgba(18,55,88,.05);
+}
+body[data-screen="module"][data-station="4"] .exam-title .big-number.s4{
+  background:#176da6!important;
+  box-shadow:0 5px 12px rgba(23,109,166,.2);
+}
+body[data-screen="module"][data-station="4"] .exam-pill{
+  background:#e8f3fb;
+  color:#176da6;
+  border:1px solid #bdd8ea;
+}
+body[data-screen="module"][data-station="4"] .exam-title .eyebrow{color:#176da6}
+body[data-screen="module"][data-station="4"] .exam-title .time{
+  color:#176da6;
+  background:#eef7fc;
+  border-color:#c8deed;
+}
 body[data-screen="module"][data-station="5"] .ordered-activity{--focus:#26754d;--focus-soft:#e8f5ed;--focus-line:#bedfc9}
 body[data-screen="module"] .activity-focus{grid-template-columns:66px 48px minmax(0,1fr) auto;margin-bottom:0;border-top:4px solid var(--focus);border-radius:8px 8px 0 0;background:linear-gradient(90deg,var(--focus-soft),#fff 34%)}
 body[data-screen="module"] .activity-focus>strong{color:var(--focus)}
