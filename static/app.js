@@ -257,6 +257,7 @@ function currentModuleIndex(modules){
  return modules.every(m=>m.percent===100)?-1:0;
 }
 const stationIcons=['eye','book','puzzle','list','flag'];
+const stationActions=['Contextualiza','Aprende','Aplica','Demuestra','Reflexiona'];
 function stationModel(i,currentN,completed){
  const n=i+1;
  const isCurrent=n===currentN;
@@ -294,26 +295,15 @@ function learningRoute({currentN=1,completed=[],moduleId=null,course=null,intera
  const mid=moduleId||current?.id||'';
  const models=names.map((_,i)=>stationModel(i,currentN,done));
  const live=`Estás en la estación ${currentN} de 5. ${doneCount} de 5 estaciones completadas.`;
+ const currentModel=models[currentN-1];
+ const currentAction=stationActions[currentN-1];
+ const specialty=course?.specialty||'tu especialidad técnico-profesional';
  return `<section class="panel route-panel lr" aria-label="${esc(title)}. ${esc(live)}">
   <header class="lr-head lr-head-compact" aria-label="Ruta de aprendizaje de las 5 estaciones">
    <span class="lr-head-compact-icon" aria-hidden="true">${workIco('pin')}</span>
-   <div class="lr-head-compact-copy"><small>RUTA DE APRENDIZAJE</small><h2>5 estaciones para aprender haciendo</h2><p>Avanza paso a paso: comprende, aplica, decide, demuestra y reflexiona.</p></div>
-   <div class="lr-head-compact-key" aria-label="Diseño, tecnología y pedagogía"><b>Diseño + tecnología + pedagogía</b><span>${[1,2,3,4,5].map(i=>`<i title="Estación ${i}"></i>`).join('')}</span></div>
+   <div class="lr-head-compact-copy"><small>MI RUTA PROFESIONAL</small><h2>Estación ${currentN} de 5 · ${esc(currentModel.stationName)}</h2><p><b>${currentAction}:</b> ${esc(descriptions[currentN-1])}</p></div>
+   <div class="lr-head-compact-key" aria-label="${doneCount} de 5 estaciones completadas"><b>${doneCount} de 5 completadas</b><span>${[1,2,3,4,5].map(i=>`<i class="${i<=doneCount?'is-done':i===currentN?'is-here':''}" title="Estación ${i}"></i>`).join('')}</span></div>
   </header>
-  <div class="lr-pedagogy" role="note">
-   <span class="lr-pedagogy-ico" aria-hidden="true">${workIco('bulb')}</span>
-   <div class="lr-pedagogy-copy">
-    <p class="lr-pedagogy-kicker">Innovación pedagógica y diseño educativo</p>
-    <p class="lr-pedagogy-text"><b>Aprendizaje interactivo y centrado en ti:</b> recursos visuales, experiencias dinámicas y conexión con situaciones reales del oficio.</p>
-    <p class="lr-pedagogy-sub">Explora, decide y avanza con autonomía.</p>
-   </div>
-   <p class="lr-pedagogy-formula" aria-label="Diseño más Tecnología más Pedagogía igual Experiencias significativas">
-    <span class="lr-pill"><span class="lr-pill-ico" aria-hidden="true">${workIco('palette')}</span><span class="lr-pill-txt">Diseño</span></span><i aria-hidden="true">+</i>
-    <span class="lr-pill"><span class="lr-pill-ico" aria-hidden="true">${workIco('monitor')}</span><span class="lr-pill-txt">Tecnología</span></span><i aria-hidden="true">+</i>
-    <span class="lr-pill"><span class="lr-pill-ico" aria-hidden="true">${workIco('book')}</span><span class="lr-pill-txt">Pedagogía</span></span><i aria-hidden="true">=</i>
-    <span class="lr-pill lr-pill-result"><span class="lr-pill-ico" aria-hidden="true">${workIco('star')}</span><span class="lr-pill-txt">Experiencias significativas</span></span>
-   </p>
-  </div>
   <ol class="lr-track" style="--lr-fill:${fill}%" role="list">${models.map((m,i)=>{
    const st=stationStateLabel(m);
    const cls=`lr-stop s${m.stationNumber} is-${m.stationStatus}${i===4?' is-goal':''}`;
@@ -328,9 +318,13 @@ function learningRoute({currentN=1,completed=[],moduleId=null,course=null,intera
    const Tag=interactive?'button':'div';
    return `<li class="${cls}" data-station-number="${m.stationNumber}" data-station-status="${m.stationStatus}" data-station-name="${esc(m.stationName)}" data-completed="${m.isCompleted}" data-available="${m.isAvailable}" data-locked="${m.isLocked}" data-current="${m.isCurrent}">
     <span class="lr-node" aria-hidden="true"><span class="lr-num">${m.stationNumber}</span>${badge}</span>
-    <${Tag} ${attrs}><span class="lr-media" aria-hidden="true"><img src="${stationRouteArt(i+1,course)}" alt="" width="960" height="640" loading="eager" fetchpriority="${i===0?'high':'low'}" decoding="async"><span class="lr-media-shade"></span>${m.isCurrent?`<span class="lr-here-pill">Estás aquí</span>`:''}${m.isCompleted?`<span class="lr-done-pill">Completada</span>`:''}</span><span class="lr-body">${workIco(stationIcons[i])}<b class="lr-name">${stationTitleMarkup(m.stationName)}</b><small class="lr-purpose">${esc(descriptions[i])}</small>${hint}${stationCta(m)}</span></${Tag}>
+    <${Tag} ${attrs}><span class="lr-body"><span class="lr-stage-icon" aria-hidden="true">${workIco(stationIcons[i])}</span><small class="lr-action">${stationActions[i]}</small><b class="lr-name">${stationTitleMarkup(m.stationName)}</b><small class="lr-purpose">${esc(descriptions[i])}</small>${hint}${stationCta(m)}</span></${Tag}>
    </li>`;
   }).join('')}</ol>
+  <details class="lr-context">
+   <summary>${workIco('tool')} ¿Para qué me servirá en mi especialidad?</summary>
+   <p>Esta etapa fortalece tu capacidad para <b>${currentAction.toLowerCase()}</b> y tomar decisiones fundamentadas en situaciones de ${esc(specialty)}.</p>
+  </details>
   <div class="lr-progress" role="group" aria-label="${doneCount} de 5 estaciones completadas">
    <span class="lr-progress-label">${workIco('flag')}<span>Tu progreso <b>${doneCount} de 5 estaciones completadas</b></span></span>
    <span class="lr-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="${doneCount}">
@@ -970,6 +964,11 @@ function renderModule(n){
  setTimeout(()=>{
   if(view.name!=='module'||view.station!==n||!stationBody||!document.body.contains(stationBody))return;
   try{
+   const routeTrack=document.querySelector('.route-panel.lr .lr-track');
+   const currentStop=routeTrack?.querySelector('.lr-stop.is-current');
+   if(routeTrack&&currentStop&&routeTrack.scrollWidth>routeTrack.clientWidth){
+    routeTrack.scrollLeft=Math.max(0,currentStop.offsetLeft-(routeTrack.clientWidth-currentStop.offsetWidth)/2);
+   }
    if(typeof bindActivity==='function')bindActivity(stationBody);
    if(window.AulaAccess)window.AulaAccess.hydrate(stationBody);
    if(window.AulaVisual)window.AulaVisual.hydrate(stationBody);
