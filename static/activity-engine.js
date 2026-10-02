@@ -54,17 +54,17 @@ function activityMeta(exp) {
 function instructionContract(item, overrides) {
   const c = Object.assign({}, item?.instruction || {}, overrides || {});
   const rows = [
-    ['Qué debes hacer', c.action],
-    ['Sobre qué', c.object],
-    ['Cómo comenzar', c.start],
-    ['Recurso', c.resource],
-    ['Qué debes entregar', c.response],
-    ['Condición de cierre', c.completion]
+    ['Qué debes hacer', c.action, 'tool', 'action'],
+    ['Sobre qué', c.object, 'search', 'object'],
+    ['Cómo comenzar', c.start, 'arrow', 'start'],
+    ['Recurso', c.resource, 'book', 'resource'],
+    ['Qué debes entregar', c.response, 'file', 'response'],
+    ['Condición de cierre', c.completion, 'check', 'completion']
   ].filter(([, value]) => String(value || '').trim());
   if (!rows.length) return '';
   return `<aside class="act-contract" aria-label="Instrucción completa de la actividad">
-    ${rows.map(([label, value]) => `<div><b>${esc(label)}</b><span>${esc(value)}</span></div>`).join('')}
-    ${c.purpose ? `<p><b>Para qué:</b> ${esc(c.purpose)}</p>` : ''}
+    ${rows.map(([label, value, ico, kind]) => `<div class="act-contract-${kind}"><i aria-hidden="true">${typeof workIco==='function'?workIco(ico):icon(ico)}</i><span><b>${esc(label)}</b><em>${esc(value)}</em></span></div>`).join('')}
+    ${c.purpose ? `<p><i aria-hidden="true">${typeof workIco==='function'?workIco('target'):icon('target')}</i><span><b>Para qué</b><em>${esc(c.purpose)}</em></span></p>` : ''}
   </aside>`;
 }
 function professionalDocument(text) {

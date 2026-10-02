@@ -36,7 +36,7 @@ function enrichedContext(){const c=current.content;const course=(typeof courses!
   ${workCard('book','¿Qué aprenderás?',`<ul class="learning-objectives">${c.aes.map(a=>`<li>${esc(a.short_title||a.title)}</li>`).join('')}</ul><p class="muted small">En este módulo vas a llegar a esto. En esta estación solo observas y anticipas.</p>`,'work-card-purpose ctx-learn')}
   ${workCard('info','Antes de comenzar','<p>Lee el caso, identifica qué información tienes y distingue los datos de las suposiciones. Las actividades posteriores te ayudarán a fundamentar tus decisiones.</p><span class="badge">Simulación didáctica</span>','work-card-prep ctx-ready')}
  </div>
- <section class="work-card work-card-activity ctx-activity"><div class="work-activity-head">${workIco('edit')}<div><h3>Actividad que debes desarrollar</h3><p>Caso profesional y reflexión inicial.</p></div></div>
+ <section class="work-card work-card-activity ctx-activity"><div class="work-activity-head">${workIco('puzzle')}<div><h3>Actividad que debes desarrollar</h3><p>Caso profesional y reflexión inicial.</p></div></div>
  ${s1Route}
  ${typeof instructionContract==='function'?instructionContract({instruction:c.context_instruction}):''}
  <div class="context-detail">
