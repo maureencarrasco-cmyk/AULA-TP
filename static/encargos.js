@@ -89,8 +89,8 @@ function paintEncargos(host){
   const aePill=ae?` · AE ${ae}`:'';
   const countPill=station2?`${items.length} encargos · este AE`:`${doneN}/${items.length} · ${hours} h aquí`;
   const lead=station2
-    ? `Practica el oficio de este aprendizaje esperado. Elige un encargo, lee qué producto se pide y responde con un dato que esté en el plano, la leyenda, la ficha o las notas. Si el documento no lo trae, indica qué falta y a quién lo consultarías. Es formativa: no califica ni abre la evaluación.`
-    : `Cierra el oficio del módulo ${mod}. Elige un encargo, lee el producto pedido y responde con un dato del plano, la leyenda, la ficha o las notas. Si falta información, nómbrala y di a quién la consultarías. Es formativa: no califica ni abre la evaluación.`;
+    ? `Practica el oficio de este aprendizaje esperado. Elige un encargo, lee qué producto se pide y responde con un dato que esté en el plano, la leyenda, la ficha o las notas. Si el documento no lo trae, indica qué falta y a quién lo consultarías.`
+    : `Cierra el oficio del módulo ${mod}. Elige un encargo, lee el producto pedido y responde con un dato del plano, la leyenda, la ficha o las notas. Si falta información, nómbrala y di a quién la consultarías.`;
   const stripNote=hasOpen
     ? 'Ahora estás en el paso 3: escribe tu evidencia. Usa un dato del plano, la leyenda, la ficha o las notas. Si no está, indica qué falta y a quién lo consultarías.'
     : (station2

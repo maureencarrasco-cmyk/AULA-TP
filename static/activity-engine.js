@@ -317,9 +317,7 @@ function oficioVideoPanel(host, pack, activity){
   const pregunta=station===1
     ? 'Elige el paso y deja el dato. No resumas el video.'
     : 'Marca la interferencia o el tramo que no calza y escribe qué dato del plano, la leyenda o las notas lo confirma.';
-  const registerHelp=station===1
-    ? 'Observación de contextualización. Esta estación no califica.'
-    : 'Evidencia docente de oficio.';
+  const registerHelp=station===1?'':'Evidencia registrada.';
   return `<article class="formative-item oficio-task oficio-video-panel" data-kind="video" data-oficio-id="${esc(activity.id)}" data-paso="${esc(paso)}">
     <header class="oficio-task-head">
       <div><span class="oficio-respond-chip">Respondes aquí</span><h5>La secuencia que viste arriba</h5></div>
@@ -331,7 +329,7 @@ function oficioVideoPanel(host, pack, activity){
     <p class="oficio-pregunta">${esc(pregunta)}</p>
     <label class="oficio-field">Escribe aquí<textarea id="oficio-evidencia" maxlength="400" data-pack-field="video-note" placeholder="Paso: ${esc(chosen.label)}&#10;Dato que vi: …&#10;Por eso freno o confirmo: …">${esc(draft)}</textarea></label>
     <p class="oficio-help">Un paso. Un dato. No resumas el video.</p>
-    <div class="formative-check"><button type="button" class="primary oficio-register" data-pack-check>Registrar evidencia</button><p class="muted small">${esc(registerHelp)}</p><p class="act-feedback" aria-live="polite"></p></div>
+    <div class="formative-check"><button type="button" class="primary oficio-register" data-pack-check>Registrar evidencia</button>${registerHelp?`<p class="muted small">${esc(registerHelp)}</p>`:''}<p class="act-feedback" aria-live="polite"></p></div>
   </article>`;
 }
 function bindOficioVideoPanel(host, article){
@@ -376,7 +374,7 @@ function openOficioActivity(host, activity){
       ${instructionContract(pack)}
       <p class="oficio-task-prompt">${esc(pack.prompt||pack.action||'')}</p>
       <div class="formative-board">${formativeItemBoard(pack)}</div>
-      <div class="formative-check"><button type="button" class="primary oficio-register" data-pack-check>Registrar evidencia</button>${optional?'<p class="muted small">Observación de contextualización. Esta estación no califica.</p>':'<p class="muted small">Evidencia docente de oficio.</p>'}<p class="act-feedback" aria-live="polite"></p></div>
+      <div class="formative-check"><button type="button" class="primary oficio-register" data-pack-check>Registrar evidencia</button>${optional?'':'<p class="muted small">Evidencia registrada.</p>'}<p class="act-feedback" aria-live="polite"></p></div>
     </article>`;
   }
   const close=detail.querySelector('[data-oficio-close]');
@@ -460,7 +458,7 @@ function bindFormativeItem(li){
         const note=(li.querySelector('[data-pack-field="video-note"]')?.value||'').trim();
         ok=!!paso&&note.length>=24;
         msg=ok
-          ?(typeof view!=='undefined'&&view.station===1?'Observación de contextualización. Esta estación no califica.':'Evidencia registrada: un paso, un dato del plano y por qué frenas.')
+          ?(typeof view!=='undefined'&&view.station===1?'Observación registrada.':'Evidencia registrada: un paso, un dato del plano y por qué frenas.')
           :'Elige un paso de la lectura y deja un dato visible. No resumas el video.';
       }else if(kind==='read'){
         ok=packOkList(t.extract?.ok, li.querySelector('[data-pack-field="extract"]')?.value);

@@ -33,7 +33,8 @@ const localDrafts = {
     if (!this.enabled()) return;
     try {
       localStorage.setItem(this.key(activity), JSON.stringify({baseline:this.baseline(activity), values}));
-      this.status(form, 'Borrador guardado automáticamente en este navegador. Aún no entregado.');
+      const status=form?.querySelector('[data-autosave-status]');
+      if(status) status.remove();
     } catch {
       this.status(form, 'No se pudo guardar el borrador. Conserva esta pantalla y entrega tu respuesta antes de salir.');
     }
@@ -72,7 +73,7 @@ const localDrafts = {
           else if (typeof saved[field.name] === 'string') field.value = saved[field.name].slice(0,10000);
         }
       }
-      this.status(form, saved ? 'Borrador recuperado de este navegador. Aún no entregado.' : 'Guardado automático en este navegador al escribir. Entrega la respuesta para registrar tu avance.');
+      if (saved) this.status(form, 'Respuesta anterior recuperada.');
       const capture = () => {
         const values = kind === 'exam' ? structuredClone(examDraft) : Object.fromEntries(new FormData(form));
         this.write(activity, values, form);

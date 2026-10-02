@@ -53,7 +53,7 @@ function enrichedContext(){const c=current.content;const course=(typeof courses!
   <div class="ctx-flow-next" aria-hidden="true">↓</div>
   <section class="ctx-step ctx-step-close ped-step" data-action="justify" data-state="idle">
    ${closeHead}
-   <article class="ctx-block ctx-reply">${workIco('edit')}<div><span class="work-kicker">✎ Tu respuesta</span>${reflectionForm('context-form',c.reflection_prompt||'¿Qué revisarías primero y qué información necesitarías confirmar?',current.state.context,'Continuar a Aprendizajes esperados')}<p class="muted small">Terminas cuando identificas un elemento reconocido, anticipas una revisión y señalas al menos un dato que falta. Esta estación no califica.</p></div></article>
+   <article class="ctx-block ctx-reply">${workIco('edit')}<div><span class="work-kicker">✎ Tu respuesta</span>${reflectionForm('context-form',c.reflection_prompt||'¿Qué revisarías primero y qué información necesitarías confirmar?',current.state.context,'Continuar a Aprendizajes esperados')}</div></article>
    <footer class="ctx-learning-close"><b>OBSERVA → RECONOCE → ACTIVA → ANTICIPA</b><span>Ya comprendes la situación inicial y qué necesitas aprender. Continúa para desarrollar los aprendizajes esperados.</span></footer>
   </section>
  </div>
