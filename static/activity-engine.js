@@ -267,7 +267,6 @@ function primeraObservacionMarkup(content){
         <span class="primera-kicker">Mira como técnico</span>
         <h4>${esc(title)}</h4>
       </div>
-      <span class="primera-chip">No califica</span>
     </header>
     <p class="primera-observacion-help">Esto prepara. La evidencia de oficio se registra en Situación integradora.</p>
     <fieldset class="primera-observacion-foco">

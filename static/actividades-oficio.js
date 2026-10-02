@@ -1,9 +1,9 @@
 'use strict';
 /* Mapa de acción del oficio. Un componente, muchas estaciones. */
 (function (global) {
-  const DEFAULT_LEAD = 'Cada card deja una evidencia para tu docente.';
+  const DEFAULT_LEAD = 'Cada actividad te permite practicar una acción concreta del oficio y registrar una evidencia breve.';
   const LEAD_BY_STATION = {
-    1: 'En esta estación basta un paso y un dato. No califica.',
+    1: 'Observa el procedimiento, reconoce un paso y registra un dato visible.',
     3: 'Marca la interferencia o el tramo que no calza y escribe qué dato del plano, la leyenda o las notas lo confirma.'
   };
   const OPTIONAL_S1 = new Set(['walk3d', 'integrate3d', 'procedure', 'cube', 'observe', 'read', 'pair', 'agent', 'error', 'context', 'before', 'log', 'argue']);
@@ -33,6 +33,7 @@
     book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h6a3 3 0 013 3v13a3 3 0 00-3-3H5z"/><path d="M19 4h-6a3 3 0 00-3 3v13a3 3 0 013-3h6z"/></svg>',
     list: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="7" r="1.4"/><circle cx="6" cy="12" r="1.4"/><circle cx="6" cy="17" r="1.4"/><path d="M10 7h9M10 12h9M10 17h9"/></svg>',
     pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.2"/></svg>'
+    ,tool: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.8-3.8a6 6 0 01-8 8l-6.9 6.9a2.1 2.1 0 01-3-3l6.9-6.9a6 6 0 018-8z"/></svg>'
   };
   const ICON_OF = {
     observe: 'clipboard', error: 'clipboard',
@@ -171,25 +172,25 @@
     el.setAttribute('aria-label', 'Actividades de oficio');
     const writeLabel = station === 1 ? 'Escribe un dato' : 'Escribe aquí tu evidencia';
     const stripNote = station === 1
-      ? 'En esta estación basta un paso y un dato. No califica.'
-      : 'Estás en el paso 2 y 3 de Secuencia del video.';
+      ? 'Sigue la ruta: observa, selecciona un paso y registra un dato.'
+      : 'Sigue la ruta: revisa el método, elige un paso y registra tu evidencia.';
     const strip = hasVideo ? `
       <div class="oficio-do" role="group" aria-label="Qué debes hacer">
-        <button type="button" class="oficio-do-btn is-video" data-oficio-do="video"><span class="oficio-do-n">1</span><small>Mira el video de arriba</small></button>
-        <button type="button" class="oficio-do-btn is-paso is-ahora" data-oficio-do="paso"><span class="oficio-ahora">Ahora</span><span class="oficio-do-n">2</span><small>Elige un paso de la lectura</small></button>
-        <button type="button" class="oficio-do-btn is-write" data-oficio-do="write"><span class="oficio-do-n">3</span><small>${esc(writeLabel)}</small></button>
+        <button type="button" class="oficio-do-btn is-video" data-oficio-do="video"><span class="oficio-do-n">1</span><span class="oficio-do-icon">${ICONS.play}</span><small>Mira el video de arriba</small></button>
+        <button type="button" class="oficio-do-btn is-paso is-ahora" data-oficio-do="paso"><span class="oficio-ahora">Ahora</span><span class="oficio-do-n">2</span><span class="oficio-do-icon">${ICONS.list}</span><small>Elige un paso de la lectura</small></button>
+        <button type="button" class="oficio-do-btn is-write" data-oficio-do="write"><span class="oficio-do-n">3</span><span class="oficio-do-icon">${ICONS.clipboard}</span><small>${esc(writeLabel)}</small></button>
       </div>
       <p class="oficio-do-note">${esc(stripNote)}</p>` : '';
     el.innerHTML = `
       <header class="oficio-head">
-        <span class="oficio-plus" aria-hidden="true">+</span>
+        <span class="oficio-plus" aria-hidden="true">${ICONS.tool}</span>
         <div class="oficio-titles">
           <span class="oficio-kicker">TÚ ACTÚAS · EL ESPACIO ENSEÑA</span>
           <h4>Actividades de oficio</h4>
         </div>
         <div class="oficio-pills">
-          <span class="oficio-pill is-station">Estación ${station} de 5</span>
-          <span class="oficio-pill is-count">${station === 1 ? '1 paso · 1 dato' : exercises + ' ejercicios'}</span>
+          <span class="oficio-pill is-station">${ICONS.pin} Estación ${station} de 5</span>
+          <span class="oficio-pill is-count">${ICONS.list} ${station === 1 ? '1 paso · 1 dato' : exercises + ' ejercicios'}</span>
         </div>
       </header>
       <p class="oficio-lead">${esc(opts.lead || DEFAULT_LEAD)}</p>
