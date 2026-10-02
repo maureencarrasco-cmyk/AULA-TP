@@ -66,13 +66,13 @@
 .oficio-do-btn{
   position:relative;
   display:flex;align-items:center;gap:10px;
-  min-height:60px;width:100%;
-  margin:0;padding:9px 12px 9px 10px;
+  min-height:64px;width:100%;overflow:hidden;
+  margin:0;padding:10px 62px 10px 10px;
   border:1px solid transparent;border-radius:12px;
   text-align:left;cursor:pointer;font-weight:600;
   color:var(--oficio-navy);box-shadow:none;filter:none;
 }
-.oficio-do-icon{display:grid;place-items:center;width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.72);flex:0 0 auto}
+.oficio-do-icon{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.72);flex:0 0 30px}
 .oficio-do-icon .icon{width:18px;height:18px}
 .oficio-do-btn .oficio-do-n{
   width:26px;height:26px;border-radius:50%;
@@ -90,8 +90,8 @@
   box-shadow:0 0 0 2px #fff,0 0 0 4px #8FB0D4;
 }
 .oficio-ahora{
-  position:absolute;top:-7px;right:8px;
-  padding:1px 7px;border-radius:999px;
+  position:absolute;top:7px;right:8px;
+  padding:2px 7px;border-radius:999px;
   background:#3D5F8A;color:#fff;
   font-size:10px;font-weight:800;letter-spacing:.02em;
 }
