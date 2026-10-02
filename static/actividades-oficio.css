@@ -199,6 +199,12 @@
   display:grid;grid-template-columns:46px minmax(0,1fr) auto;align-items:start;gap:12px;
   margin:0 0 14px;padding-bottom:14px;border-bottom:1px solid #D8E4EC;
 }
+.oficio-video-panel>.oficio-task-head{position:relative;margin:-18px -18px 16px;padding:18px 18px 16px;border-bottom:1px solid #BFD8E4;border-radius:14px 14px 0 0;background:linear-gradient(105deg,#E5F5F1 0%,#EEF6FC 58%,#fff 100%);overflow:hidden}
+.oficio-video-panel>.oficio-task-head::after{content:"";position:absolute;right:0;top:0;width:120px;height:5px;background:linear-gradient(90deg,#0D9B8A,#2879B2)}
+.oficio-video-panel .oficio-task-symbol{width:54px;height:54px;border-radius:13px;background:#0D9B8A;color:#fff;border:0;box-shadow:0 5px 14px rgba(13,155,138,.2)}
+.oficio-video-panel .oficio-task-symbol .icon{width:29px;height:29px}
+.oficio-video-panel .oficio-task-head h5{font-size:21px}
+.oficio-video-panel .oficio-respond-chip{background:#fff;border:1px solid #B8DDD5}
 .oficio-task-symbol{display:grid;place-items:center;width:44px;height:44px;border-radius:11px;background:#DDF2EE;color:#087A6C;border:1px solid #BFE3DB}
 .oficio-task-symbol .icon{width:24px;height:24px}
 .oficio-task-title{min-width:0}
@@ -528,6 +534,7 @@
   .oficio-lectura::before{display:none}
   .oficio-task-head{grid-template-columns:42px minmax(0,1fr)}
   .oficio-task-symbol{width:40px;height:40px}
+  .oficio-video-panel .oficio-task-symbol{width:44px;height:44px}
   .oficio-task-head>.outline{grid-column:1/-1;justify-self:start}
   .oficio-route-block,.oficio-evidence-workspace{padding:12px}
   .oficio-thumb{width:96px;height:54px}

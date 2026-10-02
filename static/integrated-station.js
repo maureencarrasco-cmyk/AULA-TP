@@ -55,7 +55,7 @@ function integrationBottom(){return `<a class="outline" href="#module/${current.
 function bindIntegration(){
  const filter=document.getElementById('integration-filter');
  if(filter)filter.onchange=()=>{integrationFilter=filter.value;integrationPage=0;renderModule(3)};
- const bottom=document.querySelector('.bottom-nav');if(bottom)bottom.innerHTML=integrationBottom();
+ const bottom=document.querySelector('.bottom-nav');if(bottom)bottom.remove();
 }
 document.addEventListener('click',e=>{
  const b=e.target.closest('[data-action]');if(!b||b.disabled||view.station!==3)return;
