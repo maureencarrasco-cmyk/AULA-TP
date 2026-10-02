@@ -901,6 +901,19 @@ function specialtyResourceButton(){
  const href=current.content?.regulatory_resource?.url||'https://www.sec.cl/reglamento-de-seguridad-de-las-instalaciones-de-consumo-de-energia-electrica-decreto-08/';
  return `<a class="sec-ric-fab" href="${esc(href)}" target="_blank" rel="noopener" aria-label="Abrir Pliegos Técnicos Normativos RIC de la SEC" title="Consulta los Pliegos Técnicos Normativos RIC vigentes en la SEC">${icon('file')}<span>SEC · Pliegos RIC</span></a>`;
 }
+function decorateAeOverview(root){
+ const panel=root?.querySelector('.ae-info');
+ if(!panel||panel.querySelector('.ae-context-visual'))return;
+ const course=courses.find(item=>item.id===current?.course_id);
+ const aeItem=current?.content?.aes?.[ae]||{};
+ const image=(current?.content?.media_resources||[]).find(item=>item?.image)?.image||(typeof stationRouteArt==='function'?stationRouteArt(2,course):'');
+ if(!image)return;
+ const tabs=panel.querySelector('.tabs');
+ const visual=document.createElement('figure');
+ visual.className='ae-context-visual';
+ visual.innerHTML=`<img src="${esc(image)}" alt="Contexto profesional del aprendizaje esperado ${ae+1}: ${esc(aeItem.short_title||aeItem.title||'aprendizaje técnico')}" loading="eager" decoding="async"><figcaption>${icon('book')}<span><small>APRENDIZAJE EN CONTEXTO</small><b>Observa dónde aplicarás este aprendizaje</b></span></figcaption>`;
+ tabs?.insertAdjacentElement('afterend',visual);
+}
 function decorateStationActivities(root,station){
  const selectors={
   1:['.ctx-activity'],
@@ -954,6 +967,7 @@ function renderModule(n){
  shell(`${stationHero(n)}${auth.user.role==='teacher'&&n!==3&&n!==4&&n!==5?'<div class="preview-banner">Vista previa docente · Las evidencias del estudiante se generan desde su cuenta.</div>':''}<div class="module-layout${aside?'':' is-wide'}"><div class="module-main">${avanceStrip(n)}${n===4?examStationRoute():n===5?feedbackStationRoute():stationRoute(n)}${stationLearningGuide(n)}${curriculumSourcePanel()}<section class="panel station-body s${n}">${stationActivityPrimer(n)}${content}</section><div class="bottom-nav"><a class="outline" href="${n===1?'#course/'+current.course_id:'#module/'+current.id+'/'+(n-1)}">← ${n===1?'Volver al módulo':'Estación anterior'}</a>${n<5?`<button class="primary" data-action="station" data-n="${n+1}" ${!stationUnlocked(n+1)?'disabled':''}>Continuar a ${names[n]} ${icon('arrow')}</button>`:`<a class="outline" href="#course/${current.course_id}">Volver a mi ruta ${icon('arrow')}</a>`}</div></div>${aside}</div>${specialtyResourceButton()}`);
  bindModuleForms(n);
  const stationBody=document.querySelector('.station-body');
+ if(n===2)decorateAeOverview(stationBody);
  decorateStationActivities(stationBody,n);
  setTimeout(()=>{
   if(view.name!=='module'||view.station!==n||!stationBody||!document.body.contains(stationBody))return;
