@@ -316,9 +316,10 @@ function learningRoute({currentN=1,completed=[],moduleId=null,course=null,intera
       :`type="button" class="lr-card station s${m.stationNumber}" data-action="station" data-n="${m.stationNumber}" data-module="${mid}" ${m.isCurrent?'aria-current="step"':''} aria-label="${esc(label)}"`)
     :`class="lr-card station s${m.stationNumber}" ${m.isCurrent?'aria-current="step"':''} aria-label="${esc(label)}"`;
    const Tag=interactive?'button':'div';
+   const routeImage=typeof stationRouteArt==='function'?stationRouteArt(m.stationNumber,course):`/static/themes/route/station-${m.stationNumber}.webp?v=1`;
    return `<li class="${cls}" data-station-number="${m.stationNumber}" data-station-status="${m.stationStatus}" data-station-name="${esc(m.stationName)}" data-completed="${m.isCompleted}" data-available="${m.isAvailable}" data-locked="${m.isLocked}" data-current="${m.isCurrent}">
     <span class="lr-node" aria-hidden="true"><span class="lr-num">${m.stationNumber}</span>${badge}</span>
-    <${Tag} ${attrs}><span class="lr-body"><span class="lr-stage-icon" aria-hidden="true">${workIco(stationIcons[i])}</span><small class="lr-action">${stationActions[i]}</small><b class="lr-name">${stationTitleMarkup(m.stationName)}</b><small class="lr-purpose">${esc(descriptions[i])}</small>${hint}${stationCta(m)}</span></${Tag}>
+    <${Tag} ${attrs}><span class="lr-card-photo" aria-hidden="true"><img src="${esc(routeImage)}" alt="" loading="${m.isCurrent?'eager':'lazy'}" decoding="async"><span class="lr-photo-shade"></span><span class="lr-photo-caption">Estación ${m.stationNumber}</span></span><span class="lr-body"><span class="lr-stage-icon" aria-hidden="true">${workIco(stationIcons[i])}</span><small class="lr-action">${stationActions[i]}</small><b class="lr-name">${stationTitleMarkup(m.stationName)}</b><small class="lr-purpose">${esc(descriptions[i])}</small>${hint}${stationCta(m)}</span></${Tag}>
    </li>`;
   }).join('')}</ol>
   <details class="lr-context">

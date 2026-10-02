@@ -954,12 +954,17 @@ body[data-screen="module"] .lr-head-compact-key i{background:#d6e1ea!important}
 body[data-screen="module"] .lr-head-compact-key i.is-done{background:#29936b!important}
 body[data-screen="module"] .lr-head-compact-key i.is-here{background:#176bbb!important;box-shadow:0 0 0 2px #fff,0 0 0 4px #9bc7eb}
 body[data-screen="module"] .lr .lr-track{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:10px!important;padding:18px 0 4px!important}
-body[data-screen="module"] .lr .lr-card.station{min-height:190px!important;padding:0!important;border-radius:12px!important;border-width:1px 1px 4px!important;background:#fff!important;overflow:visible!important;box-shadow:0 4px 12px rgba(16,54,85,.08)!important}
+body[data-screen="module"] .lr .lr-card.station{min-height:274px!important;padding:0!important;border-radius:12px!important;border-width:1px 1px 4px!important;background:#fff!important;overflow:hidden!important;box-shadow:0 4px 12px rgba(16,54,85,.08)!important}
 body[data-screen="module"] .lr .lr-card.station:hover{transform:translateY(-2px)!important;box-shadow:0 8px 18px rgba(16,54,85,.13)!important}
 body[data-screen="module"] .lr .lr-card.station:active{transform:translateY(0)!important;box-shadow:0 2px 7px rgba(16,54,85,.12)!important}
 body[data-screen="module"] .lr .lr-card.station:focus-visible{outline:3px solid #176bbb!important;outline-offset:3px!important}
 body[data-screen="module"] .lr .lr-stop.is-current .lr-card.station{border-color:var(--lr)!important;border-width:2px 2px 5px!important;background:linear-gradient(180deg,var(--lr-soft),#fff 46%)!important;box-shadow:0 0 0 3px #fff,0 0 0 6px var(--lr-soft),0 8px 20px rgba(16,54,85,.13)!important}
-body[data-screen="module"] .lr .lr-body{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:5px!important;padding:26px 12px 11px!important;height:100%!important}
+body[data-screen="module"] .lr-card-photo{position:relative;display:block;width:100%;height:86px;flex:0 0 86px;overflow:hidden;background:var(--lr-soft)}
+body[data-screen="module"] .lr-card-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .25s ease}
+body[data-screen="module"] .lr-card.station:hover .lr-card-photo img{transform:scale(1.035)}
+body[data-screen="module"] .lr-photo-shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 42%,rgba(8,35,63,.7))}
+body[data-screen="module"] .lr-photo-caption{position:absolute;left:10px;bottom:7px;padding:3px 7px;border-radius:5px;background:rgba(255,255,255,.94);color:var(--lr-ink);font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;box-shadow:0 2px 6px rgba(8,35,63,.15)}
+body[data-screen="module"] .lr .lr-body{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:5px!important;padding:10px 12px 11px!important;height:100%!important}
 body[data-screen="module"] .lr-stage-icon{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:var(--lr-soft);color:var(--lr)}
 body[data-screen="module"] .lr-stage-icon .work-ico,body[data-screen="module"] .lr-stage-icon svg{width:18px!important;height:18px!important}
 body[data-screen="module"] .lr-action{font-size:9px!important;font-weight:900!important;text-transform:uppercase;color:var(--lr-ink)!important;letter-spacing:.04em}
@@ -974,7 +979,7 @@ body[data-screen="module"] .lr-context summary{display:flex;align-items:center;g
 body[data-screen="module"] .lr-context summary .work-ico,body[data-screen="module"] .lr-context summary svg{width:17px;height:17px}
 body[data-screen="module"] .lr-context p{margin:0;padding:0 12px 12px;font-size:11px;line-height:1.45;color:#35566a}
 @media(max-width:1050px){body[data-screen="module"] .lr .lr-track{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory;padding:18px 4px 10px!important}body[data-screen="module"] .lr .lr-stop{flex:0 0 220px!important;scroll-snap-align:start}}
-@media(max-width:620px){body[data-screen="module"] .route-panel.lr{padding:10px!important}body[data-screen="module"] .lr .lr-stop{flex-basis:min(235px,76vw)!important}body[data-screen="module"] .lr .lr-card.station{min-height:180px!important}body[data-screen="module"] .bottom-nav{position:sticky;bottom:8px;z-index:20;padding:7px;border:1px solid #bfd3e4;border-radius:11px;background:rgba(247,251,255,.96);box-shadow:0 8px 24px rgba(10,43,76,.18);backdrop-filter:blur(8px)}body[data-screen="module"] .bottom-nav .primary{font-weight:800;box-shadow:0 4px 10px rgba(0,104,239,.2)}}
+@media(max-width:620px){body[data-screen="module"] .route-panel.lr{padding:10px!important}body[data-screen="module"] .lr .lr-stop{flex-basis:min(235px,76vw)!important}body[data-screen="module"] .lr .lr-card.station{min-height:264px!important;display:flex!important;grid-template-columns:none!important}body[data-screen="module"] .lr-card-photo{height:82px;flex-basis:82px}body[data-screen="module"] .lr .lr-body{min-height:176px!important}body[data-screen="module"] .bottom-nav{position:sticky;bottom:8px;z-index:20;padding:7px;border:1px solid #bfd3e4;border-radius:11px;background:rgba(247,251,255,.96);box-shadow:0 8px 24px rgba(10,43,76,.18);backdrop-filter:blur(8px)}body[data-screen="module"] .bottom-nav .primary{font-weight:800;box-shadow:0 4px 10px rgba(0,104,239,.2)}}
 
 /* Jerarquia, agrupacion y continuidad comunes a los 45 cursos */
 body[data-screen="module"] .module-main{width:100%;min-width:0}
