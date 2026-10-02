@@ -1725,6 +1725,41 @@ body[data-station="5"] .work-zone-s5>.az-steps-v2{
   border-radius:12px!important;
   background:#eef5fa!important;
 }
+
+/* Estacion 5: pestañas legibles y diferenciadas por etapa */
+body[data-station="5"] .work-zone-s5>.az-steps,
+body[data-station="5"] .work-zone-s5>.az-steps-v2{
+  gap:10px!important;
+  padding:9px!important;
+  background:#eaf2f8!important;
+  border-color:#b9d1e3!important;
+}
+body[data-station="5"] .az-step{
+  min-height:88px!important;
+  border-width:1px 1px 4px!important;
+  box-shadow:0 3px 8px rgba(20,58,91,.09)!important;
+}
+body[data-station="5"] .az-step.tone-blue:not(.is-active){background:#eef7ff!important;border-color:#8dc5ee!important;color:#1768a7!important}
+body[data-station="5"] .az-step.tone-violet:not(.is-active){background:#f5f1ff!important;border-color:#b8a3ed!important;color:#7046bd!important}
+body[data-station="5"] .az-step.tone-purple:not(.is-active){background:#f7f0ff!important;border-color:#c49be8!important;color:#7d3eb5!important}
+body[data-station="5"] .az-step.tone-green:not(.is-active){background:#eefaf5!important;border-color:#8ed4bb!important;color:#197c61!important}
+body[data-station="5"] .az-step.tone-orange:not(.is-active){background:#fff7e9!important;border-color:#efc474!important;color:#a96309!important}
+body[data-station="5"] .az-step.tone-blue.is-active{background:#1769b5!important;border-color:#0f4f8d!important}
+body[data-station="5"] .az-step.tone-violet.is-active{background:#7047bf!important;border-color:#563397!important}
+body[data-station="5"] .az-step.tone-purple.is-active{background:#7f3fb7!important;border-color:#602c8d!important}
+body[data-station="5"] .az-step.tone-green.is-active{background:#197d62!important;border-color:#105c48!important}
+body[data-station="5"] .az-step.tone-orange.is-active{background:#b86b08!important;border-color:#874d04!important}
+body[data-station="5"] .az-step-copy{gap:3px!important}
+body[data-station="5"] .az-step-copy b{font-size:14px!important;line-height:1.15!important}
+body[data-station="5"] .az-step-copy small{font-size:10px!important;font-weight:600!important;line-height:1.3!important}
+body[data-station="5"] .az-step:not(.is-active) .az-step-copy small{color:#3f607a!important}
+body[data-station="5"] .az-step-ico{width:22px!important;flex:0 0 22px!important}
+body[data-station="5"] .az-step-rule{height:38px!important;background:#bfd2e0!important}
+body[data-station="5"] .az-step.is-active::after{display:none!important}
+
+@media(max-width:1050px){
+  body[data-station="5"] .az-step{flex-basis:255px!important}
+}
 body[data-station="5"] .az-step,
 body[data-station="5"] .az-step:first-child,
 body[data-station="5"] .az-step:last-child{
