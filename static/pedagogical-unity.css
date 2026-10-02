@@ -1078,3 +1078,25 @@ body[data-station="4"] .exam-review.is-marked{background:#b76d0c!important;borde
 body[data-station="4"] .act-feedback,
 body[data-station="4"] .practice-result{display:none!important}
 @media(max-width:620px){body[data-screen="module"] .learning-support-level{grid-template-columns:34px minmax(0,1fr)}body[data-screen="module"] .learning-support-level>i{grid-column:1/-1;width:100%}body[data-station="4"] .exam-progress-summary{flex-wrap:wrap}body[data-station="4"] .exam-progress-summary small{width:100%;margin-left:0}}
+
+/* Continuidad cognitiva: cada experiencia reutiliza la anterior. */
+body[data-screen="module"] .activity-continuity{display:flex;align-items:center;gap:10px;margin:-2px 0 12px;padding:9px 11px;border:1px solid #d7e2eb;border-radius:7px;background:#f8fafc;color:#36566f}
+body[data-screen="module"] .activity-continuity>.icon{width:19px;height:19px;flex:0 0 19px;color:#5c6fb0}
+body[data-screen="module"] .activity-continuity span{min-width:0}
+body[data-screen="module"] .activity-continuity small{font-size:8px;font-weight:900;color:#667b8f}
+body[data-screen="module"] .activity-continuity b{display:block;font-size:10px;line-height:1.4;color:#264b68}
+body[data-station="3"] .activity-continuity{border-color:#d6cbed;background:#f8f5fc}
+body[data-station="3"] .activity-continuity>.icon{color:#7258a8}
+body[data-station="4"] .activity-continuity{border-color:#d1dce7;background:#f4f7fa}
+body[data-station="4"] .activity-continuity>.icon{color:#466b8c}
+body[data-station="5"] .activity-continuity{border-color:#c9e2d7;background:#f1f9f5}
+body[data-station="5"] .activity-continuity>.icon{color:#28795e}
+
+/* Las alternativas comparten tratamiento para no sugerir respuestas por diseño. */
+body[data-screen="module"] .mcq-options .option,
+body[data-screen="module"] .act-choices .option,
+body[data-screen="module"] .option{color:#173b5f;font-weight:600}
+body[data-screen="module"] .mcq-options .option:not(:has(input:checked)),
+body[data-screen="module"] .act-choices .option:not(:has(input:checked)),
+body[data-screen="module"] .option:not(:has(input:checked)){background:#fff!important;border-color:#c8d8e6!important}
+@media(max-width:620px){body[data-screen="module"] .activity-continuity{align-items:flex-start;margin-bottom:10px}}

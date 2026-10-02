@@ -915,6 +915,32 @@ function decorateAeOverview(root){
  visual.innerHTML=`<img src="${esc(image)}" alt="Contexto profesional del aprendizaje esperado ${ae+1}: ${esc(aeItem.short_title||aeItem.title||'aprendizaje técnico')}" loading="eager" decoding="async"><figcaption>${icon('book')}<span><small>APRENDIZAJE EN CONTEXTO</small><b>Observa dónde aplicarás este aprendizaje</b></span></figcaption>`;
  tabs?.insertAdjacentElement('afterend',visual);
 }
+function cognitiveLevel(operation){
+ const levels={Conocer:1,Observar:1,Reconocer:2,Comprender:3,Relacionar:4,Aplicar:5,Analizar:6,Decidir:7,Resolver:8,Justificar:9,Reflexionar:9,Proyectar:9};
+ return levels[operation]||5;
+}
+function activityContinuity(station,index,profile){
+ if(station===1)return 'Activa lo que ya sabes y úsalo para reconocer el desafío profesional.';
+ if(station===2){const before=step>0?(stages[step-1]||'lo anterior').toLowerCase():'el contexto profesional';return `Antes trabajaste ${before}; ahora ${profile.verb.toLowerCase()} para avanzar hacia la aplicación.`}
+ if(station===3)return `Ahora combinas ${Math.max(1,current?.content?.aes?.length||1)} aprendizajes esperados para analizar, decidir y justificar en contexto.`;
+ if(station===4)return 'Demuestra autónomamente lo aprendido; revisa tus decisiones antes de entregar.';
+ return 'Usa la evidencia de tu recorrido para comprender patrones, conectar aprendizajes y proyectar una mejora.';
+}
+function buildPedagogicalMatrix(){
+ const rows=[];
+ const aes=current?.content?.aes||[];
+ aes.forEach((item,aeIndex)=>(item.experiences||item.steps||[]).forEach((experience,activityIndex)=>{
+  const operation=['Analizar','Comprender','Relacionar','Aplicar','Verificar','Justificar'][activityIndex]||'Aplicar';
+  rows.push({station:2,ae:aeIndex+1,activity:activityIndex+1,content:item.title||item.short_title||'',operation,level:cognitiveLevel(operation),type:experience?.type||'actividad formativa',evidence:'respuesta y justificación',feedback:'formativo'});
+ }));
+ (current?.content?.cases||[]).forEach((item,index)=>rows.push({station:3,ae:'integrados',activity:index+1,content:item.title||'',operation:'Resolver',level:8,type:'situación profesional',evidence:'decisión fundamentada',feedback:'según diseño'}));
+ (current?.content?.questions||[]).forEach((item,index)=>rows.push({station:4,ae:'integrados',activity:index+1,content:item.skill||item.question||'',operation:'Demostrar',level:8,type:'evaluación',evidence:'respuesta evaluativa',feedback:'posterior a la entrega'}));
+ const operationCounts=rows.reduce((acc,row)=>(acc[row.operation]=(acc[row.operation]||0)+1,acc),{});
+ const levels=rows.map(row=>row.level);
+ window.AulaPedagogyMatrix={moduleId:current?.id,rows,audit:{activities:rows.length,operations:operationCounts,cognitiveRange:levels.length?[Math.min(...levels),Math.max(...levels)]:[0,0],reviewQuestion:'¿Qué está haciendo cognitivamente el estudiante en esta actividad?'}};
+ document.body.dataset.pedagogyActivities=String(rows.length);
+ document.body.dataset.pedagogyCognitiveRange=levels.length?`${Math.min(...levels)}-${Math.max(...levels)}`:'0-0';
+}
 function decorateStationActivities(root,station){
  const selectors={
   1:['.ctx-activity'],
@@ -955,8 +981,12 @@ function decorateStationActivities(root,station){
   const complete=stationDone||el.matches('#case-form')&&Boolean(current?.state?.cases?.[caseIndex])||el.matches('#scene-form')&&Boolean(current?.state?.scene)||el.matches('#close-form')&&Boolean(current?.state?.closed);
   el.classList.add('ordered-activity',`activity-tone-${index%5+1}`);
   el.dataset.activityState=complete?'complete':'current';
-  el.insertAdjacentHTML('afterbegin',`<header class="activity-order-badge activity-focus" aria-label="Actividad ${index+1} de ${found.length}. ${esc(profile.verb)}: ${esc(profile.title)}"><strong>${number}</strong><span class="activity-focus-main-icon">${icon(profile.icon||'file')}</span><div class="activity-focus-title"><small>PASO ${index+1} DE ${found.length} · ${esc(profile.mode)}</small><b><em>${esc(profile.verb)}</em> · ${esc(profile.title)}</b></div><div class="activity-focus-time">${icon('clock')}<span><small>TIEMPO ESTIMADO</small><b>${profile.minutes} min</b></span></div></header><section class="activity-focus-guide" aria-label="Qué harás y para qué"><div><i>${icon('arrow')}</i><span><small>QUÉ HARÁS AHORA</small><b>${esc(profile.instruction)}</b></span></div><div><i>${icon('flag')}</i><span><small>¿PARA QUÉ HAGO ESTO?</small><b>${esc(profile.purpose)}</b></span></div><strong class="activity-focus-signal">${icon(profile.mode.includes('LEE')||profile.mode.includes('OBSERVA')?'eye':'tool')} ${esc(profile.mode)}</strong></section>`);
+  el.dataset.cognitiveOperation=profile.verb;
+  el.dataset.cognitiveLevel=String(cognitiveLevel(profile.verb));
+  el.dataset.evidence=profile.mode==='ENTREGA'?'respuesta registrada':'desempeño en actividad';
+  el.insertAdjacentHTML('afterbegin',`<header class="activity-order-badge activity-focus" aria-label="Actividad ${index+1} de ${found.length}. ${esc(profile.verb)}: ${esc(profile.title)}"><strong>${number}</strong><span class="activity-focus-main-icon">${icon(profile.icon||'file')}</span><div class="activity-focus-title"><small>PASO ${index+1} DE ${found.length} · ${esc(profile.mode)}</small><b><em>${esc(profile.verb)}</em> · ${esc(profile.title)}</b></div><div class="activity-focus-time">${icon('clock')}<span><small>TIEMPO ESTIMADO</small><b>${profile.minutes} min</b></span></div></header><p class="activity-continuity">${icon('link')}<span><small>CONEXIÓN CON TU RECORRIDO</small><b>${esc(activityContinuity(station,index,profile))}</b></span></p><section class="activity-focus-guide" aria-label="Qué harás y para qué"><div><i>${icon('arrow')}</i><span><small>QUÉ HARÁS AHORA</small><b>${esc(profile.instruction)}</b></span></div><div><i>${icon('flag')}</i><span><small>¿PARA QUÉ HAGO ESTO?</small><b>${esc(profile.purpose)}</b></span></div><strong class="activity-focus-signal">${icon(profile.mode.includes('LEE')||profile.mode.includes('OBSERVA')?'eye':'tool')} ${esc(profile.mode)}</strong></section>`);
  });
+ buildPedagogicalMatrix();
 }
 function renderModule(n){
  view.station=n;
