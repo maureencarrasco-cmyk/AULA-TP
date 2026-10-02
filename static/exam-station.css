@@ -163,6 +163,8 @@ body[data-station="4"] .exam-header .integration-header-message .exam-trophy-svg
   box-shadow:0 2px 10px #1558a00d;
 }
 .exam-brief h3{color:#0B3A6B;font-size:15px;display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.exam-card-label{display:inline-flex;margin:0 0 9px;padding:4px 8px;border-radius:6px;background:#fff;color:#3975a5;font-size:10px;font-weight:900;text-transform:uppercase}
+.exam-purpose .exam-card-label{color:#08758a}
 .exam-brief p,.exam-brief li,.exam-brief small{font-size:13px;line-height:1.55;margin:5px 0;color:#3D5166}
 .exam-brief ul{margin:0;padding-left:18px}
 .exam-brief .exam-ico{
