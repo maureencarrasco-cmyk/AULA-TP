@@ -780,3 +780,25 @@ body[data-screen="module"] .activity-tone-5>.activity-order-badge>strong{backgro
 body[data-screen="module"] .activity-tone-5>.activity-order-badge>span{background:#e5f3ea;color:#17674f}
 @container(max-width:260px){body[data-screen="module"] .activity-order-badge{grid-template-columns:54px 36px;gap:8px;padding:7px}body[data-screen="module"] .activity-order-badge>strong{min-height:46px;font-size:26px}body[data-screen="module"] .activity-order-badge>span{width:36px;height:36px}body[data-screen="module"] .activity-order-badge>div{grid-column:1/-1;padding:2px 3px 1px}body[data-screen="module"] .activity-order-badge small{font-size:10px}}
 @media(max-width:580px){body[data-screen="module"] .activity-order-badge{grid-template-columns:54px 36px minmax(0,1fr);gap:9px;min-height:64px;padding:7px}body[data-screen="module"] .activity-order-badge>strong{min-height:48px;font-size:26px}body[data-screen="module"] .activity-order-badge>span{width:36px;height:36px}body[data-screen="module"] .activity-order-badge small{font-size:11px}}
+
+/* Ruta de foco: permite retomar una actividad sin releer toda la pantalla. */
+body[data-screen="module"] .activity-focus{grid-template-columns:66px 42px minmax(0,1fr) auto;margin-bottom:0;border-radius:8px 8px 0 0}
+body[data-screen="module"] .activity-focus-title em{font-style:normal;color:#0c6b59}
+body[data-screen="module"] .activity-focus-title>b{font-size:16px;line-height:1.25}
+body[data-screen="module"] .activity-focus-time{display:flex;flex-direction:row;align-items:center;gap:8px;padding:8px 12px;border-left:1px solid #d5e1eb;color:#345b7e}
+body[data-screen="module"] .activity-focus-time>.icon{width:20px;height:20px}
+body[data-screen="module"] .activity-focus-time span{display:flex;flex-direction:column}
+body[data-screen="module"] .activity-focus-time small{font-size:9px;font-weight:800}
+body[data-screen="module"] .activity-focus-time b{font-size:13px;color:#173f69}
+body[data-screen="module"] .activity-focus-guide{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) auto;gap:0;margin:0 0 18px;border:1px solid #d6e3ed;border-top:0;border-radius:0 0 8px 8px;background:#f7fafc}
+body[data-screen="module"] .activity-focus-guide>div{padding:12px 14px;border-right:1px solid #d6e3ed}
+body[data-screen="module"] .activity-focus-guide small{display:block;margin-bottom:3px;color:#587188;font-size:9px;font-weight:900}
+body[data-screen="module"] .activity-focus-guide b{display:block;color:#173f69;font-size:12px;line-height:1.4}
+body[data-screen="module"] .activity-focus-signal{display:flex;align-items:center;justify-content:center;gap:7px;min-width:142px;padding:10px 14px;background:#e7f4ef;color:#12664f;font-size:10px;font-weight:900}
+body[data-screen="module"] .activity-focus-signal .icon{width:18px;height:18px}
+body[data-screen="module"] .activity-focus-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 0;padding:11px 13px;border:1px solid #d7e2eb;border-radius:7px;background:#f4f7fa;color:#49647d;font-size:11px;font-weight:700}
+body[data-screen="module"] .activity-focus-footer>span{display:flex;align-items:center;gap:7px}
+body[data-screen="module"] .activity-focus-footer .icon{width:17px;height:17px}
+body[data-screen="module"] .activity-focus-footer.is-complete{border-color:#bfe1d4;background:#eaf7f1;color:#12664f}
+body[data-screen="module"] .ordered-activity[data-activity-state="current"]{box-shadow:0 0 0 2px #e5eef6,0 6px 18px rgba(16,61,100,.08)}
+@media(max-width:760px){body[data-screen="module"] .activity-focus{grid-template-columns:54px 36px minmax(0,1fr)}body[data-screen="module"] .activity-focus-time{grid-column:1/-1;border:0;border-top:1px solid #d6e3ed;padding-left:8px}body[data-screen="module"] .activity-focus-guide{grid-template-columns:1fr}body[data-screen="module"] .activity-focus-guide>div{border-right:0;border-bottom:1px solid #d6e3ed}body[data-screen="module"] .activity-focus-signal{justify-content:flex-start;min-width:0}body[data-screen="module"] .activity-focus-footer{align-items:flex-start;flex-direction:column}}

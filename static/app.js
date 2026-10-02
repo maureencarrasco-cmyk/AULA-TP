@@ -911,11 +911,37 @@ function decorateStationActivities(root,station){
  selectors.forEach(selector=>root.querySelectorAll(selector).forEach(el=>{
   if(!found.includes(el)&&!found.some(parent=>parent.contains(el)))found.push(el);
  }));
+ const profiles={
+  1:[{verb:'Observa',title:'Reconoce el contexto',purpose:'Distinguir datos visibles de suposiciones.',instruction:'Revisa el caso y anota una decisión y el dato que aún falta.',mode:'LEE Y RESPONDE',minutes:15}],
+  2:[
+   {verb:['Analiza','Comprende','Relaciona','Decide','Revisa','Mejora'][step]||'Analiza',title:'Trabaja el aprendizaje',purpose:'Comprender el criterio antes de aplicarlo.',instruction:'Realiza solo la acción indicada y revisa el resultado.',mode:'PRACTICA',minutes:Math.max(10,Number(current?.planning?.station_minutes?.['2_etapa']||15))},
+   {verb:'Responde',title:'Registra tu evidencia',purpose:'Hacer visible cómo pensaste y qué aprendiste.',instruction:'Escribe una respuesta breve y fundamentada; luego guarda para continuar.',mode:'ENTREGA',minutes:8}
+  ],
+  3:[
+   {verb:'Decide',title:'Resuelve la situación',purpose:'Aplicar lo aprendido en un contexto profesional.',instruction:'Lee el caso, elige una acción y fundamenta tu decisión.',mode:'ANALIZA Y RESPONDE',minutes:15},
+   {verb:'Explora',title:'Revisa el escenario',purpose:'Relacionar evidencias del entorno antes de decidir.',instruction:'Abre cada punto, identifica un dato y explica qué demuestra.',mode:'OBSERVA Y RESPONDE',minutes:15}
+  ],
+  4:[
+   {verb:'Revisa',title:'Prepárate para demostrar',purpose:'Organizar tu trabajo antes de comenzar la evaluación.',instruction:'Lee las condiciones y comienza cuando estés preparado.',mode:'LEE',minutes:3},
+   {verb:'Responde',title:'Demuestra lo aprendido',purpose:'Comprobar cómo utilizas los aprendizajes del módulo.',instruction:'Resuelve una pregunta a la vez y revisa antes de entregar.',mode:'RESPONDE',minutes:Math.max(10,Number(current?.planning?.station_minutes?.['4']||20))}
+  ],
+  5:[
+   {verb:'Revisa',title:'Reconoce tu desempeño',purpose:'Identificar avances y oportunidades de mejora.',instruction:'Observa tus resultados y selecciona el aspecto que revisarás.',mode:'LEE Y REVISA',minutes:8},
+   {verb:'Practica',title:'Refuerza lo necesario',purpose:'Convertir la retroalimentación en una mejora concreta.',instruction:'Realiza una práctica breve y comprueba tu respuesta.',mode:'PRACTICA',minutes:10},
+   {verb:'Responde',title:'Cierra tu aprendizaje',purpose:'Definir un siguiente paso personal y alcanzable.',instruction:'Escribe qué lograste y una acción concreta para mejorar.',mode:'ENTREGA',minutes:8}
+  ]
+ };
+ const stationDone=Boolean(current?.completed?.[station-1]);
  found.forEach((el,index)=>{
   if(el.querySelector(':scope > .activity-order-badge'))return;
   const number=String(index+1).padStart(2,'0');
+  const profile=profiles[station]?.[Math.min(index,(profiles[station]?.length||1)-1)]||{verb:'Realiza',title:'Completa la actividad',purpose:'Avanzar en tu aprendizaje.',instruction:'Sigue una instrucción a la vez y guarda tu respuesta.',mode:'ACTÚA',minutes:10};
+  const complete=stationDone||el.matches('#case-form')&&Boolean(current?.state?.cases?.[caseIndex])||el.matches('#scene-form')&&Boolean(current?.state?.scene)||el.matches('#close-form')&&Boolean(current?.state?.closed);
+  const next=index<found.length-1?`Continúa con la actividad ${String(index+2).padStart(2,'0')}`:`Continúa con ${stationActionGuides[station-1]?.next||'el siguiente paso'}`;
   el.classList.add('ordered-activity',`activity-tone-${index%5+1}`);
-  el.insertAdjacentHTML('afterbegin',`<header class="activity-order-badge" aria-label="Actividad ${index+1}"><strong>${number}</strong><span>${icon('edit')}</span><div><b>ACTIVIDAD ${number}</b><small>Aquí debes realizar una actividad</small></div></header>`);
+  el.dataset.activityState=complete?'complete':'current';
+  el.insertAdjacentHTML('afterbegin',`<header class="activity-order-badge activity-focus" aria-label="Actividad ${index+1} de ${found.length}. ${esc(profile.verb)}: ${esc(profile.title)}"><strong>${number}</strong><span>${icon('edit')}</span><div class="activity-focus-title"><small>PASO ${index+1} DE ${found.length} · ${esc(profile.mode)}</small><b><em>${esc(profile.verb)}</em> · ${esc(profile.title)}</b></div><div class="activity-focus-time">${icon('clock')}<span><small>TIEMPO ESTIMADO</small><b>${profile.minutes} min</b></span></div></header><section class="activity-focus-guide" aria-label="Qué harás y para qué"><div><small>QUÉ HARÁS AHORA</small><b>${esc(profile.instruction)}</b></div><div><small>¿PARA QUÉ HAGO ESTO?</small><b>${esc(profile.purpose)}</b></div><span class="activity-focus-signal">${icon(profile.mode.includes('LEE')||profile.mode.includes('OBSERVA')?'eye':'tool')} ${esc(profile.mode)}</span></section>`);
+  el.insertAdjacentHTML('beforeend',`<footer class="activity-focus-footer ${complete?'is-complete':''}" aria-live="polite"><span>${icon(complete?'check':'clock')}<b>${complete?'Actividad completada':'Actividad en curso'}</b></span><span>${esc(next)} ${icon('arrow')}</span></footer>`);
  });
 }
 function renderModule(n){
