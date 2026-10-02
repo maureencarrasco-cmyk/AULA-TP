@@ -74,7 +74,8 @@ def create_app(test_config=None):
     def headers(response):
         response.headers['X-Content-Type-Options']='nosniff';response.headers['X-Frame-Options']='DENY'
         response.headers['Content-Security-Policy']="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
-        if request.path.startswith('/api/'):response.headers['Cache-Control']='no-store'
+        if request.path.startswith('/api/') or request.path.startswith('/static/'):
+            response.headers['Cache-Control']='no-store, max-age=0'
         return response
     def empty():return {'context':'','ae':{},'cases':{},'scene':None,'exam':None,'draft':{},'reflection':'','plan':'','closed':False,'explore':{},'ae_meta':{},'trace':[],'oficio':{},'encargos':{}}
     # The catalogue contains 451 modules; retain one enriched copy per module.
