@@ -1124,12 +1124,23 @@ function decorateStationActivities(root,station){
  });
  buildPedagogicalMatrix();
 }
+function stationInstructionBanner(station){
+ const guide={
+  1:{title:'Comienza por el contexto profesional',text:'Lee la situación, observa la evidencia disponible y responde la actividad antes de continuar.',count:'1 recorrido'},
+  2:{title:'Avanza aprendizaje por aprendizaje',text:'Selecciona un AE y desarrolla cada subactividad en orden. Lee la instrucción antes de responder.',count:'6 pasos por AE'},
+  3:{title:'Resuelve cada situación en contexto',text:'Revisa los datos, elige una decisión y justifícala con evidencia antes de avanzar.',count:'15 + 1 actividades'},
+  4:{title:'Completa la evaluación de principio a fin',text:'Responde una pregunta a la vez, revisa tus respuestas y finaliza con la situación compleja.',count:'25 + 1 preguntas'},
+  5:{title:'Completa el recorrido pestaña por pestaña',text:'Pincha cada pestaña, revisa sus orientaciones y desarrolla las actividades antes de avanzar.',count:'5 etapas'}
+ }[station];
+ if(!guide)return '';
+ return `<section class="station-instruction-banner" aria-label="Instrucciones de la estación"><span class="station-instruction-icon">${icon('arrow')}</span><div><small>INSTRUCCIONES DE LA ESTACIÓN</small><b>${esc(guide.title)}</b><p>${esc(guide.text)}</p></div><span class="station-instruction-count">${esc(guide.count)}</span></section>`;
+}
 function renderModule(n){
  view.station=n;
  localDrafts.restoreExam();
  const content=[contextPanel,aePanel,integratedPanel,examPanel,feedbackPanel][n-1]();
  const aside=n===4?examSidebar():n===5?feedbackSidebar():'';
- shell(`${stationHero(n)}${auth.user.role==='teacher'&&n!==3&&n!==4&&n!==5?'<div class="preview-banner">Vista previa docente · Las evidencias del estudiante se generan desde su cuenta.</div>':''}<div class="module-layout${aside?'':' is-wide'}"><div class="module-main">${avanceStrip(n)}${n===4?examStationRoute():n===5?feedbackStationRoute():stationRoute(n)}${curriculumSourcePanel()}<section class="panel station-body s${n}">${content}</section><div class="bottom-nav" aria-label="Navegación de la estación"><a class="outline" href="${n===1?'#course/'+current.course_id:'#module/'+current.id+'/'+(n-1)}">← ${n===1?'Volver al módulo':'Estación anterior'}</a>${n<5?`<button class="primary" data-action="station" data-n="${n+1}" ${!stationUnlocked(n+1)?'disabled':''}>Continuar a ${names[n]} ${icon('arrow')}</button>`:`<a class="primary" href="#course/${current.course_id}">Finalizar y volver a mi ruta ${icon('arrow')}</a>`}</div></div>${aside}</div>${specialtyResourceButton()}`);
+ shell(`${stationHero(n)}${auth.user.role==='teacher'&&n!==3&&n!==4&&n!==5?'<div class="preview-banner">Vista previa docente · Las evidencias del estudiante se generan desde su cuenta.</div>':''}<div class="module-layout${aside?'':' is-wide'}"><div class="module-main">${avanceStrip(n)}${n===4?examStationRoute():n===5?feedbackStationRoute():stationRoute(n)}${curriculumSourcePanel()}${stationInstructionBanner(n)}<section class="panel station-body s${n}">${content}</section><div class="bottom-nav" aria-label="Navegación de la estación"><a class="outline" href="${n===1?'#course/'+current.course_id:'#module/'+current.id+'/'+(n-1)}">← ${n===1?'Volver al módulo':'Estación anterior'}</a>${n<5?`<button class="primary" data-action="station" data-n="${n+1}" ${!stationUnlocked(n+1)?'disabled':''}>Continuar a ${names[n]} ${icon('arrow')}</button>`:`<a class="primary" href="#course/${current.course_id}">Finalizar y volver a mi ruta ${icon('arrow')}</a>`}</div></div>${aside}</div>${specialtyResourceButton()}`);
  bindModuleForms(n);
  const stationBody=document.querySelector('.station-body');
  if(n===2)decorateAeOverview(stationBody);

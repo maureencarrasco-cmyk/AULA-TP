@@ -856,8 +856,7 @@ function feedbackPanel(){
     proyecta:{title:'Proyecta',summary:'Estas son las características y orientaciones de la pestaña Proyecta.',icon:'flag',tone:'orange'}
   }[viewTab];
   const stageExplanation=`<section class="s5-tab-explanation tone-${activeStage.tone}" aria-labelledby="s5-tab-explanation-title"><header><span aria-hidden="true">${icon(activeStage.icon)}</span><div><small>PESTAÑA ACTIVA</small><h2 id="s5-tab-explanation-title">Características de ${activeStage.title}</h2><p>${activeStage.summary}</p></div></header>${typeof instructionContract==='function'?instructionContract({instruction:instructions[viewTab]}):''}</section>`;
-  const tabInstruction=`<section class="s5-tab-instruction" aria-label="Cómo completar esta estación"><span class="s5-tab-instruction-icon">${icon('arrow')}</span><div><b>Completa el recorrido pestaña por pestaña</b><p>Pincha cada pestaña, revisa sus orientaciones y desarrolla las actividades antes de avanzar a la siguiente.</p></div><span class="s5-tab-instruction-count">5 etapas</span></section>`;
-  return workZone(`${analizaTitle()}${tabInstruction}${analizaSteps(viewTab)}${stageExplanation}<div class="az-summary">${feedbackBody(viewTab)}</div>`,'work-zone-s5');
+  return workZone(`${analizaTitle()}${analizaSteps(viewTab)}${stageExplanation}<div class="az-summary">${feedbackBody(viewTab)}</div>`,'work-zone-s5');
 }
 
 function feedbackBottom(){
