@@ -990,7 +990,7 @@ function decorateStationActivities(root,station){
   const signal=profile.mode==='PRACTICA'
    ?`<button type="button" class="activity-focus-signal" data-activity-signal="practice" aria-pressed="false">${icon(signalIcon)} <span>IR A LA PRÁCTICA</span>${icon('arrow')}</button>`
    :profile.mode==='ENTREGA'
-    ?`<button type="button" class="activity-focus-signal activity-delivery-signal" data-activity-signal="delivery" aria-pressed="false" disabled>${icon('file')} <span>ENTREGAR RESPUESTA</span>${icon('arrow')}</button>`
+    ?`<button type="button" class="activity-focus-signal activity-delivery-signal" data-activity-signal="delivery" aria-pressed="false">${icon('file')} <span>ENTREGAR RESPUESTA</span>${icon('arrow')}</button>`
     :`<strong class="activity-focus-signal">${icon(signalIcon)} ${esc(profile.mode)}</strong>`;
   el.insertAdjacentHTML('afterbegin',`<header class="activity-order-badge activity-focus" aria-label="Actividad ${index+1} de ${found.length}. ${esc(profile.verb)}: ${esc(profile.title)}"><strong>${number}</strong><span class="activity-focus-main-icon">${icon(profile.icon||'file')}</span><div class="activity-focus-title"><small>PASO ${index+1} DE ${found.length} · ${esc(profile.mode)}</small><b><em>${esc(profile.verb)}</em> · ${esc(profile.title)}</b></div><div class="activity-focus-time">${icon('clock')}<span><small>TIEMPO ESTIMADO</small><b>${profile.minutes} min</b></span></div></header><p class="activity-continuity">${icon('link')}<span><small>CONEXIÓN CON TU RECORRIDO</small><b>${esc(activityContinuity(station,index,profile))}</b></span></p><section class="activity-focus-guide" aria-label="Qué harás y para qué"><div><i>${icon('arrow')}</i><span><small>QUÉ HARÁS AHORA</small><b>${esc(profile.instruction)}</b></span></div><div><i>${icon('flag')}</i><span><small>¿PARA QUÉ HAGO ESTO?</small><b>${esc(profile.purpose)}</b></span></div>${signal}</section>`);
   const signalButton=el.querySelector(':scope > .activity-focus-guide [data-activity-signal]');
@@ -1001,21 +1001,34 @@ function decorateStationActivities(root,station){
     const fields=[...el.querySelectorAll('textarea, input:not([type="hidden"]):not([type="button"]):not([type="submit"]), select')];
     const key=`aula-tp-delivery:${auth?.user?.id||'anon'}:${current?.id||'x'}:${station}:${index}`;
     const hasAnswer=()=>fields.some(field=>field.type==='checkbox'||field.type==='radio'?field.checked:String(field.value||'').trim().length>0);
+    signalButton.closest('.activity-focus-guide')?.insertAdjacentHTML('afterend',`<p class="activity-delivery-receipt" role="status" hidden>${icon('check')}<span><b>Respuesta entregada al sistema</b><small>Tu respuesta quedó registrada correctamente.</small></span></p>`);
+    const receipt=el.querySelector(':scope > .activity-delivery-receipt');
+    const renderPending=()=>{signalButton.innerHTML=`${icon('file')} <span>ENTREGAR RESPUESTA</span>${icon('arrow')}`};
+    const renderDelivered=()=>{signalButton.innerHTML=`${icon('check')} <span>RESPUESTA ENTREGADA</span>`};
     const setPending=()=>{
-     signalButton.disabled=!hasAnswer();
+     signalButton.disabled=false;
+     signalButton.classList.toggle('is-ready',hasAnswer());
      signalButton.classList.remove('is-delivered');
      signalButton.setAttribute('aria-pressed','false');
-     signalButton.querySelector('span').textContent='ENTREGAR RESPUESTA';
+     renderPending();
+     if(receipt)receipt.hidden=true;
     };
     fields.forEach(field=>field.addEventListener(field.tagName==='SELECT'||field.type==='radio'||field.type==='checkbox'?'change':'input',()=>{try{localStorage.removeItem(key)}catch(e){}setPending()}));
     let delivered=false;try{delivered=localStorage.getItem(key)==='delivered'&&hasAnswer()}catch(e){}
-    if(delivered){signalButton.disabled=false;signalButton.classList.add('is-delivered');signalButton.setAttribute('aria-pressed','true');signalButton.querySelector('span').textContent='RESPUESTA ENTREGADA'}else setPending();
+    if(delivered){signalButton.disabled=false;signalButton.classList.add('is-delivered');signalButton.setAttribute('aria-pressed','true');renderDelivered();if(receipt)receipt.hidden=false}else setPending();
     signalButton.addEventListener('click',()=>{
-     if(!hasAnswer())return;
+     if(!hasAnswer()){
+      target?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+      target?.focus?.({preventScroll:true});
+      toast('Escribe tu respuesta en el recuadro antes de entregarla.');
+      return;
+     }
      try{localStorage.setItem(key,'delivered')}catch(e){}
      signalButton.classList.add('is-delivered');
+     signalButton.classList.remove('is-ready');
      signalButton.setAttribute('aria-pressed','true');
-     signalButton.querySelector('span').textContent='RESPUESTA ENTREGADA';
+     renderDelivered();
+     if(receipt){receipt.hidden=false;receipt.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'})}
      el.dataset.activityState='complete';
      el.classList.add('is-delivered');
      toast('Respuesta entregada. Puedes editarla y volver a entregar una nueva versión.');
