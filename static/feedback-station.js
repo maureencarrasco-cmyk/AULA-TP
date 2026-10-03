@@ -839,8 +839,16 @@ function feedbackPanel(){
     transfiere:{action:'Resuelve una situación nueva y justifica cómo verificarías tu decisión.',object:'El desafío técnico presentado.',start:'Identifica datos disponibles, criterio aplicable y dato pendiente.',resource:'Caso de transferencia y aprendizajes del módulo.',response:'Decisión, justificación y verificación.',purpose:'Transferir lo aprendido a un contexto diferente.',completion:'Terminas cuando la decisión usa evidencia y declara cómo comprobarla.'},
     proyecta:{action:'Sintetiza tu aprendizaje y define un próximo foco.',object:'Tu recorrido y las evidencias construidas.',start:'Recupera una fortaleza y un aspecto por reforzar de las etapas anteriores.',resource:'Síntesis del recorrido y respuestas guardadas.',response:'Aprendizaje principal, contexto de uso y foco personal.',purpose:'Cerrar el módulo con autonomía y una acción futura concreta.',completion:'Terminas cuando completas los tres productos y finalizas el recorrido.'}
   };
+  const activeStage={
+    analiza:{title:'Analiza',summary:'Estas son las características y orientaciones de la pestaña Analiza.',icon:'chart',tone:'blue'},
+    comprende:{title:'Comprende',summary:'Estas son las características y orientaciones de la pestaña Comprende.',icon:'search',tone:'violet'},
+    conecta:{title:'Conecta',summary:'Estas son las características y orientaciones de la pestaña Conecta.',icon:'link',tone:'purple'},
+    transfiere:{title:'Transfiere',summary:'Estas son las características y orientaciones de la pestaña Transfiere.',icon:'tool',tone:'green'},
+    proyecta:{title:'Proyecta',summary:'Estas son las características y orientaciones de la pestaña Proyecta.',icon:'flag',tone:'orange'}
+  }[viewTab];
+  const stageExplanation=`<section class="s5-tab-explanation tone-${activeStage.tone}" aria-labelledby="s5-tab-explanation-title"><header><span aria-hidden="true">${icon(activeStage.icon)}</span><div><small>PESTAÑA ACTIVA</small><h2 id="s5-tab-explanation-title">Características de ${activeStage.title}</h2><p>${activeStage.summary}</p></div></header>${typeof instructionContract==='function'?instructionContract({instruction:instructions[viewTab]}):''}</section>`;
   const evaluationBanner=`<section class="s5-eval-banner" aria-label="Ruta de revisión de la evaluación"><div class="s5-eval-copy"><span>CIERRE DE LA EXPERIENCIA</span><h2>Tu evaluación se convierte en aprendizaje</h2><p>Observa la evidencia, comprende tus resultados y decide cómo seguir mejorando.</p></div><div class="s5-eval-milestones"><article>${icon('chart')}<b>Resultados</b><small>Reconoce tu avance</small></article><i aria-hidden="true">→</i><article>${icon('search')}<b>Evidencias</b><small>Comprende tus decisiones</small></article><i aria-hidden="true">→</i><article>${icon('flag')}<b>Próximo paso</b><small>Proyecta tu mejora</small></article></div></section>`;
-  return workZone(`${evaluationBanner}${analizaTitle()}${analizaSteps(viewTab)}${typeof instructionContract==='function'?instructionContract({instruction:instructions[viewTab]}):''}<div class="az-summary">${feedbackBody(viewTab)}</div>`,'work-zone-s5');
+  return workZone(`${evaluationBanner}${analizaTitle()}${analizaSteps(viewTab)}${stageExplanation}<div class="az-summary">${feedbackBody(viewTab)}</div>`,'work-zone-s5');
 }
 
 function feedbackBottom(){
