@@ -966,7 +966,7 @@ function decorateStudentActionCues(root){
   if(!label||label.classList.contains('option')||label.querySelector(':scope > .student-write-cue'))return;
   const cue=document.createElement('span');
   cue.className='student-write-cue';
-  cue.innerHTML=`${icon('edit')}<b>Ahora te toca a ti</b>`;
+  cue.innerHTML='<img src="/static/student-write-banner.png?v=20261003" alt="Ahora te toca a ti">';
   control.insertAdjacentElement('beforebegin',cue);
   label.classList.add('student-write-field');
  });
