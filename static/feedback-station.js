@@ -856,8 +856,8 @@ function feedbackPanel(){
     proyecta:{title:'Proyecta',summary:'Estas son las características y orientaciones de la pestaña Proyecta.',icon:'flag',tone:'orange'}
   }[viewTab];
   const stageExplanation=`<section class="s5-tab-explanation tone-${activeStage.tone}" aria-labelledby="s5-tab-explanation-title"><header><span aria-hidden="true">${icon(activeStage.icon)}</span><div><small>PESTAÑA ACTIVA</small><h2 id="s5-tab-explanation-title">Características de ${activeStage.title}</h2><p>${activeStage.summary}</p></div></header>${typeof instructionContract==='function'?instructionContract({instruction:instructions[viewTab]}):''}</section>`;
-  const evaluationBanner=`<section class="s5-eval-banner" aria-label="Ruta de revisión de la evaluación"><div class="s5-eval-copy"><span>CIERRE DE LA EXPERIENCIA</span><h2>Tu evaluación se convierte en aprendizaje</h2><p>Observa la evidencia, comprende tus resultados y decide cómo seguir mejorando.</p></div><div class="s5-eval-milestones"><article>${icon('chart')}<b>Resultados</b><small>Reconoce tu avance</small></article><i aria-hidden="true">→</i><article>${icon('search')}<b>Evidencias</b><small>Comprende tus decisiones</small></article><i aria-hidden="true">→</i><article>${icon('flag')}<b>Próximo paso</b><small>Proyecta tu mejora</small></article></div></section>`;
-  return workZone(`${evaluationBanner}${analizaTitle()}${analizaSteps(viewTab)}${stageExplanation}<div class="az-summary">${feedbackBody(viewTab)}</div>`,'work-zone-s5');
+  const tabInstruction=`<section class="s5-tab-instruction" aria-label="Cómo completar esta estación"><span class="s5-tab-instruction-icon">${icon('arrow')}</span><div><b>Completa el recorrido pestaña por pestaña</b><p>Pincha cada pestaña, revisa sus orientaciones y desarrolla las actividades antes de avanzar a la siguiente.</p></div><span class="s5-tab-instruction-count">5 etapas</span></section>`;
+  return workZone(`${analizaTitle()}${tabInstruction}${analizaSteps(viewTab)}${stageExplanation}<div class="az-summary">${feedbackBody(viewTab)}</div>`,'work-zone-s5');
 }
 
 function feedbackBottom(){

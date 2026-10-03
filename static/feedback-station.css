@@ -1852,6 +1852,15 @@ body[data-station="5"] .s5-tab-explanation{
   border-radius:12px;
   background:color-mix(in srgb,var(--stage-accent) 5%,#fff);
 }
+
+/* Direct instruction attached to the five-tab learning route. */
+body[data-station="5"] .s5-tab-instruction{display:grid;grid-template-columns:38px minmax(0,1fr) auto;align-items:center;gap:11px;margin:0 0 9px;padding:10px 13px;border:1px solid #9dcbd0;border-left:5px solid #168486;border-radius:8px;background:#f1faf9;color:#174967;box-shadow:0 4px 12px rgba(28,112,116,.07)}
+body[data-station="5"] .s5-tab-instruction-icon{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#168486;color:#fff}
+body[data-station="5"] .s5-tab-instruction-icon .icon{width:19px;height:19px}
+body[data-station="5"] .s5-tab-instruction b{display:block;margin-bottom:2px;font-size:12px;color:#123f68}
+body[data-station="5"] .s5-tab-instruction p{margin:0;font-size:10px;line-height:1.45;color:#496c7e}
+body[data-station="5"] .s5-tab-instruction-count{padding:6px 9px;border:1px solid #9dcbd0;border-radius:6px;background:#fff;color:#147375;font-size:9px;font-weight:900;white-space:nowrap}
+@media(max-width:640px){body[data-station="5"] .s5-tab-instruction{grid-template-columns:34px minmax(0,1fr)}body[data-station="5"] .s5-tab-instruction-count{grid-column:2;justify-self:start}}
 body[data-station="5"] .s5-tab-explanation.tone-violet{--stage-accent:#7047bf}
 body[data-station="5"] .s5-tab-explanation.tone-purple{--stage-accent:#7f3fb7}
 body[data-station="5"] .s5-tab-explanation.tone-green{--stage-accent:#197d62}
