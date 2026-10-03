@@ -975,6 +975,10 @@ function decorateStationActivities(root,station){
  found.forEach((el,index)=>{
   if(el.querySelector(':scope > .activity-order-badge'))return;
   const number=String(index+1).padStart(2,'0');
+  if(station===5&&index>0&&!el.previousElementSibling?.classList.contains('activity-step-connector')){
+   const previous=String(index).padStart(2,'0');
+   el.insertAdjacentHTML('beforebegin',`<div class="activity-step-connector" aria-label="Del paso ${previous} al paso ${number}"><span>${icon('check')}</span><i aria-hidden="true"></i><strong><small>CONTINÚA TU RECORRIDO</small>Lo que trabajaste en el paso ${previous} te prepara para el paso ${number}</strong><i aria-hidden="true"></i><span>${icon('arrow')}</span></div>`);
+  }
   const profile=profiles[station]?.[Math.min(index,(profiles[station]?.length||1)-1)]||{verb:'Realiza',title:'Completa la actividad',purpose:'Avanzar en tu aprendizaje.',instruction:'Sigue una instrucción a la vez y guarda tu respuesta.',mode:'ACTÚA',minutes:10};
   const complete=stationDone||el.matches('#case-form')&&Boolean(current?.state?.cases?.[caseIndex])||el.matches('#scene-form')&&Boolean(current?.state?.scene)||el.matches('#close-form')&&Boolean(current?.state?.closed);
   el.classList.add('ordered-activity',`activity-tone-${index%5+1}`);
