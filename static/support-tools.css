@@ -1455,6 +1455,10 @@ body.reduce-motion .tools-fab-list .support-card.tone-ok { animation: none; }
 .tools-fab.is-dragging .tools-fab-btn{background:transparent!important;box-shadow:none!important;transform:scale(1.045)!important}
 .tools-fab .tools-fab-btn:focus,.tools-fab .tools-fab-btn:focus-visible{outline:0!important;outline-offset:0!important;box-shadow:none!important}
 .tools-fab .tools-fab-btn:focus-visible .tools-fab-mascot{filter:drop-shadow(0 0 5px rgba(27,152,219,.9)) drop-shadow(0 9px 8px rgba(23,72,113,.25))}
+.tools-fab:not(.is-dragging) .tools-fab-mascot{animation:nubiMascotFloat 3.4s ease-in-out infinite;will-change:transform}
+.tools-fab.is-dragging .tools-fab-mascot{animation-play-state:paused;transform:scale(1.035)}
+@keyframes nubiMascotFloat{0%,100%{transform:translateY(0) rotate(-.4deg)}50%{transform:translateY(-8px) rotate(.5deg)}}
+@media(prefers-reduced-motion:reduce){.tools-fab:not(.is-dragging) .tools-fab-mascot{animation:none}}
 @media(max-width:560px){.tools-fab .tools-fab-btn{width:156px!important;min-width:156px!important;height:92px!important;min-height:92px!important}.tools-fab .tools-fab-mascot{width:156px!important;height:92px!important;flex-basis:156px!important}}
 
 .support-card.tone-ok[data-action="practice"] {

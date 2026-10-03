@@ -169,6 +169,7 @@ body[data-screen="courses"] .dash-sidebar{padding-top:70px}
 .sec-ric-fab.is-placed:hover{transform:scale(1.035)}
 .sec-ric-fab.is-dragging{animation:none;transform:scale(1.035);cursor:grabbing;box-shadow:0 0 0 7px rgba(167,139,250,.28),0 18px 38px rgba(76,29,149,.46)}
 .sec-ric-fab.is-dragging .sec-ric-grip{cursor:grabbing}
+.sec-ric-fab:not(.is-dragging){cursor:grab}
 @keyframes secRicFloat{0%,100%{transform:translateY(0);box-shadow:0 10px 26px rgba(76,29,149,.3)}50%{transform:translateY(-9px);box-shadow:0 0 0 5px rgba(167,139,250,.18),0 17px 34px rgba(76,29,149,.4)}}
 @keyframes secRicHalo{0%{inset:-5px;opacity:.58}75%,100%{inset:-16px;opacity:0}}
 @media(prefers-reduced-motion:reduce){.sec-ric-fab,.sec-ric-fab::before{animation:none}.sec-ric-fab{box-shadow:0 0 0 5px rgba(167,139,250,.2),0 10px 26px rgba(76,29,149,.3)}}
