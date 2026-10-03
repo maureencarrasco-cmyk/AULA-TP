@@ -1146,7 +1146,7 @@ function stationInstructionBanner(station){
   5:{title:'Completa el recorrido pestaña por pestaña',text:'Pincha cada pestaña, revisa sus orientaciones y desarrolla las actividades antes de avanzar.',count:'5 etapas'}
  }[station];
  if(!guide)return '';
- return `<section class="station-instruction-banner" aria-label="Instrucciones de la estación"><span class="station-instruction-icon">${icon('arrow')}</span><div><small>INSTRUCCIONES DE LA ESTACIÓN</small><b>${esc(guide.title)}</b><p>${esc(guide.text)}</p></div><span class="station-instruction-count">${esc(guide.count)}</span></section>`;
+ return `<section class="station-instruction-banner instruction-showcase tone-green" aria-label="Instrucciones de la estación"><span class="station-instruction-icon">${icon('arrow')}</span><div><small>INSTRUCCIONES DE LA ESTACIÓN</small><b>${esc(guide.title)}</b><p>${esc(guide.text)}</p></div><span class="station-instruction-count">${icon('grid')}<b>${esc(guide.count)}</b></span></section>`;
 }
 function renderModule(n){
  view.station=n;

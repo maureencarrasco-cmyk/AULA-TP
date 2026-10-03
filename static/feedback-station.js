@@ -273,7 +273,7 @@ function analizaDash(){
   return `<div class="az-board">
     ${typeof achievementProgressTable==='function'?achievementProgressTable():''}
     ${analizaFilters(d)}
-    <section class="az-instruction"><span>${icon('search')}</span><div><h2>Observa, compara e identifica</h2><p>Observa tus resultados por AE, tu evolución y tus evidencias. Identifica una fortaleza y un aspecto que necesites seguir trabajando.</p></div></section>
+    <section class="az-instruction instruction-showcase tone-blue"><span>${icon('search')}</span><div><small>INSTRUCCIÓN DE LA ACTIVIDAD</small><h2>Observa, compara e identifica</h2><p>Observa tus resultados por AE, tu evolución y tus evidencias. Identifica una fortaleza y un aspecto que necesites seguir trabajando.</p></div><aside aria-hidden="true">${icon('chart')}</aside></section>
     ${analizaDemoCohort(d.modulePct)}
     <div class="az-grid">
       <section class="az-card az-module">
@@ -339,11 +339,12 @@ function analizaDash(){
 
     <section class="az-pattern" aria-label="Encuentra un patrón">
       <div class="az-pattern-head">
-        <div class="az-pattern-lead">
+        <div class="az-pattern-lead instruction-showcase tone-violet">
           <span class="az-pattern-ico" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#1D4ED8" stroke-width="2.2"/><path d="m20 20-3.6-3.6" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round"/><path d="M8.5 11h5M11 8.5v5" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/></svg>
           </span>
           <div>
+            <small>INSTRUCCIÓN DE LA ACTIVIDAD</small>
             <h3>¿Qué patrón observas en tus resultados?</h3>
             <p>Puedes comparar tus resultados por AE, revisar dónde avanzaste más o identificar dónde tuviste mayor dificultad.</p>
           </div>

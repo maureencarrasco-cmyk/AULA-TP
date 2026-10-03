@@ -181,7 +181,7 @@ function renderExperience(exp) {
   const boardHead = typeof pedStepHead === 'function'
     ? pedStepHead(boardN, boardAction.action, boardAction.title)
     : `<p class="act-step-label"><span class="act-step-n">${boardN}</span> ${esc(boardAction.title)}</p>`;
-  const prompt = `<header class="act-now">${nowIco}<div><span class="act-now-kicker"><span class="act-now-badge">Paso ${boardN}</span>Esto es lo que tienes que hacer ahora</span><h3 class="act-prompt act-prompt-title">${esc(exp.prompt)}</h3></div></header>`;
+  const prompt = `<header class="act-now instruction-showcase tone-blue">${nowIco}<div><span class="act-now-kicker"><span class="act-now-badge">Paso ${boardN}</span>Esto es lo que tienes que hacer ahora</span><h3 class="act-prompt act-prompt-title">${esc(exp.prompt)}</h3></div></header>`;
   const stemBlock = stem ? `<div class="act-observe ped-step" data-action="${stemAction.action}" data-state="current">${stemHead}${stem}</div><p class="act-flow ped-flow" aria-hidden="true">↓</p>` : '';
   const boardBlock = board ? `<div class="act-decide ped-step" data-action="${boardAction.action}" data-state="${stem && !imageFirst ? 'idle' : 'current'}">${boardHead}${board}</div>` : '';
   const hotspotFirst = exp.type === 'hotspot';
