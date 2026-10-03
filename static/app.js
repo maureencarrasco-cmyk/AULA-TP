@@ -1031,7 +1031,8 @@ function decorateStationActivities(root,station){
  };
  const stationDone=Boolean(current?.completed?.[station-1]);
  found.forEach((el,index)=>{
-  if(el.querySelector(':scope > .activity-order-badge'))return;
+  if(el.dataset.activityDecorated==='true')return;
+  el.dataset.activityDecorated='true';
   const number=String(index+1).padStart(2,'0');
   if(station===5&&index>0&&!el.previousElementSibling?.classList.contains('activity-step-connector')){
    const previous=String(index).padStart(2,'0');
@@ -1044,23 +1045,13 @@ function decorateStationActivities(root,station){
   el.dataset.cognitiveOperation=profile.verb;
   el.dataset.cognitiveLevel=String(cognitiveLevel(profile.verb));
   el.dataset.evidence=profile.mode==='ENTREGA'?'respuesta registrada':'desempeño en actividad';
-  const hasVideo=Boolean(el.querySelector('video,.video-figure'));
-  const hasVisual=Boolean(el.querySelector('img,figure,canvas,.mcq-media,.visual-sim,.scene-stage'));
-  const cueLabel=hasVideo?'OBSERVA EL VIDEO':hasVisual?'OBSERVA':'ACTIVIDAD';
-  const cueIcon=hasVideo?'eye':hasVisual?'eye':'puzzle';
-  const cueTone=hasVideo||hasVisual?'observe':'activity';
-  const directInstruction=hasVideo
-   ?`Observa el video y fíjate en lo necesario para realizar la actividad. ${profile.instruction}`
-   :hasVisual
-    ?`Observa el recurso visual que aparece a continuación. ${profile.instruction}`
-    :profile.instruction;
   const signalIcon=profile.mode.includes('LEE')||profile.mode.includes('OBSERVA')?'eye':'tool';
   const signal=profile.mode==='PRACTICA'
    ?`<button type="button" class="activity-focus-signal" data-activity-signal="practice" aria-pressed="false">${icon(signalIcon)} <span>IR A LA PRÁCTICA</span>${icon('arrow')}</button>`
    :profile.mode==='ENTREGA'
     ?`<button type="button" class="activity-focus-signal activity-delivery-signal" data-activity-signal="delivery" aria-pressed="false">${icon('file')} <span>ENTREGAR RESPUESTA</span>${icon('arrow')}</button>`
     :`<strong class="activity-focus-signal">${icon(signalIcon)} ${esc(profile.mode)}</strong>`;
-  el.insertAdjacentHTML('afterbegin',`<header class="activity-order-badge activity-focus" aria-label="Actividad ${index+1} de ${found.length}. ${esc(profile.verb)}: ${esc(profile.title)}"><strong>${number}</strong><span class="activity-focus-main-icon">${icon(profile.icon||'file')}</span><div class="activity-focus-title"><small>PASO ${index+1} DE ${found.length} · ${esc(profile.mode)}</small><b><em>${esc(profile.verb)}</em> · ${esc(profile.title)}</b></div><div class="activity-focus-time">${icon('clock')}<span><small>TIEMPO ESTIMADO</small><b>${profile.minutes} min</b></span></div></header><p class="activity-direct-instruction is-${cueTone}"><span class="activity-direct-icon" aria-hidden="true">${icon(cueIcon)}</span><span><small>${cueLabel}</small><b>${esc(directInstruction)}</b></span></p><section class="activity-focus-guide" aria-label="Qué harás y para qué"><div><i>${icon('arrow')}</i><span><small>QUÉ HARÁS AHORA</small><b>${esc(profile.instruction)}</b></span></div><div><i>${icon('flag')}</i><span><small>¿PARA QUÉ HAGO ESTO?</small><b>${esc(profile.purpose)}</b></span></div>${signal}</section>`);
+  el.insertAdjacentHTML('afterbegin',`<section class="activity-focus-guide" aria-label="Qué harás y para qué"><div><i>${icon('arrow')}</i><span><small>QUÉ HARÁS AHORA</small><b>${esc(profile.instruction)}</b></span></div><div><i>${icon('flag')}</i><span><small>¿PARA QUÉ HAGO ESTO?</small><b>${esc(profile.purpose)}</b></span></div>${signal}</section>`);
   const signalButton=el.querySelector(':scope > .activity-focus-guide [data-activity-signal]');
   if(signalButton){
    const mode=signalButton.dataset.activitySignal;
