@@ -210,7 +210,8 @@ function openEncargo(host, item, draftText){
   }else{
     detail.innerHTML=`<article class="formative-item oficio-task" data-encargo-id="${esc(item.id)}">
       <header class="oficio-task-head">
-        <div><span class="oficio-respond-chip">Respondes aquí</span><h5>${esc(item.title)}</h5></div>
+        <span class="oficio-task-symbol" aria-hidden="true">${oficioIcon(encargoIcon(item))}</span>
+        <div class="oficio-task-title"><span class="oficio-respond-chip">Respondes aquí</span><h5>${esc(item.title)}</h5><p>AE ${item.ae} · ${Number(item.minutes)||60} minutos estimados</p></div>
         <button type="button" class="outline" data-encargo-close>Cerrar</button>
       </header>
       ${typeof instructionContract==='function'?instructionContract(item):''}
@@ -268,6 +269,7 @@ function openEncargo(host, item, draftText){
   });
   if(window.AulaAccess) window.AulaAccess.hydrate(detail);
   if(window.AulaNarration) window.AulaNarration.hydrate(detail);
+  if(typeof decorateStudentActionCues==='function') decorateStudentActionCues(detail);
   (detail.querySelector('[data-bit="vi"]')||ta)?.focus();
 }
 function bindEncargos(root){
