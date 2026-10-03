@@ -236,8 +236,8 @@ function analizaDash(){
     <b>${fbPctLabel(a.pct)}</b>${a.warn?'<em>!</em>':''}
   </li>`).join('');
   const evolution=d.evolution||{max:25,unit:'puntos',series:[]};
-  const allLabels=[...new Set(evolution.series.flatMap(s=>s.points.map(p=>p.label)))];
-  const W=360,H=190,padL=54,padR=16,padT=22,padB=48;
+  const allLabels=[...new Set(evolution.series.flatMap(s=>s.points.filter(p=>Number.isFinite(p.value)).map(p=>p.label)))];
+  const W=440,H=224,padL=58,padR=22,padT=30,padB=58;
   const plotW=W-padL-padR, plotH=H-padT-padB;
   const evoY=[0,5,10,15,20,25].map(v=>{
     const y=padT+plotH-(v/evolution.max)*plotH;
@@ -249,11 +249,12 @@ function analizaDash(){
     return padL+(allLabels.length<=1?plotW/2:(i/(allLabels.length-1))*plotW);
   };
   const yFor=(value)=>padT+plotH-(Number(value)/evolution.max)*plotH;
-  const evoSeries=evolution.series.map(s=>{
+  const evoSeries=evolution.series.map((s,seriesIndex)=>{
     const valid=s.points.filter(p=>Number.isFinite(p.value));
     const line=valid.map((p,i)=>`${i?'L':'M'}${xFor(p.label).toFixed(1)},${yFor(p.value).toFixed(1)}`).join(' ');
+    const labelOffset=seriesIndex%2===0?-11:18;
     const dots=valid.map(p=>`<circle class="tone-${s.tone}" cx="${xFor(p.label)}" cy="${yFor(p.value)}" r="5"/>`
-      +`<text x="${xFor(p.label)}" y="${yFor(p.value)-10}" text-anchor="middle">${p.value}</text>`).join('');
+      +`<text class="az-evo-value tone-${s.tone}" x="${xFor(p.label)}" y="${yFor(p.value)+labelOffset}" text-anchor="middle">${p.value}</text>`).join('');
     return `<path class="az-evo-line tone-${s.tone}" d="${line}" fill="none"/>${dots}`;
   }).join('');
   const evoLabels=allLabels.map(label=>`<text class="az-evo-lab" x="${xFor(label)}" y="${H-27}" text-anchor="middle">${esc(label)}</text>`).join('');
@@ -323,7 +324,7 @@ function analizaDash(){
 
       <section class="az-card az-evo">
         <h3>Evolución del puntaje en evaluación</h3>
-        <p class="az-evo-subtitle">Compara tus mediciones para reconocer si tu desempeño avanzó, se mantuvo o disminuyó · máximo ${evolution.max} puntos.</p>
+        <p class="az-evo-subtitle">Compara tus mediciones para reconocer si tu desempeño avanzó, se mantuvo o disminuyó · ${allLabels.length} ${allLabels.length===1?'módulo con resultado':'módulos con resultados'} · máximo ${evolution.max} puntos.</p>
         ${evolution.series.length?`<svg class="az-evo-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Evolución del puntaje obtenido por módulo">${evoY}<line class="az-evo-axis" x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT+plotH}"/><line class="az-evo-axis" x1="${padL}" y1="${padT+plotH}" x2="${W-padR}" y2="${padT+plotH}"/>${evoSeries}${evoLabels}<text class="az-evo-axis-title az-evo-axis-y" transform="translate(13 ${padT+plotH/2}) rotate(-90)" text-anchor="middle">${esc(evolution.yTitle)} (${esc(evolution.unit)})</text><text class="az-evo-axis-title" x="${padL+plotW/2}" y="${H-7}" text-anchor="middle">${esc(evolution.xTitle)}</text></svg>${evoLegend}`:'<div class="az-evo-empty">Aún no hay puntajes comparables registrados.</div>'}
         ${evolution.demo?'<p class="az-demo-hint">Datos de ejemplo. Los puntajes reales aparecerán al completar evaluaciones.</p>':''}
         <p class="az-foot-ok">${icon('arrow')} ${esc(evoSummary)}</p>

@@ -175,12 +175,15 @@ button.feedback-close{
 .az-foot-note .icon,.az-foot-ok .icon{width:16px;height:16px;flex-shrink:0}
 
 .az-evo-subtitle{margin:-2px 0 8px;color:#64748B;font-size:11px;line-height:1.4}
-.az-evo-svg{width:100%;height:auto;min-height:165px;display:block;overflow:visible}
+.az-evo-svg{width:100%;height:auto;min-height:205px;display:block;overflow:visible}
 .az-evo-svg circle{fill:#0F766E;stroke:#fff;stroke-width:2}
 .az-evo-svg text{font-size:11px;fill:#1E3A8A;font-weight:700}
 .az-evo-svg .az-evo-lab{fill:#64748B;font-weight:600;font-size:10px}
 .az-evo-svg .az-evo-axis{stroke:#94A3B8;stroke-width:1.2}
 .az-evo-svg .az-evo-axis-title{fill:#475569;font-size:9px;font-weight:700}
+.az-evo-svg .az-evo-value{font-size:11px;font-weight:900;paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
+.az-evo-svg .az-evo-value.tone-primary{fill:#0F766E}
+.az-evo-svg .az-evo-value.tone-secondary{fill:#3E5F87}
 .az-evo-svg .az-evo-line{stroke:#0F766E;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .az-evo-svg .az-evo-line.tone-secondary{stroke:#496A92}
 .az-evo-svg circle.tone-secondary{fill:#496A92}
@@ -189,6 +192,7 @@ button.feedback-close{
 .az-evo-legend i{width:16px;height:3px;border-radius:99px;background:#0F766E}
 .az-evo-legend .tone-secondary i{background:#496A92}
 .az-evo-empty{display:grid;place-items:center;min-height:170px;border:1px dashed #CBD5E1;border-radius:12px;background:#F8FAFC;color:#64748B;font-size:12px;text-align:center;padding:20px}
+@media(max-width:520px){.az-evo-svg{min-height:190px}.az-evo-svg .az-evo-lab{font-size:9px}.az-evo-legend{gap:8px;font-size:10px}}
 
 .az-compare-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .az-compare-list li{
