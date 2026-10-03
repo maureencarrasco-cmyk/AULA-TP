@@ -1448,6 +1448,13 @@ body.reduce-motion .tools-fab-list .support-card.tone-ok { animation: none; }
 .tools-fab.is-dragging .tools-fab-btn{background:linear-gradient(145deg,#f7fcff,#d7edf6)!important}
 @media(max-width:560px){.tools-fab .tools-fab-btn{min-width:210px!important;min-height:62px!important;padding:4px 12px 4px 6px!important}.tools-fab .tools-fab-mascot{width:92px;height:51px;flex-basis:92px}.tools-fab .tools-fab-label{font-size:13px!important}}
 
+/* Transparent mascot-only control: keep drag/click behavior without a visible container. */
+.tools-fab .tools-fab-btn{width:190px!important;min-width:190px!important;height:112px!important;min-height:112px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
+.tools-fab .tools-fab-mascot{display:block;width:190px!important;height:112px!important;flex:0 0 190px!important;border-radius:0!important;object-fit:contain!important;filter:drop-shadow(0 9px 8px rgba(23,72,113,.25));pointer-events:none;user-select:none}
+.tools-fab .tools-fab-btn:hover:not(:disabled){background:transparent!important;box-shadow:none!important;transform:translateY(-3px) scale(1.035)!important}
+.tools-fab.is-dragging .tools-fab-btn{background:transparent!important;box-shadow:none!important;transform:scale(1.045)!important}
+@media(max-width:560px){.tools-fab .tools-fab-btn{width:156px!important;min-width:156px!important;height:92px!important;min-height:92px!important}.tools-fab .tools-fab-mascot{width:156px!important;height:92px!important;flex-basis:156px!important}}
+
 .support-card.tone-ok[data-action="practice"] {
   animation: pf-breathe 3.6s ease-in-out infinite;
   will-change: transform;

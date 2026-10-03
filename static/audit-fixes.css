@@ -140,7 +140,7 @@ body[data-screen="courses"] .dash-sidebar{padding-top:70px}
   position:fixed;
   z-index:88;
   right:18px;
-  bottom:106px;
+  bottom:166px;
   display:inline-flex;
   align-items:center;
   gap:9px;
@@ -186,5 +186,5 @@ body[data-screen="courses"] .dash-sidebar{padding-top:70px}
     overflow-wrap:normal;
     word-break:normal;
   }
-  .sec-ric-fab{left:12px;right:auto;bottom:14px;max-width:calc(100vw - 86px);padding:10px 13px}
+  .sec-ric-fab{left:12px;right:auto;bottom:116px;max-width:calc(100vw - 86px);padding:10px 13px}
 }
