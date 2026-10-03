@@ -899,7 +899,7 @@ function specialtyResourceButton(){
  const course=courses.find(item=>item.id===current?.course_id);
  if(specialtyKey(course)!=='electricidad')return '';
  const href=current.content?.regulatory_resource?.url||'https://www.sec.cl/reglamento-de-seguridad-de-las-instalaciones-de-consumo-de-energia-electrica-decreto-08/';
- return `<a class="sec-ric-fab" href="${esc(href)}" target="_blank" rel="noopener" aria-label="Abrir Pliegos Técnicos Normativos RIC de la SEC. Arrastra para mover" title="Arrastra para mover. Clic para consultar los Pliegos Técnicos Normativos RIC vigentes en la SEC"><span class="sec-ric-grip" aria-hidden="true"></span>${icon('file')}<span>SEC · Pliegos RIC</span></a>`;
+ return `<a class="sec-ric-fab" href="${esc(href)}" target="_blank" rel="noopener" draggable="false" aria-label="Abrir Pliegos Técnicos Normativos RIC de la SEC. Arrastra para mover" title="Arrastra para mover. Clic para consultar los Pliegos Técnicos Normativos RIC vigentes en la SEC"><span class="sec-ric-grip" aria-hidden="true"></span>${icon('file')}<span>SEC · Pliegos RIC</span></a>`;
 }
 const SEC_RIC_POS='aula-sec-ric-pos';
 function secRicClamp(x,y,el){
@@ -931,14 +931,18 @@ function bindSecRicDrag(){
  const end=e=>{
   if(!dragging||(e&&pid!=null&&e.pointerId!==pid))return;
   dragging=false;el.classList.remove('is-dragging');
+  try{if(pid!=null)el.releasePointerCapture(pid)}catch(_){}
   window.removeEventListener('pointermove',move,true);window.removeEventListener('pointerup',end,true);window.removeEventListener('pointercancel',end,true);
   if(moved){const r=el.getBoundingClientRect();try{localStorage.setItem(SEC_RIC_POS,JSON.stringify({x:Math.round(r.left),y:Math.round(r.top)}))}catch(_){}el.dataset.skipClick='1'}
  };
  el.addEventListener('pointerdown',e=>{
   if(e.pointerType==='mouse'&&e.button!==0)return;
   const r=el.getBoundingClientRect();startX=e.clientX;startY=e.clientY;origX=r.left;origY=r.top;pid=e.pointerId;dragging=true;moved=false;
+  e.preventDefault();
+  try{el.setPointerCapture(e.pointerId)}catch(_){}
   window.addEventListener('pointermove',move,{capture:true,passive:false});window.addEventListener('pointerup',end,true);window.addEventListener('pointercancel',end,true);
  });
+ el.addEventListener('dragstart',e=>e.preventDefault());
  el.addEventListener('click',e=>{if(el.dataset.skipClick){e.preventDefault();e.stopImmediatePropagation();delete el.dataset.skipClick}},true);
 }
 function decorateAeOverview(root){
