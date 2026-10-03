@@ -1523,6 +1523,16 @@ body[data-station="5"] .az-select[aria-pressed="true"]::before{
 }
 body[data-station="5"] .az-grid>.az-card[hidden]{display:none!important}
 
+/* Las tarjetas visibles ocupan el espacio disponible sin conservar huecos de tarjetas filtradas. */
+body[data-station="5"] .az-grid{
+  grid-template-areas:none!important;
+  grid-auto-flow:row dense;
+  align-items:stretch;
+}
+body[data-station="5"] .az-grid>.az-card{grid-area:auto!important;min-width:0}
+@media(max-width:900px){body[data-station="5"] .az-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:640px){body[data-station="5"] .az-grid{grid-template-columns:minmax(0,1fr)!important}}
+
 /* Los campos de producción se distinguen de las tarjetas informativas. */
 body[data-station="5"] label:has(>textarea),
 body[data-station="5"] label:has(textarea){position:relative}
