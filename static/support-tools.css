@@ -1449,17 +1449,17 @@ body.reduce-motion .tools-fab-list .support-card.tone-ok { animation: none; }
 @media(max-width:560px){.tools-fab .tools-fab-btn{min-width:210px!important;min-height:62px!important;padding:4px 12px 4px 6px!important}.tools-fab .tools-fab-mascot{width:92px;height:51px;flex-basis:92px}.tools-fab .tools-fab-label{font-size:13px!important}}
 
 /* Transparent mascot-only control: keep drag/click behavior without a visible container. */
-.tools-fab .tools-fab-btn{width:190px!important;min-width:190px!important;height:112px!important;min-height:112px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;outline:0!important;overflow:visible!important}
-.tools-fab .tools-fab-mascot{display:block;width:190px!important;height:112px!important;flex:0 0 190px!important;border-radius:0!important;object-fit:contain!important;filter:drop-shadow(0 9px 8px rgba(23,72,113,.25));pointer-events:none;user-select:none}
+.tools-fab .tools-fab-btn{width:220px!important;min-width:220px!important;height:132px!important;min-height:132px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;outline:0!important;overflow:visible!important}
+.tools-fab .tools-fab-mascot{display:block;width:220px!important;height:132px!important;flex:0 0 220px!important;border-radius:0!important;object-fit:contain!important;filter:drop-shadow(0 10px 9px rgba(23,72,113,.28));pointer-events:none;user-select:none;transform-origin:52% 72%}
 .tools-fab .tools-fab-btn:hover:not(:disabled){background:transparent!important;box-shadow:none!important;transform:translateY(-3px) scale(1.035)!important}
 .tools-fab.is-dragging .tools-fab-btn{background:transparent!important;box-shadow:none!important;transform:scale(1.045)!important}
 .tools-fab .tools-fab-btn:focus,.tools-fab .tools-fab-btn:focus-visible{outline:0!important;outline-offset:0!important;box-shadow:none!important}
 .tools-fab .tools-fab-btn:focus-visible .tools-fab-mascot{filter:drop-shadow(0 0 5px rgba(27,152,219,.9)) drop-shadow(0 9px 8px rgba(23,72,113,.25))}
-.tools-fab:not(.is-dragging) .tools-fab-mascot{animation:nubiMascotFloat 3.4s ease-in-out infinite;will-change:transform}
+.tools-fab:not(.is-dragging) .tools-fab-mascot{animation:nubiMascotFloat 3.2s ease-in-out infinite;will-change:transform,filter}
 .tools-fab.is-dragging .tools-fab-mascot{animation-play-state:paused;transform:scale(1.035)}
-@keyframes nubiMascotFloat{0%,100%{transform:translateY(0) rotate(-.4deg)}50%{transform:translateY(-8px) rotate(.5deg)}}
+@keyframes nubiMascotFloat{0%,100%{transform:translateY(0) rotate(-1deg) scale(1);filter:drop-shadow(0 10px 9px rgba(23,72,113,.25))}45%{transform:translateY(-10px) rotate(.8deg) scale(1.018);filter:drop-shadow(0 16px 12px rgba(23,72,113,.2))}58%{transform:translateY(-8px) rotate(.35deg) scale(1.012)}75%{transform:translateY(-3px) rotate(-.3deg) scale(1.004)}}
 @media(prefers-reduced-motion:reduce){.tools-fab:not(.is-dragging) .tools-fab-mascot{animation:none}}
-@media(max-width:560px){.tools-fab .tools-fab-btn{width:156px!important;min-width:156px!important;height:92px!important;min-height:92px!important}.tools-fab .tools-fab-mascot{width:156px!important;height:92px!important;flex-basis:156px!important}}
+@media(max-width:560px){.tools-fab .tools-fab-btn{width:176px!important;min-width:176px!important;height:106px!important;min-height:106px!important}.tools-fab .tools-fab-mascot{width:176px!important;height:106px!important;flex-basis:176px!important}}
 
 .support-card.tone-ok[data-action="practice"] {
   animation: pf-breathe 3.6s ease-in-out infinite;
