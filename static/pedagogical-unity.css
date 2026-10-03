@@ -1157,6 +1157,7 @@ body[data-screen="module"][data-station="5"] .az-instruction.ordered-activity{
   background:linear-gradient(135deg,#f5faff 0,#fff 62%)!important;
 }
 body[data-screen="module"][data-station="5"] .az-instruction.ordered-activity>.activity-focus,
+body[data-screen="module"][data-station="5"] .az-instruction.ordered-activity>.activity-direct-instruction,
 body[data-screen="module"][data-station="5"] .az-instruction.ordered-activity>.activity-continuity,
 body[data-screen="module"][data-station="5"] .az-instruction.ordered-activity>.activity-focus-guide{
   grid-column:1/-1!important;
