@@ -1039,6 +1039,13 @@ body[data-screen="module"] select:focus-visible{outline:3px solid #f2b529!import
 body[data-screen="module"] .practice-result,
 body[data-screen="module"] .feedback,
 body[data-screen="module"] [class*="feedback-message"]{margin-top:14px;padding:13px 15px;border:1px solid #b9ddcf;border-left:5px solid #25825f;border-radius:8px;background:#eef9f4;color:#174f3f}
+.connection-recovery{display:flex!important;min-height:300px;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;background:linear-gradient(145deg,#fff,#f2f8fc)!important}
+.connection-recovery-icon{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#e6f2fb;color:#176ba8}
+.connection-recovery-icon .icon{width:28px;height:28px;animation:connection-spin 1.4s linear infinite}
+.connection-recovery h2,.connection-recovery p{margin:0}.connection-recovery p{max-width:560px;color:#506b82}
+.connection-recovery .primary,.connection-recovery .outline{min-width:190px;justify-content:center}
+@keyframes connection-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.connection-recovery-icon .icon{animation:none}}
 
 @media(max-width:760px){
   body[data-screen="module"] .ordered-activity{padding:12px!important;margin:14px 0!important}
