@@ -915,7 +915,7 @@ body[data-screen="module"] .station-instruction-banner p{font-size:12px}
 body[data-screen="module"] .station-instruction-count{display:flex;align-items:center;gap:9px;padding:10px 14px;border-color:color-mix(in srgb,var(--instruction-accent) 42%,#d9e7ed);color:var(--instruction-accent)}
 body[data-screen="module"] .station-instruction-count .icon{width:22px;height:22px}
 body[data-screen="module"] .station-instruction-count b{font-size:12px;white-space:nowrap}
-body[data-screen="module"] .az-instruction.instruction-showcase{display:grid;grid-template-columns:58px minmax(0,1fr) 58px;align-items:center;gap:17px;margin:14px 0;padding:18px 20px}
+body[data-screen="module"] .az-instruction.instruction-showcase{display:grid;grid-template-columns:58px minmax(0,1fr);align-items:center;gap:17px;margin:14px 0;padding:18px 20px}
 body[data-screen="module"] .az-instruction.instruction-showcase>span,body[data-screen="module"] .az-instruction.instruction-showcase>aside{display:grid;place-items:center;width:56px;height:56px;border:1px solid color-mix(in srgb,var(--instruction-accent) 26%,#fff);border-radius:8px;background:#fff;color:var(--instruction-accent);box-shadow:0 6px 14px color-mix(in srgb,var(--instruction-accent) 19%,transparent)}
 body[data-screen="module"] .az-instruction.instruction-showcase .icon{width:29px;height:29px}
 body[data-screen="module"] .az-instruction.instruction-showcase h2{font-size:20px;line-height:1.22}

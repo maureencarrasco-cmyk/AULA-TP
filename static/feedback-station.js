@@ -273,7 +273,7 @@ function analizaDash(){
   return `<div class="az-board">
     ${typeof achievementProgressTable==='function'?achievementProgressTable():''}
     ${analizaFilters(d)}
-    <section class="az-instruction instruction-showcase tone-blue"><span>${icon('search')}</span><div><small>INSTRUCCIÓN DE LA ACTIVIDAD</small><h2>Observa, compara e identifica</h2><p>Observa tus resultados por AE, tu evolución y tus evidencias. Identifica una fortaleza y un aspecto que necesites seguir trabajando.</p></div><aside aria-hidden="true">${icon('chart')}</aside></section>
+    <section class="az-instruction instruction-showcase tone-blue"><span>${icon('search')}</span><div><small>INSTRUCCIÓN DE LA ACTIVIDAD</small><h2>Observa, compara e identifica</h2><p>Observa tus resultados por AE, tu evolución y tus evidencias. Identifica una fortaleza y un aspecto que necesites seguir trabajando.</p></div></section>
     ${analizaDemoCohort(d.modulePct)}
     <div class="az-grid">
       <section class="az-card az-module">
