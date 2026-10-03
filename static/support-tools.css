@@ -1389,6 +1389,21 @@ body.reduce-motion .tools-fab-list .support-card.tone-ok { animation: none; }
 .tools-fab.is-dragging .tools-fab-btn{background:linear-gradient(155deg,#effaff,#ccecff)!important;cursor:grabbing!important;transform:scale(1.03)!important}
 .tools-fab.is-open .tools-fab-ico{transform:none!important}
 
+/* Agente Nubi: menta pastel luminosa con contraste legible. */
+.tools-fab .tools-fab-btn{
+  border-color:#76d9c8!important;
+  background:linear-gradient(150deg,#f4fffb 0%,#c9f8eb 42%,#a7ecd9 100%)!important;
+  color:#075f61!important;
+  box-shadow:0 0 0 6px rgba(210,255,241,.78),0 0 24px rgba(72,220,190,.38),0 13px 30px rgba(17,131,120,.28)!important;
+}
+.tools-fab .tools-fab-btn::before,
+.tools-fab .tools-fab-btn::after{border-color:#76d9c8;background:linear-gradient(145deg,#f8fffc,#b8f3e6)}
+.tools-fab .tools-fab-label{color:#075f61!important;text-shadow:0 1px 0 rgba(255,255,255,.8)}
+.tools-fab .tools-fab-ico{color:#078b8f!important}
+.tools-fab .tools-fab-grip{background-image:radial-gradient(circle,#078b8f 1.1px,transparent 1.25px)!important}
+.tools-fab .tools-fab-btn:hover:not(:disabled){background:linear-gradient(150deg,#fff 0%,#bdf5e7 44%,#91e4cf 100%)!important;box-shadow:0 0 0 8px rgba(204,255,239,.82),0 0 30px rgba(63,224,190,.48),0 16px 34px rgba(17,131,120,.32)!important}
+.tools-fab.is-dragging .tools-fab-btn{background:linear-gradient(150deg,#eafff8,#9ce8d4)!important}
+
 .support-card.tone-ok[data-action="practice"] {
   animation: pf-breathe 3.6s ease-in-out infinite;
   will-change: transform;
