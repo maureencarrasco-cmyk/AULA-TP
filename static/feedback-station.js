@@ -850,13 +850,13 @@ function feedbackPanel(){
     proyecta:{action:'Sintetiza tu aprendizaje y define un próximo foco.',object:'Tu recorrido y las evidencias construidas.',start:'Recupera una fortaleza y un aspecto por reforzar de las etapas anteriores.',resource:'Síntesis del recorrido y respuestas guardadas.',response:'Aprendizaje principal, contexto de uso y foco personal.',purpose:'Cerrar el módulo con autonomía y una acción futura concreta.',completion:'Terminas cuando completas los tres productos y finalizas el recorrido.'}
   };
   const activeStage={
-    analiza:{title:'Analiza',summary:'Estas son las características y orientaciones de la pestaña Analiza.',icon:'chart',tone:'blue'},
-    comprende:{title:'Comprende',summary:'Estas son las características y orientaciones de la pestaña Comprende.',icon:'search',tone:'violet'},
-    conecta:{title:'Conecta',summary:'Estas son las características y orientaciones de la pestaña Conecta.',icon:'link',tone:'purple'},
-    transfiere:{title:'Transfiere',summary:'Estas son las características y orientaciones de la pestaña Transfiere.',icon:'tool',tone:'green'},
-    proyecta:{title:'Proyecta',summary:'Estas son las características y orientaciones de la pestaña Proyecta.',icon:'flag',tone:'orange'}
+    analiza:{number:1,title:'Analiza',summary:'Estas son las características y orientaciones de la pestaña Analiza.',icon:'chart',tone:'blue'},
+    comprende:{number:2,title:'Comprende',summary:'Estas son las características y orientaciones de la pestaña Comprende.',icon:'search',tone:'violet'},
+    conecta:{number:3,title:'Conecta',summary:'Estas son las características y orientaciones de la pestaña Conecta.',icon:'link',tone:'purple'},
+    transfiere:{number:4,title:'Transfiere',summary:'Estas son las características y orientaciones de la pestaña Transfiere.',icon:'tool',tone:'green'},
+    proyecta:{number:5,title:'Proyecta',summary:'Estas son las características y orientaciones de la pestaña Proyecta.',icon:'flag',tone:'orange'}
   }[viewTab];
-  const stageExplanation=`<section class="s5-tab-explanation tone-${activeStage.tone}" aria-labelledby="s5-tab-explanation-title"><header><span aria-hidden="true">${icon(activeStage.icon)}</span><div><small>PESTAÑA ACTIVA</small><h2 id="s5-tab-explanation-title">Características de ${activeStage.title}</h2><p>${activeStage.summary}</p></div></header>${typeof instructionContract==='function'?instructionContract({instruction:instructions[viewTab]}):''}</section>`;
+  const stageExplanation=`<section class="s5-tab-explanation tone-${activeStage.tone}" aria-labelledby="s5-tab-explanation-title"><div class="s5-tab-link">${icon('arrow')}<span><small>PESTAÑA ${activeStage.number} SELECCIONADA</small><b>${activeStage.title} → definición y actividad</b></span></div><header><span aria-hidden="true">${icon(activeStage.icon)}</span><div><small>CARACTERÍSTICAS DE LA PESTAÑA</small><h2 id="s5-tab-explanation-title">${activeStage.title}</h2><p>${activeStage.summary}</p></div></header>${typeof instructionContract==='function'?instructionContract({instruction:instructions[viewTab]}):''}</section>`;
   return workZone(`${analizaTitle()}${analizaSteps(viewTab)}${stageExplanation}<div class="az-summary">${feedbackBody(viewTab)}</div>`,'work-zone-s5');
 }
 
