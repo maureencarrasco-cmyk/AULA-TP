@@ -214,6 +214,7 @@ function shell(body,title='Mi aprendizaje',sub='Tu campus de formación técnico
  if(window.AulaAccess)window.AulaAccess.hydrate($('#app'));
  if(view.name==='module')mountToolsFab(view.station);
  else if(view.name!=='teacher'&&view.name!=='editor')mountToolsFab(0);
+ bindSecRicDrag();
 }
 function login(){
  document.querySelectorAll('.tools-fab, .tools-fab-backdrop, .tools-fab-layer').forEach(el=>el.remove());
@@ -898,7 +899,47 @@ function specialtyResourceButton(){
  const course=courses.find(item=>item.id===current?.course_id);
  if(specialtyKey(course)!=='electricidad')return '';
  const href=current.content?.regulatory_resource?.url||'https://www.sec.cl/reglamento-de-seguridad-de-las-instalaciones-de-consumo-de-energia-electrica-decreto-08/';
- return `<a class="sec-ric-fab" href="${esc(href)}" target="_blank" rel="noopener" aria-label="Abrir Pliegos Técnicos Normativos RIC de la SEC" title="Consulta los Pliegos Técnicos Normativos RIC vigentes en la SEC">${icon('file')}<span>SEC · Pliegos RIC</span></a>`;
+ return `<a class="sec-ric-fab" href="${esc(href)}" target="_blank" rel="noopener" aria-label="Abrir Pliegos Técnicos Normativos RIC de la SEC. Arrastra para mover" title="Arrastra para mover. Clic para consultar los Pliegos Técnicos Normativos RIC vigentes en la SEC"><span class="sec-ric-grip" aria-hidden="true"></span>${icon('file')}<span>SEC · Pliegos RIC</span></a>`;
+}
+const SEC_RIC_POS='aula-sec-ric-pos';
+function secRicClamp(x,y,el){
+ const pad=8,w=el.offsetWidth||170,h=el.offsetHeight||48;
+ return {x:Math.min(Math.max(pad,x),Math.max(pad,window.innerWidth-w-pad)),y:Math.min(Math.max(pad,y),Math.max(pad,window.innerHeight-h-pad))};
+}
+function secRicApplyPos(el,pos){
+ const next=secRicClamp(pos.x,pos.y,el);
+ el.classList.add('is-placed');
+ el.style.setProperty('left',next.x+'px','important');
+ el.style.setProperty('top',next.y+'px','important');
+ el.style.setProperty('right','auto','important');
+ el.style.setProperty('bottom','auto','important');
+}
+function bindSecRicDrag(){
+ const el=document.querySelector('.sec-ric-fab');
+ if(!el||el.dataset.dragBound)return;
+ el.dataset.dragBound='1';
+ let saved=null;
+ try{saved=JSON.parse(localStorage.getItem(SEC_RIC_POS)||'null')}catch(_){}
+ if(saved&&Number.isFinite(saved.x)&&Number.isFinite(saved.y))requestAnimationFrame(()=>secRicApplyPos(el,saved));
+ let startX=0,startY=0,origX=0,origY=0,pid=null,moved=false,dragging=false;
+ const move=e=>{
+  if(!dragging||(pid!=null&&e.pointerId!==pid))return;
+  const dx=e.clientX-startX,dy=e.clientY-startY;
+  if(!moved&&Math.hypot(dx,dy)<8)return;
+  moved=true;el.classList.add('is-dragging');secRicApplyPos(el,{x:origX+dx,y:origY+dy});e.preventDefault();
+ };
+ const end=e=>{
+  if(!dragging||(e&&pid!=null&&e.pointerId!==pid))return;
+  dragging=false;el.classList.remove('is-dragging');
+  window.removeEventListener('pointermove',move,true);window.removeEventListener('pointerup',end,true);window.removeEventListener('pointercancel',end,true);
+  if(moved){const r=el.getBoundingClientRect();try{localStorage.setItem(SEC_RIC_POS,JSON.stringify({x:Math.round(r.left),y:Math.round(r.top)}))}catch(_){}el.dataset.skipClick='1'}
+ };
+ el.addEventListener('pointerdown',e=>{
+  if(e.pointerType==='mouse'&&e.button!==0)return;
+  const r=el.getBoundingClientRect();startX=e.clientX;startY=e.clientY;origX=r.left;origY=r.top;pid=e.pointerId;dragging=true;moved=false;
+  window.addEventListener('pointermove',move,{capture:true,passive:false});window.addEventListener('pointerup',end,true);window.addEventListener('pointercancel',end,true);
+ });
+ el.addEventListener('click',e=>{if(el.dataset.skipClick){e.preventDefault();e.stopImmediatePropagation();delete el.dataset.skipClick}},true);
 }
 function decorateAeOverview(root){
  const panel=root?.querySelector('.ae-info');
