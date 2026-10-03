@@ -1826,6 +1826,16 @@ body[data-station="5"] .act-contract>p>i{width:38px;height:38px;border-radius:10
 @media(max-width:1050px){body[data-station="5"] .work-zone-s5>.az-steps,body[data-station="5"] .work-zone-s5>.az-steps-v2{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory}body[data-station="5"] .az-step{flex:0 0 235px!important;scroll-snap-align:start}body[data-station="5"] .act-contract{grid-template-columns:repeat(2,minmax(0,1fr))!important}body[data-station="5"] .act-contract>div:nth-child(n),body[data-station="5"] .act-contract>p{grid-column:auto!important}body[data-station="5"] .act-contract>p{grid-column:1/-1!important}}
 @media(max-width:620px){body[data-station="5"] .act-contract{grid-template-columns:1fr!important}body[data-station="5"] .act-contract>div:nth-child(n),body[data-station="5"] .act-contract>p{grid-column:1!important}}
 
+.c2-practice{margin-top:12px;padding:14px;border:2px solid #b8d9ce;border-radius:12px;background:#f4fbf8}
+.c2-practice>header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.c2-practice>header>span{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:10px;background:#16815f;color:#fff}
+.c2-practice>header .icon{width:21px;height:21px}.c2-practice small{display:block;color:#16815f;font-size:8px;font-weight:900}.c2-practice h3{margin:1px 0;color:#123f69;font-size:15px}.c2-practice header p{margin:2px 0 0;color:#587188;font-size:10px}
+.c2-practice fieldset{display:grid;gap:7px;margin:0;padding:0;border:0}.c2-practice legend{margin-bottom:8px;color:#173f69;font-size:12px;font-weight:800}
+.c2-practice label{display:grid;grid-template-columns:22px 30px 1fr;align-items:center;gap:8px;padding:9px 11px;border:1px solid #cfe0e7;border-radius:9px;background:#fff;cursor:pointer}
+.c2-practice label:has(input:checked){border-color:#16815f;background:#e8f7f1;box-shadow:0 0 0 1px #16815f}.c2-practice input{width:17px;height:17px;accent-color:#16815f}.c2-practice label>span{display:grid;place-items:center;width:27px;height:27px;border-radius:7px;background:#e8f1fb;color:#1769b5;font-size:10px;font-weight:900}.c2-practice label>b{color:#264d70;font-size:10px;line-height:1.35}
+.c2-practice-actions{display:flex;align-items:center;gap:12px;margin-top:11px}.c2-practice-actions button{min-height:38px}.c2-practice-actions p{display:flex;align-items:center;gap:6px;margin:0;color:#526d84;font-size:10px;line-height:1.4}.c2-practice-actions p .icon{width:18px;height:18px}.c2-practice.is-correct{border-color:#16815f}.c2-practice.is-correct .c2-practice-actions p{color:#126a4f}.c2-practice.is-incorrect{border-color:#d69638;background:#fffaf1}.c2-practice.is-incorrect .c2-practice-actions p{color:#955b08}
+@media(max-width:620px){.c2-practice-actions{align-items:stretch;flex-direction:column}.c2-practice-actions button{width:100%}}
+
 /* Connect the selected station-five tab with the guidance that belongs to it. */
 body[data-station="5"] .s5-tab-explanation{
   --stage-accent:#176fbc;

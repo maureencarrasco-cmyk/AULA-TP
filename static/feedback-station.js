@@ -631,6 +631,15 @@ function fbComprendeBodyV2(){
     <section class="c2-section" id="c2-evidence">
       <header class="c2-section-title"><span>2</span><em>APRENDE</em><div><h3>Aprende de tus evidencias</h3><p>Tus errores también muestran cómo estás aprendiendo. Revisa solo las evidencias más relevantes.</p></div><aside>${icon('bulb')} Cada desafío es una oportunidad de aprender algo nuevo.</aside></header>
       <div class="c2-proof-grid">${evidenceCards}</div>
+      <form class="c2-practice" data-practice-target data-c2-practice aria-labelledby="c2-practice-title">
+        <header><span>${icon('tool')}</span><div><small>PRÁCTICA BREVE</small><h3 id="c2-practice-title">Comprueba cómo mejorarías tu respuesta</h3><p>Elige una estrategia y revisa de inmediato si te ayuda a corregir el razonamiento.</p></div></header>
+        <fieldset><legend>Antes de volver a responder una evidencia por reforzar, ¿qué acción te ayuda más?</legend>
+          <label><input type="radio" name="c2-practice-${current?.id||'module'}" value="repeat"><span>A</span><b>Repetir la misma respuesta sin revisar la evidencia.</b></label>
+          <label><input type="radio" name="c2-practice-${current?.id||'module'}" value="check"><span>B</span><b>Comparar los datos con el criterio técnico y comprobar la decisión.</b></label>
+          <label><input type="radio" name="c2-practice-${current?.id||'module'}" value="guess"><span>C</span><b>Cambiar la respuesta solo porque la anterior fue incorrecta.</b></label>
+        </fieldset>
+        <div class="c2-practice-actions"><button type="submit" class="primary" disabled>Comprobar respuesta ${icon('check')}</button><p role="status" aria-live="polite"></p></div>
+      </form>
     </section>
 
     <section class="c2-section c2-connect">
@@ -1193,6 +1202,26 @@ function bindComprendeV2(){
       dialog.showModal();
     }else toast(`Evidencia ${n}: revisa la explicación y registra con tus palabras qué cambiarías.`);
   }));
+  const practice=board.querySelector('[data-c2-practice]');
+  if(practice){
+    const submit=practice.querySelector('button[type="submit"]');
+    const status=practice.querySelector('[role="status"]');
+    practice.querySelectorAll('input[type="radio"]').forEach(input=>input.addEventListener('change',()=>{
+      submit.disabled=false;
+      practice.classList.remove('is-correct','is-incorrect');
+      status.textContent='';
+    }));
+    practice.addEventListener('submit',event=>{
+      event.preventDefault();
+      const selected=practice.querySelector('input:checked');
+      if(!selected)return;
+      const correct=selected.value==='check';
+      practice.classList.toggle('is-correct',correct);
+      practice.classList.toggle('is-incorrect',!correct);
+      status.innerHTML=correct?`${icon('check')} <b>Correcto.</b> Revisaste la evidencia, aplicaste el criterio y comprobaste tu decisión.`:`${icon('info')} <b>Vuelve a intentarlo.</b> Primero compara los datos con el criterio técnico; cambiar o repetir sin revisar no corrige el razonamiento.`;
+      if(correct)try{localStorage.setItem(s5DraftKey('comprende-practice'),'complete')}catch(e){}
+    });
+  }
 }
 function bindS5Hints(){
   document.querySelectorAll('[data-s5-hint]').forEach(button=>button.addEventListener('click',()=>{
