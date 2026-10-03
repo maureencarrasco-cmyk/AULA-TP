@@ -181,7 +181,8 @@ function renderExperience(exp) {
   const boardHead = typeof pedStepHead === 'function'
     ? pedStepHead(boardN, boardAction.action, boardAction.title)
     : `<p class="act-step-label"><span class="act-step-n">${boardN}</span> ${esc(boardAction.title)}</p>`;
-  const prompt = `<header class="act-now instruction-showcase tone-blue">${nowIco}<div><span class="act-now-kicker"><span class="act-now-badge">Paso ${boardN}</span>Esto es lo que tienes que hacer ahora</span><h3 class="act-prompt act-prompt-title">${esc(exp.prompt)}</h3></div></header>`;
+  const inlineResponse = exp.type === 'hotspot' ? `<label class="act-now-response"><span>Tu respuesta</span><textarea data-act-inline-response maxlength="10000" placeholder="Escribe qué información aporta cada punto y explica tu respuesta."></textarea></label>` : '';
+  const prompt = `<header class="act-now instruction-showcase tone-blue">${nowIco}<div class="act-now-content"><span class="act-now-kicker"><span class="act-now-badge">Paso ${boardN}</span>Esto es lo que tienes que hacer ahora</span><h3 class="act-prompt act-prompt-title">${esc(exp.prompt)}</h3>${inlineResponse}</div></header>`;
   const stemBlock = stem ? `<div class="act-observe ped-step" data-action="${stemAction.action}" data-state="current">${stemHead}${stem}</div><p class="act-flow ped-flow" aria-hidden="true">↓</p>` : '';
   const boardBlock = board ? `<div class="act-decide ped-step" data-action="${boardAction.action}" data-state="${stem && !imageFirst ? 'idle' : 'current'}">${boardHead}${board}</div>` : '';
   const hotspotFirst = exp.type === 'hotspot';
@@ -622,6 +623,7 @@ function bindAeProgress() {
   const form = document.getElementById('ae-form');
   if (!form) return;
   const ta = form.querySelector('textarea[name="text"]');
+  const inlineTa = document.querySelector('.act-task [data-act-inline-response]');
   const btn = form.querySelector('button.primary');
   const meter = form.querySelector('[data-ae-meter]');
   const ready = form.querySelector('[data-ae-ready]');
@@ -666,6 +668,16 @@ function bindAeProgress() {
       else if (act === 'verify') item.dataset.state = boardDone && hasText ? 'current' : 'idle';
     });
   };
+  if (inlineTa && ta) {
+    inlineTa.value = ta.value;
+    inlineTa.addEventListener('input', () => {
+      ta.value = inlineTa.value;
+      ta.dispatchEvent(new Event('input', {bubbles: true}));
+    });
+    ta.addEventListener('input', () => {
+      if (inlineTa.value !== ta.value) inlineTa.value = ta.value;
+    });
+  }
   form.addEventListener('input', update);
   document.querySelector('.act-task')?.addEventListener('change', update);
   update();
