@@ -1364,6 +1364,31 @@ button.tools-fab-btn:active:not(:disabled),
 }
 body.reduce-motion .tools-fab-list .support-card.tone-ok { animation: none; }
 
+/* Agente Nubi: nube flotante y arrastrable. */
+.tools-fab .tools-fab-btn{
+  position:relative!important;
+  isolation:isolate;
+  min-width:176px!important;
+  min-height:66px!important;
+  padding:16px 25px 12px 18px!important;
+  overflow:visible!important;
+  border:2px solid #c5e6f7!important;
+  border-radius:46% 52% 45% 48% / 58% 62% 44% 46%!important;
+  background:linear-gradient(155deg,#fafdff 0%,#e5f6ff 56%,#ccecff 100%)!important;
+  color:#155e91!important;
+  box-shadow:0 0 0 5px rgba(222,245,255,.65),0 12px 28px rgba(40,139,194,.3)!important;
+}
+.tools-fab .tools-fab-btn::before,
+.tools-fab .tools-fab-btn::after{content:""!important;position:absolute!important;display:block!important;z-index:-1;border:2px solid #c5e6f7;background:linear-gradient(150deg,#fff,#dff4ff);pointer-events:none}
+.tools-fab .tools-fab-btn::before{width:58px;height:58px;left:30px;top:-22px;border-radius:50%}
+.tools-fab .tools-fab-btn::after{width:46px;height:46px;right:27px;top:-14px;border-radius:50%}
+.tools-fab .tools-fab-label{position:relative;z-index:2;color:#155e91!important;font-size:15px!important;font-weight:900!important}
+.tools-fab .tools-fab-ico{position:relative;z-index:2;width:34px!important;height:30px!important;color:#1688c3!important;transform:none!important}
+.tools-fab .tools-fab-grip{position:relative;z-index:2;background-image:radial-gradient(circle,#2586b6 1.1px,transparent 1.25px)!important;opacity:.65}
+.tools-fab .tools-fab-btn:hover:not(:disabled){background:linear-gradient(155deg,#fff 0%,#d8f2ff 55%,#bce5fa 100%)!important;box-shadow:0 0 0 7px rgba(218,243,255,.75),0 15px 32px rgba(35,132,188,.36)!important}
+.tools-fab.is-dragging .tools-fab-btn{background:linear-gradient(155deg,#effaff,#ccecff)!important;cursor:grabbing!important;transform:scale(1.03)!important}
+.tools-fab.is-open .tools-fab-ico{transform:none!important}
+
 .support-card.tone-ok[data-action="practice"] {
   animation: pf-breathe 3.6s ease-in-out infinite;
   will-change: transform;
