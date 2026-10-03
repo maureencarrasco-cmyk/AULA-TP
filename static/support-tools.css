@@ -1438,6 +1438,16 @@ body.reduce-motion .tools-fab-list .support-card.tone-ok { animation: none; }
 .tools-fab .tools-fab-btn:hover:not(:disabled){background:linear-gradient(145deg,#fff 0%,#d2ebef 48%,#add5dc 100%)!important;box-shadow:0 0 0 7px rgba(210,239,243,.8),0 15px 32px rgba(38,103,116,.34)!important}
 .tools-fab.is-dragging .tools-fab-btn{background:linear-gradient(145deg,#eefafb,#b8dce2)!important}
 
+/* Agente Nubi mascot image: visual replacement only; panel behavior remains unchanged. */
+.tools-fab .tools-fab-btn{min-width:214px!important;min-height:72px!important;padding:5px 19px 5px 8px!important;gap:7px!important;border-color:#91bdd0!important;border-radius:38px 22px 22px 38px!important;background:linear-gradient(145deg,#fff 0%,#e9f6fb 62%,#d3ebf4 100%)!important;overflow:visible!important}
+.tools-fab .tools-fab-mascot{display:block;width:78px;height:58px;flex:0 0 78px;object-fit:contain;filter:drop-shadow(0 5px 5px rgba(32,91,132,.2));pointer-events:none;user-select:none}
+.tools-fab .tools-fab-ico{display:none!important}
+.tools-fab .tools-fab-label{font-size:15px!important;color:#124f79!important;white-space:nowrap}
+.tools-fab .tools-fab-grip{width:9px!important;height:27px!important;flex:0 0 9px!important}
+.tools-fab .tools-fab-btn:hover:not(:disabled){background:linear-gradient(145deg,#fff 0%,#e1f3fa 52%,#c5e5f1 100%)!important;box-shadow:0 0 0 7px rgba(210,239,243,.8),0 15px 32px rgba(38,103,116,.34)!important}
+.tools-fab.is-dragging .tools-fab-btn{background:linear-gradient(145deg,#f7fcff,#d7edf6)!important}
+@media(max-width:560px){.tools-fab .tools-fab-btn{min-width:172px!important;min-height:60px!important;padding:4px 13px 4px 6px!important}.tools-fab .tools-fab-mascot{width:62px;height:49px;flex-basis:62px}.tools-fab .tools-fab-label{font-size:13px!important}}
+
 .support-card.tone-ok[data-action="practice"] {
   animation: pf-breathe 3.6s ease-in-out infinite;
   will-change: transform;
