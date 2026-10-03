@@ -1259,3 +1259,17 @@ body[data-screen="module"] .mcq-options .option:not(:has(input:checked)),
 body[data-screen="module"] .act-choices .option:not(:has(input:checked)),
 body[data-screen="module"] .option:not(:has(input:checked)){background:#fff!important;border-color:#c8d8e6!important}
 @media(max-width:620px){body[data-screen="module"] .activity-continuity{align-items:flex-start;margin-bottom:10px}}
+
+body[data-screen="module"] .station-instruction-number{font-size:28px;font-weight:900;line-height:1;letter-spacing:0}
+body[data-screen="module"] .work-zone-s1 .ctx-mission{display:grid;grid-template-columns:40px minmax(0,1fr) minmax(200px,23%);align-items:center;gap:18px;width:100%}
+body[data-screen="module"] .ctx-mission-copy{min-width:0;width:100%}
+body[data-screen="module"] .ctx-mission-copy p{width:100%;max-width:none;text-align:justify;text-align-last:start;line-height:1.65;overflow-wrap:anywhere}
+body[data-screen="module"] .ctx-mission-copy p+p{margin-top:10px}
+body[data-screen="module"] .ctx-mission-visual{min-width:0;width:100%;margin:0}
+body[data-screen="module"] .ctx-mission-visual img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;border-radius:6px}
+@media(max-width:760px){
+ body[data-screen="module"] .work-zone-s1 .ctx-mission{position:relative;grid-template-columns:minmax(0,1fr);gap:12px;padding:16px;align-items:start}
+ body[data-screen="module"] .ctx-mission>.work-ico{position:absolute;top:16px;left:16px}
+ body[data-screen="module"] .ctx-mission-copy>.work-kicker,body[data-screen="module"] .ctx-mission-copy>h3{padding-left:52px}
+ body[data-screen="module"] .ctx-mission-visual{max-width:440px;justify-self:center}
+}
