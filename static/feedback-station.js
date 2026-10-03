@@ -645,6 +645,7 @@ function fbComprendeBodyV2(){
     <section class="c2-section c2-connect">
       <header class="c2-section-title"><span>3</span><em>INTERPRETA</em><div><h3>Interpreta tus evidencias</h3><p>Relaciona cada evidencia con el concepto o criterio que demuestra y reconoce qué significa para tu aprendizaje.</p></div></header>
       <div class="c2-meaning-chain"><article><b>Evidencia</b><p>${esc(evidenceRows[0]?.question||'Actividad destacada del módulo')}</p></article>${icon('arrow')}<article><b>Concepto o criterio</b><p>${esc(concepts[0])}</p></article>${icon('arrow')}<article><b>Qué significa para mi aprendizaje</b><p>Esta evidencia muestra qué comprendes y qué razonamiento necesitas seguir fortaleciendo.</p></article></div>
+      <label class="c2-interpretation-response"><span class="c2-interpretation-icon">${icon('file')}</span><span class="c2-interpretation-copy"><small>ESCRIBE TU INTERPRETACIÓN</small><b>¿Qué demuestra esta evidencia sobre tu aprendizaje?</b><em>Menciona la evidencia, relaciónala con el criterio y explica qué necesitas seguir fortaleciendo.</em></span><textarea data-s5-note="comprende-interpretacion" rows="4" maxlength="600" placeholder="Esta evidencia demuestra que comprendí… porque… Para seguir mejorando necesito…"></textarea><span class="c2-interpretation-count"><b data-c2-interpretation-count>0</b>/600 caracteres · Guardado automático</span></label>
     </section>
 
     <section class="c2-section c2-demonstrate">
@@ -1221,6 +1222,13 @@ function bindComprendeV2(){
       status.innerHTML=correct?`${icon('check')} <b>Correcto.</b> Revisaste la evidencia, aplicaste el criterio y comprobaste tu decisión.`:`${icon('info')} <b>Vuelve a intentarlo.</b> Primero compara los datos con el criterio técnico; cambiar o repetir sin revisar no corrige el razonamiento.`;
       if(correct)try{localStorage.setItem(s5DraftKey('comprende-practice'),'complete')}catch(e){}
     });
+  }
+  const interpretation=board.querySelector('[data-s5-note="comprende-interpretacion"]');
+  const interpretationCount=board.querySelector('[data-c2-interpretation-count]');
+  if(interpretation&&interpretationCount){
+    const updateCount=()=>interpretationCount.textContent=String(interpretation.value.length);
+    interpretation.addEventListener('input',updateCount);
+    updateCount();
   }
 }
 function bindS5Hints(){
