@@ -1039,9 +1039,14 @@ function decorateStationActivities(root,station){
    const mode=signalButton.dataset.activitySignal;
    const target=mode==='practice'?(el.querySelector('[data-practice-target]')||el.querySelector('fieldset, textarea, input, select')):el.querySelector('textarea, input:not([type="hidden"]), select');
    if(mode==='delivery'){
-    const fields=[...el.querySelectorAll('textarea, input:not([type="hidden"]):not([type="button"]):not([type="submit"]), select')];
     const key=`aula-tp-delivery:${auth?.user?.id||'anon'}:${current?.id||'x'}:${station}:${index}`;
-    const hasAnswer=()=>fields.some(field=>field.type==='checkbox'||field.type==='radio'?field.checked:String(field.value||'').trim().length>0);
+    const draftKey=`${key}:response`;
+    let savedResponse='';try{savedResponse=localStorage.getItem(draftKey)||''}catch(e){}
+    signalButton.closest('.activity-focus-guide')?.insertAdjacentHTML('afterend',`<section class="activity-response-composer" aria-labelledby="activity-response-title-${station}-${index}"><div class="activity-response-head"><span class="activity-response-icon">${icon('file')}</span><div><small>RESPUESTA DEL ESTUDIANTE</small><h3 id="activity-response-title-${station}-${index}">Convierte tu aprendizaje en un próximo paso</h3><p>Escribe una respuesta breve que conecte lo que lograste con una acción concreta para mejorar.</p></div><span class="activity-autosave">${icon('check')} Guardado automático</span></div><div class="activity-response-prompts" aria-hidden="true"><span><b>1</b> Mi logro</span><i>${icon('arrow')}</i><span><b>2</b> La evidencia</span><i>${icon('arrow')}</i><span><b>3</b> Mi próximo paso</span></div><label class="activity-response-field"><span>Tu respuesta</span><textarea data-delivery-response minlength="20" maxlength="600" rows="5" placeholder="Ejemplo: Logré comprender… Lo comprobé cuando… Mi próximo paso será…">${esc(savedResponse)}</textarea><small><span data-response-count>${savedResponse.length}</span> / 600 caracteres</small></label></section>`);
+    const responseField=el.querySelector(':scope > .activity-response-composer [data-delivery-response]');
+    const responseCount=el.querySelector(':scope > .activity-response-composer [data-response-count]');
+    const fields=[...el.querySelectorAll('textarea, input:not([type="hidden"]):not([type="button"]):not([type="submit"]), select')];
+    const hasAnswer=()=>responseField?responseField.value.trim().length>=20:fields.some(field=>field.type==='checkbox'||field.type==='radio'?field.checked:String(field.value||'').trim().length>0);
     signalButton.closest('.activity-focus-guide')?.insertAdjacentHTML('afterend',`<p class="activity-delivery-receipt" role="status" hidden>${icon('check')}<span><b>Respuesta entregada al sistema</b><small>Tu respuesta quedó registrada correctamente.</small></span></p>`);
     const receipt=el.querySelector(':scope > .activity-delivery-receipt');
     const renderPending=()=>{signalButton.innerHTML=`${icon('file')} <span>ENTREGAR RESPUESTA</span>${icon('arrow')}`};
@@ -1055,13 +1060,15 @@ function decorateStationActivities(root,station){
      if(receipt)receipt.hidden=true;
     };
     fields.forEach(field=>field.addEventListener(field.tagName==='SELECT'||field.type==='radio'||field.type==='checkbox'?'change':'input',()=>{try{localStorage.removeItem(key)}catch(e){}setPending()}));
+    if(responseField)responseField.addEventListener('input',()=>{if(responseCount)responseCount.textContent=String(responseField.value.length);try{localStorage.setItem(draftKey,responseField.value)}catch(e){}});
     let delivered=false;try{delivered=localStorage.getItem(key)==='delivered'&&hasAnswer()}catch(e){}
     if(delivered){signalButton.disabled=false;signalButton.classList.add('is-delivered');signalButton.setAttribute('aria-pressed','true');renderDelivered();if(receipt)receipt.hidden=false}else setPending();
     signalButton.addEventListener('click',()=>{
      if(!hasAnswer()){
-      target?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
-      target?.focus?.({preventScroll:true});
-      toast('Escribe tu respuesta en el recuadro antes de entregarla.');
+      const answerTarget=responseField||target;
+      answerTarget?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+      answerTarget?.focus?.({preventScroll:true});
+      toast('Completa una respuesta de al menos 20 caracteres antes de entregarla.');
       return;
      }
      try{localStorage.setItem(key,'delivered')}catch(e){}
