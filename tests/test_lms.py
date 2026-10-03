@@ -302,6 +302,10 @@ class LMSFlow(unittest.TestCase):
   self.assertNotIn('Escenario 3D:',source)
   self.assertIn('<th>Necesidad</th><th>Indicador</th><th>Evidencia</th><th>Acción posible</th>',source)
   self.assertIn('curriculumSourcePanel()',source)
+  self.assertIn('refineStationExperience(document.querySelector',source)
+  self.assertIn("root.dataset.experienceReviewed='true'",source)
+  self.assertIn("['.instruction-contract,.station-instruction-banner','instruction']",source)
+  self.assertIn("['.bottom-nav,.question-controls,.s5-next-step,.activity-step-connector','continuation']",source)
  def test_mobile_responsive_contract_for_learning_route_and_assessment(self):
   root=Path(__file__).resolve().parents[1]
   css=(root/'static'/'pedagogical-unity.css').read_text(encoding='utf-8')

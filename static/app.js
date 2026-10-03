@@ -971,6 +971,28 @@ function decorateStudentActionCues(root){
   label.classList.add('student-write-field');
  });
 }
+function refineStationExperience(root){
+ if(!root)return;
+ const meaningful='button,a,input,textarea,select,video,audio,img,canvas,svg,iframe,[role="button"],[role="status"]';
+ root.querySelectorAll('.info-strip,.instruction-note,.activity-continuity,.student-decision-callout').forEach(el=>{
+  if(!el.textContent.trim()&&!el.querySelector(meaningful))el.remove();
+ });
+ const compactText=el=>el.textContent.replace(/\s+/g,' ').trim().toLocaleLowerCase('es');
+ root.querySelectorAll('.info-strip,.instruction-note,.activity-continuity').forEach(el=>{
+  const previous=el.previousElementSibling;
+  if(previous&&previous.matches('.info-strip,.instruction-note,.activity-continuity')&&compactText(previous)===compactText(el)&&!el.querySelector(meaningful))el.remove();
+ });
+ const roles=[
+  ['.instruction-contract,.station-instruction-banner','instruction'],
+  ['figure,video,.module-media,.visual-sim,.scene-stage,.mcq-media','resource'],
+  ['fieldset,.activity-shell,.practice-lab,.question-box','action'],
+  ['textarea,input,select,.student-write-cue','response'],
+  ['.act-feedback,.practice-result,[role="status"]','feedback'],
+  ['.bottom-nav,.question-controls,.s5-next-step,.activity-step-connector','continuation']
+ ];
+ roles.forEach(([selector,role])=>root.querySelectorAll(selector).forEach(el=>{if(!el.dataset.learningRole)el.dataset.learningRole=role}));
+ root.dataset.experienceReviewed='true';
+}
 function cognitiveLevel(operation){
  const levels={Conocer:1,Observar:1,Reconocer:2,Comprender:3,Relacionar:4,Aplicar:5,Analizar:6,Decidir:7,Resolver:8,Justificar:9,Reflexionar:9,Proyectar:9};
  return levels[operation]||5;
@@ -1137,6 +1159,7 @@ function renderModule(n){
  if(n===2)decorateAeOverview(stationBody);
  decorateStationActivities(stationBody,n);
  decorateStudentActionCues(stationBody);
+ refineStationExperience(document.querySelector('.module-main'));
  setTimeout(()=>{
   if(view.name!=='module'||view.station!==n||!stationBody||!document.body.contains(stationBody))return;
   try{
@@ -1147,6 +1170,7 @@ function renderModule(n){
    }
    if(typeof bindActivity==='function')bindActivity(stationBody);
    decorateStudentActionCues(stationBody);
+   refineStationExperience(document.querySelector('.module-main'));
    if(window.AulaAccess)window.AulaAccess.hydrate(stationBody);
    if(window.AulaVisual)window.AulaVisual.hydrate(stationBody);
    if(n===4&&examStarted&&!current.state.exam){
