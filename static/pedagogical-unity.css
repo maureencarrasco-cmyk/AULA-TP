@@ -882,6 +882,7 @@ body[data-screen="module"] .activity-delivery-receipt span{display:flex;flex-dir
 
 /* Shared response composer for every delivery activity across the course catalog. */
 body[data-screen="module"] .activity-response-composer{position:relative;margin:-2px 0 18px;padding:18px;border:1px solid #91c8ba;border-left:5px solid #168168;border-radius:8px;background:linear-gradient(135deg,#f7fcfb 0%,#eef8f5 58%,#f8fbff 100%);box-shadow:0 8px 22px rgba(25,102,82,.1)}
+body[data-screen="module"] .activity-response-composer>.activity-delivery-signal{width:100%;min-height:46px;margin-top:14px;border-radius:8px;justify-content:center}
 body[data-screen="module"] .activity-response-head{display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:start;gap:12px;margin-bottom:14px}
 body[data-screen="module"] .activity-response-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:8px;background:#168168;color:#fff;box-shadow:0 5px 12px rgba(22,129,104,.22)}
 body[data-screen="module"] .activity-response-icon .icon{width:22px;height:22px}

@@ -1126,6 +1126,12 @@ function decorateStationActivities(root,station){
     target?.querySelector?.('input,button,textarea,select')?.focus({preventScroll:true});
    });
   }
+  const focusGuide=el.querySelector(':scope > .activity-focus-guide');
+  if(signalButton?.dataset.activitySignal==='delivery'){
+   const composer=el.querySelector(':scope > .activity-response-composer');
+   if(composer)composer.append(signalButton);
+  }
+  focusGuide?.remove();
  });
  buildPedagogicalMatrix();
 }
