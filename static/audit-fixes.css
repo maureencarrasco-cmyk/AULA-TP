@@ -158,6 +158,12 @@ body[data-screen="courses"] .dash-sidebar{padding-top:70px}
 .sec-ric-fab .icon{width:19px;height:19px;flex:0 0 auto}
 .sec-ric-fab:hover{background:#5B21B6;color:#fff;filter:none}
 .sec-ric-fab:focus-visible{outline:3px solid #FACC15;outline-offset:3px}
+.sec-ric-fab{isolation:isolate;animation:secRicFloat 3.2s ease-in-out infinite;will-change:transform,box-shadow}
+.sec-ric-fab::before{content:"";position:absolute;z-index:-1;inset:-7px;border:2px solid rgba(139,92,246,.52);border-radius:13px;opacity:.15;animation:secRicHalo 2.4s ease-out infinite;pointer-events:none}
+.sec-ric-fab:hover{animation-play-state:paused;transform:translateY(-5px) scale(1.035);box-shadow:0 0 0 6px rgba(167,139,250,.22),0 16px 34px rgba(76,29,149,.42)}
+@keyframes secRicFloat{0%,100%{transform:translateY(0);box-shadow:0 10px 26px rgba(76,29,149,.3)}50%{transform:translateY(-9px);box-shadow:0 0 0 5px rgba(167,139,250,.18),0 17px 34px rgba(76,29,149,.4)}}
+@keyframes secRicHalo{0%{inset:-5px;opacity:.58}75%,100%{inset:-16px;opacity:0}}
+@media(prefers-reduced-motion:reduce){.sec-ric-fab,.sec-ric-fab::before{animation:none}.sec-ric-fab{box-shadow:0 0 0 5px rgba(167,139,250,.2),0 10px 26px rgba(76,29,149,.3)}}
 @media(max-width:760px){
   body[data-screen="module"]:has(.sec-ric-fab){padding-bottom:76px}
   .atp-hero.is-station .atp-hero-side{
