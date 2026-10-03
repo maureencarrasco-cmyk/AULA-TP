@@ -408,7 +408,7 @@ function stationToolsCatalog(station){
  items.push({id:'access',title:'Accesibilidad',hint:'Configura cómo percibes e interactúas',tone:'violet',glyph:accessGlyph()});
  return items;
 }
-function toolsFabGlyph(){return `<svg class="tools-fab-ico" viewBox="0 0 32 28" fill="none" aria-hidden="true"><path d="M8.2 23.5h16.4c3.6 0 6.4-2.7 6.4-6.1 0-3.2-2.5-5.8-5.8-6.1C24.3 6.5 20.4 3 15.7 3 10.5 3 6.2 7.3 6.2 12.5v.2C3.1 13.3 1 15.5 1 18.2c0 3 2.5 5.3 7.2 5.3Z" fill="currentColor" opacity=".2"/><path d="M8.2 23.5h16.4c3.6 0 6.4-2.7 6.4-6.1 0-3.2-2.5-5.8-5.8-6.1C24.3 6.5 20.4 3 15.7 3 10.5 3 6.2 7.3 6.2 12.5v.2C3.1 13.3 1 15.5 1 18.2c0 3 2.5 5.3 7.2 5.3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="16" r="1.25" fill="currentColor"/><circle cx="20" cy="16" r="1.25" fill="currentColor"/><path d="M13 19.1c1.7 1.3 4.3 1.3 6 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`}
+function toolsFabGlyph(){return `<svg class="tools-fab-ico" viewBox="0 0 32 28" fill="none" aria-hidden="true"><path d="M8.2 23.5h16.4c3.6 0 6.4-2.7 6.4-6.1 0-3.2-2.5-5.8-5.8-6.1C24.3 6.5 20.4 3 15.7 3 10.5 3 6.2 7.3 6.2 12.5v.2C3.1 13.3 1 15.5 1 18.2c0 3 2.5 5.3 7.2 5.3Z" fill="currentColor" opacity=".14"/><path d="M8.2 23.5h16.4c3.6 0 6.4-2.7 6.4-6.1 0-3.2-2.5-5.8-5.8-6.1C24.3 6.5 20.4 3 15.7 3 10.5 3 6.2 7.3 6.2 12.5v.2C3.1 13.3 1 15.5 1 18.2c0 3 2.5 5.3 7.2 5.3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>`}
 function toolsFabMarkup(station){
  const tools=stationToolsCatalog(station);
  if(!tools.length)return '';
