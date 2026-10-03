@@ -958,6 +958,40 @@ function decorateAeOverview(root){
  visual.innerHTML=`<img src="${esc(image)}" alt="Contexto profesional del aprendizaje esperado ${ae+1}: ${esc(aeItem.short_title||aeItem.title||'aprendizaje técnico')}" loading="eager" decoding="async"><figcaption>${icon('book')}<span><small>APRENDIZAJE EN CONTEXTO</small><b>Observa dónde aplicarás este aprendizaje</b></span></figcaption>`;
  tabs?.insertAdjacentElement('afterend',visual);
 }
+
+function decorateStudentActionCues(root){
+ if(!root)return;
+ const addCue=target=>{
+  if(!target||target.classList.contains('student-action-cue')||target.closest('[hidden]'))return;
+  const marker=document.createElement('span');
+  marker.className='student-action-cue-icon';
+  marker.setAttribute('aria-hidden','true');
+  marker.innerHTML='<img src="/static/student-action-cue.png?v=20261003" alt="">';
+  target.classList.add('student-action-cue');
+  target.prepend(marker);
+ };
+ root.querySelectorAll([
+  '.activity-focus-guide > div:first-child b',
+  '.mcq-prompt',
+  '.question-box > h3',
+  '.student-decision-callout b',
+  '.case-question-banner h3',
+  '.pf-activity header h3',
+  '.c2-section-title h3',
+  '.c2-micro-grid label > p',
+  '.p3-step-panel h5',
+  '.p3-metacognition h4',
+  '.p3-synth-card h4'
+ ].join(',')).forEach(addCue);
+ root.querySelectorAll('textarea, input[type="text"], input[type="number"], select').forEach(control=>{
+  const label=control.closest('label');
+  if(label&&!label.classList.contains('option'))addCue(label);
+ });
+ root.querySelectorAll('fieldset').forEach(fieldset=>{
+  const legend=fieldset.querySelector(':scope > legend:not(.sr-only)');
+  if(legend)addCue(legend);
+ });
+}
 function cognitiveLevel(operation){
  const levels={Conocer:1,Observar:1,Reconocer:2,Comprender:3,Relacionar:4,Aplicar:5,Analizar:6,Decidir:7,Resolver:8,Justificar:9,Reflexionar:9,Proyectar:9};
  return levels[operation]||5;
@@ -1105,6 +1139,7 @@ function renderModule(n){
  const stationBody=document.querySelector('.station-body');
  if(n===2)decorateAeOverview(stationBody);
  decorateStationActivities(stationBody,n);
+ decorateStudentActionCues(stationBody);
  setTimeout(()=>{
   if(view.name!=='module'||view.station!==n||!stationBody||!document.body.contains(stationBody))return;
   try{
@@ -1114,6 +1149,7 @@ function renderModule(n){
     routeTrack.scrollLeft=Math.max(0,currentStop.offsetLeft-(routeTrack.clientWidth-currentStop.offsetWidth)/2);
    }
    if(typeof bindActivity==='function')bindActivity(stationBody);
+   decorateStudentActionCues(stationBody);
    if(window.AulaAccess)window.AulaAccess.hydrate(stationBody);
    if(window.AulaVisual)window.AulaVisual.hydrate(stationBody);
    if(n===4&&examStarted&&!current.state.exam){

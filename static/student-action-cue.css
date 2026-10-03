@@ -1,0 +1,46 @@
+body[data-screen="module"] .student-action-cue-icon{
+  display:inline-grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  margin:0 9px 3px 0;
+  overflow:hidden;
+  vertical-align:middle;
+  border:1px solid #ffcf5a;
+  border-radius:10px;
+  background:#fff9e8;
+  box-shadow:0 3px 9px rgba(17,82,157,.15);
+}
+body[data-screen="module"] .student-action-cue-icon img{
+  display:block;
+  width:34px;
+  height:34px;
+  object-fit:cover;
+}
+body[data-screen="module"] h3.student-action-cue,
+body[data-screen="module"] h4.student-action-cue,
+body[data-screen="module"] h5.student-action-cue,
+body[data-screen="module"] legend.student-action-cue{
+  display:flex;
+  align-items:center;
+  gap:0;
+}
+body[data-screen="module"] label.student-action-cue{
+  display:block;
+}
+body[data-screen="module"] label.student-action-cue>.student-action-cue-icon{
+  float:left;
+}
+body[data-screen="module"] label.student-action-cue>textarea,
+body[data-screen="module"] label.student-action-cue>input,
+body[data-screen="module"] label.student-action-cue>select{
+  clear:both;
+}
+body[data-screen="module"] .activity-focus-guide b.student-action-cue{
+  display:flex;
+  align-items:center;
+}
+@media(max-width:700px){
+  body[data-screen="module"] .student-action-cue-icon{width:32px;height:32px;border-radius:9px}
+  body[data-screen="module"] .student-action-cue-icon img{width:30px;height:30px}
+}
