@@ -44,3 +44,22 @@ body[data-screen="module"] .activity-focus-guide b.student-action-cue{
   body[data-screen="module"] .student-action-cue-icon{width:32px;height:32px;border-radius:9px}
   body[data-screen="module"] .student-action-cue-icon img{width:30px;height:30px}
 }
+body[data-screen="module"] .student-write-cue{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  width:max-content;
+  max-width:100%;
+  margin:9px 0 7px;
+  padding:6px 9px;
+  border:1px solid #efc65d;
+  border-radius:7px;
+  background:#fff8dd;
+  color:#755000;
+  font-size:11px;
+  font-weight:900;
+}
+body[data-screen="module"] .student-write-cue .icon{width:17px;height:17px;color:#d28a00}
+body[data-screen="module"] .student-write-field>textarea,
+body[data-screen="module"] .student-write-field>input[type="text"],
+body[data-screen="module"] .student-write-field>input[type="number"]{display:block;width:100%;clear:both}

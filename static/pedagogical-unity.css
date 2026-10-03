@@ -883,6 +883,15 @@ body[data-screen="module"] .activity-delivery-receipt span{display:flex;flex-dir
 /* Shared response composer for every delivery activity across the course catalog. */
 body[data-screen="module"] .activity-response-composer{position:relative;margin:-2px 0 18px;padding:18px;border:1px solid #91c8ba;border-left:5px solid #168168;border-radius:8px;background:linear-gradient(135deg,#f7fcfb 0%,#eef8f5 58%,#f8fbff 100%);box-shadow:0 8px 22px rgba(25,102,82,.1)}
 body[data-screen="module"] .activity-response-composer>.activity-delivery-signal{width:100%;min-height:46px;margin-top:14px;border-radius:8px;justify-content:center}
+body[data-screen="module"] .activity-direct-instruction{display:flex;align-items:center;gap:10px;margin:10px 0;padding:11px 14px;border:1px solid #bad8ee;border-left:5px solid #2278bd;border-radius:8px;background:#f4f9fd;color:#173f69}
+body[data-screen="module"] .activity-direct-instruction.is-activity{border-color:#d8c7ee;border-left-color:#7748b5;background:#f8f4fc;color:#432873}
+body[data-screen="module"] .activity-direct-icon{display:grid;place-items:center;width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:#dfeefa;color:#176cae}
+body[data-screen="module"] .activity-direct-instruction.is-activity .activity-direct-icon{background:#eadff6;color:#7142aa}
+body[data-screen="module"] .activity-direct-icon .icon{width:19px;height:19px}
+body[data-screen="module"] .activity-direct-instruction>span:last-child{min-width:0}
+body[data-screen="module"] .activity-direct-instruction small{display:block;margin-bottom:2px;color:#42739b;font-size:9px;font-weight:900;letter-spacing:.04em}
+body[data-screen="module"] .activity-direct-instruction.is-activity small{color:#76529f}
+body[data-screen="module"] .activity-direct-instruction b{display:block;font-size:13px;line-height:1.4}
 body[data-screen="module"] .activity-response-head{display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:start;gap:12px;margin-bottom:14px}
 body[data-screen="module"] .activity-response-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:8px;background:#168168;color:#fff;box-shadow:0 5px 12px rgba(22,129,104,.22)}
 body[data-screen="module"] .activity-response-icon .icon{width:22px;height:22px}

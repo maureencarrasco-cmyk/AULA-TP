@@ -961,35 +961,14 @@ function decorateAeOverview(root){
 
 function decorateStudentActionCues(root){
  if(!root)return;
- const addCue=target=>{
-  if(!target||target.classList.contains('student-action-cue')||target.closest('[hidden]'))return;
-  const marker=document.createElement('span');
-  marker.className='student-action-cue-icon';
-  marker.setAttribute('aria-hidden','true');
-  marker.innerHTML='<img src="/static/student-action-cue.png?v=20261003" alt="">';
-  target.classList.add('student-action-cue');
-  target.prepend(marker);
- };
- root.querySelectorAll([
-  '.activity-focus-guide > div:first-child b',
-  '.mcq-prompt',
-  '.question-box > h3',
-  '.student-decision-callout b',
-  '.case-question-banner h3',
-  '.pf-activity header h3',
-  '.c2-section-title h3',
-  '.c2-micro-grid label > p',
-  '.p3-step-panel h5',
-  '.p3-metacognition h4',
-  '.p3-synth-card h4'
- ].join(',')).forEach(addCue);
- root.querySelectorAll('textarea, input[type="text"], input[type="number"], select').forEach(control=>{
+ root.querySelectorAll('textarea:not([hidden]), input[type="text"], input[type="number"]').forEach(control=>{
   const label=control.closest('label');
-  if(label&&!label.classList.contains('option'))addCue(label);
- });
- root.querySelectorAll('fieldset').forEach(fieldset=>{
-  const legend=fieldset.querySelector(':scope > legend:not(.sr-only)');
-  if(legend)addCue(legend);
+  if(!label||label.classList.contains('option')||label.querySelector(':scope > .student-write-cue'))return;
+  const cue=document.createElement('span');
+  cue.className='student-write-cue';
+  cue.innerHTML=`${icon('edit')}<b>Ahora te toca a ti</b>`;
+  control.insertAdjacentElement('beforebegin',cue);
+  label.classList.add('student-write-field');
  });
 }
 function cognitiveLevel(operation){
@@ -1065,13 +1044,23 @@ function decorateStationActivities(root,station){
   el.dataset.cognitiveOperation=profile.verb;
   el.dataset.cognitiveLevel=String(cognitiveLevel(profile.verb));
   el.dataset.evidence=profile.mode==='ENTREGA'?'respuesta registrada':'desempeño en actividad';
+  const hasVideo=Boolean(el.querySelector('video,.video-figure'));
+  const hasVisual=Boolean(el.querySelector('img,figure,canvas,.mcq-media,.visual-sim,.scene-stage'));
+  const cueLabel=hasVideo?'OBSERVA EL VIDEO':hasVisual?'OBSERVA':'ACTIVIDAD';
+  const cueIcon=hasVideo?'eye':hasVisual?'eye':'puzzle';
+  const cueTone=hasVideo||hasVisual?'observe':'activity';
+  const directInstruction=hasVideo
+   ?`Observa el video y fíjate en lo necesario para realizar la actividad. ${profile.instruction}`
+   :hasVisual
+    ?`Observa el recurso visual que aparece a continuación. ${profile.instruction}`
+    :profile.instruction;
   const signalIcon=profile.mode.includes('LEE')||profile.mode.includes('OBSERVA')?'eye':'tool';
   const signal=profile.mode==='PRACTICA'
    ?`<button type="button" class="activity-focus-signal" data-activity-signal="practice" aria-pressed="false">${icon(signalIcon)} <span>IR A LA PRÁCTICA</span>${icon('arrow')}</button>`
    :profile.mode==='ENTREGA'
     ?`<button type="button" class="activity-focus-signal activity-delivery-signal" data-activity-signal="delivery" aria-pressed="false">${icon('file')} <span>ENTREGAR RESPUESTA</span>${icon('arrow')}</button>`
     :`<strong class="activity-focus-signal">${icon(signalIcon)} ${esc(profile.mode)}</strong>`;
-  el.insertAdjacentHTML('afterbegin',`<header class="activity-order-badge activity-focus" aria-label="Actividad ${index+1} de ${found.length}. ${esc(profile.verb)}: ${esc(profile.title)}"><strong>${number}</strong><span class="activity-focus-main-icon">${icon(profile.icon||'file')}</span><div class="activity-focus-title"><small>PASO ${index+1} DE ${found.length} · ${esc(profile.mode)}</small><b><em>${esc(profile.verb)}</em> · ${esc(profile.title)}</b></div><div class="activity-focus-time">${icon('clock')}<span><small>TIEMPO ESTIMADO</small><b>${profile.minutes} min</b></span></div></header><p class="activity-continuity">${icon('link')}<span><small>CONEXIÓN CON TU RECORRIDO</small><b>${esc(activityContinuity(station,index,profile))}</b></span></p><section class="activity-focus-guide" aria-label="Qué harás y para qué"><div><i>${icon('arrow')}</i><span><small>QUÉ HARÁS AHORA</small><b>${esc(profile.instruction)}</b></span></div><div><i>${icon('flag')}</i><span><small>¿PARA QUÉ HAGO ESTO?</small><b>${esc(profile.purpose)}</b></span></div>${signal}</section>`);
+  el.insertAdjacentHTML('afterbegin',`<header class="activity-order-badge activity-focus" aria-label="Actividad ${index+1} de ${found.length}. ${esc(profile.verb)}: ${esc(profile.title)}"><strong>${number}</strong><span class="activity-focus-main-icon">${icon(profile.icon||'file')}</span><div class="activity-focus-title"><small>PASO ${index+1} DE ${found.length} · ${esc(profile.mode)}</small><b><em>${esc(profile.verb)}</em> · ${esc(profile.title)}</b></div><div class="activity-focus-time">${icon('clock')}<span><small>TIEMPO ESTIMADO</small><b>${profile.minutes} min</b></span></div></header><p class="activity-direct-instruction is-${cueTone}"><span class="activity-direct-icon" aria-hidden="true">${icon(cueIcon)}</span><span><small>${cueLabel}</small><b>${esc(directInstruction)}</b></span></p><section class="activity-focus-guide" aria-label="Qué harás y para qué"><div><i>${icon('arrow')}</i><span><small>QUÉ HARÁS AHORA</small><b>${esc(profile.instruction)}</b></span></div><div><i>${icon('flag')}</i><span><small>¿PARA QUÉ HAGO ESTO?</small><b>${esc(profile.purpose)}</b></span></div>${signal}</section>`);
   const signalButton=el.querySelector(':scope > .activity-focus-guide [data-activity-signal]');
   if(signalButton){
    const mode=signalButton.dataset.activitySignal;
