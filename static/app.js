@@ -314,7 +314,6 @@ function learningRoute({currentN=1,completed=[],moduleId=null,course=null,intera
  const live=`Estás en la estación ${currentN} de 5. ${doneCount} de 5 estaciones completadas.`;
  const currentModel=models[currentN-1];
  const currentAction=stationActions[currentN-1];
- const specialty=course?.specialty||'tu especialidad técnico-profesional';
  return `<section class="panel route-panel lr" aria-label="${esc(title)}. ${esc(live)}">
   <header class="lr-head lr-head-compact" aria-label="Ruta de aprendizaje de las 5 estaciones">
    <span class="lr-head-compact-icon" aria-hidden="true">${workIco('pin')}</span>
@@ -339,18 +338,6 @@ function learningRoute({currentN=1,completed=[],moduleId=null,course=null,intera
     <${Tag} ${attrs}><span class="lr-card-photo" aria-hidden="true"><img src="${esc(routeImage)}" alt="" loading="${m.isCurrent?'eager':'lazy'}" decoding="async"><span class="lr-photo-shade"></span><span class="lr-photo-caption">Estación ${m.stationNumber}</span></span><span class="lr-body"><span class="lr-stage-icon" aria-hidden="true">${workIco(stationIcons[i])}</span><small class="lr-action">${stationActions[i]}</small><b class="lr-name">${stationTitleMarkup(m.stationName)}</b><small class="lr-purpose">${esc(descriptions[i])}</small>${hint}${stationCta(m)}</span></${Tag}>
    </li>`;
   }).join('')}</ol>
-  <details class="lr-context">
-   <summary>${workIco('tool')} ¿Para qué me servirá en mi especialidad?</summary>
-   <p>Esta etapa fortalece tu capacidad para <b>${currentAction.toLowerCase()}</b> y tomar decisiones fundamentadas en situaciones de ${esc(specialty)}.</p>
-  </details>
-  <div class="lr-progress" role="group" aria-label="${doneCount} de 5 estaciones completadas">
-   <span class="lr-progress-label">${workIco('flag')}<span>Tu progreso <b>${doneCount} de 5 estaciones completadas</b></span></span>
-   <span class="lr-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="${doneCount}">
-    <i class="lr-progress-fill" style="width:${doneCount*20}%"></i>
-    <span class="lr-progress-dots" aria-hidden="true">${[0,1,2,3,4].map(d=>`<em class="${d<doneCount?'is-done':(d===currentN-1?'is-here':'')}"></em>`).join('')}</span>
-   </span>
-   <span class="lr-progress-goal" aria-hidden="true">${workIco('flag')}</span>
-  </div>
  </section>`;
 }
 
@@ -790,14 +777,7 @@ const stationActionGuides=[
 function stationLearningGuide(n){
  const guide=stationActionGuides[n-1];
  const items=[['pin','Dónde estás',`Estación ${n} de 5`],['book','Qué aprenderás',guide.learn],['tool','Qué harás',guide.do],['file','Qué entregarás',guide.deliver]];
- const support=[
-  ['Activación guiada','Conecta lo que ya sabes con el nuevo desafío. Esta reflexión inicial no califica.','bulb'],
-  ['Práctica con apoyo','Recibes orientación y retroalimentación para comprender y volver a intentar.','chat'],
-  ['Autonomía creciente','Integra varios aprendizajes y fundamenta tus decisiones con menos apoyo.','tool'],
-  ['Trabajo autónomo','Demuestra lo aprendido sin pistas ni retroalimentación durante la evaluación.','lock'],
-  ['Acompañamiento de cierre','Analiza tus resultados, comprende tu avance y proyecta un próximo paso.','flag']
- ][n-1];
- return `<section class="learning-compass s${n}" data-support-level="${n}" aria-label="Orientación para esta estación"><div class="learning-lab-principle"><span>${icon('bulb')}</span><div><small>LABORATORIO DIGITAL DE APRENDIZAJE PROFESIONAL</small><b>Aula TP no se diseña alrededor del contenido; se diseña alrededor de la acción del estudiante.</b><p>El contenido te orienta. Tú exploras, practicas, decides, corriges y avanzas.</p></div><strong>${esc(guide.concept)}</strong></div><div class="learning-support-level"><span aria-hidden="true">${icon(support[2])}</span><div><small>NIVEL DE ACOMPAÑAMIENTO</small><b>${esc(support[0])}</b><p>${esc(support[1])}</p></div><i aria-hidden="true">${[1,2,3,4,5].map(i=>`<em class="${i===n?'is-current':i<n?'is-past':''}"></em>`).join('')}</i></div><div class="learning-compass-head"><span>${icon('pin')}</span><div><small>GUÍA DE ACCIÓN</small><b>Tu ruta en esta pantalla</b></div><div class="learning-capacity"><small>ESTÁS DESARROLLANDO</small><b>${esc(guide.capacity)}</b></div><em>Siguiente: ${esc(guide.next)}</em></div><ol>${items.map(([ico,label,value],i)=>`<li><span class="learning-compass-number">${i+1}</span>${icon(ico)}<div><small>${esc(label)}</small><b>${esc(value)}</b></div></li>`).join('')}</ol></section>`;
+ return `<section class="learning-compass s${n}" data-support-level="${n}" aria-label="Orientación para esta estación"><div class="learning-compass-head"><span>${icon('pin')}</span><div><small>GUÍA DE ACCIÓN</small><b>Tu ruta en esta pantalla</b></div><div class="learning-capacity"><small>ESTÁS DESARROLLANDO</small><b>${esc(guide.capacity)}</b></div><em>Siguiente: ${esc(guide.next)}</em></div><ol>${items.map(([ico,label,value],i)=>`<li><span class="learning-compass-number">${i+1}</span>${icon(ico)}<div><small>${esc(label)}</small><b>${esc(value)}</b></div></li>`).join('')}</ol></section>`;
 }
 function stationActivityPrimer(n){
  const plan=n===4?evaluationPlan():null;
