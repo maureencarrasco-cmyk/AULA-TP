@@ -33,3 +33,18 @@ def assessment_issues(content):
             if section == 'questions' and not str(item.get('explanation') or '').strip():
                 record('missing_explanation')
     return issues
+
+
+def learning_coverage_issues(content):
+    issues = []
+    for index, ae in enumerate(content.get('aes') or []):
+        location = f'aes[{index}]'
+        if not ae.get('criteria'):
+            issues.append({'location': location, 'code': 'missing_criteria'})
+        formative = any(item.get('ae') == index for item in content.get('cases') or [])
+        formative = formative or any(item.get('type') == 'choice' for item in ae.get('experiences') or [])
+        if not formative:
+            issues.append({'location': location, 'code': 'missing_formative_assessment'})
+        if not any(item.get('ae') == index for item in content.get('questions') or []):
+            issues.append({'location': location, 'code': 'missing_final_assessment'})
+    return issues

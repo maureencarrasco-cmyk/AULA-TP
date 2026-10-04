@@ -1,7 +1,7 @@
 import unittest
 from copy import deepcopy
 
-from assessment_integrity import assessment_issues
+from assessment_integrity import assessment_issues, learning_coverage_issues
 
 
 class AssessmentIntegrityTests(unittest.TestCase):
@@ -50,6 +50,16 @@ class AssessmentIntegrityTests(unittest.TestCase):
         content = self.fixture()
         content['questions'] = [None]
         self.assertTrue(any('formato de pregunta invalido' in gap for gap in publication_gaps(content)))
+
+    def test_learning_coverage_detects_missing_components(self):
+        content = {'aes': [{'title': 'Aprendizaje'}], 'questions': [], 'cases': []}
+        self.assertEqual({'missing_criteria', 'missing_formative_assessment', 'missing_final_assessment'},
+                         {issue['code'] for issue in learning_coverage_issues(content)})
+
+    def test_learning_coverage_uses_zero_based_indices(self):
+        content = {'aes': [{'criteria': ['Criterio'], 'experiences': [{'type': 'choice'}]}],
+                   'questions': [{'ae': 0}], 'cases': []}
+        self.assertEqual([], learning_coverage_issues(content))
 
 
 if __name__ == '__main__':
