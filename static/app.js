@@ -461,6 +461,17 @@ function bindToolsFabDrag(fab){
  const btn=fab.querySelector('.tools-fab-btn');
  if(!btn||btn.dataset.dragBound)return;
  btn.dataset.dragBound='1';
+ btn.setAttribute('aria-keyshortcuts','Alt+ArrowLeft Alt+ArrowRight Alt+ArrowUp Alt+ArrowDown Alt+Home');
+ btn.addEventListener('keydown',e=>{
+  if(!e.altKey||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home'].includes(e.key))return;
+  e.preventDefault();
+  closeToolsFab(false);
+  const r=fab.getBoundingClientRect(),distance=e.shiftKey?50:20;
+  const x=e.key==='Home'?window.innerWidth-r.width-16:r.left+(e.key==='ArrowRight'?distance:e.key==='ArrowLeft'?-distance:0);
+  const y=e.key==='Home'?window.innerHeight-r.height-16:r.top+(e.key==='ArrowDown'?distance:e.key==='ArrowUp'?-distance:0);
+  toolsFabApplyPos(fab,toolsFabClamp(x,y,fab));
+  toolsFabSavePos(fab);
+ });
  let startX=0,startY=0,origX=0,origY=0,moved=false,dragging=false,pid=null;
  const moveTo=(x,y)=>{
   const dx=x-startX,dy=y-startY;
