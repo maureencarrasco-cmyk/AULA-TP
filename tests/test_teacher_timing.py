@@ -41,3 +41,24 @@ class TeacherTimingTests(unittest.TestCase):
         result = timing_summary(['a'], [self.record()], None)
         self.assertEqual(50, result['sensitivity']['5']['student_minutes'])
         self.assertIsNone(result['sensitivity']['5']['occupancy_percent'])
+
+    def test_invalid_measurement_dates_rejected(self):
+        for date in ('ayer', '2026-02-30', '2026-13-01', 20261004):
+            with self.subTest(date=date), self.assertRaises(ValueError):
+                timing_summary(['a'], [{**self.record(), 'measured_at': date}], 100)
+        record = {**self.record(), 'measured_at': '2026-10-04T10:30:00-03:00'}
+        self.assertTrue(timing_summary(['a'], [record], 100)['complete'])
+
+    def test_invalid_required_inventory_rejected(self):
+        for activities in (['a', 'a'], [''], ['   '], [None], [1]):
+            with self.subTest(activities=activities), self.assertRaises(ValueError):
+                timing_summary(activities, [], 100)
+
+    def test_overflow_cannot_produce_coverage(self):
+        record = self.record()
+        record['minutes'] = dict.fromkeys(record['minutes'], 1e308)
+        with self.assertRaises(ValueError):
+            timing_summary(['a'], [record], 100)
+        record['minutes'] = dict.fromkeys(record['minutes'], 4e307)
+        with self.assertRaises(ValueError):
+            timing_summary(['a'], [record], 100)
