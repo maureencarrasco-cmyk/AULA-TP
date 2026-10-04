@@ -1,0 +1,31 @@
+{
+  "applied": true,
+  "changed_modules": [
+    208,
+    209,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82
+  ],
+  "totals": {
+    "source_references": 0,
+    "missing_media": 7068,
+    "alternative_labels": 0
+  },
+  "backup": "C:\\Respaldo\\OneDrive\\Aplicaciones\\aula-tp-chile\\backups\\integridad-cursos-20261004-191613-192001.sqlite3",
+  "protected_tables_unchanged": true
+}

@@ -13,6 +13,14 @@ GENERATED_CONTEXT_ASSETS = {
         'alt': 'Dos estudiantes y un docente observan una placa electronica desconectada con una lupa en una mesa de laboratorio.',
         'caption': 'Ilustracion generada de aprendizaje supervisado en electronica. Contexto simulado; no acredita conexiones, lecturas ni procedimientos tecnicos.',
     },
+    '/static/headers/muebles-terminaciones-madera/e2.png': {
+        'alt': 'Dos estudiantes y un docente observan un mueble terminado y tres muestras de acabado sobre un banco de taller.',
+        'caption': 'Ilustracion generada de aprendizaje en muebles y terminaciones en madera. Contexto simulado; no acredita medidas, materiales ni procedimientos tecnicos.',
+    },
+    '/static/headers/programacion/e2.png': {
+        'alt': 'Dos estudiantes y un docente comparan un boceto de interfaz con un diseno en la pantalla de un computador.',
+        'caption': 'Ilustracion generada de aprendizaje colaborativo en programacion. Contexto simulado; no contiene codigo ni respuestas de evaluacion.',
+    },
 }
 
 

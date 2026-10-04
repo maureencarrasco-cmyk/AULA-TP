@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-10-04T19:05:54",
+  "checked_at": "2026-10-04T19:17:00",
   "metric": "Disponibilidad de recursos locales: referencias disponibles / referencias registradas.",
   "overall_pedagogical_certification": false,
-  "overall_media_percent": 79.0,
+  "overall_media_percent": 80.3,
   "courses": [
     {
       "course": "Acuicultura",
@@ -379,13 +379,10 @@
     {
       "course": "Muebles y Terminaciones en Madera",
       "modules": 10,
-      "available": 592,
-      "pending": 256,
+      "available": 848,
       "registered_references": 848,
-      "media_percent": 69.8,
-      "missing_files": [
-        "/static/headers/muebles-terminaciones-madera/e2.png"
-      ],
+      "media_percent": 100.0,
+      "missing_files": [],
       "overall_quality_percent": null
     },
     {
@@ -415,13 +412,10 @@
     {
       "course": "Programación",
       "modules": 9,
-      "available": 519,
-      "pending": 189,
+      "available": 708,
       "registered_references": 708,
-      "media_percent": 73.3,
-      "missing_files": [
-        "/static/headers/programacion/e2.png"
-      ],
+      "media_percent": 100.0,
+      "missing_files": [],
       "overall_quality_percent": null
     },
     {

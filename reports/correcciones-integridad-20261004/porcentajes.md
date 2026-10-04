@@ -40,10 +40,10 @@ El cumplimiento integral sigue pendiente de revision disciplinar, recursos y cro
 | Mecánica de Mantenimiento de Aeronaves | 641 | 251 | 71.9% |
 | Metalurgia Extractiva | 515 | 177 | 74.4% |
 | Montaje Industrial | 519 | 189 | 73.3% |
-| Muebles y Terminaciones en Madera | 592 | 256 | 69.8% |
+| Muebles y Terminaciones en Madera | 848 | 0 | 100.0% |
 | Operaciones Portuarias | 519 | 189 | 73.3% |
 | Pesquería | 533 | 231 | 69.8% |
-| Programación | 519 | 189 | 73.3% |
+| Programación | 708 | 0 | 100.0% |
 | Química Industrial, mención Laboratorio Químico | 586 | 238 | 71.1% |
 | Química Industrial, mención Planta Química | 523 | 201 | 72.2% |
 | Refrigeración y Climatización | 857 | 0 | 100.0% |
@@ -53,6 +53,6 @@ El cumplimiento integral sigue pendiente de revision disciplinar, recursos y cro
 | Tripulación de Naves Mercantes y Especiales | 531 | 225 | 70.2% |
 | Vestuario y Confección Textil | 584 | 232 | 71.6% |
 
-Disponibilidad global: 79.0%.
+Disponibilidad global: 80.3%.
 
 Las referencias repetidas cuentan por su uso en las actividades; no son archivos unicos.

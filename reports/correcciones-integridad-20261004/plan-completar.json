@@ -41149,9 +41149,7 @@
       ]
     },
     "Muebles y Terminaciones en Madera": {
-      "missing_files": [
-        "/static/headers/muebles-terminaciones-madera/e2.png"
-      ],
+      "missing_files": [],
       "modules": [
         {
           "module_id": 208,
@@ -44898,9 +44896,7 @@
       ]
     },
     "Programación": {
-      "missing_files": [
-        "/static/headers/programacion/e2.png"
-      ],
+      "missing_files": [],
       "modules": [
         {
           "module_id": 74,

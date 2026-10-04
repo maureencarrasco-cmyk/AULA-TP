@@ -7,8 +7,8 @@ Alcance: 45 cursos y 451 modulos. No se certifica 100% de calidad.
 - 1153 etiquetas alternativas incorporadas desde textos existentes; requieren revision visual.
 - Sin rutas multimedia locales inexistentes activas en los datos ni en el contenido enriquecido de los 451 modulos.
 - 84 imagenes originales recuperadas del historial; 17380 referencias reactivadas en su misma especialidad. No es una certificacion disciplinar.
-- 469 referencias completadas con contexto generado, identificado como simulado y separado de la evidencia tecnica.
-- 7513 referencias siguen pendientes; no se sustituyen por material de otro oficio.
+- 914 referencias completadas con contexto generado, identificado como simulado y separado de la evidencia tecnica.
+- 7068 referencias siguen pendientes; no se sustituyen por material de otro oficio.
 - 368 introducciones completadas con una imagen contextual de su propia especialidad. No son evidencias de parametros ni recursos tecnicos interactivos.
 - Tiempo docente real, cobertura y brecha permanecen sin valor hasta disponer de cronometraje; ya no se presenta cumplimiento artificial de 100%.
 - Calibracion de dificultad marcada como propuesta pendiente, no validacion cognitiva.
@@ -62,10 +62,10 @@ Alcance: 45 cursos y 451 modulos. No se certifica 100% de calidad.
 | Mecánica de Mantenimiento de Aeronaves | 11 | 462 | 251 |
 | Metalurgia Extractiva | 9 | 378 | 177 |
 | Montaje Industrial | 9 | 378 | 189 |
-| Muebles y Terminaciones en Madera | 10 | 420 | 256 |
+| Muebles y Terminaciones en Madera | 10 | 420 | 0 |
 | Operaciones Portuarias | 9 | 378 | 189 |
 | Pesquería | 9 | 378 | 231 |
-| Programación | 9 | 378 | 189 |
+| Programación | 9 | 378 | 0 |
 | Química Industrial, mención Laboratorio Químico | 10 | 420 | 238 |
 | Química Industrial, mención Planta Química | 9 | 378 | 201 |
 | Refrigeración y Climatización | 9 | 0 | 0 |

@@ -37,10 +37,10 @@ Pendientes localizados, no certificaciones. Las mediciones estan vacias: deben r
 | Mecánica de Mantenimiento de Aeronaves | /static/headers/mecanica-mantenimiento-aeronaves/e2.png | 11 | 0 | 808 |
 | Metalurgia Extractiva | /static/headers/metalurgia-extractiva/e2.png | 9 | 0 | 628 |
 | Montaje Industrial | /static/headers/montaje/e2.png | 9 | 0 | 642 |
-| Muebles y Terminaciones en Madera | /static/headers/muebles-terminaciones-madera/e2.png | 10 | 0 | 767 |
+| Muebles y Terminaciones en Madera | Sin faltantes registrados | 10 | 0 | 767 |
 | Operaciones Portuarias | /static/headers/operaciones-portuarias/e2.png | 9 | 0 | 642 |
 | Pesquería | /static/headers/pesqueria/e2.png | 9 | 0 | 691 |
-| Programación | /static/headers/programacion/e2.png | 9 | 0 | 642 |
+| Programación | Sin faltantes registrados | 9 | 0 | 642 |
 | Química Industrial, mención Laboratorio Químico | /static/headers/quimica-industrial-laboratorio/e2.png | 10 | 0 | 746 |
 | Química Industrial, mención Planta Química | /static/headers/quimica-industrial-planta/e2.png | 9 | 0 | 656 |
 | Refrigeración y Climatización | Sin faltantes registrados | 9 | 0 | 621 |
