@@ -7,8 +7,8 @@ Alcance: 45 cursos y 451 modulos. No se certifica 100% de calidad.
 - 1153 etiquetas alternativas incorporadas desde textos existentes; requieren revision visual.
 - Sin rutas multimedia locales inexistentes activas en los datos ni en el contenido enriquecido de los 451 modulos.
 - 84 imagenes originales recuperadas del historial; 17380 referencias reactivadas en su misma especialidad. No es una certificacion disciplinar.
-- 207 referencias completadas con contexto generado, identificado como simulado y separado de la evidencia tecnica.
-- 7775 referencias siguen pendientes; no se sustituyen por material de otro oficio.
+- 469 referencias completadas con contexto generado, identificado como simulado y separado de la evidencia tecnica.
+- 7513 referencias siguen pendientes; no se sustituyen por material de otro oficio.
 - 368 introducciones completadas con una imagen contextual de su propia especialidad. No son evidencias de parametros ni recursos tecnicos interactivos.
 - Tiempo docente real, cobertura y brecha permanecen sin valor hasta disponer de cronometraje; ya no se presenta cumplimiento artificial de 100%.
 - Calibracion de dificultad marcada como propuesta pendiente, no validacion cognitiva.
@@ -48,7 +48,7 @@ Alcance: 45 cursos y 451 modulos. No se certifica 100% de calidad.
 | Dibujo Técnico | 11 | 462 | 233 |
 | Elaboración Industrial de Alimentos | 9 | 378 | 153 |
 | Electricidad | 9 | 0 | 0 |
-| Electrónica | 10 | 420 | 262 |
+| Electrónica | 10 | 420 | 0 |
 | Explotación Minera | 9 | 378 | 231 |
 | Forestal | 9 | 378 | 189 |
 | Gastronomía, mención Cocina | 11 | 667 | 0 |

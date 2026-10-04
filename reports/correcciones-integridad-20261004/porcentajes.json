@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-10-04T18:53:59",
+  "checked_at": "2026-10-04T19:05:54",
   "metric": "Disponibilidad de recursos locales: referencias disponibles / referencias registradas.",
   "overall_pedagogical_certification": false,
-  "overall_media_percent": 78.3,
+  "overall_media_percent": 79.0,
   "courses": [
     {
       "course": "Acuicultura",
@@ -220,13 +220,10 @@
     {
       "course": "Electrónica",
       "modules": 10,
-      "available": 594,
-      "pending": 262,
+      "available": 856,
       "registered_references": 856,
-      "media_percent": 69.4,
-      "missing_files": [
-        "/static/headers/electronica/e2.png"
-      ],
+      "media_percent": 100.0,
+      "missing_files": [],
       "overall_quality_percent": null
     },
     {

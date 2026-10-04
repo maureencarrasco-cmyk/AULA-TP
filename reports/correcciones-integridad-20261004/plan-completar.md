@@ -23,7 +23,7 @@ Pendientes localizados, no certificaciones. Las mediciones estan vacias: deben r
 | Dibujo Técnico | /static/headers/dibujo/e2.png | 11 | 0 | 787 |
 | Elaboración Industrial de Alimentos | /static/headers/elaboracion-industrial-alimentos/e2.png | 9 | 0 | 600 |
 | Electricidad | Sin faltantes registrados | 9 | 0 | 607 |
-| Electrónica | /static/headers/electronica/e2.png | 10 | 0 | 774 |
+| Electrónica | Sin faltantes registrados | 10 | 0 | 774 |
 | Explotación Minera | /static/headers/explotacion-minera/e2.png | 9 | 0 | 691 |
 | Forestal | /static/headers/forestal/e2.png | 9 | 0 | 642 |
 | Gastronomía, mención Cocina | Sin faltantes registrados | 11 | 0 | 780 |

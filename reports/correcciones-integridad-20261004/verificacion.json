@@ -5,11 +5,11 @@
   "question_text_options_keys_unchanged": true,
   "source_references_repaired": 4672,
   "alternative_labels_added": 1153,
-  "pending_media_references": 7775,
+  "pending_media_references": 7513,
   "active_missing_media_paths": 0,
   "restored_media_files": 84,
   "recovered_media_references": 17380,
-  "generated_context_references": 207,
+  "generated_context_references": 469,
   "contextual_replacements": 368,
   "runtime_checked_modules": 451,
   "course_rows": {
@@ -165,9 +165,9 @@
       "modules": 10,
       "recovered_references": 420,
       "contextual_replacements": 10,
-      "pending_media": 262,
-      "images": 430,
-      "images_with_alt": 430
+      "images": 692,
+      "images_with_alt": 692,
+      "generated_context_references": 262
     },
     "Explotación Minera": {
       "modules": 9,

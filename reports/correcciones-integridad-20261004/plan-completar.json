@@ -23793,9 +23793,7 @@
       ]
     },
     "Electrónica": {
-      "missing_files": [
-        "/static/headers/electronica/e2.png"
-      ],
+      "missing_files": [],
       "modules": [
         {
           "module_id": 112,

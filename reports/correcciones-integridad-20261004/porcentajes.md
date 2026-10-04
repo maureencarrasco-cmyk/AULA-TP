@@ -26,7 +26,7 @@ El cumplimiento integral sigue pendiente de revision disciplinar, recursos y cro
 | Dibujo Técnico | 635 | 233 | 73.2% |
 | Elaboración Industrial de Alimentos | 507 | 153 | 76.8% |
 | Electricidad | 654 | 0 | 100.0% |
-| Electrónica | 594 | 262 | 69.4% |
+| Electrónica | 856 | 0 | 100.0% |
 | Explotación Minera | 533 | 231 | 69.8% |
 | Forestal | 519 | 189 | 73.3% |
 | Gastronomía, mención Cocina | 832 | 0 | 100.0% |
@@ -53,6 +53,6 @@ El cumplimiento integral sigue pendiente de revision disciplinar, recursos y cro
 | Tripulación de Naves Mercantes y Especiales | 531 | 225 | 70.2% |
 | Vestuario y Confección Textil | 584 | 232 | 71.6% |
 
-Disponibilidad global: 78.3%.
+Disponibilidad global: 79.0%.
 
 Las referencias repetidas cuentan por su uso en las actividades; no son archivos unicos.
