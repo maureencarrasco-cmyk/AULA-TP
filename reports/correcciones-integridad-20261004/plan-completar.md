@@ -7,9 +7,9 @@ Pendientes localizados, no certificaciones. Las mediciones estan vacias: deben r
 | Acuicultura | Sin faltantes registrados | 9 | 0 | 663 |
 | Administración, mención Logística | /static/headers/administracion-logistica/e2.png | 11 | 0 | 766 |
 | Administración, mención Recursos Humanos | /static/headers/administracion-recursos-humanos/e2.png | 11 | 0 | 745 |
-| Agropecuaria, mención Agricultura | /static/headers/agropecuaria-agricultura/e2.png | 10 | 0 | 739 |
+| Agropecuaria, mención Agricultura | Sin faltantes registrados | 10 | 0 | 739 |
 | Agropecuaria, mención Pecuaria | Sin faltantes registrados | 11 | 0 | 822 |
-| Agropecuaria, mención Vitivinícola | /static/headers/agropecuaria-vitivinicola/e2.png | 11 | 0 | 808 |
+| Agropecuaria, mención Vitivinícola | Sin faltantes registrados | 11 | 0 | 808 |
 | Asistencia en Geología | /static/headers/asistencia-geologia/e2.png | 9 | 0 | 642 |
 | Atención de Enfermería, mención Adulto Mayor | Sin faltantes registrados | 13 | 0 | 869 |
 | Atención de Enfermería, mención Enfermería | Sin faltantes registrados | 10 | 0 | 690 |

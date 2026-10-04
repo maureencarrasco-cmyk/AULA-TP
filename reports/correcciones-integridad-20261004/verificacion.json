@@ -5,11 +5,11 @@
   "question_text_options_keys_unchanged": true,
   "source_references_repaired": 4672,
   "alternative_labels_added": 1153,
-  "pending_media_references": 6573,
+  "pending_media_references": 6090,
   "active_missing_media_paths": 0,
   "restored_media_files": 84,
   "recovered_media_references": 17380,
-  "generated_context_references": 1409,
+  "generated_context_references": 1892,
   "contextual_replacements": 368,
   "runtime_checked_modules": 451,
   "course_rows": {
@@ -41,9 +41,9 @@
       "modules": 10,
       "recovered_references": 420,
       "contextual_replacements": 10,
-      "pending_media": 232,
-      "images": 430,
-      "images_with_alt": 430
+      "images": 662,
+      "images_with_alt": 662,
+      "generated_context_references": 232
     },
     "Agropecuaria, mención Pecuaria": {
       "modules": 11,
@@ -57,9 +57,9 @@
       "modules": 11,
       "recovered_references": 462,
       "contextual_replacements": 11,
-      "pending_media": 251,
-      "images": 473,
-      "images_with_alt": 473
+      "images": 724,
+      "images_with_alt": 724,
+      "generated_context_references": 251
     },
     "Asistencia en Geología": {
       "modules": 9,

@@ -10,9 +10,9 @@ El cumplimiento integral sigue pendiente de revision disciplinar, recursos y cro
 | Acuicultura | 732 | 0 | 100.0% |
 | Administración, mención Logística | 629 | 215 | 74.5% |
 | Administración, mención Recursos Humanos | 623 | 197 | 76.0% |
-| Agropecuaria, mención Agricultura | 584 | 232 | 71.6% |
+| Agropecuaria, mención Agricultura | 816 | 0 | 100.0% |
 | Agropecuaria, mención Pecuaria | 908 | 0 | 100.0% |
-| Agropecuaria, mención Vitivinícola | 641 | 251 | 71.9% |
+| Agropecuaria, mención Vitivinícola | 892 | 0 | 100.0% |
 | Asistencia en Geología | 519 | 189 | 73.3% |
 | Atención de Enfermería, mención Adulto Mayor | 938 | 0 | 100.0% |
 | Atención de Enfermería, mención Enfermería | 740 | 0 | 100.0% |
@@ -53,6 +53,6 @@ El cumplimiento integral sigue pendiente de revision disciplinar, recursos y cro
 | Tripulación de Naves Mercantes y Especiales | 531 | 225 | 70.2% |
 | Vestuario y Confección Textil | 816 | 0 | 100.0% |
 
-Disponibilidad global: 81.6%.
+Disponibilidad global: 83.0%.
 
 Las referencias repetidas cuentan por su uso en las actividades; no son archivos unicos.

@@ -3719,9 +3719,7 @@
       ]
     },
     "Agropecuaria, mención Agricultura": {
-      "missing_files": [
-        "/static/headers/agropecuaria-agricultura/e2.png"
-      ],
+      "missing_files": [],
       "modules": [
         {
           "module_id": 323,
@@ -6444,9 +6442,7 @@
       ]
     },
     "Agropecuaria, mención Vitivinícola": {
-      "missing_files": [
-        "/static/headers/agropecuaria-vitivinicola/e2.png"
-      ],
+      "missing_files": [],
       "modules": [
         {
           "module_id": 344,

@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-10-04T19:25:11",
+  "checked_at": "2026-10-04T19:40:29",
   "metric": "Disponibilidad de recursos locales: referencias disponibles / referencias registradas.",
   "overall_pedagogical_certification": false,
-  "overall_media_percent": 81.6,
+  "overall_media_percent": 83.0,
   "courses": [
     {
       "course": "Acuicultura",
@@ -40,13 +40,10 @@
     {
       "course": "Agropecuaria, mención Agricultura",
       "modules": 10,
-      "available": 584,
-      "pending": 232,
+      "available": 816,
       "registered_references": 816,
-      "media_percent": 71.6,
-      "missing_files": [
-        "/static/headers/agropecuaria-agricultura/e2.png"
-      ],
+      "media_percent": 100.0,
+      "missing_files": [],
       "overall_quality_percent": null
     },
     {
@@ -61,13 +58,10 @@
     {
       "course": "Agropecuaria, mención Vitivinícola",
       "modules": 11,
-      "available": 641,
-      "pending": 251,
+      "available": 892,
       "registered_references": 892,
-      "media_percent": 71.9,
-      "missing_files": [
-        "/static/headers/agropecuaria-vitivinicola/e2.png"
-      ],
+      "media_percent": 100.0,
+      "missing_files": [],
       "overall_quality_percent": null
     },
     {
