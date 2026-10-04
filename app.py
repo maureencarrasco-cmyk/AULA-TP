@@ -1,5 +1,5 @@
 from pathlib import Path
-import csv, io, json, os, secrets, sqlite3
+import csv, io, json, math, os, secrets, sqlite3
 from contextlib import contextmanager
 from functools import lru_cache, wraps
 from flask import Flask, request, session, jsonify, send_from_directory, Response
@@ -467,10 +467,11 @@ def create_app(test_config=None):
             if p['type']=='scale':
                 pass
             if p['type'] in ('measurement','network'):
-                if not isinstance(p.get('values'),list) or len(p['values'])!=3 or any(type(v) not in (int,float) or not -1000<=v<=1000 for v in p['values']):return False
-            if p['type']=='measurement' and (not isinstance(p.get('reference'),list) or len(p['reference'])!=2 or any(type(v) not in (int,float) or not -1000<=v<=1000 for v in p['reference']) or p['reference'][0]>p['reference'][1]):return False
-            if p['type']=='network' and (type(p.get('reserve')) not in (int,float) or not 0<=p['reserve']<=100):return False
-            if p['type']=='equipment' and any(type(p.get(k)) not in (int,float) or not 0<=p[k]<=1000 for k in ('available','required')):return False
+                minimum=0 if p['type']=='network' else -1000
+                if not isinstance(p.get('values'),list) or len(p['values'])!=3 or any(type(v) not in (int,float) or not math.isfinite(v) or not minimum<=v<=1000 for v in p['values']):return False
+            if p['type']=='measurement' and (not isinstance(p.get('reference'),list) or len(p['reference'])!=2 or any(type(v) not in (int,float) or not math.isfinite(v) or not -1000<=v<=1000 for v in p['reference']) or p['reference'][0]>p['reference'][1]):return False
+            if p['type']=='network' and (type(p.get('reserve')) not in (int,float) or not math.isfinite(p['reserve']) or not 0<=p['reserve']<=100):return False
+            if p['type']=='equipment' and any(type(p.get(k)) not in (int,float) or not math.isfinite(p[k]) or not 0<=p[k]<=1000 for k in ('available','required')):return False
         if 'rubric' in c:
             r=c['rubric']
             if not isinstance(r,list) or len(r)!=5 or any(not isinstance(p,dict) or not text_valid(p.get('name'),3) or p.get('max')!=5 for p in r):return False

@@ -56,3 +56,21 @@ class OptionalMediaAuthoringTests(unittest.TestCase):
                 content = deepcopy(DEFAULT_CONTENT)
                 content['questions'][0].update(image=None, unavailable_media=metadata)
                 self.assertEqual(400, self.save(content).status_code)
+
+    def test_network_lengths_nonnegative_and_zero_reserve_allowed(self):
+        content = deepcopy(DEFAULT_CONTENT)
+        content['practice'] = {'type': 'network', 'title': 'Longitudes de red',
+                               'values': [0, 2.5, 3], 'reserve': 0}
+        self.assertEqual(200, self.save(content).status_code)
+        for value in (-1, float('nan'), float('inf'), True):
+            with self.subTest(value=value):
+                content['practice']['values'][0] = value
+                self.assertEqual(400, self.save(content).status_code)
+
+    def test_negative_measurement_is_valid_but_nonfinite_reference_is_not(self):
+        content = deepcopy(DEFAULT_CONTENT)
+        content['practice'] = {'type': 'measurement', 'title': 'Temperaturas del ejercicio',
+                               'values': [-5, -4, -3], 'reference': [-10, 0]}
+        self.assertEqual(200, self.save(content).status_code)
+        content['practice']['reference'][0] = float('nan')
+        self.assertEqual(400, self.save(content).status_code)
