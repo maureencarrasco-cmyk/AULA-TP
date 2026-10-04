@@ -11,6 +11,7 @@ from pedagogy import enrich, strip_for_student, validate_experience, hint_for, s
 from encargos import encargos_for
 from contextualization import context_plan, save_context_step
 from learning_sequence import learning_sequence, validate_sequence, sequence_feedback
+from assessment_integrity import assessment_issues
 
 ROOT=Path(__file__).resolve().parent
 
@@ -494,6 +495,9 @@ def create_app(test_config=None):
             existing=con.execute('SELECT content,position FROM modules WHERE id=?',(mid,)).fetchone()
             if not existing:return fail('Módulo inexistente.',404)
             if published:
+                issues=assessment_issues(c)
+                if issues:
+                    return fail('Revisa las alternativas, la clave, el fundamento y el aprendizaje asociado de '+issues[0]['location']+'. No publiques el módulo con datos inválidos.')
                 enrich(c, existing['position'] or 1)
                 gaps=publication_gaps(c)
                 if gaps:return fail(gaps[0]+' No publiques el módulo con ese hueco.')

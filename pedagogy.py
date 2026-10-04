@@ -15,6 +15,7 @@ from curriculum import OFFICIAL_HP, TIME_FACTOR, MODULE_TITLES, SCOPE, apply_off
 from encargos import encargos_for
 from instructional_quality import apply_instructional_quality
 from content_integrity import repair_content_integrity
+from assessment_integrity import assessment_issues
 
 HP_MINUTES = 45
 AULA_SHARE = 0.30
@@ -781,7 +782,20 @@ def publication_gaps(content, specialty='Refrigeración y climatización'):
     """Hueco = criterio sin actividad, alternativa sin práctica del mismo formato, o ítem A–D incompleto."""
     if not isinstance(content, dict):
         return ['No hay contenido para publicar.']
-    gaps = []
+    issue_labels = {
+        'invalid_item': 'formato de pregunta invalido',
+        'missing_options': 'faltan alternativas',
+        'empty_option': 'hay alternativas vacias',
+        'duplicate_options': 'hay alternativas repetidas',
+        'invalid_answer_index': 'la clave de respuesta esta fuera de rango',
+        'invalid_ae_index': 'el aprendizaje asociado no existe en el modulo',
+        'missing_prompt': 'falta la consigna',
+        'missing_explanation': 'falta el fundamento de la respuesta',
+    }
+    issues = assessment_issues(content)
+    gaps = [f'{issue["location"]}: {issue_labels[issue["code"]]}.' for issue in issues]
+    if any(issue['code'] == 'invalid_item' for issue in issues):
+        return gaps
     aes = content.get('aes') or []
     cases = content.get('cases') or []
     qs = content.get('questions') or []
