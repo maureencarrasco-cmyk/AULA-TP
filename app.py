@@ -336,9 +336,10 @@ def create_app(test_config=None):
                 if len(s['ae'])!=expected_steps:return fail('Completa todos los aprendizajes esperados del módulo.',403)
                 if any((s.get('ae_meta') or {}).get(f'{a}-5',{}).get('sequence')==1 and not professional_complete(s,a) for a in range(len(c.get('aes') or []))):return fail('Completa los desaf\u00edos profesionales antes de la situaci\u00f3n integradora.',403)
                 idx=b.get('index');choice=b.get('choice')
-                if type(idx)!=int or idx not in range(15) or type(choice)!=int or choice not in range(2) or not text_valid(b.get('text')):return fail('Selecciona una decisión y justifícala con al menos 20 caracteres.')
-                if idx and str(idx-1) not in s['cases']:return fail('Resuelve la situación anterior.',403)
+                if type(idx)!=int or idx not in range(min(15,len(c.get('cases') or []))) or type(choice)!=int or not text_valid(b.get('text')):return fail('Selecciona una decisión y justifícala con al menos 20 caracteres.')
                 q=c['cases'][idx]
+                if choice not in range(len(q.get('options') or [])):return fail('Selecciona una alternativa disponible para esta situación.')
+                if idx and str(idx-1) not in s['cases']:return fail('Resuelve la situación anterior.',403)
                 if choice!=q['answer']:return fail('Revisa tu decisión: identifica qué documento falta y cómo comprobarías la información antes de continuar.')
                 s['cases'][str(idx)]={'choice':choice,'text':b['text'].strip()}
             elif kind=='scene':
