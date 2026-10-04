@@ -5,6 +5,14 @@ from functools import lru_cache
 ROOT = Path(__file__).resolve().parent
 MEDIA_FIELDS = ('image', 'imageB', 'video', 'vtt', 'audio', 'model')
 GENERATED_CONTEXT_ASSETS = {
+    '/static/headers/agropecuaria-agricultura/e2.png': {
+        'alt': 'Dos estudiantes y una docente observan plantulas y hojas en un invernadero.',
+        'caption': 'Ilustracion generada de aprendizaje en agricultura. Contexto simulado; no acredita parametros ni prescribe tratamientos o procedimientos agricolas.',
+    },
+    '/static/headers/agropecuaria-vitivinicola/e2.png': {
+        'alt': 'Dos estudiantes y una docente observan racimos y hojas de vid junto a una bandeja de muestras.',
+        'caption': 'Ilustracion generada de aprendizaje en vitivinicultura. Contexto simulado; no acredita parametros ni prescribe tratamientos o procedimientos productivos.',
+    },
     '/static/headers/acuicultura/e2.png': {
         'alt': 'Estudiante y docente observan una muestra de agua junto a un microscopio y estanques de cultivo.',
         'caption': 'Ilustracion generada de un entorno de aprendizaje acuicola. Recurso contextual simulado; no acredita parametros ni procedimientos tecnicos.',
