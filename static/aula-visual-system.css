@@ -45,6 +45,30 @@ body[data-screen="module"] :is(.encargo-card,.cn-learning-list article,.cg-resul
 body[data-screen="module"] :is(.encargo-card,.cn-learning-list article,.cg-result):nth-child(3n){border-top-color:#c0e4d3!important}
 @media(max-width:700px){body[data-screen="module"] .tp-meaning-icon{width:38px!important;height:38px!important;flex-basis:38px!important}body[data-screen="module"] :is(.context-activity-heading,.sequence-instruction,.work-activity-head,.case-question-banner){padding:14px!important}}
 /* Resource failures remain explicit; they are never replaced with other evidence. */
+/* Pastel navigation shared by every course, without changing activity gating. */
+body[data-screen="module"] .context-sequence .context-tabs{gap:12px;padding:18px 0;align-items:stretch}
+body[data-screen="module"] .context-sequence .context-tabs button{display:grid;grid-template-columns:36px minmax(0,1fr);align-content:start;gap:12px;min-height:118px;padding:18px 14px;border:1px solid var(--tab-edge)!important;border-top:4px solid var(--tab-accent)!important;border-radius:8px!important;background:var(--tab-soft)!important;box-shadow:0 3px 8px #173b500a!important}
+body[data-screen="module"] .context-sequence .context-tabs button [data-context-tab-status]{width:36px;height:36px;flex-basis:36px;border-radius:50%;font-size:16px;background:#fff;color:var(--tab-accent)}
+body[data-screen="module"] .context-sequence .context-tabs button b{color:var(--tab-accent);font-size:14px}
+body[data-screen="module"] .context-sequence .context-tabs button small{font-size:12px;line-height:1.55;color:#405e73;overflow-wrap:anywhere}
+body[data-screen="module"] .context-sequence .context-tabs button[aria-selected="true"]{border-color:var(--tab-accent)!important;background:var(--tab-soft)!important;box-shadow:inset 0 -4px var(--tab-accent),0 4px 10px #173b5015!important}
+body[data-screen="module"] .context-sequence .context-tabs button[aria-selected="true"] [data-context-tab-status]{background:var(--tab-accent);color:#fff;border-color:var(--tab-accent)}
+body[data-screen="module"] .context-sequence .context-tabs button:hover:not(:disabled){border-color:var(--tab-accent)!important;box-shadow:0 5px 12px #173b501c!important}
+body[data-screen="module"] .sequence-aes button{--ae-soft:#eaf4ff;--ae-edge:#b7d5ef;--ae-ink:#185d94;min-width:88px;min-height:48px;padding:12px 18px;background:var(--ae-soft)!important;border:1px solid var(--ae-edge)!important;border-radius:8px!important;color:var(--ae-ink)!important;box-shadow:0 2px 5px #173b500c!important}
+body[data-screen="module"] .sequence-aes button:nth-child(3n+2){--ae-soft:#f3edfc;--ae-edge:#d8c6eb;--ae-ink:#70429b}
+body[data-screen="module"] .sequence-aes button:nth-child(3n){--ae-soft:#eaf8f1;--ae-edge:#b7dac8;--ae-ink:#276d51}
+body[data-screen="module"] .sequence-aes button.active{background:var(--ae-soft)!important;border-color:var(--ae-ink)!important;box-shadow:inset 0 -4px var(--ae-ink),0 3px 7px #173b5015!important}
+body[data-screen="module"] .sequence-aes button:hover:not(:disabled){border-color:var(--ae-ink)!important}
+body[data-screen="module"] .sequence-aes button:disabled{opacity:.55;box-shadow:none!important;cursor:not-allowed}
+body[data-screen="module"] .tp-meaning-icon:is(.tp-icon-situation,.tp-icon-evaluation){width:52px!important;height:52px!important;flex-basis:52px!important;background-size:contain!important;background-position:center!important;border-radius:8px!important}
+body[data-screen="module"] .tp-meaning-icon.tp-icon-situation{background-image:url('/static/situation-puzzle-icon.png')!important;background-color:#f2ebfc!important}
+body[data-screen="module"] .tp-meaning-icon.tp-icon-evaluation{background-image:url('/static/evaluation-clipboard-icon.png')!important;background-color:#eaf4ff!important}
+body[data-screen="module"] .exam-assessment-photo figcaption{display:flex;gap:12px;align-items:flex-start;box-sizing:border-box;padding:16px;border:1px solid #c7e1ed;border-left:4px solid #85bcb0;border-radius:8px;background:#f0faf7;box-shadow:0 3px 8px #173b500c}
+body[data-screen="module"] .exam-assessment-photo figcaption>.exam-ico{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;padding:8px;border-radius:50%;background:#dceee9;color:#257553;box-sizing:border-box}
+body[data-screen="module"] .exam-assessment-photo figcaption span{min-width:0}
+body[data-screen="module"] .exam-assessment-photo figcaption b{display:block;line-height:1.4;color:#215b4c}
+body[data-screen="module"] .exam-assessment-photo figcaption small{display:block;margin-top:4px;line-height:1.55;color:#466574}
+@media(max-width:700px){body[data-screen="module"] .context-sequence .context-tabs{position:relative;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;gap:10px}body[data-screen="module"] .context-sequence .context-tabs button{padding:14px 10px;gap:8px;min-height:128px}body[data-screen="module"] .context-sequence .context-tabs button:last-child{grid-column:1/-1;min-height:96px}}
 .resource-unavailable {
   padding: 12px 16px;
   border-left: 4px solid #ac7919;

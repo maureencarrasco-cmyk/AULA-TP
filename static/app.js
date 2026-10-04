@@ -969,6 +969,8 @@ function decorateStudentActionCues(root){
   symbol.classList.add('tp-meaning-icon');
   symbol.classList.toggle('tp-icon-activity',kind===4);
   symbol.classList.toggle('tp-icon-book',kind===8);
+  symbol.classList.toggle('tp-icon-situation',kind===5);
+  symbol.classList.toggle('tp-icon-evaluation',kind===0);
   symbol.style.setProperty('--tp-icon-position',`${kind*100/15}%`);
  });
  root.querySelectorAll('textarea:not([hidden])').forEach(control=>{
