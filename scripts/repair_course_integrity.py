@@ -4,6 +4,7 @@ import datetime
 import hashlib
 import json
 import sqlite3
+import shutil
 import sys
 from contextlib import closing
 from pathlib import Path
@@ -31,12 +32,16 @@ def repair_database(database, apply=False):
     backup_path = None
     try:
         if apply:
+            required_space = Path(database).stat().st_size * 3
+            if shutil.disk_usage(Path(database).resolve().parent).free < required_space:
+                raise RuntimeError('Espacio insuficiente para respaldo y transaccion; libera espacio antes de aplicar cambios.')
             backup_dir = ROOT / 'backups'
             backup_dir.mkdir(exist_ok=True)
             stamp = datetime.datetime.now().strftime('%Y%m%d-%H%M%S-%f')
             backup_path = backup_dir / f'integridad-cursos-{stamp}.sqlite3'
             with closing(sqlite3.connect(backup_path)) as backup:
                 con.backup(backup)
+        con.execute('PRAGMA temp_store=MEMORY')
         con.execute('BEGIN IMMEDIATE' if apply else 'BEGIN')
         protected = protected_snapshot(con)
         for row in con.execute('SELECT m.id,m.content,c.specialty FROM modules m JOIN courses c ON c.id=m.course_id ORDER BY m.course_id,m.position').fetchall():

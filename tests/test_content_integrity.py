@@ -2,11 +2,12 @@ import json
 import sqlite3
 import tempfile
 import unittest
+from unittest.mock import patch
 from copy import deepcopy
 from contextlib import closing
 from pathlib import Path
 
-from content_integrity import asset_exists, repair_content_integrity
+from content_integrity import GENERATED_CONTEXT_ASSETS, asset_exists, repair_content_integrity
 from scripts.repair_course_integrity import repair_database
 from pedagogy import build_traceability, enrich, publication_gaps
 
@@ -103,6 +104,23 @@ class ContentIntegrityTests(unittest.TestCase):
         self.assertIsNone(q['image'])
         self.assertEqual(1, c['integrity_audit']['missing_media_count'])
 
+    def test_all_generated_assets_are_contextual_and_cannot_supply_required_evidence(self):
+        for path in GENERATED_CONTEXT_ASSETS:
+            for required in (False, True):
+                with self.subTest(path=path, required=required):
+                    content = self.fixture()
+                    item = content['questions'][0]
+                    item.update(image=path+'?v=3', requires_image=required)
+                    repair_content_integrity(content)
+                    if required:
+                        self.assertIsNone(item['image'])
+                        self.assertIn('image', item['unavailable_media'])
+                    else:
+                        self.assertEqual(path+'?v=3', item['image'])
+                        self.assertEqual('context', item['media_role'])
+                        self.assertIn('simulado', item['caption'])
+                    self.assertEqual(2, item['answer'])
+
     def test_context_replacement_does_not_replace_technical_activity(self):
         c = self.fixture()
         c['explore'] = {'image': '/static/headers/acuicultura/e1.png?v=3'}
@@ -167,6 +185,21 @@ class ContentIntegrityTests(unittest.TestCase):
                 self.assertEqual(('Mi modulo',),con.execute('SELECT title FROM modules').fetchone())
                 self.assertEqual('Electricidad',json.loads(con.execute('SELECT content FROM modules').fetchone()[0])['specialty'])
                 self.assertEqual(('Evidencia conservada',),con.execute('SELECT state FROM progress').fetchone())
+
+    def test_low_disk_stops_before_creating_backup_or_changing_data(self):
+        from collections import namedtuple
+        usage = namedtuple('Usage', 'total used free')
+        with tempfile.TemporaryDirectory() as directory:
+            database = Path(directory) / 'test.sqlite3'
+            with closing(sqlite3.connect(database)) as db:
+                db.execute('CREATE TABLE evidence(value TEXT)')
+                db.execute('INSERT INTO evidence VALUES(?)', ('Conservar',))
+                db.commit()
+            with patch('scripts.repair_course_integrity.shutil.disk_usage', return_value=usage(100, 100, 0)):
+                with self.assertRaisesRegex(RuntimeError, 'Espacio insuficiente'):
+                    repair_database(str(database), apply=True)
+            with closing(sqlite3.connect(database)) as db:
+                self.assertEqual('Conservar', db.execute('SELECT value FROM evidence').fetchone()[0])
 
 
 if __name__=='__main__':

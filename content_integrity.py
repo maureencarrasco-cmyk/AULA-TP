@@ -9,6 +9,10 @@ GENERATED_CONTEXT_ASSETS = {
         'alt': 'Estudiante y docente observan una muestra de agua junto a un microscopio y estanques de cultivo.',
         'caption': 'Ilustracion generada de un entorno de aprendizaje acuicola. Recurso contextual simulado; no acredita parametros ni procedimientos tecnicos.',
     },
+    '/static/headers/electronica/e2.png': {
+        'alt': 'Dos estudiantes y un docente observan una placa electronica desconectada con una lupa en una mesa de laboratorio.',
+        'caption': 'Ilustracion generada de aprendizaje supervisado en electronica. Contexto simulado; no acredita conexiones, lecturas ni procedimientos tecnicos.',
+    },
 }
 
 
