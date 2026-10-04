@@ -7,7 +7,7 @@ El cumplimiento integral sigue pendiente de revision disciplinar, recursos y cro
 
 | Curso | Recursos disponibles | Pendientes | Disponibilidad |
 | --- | ---: | ---: | ---: |
-| Acuicultura | 525 | 207 | 71.7% |
+| Acuicultura | 732 | 0 | 100.0% |
 | Administración, mención Logística | 629 | 215 | 74.5% |
 | Administración, mención Recursos Humanos | 623 | 197 | 76.0% |
 | Agropecuaria, mención Agricultura | 584 | 232 | 71.6% |
@@ -53,6 +53,6 @@ El cumplimiento integral sigue pendiente de revision disciplinar, recursos y cro
 | Tripulación de Naves Mercantes y Especiales | 531 | 225 | 70.2% |
 | Vestuario y Confección Textil | 584 | 232 | 71.6% |
 
-Disponibilidad global: 77.7%.
+Disponibilidad global: 78.3%.
 
 Las referencias repetidas cuentan por su uso en las actividades; no son archivos unicos.

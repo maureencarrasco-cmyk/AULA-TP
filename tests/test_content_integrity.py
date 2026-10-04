@@ -83,10 +83,31 @@ class ContentIntegrityTests(unittest.TestCase):
         self.assertTrue(all(x['required_minutes'] is None for x in audit['sensitivity'].values()))
         self.assertNotIn('simulated_validation',audit)
 
+    def test_generated_context_restores_png_without_claiming_technical_evidence(self):
+        c = self.fixture()
+        q = c['questions'][0]
+        q.update(image=None, unavailable_media={'image': {'path': 'static/headers/acuicultura/e2.png'}})
+        repair_content_integrity(c)
+        self.assertEqual('/static/headers/acuicultura/e2.png', q['image'])
+        self.assertEqual('context', q['media_role'])
+        self.assertEqual('ai-generated', q['media_origin'])
+        self.assertIn('simulado', q['caption'])
+        self.assertEqual(2, q['answer'])
+
+    def test_generated_context_cannot_restore_required_technical_image(self):
+        c = self.fixture()
+        q = c['questions'][0]
+        q.update(image=None, requires_image=True,
+                 unavailable_media={'image': {'path': 'static/headers/acuicultura/e2.png'}})
+        repair_content_integrity(c)
+        self.assertIsNone(q['image'])
+        self.assertEqual(1, c['integrity_audit']['missing_media_count'])
+
     def test_context_replacement_does_not_replace_technical_activity(self):
         c = self.fixture()
         c['explore'] = {'image': '/static/headers/acuicultura/e1.png?v=3'}
         c['questions'][0]['image'] = '/static/headers/acuicultura/e2.png?v=3'
+        c['questions'][0]['requires_image'] = True
         repair_content_integrity(c)
         self.assertEqual('/static/headers/acuicultura/e3.webp', c['explore']['image'])
         self.assertEqual('context', c['explore']['replaced_media']['image']['role'])

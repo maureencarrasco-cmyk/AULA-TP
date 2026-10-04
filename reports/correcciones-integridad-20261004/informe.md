@@ -7,7 +7,8 @@ Alcance: 45 cursos y 451 modulos. No se certifica 100% de calidad.
 - 1153 etiquetas alternativas incorporadas desde textos existentes; requieren revision visual.
 - Sin rutas multimedia locales inexistentes activas en los datos ni en el contenido enriquecido de los 451 modulos.
 - 84 imagenes originales recuperadas del historial; 17380 referencias reactivadas en su misma especialidad. No es una certificacion disciplinar.
-- 7982 referencias siguen pendientes; no se sustituyen por material de otro oficio.
+- 207 referencias completadas con contexto generado, identificado como simulado y separado de la evidencia tecnica.
+- 7775 referencias siguen pendientes; no se sustituyen por material de otro oficio.
 - 368 introducciones completadas con una imagen contextual de su propia especialidad. No son evidencias de parametros ni recursos tecnicos interactivos.
 - Tiempo docente real, cobertura y brecha permanecen sin valor hasta disponer de cronometraje; ya no se presenta cumplimiento artificial de 100%.
 - Calibracion de dificultad marcada como propuesta pendiente, no validacion cognitiva.
@@ -28,7 +29,7 @@ Alcance: 45 cursos y 451 modulos. No se certifica 100% de calidad.
 
 | Curso | Modulos | Referencias recuperadas | Referencias pendientes de restaurar |
 | --- | ---: | ---: | ---: |
-| Acuicultura | 9 | 378 | 207 |
+| Acuicultura | 9 | 378 | 0 |
 | Administración, mención Logística | 11 | 462 | 215 |
 | Administración, mención Recursos Humanos | 11 | 462 | 197 |
 | Agropecuaria, mención Agricultura | 10 | 420 | 232 |

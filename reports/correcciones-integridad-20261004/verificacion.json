@@ -5,10 +5,11 @@
   "question_text_options_keys_unchanged": true,
   "source_references_repaired": 4672,
   "alternative_labels_added": 1153,
-  "pending_media_references": 7982,
+  "pending_media_references": 7775,
   "active_missing_media_paths": 0,
   "restored_media_files": 84,
   "recovered_media_references": 17380,
+  "generated_context_references": 207,
   "contextual_replacements": 368,
   "runtime_checked_modules": 451,
   "course_rows": {
@@ -16,9 +17,9 @@
       "modules": 9,
       "recovered_references": 378,
       "contextual_replacements": 9,
-      "pending_media": 207,
-      "images": 387,
-      "images_with_alt": 387
+      "images": 594,
+      "images_with_alt": 594,
+      "generated_context_references": 207
     },
     "Administración, mención Logística": {
       "modules": 11,

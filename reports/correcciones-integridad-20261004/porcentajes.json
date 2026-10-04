@@ -1,19 +1,16 @@
 {
-  "checked_at": "2026-10-04T18:43:07",
+  "checked_at": "2026-10-04T18:53:59",
   "metric": "Disponibilidad de recursos locales: referencias disponibles / referencias registradas.",
   "overall_pedagogical_certification": false,
-  "overall_media_percent": 77.7,
+  "overall_media_percent": 78.3,
   "courses": [
     {
       "course": "Acuicultura",
       "modules": 9,
-      "available": 525,
-      "pending": 207,
+      "available": 732,
       "registered_references": 732,
-      "media_percent": 71.7,
-      "missing_files": [
-        "/static/headers/acuicultura/e2.png"
-      ],
+      "media_percent": 100.0,
+      "missing_files": [],
       "overall_quality_percent": null
     },
     {

@@ -1,9 +1,7 @@
 {
   "courses": {
     "Acuicultura": {
-      "missing_files": [
-        "/static/headers/acuicultura/e2.png"
-      ],
+      "missing_files": [],
       "modules": [
         {
           "module_id": 227,

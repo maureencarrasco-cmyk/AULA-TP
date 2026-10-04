@@ -57,7 +57,8 @@ for row in rows:
         if isinstance(obj.get('image'),str):
             stats['images']+=1
             stats['images_with_alt']+=bool(obj.get('alt'))
-        stats['recovered_references']+=len(obj.get('restored_media') or {})
+        generated=obj.get('media_origin')=='ai-generated'
+        stats['generated_context_references' if generated else 'recovered_references']+=len(obj.get('restored_media') or {})
         stats['contextual_replacements']+=len(obj.get('replaced_media') or {})
     runtime=enrich(c,row['position'])
     runtime_src=runtime.get('specialty_source') or runtime.get('official_source') or {}
@@ -78,6 +79,7 @@ result={'courses':45,'modules':451,'protected_tables_unchanged':True,
         'pending_media_references':sum(v['pending_media'] for v in courses.values()),
         'active_missing_media_paths':0,'restored_media_files':recovery.get('restored_images',0),
         'recovered_media_references':sum(v['recovered_references'] for v in courses.values()),
+        'generated_context_references':sum(v['generated_context_references'] for v in courses.values()),
         'contextual_replacements':sum(v['contextual_replacements'] for v in courses.values()),
         'runtime_checked_modules':451,'course_rows':{k:dict(v) for k,v in courses.items()},
         'complete_pedagogical_audit':False,'measured_teacher_times_available':False}
@@ -89,6 +91,7 @@ lines=['# Correcciones aplicadas y pendientes', '',
     f'- {result["alternative_labels_added"]} etiquetas alternativas incorporadas desde textos existentes; requieren revision visual.',
     '- Sin rutas multimedia locales inexistentes activas en los datos ni en el contenido enriquecido de los 451 modulos.',
     f'- {result["restored_media_files"]} imagenes originales recuperadas del historial; {result["recovered_media_references"]} referencias reactivadas en su misma especialidad. No es una certificacion disciplinar.',
+    f'- {result["generated_context_references"]} referencias completadas con contexto generado, identificado como simulado y separado de la evidencia tecnica.',
     f'- {result["pending_media_references"]} referencias siguen pendientes; no se sustituyen por material de otro oficio.',
     f'- {result["contextual_replacements"]} introducciones completadas con una imagen contextual de su propia especialidad. No son evidencias de parametros ni recursos tecnicos interactivos.',
     '- Tiempo docente real, cobertura y brecha permanecen sin valor hasta disponer de cronometraje; ya no se presenta cumplimiento artificial de 100%.',

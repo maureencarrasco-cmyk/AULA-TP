@@ -4,6 +4,12 @@ from functools import lru_cache
 
 ROOT = Path(__file__).resolve().parent
 MEDIA_FIELDS = ('image', 'imageB', 'video', 'vtt', 'audio', 'model')
+GENERATED_CONTEXT_ASSETS = {
+    '/static/headers/acuicultura/e2.png': {
+        'alt': 'Estudiante y docente observan una muestra de agua junto a un microscopio y estanques de cultivo.',
+        'caption': 'Ilustracion generada de un entorno de aprendizaje acuicola. Recurso contextual simulado; no acredita parametros ni procedimientos tecnicos.',
+    },
+}
 
 
 @lru_cache(maxsize=8192)
@@ -46,11 +52,11 @@ def repair_content_integrity(content, page_lookup=None):
                 walk(item, f'{path}[{index}]')
         elif isinstance(value, dict):
             unavailable = value.setdefault('unavailable_media', {}) if any(
-                isinstance(value.get(k), str) and value[k].startswith('/static/') and not asset_exists(value[k])
+                isinstance(value.get(k), str) and value[k].startswith('/static/') and (not asset_exists(value[k]) or (value.get('requires_image') and value[k].split('?', 1)[0] in GENERATED_CONTEXT_ASSETS))
                 for k in MEDIA_FIELDS) else value.get('unavailable_media') or {}
             for field in MEDIA_FIELDS:
                 src = value.get(field)
-                if isinstance(src, str) and src.startswith('/static/') and not asset_exists(src):
+                if isinstance(src, str) and src.startswith('/static/') and (not asset_exists(src) or (value.get('requires_image') and src.split('?', 1)[0] in GENERATED_CONTEXT_ASSETS)):
                     unavailable[field] = {'path': src.lstrip('/'), 'status': 'PENDIENTE DE RESTAURAR',
                         'role':'context' if '/static/headers/' in src else 'evidence'}
                     value['unavailable_media'] = unavailable
@@ -61,11 +67,16 @@ def repair_content_integrity(content, page_lookup=None):
                     base, separator, query = original.partition('?')
                     candidate = str(Path(base).with_suffix('.webp')).replace('\\', '/') if base.endswith('.png') else base
                     candidate += separator + query
-                    if base.startswith('/static/headers/') and asset_exists(candidate):
+                    if asset_exists(original):
+                        candidate = original
+                    generated = GENERATED_CONTEXT_ASSETS.get(candidate.split('?', 1)[0])
+                    if generated and value.get('requires_image'):
+                        candidate = None
+                    if candidate and base.startswith('/static/headers/') and asset_exists(candidate):
                         value[field] = candidate
                         value.setdefault('restored_media', {})[field] = {
                             'original_path': prior['path'], 'path': candidate,
-                            'status': 'ORIGINAL RECUPERADO; REVISION DISCIPLINAR PENDIENTE'}
+                            'status': 'CONTEXTO GENERADO; NO EVIDENCIA TECNICA' if generated else 'ORIGINAL RECUPERADO; REVISION DISCIPLINAR PENDIENTE'}
                         unavailable.pop(field)
                     elif (field == 'image' and path == 'contenido.explore'
                           and base.startswith('/static/headers/') and base.endswith('/e1.png')
@@ -80,6 +91,11 @@ def repair_content_integrity(content, page_lookup=None):
                 if field in unavailable:
                     unavailable[field].setdefault('role', 'context' if unavailable[field].get('path','').startswith('static/headers/') else 'evidence')
                     missing.append({'location':path, 'field':field, **unavailable[field]})
+            generated = GENERATED_CONTEXT_ASSETS.get(str(value.get('image') or '').split('?', 1)[0])
+            if generated:
+                value.update(generated)
+                value['media_role'] = 'context'
+                value['media_origin'] = 'ai-generated'
             if value.get('image') and not str(value.get('alt') or '').strip():
                 label = value.get('caption') or value.get('title')
                 if isinstance(label, str) and label.strip():
