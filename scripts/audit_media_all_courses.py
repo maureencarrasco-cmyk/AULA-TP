@@ -31,9 +31,10 @@ def main():
         before_pct = round(sum(map(int, before_checks)) / len(before_checks) * 100, 1)
         after.append((row['course_title'], row['position'], row['module_title'], before_pct, after_pct, a[0], a[1], a[2], len(a[3])))
     docs = ROOT / 'docs'; docs.mkdir(exist_ok=True)
-    lines = ['# Auditoría de imágenes 3D y videos por módulo', '',
+    lines = ['# Inventario de metadatos multimedia por modulo', '',
+             '> NO CERTIFICACION. Los porcentajes cuentan campos declarados, no recursos disponibles ni calidad tecnica o pedagogica. No certifican motores 3D. Consultar reports/correcciones-integridad-20261004/porcentajes.md e informe.md para disponibilidad y pendientes.', '',
              'Auditoría automática de módulos publicados. El video se marca como pertinente solo cuando el módulo tiene un recurso audiovisual declarado para su contenido; no se reutilizan videos de otra especialidad.', '',
-             '| Curso | Módulo | Cumplimiento inicial | Cumplimiento final | 3 visualizaciones | Trazabilidad pedagógica | Video pertinente | Recursos |',
+             '| Curso | Módulo | Registro inicial | Registro final | 3 recursos declarados | Campos de trazabilidad | Video declarado | Recursos |',
              '|---|---:|---:|---:|---:|---:|---:|---:|']
     for r in after:
         lines.append(f'| {r[0]} | {r[1]} · {r[2]} | {r[3]}% | {r[4]}% | {"Sí" if r[5] else "No"} | {"Sí" if r[6] else "No"} | {"Sí" if r[7] else "No aplica"} | {r[8]} |')

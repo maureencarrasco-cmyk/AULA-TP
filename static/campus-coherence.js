@@ -47,6 +47,8 @@ function clearCatalogQuery() {
 }
 
 function moduleYearBand(course, module, index) {
+  const official=String(module?.official_year||'').trim();
+  if(official==='3° medio'||official==='4° medio')return official;
   const pos = Number(module?.position || index + 1);
   const title = String(module?.title || '');
   if (/emprendimiento y empleabilidad/i.test(title)) return '4° medio';

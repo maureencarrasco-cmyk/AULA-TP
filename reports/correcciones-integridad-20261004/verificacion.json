@@ -1,0 +1,370 @@
+{
+  "courses": 45,
+  "modules": 451,
+  "protected_tables_unchanged": true,
+  "question_text_options_keys_unchanged": true,
+  "source_references_repaired": 4672,
+  "alternative_labels_added": 1153,
+  "pending_media_references": 7982,
+  "active_missing_media_paths": 0,
+  "restored_media_files": 84,
+  "recovered_media_references": 17380,
+  "contextual_replacements": 368,
+  "runtime_checked_modules": 451,
+  "course_rows": {
+    "Acuicultura": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 207,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Administración, mención Logística": {
+      "modules": 11,
+      "recovered_references": 462,
+      "contextual_replacements": 11,
+      "pending_media": 215,
+      "images": 473,
+      "images_with_alt": 473
+    },
+    "Administración, mención Recursos Humanos": {
+      "modules": 11,
+      "recovered_references": 462,
+      "contextual_replacements": 11,
+      "pending_media": 197,
+      "images": 473,
+      "images_with_alt": 473
+    },
+    "Agropecuaria, mención Agricultura": {
+      "modules": 10,
+      "recovered_references": 420,
+      "contextual_replacements": 10,
+      "pending_media": 232,
+      "images": 430,
+      "images_with_alt": 430
+    },
+    "Agropecuaria, mención Pecuaria": {
+      "modules": 11,
+      "recovered_references": 462,
+      "contextual_replacements": 11,
+      "pending_media": 263,
+      "images": 473,
+      "images_with_alt": 473
+    },
+    "Agropecuaria, mención Vitivinícola": {
+      "modules": 11,
+      "recovered_references": 462,
+      "contextual_replacements": 11,
+      "pending_media": 251,
+      "images": 473,
+      "images_with_alt": 473
+    },
+    "Asistencia en Geología": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 189,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Atención de Enfermería, mención Adulto Mayor": {
+      "modules": 13,
+      "recovered_references": 0,
+      "contextual_replacements": 0,
+      "images": 938,
+      "images_with_alt": 756
+    },
+    "Atención de Enfermería, mención Enfermería": {
+      "modules": 10,
+      "recovered_references": 0,
+      "contextual_replacements": 0,
+      "images": 740,
+      "images_with_alt": 600
+    },
+    "Atención de Párvulos": {
+      "modules": 10,
+      "recovered_references": 420,
+      "contextual_replacements": 10,
+      "pending_media": 226,
+      "images": 430,
+      "images_with_alt": 430
+    },
+    "Conectividad y Redes": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 195,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Construcciones Metálicas": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 213,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Construcción, mención Edificación": {
+      "modules": 12,
+      "recovered_references": 504,
+      "contextual_replacements": 12,
+      "pending_media": 216,
+      "images": 516,
+      "images_with_alt": 516
+    },
+    "Construcción, mención Obras Viales e Infraestructura": {
+      "modules": 13,
+      "recovered_references": 546,
+      "contextual_replacements": 13,
+      "pending_media": 229,
+      "images": 559,
+      "images_with_alt": 559
+    },
+    "Construcción, mención Terminaciones de la Construcción": {
+      "modules": 12,
+      "recovered_references": 504,
+      "contextual_replacements": 12,
+      "pending_media": 210,
+      "images": 516,
+      "images_with_alt": 516
+    },
+    "Contabilidad": {
+      "modules": 10,
+      "recovered_references": 0,
+      "contextual_replacements": 0,
+      "images": 776,
+      "images_with_alt": 636
+    },
+    "Dibujo Técnico": {
+      "modules": 11,
+      "recovered_references": 462,
+      "contextual_replacements": 11,
+      "pending_media": 233,
+      "images": 473,
+      "images_with_alt": 473
+    },
+    "Elaboración Industrial de Alimentos": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 153,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Electricidad": {
+      "modules": 9,
+      "recovered_references": 0,
+      "contextual_replacements": 0,
+      "images": 654,
+      "images_with_alt": 528
+    },
+    "Electrónica": {
+      "modules": 10,
+      "recovered_references": 420,
+      "contextual_replacements": 10,
+      "pending_media": 262,
+      "images": 430,
+      "images_with_alt": 430
+    },
+    "Explotación Minera": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 231,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Forestal": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 189,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Gastronomía, mención Cocina": {
+      "modules": 11,
+      "recovered_references": 667,
+      "contextual_replacements": 0,
+      "images": 832,
+      "images_with_alt": 678
+    },
+    "Gastronomía, mención Pastelería y Repostería": {
+      "modules": 11,
+      "recovered_references": 661,
+      "contextual_replacements": 0,
+      "images": 826,
+      "images_with_alt": 672
+    },
+    "Gráfica": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 159,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Instalaciones Sanitarias": {
+      "modules": 10,
+      "recovered_references": 420,
+      "contextual_replacements": 10,
+      "pending_media": 220,
+      "images": 430,
+      "images_with_alt": 430
+    },
+    "Mecánica Automotriz": {
+      "modules": 10,
+      "recovered_references": 420,
+      "contextual_replacements": 10,
+      "pending_media": 232,
+      "images": 430,
+      "images_with_alt": 430
+    },
+    "Mecánica Industrial, mención Mantenimiento Electromecánico": {
+      "modules": 10,
+      "recovered_references": 420,
+      "contextual_replacements": 10,
+      "pending_media": 214,
+      "images": 430,
+      "images_with_alt": 430
+    },
+    "Mecánica Industrial, mención Matricería": {
+      "modules": 10,
+      "recovered_references": 420,
+      "contextual_replacements": 10,
+      "pending_media": 226,
+      "images": 430,
+      "images_with_alt": 430
+    },
+    "Mecánica Industrial, mención Máquinas-Herramientas": {
+      "modules": 10,
+      "recovered_references": 420,
+      "contextual_replacements": 10,
+      "pending_media": 220,
+      "images": 430,
+      "images_with_alt": 430
+    },
+    "Mecánica de Mantenimiento de Aeronaves": {
+      "modules": 11,
+      "recovered_references": 462,
+      "contextual_replacements": 11,
+      "pending_media": 251,
+      "images": 473,
+      "images_with_alt": 473
+    },
+    "Metalurgia Extractiva": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 177,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Montaje Industrial": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 189,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Muebles y Terminaciones en Madera": {
+      "modules": 10,
+      "recovered_references": 420,
+      "contextual_replacements": 10,
+      "pending_media": 256,
+      "images": 430,
+      "images_with_alt": 430
+    },
+    "Operaciones Portuarias": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 189,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Pesquería": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 231,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Programación": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 189,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Química Industrial, mención Laboratorio Químico": {
+      "modules": 10,
+      "recovered_references": 420,
+      "contextual_replacements": 10,
+      "pending_media": 238,
+      "images": 430,
+      "images_with_alt": 430
+    },
+    "Química Industrial, mención Planta Química": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 201,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Refrigeración y Climatización": {
+      "modules": 9,
+      "recovered_references": 0,
+      "contextual_replacements": 0,
+      "images": 681,
+      "images_with_alt": 555
+    },
+    "Servicios de Hotelería": {
+      "modules": 10,
+      "recovered_references": 596,
+      "contextual_replacements": 0,
+      "images": 746,
+      "images_with_alt": 606
+    },
+    "Servicios de Turismo": {
+      "modules": 10,
+      "recovered_references": 420,
+      "contextual_replacements": 10,
+      "pending_media": 202,
+      "images": 430,
+      "images_with_alt": 430
+    },
+    "Telecomunicaciones": {
+      "modules": 10,
+      "recovered_references": 420,
+      "contextual_replacements": 10,
+      "pending_media": 220,
+      "images": 430,
+      "images_with_alt": 430
+    },
+    "Tripulación de Naves Mercantes y Especiales": {
+      "modules": 9,
+      "recovered_references": 378,
+      "contextual_replacements": 9,
+      "pending_media": 225,
+      "images": 387,
+      "images_with_alt": 387
+    },
+    "Vestuario y Confección Textil": {
+      "modules": 10,
+      "recovered_references": 420,
+      "contextual_replacements": 10,
+      "pending_media": 232,
+      "images": 430,
+      "images_with_alt": 430
+    }
+  },
+  "complete_pedagogical_audit": false,
+  "measured_teacher_times_available": false
+}

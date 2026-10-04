@@ -64,8 +64,16 @@ body[data-screen="module"][data-station="5"] .work-zone-s5 .az-guided .fb-row.is
 body[data-screen="module"][data-station="5"] .work-zone-s5 .az-guided .fb-row.is-ok .fb-row-track i{background:#9bd0ae}
 body[data-screen="module"][data-station="5"] .work-zone-s5 .az-guided .fb-row.is-void{--learning-soft:#f4f6f8;--learning-ink:#526575;--learning-edge:#cbd5de}
 .fb-heat-legend{display:flex;flex-wrap:wrap;gap:12px 20px;list-style:none;padding:0;margin:14px 0;font:600 13px Inter,sans-serif}
-.fb-heat-legend li{display:flex;align-items:center;gap:8px}
-.fb-heat-legend li::before{content:"";width:12px;height:12px;border-radius:3px;background:#df9292;flex:0 0 12px}
+.fb-heat-legend button{display:flex;align-items:center;gap:9px;min-height:44px;padding:10px 18px;border-radius:999px;border:1px solid #e5b7b7;background:#fceeee;color:#873b3b;font:600 14px Inter,sans-serif;box-shadow:0 2px 4px #16374a0a;cursor:pointer}
+.fb-heat-legend button::before{content:"";width:10px;height:10px;border-radius:50%;background:#df9292;flex:0 0 10px}
+.fb-heat-legend button.heat-mid{background:#fff8dd;border-color:#e7d599;color:#795f13}
+.fb-heat-legend button.heat-ok{background:#eef8f0;border-color:#bedec9;color:#306b48}
+.fb-heat-legend button:hover{box-shadow:0 3px 8px #16374a20}
+.fb-heat-legend button[aria-expanded="true"]{outline:2px solid currentColor;outline-offset:2px}
+.fb-heat-legend button:focus-visible{outline:3px solid #17669c;outline-offset:3px}
+body[data-screen="module"][data-station="5"] .work-zone-s5 .fb-heat-legend button{border-radius:999px!important}
+.fb-heat-explanations p{padding:12px 0;border-bottom:1px solid #dce5eb}
+.fb-heat-explanations [hidden]{display:none!important}
 .fb-heat-legend .heat-mid::before{background:#e8ce75}
 .fb-heat-legend .heat-ok::before{background:#9bd0ae}
 /* Reference dashboard: separate indicators and colored category labels. */

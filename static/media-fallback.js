@@ -54,18 +54,7 @@
       return decorateVideo(html, exp && exp.poster);
     };
     vis.mediaFor = function (exp, opts) {
-      let html = origMedia(exp, opts);
-      if (html) return html;
-      if (!exp) return '';
-      const course = typeof courses !== 'undefined' && typeof current !== 'undefined'
-        ? courses.find(c => c.id === current?.course_id)
-        : null;
-      const seq = sequenceFor(course, current?.position);
-      if (!seq.video) {
-        return `<figure class="media-missing"><img src="${seq.poster}" alt="Recurso visual de la especialidad"><figcaption>Este módulo no tiene video propio. Sigue con la imagen de oficio y la consigna escrita.</figcaption></figure>`;
-      }
-      const fake = Object.assign({}, exp, {video: seq.video, vtt: seq.vtt, poster: seq.poster});
-      return vis.videoFigure(fake);
+      return origMedia(exp, opts);
     };
   }
 
@@ -76,7 +65,7 @@
       v.addEventListener('error', () => {
         const note = document.createElement('figure');
         note.className = 'media-missing';
-        note.innerHTML = '<img alt="Recurso de oficio no disponible" src="/static/themes/poster-general.svg"><figcaption>El video de este módulo no cargó. Continúa con la consigna escrita.</figcaption>';
+        note.innerHTML = '<figcaption>El video no cargó. Solicita el recurso al docente si necesitas consultarlo para responder.</figcaption>';
         v.replaceWith(note);
       });
     });
@@ -84,7 +73,10 @@
       if (img.dataset.fallbackBound) return;
       img.dataset.fallbackBound = '1';
       img.addEventListener('error', () => {
-        if (img.src.indexOf('poster-') === -1) img.src = '/static/themes/poster-general.svg';
+        const note=document.createElement('p');
+        note.className='resource-unavailable';
+        note.textContent='La imagen no cargó. Solicita el recurso al docente; una imagen genérica no sustituye la evidencia de esta actividad.';
+        img.replaceWith(note);
       });
     });
   }

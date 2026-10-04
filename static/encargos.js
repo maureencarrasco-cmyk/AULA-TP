@@ -64,7 +64,7 @@ function encargosItems(station, aeIndex){
 }
 function encargosUi(host){
   window.__encargoUi=window.__encargoUi||{};
-  const key=host.dataset.uiKey||`${host.dataset.station}:${host.dataset.ae||''}`;
+  const key=`${auth?.user?.id||'demo'}:${current?.course_id||''}:${current?.id||''}:${host.dataset.station}:${host.dataset.ae||''}`;
   host.dataset.uiKey=key;
   if(!window.__encargoUi[key]) window.__encargoUi[key]={expanded:false,openId:'',drafts:{}};
   return window.__encargoUi[key];

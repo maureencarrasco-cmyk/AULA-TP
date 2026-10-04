@@ -84,6 +84,7 @@
   function mediaFor(exp, opts) {
     opts = opts || {};
     if (!exp) return '';
+    if (exp.unavailable_media?.image && !exp.image) return exp.type === 'hotspot' ? '' : missingMedia();
     if (exp.video) return videoFigure(exp);
     const role = opts.role || (opts.exam ? 'exam' : 'evidence');
     const zoom = opts.zoom != null ? opts.zoom : shouldZoom(exp) || opts.exam;
@@ -91,8 +92,11 @@
     const alt = exp.alt;
     const rep = `${exp.format || ''} ${exp.representation || ''} ${exp.type || ''}`;
     if (/compar/i.test(rep) && (!opts.exam || exp.image || exp.imageB)) {
-      const pair = comparePair();
-      return compare(exp.image || pair[0], exp.imageB || pair[1], {captionA: cap, captionB: exp.captionB});
+      if (exp.image && exp.imageB) return compare(exp.image, exp.imageB, {captionA: cap, captionB: exp.captionB});
+      if (!current?.content?.specialty_source) {
+        const pair = comparePair();
+        return compare(exp.image || pair[0], exp.imageB || pair[1], {captionA: cap, captionB: exp.captionB});
+      }
     }
     if (exp.image && exp.type !== 'hotspot') return figure(exp.image, {role, zoom, caption: cap, alt: alt || pedagogicalAlt(role)});
     return '';
@@ -135,11 +139,11 @@
   }
 
   function hotspotScene(exp, spotsHtml) {
-    if (!exp?.image) return spotsHtml || '';
+    if (!exp?.image) return exp?.unavailable_media?.image ? missingMedia() : '';
     return `<figure class="vis-fig vis-hotspot">
       <div class="vis-frame act-scene" data-vis-zoom="1">
         <div class="vis-zoom-target">
-          <img src="${hx(exp.image)}" alt="${hx(pedagogicalAlt('scene'))}" decoding="async">
+          <img src="${hx(exp.image)}" alt="${hx(exp.alt || pedagogicalAlt('scene'))}" decoding="async">
           ${spotsHtml || ''}
         </div>
       </div>
@@ -191,6 +195,9 @@
   function sceneStage(scene) {
     const parts = scene.parts || [];
     const src = scene.image || envSrc();
+    if (scene.unavailable_media?.image && !scene.image) {
+      return `${missingMedia()}<ul class="vis-resource-list">${parts.map(p=>`<li><button type="button" data-action="inspect" data-part="${hx(p.id)}">${hx(p.label)}</button></li>`).join('')}</ul>`;
+    }
     const cam = window.sceneCam;
     if (typeof sceneRotation !== 'undefined') cam.rot = sceneRotation;
     return `<div class="vis-sim">
@@ -332,7 +339,11 @@
     if (window.AulaNarration) window.AulaNarration.hydrate(root);
   }
 
+  function missingMedia() {
+    return '<p class="resource-unavailable" role="status">El recurso visual está pendiente de restauración. No lo reemplaces por una suposición. Solicita el recurso al docente si lo necesitas para responder.</p>';
+  }
+
   window.AulaVisual = {
-    figure, compare, mediaFor, bindZoom, sceneStage, bindScene, applyCam, resetCam, focusPin, showEvidence, hydrate, envSrc, pedagogicalAlt, cycle, hotspotScene, videoFigure
+    figure, compare, mediaFor, bindZoom, sceneStage, bindScene, applyCam, resetCam, focusPin, showEvidence, hydrate, envSrc, pedagogicalAlt, cycle, hotspotScene, videoFigure, missingMedia
   };
 })();

@@ -4,7 +4,7 @@ function integrationLabel(i){
  const q=current.content.cases[i]||{};
  return [q.title||`Situación ${i+1}`, q.lead||q.site||(integrationLevel(i)+' · Análisis y decisión')];
 }
-function integrationLevel(i){return ['Inicial','Intermedia','Avanzada'][Math.min(2,Math.floor(i/5))]}
+function integrationLevel(i){return current.content.cases?.[i]?.difficulty||'Sin clasificar'}
 function integrationCases(){return current.content.cases.map((c,i)=>({c,i})).filter(({i})=>integrationFilter==='all'||integrationLevel(i)===integrationFilter)}
 function integrationUnlocked(i){return isDemoStudent()||i===0||Boolean(current.state.cases[i-1])}
 function photoV(src){return String(src||'').split('?')[0]+'?v=4'}
@@ -17,9 +17,13 @@ const integrationCaseImages=[
 ];
 function integrationPhoto(i){
  const q=current.content.cases?.[i];
- const repeated=q?.image&&(current.content.cases||[]).filter(item=>item?.image===q.image).length>1;
- if(q?.image&&!repeated)return photoV(q.image);
+ if(q?.image)return photoV(q.image);
+ if(q?.unavailable_media?.image||current.content.specialty_source)return '';
  return photoV(integrationCaseImages[i%integrationCaseImages.length]);
+}
+function integrationThumbnail(i){
+ const src=integrationPhoto(i);
+ return src?`<img src="${esc(src)}" alt="${esc(integrationPhotoAlt(i))}" loading="eager" decoding="async">`:'<div class="situation-resource-pending">Recurso visual pendiente</div>';
 }
 function integrationPhotoAlt(i){
  const q=current.content.cases?.[i]||{};
@@ -34,17 +38,17 @@ function integratedPanel(){
  const pack=current.content.encargos||{};
  const encargoN=pack.count||0;
 const activity=encargosTab?(typeof encargosMarkup==='function'?encargosMarkup(3):''):scene?scenePanel():`<div class="integration-select"><div>${workIco('search')}<div><h3>Selecciona una situación para comenzar</h3><p>Cada situación te presenta un contexto simulado de la especialidad. Lee el caso, analiza la información y toma decisiones.</p></div></div><label>Filtrar por dificultad<select id="integration-filter">${['all','Inicial','Intermedia','Avanzada'].map(x=>`<option value="${x}" ${integrationFilter===x?'selected':''}>${x==='all'?'Todas':x}</option>`).join('')}</select></label></div>
- <div class="integration-carousel" aria-label="Selector de situaciones">${action('case-page','‹','carousel-arrow','data-page="'+(integrationPage-1)+'" aria-label="Página anterior de situaciones" '+(integrationPage===0?'disabled':''))}<div class="integration-cards">${visible.map(({i})=>{const unlocked=integrationUnlocked(i),done=Boolean(current.state.cases[i]),label=integrationLabel(i);return `<button type="button" class="situation-card ${i===caseIndex?'selected':''}" data-action="case" data-index="${i}" ${unlocked?'':'disabled'} aria-pressed="${i===caseIndex}"><div class="situation-photo"><img src="${integrationPhoto(i)}" alt="${esc(integrationPhotoAlt(i))}" loading="eager" decoding="async" onerror="this.onerror=null;this.src='/static/themes/workshop.webp'"><span>${i+1}</span></div><div class="situation-copy"><h4>${esc(label[0])}</h4><p>${esc(label[1])}</p><span class="situation-cta"${unlocked?' data-action="focus-case"':''}>${!unlocked?icon('lock')+' Bloqueada':done?'✓ Revisar':'Comenzar '+icon('arrow')}</span></div></button>`}).join('')}</div>${action('case-page','›','carousel-arrow','data-page="'+(integrationPage+1)+'" aria-label="Página siguiente de situaciones" '+(integrationPage>=pages-1?'disabled':''))}</div>
+ <div class="integration-carousel" aria-label="Selector de situaciones">${action('case-page','‹','carousel-arrow','data-page="'+(integrationPage-1)+'" aria-label="Página anterior de situaciones" '+(integrationPage===0?'disabled':''))}<div class="integration-cards">${visible.map(({i})=>{const unlocked=integrationUnlocked(i),done=Boolean(current.state.cases[i]),label=integrationLabel(i);return `<button type="button" class="situation-card ${i===caseIndex?'selected':''}" data-action="case" data-index="${i}" ${unlocked?'':'disabled'} aria-pressed="${i===caseIndex}"><div class="situation-photo">${integrationThumbnail(i)}<span>${i+1}</span></div><div class="situation-copy"><h4>${esc(label[0])}</h4><p>${esc(label[1])}</p><span class="situation-cta"${unlocked?' data-action="focus-case"':''}>${!unlocked?icon('lock')+' Bloqueada':done?'✓ Revisar':'Comenzar '+icon('arrow')}</span></div></button>`}).join('')}</div>${action('case-page','›','carousel-arrow','data-page="'+(integrationPage+1)+'" aria-label="Página siguiente de situaciones" '+(integrationPage>=pages-1?'disabled':''))}</div>
  <div class="integration-pages" aria-label="Páginas de situaciones">${Array.from({length:pages},(_,i)=>action('case-page','',i===integrationPage?'active':'',`data-page="${i}" aria-label="Página ${i+1} de situaciones" aria-pressed="${i===integrationPage}"`)).join('')}</div>`;
  return workZone(`
  ${workCard('puzzle', 'Situación Integradora', `${workKicker('Este es el desafío principal que debes resolver')}<p>Aplica lo aprendido en escenarios que requieren análisis, aplicación y toma de decisiones.</p>`,'work-card-hero')}
  <div class="work-grid-3">
   ${workCard('target','Propósito de esta estación','<p>La Situación Integradora permite movilizar los aprendizajes desarrollados durante el módulo en escenarios que requieren análisis, aplicación y toma de decisiones, aumentando la contextualización y complejidad de la experiencia.</p>','work-card-purpose')}
   ${workCard('file','Información que necesitas','<p><b>15 situaciones integradoras</b></p><small>vinculadas con los Aprendizajes Esperados.</small><p><b>'+encargoN+' encargos de oficio</b></p><small>trabajo largo; no desbloquean el examen.</small>')}
-  ${workCard('cube','Desafío final','<p><b>1 situación final en 3D</b></p><small>en la que deberás analizar, tomar decisiones y aplicar de manera integrada lo aprendido.</small>')}
+  ${workCard('cube','Desafío final','<p><b>1 escenario final explorable</b></p><small>Analiza, decide y aplica lo aprendido. Representación con imágenes y puntos de inspección.</small>')}
  </div>
  <section class="work-card work-card-activity"><div class="work-activity-head">${workIco('puzzle')}<div><h3>Actividad que debes desarrollar</h3><p>${encargosTab?'Elige un encargo, trabaja 45 a 90 minutos y entrega el producto con un dato de oficio.':scene?'Explora el escenario, examina cada componente y justifica tu conclusión.':'Elige una situación, analiza el caso y toma una decisión justificada.'}</p></div></div>
- <div class="tabs integration-tabs">${action('tab',icon('file')+' Situaciones integradoras (1–15)',!scene&&!encargosTab?'active':'','data-tab="cases" aria-pressed="'+(!scene&&!encargosTab)+'"')}${action('tab',icon('cube')+' Situación final en 3D',scene?'active':'','data-tab="scene" aria-pressed="'+scene+'"')}${action('tab',icon('file')+' Encargos de oficio',encargosTab?'active':'','data-tab="encargos" aria-pressed="'+encargosTab+'"')}</div>
+ <div class="tabs integration-tabs">${action('tab',icon('file')+' Situaciones integradoras (1–15)',!scene&&!encargosTab?'active':'','data-tab="cases" aria-pressed="'+(!scene&&!encargosTab)+'"')}${action('tab',icon('cube')+' Escenario final explorable',scene?'active':'','data-tab="scene" aria-pressed="'+scene+'"')}${action('tab',icon('file')+' Encargos de oficio',encargosTab?'active':'','data-tab="encargos" aria-pressed="'+encargosTab+'"')}</div>
  ${activity}
  </section>`,'work-zone-s3');
 }

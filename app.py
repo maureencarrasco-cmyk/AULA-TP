@@ -159,6 +159,7 @@ def create_app(test_config=None):
                     json_extract(content,'$.specialty_source.official_hp') AS official_hp,
                     json_extract(content,'$.specialty_source.scope') AS source_scope,
                     json_extract(content,'$.specialty_source.pdf') AS source_pdf,
+                    json_extract(content,'$.specialty_source.year') AS official_year,
                     json_extract(content,'$.encargos.count') AS encargos_count,
                     json_extract(content,'$.encargos.hours') AS encargos_hours,
                     json_array_length(json_extract(content,'$.aes')) AS ae_count

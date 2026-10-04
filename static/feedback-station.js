@@ -8,6 +8,15 @@ function feedbackStationRoute(){ return stationRoute(5); }
 function feedbackSidebar(){ return ''; }
 
 function fbPass(){ return Number(current?.content?.pass_percent)||60; }
+document.addEventListener('click',event=>{
+  const button=event.target.closest('[data-heat-range]');
+  if(!button)return;
+  const note=document.getElementById(button.getAttribute('aria-controls'));
+  if(!note)return;
+  const open=button.getAttribute('aria-expanded')!=='true';
+  button.setAttribute('aria-expanded',String(open));
+  note.hidden=!open;
+});
 function fbPctLabel(pct){ return pct==null?'—':`${pct}%`; }
 function fbCaseScore(){
   const cases=current?.content?.cases||[];
@@ -199,9 +208,9 @@ function analizaSteps(active){
     {id:'transfiere',n:4,title:'Transfiere',sub:'\u00bfC\u00f3mo lo utilizo en una situaci\u00f3n nueva?',tone:'green',svg:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2"/></svg>'},
     {id:'proyecta',n:5,title:'Proyecta',sub:'\u00bfQu\u00e9 aprendizaje me llevo?',tone:'orange',svg:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 20V4m0 1h10l-2 3 2 3H5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>'}
   ];
-  return `<nav class="az-steps az-steps-v2" aria-label="Pasos de la estaci\u00f3n 5">${steps.map(s=>{
+  return `<nav class="az-steps az-steps-v2" aria-label="Pasos de la estaci\u00f3n 6">${steps.map(s=>{
     const on=active===s.id;
-    const badge=s.id==='analiza'?`<span class="az-step-badge">ESTACI\u00d3N 5</span>`:'';
+    const badge=s.id==='analiza'?`<span class="az-step-badge">ESTACI\u00d3N 6</span>`:'';
     return `<button type="button" class="az-step tone-${s.tone}${on?' is-active':''}" data-action="tab" data-tab="${s.id}"><span class="az-step-num">${s.n}</span><span class="az-step-ico" aria-hidden="true">${s.svg}</span><span class="az-step-rule" aria-hidden="true"></span><span class="az-step-copy">${badge}<b>${s.title}</b><small>${s.sub}</small></span></button>`;
   }).join('')}</nav>`;
 }
@@ -283,7 +292,12 @@ function fbAeChart(){
   </li>`).join('');
   return `<section class="fb-card"><h3>Aprendizajes esperados</h3>
     <p class="fb-note">${has?'Porcentaje de aciertos en la evaluación, por AE.':'Cuando entregues la evaluación, aquí verás el logro por cada aprendizaje esperado.'}</p>
-    <ul class="fb-heat-legend" aria-label="Rangos del semáforo de logro"><li class="heat-low">Rojo: menos de ${Math.min(40,pass)}%</li><li class="heat-mid">Amarillo: ${Math.min(40,pass)}% a menos de ${pass}%</li><li class="heat-ok">Verde: ${pass}% o más</li></ul>
+    <div class="fb-heat-legend" role="group" aria-label="Rangos del semáforo de logro">
+      <button type="button" class="heat-low" data-heat-range aria-expanded="false" aria-controls="heat-low-note">Rojo · p &lt; ${Math.min(40,pass)}%</button>
+      <button type="button" class="heat-mid" data-heat-range aria-expanded="false" aria-controls="heat-mid-note">Amarillo · ${Math.min(40,pass)}% ≤ p &lt; ${pass}%</button>
+      <button type="button" class="heat-ok" data-heat-range aria-expanded="false" aria-controls="heat-ok-note">Verde · p ≥ ${pass}%</button>
+    </div>
+    <div class="fb-heat-explanations"><p id="heat-low-note" hidden><b>p = porcentaje de logro.</b> Menos de ${Math.min(40,pass)}%: revisa los aprendizajes y practica con apoyo.</p><p id="heat-mid-note" hidden><b>p = porcentaje de logro.</b> Desde ${Math.min(40,pass)}% inclusive hasta menos de ${pass}%: estás consolidando el aprendizaje.</p><p id="heat-ok-note" hidden><b>p = porcentaje de logro.</b> ${pass}% o más: alcanzaste el umbral de referencia del curso.</p></div>
     <ul class="fb-rows">${list}</ul></section>`;
 }
 function fbComprendeBody(){

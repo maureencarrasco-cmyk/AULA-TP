@@ -418,7 +418,7 @@ function toolsFabMarkup(station){
  const tools=stationToolsCatalog(station);
  if(!tools.length)return '';
  const cards=tools.map(t=>`<button type="button" class="support-card tone-${t.tone}" data-action="${t.id}" aria-label="${esc(t.title)}. ${esc(t.hint)}"><span class="support-ico" aria-hidden="true">${t.glyph}</span><span class="support-copy"><b>${esc(t.title)}</b><small>${esc(t.hint)}</small></span><span class="tools-fab-open">Abrir</span></button>`).join('');
- return `<button type="button" class="tools-fab-backdrop" data-action="tools-fab-close" tabindex="-1" aria-label="Cerrar Agente Nubi"></button><div class="tools-fab" data-tools-fab><div id="tools-fab-panel" class="tools-fab-panel" role="dialog" aria-modal="true" aria-labelledby="tools-fab-title"><div class="tools-fab-head"><div><h3 id="tools-fab-title">Agente Nubi</h3><p>Tu nube de apoyo para practicar, orientarte y configurar esta estación.</p></div><button type="button" class="tools-fab-close" data-action="tools-fab-close" aria-label="Cerrar Agente Nubi">×</button></div><div class="tools-fab-list">${cards}</div></div><button type="button" class="tools-fab-btn" data-action="tools-fab-toggle" aria-expanded="false" aria-haspopup="dialog" aria-controls="tools-fab-panel" title="Arrastra para mover. Pulsa la nube para abrir Agente Nubi." aria-label="Agente Nubi. Arrastra para mover o pulsa para abrir"><img class="tools-fab-mascot" src="/static/agente-nubi-idea-transparente.png?v=20261004-halo" alt=""></button></div>`;
+ return `<button type="button" class="tools-fab-backdrop" data-action="tools-fab-close" tabindex="-1" aria-label="Cerrar Agente Nubi"></button><div class="tools-fab" data-tools-fab><div id="tools-fab-panel" class="tools-fab-panel" role="dialog" aria-modal="true" aria-labelledby="tools-fab-title"><div class="tools-fab-head"><div><h3 id="tools-fab-title">Agente Nubi</h3><p>Tu nube de apoyo para practicar, orientarte y configurar esta estación.</p></div><button type="button" class="tools-fab-close" data-action="tools-fab-close" aria-label="Cerrar Agente Nubi">×</button></div><div class="tools-fab-list">${cards}</div></div><button type="button" class="tools-fab-btn" data-action="tools-fab-toggle" aria-expanded="false" aria-haspopup="dialog" aria-controls="tools-fab-panel" title="Arrastra para mover. Pulsa la nube para abrir Agente Nubi." aria-label="Agente Nubi. Arrastra para mover o pulsa para abrir"><img class="tools-fab-mascot" src="/static/agente-nubi-luz-transparente.png?v=20261004-luz" alt=""></button></div>`;
 }
 const TOOLS_FAB_POS='aula-tools-fab-pos';
 function toolsFabClamp(x,y,el){
@@ -945,6 +945,29 @@ function decorateStudentActionCues(root){
  if(!root)return;
  updateVisibleStationNumbers(document.getElementById('main'));
  decorateStudentQuestionOrder(root);
+ root.querySelectorAll('.sequence-instruction h3,.panel-title h2,.case-question-banner h3,.work-activity-head h3').forEach(heading=>{
+  if(heading.querySelector('.tp-meaning-icon'))return;
+  const symbol=document.createElement('span');
+  symbol.className='tp-meaning-icon';
+  symbol.setAttribute('aria-hidden','true');
+  heading.prepend(symbol);
+ });
+ root.querySelectorAll('.tp-meaning-icon,.student-section-symbol,.context-activity-symbol,.az-step-ico,.oficio-do-icon').forEach(symbol=>{
+  const text=symbol.parentElement.textContent.toLowerCase();
+  const kind=/seguridad|protección/.test(text)?14:/laboral|oficio/.test(text)?15:/colabora|equipo/.test(text)?10:/verifica|comprueba|logro/.test(text)?7:/corrige|herramienta/.test(text)?2:/proyecta|objetivo|decide|decisión/.test(text)?3:/relaciona|conecta|integra|compleja/.test(text)?5:/comprende|estudia|aprende/.test(text)?8:/reflex|argumenta/.test(text)?12:/resultado|progres/.test(text)?6:/analiza|observa|explora/.test(text)?11:/evalua/.test(text)?0:/idea|innovación/.test(text)?1:4;
+  symbol.classList.add('tp-meaning-icon');
+  symbol.classList.toggle('tp-icon-activity',kind===4);
+  symbol.classList.toggle('tp-icon-book',kind===8);
+  symbol.style.setProperty('--tp-icon-position',`${kind*100/15}%`);
+ });
+ root.querySelectorAll('textarea:not([hidden])').forEach(control=>{
+  const block=control.closest('.az-written-question')||control.closest('label');
+  if(!block||block.querySelector('.tp-response-kicker'))return;
+  const cue=document.createElement('span');
+  cue.className='tp-response-kicker';
+  cue.innerHTML='<img src="/static/student-write-pencil-blue.png?v=20261004-pencil-blue" alt="">Ahora te toca a ti';
+  block.insertBefore(cue,block.firstChild);
+ });
  root.querySelectorAll('.az-guided > section > h3').forEach(heading=>{
   heading.classList.add('instruction-showcase','activity-showcase-title');
  });
@@ -965,12 +988,18 @@ function decorateStudentActionCues(root){
 }
 function updateVisibleStationNumbers(root){
  if(!root)return;
- const rewrite=text=>text.replace(/(estaci[oó]n\s+)([1-5])(\s+de\s+)5/gi,(_,prefix,n,join)=>`${prefix}${Number(n)>=4?Number(n)+1:n}${join}6`).replace(/5 estaciones/gi,'6 estaciones');
+ const rewrite=text=>text.replace(/(estaci[oó]n\s+)([1-5])(\s+de\s+)5/gi,(_,prefix,n,join)=>`${prefix}${Number(n)>=4?Number(n)+1:n}${join}6`);
  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node;
  while((node=walker.nextNode())){if(node.parentElement.closest('.lr-track,.lr-progress,script,style,textarea'))continue;node.nodeValue=rewrite(node.nodeValue);}
  root.querySelectorAll('[aria-label]').forEach(el=>{if(!el.closest('.lr-track,.lr-progress'))el.setAttribute('aria-label',rewrite(el.getAttribute('aria-label')));});
  root.querySelectorAll('.big-number.s4').forEach(el=>el.textContent='5');
  root.querySelectorAll('.big-number.s5').forEach(el=>el.textContent='6');
+ const station=Number(view?.station);
+ if(current&&station>=1&&station<=5){
+  const shown=station>=4?station+1:station;
+  root.querySelectorAll('.atp-hero-sign-num').forEach(el=>el.textContent=String(shown));
+  root.querySelectorAll('.station-instruction-banner').forEach(el=>el.setAttribute('aria-label',`Instrucciones de la estación ${shown}`));
+ }
 }
 function decorateStudentQuestionOrder(root){
  const groups=new Map();

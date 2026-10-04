@@ -1,8 +1,10 @@
 # Auditoría de imágenes 3D y videos por módulo
 
+> INFORME HISTORICO DE REGISTRO, NO CERTIFICACION. Los porcentajes de esta tabla cuentan metadatos declarados; no verifican archivos, pertinencia tecnica ni motores 3D. No equivalen a cumplimiento pedagogico. Consultar `reports/correcciones-integridad-20261004/porcentajes.md` para disponibilidad actual y `informe.md` para pendientes reales.
+
 Auditoría automática de módulos publicados. El video se marca como pertinente solo cuando el módulo tiene un recurso audiovisual declarado para su contenido; no se reutilizan videos de otra especialidad.
 
-| Curso | Módulo | Cumplimiento inicial | Cumplimiento final | 3 visualizaciones | Trazabilidad pedagógica | Video pertinente | Recursos |
+| Curso | Módulo | Registro inicial | Registro final | 3 recursos declarados | Campos de trazabilidad | Video declarado | Recursos |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Atención de Enfermería, mención Adulto Mayor | 1 · Aplicación de cuidados básicos | 0.0% | 100.0% | Sí | Sí | No aplica | 3 |
 | Atención de Enfermería, mención Adulto Mayor | 2 · Medición y control de parámetros básicos en salud | 0.0% | 100.0% | Sí | Sí | No aplica | 3 |

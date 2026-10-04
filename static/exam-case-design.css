@@ -20,3 +20,5 @@ body[data-screen="module"][data-station="4"] .dev-evidence{margin:14px 0;padding
 body[data-screen="module"][data-station="4"] .exam-dev-step>label{display:block;margin-top:24px;font-weight:700}
 body[data-screen="module"][data-station="4"] .exam-dev-step textarea{width:100%;min-height:220px;padding:16px;box-sizing:border-box}
 @media(max-width:700px){body[data-screen="module"][data-station="4"] .exam-dev-step{padding:14px!important}body[data-screen="module"][data-station="4"] .dev-grid{grid-template-columns:1fr}}
+body[data-screen="module"] .exam-closing-banner{margin:16px 0 24px;width:100%;background:transparent;border:0;box-shadow:none}
+body[data-screen="module"] .exam-closing-banner img{display:block;width:100%;height:auto;max-width:none;border:0;object-fit:contain}

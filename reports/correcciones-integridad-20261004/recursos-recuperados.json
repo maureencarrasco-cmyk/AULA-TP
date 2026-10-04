@@ -1,0 +1,622 @@
+{
+  "source_commit": "a13a081",
+  "files": [
+    {
+      "path": "static/headers/acuicultura/alt.json",
+      "sha256": "6f85ae0fb30e838903d0628ee7fdd9b5d484eb25c20e8825eb71c906137b7346",
+      "bytes": 197
+    },
+    {
+      "path": "static/headers/acuicultura/e3.webp",
+      "sha256": "623bd44ba07175fee53ff3dcf6452e72200d5ad417eeb2533fad0c85f590267d",
+      "bytes": 82954
+    },
+    {
+      "path": "static/headers/acuicultura/e4.webp",
+      "sha256": "e2be1dc0d4d12c6fc7c6abdb941162ac76ee1bd3a3f901f8825cb4ae06cffd3a",
+      "bytes": 70208
+    },
+    {
+      "path": "static/headers/administracion-logistica/alt.json",
+      "sha256": "4bea83b056ef3f32cd45f5bb172d04787753b4c5da4c92ccca53477afee7c63d",
+      "bytes": 227
+    },
+    {
+      "path": "static/headers/administracion-logistica/e3.webp",
+      "sha256": "6c137e52db958848f1194b21179fba974b11c1f7cdaabc6c07f1faff16da49fc",
+      "bytes": 90620
+    },
+    {
+      "path": "static/headers/administracion-logistica/e4.webp",
+      "sha256": "b22f0e1fdfa53172e33f140dddc64bef3f4bc2053af6ed85a6176873a6458d38",
+      "bytes": 55640
+    },
+    {
+      "path": "static/headers/administracion-recursos-humanos/alt.json",
+      "sha256": "35ef6eb24527b316924c586608ab9d5da6f1a60a01ae09c68f05631677c6166e",
+      "bytes": 245
+    },
+    {
+      "path": "static/headers/administracion-recursos-humanos/e3.webp",
+      "sha256": "63621094878ca4a1cc80003362337c5f10fac87f8f70b14b3fde14bbea1e0024",
+      "bytes": 55300
+    },
+    {
+      "path": "static/headers/administracion-recursos-humanos/e4.webp",
+      "sha256": "9b2d5db3725841dfa0eea65f949dc82d3dc1240fb6aa86000aef8291b6119649",
+      "bytes": 65216
+    },
+    {
+      "path": "static/headers/agropecuaria-agricultura/alt.json",
+      "sha256": "7d803db0a0702bb4a7b06886c2d318d1f03bdd3001b1183d460810e73f06002f",
+      "bytes": 197
+    },
+    {
+      "path": "static/headers/agropecuaria-agricultura/e3.webp",
+      "sha256": "5de2c217626487971098a1d1e790a72d20d5582a66e2cd1d8adcf55feebe3d2b",
+      "bytes": 149100
+    },
+    {
+      "path": "static/headers/agropecuaria-agricultura/e4.webp",
+      "sha256": "b083653d0713a3c996f2b7f049cae7b3b91a804f1c0c58588628fed1c76dae15",
+      "bytes": 100824
+    },
+    {
+      "path": "static/headers/agropecuaria-pecuaria/alt.json",
+      "sha256": "8fbd6f8fcd8ef846c977b773a268bfe1db3cb8fe15d723e3dc46c3cbf3e1a284",
+      "bytes": 215
+    },
+    {
+      "path": "static/headers/agropecuaria-pecuaria/e3.webp",
+      "sha256": "2a16da3e45a4466c968cf169d87768cd502cf49c2b6563da88a5ba0dff54fb70",
+      "bytes": 145352
+    },
+    {
+      "path": "static/headers/agropecuaria-pecuaria/e4.webp",
+      "sha256": "cb3b2c48366c74a2800c09d1f969398580abd414c4f48184ceff4412c5d6cf7b",
+      "bytes": 76996
+    },
+    {
+      "path": "static/headers/agropecuaria-vitivinicola/alt.json",
+      "sha256": "22252f3abc5962842a34ccbc160fb25ad3d6a2f43892789b247c98b55ec81496",
+      "bytes": 205
+    },
+    {
+      "path": "static/headers/agropecuaria-vitivinicola/e3.webp",
+      "sha256": "b32758f8a9fef0d90d1163846c02ada2197a8cb4f6b18f9ed8a59a1f56df3a5a",
+      "bytes": 152634
+    },
+    {
+      "path": "static/headers/agropecuaria-vitivinicola/e4.webp",
+      "sha256": "67fb56369520e91adf5978aecade33ed675264641eec682bc0bc20b3e285a424",
+      "bytes": 79310
+    },
+    {
+      "path": "static/headers/asistencia-geologia/alt.json",
+      "sha256": "ad5f174487e65eef0c667493506a021e4ceeea954145784b772252fdde5aee1f",
+      "bytes": 221
+    },
+    {
+      "path": "static/headers/asistencia-geologia/e3.webp",
+      "sha256": "f11887cda9fb4e5a2fc5edd42c9a1fbfb8b0755e3d68934aa025d2ce8da7fdec",
+      "bytes": 135622
+    },
+    {
+      "path": "static/headers/asistencia-geologia/e4.webp",
+      "sha256": "a22f2ce4aa6644248cc776c81acaee4405e28b997c84ddfa31ff60cdc6ca835c",
+      "bytes": 112772
+    },
+    {
+      "path": "static/headers/atencion-parvulos/alt.json",
+      "sha256": "51d32bd8df525ae4de10a58957f40bae835b818fdb76916baad47c5bf3b6b63f",
+      "bytes": 219
+    },
+    {
+      "path": "static/headers/atencion-parvulos/e3.webp",
+      "sha256": "9625e34c846d7a1d69bff7bb3b7ae324f4d719f805bb4dedd4ead26dbf283f4b",
+      "bytes": 92666
+    },
+    {
+      "path": "static/headers/atencion-parvulos/e4.webp",
+      "sha256": "a37817d780b387efe53f9abf5fa9f4ba5116e1b91c74d4c793ee6a73593e0aec",
+      "bytes": 61376
+    },
+    {
+      "path": "static/headers/construccion-edificacion/alt.json",
+      "sha256": "a627009faf0cdf0f84682974610bd5bd75c1b84b14396394c5f12df9fd51e55c",
+      "bytes": 199
+    },
+    {
+      "path": "static/headers/construccion-edificacion/e3.webp",
+      "sha256": "93d20fafbba9966286f8d354c517d8ad0c3ce85e19b123a493244bd2806e617f",
+      "bytes": 73906
+    },
+    {
+      "path": "static/headers/construccion-edificacion/e4.webp",
+      "sha256": "264182cb3e0b9581a8c4503dab6bb37014f41d3c4d88a131001a5100e5d86af1",
+      "bytes": 92008
+    },
+    {
+      "path": "static/headers/construccion-obras-viales/alt.json",
+      "sha256": "46c10201315a077861bbde0e26e3659192d002fd0ce7c062942adac8324ba724",
+      "bytes": 394
+    },
+    {
+      "path": "static/headers/construccion-obras-viales/e3.webp",
+      "sha256": "2c5dce167524f686037b7d3c3455bb8aa6c40df01faf71889703940d2463655b",
+      "bytes": 148388
+    },
+    {
+      "path": "static/headers/construccion-obras-viales/e4.webp",
+      "sha256": "e9241935c035e31638d57d8e16a29b0c241cced96cb96e1cb0af730930313337",
+      "bytes": 97544
+    },
+    {
+      "path": "static/headers/construccion-terminaciones/alt.json",
+      "sha256": "4ea77f5ba690020fd4d96394483de129c62e3fe7c9c202d16c86b305a7a1ab31",
+      "bytes": 376
+    },
+    {
+      "path": "static/headers/construccion-terminaciones/e3.webp",
+      "sha256": "895acd87e28b231eee2d000d987d458f9ba38d151e068873e8a243dc1e1d6f31",
+      "bytes": 106406
+    },
+    {
+      "path": "static/headers/construccion-terminaciones/e4.webp",
+      "sha256": "522153a1dcdd7ffde6ce5a58ed9081e5559e38314e61e9cd6dcb631f417f5ee2",
+      "bytes": 80772
+    },
+    {
+      "path": "static/headers/construcciones-metalicas/alt.json",
+      "sha256": "2a0a8b8c22ba1a285fa3007e788c615daad2a8965222697409fcd1c0b1cd3ab9",
+      "bytes": 225
+    },
+    {
+      "path": "static/headers/construcciones-metalicas/e3.webp",
+      "sha256": "67dafbf637ffe903c6b1b8fe27912dbd4603123b4fbd32b2d482d5d32b21087b",
+      "bytes": 69392
+    },
+    {
+      "path": "static/headers/construcciones-metalicas/e4.webp",
+      "sha256": "c0435f314db2ef5c85e2fb3f2c5797816964695bc74b497bfdd4b59a15508c62",
+      "bytes": 96600
+    },
+    {
+      "path": "static/headers/dibujo/alt.json",
+      "sha256": "7bb8878a1b9c8fea143cd88f11d135edf486d3ca13389f00e2fceaa8ae397c4b",
+      "bytes": 205
+    },
+    {
+      "path": "static/headers/dibujo/e3.webp",
+      "sha256": "f4d1306283cbd796796cc485a440c8461193db91cf29e2e8d86e32564b4428db",
+      "bytes": 64888
+    },
+    {
+      "path": "static/headers/dibujo/e4.webp",
+      "sha256": "b209388a78dee30e209adf5f276112e39e501c163d84c57b6eb768ca28300641",
+      "bytes": 59988
+    },
+    {
+      "path": "static/headers/elaboracion-industrial-alimentos/alt.json",
+      "sha256": "46fd5eb636b49a98fd1d5afce752601fd95315c65f50bb180c0317b13770e56c",
+      "bytes": 247
+    },
+    {
+      "path": "static/headers/elaboracion-industrial-alimentos/e3.webp",
+      "sha256": "eee82c9cd13e9d552e66f95eb46a502367920b57d4767825ef5e78695568ee1d",
+      "bytes": 70548
+    },
+    {
+      "path": "static/headers/elaboracion-industrial-alimentos/e4.webp",
+      "sha256": "d9484c107bbb5b39ecfc0b57bd0aa0089260022b3060cee191785a3f60179f86",
+      "bytes": 53376
+    },
+    {
+      "path": "static/headers/electronica/alt.json",
+      "sha256": "9aa5169e858c9c723df3683316ad2e053fe59c60402f0f2d394fc1a0bf56346c",
+      "bytes": 199
+    },
+    {
+      "path": "static/headers/electronica/e3.webp",
+      "sha256": "91362e1e06f4489333cb7a63c545da4b0ee3b566df2bf112c554d941db60aa4f",
+      "bytes": 81914
+    },
+    {
+      "path": "static/headers/electronica/e4.webp",
+      "sha256": "1b8a30c200b1ffbeca256b3897d6756aacc5a053192b3ac587472c3db866be0f",
+      "bytes": 91904
+    },
+    {
+      "path": "static/headers/explotacion-minera/alt.json",
+      "sha256": "e8ec571b231a1d2a1eda9ec0f69ac713c5f5924cb60e5f216f79dfcb09cbbd53",
+      "bytes": 213
+    },
+    {
+      "path": "static/headers/explotacion-minera/e3.webp",
+      "sha256": "ec8c4d8f8e05c1bc9a54b2508e8f89dd7c7c62fd67a2764ff845a69508e1430f",
+      "bytes": 89666
+    },
+    {
+      "path": "static/headers/explotacion-minera/e4.webp",
+      "sha256": "a59d38ea48e466bbd3bdf1c9074e7e56ea4a2eb2ec9832e30b85a0ee2a9b244a",
+      "bytes": 93984
+    },
+    {
+      "path": "static/headers/forestal/alt.json",
+      "sha256": "3b85589fa5e438f2b63b398e1cfaad1c0e347064a143a4d34d70340398695a83",
+      "bytes": 191
+    },
+    {
+      "path": "static/headers/forestal/e3.webp",
+      "sha256": "8de5194b5206b23a0d73d4ca4af281915551b840c22c116f21cc036b0f7b8df5",
+      "bytes": 152998
+    },
+    {
+      "path": "static/headers/forestal/e4.webp",
+      "sha256": "1516a141b3d082ac8be8d543420fbe3d7297494ec0d1c278be2b5dd68072a81a",
+      "bytes": 106260
+    },
+    {
+      "path": "static/headers/gastronomia/alt.json",
+      "sha256": "6ac7a04692b930350f8221deec401c42cfa2fccaa6ae931c0dcccd7372cc3d90",
+      "bytes": 427
+    },
+    {
+      "path": "static/headers/gastronomia/e1.webp",
+      "sha256": "c63e7277e8dc7e399c909c1cc255b067c10d1fc381402df965b7b982bf8372a2",
+      "bytes": 46312
+    },
+    {
+      "path": "static/headers/gastronomia/e2.webp",
+      "sha256": "2a02b88a715f8eb040e47cd867c43e585fc2251e5660bdab80086d94a9fcf5fc",
+      "bytes": 53980
+    },
+    {
+      "path": "static/headers/gastronomia/e3.webp",
+      "sha256": "a8ff2de9a14448532027e940f84b7950f45f57e6af81b08782ffefd1d1b11fda",
+      "bytes": 45646
+    },
+    {
+      "path": "static/headers/gastronomia/e4.webp",
+      "sha256": "ff69338e8a51f00eb2dd81afa6f62de3d73ad533d1bc546f185a5065dfe433e5",
+      "bytes": 48040
+    },
+    {
+      "path": "static/headers/gastronomia/e5.webp",
+      "sha256": "3701da501f28648e2b367214c646bad13699b1d751192b4ccdeae08a27481a53",
+      "bytes": 41392
+    },
+    {
+      "path": "static/headers/grafica/alt.json",
+      "sha256": "32430312971b558f746c7f654302891442c6c1b423b05bcd713e2af7378d4dd1",
+      "bytes": 191
+    },
+    {
+      "path": "static/headers/grafica/e3.webp",
+      "sha256": "183a268eaef202b515b126c27a1a4f68273cf9df1ceee7512569fbe37a717566",
+      "bytes": 70264
+    },
+    {
+      "path": "static/headers/grafica/e4.webp",
+      "sha256": "82b65d05eee5588490553751e5f60ff062eedf794a3b7e7d0766939af4d4fd3b",
+      "bytes": 65028
+    },
+    {
+      "path": "static/headers/hoteleria/alt.json",
+      "sha256": "ed6d3194afd29f0f396323dd84cccb57859d46fccc8acb34d11b1dd00d021ee1",
+      "bytes": 437
+    },
+    {
+      "path": "static/headers/hoteleria/e1.webp",
+      "sha256": "61c986827024a9a805e98aafe07152895572f354572153da52ef95fa7d871e5b",
+      "bytes": 52348
+    },
+    {
+      "path": "static/headers/hoteleria/e2.webp",
+      "sha256": "dd98eb2884f58eee590598ce7f9459bcb0acb0354b403c08d622730d28c9db85",
+      "bytes": 44790
+    },
+    {
+      "path": "static/headers/hoteleria/e3.webp",
+      "sha256": "1b1ff78dfa44105cde63543a5b03d21cbe52bd2f1293ab0ef220f60590096cba",
+      "bytes": 45480
+    },
+    {
+      "path": "static/headers/hoteleria/e4.webp",
+      "sha256": "363e8edeb89fb4fc25f260d8bc5f5a37a9f47d08bd73521a959f077e34e28129",
+      "bytes": 52892
+    },
+    {
+      "path": "static/headers/hoteleria/e5.webp",
+      "sha256": "e37ef8aa51b29c1344406944be3bc79f3aa09d34bc1cf93500471dae0fa9fc0d",
+      "bytes": 45872
+    },
+    {
+      "path": "static/headers/mecanica-automotriz/alt.json",
+      "sha256": "4e05a9d46c5893b610837a665be91158ac46545d863c6b291a908b13cfab0b8a",
+      "bytes": 215
+    },
+    {
+      "path": "static/headers/mecanica-automotriz/e3.webp",
+      "sha256": "10de3a302c011ff47eed2bb4e3e56d5ac843a24cdef005ba7394aa5d006f38c7",
+      "bytes": 78412
+    },
+    {
+      "path": "static/headers/mecanica-automotriz/e4.webp",
+      "sha256": "73e69872b451ae6ec9a3d2ef12741dfc73286fd23cb98a014038e7134959e54a",
+      "bytes": 84632
+    },
+    {
+      "path": "static/headers/mecanica-industrial-mantenimiento/alt.json",
+      "sha256": "4c4fc94bc3a3de39b0c7e5aecc2bfbb15ca8a3911078bfc361dbf99d9eaaee6e",
+      "bytes": 384
+    },
+    {
+      "path": "static/headers/mecanica-industrial-mantenimiento/e3.webp",
+      "sha256": "5d4bbd730d806f2499bb2f467b405269005ca81f844d8cd648043a6490dfe3dc",
+      "bytes": 73612
+    },
+    {
+      "path": "static/headers/mecanica-industrial-mantenimiento/e4.webp",
+      "sha256": "852808ea252a59bf6e0923524b7daf82854405c1c8eb82edf92267f401341d9d",
+      "bytes": 69870
+    },
+    {
+      "path": "static/headers/mecanica-industrial-maquinas/alt.json",
+      "sha256": "fdbcc9a46f375af9e7fe762c56e209ed1177a7a302767ba4d8c3a72ec2879052",
+      "bytes": 336
+    },
+    {
+      "path": "static/headers/mecanica-industrial-maquinas/e3.webp",
+      "sha256": "cd66e62e203d8764a49232a814c42ae694968f9e643f586cda2de2a8ab75de10",
+      "bytes": 69168
+    },
+    {
+      "path": "static/headers/mecanica-industrial-maquinas/e4.webp",
+      "sha256": "9a58f0fd335c17863610606bd0573fb876fcb6ed5edc225baa7a1865b7f86695",
+      "bytes": 67424
+    },
+    {
+      "path": "static/headers/mecanica-industrial-matriceria/alt.json",
+      "sha256": "797012bfe3f391db5cec3471f06e2763c35e44e8eef951e6bdc6d02032ed7f0f",
+      "bytes": 352
+    },
+    {
+      "path": "static/headers/mecanica-industrial-matriceria/e3.webp",
+      "sha256": "bd468bb094c6b8073bbc96356c7d75b35189eed82716605bb4cd40ba1cef72f8",
+      "bytes": 96802
+    },
+    {
+      "path": "static/headers/mecanica-industrial-matriceria/e4.webp",
+      "sha256": "fed613749f66da9d15d6fafbcff8eac4bec2afa7860b2d972163cdc92e6b8722",
+      "bytes": 126200
+    },
+    {
+      "path": "static/headers/mecanica-mantenimiento-aeronaves/alt.json",
+      "sha256": "c521580a39489489d70e61cc38f7f2b5f44d9f2165007ce08403a8547608a554",
+      "bytes": 227
+    },
+    {
+      "path": "static/headers/mecanica-mantenimiento-aeronaves/e3.webp",
+      "sha256": "5869ac21a2bb28c58ec61616e82dd7b278abaca91dcaab25f39ada52f9fff6ff",
+      "bytes": 72968
+    },
+    {
+      "path": "static/headers/mecanica-mantenimiento-aeronaves/e4.webp",
+      "sha256": "67bbc75952b46fac6911be51b09db4985b0a2b49d9b276fcbb184a069230bdab",
+      "bytes": 76702
+    },
+    {
+      "path": "static/headers/metalurgia-extractiva/alt.json",
+      "sha256": "aad8ebf9338fdab13b529bf5f10967aec4f42e80be0139c0da226c092ca5cba9",
+      "bytes": 217
+    },
+    {
+      "path": "static/headers/metalurgia-extractiva/e3.webp",
+      "sha256": "12d586a4cdf25fdadb4052dd4a14382859976b52cc6f5d53451a99e2b83b5ddd",
+      "bytes": 60090
+    },
+    {
+      "path": "static/headers/metalurgia-extractiva/e4.webp",
+      "sha256": "826e915ee5a9d3d7e038f0abcfeaef3e5b82682ab1ed9a6c5206186c0221e463",
+      "bytes": 85892
+    },
+    {
+      "path": "static/headers/montaje/alt.json",
+      "sha256": "39bc6b823f725862740325bee7507ed6cb8adc2f042451d933a5ee275415b549",
+      "bytes": 211
+    },
+    {
+      "path": "static/headers/montaje/e3.webp",
+      "sha256": "5cf22e4680e8c3517c340500828aa41d4fa3bd81fda047d2190afe2b619fd224",
+      "bytes": 93070
+    },
+    {
+      "path": "static/headers/montaje/e4.webp",
+      "sha256": "6959537b0ba1f4489687955d4a6d3c43d76e52121b1079de263b48228e6e89d3",
+      "bytes": 104706
+    },
+    {
+      "path": "static/headers/muebles-terminaciones-madera/alt.json",
+      "sha256": "2612c7c3cff73e8bf9afbef87d7adcf5e145c5d014a2c922335614544a8eae34",
+      "bytes": 241
+    },
+    {
+      "path": "static/headers/muebles-terminaciones-madera/e3.webp",
+      "sha256": "2d53ff6e6448f4eacc44871010e37a367ac988019de191884819eee94802b630",
+      "bytes": 82110
+    },
+    {
+      "path": "static/headers/muebles-terminaciones-madera/e4.webp",
+      "sha256": "e27aad25ccae862358ba233db65ecf7b62751f820513669b32b469f8ad4991a9",
+      "bytes": 115650
+    },
+    {
+      "path": "static/headers/operaciones-portuarias/alt.json",
+      "sha256": "04d9ae04c3a122c6de7c9c5c9ae753a2fbccb4e819ffb4b0523ff56f50ee2ecb",
+      "bytes": 219
+    },
+    {
+      "path": "static/headers/operaciones-portuarias/e3.webp",
+      "sha256": "74123014aa452926b68733d38cb24759c4d7f18fe41b1f6b517333ee7eca913c",
+      "bytes": 64338
+    },
+    {
+      "path": "static/headers/operaciones-portuarias/e4.webp",
+      "sha256": "42355ed41a01dee181645a37abb9f134ac35ca377c56bfd93392d19319285e75",
+      "bytes": 48830
+    },
+    {
+      "path": "static/headers/pesqueria/alt.json",
+      "sha256": "4aa8af190961e8543bfda3f3c20db899ecc36b999c0840a88c6d6ece165aed78",
+      "bytes": 195
+    },
+    {
+      "path": "static/headers/pesqueria/e3.webp",
+      "sha256": "5fa3d700cef42040338b655d81f44fa2e79920ede1489745fa25984d9f906d6a",
+      "bytes": 84078
+    },
+    {
+      "path": "static/headers/pesqueria/e4.webp",
+      "sha256": "922ce4dbc8aadcdf18cdb3fcec1459ad13c8d23bcbd24de7331d96d308ddcbed",
+      "bytes": 88592
+    },
+    {
+      "path": "static/headers/programacion/alt.json",
+      "sha256": "4955a19ebb73428017f8b8fb374b75133c5b62e1dfad3e48f9b2b3978f958c96",
+      "bytes": 201
+    },
+    {
+      "path": "static/headers/programacion/e3.webp",
+      "sha256": "4bed317827088f9ae8f5ac1df1c31337a823aa52dce1193cd78395494a1db112",
+      "bytes": 51560
+    },
+    {
+      "path": "static/headers/programacion/e4.webp",
+      "sha256": "245afbb3373015d776f40fb33adf35be8caf3852e51a15421508e05298dd1533",
+      "bytes": 42000
+    },
+    {
+      "path": "static/headers/quimica-industrial-laboratorio/alt.json",
+      "sha256": "c870b6e1349efb37bb05d7191f1264f7908fa4ef6381e5594fb4039786bc97ca",
+      "bytes": 404
+    },
+    {
+      "path": "static/headers/quimica-industrial-laboratorio/e3.webp",
+      "sha256": "1ab5ec7930396812541a30052d575b96308afd78269c94191f039b21688fcebc",
+      "bytes": 69682
+    },
+    {
+      "path": "static/headers/quimica-industrial-laboratorio/e4.webp",
+      "sha256": "28e2bfd01ea1719633fac8e5398bc0734fc02c5b5948cef381351518857cba16",
+      "bytes": 45782
+    },
+    {
+      "path": "static/headers/quimica-industrial-planta/alt.json",
+      "sha256": "cae5c8ac59822d8028e11fedf2c3e0f046f3c054b2c7c00af4f58c78101248fd",
+      "bytes": 403
+    },
+    {
+      "path": "static/headers/quimica-industrial-planta/e3.webp",
+      "sha256": "624ecd5b861fb462ecc3546a597c76e4faf6e1db50ec6338d17169c8d2740f3b",
+      "bytes": 85300
+    },
+    {
+      "path": "static/headers/quimica-industrial-planta/e4.webp",
+      "sha256": "8c7332337809d1d09c7e2903e0dba26a81bdd4c08a1aaff7368d45c466ca69c0",
+      "bytes": 54650
+    },
+    {
+      "path": "static/headers/redes/alt.json",
+      "sha256": "2fad8ab32a9984680a71967dc2c963f46b9f82f42711f621b0c3e59b20d294e7",
+      "bytes": 215
+    },
+    {
+      "path": "static/headers/redes/e3.webp",
+      "sha256": "265c9632ce2b3eafc184ae53e8a384cce3f42207f87ddb26a1dd907b6593364b",
+      "bytes": 86362
+    },
+    {
+      "path": "static/headers/redes/e4.webp",
+      "sha256": "4010d182d7e85aaa635dbec14348054fd7abd34b37648fab72b73affaaaeec20",
+      "bytes": 55488
+    },
+    {
+      "path": "static/headers/sanitarias/alt.json",
+      "sha256": "c4651f15ff957c49027fd360df0e90a665558898da9707743a87eea8c9a8c148",
+      "bytes": 223
+    },
+    {
+      "path": "static/headers/sanitarias/e3.webp",
+      "sha256": "ad1c5adfdd6f2cf0f0c904e0b0cebfb14f7e95eb3bae74db0994b6eb4fd35507",
+      "bytes": 89754
+    },
+    {
+      "path": "static/headers/sanitarias/e4.webp",
+      "sha256": "3a2311910321a7b372054be518d72118f3d50b78fe30a532c35cb71ad2e02149",
+      "bytes": 63816
+    },
+    {
+      "path": "static/headers/telecomunicaciones/alt.json",
+      "sha256": "7c4365afa7630128cf5a0cfd21a166b4a4d2de678ba987a824f7057bb637a6e7",
+      "bytes": 211
+    },
+    {
+      "path": "static/headers/telecomunicaciones/e3.webp",
+      "sha256": "9cb921621a45c2a9c432168bc35f8e53da8a9ca93f1131324b69cf951ce54153",
+      "bytes": 76964
+    },
+    {
+      "path": "static/headers/telecomunicaciones/e4.webp",
+      "sha256": "4a990958fcf6d68e8f1c92fb794ff27e7156ffbf487f9a2d151c00a1ba169410",
+      "bytes": 50796
+    },
+    {
+      "path": "static/headers/tripulacion-naves-mercantes-especiales/alt.json",
+      "sha256": "b9e886c684acd9b64a14edcb5d58ccfe9e1f26f1fb0fcbf03eb15c1463df8b1d",
+      "bytes": 263
+    },
+    {
+      "path": "static/headers/tripulacion-naves-mercantes-especiales/e3.webp",
+      "sha256": "03127e674f37b8ec16f180606fe9738324d5a1a3d470365f1e11d98229fe06ba",
+      "bytes": 102478
+    },
+    {
+      "path": "static/headers/tripulacion-naves-mercantes-especiales/e4.webp",
+      "sha256": "36a7c88ac52efe9ad4b218ad8f3204f56d53eb18ac62a2c65aa157b6886e1b0e",
+      "bytes": 99784
+    },
+    {
+      "path": "static/headers/turismo/alt.json",
+      "sha256": "ed17090b3031df95f6cc50cdfcbd86ea8201c2bb0b0e7260bce7c3be2afafd4a",
+      "bytes": 215
+    },
+    {
+      "path": "static/headers/turismo/e3.webp",
+      "sha256": "1b4ab1802dfca0b7310dcc477117a51eb76b4714cc972ee2a7881bc3c7b6f4b3",
+      "bytes": 75116
+    },
+    {
+      "path": "static/headers/turismo/e4.webp",
+      "sha256": "db1d0e2a95ab2f0b4b4550c0eac277e6509f99fcd7073e931ffe748857a69ab1",
+      "bytes": 83998
+    },
+    {
+      "path": "static/headers/vestuario-confeccion-textil/alt.json",
+      "sha256": "921f808c32ef0d3115fc9e7818364a354149e2ff00b1b4dd1fca88b9164f3f32",
+      "bytes": 235
+    },
+    {
+      "path": "static/headers/vestuario-confeccion-textil/e3.webp",
+      "sha256": "03c6e5c2ac6528c3a896cf4abd32e659c5702c12d43a836628d78c641a35e088",
+      "bytes": 54196
+    },
+    {
+      "path": "static/headers/vestuario-confeccion-textil/e4.webp",
+      "sha256": "a1377fd18c255ec8ee087c04ec9627811d467392ce673fc4e77573a373118b3f",
+      "bytes": 70234
+    }
+  ],
+  "restored_images": 84,
+  "disciplinary_validation": "PENDIENTE; recuperacion de originales, no certificacion tecnica"
+}

@@ -31,8 +31,9 @@ class FullAuditTests(unittest.TestCase):
                 self.assertEqual(result['feedback_instruction']['ae'], codes)
                 self.assertTrue(all(contract_is_complete(instruction)
                                     for _, _, instruction, _ in activities(result)))
-                self.assertEqual(result['planning']['minutes'], result['time_audit']['student_minutes'])
-                self.assertEqual(0, result['time_audit']['difference_minutes'])
+                self.assertEqual(result['planning']['minutes'], result['time_audit']['planned_minutes'])
+                self.assertIsNone(result['time_audit']['student_minutes'])
+                self.assertIsNone(result['time_audit']['difference_minutes'])
                 self.assertGreaterEqual(len(result['community_reporting']), 7)
                 self.assertIn('requirements', result['accessibility_audit'])
 

@@ -322,28 +322,22 @@ class LMSFlow(unittest.TestCase):
  def test_question_calibration_distribution_and_variety(self):
   content=self.s.get('/api/modules/1').json['content']
   calibration=content['question_calibration']
-  self.assertTrue(calibration['distribution_valid'])
-  self.assertEqual(calibration['difficulty_counts'],{'Fácil':3,'Media':12,'Difícil':10})
-  self.assertEqual(len(calibration['skills_present']),7)
-  self.assertGreaterEqual(len(calibration['formats_present']),10)
+  self.assertIsNone(calibration['distribution_valid'])
+  self.assertFalse(calibration['cognitive_difficulty_validated'])
+  self.assertTrue(calibration['skills_present'])
+  self.assertTrue(calibration['formats_present'])
   self.assertTrue(all(q['step_count']==len(q['cognitive_steps']) for q in content['questions']))
  def test_time_x5_sensitivity_and_capacity_contract(self):
   audit=self.s.get('/api/modules/1').json['content']['time_audit']
   self.assertEqual(set(audit['sensitivity']),{'3','4','5','6'})
-  self.assertIn(audit['course_level'],('3° medio','4° medio'))
+  self.assertTrue(audit['course_level'])
   self.assertGreater(audit['activity_count'],0)
-  self.assertGreater(audit['teacher_minutes_per_activity'],0)
-  self.assertLessEqual(audit['occupancy_percent'],100)
-  self.assertGreaterEqual(audit['remaining_hours'],0)
-  self.assertLess(audit['sensitivity']['3']['occupancy_percent'],audit['sensitivity']['5']['occupancy_percent'])
-  self.assertGreater(audit['sensitivity']['6']['occupancy_percent'],audit['sensitivity']['5']['occupancy_percent'])
-  validation=audit['simulated_validation']
-  self.assertEqual(validation['analytical_completion_percent'],100)
-  self.assertTrue(validation['x5_accepted'])
-  self.assertEqual(set(validation['profiles']),{'agil_p25','referencia_p50','apoyo_p75'})
-  self.assertLessEqual(validation['adaptive_pacing']['adjusted_x6_occupancy_percent'],100)
-  self.assertIn('25 preguntas',validation['adaptive_pacing']['protected_components'])
-  self.assertIn('reales',validation['empirical_validation_status'])
+  self.assertIsNone(audit['teacher_minutes_per_activity'])
+  self.assertIsNone(audit['occupancy_percent'])
+  self.assertIsNone(audit['remaining_hours'])
+  self.assertTrue(all(row['occupancy_percent'] is None for row in audit['sensitivity'].values()))
+  self.assertNotIn('simulated_validation',audit)
+  self.assertEqual(audit['measurement_status'],'NO VERIFICABLE')
  def test_encargos_cover_hours_without_gating_exam(self):
   expected={1:32,2:36,3:38,4:36}
   hours={1:32.2,2:32.2,3:40.8,4:40.8}

@@ -14,6 +14,7 @@ from pathlib import Path
 from curriculum import OFFICIAL_HP, TIME_FACTOR, MODULE_TITLES, SCOPE, apply_official, procedure_parts, PDF
 from encargos import encargos_for
 from instructional_quality import apply_instructional_quality
+from content_integrity import repair_content_integrity
 
 HP_MINUTES = 45
 AULA_SHARE = 0.30
@@ -681,11 +682,10 @@ def build_traceability(content, specialty='Refrigeración y climatización'):
     rows = []
     aes = content.get('aes') or []
     ae_count = max(1, len(aes))
-    src = content.get('official_source') or {}
-    source_pdf = src.get('pdf') or PDF
+    src = content.get('specialty_source') or content.get('official_source') or {}
+    source_pdf = src.get('pdf')
     for ae in aes:
         ae.setdefault('official_page', MINEDUC_PAGE_INDEX.get(_source_key(source_pdf, ae.get('title'))))
-    pdf_page = lambda ae: (ae or {}).get('official_page') or src.get('title') or PDF
 
     def crit_label(ae_i):
         ae = aes[ae_i] if ae_i < len(aes) else {}
@@ -795,7 +795,8 @@ def publication_gaps(content, specialty='Refrigeración y climatización'):
             continue
         if len(case.get('options') or []) != 4:
             gaps.append(f'Situación {i+1}: debe tener A, B, C y D.')
-        if not case.get('image'):
+        optional_context = (case.get('unavailable_media') or {}).get('image', {}).get('role') == 'context' and not case.get('requires_image')
+        if not case.get('image') and not optional_context:
             gaps.append(f'Situación {i+1}: falta la foto real.')
         elif DECORATIVE_MEDIA.search(str(case.get('image') or '')) and not content.get('specialty_source'):
             gaps.append(f'Situación {i+1}: la foto es decorativa, no de oficio.')
@@ -807,7 +808,8 @@ def publication_gaps(content, specialty='Refrigeración y climatización'):
             continue
         if len(q.get('options') or []) != 4:
             gaps.append(f'Ítem EF {i+1}: debe tener A, B, C y D.')
-        if not q.get('image'):
+        optional_context = (q.get('unavailable_media') or {}).get('image', {}).get('role') == 'context' and not q.get('requires_image')
+        if not q.get('image') and not optional_context:
             gaps.append(f'Ítem EF {i+1}: falta la foto real.')
         elif DECORATIVE_MEDIA.search(str(q.get('image') or '')) and not content.get('specialty_source'):
             gaps.append(f'Ítem EF {i+1}: la foto es decorativa, no de oficio.')
@@ -1277,10 +1279,8 @@ def enrich(content, module_id=1):
         _fourth_option(q)
         meta = _exam_meta(i, mid)
         for k, v in meta.items():
-            if k == 'ae':
-                q.setdefault(k, v)
-            else:
-                q[k] = v
+            q.setdefault(k, v)
+        q['calibration_status'] = 'PROPUESTA AUTOMATICA; REQUIERE REVISION DE PASOS COGNITIVOS'
         _visual_stem(q, i, mid, c.get('specialty_key') if custom else None)
         q.setdefault('id', i)
         ensure_mcq_fields(q, i, mid, 'question')
@@ -1288,7 +1288,7 @@ def enrich(content, module_id=1):
         ae_i = q.get('ae', i % ae_count)
         crits = (c['aes'][ae_i].get('criteria') if ae_i < len(c.get('aes') or []) else []) or []
         if crits:
-            q['criterion'] = crits[i % len(crits)]
+            q.setdefault('criterion', crits[i % len(crits)])
             q['formative_footprint'] = True
         if curriculum_url:
             q.setdefault('source_url', curriculum_url)
@@ -1645,7 +1645,8 @@ def enrich(content, module_id=1):
         'participation': 'Ruta predecible, práctica libre no calificable, reintento y retroalimentación.',
         'requirements': ['teclado', 'foco visible', 'texto alternativo', 'subtítulos cuando hay video', 'reducción de movimiento', 'no depender solo del color'],
     }
-    c['traceability'] = build_traceability(c, c.get('specialty') or 'Refrigeración y climatización')
+    trace_specialty = c.get('specialty') or next((row.get('specialty') for row in c.get('traceability') or [] if row.get('specialty')), None)
+    c['traceability'] = build_traceability(c, trace_specialty or ('Especialidad pendiente de identificar' if custom else 'Refrigeración y climatización'))
     if draft:
         media_items = [c.get('explore') or {}, c.get('scene') or {}, c]
         media_items.extend(c.get('cases') or [])
@@ -1666,6 +1667,7 @@ def enrich(content, module_id=1):
         ]
     c['pedagogy_version'] = 'mineduc-3medio-x5-1'
     c['media_audit'] = [] if draft else media_audit(c, mid)
+    repair_content_integrity(c, lambda pdf, title: MINEDUC_PAGE_INDEX.get(_source_key(pdf, title)))
     return _scrub_inventes(c)
 
 
