@@ -484,7 +484,12 @@ def create_app(test_config=None):
             if not isinstance(ae,dict) or not text_valid(ae.get('title'),3) or not text_valid(ae.get('description'),3) or not isinstance(ae.get('steps'),list) or len(ae['steps'])!=6 or not all(text_valid(x,3) for x in ae['steps']):return False
         for q in cases+qs:
             if not isinstance(q,dict) or not isinstance(q.get('options'),list) or len(q.get('options') or [])!=4 or not all(text_valid(x,1) for x in q['options']) or type(q.get('answer'))!=int or q['answer'] not in range(4):return False
-            if not text_valid(str(q.get('image') or ''),3):return False
+            unavailable=q.get('unavailable_media') or {}
+            if not isinstance(unavailable,dict):return False
+            missing_image=unavailable.get('image') or {}
+            if not isinstance(missing_image,dict):return False
+            optional_context=missing_image.get('role')=='context' and not q.get('requires_image')
+            if not text_valid(str(q.get('image') or ''),3) and not optional_context:return False
         return all(text_valid(q.get('title'),3) and text_valid(q.get('context'),3) for q in cases) and all(text_valid(q.get('question'),3) and text_valid(q.get('explanation'),3) for q in qs)
     @app.put('/api/teacher/modules/<int:mid>')
     @require('teacher')
