@@ -5,8 +5,8 @@ Pendientes localizados, no certificaciones. Las mediciones estan vacias: deben r
 | Curso | Archivos faltantes | Modulos por revisar | Hallazgos de cobertura AE | Actividades por cronometrar |
 | --- | --- | ---: | ---: | ---: |
 | Acuicultura | Sin faltantes registrados | 9 | 0 | 663 |
-| Administración, mención Logística | /static/headers/administracion-logistica/e2.png | 11 | 0 | 766 |
-| Administración, mención Recursos Humanos | /static/headers/administracion-recursos-humanos/e2.png | 11 | 0 | 745 |
+| Administración, mención Logística | Sin faltantes registrados | 11 | 0 | 766 |
+| Administración, mención Recursos Humanos | Sin faltantes registrados | 11 | 0 | 745 |
 | Agropecuaria, mención Agricultura | Sin faltantes registrados | 10 | 0 | 739 |
 | Agropecuaria, mención Pecuaria | Sin faltantes registrados | 11 | 0 | 822 |
 | Agropecuaria, mención Vitivinícola | Sin faltantes registrados | 11 | 0 | 808 |

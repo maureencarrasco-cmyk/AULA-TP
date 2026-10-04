@@ -5,6 +5,14 @@ from functools import lru_cache
 ROOT = Path(__file__).resolve().parent
 MEDIA_FIELDS = ('image', 'imageB', 'video', 'vtt', 'audio', 'model')
 GENERATED_CONTEXT_ASSETS = {
+    '/static/headers/administracion-logistica/e2.png': {
+        'alt': 'Dos estudiantes y un docente observan cajas organizadas en estanterias y una mesa con un registro en blanco.',
+        'caption': 'Ilustracion generada de aprendizaje en administracion logistica. Contexto simulado; no acredita cantidades, inventarios ni procedimientos tecnicos.',
+    },
+    '/static/headers/administracion-recursos-humanos/e2.png': {
+        'alt': 'Dos estudiantes y una docente conversan alrededor de una mesa con carpetas, hojas en blanco y un computador.',
+        'caption': 'Ilustracion generada de aprendizaje en administracion de recursos humanos. Contexto simulado; no contiene datos personales ni acredita procedimientos o requisitos legales.',
+    },
     '/static/headers/agropecuaria-agricultura/e2.png': {
         'alt': 'Dos estudiantes y una docente observan plantulas y hojas en un invernadero.',
         'caption': 'Ilustracion generada de aprendizaje en agricultura. Contexto simulado; no acredita parametros ni prescribe tratamientos o procedimientos agricolas.',

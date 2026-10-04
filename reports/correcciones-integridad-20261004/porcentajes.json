@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-10-04T19:40:29",
+  "checked_at": "2026-10-04T20:10:14",
   "metric": "Disponibilidad de recursos locales: referencias disponibles / referencias registradas.",
   "overall_pedagogical_certification": false,
-  "overall_media_percent": 83.0,
+  "overall_media_percent": 84.1,
   "courses": [
     {
       "course": "Acuicultura",
@@ -16,25 +16,19 @@
     {
       "course": "Administración, mención Logística",
       "modules": 11,
-      "available": 629,
-      "pending": 215,
+      "available": 844,
       "registered_references": 844,
-      "media_percent": 74.5,
-      "missing_files": [
-        "/static/headers/administracion-logistica/e2.png"
-      ],
+      "media_percent": 100.0,
+      "missing_files": [],
       "overall_quality_percent": null
     },
     {
       "course": "Administración, mención Recursos Humanos",
       "modules": 11,
-      "available": 623,
-      "pending": 197,
+      "available": 820,
       "registered_references": 820,
-      "media_percent": 76.0,
-      "missing_files": [
-        "/static/headers/administracion-recursos-humanos/e2.png"
-      ],
+      "media_percent": 100.0,
+      "missing_files": [],
       "overall_quality_percent": null
     },
     {

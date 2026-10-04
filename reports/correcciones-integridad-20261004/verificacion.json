@@ -5,11 +5,11 @@
   "question_text_options_keys_unchanged": true,
   "source_references_repaired": 4672,
   "alternative_labels_added": 1153,
-  "pending_media_references": 6090,
+  "pending_media_references": 5678,
   "active_missing_media_paths": 0,
   "restored_media_files": 84,
   "recovered_media_references": 17380,
-  "generated_context_references": 1892,
+  "generated_context_references": 2304,
   "contextual_replacements": 368,
   "runtime_checked_modules": 451,
   "course_rows": {
@@ -25,17 +25,17 @@
       "modules": 11,
       "recovered_references": 462,
       "contextual_replacements": 11,
-      "pending_media": 215,
-      "images": 473,
-      "images_with_alt": 473
+      "images": 688,
+      "images_with_alt": 688,
+      "generated_context_references": 215
     },
     "Administración, mención Recursos Humanos": {
       "modules": 11,
       "recovered_references": 462,
       "contextual_replacements": 11,
-      "pending_media": 197,
-      "images": 473,
-      "images_with_alt": 473
+      "images": 670,
+      "images_with_alt": 670,
+      "generated_context_references": 197
     },
     "Agropecuaria, mención Agricultura": {
       "modules": 10,
