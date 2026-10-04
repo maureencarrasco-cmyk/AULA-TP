@@ -8,7 +8,7 @@ Pendientes localizados, no certificaciones. Las mediciones estan vacias: deben r
 | Administración, mención Logística | /static/headers/administracion-logistica/e2.png | 11 | 0 | 766 |
 | Administración, mención Recursos Humanos | /static/headers/administracion-recursos-humanos/e2.png | 11 | 0 | 745 |
 | Agropecuaria, mención Agricultura | /static/headers/agropecuaria-agricultura/e2.png | 10 | 0 | 739 |
-| Agropecuaria, mención Pecuaria | /static/headers/agropecuaria-pecuaria/e2.png | 11 | 0 | 822 |
+| Agropecuaria, mención Pecuaria | Sin faltantes registrados | 11 | 0 | 822 |
 | Agropecuaria, mención Vitivinícola | /static/headers/agropecuaria-vitivinicola/e2.png | 11 | 0 | 808 |
 | Asistencia en Geología | /static/headers/asistencia-geologia/e2.png | 9 | 0 | 642 |
 | Atención de Enfermería, mención Adulto Mayor | Sin faltantes registrados | 13 | 0 | 869 |
@@ -48,7 +48,7 @@ Pendientes localizados, no certificaciones. Las mediciones estan vacias: deben r
 | Servicios de Turismo | /static/headers/turismo/e2.png | 10 | 0 | 704 |
 | Telecomunicaciones | /static/headers/telecomunicaciones/e2.png | 10 | 0 | 725 |
 | Tripulación de Naves Mercantes y Especiales | /static/headers/tripulacion-naves-mercantes-especiales/e2.png | 9 | 0 | 684 |
-| Vestuario y Confección Textil | /static/headers/vestuario-confeccion-textil/e2.png | 10 | 0 | 739 |
+| Vestuario y Confección Textil | Sin faltantes registrados | 10 | 0 | 739 |
 
 ## Recursos
 Cada imagen pendiente necesita observaciones tecnicas propias de su especialidad y de los AE/criterios listados en el JSON. Una foto ambiental no sustituye una evidencia tecnica. No agregar cotas, lecturas ni normas sin fuente.

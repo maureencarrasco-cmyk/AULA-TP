@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-10-04T19:17:00",
+  "checked_at": "2026-10-04T19:25:11",
   "metric": "Disponibilidad de recursos locales: referencias disponibles / referencias registradas.",
   "overall_pedagogical_certification": false,
-  "overall_media_percent": 80.3,
+  "overall_media_percent": 81.6,
   "courses": [
     {
       "course": "Acuicultura",
@@ -52,13 +52,10 @@
     {
       "course": "Agropecuaria, mención Pecuaria",
       "modules": 11,
-      "available": 645,
-      "pending": 263,
+      "available": 908,
       "registered_references": 908,
-      "media_percent": 71.0,
-      "missing_files": [
-        "/static/headers/agropecuaria-pecuaria/e2.png"
-      ],
+      "media_percent": 100.0,
+      "missing_files": [],
       "overall_quality_percent": null
     },
     {
@@ -499,13 +496,10 @@
     {
       "course": "Vestuario y Confección Textil",
       "modules": 10,
-      "available": 584,
-      "pending": 232,
+      "available": 816,
       "registered_references": 816,
-      "media_percent": 71.6,
-      "missing_files": [
-        "/static/headers/vestuario-confeccion-textil/e2.png"
-      ],
+      "media_percent": 100.0,
+      "missing_files": [],
       "overall_quality_percent": null
     }
   ]

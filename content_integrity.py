@@ -21,6 +21,14 @@ GENERATED_CONTEXT_ASSETS = {
         'alt': 'Dos estudiantes y un docente comparan un boceto de interfaz con un diseno en la pantalla de un computador.',
         'caption': 'Ilustracion generada de aprendizaje colaborativo en programacion. Contexto simulado; no contiene codigo ni respuestas de evaluacion.',
     },
+    '/static/headers/agropecuaria-pecuaria/e2.png': {
+        'alt': 'Dos estudiantes y un docente observan bovinos desde el exterior de un recinto cercado, junto a un bebedero.',
+        'caption': 'Ilustracion generada de aprendizaje en produccion pecuaria. Contexto simulado; no acredita condiciones sanitarias ni prescribe manejo animal.',
+    },
+    '/static/headers/vestuario-confeccion-textil/e2.png': {
+        'alt': 'Dos estudiantes y una docente observan una prenda terminada en un maniqui y comparan muestras textiles.',
+        'caption': 'Ilustracion generada de aprendizaje en vestuario y confeccion textil. Contexto simulado; no acredita medidas, patrones ni procedimientos de confeccion.',
+    },
 }
 
 

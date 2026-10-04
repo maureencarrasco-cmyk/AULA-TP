@@ -7,8 +7,8 @@ Alcance: 45 cursos y 451 modulos. No se certifica 100% de calidad.
 - 1153 etiquetas alternativas incorporadas desde textos existentes; requieren revision visual.
 - Sin rutas multimedia locales inexistentes activas en los datos ni en el contenido enriquecido de los 451 modulos.
 - 84 imagenes originales recuperadas del historial; 17380 referencias reactivadas en su misma especialidad. No es una certificacion disciplinar.
-- 914 referencias completadas con contexto generado, identificado como simulado y separado de la evidencia tecnica.
-- 7068 referencias siguen pendientes; no se sustituyen por material de otro oficio.
+- 1409 referencias completadas con contexto generado, identificado como simulado y separado de la evidencia tecnica.
+- 6573 referencias siguen pendientes; no se sustituyen por material de otro oficio.
 - 368 introducciones completadas con una imagen contextual de su propia especialidad. No son evidencias de parametros ni recursos tecnicos interactivos.
 - Tiempo docente real, cobertura y brecha permanecen sin valor hasta disponer de cronometraje; ya no se presenta cumplimiento artificial de 100%.
 - Calibracion de dificultad marcada como propuesta pendiente, no validacion cognitiva.
@@ -33,7 +33,7 @@ Alcance: 45 cursos y 451 modulos. No se certifica 100% de calidad.
 | Administración, mención Logística | 11 | 462 | 215 |
 | Administración, mención Recursos Humanos | 11 | 462 | 197 |
 | Agropecuaria, mención Agricultura | 10 | 420 | 232 |
-| Agropecuaria, mención Pecuaria | 11 | 462 | 263 |
+| Agropecuaria, mención Pecuaria | 11 | 462 | 0 |
 | Agropecuaria, mención Vitivinícola | 11 | 462 | 251 |
 | Asistencia en Geología | 9 | 378 | 189 |
 | Atención de Enfermería, mención Adulto Mayor | 13 | 0 | 0 |
@@ -73,7 +73,7 @@ Alcance: 45 cursos y 451 modulos. No se certifica 100% de calidad.
 | Servicios de Turismo | 10 | 420 | 202 |
 | Telecomunicaciones | 10 | 420 | 220 |
 | Tripulación de Naves Mercantes y Especiales | 9 | 378 | 225 |
-| Vestuario y Confección Textil | 10 | 420 | 232 |
+| Vestuario y Confección Textil | 10 | 420 | 0 |
 
 Los numeros cuentan referencias repetidas, no archivos unicos. No se usan para otorgar aprobacion pedagogica.
 

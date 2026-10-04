@@ -5013,9 +5013,7 @@
       ]
     },
     "Agropecuaria, mención Pecuaria": {
-      "missing_files": [
-        "/static/headers/agropecuaria-pecuaria/e2.png"
-      ],
+      "missing_files": [],
       "modules": [
         {
           "module_id": 333,
@@ -54408,9 +54406,7 @@
       ]
     },
     "Vestuario y Confección Textil": {
-      "missing_files": [
-        "/static/headers/vestuario-confeccion-textil/e2.png"
-      ],
+      "missing_files": [],
       "modules": [
         {
           "module_id": 189,
