@@ -306,25 +306,28 @@ function stationCta(m){
  return `<span class="lr-cta lr-state"><span class="lr-cta-ico" aria-hidden="true">${workIco(st.ico)}</span><span class="lr-cta-label">${esc(st.text)}</span></span>`;
 }
 function learningRoute({currentN=1,completed=[],moduleId=null,course=null,interactive=true,title='Ruta de las 5 estaciones del módulo',lead='Diseño + tecnología + pedagogía: explora cada estación, conecta teoría con el oficio y haz visible tu aprendizaje.'}={}){
+ const displayStation=n=>n>=4?n+1:n;
+ const shownCurrent=displayStation(currentN);
  const done=names.map((_,i)=>!!completed[i]);
  const doneCount=done.filter(Boolean).length;
+ const completionPercent=Math.round(doneCount/done.length*100);
  const reached=Math.max(currentN,doneCount||1);
  const fill=Math.round(((Math.min(5,reached)-1)/4)*100);
  const mid=moduleId||current?.id||'';
  const models=names.map((_,i)=>stationModel(i,currentN,done));
- const live=`Estás en la estación ${currentN} de 5. ${doneCount} de 5 estaciones completadas.`;
+ const live=`Estás en la estación ${shownCurrent} de 6. ${doneCount} de 5 estaciones habilitadas completadas.`;
  const currentModel=models[currentN-1];
  const currentAction=stationActions[currentN-1];
  return `<section class="panel route-panel lr" aria-label="${esc(title)}. ${esc(live)}">
-  <header class="lr-head lr-head-compact" aria-label="Ruta de aprendizaje de las 5 estaciones">
+  <header class="lr-head lr-head-compact" aria-label="Ruta de aprendizaje de las 6 estaciones">
    <span class="lr-head-compact-icon" aria-hidden="true">${workIco('pin')}</span>
-   <div class="lr-head-compact-copy"><small>MI RUTA PROFESIONAL</small><h2>Estación ${currentN} de 5 · ${esc(currentModel.stationName)}</h2><p><b>${currentAction}:</b> ${esc(descriptions[currentN-1])}</p></div>
-   <div class="lr-head-compact-key" aria-label="${doneCount} de 5 estaciones completadas"><b>${doneCount} de 5 completadas</b><span>${[1,2,3,4,5].map(i=>`<i class="${i<=doneCount?'is-done':i===currentN?'is-here':''}" title="Estación ${i}"></i>`).join('')}</span></div>
+   <div class="lr-head-compact-copy"><small>MI RUTA PROFESIONAL</small><h2>Estación ${shownCurrent} de 6 · ${esc(currentModel.stationName)}</h2><p><b>${currentAction}:</b> ${esc(descriptions[currentN-1])}</p></div>
+   <div class="lr-progress"><div class="lr-progress-heading"><span>Avance de tu ruta</span><strong>${completionPercent}%</strong></div><div class="lr-completion-bar" role="progressbar" aria-label="Estaciones habilitadas completadas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${completionPercent}" aria-valuetext="${doneCount} de 5 estaciones habilitadas completadas" style="--completion:${completionPercent}%"><span class="lr-completion-fill"></span></div><p>${doneCount} de 5 estaciones habilitadas completadas</p><small>${icon('lock')} Misión laboral · en construcción</small></div>
   </header>
   <ol class="lr-track" style="--lr-fill:${fill}%" role="list">${models.map((m,i)=>{
    const st=stationStateLabel(m);
    const cls=`lr-stop s${m.stationNumber} is-${m.stationStatus}${i===4?' is-goal':''}`;
-   const label=`Estación ${m.stationNumber} de 5: ${m.stationName}. ${st.text}. ${descriptions[i]}.`;
+   const label=`Estación ${displayStation(m.stationNumber)} de 6: ${m.stationName}. ${st.text}. ${descriptions[i]}.`;
    const badge=m.isCompleted?`<span class="lr-check" aria-hidden="true">${icon('check')}</span>`:'';
    const hint=m.isCurrent?'<em class="lr-hint is-here">Estás trabajando en esta etapa.</em>':'';
    const attrs=interactive
@@ -334,9 +337,10 @@ function learningRoute({currentN=1,completed=[],moduleId=null,course=null,intera
     :`class="lr-card station s${m.stationNumber}" ${m.isCurrent?'aria-current="step"':''} aria-label="${esc(label)}"`;
    const Tag=interactive?'button':'div';
    const routeImage=typeof stationRouteArt==='function'?stationRouteArt(m.stationNumber,course):`/static/themes/route/station-${m.stationNumber}.webp?v=1`;
-   return `<li class="${cls}" data-station-number="${m.stationNumber}" data-station-status="${m.stationStatus}" data-station-name="${esc(m.stationName)}" data-completed="${m.isCompleted}" data-available="${m.isAvailable}" data-locked="${m.isLocked}" data-current="${m.isCurrent}">
-    <span class="lr-node" aria-hidden="true"><span class="lr-num">${m.stationNumber}</span>${badge}</span>
-    <${Tag} ${attrs}><span class="lr-card-photo" aria-hidden="true"><img src="${esc(routeImage)}" alt="" loading="${m.isCurrent?'eager':'lazy'}" decoding="async"><span class="lr-photo-shade"></span><span class="lr-photo-caption">Estación ${m.stationNumber}</span></span><span class="lr-body"><span class="lr-stage-icon" aria-hidden="true">${workIco(stationIcons[i])}</span><small class="lr-action">${stationActions[i]}</small><b class="lr-name">${stationTitleMarkup(m.stationName)}</b><small class="lr-purpose">${esc(descriptions[i])}</small>${hint}${stationCta(m)}</span></${Tag}>
+   const mission=i===3?`<li class="lr-stop mission-laboral-stop is-locked" data-station-name="Misión laboral"><span class="lr-node" aria-hidden="true"><span class="lr-num">4</span></span><button type="button" class="lr-card station mission-laboral" disabled aria-label="Estación 4 de 6. Misión laboral. En construcción. Estación bloqueada"><span class="mission-scene" aria-hidden="true"><img src="/static/themes/workshop.webp" alt=""><img class="mission-controller" src="/static/mission-game-controller.png?v=1" alt=""><span class="mission-level">MISIÓN LABORAL</span><span class="mission-emblem">${icon('flag')}</span></span><span class="lr-body"><small class="mission-status">${icon('lock')} EN CONSTRUCCIÓN</small><b class="lr-name">Misión laboral</b><span class="mission-objective">Desafío de oficio</span><small class="lr-purpose">Una misión profesional para poner en juego tus aprendizajes.</small><span class="mission-checkpoints"><span>${icon('search')} Explora</span><span>${icon('check')} Resuelve</span><span>${icon('flag')} Completa</span></span><span class="mission-reward">${icon('lock')} Insignia de misión · bloqueada</span></span></button></li>`:'';
+   return `${mission}<li class="${cls}" data-station-number="${m.stationNumber}" data-station-status="${m.stationStatus}" data-station-name="${esc(m.stationName)}" data-completed="${m.isCompleted}" data-available="${m.isAvailable}" data-locked="${m.isLocked}" data-current="${m.isCurrent}">
+    <span class="lr-node" aria-hidden="true"><span class="lr-num">${displayStation(m.stationNumber)}</span>${badge}</span>
+    <${Tag} ${attrs}><span class="lr-card-photo" aria-hidden="true"><img src="${esc(routeImage)}" alt="" loading="${m.isCurrent?'eager':'lazy'}" decoding="async"><span class="lr-photo-shade"></span><span class="lr-photo-caption">Estación ${displayStation(m.stationNumber)}</span></span><span class="lr-body"><span class="lr-stage-icon" aria-hidden="true">${workIco(stationIcons[i])}</span><small class="lr-action">${stationActions[i]}</small><b class="lr-name">${stationTitleMarkup(m.stationName)}</b><small class="lr-purpose">${esc(descriptions[i])}</small>${hint}${stationCta(m)}</span></${Tag}>
    </li>`;
   }).join('')}</ol>
  </section>`;
@@ -414,7 +418,7 @@ function toolsFabMarkup(station){
  const tools=stationToolsCatalog(station);
  if(!tools.length)return '';
  const cards=tools.map(t=>`<button type="button" class="support-card tone-${t.tone}" data-action="${t.id}" aria-label="${esc(t.title)}. ${esc(t.hint)}"><span class="support-ico" aria-hidden="true">${t.glyph}</span><span class="support-copy"><b>${esc(t.title)}</b><small>${esc(t.hint)}</small></span><span class="tools-fab-open">Abrir</span></button>`).join('');
- return `<button type="button" class="tools-fab-backdrop" data-action="tools-fab-close" tabindex="-1" aria-label="Cerrar Agente Nubi"></button><div class="tools-fab" data-tools-fab><div id="tools-fab-panel" class="tools-fab-panel" role="dialog" aria-modal="true" aria-labelledby="tools-fab-title"><div class="tools-fab-head"><div><h3 id="tools-fab-title">Agente Nubi</h3><p>Tu nube de apoyo para practicar, orientarte y configurar esta estación.</p></div><button type="button" class="tools-fab-close" data-action="tools-fab-close" aria-label="Cerrar Agente Nubi">×</button></div><div class="tools-fab-list">${cards}</div></div><button type="button" class="tools-fab-btn" data-action="tools-fab-toggle" aria-expanded="false" aria-haspopup="dialog" aria-controls="tools-fab-panel" title="Arrastra para mover. Pulsa la nube para abrir Agente Nubi." aria-label="Agente Nubi. Arrastra para mover o pulsa para abrir"><img class="tools-fab-mascot" src="/static/agente-nubi-presenter.png?v=20261003-nubi-simple" alt=""></button></div>`;
+ return `<button type="button" class="tools-fab-backdrop" data-action="tools-fab-close" tabindex="-1" aria-label="Cerrar Agente Nubi"></button><div class="tools-fab" data-tools-fab><div id="tools-fab-panel" class="tools-fab-panel" role="dialog" aria-modal="true" aria-labelledby="tools-fab-title"><div class="tools-fab-head"><div><h3 id="tools-fab-title">Agente Nubi</h3><p>Tu nube de apoyo para practicar, orientarte y configurar esta estación.</p></div><button type="button" class="tools-fab-close" data-action="tools-fab-close" aria-label="Cerrar Agente Nubi">×</button></div><div class="tools-fab-list">${cards}</div></div><button type="button" class="tools-fab-btn" data-action="tools-fab-toggle" aria-expanded="false" aria-haspopup="dialog" aria-controls="tools-fab-panel" title="Arrastra para mover. Pulsa la nube para abrir Agente Nubi." aria-label="Agente Nubi. Arrastra para mover o pulsa para abrir"><img class="tools-fab-mascot" src="/static/agente-nubi-idea-transparente.png?v=20261004-halo" alt=""></button></div>`;
 }
 const TOOLS_FAB_POS='aula-tools-fab-pos';
 function toolsFabClamp(x,y,el){
@@ -791,29 +795,8 @@ function stationActivityPrimer(n){
 function sidebar(n){const pct=current.completed.filter(Boolean).length*20;const aeTotal=Math.max(1,current.content?.aes?.length||1);const recado=n===1?'Separa lo que viste de lo que estás suponiendo. Qué no puedes afirmar aún.':n===4?'Responde de forma autónoma. Puedes guardar un borrador y continuar después.':n===3?'Tu reflexión importa tanto como tu respuesta. Explica por qué tomas cada decisión.':'Tu reflexión importa tanto como tu respuesta. Explica por qué tomas cada decisión.';return `<aside class="sidebar"><section class="panel"><h3>${icon('clock')} Tu avance</h3><dl><div><dt>Ruta del módulo</dt><dd>${n} / 5</dd></div><div><dt>Módulo actual</dt><dd>${typeof gpsModuleShort==='function'?gpsModuleShort():('Módulo '+current.position)}</dd></div><div><dt>AE ${n===2?'activo':'integrados'}</dt><dd>${n===2?'AE '+(ae+1)+' de '+aeTotal:aeTotal+' aprendizajes esperados'}</dd></div><div><dt>Estado</dt><dd>${current.state.closed?'Completada':'En curso'}</dd></div><div><dt>Modalidad</dt><dd>Autoguiada</dd></div></dl><div class="progress-label"><b>Progreso general</b><b>${pct}%</b></div><progress value="${pct}" max="100"></progress></section>${n===4?'<section class="panel outcomes"><h3>Al finalizar esta estación…</h3><p>✓ Obtendrás evidencia de tu aprendizaje.</p><p>✓ Integrarás todos los aprendizajes esperados.</p><p>✓ Reconocerás qué necesitas reforzar.</p></section>':''}${typeof recuerdaMarkup==='function'?recuerdaMarkup(recado):''}</aside>`}
 function panelTitle(n,subtitle,time){return `<div class="panel-title">${n===1?'':`<span class="big-number s${n}">${n}</span>`}<div><span class="eyebrow">ESTACIÓN ${n} DE 5</span><h2>${names[n-1]}</h2>${typeof pedStationFn==='function'?pedStationFn(n):''}<p>${subtitle}</p></div><span class="time">${icon('clock')} ${time}</span></div>`}
 function reflectionForm(id,prompt,value='',label='Guardar y continuar'){const ae=id==='ae-form';const ctx=id==='context-form';const ph=ctx?'Una decisión y un dato que aún falta. No cubiques.':'Escribe tu respuesta y explica tu razonamiento…';return `<form id="${id}"><label class="${ae?'ae-justify-label':''}">${esc(prompt)}<textarea name="text" minlength="20" maxlength="10000" required placeholder="${esc(ph)}">${esc(value)}</textarea></label><div class="form-bottom">${ae?`<div class="ae-req"><p class="char-meter is-wait" data-ae-meter aria-live="polite">0 / mínimo 20 caracteres</p><ul class="ae-ready" data-ae-ready></ul></div>`:''}<button class="primary" ${current?.state.closed||auth.user.role==='teacher'?'disabled':''}>${label} ${icon('arrow')}</button></div></form>`}
-function moduleMediaMarkup(){const item=(current?.content?.media_resources||[]).find(m=>m.image);if(!item)return '';return `<section class="module-media panel" aria-label="Recurso visual de la actividad"><header><span class="eyebrow">RECURSO PARA COMPRENDER</span><h3>Observa e identifica antes de responder</h3><p>Relaciona esta representación con el aprendizaje esperado y con la decisión de la actividad.</p></header><div class="module-media-grid"><article class="module-media-card"><img src="${esc(item.image)}" alt="${esc(item.title)}" loading="eager"><div><span class="media-sequence">Actividad 1.1</span><span class="media-kind">Visualización 3D</span><h4>${esc(item.title)}</h4><p><b>AE:</b> ${esc(item.ae||'Aprendizaje esperado del módulo')}</p><p><b>Contenido:</b> ${esc(item.content)}</p><p><b>Acción:</b> ${esc(item.activity)}</p><details><summary>Qué observar</summary><p>${esc(item.observe)}</p><p class="muted small">Propósito: ${esc(item.purpose)}</p></details></div></article></div></section>`}
-function contextMissionMarkup(content,course){
- const image=typeof moduleStopArt==='function'&&course?moduleStopArt(course,Math.max(0,(current.position||1)-1)):(content.media_resources||[]).find(item=>item?.image)?.image||'/static/themes/plans.png';
- return `<article class="work-card work-card-hero ctx-mission">${workIco('target')}<div class="ctx-mission-copy"><span class="work-kicker">Misión</span><h3>Observa, reconoce y anticipa</h3><p>${esc(content.context||'Lee el caso profesional y reconoce la información que necesitas confirmar.')}</p><p class="muted small">${esc(content.context_guidance||'Distingue los datos visibles de tus suposiciones antes de tomar una decisión.')}</p></div><figure class="ctx-mission-visual"><img src="${esc(image)}" alt="${esc(content.case_title||current.title)}: contexto profesional que observarás en esta misión" loading="eager" decoding="async"></figure></article>`;
-}
-function contextPanel(){
- const c=current.content||{};
- const course=courses.find(item=>item.id===current.course_id);
- const caseImage=(c.media_resources||[]).find(item=>item?.image)?.image||(typeof stationRouteArt==='function'?stationRouteArt(1,course):(typeof specialtyCover==='function'&&course?specialtyCover(course):'/static/themes/plans.png'));
- return workZone(`${panelTitle(1,'Conoce el contexto y activa tus conocimientos previos.',typeof cargaLabel==='function'?cargaLabel(1,'Carga x5'):'Carga x5')}${moduleMediaMarkup()}
-  ${contextMissionMarkup(c,course)}
-  <section class="work-card work-card-activity ctx-activity"><div class="work-activity-head">${workIco('puzzle')}<div><h3>Actividad que debes desarrollar</h3><p>Caso profesional y reflexión inicial.</p></div></div>
-   ${typeof instructionContract==='function'?instructionContract({instruction:c.context_instruction}):''}
-   <article class="ctx-block ctx-case ctx-case-featured"><figure><img src="${esc(caseImage)}" alt="Contexto profesional del caso: ${esc(c.case_title||current.title)}" loading="eager" decoding="async"><figcaption>${icon('eye')} Observa el escenario antes de responder</figcaption></figure><div class="ctx-case-copy"><div class="ctx-case-label">${typeof workIco==='function'?workIco('cube'):icon('cube')}<span class="eyebrow">CASO PROFESIONAL · MÓDULO ${current.position}</span></div><span class="ctx-case-kicker">TU DESAFÍO EN CONTEXTO</span><h3>${esc(c.case_title||current.title)}</h3><p>${esc(c.case_blurb||c.application||'Revisa la información disponible antes de continuar.')}</p><div class="ctx-case-cue">${icon('target')}<span><b>Fíjate en:</b> personas, equipos, documentos, condiciones y datos que aún debas confirmar.</span></div></div></article>
-   ${reflectionForm('context-form',c.reflection_prompt||'¿Qué revisarías primero y qué información necesitarías confirmar?',current.state.context,'Continuar a Aprendizajes esperados')}
-  </section>${curriculumNote()}`,'work-zone-s1');
-}
-function aeRoute(){
- const aeTotal=Math.max(1,current.content?.aes?.length||1);
- const steps=[['flag','Ubícate','Dónde estás · Estación 2 de 5'],['book','Revisa','Familia AE · '+aeTotal+' aprendizajes'],['list','Analiza','Etapa · '+(stages[step]||'')],['target','Actúa','Tu acción · Decide y justifica']];
- return `<div class="ae-route" role="list" aria-label="Secuencia de la etapa: ubícate, revisa, analiza, actúa">${steps.map((h,i)=>`<div class="ae-route-step s${i+1}" role="listitem"><span class="ae-route-n">${i+1}</span><span class="ae-route-ico">${workIco(h[0])}</span><span class="ae-route-txt"><b>${h[1]}</b><small>${esc(h[2])}</small></span></div>${i<steps.length-1?'<div class="ae-route-arrow" aria-hidden="true"><span></span></div>':''}`).join('')}</div>`;
-}
-function aePanel(){const aeTotal=Math.max(1,current.content.aes.length),c=current.content.aes[ae],key=`${ae}-${step}`;return workZone(`${panelTitle(2,'Desarrolla los conceptos clave para avanzar en el módulo.',cargaLabel('2_etapa','Carga ×5 / etapa'))}${aeRoute()}${workCard('book',esc(aeLabel(c)),workKicker('Aprendizaje esperado '+(ae+1)+' de '+aeTotal+' · aplica este conocimiento')+'<p>'+esc(c.description)+'</p>','work-card-hero')}<div class="ae-layout"><article class="soft ae-info"><div class="tabs compact">${current.content.aes.map((a,i)=>action('ae',`AE ${i+1}`,i===ae?'active':'',`data-index="${i}" ${auth.user.role==='student'&&!isDemoStudent()&&i>0&&!current.state.ae[`${i-1}-5`]?'disabled':''}`)).join('')}</div><span class="eyebrow">APRENDIZAJE ESPERADO ${ae+1} DE ${aeTotal}</span><h2>${esc(aeLabel(c))}</h2><p>${esc(c.description)}</p><details><summary>Ver detalles del AE ${ae+1}</summary><p>Seis etapas para analizar información, tomar decisiones justificadas y revisar tus conclusiones. Se guarda una evidencia escrita por etapa.</p></details></article><section class="soft progression"><h3>${icon('chart')} La progresión de aprendizaje en esta estación</h3><p>Cada número decimal indica una subactividad del aprendizaje esperado activo.</p><div class="learning-route">${stages.map((s,i)=>{const done=current.state.ae[`${ae}-${i}`],locked=auth.user.role==='student'&&!isDemoStudent()&&(ae*6+i>0&&!current.state.ae[`${Math.floor((ae*6+i-1)/6)}-${(ae*6+i-1)%6}`]);return `<button class="learning-step ${i===step?'active':''} ${done?'done':''}" data-action="step" data-ped-action="${['analyze','comprehend','relate','decide','verify','improve'][i]}" data-index="${i}" aria-label="Subactividad ${ae+1}.${i+1}: ${esc(s)}. ${done?'Completada':i===step?'En curso':'Pendiente'}" ${locked?'disabled':''}><span>${ae+1}.${i+1}</span>${icon(['search','book','link','tool','check','chat'][i])}<b>${s}</b><small>${done?'Completada':i===step?'En curso':'Pendiente'}</small></button>`}).join('')}</div><div class="info-strip">La finalidad es avanzar desde la comprensión hacia la utilización efectiva del conocimiento.</div></section></div>${learningNotes(c)}<div class="ae-challenge">${(()=>{const exp=c.experiences?.[step];const plan=typeof aeActionPlan==='function'?aeActionPlan(exp):[];const route=typeof pedRoute==='function'&&plan.length?pedRoute(plan,0):'';const body=exp&&typeof renderExperience==='function'?renderExperience(exp):'';return route+body})()}<div class="soft reflection ae-evidence ped-step" data-action="justify" data-state="idle"><header class="ae-evidence-head">${typeof workIco==='function'?workIco('chat'):icon('file')}<div><span class="work-kicker ped-verb">Justifica</span><h3>${c.experiences?.[step]?.type==='reflect'?'Verifica y retroalimenta':'Tu evidencia en esta etapa'} · ${stages[step]}</h3></div></header>${reflectionForm('ae-form',c.steps[step],typeof current.state.ae[key]==='string'?current.state.ae[key]:(current.state.ae[key]?.text||''),step===5?(ae===aeTotal-1?'Continuar a situaciones':'Continuar con AE '+(ae+2)):'Continuar con '+stages[step+1])}</div></div>${typeof encargosMarkup==='function'?encargosMarkup(2,ae+1):''}`,'work-zone-s2')}
+function contextPanel(){return contextualizationPanel()}
+function aePanel(){return learningSequencePanel()}
 function caseObserveBody(q, stem){
  const photo=q.image||(typeof integrationPhoto==='function'?integrationPhoto(caseIndex):'');
  const alt=q.alt||(q.site||q.title||'Escenario profesional simulado');
@@ -851,7 +834,7 @@ function initialAchievementPanel(){
  return `<section class="achievement-start" aria-labelledby="achievement-start-title"><div><small>DIAGNÓSTICO BASADO EN PRIMEROS INTENTOS</small><h3 id="achievement-start-title">Punto de partida del aprendizaje</h3><p>Este porcentaje inicial utiliza tus primeras respuestas registradas en las actividades de cada aprendizaje. No es una calificación.</p></div><strong>${achievementValue(summary.initial)}</strong><span>Referencia esperada: 100%</span></section>`;
 }
 function achievementProgressTable(){
- const summary=achievementSummary();
+ const summary=(view.station===5&&typeof feedbackDemoAchievementSummary==='function'?feedbackDemoAchievementSummary():null)||achievementSummary();
  const rows=summary.rows.map(row=>{const gain=Number.isFinite(row.initial)&&Number.isFinite(row.final)?row.final-row.initial:null;const gap=Number.isFinite(row.final)?Math.max(0,100-row.final):null;return `<tr><th scope="row"><span>AE ${row.index+1}</span>${esc(row.label)}</th><td>${achievementValue(row.initial)}</td><td>${achievementValue(row.final)}${row.assessed?`<small>${row.assessed} evidencias evaluadas</small>`:''}</td><td class="achievement-gain ${gain>0?'is-positive':''}">${Number.isFinite(gain)?`${gain>0?'+':''}${gain} pp`:'Pendiente'}</td><td>${Number.isFinite(gap)?`${gap} pp`:'Pendiente'}</td></tr>`}).join('');
  const totalGain=Number.isFinite(summary.initial)&&Number.isFinite(summary.final)?summary.final-summary.initial:null;
  return `<section class="achievement-progress" aria-labelledby="achievement-progress-title"><header><div><small>PROGRESIÓN HACIA EL 100% ESPERADO</small><h3 id="achievement-progress-title">Logro por aprendizaje u objetivo evaluado</h3><p>Compara el primer desempeño registrado con la evaluación final. Los porcentajes pendientes aparecerán cuando exista evidencia suficiente.</p></div><div class="achievement-total"><span>${achievementValue(summary.initial)}<small>Inicial</small></span><i aria-hidden="true">→</i><span>${achievementValue(summary.final)}<small>Final</small></span><b>${Number.isFinite(totalGain)?`${totalGain>0?'+':''}${totalGain} pp`:'Pendiente'}<small>Progresión</small></b></div></header><div class="achievement-table-wrap"><table><thead><tr><th>Aprendizaje evaluado</th><th>Logro inicial</th><th>Logro final</th><th>Progresión</th><th>Brecha al 100%</th></tr></thead><tbody>${rows}</tbody></table></div><p class="achievement-note">Los resultados orientan la retroalimentación y el plan de mejora; no reemplazan el juicio pedagógico del docente.</p></section>`;
@@ -960,14 +943,58 @@ function decorateAeOverview(root){
 
 function decorateStudentActionCues(root){
  if(!root)return;
+ updateVisibleStationNumbers(document.getElementById('main'));
+ decorateStudentQuestionOrder(root);
+ root.querySelectorAll('.az-guided > section > h3').forEach(heading=>{
+  heading.classList.add('instruction-showcase','activity-showcase-title');
+ });
+ root.querySelectorAll('.az-written-question').forEach(block=>{
+  const heading=block.querySelector('h4[id]');
+  const pencil=block.querySelector('label > .az-question-pencil');
+  if(heading&&pencil)heading.prepend(pencil);
+ });
  root.querySelectorAll('textarea:not([hidden]), input[type="text"], input[type="number"]').forEach(control=>{
   const label=control.closest('label');
   if(!label||label.classList.contains('option')||label.querySelector(':scope > .student-write-cue'))return;
   const cue=document.createElement('span');
   cue.className='student-write-cue';
-  cue.innerHTML='<img src="/static/student-write-banner.png?v=20261003" alt="Ahora te toca a ti">';
-  control.insertAdjacentElement('beforebegin',cue);
+  cue.innerHTML='<img src="/static/student-write-pencil-blue.png?v=20261004-pencil-blue" alt="">';
+  label.prepend(cue);
   label.classList.add('student-write-field');
+ });
+}
+function updateVisibleStationNumbers(root){
+ if(!root)return;
+ const rewrite=text=>text.replace(/(estaci[oó]n\s+)([1-5])(\s+de\s+)5/gi,(_,prefix,n,join)=>`${prefix}${Number(n)>=4?Number(n)+1:n}${join}6`).replace(/5 estaciones/gi,'6 estaciones');
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node;
+ while((node=walker.nextNode())){if(node.parentElement.closest('.lr-track,.lr-progress,script,style,textarea'))continue;node.nodeValue=rewrite(node.nodeValue);}
+ root.querySelectorAll('[aria-label]').forEach(el=>{if(!el.closest('.lr-track,.lr-progress'))el.setAttribute('aria-label',rewrite(el.getAttribute('aria-label')));});
+ root.querySelectorAll('.big-number.s4').forEach(el=>el.textContent='5');
+ root.querySelectorAll('.big-number.s5').forEach(el=>el.textContent='6');
+}
+function decorateStudentQuestionOrder(root){
+ const groups=new Map();
+ root.querySelectorAll('textarea:not([hidden]),input[type="text"],input[type="number"]').forEach(control=>{
+  if(control.closest('[data-pg-legacy],.select-enhancer'))return;
+  const block=control.closest('.az-written-question,.question-box,.question-card');
+  const label=block?.querySelector('h4,label')||root.querySelector(`label[for="${CSS.escape(control.id)}"]`)||control.closest('label');
+  if(!label||!label.textContent.trim())return;
+  const group=block?.parentElement||control.closest('form,section,fieldset')||root;
+  if(!groups.has(group))groups.set(group,[]);
+  const items=groups.get(group);if(!items.includes(label))items.push(label);
+ });
+ groups.forEach(items=>{
+  if(!items.length)return;
+  items.forEach((label,index)=>{
+   if(label.querySelector('.student-question-number')||/^\s*\d+(?:\.\d+)*[.)\s]/.test(label.textContent)||/^\s*(?:pregunta|actividad)\s+\d+/i.test(label.textContent))return;
+   const number=document.createElement('span');number.className='student-question-number';number.textContent=String(index+1);number.setAttribute('aria-label',`Pregunta ${index+1}`);label.prepend(number);
+  });
+ });
+ root.querySelectorAll('.az-guided>section>h3,.pg-stage>h3').forEach(heading=>{
+  if(heading.querySelector('.student-section-symbol,svg'))return;
+  const text=heading.textContent.toLocaleLowerCase('es');
+  const kind=/verifica|cierra/.test(text)?'check':/observa|explora|identifica/.test(text)?'search':/proyecta|foco/.test(text)?'target':'book';
+  const symbol=document.createElement('span');symbol.className=`student-section-symbol tone-${kind}`;symbol.setAttribute('aria-hidden','true');symbol.innerHTML=icon(kind==='search'?'eye':kind==='target'?'flag':kind);heading.prepend(symbol);
  });
 }
 function refineStationExperience(root){
@@ -1019,6 +1046,7 @@ function buildPedagogicalMatrix(){
  document.body.dataset.pedagogyCognitiveRange=levels.length?`${Math.min(...levels)}-${Math.max(...levels)}`:'0-0';
 }
 function decorateStationActivities(root,station){
+ if(root.querySelector('.context-sequence,.learning-sequence')){buildPedagogicalMatrix();return;}
  const selectors={
   1:['.ctx-activity'],
   2:['.ae-challenge .act-card:not(.act-explore)','.ae-evidence'],
@@ -1152,7 +1180,7 @@ function renderModule(n){
  localDrafts.restoreExam();
  const content=[contextPanel,aePanel,integratedPanel,examPanel,feedbackPanel][n-1]();
  const aside=n===4?examSidebar():n===5?feedbackSidebar():'';
- shell(`${stationHero(n)}${auth.user.role==='teacher'&&n!==3&&n!==4&&n!==5?'<div class="preview-banner">Vista previa docente · Las evidencias del estudiante se generan desde su cuenta.</div>':''}<div class="module-layout${aside?'':' is-wide'}"><div class="module-main">${avanceStrip(n)}${n===4?examStationRoute():n===5?feedbackStationRoute():stationRoute(n)}${curriculumSourcePanel()}${stationInstructionBanner(n)}<section class="panel station-body s${n}">${content}</section><div class="bottom-nav" aria-label="Navegación de la estación"><a class="outline" href="${n===1?'#course/'+current.course_id:'#module/'+current.id+'/'+(n-1)}">← ${n===1?'Volver al módulo':'Estación anterior'}</a>${n<5?`<button class="primary" data-action="station" data-n="${n+1}" ${!stationUnlocked(n+1)?'disabled':''}>Continuar a ${names[n]} ${icon('arrow')}</button>`:`<a class="primary" href="#course/${current.course_id}">Finalizar y volver a mi ruta ${icon('arrow')}</a>`}</div></div>${aside}</div>${specialtyResourceButton()}`);
+ shell(`${stationHero(n)}${auth.user.role==='teacher'&&n!==3&&n!==4&&n!==5?'<div class="preview-banner">Vista previa docente · Las evidencias del estudiante se generan desde su cuenta.</div>':''}<div class="module-layout${aside?'':' is-wide'}"><div class="module-main">${avanceStrip(n)}${n===4?examStationRoute():n===5?feedbackStationRoute():stationRoute(n)}${n===1?'':curriculumSourcePanel()+stationInstructionBanner(n)}<section class="panel station-body s${n}">${content}</section><div class="bottom-nav" aria-label="Navegación de la estación"><a class="outline" href="${n===1?'#course/'+current.course_id:'#module/'+current.id+'/'+(n-1)}">← ${n===1?'Volver al módulo':'Estación anterior'}</a>${n<=2?'':n<5?`<button class="primary" data-action="station" data-n="${n+1}" ${!stationUnlocked(n+1)?'disabled':''}>Continuar a ${names[n]} ${icon('arrow')}</button>`:`<a class="primary" href="#course/${current.course_id}">Finalizar y volver a mi ruta ${icon('arrow')}</a>`}</div></div>${aside}</div>${specialtyResourceButton()}`);
  bindModuleForms(n);
  const stationBody=document.querySelector('.station-body');
  if(n===2)decorateAeOverview(stationBody);
@@ -1177,6 +1205,8 @@ function renderModule(n){
     if($('#development'))$('#development').oninput=e=>{examDraft.development=e.target.value;updateExamReady()};
    }
    localDrafts.mount();
+   if(n===1)bindContextualization(stationBody);
+   if(n===2)bindLearningSequence(stationBody);
    if(n===3)bindIntegration();
    if(n===4)bindExam();
    if(n===5)bindFeedback();

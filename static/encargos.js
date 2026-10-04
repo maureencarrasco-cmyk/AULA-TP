@@ -66,13 +66,34 @@ function encargosUi(host){
   window.__encargoUi=window.__encargoUi||{};
   const key=host.dataset.uiKey||`${host.dataset.station}:${host.dataset.ae||''}`;
   host.dataset.uiKey=key;
-  if(!window.__encargoUi[key]) window.__encargoUi[key]={expanded:false,openId:''};
+  if(!window.__encargoUi[key]) window.__encargoUi[key]={expanded:false,openId:'',drafts:{}};
   return window.__encargoUi[key];
 }
 function encargosMarkup(station, aeIndex){
   const items=encargosItems(station, aeIndex);
   if(!items.length) return '';
   return `<section id="seccion-encargos" class="seccion-actividades-de-oficio seccion-encargos formative-pack" data-station="${station}" data-ae="${aeIndex||''}" aria-label="Actividades de oficio"></section>`;
+}
+function encargoBrief(item){
+  const c=item.instruction||{};
+  const product=item.product||'Evidencia del encargo';
+  const action=/inconsistencias/i.test(product)?'Compara la información de los documentos e identifica los datos que no coinciden.':`Revisa la información disponible y prepara este producto: ${product}.`;
+  const criteria=current?.content?.aes?.[Number(item.ae)-1];
+  const criterionRows=Array.isArray(criteria?.criteria)?criteria.criteria:[];
+  const criterionMarkup=criterionRows.length?`<ul>${criterionRows.map(row=>`<li>${esc(typeof row==='string'?row:row.text||row.description||row.title||'')}</li>`).join('')}</ul>`:'';
+  return `<section class="encargo-brief" aria-label="Comprende tu encargo">
+    <h5>2. Comprende tu encargo</h5>
+    <p><b>Situación</b><br>Recibes una tarea profesional de este módulo: ${esc(item.title)}. Debes preparar una entrega respaldada por información disponible, sin inventar los datos que faltan.</p>
+    <div class="encargo-main-action"><b>¿Qué debes hacer?</b><p>${esc(action)}</p></div>
+    <p><b>¿Sobre qué trabajarás?</b><br>${esc(c.object||item.title)}</p>
+    <details class="encargo-resources"><summary>Revisar recursos y criterios · AE ${esc(item.ae)}</summary><p>${esc(c.resource||'Consulta los recursos del módulo y los criterios del aprendizaje esperado asociado. Si no encuentras el documento necesario, registra qué falta y a quién lo solicitarías.')}</p>${item.document?`<pre>${esc(item.document)}</pre>`:''}${criteria?`<p>${esc(typeof criteria==='string'?criteria:criteria.title||criteria.text||'')}</p>`:''}<p>Esta ficha no añade documentos técnicos que no estén disponibles en el módulo.</p></details>
+    ${criterionMarkup?`<details><summary>Criterios del aprendizaje esperado</summary>${criterionMarkup}</details>`:''}
+    <p><b>¿Qué debes entregar?</b><br>${esc(product)}</p>
+    <ol><li><b>Revisa:</b> abre los recursos y localiza un dato. Anota el documento, símbolo, medida o nota donde aparece.</li><li><b>Desarrolla:</b> prepara el producto solicitado y explica qué decisión tomas utilizando ese dato.</li><li><b>Comprueba y entrega:</b> señala lo que falta confirmar, indica a quién consultarías y pulsa «Registrar evidencia». En una bitácora, pulsa «Guardar esta hoja».</li></ol>
+    <p><b>¿Cómo comenzar?</b><br>Primero lee esta ficha y abre «Revisar recursos y criterios». Después pulsa el paso 3 para ir al campo de respuesta. Puedes cambiar de encargo sin perder tu borrador durante esta sesión.</p>
+    <p><b>¿Cuándo está terminado?</b><br>Cuando entregues el producto solicitado, cites su evidencia, señales los pendientes y registres tu respuesta con al menos 80 caracteres. Guardar la respuesta no confirma por sí solo que la decisión técnica sea correcta.</p>
+    <details><summary>¿Necesitas orientación? · Agente Nubi</summary><p>Localiza un dato verificable. ¿Qué parte de tu producto respalda? Si falta información, ¿qué necesitas consultar antes de decidir? Puedes abrir Agente Nubi para revisar las herramientas de apoyo.</p></details>
+  </section>`;
 }
 function encargoCardHtml(item, index, openId, done){
   const saved=done[item.id];
@@ -81,15 +102,16 @@ function encargoCardHtml(item, index, openId, done){
   const open=String(openId)===String(item.id)?' is-open':'';
   const notebook=isBitacora(item);
   const taskIcon=encargoIcon(item);
-  return `<button type="button" class="oficio-card is-${status}${open}${notebook?' is-bitacora':''}" data-encargo-id="${esc(item.id)}" data-tone="${tone}">
+  return `<button type="button" class="oficio-card is-${status}${open}${notebook?' is-bitacora':''}" aria-pressed="${Boolean(open)}" aria-controls="encargo-detail" data-encargo-id="${esc(item.id)}" data-tone="${tone}">
     <span class="oficio-tile" aria-hidden="true">${oficioIcon(taskIcon)}</span>
     <span class="oficio-card-body">
-      <span class="oficio-product-label">Producto esperado</span>
-      <b>${esc(item.title)}</b>
-      <span class="oficio-card-kicker">AE ${item.ae} · ${notebook?'tu bitácora':'producto escrito'}</span>
+      <span class="oficio-product-label">Encargo profesional</span>
+      <b><span class="student-question-number" aria-label="Encargo ${index+1}">${index+1}</span>${esc(item.title)}</b>
+      <span class="oficio-card-kicker">Producto: ${esc(item.product||'Evidencia escrita')}</span>
+      <span class="oficio-card-kicker">AE ${item.ae}</span>
       <span class="oficio-card-meta">
         <span class="oficio-min">${oficioIcon('clock')} ${Number(item.minutes)||60} min</span>
-        <span class="oficio-chip is-${status}">${saved?oficioIcon('check'):oficioIcon('arrow')} ${saved?'Entregado':'Abrir encargo'}</span>
+        <span class="oficio-chip is-${status}">${saved?oficioIcon('check'):oficioIcon('arrow')} ${open?'Seleccionado':saved?'Entregado':'Abrir encargo'}</span>
       </span>
     </span>
   </button>`;
@@ -136,21 +158,17 @@ function paintEncargos(host){
         <span class="oficio-pill is-count">${oficioIcon('list')} ${esc(countPill)}</span>
       </div>
     </header>
-    <p class="oficio-lead">${esc(lead)}</p>
+    <div class="encargo-introduction"><h5>¿Qué es un encargo de oficio?</h5><p>Es una tarea breve similar a las que podrías recibir en un lugar de trabajo de tu especialidad. Aplicarás lo aprendido para revisar una situación, analizar información, tomar una decisión y entregar evidencia.</p><p><b>No tienes que resolver todos a la vez. Elige uno y sigue sus indicaciones.</b></p></div>
     <div class="oficio-do" role="group" aria-label="Qué debes hacer">
       <button type="button" class="oficio-do-btn is-video${hasOpen?'':' is-ahora'}" data-encargo-do="pick"><span class="oficio-do-n">1</span><span class="oficio-do-icon">${oficioIcon('target')}</span><small>Elige un encargo</small>${hasOpen?'':'<span class="oficio-ahora">Ahora</span>'}</button>
-      <button type="button" class="oficio-do-btn is-paso" data-encargo-do="read"><span class="oficio-do-n">2</span><span class="oficio-do-icon">${oficioIcon('book')}</span><small>Lee el producto pedido</small></button>
-      <button type="button" class="oficio-do-btn is-write${hasOpen?' is-ahora':''}" data-encargo-do="write">${hasOpen?'<span class="oficio-ahora">Ahora</span>':''}<span class="oficio-do-n">3</span><span class="oficio-do-icon">${oficioIcon('edit')}</span><small>Escribe tu evidencia</small></button>
+      <button type="button" class="oficio-do-btn is-paso" data-encargo-do="read"><span class="oficio-do-n">2</span><span class="oficio-do-icon">${oficioIcon('book')}</span><small>Revisa qué debes hacer</small></button>
+      <button type="button" class="oficio-do-btn is-write" data-encargo-do="write"><span class="oficio-do-n">3</span><span class="oficio-do-icon">${oficioIcon('edit')}</span><small>Realiza y entrega tu evidencia</small></button>
     </div>
-    <p class="oficio-do-note">${esc(stripNote)}</p>
-    <ol class="oficio-guide" aria-label="Cómo trabajar este encargo">
-      <li><b>Elige</b> el encargo que vas a desarrollar.</li>
-      <li><b>Lee</b> el producto pedido: qué debes entregar y con qué evidencia.</li>
-      <li><b>Escribe</b> un dato visible en el plano, la leyenda, la ficha o las notas. Si no aparece, indica qué falta y a quién lo consultarías.</li>
-    </ol>
+    <p class="oficio-do-note">Tu meta: aplicar lo aprendido en el módulo para resolver una tarea de tu especialidad.</p>
+    <h5>1. Elige tu encargo</h5>
     <div class="oficio-grid">${shown.map((e,i)=>encargoCardHtml(e,i,ui.openId,done)).join('')}</div>
     ${items.length>visible?`<button type="button" class="oficio-more" data-encargo-more>${ui.expanded?'Ver menos':'Ver todas'}</button>`:''}
-    <div class="oficio-detail encargo-detail" hidden></div>`;
+    <div id="encargo-detail" class="oficio-detail encargo-detail" hidden></div>`;
   if(ui.openId){
     const item=items.find(e=>String(e.id)===String(ui.openId));
     if(item) openEncargo(host,item,draft);
@@ -160,14 +178,16 @@ function openEncargo(host, item, draftText){
   const detail=host.querySelector('.encargo-detail');
   if(!detail||!item) return;
   const ui=encargosUi(host);
+  ui.drafts=ui.drafts||{};
+  if(ui.openId&&detail.querySelector('#encargo-texto'))ui.drafts[ui.openId]=detail.querySelector('[data-bit]')?joinBitacora(detail):detail.querySelector('#encargo-texto').value;
   ui.openId=item.id;
   const saved=(current?.state?.encargos||{})[item.id];
   const locked=auth?.user?.role==='teacher'||current?.state?.closed;
-  const draft=(typeof draftText==='string'&&draftText!=='')?draftText:(saved?.text||'');
-  host.querySelectorAll('.oficio-card.is-open').forEach(c=>c.classList.remove('is-open'));
+  const draft=typeof draftText==='string'?draftText:(ui.drafts[item.id]??saved?.text??'');
+  host.querySelectorAll('.oficio-card').forEach(c=>{c.classList.remove('is-open');c.setAttribute('aria-pressed',String(c.dataset.encargoId===String(item.id)));const chip=c.querySelector('.oficio-chip');if(chip)chip.innerHTML=c.dataset.encargoId===String(item.id)?`${oficioIcon('check')} Seleccionado`:c.classList.contains('is-completado')?`${oficioIcon('check')} Entregado`:`${oficioIcon('arrow')} Abrir encargo`;});
   host.querySelector(`[data-encargo-id="${CSS.escape(String(item.id))}"]`)?.classList.add('is-open');
   host.querySelectorAll('.oficio-do-btn').forEach(b=>b.classList.remove('is-ahora'));
-  const writeBtn=host.querySelector('[data-encargo-do="write"]');
+  const writeBtn=host.querySelector('[data-encargo-do="read"]');
   if(writeBtn){
     writeBtn.classList.add('is-ahora');
     if(!writeBtn.querySelector('.oficio-ahora')) writeBtn.insertAdjacentHTML('afterbegin','<span class="oficio-ahora">Ahora</span>');
@@ -175,9 +195,10 @@ function openEncargo(host, item, draftText){
   host.querySelector('[data-encargo-do="pick"] .oficio-ahora')?.remove();
   const note=host.querySelector('.oficio-do-note');
   if(note) note.textContent=isBitacora(item)
-    ? 'Ahora estás en tu bitácora. Escribe como en el cuaderno de taller: lo que viste, lo que consultaste y lo que queda pendiente.'
-    : 'Ahora estás en el paso 3: escribe tu evidencia. Usa un dato del plano, la leyenda, la ficha o las notas. Si no está, indica qué falta y a quién lo consultarías.';
+    ? 'Revisa primero tu encargo. Después registra lo que viste, consultaste y quedó pendiente.'
+    : 'Revisa primero la situación, los recursos y el producto solicitado. Después registra tu evidencia.';
   detail.hidden=false;
+  const position=encargosItems(Number(host.dataset.station||2),host.dataset.ae||null).findIndex(e=>String(e.id)===String(item.id))+1;
   const notebook=isBitacora(item);
   if(notebook){
     const parts=parseBitacora(draft);
@@ -189,12 +210,13 @@ function openEncargo(host, item, draftText){
         <header class="bitacora-head">
           <div>
             <span class="bitacora-kicker">Bitácora de oficio · tu cuaderno</span>
-            <h5>${esc(item.title)}</h5>
+            <h5>Encargo ${position} · ${esc(item.title)}</h5>
             <p class="bitacora-who">${who} · ${esc(day||'Hoy')}${when?` · turno ${esc(when)}`:''} · AE ${item.ae}</p>
           </div>
           <button type="button" class="outline" data-encargo-close>Cerrar</button>
         </header>
-        ${typeof instructionContract==='function'?instructionContract(item):''}
+        ${encargoBrief(item)}
+        <h5>3. Ahora te toca a ti</h5>
         <p class="bitacora-intro">Esta hoja es tu cuaderno de taller. Anota el dato que viste, la consulta que harías y lo que todavía no puedes afirmar.</p>
         <label class="bitacora-field">Hoy vi<textarea class="bitacora-ruled" data-bit="vi" maxlength="4000" placeholder="Un dato del plano, la leyenda, la ficha o las notas.">${esc(parts.vi)}</textarea></label>
         <label class="bitacora-field">Consulté<textarea class="bitacora-ruled" data-bit="consult" maxlength="4000" placeholder="Qué pregunté, o a quién lo consultaría si el dato no aparece.">${esc(parts.consult)}</textarea></label>
@@ -211,19 +233,12 @@ function openEncargo(host, item, draftText){
     detail.innerHTML=`<article class="formative-item oficio-task" data-encargo-id="${esc(item.id)}">
       <header class="oficio-task-head">
         <span class="oficio-task-symbol" aria-hidden="true">${oficioIcon(encargoIcon(item))}</span>
-        <div class="oficio-task-title"><span class="oficio-respond-chip">Respondes aquí</span><h5>${esc(item.title)}</h5><p>AE ${item.ae} · ${Number(item.minutes)||60} minutos estimados</p></div>
+        <div class="oficio-task-title"><span class="oficio-respond-chip">Respondes aquí</span><h5>Encargo ${position} · ${esc(item.title)}</h5><p>AE ${item.ae} · ${Number(item.minutes)||60} minutos estimados</p></div>
         <button type="button" class="outline" data-encargo-close>Cerrar</button>
       </header>
-      ${typeof instructionContract==='function'?instructionContract(item):''}
-      <p class="oficio-task-prompt">${esc(item.prompt||item.title)}</p>
-      <p class="oficio-help"><b>Producto pedido:</b> ${esc(item.product)} · AE ${item.ae}</p>
-      <ol class="oficio-how">
-        <li>Busca el dato en el plano, la leyenda, la ficha o las notas de este encargo.</li>
-        <li>Redacta el producto con ese dato, tu decisión y lo que queda pendiente.</li>
-        <li>Si el documento no lo trae, nombra qué falta y a quién lo consultarías.</li>
-      </ol>
-      <p class="oficio-pregunta">¿Qué dato de oficio sustenta el producto que se pide?</p>
-      <label class="oficio-field">Escribe tu evidencia<textarea id="encargo-texto" maxlength="10000" minlength="80" placeholder="Dato que ves + decisión que tomas + lo que queda pendiente. Mínimo 80 caracteres.">${esc(draft)}</textarea></label>
+      ${encargoBrief(item)}
+      <h5>3. Ahora te toca a ti</h5>
+      <label class="oficio-field">Escribe tu evidencia<textarea id="encargo-texto" maxlength="10000" minlength="80" placeholder="Entrega el producto solicitado. Cita dónde encontraste cada dato, explica tu decisión y señala lo que falta confirmar. Mínimo 80 caracteres.">${esc(draft)}</textarea></label>
       <p class="oficio-help encargo-meter" data-encargo-meter>0 / mínimo 80 caracteres</p>
       <div class="formative-check">
         <button type="button" class="primary oficio-register" data-encargo-save ${locked?'disabled':''}>Registrar evidencia</button>
@@ -234,6 +249,7 @@ function openEncargo(host, item, draftText){
   const ta=detail.querySelector('#encargo-texto');
   const meter=detail.querySelector('[data-encargo-meter]');
   const tick=()=>{
+    ui.drafts[item.id]=notebook?joinBitacora(detail):(ta?.value||'');
     const n=notebook?bitacoraLength(detail):(ta?.value||'').trim().length;
     if(meter){
       meter.textContent=`${n} / mínimo 80 caracteres`;
@@ -257,20 +273,26 @@ function openEncargo(host, item, draftText){
       if(fb){fb.textContent=notebook?'La hoja pide al menos 80 caracteres entre lo que viste, consultaste y quedó pendiente.':'El producto pide al menos 80 caracteres con un dato de oficio.';fb.classList.add('is-err');}
       return;
     }
+    const saveButton=detail.querySelector('[data-encargo-save]');
+    if(saveButton.disabled)return;
+    saveButton.disabled=true;saveButton.setAttribute('aria-busy','true');saveButton.textContent='Guardando…';
     try{
       await saveActivity({kind:'encargo',id:item.id,station:Number(host.dataset.station||item.station),ae:item.ae,text});
       paintEncargos(host);
+      if(typeof refreshLearningChallenge==='function')refreshLearningChallenge(host.closest('.learning-sequence'));
       const again=host.querySelector('.encargo-detail .act-feedback');
       if(again){again.textContent=notebook?'Hoja guardada en tu bitácora. Sigue con el siguiente encargo o continúa la estación.':'Encargo registrado. Sigue con el siguiente o continúa la estación.';again.classList.remove('is-err');}
     }catch(err){
       if(fb){fb.textContent=err.message||'No se pudo guardar.';fb.classList.add('is-err');}
       toast(err.message);
+    }finally{
+      if(saveButton.isConnected){saveButton.disabled=Boolean(locked);saveButton.removeAttribute('aria-busy');saveButton.textContent=notebook?'Guardar esta hoja':'Registrar evidencia';}
     }
   });
   if(window.AulaAccess) window.AulaAccess.hydrate(detail);
   if(window.AulaNarration) window.AulaNarration.hydrate(detail);
   if(typeof decorateStudentActionCues==='function') decorateStudentActionCues(detail);
-  (detail.querySelector('[data-bit="vi"]')||ta)?.focus();
+  detail.querySelector('.encargo-brief')?.scrollIntoView({block:'nearest'});
 }
 function bindEncargos(root){
   const host=(root||document).querySelector('#seccion-encargos');
@@ -294,14 +316,17 @@ function bindEncargos(root){
       const items=encargosItems(station, ae);
       const ui=encargosUi(host);
       if(act==='pick'){
+        host.querySelectorAll('.oficio-do-btn').forEach(b=>b.classList.toggle('is-ahora',b===doBtn));
         host.querySelector('.oficio-grid')?.scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
         return;
       }
       const currentItem=items.find(x=>String(x.id)===String(ui.openId))||items[0];
       if(!currentItem) return;
       if(String(ui.openId)!==String(currentItem.id)) openEncargo(host, currentItem);
+      host.querySelectorAll('.oficio-do-btn').forEach(b=>{b.classList.toggle('is-ahora',b===doBtn);b.querySelector('.oficio-ahora')?.remove();});
+      doBtn.insertAdjacentHTML('beforeend','<span class="oficio-ahora">Ahora</span>');
       const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
-      if(act==='read') host.querySelector('.bitacora-intro, .oficio-task-prompt')?.scrollIntoView({block:'nearest',behavior:reduce});
+      if(act==='read') host.querySelector('.encargo-brief')?.scrollIntoView({block:'nearest',behavior:reduce});
       if(act==='write'){
         const ta=host.querySelector('[data-bit="vi"]')||host.querySelector('#encargo-texto');
         ta?.focus();

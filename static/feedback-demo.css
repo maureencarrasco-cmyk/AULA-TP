@@ -1,0 +1,11 @@
+.feedback-demo{padding:20px;margin:12px 0 24px;border:1px solid #9fcdd6;border-left:4px solid #078b98;border-radius:6px;background:#f1fafb;color:#123e59}
+.feedback-demo header small{font-weight:700;color:#08777f}
+.feedback-demo h2{font-size:22px;margin:8px 0}
+.feedback-demo select{display:block;width:100%;max-width:600px;min-height:48px;margin:8px 0 16px;font-family:Inter,sans-serif}
+.feedback-demo-metrics{display:flex;flex-wrap:wrap;gap:24px;padding:12px 0;border-top:1px solid #bfdde2;border-bottom:1px solid #bfdde2;margin-bottom:16px}
+.feedback-demo-metrics b{display:block;font:700 24px Inter,sans-serif;color:#08777f}
+.feedback-demo table{width:100%;border-collapse:collapse}
+.feedback-demo th,.feedback-demo td{padding:10px;text-align:left;border-bottom:1px solid #cbdfe5}
+.feedback-demo caption{text-align:left;font-weight:700;padding:10px 0}
+.feedback-demo-note{border-top:1px solid #bfdde2;padding-top:12px}
+@media(max-width:700px){.feedback-demo{padding:12px}.feedback-demo th,.feedback-demo td{padding:8px}.feedback-demo .achievement-table-wrap{overflow-x:auto}}

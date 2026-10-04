@@ -18,62 +18,30 @@ function learningNotes(a){
 function curriculumNote(){const c=current.content.curriculum;if(!c)return '';const url=typeof c.url==='string'&&c.url.startsWith('https://www.curriculumnacional.cl/')?c.url:null;return `<details class="curriculum-note"><summary>Acerca de estos contenidos</summary><p>${esc(c.status)}</p>${url?`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(c.label)} ↗</a><small>Enlace externo opcional. Las actividades del curso funcionan sin Internet.</small>`:''}</details>`}
 function ctxStepMark(n,kicker,title){return `<span class="ctx-step-n">${n}</span><div><span class="work-kicker">${kicker}</span><h4>${title}</h4></div>`}
 function ctxStepHead(n,kicker,title){return `<header class="ctx-step-head">${ctxStepMark(n,kicker,title)}</header>`}
-function enrichedContext(){const c=current.content;const course=(typeof courses!=='undefined'?courses:[]).find(x=>x.id===current.course_id);const s1Route=typeof pedRoute==='function'?pedRoute([{action:'observe',title:'Observa'},{action:'explore',title:'Explora'},{action:'analyze',title:'Analiza'},{action:'justify',title:'Justifica'},{action:'verify',title:'Verifica'}],0):`<ol class="ctx-mini-route" aria-label="Secuencia de esta actividad">
-  <li class="is-start"><b>1</b><span>Observa</span></li><li aria-hidden="true">→</li>
-  <li><b>2</b><span>Explora</span></li><li aria-hidden="true">→</li>
-  <li><b>3</b><span>Analiza</span></li><li aria-hidden="true">→</li>
-  <li><b>4</b><span>Justifica</span></li><li aria-hidden="true">→</li>
-  <li><b>5</b><span>Verifica</span></li>
- </ol>`;
- const startHead=typeof pedStepHead==='function'?pedStepHead(1,'observe','Lee el caso y dónde se aplica'):ctxStepHead(1,'Inicio · instrucción','Lee el caso y dónde se aplica');
- const closeHead=typeof pedStepHead==='function'
-  ? `<header class="ped-step-head ctx-step-head ctx-step-head-split">${pedStepMark(4,'justify','Tu respuesta')}<span class="ctx-step-arrow" aria-hidden="true">→</span>${pedStepMark(5,'verify','Continuar a Aprendizajes esperados')}</header>`
-  : `<header class="ctx-step-head ctx-step-head-split">${ctxStepMark(4,'Verificación','Tu respuesta')}<span class="ctx-step-arrow" aria-hidden="true">→</span>${ctxStepMark(5,'Siguiente','Continuar a Aprendizajes esperados')}</header>`;
- return workZone(`${panelTitle(1,'Conoce el contexto y activa tus conocimientos previos.',typeof cargaLabel==='function'?cargaLabel(1,'Carga ×5'):'Carga ×5')}
- ${contextMissionMarkup(c,course)}
- <section class="work-card work-card-activity ctx-activity"><div class="work-activity-head">${workIco('puzzle')}<div><h3>Actividad que debes desarrollar</h3><p>Caso profesional y reflexión inicial.</p></div></div>
- ${s1Route}
- ${typeof instructionContract==='function'?instructionContract({instruction:c.context_instruction}):''}
- <div class="context-detail">
-  <section class="ctx-step ctx-step-start ped-step" data-action="observe" data-state="current">
-   ${startHead}
-   <div class="ctx-orient">
-    <article class="ctx-block ctx-case"><img src="${(typeof moduleStopArt==='function'&&course)?moduleStopArt(course,Math.max(0,(current.position||1)-1)):'/static/themes/plans.png'}" alt="${esc(c.case_title||'Caso profesional del módulo')}"><div class="ctx-case-copy"><div class="ctx-case-label">${workIco('cube')}<span class="eyebrow">CASO PROFESIONAL · MÓDULO ${current.position}</span></div><h3>${esc(c.case_title||'Climatización en un edificio educacional')}</h3><p>${esc(c.case_blurb||'La lectura del plano es el primer paso para comprender el proyecto.')}</p></div></article>
-    <article class="ctx-block ctx-apply">${workIco('pin')}<div><h3>¿Dónde se aplica este aprendizaje?</h3><p>${esc(c.application||'En la revisión y coordinación de documentación técnica. Una etiqueta, una leyenda y una referencia de detalle deben contar la misma historia.')}</p></div></article>
-   </div>
-  </section>
-  <div class="ctx-flow-next" aria-hidden="true">↓</div>
-  ${typeof renderExplore==='function'&&c.explore?renderExplore(c.explore,current.state.explore):''}
-  ${typeof formativePackMarkup==='function'?formativePackMarkup(c,1):''}
-  <div class="ctx-flow-next" aria-hidden="true">↓</div>
-  <section class="ctx-step ctx-step-close ped-step" data-action="justify" data-state="idle">
-   ${closeHead}
-   <article class="ctx-block ctx-reply">${workIco('edit')}<div><span class="work-kicker">✎ Tu respuesta</span>${reflectionForm('context-form',c.reflection_prompt||'¿Qué revisarías primero y qué información necesitarías confirmar?',current.state.context,'Continuar a Aprendizajes esperados')}</div></article>
-   <footer class="ctx-learning-close"><b>OBSERVA → RECONOCE → ACTIVA → ANTICIPA</b><span>Ya comprendes la situación inicial y qué necesitas aprender. Continúa para desarrollar los aprendizajes esperados.</span></footer>
-  </section>
- </div>
- </section>${curriculumNote()}`,'work-zone-s1')}
+function enrichedContext(){return contextualizationPanel()}
 function currentScene(){return current.content.scene||{title:'Inspección del sistema · Escenario 3D simplificado',prompt:'La planta identifica UI-01 y UE-01, pero el listado recibido omite el control. ¿Cómo comprobarías esa diferencia y qué registrarías?',parts:[{id:'exterior',label:'UE-01',value:'Exterior',detail:'UE-01 · Unidad exterior identificada en la planta. Contrasta su etiqueta con el listado.'},{id:'interior',label:'UI-01',value:'Interior',detail:'UI-01 · Unidad interior conectada en el esquema a UE-01. Verifica su ubicación en la planta.'},{id:'control',label:'CONTROL',value:'22°',detail:'Control · Representado en la escena, pero omitido en el listado. Registra la discrepancia.'}]}}
 function enrichedScene(){
  const scene=currentScene(),unlocked=auth.user.role==='teacher'||Object.keys(current.state.cases).length===15;
- const sceneRoute=typeof pedRoute==='function'?pedRoute([{action:'explore',title:'Explora el escenario'},{action:'observe',title:'Examina cada componente'},{action:'relate',title:'Relaciona lo observado'},{action:'justify',title:'Escribe tu conclusión'},{action:'verify',title:'Completa la estación'}],inspected.size?Math.min(2,inspected.size):0):'';
+ const sceneRoute=typeof pedRoute==='function'?pedRoute([{action:'explore',title:'Observa'},{action:'observe',title:'Recopila evidencias'},{action:'relate',title:'Analiza y relaciona'},{action:'justify',title:'Fundamenta tu decisión'},{action:'verify',title:'Verifica'}],inspected.size?Math.min(2,inspected.size):0):'';
  const sceneHead=typeof pedStepHead==='function'?pedStepHead(4,'relate','Relaciona lo observado'):'<h3>Relaciona lo observado</h3>';
  const vis=window.AulaVisual;
  const stage=vis?vis.sceneStage(scene):'';
-  const cycle=vis?vis.cycle(['Preparar','Recorrer 3D','Ejecutar el paso','Verificar']):'';
- const video=vis&&scene.video?`<div id="video-lectura-oficio">${vis.videoFigure(scene)}</div>`:'';
+ const course=courses.find(c=>c.id===current.course_id);
+ const role=course?.specialty||course?.title||'tu especialidad';
+ const cycle='';
+ const video='';
  return `<div class="scene-layout">${sceneRoute}<div>
   <h3>${esc(scene.title)}</h3>
-  ${typeof instructionContract==='function'?instructionContract(scene):''}
+  <header class="instruction-showcase tone-green sequence-instruction"><div><small>SITUACIÓN INTEGRADORA FINAL · ESTACIÓN 3</small><h3>Observa antes de decidir</h3><p>El equipo necesita revisar los antecedentes de ${esc(current.title)} antes de continuar. Tu rol es participar como estudiante técnico de ${esc(role)}, dentro de los límites de tu formación.</p><p>Tu misión: reúne evidencias del escenario, relaciónalas con los aprendizajes del módulo y fundamenta cómo actuarías y qué verificarías.</p></div></header>
   ${cycle}
-  <p>Recorrido espacial interactivo del procedimiento: gira, acerca y abre cada paso (armar, instalar o diagnosticar). Este recurso representa relaciones espaciales; no sustituye una práctica en taller ni se presenta como un modelo 3D completo.</p>
+  <p class="scene-professional-note">Actividad formativa: puedes revisar la información y corregir tu conclusión. No corresponde a la Evaluación Final de la estación 4.</p>
   ${video}
   ${stage}
   <div class="inspect-shortcuts">${scene.parts.map(p=>`<button type="button" class="outline ${inspected.has(p.id)?'inspected':''}" data-action="inspect" data-part="${esc(p.id)}">${esc(p.label)} ${inspected.has(p.id)?'✓':''}</button>`).join('')}</div>
   <div class="scene-simple-nav" aria-label="Navegación simplificada del escenario"><button type="button" data-scene-nav="prev">← Anterior</button><button type="button" data-scene-nav="next">Siguiente →</button><button type="button" data-scene-nav="inspect">Examinar</button></div>
   <p id="inspection-detail" class="info-strip" aria-live="polite">${inspected.size} de ${scene.parts.length} componentes inspeccionados.</p>
  </div>
- <form id="scene-form" class="soft ped-step" data-action="justify">${sceneHead}<p>${esc(scene.prompt)}</p><label>Tu conclusión<textarea name="text" minlength="20" maxlength="10000" required>${esc(current.state.scene?.text||'')}</textarea></label><button class="primary" ${!unlocked||auth.user.role==='teacher'||current.state.closed?'disabled':''}>Completar estación 3</button>${!unlocked?'<p>Completa antes las 15 situaciones integradoras.</p>':''}<p class="muted small">Representación virtual del entorno profesional para inspeccionar información. No sustituye una práctica supervisada.</p></form></div>`;
+ <form id="scene-form" class="soft ped-step" data-action="justify">${sceneHead}<p>${esc(scene.prompt)}</p><details class="sequence-official"><summary>Aprendizajes que movilizas</summary>${current.content.aes.map(a=>`<p>${esc(a.description||a.title)}</p>`).join('')}</details><aside class="sequence-support"><h4>Nubi · Revisa antes de actuar</h4><details><summary>Primera orientación</summary><p>¿Qué dato observaste y qué información todavía necesitas confirmar?</p></details><details><summary>Focaliza tu revisión</summary><p>Compara dos evidencias del escenario. ¿Coinciden sus etiquetas, valores o referencias?</p></details><details><summary>Revisa tu argumento</summary><p>Separa el dato visible de tu interpretación. Explica qué aprendizaje utilizas y qué comprobarías antes de intervenir.</p></details></aside><label>¿Qué evidencia fue determinante, qué decisión tomarías y cómo verificarías el resultado?<textarea name="text" minlength="20" maxlength="10000" required placeholder="Observé… Lo relaciono con… Decidiría… La consecuencia esperada sería… Verificaría…">${esc(current.state.scene?.text||'')}</textarea></label><p class="muted small">Las consecuencias descritas son tu previsión: este recorrido no ejecuta una intervención técnica ni simula su resultado.</p><button class="primary" ${!unlocked||auth.user.role==='teacher'||current.state.closed?'disabled':''}>Guardar evidencia y completar estación 3</button>${!unlocked?'<p>Completa antes las 15 situaciones integradoras.</p>':''}<p class="muted small">Representación espacial con imagen y puntos de inspección; no es todavía un modelo 3D interactivo ni sustituye una práctica supervisada.</p></form></div>`;
 }
 function inspectPart(id){
  const p=currentScene().parts.find(p=>p.id===id);

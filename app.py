@@ -9,6 +9,8 @@ from catalog import upgrade_catalog, EXTENDED_MODULES
 from curriculum import MODULE_TITLES
 from pedagogy import enrich, strip_for_student, validate_experience, hint_for, summarize_response, exam_profile, course_planning, module_plan, publication_gaps
 from encargos import encargos_for
+from contextualization import context_plan, save_context_step
+from learning_sequence import learning_sequence, validate_sequence, sequence_feedback
 
 ROOT=Path(__file__).resolve().parent
 
@@ -102,7 +104,10 @@ def create_app(test_config=None):
     def completed(s, content=None):
         ae_count=len((content or {}).get('aes') or []) if isinstance(content,dict) else 3
         expected_steps=max(1,ae_count)*6
-        return [bool(s['context']),len(s['ae'])==expected_steps,len(s['cases'])==15 and bool(s['scene']),bool(s['exam']),s['closed']]
+        learned=len(s['ae'])==expected_steps and all((s.get('ae_meta') or {}).get(f'{a}-5',{}).get('sequence')!=1 or professional_complete(s,a) for a in range(ae_count))
+        return [bool(s['context']),learned,len(s['cases'])==15 and bool(s['scene']),bool(s['exam']),s['closed']]
+    def professional_complete(s,a):
+        return bool((s.get('ae_professional') or {}).get(str(a))) or any(int(item.get('station') or 0)==2 and int(item.get('ae') or 0)==a+1 for item in (s.get('encargos') or {}).values())
     def accessible(mid):
         with db() as con:
             m=con.execute('SELECT * FROM modules WHERE id=?',(mid,)).fetchone();u=user()
@@ -221,6 +226,8 @@ def create_app(test_config=None):
             if whole_plan:
                 active_plan=next((p for p in whole_plan['modules'] if p['position']==m['position']),None)
                 if active_plan:c['planning']=active_plan
+        c['contextualization']=context_plan(c,course,m['title'])
+        for item in c.get('aes') or []:item['learning_sequence']=learning_sequence(item)
         if u['role']=='student':c=strip_for_student(c)
         m.update(content=c,state=s,completed=completed(s,c),stations=STATIONS,steps=STEPS,planning=active_plan or c.get('planning') or module_plan(m['position']))
         return jsonify(m)
@@ -264,27 +271,43 @@ def create_app(test_config=None):
         with db() as con:
             s=getstate(con,mid)
             if s['closed']:return fail('El módulo ya está cerrado. Tus evidencias están conservadas.')
-            if kind=='context':
+            if kind=='context-step':
+                try:save_context_step(s,b.get('index'),b.get('response'))
+                except ValueError as error:return fail(str(error))
+                trace(s,'context-step',index=b['index'])
+            elif kind=='context':
                 if not text_valid(b.get('text')):return fail('Escribe una reflexión de al menos 20 caracteres.')
                 s['context']=b['text'].strip()
                 observed=b.get('observed')
                 if isinstance(observed,list):
                     s['explore']={'observed':[x for x in observed if isinstance(x,str)][:16]}
                 trace(s,'context')
-            elif kind=='ae':
+            elif kind in ('ae','ae-check'):
                 if not s['context']:return fail('Completa primero la contextualización.',403)
                 a=b.get('ae');step=b.get('step')
                 ae_count=len(c.get('aes') or [])
                 if type(a)!=int or type(step)!=int or a not in range(ae_count) or step not in range(6):return fail('Etapa inválida.')
                 index=a*6+step;key=f'{a}-{step}'
-                if index and f'{(index-1)//6}-{(index-1)%6}' not in s['ae']:return fail('Completa la etapa anterior.',403)
+                if b.get('sequence')!=1 and index and f'{(index-1)//6}-{(index-1)%6}' not in s['ae']:return fail('Completa la etapa anterior.',403)
                 exp=None
                 if a<len(c.get('aes',[])):
                     exps=c['aes'][a].get('experiences') or []
                     if step<len(exps):exp=exps[step]
                 response=b.get('response') if isinstance(b.get('response'),dict) else None
                 meta=s.setdefault('ae_meta',{}).get(key) or {'attempts':0}
-                if exp and exp.get('type') not in (None,'reflect') and response:
+                sequence=b.get('sequence')==1
+                if kind=='ae-check' and not sequence:return fail('Recorrido de aprendizaje inv\u00e1lido.')
+                if sequence:
+                    exp=learning_sequence(c['aes'][a])[step]
+                    ok,message=validate_sequence(exp,response,b.get('text'))
+                    feedback=sequence_feedback(exp,ok,message)
+                    if not ok:
+                        meta['attempts']=int(meta.get('attempts') or 0)+1
+                        s['ae_meta'][key]=meta
+                        putstate(con,mid,s)
+                    if kind=='ae-check':return jsonify(ready=ok,feedback=feedback)
+                    if not ok:return fail(message)
+                elif exp and exp.get('type') not in (None,'reflect') and response:
                     ok,_=validate_experience(exp,response)
                     if not ok:
                         meta['attempts']=int(meta.get('attempts') or 0)+1
@@ -297,10 +320,19 @@ def create_app(test_config=None):
                 if not text_valid(text):return fail('Fundamenta tu respuesta con al menos 20 caracteres.')
                 s['ae'][key]=text.strip()
                 s.setdefault('ae_meta',{})[key]={'attempts':int(meta.get('attempts') or 0),'type':(exp or {}).get('type'),'skill':(exp or {}).get('skill')}
+                if sequence:s['ae_meta'][key].update(response=response,feedback=feedback,sequence=1)
                 trace(s,'ae',ae=a,step=step,tipo=(exp or {}).get('type'))
+            elif kind=='ae-professional':
+                a=b.get('ae')
+                if type(a)!=int or a not in range(len(c.get('aes') or [])):return fail('Aprendizaje inv\u00e1lido.')
+                if not all(f'{a}-{i}' in s['ae'] for i in range(6)):return fail('Completa las seis etapas antes del desaf\u00edo profesional.',403)
+                if not text_valid(b.get('text'),80) or b.get('verified') is not True:return fail('Escribe tu evidencia con al menos 80 caracteres y verifica tu respuesta.')
+                s.setdefault('ae_professional',{})[str(a)]={'text':b['text'].strip(),'verified':True}
+                trace(s,'ae-professional',ae=a)
             elif kind=='case':
                 expected_steps=len(c.get('aes') or [])*6
                 if len(s['ae'])!=expected_steps:return fail('Completa todos los aprendizajes esperados del módulo.',403)
+                if any((s.get('ae_meta') or {}).get(f'{a}-5',{}).get('sequence')==1 and not professional_complete(s,a) for a in range(len(c.get('aes') or []))):return fail('Completa los desaf\u00edos profesionales antes de la situaci\u00f3n integradora.',403)
                 idx=b.get('index');choice=b.get('choice')
                 if type(idx)!=int or idx not in range(15) or type(choice)!=int or choice not in range(2) or not text_valid(b.get('text')):return fail('Selecciona una decisión y justifícala con al menos 20 caracteres.')
                 if idx and str(idx-1) not in s['cases']:return fail('Resuelve la situación anterior.',403)

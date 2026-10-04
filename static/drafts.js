@@ -12,6 +12,7 @@ const localDrafts = {
   baseline(activity) {
     const s = current.state, parts = activity.split(':');
     if (parts[0] === 'ae') return JSON.stringify(s.ae[`${parts[1]}-${parts[2]}`] ?? null);
+    if (parts[0] === 'professional') return JSON.stringify(s.ae_professional?.[parts[1]] ?? null);
     if (parts[0] === 'case') return JSON.stringify(s.cases[parts[1]] ?? null);
     if (activity === 'exam') return JSON.stringify([s.exam, s.draft]);
     if (activity === 'close') return JSON.stringify([s.reflection, s.plan, s.closed]);

@@ -36,7 +36,7 @@ function integratedPanel(){
 const activity=encargosTab?(typeof encargosMarkup==='function'?encargosMarkup(3):''):scene?scenePanel():`<div class="integration-select"><div>${workIco('search')}<div><h3>Selecciona una situación para comenzar</h3><p>Cada situación te presenta un contexto simulado de la especialidad. Lee el caso, analiza la información y toma decisiones.</p></div></div><label>Filtrar por dificultad<select id="integration-filter">${['all','Inicial','Intermedia','Avanzada'].map(x=>`<option value="${x}" ${integrationFilter===x?'selected':''}>${x==='all'?'Todas':x}</option>`).join('')}</select></label></div>
  <div class="integration-carousel" aria-label="Selector de situaciones">${action('case-page','‹','carousel-arrow','data-page="'+(integrationPage-1)+'" aria-label="Página anterior de situaciones" '+(integrationPage===0?'disabled':''))}<div class="integration-cards">${visible.map(({i})=>{const unlocked=integrationUnlocked(i),done=Boolean(current.state.cases[i]),label=integrationLabel(i);return `<button type="button" class="situation-card ${i===caseIndex?'selected':''}" data-action="case" data-index="${i}" ${unlocked?'':'disabled'} aria-pressed="${i===caseIndex}"><div class="situation-photo"><img src="${integrationPhoto(i)}" alt="${esc(integrationPhotoAlt(i))}" loading="eager" decoding="async" onerror="this.onerror=null;this.src='/static/themes/workshop.webp'"><span>${i+1}</span></div><div class="situation-copy"><h4>${esc(label[0])}</h4><p>${esc(label[1])}</p><span class="situation-cta"${unlocked?' data-action="focus-case"':''}>${!unlocked?icon('lock')+' Bloqueada':done?'✓ Revisar':'Comenzar '+icon('arrow')}</span></div></button>`}).join('')}</div>${action('case-page','›','carousel-arrow','data-page="'+(integrationPage+1)+'" aria-label="Página siguiente de situaciones" '+(integrationPage>=pages-1?'disabled':''))}</div>
  <div class="integration-pages" aria-label="Páginas de situaciones">${Array.from({length:pages},(_,i)=>action('case-page','',i===integrationPage?'active':'',`data-page="${i}" aria-label="Página ${i+1} de situaciones" aria-pressed="${i===integrationPage}"`)).join('')}</div>`;
- return workZone(`${panelTitle(3,'Aplica lo aprendido en escenarios que requieren análisis, aplicación y toma de decisiones.',typeof cargaLabel==='function'?cargaLabel(3,'Carga ×5'):'Carga ×5')}
+ return workZone(`
  ${workCard('puzzle', 'Situación Integradora', `${workKicker('Este es el desafío principal que debes resolver')}<p>Aplica lo aprendido en escenarios que requieren análisis, aplicación y toma de decisiones.</p>`,'work-card-hero')}
  <div class="work-grid-3">
   ${workCard('target','Propósito de esta estación','<p>La Situación Integradora permite movilizar los aprendizajes desarrollados durante el módulo en escenarios que requieren análisis, aplicación y toma de decisiones, aumentando la contextualización y complejidad de la experiencia.</p>','work-card-purpose')}
@@ -46,8 +46,6 @@ const activity=encargosTab?(typeof encargosMarkup==='function'?encargosMarkup(3)
  <section class="work-card work-card-activity"><div class="work-activity-head">${workIco('puzzle')}<div><h3>Actividad que debes desarrollar</h3><p>${encargosTab?'Elige un encargo, trabaja 45 a 90 minutos y entrega el producto con un dato de oficio.':scene?'Explora el escenario, examina cada componente y justifica tu conclusión.':'Elige una situación, analiza el caso y toma una decisión justificada.'}</p></div></div>
  <div class="tabs integration-tabs">${action('tab',icon('file')+' Situaciones integradoras (1–15)',!scene&&!encargosTab?'active':'','data-tab="cases" aria-pressed="'+(!scene&&!encargosTab)+'"')}${action('tab',icon('cube')+' Situación final en 3D',scene?'active':'','data-tab="scene" aria-pressed="'+scene+'"')}${action('tab',icon('file')+' Encargos de oficio',encargosTab?'active':'','data-tab="encargos" aria-pressed="'+encargosTab+'"')}</div>
  ${activity}
- ${!scene&&!encargosTab&&typeof oficioLessonVideo==='function'?oficioLessonVideo(current.content):''}
- ${!encargosTab&&typeof formativePackMarkup==='function'?formativePackMarkup(current.content,3):''}
  </section>`,'work-zone-s3');
 }
 function integrationBottom(){return `<a class="outline" href="#module/${current.id}/2">← Estación anterior</a>${tab==='scene'||tab==='encargos'?action('station','Continuar a Evaluación final '+icon('arrow'),'primary',`data-n="4" ${!stationUnlocked(4)?'disabled':''}`):action('focus-case',`Continuar con Situación ${caseIndex+1} ${icon('arrow')}`,'primary',`${!integrationUnlocked(caseIndex)?'disabled':''}`)}`}
@@ -65,7 +63,7 @@ document.addEventListener('click',e=>{
 
 function integrationActivityPanel(){
  const label=integrationLabel(caseIndex);
- return workZone(`${panelTitle(3,'Aplica lo aprendido en escenarios que requieren análisis, aplicación y toma de decisiones.',typeof cargaLabel==='function'?cargaLabel(3,'Carga ×5'):'Carga ×5')}
+ return workZone(`
  ${workCard('puzzle',esc(label[0]),`${workKicker('Situación '+ (caseIndex+1) +' de 15 · desafío a resolver')}<p>${esc(label[1])}</p>`,'work-card-hero')}
  <div class="integration-activity-heading">${action('back-selector','← Volver a las situaciones','outline')}<span class="badge">Situación ${caseIndex+1} de 15</span></div>
  ${caseForm()}`,'work-zone-s3 work-zone-activity');

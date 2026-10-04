@@ -1017,7 +1017,7 @@ def strip_for_student(content):
         q.pop('answer', None)
         q.pop('inspect', None)
     for a in c.get('aes', []):
-        for exp in a.get('experiences', []):
+        for exp in a.get('experiences', []) + a.get('learning_sequence', []):
             exp.pop('answer', None)
             exp.pop('hints', None)
     c.pop('media_audit', None)

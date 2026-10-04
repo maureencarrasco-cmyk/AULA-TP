@@ -28,13 +28,17 @@ function fbProfileAvg(map){
   return Math.round(vals.reduce((a,v)=>a+Number(v.percent||0),0)/vals.length);
 }
 function fbAutoPct(){
-  const e=current?.state?.exam;
+  const demo=feedbackDemoSelected();
+  if(demo)return demo.final;
+  const e=feedbackResultState().exam;
   if(e&&typeof e.score==='number')return Math.round((e.score/Number(e.max_score||25))*100);
   const c=fbCaseScore();
   return c?c.percent:null;
 }
 function fbFinalPct(){
-  const e=current?.state?.exam,rev=e?.review;
+  const demo=feedbackDemoSelected();
+  if(demo)return demo.final;
+  const e=feedbackResultState().exam,rev=e?.review;
   if(!e)return null;
   const selection=Math.round((e.score/Number(e.max_score||25))*100);
   if(!e.development_required)return selection;
@@ -42,7 +46,7 @@ function fbFinalPct(){
   return Math.round((selection+(rev.score/25)*100)/2);
 }
 function fbEvidenceCounts(){
-  const s=current?.state||{};
+  const s=feedbackResultState();
   const aes=(current?.content?.aes||[]).length||3;
   const slots=[];
   slots.push(s.context?'sent':'todo');
@@ -64,7 +68,9 @@ function fbEvidenceCounts(){
   return {review,todo,first,scored,sent,total:slots.length};
 }
 function fbAeRows(){
-  const profile=current?.state?.exam?.profile?.ae||{};
+  const demo=feedbackDemoSelected();
+  if(demo)return demo.learnings.map(a=>({id:a.id,label:`${a.id} · ${a.label}`,pct:a.final}));
+  const profile=feedbackResultState().exam?.profile?.ae||{};
   const aes=current?.content?.aes||[];
   const keys=Object.keys(profile);
   if(!keys.length){
@@ -79,6 +85,8 @@ function fbAeRows(){
 }
 
 function fbEvolution(){
+  const demo=feedbackDemoEvolution();
+  if(demo)return demo;
   const course=(courses||[]).find(c=>Number(c.id)===Number(current?.course_id));
   const modules=(course?.modules||[]).slice().sort((a,b)=>Number(a.position)-Number(b.position));
   const points=(key)=>modules.map(m=>({
@@ -137,7 +145,7 @@ function analizaSnapshot(){
       {label:'Logro del módulo',value:fbPctLabel(modulePct),tone:'violet'},
       {label:'Evidencias logradas',value:`${logradas} / ${totalEv}`,tone:'amber'},
       {label:'Intentos realizados',value:String(Object.keys(current?.state?.cases||{}).length||'—'),tone:'blue'},
-      {label:'Retroalimentaciones consultadas',value:current?.state?.exam?.review?'1':'0',tone:'green'}
+      {label:'Retroalimentaciones consultadas',value:feedbackResultState().exam?.review?'1':'0',tone:'green'}
     ],
     filters:{mod:`Módulo ${current?.position||''}`,oa:'Todos los OA',ae:'Todos los AE'}
   };
@@ -208,188 +216,53 @@ function analizaFilters(d){
 }
 
 function analizaDemoCohort(studentPct){
-  const bands=[
-    {label:'0–39%',count:0},{label:'40–49%',count:2},{label:'50–59%',count:9},
-    {label:'60–69%',count:27},{label:'70–79%',count:50},{label:'80–89%',count:26},{label:'90–100%',count:6}
-  ];
+  const data=feedbackDemoData();
+  if(!data)return '';
+  const bands=data.bands;
   const total=bands.reduce((sum,b)=>sum+b.count,0),max=Math.max(...bands.map(b=>b.count));
   const W=720,H=238,left=58,right=24,top=34,bottom=54,plotW=W-left-right,plotH=H-top-bottom;
   const step=plotW/bands.length,barW=Math.min(58,step*.62);
-  const grid=[0,10,20,30,40,50].map(v=>{const y=top+plotH-(v/50)*plotH;return `<line x1="${left}" y1="${y}" x2="${W-right}" y2="${y}"/><text x="${left-10}" y="${y+4}" text-anchor="end">${v}</text>`}).join('');
-  const bars=bands.map((b,i)=>{const h=(b.count/max)*plotH,x=left+i*step+(step-barW)/2,y=top+plotH-h;return `<g><rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="7"/><text class="az-cohort-value" x="${x+barW/2}" y="${y-8}" text-anchor="middle">${b.count}</text><text class="az-cohort-band" x="${x+barW/2}" y="${H-29}" text-anchor="middle">${b.label}</text></g>`}).join('');
+  const axisMax=Math.max(10,Math.ceil(max/10)*10);
+  const grid=Array.from({length:6},(_,i)=>axisMax*i/5).map(v=>{const y=top+plotH-(v/axisMax)*plotH;return `<line x1="${left}" y1="${y}" x2="${W-right}" y2="${y}"/><text x="${left-10}" y="${y+4}" text-anchor="end">${v}</text>`}).join('');
+  const bars=bands.map((b,i)=>{const h=(b.count/axisMax)*plotH,x=left+i*step+(step-barW)/2,y=top+plotH-h;return `<g><rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="7"/><text class="az-cohort-value" x="${x+barW/2}" y="${y-8}" text-anchor="middle">${b.count}</text><text class="az-cohort-band" x="${x+barW/2}" y="${H-29}" text-anchor="middle">${b.label}</text></g>`}).join('');
   const hasStudent=studentPct!=null&&Number.isFinite(Number(studentPct));
   const markerX=hasStudent?left+(Math.max(0,Math.min(100,Number(studentPct)))/100)*plotW:null;
-  const marker=hasStudent?`<g class="az-cohort-marker"><line x1="${markerX}" y1="${top-5}" x2="${markerX}" y2="${top+plotH}"/><rect x="${Math.max(left,Math.min(W-right-82,markerX-41))}" y="4" width="82" height="23" rx="11"/><text x="${Math.max(left+41,Math.min(W-right-41,markerX))}" y="20" text-anchor="middle">Tú · ${studentPct}%</text></g>`:'';
-  return `<section class="az-card az-cohort" aria-labelledby="az-cohort-title"><header><div><span class="az-cohort-kicker">DATOS SIMULADOS PARA EXPLORAR</span><h3 id="az-cohort-title">Resultados de una cohorte de demostración</h3><p>Compara la distribución de logro de <b>${total} estudiantes de ejemplo</b>. No corresponde a calificaciones reales.</p></div><div class="az-cohort-stats"><span><b>120</b> estudiantes</span><span><b>74%</b> promedio</span><span><b>75%</b> mediana</span></div></header><svg class="az-cohort-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribución de 120 estudiantes de ejemplo por rango de logro">${grid}<line class="az-cohort-axis" x1="${left}" y1="${top+plotH}" x2="${W-right}" y2="${top+plotH}"/>${bars}${marker}<text class="az-cohort-axis-title" x="${left+plotW/2}" y="${H-5}" text-anchor="middle">Porcentaje de logro</text><text class="az-cohort-axis-title" x="14" y="${top+plotH/2}" text-anchor="middle" transform="rotate(-90 14 ${top+plotH/2})">Cantidad de estudiantes</text></svg><footer>${icon('info')} <span>Úsalo para aprender a interpretar resultados grupales; tu retroalimentación personal se basa únicamente en tus evidencias.</span></footer></section>`;
+  const marker=hasStudent?`<g class="az-cohort-marker"><line x1="${markerX}" y1="${top-5}" x2="${markerX}" y2="${top+plotH}"/><rect x="${Math.max(left,Math.min(W-right-82,markerX-41))}" y="4" width="82" height="23" rx="11"/><text x="${Math.max(left+41,Math.min(W-right-41,markerX))}" y="20" text-anchor="middle">Perfil · ${studentPct}%</text></g>`:'';
+  return `<section class="az-card az-cohort" aria-labelledby="az-cohort-title"><header><div><span class="az-cohort-kicker">DATOS SIMULADOS PARA EXPLORAR</span><h3 id="az-cohort-title">Resultados de una cohorte de demostración</h3><p>Compara la distribución de logro de <b>${total} estudiantes de ejemplo</b>. No corresponde a calificaciones reales.</p></div><div class="az-cohort-stats"><span><b>120</b> estudiantes</span><span><b>${data.average}%</b> promedio</span><span><b>${data.median}%</b> mediana</span></div></header><svg class="az-cohort-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribución de 120 estudiantes de ejemplo por rango de logro">${grid}<line class="az-cohort-axis" x1="${left}" y1="${top+plotH}" x2="${W-right}" y2="${top+plotH}"/>${bars}${marker}<text class="az-cohort-axis-title" x="${left+plotW/2}" y="${H-5}" text-anchor="middle">Porcentaje de logro</text><text class="az-cohort-axis-title" x="14" y="${top+plotH/2}" text-anchor="middle" transform="rotate(-90 14 ${top+plotH/2})">Cantidad de estudiantes</text></svg><footer>${icon('info')} <span>Úsalo para aprender a interpretar resultados grupales; los perfiles son ficticios y no se utilizan para calificar.</span></footer></section>`;
 }
 
 function analizaDash(){
-  const d=analizaSnapshot();
-  const oaBars=d.oa.map(o=>`<li class="az-oa tone-${o.tone}">
-    <span class="az-oa-id">${esc(o.id)}</span>
-    <span class="az-oa-track"><i style="width:${o.pct==null?0:Math.max(0,Math.min(100,o.pct))}%"></i></span>
-    <b>${fbPctLabel(o.pct)}</b>
-  </li>`).join('');
-  const aeBars=d.ae.map(a=>`<li class="az-ae tone-${a.tone}${a.warn?' is-warn':''}">
-    <span>${esc(a.id)}</span>
-    <span class="az-ae-track"><i style="width:${a.pct==null?0:a.pct}%"></i></span>
-    <b>${fbPctLabel(a.pct)}</b>${a.warn?'<em>!</em>':''}
-  </li>`).join('');
-  const evolution=d.evolution||{max:25,unit:'puntos',series:[]};
-  const allLabels=[...new Set(evolution.series.flatMap(s=>s.points.filter(p=>Number.isFinite(p.value)).map(p=>p.label)))];
-  const W=440,H=224,padL=58,padR=22,padT=30,padB=58;
-  const plotW=W-padL-padR, plotH=H-padT-padB;
-  const evoY=[0,5,10,15,20,25].map(v=>{
-    const y=padT+plotH-(v/evolution.max)*plotH;
-    return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#E2E8F0" stroke-width="1"/>`
-      +`<text class="az-evo-y" x="${padL-8}" y="${y+4}" text-anchor="end">${v}</text>`;
-  }).join('');
-  const xFor=(label)=>{
-    const i=Math.max(0,allLabels.indexOf(label));
-    return padL+(allLabels.length<=1?plotW/2:(i/(allLabels.length-1))*plotW);
-  };
-  const yFor=(value)=>padT+plotH-(Number(value)/evolution.max)*plotH;
-  const evoSeries=evolution.series.map((s,seriesIndex)=>{
-    const valid=s.points.filter(p=>Number.isFinite(p.value));
-    const line=valid.map((p,i)=>`${i?'L':'M'}${xFor(p.label).toFixed(1)},${yFor(p.value).toFixed(1)}`).join(' ');
-    const labelOffset=seriesIndex%2===0?-11:18;
-    const dots=valid.map(p=>`<circle class="tone-${s.tone}" cx="${xFor(p.label)}" cy="${yFor(p.value)}" r="5"/>`
-      +`<text class="az-evo-value tone-${s.tone}" x="${xFor(p.label)}" y="${yFor(p.value)+labelOffset}" text-anchor="middle">${p.value}</text>`).join('');
-    return `<path class="az-evo-line tone-${s.tone}" d="${line}" fill="none"/>${dots}`;
-  }).join('');
-  const evoLabels=allLabels.map(label=>`<text class="az-evo-lab" x="${xFor(label)}" y="${H-27}" text-anchor="middle">${esc(label)}</text>`).join('');
-  const evoLegend=evolution.series.length>1?`<div class="az-evo-legend">${evolution.series.map(s=>`<span class="tone-${s.tone}"><i></i>${esc(s.label)}</span>`).join('')}</div>`:'';
-  const primary=evolution.series[0]?.points.filter(p=>Number.isFinite(p.value))||[];
-  const delta=primary.length>1?primary[primary.length-1].value-primary[0].value:null;
-  const evoSummary=delta==null
-    ?'Completa una evaluación para comenzar a visualizar tu evolución.'
-    :delta===0
-      ?`Tu puntaje se mantuvo estable en ${primary[0].value} ${evolution.unit}.`
-      :`Tu puntaje ${delta>0?'aumentó':'disminuyó'} ${Math.abs(delta)} ${evolution.unit} entre ${primary[0].label} y ${primary[primary.length-1].label}.`;
-  const compare=d.compare.map(c=>`<li class="tone-${c.tone}"><i></i><span>${esc(c.label)}</span><b>${esc(c.value)}</b></li>`).join('');
-  const overTxt=d.over==null?'':('Tu resultado está '+Math.abs(d.over)+' puntos porcentuales '+(d.over>=0?'sobre':'bajo')+' el umbral esperado ('+d.pass+'%).');
-  const logrPct=Math.round((d.evid.logradas/Math.max(1,d.evid.total))*100);
-
-  return `<div class="az-board">
+  const s=feedbackResultState(),rows=fbAeRows(),final=fbFinalPct(),auto=fbAutoPct();
+  const pct=final!=null?final:auto;
+  const pending=Boolean(s.exam?.development_required&&!s.exam?.review);
+  const aes=current?.content?.aes||[];
+  const required=1+aes.length*6+15+1+1;
+  const recorded=(s.context?1:0)+Object.keys(s.ae||{}).length+Object.keys(s.cases||{}).length+(s.scene?1:0)+(s.exam?1:0);
+  const level=pct==null?'Sin resultado':pct>=fbPass()?'Umbral alcanzado':'Por fortalecer';
+  const evolution=fbEvolution();
+  const enough=evolution.series.some(series=>series.points.filter(p=>Number.isFinite(p.value)).length>=2);
+  const questions=[
+    ['Mi fortaleza','¿Cuál es tu principal fortaleza según tus resultados?','Identifica el aprendizaje con mejores resultados y cita un dato o evidencia.'],
+    ['Lo que necesito fortalecer','¿Qué aprendizaje presenta tu mayor dificultad?','Señala qué necesitas fortalecer y utiliza un resultado como evidencia.'],
+    ['Relación entre mis acciones y resultados','¿Qué relación observas entre tus acciones y tus resultados?','Relaciona las evidencias y retroalimentaciones disponibles con tus resultados. Si no hay datos suficientes, indícalo.']
+  ];
+  return `<div class="az-board az-guided">
+    <header class="az-guided-intro"><small>1. ANALIZA · ¿CÓMO ME FUE?</small><h2>Analiza tus resultados</h2><p>Revisa tus evidencias y sigue los pasos en orden. Primero observa tus resultados, luego identifica información importante y finalmente responde utilizando tus propios datos.</p><ol class="az-mini-route"><li>1. Observa</li><li>2. Identifica</li><li>3. Analiza y responde</li><li>4. Verifica</li></ol></header>
+    <section class="az-observe"><h3>1. Observa — ¿Cómo me fue?</h3><p>Revisa tu nivel de logro, tus aprendizajes y tus evidencias. En este paso solo observa; todavía no necesitas escribir.</p>
+    <h4>1.1 Mi resultado general</h4><dl class="az-personal-metrics"><div><dt>${pending?'Resultado automático provisional':'Logro general'}</dt><dd>${fbPctLabel(pct)}</dd></div><div><dt>Nivel de referencia</dt><dd>${esc(level)}</dd></div><div><dt>Evidencias registradas</dt><dd>${recorded} / ${required}</dd></div><div><dt>Evidencias pendientes</dt><dd>${Math.max(0,required-recorded)}</dd></div></dl>
+    <p>Las evidencias registradas indican participación, no logro técnico. ${pending?'El resultado final está pendiente de revisión docente.':''}</p>
+    <h4>1.2 Mis aprendizajes</h4>
     ${typeof achievementProgressTable==='function'?achievementProgressTable():''}
-    ${analizaFilters(d)}
-    <section class="az-instruction instruction-showcase tone-blue"><span>${icon('search')}</span><div><small>INSTRUCCIÓN DE LA ACTIVIDAD</small><h2>Observa, compara e identifica</h2><p>Observa tus resultados por AE, tu evolución y tus evidencias. Identifica una fortaleza y un aspecto que necesites seguir trabajando.</p></div></section>
-    ${analizaDemoCohort(d.modulePct)}
-    <div class="az-grid">
-      <section class="az-card az-module">
-        <h3>${esc(d.moduleLabel)}</h3>
-        <div class="az-module-body">
-          ${analizaDonut(d.modulePct,'Logro del módulo','#14B8A6')}
-          <div class="az-module-copy">
-            <p>${d.modulePct==null?'Aún no hay una evaluación entregada. Completa la estación 4 para visualizar tu logro.':`Has alcanzado un <b>${d.modulePct}%</b> de logro considerando las evidencias evaluadas en este módulo.`}</p>
-            <div class="az-tip">${icon('bulb')}<span>${esc(overTxt||'Cuando haya más evidencias puntadas, aquí verás tu logro frente al umbral.')}</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="az-card az-oa-card">
-        <h3>Logro por OA</h3>
-        <p class="az-chart-purpose">Compara el nivel alcanzado en cada objetivo para reconocer dónde avanzaste más y dónde necesitas apoyo.</p>
-        <div class="az-oa-chart">
-          <ul class="az-oa-list">${oaBars}</ul>
-          <div class="az-threshold" style="--mark:${d.pass}"><span>Umbral esperado ${d.pass}%</span></div>
-        </div>
-      </section>
-
-      <aside class="az-card az-opp">
-        <h3>Tu oportunidad de mejora</h3>
-        <div class="az-opp-badge"><span class="az-warn">⚠</span><b>${esc(d.weak.id)} · ${fbPctLabel(d.weak.pct)}</b></div>
-        <p>Es el objetivo con menor logro dentro del módulo.</p>
-        <p class="az-opp-delta">Diferencia respecto del umbral: <b>${d.weak.delta==null?'—':((d.weak.delta>=0?'+':'')+d.weak.delta+' pp')}</b></p>
-        <button type="button" class="az-opp-btn" data-action="az-ae">Ver AE asociados →</button>
-        <div class="az-ae-block">
-          <h4>AE del ${esc(d.weak.id)}</h4>
-          <ul class="az-ae-list">${aeBars}</ul>
-        </div>
-      </aside>
-
-      <section class="az-card az-evid">
-        <h3>Estado de mis evidencias</h3>
-        <p class="az-chart-purpose">Observa cuántas evidencias están logradas, en desarrollo o pendientes para identificar tu nivel de avance.</p>
-        <div class="az-evid-body">
-          ${analizaEvidDonut(d.evid)}
-          <ul class="az-evid-legend">
-            <li><i class="g"></i>Logradas <b>${logrPct}%</b> <em>${d.evid.logradas}</em></li>
-            <li><i class="y"></i>En desarrollo <b>${Math.round((d.evid.desarrollo/Math.max(1,d.evid.total))*100)}%</b> <em>${d.evid.desarrollo}</em></li>
-            <li><i class="z"></i>Pendientes <b>${Math.round((d.evid.pendientes/Math.max(1,d.evid.total))*100)}%</b> <em>${d.evid.pendientes}</em></li>
-          </ul>
-        </div>
-        <p class="az-foot-note">${icon('file')} ${d.evid.logradas} de cada ${d.evid.total} evidencias registradas alcanzan el criterio esperado.</p>
-      </section>
-
-      <section class="az-card az-evo">
-        <h3>Evolución del puntaje en evaluación</h3>
-        <p class="az-evo-subtitle">Compara tus mediciones para reconocer si tu desempeño avanzó, se mantuvo o disminuyó · ${allLabels.length} ${allLabels.length===1?'módulo con resultado':'módulos con resultados'} · máximo ${evolution.max} puntos.</p>
-        ${evolution.series.length?`<svg class="az-evo-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Evolución del puntaje obtenido por módulo">${evoY}<line class="az-evo-axis" x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT+plotH}"/><line class="az-evo-axis" x1="${padL}" y1="${padT+plotH}" x2="${W-padR}" y2="${padT+plotH}"/>${evoSeries}${evoLabels}<text class="az-evo-axis-title az-evo-axis-y" transform="translate(13 ${padT+plotH/2}) rotate(-90)" text-anchor="middle">${esc(evolution.yTitle)} (${esc(evolution.unit)})</text><text class="az-evo-axis-title" x="${padL+plotW/2}" y="${H-7}" text-anchor="middle">${esc(evolution.xTitle)}</text></svg>${evoLegend}`:'<div class="az-evo-empty">Aún no hay puntajes comparables registrados.</div>'}
-        ${evolution.demo?'<p class="az-demo-hint">Datos de ejemplo. Los puntajes reales aparecerán al completar evaluaciones.</p>':''}
-        <p class="az-foot-ok">${icon('arrow')} ${esc(evoSummary)}</p>
-      </section>
-
-      <section class="az-card az-compare">
-        <h3>Comparación de variables</h3>
-        <ul class="az-compare-list">${compare}</ul>
-        <div class="az-tip">${icon('bulb')}<span>Observa ambos grupos de datos. ¿Qué relación encuentras entre tu actividad y tu logro?</span></div>
-      </section>
-    </div>
-
-    <section class="az-pattern" aria-label="Encuentra un patrón">
-      <div class="az-pattern-head">
-        <div class="az-pattern-lead instruction-showcase tone-violet">
-          <span class="az-pattern-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#1D4ED8" stroke-width="2.2"/><path d="m20 20-3.6-3.6" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round"/><path d="M8.5 11h5M11 8.5v5" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/></svg>
-          </span>
-          <div>
-            <small>INSTRUCCIÓN DE LA ACTIVIDAD</small>
-            <h3>¿Qué patrón observas en tus resultados?</h3>
-            <p>Puedes comparar tus resultados por AE, revisar dónde avanzaste más o identificar dónde tuviste mayor dificultad.</p>
-          </div>
-        </div>
-        <aside class="az-pattern-tip">
-          <span class="az-tip-bulb" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M9 18h6M10 21h4" stroke="#D97706" stroke-width="2" stroke-linecap="round"/><path d="M12 3a6 6 0 0 0-3.5 10.7c.7.6 1.1 1.4 1.2 2.3h4.6c.1-.9.5-1.7 1.2-2.3A6 6 0 0 0 12 3Z" fill="#FBBF24" stroke="#F59E0B" stroke-width="1.2"/><path d="M12 2v1M4.5 7.5l.8.5M19.5 7.5l-.8.5" stroke="#FCD34D" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </span>
-          <p class="az-tip-hand">Los datos son una pista, no una sentencia. ¡Tú decides qué hacer con ellos!</p>
-        </aside>
-        <button type="button" class="s5-hint-button" data-s5-hint="analiza" aria-expanded="false">${icon('bulb')} Necesito una pista</button>
-      </div>
-      <div class="s5-hint-panel" data-s5-hint-panel="analiza" hidden>Compara primero tu resultado más alto con el más bajo. Luego revisa qué evidencia o actividad podría explicar esa diferencia.</div>
-      <ol class="az-pattern-qs">
-        <li class="az-pq tone-oa">
-          <header class="az-pq-head">
-            <span class="az-qnum" aria-hidden="true">1</span>
-            <span class="az-pq-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V9M10 19V5M16 19v-6M22 19H2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 9h.01M10 5h.01M16 13h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span>
-            <p class="az-pq-q">¿Qué patrón observas al comparar tus resultados?</p>
-          </header>
-          <label class="az-pq-label" for="az-pq-1"><span class="az-pq-n">Respuesta 1</span></label>
-          <textarea id="az-pq-1" class="az-pq-answer" data-az-pq="1" rows="3" maxlength="600" placeholder="Escribe aquí tu análisis…"></textarea>
-        </li>
-        <li class="az-pq tone-fase">
-          <header class="az-pq-head">
-            <span class="az-qnum" aria-hidden="true">2</span>
-            <span class="az-pq-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4.5 7v5c0 5 3.2 8.4 7.5 9.5C16.3 20.4 19.5 17 19.5 12V7L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 8v5M12 16.5h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
-            <p class="az-pq-q">¿Qué fase presenta la mayor dificultad?</p>
-          </header>
-          <label class="az-pq-label" for="az-pq-2"><span class="az-pq-n">Respuesta 2</span></label>
-          <textarea id="az-pq-2" class="az-pq-answer" data-az-pq="2" rows="3" maxlength="600" placeholder="Escribe aquí tu análisis…"></textarea>
-        </li>
-        <li class="az-pq tone-rel">
-          <header class="az-pq-head">
-            <span class="az-qnum" aria-hidden="true">3</span>
-            <span class="az-pq-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="7" cy="8" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="8" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="17" r="2.5" stroke="currentColor" stroke-width="2"/><path d="M9.2 9.5 10.8 15M14.8 9.5 13.2 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-            <p class="az-pq-q">¿Cómo se relacionan tus intentos, retroalimentaciones y logro?</p>
-          </header>
-          <label class="az-pq-label" for="az-pq-3"><span class="az-pq-n">Respuesta 3</span></label>
-          <textarea id="az-pq-3" class="az-pq-answer" data-az-pq="3" rows="3" maxlength="600" placeholder="Escribe aquí tu análisis…"></textarea>
-        </li>
-      </ol>
+    ${fbAeChart()}
+    <p>Los porcentajes por AE corresponden a los aciertos evaluados. No se atribuye un porcentaje por OA sin una medición específica.</p>
+    <h4>1.3 Mis evidencias</h4><ul><li>Situaciones registradas: ${Object.keys(s.cases||{}).length} de 15.</li><li>Evaluación final: ${s.exam?`${s.exam.score} / ${s.exam.max_score||25} puntos en selección múltiple`:'Pendiente de entrega'}.</li><li>Retroalimentación docente: ${s.exam?.review?'Disponible en Comprende':'Sin revisión registrada'}.</li></ul><p>No hay un historial completo de intentos ni un registro de consultas de retroalimentación; no se muestran cifras estimadas.</p>
+    ${enough?`<details><summary>Resultados de evaluaciones por módulo</summary><ul>${evolution.series.map(series=>`<li><b>${esc(series.label)}</b><ul>${series.points.filter(p=>Number.isFinite(p.value)).map(p=>`<li>${esc(p.label)}: ${p.value} puntos</li>`).join('')}</ul></li>`).join('')}</ul></details>`:'<p>Aún no hay suficientes resultados para mostrar tu evolución. Completa nuevas evaluaciones para visualizar tu progreso.</p>'}
     </section>
-    <footer class="s5-next-step"><b>OBSERVA → COMPARA → IDENTIFICA</b><span>Ahora que reconociste cómo fue tu desempeño, interpreta qué significan esos resultados.</span></footer>
-    ${d.demo?'<p class="az-demo-hint">Vista de ejemplo con el diseño de Analiza. Tus cifras reales aparecerán cuando haya evidencias puntadas.</p>':''}
+    <section class="az-identify"><h3>2. Identifica — Qué muestran mis resultados</h3><p>Busca una fortaleza, una dificultad y una relación entre tus acciones y resultados. Estas orientaciones no requieren una respuesta escrita todavía.</p><dl><div><dt>2.1 Fortaleza</dt><dd>Localiza tu resultado más alto y su evidencia.</dd></div><div><dt>2.2 Dificultad</dt><dd>Reconoce el aprendizaje con menor logro o sin evidencia suficiente.</dd></div><div><dt>2.3 Relación</dt><dd>Revisa si tus actividades y retroalimentaciones ayudan a interpretar los resultados.</dd></div></dl></section>
+    <section class="az-pattern az-response"><h3>3. Analiza y responde — Qué puedo concluir</h3><p>Ahora te toca a ti. En cada respuesta menciona al menos un resultado o evidencia que apoye tu conclusión. Si aún no tienes resultados, explica qué falta para poder analizar.</p><p class="az-draft-note">Tus respuestas se conservan como borrador en este navegador.</p>
+    ${questions.map(([title,question,hint],i)=>`<div class="az-written-question"><h4>3.${i+1} ${title}</h4><label for="az-pq-${i+1}"><img class="az-question-pencil" src="/static/student-write-pencil-blue.png?v=20261004-pencil-blue" alt="" aria-hidden="true">${question}</label><p id="az-help-${i+1}">${hint}</p><textarea id="az-pq-${i+1}" class="az-pq-answer" data-az-pq="${i+1}" rows="5" maxlength="600" aria-describedby="az-help-${i+1}" placeholder="Escribe tu respuesta aquí..."></textarea></div>`).join('')}
+    </section>
+    <section class="az-verify"><h3>4. Verifica — Antes de continuar</h3><p>Revisa tus respuestas. Esta comprobación no es una nueva evaluación.</p>${['Identifiqué una fortaleza.','Identifiqué un aprendizaje que necesito fortalecer.','Utilicé resultados o evidencias para justificar mis respuestas.','Respondí todas las preguntas.'].map((text,i)=>`<label><input type="checkbox" data-az-verify="${i}"> ${text}</label>`).join('')}<p data-az-ready role="status">Completa las tres respuestas y revisa la lista para continuar.</p>${action('tab','Continuar a Comprende '+icon('arrow'),'primary az-continue','data-tab="comprende" disabled')}<p>En el siguiente paso profundizarás en lo que significan tus resultados.</p></section>
   </div>`;
 }
 
@@ -410,10 +283,11 @@ function fbAeChart(){
   </li>`).join('');
   return `<section class="fb-card"><h3>Aprendizajes esperados</h3>
     <p class="fb-note">${has?'Porcentaje de aciertos en la evaluación, por AE.':'Cuando entregues la evaluación, aquí verás el logro por cada aprendizaje esperado.'}</p>
+    <ul class="fb-heat-legend" aria-label="Rangos del semáforo de logro"><li class="heat-low">Rojo: menos de ${Math.min(40,pass)}%</li><li class="heat-mid">Amarillo: ${Math.min(40,pass)}% a menos de ${pass}%</li><li class="heat-ok">Verde: ${pass}% o más</li></ul>
     <ul class="fb-rows">${list}</ul></section>`;
 }
 function fbComprendeBody(){
-  const e=current?.state?.exam,rev=e?.review;
+  const e=feedbackResultState().exam,rev=e?.review;
   const msg=rev?.feedback||'Aún no hay comentario del docente. Cuando revise tu desarrollo, verás aquí su orientación para seguir mejorando.';
   const rows=fbAeRows();
   const pass=fbPass();
@@ -570,8 +444,21 @@ function fbProyectaBody(){
   </div>`;
 }
 
+function fbComprendeBodyV3(){
+  const exam=feedbackResultState().exam;
+  const rows=fbAeRows().filter(row=>row.pct!=null);
+  const corrections=(exam?.corrections||[]).map((row,index)=>({...row,index}));
+  const groups=[['Lo que ya dominas',rows.filter(row=>row.pct>=fbPass()),'Aciertos que conviene mantener y verificar en nuevas situaciones.'],['Lo que estás consolidando',rows.filter(row=>row.pct>=40&&row.pct<fbPass()),'Revisa qué decisiones cumplen el criterio y cuáles necesitan ajustes.'],['Tu principal desafío',rows.filter(row=>row.pct<40),'Contrasta tu respuesta con la explicación antes de concluir.']];
+  const questions=[['comprende-interpretacion','¿Qué comprendiste al revisar esta evidencia?','Explica qué hiciste correctamente o qué necesitabas realizar de otra manera.','Escribe aquí qué comprendiste...'],['comprende-reflexion','¿Qué evidencia demuestra lo que acabas de explicar?','Cita un resultado, dato, decisión o criterio presente en la evidencia.','Menciona una evidencia concreta...'],['comprende-fortalecer','¿Qué aspecto de este aprendizaje necesitas fortalecer?','Explica qué necesitas seguir trabajando a partir de la evidencia revisada.','Explica qué necesitas fortalecer...']];
+  return `<div class="az-guided cg-board"><header class="az-guided-intro"><small>2. COMPRENDE</small><h2>¿Qué significan mis resultados?</h2><p>Revisa las evidencias que explican tus fortalezas y dificultades. Identifica qué ocurrió y explica con tus palabras qué significa para tu aprendizaje.</p><ol class="az-mini-route"><li>1. Revisa</li><li>2. Comprende</li><li>3. Explica</li><li>4. Verifica</li></ol><details><summary>Antes de comenzar</summary><p><b>Objetivo:</b> comprender tus resultados y reconocer qué mantener o fortalecer.</p><p><b>Vas a revisar:</b> resultados, retroalimentaciones y evidencias.</p><p><b>Vas a realizar:</b> revisar, comprender, explicar y verificar.</p><p><b>Al finalizar:</b> explicarás qué aprendiste, qué evidencia lo demuestra y qué necesitas fortalecer.</p></details></header>
+  <section class="az-observe"><h3>1. Revisa — Qué muestran mis resultados</h3><p>Revisa tus aprendizajes y abre una evidencia para comprender de dónde proviene el resultado. Todavía no necesitas escribir.</p><div class="cg-results">${groups.map(([title,matches,meaning],i)=>`<article class="cg-result cg-tone-${i}"><h4>1.${i+1} ${title}</h4>${matches.length?`<ul>${matches.map(row=>`<li><b>${esc(row.id)} · ${row.pct}%</b><details><summary>Aprendizaje asociado</summary>${esc(row.label)}</details></li>`).join('')}</ul><p>${meaning}</p><button type="button" class="outline" data-cg-review>Revisar evidencia</button>`:'<p>No hay resultados registrados en este rango. No se atribuye dominio ni dificultad sin evidencia.</p>'}</article>`).join('')}</div><p>Los rangos son referencias de aciertos, no una certificación de dominio técnico.</p>${exam?.review?.feedback?`<details><summary>Retroalimentación docente</summary><p>${esc(exam.review.feedback)}</p></details>`:'<p>No hay comentario docente disponible todavía.</p>'}</section>
+  <section class="az-identify" id="cg-evidence"><h3>2. Comprende — Revisa una evidencia</h3><p>Selecciona una evidencia. Revisa qué respondiste, qué ocurrió y qué criterio respalda la explicación.</p>${corrections.length?`<label for="cg-select">Evidencia que revisarás</label><select id="cg-select" data-cg-select><option value="">Selecciona una evidencia</option>${corrections.map(row=>`<option value="${row.index}">Pregunta ${row.index+1} · ${row.correct?'Acierto para comprender':'Prioridad de revisión'} · ${esc(row.ae||'AE por identificar')}</option>`).join('')}</select><div data-cg-detail aria-live="polite"></div>`:'<p>No hay evidencias evaluadas disponibles. Entrega la evaluación de la estación 4 para revisar tus respuestas; no se presentan ejemplos como si fueran tus resultados.</p>'}
+  <form data-cg-practice><h4>2.5 Comprueba si comprendiste</h4><fieldset><legend>Selecciona la acción que mejor te ayudaría a mejorar esta evidencia.</legend>${['Repetir la misma respuesta sin revisar la evidencia.','Comparar los datos con el criterio técnico y comprobar la decisión.','Cambiar la respuesta solo porque fue incorrecta.','Decidir por intuición sin comprobar los datos.'].map((text,i)=>`<label><input type="radio" name="cg-practice" value="${i}" disabled> ${'ABCD'[i]}. ${text}</label>`).join('')}</fieldset><button type="submit" class="outline" disabled>Comprobar respuesta</button><p role="status" data-cg-practice-status>Primero selecciona y revisa una evidencia.</p></form></section>
+  <section class="az-response"><h3>3. Explica — Qué comprendiste</h3><p>Ahora te toca a ti. Utiliza la evidencia revisada para responder con tus propias palabras.</p><p class="az-draft-note" data-cg-save>Tus respuestas se conservan como borrador en este navegador.</p>${questions.map(([key,question,hint,placeholder],i)=>`<div class="az-written-question"><label for="cg-answer-${i}"><img class="az-question-pencil" src="/static/student-write-pencil-blue.png?v=20261004-pencil-blue" alt="" aria-hidden="true">3.${i+1} ${question}</label><p id="cg-help-${i}">${hint}</p><textarea id="cg-answer-${i}" class="az-pq-answer" data-s5-note="${key}" rows="5" maxlength="700" aria-describedby="cg-help-${i}" placeholder="${placeholder}"></textarea></div>`).join('')}</section>
+  <section class="az-verify"><h3>4. Verifica — Comprendí mis resultados</h3><p>Revisa tus respuestas antes de continuar. Esta comprobación no agrega una calificación.</p>${['Expliqué qué comprendí.','Utilicé una evidencia para justificar mi explicación.','Reconocí qué aspecto necesito fortalecer.','Respondí todas las preguntas.'].map(text=>`<label><input type="checkbox" data-cg-verify> ${text}</label>`).join('')}<p role="status" data-cg-ready>Revisa una evidencia, comprueba tu comprensión y completa las tres respuestas.</p>${action('tab','← Volver a Analiza','outline','data-tab="analiza"')}${action('tab','Continuar a Conecta '+icon('arrow'),'primary','data-tab="conecta" data-cg-continue disabled')}<p>En el siguiente paso relacionarás lo aprendido.</p></section></div>`;
+}
 function fbComprendeBodyV2(){
-  const exam=current?.state?.exam;
+  const exam=feedbackResultState().exam;
   const rows=fbAeRows().map((r,i)=>({...r,index:i}));
   const scored=rows.filter(r=>r.pct!=null).sort((a,b)=>b.pct-a.pct);
   const strength=scored[0]||rows[0]||{id:'AE 1',label:'Aprendizaje principal',pct:null,index:0};
@@ -787,6 +674,21 @@ function fbProyectaBodyV2(mode='proyecta'){
 }
 
 
+function proyectaGuidedBody(){
+  const learnings=conectaLearnings(),closed=Boolean(current?.state?.closed),readonly=closed||auth?.user?.role==='teacher';
+  const contexts=['En una actividad de mi especialidad','En otro módulo','En una práctica o taller','En una situación laboral','En un proyecto','En otra situación'];
+  const focuses=learnings.map(item=>item.label).concat(['Fundamentar mis decisiones con evidencia','Trabajar con mayor autonomía']);
+  const answer=(n,question,hint,key,rows)=>`<div class="az-written-question"><h4 id="pg-question-${n}">${n}.2 ${question}</h4><p>${hint}</p><label for="pg-answer-${n}"><img class="az-question-pencil" src="/static/student-write-pencil-blue.png?v=20261004-pencil-blue" alt="" aria-hidden="true">Tu respuesta</label><textarea id="pg-answer-${n}" class="az-pq-answer" data-pg-answer="${key}" aria-labelledby="pg-question-${n}" rows="${rows}" minlength="20" maxlength="1500" placeholder="Escribe tu respuesta aquí..." ${readonly?'readonly':''}></textarea></div>`;
+  return `<div class="az-guided pg-board"><header class="az-guided-intro"><small>5. PROYECTA</small><h2>¿Qué aprendizaje me llevo?</h2><p>Cierra tu recorrido. Reconoce el aprendizaje más importante, piensa dónde puedes utilizarlo y define una acción concreta para seguir avanzando.</p><ol class="az-mini-route">${['Sintetiza','Proyecta','Define tu foco','Cierra'].map((title,i)=>`<li>${i+1}. ${title}<small data-pg-status="${i}">Pendiente</small></li>`).join('')}</ol><details><summary>Antes de comenzar</summary><p><b>Objetivo:</b> reconocer qué aprendizaje te llevas y cómo seguir avanzando.</p><p><b>Vas a realizar:</b> sintetizar, proyectar, definir tu foco y cerrar.</p><p><b>Al finalizar:</b> tendrás una síntesis personal y una acción concreta de mejora. Tu reflexión no se califica como correcta o incorrecta.</p></details><details><summary>Ver mi recorrido</summary><ul data-pg-journey></ul></details></header>
+  ${closed?'<p class="pg-closed" role="status">Recorrido finalizado. Tus respuestas están conservadas y no se pueden modificar.</p>':''}
+  <form id="close-form"><section class="pg-stage" data-pg-stage="0"><h3>1. Sintetiza — El aprendizaje que te llevas</h3><p>Selecciona el aprendizaje que consideras más importante para ti.</p><fieldset ${readonly?'disabled':''}><legend>1.1 Selecciona un aprendizaje</legend><div class="pg-choices">${learnings.map(item=>`<label><input type="radio" name="pg-learning" value="${esc(item.label)}"> ${esc(item.label)}</label>`).join('')}</div></fieldset>${answer(1,'¿Por qué este aprendizaje es importante para ti?','Explica qué comprendiste o qué puedes hacer ahora gracias a este aprendizaje.','importance',5)}<p data-pg-missing="0" role="status"></p></section>
+  <section class="pg-stage" data-pg-stage="1" hidden><h3>2. Proyecta — Dónde podrías utilizarlo</h3><p>Piensa en una situación futura y selecciona el contexto que corresponda.</p><fieldset ${readonly?'disabled':''}><legend>2.1 Selecciona un contexto</legend>${contexts.map(item=>`<label><input type="radio" name="pg-context" value="${esc(item)}"> ${esc(item)}</label>`).join('')}</fieldset>${answer(2,'¿Cómo utilizarías este aprendizaje en esa situación?','Describe brevemente qué harías utilizando lo que aprendiste.','application',5)}<details><summary>¿Necesitas una pista?</summary><p>Piensa en una tarea de tu especialidad donde este aprendizaje podría ser útil.</p></details><p data-pg-missing="1" role="status"></p></section>
+  <section class="pg-stage" data-pg-stage="2" hidden><h3>3. Define tu foco — Qué quieres fortalecer</h3><p>Selecciona un foco prioritario y define una acción que puedas realizar.</p><fieldset ${readonly?'disabled':''}><legend>3.1 Selecciona un aspecto</legend>${focuses.map(item=>`<label><input type="radio" name="pg-focus" value="${esc(item)}"> ${esc(item)}</label>`).join('')}</fieldset>${answer(3,'¿Qué puedes hacer para seguir mejorando?','Escribe una acción concreta para fortalecer el aspecto seleccionado. Puedes indicar cómo comprobarás tu avance.','action',4)}<p data-pg-missing="2" role="status"></p></section>
+  <section class="az-verify" data-pg-stage="3" hidden><h3>4. Cierra — Mi cierre de aprendizaje</h3><p>Revisa la síntesis construida con tus propias respuestas.</p><dl class="pg-summary">${[['learning','Me llevo'],['importance','Es importante para mí porque'],['context','Puedo utilizarlo en'],['application','Así podría utilizarlo'],['focus','Quiero seguir fortaleciendo'],['action','Mi próxima acción será']].map(([key,label])=>`<dt>${label}</dt><dd data-pg-summary="${key}"></dd>`).join('')}</dl><p role="status" data-pg-ready></p>${!closed?'<p>Al finalizar se guardan la reflexión y el plan de mejora en el módulo. El cierre requiere haber entregado la evaluación.</p>':''}</section>
+  <textarea name="reflection" hidden></textarea><textarea name="plan" hidden></textarea>
+  <p class="az-draft-note" data-pg-save>Las respuestas se conservan como borrador en este navegador.</p><details data-pg-legacy hidden><summary>Consultar reflexión y plan anteriores</summary><div data-pg-legacy-copy></div></details>
+  <nav class="pg-close-nav">${action('tab','← Revisar mi recorrido','outline','data-tab="analiza"')}<button type="submit" class="primary" data-pg-finish disabled>${closed?'Recorrido finalizado':'Finalizar mi recorrido '+icon('arrow')}</button></nav></form></div>`;
+}
 function proyectaFinalBody(){
   const closed=Boolean(current?.state?.closed);
   const disabled=closed||auth.user.role==='teacher';
@@ -816,6 +718,55 @@ function proyectaFinalBody(){
   </div>`;
 }
 
+function transferScenario(){
+  const cases=current?.content?.cases||[];
+  const source=cases[cases.length-1]||{};
+  const aes=current?.content?.aes||[];
+  const aeIndex=Math.max(0,Math.min(aes.length-1,Number(source.ae||1)-1));
+  const ae=aes[aeIndex]||{};
+  const criterion=source.criterion||ae.criteria?.[0];
+  const technical=typeof criterion==='string'?criterion:criterion?.text||criterion?.description||criterion?.title||ae.title||'';
+  return {title:source.title||current?.title||'Situación del módulo',site:source.site||'Contexto profesional del módulo',background:source.context||current?.content?.application||'',image:source.image||'',alt:source.alt||source.caption||'Recurso técnico del caso',document:source.document||'',criterion:technical,ae:aeIndex+1,
+    change:'Después de la revisión inicial, el equipo recibe una actualización de los antecedentes sin confirmar si modifica las condiciones de trabajo. Debes decidir cómo continuar antes de aplicar tu propuesta.',
+    decisions:[`Contrastar la actualización con el criterio del AE ${aeIndex+1} y registrar qué condiciones se mantienen.`,`Solicitar confirmación del antecedente actualizado antes de continuar con la tarea.`,`Mantener la propuesta inicial solo después de comprobar que la actualización no cambia sus condiciones.`,`Reformular la propuesta utilizando la actualización y revisar su coherencia con el criterio del AE ${aeIndex+1}.`]};
+}
+function transfiereGuidedBody(){
+  const scenario=transferScenario(),learnings=conectaLearnings();
+  const fields=[['proyecta-justifica','3.1 ¿Por qué elegiste esta decisión?','Fundamenta tu respuesta con un dato de la situación o del recurso y el criterio técnico.','Explica por qué tomaste esta decisión...'],['transfiere-aprendizajes','3.2 ¿Cómo te ayudaron estos aprendizajes a tomar tu decisión?','Explica cómo utilizaste uno o más aprendizajes para interpretar los antecedentes y decidir.','Describe cómo utilizaste lo aprendido...']];
+  return `<div class="az-guided tf-board"><header class="az-guided-intro"><small>4. TRANSFIERE</small><h2>¿Cómo utilizo lo aprendido en una situación nueva?</h2><p>Revisa la situación profesional, selecciona información, toma una decisión y explica qué aprendizajes utilizaste para fundamentarla.</p><ol class="az-mini-route">${['Explora','Decide','Justifica','Verifica'].map((name,i)=>`<li>${i+1}. ${name} <small data-tf-state="${i}">Pendiente</small></li>`).join('')}</ol><details><summary>Antes de comenzar</summary><p><b>Objetivo:</b> aplicar aprendizajes a una situación modificada del módulo.</p><p><b>Vas a utilizar:</b> antecedentes, recurso técnico y criterios del aprendizaje esperado.</p><p><b>Vas a realizar:</b> explorar, decidir, justificar y verificar.</p><p><b>Al finalizar:</b> conservarás tu decisión, justificación y aprendizajes utilizados. Es una actividad formativa, no otra evaluación final.</p></details></header>
+  <section class="az-observe"><h3>1. Explora — Comprende la situación</h3><h4>${esc(scenario.title)} · actualización de antecedentes</h4><p><b>Contexto:</b> ${esc(scenario.site)}</p><p>${esc(scenario.change)}</p><details><summary>Antecedentes de la situación — Necesario</summary><p>${esc(scenario.background)}</p>${scenario.document?`<pre>${esc(scenario.document)}</pre>`:''}</details><div class="tf-mission"><b>Tu misión</b><p>Determina si los antecedentes disponibles permiten mantener, ajustar o detener tu propuesta. Fundamenta la decisión con el criterio técnico y señala lo que aún necesita confirmación.</p></div>
+  ${scenario.image?`<figure class="tf-resource"><figcaption>Recurso técnico de la situación — Necesario</figcaption><div class="tf-resource-scroll"><img src="${esc(scenario.image)}" alt="${esc(scenario.alt)}" data-tf-image></div><div class="tf-zoom"><button type="button" class="outline" data-tf-zoom="in" aria-label="Ampliar recurso">${icon('search')} Ampliar</button><button type="button" class="outline" data-tf-zoom="reset">Restablecer vista</button></div></figure>`:''}
+  <details><summary>Criterio técnico · AE ${scenario.ae} — Necesario</summary><p>${esc(scenario.criterion||'No hay un criterio específico disponible. Consulta el aprendizaje esperado antes de afirmar que la decisión cumple sus requerimientos.')}</p></details><details><summary>Aprendizajes de Conecta — Opcional</summary><ul data-tf-connections></ul></details><details><summary>Ver pista — Opcional</summary><p>Compara lo que sabes con lo que no está confirmado. ¿Qué dato podría cambiar tu decisión? Revisa el criterio técnico antes de continuar.</p></details>
+  <h4>1.1 Identifica la información que necesitas</h4><fieldset><legend>Selecciona los recursos necesarios para decidir</legend>${[['antecedentes','Antecedentes de la situación — Necesario'],...(scenario.image?[['recurso','Recurso técnico de la situación — Necesario']]:[]),['criterio',`Criterio técnico del AE ${scenario.ae} — Necesario`],['conexiones','Mis conexiones de aprendizajes — Opcional']].map(([value,label])=>`<label><input type="checkbox" data-tf-resource="${value}"> ${esc(label)}</label>`).join('')}</fieldset><p role="status" data-tf-explore>Revisa y selecciona los recursos necesarios. Los opcionales no bloquean el avance.</p></section>
+  <section class="az-identify"><h3>2. Decide — Qué harías en esta situación</h3><fieldset data-tf-decisions disabled><legend>Selecciona tu decisión</legend>${scenario.decisions.map((text,i)=>`<label><input type="radio" name="tf-decision" value="${i}"> ${'ABCD'[i]}. ${esc(text)}</label>`).join('')}</fieldset><button type="button" class="outline" data-tf-confirm disabled>Confirmar decisión</button><p role="status" data-tf-decision-feedback>Primero completa la exploración.</p></section>
+  <section class="az-response"><h3>3. Justifica — Fundamenta tu decisión</h3><p>Ahora te toca a ti. Explica tu decisión utilizando información de la situación y aprendizajes del módulo.</p><blockquote data-tf-preview>Confirma primero una decisión.</blockquote><div data-tf-writing hidden><fieldset><legend>Aprendizajes que utilizaste</legend>${learnings.map(a=>`<label><input type="checkbox" data-tf-learning="${esc(a.id)}"> ${esc(a.label)}</label>`).join('')}</fieldset>${fields.map(([key,question,hint,placeholder],i)=>`<div class="az-written-question"><h4 id="tf-question-${i}">${question}</h4><p>${hint}</p><label for="tf-answer-${i}"><img class="az-question-pencil" src="/static/student-write-pencil-blue.png?v=20261004-pencil-blue" alt="" aria-hidden="true">Tu respuesta</label><textarea id="tf-answer-${i}" class="az-pq-answer" aria-labelledby="tf-question-${i}" data-s5-note="${key}" rows="6" maxlength="1500" placeholder="${placeholder}"></textarea></div>`).join('')}<p class="az-draft-note">Tu trabajo se conserva como borrador en este navegador.</p><details><summary>Consultar respuestas de la versión anterior</summary><div data-tf-legacy></div></details></div></section>
+  <section class="az-verify"><h3>4. Verifica — Revisa tu fundamento</h3><p>Comprueba la coherencia entre la decisión, los datos y los criterios. Puedes volver a decidir y corregir tu respuesta.</p>${['Comprendí la situación.','Revisé los recursos necesarios.','Tomé una decisión.','Utilicé información técnica.','Relacioné la decisión con aprendizajes del módulo.','Expliqué el razonamiento con mis palabras.'].map(text=>`<label><input type="checkbox" data-tf-verify> ${text}</label>`).join('')}<p role="status" data-tf-ready>Completa tu razonamiento antes de continuar.</p><p>Una decisión está fundamentada cuando usa información pertinente, considera el criterio técnico y explica sus límites. Completar estos pasos no certifica que la propuesta sea técnicamente correcta.</p>${action('tab','← Volver a Conecta','outline','data-tab="conecta"')}${action('tab','Continuar a Proyecta '+icon('arrow'),'primary','data-tab="proyecta" data-tf-continue disabled')}</section></div>`;
+}
+function conectaLearnings(){
+  const aes=current?.content?.aes||[];
+  const items=aes.slice(0,5).map((ae,i)=>({
+    id:`ae-${i+1}`,label:ae.short_title||`Aprendizaje esperado ${i+1}`,
+    description:ae.summary||ae.purpose||ae.description||ae.title||'',
+    official:ae.title||'',criteria:ae.criteria||[],where:`AE ${i+1} · estación 2 y situaciones integradoras del módulo`
+  }));
+  if(items.length===2){
+    const criterion=aes[0]?.criteria?.[0];
+    const text=typeof criterion==='string'?criterion:criterion?.text||criterion?.description||criterion?.title;
+    if(text)items.push({id:'criterio-ae-1',label:'Aplicar el criterio técnico del AE 1',description:text,official:text,criteria:[criterion],where:'AE 1 · criterio del aprendizaje esperado'});
+  }
+  return items;
+}
+function conectaGuidedBody(){
+  const learnings=conectaLearnings();
+  const options=learnings.map(a=>`<option value="${esc(a.id)}">${esc(a.label)}</option>`).join('');
+  const relations=['Se complementan.','El primero permite realizar el segundo.','El primero permite comprobar el segundo.','El primero depende del segundo.','Juntos permiten tomar una decisión técnica.','Existe otra relación.'];
+  const questions=[['conecta-explicacion','¿Por qué se relacionan estos dos aprendizajes?','Explica qué aporta uno al otro o por qué necesitas utilizar ambos relacionados.','Explica aquí cómo se relacionan...'],['conecta-utilidad','¿Para qué te sirve utilizar estos aprendizajes juntos?','Explica qué tarea, procedimiento o decisión del módulo puedes realizar mejor al utilizar ambos.','Escribe aquí para qué sirve esta conexión...']];
+  return `<div class="az-guided cn-board"><header class="az-guided-intro"><small>3. CONECTA</small><h2>¿Cómo se relaciona lo aprendido?</h2><p>Revisa los aprendizajes principales del módulo, identifica cuáles se relacionan y explica con tus palabras por qué esa conexión es importante.</p><ol class="az-mini-route"><li>1. Reconoce</li><li>2. Relaciona</li><li>3. Explica</li><li>4. Verifica</li></ol><details><summary>Antes de comenzar</summary><p><b>Objetivo:</b> reconocer relaciones entre los aprendizajes del módulo.</p><p><b>Vas a revisar:</b> aprendizajes, procedimientos y criterios técnicos.</p><p><b>Vas a realizar:</b> reconocer, relacionar, explicar y verificar.</p><p><b>Al finalizar:</b> explicarás una conexión significativa entre dos aprendizajes.</p></details></header>
+  <section class="az-observe"><h3>1. Reconoce — Aprendizajes principales</h3><p>Revisa qué significa cada aprendizaje antes de relacionarlo. Todavía no necesitas escribir.</p><h4>1.1 Aprendizajes del módulo</h4><div class="cn-learning-list">${learnings.map(a=>`<article><h4>${esc(a.label)}</h4><p>${esc(a.where)}</p><details><summary>Qué significa y criterios técnicos</summary><p>${esc(a.description)}</p>${a.official!==a.description?`<p>${esc(a.official)}</p>`:''}${Array.isArray(a.criteria)?`<ul>${a.criteria.map(c=>`<li>${esc(typeof c==='string'?c:c.text||c.description||c.title||'')}</li>`).join('')}</ul>`:''}</details></article>`).join('')}</div></section>
+  <section class="az-identify"><h3>2. Relaciona — Construye tu mapa</h3><p>Selecciona dos aprendizajes diferentes y un tipo de relación. En las relaciones dirigidas, el orden de los aprendizajes importa.</p><h4>1.2 Mapa de aprendizajes</h4><div class="cn-map" role="group" aria-label="Aprendizajes del mapa">${learnings.map(a=>`<button type="button" class="outline" data-cn-node="${esc(a.id)}" aria-pressed="false">${esc(a.label)}</button>`).join('')}</div><p>Puedes seleccionar dos nodos del mapa o utilizar los menús.</p><div class="cn-selects"><label>2.1 Primer aprendizaje<select data-cn-a><option value="">Selecciona un aprendizaje</option>${options}</select></label><label>2.2 Segundo aprendizaje<select data-cn-b><option value="">Selecciona un aprendizaje</option>${options}</select></label></div><fieldset><legend>2.3 Cómo se relacionan</legend>${relations.map((text,i)=>`<label><input type="radio" name="cn-relation" value="${i}"> ${text}</label>`).join('')}</fieldset><button type="button" class="outline" data-cn-check>Comprobar relación</button><p role="status" data-cn-feedback>Selecciona dos aprendizajes y una relación.</p><div class="cn-connection" data-cn-map-result aria-live="polite"></div><details><summary>Mis conexiones anteriores</summary><ul data-cn-history></ul></details></section>
+  <section class="az-response"><h3>3. Explica — Por qué se relacionan</h3><p>Ahora te toca a ti. Utiliza los aprendizajes seleccionados para explicar la conexión y su utilidad.</p><p data-cn-pair>Selecciona dos aprendizajes en el paso anterior.</p><p class="az-draft-note">Tus respuestas y conexiones se guardan en este navegador.</p>${questions.map(([key,question,hint,placeholder],i)=>`<div class="az-written-question"><h4 id="cn-question-${i}">3.${i+1} ${question}</h4><p>${hint}</p><label for="cn-answer-${i}"><img class="az-question-pencil" src="/static/student-write-pencil-blue.png?v=20261004-pencil-blue" alt="" aria-hidden="true">Tu respuesta</label><textarea id="cn-answer-${i}" aria-labelledby="cn-question-${i}" class="az-pq-answer" data-s5-note="${key}" rows="5" maxlength="1000" placeholder="${placeholder}"></textarea></div>`).join('')}</section>
+  <section class="az-verify"><h3>4. Verifica — Una conexión con sentido</h3><p>Revisa la relación y tus explicaciones. Esta comprobación no certifica su corrección técnica.</p>${['Seleccioné dos aprendizajes relacionados.','Identifiqué cómo se relacionan.','Expliqué la conexión con mis palabras.','Expliqué para qué sirve utilizar ambos juntos.'].map(text=>`<label><input type="checkbox" data-cn-verify> ${text}</label>`).join('')}<p role="status" data-cn-ready>Completa la conexión, las dos respuestas y la verificación.</p>${action('tab','← Volver a Comprende','outline','data-tab="comprende"')}${action('tab','Continuar a Transfiere '+icon('arrow'),'primary','data-tab="transfiere" data-cn-continue disabled')}</section></div>`;
+}
 function pedagogicalTabBody(mode){
   let html=fbProyectaBodyV2(mode);
   if(mode==='conecta')html=html
@@ -830,10 +781,10 @@ function pedagogicalTabBody(mode){
 
 function feedbackBody(viewTab){
   const t=viewTab||'analiza';
-  if(t==='conecta')return pedagogicalTabBody('conecta');
-  if(t==='transfiere')return pedagogicalTabBody('transfiere');
-  if(t==='proyecta'||t==='plan')return proyectaFinalBody();
-  if(t==='comprende'||t==='feedback')return fbComprendeBodyV2();
+  if(t==='conecta')return conectaGuidedBody();
+  if(t==='transfiere')return transfiereGuidedBody();
+  if(t==='proyecta'||t==='plan')return proyectaGuidedBody();
+  if(t==='comprende'||t==='feedback')return fbComprendeBodyV3();
   return analizaDash();
 }
 
@@ -857,12 +808,17 @@ function feedbackPanel(){
     proyecta:{number:5,title:'Proyecta',summary:'Estas son las características y orientaciones de la pestaña Proyecta.',icon:'flag',tone:'orange'}
   }[viewTab];
   const stageExplanation=`<section class="s5-tab-explanation tone-${activeStage.tone}" aria-labelledby="s5-tab-explanation-title"><div class="s5-tab-link">${icon('arrow')}<span><small>PESTAÑA ${activeStage.number} SELECCIONADA</small><b>${activeStage.title} → definición y actividad</b></span></div><header><span aria-hidden="true">${icon(activeStage.icon)}</span><div><small>CARACTERÍSTICAS DE LA PESTAÑA</small><h2 id="s5-tab-explanation-title">${activeStage.title}</h2><p>${activeStage.summary}</p></div></header>${typeof instructionContract==='function'?instructionContract({instruction:instructions[viewTab]}):''}</section>`;
-  return workZone(`${analizaTitle()}${analizaSteps(viewTab)}${stageExplanation}<div class="az-summary">${feedbackBody(viewTab)}</div>`,'work-zone-s5');
+  return workZone(`${analizaTitle()}${analizaSteps(viewTab)}${feedbackDemoPanel()}<div class="az-summary">${feedbackBody(viewTab)}</div>`,'work-zone-s5');
 }
 
 function feedbackBottom(){
   const done=Boolean(current.state.closed);
   const t=tab||'analiza';
+  if(t==='analiza'||t==='results')return `<a class="outline" href="#module/${current.id}/4">← Estación anterior</a>`;
+  if(t==='comprende'||t==='feedback')return '';
+  if(t==='conecta')return '';
+  if(t==='transfiere')return '';
+  if(t==='proyecta'||t==='plan')return '';
   const route={analiza:['module','comprende','Continuar a Comprende'],comprende:['analiza','conecta','Continuar a Conecta'],conecta:['comprende','transfiere','Continuar a Transfiere'],transfiere:['conecta','proyecta','Continuar a Proyecta']}[t];
   if(route){
     const back=route[0]==='module'?`<a class="outline" href="#module/${current.id}/4">← Estación anterior</a>`:action('tab',`← Volver a ${route[0].charAt(0).toUpperCase()+route[0].slice(1)}`,'outline',`data-tab="${route[0]}"`);
@@ -889,6 +845,17 @@ function bindAzPatternAnswers(){
   const box=document.querySelector('.az-pattern');
   if(!box)return;
   const saved=azPatternLoad();
+  const board=document.querySelector('.az-guided');
+  const checks=[...(board?.querySelectorAll('[data-az-verify]')||[])];
+  const update=()=>{
+    const answered=[...box.querySelectorAll('.az-pq-answer')].every(el=>el.value.trim().length>0);
+    const ready=answered&&checks.every(el=>el.checked);
+    const button=board?.querySelector('.az-continue');
+    if(button)button.disabled=!ready;
+    const status=board?.querySelector('[data-az-ready]');
+    if(status)status.textContent=ready?'Revisión completa. Puedes continuar a Comprende.':'Completa las tres respuestas y revisa la lista para continuar.';
+  };
+  checks.forEach(el=>el.addEventListener('change',update));
   box.querySelectorAll('.az-pq-answer').forEach(el=>{
     const k=el.getAttribute('data-az-pq');
     if(saved[k])el.value=saved[k];
@@ -896,8 +863,11 @@ function bindAzPatternAnswers(){
       const m=azPatternLoad();
       m[k]=el.value;
       azPatternSave(m);
+      checks.forEach(check=>{check.checked=false;});
+      update();
     });
   });
+  update();
 }
 
 function bindFeedback(){
@@ -911,6 +881,10 @@ function bindFeedback(){
   const bottom=document.querySelector('.bottom-nav');
   if(bottom)bottom.innerHTML=feedbackBottom();
   bindS5SupportPanel();
+  bindComprendeGuided();
+  bindConectaGuided();
+  bindTransfiereGuided();
+  bindProyectaGuided();
 }
 function bindProyectaFinal(){
   const board=document.querySelector('.pf-board');
@@ -1178,6 +1152,198 @@ function bindProyectaV2(){
     if(action==='evidence')board.querySelector('.p3-transfer')?.scrollIntoView({behavior:'smooth',block:'start'});
     if(action==='practice'&&typeof tool==='function')tool('practice');
   }));
+}
+function bindProyectaGuided(){
+  const board=document.querySelector('.pg-board');if(!board)return;
+  const form=board.querySelector('#close-form'),closed=Boolean(current.state.closed),readonly=closed||auth?.user?.role==='teacher';
+  const key=s5DraftKey('proyecta-cierre-v2');
+  let draft={};try{draft=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch(_){}
+  const reflection=current.state.reflection||'',plan=current.state.plan||'';
+  const divider='\n\n';
+    const headings=['Me llevo:','Es importante para mí porque:','Puedo utilizarlo en:','Así podría utilizarlo:','Quiero seguir fortaleciendo:','Mi próxima acción será:'];
+    const take=(text,prefix)=>{const start=text.startsWith(prefix)?0:text.indexOf(divider+prefix);if(start<0)return '';const offset=start+(start===0?0:divider.length)+prefix.length;const ends=headings.filter(heading=>heading!==prefix).map(heading=>text.indexOf(divider+heading,offset)).filter(index=>index>=0);return text.slice(offset,ends.length?Math.min(...ends):undefined).trim();};
+  const final={learning:take(reflection,'Me llevo:'),importance:take(reflection,'Es importante para mí porque:'),context:take(plan,'Puedo utilizarlo en:'),application:take(plan,'Así podría utilizarlo:'),focus:take(plan,'Quiero seguir fortaleciendo:'),action:take(plan,'Mi próxima acción será:')};
+  if(final.learning)draft=closed?final:{...final,...draft};
+  if(!draft.importance){try{draft.importance=reflection||localStorage.getItem(s5DraftKey('proyecta-final-importancia'))||'';}catch(_){}}
+  if(!draft.application){try{draft.application=localStorage.getItem(s5DraftKey('proyecta-final-aplicacion'))||'';}catch(_){}}
+  const inputs={importance:board.querySelector('[data-pg-answer="importance"]'),application:board.querySelector('[data-pg-answer="application"]'),action:board.querySelector('[data-pg-answer="action"]')};
+  Object.entries(inputs).forEach(([name,input])=>input.value=draft[name]||'');
+  const radios={learning:[...board.querySelectorAll('[name="pg-learning"]')],context:[...board.querySelectorAll('[name="pg-context"]')],focus:[...board.querySelectorAll('[name="pg-focus"]')]};
+  Object.entries(radios).forEach(([name,list])=>{const input=list.find(item=>item.value===draft[name]);if(input)input.checked=true;});
+  const values=()=>({learning:radios.learning.find(input=>input.checked)?.value||'',context:radios.context.find(input=>input.checked)?.value||'',focus:radios.focus.find(input=>input.checked)?.value||'',importance:inputs.importance.value.trim(),application:inputs.application.value.trim(),action:inputs.action.value.trim()});
+  const update=()=>{
+    const data=values(),done=[Boolean(data.learning&&data.importance.length>=20),Boolean(data.context&&data.application.length>=20),Boolean(data.focus&&data.action.length>=20)];
+    const ready=done.every(Boolean),prefixes=['Sintetiza','Proyecta','Define tu foco'];
+    board.querySelectorAll('[data-pg-stage]').forEach(section=>{const i=Number(section.dataset.pgStage);section.hidden=!closed&&i>0&&!done.slice(0,i).every(Boolean);});
+    [...done,ready].forEach((complete,i)=>{board.querySelector(`[data-pg-status="${i}"]`).textContent=complete?'Completado':i===0||done.slice(0,i).every(Boolean)?'En curso':'Pendiente';});
+    done.forEach((complete,i)=>{board.querySelector(`[data-pg-missing="${i}"]`).textContent=complete?`Paso ${i+1} completado.`:`Para completar ${prefixes[i]}: selecciona una opción y escribe al menos 20 caracteres en tu respuesta.`;});
+    Object.entries(data).forEach(([name,value])=>{board.querySelector(`[data-pg-summary="${name}"]`).textContent=value||'Pendiente';});
+    form.elements.reflection.value=`Me llevo: ${data.learning}${divider}Es importante para mí porque:\n${data.importance}`;
+    form.elements.plan.value=`Puedo utilizarlo en: ${data.context}${divider}Así podría utilizarlo:\n${data.application}${divider}Quiero seguir fortaleciendo: ${data.focus}${divider}Mi próxima acción será:\n${data.action}`;
+    board.querySelector('[data-pg-finish]').disabled=readonly||!ready||!current.state.exam;
+    board.querySelector('[data-pg-ready]').textContent=closed?'Recorrido finalizado. Tu reflexión y plan están guardados.':ready?'Síntesis completa. Revisa tus respuestas antes de finalizar.':'Completa las tres actividades antes de finalizar.';
+    if(!readonly)try{localStorage.setItem(key,JSON.stringify(data));}catch(_){board.querySelector('[data-pg-save]').textContent='No se pudo guardar el borrador en este navegador. El cierre final lo registra en el módulo.';}
+  };
+  Object.values(inputs).forEach(input=>input.addEventListener('input',update));Object.values(radios).flat().forEach(input=>input.addEventListener('change',update));
+  const journey=[];
+  let analiza=false,comprende=false,conecta=false,transfiere=false;
+  try{
+    analiza=Object.values(azPatternLoad()).filter(value=>String(value).trim()).length>=3;
+    comprende=['comprende-interpretacion','comprende-reflexion','comprende-fortalecer'].every(name=>(localStorage.getItem(s5DraftKey(name))||'').trim());
+    const connections=JSON.parse(localStorage.getItem(s5DraftKey('map-connections'))||'[]');conecta=Array.isArray(connections)&&connections.some(item=>item.reason&&item.utility);
+    const transfer=JSON.parse(localStorage.getItem(s5DraftKey('transfiere-producto'))||'{}');transfiere=Boolean(transfer.confirmed&&transfer.justification&&transfer.application);
+  }catch(_){}
+  ['Analiza','Comprende','Conecta','Transfiere'].forEach((name,i)=>journey.push(`<li>${esc(name)} · ${[analiza,comprende,conecta,transfiere][i]?'Respuestas registradas en este navegador':'Sin evidencia completa disponible en este navegador'}</li>`));
+  board.querySelector('[data-pg-journey]').innerHTML=journey.join('');
+  if(reflection||plan){board.querySelector('[data-pg-legacy]').hidden=false;board.querySelector('[data-pg-legacy-copy]').innerHTML=`<p><b>Reflexión guardada</b></p><p class="pg-saved-text">${esc(reflection||'Sin registro')}</p><p><b>Plan guardado</b></p><p class="pg-saved-text">${esc(plan||'Sin registro')}</p>`;}
+  update();
+  // Keep the existing server-backed close handler; only guard incomplete UI submissions.
+  form.addEventListener('submit',event=>{
+    const data=values();if(readonly||!data.learning||!data.context||!data.focus||[data.importance,data.application,data.action].some(value=>value.length<20)||!current.state.exam){event.preventDefault();event.stopImmediatePropagation();toast('Completa las tres actividades y entrega la evaluación antes de finalizar.');}
+  },true);
+}
+function bindTransfiereGuided(){
+  const board=document.querySelector('.tf-board');if(!board)return;
+  const scenario=transferScenario(),learnings=conectaLearnings(),key=s5DraftKey('transfiere-producto');
+  const resources=[...board.querySelectorAll('[data-tf-resource]')],picks=[...board.querySelectorAll('[data-tf-learning]')];
+  const answers=[...board.querySelectorAll('[data-s5-note]')],checks=[...board.querySelectorAll('[data-tf-verify]')];
+  const necessary=resources.filter(el=>el.dataset.tfResource!=='conexiones');
+  let confirmed=false;
+  let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch(_){}
+  resources.forEach(el=>el.checked=(saved.resources||[]).includes(el.dataset.tfResource));
+  picks.forEach(el=>el.checked=(saved.learnings||[]).includes(el.dataset.tfLearning));
+  const radio=board.querySelector(`input[name="tf-decision"][value="${Number(saved.decision)}"]`);if(radio&&saved.decision!=null)radio.checked=true;
+  const chosen=()=>board.querySelector('input[name="tf-decision"]:checked');
+  const explored=()=>necessary.length>0&&necessary.every(el=>el.checked);
+  const persist=()=>{
+    const data={resources:resources.filter(el=>el.checked).map(el=>el.dataset.tfResource),decision:chosen()?.value??null,confirmed,decisionText:chosen()?scenario.decisions[Number(chosen().value)]:'',justification:answers[0]?.value||'',application:answers[1]?.value||'',learnings:picks.filter(el=>el.checked).map(el=>el.dataset.tfLearning)};
+    try{localStorage.setItem(key,JSON.stringify(data));if(confirmed)localStorage.setItem(s5DraftKey('proyecta-decide'),data.decisionText);}catch(_){}
+  };
+  const update=()=>{
+    const explore=explored();
+    const justified=confirmed&&answers.every(el=>el.value.trim())&&picks.some(el=>el.checked);
+    const ready=explore&&justified&&checks.every(el=>el.checked);
+    board.querySelector('[data-tf-decisions]').disabled=!explore;
+    board.querySelector('[data-tf-confirm]').disabled=!explore||!chosen();
+    board.querySelector('[data-tf-writing]').hidden=!confirmed;
+    board.querySelector('[data-tf-preview]').textContent=confirmed?scenario.decisions[Number(chosen().value)]:'Confirma primero una decisión.';
+    board.querySelector('[data-tf-continue]').disabled=!ready;
+    board.querySelector('[data-tf-explore]').textContent=explore?'Recursos necesarios seleccionados. Comprueba que puedes citar un dato y el criterio técnico.':'Revisa y selecciona los recursos necesarios; los opcionales no bloquean el avance.';
+    board.querySelector('[data-tf-ready]').textContent=ready?'Transfiere completado. Tu decisión, fundamento y aprendizajes quedan guardados para continuar a Proyecta.':'Completa la decisión, las dos explicaciones, los aprendizajes utilizados y la verificación.';
+    [explore,confirmed,justified,ready].forEach((done,i)=>{board.querySelector(`[data-tf-state="${i}"]`).textContent=done?'Completado':i===0||[explore,confirmed,justified][i-1]?'En curso':'Pendiente';});
+  };
+  const invalidate=()=>{checks.forEach(el=>el.checked=false);persist();update();};
+  resources.forEach(el=>el.addEventListener('change',()=>{if(!explored())confirmed=false;invalidate();}));
+  board.querySelectorAll('input[name="tf-decision"]').forEach(el=>el.addEventListener('change',()=>{confirmed=false;board.querySelector('[data-tf-decision-feedback]').textContent='Confirma la nueva decisión antes de justificar.';invalidate();}));
+  board.querySelector('[data-tf-confirm]').addEventListener('click',()=>{
+    if(!explored()||!chosen())return;confirmed=true;
+    board.querySelector('[data-tf-decision-feedback]').textContent='Decisión registrada. Ahora explica qué dato y qué criterio la respaldan; puedes modificarla si encuentras información que la contradiga.';
+    invalidate();
+  });
+  answers.forEach(el=>el.addEventListener('input',invalidate));picks.forEach(el=>el.addEventListener('change',invalidate));checks.forEach(el=>el.addEventListener('change',()=>{persist();update();}));
+  let connections=[];try{connections=JSON.parse(localStorage.getItem(s5DraftKey('map-connections'))||'[]')||[];}catch(_){}
+  const label=id=>learnings.find(item=>item.id===id)?.label||id;
+  board.querySelector('[data-tf-connections]').innerHTML=Array.isArray(connections)&&connections.length?connections.map(c=>`<li>${esc(label(c.a))} ↔ ${esc(label(c.b))}<p>${esc(c.reason||'')}</p></li>`).join(''):'<li>No hay conexiones guardadas. Puedes consultar los aprendizajes del módulo; esto no bloquea el avance.</li>';
+  const old=[['Decisión anterior','proyecta-decide'],['Dato o evidencia anterior','proyecta-evidencia'],['Verificación anterior','proyecta-verifica']];
+  board.querySelector('[data-tf-legacy]').innerHTML=old.map(([title,name])=>{let value='';try{value=localStorage.getItem(s5DraftKey(name))||'';}catch(_){}return value?`<p><b>${title}</b><br>${esc(value)}</p>`:'';}).join('')||'<p>No hay otras respuestas anteriores.</p>';
+  let zoom=1;const image=board.querySelector('[data-tf-image]');
+  board.querySelectorAll('[data-tf-zoom]').forEach(button=>button.addEventListener('click',()=>{zoom=button.dataset.tfZoom==='reset'?1:Math.min(3,zoom+.5);if(image){image.style.width=`${zoom*100}%`;image.style.maxWidth='none';}}));
+  confirmed=Boolean(saved.confirmed&&chosen()&&explored());
+  update();
+}
+function bindConectaGuided(){
+  const board=document.querySelector('.cn-board');
+  if(!board)return;
+  const learnings=conectaLearnings(),a=board.querySelector('[data-cn-a]'),b=board.querySelector('[data-cn-b]');
+  const answers=[...board.querySelectorAll('[data-s5-note]')],checks=[...board.querySelectorAll('[data-cn-verify]')];
+  const key=s5DraftKey('map-connections'),draftKey=s5DraftKey('conecta-seleccion');
+  let connections=[];try{const saved=JSON.parse(localStorage.getItem(key)||'[]');connections=Array.isArray(saved)?saved:[];}catch(_){}
+  const label=id=>learnings.find(item=>item.id===id)?.label||id;
+  const showHistory=()=>{board.querySelector('[data-cn-history]').innerHTML=connections.length?connections.map(item=>`<li><b>${esc(label(item.a))} → ${esc(label(item.b))}</b><p>${esc(item.typeLabel||'Relación guardada anteriormente')}</p><p>${esc(item.reason||'')}</p>${item.utility?`<p>${esc(item.utility)}</p>`:''}</li>`).join(''):'<li>Aún no has guardado conexiones.</li>';};
+  let checked=false;
+  try{const draft=JSON.parse(localStorage.getItem(draftKey)||'null')||connections[connections.length-1];if(draft){if(learnings.some(item=>item.id===draft.a))a.value=draft.a;if(learnings.some(item=>item.id===draft.b))b.value=draft.b;const radio=board.querySelector(`input[name="cn-relation"][value="${Number(draft.type)}"]`);if(radio)radio.checked=true;if(!answers[0].value&&draft.reason)answers[0].value=draft.reason;}}catch(_){}
+  const relation=()=>board.querySelector('input[name="cn-relation"]:checked');
+  const typeLabel=()=>relation()?.closest('label')?.textContent.trim()||'';
+  const persistSelection=()=>{try{localStorage.setItem(draftKey,JSON.stringify({a:a.value,b:b.value,type:relation()?.value,reason:answers[0].value}));}catch(_){}};
+  const saveConnection=()=>{
+    if(!checked||!answers.every(el=>el.value.trim()))return;
+    const item={a:a.value,b:b.value,type:relation()?.value,typeLabel:typeLabel(),reason:answers[0].value.trim(),utility:answers[1].value.trim(),at:Date.now()};
+    const index=connections.findIndex(row=>row.a===item.a&&row.b===item.b);
+    if(index<0)connections.push(item);else connections[index]=item;
+    try{localStorage.setItem(key,JSON.stringify(connections));}catch(_){}
+    showHistory();
+  };
+  const update=()=>{
+    const distinct=a.value&&b.value&&a.value!==b.value;
+    const pair=distinct?`${label(a.value)} ↔ ${label(b.value)}`:'Selecciona dos aprendizajes diferentes.';
+    board.querySelector('[data-cn-pair]').textContent=pair;
+    board.querySelectorAll('[data-cn-node]').forEach(node=>node.setAttribute('aria-pressed',String(node.dataset.cnNode===a.value||node.dataset.cnNode===b.value)));
+    board.querySelector('[data-cn-map-result]').textContent=checked?`${label(a.value)} → ${typeLabel()} → ${label(b.value)}`:'';
+    const ready=distinct&&checked&&answers.every(el=>el.value.trim())&&checks.every(el=>el.checked);
+    board.querySelector('[data-cn-continue]').disabled=!ready;
+    board.querySelector('[data-cn-ready]').textContent=ready?'Conecta completado. En Transfiere utilizarás lo aprendido en una situación nueva.':'Completa la conexión, las dos respuestas y la verificación.';
+  };
+  const reset=()=>{checked=false;checks.forEach(el=>el.checked=false);board.querySelector('[data-cn-feedback]').textContent='La selección cambió. Comprueba nuevamente la relación.';persistSelection();update();};
+  [a,b].forEach(el=>el.addEventListener('change',reset));
+  board.querySelectorAll('input[name="cn-relation"]').forEach(el=>el.addEventListener('change',reset));
+  board.querySelectorAll('[data-cn-node]').forEach(node=>node.addEventListener('click',()=>{if(!a.value||b.value){a.value=node.dataset.cnNode;b.value='';}else b.value=node.dataset.cnNode;reset();}));
+  board.querySelector('[data-cn-check]').addEventListener('click',()=>{
+    const out=board.querySelector('[data-cn-feedback]');
+    if(!a.value||!b.value||a.value===b.value||!relation()){checked=false;out.textContent='Revisa nuevamente: selecciona dos aprendizajes diferentes e identifica una relación.';update();return;}
+    checked=true;
+    out.textContent=`La conexión tiene dos aprendizajes diferentes y un tipo de relación. Contrasta “${label(a.value)}” y “${label(b.value)}” con sus criterios del paso 1: explica qué aporta uno al otro y qué tarea permite realizar. Esta comprobación revisa la estructura, no valida automáticamente su corrección técnica.`;
+    persistSelection();saveConnection();update();
+  });
+  answers.forEach(el=>el.addEventListener('input',()=>{checks.forEach(check=>check.checked=false);persistSelection();saveConnection();update();}));
+  checks.forEach(el=>el.addEventListener('change',()=>{saveConnection();update();}));
+  showHistory();update();
+}
+function bindComprendeGuided(){
+  const board=document.querySelector('.cg-board');
+  if(!board)return;
+  const select=board.querySelector('[data-cg-select]');
+  board.querySelectorAll('[data-cg-review]').forEach(button=>button.addEventListener('click',()=>{
+    board.querySelector('#cg-evidence')?.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    select?.focus({preventScroll:true});
+  }));
+  const practice=board.querySelector('[data-cg-practice]');
+  const answers=[...board.querySelectorAll('[data-s5-note]')];
+  const checks=[...board.querySelectorAll('[data-cg-verify]')];
+  let understood=false;
+  const update=()=>{
+    const ready=Boolean(select?.value)&&understood&&answers.every(el=>el.value.trim())&&checks.every(el=>el.checked);
+    board.querySelector('[data-cg-continue]').disabled=!ready;
+    board.querySelector('[data-cg-ready]').textContent=ready?'Comprende completado. Ahora puedes relacionar lo aprendido en Conecta.':'Revisa una evidencia, comprueba tu comprensión, responde las tres preguntas y verifica tu trabajo.';
+  };
+  select?.addEventListener('change',()=>{
+    understood=false;
+    checks.forEach(el=>el.checked=false);
+    practice.querySelectorAll('input').forEach(el=>{el.checked=false;el.disabled=!select.value;});
+    practice.querySelector('button').disabled=true;
+    practice.querySelector('[role="status"]').textContent='Selecciona una alternativa después de revisar la evidencia.';
+    const index=Number(select.value),row=feedbackResultState().exam?.corrections?.[index];
+    const detail=board.querySelector('[data-cg-detail]');
+    if(select.value===''||!row){detail.innerHTML='';update();return;}
+    const question=current.content.questions?.[index];
+    const choice=feedbackResultState().exam?.answers?.[index];
+    const selected=question?.options?.[choice];
+    const ae=current.content.aes?.[Math.max(0,Number(String(row.ae||'').replace(/\D/g,''))-1)];
+    detail.innerHTML=`<article class="cg-proof"><h4>Pregunta ${index+1}</h4><p>${esc(row.question)}</p>${row.image?`<img src="${esc(row.image)}" alt="${esc(row.alt||row.caption||'Recurso de la pregunta evaluada')}">`:''}<dl><dt>2.1 Qué hiciste</dt><dd>${esc(selected||'La alternativa elegida no está disponible en este registro.')}</dd><dt>2.2 Qué ocurrió</dt><dd>${row.correct?'Tu respuesta fue correcta.':'Tu respuesta necesita revisión.'} ${esc(row.option_feedback||row.explanation||'')}</dd><dt>2.3 Qué criterio estaba involucrado</dt><dd>${esc(ae?.short_title||ae?.title||row.ae||'Aprendizaje por identificar')}<p>${esc(row.explanation||'No hay explicación técnica registrada.')}</p></dd><dt>2.4 Cómo puedes mejorarlo</dt><dd>Compara los datos de la pregunta con esta explicación. Identifica qué parte respalda o contradice tu decisión antes de modificarla.</dd></dl></article>`;
+    update();
+  });
+  practice.querySelectorAll('input').forEach(el=>el.addEventListener('change',()=>{
+    understood=false;checks.forEach(check=>check.checked=false);
+    practice.querySelector('button').disabled=false;update();
+  }));
+  practice.addEventListener('submit',event=>{
+    event.preventDefault();
+    understood=practice.querySelector('input:checked')?.value==='1';
+    practice.querySelector('[role="status"]').textContent=understood?'Correcto. Comparar tu respuesta con el criterio técnico permite comprender qué debes mantener o modificar.':'Revisa nuevamente la evidencia y el criterio técnico. Luego vuelve a intentarlo; cambiar o repetir sin comprobar no explica el resultado.';
+    update();
+  });
+  answers.forEach(el=>el.addEventListener('input',()=>{checks.forEach(check=>check.checked=false);update();}));
+  checks.forEach(el=>el.addEventListener('change',update));
+  update();
 }
 function bindComprendeV2(){
   const board=document.querySelector('.c2-board');

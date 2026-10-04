@@ -309,7 +309,7 @@
   function explainDisabled(root) {
     if (document.body.dataset.role === 'teacher') return;
     (root || document).querySelectorAll('button.primary:disabled, [data-action="submit-exam"][disabled], [data-action="station"][disabled].primary').forEach(btn => {
-      if (btn.closest('.ax-panel')) return;
+      if (btn.closest('.ax-panel,.context-sequence,.learning-sequence')) return;
       let box = btn.parentElement && btn.parentElement.querySelector('.access-blocked');
       if (!box) {
         box = document.createElement('ul');

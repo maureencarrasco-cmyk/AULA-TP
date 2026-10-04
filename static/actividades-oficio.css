@@ -551,3 +551,34 @@
   .bitacora-sheet{padding:18px 14px 16px 44px}
 }
 @media(max-width:460px){.oficio-lectura{grid-template-columns:1fr}.oficio-task-head h5{font-size:16px}}
+.encargo-introduction{padding:16px 0;border-bottom:1px solid #bddbd7;margin-bottom:16px;line-height:1.6}
+.encargo-introduction h5,.encargo-brief h5{font-size:17px;margin:0 0 12px}
+.encargo-brief{padding:20px 0;line-height:1.65;border-bottom:1px solid #bddbd7;margin-bottom:20px;scroll-margin-top:24px}
+.encargo-brief>p{margin:16px 0}
+.encargo-main-action{padding:16px;border-left:4px solid #078780;background:#e9f7f4}
+.encargo-main-action p{margin:6px 0 0;font-weight:600}
+.encargo-resources{padding:12px 0;border-block:1px solid #c4d9ed}
+.encargo-brief summary{cursor:pointer;color:#0865a7;font-weight:700;padding:8px 0}
+.encargo-brief pre{white-space:pre-wrap;overflow-wrap:anywhere}
+.seccion-encargos .oficio-card-body{min-width:0;overflow-wrap:anywhere}
+@media(max-width:600px){
+  .seccion-encargos,.seccion-encargos .encargo-detail,.seccion-encargos .oficio-task{padding:10px!important}
+  .seccion-encargos .oficio-grid{grid-template-columns:1fr}
+  .seccion-encargos .oficio-do{display:grid;grid-template-columns:1fr;gap:8px}
+  .seccion-encargos .oficio-task-head{flex-wrap:wrap}
+  .encargo-main-action{padding:10px}
+  .encargo-brief{overflow-wrap:anywhere}
+}
+.seccion-encargos .oficio-card{min-height:150px!important;transition:border-color .15s,box-shadow .15s,background .15s;cursor:pointer}
+.seccion-encargos .oficio-card:hover{border-color:#1684c5!important;box-shadow:0 3px 9px #164d7020!important}
+.seccion-encargos .oficio-card:active,.seccion-encargos .oficio-do-btn:active{box-shadow:inset 0 0 0 2px #1684c5!important}
+.seccion-encargos .oficio-card.is-open{border:2px solid #087f82!important;background:#edf9f6!important;box-shadow:none!important}
+.seccion-encargos :is(.oficio-card,.oficio-do-btn,.oficio-more,.oficio-register,[data-encargo-close]):focus-visible{outline:3px solid #176abd!important;outline-offset:3px}
+.seccion-encargos .oficio-do-btn{min-height:56px!important;white-space:normal!important}
+.seccion-encargos .oficio-do-btn.is-ahora{border:2px solid #087f82!important;background:#e5f5f1!important}
+.seccion-encargos .encargo-main-action{padding:16px;border-left:4px solid #087f82;background:#eaf8f4;border-radius:6px;margin:16px 0}
+.seccion-encargos .encargo-brief>ol{padding:16px 16px 16px 40px;background:#edf6ff;border-left:4px solid #1684c5;border-radius:6px}
+.seccion-encargos .encargo-brief details{padding:8px 0;border-bottom:1px solid #cbdde8}
+.seccion-encargos .encargo-brief summary{min-height:44px;padding:10px 4px;cursor:pointer}
+.seccion-encargos .oficio-register{min-height:48px!important;min-width:190px}
+.seccion-encargos .act-feedback{width:100%;max-width:none}

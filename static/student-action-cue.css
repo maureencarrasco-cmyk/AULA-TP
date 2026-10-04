@@ -46,23 +46,24 @@ body[data-screen="module"] .activity-focus-guide b.student-action-cue{
 }
 body[data-screen="module"] .student-write-cue{
   position:relative;
-  display:block;
-  width:min(280px,100%);
-  height:68px;
-  margin:10px 0 8px;
+  display:inline-block;
+  vertical-align:middle;
+  width:48px;
+  height:48px;
+  margin:0 8px 3px 0;
   overflow:hidden;
   border:0;
-  border-radius:15px;
+  border-radius:0;
   background:transparent;
 }
 body[data-screen="module"] .student-write-cue img{
-  position:absolute;
-  top:-13px;
-  left:0;
+  position:static;
   display:block;
-  width:280px;
-  max-width:none;
-  height:auto;
+  width:100%;
+  max-width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 2px 2px rgba(110,78,0,.15));
   pointer-events:none;
   user-select:none;
 }
@@ -70,6 +71,11 @@ body[data-screen="module"] .student-write-field>textarea,
 body[data-screen="module"] .student-write-field>input[type="text"],
 body[data-screen="module"] .student-write-field>input[type="number"]{display:block;width:100%;clear:both}
 @media(max-width:700px){
-  body[data-screen="module"] .student-write-cue{width:min(230px,100%);height:57px;border-radius:12px}
-  body[data-screen="module"] .student-write-cue img{top:-10px;width:230px}
+  body[data-screen="module"] .student-write-cue{width:40px;height:40px}
 }
+body[data-screen="module"] .student-question-number{display:inline-grid;place-items:center;width:28px;height:28px;flex:0 0 28px;margin-right:9px;border-radius:6px;background:#e2f3f1;color:#087f82;border:1px solid #a9d8d3;font-size:14px;font-weight:800;vertical-align:middle}
+body[data-screen="module"] .student-section-symbol{display:inline-grid;place-items:center;width:30px;height:30px;margin-right:10px;border-radius:6px;background:#e5f1ff;color:#176abd;vertical-align:middle}
+body[data-screen="module"] .student-section-symbol .icon{width:18px;height:18px}
+body[data-screen="module"] .student-section-symbol.tone-check{background:#dff2e6;color:#237b50}
+body[data-screen="module"] .student-section-symbol.tone-search{background:#def3f1;color:#087f82}
+body[data-screen="module"] .student-section-symbol.tone-target{background:#fff0d5;color:#966006}

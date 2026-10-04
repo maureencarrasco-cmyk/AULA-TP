@@ -3,7 +3,7 @@ if(!icons.edit)icons.edit='M4 20h4L19 9l-4-4L4 16Z M14 6l4 4';
 function examSvg(d){return `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision" aria-hidden="true"><path d="${d}"/></svg>`}
 function examIco(kind){
  const d={file:icons.file,edit:icons.edit,target:'M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20 M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12 M12 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4',trophy:'M8 4h8v3a4 4 0 0 1-8 0V4Z M8 4H5v3a3 3 0 0 0 3 3 M16 4h3v3a3 3 0 0 1-3 3 M9 20h6 M12 11v9',info:'M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20 M12 11v6 M12 8h.01',leaf:'M20 3C6 1 2 9 7 16s15 2 13-13ZM4 21 17 7',list:'M8 6h13 M8 12h13 M8 18h13 M3 6h.01 M3 12h.01 M3 18h.01'};
- return `<span class="exam-ico">${examSvg(d[kind]||icons.file)}</span>`;
+ return `<span class="exam-ico exam-ico-${kind}">${examSvg(d[kind]||icons[kind]||icons.file)}</span>`;
 }
 function examPhoto(){return `<figure class="exam-visual" aria-label="Evaluación final: observa, decide y demuestra"><div class="exam-visual-icons"><span>${examIco('file')}</span><i aria-hidden="true">→</i><span>${examIco('target')}</span><i aria-hidden="true">→</i><span>${examIco('check')}</span></div><figcaption><b>Observa · decide · demuestra</b><small>Tu evidencia refleja lo que puedes aplicar de manera autónoma.</small></figcaption></figure>`}
 function examHeroPhoto(){return `<figure class="exam-assessment-photo"><span class="exam-near-badge">Ya estás cerca</span><img src="/static/themes/evaluation-trophy.png?v=20261002" alt="Copa dorada que representa la cercanía del logro"><figcaption>${examIco('check')}<span><b>Avanza hacia tu logro</b><small>Lee, decide, fundamenta y revisa antes de entregar.</small></span></figcaption></figure>`}
@@ -20,40 +20,24 @@ function examTitle(subtitle){
 }
 function examTabs(dev){
  const cfg=examConfig();
- return `<div class="exam-sequence-note" role="note">${examIco('list')}<span><b>Esta evaluación tiene 26 actividades</b><small>Responde las preguntas 1 a 25 y finaliza con la situación compleja 26.</small></span></div><div class="tabs integration-tabs exam-tabs">${action('exam-tab',icon('file')+` Preguntas 1–${cfg.count}`,!dev?'active':'','data-tab="questions"')}${cfg.dev?action('exam-tab',icon('edit')+` Actividad 26 · Situación compleja`,dev?'active':'','data-tab="development"'):''}</div>`;
+ return `<div class="tabs integration-tabs exam-tabs" role="group" aria-label="Secciones de la evaluación">${action('exam-tab',icon('file')+` Preguntas 1–${cfg.count}${!dev?'<span class="exam-tab-current">Estás aquí</span>':''}`,!dev?'active':'',`data-tab="questions" aria-pressed="${!dev}"`)}${cfg.dev?action('exam-tab',icon('edit')+` Actividad 26 · Situación compleja${dev?'<span class="exam-tab-current">Estás aquí</span>':''}`,dev?'active':'',`data-tab="development" aria-pressed="${dev}"`):''}</div>`;
 }
 function examLanding(){
  const cfg=examConfig(),dev=cfg.dev&&tab==='development';
  const startLabel=Object.keys(current.state.draft?.answers||{}).length?'Continuar borrador':'Comenzar evaluación';
  return workZone(`${examTitle('Demuestra que puedes integrar el módulo, reconocer tus avances y continuar al siguiente desafío.')}
- ${typeof initialAchievementPanel==='function'?initialAchievementPanel():''}
- ${typeof pedRoute==='function'?pedRoute([{action:'decide',title:`${cfg.count} ítems`},...(cfg.dev?[{action:'justify',title:'1 desarrollo'}]:[]),{action:'verify',title:'Entrega'}],0):''}
- <section class="exam-course-plan" aria-label="Plan de evaluación del módulo"><div class="exam-course-plan-title">${examIco('trophy')}<div><span>DESAFÍO DE CIERRE</span><h3>Demuestra lo que sabes hacer</h3><p>Una evaluación completa, conectada con decisiones del mundo profesional.</p></div></div><div class="exam-course-plan-metrics"><article><strong>${cfg.count}</strong><span>preguntas<br>1 a 25</span></article><i aria-hidden="true">+</i><article><strong>1</strong><span>situación compleja<br>actividad 26</span></article><i aria-hidden="true">=</i><article class="exam-total-activities"><strong>${cfg.count+1}</strong><span>actividades<br>en total</span></article></div>${examHeroPhoto()}<small>${examIco('info')} Completa las 25 preguntas y la situación compleja para cerrar la evaluación del módulo.</small></section>
+ <section class="exam-course-plan" aria-label="Plan de evaluación del módulo"><div class="exam-course-plan-title">${examIco('trophy')}<div><span>DESAFÍO DE CIERRE</span><h3>Demuestra lo que sabes hacer</h3><p>Una evaluación completa, conectada con decisiones del mundo profesional.</p></div></div><div class="exam-course-plan-metrics"><article><strong>${cfg.count}</strong><span>preguntas<br>1 a 25</span></article><i aria-hidden="true">+</i><article><strong>1</strong><span>situación compleja<br>actividad 26</span></article><i aria-hidden="true">=</i><article class="exam-total-activities"><strong>${cfg.count+1}</strong><span>actividades<br>en total</span></article></div>${examHeroPhoto()}</section>
  <div class="exam-brief">
   <article class="exam-include"><span class="exam-card-label">01 · Tu tarea</span><h3>${examIco('list')} ¿Qué realizarás ahora?</h3><ul><li><b>${cfg.count} preguntas</b> de selección múltiple</li>${cfg.dev?'<li><b>1 situación integradora final</b></li>':''}</ul><small>Ambas partes recogen evidencia de los aprendizajes esperados de este módulo.</small></article>
   <article class="exam-purpose"><span class="exam-card-label">02 · Tu propósito</span><h3>${examIco('target')} ¿Para qué lo realizarás?</h3><p>Para demostrar que puedes aplicar y analizar los conocimientos en un escenario integrador.</p><p>Al finalizar obtendrás evidencia de tus aprendizajes.</p></article>
-  <article class="exam-important"><div><h3>Importante</h3><ul><li>La Práctica libre y el Agente pedagógico no forman parte de la calificación.</li><li>Las herramientas de accesibilidad permanecen disponibles para facilitar la lectura.</li><li>Lee la evidencia de cada ítem; los textos alternativos no anticipan la respuesta.</li><li>Las respuestas se registran automáticamente.</li></ul></div>${examPhoto()}</article>
+  <article class="exam-important"><div><span class="exam-card-label">03 · Antes de comenzar</span><h3>${examIco('info')} Importante</h3><ul><li>La Práctica libre y el Agente pedagógico no forman parte de la calificación.</li><li>Las herramientas de accesibilidad permanecen disponibles para facilitar la lectura.</li><li>Lee la evidencia de cada ítem; los textos alternativos no anticipan la respuesta.</li><li>Las respuestas se registran automáticamente.</li></ul></div>${examPhoto()}</article>
  </div>
- <ol class="exam-path" aria-label="Recorrido de la evaluación">
-  <li><span class="exam-path-n">1</span><span class="exam-path-ico">${examIco('list')}</span><b>${cfg.count} ítems</b><small>Selección múltiple</small></li>
-  ${cfg.dev?'<li class="exam-path-arrow" aria-hidden="true">→</li><li><span class="exam-path-n">2</span><span class="exam-path-ico">'+examIco('edit')+'</span><b>Actividad 26</b><small>Situación compleja · integra y fundamenta</small></li>':''}
-  <li class="exam-path-arrow" aria-hidden="true">→</li>
-  <li class="exam-path-goal"><span class="exam-path-n">3</span>${examIco('check')}<b>Evidencia de logro</b><small>${cfg.dev?'Selección y desarrollo':'Selección múltiple'}</small></li>
- </ol>
  ${examTabs(dev)}
- <div class="exam-summary">
-  <div class="exam-summary-head"><div><h3>Resumen de la evaluación</h3><p>Completa los ${cfg.count} ítems${cfg.dev?' y luego desarrolla la situación final':''}. Puedes revisar tu progreso antes de entregar.</p></div><span class="exam-total-chip">${cfg.minutes} min · incluidos en las 2 HP del curso</span></div>
-  <div class="exam-summary-cards">
-   <section class="exam-card-q"><span class="exam-count">${cfg.count}</span><div><b>Ítems</b><small>Selección múltiple<br>1 punto cada uno</small></div></section>
-   ${cfg.dev?'<section class="exam-card-d"><span class="exam-count">26</span><div><b>Situación compleja final</b><small>1 actividad de integración · 25 puntos</small></div></section>':''}
-   <section class="exam-card-total">${examIco('file')}<div><b>Culminación del módulo</b><small>Al entregar reconoces tu avance y cierras la evaluación con evidencia de logro.</small></div></section>
-  </div>
-  <div class="exam-summary-cta">${examIco('info')}<p>${cfg.dev?'El desarrollo final integra evidencia, cálculo o modelo, decisión, argumento y verificación.':'Esta evaluación recoge una parte de los 25 ítems planificados para el curso completo.'}</p>${action('start-exam',startLabel+' '+icon('arrow'),'primary exam-start')}</div>
- </div>`,'work-zone-s4');
+ <div class="exam-entry-actions">${action('start-exam',startLabel+' '+icon('arrow'),'primary exam-start')}</div>`,'work-zone-s4');
 }
 function examPanel(){
  const cfg=examConfig();
- if(current.state.exam)return workZone(`${examTitle('Evaluación entregada. Tus respuestas están guardadas.')}${typeof initialAchievementPanel==='function'?initialAchievementPanel():''}<div class="exam-summary">${workCard('check','Has entregado tu evaluación',`<p>Selección múltiple: <b>${current.state.exam.score} / ${current.state.exam.max_score||cfg.count} puntos</b>.</p><p>${cfg.dev?(current.state.exam.review?'Desarrollo revisado por el docente.':'Desarrollo pendiente de revisión docente.'):'Esta evaluación de módulo no incluye desarrollo escrito.'}</p>`,'work-card-ok')}<a class="primary exam-start" href="#module/${current.id}/5">Continuar a retroalimentación ${icon('arrow')}</a></div>`,'work-zone-s4');
+ if(current.state.exam)return workZone(`${examTitle('Evaluación entregada. Tus respuestas están guardadas.')}<div class="exam-summary">${workCard('check','Has entregado tu evaluación',`<p>Selección múltiple: <b>${current.state.exam.score} / ${current.state.exam.max_score||cfg.count} puntos</b>.</p><p>${cfg.dev?(current.state.exam.review?'Desarrollo revisado por el docente.':'Desarrollo pendiente de revisión docente.'):'Esta evaluación de módulo no incluye desarrollo escrito.'}</p>`,'work-card-ok')}<a class="primary exam-start" href="#module/${current.id}/5">Continuar a retroalimentación ${icon('arrow')}</a></div>`,'work-zone-s4');
  if(!examStarted)return examLanding();
  return workZone(`${examTitle('Demuestra lo aprendido e integra tus conocimientos.')}${examForm()}`,'work-zone-s4');
 }
