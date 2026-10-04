@@ -2,13 +2,13 @@
 /**
  * Aula TP · lógica de menús
  * Tres chromes excluyentes: público, estudiante, docente.
- * Cadena canónica: Contextualización → AE → Situación integradora → Evaluación → Cierre.
- * En Evaluación Final (estación 4) se ocultan Tutor y Práctica Libre al estudiante.
+ * Cadena canónica: Contextualización → AE → Situación integradora → Evaluación final → Retroalimentación y cierre.
+ * En Evaluación final (estación 4) se ocultan Tutor y Práctica libre al estudiante.
  */
 (function () {
   const ADMIN_TEXT = /revisi[oó]n administrador|desbloquear navegaci[oó]n|avanzar pantalla|reiniciar revisi[oó]n|ir a situaci[oó]n integradora/i;
   const SUPPORT_TEXT = /apoyos aula tp|herramientas de apoyo|herramientas locales/i;
-  const STATION_NAMES = ['', 'Contextualización', 'Aprendizajes esperados', 'Situación integradora', 'Evaluación final', 'Cierre'];
+  const STATION_NAMES = ['', 'Contextualización', 'Aprendizajes esperados', 'Situación integradora', 'Evaluación final', 'Retroalimentación y cierre'];
   let applying = false;
 
   function role() {
@@ -27,6 +27,8 @@
     if (/^courses?$/.test(hash) || hash === 'catalogo') return 'courses';
     if (hash.startsWith('module')) return 'module';
     if (hash.startsWith('course')) return 'course';
+    if (hash.startsWith('progress')) return 'progress';
+    if (hash.startsWith('info/')) return 'info';
     if (hash.startsWith('teacher') || hash.startsWith('follow')) return 'teacher';
     if (hash.startsWith('editor')) return 'editor';
     return '';
@@ -64,6 +66,9 @@
       if (st) {
         const nextStation = String(st);
         if (b.dataset.station !== nextStation) b.dataset.station = nextStation;
+      } else if (screen !== 'module') {
+        delete b.dataset.station;
+        b.classList.remove('station-exam');
       }
       b.classList.toggle('chrome-public', c === 'public');
       b.classList.toggle('chrome-student', c === 'student');
@@ -72,7 +77,7 @@
       hideAdminForStudent(c);
       gateExamAids(st, c);
       hideHomeChrome(c, screen);
-      labelPrimaryNav(c, st);
+      labelPrimaryNav(c, st, screen);
     } finally {
       applying = false;
     }
@@ -109,9 +114,9 @@
         const input = el.querySelector('textarea, input[type="text"]');
         if (input) {
           input.disabled = true;
-          input.placeholder = 'En Evaluación Final el tutor no orienta el contenido.';
+          input.placeholder = 'En Evaluación final el tutor no orienta el contenido.';
         }
-      } else {
+      } else if (el.getAttribute('data-exam-silent') === '1') {
         el.removeAttribute('data-exam-silent');
         el.hidden = false;
         el.setAttribute('aria-hidden', 'false');
@@ -122,7 +127,7 @@
   }
 
   function hideHomeChrome(c, screen) {
-    const hideNavChrome = c === 'public' || screen === 'courses' || screen === 'login';
+    const hideNavChrome = c === 'public' || screen === 'courses' || screen === 'login' || screen === 'info';
     document.querySelectorAll('.floating-back-button, .tools-fab, .tools-fab-backdrop, .tools-fab-layer, [data-open="support"]').forEach(el => {
       el.hidden = hideNavChrome;
       el.setAttribute('aria-hidden', hideNavChrome ? 'true' : 'false');
@@ -137,22 +142,36 @@
     });
   }
 
-  function labelPrimaryNav(c, st) {
+  function labelPrimaryNav(c, st, screen) {
     const nav = document.querySelector('nav.primary, header nav, #app-nav');
     if (nav) {
       nav.dataset.chrome = c;
       nav.querySelectorAll('[data-nav="editor"], [data-nav="teacher"], [data-nav="enroll"]').forEach(el => {
         el.hidden = c !== 'teacher';
       });
+      nav.querySelectorAll('a[href="#courses"], a[href="#progress"], a[href="#teacher"]').forEach(a => {
+        const href = a.getAttribute('href') || '';
+        const on = (href === '#courses' && (screen === 'courses' || screen === 'course' || screen === 'module'))
+          || (href === '#progress' && screen === 'progress')
+          || (href === '#teacher' && (screen === 'teacher' || screen === 'editor'));
+        a.classList.toggle('selected', on);
+        if (on) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
     }
     const crumbs = document.getElementById('station-crumb');
-    if (crumbs && st) crumbs.textContent = STATION_NAMES[st] || '';
+    if (crumbs) crumbs.textContent = st ? (STATION_NAMES[st] || '') : '';
     const route = document.getElementById('station-route');
-    if (route && st) {
+    if (route) {
+      if (!st) {
+        route.innerHTML = '';
+        return;
+      }
+      route.setAttribute('aria-label', 'Recorrido de cinco estaciones');
       route.innerHTML = STATION_NAMES.slice(1).map((name, i) => {
         const n = i + 1;
         const state = n < st ? 'done' : n === st ? 'current' : 'todo';
-        return `<li data-station-step="${n}" data-state="${state}">${n}. ${name}</li>`;
+        return `<li data-station-step="${n}" data-state="${state}"><span>${n}</span> ${name}</li>`;
       }).join('');
     }
   }

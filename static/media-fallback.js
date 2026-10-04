@@ -1,5 +1,5 @@
 'use strict';
-/* Multimedia faltante: secuencia por especialidad. No reutiliza el video de otro oficio. */
+/* Multimedia faltante: secuencia propia si existe; si no, portada de la misma especialidad. */
 (function () {
   const SEQUENCE = {
     electricidad: 'electricidad-secuencia',
@@ -7,22 +7,19 @@
     climate: 'climate-secuencia',
     climatizacion: 'climate-secuencia'
   };
-  const POSTER = {
-    electricidad: '/static/themes/poster-electricidad.svg',
-    enfermeria: '/static/themes/poster-enfermeria.svg',
-    climate: '/static/themes/poster-climatizacion.svg',
-    climatizacion: '/static/themes/poster-climatizacion.svg',
-    automotriz: '/static/themes/poster-automotriz.svg',
-    automotive: '/static/themes/poster-automotriz.svg',
-    general: '/static/themes/poster-general.svg'
-  };
 
   function keyOf(course) {
     return typeof specialtyKey === 'function' ? specialtyKey(course) : 'general';
   }
 
+  function activeCourse() {
+    if (typeof courses === 'undefined' || typeof current === 'undefined') return null;
+    return courses.find(c => c.id === current?.course_id) || null;
+  }
+
   function posterFor(course) {
-    return POSTER[keyOf(course)] || POSTER.general;
+    if (typeof specialtyCover === 'function') return specialtyCover(course || {});
+    return '/static/themes/poster-general.svg';
   }
 
   function sequenceFor(course, position) {
@@ -38,9 +35,14 @@
     return {video: `/static/media/${file}.mp4`, vtt: `/static/media/${file}.vtt`, poster};
   }
 
+  function missingFigure(poster, caption) {
+    const src = poster || '/static/themes/poster-general.svg';
+    return `<figure class="media-missing"><img src="${src}" alt="Recurso visual de la especialidad"><figcaption>${caption}</figcaption></figure>`;
+  }
+
   function decorateVideo(html, poster) {
     if (!html) return '';
-    return html.replace('<video ', `<video poster="${poster || POSTER.general}" `);
+    return html.replace('<video ', `<video poster="${poster || '/static/themes/poster-general.svg'}" `);
   }
 
   function attach() {
@@ -57,12 +59,10 @@
       let html = origMedia(exp, opts);
       if (html) return html;
       if (!exp) return '';
-      const course = typeof courses !== 'undefined' && typeof current !== 'undefined'
-        ? courses.find(c => c.id === current?.course_id)
-        : null;
+      const course = activeCourse();
       const seq = sequenceFor(course, current?.position);
       if (!seq.video) {
-        return `<figure class="media-missing"><img src="${seq.poster}" alt="Recurso visual de la especialidad"><figcaption>Este módulo no tiene video propio. Sigue con la imagen de oficio y la consigna escrita.</figcaption></figure>`;
+        return missingFigure(seq.poster, 'Este módulo no tiene video propio. Sigue con la imagen de oficio y la consigna escrita.');
       }
       const fake = Object.assign({}, exp, {video: seq.video, vtt: seq.vtt, poster: seq.poster});
       return vis.videoFigure(fake);
@@ -70,21 +70,26 @@
   }
 
   function bindBrokenMedia(root) {
+    const course = activeCourse();
+    const poster = posterFor(course);
     (root || document).querySelectorAll('video').forEach(v => {
       if (v.dataset.fallbackBound) return;
       v.dataset.fallbackBound = '1';
+      if (!v.getAttribute('poster')) v.setAttribute('poster', poster);
       v.addEventListener('error', () => {
         const note = document.createElement('figure');
         note.className = 'media-missing';
-        note.innerHTML = '<img alt="Recurso de oficio no disponible" src="/static/themes/poster-general.svg"><figcaption>El video de este módulo no cargó. Continúa con la consigna escrita.</figcaption>';
+        note.innerHTML = `<img alt="Recurso de oficio no disponible" src="${poster}"><figcaption>El video de este módulo no cargó. Continúa con la imagen de oficio y la consigna escrita.</figcaption>`;
         v.replaceWith(note);
       });
     });
-    (root || document).querySelectorAll('img.header-photo, .vis-env, .vis-zoom-target img, .situation-photo img, .module-media-card img, .case-scene img').forEach(img => {
+    (root || document).querySelectorAll('img.header-photo, .vis-env, .vis-zoom-target img, .situation-photo img, .module-media-card img, .case-scene img, .dash-course-card img').forEach(img => {
       if (img.dataset.fallbackBound) return;
       img.dataset.fallbackBound = '1';
       img.addEventListener('error', () => {
-        if (img.src.indexOf('poster-') === -1) img.src = '/static/themes/poster-general.svg';
+        if (img.dataset.fallbackUsed) return;
+        img.dataset.fallbackUsed = '1';
+        img.src = poster;
       });
     });
   }
