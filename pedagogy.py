@@ -1548,7 +1548,18 @@ def enrich(content, module_id=1):
         'human_bias_review_required': True,
     }
     if isinstance(c.get('practice'), dict):
-        c['practice']['type'] = 'professional_decision_simulation'
+        practice = c['practice']
+        if practice.get('type') == 'professional_decision_simulation':
+            # Recover the numeric renderer from the legacy payload's fields.
+            if 'reference' in practice:
+                practice['type'] = 'measurement'
+            elif 'reserve' in practice:
+                practice['type'] = 'network'
+            elif 'available' in practice or 'required' in practice:
+                practice['type'] = 'equipment'
+            else:
+                practice['type'] = 'scale'
+        practice['simulation_kind'] = 'professional_decision_simulation'
         c['practice'].setdefault('retry_policy', 'unlimited-formative')
         c['practice']['simulation_cycle'] = ['observar', 'interpretar', 'decidir', 'actuar', 'recibir consecuencia', 'verificar', 'reintentar']
     experiences = [exp for ae in c.get('aes') or [] for exp in ae.get('experiences') or []]
