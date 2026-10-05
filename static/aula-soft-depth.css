@@ -37,5 +37,5 @@ body[data-screen="module"] .sequence-station-heading .sequence-aes button:nth-ch
 }
 .reduce-motion :is(button,a.primary,a.outline,a.journey-button,a.back-link,a.atp-hero-back,summary,.support-card,.nubi-robot){animation:none!important;transition:none!important;translate:none!important;scale:1!important;transform:none!important;rotate:none!important}
 /* The replacement artwork includes its own shadow; no added frame or halo. */
-.tools-fab .tools-fab-btn .nubi-robot{background-image:url('/static/nubi-agent-shadow.png')!important;background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important;animation:none!important;filter:none!important}
+.tools-fab .tools-fab-btn .nubi-robot{background-image:url('/static/nubi-agent-shadow-v2.png')!important;background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important;animation:none!important;filter:none!important}
 .tools-fab .tools-fab-btn:is(:hover,:focus-visible) .nubi-robot{filter:none!important}
