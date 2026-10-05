@@ -418,9 +418,29 @@ function toolsFabMarkup(station){
  const tools=stationToolsCatalog(station);
  if(!tools.length)return '';
  const cards=tools.map(t=>`<button type="button" class="support-card tone-${t.tone}" data-action="${t.id}" aria-label="${esc(t.title)}. ${esc(t.hint)}"><span class="support-ico" aria-hidden="true">${t.glyph}</span><span class="support-copy"><b>${esc(t.title)}</b><small>${esc(t.hint)}</small></span><span class="tools-fab-open">Abrir</span></button>`).join('');
- return `<button type="button" class="tools-fab-backdrop" data-action="tools-fab-close" tabindex="-1" aria-label="Cerrar Agente Nubi"></button><div class="tools-fab" data-tools-fab><div id="tools-fab-panel" class="tools-fab-panel" role="dialog" aria-modal="true" aria-labelledby="tools-fab-title"><div class="tools-fab-head"><div><h3 id="tools-fab-title">Agente Nubi</h3><p>Tu nube de apoyo para practicar, orientarte y configurar esta estación.</p></div><button type="button" class="tools-fab-close" data-action="tools-fab-close" aria-label="Cerrar Agente Nubi">×</button></div><div class="tools-fab-list">${cards}</div></div><button type="button" class="tools-fab-btn" data-action="tools-fab-toggle" aria-expanded="false" aria-haspopup="dialog" aria-controls="tools-fab-panel" title="Arrastra para mover. Pulsa la nube para abrir Agente Nubi." aria-label="Agente Nubi. Arrastra para mover o pulsa para abrir"><img class="tools-fab-mascot" src="/static/agente-nubi-chat-luminoso.png?v=20261004-luminoso" alt=""></button></div>`;
+ return `<button type="button" class="tools-fab-backdrop" data-action="tools-fab-close" tabindex="-1" aria-label="Cerrar Agente Nubi"></button><div class="tools-fab" data-tools-fab><div id="tools-fab-panel" class="tools-fab-panel" role="dialog" aria-modal="true" aria-labelledby="tools-fab-title"><div class="tools-fab-head"><div><h3 id="tools-fab-title">Agente Nubi</h3><p>Tu asistente de apoyo para practicar, orientarte y configurar esta estación.</p></div><button type="button" class="tools-fab-close" data-action="tools-fab-close" aria-label="Cerrar Agente Nubi">×</button></div><div class="tools-fab-list">${cards}</div></div><button type="button" class="tools-fab-btn" data-action="tools-fab-toggle" aria-expanded="false" aria-haspopup="dialog" aria-controls="tools-fab-panel" title="Arrastra para mover. Pulsa el robot para abrir Agente Nubi." aria-label="Agente Nubi. Arrastra para mover o pulsa para abrir"><span class="tools-fab-mascot nubi-robot" data-emotion="idle" aria-hidden="true"></span></button></div>`;
 }
 const TOOLS_FAB_POS='aula-tools-fab-pos';
+let nubiEmotionTimer;
+function setNubiEmotion(emotion='idle',duration=5000){
+ const allowed=['idle','wave','celebrate','sad','think','surprised'];
+ const mascot=document.querySelector('.nubi-robot');
+ if(!mascot||!allowed.includes(emotion))return;
+ clearTimeout(nubiEmotionTimer);
+ mascot.dataset.emotion=emotion;
+ mascot.closest('.tools-fab')?.setAttribute('data-emotion',emotion);
+ if(emotion!=='idle')nubiEmotionTimer=setTimeout(()=>setNubiEmotion('idle'),duration);
+}
+function bindNubiEmotions(){
+ if(window.__nubiEmotionsBound)return;
+ window.__nubiEmotionsBound=true;
+ document.addEventListener('nubi-emotion',event=>setNubiEmotion(event.detail?.emotion,event.detail?.duration));
+ document.addEventListener('click',event=>{
+  if(event.target.closest('[data-guidance-next],[data-sequence-check]'))setNubiEmotion('think');
+  else if(event.target.closest('[data-action="tools-fab-toggle"]'))setNubiEmotion('wave');
+  else if(event.target.closest('[data-action="inspect"]'))setNubiEmotion('surprised',2500);
+ });
+}
 function toolsFabClamp(x,y,el){
  const pad=8,w=el.offsetWidth||220,h=el.offsetHeight||52;
  const maxX=Math.max(pad,window.innerWidth-w-pad);
@@ -586,6 +606,7 @@ function toggleToolsFab(){
  else openToolsFab();
 }
 function bindToolsFabKeys(){
+ bindNubiEmotions();
  if(window.__aulaToolsFabKeys)return;
  window.__aulaToolsFabKeys=true;
  document.addEventListener('keydown',e=>{

@@ -1470,6 +1470,22 @@ body.reduce-motion .tools-fab-list .support-card.tone-ok { animation: none; }
 @media(prefers-reduced-motion:reduce){.tools-fab:not(.is-dragging) .tools-fab-btn{animation:none}}
 @media(max-width:560px){.tools-fab .tools-fab-btn{width:176px!important;min-width:176px!important;height:106px!important;min-height:106px!important}.tools-fab .tools-fab-mascot{width:176px!important;height:106px!important;flex-basis:176px!important}}
 
+.tools-fab .tools-fab-btn:has(.nubi-robot){width:132px!important;min-width:132px!important;height:132px!important;min-height:132px!important}
+.tools-fab .nubi-robot{--robot-from:0%;--robot-to:33.333333%;--robot-row:0%;width:132px!important;height:132px!important;flex:0 0 132px!important;background-image:url('/static/nubi-robot-emotions.png');background-size:400% 300%;background-repeat:no-repeat;background-position:var(--robot-from) var(--robot-row);animation:nubiRobotFrames 2.8s steps(1,end) infinite!important;filter:drop-shadow(0 4px 4px #143a5720)!important}
+.tools-fab .nubi-robot[data-emotion="wave"]{--robot-from:66.666667%;--robot-to:100%}
+.tools-fab .nubi-robot[data-emotion="celebrate"]{--robot-row:50%;animation-duration:.6s!important}
+.tools-fab .nubi-robot[data-emotion="sad"]{--robot-row:50%;--robot-from:66.666667%;--robot-to:100%;animation-duration:2s!important}
+.tools-fab .nubi-robot[data-emotion="think"]{--robot-row:100%;animation-duration:1.4s!important}
+.tools-fab .nubi-robot[data-emotion="surprised"]{--robot-row:100%;--robot-from:66.666667%;--robot-to:100%;animation-duration:1s!important}
+.tools-fab[data-emotion="celebrate"]:not(.is-dragging) .tools-fab-btn{animation:nubiRobotCelebrate .65s ease-in-out infinite}
+.tools-fab[data-emotion="sad"]:not(.is-dragging) .tools-fab-btn{animation:nubiRobotSway 2s ease-in-out infinite}
+@keyframes nubiRobotFrames{0%,89%{background-position:var(--robot-from) var(--robot-row)}90%,100%{background-position:var(--robot-to) var(--robot-row)}}
+@keyframes nubiRobotCelebrate{0%,100%{translate:0 0;rotate:-3deg}50%{translate:0 -12px;rotate:3deg}}
+@keyframes nubiRobotSway{0%,100%{rotate:-2deg}50%{rotate:2deg}}
+@media(max-width:560px){.tools-fab .tools-fab-btn:has(.nubi-robot){width:106px!important;min-width:106px!important;height:106px!important;min-height:106px!important}.tools-fab .nubi-robot{width:106px!important;height:106px!important;flex-basis:106px!important}}
+@media(prefers-reduced-motion:reduce){.tools-fab .nubi-robot,.tools-fab[data-emotion] .tools-fab-btn{animation:none!important}}
+.reduce-motion .tools-fab .nubi-robot,.reduce-motion .tools-fab[data-emotion] .tools-fab-btn{animation:none!important}
+
 .support-card.tone-ok[data-action="practice"] {
   animation: pf-breathe 3.6s ease-in-out infinite;
   will-change: transform;

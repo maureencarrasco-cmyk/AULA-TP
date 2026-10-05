@@ -128,6 +128,7 @@ function bindLearningSequence(root) {
    const result=await api(`/modules/${moduleId}/activity`,'POST',{kind:'ae-check',sequence:1,ae:aeIndex,step:phase,text:data.text,response:data.response});
    if(!container.isConnected||current.id!==moduleId||fingerprint()!==snapshot)return;
    feedback.innerHTML=learningFeedbackMarkup(result.feedback);feedback.hidden=false;
+   document.dispatchEvent(new CustomEvent('nubi-emotion',{detail:{emotion:result.ready?'celebrate':'sad'}}));
    approved=result.ready?snapshot:'';next.disabled=!result.ready;
    if(!result.ready)revealGuidance();
   }catch(err){error.textContent=err.message;error.hidden=false;}
