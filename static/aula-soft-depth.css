@@ -1,0 +1,38 @@
+/* Visual-only layer. No dimensions, content, routing or behavior changes. */
+:root{
+ --aula-depth-rest:inset 0 1px 0 #ffffffc9,0 2px 4px #174b7010,0 6px 16px #174b700b;
+ --aula-depth-hover:inset 0 1px 0 #fff,0 5px 12px #174b7018,0 0 0 3px #51a8ce12;
+ --aula-depth-pressed:inset 0 2px 4px #174b7018,0 1px 3px #174b7010;
+ --aula-motion:190ms cubic-bezier(.2,.7,.2,1);
+}
+body :is(button,a.primary,a.outline,a.journey-button,a.back-link,a.atp-hero-back,summary){transition:translate var(--aula-motion),scale var(--aula-motion),box-shadow var(--aula-motion),border-color var(--aula-motion),filter var(--aula-motion)!important}
+body :is(button,a.primary,a.outline,a.journey-button,a.back-link,a.atp-hero-back):not(:disabled):not([aria-disabled="true"]):not(.tools-fab-btn):not(.tools-fab-backdrop):not(.vis-pin){box-shadow:var(--aula-depth-rest)!important}
+body[data-screen="module"] :is(.sequence-route button,.context-tabs button,.sequence-aes button,.support-card){box-shadow:var(--aula-depth-rest)!important}
+body :is(button,a.primary,a.outline,summary):focus-visible{outline:3px solid #186b9d!important;outline-offset:3px!important}
+body :is(button,a.primary,a.outline):not(:disabled):not([aria-disabled="true"]):active{translate:0 1px;scale:.985;box-shadow:var(--aula-depth-pressed)!important}
+body :is(button:disabled,[aria-disabled="true"]){filter:saturate(.55);box-shadow:none!important;translate:none!important;scale:1!important}
+/* Existing selections are indicated by an edge and depth as well as color. */
+body[data-screen="module"] :is(.sequence-route button.is-current,.context-tabs button[aria-selected="true"],.sequence-aes button.active,.tabs button.active,.q-number.active){outline:2px solid #277db2!important;outline-offset:2px!important;box-shadow:inset 0 -3px #277db2,0 3px 10px #328eae20!important}
+body[data-screen="module"] :is(.sequence-route button.is-complete,.lr-card.is-complete){box-shadow:inset 0 -3px #26835f,0 2px 8px #26835f18!important}
+body[data-screen="module"] :is(.option,.context-options label,.act-choices label):has(input:checked){border-color:#298363!important;box-shadow:inset 0 0 0 1px #298363,0 2px 8px #29836315!important}
+body[data-screen="module"] :is(input,textarea,select):focus-visible{outline:3px solid #186b9d!important;outline-offset:2px!important;box-shadow:0 0 0 5px #328eae12!important}
+body[data-screen="module"] :is(.instruction-showcase,.sequence-support,.encargo-detail,.question-box){box-shadow:inset 0 1px 0 #ffffffb0,0 3px 10px #174b7009!important}
+body[data-screen="module"] :is(.tp-meaning-icon,.sequence-results-heading img,.sequence-decision-icon){filter:drop-shadow(0 2px 2px #1e5a7820)}
+/* Restore supplied control artwork without touching click targets or labels. */
+body[data-screen="module"] .context-sequence .context-tabs button:is([aria-selected="true"],[aria-selected="false"]){background-image:url('/static/context-activities-reference.png')!important;background-size:500% 100%!important;background-repeat:no-repeat!important;background-position:calc(var(--reference-context,0)*25%) center!important}
+body[data-screen="module"] .learning-sequence .sequence-route button{background-image:url('/static/learning-activities-reference.png')!important;background-size:600% 100%!important;background-repeat:no-repeat!important;background-position:calc(var(--reference-step,0)*20%) center!important}
+body[data-screen="module"] .sequence-station-heading .sequence-aes button:nth-child(-n+3){background-image:url('/static/learning-ae-reference.png')!important;background-size:300% 100%!important;background-repeat:no-repeat!important;background-position:calc(var(--reference-ae,0)*50%) center!important}
+@media(hover:hover) and (pointer:fine){
+ body :is(button,a.primary,a.outline,a.journey-button,a.back-link,a.atp-hero-back,summary):not(:disabled):not([aria-disabled="true"]):not(.tools-fab-backdrop):not(.vis-pin):hover{translate:0 -2px;box-shadow:var(--aula-depth-hover)!important}
+ body :is(.course-card,.situation-card,.support-card,.lr-card.station):not([aria-disabled="true"]):hover{box-shadow:var(--aula-depth-hover)!important}
+ .tools-fab .tools-fab-btn:hover .nubi-robot{filter:drop-shadow(0 3px 5px #328eae40)!important;scale:1.02}
+}
+/* Idle is still; existing emotional feedback remains brief and unchanged. */
+.tools-fab:not([data-emotion="celebrate"]):not([data-emotion="sad"]) .tools-fab-btn{animation:none!important}
+.tools-fab .nubi-robot[data-emotion="idle"]{animation:none!important}
+.support-card.tone-ok[data-action="practice"]{animation:none!important;will-change:auto}
+.tools-fab .nubi-robot{transition:scale var(--aula-motion),filter var(--aula-motion)!important}
+@media(prefers-reduced-motion:reduce){
+ body :is(button,a.primary,a.outline,a.journey-button,a.back-link,a.atp-hero-back,summary,.support-card,.nubi-robot){animation:none!important;transition:none!important;translate:none!important;scale:1!important;transform:none!important;rotate:none!important}
+}
+.reduce-motion :is(button,a.primary,a.outline,a.journey-button,a.back-link,a.atp-hero-back,summary,.support-card,.nubi-robot){animation:none!important;transition:none!important;translate:none!important;scale:1!important;transform:none!important;rotate:none!important}
