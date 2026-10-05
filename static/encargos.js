@@ -102,8 +102,10 @@ function encargoCardHtml(item, index, openId, done){
   const open=String(openId)===String(item.id)?' is-open':'';
   const notebook=isBitacora(item);
   const taskIcon=encargoIcon(item);
+  const course=courses.find(course=>course.id===current?.course_id);
+  const photo=typeof moduleStopArt==='function'?moduleStopArt(course,Math.max(0,(Number(current?.position)||1)-1)):'';
   return `<button type="button" class="oficio-card is-${status}${open}${notebook?' is-bitacora':''}" aria-pressed="${Boolean(open)}" aria-controls="encargo-detail" data-encargo-id="${esc(item.id)}" data-tone="${tone}">
-    <span class="oficio-tile" aria-hidden="true">${oficioIcon(taskIcon)}</span>
+    ${photo?`<span class="encargo-card-photo" aria-hidden="true"><img src="${esc(photo)}" alt="" loading="lazy" decoding="async"></span>`:`<span class="oficio-tile" aria-hidden="true">${oficioIcon(taskIcon)}</span>`}
     <span class="oficio-card-body">
       <span class="oficio-product-label">Encargo profesional</span>
       <b><span class="student-question-number" aria-label="Encargo ${index+1}">${index+1}</span>${esc(item.title)}</b>

@@ -992,9 +992,11 @@ function decorateStudentActionCues(root){
   symbol.classList.toggle('tp-icon-book',kind===8);
   symbol.classList.toggle('tp-icon-situation',kind===5);
   symbol.classList.toggle('tp-icon-evaluation',kind===0);
+  symbol.classList.toggle('tp-icon-target',kind===3);
   symbol.style.setProperty('--tp-icon-position',`${kind*100/15}%`);
  });
  root.querySelectorAll('textarea:not([hidden])').forEach(control=>{
+  if(control.closest('.encargo-detail'))return;
   const block=control.closest('.az-written-question')||control.closest('label');
   if(!block||block.querySelector('.tp-response-kicker'))return;
   const cue=document.createElement('span');

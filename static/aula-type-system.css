@@ -1,0 +1,22 @@
+@font-face{font-family:Manrope;src:url('/static/fonts/manrope-variable.ttf') format('truetype');font-style:normal;font-weight:200 800;font-display:swap}
+:root{--font-learning:Inter,Arial,sans-serif;--font-ui:Inter,Arial,sans-serif;--font-identity:Manrope,Inter,Arial,sans-serif}
+html body{font-family:var(--font-learning)!important;letter-spacing:0!important}
+html body #app #main :is(h1,h2,h3,h4,h5,h6,p,span,small,b,strong,label,legend,summary,button,input,textarea,select,li,td,th,dd,dt,a,blockquote){font-family:var(--font-learning)!important;letter-spacing:0!important}
+html body #app #main :is(h1,h2,h3,h4,h5,h6),
+html body #app #main :is(h1,h2,h3,h4,h5,h6) :is(span,b,strong,small),
+html body #app #main :is(.lr-name,.header-station,.station>b){font-family:var(--font-identity)!important;font-weight:700!important;line-height:1.4!important}
+html body #app #main :is(h3,h4,h5,h6){font-weight:600!important}
+html body #app #main :is(.integration-header-copy h1,.atp-hero h1){font-size:32px!important;font-weight:700!important}
+html body #app #main :is(.sequence-instruction h3,.context-activity-heading h3,.work-activity-head h3,.case-question-banner h3,.dev-case-heading h3){font-size:23px!important;font-weight:600!important}
+html body #app #main :is(.sequence-instruction,.context-activity-heading,.work-activity-head,.case-question-banner)>div>p{font-size:17px!important;font-weight:500!important;line-height:1.65!important}
+html body #app #main :is(.sequence-board,.encargo-brief,.question-box,.az-guided,.sequence-support,.context-activity) :is(p,li,dd){font-size:16px!important;font-weight:400!important;line-height:1.7!important}
+html body #app #main :is(button,input,textarea,select){font-family:var(--font-learning)!important}
+html body #app #main :is(button,a.primary,a.outline,.journey-button,.dash-course-action){font-weight:600!important}
+html body #app #main :is(button.primary,button.outline,a.primary,a.outline,.journey-button,.dash-course-action){font-size:15px!important}
+html body #app #main :is(textarea,input[type="text"],input[type="number"],select){font-size:16px!important;font-weight:400!important;line-height:1.6!important}
+html body #app #main textarea::placeholder{font-family:var(--font-learning)!important;font-size:16px!important;font-weight:400!important}
+html body #app #main :is(.option,.sequence-relate label,.sequence-selfcheck label){font-weight:400!important}
+html body #app #main :is(b,strong){font-weight:600!important}
+html body :is(.tools-fab-panel,.tools-fab-layer,.nubi-content,.nubi-body,.agent-message){font-family:var(--font-learning)!important}
+html body :is(.tools-fab-panel,.tools-fab-layer) :is(button,input,textarea,select,p,span){font-family:var(--font-learning)!important;letter-spacing:0!important}
+@media(max-width:650px){html body #app #main :is(.integration-header-copy h1,.atp-hero h1){font-size:30px!important}html body #app #main :is(.sequence-instruction h3,.context-activity-heading h3,.work-activity-head h3,.case-question-banner h3,.dev-case-heading h3){font-size:22px!important}}
