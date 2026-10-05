@@ -1,4 +1,5 @@
-:root{--font-learning:'Atkinson Hyperlegible',sans-serif;--font-ui:'Inter',sans-serif}
+:root{--font-learning:'Inter',sans-serif;--font-ui:'Inter',sans-serif}
+body :is(h1,h2,h3,h4,h5,h6,p,span,small,b,strong,label,legend,summary,button,input,textarea,select,li,td,th,dd,dt,a){font-family:var(--font-ui)!important;letter-spacing:0!important}
 body{font-family:var(--font-ui);letter-spacing:0}
 body[data-screen="module"]{font-family:var(--font-learning);font-size:18px;line-height:1.6}
 body[data-screen="module"] :is(p,blockquote,li,dd,td,.option,.written-response,.act-feedback,.instruction-note,.instruction-contract,.sequence-case-question,.context-hint,.az-written-question>label,textarea,input[type="text"],input[type="number"]){font-family:var(--font-learning)!important;font-size:18px!important;line-height:1.6!important;letter-spacing:0!important}

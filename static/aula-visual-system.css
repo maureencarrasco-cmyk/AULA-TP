@@ -45,6 +45,39 @@ body[data-screen="module"] :is(.encargo-card,.cn-learning-list article,.cg-resul
 body[data-screen="module"] :is(.encargo-card,.cn-learning-list article,.cg-result):nth-child(3n){border-top-color:#c0e4d3!important}
 @media(max-width:700px){body[data-screen="module"] .tp-meaning-icon{width:38px!important;height:38px!important;flex-basis:38px!important}body[data-screen="module"] :is(.context-activity-heading,.sequence-instruction,.work-activity-head,.case-question-banner){padding:14px!important}}
 /* Resource failures remain explicit; they are never replaced with other evidence. */
+/* Reference artwork replaces each control face; semantic controls stay intact. */
+body[data-screen="module"] .atp-hero-account{display:none!important}
+body[data-screen="module"] .learning-sequence .sequence-route button{display:block!important;position:relative;aspect-ratio:1717/1242;min-height:0!important;padding:0!important;border:0!important;border-radius:8px!important;background-image:url('/static/learning-activities-reference.png')!important;background-size:600% 100%!important;background-repeat:no-repeat!important;background-position:calc(var(--reference-step,0)*20%) center!important;box-shadow:none!important;overflow:hidden}
+body[data-screen="module"] .learning-sequence .sequence-route button:nth-child(1){--reference-step:0}
+body[data-screen="module"] .learning-sequence .sequence-route button:nth-child(2){--reference-step:1}
+body[data-screen="module"] .learning-sequence .sequence-route button:nth-child(3){--reference-step:2}
+body[data-screen="module"] .learning-sequence .sequence-route button:nth-child(4){--reference-step:3}
+body[data-screen="module"] .learning-sequence .sequence-route button:nth-child(5){--reference-step:4}
+body[data-screen="module"] .learning-sequence .sequence-route button:nth-child(6){--reference-step:5}
+body[data-screen="module"] .learning-sequence .sequence-route button>*{position:absolute;opacity:0!important;pointer-events:none}
+body[data-screen="module"] .learning-sequence .sequence-route button::after{display:none!important}
+body[data-screen="module"] .learning-sequence .sequence-route button.is-current{outline:2px solid var(--phase);outline-offset:2px}
+body[data-screen="module"] .learning-sequence .sequence-route button:hover:not(:disabled){filter:brightness(.97)}
+body[data-screen="module"] .sequence-aes button:nth-child(-n+3){aspect-ratio:1681/801;min-height:44px!important;width:104px;padding:0!important;font-size:0!important;border:0!important;background-image:url('/static/learning-ae-reference.png')!important;background-size:300% 100%!important;background-repeat:no-repeat!important;background-position:calc(var(--reference-ae,0)*50%) center!important;box-shadow:none!important}
+body[data-screen="module"] .sequence-aes button:nth-child(1){--reference-ae:0}
+body[data-screen="module"] .sequence-aes button:nth-child(2){--reference-ae:1}
+body[data-screen="module"] .sequence-aes button:nth-child(3){--reference-ae:2}
+body[data-screen="module"] .sequence-aes{align-items:flex-start}
+body[data-screen="module"] .sequence-aes button:nth-child(n+4){width:104px;aspect-ratio:1681/801;min-height:44px!important;padding:0!important;border:2px solid #c5dced!important;background:#f5faff!important;color:#07356d!important;font-size:20px!important;box-shadow:none!important}
+body[data-screen="module"] .sequence-aes button.active{outline:2px solid #2584d4;outline-offset:2px}
+body[data-screen="module"] .sequence-station-heading .sequence-aes button:nth-child(-n+3).active{background-image:url('/static/learning-ae-reference.png')!important;background-size:300% 100%!important;background-repeat:no-repeat!important;background-position:calc(var(--reference-ae,0)*50%) center!important;box-shadow:none!important}
+body[data-screen="module"] .context-sequence .context-tabs button{display:block!important;aspect-ratio:1717/710;min-height:0!important;padding:0!important;border:0!important;background-image:url('/static/context-activities-reference.png')!important;background-size:500% 100%!important;background-repeat:no-repeat!important;background-position:calc(var(--reference-context,0)*25%) center!important;box-shadow:none!important}
+body[data-screen="module"] .context-sequence .context-tabs button:nth-child(1){--reference-context:0}
+body[data-screen="module"] .context-sequence .context-tabs button:nth-child(2){--reference-context:1}
+body[data-screen="module"] .context-sequence .context-tabs button:nth-child(3){--reference-context:2}
+body[data-screen="module"] .context-sequence .context-tabs button:nth-child(4){--reference-context:3}
+body[data-screen="module"] .context-sequence .context-tabs button:nth-child(5){--reference-context:4}
+body[data-screen="module"] .context-sequence .context-tabs button>*{position:absolute;opacity:0!important;pointer-events:none}
+body[data-screen="module"] .context-sequence .context-tabs button[aria-selected="true"]{outline:2px solid var(--tab-accent);outline-offset:2px}
+body[data-screen="module"] .context-sequence .context-tabs button[aria-selected="true"]{background-image:url('/static/context-activities-reference.png')!important;background-size:500% 100%!important;background-repeat:no-repeat!important;background-position:calc(var(--reference-context,0)*25%) center!important}
+@media(max-width:700px){body[data-screen="module"] .context-sequence .context-tabs button:last-child{grid-column:auto!important;min-height:0!important}body[data-screen="module"] .context-sequence .context-tabs{grid-template-columns:1fr!important}body[data-screen="module"] .learning-sequence .sequence-route{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+body[data-screen="module"] .exam-instructions-banner{display:block;width:100%;margin:18px 0;padding:0;border:0;background:transparent;box-shadow:none}
+body[data-screen="module"] .exam-instructions-banner img{display:block;width:100%;height:auto;max-width:100%;object-fit:contain;image-rendering:auto}
 /* Pastel navigation shared by every course, without changing activity gating. */
 body[data-screen="module"] .context-sequence .context-tabs{gap:12px;padding:18px 0;align-items:stretch}
 body[data-screen="module"] .context-sequence .context-tabs button{display:grid;grid-template-columns:36px minmax(0,1fr);align-content:start;gap:12px;min-height:118px;padding:18px 14px;border:1px solid var(--tab-edge)!important;border-top:4px solid var(--tab-accent)!important;border-radius:8px!important;background:var(--tab-soft)!important;box-shadow:0 3px 8px #173b500a!important}

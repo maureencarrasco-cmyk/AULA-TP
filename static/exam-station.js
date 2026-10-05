@@ -27,11 +27,11 @@ function examLanding(){
  const startLabel=Object.keys(current.state.draft?.answers||{}).length?'Continuar borrador':'Comenzar evaluación';
  return workZone(`${examTitle('Demuestra que puedes integrar el módulo, reconocer tus avances y continuar al siguiente desafío.')}
  <figure class="exam-closing-banner"><img src="/static/evaluation-closing-banner.png?v=20261004" width="1905" height="487" alt="Desafío de cierre. Demuestra lo que sabes hacer. Una evaluación completa, conectada con decisiones del mundo profesional. 25 preguntas, una situación compleja y 26 actividades en total. Ya estás cerca: lee, decide, fundamenta y revisa antes de entregar."></figure>
- <div class="exam-brief">
+ ${cfg.count===25&&cfg.dev?`<figure class="exam-instructions-banner"><img src="/static/evaluation-instructions-banner.png?v=20261004" alt="Tu tarea: 25 preguntas de seleccion multiple y una situacion integradora final. Tu proposito: aplicar y analizar conocimientos y obtener evidencia de aprendizaje. Antes de comenzar: la practica libre y el agente pedagogico no forman parte de la calificacion; las herramientas de accesibilidad permanecen disponibles; lee la evidencia sin pistas en los textos alternativos; las respuestas se registran automaticamente. Observa, decide y demuestra."></figure>`:`<div class="exam-brief">
   <article class="exam-include"><span class="exam-card-label">01 · Tu tarea</span><h3>${examIco('list')} ¿Qué realizarás ahora?</h3><ul><li><b>${cfg.count} preguntas</b> de selección múltiple</li>${cfg.dev?'<li><b>1 situación integradora final</b></li>':''}</ul><small>Ambas partes recogen evidencia de los aprendizajes esperados de este módulo.</small></article>
   <article class="exam-purpose"><span class="exam-card-label">02 · Tu propósito</span><h3>${examIco('target')} ¿Para qué lo realizarás?</h3><p>Para demostrar que puedes aplicar y analizar los conocimientos en un escenario integrador.</p><p>Al finalizar obtendrás evidencia de tus aprendizajes.</p></article>
   <article class="exam-important"><div><span class="exam-card-label">03 · Antes de comenzar</span><h3>${examIco('info')} Importante</h3><ul><li>La Práctica libre y el Agente pedagógico no forman parte de la calificación.</li><li>Las herramientas de accesibilidad permanecen disponibles para facilitar la lectura.</li><li>Lee la evidencia de cada ítem; los textos alternativos no anticipan la respuesta.</li><li>Las respuestas se registran automáticamente.</li></ul></div>${examPhoto()}</article>
- </div>
+ </div>`}
  ${examTabs(dev)}
  <div class="exam-entry-actions">${action('start-exam',startLabel+' '+icon('arrow'),'primary exam-start')}</div>`,'work-zone-s4');
 }
