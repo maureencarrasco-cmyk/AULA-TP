@@ -1,4 +1,4 @@
-/* Aula TP · parche 2026-10-01: cards, hero TP y menú canónico */
+/* Aula TP · parche 2026-10-06: menú canónico, oficio visible, hero alineado */
 .capability-card{
   display:flex;
   align-items:center;
@@ -30,15 +30,27 @@
   font-size:.82rem;
 }
 .hero-media{position:relative}
-.hero-media > img[data-tp-poster]{
+.tp-media-caption{
+  margin:8px 0 0;
+  padding:0;
+  color:#334155;
+  font-size:.84rem;
+  line-height:1.35;
+}
+header nav a, footer nav a, #nav a{white-space:nowrap}
+.demo-link span, .nav-cta span{white-space:nowrap}
+.demo-link{min-width:7.6rem}
+#especialidades article,
+#additional-specialties article,
+.additional-card{overflow:hidden}
+.tp-oficio{margin:0 0 12px}
+.tp-oficio img{
   display:block;
   width:100%;
-  height:auto;
-  border-radius:18px 18px 0 0;
+  height:92px;
   object-fit:cover;
+  border-radius:8px;
 }
-video[data-off-specialty="1"]{display:none !important}
-header nav a, footer nav a{white-space:nowrap}
 @media(max-width:780px){
-  header nav a, footer nav a{white-space:normal}
+  header nav a, footer nav a, #nav a{white-space:normal}
 }
