@@ -1,10 +1,25 @@
-/* Visual-only layer. No dimensions, content, routing or behavior changes. */
+/* Shared presentation layer. Content, routing and behavior remain unchanged. */
 :root{
+ --simulator-page-width:1440px;
+ --simulator-page-gutter:24px;
  --aula-depth-rest:inset 0 1px 0 #ffffffc9,0 2px 4px #174b7010,0 6px 16px #174b700b;
  --aula-depth-hover:inset 0 1px 0 #fff,0 5px 12px #174b7018,0 0 0 3px #51a8ce12;
  --aula-depth-pressed:inset 0 2px 4px #174b7018,0 1px 3px #174b7010;
  --aula-motion:190ms cubic-bezier(.2,.7,.2,1);
 }
+/* One page boundary across every course and station, including legacy layouts. */
+html body[data-screen="module"] #app #main{
+ box-sizing:border-box!important;width:100%!important;max-width:var(--simulator-page-width)!important;
+ margin-inline:auto!important;padding:20px var(--simulator-page-gutter)!important;
+ font-family:var(--font-learning)!important;
+}
+html body[data-screen="module"] #app #main>:is(.atp-hero,.avance-strip,.route-panel,.module-layout,.station-body,.work-zone,.learning-sequence,.context-sequence,.integration-shell,.feedback-station,.exam-station){
+ box-sizing:border-box!important;width:100%!important;max-width:none!important;margin-inline:0!important;min-width:0;
+}
+html body[data-screen="module"] #app #main :is(.module-layout,.station-body,.work-zone,.learning-sequence,.context-sequence){min-width:0;box-sizing:border-box}
+html body[data-screen="module"] #app #main :is(h1,h2,h3,h4,h5,h6){font-family:var(--font-identity)!important;letter-spacing:0!important}
+html body[data-screen="module"] #app #main :is(p,label,legend,summary,button,input,textarea,select,td,th,li){font-family:var(--font-learning)!important;letter-spacing:0!important}
+@media(max-width:650px){html body[data-screen="module"] #app #main{--simulator-page-gutter:12px;padding-block:12px!important}}
 body :is(button,a.primary,a.outline,a.journey-button,a.back-link,a.atp-hero-back,summary){transition:translate var(--aula-motion),scale var(--aula-motion),box-shadow var(--aula-motion),border-color var(--aula-motion),filter var(--aula-motion)!important}
 body :is(button,a.primary,a.outline,a.journey-button,a.back-link,a.atp-hero-back):not(:disabled):not([aria-disabled="true"]):not(.tools-fab-btn):not(.tools-fab-backdrop):not(.vis-pin){box-shadow:var(--aula-depth-rest)!important}
 body[data-screen="module"] :is(.sequence-route button,.context-tabs button,.sequence-aes button,.support-card){box-shadow:var(--aula-depth-rest)!important}
@@ -29,7 +44,8 @@ body[data-screen="module"] .sequence-station-heading .sequence-aes button:nth-ch
 }
 /* Idle is still; existing emotional feedback remains brief and unchanged. */
 .tools-fab:not([data-emotion="celebrate"]):not([data-emotion="sad"]) .tools-fab-btn{animation:none!important}
-.tools-fab .nubi-robot[data-emotion="idle"]{animation:none!important}
+.tools-fab .nubi-robot[data-emotion="idle"]{animation:nubita-idle-float 4s ease-in-out infinite!important}
+@keyframes nubita-idle-float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-6px) rotate(1deg)}}
 .support-card.tone-ok[data-action="practice"]{animation:none!important;will-change:auto}
 .tools-fab .nubi-robot{transition:scale var(--aula-motion),filter var(--aula-motion)!important}
 @media(prefers-reduced-motion:reduce){
@@ -37,7 +53,9 @@ body[data-screen="module"] .sequence-station-heading .sequence-aes button:nth-ch
 }
 .reduce-motion :is(button,a.primary,a.outline,a.journey-button,a.back-link,a.atp-hero-back,summary,.support-card,.nubi-robot){animation:none!important;transition:none!important;translate:none!important;scale:1!important;transform:none!important;rotate:none!important}
 /* The replacement artwork includes its own shadow; no added frame or halo. */
-.tools-fab .tools-fab-btn .nubi-robot{background-image:url('/static/nubi-agent-shadow-v2.png')!important;background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important;animation:none!important;filter:none!important}
+.tools-fab .tools-fab-btn .nubi-robot{background-image:url('/static/nubi-agent-shadow-v2.png')!important;background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important;filter:none!important}
+@media(prefers-reduced-motion:reduce){.tools-fab .tools-fab-btn .nubi-robot[data-emotion]{animation:none!important;transform:none!important}}
+.reduce-motion .tools-fab .tools-fab-btn .nubi-robot[data-emotion]{animation:none!important;transform:none!important}
 
 body[data-screen="module"] .exam-assessment-photo img{
  animation:aula-trophy-float 4s ease-in-out infinite!important;
@@ -59,14 +77,18 @@ html body[data-screen="module"] #app #main .lr-head.lr-head-compact{display:grid
 html body[data-screen="module"] #app #main .lr-head-compact-icon{display:grid!important;place-items:center;width:80px!important;height:80px!important;border-radius:50%!important;background:#dcedff!important;color:#236bc5!important;box-shadow:inset 0 2px 7px #fff,0 3px 7px #21609a12!important}
 html body[data-screen="module"] #app #main .lr-head-compact-icon .icon{width:44px!important;height:44px!important}
 html body[data-screen="module"] #app #main .lr-head-compact-copy>small{display:inline-block;padding:6px 12px!important;border-radius:18px;background:#d9f0fa!important;color:#087c95!important;font-size:12px!important;font-weight:600!important}
-html body[data-screen="module"] #app #main .lr-head-compact-copy h2{font-family:var(--font-identity)!important;font-size:24px!important;color:#15375e!important;line-height:1.4!important;margin:10px 0!important}
-html body[data-screen="module"] #app #main .lr-head-compact-copy p{font-size:17px!important;line-height:1.5!important;color:#536e85!important;margin:0!important}
+html body[data-screen="module"] #app #main .lr-head-compact-copy h2{font-family:var(--font-identity)!important;font-size:28px!important;color:#142454!important;line-height:1.3!important;margin:10px 0!important;letter-spacing:0}
+html body[data-screen="module"] #app #main .lr-head-compact-copy p{font-size:20px!important;line-height:1.5!important;color:#506d91!important;margin:0!important}
 html body[data-screen="module"] #app #main .lr-head-compact .lr-progress{border-left:1px solid #b9d9e8!important;padding:0 0 0 26px!important;min-width:0}
-html body[data-screen="module"] #app #main .lr-progress-heading{display:flex!important;align-items:center;gap:22px!important;color:#234d70!important;font-size:17px!important}
-html body[data-screen="module"] #app #main .lr-progress-heading strong{color:#049c89!important;font-size:34px!important;line-height:1.3!important;font-weight:700!important}
+html body[data-screen="module"] #app #main .lr-progress-heading{display:flex!important;align-items:center;gap:34px!important;color:#36577f!important;font-size:21px!important}
+html body[data-screen="module"] #app #main .lr-progress-heading strong{color:#049c89!important;font-size:46px!important;line-height:1.3!important;font-weight:800!important}
 html body[data-screen="module"] #app #main .lr-completion-bar{height:18px!important;border-radius:12px!important;background:#e0eaf0!important;border:1px solid #bed5e1!important;overflow:hidden;margin:16px 0!important;box-shadow:inset 0 2px 4px #1c536711}
 html body[data-screen="module"] #app #main .lr-completion-fill{background:linear-gradient(90deg,#73b3ee,#30bfa1)!important;border-radius:12px!important}
-html body[data-screen="module"] #app #main .lr-progress>p{font-size:15px!important;color:#365a75!important;line-height:1.6!important}
+html body[data-screen="module"] #app #main .lr-progress>p{display:flex;align-items:center;gap:14px;padding-left:0!important;font-size:16px!important;color:#365a75!important;line-height:1.6!important}
+html body[data-screen="module"] #app #main .lr-progress>p::before{display:none!important}
+.lr-progress-flag{display:grid;place-items:center;flex:0 0 48px;width:48px;height:48px;background:#deefff;border-radius:50%;color:#0870da}
+.lr-progress-flag .icon{width:26px;height:26px}
+.lr-progress>p b{color:#142454}
 html body[data-screen="module"] #app #main .lr-progress>small{display:inline-flex!important;align-items:center;gap:8px;padding:8px 12px!important;border-radius:18px!important;background:#fff5dc!important;color:#8b671e!important;font-size:12px!important;line-height:1.5!important}
 @media(max-width:1050px){html body[data-screen="module"] #app #main .lr-head.lr-head-compact{grid-template-columns:64px minmax(0,1fr)!important;padding:20px!important;gap:16px!important}html body[data-screen="module"] #app #main .lr-head-compact-icon{width:64px!important;height:64px!important}html body[data-screen="module"] #app #main .lr-head-compact .lr-progress{grid-column:1/-1;border-left:0!important;border-top:1px solid #c8dee9!important;padding:18px 0 0!important}html body[data-screen="module"] #app #main .lr-head-compact-copy h2{font-size:20px!important}}
 html body[data-screen="module"] #app #main .integration-tabs:not(.exam-tabs){display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important;padding:12px!important;border:1px solid #dce7f5!important;border-radius:24px!important;background:#f8fbff!important;box-shadow:0 3px 10px #4458970c!important}
@@ -339,3 +361,25 @@ body[data-station="5"] .work-zone-s5 .az-step.az-step.az-step:focus-visible{outl
 @media(max-width:1100px){body[data-station="5"] .work-zone-s5>.az-steps{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 @media(max-width:650px){body[data-station="5"] .work-zone-s5>.az-steps{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}body[data-station="5"] .work-zone-s5 .az-step.az-step.az-step:nth-child(n){padding:12px!important;grid-template-columns:1fr 56px!important}body[data-station="5"] .work-zone-s5 .az-step.az-step.az-step .az-step-ico{width:56px!important;height:56px!important}}
 .tools-fab .tools-fab-btn:is(:hover,:focus-visible) .nubi-robot{filter:none!important}
+/* Final summary presentation, after the legacy station styles. */
+html body[data-screen="module"] #app #main .avance-strip.avance-strip{display:grid!important;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1.15fr)!important;gap:14px!important;align-items:stretch}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip>:is(.av2-ident,.av2-card){min-height:196px!important;padding:20px!important;border-radius:16px!important;box-sizing:border-box;box-shadow:none!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip>.av2-ident{padding-right:100px!important;gap:18px!important;background:#f7fbff!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip>.av2-ident::after{content:""!important;display:block!important;position:absolute!important;width:76px!important;height:90px!important;right:12px!important;top:calc(50% - 45px)!important;background:url('/static/activity-document-icon.png') center/contain no-repeat!important;opacity:1!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-mod-title{font:800 20px/1.45 var(--font-identity)!important;color:#13345d!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-ae{font-size:16px!important;line-height:1.5!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-card-head{font:800 16px/1.4 var(--font-identity)!important;letter-spacing:0!important;margin-bottom:16px!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-aprendizaje{background:#effbf5!important;color:#00a083!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-apre-body{display:flex!important;gap:18px!important;align-items:center!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-book{width:64px!important;height:64px!important;flex:0 0 64px!important;display:grid!important;place-items:center}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-label{font-size:14px!important;line-height:1.4!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-value{display:block!important;font:800 40px/1.15 var(--font-identity)!important;color:#00a18c!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-bar{display:block!important;width:100%!important;height:14px!important;border:2px solid white!important;border-radius:10px!important;background:#dce8e4!important;margin:4px 0!important;overflow:hidden;box-sizing:border-box}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-bar>i{display:block!important;height:100%!important;background:#12b99b!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-motive{display:block;font-size:14px!important;line-height:1.5!important;white-space:normal!important;color:#049e64!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip>.av2-logro{padding-right:90px!important;background:#f7f4ff!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-pct{width:72px!important;height:72px!important;font-size:26px!important;flex:0 0 72px!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-logro-copy>b{font-size:18px!important;line-height:1.4!important}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-logro-copy>small{display:block!important;font-size:16px!important;line-height:1.5!important}
+@media(max-width:1200px){html body[data-screen="module"] #app #main .avance-strip.avance-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important}html body[data-screen="module"] #app #main .avance-strip.avance-strip>.av2-ident{grid-column:1/-1}}
+@media(max-width:650px){html body[data-screen="module"] #app #main .avance-strip.avance-strip{grid-template-columns:minmax(0,1fr)!important}html body[data-screen="module"] #app #main .avance-strip.avance-strip>:is(.av2-ident,.av2-card){padding:18px!important;min-height:180px!important}html body[data-screen="module"] #app #main .avance-strip.avance-strip>.av2-ident::after,html body[data-screen="module"] #app #main .avance-strip.avance-strip>.av2-logro::after{display:none!important}}

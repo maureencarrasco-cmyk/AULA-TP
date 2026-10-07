@@ -145,7 +145,7 @@ function classifyBoard(exp) {
   </div>`;
 }
 function choiceOptions(exp) {
-  return `<fieldset class="act-choices" data-field="choice"><legend class="sr-only">Selecciona una alternativa</legend>${(exp.options || []).map((o, i) => `<label class="option"><input type="radio" name="act-choice" value="${i}"><b>${ACTIVITY_LETTERS[i] || i + 1}</b><span>${esc(o)}</span></label>`).join('')}</fieldset>`;
+  return `<fieldset class="act-choices ${(exp.options||[]).length===3?'act-three-choices':''}" data-field="choice"><legend class="sr-only">Selecciona una alternativa</legend>${(exp.options || []).map((o, i) => `<label class="option"><input type="radio" name="act-choice" value="${i}"><b>${ACTIVITY_LETTERS[i] || i + 1}</b><span>${esc(o)}</span></label>`).join('')}</fieldset>`;
 }
 function choiceBoard(exp) {
   return `${activityStem(exp)}${choiceOptions(exp)}`;

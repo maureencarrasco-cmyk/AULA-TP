@@ -62,7 +62,7 @@ document.addEventListener('click',e=>{
  const b=e.target.closest('[data-action]');if(!b||b.disabled||view.station!==3)return;
  if(b.dataset.action==='case-page'){integrationPage=Number(b.dataset.page);renderModule(3)}
  if(b.dataset.action==='back-selector'){integrationActivity=false;renderModule(3)}
- if(b.dataset.action==='focus-case'){if(!integrationUnlocked(caseIndex))return;integrationActivity=true;renderModule(3);const f=document.getElementById('case-form');if(f){f.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});f.querySelector('input,textarea')?.focus({preventScroll:true})}}
+ if(b.dataset.action==='focus-case'){const selected=b.closest('[data-index]');if(selected)caseIndex=Number(selected.dataset.index);if(!integrationUnlocked(caseIndex))return;integrationActivity=true;renderModule(3);const f=document.getElementById('case-form');if(f){f.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});f.querySelector('input,textarea')?.focus({preventScroll:true})}}
 });
 
 function integrationActivityPanel(){

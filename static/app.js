@@ -321,8 +321,8 @@ function learningRoute({currentN=1,completed=[],moduleId=null,course=null,intera
  return `<section class="panel route-panel lr" aria-label="${esc(title)}. ${esc(live)}">
   <header class="lr-head lr-head-compact" aria-label="Ruta de aprendizaje de las 6 estaciones">
    <span class="lr-head-compact-icon" aria-hidden="true">${workIco('pin')}</span>
-   <div class="lr-head-compact-copy"><small>MI RUTA PROFESIONAL</small><h2>Estación ${shownCurrent} de 6 · ${esc(currentModel.stationName)}</h2><p><b>${currentAction}:</b> ${esc(descriptions[currentN-1])}</p></div>
-   <div class="lr-progress"><div class="lr-progress-heading"><span>Avance de tu ruta</span><strong>${completionPercent}%</strong></div><div class="lr-completion-bar" role="progressbar" aria-label="Estaciones habilitadas completadas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${completionPercent}" aria-valuetext="${doneCount} de 5 estaciones habilitadas completadas" style="--completion:${completionPercent}%"><span class="lr-completion-fill"></span></div><p>${doneCount} de 5 estaciones habilitadas completadas</p><small>${icon('lock')} Misión laboral · en construcción</small></div>
+   <div class="lr-head-compact-copy"><small>MI RUTA PROFESIONAL</small><h2>Estación ${shownCurrent} de 6 · <span>${esc(currentModel.stationName)}</span></h2><p>${esc(descriptions[currentN-1])}</p></div>
+   <div class="lr-progress"><div class="lr-progress-heading"><span>Avance de tu ruta</span><strong>${completionPercent}%</strong></div><div class="lr-completion-bar" role="progressbar" aria-label="Estaciones habilitadas completadas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${completionPercent}" aria-valuetext="${doneCount} de 5 estaciones habilitadas completadas" style="--completion:${completionPercent}%"><span class="lr-completion-fill"></span></div><p><span class="lr-progress-flag" aria-hidden="true">${icon('flag')}</span><span><b>${doneCount} de 5 estaciones</b><br>habilitadas completadas</span></p><small>${icon('lock')} Misión laboral · en construcción</small></div>
   </header>
   <ol class="lr-track" style="--lr-fill:${fill}%" role="list">${models.map((m,i)=>{
    const st=stationStateLabel(m);
@@ -423,7 +423,7 @@ function toolsFabMarkup(station){
 const TOOLS_FAB_POS='aula-tools-fab-pos';
 let nubiEmotionTimer;
 function setNubiEmotion(emotion='idle',duration=5000){
- const allowed=['idle','wave','celebrate','sad','think','surprised'];
+ const allowed=['idle','wave','celebrate','sad','think','surprised','turn'];
  const mascot=document.querySelector('.nubi-robot');
  if(!mascot||!allowed.includes(emotion))return;
  clearTimeout(nubiEmotionTimer);
@@ -435,9 +435,24 @@ function bindNubiEmotions(){
  if(window.__nubiEmotionsBound)return;
  window.__nubiEmotionsBound=true;
  document.addEventListener('nubi-emotion',event=>setNubiEmotion(event.detail?.emotion,event.detail?.duration));
+ const motionAllowed=()=>!document.hidden&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('reduce-motion')&&!document.body.classList.contains('reduce-motion');
+ let lastGreeting=0;
+ const greet=event=>{
+  if(!event.target.closest('.tools-fab-btn')||!motionAllowed()||Date.now()-lastGreeting<7000)return;
+  if(document.querySelector('.tools-fab.is-dragging'))return;
+  lastGreeting=Date.now();setNubiEmotion('wave',1800);
+ };
+ document.addEventListener('pointerover',greet);
+ document.addEventListener('focusin',greet);
+ setInterval(()=>{
+  const fab=document.querySelector('.tools-fab');
+  if(!motionAllowed()||!fab||fab.matches('.is-open,.is-dragging')||document.activeElement?.matches('input,textarea,[contenteditable="true"]'))return;
+  const robot=fab.querySelector('.nubi-robot');
+  if(robot?.dataset.emotion==='idle')setNubiEmotion(Math.random()<.5?'turn':'wave',2000);
+ },35000);
  document.addEventListener('click',event=>{
   if(event.target.closest('[data-guidance-next],[data-sequence-check]'))setNubiEmotion('think');
-  else if(event.target.closest('[data-action="tools-fab-toggle"]'))setNubiEmotion('wave');
+  else if(event.target.closest('[data-action="tools-fab-toggle"]')&&motionAllowed())setNubiEmotion('turn',2000);
   else if(event.target.closest('[data-action="inspect"]'))setNubiEmotion('surprised',2500);
  });
 }
@@ -975,6 +990,7 @@ function decorateAeOverview(root){
 }
 
 function decorateStudentActionCues(root){
+ if(!root)return;
  const radioGroups=new Map();
  root.querySelectorAll('input[type="radio"][name]').forEach(input=>{
   const owner=input.form||input.closest('fieldset,section')||root;
@@ -989,7 +1005,9 @@ function decorateStudentActionCues(root){
    const label=input.closest('label')||(input.id?root.querySelector(`label[for="${CSS.escape(input.id)}"]`):null);
    if(!label)return;
    label.classList.add('tp-four-option');
-   if(!label.querySelector('.tp-option-letter,.cg-option-letter')){
+   const existingLetter=label.querySelector('.tp-option-letter,.cg-option-letter')||Array.from(label.children).find(el=>el.tagName==='B'&&el.textContent.trim()==='ABCD'[index]);
+   if(existingLetter)existingLetter.classList.add('tp-option-letter');
+   if(!existingLetter){
     const badge=document.createElement('span');
     badge.className='tp-option-letter';badge.textContent='ABCD'[index];badge.setAttribute('aria-hidden','true');
     input.insertAdjacentElement('afterend',badge);

@@ -20,6 +20,16 @@ function ctxStepMark(n,kicker,title){return `<span class="ctx-step-n">${n}</span
 function ctxStepHead(n,kicker,title){return `<header class="ctx-step-head">${ctxStepMark(n,kicker,title)}</header>`}
 function enrichedContext(){return contextualizationPanel()}
 function currentScene(){return current.content.scene||{title:'Inspección del sistema · Escenario 3D simplificado',prompt:'La planta identifica UI-01 y UE-01, pero el listado recibido omite el control. ¿Cómo comprobarías esa diferencia y qué registrarías?',parts:[{id:'exterior',label:'UE-01',value:'Exterior',detail:'UE-01 · Unidad exterior identificada en la planta. Contrasta su etiqueta con el listado.'},{id:'interior',label:'UI-01',value:'Interior',detail:'UI-01 · Unidad interior conectada en el esquema a UE-01. Verifica su ubicación en la planta.'},{id:'control',label:'CONTROL',value:'22°',detail:'Control · Representado en la escena, pero omitido en el listado. Registra la discrepancia.'}]}}
+function sceneNubiSupport(){
+ return `<aside class="sequence-support scene-nubi-support" aria-label="Nubi · Revisa antes de actuar"><img class="scene-nubi-art" src="/static/nubi-agent-shadow-v2.png" alt="" aria-hidden="true"><div class="scene-nubi-copy"><span class="scene-nubi-name">Nubi</span><h4><strong>Revisa</strong> antes de actuar</h4><p>Antes de continuar, detente un momento y revisa la información clave. Esto te ayudará a tomar mejores decisiones.</p><details class="scene-nubi-focus"><summary>${workIco('search')}<span>Focaliza tu revisión</span></summary><p>Compara dos evidencias del escenario. ¿Coinciden sus etiquetas, valores o referencias?</p></details></div><div class="scene-nubi-links"><details><summary>${workIco('book')}<span>Primera orientación</span>${workIco('arrow')}</summary><p>¿Qué dato observaste y qué información todavía necesitas confirmar?</p></details><details><summary>${workIco('file')}<span>Revisa tu argumento</span>${workIco('arrow')}</summary><p>Separa el dato visible de tu interpretación. Explica qué aprendizaje utilizas y qué comprobarías antes de intervenir.</p></details></div></aside>`;
+}
+function sceneEvidenceClosing(unlocked){
+ return `<section class="scene-evidence-entry"><label for="scene-evidence-text">¿Qué evidencia fue determinante, qué decisión tomarías y cómo verificarías el resultado?</label><textarea id="scene-evidence-text" name="text" rows="7" minlength="20" maxlength="10000" required placeholder="Observé… Lo relaciono con… Decidiría… La consecuencia esperada sería… Verificaría…">${esc(current.state.scene?.text||'')}</textarea></section><div class="scene-save-notice"><p><strong>Las consecuencias descritas son tu previsión:</strong> este recorrido no ejecuta una intervención técnica ni simula su resultado.</p><button type="submit" class="primary" ${!unlocked||auth.user.role==='teacher'||current.state.closed?'disabled':''}>Guardar evidencia y completar estación 3</button></div><div class="scene-closing-notes">${!unlocked?'<p class="scene-prerequisite">Completa antes las 15 situaciones integradoras.</p>':''}<p class="scene-spatial-note"><strong>Representación espacial</strong>Con imagen y puntos de inspección; no es todavía un modelo 3D interactivo ni sustituye una práctica supervisada.</p></div>`;
+}
+function sceneInspectionSummary(part){
+ const parts=currentScene().parts,index=part?parts.findIndex(p=>p.id===part.id):-1;
+ return `<span class="scene-inspection-heading">${part?`Paso ${index+1} de ${parts.length} · ${esc(part.label)}`:'Explora los puntos del escenario'}</span>${part?`<span class="scene-inspection-copy">${esc(part.detail)}</span>`:''}<span class="scene-inspection-progress"><b>Progreso</b><progress max="${parts.length}" value="${inspected.size}" aria-label="Puntos inspeccionados"></progress><span>${inspected.size} de ${parts.length} puntos revisados</span></span>`;
+}
 function enrichedScene(){
  const scene=currentScene(),unlocked=auth.user.role==='teacher'||Object.keys(current.state.cases).length===15;
  const sceneRoute=typeof pedRoute==='function'?pedRoute([{action:'explore',title:'Observa'},{action:'observe',title:'Recopila evidencias'},{action:'relate',title:'Analiza y relaciona'},{action:'justify',title:'Fundamenta tu decisión'},{action:'verify',title:'Verifica'}],inspected.size?Math.min(2,inspected.size):0):'';
@@ -32,16 +42,16 @@ function enrichedScene(){
  const video='';
  return `<div class="scene-layout">${sceneRoute}<div>
   <h3>${esc(scene.title)}</h3>
-  <header class="instruction-showcase tone-green sequence-instruction"><div><small>SITUACIÓN INTEGRADORA FINAL · ESTACIÓN 3</small><h3>Observa antes de decidir</h3><p>El equipo necesita revisar los antecedentes de ${esc(current.title)} antes de continuar. Tu rol es participar como estudiante técnico de ${esc(role)}, dentro de los límites de tu formación.</p><p>Tu misión: reúne evidencias del escenario, relaciónalas con los aprendizajes del módulo y fundamenta cómo actuarías y qué verificarías.</p></div></header>
+  <header class="instruction-showcase tone-green sequence-instruction scene-observe-intro"><div class="scene-observe-copy"><small>SITUACIÓN INTEGRADORA FINAL · ESTACIÓN 3</small><h3><span class="scene-observe-symbol" aria-hidden="true">${icon('search')}</span><span><strong>Observa</strong> antes de decidir</span></h3><p>El equipo necesita revisar los antecedentes de ${esc(current.title)} antes de continuar. Tu rol es participar como estudiante técnico de ${esc(role)}, dentro de los límites de tu formación.</p><aside class="scene-observe-mission"><span aria-hidden="true">${icon('target')}</span><div><b>Tu misión:</b><p>reúne evidencias del escenario, relaciónalas con los aprendizajes del módulo y fundamenta cómo actuarías y qué verificarías.</p></div></aside></div><img class="scene-observe-art" src="/static/activity-results-illustration.png" alt="" aria-hidden="true"></header>
   ${cycle}
   <p class="scene-professional-note">Actividad formativa: puedes revisar la información y corregir tu conclusión. No corresponde a la Evaluación Final de la estación 4.</p>
   ${video}
   ${stage}
-  <div class="inspect-shortcuts">${scene.parts.map(p=>`<button type="button" class="outline ${inspected.has(p.id)?'inspected':''}" data-action="inspect" data-part="${esc(p.id)}">${esc(p.label)} ${inspected.has(p.id)?'✓':''}</button>`).join('')}</div>
+  <div class="inspect-shortcuts">${scene.parts.map((p,i)=>`<button type="button" class="outline ${inspected.has(p.id)?'inspected':''}" data-action="inspect" data-part="${esc(p.id)}" aria-pressed="false"><span class="inspection-number">${i+1}</span>${workIco(['home','file','edit','puzzle','tool','list','search','check'][i%8])}<span>${esc(p.label.replace(/^\d+\s*/,''))}</span></button>`).join('')}</div>
   <div class="scene-simple-nav" aria-label="Navegación simplificada del escenario"><button type="button" data-scene-nav="prev">← Anterior</button><button type="button" data-scene-nav="next">Siguiente →</button><button type="button" data-scene-nav="inspect">Examinar</button></div>
-  <p id="inspection-detail" class="info-strip" aria-live="polite">${inspected.size} de ${scene.parts.length} componentes inspeccionados.</p>
+  <div id="inspection-detail" class="info-strip scene-inspection-status" aria-live="polite">${sceneInspectionSummary()}</div>
  </div>
- <form id="scene-form" class="soft ped-step" data-action="justify">${sceneHead}<p>${esc(scene.prompt)}</p><details class="sequence-official"><summary>Aprendizajes que movilizas</summary>${current.content.aes.map(a=>`<p>${esc(a.description||a.title)}</p>`).join('')}</details><aside class="sequence-support"><h4>Nubi · Revisa antes de actuar</h4><details><summary>Primera orientación</summary><p>¿Qué dato observaste y qué información todavía necesitas confirmar?</p></details><details><summary>Focaliza tu revisión</summary><p>Compara dos evidencias del escenario. ¿Coinciden sus etiquetas, valores o referencias?</p></details><details><summary>Revisa tu argumento</summary><p>Separa el dato visible de tu interpretación. Explica qué aprendizaje utilizas y qué comprobarías antes de intervenir.</p></details></aside><label>¿Qué evidencia fue determinante, qué decisión tomarías y cómo verificarías el resultado?<textarea name="text" minlength="20" maxlength="10000" required placeholder="Observé… Lo relaciono con… Decidiría… La consecuencia esperada sería… Verificaría…">${esc(current.state.scene?.text||'')}</textarea></label><p class="muted small">Las consecuencias descritas son tu previsión: este recorrido no ejecuta una intervención técnica ni simula su resultado.</p><button class="primary" ${!unlocked||auth.user.role==='teacher'||current.state.closed?'disabled':''}>Guardar evidencia y completar estación 3</button>${!unlocked?'<p>Completa antes las 15 situaciones integradoras.</p>':''}<p class="muted small">Representación espacial con imagen y puntos de inspección; no es todavía un modelo 3D interactivo ni sustituye una práctica supervisada.</p></form></div>`;
+ <form id="scene-form" class="soft ped-step" data-action="justify">${sceneHead}<p>${esc(scene.prompt)}</p><details class="sequence-official"><summary>Aprendizajes que movilizas</summary>${current.content.aes.map(a=>`<p>${esc(a.description||a.title)}</p>`).join('')}</details>${sceneNubiSupport()}${sceneEvidenceClosing(unlocked)}</form></div>`;
 }
 function inspectPart(id){
  const p=currentScene().parts.find(p=>p.id===id);
@@ -49,11 +59,12 @@ function inspectPart(id){
  inspected.add(id);
  document.querySelectorAll('[data-action="inspect"]').forEach(b=>{
   const on=b.dataset.part===id;
+  b.setAttribute('aria-pressed',String(on));
   if(on){b.classList.add('inspected');b.classList.add('is-done')}
   b.classList.toggle('is-focus', on && b.classList.contains('vis-pin'));
  });
  const detail=$('#inspection-detail');
- if(detail) detail.textContent=`${p.detail} (${inspected.size}/${currentScene().parts.length} inspeccionados)`;
+ if(detail) detail.innerHTML=sceneInspectionSummary(p);
  if(window.AulaVisual) window.AulaVisual.showEvidence(p);
 }
 function numberDisplay(n){return new Intl.NumberFormat('es-CL',{maximumFractionDigits:3}).format(n)}
