@@ -74,6 +74,20 @@ function encargosMarkup(station, aeIndex){
   if(!items.length) return '';
   return `<section id="seccion-encargos" class="seccion-actividades-de-oficio seccion-encargos formative-pack" data-station="${station}" data-ae="${aeIndex||''}" aria-label="Actividades de oficio"></section>`;
 }
+function encargoContextPhoto(course){
+  if(typeof specialtyKey==='function'&&specialtyKey(course)==='climate')return {
+    image:'/static/encargo-climatizacion-real.jpg',
+    alt:'Fotografía real de una unidad exterior de aire acondicionado LG',author:'Dinkun Chen',
+    source:'https://commons.wikimedia.org/wiki/File:LG_AIR_CONDITIONER_OUTDOOR_UNIT_(2).jpg',
+    license:'CC BY-SA 4.0',licenseUrl:'https://creativecommons.org/licenses/by-sa/4.0/'
+  };
+  return {
+    image:'/static/encargo-documentacion-real.jpg',
+    alt:'Fotografía real de una persona escribiendo notas en un cuaderno',author:'Tookapic',
+    source:'https://commons.wikimedia.org/wiki/File:Pen-writing-notes-studying.jpg',
+    license:'CC0 1.0',licenseUrl:'https://creativecommons.org/publicdomain/zero/1.0/'
+  };
+}
 function encargoBrief(item){
   const c=item.instruction||{};
   const product=item.product||'Evidencia del encargo';
@@ -81,10 +95,13 @@ function encargoBrief(item){
   const criteria=current?.content?.aes?.[Number(item.ae)-1];
   const criterionRows=Array.isArray(criteria?.criteria)?criteria.criteria:[];
   const criterionMarkup=criterionRows.length?`<ul>${criterionRows.map(row=>`<li>${esc(typeof row==='string'?row:row.text||row.description||row.title||'')}</li>`).join('')}</ul>`:'';
+  const course=courses.find(course=>course.id===current?.course_id);
+  const realPhoto=encargoContextPhoto(course);
   return `<section class="encargo-brief" aria-label="Comprende tu encargo">
-    <h5>2. Comprende tu encargo</h5>
+    <h5 class="encargo-step-title"><span aria-hidden="true">2</span>Comprende tu encargo</h5>
+    <figure class="encargo-real-photo"><img src="${esc(realPhoto.image)}" alt="${esc(realPhoto.alt)}" loading="lazy" decoding="async" referrerpolicy="no-referrer"><figcaption>Fotografía de contexto, no evidencia del caso. <a href="${esc(realPhoto.source)}" target="_blank" rel="noopener noreferrer">${esc(realPhoto.author)}</a> · <a href="${esc(realPhoto.licenseUrl)}" target="_blank" rel="noopener noreferrer">${esc(realPhoto.license)}</a>. Sin modificaciones.</figcaption></figure>
     <p><b>Situación</b><br>Recibes una tarea profesional de este módulo: ${esc(item.title)}. Debes preparar una entrega respaldada por información disponible, sin inventar los datos que faltan.</p>
-    <div class="encargo-main-action"><b>¿Qué debes hacer?</b><p>${esc(action)}</p></div>
+    <div class="encargo-main-action"><span class="encargo-section-icon" aria-hidden="true">${oficioIcon('bulb')}</span><div><b>¿Qué debes hacer?</b><p>${esc(action)}</p></div></div>
     <p><b>¿Sobre qué trabajarás?</b><br>${esc(c.object||item.title)}</p>
     <details class="encargo-resources"><summary>Revisar recursos y criterios · AE ${esc(item.ae)}</summary><p>${esc(c.resource||'Consulta los recursos del módulo y los criterios del aprendizaje esperado asociado. Si no encuentras el documento necesario, registra qué falta y a quién lo solicitarías.')}</p>${item.document?`<pre>${esc(item.document)}</pre>`:''}${criteria?`<p>${esc(typeof criteria==='string'?criteria:criteria.title||criteria.text||'')}</p>`:''}<p>Esta ficha no añade documentos técnicos que no estén disponibles en el módulo.</p></details>
     ${criterionMarkup?`<details><summary>Criterios del aprendizaje esperado</summary>${criterionMarkup}</details>`:''}
@@ -95,6 +112,44 @@ function encargoBrief(item){
     <details><summary>¿Necesitas orientación? · Agente Nubi</summary><p>Localiza un dato verificable. ¿Qué parte de tu producto respalda? Si falta información, ¿qué necesitas consultar antes de decidir? Puedes abrir Agente Nubi para revisar las herramientas de apoyo.</p></details>
   </section>`;
 }
+function encargoArtwork(item, course){
+  const own=item?.image||item?.poster||item?.resource?.image||item?.stimulus?.image;
+  if(typeof own==='string'&&own.trim())return own;
+  const text=[item?.title,item?.product,item?.prompt,item?.instruction?.object].join(' ').toLowerCase();
+  if(typeof specialtyKey==='function'&&specialtyKey(course)==='climate'){
+    const scenes=[
+      [/drenaje|desagüe/,'oficio-drenaje'],
+      [/interferencia|cruce|colisi[oó]n/,'oficio-cruce'],
+      [/cubicaci[oó]n|tramos|longitud/,'oficio-tramos'],
+      [/man[oó]metro|presi[oó]n/,'oficio-manometro'],
+      [/temperatura|term[oó]metro|visor/,'oficio-visor-21c'],
+      [/acceso|mantenci[oó]n/,'oficio-acceso-cm'],
+      [/escala|proporci[oó]n/,'oficio-escala'],
+      [/tuber[ií]a|conexi[oó]n/,'oficio-tuberias'],
+      [/intervalo|rango/,'oficio-intervalo'],
+      [/planta|plano|leyenda|dossier/,'oficio-plano-leyenda']
+    ];
+    const scene=scenes.find(([pattern])=>pattern.test(text));
+    if(scene)return `/static/themes/oficio/${scene[1]}.png`;
+  }
+  const workplaces=[
+    [/sala de servidores|centro de datos/,'05-servidores'],
+    [/farmacia/,'08-farmacia'],[/cl[ií]nica|hospital/,'02-clinica'],
+    [/bodega|almac[eé]n/,'10-bodega'],[/packing/,'12-packing'],
+    [/cocina|preparaci[oó]n culinaria/,'06-cocina'],[/hotel|habitaci[oó]n/,'04-hotel'],
+    [/obra|edificaci[oó]n/,'07-obra'],[/supermercado/,'03-supermercado']
+  ];
+  const workplace=workplaces.find(([pattern])=>pattern.test(text));
+  if(workplace)return `/static/themes/cases/${workplace[1]}.png`;
+  // Product illustrations are decorative, never substitutes for task evidence.
+  const kind=item?.kind;
+  if(/plano|croquis|diseñ|prototipo/.test(text))return '/static/activity-document-icon.png';
+  if(/compar|relacion|conect/.test(text))return '/static/situation-puzzle-icon.png';
+  if(isBitacora(item)||kind==='read')return '/static/open-book-icon.png';
+  if(kind==='procedure'||/procedimiento|secuencia|lista/.test(text))return '/static/evaluation-clipboard-icon.png';
+  if(kind==='reflect'||/reflexi[oó]n|argumento/.test(text))return '/static/objective-target-icon.png';
+  return '/static/activity-document-icon.png';
+}
 function encargoCardHtml(item, index, openId, done){
   const saved=done[item.id];
   const status=saved?'completado':'pendiente';
@@ -103,7 +158,7 @@ function encargoCardHtml(item, index, openId, done){
   const notebook=isBitacora(item);
   const taskIcon=encargoIcon(item);
   const course=courses.find(course=>course.id===current?.course_id);
-  const photo=typeof moduleStopArt==='function'?moduleStopArt(course,Math.max(0,(Number(current?.position)||1)-1)):'';
+  const photo=encargoArtwork(item,course);
   return `<button type="button" class="oficio-card is-${status}${open}${notebook?' is-bitacora':''}" aria-pressed="${Boolean(open)}" aria-controls="encargo-detail" data-encargo-id="${esc(item.id)}" data-tone="${tone}">
     ${photo?`<span class="encargo-card-photo" aria-hidden="true"><img src="${esc(photo)}" alt="" loading="lazy" decoding="async"></span>`:`<span class="oficio-tile" aria-hidden="true">${oficioIcon(taskIcon)}</span>`}
     <span class="oficio-card-body">
@@ -236,16 +291,19 @@ function openEncargo(host, item, draftText){
       <header class="oficio-task-head">
         <span class="oficio-task-symbol" aria-hidden="true">${oficioIcon(encargoIcon(item))}</span>
         <div class="oficio-task-title"><span class="oficio-respond-chip">Respondes aquí</span><h5>Encargo ${position} · ${esc(item.title)}</h5><p>AE ${item.ae} · ${Number(item.minutes)||60} minutos estimados</p></div>
-        <button type="button" class="outline" data-encargo-close>Cerrar</button>
+        <img class="encargo-detail-art" src="${esc(encargoArtwork(item,courses.find(course=>course.id===current?.course_id)))}" alt="" aria-hidden="true">
+        <button type="button" class="outline" data-encargo-close>${oficioIcon('arrow')} Cerrar</button>
       </header>
       ${encargoBrief(item)}
-      <h5>3. Ahora te toca a ti</h5>
+      <section class="encargo-response">
+      <h5 class="encargo-step-title"><span aria-hidden="true">3</span>Ahora te toca a ti</h5>
       <label class="oficio-field">Escribe tu evidencia<textarea id="encargo-texto" maxlength="10000" minlength="80" placeholder="Entrega el producto solicitado. Cita dónde encontraste cada dato, explica tu decisión y señala lo que falta confirmar. Mínimo 80 caracteres.">${esc(draft)}</textarea></label>
       <p class="oficio-help encargo-meter" data-encargo-meter>0 / mínimo 80 caracteres</p>
       <div class="formative-check">
         <button type="button" class="primary oficio-register" data-encargo-save ${locked?'disabled':''}>Registrar evidencia</button>
         <p class="act-feedback" aria-live="polite"></p>
       </div>
+      </section>
     </article>`;
   }
   const ta=detail.querySelector('#encargo-texto');

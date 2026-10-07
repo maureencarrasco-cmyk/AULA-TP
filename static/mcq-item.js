@@ -90,7 +90,7 @@ function mcqItemMarkup(item, opts) {
   return `<article class="mcq-card" data-exam="${exam ? 1 : 0}" data-form="${Number(item.form || 1)}">
     <div class="mcq-toolbar">${chips.join('')}</div>
     ${typeof instructionContract === 'function' ? instructionContract(item) : ''}
-    ${stimulus ? `<p class="mcq-stimulus">${mcqEsc(stimulus)}</p>` : ''}
+    ${stimulus ? `<p class="mcq-stimulus"><span class="mcq-situation-number" aria-hidden="true">${mcqEsc(opts.index || 1)}</span><span>${mcqEsc(stimulus)}</span></p>` : ''}
     ${mcqMedia(item, exam)}
     <h3 class="mcq-prompt">${mcqEsc(prompt)}</h3>
     ${mcqOptions(item, opts)}

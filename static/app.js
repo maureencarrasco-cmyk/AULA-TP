@@ -435,30 +435,43 @@ function bindNubiEmotions(){
  if(window.__nubiEmotionsBound)return;
  window.__nubiEmotionsBound=true;
  document.addEventListener('nubi-emotion',event=>setNubiEmotion(event.detail?.emotion,event.detail?.duration));
- const motionAllowed=()=>!document.hidden&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('reduce-motion')&&!document.body.classList.contains('reduce-motion');
+ const motionAllowed=()=>!document.hidden&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('reduce-motion')&&!document.body.classList.contains('reduce-motion')&&!document.activeElement?.matches('input,textarea,[contenteditable="true"]');
  let lastGreeting=0;
+ let nextOccasional='turn';
  const greet=event=>{
   if(!event.target.closest('.tools-fab-btn')||!motionAllowed()||Date.now()-lastGreeting<7000)return;
   if(document.querySelector('.tools-fab.is-dragging'))return;
-  lastGreeting=Date.now();setNubiEmotion('wave',1800);
+  lastGreeting=Date.now();setNubiEmotion('wave',2300);
  };
  document.addEventListener('pointerover',greet);
- document.addEventListener('focusin',greet);
+ document.addEventListener('focusin',event=>{
+  if(event.target.matches('input,textarea,[contenteditable="true"]'))setNubiEmotion('idle');
+  else greet(event);
+ });
  setInterval(()=>{
   const fab=document.querySelector('.tools-fab');
-  if(!motionAllowed()||!fab||fab.matches('.is-open,.is-dragging')||document.activeElement?.matches('input,textarea,[contenteditable="true"]'))return;
+  if(!motionAllowed()||!fab||fab.matches('.is-open,.is-dragging'))return;
   const robot=fab.querySelector('.nubi-robot');
-  if(robot?.dataset.emotion==='idle')setNubiEmotion(Math.random()<.5?'turn':'wave',2000);
+  if(robot?.dataset.emotion==='idle'){
+   setNubiEmotion(nextOccasional,nextOccasional==='turn'?2500:2300);
+   nextOccasional=nextOccasional==='turn'?'wave':'turn';
+  }
  },35000);
  document.addEventListener('click',event=>{
   if(event.target.closest('[data-guidance-next],[data-sequence-check]'))setNubiEmotion('think');
-  else if(event.target.closest('[data-action="tools-fab-toggle"]')&&motionAllowed())setNubiEmotion('turn',2000);
+  else if(event.target.closest('[data-action="tools-fab-toggle"]')&&motionAllowed()){
+   lastGreeting=Date.now();setNubiEmotion('wave',2300);
+  }
   else if(event.target.closest('[data-action="inspect"]'))setNubiEmotion('surprised',2500);
  });
+ document.addEventListener('animationend',event=>{
+  if(event.target.matches('.nubi-robot')&&['nubi-body-turn','nubi-body-wave'].includes(event.animationName))setNubiEmotion('idle');
+ });
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)setNubiEmotion('idle')});
 }
 function toolsFabClamp(x,y,el){
  const pad=8,w=el.offsetWidth||220,h=el.offsetHeight||52;
- const maxX=Math.max(pad,window.innerWidth-w-pad);
+ const maxX=Math.max(pad,(document.documentElement.clientWidth||window.innerWidth)-w-pad);
  const maxY=Math.max(pad,window.innerHeight-h-pad);
  return {x:Math.min(Math.max(pad,x),maxX),y:Math.min(Math.max(pad,y),maxY)};
 }
@@ -485,12 +498,17 @@ function toolsFabPlacePanel(fab){
  const panel=fab.querySelector('.tools-fab-panel');
  if(!panel)return;
  panel.style.top='';panel.style.bottom='';panel.style.left='';panel.style.right='';
- const r=fab.getBoundingClientRect();
- const spaceAbove=r.top, spaceBelow=window.innerHeight-r.bottom;
- if(spaceAbove>=Math.min(320,spaceBelow+80)){panel.style.bottom='calc(100% + 12px)';panel.style.top='auto'}
- else{panel.style.top='calc(100% + 12px)';panel.style.bottom='auto'}
- if(r.left+360>window.innerWidth-8){panel.style.right='0';panel.style.left='auto'}
- else{panel.style.left='0';panel.style.right='auto'}
+ const r=fab.getBoundingClientRect(),pad=8,gap=12;
+ const spaceAbove=Math.max(0,r.top-pad-gap),spaceBelow=Math.max(0,window.innerHeight-r.bottom-pad-gap);
+ panel.style.setProperty('max-height',`min(70vh, 520px, ${Math.max(spaceAbove,spaceBelow)}px)`,'important');
+ const p=panel.getBoundingClientRect();
+ const viewWidth=document.documentElement.clientWidth||window.innerWidth;
+ const left=Math.max(pad,Math.min(r.left,viewWidth-p.width-pad));
+ const below=r.bottom+gap;
+ const desiredTop=spaceBelow>=spaceAbove?below:r.top-p.height-gap;
+ const top=Math.max(pad,Math.min(desiredTop,window.innerHeight-p.height-pad));
+ panel.style.left=(left-r.left)+'px';panel.style.right='auto';
+ panel.style.top=(top-r.top)+'px';panel.style.bottom='auto';
 }
 function bindToolsFabDrag(fab){
  const btn=fab.querySelector('.tools-fab-btn');
@@ -574,8 +592,9 @@ function bindToolsFabResize(){
  window.__aulaToolsFabResize=true;
  window.addEventListener('resize',()=>{
   const fab=document.querySelector('.tools-fab');
-  if(!fab||!fab.style.left)return;
-  toolsFabApplyPos(fab,toolsFabClamp(parseFloat(fab.style.left),parseFloat(fab.style.top),fab));
+  if(!fab)return;
+  if(fab.style.left)toolsFabApplyPos(fab,toolsFabClamp(parseFloat(fab.style.left),parseFloat(fab.style.top),fab));
+  if(fab.classList.contains('is-open'))toolsFabPlacePanel(fab);
  });
 }
 function mountToolsFab(station){
@@ -605,8 +624,8 @@ function openToolsFab(){
  const fab=document.querySelector('.tools-fab');
  const backdrop=document.querySelector('.tools-fab-backdrop');
  if(!fab)return;
- toolsFabPlacePanel(fab);
  fab.classList.add('is-open');
+ toolsFabPlacePanel(fab);
  if(backdrop)backdrop.classList.add('is-open');
  const btn=fab.querySelector('[data-action="tools-fab-toggle"]');
  if(btn)btn.setAttribute('aria-expanded','true');
@@ -1024,6 +1043,7 @@ function decorateStudentActionCues(root){
   const symbol=document.createElement('span');
   symbol.className='tp-meaning-icon';
   symbol.setAttribute('aria-hidden','true');
+  if(heading.closest('.case-question-banner'))symbol.innerHTML=icon('file');
   heading.prepend(symbol);
  });
  root.querySelectorAll('.tp-meaning-icon,.student-section-symbol,.context-activity-symbol,.az-step-ico,.oficio-do-icon').forEach(symbol=>{
