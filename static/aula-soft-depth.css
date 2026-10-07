@@ -1,4 +1,40 @@
 /* Shared presentation layer. Content, routing and behavior remain unchanged. */
+/* Station wrappers are unframed so their content shares the page boundary. */
+html body[data-screen="module"] #app #main .module-main.module-main{width:100%!important;max-width:none!important;min-width:0;margin-inline:0!important}
+html body[data-screen="module"] #app #main .station-body.station-body{
+ width:100%!important;max-width:none!important;margin-inline:0!important;
+ padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;
+}
+html body[data-screen="module"] #app #main .station-body.station-body>:is(.work-zone,.learning-sequence,.context-sequence,.activity-primer){
+ width:100%!important;max-width:none!important;margin-inline:0!important;box-sizing:border-box;
+}
+html body[data-screen="module"] #app #main :is(.context-sequence,.learning-sequence){padding-inline:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+html body[data-screen="module"] #app #main :is(.sequence-station-heading,.context-station-heading,.sequence-instruction,.context-activity-heading,.station-instructions){box-sizing:border-box;width:100%!important;max-width:none!important;margin-inline:0!important}
+@media(min-width:1051px){
+ html body[data-screen="module"] #app #main .avance-strip.avance-strip.avance-strip>:is(.av2-ident,.av2-card){min-height:146px!important;padding-block:8px!important}
+ html body[data-screen="module"] #app #main .avance-strip.avance-strip.avance-strip .av2-mod-title{font-size:18px!important;line-height:1.35!important}
+ html body[data-screen="module"] #app #main .avance-strip.avance-strip.avance-strip .av2-card-head{margin-bottom:4px!important}
+ html body[data-screen="module"] #app #main .avance-strip.avance-strip.avance-strip .av2-book{width:48px!important;height:48px!important;flex-basis:48px!important}
+ html body[data-screen="module"] #app #main .avance-strip.avance-strip.avance-strip .av2-value{font-size:30px!important}
+ html body[data-screen="module"] #app #main .avance-strip.avance-strip.avance-strip .av2-bar{height:10px!important;margin-block:2px!important}
+ html body[data-screen="module"] #app #main .avance-strip.avance-strip.avance-strip>.av2-ident{padding-right:76px!important;gap:12px!important}
+ html body[data-screen="module"] #app #main .avance-strip.avance-strip.avance-strip>.av2-ident::after{width:52px!important;height:64px!important;top:calc(50% - 32px)!important}
+ html body[data-screen="module"] #app #main .lr-head.lr-head-compact.lr-head-compact{padding-block:8px!important;min-height:122px!important}
+ html body[data-screen="module"] #app #main .lr-head-compact .lr-progress{row-gap:4px!important}
+ html body[data-screen="module"] #app #main .lr-head-compact .lr-completion-bar{height:12px!important;min-height:12px!important;margin-block:4px!important}
+ html body[data-screen="module"] #app #main .lr-head-compact .lr-progress-heading strong{font-size:30px!important}
+ html body[data-screen="module"] #app #main .lr-head-compact .lr-head-compact-copy h2{margin-block:4px!important}
+ html body[data-screen="module"] #app #main .lr-head-compact .lr-head-compact-copy>small{padding-block:3px!important}
+ html body[data-screen="module"] #app #main .lr-head-compact .lr-progress>small{padding-block:4px!important}
+}
+html body[data-screen="module"] #app #main .avance-strip.avance-strip,
+html body[data-screen="module"] #app #main .lr-head.lr-head-compact{
+ width:100%!important;max-width:none!important;
+ margin-inline:0!important;box-sizing:border-box!important;
+}
+html body[data-screen="module"] #app #main .route-panel.lr{
+ padding-inline:0!important;
+}
 :root{
  --simulator-page-width:1440px;
  --simulator-page-gutter:24px;
@@ -34,7 +70,7 @@ body[data-screen="module"] :is(input,textarea,select):focus-visible{outline:3px 
 body[data-screen="module"] :is(.instruction-showcase,.sequence-support,.encargo-detail,.question-box){box-shadow:inset 0 1px 0 #ffffffb0,0 3px 10px #174b7009!important}
 body[data-screen="module"] :is(.tp-meaning-icon,.sequence-results-heading img,.sequence-decision-icon){filter:drop-shadow(0 2px 2px #1e5a7820)}
 /* Restore supplied control artwork without touching click targets or labels. */
-body[data-screen="module"] .context-sequence .context-tabs button:is([aria-selected="true"],[aria-selected="false"]){background-image:url('/static/context-activities-reference.png')!important;background-size:500% 100%!important;background-repeat:no-repeat!important;background-position:calc(var(--reference-context,0)*25%) center!important}
+body[data-screen="module"] .context-sequence .context-tabs button:is([aria-selected="true"],[aria-selected="false"]){background-image:url('/static/context-activities-reference-v2.png')!important;background-size:500% 100%!important;background-repeat:no-repeat!important;background-position:calc(var(--reference-context,0)*25%) center!important;aspect-ratio:342.4/186!important;min-height:0!important;border:0!important;padding:0!important}
 body[data-screen="module"] .learning-sequence .sequence-route button{background-image:url('/static/learning-activities-reference.png')!important;background-size:600% 100%!important;background-repeat:no-repeat!important;background-position:calc(var(--reference-step,0)*20%) center!important}
 body[data-screen="module"] .sequence-station-heading .sequence-aes button:nth-child(-n+3){background-image:url('/static/learning-ae-reference.png')!important;background-size:300% 100%!important;background-repeat:no-repeat!important;background-position:calc(var(--reference-ae,0)*50%) center!important}
 @media(hover:hover) and (pointer:fine){
