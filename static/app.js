@@ -861,13 +861,14 @@ function achievementSummary(){
  return {rows,initial:average('initial'),final:average('final')};
 }
 function achievementValue(value){return Number.isFinite(value)?`${value}%`:'Pendiente'}
+function achievementMeter(value,label){return Number.isFinite(value)?`<meter class="achievement-meter" min="0" max="100" value="${value}" aria-label="${label}">${value}%</meter>`:''}
 function initialAchievementPanel(){
  const summary=achievementSummary();
  return `<section class="achievement-start" aria-labelledby="achievement-start-title"><div><small>DIAGNÓSTICO BASADO EN PRIMEROS INTENTOS</small><h3 id="achievement-start-title">Punto de partida del aprendizaje</h3><p>Este porcentaje inicial utiliza tus primeras respuestas registradas en las actividades de cada aprendizaje. No es una calificación.</p></div><strong>${achievementValue(summary.initial)}</strong><span>Referencia esperada: 100%</span></section>`;
 }
 function achievementProgressTable(){
  const summary=(view.station===5&&typeof feedbackDemoAchievementSummary==='function'?feedbackDemoAchievementSummary():null)||achievementSummary();
- const rows=summary.rows.map(row=>{const gain=Number.isFinite(row.initial)&&Number.isFinite(row.final)?row.final-row.initial:null;const gap=Number.isFinite(row.final)?Math.max(0,100-row.final):null;return `<tr><th scope="row"><span>AE ${row.index+1}</span>${esc(row.label)}</th><td>${achievementValue(row.initial)}</td><td>${achievementValue(row.final)}${row.assessed?`<small>${row.assessed} evidencias evaluadas</small>`:''}</td><td class="achievement-gain ${gain>0?'is-positive':''}">${Number.isFinite(gain)?`${gain>0?'+':''}${gain} pp`:'Pendiente'}</td><td>${Number.isFinite(gap)?`${gap} pp`:'Pendiente'}</td></tr>`}).join('');
+ const rows=summary.rows.map(row=>{const gain=Number.isFinite(row.initial)&&Number.isFinite(row.final)?row.final-row.initial:null;const gap=Number.isFinite(row.final)?Math.max(0,100-row.final):null;return `<tr><th scope="row"><span>AE ${row.index+1}</span>${esc(row.label)}</th><td>${achievementValue(row.initial)}${achievementMeter(row.initial,'Logro inicial')}</td><td>${achievementValue(row.final)}${achievementMeter(row.final,'Logro final')}${row.assessed?`<small>${row.assessed} evidencias evaluadas</small>`:''}</td><td class="achievement-gain ${gain>0?'is-positive':''}"><b>${Number.isFinite(gain)?`${gain>0?'+':''}${gain} pp`:'Pendiente'}</b></td><td>${Number.isFinite(gap)?`${gap} pp`:'Pendiente'}</td></tr>`}).join('');
  const totalGain=Number.isFinite(summary.initial)&&Number.isFinite(summary.final)?summary.final-summary.initial:null;
  return `<section class="achievement-progress" aria-labelledby="achievement-progress-title"><header><div><small>PROGRESIÓN HACIA EL 100% ESPERADO</small><h3 id="achievement-progress-title">Logro por aprendizaje u objetivo evaluado</h3><p>Compara el primer desempeño registrado con la evaluación final. Los porcentajes pendientes aparecerán cuando exista evidencia suficiente.</p></div><div class="achievement-total"><span>${achievementValue(summary.initial)}<small>Inicial</small></span><i aria-hidden="true">→</i><span>${achievementValue(summary.final)}<small>Final</small></span><b>${Number.isFinite(totalGain)?`${totalGain>0?'+':''}${totalGain} pp`:'Pendiente'}<small>Progresión</small></b></div></header><div class="achievement-table-wrap"><table><thead><tr><th>Aprendizaje evaluado</th><th>Logro inicial</th><th>Logro final</th><th>Progresión</th><th>Brecha al 100%</th></tr></thead><tbody>${rows}</tbody></table></div><p class="achievement-note">Los resultados orientan la retroalimentación y el plan de mejora; no reemplazan el juicio pedagógico del docente.</p></section>`;
 }
@@ -974,6 +975,29 @@ function decorateAeOverview(root){
 }
 
 function decorateStudentActionCues(root){
+ const radioGroups=new Map();
+ root.querySelectorAll('input[type="radio"][name]').forEach(input=>{
+  const owner=input.form||input.closest('fieldset,section')||root;
+  if(!radioGroups.has(owner))radioGroups.set(owner,new Map());
+  const groups=radioGroups.get(owner);
+  if(!groups.has(input.name))groups.set(input.name,[]);
+  groups.get(input.name).push(input);
+ });
+ radioGroups.forEach(groups=>groups.forEach(inputs=>{
+  if(inputs.length!==4)return;
+  inputs.forEach((input,index)=>{
+   const label=input.closest('label')||(input.id?root.querySelector(`label[for="${CSS.escape(input.id)}"]`):null);
+   if(!label)return;
+   label.classList.add('tp-four-option');
+   if(!label.querySelector('.tp-option-letter,.cg-option-letter')){
+    const badge=document.createElement('span');
+    badge.className='tp-option-letter';badge.textContent='ABCD'[index];badge.setAttribute('aria-hidden','true');
+    input.insertAdjacentElement('afterend',badge);
+   }
+   const container=label.closest('fieldset,.options,.question-card,.question-box');
+   if(container)container.classList.add('tp-four-options');
+  });
+ }));
  if(!root)return;
  updateVisibleStationNumbers(document.getElementById('main'));
  decorateStudentQuestionOrder(root);
@@ -993,11 +1017,15 @@ function decorateStudentActionCues(root){
   symbol.classList.toggle('tp-icon-situation',kind===5);
   symbol.classList.toggle('tp-icon-evaluation',kind===0);
   symbol.classList.toggle('tp-icon-target',kind===3);
+  const cleanIcon={11:'search',6:'chart',7:'check'}[kind];
+  symbol.classList.toggle('tp-icon-clean',Boolean(cleanIcon));
+  if(cleanIcon){symbol.innerHTML=icon(cleanIcon);symbol.dataset.iconKind=cleanIcon;}
+  else delete symbol.dataset.iconKind;
   symbol.style.setProperty('--tp-icon-position',`${kind*100/15}%`);
  });
  root.querySelectorAll('textarea:not([hidden])').forEach(control=>{
-  if(control.closest('.encargo-detail'))return;
-  const block=control.closest('.az-written-question')||control.closest('label');
+  const block=control.closest('.az-written-question')||control.closest('label')||control.closest('.question-box,.question-card');
+  if(block&&!block.closest('.sequence-written'))block.classList.add('tp-response-panel');
   if(!block||block.querySelector('.tp-response-kicker'))return;
   const cue=document.createElement('span');
   cue.className='tp-response-kicker';
