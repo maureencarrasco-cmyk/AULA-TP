@@ -1,0 +1,278 @@
+/* Course chrome: SPEC accents at full chroma + Outfit/DM Sans.
+   Beats Style Lock pastels. No rainbow per módulo. */
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@600;700;800&display=swap");
+
+body.course-electricidad-3m,
+body.course-enfermeria-tens,
+body.course-electricidad-3m #accessView,
+body.course-enfermeria-tens #accessView {
+  --font-display: "Outfit", Manrope, "DM Sans", sans-serif;
+  --font-sans: "DM Sans", Inter, "Segoe UI", sans-serif;
+  --color-navy: #0b3a6b;
+  --color-navy-deep: #072a4e;
+  --color-blue: #1b6bc4;
+  --color-blue-600: #1b6bc4;
+  --color-cyan: #3ec6e0;
+  --color-ink: #122033;
+  --color-slate: #3d5166;
+  --color-muted: #6b7c8e;
+  --color-line: #d5dee8;
+  --color-surface: #f4f7fb;
+  --color-card: #ffffff;
+  --color-ok: #1f8a5b;
+  --color-ok-soft: #e6f6ee;
+  --cta-fg: #072a4e;
+  font-family: var(--font-sans) !important;
+  color: var(--color-ink) !important;
+  background: var(--color-surface) !important;
+}
+
+body.course-electricidad-3m,
+body.course-electricidad-3m .route-panel--camino {
+  --specialty-electricidad: #f0b429;
+  --accent: #f0b429;
+  --path-accent: #f0b429;
+}
+
+body.course-enfermeria-tens,
+body.course-enfermeria-tens .route-panel--camino {
+  --specialty-enfermeria: #2bb3a8;
+  --accent: #2bb3a8;
+  --path-accent: #2bb3a8;
+}
+
+body.course-electricidad-3m #accessView,
+body.course-enfermeria-tens #accessView,
+body.course-electricidad-3m #accessView button,
+body.course-enfermeria-tens #accessView button,
+body.course-electricidad-3m #accessView input,
+body.course-enfermeria-tens #accessView input {
+  font-family: var(--font-sans) !important;
+}
+
+body.course-electricidad-3m #accessView .route-enter,
+body.course-electricidad-3m #accessView .detail-enter,
+body.course-electricidad-3m #accessView h1,
+body.course-electricidad-3m #accessView h2,
+body.course-electricidad-3m #accessView h3,
+body.course-enfermeria-tens #accessView .route-enter,
+body.course-enfermeria-tens #accessView .detail-enter,
+body.course-enfermeria-tens #accessView h1,
+body.course-enfermeria-tens #accessView h2,
+body.course-enfermeria-tens #accessView h3 {
+  font-family: "Outfit", Manrope, "DM Sans", sans-serif !important;
+  letter-spacing: -0.03em;
+}
+
+.route-panel--camino .route-select h3 {
+  font-weight: 800 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.2 !important;
+}
+
+.route-panel--camino .route-enter,
+.detail-enter {
+  font-weight: 800 !important;
+  letter-spacing: 0.01em !important;
+}
+
+.route-panel--camino {
+  --path-navy: #0b3a6b;
+  --path-blue: #1b6bc4;
+  --path-done: #1f8a5b;
+  --path-ready: #1b6bc4;
+  --path-wait: #6b7c8e;
+  --path-orange: #c47a12;
+  --path-accent: var(--accent, #3ec6e0);
+  --cta-fg: #072a4e;
+  background-color: color-mix(in srgb, var(--path-accent) 32%, #f4f7fb) !important;
+  background-image:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--path-accent) 42%, white) 0%,
+      color-mix(in srgb, var(--path-accent) 12%, transparent) 40%,
+      color-mix(in srgb, var(--path-accent) 36%, white) 100%
+    ),
+    url("assets/aula-tp-ruta-paisaje.jpg") !important;
+  border-color: color-mix(in srgb, var(--path-accent) 55%, white) !important;
+}
+
+.route-panel--camino > h2 {
+  background: var(--path-accent) !important;
+  color: var(--cta-fg) !important;
+  border-color: transparent !important;
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--path-accent) 48%, transparent) !important;
+}
+
+.route-panel--camino .route-item {
+  background: color-mix(in srgb, var(--path-accent) 36%, white) !important;
+  color: #122033 !important;
+  border: 1px solid color-mix(in srgb, var(--path-accent) 58%, white) !important;
+  border-top: 7px solid var(--path-accent) !important;
+  box-shadow: 0 14px 32px color-mix(in srgb, var(--path-accent) 36%, rgba(7, 42, 78, 0.14)) !important;
+}
+
+.route-panel--camino .route-select h3,
+.route-panel--camino .hours,
+.route-panel--camino .hours strong {
+  color: #0b3a6b !important;
+}
+
+.route-panel--camino .module-code,
+.route-panel--camino .route-select small {
+  color: #0b3a6b !important;
+  font-weight: 800;
+}
+
+.route-panel--camino .route-icon {
+  background: var(--path-accent) !important;
+  color: #072a4e !important;
+  border: 0 !important;
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--path-accent) 55%, transparent) !important;
+}
+
+.route-panel--camino .route-state-badge,
+.route-item.completed .route-state-badge,
+.route-item.is-done .route-state-badge {
+  background: #1f8a5b !important;
+  color: #fff !important;
+  border: 0 !important;
+  font-family: var(--font-display, "Outfit", sans-serif) !important;
+  font-weight: 800 !important;
+}
+
+.route-panel--camino .route-item.is-next .route-state-badge,
+.route-panel--camino .route-item.selected .route-state-badge,
+.route-item[data-route-state="selected"] .route-state-badge {
+  background: #1b6bc4 !important;
+  color: #fff !important;
+}
+
+.route-panel--camino .route-item.is-ready .route-state-badge,
+.route-item[data-route-state="available"] .route-state-badge {
+  background: var(--path-accent) !important;
+  color: #072a4e !important;
+}
+
+.route-panel--camino .route-item.is-wait .route-state-badge,
+.route-item[data-route-state="locked"] .route-state-badge {
+  background: #f4f7fb !important;
+  color: #6b7c8e !important;
+}
+
+.route-panel--camino .route-item.is-done,
+.route-panel--camino .route-item.completed {
+  background: color-mix(in srgb, var(--path-accent) 22%, white) !important;
+}
+
+.route-panel--camino .route-item.is-next,
+.route-panel--camino .route-item.selected {
+  background: color-mix(in srgb, var(--path-accent) 48%, white) !important;
+  border-color: var(--path-accent) !important;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 6px var(--path-accent),
+    0 16px 36px color-mix(in srgb, var(--path-accent) 50%, transparent) !important;
+}
+
+.route-panel--camino .route-enter,
+.route-panel--camino .route-item.is-done .route-enter,
+.route-panel--camino .route-item.is-next .route-enter,
+.route-panel--camino .route-item.is-ready .route-enter,
+.detail-enter,
+.login-card > button,
+.portal-live-primary,
+.advance-stage {
+  background: var(--path-accent, var(--accent, #3ec6e0)) !important;
+  color: #072a4e !important;
+  border-radius: 14px !important;
+  box-shadow: 0 12px 24px color-mix(in srgb, var(--path-accent, var(--accent, #3ec6e0)) 50%, transparent) !important;
+  font-weight: 800 !important;
+}
+
+.route-panel--camino .step,
+.route-panel--camino .route-path-pin {
+  background: var(--path-accent) !important;
+  color: #072a4e !important;
+  border-color: #fff !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--path-accent) 50%, transparent) !important;
+  font-family: var(--font-display, "Outfit", sans-serif) !important;
+  font-weight: 800 !important;
+}
+
+.route-panel--camino .route-item.is-done .step,
+.route-panel--camino .route-path-pin.is-done {
+  background: #1f8a5b !important;
+  color: #fff !important;
+}
+
+.route-panel--camino .route-item.is-next .step,
+.route-panel--camino .route-path-pin.is-next {
+  background: #1b6bc4 !important;
+  color: #fff !important;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 6px var(--path-accent) !important;
+}
+
+.route-panel--camino .route-line--camino span {
+  background: linear-gradient(90deg, var(--path-accent), #1b6bc4) !important;
+}
+
+.information-card > h2,
+.course-panel > h2,
+.selected-panel h2 {
+  background: #0b3a6b !important;
+  color: #fff !important;
+}
+
+body.course-electricidad-3m #accessView .hero-banner {
+  --hero-accent: #f0b429;
+  background:
+    linear-gradient(90deg, #072a4e 0%, rgba(7, 42, 78, 0.48) 28%, transparent 58%),
+    var(--hero-photo, url("assets/electricity-hero-entry-v2.webp")) center / cover no-repeat !important;
+}
+
+body.course-electricidad-3m #accessView .hero-banner::after,
+body.course-enfermeria-tens #accessView .hero-banner::after {
+  content: "";
+  display: block;
+  height: 6px;
+  background: var(--hero-accent, #f0b429);
+}
+
+body.course-enfermeria-tens #accessView .hero-banner {
+  --hero-accent: #2bb3a8;
+  background:
+    linear-gradient(90deg, #072a4e 0%, rgba(7, 42, 78, 0.48) 28%, transparent 58%),
+    var(--hero-photo, url("assets/nursing-team.webp")) center / cover no-repeat !important;
+}
+
+body.course-electricidad-3m .route-panel--camino .route-enter,
+body.course-electricidad-3m .route-panel--camino .route-item.is-done .route-enter,
+body.course-electricidad-3m .route-panel--camino .route-icon,
+body.course-electricidad-3m .route-panel--camino > h2,
+body.course-electricidad-3m .route-panel--camino .step,
+body.course-electricidad-3m .route-panel--camino .route-path-pin {
+  background: #f0b429 !important;
+  color: #072a4e !important;
+}
+
+body.course-enfermeria-tens .route-panel--camino .route-enter,
+body.course-enfermeria-tens .route-panel--camino .route-item.is-done .route-enter,
+body.course-enfermeria-tens .route-panel--camino .route-icon,
+body.course-enfermeria-tens .route-panel--camino > h2,
+body.course-enfermeria-tens .route-panel--camino .step,
+body.course-enfermeria-tens .route-panel--camino .route-path-pin {
+  background: #2bb3a8 !important;
+  color: #072a4e !important;
+}
+
+body.course-electricidad-3m .route-panel--camino .route-item.is-done .step,
+body.course-electricidad-3m .route-panel--camino .route-path-pin.is-done,
+body.course-enfermeria-tens .route-panel--camino .route-item.is-done .step,
+body.course-enfermeria-tens .route-panel--camino .route-path-pin.is-done {
+  background: #1f8a5b !important;
+  color: #fff !important;
+}

@@ -1,0 +1,215 @@
+/* =============================================================================
+   Aula TP · Design Tokens (Electricidad Phase 1–4 visual ADN)
+   Visual-only shared layer. Do not encode pedagogy or course content here.
+   Safe to import ahead of styles.css; existing --navy/--blue/--teal aliases kept.
+   ============================================================================= */
+
+:root {
+  /* ---------- Brand / institutional ---------- */
+  --aula-navy: #062f91;
+  --aula-blue: #0870ef;
+  --aula-blue-deep: #0549b8;
+  --aula-teal: #008b98;
+  --aula-cyan: #07a8b8;
+  --aula-ink: #082b80;
+  --aula-muted: #31538f;
+
+  /* Legacy aliases (existing styles.css consumers) */
+  --navy: var(--aula-navy);
+  --blue: var(--aula-blue);
+  --teal: var(--aula-teal);
+  --ink: var(--aula-ink);
+  --muted: var(--aula-muted);
+  --pink: #f51670;
+  --line: var(--aula-line);
+  --pale: var(--aula-pale);
+  --white: #ffffff;
+
+  /* ---------- Semantic accents ---------- */
+  --aula-success: #08a85f;
+  --aula-success-soft: #e7f9f1;
+  --aula-success-ink: #00784d;
+  --aula-warning: #e99300;
+  --aula-warning-soft: #fff5dd;
+  --aula-warning-ink: #9b3e13;
+  --aula-danger: #e23b5c;
+  --aula-danger-soft: #fff1f4;
+  --aula-danger-ink: #a2334d;
+  --aula-violet: #6d28d9;
+  --aula-violet-soft: #f3e9ff;
+  --aula-orange: #f05b0a;
+  --aula-orange-soft: #fff1e4;
+  --aula-coral: #f22f4d;
+  --aula-activity: #eea500;
+
+  /* ---------- Neutrals ---------- */
+  --aula-line: #d9e5f6;
+  --aula-line-strong: #c0d8ef;
+  --aula-pale: #f7fbff;
+  --aula-surface: #ffffff;
+  --aula-surface-soft: #f5f9fe;
+  --aula-surface-tint: #edf6ff;
+  --aula-text: #082b80;
+  --aula-text-secondary: #43628f;
+  --aula-text-muted: #5e7596;
+  --aula-overlay: rgba(2, 34, 91, 0.32);
+
+  /* ---------- Spacing scale (4px base) ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 48px;
+  --space-10: 64px;
+
+  /* ---------- Radius scale ---------- */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /* ---------- Shadow levels ---------- */
+  --shadow-xs: 0 2px 6px rgba(17, 70, 147, 0.06);
+  --shadow-sm: 0 3px 12px rgba(17, 70, 147, 0.10);
+  --shadow-md: 0 8px 22px rgba(17, 70, 147, 0.12);
+  --shadow-lg: 0 14px 32px rgba(10, 73, 139, 0.14);
+  --shadow-xl: 0 22px 48px rgba(2, 34, 91, 0.22);
+  --shadow-focus: 0 0 0 3px rgba(143, 223, 255, 0.85);
+  --shadow-inset-soft: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+  --shadow: var(--shadow-sm);
+
+  /* ---------- Type scale ---------- */
+  --font-sans: "Segoe UI Variable Text", Aptos, "Segoe UI", Arial, sans-serif;
+  --type-display: clamp(2.4rem, 4vw, 3.75rem);
+  --type-h1: clamp(1.75rem, 2.6vw, 2.35rem);
+  --type-h2: 1.25rem;
+  --type-h3: 1.05rem;
+  --type-body: 0.875rem;
+  --type-label: 0.75rem;
+  --type-caption: 0.625rem;
+  --fw-regular: 450;
+  --fw-medium: 650;
+  --fw-bold: 750;
+  --fw-black: 850;
+  --lh-tight: 1.15;
+  --lh-snug: 1.35;
+  --lh-body: 1.5;
+
+  /* ---------- Button system ---------- */
+  --btn-height: 44px;
+  --btn-height-sm: 38px;
+  --btn-height-lg: 52px;
+  --btn-radius: var(--radius-md);
+  --btn-radius-pill: var(--radius-pill);
+  --btn-pad-x: 18px;
+  --btn-fw: var(--fw-black);
+  --btn-transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+
+  --btn-primary-bg: linear-gradient(100deg, #0747bb, #0878ea);
+  --btn-primary-fg: #ffffff;
+  --btn-primary-shadow: 0 8px 18px rgba(0, 77, 185, 0.22);
+
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-fg: var(--aula-navy);
+  --btn-secondary-border: var(--aula-line-strong);
+
+  --btn-tertiary-bg: transparent;
+  --btn-tertiary-fg: var(--aula-blue-deep);
+
+  --btn-success-bg: linear-gradient(100deg, #078d71, #07b16d);
+  --btn-success-fg: #ffffff;
+  --btn-success-shadow: 0 10px 22px rgba(8, 168, 95, 0.22);
+
+  --btn-warning-bg: linear-gradient(100deg, #e99300, #f0a800);
+  --btn-warning-fg: #ffffff;
+
+  --btn-danger-bg: linear-gradient(100deg, #d52a4e, #ef4f6e);
+  --btn-danger-fg: #ffffff;
+
+  --btn-disabled-bg: #9cb0cb;
+  --btn-disabled-fg: #ffffff;
+  --btn-disabled-opacity: 0.55;
+
+  /* ---------- Card family ---------- */
+  --card-bg: var(--aula-surface);
+  --card-border: 1px solid var(--aula-line);
+  --card-radius: var(--radius-lg);
+  --card-radius-lg: var(--radius-xl);
+  --card-padding: var(--space-4);
+  --card-shadow: var(--shadow-sm);
+  --card-shadow-elevated: var(--shadow-md);
+  --card-shadow-deep: var(--shadow-lg);
+
+  /* ---------- Focus / motion ---------- */
+  --focus-ring: 3px solid #8fdfff;
+  --focus-ring-offset: 3px;
+  --focus-ring-strong: 3px solid #bde7ff;
+  --motion-fast: 0.15s ease;
+  --motion-base: 0.18s ease;
+  --motion-slow: 0.28s ease;
+
+  /* ---------- Supports hub pastels (keep / refine) ---------- */
+  --support-tutor-bg: linear-gradient(180deg, #f3e9ff 0%, #ebe0ff 100%);
+  --support-tutor-border: #c9aef5;
+  --support-tutor-ink: #4a2f8c;
+  --support-tutor-muted: #6d5a95;
+  --support-tutor-icon: #6b3fd4;
+  --support-tutor-icon-bg: linear-gradient(145deg, #ffffff, #e4d4ff);
+  --support-tutor-hover-outline: #d9c4ff;
+
+  --support-a11y-bg: linear-gradient(180deg, #e6faf3 0%, #d8f5ea 100%);
+  --support-a11y-border: #8fd9bf;
+  --support-a11y-ink: #0d5c4a;
+  --support-a11y-muted: #3d7a68;
+  --support-a11y-icon: #0f7a5f;
+  --support-a11y-icon-bg: linear-gradient(145deg, #ffffff, #c9f0df);
+  --support-a11y-hover-outline: #a8e8d0;
+
+  --support-practice-bg: linear-gradient(180deg, #fff1e4 0%, #ffe4cc 100%);
+  --support-practice-border: #f0b887;
+  --support-practice-ink: #8a3d12;
+  --support-practice-muted: #9a6240;
+  --support-practice-icon: #c45a12;
+  --support-practice-icon-bg: linear-gradient(145deg, #ffffff, #ffd9b8);
+  --support-practice-hover-outline: #ffc89a;
+
+  --support-hub-fab-bg: linear-gradient(135deg, #0549b8 0%, #078f9e 100%);
+  --support-hub-fab-shadow: 0 12px 28px rgba(3, 48, 116, 0.28);
+
+  /* ---------- SI / map (AE radial) ---------- */
+  --ae-center-border: #cfe3ff;
+  --ae-center-ring: #ffffff;
+  --ae-center-shadow: 0 16px 40px rgba(20, 76, 150, 0.22), 0 4px 14px rgba(7, 91, 216, 0.12), inset 0 0 0 5px #fff;
+  --ae-center-glow: 0 0 0 10px rgba(8, 112, 239, 0.08);
+
+  font-family: var(--font-sans);
+  color: var(--aula-ink);
+  background: var(--aula-surface);
+}
+
+/* Optional utility hooks (opt-in; do not force globally) */
+.aula-card {
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: var(--card-padding);
+}
+
+.aula-card--elevated {
+  box-shadow: var(--card-shadow-elevated);
+  border-radius: var(--card-radius-lg);
+}
+
+.aula-focus-ring:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}

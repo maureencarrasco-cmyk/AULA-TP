@@ -17,6 +17,9 @@ export default async function PortalSectionPage({ params }: Props) {
   if (section === "recursos") {
     redirect("/portal-docente");
   }
+  if (section === "cumplimiento") {
+    redirect("/portal-docente/reportes?vista=cobertura");
+  }
 
   if (!isValidSection(section)) {
     notFound();

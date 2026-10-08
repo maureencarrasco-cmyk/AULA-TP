@@ -1,30 +1,25 @@
 # Design QA - Portal Aula TP Chile
 
-## Reference
+## Resultado visual
 
-- Source: `C:/Users/Martín/Downloads/Imagen de Codex 24 sept 2026, 15_44_33.png`
-- Viewport represented: 1024 x 1536 px
-- Local preview: `http://127.0.0.1:8100/landing/#portal`
+- La captura usada como pantalla fue eliminada del HTML y de los activos del proyecto.
+- Títulos, párrafos, botones, tarjetas y navegación son elementos HTML nativos y se renderizan con tipografía nítida.
+- La jerarquía y distribución conservan el diseño de referencia con una paleta institucional contenida.
+- La portada responde sin recortes ni desplazamiento horizontal en móvil.
+- Los estados de foco quedan dentro de cada tarjeta.
 
-## Visual comparison
+## Especialidades
 
-- Structure, section order, typography, colors, imagery and proportions match the supplied reference because the approved artwork is rendered at its native 2:3 ratio.
-- Desktop rendering preserves the native 1024 px composition.
-- Mobile rendering scales the full composition proportionally without horizontal overflow or cropping.
-- Interactive regions remain aligned because their coordinates use percentages relative to the reference artwork.
+- Mecánica Automotriz, Electricidad, Construcción, Electrónica y Gastronomía abren fichas interactivas.
+- Cada ficha contiene una fotografía, descripción breve, áreas o menciones y acceso al catálogo filtrado.
+- Construcción explicita Edificación, Terminaciones de la Construcción y Obras Viales e Infraestructura.
+- Otras especialidades abre el catálogo completo.
 
-## Functional verification
+## Acciones
 
-- Main navigation links scroll to real sections.
-- The video CTA opens a working modal with the existing corporate video.
-- Student and specialty actions link to `/portal/cursos/` or its filtered variants.
-- Teacher and evidence actions link to `/portal-docente/`.
-- Demo and implementation actions scroll to the contact area or open a populated email request.
-- All controls have accessible names and visible keyboard focus.
-- No empty links or destination-less buttons remain.
-
-## Remaining notes
-
-- The reference artwork contains the visible interface text. Accessible labels expose equivalent names to assistive technology.
+- Todos los botones “Solicitar demo” dirigen a `/portal/cursos/`, la pantalla habitual de acceso.
+- El botón “Ver cómo funciona (30 segundos)” y su video fueron eliminados.
+- Cursos, portal docente, ruta pedagógica, especialidades y contacto conservan destinos reales.
+- No existen enlaces vacíos ni botones sin función.
 
 final result: passed

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   CATALOGO_OA,
   ESTADO_OA_AE_LABEL,
@@ -14,6 +15,7 @@ import {
   type EstadoOaAe,
   type EstudianteDemo,
 } from "@/lib/demo-data";
+import { CLIMATIZACION_META } from "@/lib/climatizacion-curso";
 import { BarChart, ChartPanel, CHART_HEX, DonutChart, MiniDonut } from "./charts";
 import {
   AlertList,
@@ -51,13 +53,38 @@ import {
   conteoOaGrupo,
   criteriosDeEvaluacion,
   estudiantesDeEspecialidad,
-  oaCodesForGroup,
   pctLogroAe,
   pluralEstudiantes,
   tendenciaCentral,
 } from "@/lib/portal-stats";
 
 export { CumplimientoView };
+
+function CurricularSourceNote({ compact = false }: { compact?: boolean }) {
+  return (
+    <aside className="rounded-2xl border border-[var(--color-line)] bg-[#f7f3ea] px-4 py-3 text-xs text-[var(--color-slate)]">
+      <p>
+        <span className="font-bold">Referencia oficial.</span> Especialidad Refrigeración y Climatización,
+        sector Construcción. Programa de Estudio 3° y 4° medio, {CLIMATIZACION_META.decretoPrograma}.
+        Bases: {CLIMATIZACION_META.decretoBases}. {CLIMATIZACION_META.programaEdicion}.
+      </p>
+      <p className="mt-1">
+        Fuente consultada el 26-09-2026: ejemplar MINEDUC ISBN 978-956-292-506-8 (copia de trabajo del campus).
+        Portal Currículum Nacional:{" "}
+        <a className="font-semibold underline" href="https://www.curriculumnacional.cl/" target="_blank" rel="noreferrer">
+          curriculumnacional.cl
+        </a>
+        . Aula TP Chile no es una plataforma oficial del MINEDUC.
+      </p>
+      {compact ? null : (
+        <p className="mt-2">
+          Distinción: <b>oficial</b> = texto del programa; <b>orientación</b> = ayuda pedagógica;{" "}
+          <b>propuesta Aula TP</b> = desafío, estación o instrumento de la plataforma.
+        </p>
+      )}
+    </aside>
+  );
+}
 
 const ESTADO_BADGE: Record<EstadoOaAe, string> = {
   logrado: "bg-emerald-100 text-emerald-800 ring-emerald-200",
@@ -105,7 +132,6 @@ export function ResumenView() {
     { logrado: 0, medianamente_logrado: 0, en_proceso: 0, no_logrado: 0 },
   );
   const n = estudiantes.length || 1;
-  const descendidos = [...estudiantes].sort((a, b) => a.avancePct - b.avancePct).slice(0, 5);
   const oaCriticos = catalogoOaDeGrupo(estudiantes)
     .map((oa) => ({
       oa,
@@ -123,64 +149,46 @@ export function ResumenView() {
     <div className="space-y-6">
       <SectionIntro
         title="Panel general"
-        purpose="Vista institucional para leer en segundos el estado de cursos, estudiantes, avance y cumplimiento. Desde aquí identificas alertas y entras al detalle por el menú lateral."
+        purpose="¿Qué requiere mi atención hoy? Solo síntesis accionable: próxima clase, desafío activo y situaciones a revisar. El detalle vive en las otras pestañas."
       />
       <LiveStatusNote />
 
       <ResumenStoreCounts />
       <LiveKpiRow />
 
-      <KpiStrip
-        items={[
-          {
-            label: "Porcentaje de logro % (media)",
-            value: `${stats.media}`,
-            hint: `Mediana ${stats.mediana} · moda ${stats.moda ?? "—"} · ${pluralEstudiantes(stats.n)}`,
-          },
-          {
-            label: "Estudiantes en proceso o no logrados",
-            value: String(bandas.en_proceso + bandas.no_logrado),
-            hint: "Cantidad de estudiantes que requieren apoyo",
-          },
-          {
-            label: "OA con menor porcentaje de logro",
-            value: oaCriticos[0] ? `${oaCriticos[0].pct}%` : "—",
-            hint: oaCriticos[0]
-              ? `${oaCriticos[0].oa.codigo} · ${oaCriticos[0].oa.especialidad}`
-              : "Sin evidencia LMS",
-          },
-          {
-            label: "Cursos con menor avance",
-            value: porCurso[0] ? `${porCurso[0].avg}%` : "—",
-            hint: porCurso[0] ? porCurso[0].key : "Sin cursos",
-          },
-        ]}
-      />
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Link href="/portal-docente/cursos" className="portal-surface rounded-2xl border p-4 hover:border-[var(--color-ok,#1f8a5b)]">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--color-muted)]">Próxima clase</p>
+          <p className="mt-1 text-sm font-semibold">Módulo 1 · Lectura de planos y cubicación</p>
+          <p className="mt-1 text-xs text-[var(--color-slate)]">Preparar simbología y overlay plano–obra. Abrir planificación.</p>
+        </Link>
+        <Link href="/portal-docente/estudiantes" className="portal-surface rounded-2xl border p-4 hover:border-[var(--color-ok,#1f8a5b)]">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--color-muted)]">Desafío activo</p>
+          <p className="mt-1 text-sm font-semibold">Marcar interferencias en el plano</p>
+          <p className="mt-1 text-xs text-[var(--color-slate)]">Ver evidencias y decidir apoyo o demostración.</p>
+        </Link>
+        <Link href="/portal-docente/reportes?vista=cobertura" className="portal-surface rounded-2xl border p-4 hover:border-[var(--color-ok,#1f8a5b)]">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--color-muted)]">Requiere atención</p>
+          <p className="mt-1 text-sm font-semibold">{bandas.en_proceso + bandas.no_logrado} recorridos con evidencia incompleta</p>
+          <p className="mt-1 text-xs text-[var(--color-slate)]">Revisar cobertura curricular. No etiqueta a estudiantes.</p>
+        </Link>
+      </div>
 
       <AlertList
-        title="Focos prioritarios (30 segundos)"
+        title="Focos de hoy (enlazan al detalle)"
         items={[
           ...porCurso.slice(0, 2).map((c) => ({
             id: `curso-${c.key}`,
-            title: `Curso con menor avance: ${c.key}`,
-            detail: `Avance promedio ${c.avg}% · ${pluralEstudiantes(c.estudiantes.length)}. Revisa Cumplimiento o Estudiantes para el detalle.`,
+            title: `Curso con menor avance de estaciones: ${c.key}`,
+            detail: `Promedio ${c.avg}%. Abrir Estudiantes para evidencias o Reportes para cobertura del módulo.`,
             tone: "warn" as const,
           })),
           ...oaCriticos.slice(0, 2).map((o) => ({
             id: `oa-${o.oa.especialidad}-${o.oa.codigo}`,
-            title: `${o.oa.codigo} crítico · ${o.oa.especialidad}`,
-            detail: `Porcentaje de logro ${o.pct}% · ${pluralEstudiantes(o.conteo.logrado)} logrados de ${o.conteo.total}.`,
+            title: `${o.oa.codigo} con menos evidencia recogida · ${o.oa.especialidad}`,
+            detail: `${o.pct}% de registros en logrado. Ver referencia en OA, AE y criterios.`,
             tone: "warn" as const,
           })),
-          {
-            id: "desc",
-            title: `${pluralEstudiantes(descendidos.length)} con menor porcentaje de logro`,
-            detail: descendidos
-              .slice(0, 3)
-              .map((e) => `${e.nombre} (${e.avancePct}%)`)
-              .join(" · "),
-            tone: "info" as const,
-          },
         ]}
       />
 
@@ -260,8 +268,13 @@ export function CursosView() {
     <div className="space-y-6">
       <SectionIntro
         title="Cursos / Planificación"
-        purpose="Cursos publicados, comparación de avance entre grupos y horario semanal asociado a OA/AE. El acceso estudiantil único es el catálogo /portal/cursos/."
+        purpose="¿Qué voy a enseñar y cómo? Aquí se prepara la clase o el desafío. El seguimiento de evidencias se hace en Estudiantes."
       />
+      <CurricularSourceNote compact />
+      <p className="rounded-xl border border-[var(--color-line)] bg-[var(--color-ok-soft,#e6f6ee)] px-4 py-3 text-xs text-[var(--color-slate)]">
+        <b>Referencia oficial:</b> módulo 1 «Lectura de planos y cubicación de materiales de proyectos» (190 h, 3° medio).{" "}
+        <b>Propuesta Aula TP:</b> desafío de overlay plano–obra (no forma parte del programa MINEDUC).
+      </p>
       <LiveStatusNote />
 
       <CursosVivosList />
@@ -379,7 +392,7 @@ export function EstudiantesView() {
     <div className="space-y-6">
       <SectionIntro
         title="Estudiantes"
-        purpose="Lee el avance desde tres perspectivas. Por nivel: tendencias de OA, AE y criterios de evaluación. Por curso: comparación entre grupos. Por estudiante: quién requiere apoyo ahora."
+        purpose="¿Cómo avanza cada estudiante y qué puede hacer ahora? Aquí viven evidencias, retroalimentación y la ruta del desafío. Los OA completos están en la pestaña curricular."
       >
         <BrowserSaveHint className="mt-1" />
       </SectionIntro>
@@ -748,14 +761,13 @@ export function OaAeView() {
     "Administración",
     "Refrigeración y Climatización",
   ];
-  type OaVista = "todas" | "carrera" | "curso" | "estudiante" | "nivel";
+  type OaVista = "todas" | "carrera" | "curso" | "nivel";
   const { oaFiltro: filtro, setOaFiltro: setFiltro } = usePortalStore();
   const { estudiantes } = useLivePortal();
   const [vista, setVista] = useState<OaVista>("todas");
   const [search, setSearch] = useState("");
   const [cursoSel, setCursoSel] = useState("");
   const [nivelSel, setNivelSel] = useState("");
-  const [estSel, setEstSel] = useState("");
   const cursos = useMemo(
     () => Array.from(new Set(estudiantes.map((e) => e.curso))).sort((a, b) => a.localeCompare(b, "es")),
     [estudiantes],
@@ -774,15 +786,12 @@ export function OaAeView() {
       const curso = cursoSel || cursos[0];
       return estudiantes.filter((e) => e.curso === curso);
     }
-    if (vista === "estudiante") {
-      return estudiantes.filter((e) => e.id === (estSel || estudiantes[0]?.id));
-    }
     if (vista === "nivel") {
       const nivel = nivelSel || niveles[0];
       return estudiantes.filter((e) => nivelFromCurso(e.curso) === nivel);
     }
     return filtro === "Todas" ? estudiantes : estudiantesDeEspecialidad(estudiantes, filtro);
-  }, [vista, filtro, cursoSel, cursos, estSel, nivelSel, niveles, estudiantes]);
+  }, [vista, filtro, cursoSel, cursos, nivelSel, niveles, estudiantes]);
 
   const filtered = useMemo(() => {
     const catalog = catalogoOaDeGrupo(recorte.length ? recorte : estudiantes);
@@ -807,10 +816,11 @@ export function OaAeView() {
     <div className="space-y-6">
       <SectionIntro
         title="OA, AE y criterios de evaluación"
-        purpose="Analiza Objetivos de Aprendizaje, Aprendizajes Esperados y criterios de evaluación desde todas las carreras, una carrera, un curso, un estudiante o el nivel completo."
+        purpose="¿Cuál es la referencia curricular? Textos oficiales verificados, con enlace a la fuente. En otras pestañas solo aparece un extracto breve."
       >
         <BrowserSaveHint className="mt-1" />
       </SectionIntro>
+      <CurricularSourceNote />
       <LiveStatusNote />
 
       <PerspectiveTabs
@@ -818,10 +828,9 @@ export function OaAeView() {
         value={vista}
         onChange={setVista}
         options={[
-          { id: "todas", label: "Todas las carreras" },
-          { id: "carrera", label: "Por carrera" },
+          { id: "todas", label: "Todas las especialidades" },
+          { id: "carrera", label: "Por especialidad" },
           { id: "curso", label: "Por curso" },
-          { id: "estudiante", label: "Por estudiante" },
           { id: "nivel", label: "Nivel completo" },
         ]}
       />
@@ -883,22 +892,6 @@ export function OaAeView() {
               {niveles.map((n) => (
                 <option key={n} value={n}>
                   {n}
-                </option>
-              ))}
-            </select>
-          </label>
-        ) : null}
-        {vista === "estudiante" ? (
-          <label className="text-xs font-semibold text-slate-700">
-            Estudiante
-            <select
-              value={estSel}
-              onChange={(e) => setEstSel(e.target.value)}
-              className="mt-1 block min-h-11 max-w-xs rounded-xl border-2 border-slate-300 bg-white px-3 py-2 text-sm"
-            >
-              {estudiantes.map((e) => (
-                <option key={e.id} value={e.id}>
-                  {e.nombre} · {e.curso}
                 </option>
               ))}
             </select>
@@ -1061,13 +1054,15 @@ function exportEstudiantesCsv(rows: EstudianteDemo[]) {
 }
 
 export function ReportesView() {
-  type ReportesVista = "nivel" | "especialidad" | "curso" | "estudiante";
-  type SortKey = "nombre" | "curso" | "especialidad" | "avance" | "ae";
+  type ReportesPane = "analisis" | "cobertura";
+  type ReportesVista = "nivel" | "especialidad" | "curso";
+  const searchParams = useSearchParams();
   const { reportesFiltro, setReportesFiltro } = usePortalStore();
   const { estudiantes: estudiantesBase } = useLivePortal();
   const [vista, setVista] = useState<ReportesVista>("nivel");
-  const [sortKey, setSortKey] = useState<SortKey>("avance");
-  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
+  const [pane, setPane] = useState<ReportesPane>(
+    searchParams.get("vista") === "cobertura" ? "cobertura" : "analisis",
+  );
   const cursosUnicos = useMemo(
     () => Array.from(new Set(estudiantesBase.map((e) => e.curso))).sort((a, b) => a.localeCompare(b, "es")),
     [estudiantesBase],
@@ -1120,17 +1115,6 @@ export function ReportesView() {
     return tot === 0 ? 0 : Math.round((log / tot) * 100);
   }, [estudiantesFiltrados]);
 
-  const logradosPorOa = useMemo(() => {
-    return oaCodesForGroup(estudiantesFiltrados).map((codigo) => {
-      const c = conteoOaGrupo(estudiantesFiltrados, codigo);
-      return {
-        label: codigo,
-        value: c.logrado,
-        valueLabel: pluralEstudiantes(c.logrado),
-      };
-    });
-  }, [estudiantesFiltrados]);
-
   const porEspecialidad = useMemo(
     () =>
       groupEstudiantesBy(
@@ -1152,42 +1136,13 @@ export function ReportesView() {
     },
     { logrado: 0, medianamente_logrado: 0, en_proceso: 0, no_logrado: 0 },
   );
-  const nSafe = n || 1;
-
-  const sortedEstudiantes = useMemo(() => {
-    const rows = [...estudiantesFiltrados];
-    const dir = sortDir === "asc" ? 1 : -1;
-    rows.sort((a, b) => {
-      if (sortKey === "nombre") return a.nombre.localeCompare(b.nombre, "es") * dir;
-      if (sortKey === "curso") return a.curso.localeCompare(b.curso, "es") * dir;
-      if (sortKey === "especialidad") {
-        return (
-          (etiquetaEspecialidadCurso(a.curso)).localeCompare(
-            etiquetaEspecialidadCurso(b.curso),
-            "es",
-          ) * dir
-        );
-      }
-      if (sortKey === "ae") return (a.aeLogrados - b.aeLogrados) * dir;
-      return (a.avancePct - b.avancePct) * dir;
-    });
-    return rows;
-  }, [estudiantesFiltrados, sortKey, sortDir]);
-
-  function toggleSort(key: SortKey) {
-    if (sortKey === key) setSortDir((d) => (d === "asc" ? "desc" : "asc"));
-    else {
-      setSortKey(key);
-      setSortDir(key === "avance" || key === "ae" ? "asc" : "asc");
-    }
-  }
 
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <SectionIntro
           title="Reportes"
-          purpose="De lo general a lo específico: nivel, especialidad, curso y estudiante. Cada gráfico indica si muestra cantidad de estudiantes, Porcentaje de logro %, cobertura OA/AE o evolución en el tiempo."
+          purpose="¿Qué se ha trabajado, qué falta y qué decisión tomaré? Cobertura curricular describe el trabajo pedagógico; el análisis ayuda a elegir una acción. Las fichas individuales viven en Estudiantes."
         >
           <BrowserSaveHint className="mt-1" />
         </SectionIntro>
@@ -1202,14 +1157,26 @@ export function ReportesView() {
       <LiveStatusNote />
 
       <PerspectiveTabs
-        label="Perspectiva del reporte"
+        label="Vistas de reportes"
+        value={pane}
+        onChange={setPane}
+        options={[
+          { id: "analisis", label: "Análisis pedagógico" },
+          { id: "cobertura", label: "Cobertura curricular" },
+        ]}
+      />
+
+      {pane === "cobertura" ? <CumplimientoView /> : (
+      <>
+
+      <PerspectiveTabs
+        label="Perspectiva del análisis"
         value={vista}
         onChange={setVista}
         options={[
           { id: "nivel", label: "Por nivel" },
           { id: "especialidad", label: "Por especialidad" },
           { id: "curso", label: "Por curso" },
-          { id: "estudiante", label: "Por estudiante" },
         ]}
       />
 
@@ -1297,115 +1264,16 @@ export function ReportesView() {
         </div>
       ) : null}
       {vista === "curso" ? <CursoComparePanel grupos={porCurso} /> : null}
-      {vista === "estudiante" ? (
-        <EstudiantePriorityPanel
-          estudiantes={estudiantesFiltrados}
-          total={estudiantesFiltrados.length}
-        />
-      ) : null}
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <ChartPanel
-          title="Distribución de logro"
-          subtitle="Cantidad de estudiantes del recorte LMS según banda de Porcentaje de logro %."
-        >
-          <DonutChart
-            title="Cantidad de estudiantes según banda de logro"
-            centerLabel={String(n)}
-            slices={(Object.keys(BANDA_LOGRO_LABEL) as Array<keyof typeof BANDA_LOGRO_LABEL>).map(
-              (k) => ({
-                label: BANDA_LOGRO_LABEL[k],
-                pct: Math.round((bandas[k] / nSafe) * 100),
-                count: bandas[k],
-                unit: "estudiantes",
-                color: BANDA_LOGRO_COLOR[k],
-              }),
-            )}
-          />
-        </ChartPanel>
-        <ChartPanel
-          title="Cobertura AE del recorte"
-          subtitle="Porcentaje de AE logrados vs pendientes (cobertura OA/AE)."
-        >
-          <DonutChart
-            title="Cobertura de AE (porcentaje)"
-            centerLabel={`${cobPct}%`}
-            slices={[
-              { label: "AE logrados", pct: cobPct, color: CHART_HEX.teal },
-              {
-                label: "AE pendientes",
-                pct: 100 - cobPct,
-                color: CHART_HEX.track,
-              },
-            ]}
-          />
-        </ChartPanel>
-      </div>
-
-      <ChartPanel
-        title="Cobertura de OA: cantidad de estudiantes que lograron cada objetivo"
-        subtitle="Eje vertical: cantidad de estudiantes. Eje horizontal: OA."
-      >
-        <BarChart
-          title="Cantidad de estudiantes que lograron cada OA"
-          yAxisTitle="Cantidad de estudiantes"
-          xAxisTitle="Objetivo de Aprendizaje (OA)"
-          items={logradosPorOa}
-          color={CHART_HEX.success}
-        />
-      </ChartPanel>
-
-      <ChartPanel title="Tabla de estudiantes (ordenable)" className="overflow-x-auto">
-        <table className="mt-1 min-w-[640px] w-full text-left text-sm">
-          <thead>
-            <tr className="border-b border-[var(--aula-line,#d9e5f6)] text-xs uppercase tracking-wide text-[var(--aula-text-muted,#5e7596)]">
-              {(
-                [
-                  ["nombre", "Nombre"],
-                  ["curso", "Curso"],
-                  ["especialidad", "Especialidad"],
-                  ["avance", "Porcentaje de logro %"],
-                  ["ae", "Cantidad de AE logrados"],
-                ] as Array<[SortKey, string]>
-              ).map(([key, label]) => (
-                <th key={key} className="px-2 py-2">
-                  <button
-                    type="button"
-                    onClick={() => toggleSort(key)}
-                    className="font-bold uppercase tracking-wide hover:text-[var(--aula-blue,#1558A0)]"
-                  >
-                    {label}
-                    {sortKey === key ? (sortDir === "asc" ? " ↑" : " ↓") : ""}
-                  </button>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[var(--aula-line,#d9e5f6)]">
-            {sortedEstudiantes.slice(0, 40).map((e) => (
-              <tr key={e.id}>
-                <td className="px-2 py-1.5 font-medium text-[var(--aula-text,#082b80)]">{e.nombre}</td>
-                <td className="px-2 py-1.5 text-[var(--aula-text-secondary,#43628f)]">{e.curso}</td>
-                <td className="px-2 py-1.5 text-[var(--aula-text-secondary,#43628f)]">
-                  {etiquetaEspecialidadCurso(e.curso)}
-                </td>
-                <td className="px-2 py-1.5 tabular-nums text-[var(--aula-text,#082b80)]">
-                  {e.avancePct}%
-                </td>
-                <td className="px-2 py-1.5 tabular-nums text-[var(--aula-text,#082b80)]">
-                  {e.aeLogrados}/{e.aeTotales}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {estudiantesFiltrados.length > 40 ? (
-          <p className="mt-2 text-xs text-[var(--aula-text-muted,#5e7596)]">
-            Mostrando 40 de {pluralEstudiantes(estudiantesFiltrados.length)}. Usa Exportar CSV para el
-            listado completo.
-          </p>
-        ) : null}
-      </ChartPanel>
+      <p className="text-xs text-[var(--color-slate)]">
+        Los listados nominales y la evidencia por persona están en{" "}
+        <Link className="font-semibold underline" href="/portal-docente/estudiantes">
+          Estudiantes
+        </Link>
+        . Este análisis no etiqueta capacidad ni motivación.
+      </p>
+      </>
+      )}
     </div>
   );
 }

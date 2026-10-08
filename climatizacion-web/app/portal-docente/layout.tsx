@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Portal Docente — Aula TP Chile",
   description:
-    "Panel docente de Aula TP Chile: cursos, estudiantes, OA/AE, cumplimiento y reportes desde el LMS.",
+    "Portal docente de Aula TP Chile: panel, planificación, estudiantes, referencia curricular y reportes. No es un sitio oficial del MINEDUC.",
   robots: { index: false, follow: false },
 };
 

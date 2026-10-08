@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import {
   NAV_SECTIONS,
   type SectionId,
 } from "@/lib/demo-data";
 import { LivePortalProvider } from "./live-data";
 import {
-  CumplimientoView,
   CursosView,
   EstudiantesView,
   OaAeView,
@@ -25,7 +24,6 @@ const PORTAL_SECTION_ART = {
   cursos: { src: "/images/portal-docente/frames/hero-cursos-planificacion.png", alt: "Banner de cursos y planificación del Portal Docente", trimVerticalWhitespace: false },
   estudiantes: { src: "/images/portal-docente/frames/hero-estudiantes-reference.png", alt: "Banner de estudiantes y seguimiento de aprendizajes", trimVerticalWhitespace: false },
   "oa-ae": { src: "/images/portal-docente/frames/hero-oa-ae-reference.png", alt: "Banner de objetivos de aprendizaje y aprendizajes esperados", trimVerticalWhitespace: false },
-  cumplimiento: { src: "/images/portal-docente/frames/hero-cumplimiento.png", alt: "Banner de seguimiento de cumplimiento", trimVerticalWhitespace: false },
   reportes: {
     src: "/images/portal-docente/frames/hero-reportes-reference.png",
     alt: "Banner de reportes y análisis pedagógico",
@@ -38,7 +36,7 @@ export function PortalShell({ section }: PortalShellProps) {
   const sectionArt = PORTAL_SECTION_ART[section];
 
   return (
-    <div className="min-h-screen bg-[var(--aula-pale,#f7fbff)]">
+    <div className="min-h-screen bg-[#f6f4ee]">
       <div className="flex min-h-screen">
         <aside className="portal-sidebar hidden min-h-screen w-64 shrink-0 flex-col overflow-y-auto lg:flex" aria-label="Navegación principal">
           <div className="portal-sidebar-reference relative w-full shrink-0">
@@ -189,7 +187,6 @@ function PortalNavIcon({ section }: { section: SectionId }) {
     cursos: "M3 6.5 10 4l7 2.5-7 2.5L3 6.5Zm2 3.5v3.5c2.7 2 7.3 2 10 0V10",
     estudiantes: "M6.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm7 0a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM2.5 16c.3-3 2-4.5 4-4.5S10.2 13 10.5 16M9.5 16c.3-3 2-4.5 4-4.5s3.7 1.5 4 4.5",
     "oa-ae": "M5 3.5h8l2.5 2.5v10.5H5V3.5Zm8 0V6h2.5M8 9h5M8 12h5M8 15h3",
-    cumplimiento: "M10 3.5 16 6v4.5c0 3.5-2.3 5.8-6 7-3.7-1.2-6-3.5-6-7V6l6-2.5Zm-2.5 6.5 1.7 1.7 3.5-3.5",
     reportes: "M4 16V9h3v7H4Zm4.5 0V5h3v11h-3Zm4.5 0v-4h3v4h-3Z",
   };
 
@@ -213,9 +210,11 @@ function SectionBody({ section }: { section: SectionId }) {
     case "oa-ae":
       return <OaAeView />;
     case "reportes":
-      return <ReportesView />;
-    case "cumplimiento":
-      return <CumplimientoView />;
+      return (
+        <Suspense fallback={<p className="text-sm text-[var(--color-muted)]">Cargando reportes…</p>}>
+          <ReportesView />
+        </Suspense>
+      );
     default:
       return <ResumenView />;
   }

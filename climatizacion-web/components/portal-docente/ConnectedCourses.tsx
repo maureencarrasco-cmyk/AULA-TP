@@ -9,6 +9,7 @@ import {
   type PortalCurso,
 } from "@/lib/portal-cursos";
 import { especialidadFromCurso } from "@/lib/demo-data";
+import { MODULOS_CLIMATIZACION } from "@/lib/climatizacion-curso";
 import { ChartPanel, CHART_HEX, DataBadge, MiniDonut, BarChart } from "./charts";
 import {
   KpiStrip,
@@ -16,7 +17,7 @@ import {
   SectionIntro,
   TendenciaCard,
 } from "./analytics";
-import { CursoComparePanel, EstudiantePriorityPanel } from "./perspective-panels";
+import { CursoComparePanel } from "./perspective-panels";
 import {
   demoMetricsForPath,
   shouldUseDemoMetrics,
@@ -427,7 +428,7 @@ export function CursosVivosList() {
 }
 
 export function CumplimientoView() {
-  type Vista = "nivel" | "curso" | "estudiante";
+  type Vista = "nivel" | "curso";
   const [refreshKey, setRefreshKey] = useState(0);
   const [vista, setVista] = useState<Vista>("nivel");
   const [carrera, setCarrera] = useState<"Todas" | "enfermeria" | "electricidad" | "climatizacion">(
@@ -554,8 +555,8 @@ export function CumplimientoView() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <SectionIntro
-          title="Cumplimiento"
-          purpose="Eje principal: cumplimiento de Objetivos de Aprendizaje (OA), actividades e integradores. Revisa por nivel, por curso o por estudiante."
+          title="Cobertura curricular"
+          purpose="Matriz del trabajo pedagógico: planificado, trabajado y con evidencia recogida. Describe lo que se ha abordado en el módulo, no etiqueta a estudiantes."
         />
         <button
           type="button"
@@ -567,13 +568,12 @@ export function CumplimientoView() {
       </div>
 
       <PerspectiveTabs
-        label="Perspectiva de cumplimiento"
+        label="Perspectiva de cobertura"
         value={vista}
         onChange={setVista}
         options={[
           { id: "nivel", label: "Por nivel" },
           { id: "curso", label: "Por curso" },
-          { id: "estudiante", label: "Por estudiante" },
         ]}
       />
 
@@ -631,7 +631,7 @@ export function CumplimientoView() {
           {
             label: "Actividades completadas",
             value: `${actAvg}%`,
-            hint: "Promedio de cumplimiento de actividades",
+            hint: "Actividades con registro de trabajo en el módulo",
           },
           {
             label: "Cumplimiento del integrador",
@@ -647,6 +647,45 @@ export function CumplimientoView() {
       />
 
       <TendenciaCard stats={stats} />
+
+      <section className="overflow-x-auto rounded-2xl border bg-white p-4">
+        <h2 className="text-sm font-bold">Matriz de cobertura · Refrigeración y Climatización (3° medio)</h2>
+        <p className="mt-1 text-xs text-[var(--color-muted)]">
+          Planificado = en el programa y en la planificación Aula TP. Trabajado = hay actividad registrada.
+          Con evidencia = hay registro de proceso o resultado. No describe a personas.
+        </p>
+        <table className="mt-3 min-w-[52rem] w-full text-left text-sm">
+          <thead>
+            <tr className="border-b text-xs uppercase tracking-wide text-[var(--color-muted)]">
+              <th className="py-2 pr-3">Módulo / AE</th>
+              <th className="py-2 pr-3">Planificado</th>
+              <th className="py-2 pr-3">Trabajado</th>
+              <th className="py-2 pr-3">Con evidencia</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y">
+            {MODULOS_CLIMATIZACION.filter((m) => m.nivel === "3°").flatMap((m) =>
+              m.ae.map((ae) => {
+                const worked = actAvg > 0 && ae.incluidoEn30;
+                const evidence = intAvg > 0 && ae.incluidoEn30;
+                return (
+                  <tr key={`${m.id}-${ae.codigo}`}>
+                    <td className="py-2 pr-3">
+                      <span className="font-semibold">{ae.codigo}</span>
+                      <span className="block text-xs text-[var(--color-muted)]">
+                        {m.nombre} · {ae.incluidoEn30 ? "rebanada Aula TP 30 %" : "fuera del 30 % (taller presencial)"}
+                      </span>
+                    </td>
+                    <td className="py-2 pr-3">{ae.incluidoEn30 ? "Sí" : "Pendiente de verificación en esta rebanada"}</td>
+                    <td className="py-2 pr-3">{worked ? "Sí" : "Aún no"}</td>
+                    <td className="py-2 pr-3">{evidence ? "Sí" : "Aún no"}</td>
+                  </tr>
+                );
+              }),
+            )}
+          </tbody>
+        </table>
+      </section>
 
       {oaBars.length > 0 ? (
         <ChartPanel
@@ -682,13 +721,6 @@ export function CumplimientoView() {
       ) : null}
 
       {vista === "curso" ? <CursoComparePanel grupos={porCurso} /> : null}
-
-      {vista === "estudiante" ? (
-        <EstudiantePriorityPanel
-          estudiantes={recorteEstudiantes}
-          total={recorteEstudiantes.length}
-        />
-      ) : null}
 
       {visibles.map((b) => (
         <CumplimientoCourseBlock
