@@ -1,0 +1,25 @@
+{
+  "cursos": 45,
+  "modulos": 451,
+  "componentes_documentados": 55938,
+  "controles_documentales": 190555,
+  "controles_satisfactorios": 190555,
+  "promedio_integral": "NV",
+  "cursos_cumplimiento_integral": "NV",
+  "cursos_cumplimiento_parcial_integral": "NV",
+  "cursos_brechas_relevantes_integral": "NV",
+  "parejas_repetidas": 29,
+  "modulos_con_repeticiones": 16,
+  "cursos_con_repeticiones": [
+    5,
+    6,
+    7
+  ],
+  "propuestas_condicionadas": 29,
+  "prioridades": {
+    "Alta": 0,
+    "Media": 29,
+    "Baja": 0
+  },
+  "cambios_ejecutados": 0
+}

@@ -1,0 +1,500 @@
+- link "Saltar al contenido":
+  - /url: "#main"
+- main:
+  - link "Aula TP Chile · Formación técnica con sentido":
+    - /url: "#courses"
+    - img "Aula TP Chile · Formación técnica con sentido"
+  - link "Volver atrás":
+    - /url: "#module/351/4"
+    - text: Volver atrás
+  - navigation "Ubicación":
+    - link "Inicio":
+      - /url: "#courses"
+      - text: Inicio
+    - link "Módulo 8":
+      - /url: "#course/37"
+      - text: Módulo 8
+    - generic: Retroalimentación y cierre
+  - generic: Tu progreso en el módulo
+  - progressbar
+  - generic: 0 de 5 estaciones
+  - paragraph:
+    - generic: Estación 6 de 6
+    - generic: "6"
+  - paragraph:
+    - generic: Módulo 8 · Elaboración de vinos
+  - heading "Retroalimentación y Cierre" [level=1]
+  - paragraph: Consolida tu aprendizaje, reconoce tus avances e identifica nuevas oportunidades de mejora.
+  - blockquote: Tu aprendizaje también deja huella.
+  - img "Revisión de avances, reflexión y cierre del módulo"
+  - complementary:
+    - emphasis: Tu aprendizaje también deja huella.
+  - 'region "Módulo 8: Elaboración de vinos. AE 1 · Retroalimentación y cierre. Avance del módulo 0 de 5 estaciones. Logro 0 por ciento, aún sin evidencia registrada."':
+    - generic: Módulo 8
+    - generic: Elaboración de vinos
+    - generic: AE 1 · Retroalimentación y cierre
+    - article:
+      - text: Tu aprendizaje
+      - generic: Avance del módulo
+      - generic: 0/5
+      - img "0 de 5 estaciones recorridas"
+      - emphasis: ¡Vamos! Cada paso te acerca a tu objetivo.
+    - article:
+      - text: Logro del módulo
+      - generic: 0%
+      - generic: Aún no registrada
+      - generic: Completa la reflexión para construir tu evidencia.
+  - region "Ruta de las 5 estaciones del módulo. Estás en la estación 6 de 6. 0 de 5 estaciones habilitadas completadas.":
+    - generic "Ruta de aprendizaje de las 6 estaciones":
+      - generic: MI RUTA PROFESIONAL
+      - heading "Estación 6 de 6 · Retroalimentación y cierre" [level=2]
+      - paragraph: Reflexiona y avanza
+      - generic: Avance de tu ruta
+      - strong: 0%
+      - progressbar "Estaciones habilitadas completadas"
+      - paragraph:
+        - text: 0 de 5 estaciones
+        - text: habilitadas completadas
+      - text: Misión laboral · en construcción
+    - list:
+      - text: ›
+      - generic: "1"
+      - 'button "Estación 1 de 6: Contextualización. Pendiente. Comprender la situación."':
+        - generic: Estación 1
+        - generic: Contextualiza
+        - generic: Contextualización
+        - generic: Comprender la situación
+        - generic: Pendiente
+      - text: ›
+      - generic: "2"
+      - 'button "Estación 2 de 6: Aprendizajes esperados. Pendiente. Analiza, comprende y aplica."':
+        - generic: Estación 2
+        - generic: Aprende
+        - generic: Aprendizajes esperados
+        - generic: Analiza, comprende y aplica
+        - generic: Pendiente
+      - text: ›
+      - generic: "3"
+      - 'button "Estación 3 de 6: Situación integradora. Pendiente. Resuelve en contexto."':
+        - generic: Estación 3
+        - generic: Aplica
+        - generic: Situación integradora
+        - generic: Resuelve en contexto
+        - generic: Pendiente
+      - text: ›
+      - generic: "4"
+      - button "Estación 4 de 6. Misión laboral. En construcción. Estación bloqueada" [disabled]:
+        - generic: MISIÓN LABORAL
+        - text: EN CONSTRUCCIÓN
+        - generic: Misión laboral
+        - generic: Desafío de oficio
+        - generic: Una misión profesional para poner en juego tus aprendizajes.
+        - text: Explora
+        - text: Resuelve
+        - text: Completa
+        - text: Insignia de misión · bloqueada
+      - text: ›
+      - generic: "5"
+      - 'button "Estación 5 de 6: Evaluación final. Pendiente. Demuestra lo aprendido."':
+        - generic: Estación 5
+        - generic: Demuestra
+        - generic: Evaluación final
+        - generic: Demuestra lo aprendido
+        - generic: Pendiente
+      - generic: "6"
+      - 'button "Estación 6 de 6: Retroalimentación y cierre. Estás aquí. Reflexiona y avanza."':
+        - generic: Estación 6
+        - generic: Reflexiona
+        - text: Retroalimentación
+        - text: y cierre
+        - generic: Reflexiona y avanza
+        - emphasis: Estás trabajando en esta etapa.
+        - generic: Estás aquí
+  - generic "RESPALDO CURRICULAR Fuente curricular y alcance de la simulación":
+    - generic: RESPALDO CURRICULAR
+    - generic: Fuente curricular y alcance de la simulación
+  - region "Instrucciones de la estación 6":
+    - generic: INSTRUCCIONES DE LA ESTACIÓN
+    - generic: Completa el recorrido pestaña por pestaña
+    - paragraph: Pincha cada pestaña, revisa sus orientaciones y desarrolla las actividades antes de avanzar.
+    - generic: 5 etapas
+  - text: 26–36 min
+  - navigation "Pasos de la estación 6":
+    - button "1 Analiza ¿Cómo me fue?":
+      - generic: "1"
+      - generic: Analiza
+      - generic: ¿Cómo me fue?
+    - button "2 Comprende ¿Qué significan mis resultados?":
+      - generic: "2"
+      - generic: Comprende
+      - generic: ¿Qué significan mis resultados?
+    - button "3 Conecta ¿Cómo se relaciona lo aprendido?":
+      - generic: "3"
+      - generic: Conecta
+      - generic: ¿Cómo se relaciona lo aprendido?
+    - button "4 Transfiere ¿Cómo lo utilizo en una situación nueva?":
+      - generic: "4"
+      - generic: Transfiere
+      - generic: ¿Cómo lo utilizo en una situación nueva?
+    - button "5 Proyecta ¿Qué aprendizaje me llevo?":
+      - generic: "5"
+      - generic: Proyecta
+      - generic: ¿Qué aprendizaje me llevo?
+  - region "120 estudiantes simulados":
+    - generic: DEMO · DATOS FICTICIOS
+    - heading "120 estudiantes simulados" [level=2]
+    - paragraph: Resultados de ejemplo para este curso y módulo. No son tus calificaciones ni corresponden a personas reales.
+    - generic: Perfil que quieres explorar
+    - combobox "Perfil que quieres explorar":
+      - option "Estudiante simulado 001 · 42% de logro" [selected]
+      - option "Estudiante simulado 002 · 90% de logro"
+      - option "Estudiante simulado 003 · 53% de logro"
+      - option "Estudiante simulado 004 · 88% de logro"
+      - option "Estudiante simulado 005 · 91% de logro"
+      - option "Estudiante simulado 006 · 81% de logro"
+      - option "Estudiante simulado 007 · 70% de logro"
+      - option "Estudiante simulado 008 · 85% de logro"
+      - option "Estudiante simulado 009 · 64% de logro"
+      - option "Estudiante simulado 010 · 90% de logro"
+      - option "Estudiante simulado 011 · 54% de logro"
+      - option "Estudiante simulado 012 · 78% de logro"
+      - option "Estudiante simulado 013 · 46% de logro"
+      - option "Estudiante simulado 014 · 63% de logro"
+      - option "Estudiante simulado 015 · 53% de logro"
+      - option "Estudiante simulado 016 · 73% de logro"
+      - option "Estudiante simulado 017 · 73% de logro"
+      - option "Estudiante simulado 018 · 85% de logro"
+      - option "Estudiante simulado 019 · 80% de logro"
+      - option "Estudiante simulado 020 · 59% de logro"
+      - option "Estudiante simulado 021 · 59% de logro"
+      - option "Estudiante simulado 022 · 92% de logro"
+      - option "Estudiante simulado 023 · 100% de logro"
+      - option "Estudiante simulado 024 · 77% de logro"
+      - option "Estudiante simulado 025 · 61% de logro"
+      - option "Estudiante simulado 026 · 72% de logro"
+      - option "Estudiante simulado 027 · 52% de logro"
+      - option "Estudiante simulado 028 · 86% de logro"
+      - option "Estudiante simulado 029 · 90% de logro"
+      - option "Estudiante simulado 030 · 81% de logro"
+      - option "Estudiante simulado 031 · 85% de logro"
+      - option "Estudiante simulado 032 · 74% de logro"
+      - option "Estudiante simulado 033 · 92% de logro"
+      - option "Estudiante simulado 034 · 81% de logro"
+      - option "Estudiante simulado 035 · 93% de logro"
+      - option "Estudiante simulado 036 · 68% de logro"
+      - option "Estudiante simulado 037 · 73% de logro"
+      - option "Estudiante simulado 038 · 74% de logro"
+      - option "Estudiante simulado 039 · 60% de logro"
+      - option "Estudiante simulado 040 · 92% de logro"
+      - option "Estudiante simulado 041 · 59% de logro"
+      - option "Estudiante simulado 042 · 48% de logro"
+      - option "Estudiante simulado 043 · 92% de logro"
+      - option "Estudiante simulado 044 · 88% de logro"
+      - option "Estudiante simulado 045 · 34% de logro"
+      - option "Estudiante simulado 046 · 76% de logro"
+      - option "Estudiante simulado 047 · 66% de logro"
+      - option "Estudiante simulado 048 · 83% de logro"
+      - option "Estudiante simulado 049 · 88% de logro"
+      - option "Estudiante simulado 050 · 93% de logro"
+      - option "Estudiante simulado 051 · 76% de logro"
+      - option "Estudiante simulado 052 · 77% de logro"
+      - option "Estudiante simulado 053 · 91% de logro"
+      - option "Estudiante simulado 054 · 68% de logro"
+      - option "Estudiante simulado 055 · 73% de logro"
+      - option "Estudiante simulado 056 · 100% de logro"
+      - option "Estudiante simulado 057 · 87% de logro"
+      - option "Estudiante simulado 058 · 95% de logro"
+      - option "Estudiante simulado 059 · 86% de logro"
+      - option "Estudiante simulado 060 · 92% de logro"
+      - option "Estudiante simulado 061 · 89% de logro"
+      - option "Estudiante simulado 062 · 78% de logro"
+      - option "Estudiante simulado 063 · 60% de logro"
+      - option "Estudiante simulado 064 · 48% de logro"
+      - option "Estudiante simulado 065 · 79% de logro"
+      - option "Estudiante simulado 066 · 73% de logro"
+      - option "Estudiante simulado 067 · 84% de logro"
+      - option "Estudiante simulado 068 · 95% de logro"
+      - option "Estudiante simulado 069 · 68% de logro"
+      - option "Estudiante simulado 070 · 62% de logro"
+      - option "Estudiante simulado 071 · 47% de logro"
+      - option "Estudiante simulado 072 · 87% de logro"
+      - option "Estudiante simulado 073 · 46% de logro"
+      - option "Estudiante simulado 074 · 43% de logro"
+      - option "Estudiante simulado 075 · 78% de logro"
+      - option "Estudiante simulado 076 · 83% de logro"
+      - option "Estudiante simulado 077 · 75% de logro"
+      - option "Estudiante simulado 078 · 91% de logro"
+      - option "Estudiante simulado 079 · 79% de logro"
+      - option "Estudiante simulado 080 · 50% de logro"
+      - option "Estudiante simulado 081 · 39% de logro"
+      - option "Estudiante simulado 082 · 88% de logro"
+      - option "Estudiante simulado 083 · 54% de logro"
+      - option "Estudiante simulado 084 · 82% de logro"
+      - option "Estudiante simulado 085 · 99% de logro"
+      - option "Estudiante simulado 086 · 85% de logro"
+      - option "Estudiante simulado 087 · 79% de logro"
+      - option "Estudiante simulado 088 · 66% de logro"
+      - option "Estudiante simulado 089 · 84% de logro"
+      - option "Estudiante simulado 090 · 93% de logro"
+      - option "Estudiante simulado 091 · 54% de logro"
+      - option "Estudiante simulado 092 · 91% de logro"
+      - option "Estudiante simulado 093 · 73% de logro"
+      - option "Estudiante simulado 094 · 100% de logro"
+      - option "Estudiante simulado 095 · 95% de logro"
+      - option "Estudiante simulado 096 · 72% de logro"
+      - option "Estudiante simulado 097 · 75% de logro"
+      - option "Estudiante simulado 098 · 87% de logro"
+      - option "Estudiante simulado 099 · 87% de logro"
+      - option "Estudiante simulado 100 · 40% de logro"
+      - option "Estudiante simulado 101 · 56% de logro"
+      - option "Estudiante simulado 102 · 87% de logro"
+      - option "Estudiante simulado 103 · 63% de logro"
+      - option "Estudiante simulado 104 · 70% de logro"
+      - option "Estudiante simulado 105 · 68% de logro"
+      - option "Estudiante simulado 106 · 82% de logro"
+      - option "Estudiante simulado 107 · 85% de logro"
+      - option "Estudiante simulado 108 · 47% de logro"
+      - option "Estudiante simulado 109 · 39% de logro"
+      - option "Estudiante simulado 110 · 83% de logro"
+      - option "Estudiante simulado 111 · 81% de logro"
+      - option "Estudiante simulado 112 · 72% de logro"
+      - option "Estudiante simulado 113 · 48% de logro"
+      - option "Estudiante simulado 114 · 72% de logro"
+      - option "Estudiante simulado 115 · 36% de logro"
+      - option "Estudiante simulado 116 · 96% de logro"
+      - option "Estudiante simulado 117 · 36% de logro"
+      - option "Estudiante simulado 118 · 67% de logro"
+      - option "Estudiante simulado 119 · 79% de logro"
+      - option "Estudiante simulado 120 · 100% de logro"
+    - button "Estudiante simulado 001 · 42% de logro"
+    - text: Inicial
+    - generic: 37%
+    - text: Final
+    - generic: 42%
+    - text: Progresión
+    - generic: +5 pp
+    - table "Resultados simulados por aprendizaje":
+      - caption: Resultados simulados por aprendizaje
+      - rowgroup:
+        - row "Aprendizaje Inicial Final Por alcanzar":
+          - columnheader "Aprendizaje"
+          - columnheader "Inicial"
+          - columnheader "Final"
+          - columnheader "Por alcanzar"
+      - rowgroup:
+        - row "AE1 · Realiza las labores del proceso de vinificación de vinos blancos o tintos 33% 36% 64 pp":
+          - rowheader "AE1 · Realiza las labores del proceso de vinificación de vinos blancos o tintos"
+          - cell "33%"
+          - cell "36%"
+          - cell "64 pp"
+        - row "AE2 · Realiza las labores del proceso de envejecimiento de vinos 41% 48% 52 pp":
+          - rowheader "AE2 · Realiza las labores del proceso de envejecimiento de vinos"
+          - cell "41%"
+          - cell "48%"
+          - cell "52 pp"
+    - paragraph: "Fortaleza del perfil: Realiza las labores del proceso de envejecimiento de vinos (48%)."
+    - paragraph: "Próximo foco: Realiza las labores del proceso de vinificación de vinos blancos o tintos. Revisar el criterio técnico, contrastar la evidencia y comprobar la decisión."
+    - generic "Distribución de los 120 estudiantes"
+    - region "Resultados de una cohorte de demostración":
+      - text: DATOS SIMULADOS PARA EXPLORAR
+      - heading "Resultados de una cohorte de demostración" [level=3]
+      - paragraph: Compara la distribución de logro de 120 estudiantes de ejemplo. No corresponde a calificaciones reales.
+      - generic: "120"
+      - text: estudiantes
+      - generic: 74%
+      - text: promedio
+      - generic: 77.5%
+      - text: mediana
+      - img "Distribución de 120 estudiantes de ejemplo por rango de logro":
+        - generic: "0"
+        - generic: "6"
+        - generic: "12"
+        - generic: "18"
+        - generic: "24"
+        - generic: "30"
+        - generic: "5"
+        - generic: 0–39%
+        - generic: "10"
+        - generic: 40–49%
+        - generic: "11"
+        - generic: 50–59%
+        - generic: "14"
+        - generic: 60–69%
+        - generic: "27"
+        - generic: 70–79%
+        - generic: "29"
+        - generic: 80–89%
+        - generic: "24"
+        - generic: 90–100%
+        - generic: Perfil · 42%
+        - generic: Porcentaje de logro
+        - generic: Cantidad de estudiantes
+      - generic: Úsalo para aprender a interpretar resultados grupales; los perfiles son ficticios y no se utilizan para calificar.
+    - paragraph: Las actividades de las pestañas siguen siendo interactivas. Estos perfiles no se guardan como evaluaciones, no desbloquean estaciones y no modifican tus evidencias.
+  - generic: 1. ANALIZA · ¿CÓMO ME FUE?
+  - heading "Analiza tus resultados" [level=2]
+  - paragraph: Revisa tus evidencias y sigue los pasos en orden. Primero observa tus resultados, luego identifica información importante y finalmente responde utilizando tus propios datos.
+  - list:
+    - generic: "1"
+    - text: Observa
+    - generic: "2"
+    - text: Identifica
+    - generic: "3"
+    - text: Analiza y responde
+    - generic: "4"
+    - text: Verifica
+  - heading "1. Observa — ¿Cómo me fue?" [level=3]:
+    - text: 1. Observa — ¿Cómo me fue?
+  - text: Revisa tu nivel de logro, tus aprendizajes y tus evidencias.
+  - paragraph: En este paso solo observa; todavía no necesitas escribir.
+  - heading "1.1 Mi resultado general" [level=4]:
+    - generic: "1.1"
+    - text: Mi resultado general
+  - term: Logro general
+  - definition: 42%
+  - progressbar "Porcentaje de logro": 42%
+  - term: Nivel de referencia
+  - definition: Por fortalecer
+  - term: Evidencias registradas
+  - definition: 30 / 30
+  - term: Evidencias pendientes
+  - definition: "0"
+  - paragraph:
+    - generic: Las evidencias registradas indican participación, no logro técnico.
+  - heading "1.2 Mis aprendizajes" [level=4]
+  - region "Logro por aprendizaje u objetivo evaluado":
+    - generic: PROGRESIÓN HACIA EL 100% ESPERADO
+    - heading "Logro por aprendizaje u objetivo evaluado" [level=3]
+    - paragraph: Compara el primer desempeño registrado con la evaluación final. Los porcentajes pendientes aparecerán cuando exista evidencia suficiente.
+    - text: 37%
+    - generic: Inicial
+    - generic: →
+    - text: 42%
+    - generic: Final
+    - text: +5 pp
+    - generic: Progresión
+    - table:
+      - rowgroup:
+        - row "Aprendizaje evaluado Logro inicial Logro final Progresión Brecha al 100%":
+          - columnheader "Aprendizaje evaluado"
+          - columnheader "Logro inicial"
+          - columnheader "Logro final"
+          - columnheader "Progresión"
+          - columnheader "Brecha al 100%"
+      - rowgroup:
+        - row "AE 1 Realiza las labores del proceso de vinificación de vinos blancos o tintos 33% 33 36% 36 25 evidencias evaluadas +3 pp 64 pp":
+          - rowheader "AE 1 Realiza las labores del proceso de vinificación de vinos blancos o tintos":
+            - generic: AE 1
+            - text: Realiza las labores del proceso de vinificación de vinos blancos o tintos
+          - cell "33% 33":
+            - text: 33%
+            - meter "Logro inicial": 33%
+          - cell "36% 36 25 evidencias evaluadas":
+            - text: 36%
+            - meter "Logro final": 36%
+            - generic: 25 evidencias evaluadas
+          - cell "+3 pp":
+            - generic: +3 pp
+          - cell "64 pp"
+        - row "AE 2 Realiza las labores del proceso de envejecimiento de vinos 41% 41 48% 48 25 evidencias evaluadas +7 pp 52 pp":
+          - rowheader "AE 2 Realiza las labores del proceso de envejecimiento de vinos":
+            - generic: AE 2
+            - text: Realiza las labores del proceso de envejecimiento de vinos
+          - cell "41% 41":
+            - text: 41%
+            - meter "Logro inicial": 41%
+          - cell "48% 48 25 evidencias evaluadas":
+            - text: 48%
+            - meter "Logro final": 48%
+            - generic: 25 evidencias evaluadas
+          - cell "+7 pp":
+            - generic: +7 pp
+          - cell "52 pp"
+    - paragraph: Los resultados orientan la retroalimentación y el plan de mejora; no reemplazan el juicio pedagógico del docente.
+  - heading "Aprendizajes esperados" [level=3]
+  - paragraph: Porcentaje de aciertos en la evaluación, por AE.
+  - group "Rangos del semáforo de logro":
+    - button "Rojo · p < 40%"
+    - button "Amarillo · 40% ≤ p < 60%"
+    - button "Verde · p ≥ 60%"
+  - list:
+    - generic: AE1 · Realiza las labores del proceso de vinificación de vinos blancos o tintos
+    - generic: 36%
+    - generic: AE2 · Realiza las labores del proceso de envejecimiento de vinos
+    - generic: 48%
+  - paragraph: Los porcentajes por AE corresponden a los aciertos evaluados. No se atribuye un porcentaje por OA sin una medición específica.
+  - heading "1.3 Mis evidencias" [level=4]
+  - list:
+    - generic: Situaciones registradas
+    - generic: 15 de 15
+    - generic: Evaluación final
+    - generic: 11 / 25 puntos en selección múltiple
+    - generic: Retroalimentación docente
+    - generic: Disponible en Comprende
+  - paragraph: No hay un historial completo de intentos ni un registro de consultas de retroalimentación; no se muestran cifras estimadas.
+  - generic "Resultados de evaluaciones por módulo"
+  - heading "2. Identifica — Qué muestran mis resultados" [level=3]:
+    - text: 2. Identifica — Qué muestran mis resultados
+  - paragraph: Busca una fortaleza, una dificultad y una relación entre tus acciones y resultados. Estas orientaciones no requieren una respuesta escrita todavía.
+  - term: 2.1 Fortaleza
+  - definition: Localiza tu resultado más alto y su evidencia.
+  - term: 2.2 Dificultad
+  - definition: Reconoce el aprendizaje con menor logro o sin evidencia suficiente.
+  - term: 2.3 Relación
+  - definition: Revisa si tus actividades y retroalimentaciones ayudan a interpretar los resultados.
+  - heading "3. Analiza y responde — Qué puedo concluir" [level=3]:
+    - text: 3. Analiza y responde — Qué puedo concluir
+  - paragraph: Ahora te toca a ti. En cada respuesta menciona al menos un resultado o evidencia que apoye tu conclusión. Si aún no tienes resultados, explica qué falta para poder analizar.
+  - paragraph: Tus respuestas se conservan como borrador en este navegador.
+  - generic: Ahora te toca a ti
+  - heading "3.1 Mi fortaleza" [level=4]
+  - generic: ¿Cuál es tu principal fortaleza según tus resultados?
+  - paragraph: Identifica el aprendizaje con mejores resultados y cita un dato o evidencia.
+  - textbox "¿Cuál es tu principal fortaleza según tus resultados?":
+    - /placeholder: Escribe tu respuesta aquí...
+  - generic: Ahora te toca a ti
+  - heading "3.2 Lo que necesito fortalecer" [level=4]
+  - generic: ¿Qué aprendizaje presenta tu mayor dificultad?
+  - paragraph: Señala qué necesitas fortalecer y utiliza un resultado como evidencia.
+  - textbox "¿Qué aprendizaje presenta tu mayor dificultad?":
+    - /placeholder: Escribe tu respuesta aquí...
+  - generic: Ahora te toca a ti
+  - heading "3.3 Relación entre mis acciones y resultados" [level=4]
+  - generic: ¿Qué relación observas entre tus acciones y tus resultados?
+  - paragraph: Relaciona las evidencias y retroalimentaciones disponibles con tus resultados. Si no hay datos suficientes, indícalo.
+  - textbox "¿Qué relación observas entre tus acciones y tus resultados?":
+    - /placeholder: Escribe tu respuesta aquí...
+  - heading "4. Verifica — Antes de continuar" [level=3]:
+    - text: 4. Verifica — Antes de continuar
+  - heading "Antes de continuar, revisa tus respuestas" [level=4]
+  - paragraph: Esta revisión te ayudará a comprobar que tu reflexión está completa. No es una nueva evaluación.
+  - checkbox "Identifiqué una fortaleza."
+  - generic: Identifiqué una fortaleza.
+  - checkbox "Identifiqué un aprendizaje que necesito fortalecer."
+  - generic: Identifiqué un aprendizaje que necesito fortalecer.
+  - checkbox "Utilicé resultados o evidencias para justificar mis respuestas."
+  - generic: Utilicé resultados o evidencias para justificar mis respuestas.
+  - checkbox "Respondí todas las preguntas."
+  - generic: Respondí todas las preguntas.
+  - figure "Fotografía de contexto · Tookapic, CC0":
+    - img "Persona que revisa sus notas y registra información"
+    - text: Fotografía de contexto ·
+    - link "Tookapic, CC0":
+      - /url: https://commons.wikimedia.org/wiki/File:Pen-writing-notes-studying.jpg
+  - status: Antes de continuar Completa las tres respuestas y revisa la lista para continuar.
+  - button "Continuar a Comprende" [disabled]:
+    - text: Continuar a Comprende
+  - list:
+    - text: "!"
+    - listitem: "Para continuar falta:"
+    - listitem: ○ Aún no se cumplen los requisitos para continuar
+  - paragraph: En el siguiente paso profundizarás en lo que significan tus resultados.
+  - generic "Navegación de la estación":
+    - link "← Estación anterior":
+      - /url: "#module/351/4"
+- contentinfo:
+  - img "Aula TP Chile · Formación técnica con sentido"
+  - generic: Aprender hoy, construir el mañana.
+  - generic: Aula TP Chile · Formación técnica con sentido
+- status
+- button "Agente Nubi. Arrastra para mover o pulsa para abrir"

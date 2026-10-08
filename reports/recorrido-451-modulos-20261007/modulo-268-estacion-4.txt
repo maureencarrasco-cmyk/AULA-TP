@@ -1,0 +1,186 @@
+- link "Saltar al contenido":
+  - /url: "#main"
+- main:
+  - link "Aula TP Chile · Formación técnica con sentido":
+    - /url: "#courses"
+    - img "Aula TP Chile · Formación técnica con sentido"
+  - link "Volver atrás":
+    - /url: "#module/268/3"
+    - text: Volver atrás
+  - navigation "Ubicación":
+    - link "Inicio":
+      - /url: "#courses"
+      - text: Inicio
+    - link "Módulo 5":
+      - /url: "#course/29"
+      - text: Módulo 5
+    - generic: Evaluación final
+  - generic: Tu progreso en el módulo
+  - progressbar
+  - generic: 0 de 5 estaciones
+  - paragraph:
+    - generic: Estación 5 de 6
+    - generic: "5"
+  - paragraph:
+    - generic: Módulo 5 · Recreación y bienestar de los párvulos
+  - heading "Evaluación Final" [level=1]
+  - paragraph: Demuestra lo aprendido e integra tus conocimientos.
+  - paragraph: En esta etapa aplicarás lo trabajado durante el módulo en una situación real, relacionando conocimientos y demostrando tus competencias técnicas.
+  - blockquote: Demuestra con calma lo que ya sabes hacer.
+  - img "Recurso visual técnico del módulo. Examina la evidencia del ítem antes de responder."
+  - complementary:
+    - emphasis: Demuestra con calma lo que ya sabes hacer.
+  - 'region "Módulo 5: Recreación y bienestar de los párvulos. AE 1 · Evaluación final. Avance del módulo 0 de 5 estaciones. Logro 0 por ciento, aún sin evidencia registrada."':
+    - generic: Módulo 5
+    - generic: Recreación y bienestar de los párvulos
+    - generic: AE 1 · Evaluación final
+    - article:
+      - text: Tu aprendizaje
+      - generic: Avance del módulo
+      - generic: 0/5
+      - img "0 de 5 estaciones recorridas"
+      - emphasis: ¡Vamos! Cada paso te acerca a tu objetivo.
+    - article:
+      - text: Logro del módulo
+      - generic: 0%
+      - generic: Aún no registrada
+      - generic: Completa la reflexión para construir tu evidencia.
+  - region "Ruta de las 5 estaciones del módulo. Estás en la estación 5 de 6. 0 de 5 estaciones habilitadas completadas.":
+    - generic "Ruta de aprendizaje de las 6 estaciones":
+      - generic: MI RUTA PROFESIONAL
+      - heading "Estación 5 de 6 · Evaluación final" [level=2]
+      - paragraph: Demuestra lo aprendido
+      - generic: Avance de tu ruta
+      - strong: 0%
+      - progressbar "Estaciones habilitadas completadas"
+      - paragraph:
+        - text: 0 de 5 estaciones
+        - text: habilitadas completadas
+      - text: Misión laboral · en construcción
+    - list:
+      - text: ›
+      - generic: "1"
+      - 'button "Estación 1 de 6: Contextualización. Pendiente. Comprender la situación."':
+        - generic: Estación 1
+        - generic: Contextualiza
+        - generic: Contextualización
+        - generic: Comprender la situación
+        - generic: Pendiente
+      - text: ›
+      - generic: "2"
+      - 'button "Estación 2 de 6: Aprendizajes esperados. Pendiente. Analiza, comprende y aplica."':
+        - generic: Estación 2
+        - generic: Aprende
+        - generic: Aprendizajes esperados
+        - generic: Analiza, comprende y aplica
+        - generic: Pendiente
+      - text: ›
+      - generic: "3"
+      - 'button "Estación 3 de 6: Situación integradora. Pendiente. Resuelve en contexto."':
+        - generic: Estación 3
+        - generic: Aplica
+        - generic: Situación integradora
+        - generic: Resuelve en contexto
+        - generic: Pendiente
+      - text: ›
+      - generic: "4"
+      - button "Estación 4 de 6. Misión laboral. En construcción. Estación bloqueada" [disabled]:
+        - generic: MISIÓN LABORAL
+        - text: EN CONSTRUCCIÓN
+        - generic: Misión laboral
+        - generic: Desafío de oficio
+        - generic: Una misión profesional para poner en juego tus aprendizajes.
+        - text: Explora
+        - text: Resuelve
+        - text: Completa
+        - text: Insignia de misión · bloqueada
+      - text: ›
+      - generic: "5"
+      - 'button "Estación 5 de 6: Evaluación final. Estás aquí. Demuestra lo aprendido."':
+        - generic: Estación 5
+        - generic: Demuestra
+        - generic: Evaluación final
+        - generic: Demuestra lo aprendido
+        - emphasis: Estás trabajando en esta etapa.
+        - generic: Estás aquí
+      - generic: "6"
+      - 'button "Estación 6 de 6: Retroalimentación y cierre. Siguiente. Reflexiona y avanza."':
+        - generic: Estación 6
+        - generic: Reflexiona
+        - text: Retroalimentación
+        - text: y cierre
+        - generic: Reflexiona y avanza
+        - generic: Siguiente
+  - generic "RESPALDO CURRICULAR Fuente curricular y alcance de la simulación":
+    - generic: RESPALDO CURRICULAR
+    - generic: Fuente curricular y alcance de la simulación
+  - region "Instrucciones de la estación 5":
+    - generic: INSTRUCCIONES DE LA ESTACIÓN
+    - generic: Completa la evaluación de principio a fin
+    - paragraph: Responde una pregunta a la vez, revisa tus respuestas y finaliza con la situación compleja.
+    - generic: 25 + 1 preguntas
+  - generic: "5"
+  - generic: ESTACIÓN 5 DE 6
+  - heading "Evaluación Final Evaluación" [level=2]:
+    - text: Evaluación Final
+    - text: Evaluación
+  - paragraph:
+    - generic: Demostrar · resolver · verificar
+  - paragraph: Demuestra que puedes integrar el módulo, reconocer tus avances y continuar al siguiente desafío.
+  - text: 12 min
+  - region "Desafío de cierre":
+    - generic: DESAFÍO DE CIERRE
+    - heading "Demuestra lo que sabes hacer" [level=3]
+    - paragraph: Una evaluación completa, conectada con decisiones del mundo profesional.
+    - generic: "25"
+    - text: preguntas
+    - generic: +
+    - generic: "1"
+    - text: situación compleja
+    - generic: =
+    - generic: "26"
+    - text: actividades en total
+    - generic: YA ESTÁS CERCA
+    - img "Trofeo dorado"
+    - paragraph: Lee, decide, fundamenta y revisa antes de entregar.
+  - article:
+    - generic: 01 · Tu tarea
+    - heading "¿Qué realizarás ahora?" [level=3]:
+      - text: ¿Qué realizarás ahora?
+    - list:
+      - listitem: 25 preguntas de selección múltiple
+      - listitem: 1 situación integradora final
+    - generic: Ambas partes recogen evidencia de los aprendizajes esperados de este módulo.
+  - article:
+    - generic: 02 · Tu propósito
+    - heading "¿Para qué lo realizarás?" [level=3]:
+      - text: ¿Para qué lo realizarás?
+    - paragraph: Para demostrar que puedes aplicar y analizar los conocimientos en un escenario integrador.
+    - paragraph: Al finalizar obtendrás evidencia de tus aprendizajes.
+  - article:
+    - generic: 03 · Antes de comenzar
+    - heading "Importante" [level=3]:
+      - text: Importante
+    - list:
+      - listitem: La Práctica libre y el Agente pedagógico no forman parte de la calificación.
+      - listitem: Las herramientas de accesibilidad permanecen disponibles para facilitar la lectura.
+      - listitem: Lee la evidencia de cada ítem; los textos alternativos no anticipan la respuesta.
+      - listitem: Las respuestas se registran automáticamente.
+  - group "Secciones de la evaluación":
+    - button "Preguntas 1–25 Estás aquí" [pressed]:
+      - text: Preguntas 1–25
+      - generic: Estás aquí
+    - button "Actividad 26 · Situación compleja":
+      - text: Actividad 26 · Situación compleja
+  - button "Comenzar evaluación":
+    - text: Comenzar evaluación
+  - generic "Navegación de la estación":
+    - link "← Estación anterior":
+      - /url: "#module/268/3"
+    - button "Continuar con Retroalimentación" [disabled]
+- contentinfo:
+  - img "Aula TP Chile · Formación técnica con sentido"
+  - generic: Aprender hoy, construir el mañana.
+  - generic: Aula TP Chile · Formación técnica con sentido
+- status
+- button "Agente Nubi. Arrastra para mover o pulsa para abrir"

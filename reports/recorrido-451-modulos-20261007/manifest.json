@@ -1,0 +1,3610 @@
+[
+  {
+    "id": 1,
+    "course_id": 1,
+    "title": "Lectura de planos y cubicación de materiales de proyectos",
+    "position": 1,
+    "course": "Refrigeración y Climatización",
+    "specialty": "Refrigeración y climatización"
+  },
+  {
+    "id": 2,
+    "course_id": 1,
+    "title": "Instrumentos de medición y de verificación",
+    "position": 2,
+    "course": "Refrigeración y Climatización",
+    "specialty": "Refrigeración y climatización"
+  },
+  {
+    "id": 3,
+    "course_id": 1,
+    "title": "Instalación y montaje de redes de refrigeración y climatización",
+    "position": 3,
+    "course": "Refrigeración y Climatización",
+    "specialty": "Refrigeración y climatización"
+  },
+  {
+    "id": 4,
+    "course_id": 1,
+    "title": "Instalación y montaje de equipos",
+    "position": 4,
+    "course": "Refrigeración y Climatización",
+    "specialty": "Refrigeración y climatización"
+  },
+  {
+    "id": 17,
+    "course_id": 1,
+    "title": "Puesta en marcha de equipos de refrigeración y climatización",
+    "position": 5,
+    "course": "Refrigeración y Climatización",
+    "specialty": "Refrigeración y climatización"
+  },
+  {
+    "id": 18,
+    "course_id": 1,
+    "title": "Diagnóstico en sistemas de refrigeración y climatización",
+    "position": 6,
+    "course": "Refrigeración y Climatización",
+    "specialty": "Refrigeración y climatización"
+  },
+  {
+    "id": 19,
+    "course_id": 1,
+    "title": "Mantención de sistemas de refrigeración y climatización",
+    "position": 7,
+    "course": "Refrigeración y Climatización",
+    "specialty": "Refrigeración y climatización"
+  },
+  {
+    "id": 20,
+    "course_id": 1,
+    "title": "Reciclaje y almacenamiento de refrigerantes",
+    "position": 8,
+    "course": "Refrigeración y Climatización",
+    "specialty": "Refrigeración y climatización"
+  },
+  {
+    "id": 21,
+    "course_id": 1,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Refrigeración y Climatización",
+    "specialty": "Refrigeración y climatización"
+  },
+  {
+    "id": 5,
+    "course_id": 2,
+    "title": "Instalación de motores eléctricos y equipos de calefacción",
+    "position": 1,
+    "course": "Electricidad",
+    "specialty": "Electricidad"
+  },
+  {
+    "id": 6,
+    "course_id": 2,
+    "title": "Instalaciones eléctricas domiciliarias",
+    "position": 2,
+    "course": "Electricidad",
+    "specialty": "Electricidad"
+  },
+  {
+    "id": 7,
+    "course_id": 2,
+    "title": "Elaboración de proyectos eléctricos",
+    "position": 3,
+    "course": "Electricidad",
+    "specialty": "Electricidad"
+  },
+  {
+    "id": 8,
+    "course_id": 2,
+    "title": "Mantenimiento de máquinas, equipos y sistemas eléctricos",
+    "position": 4,
+    "course": "Electricidad",
+    "specialty": "Electricidad"
+  },
+  {
+    "id": 22,
+    "course_id": 2,
+    "title": "Instalación de sistemas de control eléctrico industrial",
+    "position": 5,
+    "course": "Electricidad",
+    "specialty": "Electricidad"
+  },
+  {
+    "id": 23,
+    "course_id": 2,
+    "title": "Instalaciones eléctricas industriales",
+    "position": 6,
+    "course": "Electricidad",
+    "specialty": "Electricidad"
+  },
+  {
+    "id": 24,
+    "course_id": 2,
+    "title": "Instalación de equipos electrónicos de potencia",
+    "position": 7,
+    "course": "Electricidad",
+    "specialty": "Electricidad"
+  },
+  {
+    "id": 25,
+    "course_id": 2,
+    "title": "Automatización de sistemas eléctricos industriales",
+    "position": 8,
+    "course": "Electricidad",
+    "specialty": "Electricidad"
+  },
+  {
+    "id": 26,
+    "course_id": 2,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Electricidad",
+    "specialty": "Electricidad"
+  },
+  {
+    "id": 9,
+    "course_id": 3,
+    "title": "Aplicación de cuidados básicos",
+    "position": 1,
+    "course": "Atención de Enfermería, mención Adulto Mayor",
+    "specialty": "Atención de Enfermería, mención Adulto Mayor"
+  },
+  {
+    "id": 10,
+    "course_id": 3,
+    "title": "Medición y control de parámetros básicos en salud",
+    "position": 2,
+    "course": "Atención de Enfermería, mención Adulto Mayor",
+    "specialty": "Atención de Enfermería, mención Adulto Mayor"
+  },
+  {
+    "id": 11,
+    "course_id": 3,
+    "title": "Promoción de la salud y prevención de la enfermedad",
+    "position": 3,
+    "course": "Atención de Enfermería, mención Adulto Mayor",
+    "specialty": "Atención de Enfermería, mención Adulto Mayor"
+  },
+  {
+    "id": 12,
+    "course_id": 3,
+    "title": "Higiene y bioseguridad del ambiente",
+    "position": 4,
+    "course": "Atención de Enfermería, mención Adulto Mayor",
+    "specialty": "Atención de Enfermería, mención Adulto Mayor"
+  },
+  {
+    "id": 27,
+    "course_id": 3,
+    "title": "Sistemas de registro e información en salud",
+    "position": 5,
+    "course": "Atención de Enfermería, mención Adulto Mayor",
+    "specialty": "Atención de Enfermería, mención Adulto Mayor"
+  },
+  {
+    "id": 28,
+    "course_id": 3,
+    "title": "Prevención y control de infecciones intrahospitalarias",
+    "position": 6,
+    "course": "Atención de Enfermería, mención Adulto Mayor",
+    "specialty": "Atención de Enfermería, mención Adulto Mayor"
+  },
+  {
+    "id": 29,
+    "course_id": 3,
+    "title": "Necesidades psicosociales del adulto mayor",
+    "position": 7,
+    "course": "Atención de Enfermería, mención Adulto Mayor",
+    "specialty": "Atención de Enfermería, mención Adulto Mayor"
+  },
+  {
+    "id": 30,
+    "course_id": 3,
+    "title": "Orientación familiar para el cuidado del adulto mayor",
+    "position": 8,
+    "course": "Atención de Enfermería, mención Adulto Mayor",
+    "specialty": "Atención de Enfermería, mención Adulto Mayor"
+  },
+  {
+    "id": 31,
+    "course_id": 3,
+    "title": "Alimentación y nutrición del adulto mayor",
+    "position": 9,
+    "course": "Atención de Enfermería, mención Adulto Mayor",
+    "specialty": "Atención de Enfermería, mención Adulto Mayor"
+  },
+  {
+    "id": 32,
+    "course_id": 3,
+    "title": "Atención de primeros auxilios del adulto mayor",
+    "position": 10,
+    "course": "Atención de Enfermería, mención Adulto Mayor",
+    "specialty": "Atención de Enfermería, mención Adulto Mayor"
+  },
+  {
+    "id": 33,
+    "course_id": 3,
+    "title": "Administración de medicamentos",
+    "position": 11,
+    "course": "Atención de Enfermería, mención Adulto Mayor",
+    "specialty": "Atención de Enfermería, mención Adulto Mayor"
+  },
+  {
+    "id": 34,
+    "course_id": 3,
+    "title": "Higiene y confort del adulto mayor",
+    "position": 12,
+    "course": "Atención de Enfermería, mención Adulto Mayor",
+    "specialty": "Atención de Enfermería, mención Adulto Mayor"
+  },
+  {
+    "id": 35,
+    "course_id": 3,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 13,
+    "course": "Atención de Enfermería, mención Adulto Mayor",
+    "specialty": "Atención de Enfermería, mención Adulto Mayor"
+  },
+  {
+    "id": 13,
+    "course_id": 4,
+    "title": "Aplicación de cuidados básicos",
+    "position": 1,
+    "course": "Atención de Enfermería, mención Enfermería",
+    "specialty": "Atención de Enfermería, mención Enfermería"
+  },
+  {
+    "id": 14,
+    "course_id": 4,
+    "title": "Medición y control de parámetros básicos en salud",
+    "position": 2,
+    "course": "Atención de Enfermería, mención Enfermería",
+    "specialty": "Atención de Enfermería, mención Enfermería"
+  },
+  {
+    "id": 15,
+    "course_id": 4,
+    "title": "Promoción de la salud y prevención de la enfermedad",
+    "position": 3,
+    "course": "Atención de Enfermería, mención Enfermería",
+    "specialty": "Atención de Enfermería, mención Enfermería"
+  },
+  {
+    "id": 16,
+    "course_id": 4,
+    "title": "Higiene y bioseguridad del ambiente",
+    "position": 4,
+    "course": "Atención de Enfermería, mención Enfermería",
+    "specialty": "Atención de Enfermería, mención Enfermería"
+  },
+  {
+    "id": 36,
+    "course_id": 4,
+    "title": "Sistemas de registro e información en salud",
+    "position": 5,
+    "course": "Atención de Enfermería, mención Enfermería",
+    "specialty": "Atención de Enfermería, mención Enfermería"
+  },
+  {
+    "id": 37,
+    "course_id": 4,
+    "title": "Prevención y control de infecciones intrahospitalarias",
+    "position": 6,
+    "course": "Atención de Enfermería, mención Enfermería",
+    "specialty": "Atención de Enfermería, mención Enfermería"
+  },
+  {
+    "id": 38,
+    "course_id": 4,
+    "title": "Técnicas básicas de enfermería y del Programa Nacional de Inmunizaciones",
+    "position": 7,
+    "course": "Atención de Enfermería, mención Enfermería",
+    "specialty": "Atención de Enfermería, mención Enfermería"
+  },
+  {
+    "id": 39,
+    "course_id": 4,
+    "title": "Atención en servicios de urgencia y primeros auxilios",
+    "position": 8,
+    "course": "Atención de Enfermería, mención Enfermería",
+    "specialty": "Atención de Enfermería, mención Enfermería"
+  },
+  {
+    "id": 40,
+    "course_id": 4,
+    "title": "Preparación del entorno clínico",
+    "position": 9,
+    "course": "Atención de Enfermería, mención Enfermería",
+    "specialty": "Atención de Enfermería, mención Enfermería"
+  },
+  {
+    "id": 41,
+    "course_id": 4,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Atención de Enfermería, mención Enfermería",
+    "specialty": "Atención de Enfermería, mención Enfermería"
+  },
+  {
+    "id": 42,
+    "course_id": 5,
+    "title": "Higiene para la elaboración de alimentos",
+    "position": 1,
+    "course": "Gastronomía, mención Cocina",
+    "specialty": "Gastronomía, mención Cocina"
+  },
+  {
+    "id": 43,
+    "course_id": 5,
+    "title": "Elaboración de alimentos de baja complejidad",
+    "position": 2,
+    "course": "Gastronomía, mención Cocina",
+    "specialty": "Gastronomía, mención Cocina"
+  },
+  {
+    "id": 44,
+    "course_id": 5,
+    "title": "Recepción y almacenamiento de insumos",
+    "position": 3,
+    "course": "Gastronomía, mención Cocina",
+    "specialty": "Gastronomía, mención Cocina"
+  },
+  {
+    "id": 45,
+    "course_id": 5,
+    "title": "Planificación de la producción gastronómica",
+    "position": 4,
+    "course": "Gastronomía, mención Cocina",
+    "specialty": "Gastronomía, mención Cocina"
+  },
+  {
+    "id": 46,
+    "course_id": 5,
+    "title": "Preparación, diseño y montaje de buffet",
+    "position": 5,
+    "course": "Gastronomía, mención Cocina",
+    "specialty": "Gastronomía, mención Cocina"
+  },
+  {
+    "id": 47,
+    "course_id": 5,
+    "title": "Servicio de comedores, bares y salones",
+    "position": 6,
+    "course": "Gastronomía, mención Cocina",
+    "specialty": "Gastronomía, mención Cocina"
+  },
+  {
+    "id": 48,
+    "course_id": 5,
+    "title": "Cocina chilena",
+    "position": 7,
+    "course": "Gastronomía, mención Cocina",
+    "specialty": "Gastronomía, mención Cocina"
+  },
+  {
+    "id": 49,
+    "course_id": 5,
+    "title": "Innovación y cocina internacional",
+    "position": 8,
+    "course": "Gastronomía, mención Cocina",
+    "specialty": "Gastronomía, mención Cocina"
+  },
+  {
+    "id": 50,
+    "course_id": 5,
+    "title": "Elaboración de bebidas alcohólicas y analcohólicas",
+    "position": 9,
+    "course": "Gastronomía, mención Cocina",
+    "specialty": "Gastronomía, mención Cocina"
+  },
+  {
+    "id": 51,
+    "course_id": 5,
+    "title": "Elaboración de menús y carta",
+    "position": 10,
+    "course": "Gastronomía, mención Cocina",
+    "specialty": "Gastronomía, mención Cocina"
+  },
+  {
+    "id": 52,
+    "course_id": 5,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 11,
+    "course": "Gastronomía, mención Cocina",
+    "specialty": "Gastronomía, mención Cocina"
+  },
+  {
+    "id": 53,
+    "course_id": 6,
+    "title": "Higiene para la elaboración de alimentos",
+    "position": 1,
+    "course": "Gastronomía, mención Pastelería y Repostería",
+    "specialty": "Gastronomía, mención Pastelería y Repostería"
+  },
+  {
+    "id": 54,
+    "course_id": 6,
+    "title": "Elaboración de alimentos de baja complejidad",
+    "position": 2,
+    "course": "Gastronomía, mención Pastelería y Repostería",
+    "specialty": "Gastronomía, mención Pastelería y Repostería"
+  },
+  {
+    "id": 55,
+    "course_id": 6,
+    "title": "Recepción y almacenamiento de insumos",
+    "position": 3,
+    "course": "Gastronomía, mención Pastelería y Repostería",
+    "specialty": "Gastronomía, mención Pastelería y Repostería"
+  },
+  {
+    "id": 56,
+    "course_id": 6,
+    "title": "Planificación de la producción gastronómica",
+    "position": 4,
+    "course": "Gastronomía, mención Pastelería y Repostería",
+    "specialty": "Gastronomía, mención Pastelería y Repostería"
+  },
+  {
+    "id": 57,
+    "course_id": 6,
+    "title": "Preparación, diseño y montaje de buffet",
+    "position": 5,
+    "course": "Gastronomía, mención Pastelería y Repostería",
+    "specialty": "Gastronomía, mención Pastelería y Repostería"
+  },
+  {
+    "id": 58,
+    "course_id": 6,
+    "title": "Servicio de comedores, bares y salones",
+    "position": 6,
+    "course": "Gastronomía, mención Pastelería y Repostería",
+    "specialty": "Gastronomía, mención Pastelería y Repostería"
+  },
+  {
+    "id": 59,
+    "course_id": 6,
+    "title": "Elaboración de masas y pastas",
+    "position": 7,
+    "course": "Gastronomía, mención Pastelería y Repostería",
+    "specialty": "Gastronomía, mención Pastelería y Repostería"
+  },
+  {
+    "id": 60,
+    "course_id": 6,
+    "title": "Elaboración de productos de repostería",
+    "position": 8,
+    "course": "Gastronomía, mención Pastelería y Repostería",
+    "specialty": "Gastronomía, mención Pastelería y Repostería"
+  },
+  {
+    "id": 61,
+    "course_id": 6,
+    "title": "Elaboración de productos de pastelería",
+    "position": 9,
+    "course": "Gastronomía, mención Pastelería y Repostería",
+    "specialty": "Gastronomía, mención Pastelería y Repostería"
+  },
+  {
+    "id": 62,
+    "course_id": 6,
+    "title": "Innovación en la pastelería y repostería",
+    "position": 10,
+    "course": "Gastronomía, mención Pastelería y Repostería",
+    "specialty": "Gastronomía, mención Pastelería y Repostería"
+  },
+  {
+    "id": 63,
+    "course_id": 6,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 11,
+    "course": "Gastronomía, mención Pastelería y Repostería",
+    "specialty": "Gastronomía, mención Pastelería y Repostería"
+  },
+  {
+    "id": 64,
+    "course_id": 7,
+    "title": "Atención al cliente en servicios de hotelería",
+    "position": 1,
+    "course": "Servicios de Hotelería",
+    "specialty": "Servicios de Hotelería"
+  },
+  {
+    "id": 65,
+    "course_id": 7,
+    "title": "Servicio de habitaciones",
+    "position": 2,
+    "course": "Servicios de Hotelería",
+    "specialty": "Servicios de Hotelería"
+  },
+  {
+    "id": 66,
+    "course_id": 7,
+    "title": "Actividades recreativas y de animación",
+    "position": 3,
+    "course": "Servicios de Hotelería",
+    "specialty": "Servicios de Hotelería"
+  },
+  {
+    "id": 67,
+    "course_id": 7,
+    "title": "Servicio de eventos",
+    "position": 4,
+    "course": "Servicios de Hotelería",
+    "specialty": "Servicios de Hotelería"
+  },
+  {
+    "id": 68,
+    "course_id": 7,
+    "title": "Inglés técnico para la industria de la hospitalidad",
+    "position": 5,
+    "course": "Servicios de Hotelería",
+    "specialty": "Servicios de Hotelería"
+  },
+  {
+    "id": 69,
+    "course_id": 7,
+    "title": "Información turística",
+    "position": 6,
+    "course": "Servicios de Hotelería",
+    "specialty": "Servicios de Hotelería"
+  },
+  {
+    "id": 70,
+    "course_id": 7,
+    "title": "Servicio de recepción y reservas",
+    "position": 7,
+    "course": "Servicios de Hotelería",
+    "specialty": "Servicios de Hotelería"
+  },
+  {
+    "id": 71,
+    "course_id": 7,
+    "title": "Servicio de coctelería y vinos",
+    "position": 8,
+    "course": "Servicios de Hotelería",
+    "specialty": "Servicios de Hotelería"
+  },
+  {
+    "id": 72,
+    "course_id": 7,
+    "title": "Servicio de información bilingüe",
+    "position": 9,
+    "course": "Servicios de Hotelería",
+    "specialty": "Servicios de Hotelería"
+  },
+  {
+    "id": 73,
+    "course_id": 7,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Servicios de Hotelería",
+    "specialty": "Servicios de Hotelería"
+  },
+  {
+    "id": 83,
+    "course_id": 8,
+    "title": "Contabilización de operaciones comerciales",
+    "position": 1,
+    "course": "Contabilidad",
+    "specialty": "Contabilidad"
+  },
+  {
+    "id": 84,
+    "course_id": 8,
+    "title": "Cálculo y registro de remuneraciones",
+    "position": 2,
+    "course": "Contabilidad",
+    "specialty": "Contabilidad"
+  },
+  {
+    "id": 85,
+    "course_id": 8,
+    "title": "Control y procesamiento de información contable",
+    "position": 3,
+    "course": "Contabilidad",
+    "specialty": "Contabilidad"
+  },
+  {
+    "id": 86,
+    "course_id": 8,
+    "title": "Organización y métodos de trabajo en la oficina",
+    "position": 4,
+    "course": "Contabilidad",
+    "specialty": "Contabilidad"
+  },
+  {
+    "id": 87,
+    "course_id": 8,
+    "title": "Atención de clientes",
+    "position": 5,
+    "course": "Contabilidad",
+    "specialty": "Contabilidad"
+  },
+  {
+    "id": 88,
+    "course_id": 8,
+    "title": "Elaboración de informes contables",
+    "position": 6,
+    "course": "Contabilidad",
+    "specialty": "Contabilidad"
+  },
+  {
+    "id": 89,
+    "course_id": 8,
+    "title": "Cálculo y registro de impuestos",
+    "position": 7,
+    "course": "Contabilidad",
+    "specialty": "Contabilidad"
+  },
+  {
+    "id": 90,
+    "course_id": 8,
+    "title": "Registro de operaciones de comercio nacional e internacional",
+    "position": 8,
+    "course": "Contabilidad",
+    "specialty": "Contabilidad"
+  },
+  {
+    "id": 91,
+    "course_id": 8,
+    "title": "Procesamiento de información contable-financiera",
+    "position": 9,
+    "course": "Contabilidad",
+    "specialty": "Contabilidad"
+  },
+  {
+    "id": 92,
+    "course_id": 8,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Contabilidad",
+    "specialty": "Contabilidad"
+  },
+  {
+    "id": 180,
+    "course_id": 9,
+    "title": "Recepción de materias primas",
+    "position": 1,
+    "course": "Elaboración Industrial de Alimentos",
+    "specialty": "Elaboración Industrial de Alimentos"
+  },
+  {
+    "id": 181,
+    "course_id": 9,
+    "title": "Almacenaje y bodega de alimentos e insumos alimentarios",
+    "position": 2,
+    "course": "Elaboración Industrial de Alimentos",
+    "specialty": "Elaboración Industrial de Alimentos"
+  },
+  {
+    "id": 182,
+    "course_id": 9,
+    "title": "Elaboración de alimentos e higiene",
+    "position": 3,
+    "course": "Elaboración Industrial de Alimentos",
+    "specialty": "Elaboración Industrial de Alimentos"
+  },
+  {
+    "id": 183,
+    "course_id": 9,
+    "title": "Aseguramiento de la calidad de procesos y alimentos",
+    "position": 4,
+    "course": "Elaboración Industrial de Alimentos",
+    "specialty": "Elaboración Industrial de Alimentos"
+  },
+  {
+    "id": 184,
+    "course_id": 9,
+    "title": "Tratamientos de conservación de alimentos",
+    "position": 5,
+    "course": "Elaboración Industrial de Alimentos",
+    "specialty": "Elaboración Industrial de Alimentos"
+  },
+  {
+    "id": 185,
+    "course_id": 9,
+    "title": "Control y registro de procesos de la industria de alimentos",
+    "position": 6,
+    "course": "Elaboración Industrial de Alimentos",
+    "specialty": "Elaboración Industrial de Alimentos"
+  },
+  {
+    "id": 186,
+    "course_id": 9,
+    "title": "Manejo de desechos de la industria de alimentos",
+    "position": 7,
+    "course": "Elaboración Industrial de Alimentos",
+    "specialty": "Elaboración Industrial de Alimentos"
+  },
+  {
+    "id": 187,
+    "course_id": 9,
+    "title": "Envasado y rotulación de alimentos",
+    "position": 8,
+    "course": "Elaboración Industrial de Alimentos",
+    "specialty": "Elaboración Industrial de Alimentos"
+  },
+  {
+    "id": 188,
+    "course_id": 9,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Elaboración Industrial de Alimentos",
+    "specialty": "Elaboración Industrial de Alimentos"
+  },
+  {
+    "id": 189,
+    "course_id": 10,
+    "title": "Patronaje computacional",
+    "position": 1,
+    "course": "Vestuario y Confección Textil",
+    "specialty": "Vestuario y Confección Textil"
+  },
+  {
+    "id": 190,
+    "course_id": 10,
+    "title": "Elaboración de fichas técnicas",
+    "position": 2,
+    "course": "Vestuario y Confección Textil",
+    "specialty": "Vestuario y Confección Textil"
+  },
+  {
+    "id": 191,
+    "course_id": 10,
+    "title": "Mantenimiento de máquinas",
+    "position": 3,
+    "course": "Vestuario y Confección Textil",
+    "specialty": "Vestuario y Confección Textil"
+  },
+  {
+    "id": 192,
+    "course_id": 10,
+    "title": "Tendido, trazado y corte de telas",
+    "position": 4,
+    "course": "Vestuario y Confección Textil",
+    "specialty": "Vestuario y Confección Textil"
+  },
+  {
+    "id": 193,
+    "course_id": 10,
+    "title": "Confección y terminaciones",
+    "position": 5,
+    "course": "Vestuario y Confección Textil",
+    "specialty": "Vestuario y Confección Textil"
+  },
+  {
+    "id": 194,
+    "course_id": 10,
+    "title": "Diseño computacional de artículos y vestuario",
+    "position": 6,
+    "course": "Vestuario y Confección Textil",
+    "specialty": "Vestuario y Confección Textil"
+  },
+  {
+    "id": 195,
+    "course_id": 10,
+    "title": "Patronaje y escalado industrial",
+    "position": 7,
+    "course": "Vestuario y Confección Textil",
+    "specialty": "Vestuario y Confección Textil"
+  },
+  {
+    "id": 196,
+    "course_id": 10,
+    "title": "Procesos de confección industrial",
+    "position": 8,
+    "course": "Vestuario y Confección Textil",
+    "specialty": "Vestuario y Confección Textil"
+  },
+  {
+    "id": 197,
+    "course_id": 10,
+    "title": "Control de calidad",
+    "position": 9,
+    "course": "Vestuario y Confección Textil",
+    "specialty": "Vestuario y Confección Textil"
+  },
+  {
+    "id": 198,
+    "course_id": 10,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Vestuario y Confección Textil",
+    "specialty": "Vestuario y Confección Textil"
+  },
+  {
+    "id": 152,
+    "course_id": 11,
+    "title": "Lectura de planos de instalaciones sanitarias",
+    "position": 1,
+    "course": "Instalaciones Sanitarias",
+    "specialty": "Instalaciones Sanitarias"
+  },
+  {
+    "id": 153,
+    "course_id": 11,
+    "title": "Trazado de redes",
+    "position": 2,
+    "course": "Instalaciones Sanitarias",
+    "specialty": "Instalaciones Sanitarias"
+  },
+  {
+    "id": 154,
+    "course_id": 11,
+    "title": "Instalación de redes de agua potable",
+    "position": 3,
+    "course": "Instalaciones Sanitarias",
+    "specialty": "Instalaciones Sanitarias"
+  },
+  {
+    "id": 155,
+    "course_id": 11,
+    "title": "Instalación de redes de alcantarillado",
+    "position": 4,
+    "course": "Instalaciones Sanitarias",
+    "specialty": "Instalaciones Sanitarias"
+  },
+  {
+    "id": 156,
+    "course_id": 11,
+    "title": "Instalación de redes para riego agrícola",
+    "position": 5,
+    "course": "Instalaciones Sanitarias",
+    "specialty": "Instalaciones Sanitarias"
+  },
+  {
+    "id": 157,
+    "course_id": 11,
+    "title": "Cubicación en instalaciones sanitarias",
+    "position": 6,
+    "course": "Instalaciones Sanitarias",
+    "specialty": "Instalaciones Sanitarias"
+  },
+  {
+    "id": 158,
+    "course_id": 11,
+    "title": "Instalación de artefactos sanitarios",
+    "position": 7,
+    "course": "Instalaciones Sanitarias",
+    "specialty": "Instalaciones Sanitarias"
+  },
+  {
+    "id": 159,
+    "course_id": 11,
+    "title": "Instalación de gas",
+    "position": 8,
+    "course": "Instalaciones Sanitarias",
+    "specialty": "Instalaciones Sanitarias"
+  },
+  {
+    "id": 160,
+    "course_id": 11,
+    "title": "Mantenimiento de redes y artefactos",
+    "position": 9,
+    "course": "Instalaciones Sanitarias",
+    "specialty": "Instalaciones Sanitarias"
+  },
+  {
+    "id": 161,
+    "course_id": 11,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Instalaciones Sanitarias",
+    "specialty": "Instalaciones Sanitarias"
+  },
+  {
+    "id": 162,
+    "course_id": 12,
+    "title": "Unión y reparación de elementos metálicos",
+    "position": 1,
+    "course": "Montaje Industrial",
+    "specialty": "Montaje Industrial"
+  },
+  {
+    "id": 163,
+    "course_id": 12,
+    "title": "Dibujo e interpretación de planos de montaje",
+    "position": 2,
+    "course": "Montaje Industrial",
+    "specialty": "Montaje Industrial"
+  },
+  {
+    "id": 164,
+    "course_id": 12,
+    "title": "Mediciones, trazados y cálculos de montaje industrial",
+    "position": 3,
+    "course": "Montaje Industrial",
+    "specialty": "Montaje Industrial"
+  },
+  {
+    "id": 165,
+    "course_id": 12,
+    "title": "Maniobras de levante de cargas",
+    "position": 4,
+    "course": "Montaje Industrial",
+    "specialty": "Montaje Industrial"
+  },
+  {
+    "id": 166,
+    "course_id": 12,
+    "title": "Tratamientos superficiales y manejo de residuos",
+    "position": 5,
+    "course": "Montaje Industrial",
+    "specialty": "Montaje Industrial"
+  },
+  {
+    "id": 167,
+    "course_id": 12,
+    "title": "Fijación y montaje de elementos",
+    "position": 6,
+    "course": "Montaje Industrial",
+    "specialty": "Montaje Industrial"
+  },
+  {
+    "id": 168,
+    "course_id": 12,
+    "title": "Mantenimiento industrial",
+    "position": 7,
+    "course": "Montaje Industrial",
+    "specialty": "Montaje Industrial"
+  },
+  {
+    "id": 169,
+    "course_id": 12,
+    "title": "Cubicación de proyectos",
+    "position": 8,
+    "course": "Montaje Industrial",
+    "specialty": "Montaje Industrial"
+  },
+  {
+    "id": 170,
+    "course_id": 12,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Montaje Industrial",
+    "specialty": "Montaje Industrial"
+  },
+  {
+    "id": 112,
+    "course_id": 13,
+    "title": "Proyectos electrónicos",
+    "position": 1,
+    "course": "Electrónica",
+    "specialty": "Electrónica"
+  },
+  {
+    "id": 113,
+    "course_id": 13,
+    "title": "Armado y reparación de circuitos electrónicos",
+    "position": 2,
+    "course": "Electrónica",
+    "specialty": "Electrónica"
+  },
+  {
+    "id": 114,
+    "course_id": 13,
+    "title": "Ensamblaje y mantención de sistemas y equipos digitales",
+    "position": 3,
+    "course": "Electrónica",
+    "specialty": "Electrónica"
+  },
+  {
+    "id": 115,
+    "course_id": 13,
+    "title": "Sistemas de control domótico",
+    "position": 4,
+    "course": "Electrónica",
+    "specialty": "Electrónica"
+  },
+  {
+    "id": 116,
+    "course_id": 13,
+    "title": "Mantención y operación de equipos de control electrónico de potencia",
+    "position": 5,
+    "course": "Electrónica",
+    "specialty": "Electrónica"
+  },
+  {
+    "id": 117,
+    "course_id": 13,
+    "title": "Detección de fallas industriales",
+    "position": 6,
+    "course": "Electrónica",
+    "specialty": "Electrónica"
+  },
+  {
+    "id": 118,
+    "course_id": 13,
+    "title": "Operación y programación de equipos de control eléctrico industrial",
+    "position": 7,
+    "course": "Electrónica",
+    "specialty": "Electrónica"
+  },
+  {
+    "id": 119,
+    "course_id": 13,
+    "title": "Montaje de equipos industriales",
+    "position": 8,
+    "course": "Electrónica",
+    "specialty": "Electrónica"
+  },
+  {
+    "id": 120,
+    "course_id": 13,
+    "title": "Automatización industrial",
+    "position": 9,
+    "course": "Electrónica",
+    "specialty": "Electrónica"
+  },
+  {
+    "id": 121,
+    "course_id": 13,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Electrónica",
+    "specialty": "Electrónica"
+  },
+  {
+    "id": 132,
+    "course_id": 14,
+    "title": "Lectura de planos y documentos técnicos",
+    "position": 1,
+    "course": "Dibujo Técnico",
+    "specialty": "Dibujo Técnico"
+  },
+  {
+    "id": 133,
+    "course_id": 14,
+    "title": "Dibujo manual de levantamientos",
+    "position": 2,
+    "course": "Dibujo Técnico",
+    "specialty": "Dibujo Técnico"
+  },
+  {
+    "id": 134,
+    "course_id": 14,
+    "title": "Dibujo digital de proyectos de arquitectura",
+    "position": 3,
+    "course": "Dibujo Técnico",
+    "specialty": "Dibujo Técnico"
+  },
+  {
+    "id": 135,
+    "course_id": 14,
+    "title": "Dibujo digital de piezas y conjuntos mecánicos",
+    "position": 4,
+    "course": "Dibujo Técnico",
+    "specialty": "Dibujo Técnico"
+  },
+  {
+    "id": 136,
+    "course_id": 14,
+    "title": "Maquetas virtuales",
+    "position": 5,
+    "course": "Dibujo Técnico",
+    "specialty": "Dibujo Técnico"
+  },
+  {
+    "id": 137,
+    "course_id": 14,
+    "title": "Dibujo digital de instalaciones domiciliarias",
+    "position": 6,
+    "course": "Dibujo Técnico",
+    "specialty": "Dibujo Técnico"
+  },
+  {
+    "id": 138,
+    "course_id": 14,
+    "title": "Dibujo digital de sistemas constructivos",
+    "position": 7,
+    "course": "Dibujo Técnico",
+    "specialty": "Dibujo Técnico"
+  },
+  {
+    "id": 139,
+    "course_id": 14,
+    "title": "Dibujo digital de montaje industrial",
+    "position": 8,
+    "course": "Dibujo Técnico",
+    "specialty": "Dibujo Técnico"
+  },
+  {
+    "id": 140,
+    "course_id": 14,
+    "title": "Cubicación de proyectos",
+    "position": 9,
+    "course": "Dibujo Técnico",
+    "specialty": "Dibujo Técnico"
+  },
+  {
+    "id": 141,
+    "course_id": 14,
+    "title": "Impresión y reproducción de planos",
+    "position": 10,
+    "course": "Dibujo Técnico",
+    "specialty": "Dibujo Técnico"
+  },
+  {
+    "id": 142,
+    "course_id": 14,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 11,
+    "course": "Dibujo Técnico",
+    "specialty": "Dibujo Técnico"
+  },
+  {
+    "id": 143,
+    "course_id": 15,
+    "title": "Verificación y preparación de archivos digitales",
+    "position": 1,
+    "course": "Gráfica",
+    "specialty": "Gráfica"
+  },
+  {
+    "id": 144,
+    "course_id": 15,
+    "title": "Preparación de la máquina impresora",
+    "position": 2,
+    "course": "Gráfica",
+    "specialty": "Gráfica"
+  },
+  {
+    "id": 145,
+    "course_id": 15,
+    "title": "Impresión del producto gráfico",
+    "position": 3,
+    "course": "Gráfica",
+    "specialty": "Gráfica"
+  },
+  {
+    "id": 146,
+    "course_id": 15,
+    "title": "Materiales e insumos de la industria gráfica",
+    "position": 4,
+    "course": "Gráfica",
+    "specialty": "Gráfica"
+  },
+  {
+    "id": 147,
+    "course_id": 15,
+    "title": "Encuadernación del producto impreso",
+    "position": 5,
+    "course": "Gráfica",
+    "specialty": "Gráfica"
+  },
+  {
+    "id": 148,
+    "course_id": 15,
+    "title": "Imposición de archivos y obtención de prueba de color",
+    "position": 6,
+    "course": "Gráfica",
+    "specialty": "Gráfica"
+  },
+  {
+    "id": 149,
+    "course_id": 15,
+    "title": "Salida del archivo a matriz impresora e impresión digital",
+    "position": 7,
+    "course": "Gráfica",
+    "specialty": "Gráfica"
+  },
+  {
+    "id": 150,
+    "course_id": 15,
+    "title": "Postimpresión en embalajes y recubrimientos a impresos",
+    "position": 8,
+    "course": "Gráfica",
+    "specialty": "Gráfica"
+  },
+  {
+    "id": 151,
+    "course_id": 15,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Gráfica",
+    "specialty": "Gráfica"
+  },
+  {
+    "id": 93,
+    "course_id": 16,
+    "title": "Sistemas de reservas",
+    "position": 1,
+    "course": "Servicios de Turismo",
+    "specialty": "Servicios de Turismo"
+  },
+  {
+    "id": 94,
+    "course_id": 16,
+    "title": "Atención turística al cliente",
+    "position": 2,
+    "course": "Servicios de Turismo",
+    "specialty": "Servicios de Turismo"
+  },
+  {
+    "id": 95,
+    "course_id": 16,
+    "title": "Patrimonio, cultura y atractivos turísticos de Chile",
+    "position": 3,
+    "course": "Servicios de Turismo",
+    "specialty": "Servicios de Turismo"
+  },
+  {
+    "id": 96,
+    "course_id": 16,
+    "title": "Prevención y seguridad en programas turísticos",
+    "position": 4,
+    "course": "Servicios de Turismo",
+    "specialty": "Servicios de Turismo"
+  },
+  {
+    "id": 97,
+    "course_id": 16,
+    "title": "Inglés para la comunicación oral en turismo",
+    "position": 5,
+    "course": "Servicios de Turismo",
+    "specialty": "Servicios de Turismo"
+  },
+  {
+    "id": 98,
+    "course_id": 16,
+    "title": "Patrimonio, cultura y atractivos turísticos del mundo",
+    "position": 6,
+    "course": "Servicios de Turismo",
+    "specialty": "Servicios de Turismo"
+  },
+  {
+    "id": 99,
+    "course_id": 16,
+    "title": "Conducción de grupos turísticos",
+    "position": 7,
+    "course": "Servicios de Turismo",
+    "specialty": "Servicios de Turismo"
+  },
+  {
+    "id": 100,
+    "course_id": 16,
+    "title": "Elaboración de programas turísticos",
+    "position": 8,
+    "course": "Servicios de Turismo",
+    "specialty": "Servicios de Turismo"
+  },
+  {
+    "id": 101,
+    "course_id": 16,
+    "title": "Inglés para la comunicación escrita en turismo",
+    "position": 9,
+    "course": "Servicios de Turismo",
+    "specialty": "Servicios de Turismo"
+  },
+  {
+    "id": 102,
+    "course_id": 16,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Servicios de Turismo",
+    "specialty": "Servicios de Turismo"
+  },
+  {
+    "id": 199,
+    "course_id": 17,
+    "title": "Producción de plantas y repoblación",
+    "position": 1,
+    "course": "Forestal",
+    "specialty": "Forestal"
+  },
+  {
+    "id": 200,
+    "course_id": 17,
+    "title": "Mediciones forestales",
+    "position": 2,
+    "course": "Forestal",
+    "specialty": "Forestal"
+  },
+  {
+    "id": 201,
+    "course_id": 17,
+    "title": "Control de plagas y enfermedades forestales",
+    "position": 3,
+    "course": "Forestal",
+    "specialty": "Forestal"
+  },
+  {
+    "id": 202,
+    "course_id": 17,
+    "title": "Uso y mantenimiento de herramientas y máquinas",
+    "position": 4,
+    "course": "Forestal",
+    "specialty": "Forestal"
+  },
+  {
+    "id": 203,
+    "course_id": 17,
+    "title": "Operaciones silvícolas",
+    "position": 5,
+    "course": "Forestal",
+    "specialty": "Forestal"
+  },
+  {
+    "id": 204,
+    "course_id": 17,
+    "title": "Operaciones de cosecha forestal",
+    "position": 6,
+    "course": "Forestal",
+    "specialty": "Forestal"
+  },
+  {
+    "id": 205,
+    "course_id": 17,
+    "title": "Control de la producción forestal",
+    "position": 7,
+    "course": "Forestal",
+    "specialty": "Forestal"
+  },
+  {
+    "id": 206,
+    "course_id": 17,
+    "title": "Técnicas de prevención y combate de incendios forestales",
+    "position": 8,
+    "course": "Forestal",
+    "specialty": "Forestal"
+  },
+  {
+    "id": 207,
+    "course_id": 17,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Forestal",
+    "specialty": "Forestal"
+  },
+  {
+    "id": 208,
+    "course_id": 18,
+    "title": "Abastecimiento y despacho",
+    "position": 1,
+    "course": "Muebles y Terminaciones en Madera",
+    "specialty": "Muebles y Terminaciones en Madera"
+  },
+  {
+    "id": 209,
+    "course_id": 18,
+    "title": "Fabricación de componentes de carpintería y muebles",
+    "position": 2,
+    "course": "Muebles y Terminaciones en Madera",
+    "specialty": "Muebles y Terminaciones en Madera"
+  },
+  {
+    "id": 210,
+    "course_id": 18,
+    "title": "Cubicaciones",
+    "position": 3,
+    "course": "Muebles y Terminaciones en Madera",
+    "specialty": "Muebles y Terminaciones en Madera"
+  },
+  {
+    "id": 211,
+    "course_id": 18,
+    "title": "Aseguramiento de la calidad, seguridad y cuidado del medio ambiente",
+    "position": 4,
+    "course": "Muebles y Terminaciones en Madera",
+    "specialty": "Muebles y Terminaciones en Madera"
+  },
+  {
+    "id": 212,
+    "course_id": 18,
+    "title": "Representación gráfica de muebles y elementos de carpintería",
+    "position": 5,
+    "course": "Muebles y Terminaciones en Madera",
+    "specialty": "Muebles y Terminaciones en Madera"
+  },
+  {
+    "id": 213,
+    "course_id": 18,
+    "title": "Armado de estructuras",
+    "position": 6,
+    "course": "Muebles y Terminaciones en Madera",
+    "specialty": "Muebles y Terminaciones en Madera"
+  },
+  {
+    "id": 214,
+    "course_id": 18,
+    "title": "Terminaciones de muebles y elementos de carpintería",
+    "position": 7,
+    "course": "Muebles y Terminaciones en Madera",
+    "specialty": "Muebles y Terminaciones en Madera"
+  },
+  {
+    "id": 215,
+    "course_id": 18,
+    "title": "Instalación de muebles y elementos de carpintería",
+    "position": 8,
+    "course": "Muebles y Terminaciones en Madera",
+    "specialty": "Muebles y Terminaciones en Madera"
+  },
+  {
+    "id": 216,
+    "course_id": 18,
+    "title": "Mantenimiento de máquinas, equipos y herramientas",
+    "position": 9,
+    "course": "Muebles y Terminaciones en Madera",
+    "specialty": "Muebles y Terminaciones en Madera"
+  },
+  {
+    "id": 217,
+    "course_id": 18,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Muebles y Terminaciones en Madera",
+    "specialty": "Muebles y Terminaciones en Madera"
+  },
+  {
+    "id": 227,
+    "course_id": 19,
+    "title": "Manejo de reproductores, desove y crías de larvas de especies hidrobiológicas",
+    "position": 1,
+    "course": "Acuicultura",
+    "specialty": "Acuicultura"
+  },
+  {
+    "id": 228,
+    "course_id": 19,
+    "title": "Engorde de especies acuícolas",
+    "position": 2,
+    "course": "Acuicultura",
+    "specialty": "Acuicultura"
+  },
+  {
+    "id": 229,
+    "course_id": 19,
+    "title": "Operación de sistemas, equipos y maquinarias",
+    "position": 3,
+    "course": "Acuicultura",
+    "specialty": "Acuicultura"
+  },
+  {
+    "id": 230,
+    "course_id": 19,
+    "title": "Seguridad, prevención de riesgos y cuidado del medio ambiente",
+    "position": 4,
+    "course": "Acuicultura",
+    "specialty": "Acuicultura"
+  },
+  {
+    "id": 231,
+    "course_id": 19,
+    "title": "Cosecha de especies acuícolas",
+    "position": 5,
+    "course": "Acuicultura",
+    "specialty": "Acuicultura"
+  },
+  {
+    "id": 232,
+    "course_id": 19,
+    "title": "Captación de semillas",
+    "position": 6,
+    "course": "Acuicultura",
+    "specialty": "Acuicultura"
+  },
+  {
+    "id": 233,
+    "course_id": 19,
+    "title": "Trabajos subacuáticos en acuicultura",
+    "position": 7,
+    "course": "Acuicultura",
+    "specialty": "Acuicultura"
+  },
+  {
+    "id": 234,
+    "course_id": 19,
+    "title": "Manejo de información acuícola",
+    "position": 8,
+    "course": "Acuicultura",
+    "specialty": "Acuicultura"
+  },
+  {
+    "id": 235,
+    "course_id": 19,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Acuicultura",
+    "specialty": "Acuicultura"
+  },
+  {
+    "id": 218,
+    "course_id": 20,
+    "title": "Documentación en la operación portuaria",
+    "position": 1,
+    "course": "Operaciones Portuarias",
+    "specialty": "Operaciones Portuarias"
+  },
+  {
+    "id": 219,
+    "course_id": 20,
+    "title": "Consolidación y desconsolidación de contenedores",
+    "position": 2,
+    "course": "Operaciones Portuarias",
+    "specialty": "Operaciones Portuarias"
+  },
+  {
+    "id": 220,
+    "course_id": 20,
+    "title": "Seguridad y prevención de riesgos en faenas portuarias",
+    "position": 3,
+    "course": "Operaciones Portuarias",
+    "specialty": "Operaciones Portuarias"
+  },
+  {
+    "id": 221,
+    "course_id": 20,
+    "title": "Operación de movilización y distribución de cargas",
+    "position": 4,
+    "course": "Operaciones Portuarias",
+    "specialty": "Operaciones Portuarias"
+  },
+  {
+    "id": 222,
+    "course_id": 20,
+    "title": "Tramitación y documentación de recepción y despacho de carga",
+    "position": 5,
+    "course": "Operaciones Portuarias",
+    "specialty": "Operaciones Portuarias"
+  },
+  {
+    "id": 223,
+    "course_id": 20,
+    "title": "Estiba y desestiba de naves mercantes",
+    "position": 6,
+    "course": "Operaciones Portuarias",
+    "specialty": "Operaciones Portuarias"
+  },
+  {
+    "id": 224,
+    "course_id": 20,
+    "title": "Tramitación de movilización y distribución de cargas",
+    "position": 7,
+    "course": "Operaciones Portuarias",
+    "specialty": "Operaciones Portuarias"
+  },
+  {
+    "id": 225,
+    "course_id": 20,
+    "title": "Organización y almacenamiento de cargas en zonas de depósito",
+    "position": 8,
+    "course": "Operaciones Portuarias",
+    "specialty": "Operaciones Portuarias"
+  },
+  {
+    "id": 226,
+    "course_id": 20,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Operaciones Portuarias",
+    "specialty": "Operaciones Portuarias"
+  },
+  {
+    "id": 236,
+    "course_id": 21,
+    "title": "Navegación y meteorología",
+    "position": 1,
+    "course": "Pesquería",
+    "specialty": "Pesquería"
+  },
+  {
+    "id": 237,
+    "course_id": 21,
+    "title": "Armado, mantenimiento y reparación de implementos de pesca",
+    "position": 2,
+    "course": "Pesquería",
+    "specialty": "Pesquería"
+  },
+  {
+    "id": 238,
+    "course_id": 21,
+    "title": "Tratamientos de conservación y manipulación de recursos hidrobiológicos",
+    "position": 3,
+    "course": "Pesquería",
+    "specialty": "Pesquería"
+  },
+  {
+    "id": 239,
+    "course_id": 21,
+    "title": "Prevención de riesgos en el mar",
+    "position": 4,
+    "course": "Pesquería",
+    "specialty": "Pesquería"
+  },
+  {
+    "id": 240,
+    "course_id": 21,
+    "title": "Primeros auxilios",
+    "position": 5,
+    "course": "Pesquería",
+    "specialty": "Pesquería"
+  },
+  {
+    "id": 241,
+    "course_id": 21,
+    "title": "Maniobras y operación de artes de pesca",
+    "position": 6,
+    "course": "Pesquería",
+    "specialty": "Pesquería"
+  },
+  {
+    "id": 242,
+    "course_id": 21,
+    "title": "Gestión de planes y proyectos de manejo y emprendimiento pesquero",
+    "position": 7,
+    "course": "Pesquería",
+    "specialty": "Pesquería"
+  },
+  {
+    "id": 243,
+    "course_id": 21,
+    "title": "Comunicaciones marítimas",
+    "position": 8,
+    "course": "Pesquería",
+    "specialty": "Pesquería"
+  },
+  {
+    "id": 244,
+    "course_id": 21,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Pesquería",
+    "specialty": "Pesquería"
+  },
+  {
+    "id": 245,
+    "course_id": 22,
+    "title": "Operación de equipos de maniobras de cubierta",
+    "position": 1,
+    "course": "Tripulación de Naves Mercantes y Especiales",
+    "specialty": "Tripulación de Naves Mercantes y Especiales"
+  },
+  {
+    "id": 246,
+    "course_id": 22,
+    "title": "Mantenimiento de máquinas de cubierta",
+    "position": 2,
+    "course": "Tripulación de Naves Mercantes y Especiales",
+    "specialty": "Tripulación de Naves Mercantes y Especiales"
+  },
+  {
+    "id": 247,
+    "course_id": 22,
+    "title": "Prevención de riesgos en el mar",
+    "position": 3,
+    "course": "Tripulación de Naves Mercantes y Especiales",
+    "specialty": "Tripulación de Naves Mercantes y Especiales"
+  },
+  {
+    "id": 248,
+    "course_id": 22,
+    "title": "Operación puente de gobierno",
+    "position": 4,
+    "course": "Tripulación de Naves Mercantes y Especiales",
+    "specialty": "Tripulación de Naves Mercantes y Especiales"
+  },
+  {
+    "id": 249,
+    "course_id": 22,
+    "title": "Primeros auxilios",
+    "position": 5,
+    "course": "Tripulación de Naves Mercantes y Especiales",
+    "specialty": "Tripulación de Naves Mercantes y Especiales"
+  },
+  {
+    "id": 250,
+    "course_id": 22,
+    "title": "Operación de máquinas propulsoras y auxiliares",
+    "position": 6,
+    "course": "Tripulación de Naves Mercantes y Especiales",
+    "specialty": "Tripulación de Naves Mercantes y Especiales"
+  },
+  {
+    "id": 251,
+    "course_id": 22,
+    "title": "Mantenimiento de máquinas marinas",
+    "position": 7,
+    "course": "Tripulación de Naves Mercantes y Especiales",
+    "specialty": "Tripulación de Naves Mercantes y Especiales"
+  },
+  {
+    "id": 252,
+    "course_id": 22,
+    "title": "Comunicaciones",
+    "position": 8,
+    "course": "Tripulación de Naves Mercantes y Especiales",
+    "specialty": "Tripulación de Naves Mercantes y Especiales"
+  },
+  {
+    "id": 253,
+    "course_id": 22,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Tripulación de Naves Mercantes y Especiales",
+    "specialty": "Tripulación de Naves Mercantes y Especiales"
+  },
+  {
+    "id": 171,
+    "course_id": 23,
+    "title": "Lectura y dibujo de planos en construcciones metálicas",
+    "position": 1,
+    "course": "Construcciones Metálicas",
+    "specialty": "Construcciones Metálicas"
+  },
+  {
+    "id": 172,
+    "course_id": 23,
+    "title": "Trazado de partes y piezas en construcciones metálicas",
+    "position": 2,
+    "course": "Construcciones Metálicas",
+    "specialty": "Construcciones Metálicas"
+  },
+  {
+    "id": 173,
+    "course_id": 23,
+    "title": "Mantenimiento de equipos y herramientas en construcciones metálicas",
+    "position": 3,
+    "course": "Construcciones Metálicas",
+    "specialty": "Construcciones Metálicas"
+  },
+  {
+    "id": 174,
+    "course_id": 23,
+    "title": "Mecanizado de partes y piezas metálicas",
+    "position": 4,
+    "course": "Construcciones Metálicas",
+    "specialty": "Construcciones Metálicas"
+  },
+  {
+    "id": 175,
+    "course_id": 23,
+    "title": "Corte y soldadura en construcciones metálicas",
+    "position": 5,
+    "course": "Construcciones Metálicas",
+    "specialty": "Construcciones Metálicas"
+  },
+  {
+    "id": 176,
+    "course_id": 23,
+    "title": "Armado y montaje en construcciones metálicas",
+    "position": 6,
+    "course": "Construcciones Metálicas",
+    "specialty": "Construcciones Metálicas"
+  },
+  {
+    "id": 177,
+    "course_id": 23,
+    "title": "Protección de estructuras y tratamientos de residuos",
+    "position": 7,
+    "course": "Construcciones Metálicas",
+    "specialty": "Construcciones Metálicas"
+  },
+  {
+    "id": 178,
+    "course_id": 23,
+    "title": "Cubicación de materiales e insumos en construcciones metálicas",
+    "position": 8,
+    "course": "Construcciones Metálicas",
+    "specialty": "Construcciones Metálicas"
+  },
+  {
+    "id": 179,
+    "course_id": 23,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Construcciones Metálicas",
+    "specialty": "Construcciones Metálicas"
+  },
+  {
+    "id": 254,
+    "course_id": 24,
+    "title": "Ajuste de motores",
+    "position": 1,
+    "course": "Mecánica Automotriz",
+    "specialty": "Mecánica Automotriz"
+  },
+  {
+    "id": 255,
+    "course_id": 24,
+    "title": "Lectura de planos y manuales técnicos",
+    "position": 2,
+    "course": "Mecánica Automotriz",
+    "specialty": "Mecánica Automotriz"
+  },
+  {
+    "id": 256,
+    "course_id": 24,
+    "title": "Manejo de residuos y desechos automotrices",
+    "position": 3,
+    "course": "Mecánica Automotriz",
+    "specialty": "Mecánica Automotriz"
+  },
+  {
+    "id": 257,
+    "course_id": 24,
+    "title": "Mantenimiento de sistemas de seguridad y confortabilidad",
+    "position": 4,
+    "course": "Mecánica Automotriz",
+    "specialty": "Mecánica Automotriz"
+  },
+  {
+    "id": 258,
+    "course_id": 24,
+    "title": "Mantenimiento de sistemas eléctricos y electrónicos",
+    "position": 5,
+    "course": "Mecánica Automotriz",
+    "specialty": "Mecánica Automotriz"
+  },
+  {
+    "id": 259,
+    "course_id": 24,
+    "title": "Mantenimiento de motores",
+    "position": 6,
+    "course": "Mecánica Automotriz",
+    "specialty": "Mecánica Automotriz"
+  },
+  {
+    "id": 260,
+    "course_id": 24,
+    "title": "Mantenimiento de sistemas hidráulicos y neumáticos",
+    "position": 7,
+    "course": "Mecánica Automotriz",
+    "specialty": "Mecánica Automotriz"
+  },
+  {
+    "id": 261,
+    "course_id": 24,
+    "title": "Mantenimiento de los sistemas de transmisión y frenos",
+    "position": 8,
+    "course": "Mecánica Automotriz",
+    "specialty": "Mecánica Automotriz"
+  },
+  {
+    "id": 262,
+    "course_id": 24,
+    "title": "Mantenimiento de sistemas de dirección y suspensión",
+    "position": 9,
+    "course": "Mecánica Automotriz",
+    "specialty": "Mecánica Automotriz"
+  },
+  {
+    "id": 263,
+    "course_id": 24,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Mecánica Automotriz",
+    "specialty": "Mecánica Automotriz"
+  },
+  {
+    "id": 441,
+    "course_id": 25,
+    "title": "Reparación y remplazo de elementos estructurales de la aeronave",
+    "position": 1,
+    "course": "Mecánica de Mantenimiento de Aeronaves",
+    "specialty": "Mecánica de Mantenimiento de Aeronaves"
+  },
+  {
+    "id": 442,
+    "course_id": 25,
+    "title": "Detección de fallas en instrumentos y sistemas de navegación y comunicación de la aeronave",
+    "position": 2,
+    "course": "Mecánica de Mantenimiento de Aeronaves",
+    "specialty": "Mecánica de Mantenimiento de Aeronaves"
+  },
+  {
+    "id": 443,
+    "course_id": 25,
+    "title": "Mantenimiento de los controles de vuelo de la aeronave",
+    "position": 3,
+    "course": "Mecánica de Mantenimiento de Aeronaves",
+    "specialty": "Mecánica de Mantenimiento de Aeronaves"
+  },
+  {
+    "id": 444,
+    "course_id": 25,
+    "title": "Inglés técnico de estructura, controles de vuelo y sistemas de navegación y comunicación de la aeronave",
+    "position": 4,
+    "course": "Mecánica de Mantenimiento de Aeronaves",
+    "specialty": "Mecánica de Mantenimiento de Aeronaves"
+  },
+  {
+    "id": 445,
+    "course_id": 25,
+    "title": "Lectura e interpretación de manuales de mantenimiento de aeronaves",
+    "position": 5,
+    "course": "Mecánica de Mantenimiento de Aeronaves",
+    "specialty": "Mecánica de Mantenimiento de Aeronaves"
+  },
+  {
+    "id": 446,
+    "course_id": 25,
+    "title": "Normativa de mantenimiento aeronáutico",
+    "position": 6,
+    "course": "Mecánica de Mantenimiento de Aeronaves",
+    "specialty": "Mecánica de Mantenimiento de Aeronaves"
+  },
+  {
+    "id": 447,
+    "course_id": 25,
+    "title": "Mantenimiento de las unidades y sistemas asociados al motor recíproco",
+    "position": 7,
+    "course": "Mecánica de Mantenimiento de Aeronaves",
+    "specialty": "Mecánica de Mantenimiento de Aeronaves"
+  },
+  {
+    "id": 448,
+    "course_id": 25,
+    "title": "Mantenimiento de las unidades y sistemas asociados al motor a reacción",
+    "position": 8,
+    "course": "Mecánica de Mantenimiento de Aeronaves",
+    "specialty": "Mecánica de Mantenimiento de Aeronaves"
+  },
+  {
+    "id": 449,
+    "course_id": 25,
+    "title": "Mantenimiento de los sistemas de la aeronave",
+    "position": 9,
+    "course": "Mecánica de Mantenimiento de Aeronaves",
+    "specialty": "Mecánica de Mantenimiento de Aeronaves"
+  },
+  {
+    "id": 450,
+    "course_id": 25,
+    "title": "Inglés técnico de mantenimiento de aeronaves",
+    "position": 10,
+    "course": "Mecánica de Mantenimiento de Aeronaves",
+    "specialty": "Mecánica de Mantenimiento de Aeronaves"
+  },
+  {
+    "id": 451,
+    "course_id": 25,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 11,
+    "course": "Mecánica de Mantenimiento de Aeronaves",
+    "specialty": "Mecánica de Mantenimiento de Aeronaves"
+  },
+  {
+    "id": 274,
+    "course_id": 26,
+    "title": "Preparación e instalación de campamentos",
+    "position": 1,
+    "course": "Asistencia en Geología",
+    "specialty": "Asistencia en Geología"
+  },
+  {
+    "id": 275,
+    "course_id": 26,
+    "title": "Marco legal y seguridad en geología",
+    "position": 2,
+    "course": "Asistencia en Geología",
+    "specialty": "Asistencia en Geología"
+  },
+  {
+    "id": 276,
+    "course_id": 26,
+    "title": "Clasificación de rocas y minerales",
+    "position": 3,
+    "course": "Asistencia en Geología",
+    "specialty": "Asistencia en Geología"
+  },
+  {
+    "id": 277,
+    "course_id": 26,
+    "title": "Lectura y elaboración de mapas topográficos y geológicos",
+    "position": 4,
+    "course": "Asistencia en Geología",
+    "specialty": "Asistencia en Geología"
+  },
+  {
+    "id": 278,
+    "course_id": 26,
+    "title": "Prospección geológica con sondajes",
+    "position": 5,
+    "course": "Asistencia en Geología",
+    "specialty": "Asistencia en Geología"
+  },
+  {
+    "id": 279,
+    "course_id": 26,
+    "title": "Técnicas de muestreo geológico",
+    "position": 6,
+    "course": "Asistencia en Geología",
+    "specialty": "Asistencia en Geología"
+  },
+  {
+    "id": 280,
+    "course_id": 26,
+    "title": "Registro y transferencia de información geológica",
+    "position": 7,
+    "course": "Asistencia en Geología",
+    "specialty": "Asistencia en Geología"
+  },
+  {
+    "id": 281,
+    "course_id": 26,
+    "title": "Transporte y mantenimiento de equipos e instrumentos geológicos",
+    "position": 8,
+    "course": "Asistencia en Geología",
+    "specialty": "Asistencia en Geología"
+  },
+  {
+    "id": 282,
+    "course_id": 26,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Asistencia en Geología",
+    "specialty": "Asistencia en Geología"
+  },
+  {
+    "id": 292,
+    "course_id": 27,
+    "title": "Lectura de planos de ubicación y de tronadura",
+    "position": 1,
+    "course": "Explotación Minera",
+    "specialty": "Explotación Minera"
+  },
+  {
+    "id": 293,
+    "course_id": 27,
+    "title": "Fortificación de minas subterráneas y a cielo abierto",
+    "position": 2,
+    "course": "Explotación Minera",
+    "specialty": "Explotación Minera"
+  },
+  {
+    "id": 294,
+    "course_id": 27,
+    "title": "Perforación y tronadura en faenas mineras",
+    "position": 3,
+    "course": "Explotación Minera",
+    "specialty": "Explotación Minera"
+  },
+  {
+    "id": 295,
+    "course_id": 27,
+    "title": "Marco legal y seguridad en plantas de explotación minera",
+    "position": 4,
+    "course": "Explotación Minera",
+    "specialty": "Explotación Minera"
+  },
+  {
+    "id": 296,
+    "course_id": 27,
+    "title": "Ventilación secundaria y drenaje de minas",
+    "position": 5,
+    "course": "Explotación Minera",
+    "specialty": "Explotación Minera"
+  },
+  {
+    "id": 297,
+    "course_id": 27,
+    "title": "Muestreo en explotaciones mineras",
+    "position": 6,
+    "course": "Explotación Minera",
+    "specialty": "Explotación Minera"
+  },
+  {
+    "id": 298,
+    "course_id": 27,
+    "title": "Cubicación, carguío y transporte",
+    "position": 7,
+    "course": "Explotación Minera",
+    "specialty": "Explotación Minera"
+  },
+  {
+    "id": 299,
+    "course_id": 27,
+    "title": "Chancado primario de minerales",
+    "position": 8,
+    "course": "Explotación Minera",
+    "specialty": "Explotación Minera"
+  },
+  {
+    "id": 300,
+    "course_id": 27,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Explotación Minera",
+    "specialty": "Explotación Minera"
+  },
+  {
+    "id": 283,
+    "course_id": 28,
+    "title": "Laboratorio y análisis químico",
+    "position": 1,
+    "course": "Metalurgia Extractiva",
+    "specialty": "Metalurgia Extractiva"
+  },
+  {
+    "id": 284,
+    "course_id": 28,
+    "title": "Muestreo y control de procesos",
+    "position": 2,
+    "course": "Metalurgia Extractiva",
+    "specialty": "Metalurgia Extractiva"
+  },
+  {
+    "id": 285,
+    "course_id": 28,
+    "title": "Control de inventario",
+    "position": 3,
+    "course": "Metalurgia Extractiva",
+    "specialty": "Metalurgia Extractiva"
+  },
+  {
+    "id": 286,
+    "course_id": 28,
+    "title": "Legislación y prevención de riesgos en la minería",
+    "position": 4,
+    "course": "Metalurgia Extractiva",
+    "specialty": "Metalurgia Extractiva"
+  },
+  {
+    "id": 287,
+    "course_id": 28,
+    "title": "Transformación mecánica de los minerales",
+    "position": 5,
+    "course": "Metalurgia Extractiva",
+    "specialty": "Metalurgia Extractiva"
+  },
+  {
+    "id": 288,
+    "course_id": 28,
+    "title": "Acondicionamiento químico de los minerales",
+    "position": 6,
+    "course": "Metalurgia Extractiva",
+    "specialty": "Metalurgia Extractiva"
+  },
+  {
+    "id": 289,
+    "course_id": 28,
+    "title": "Técnicas de hidrometalurgia",
+    "position": 7,
+    "course": "Metalurgia Extractiva",
+    "specialty": "Metalurgia Extractiva"
+  },
+  {
+    "id": 290,
+    "course_id": 28,
+    "title": "Fundición y refinería",
+    "position": 8,
+    "course": "Metalurgia Extractiva",
+    "specialty": "Metalurgia Extractiva"
+  },
+  {
+    "id": 291,
+    "course_id": 28,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Metalurgia Extractiva",
+    "specialty": "Metalurgia Extractiva"
+  },
+  {
+    "id": 264,
+    "course_id": 29,
+    "title": "Material didáctico y de ambientación",
+    "position": 1,
+    "course": "Atención de Párvulos",
+    "specialty": "Atención de Párvulos"
+  },
+  {
+    "id": 265,
+    "course_id": 29,
+    "title": "Expresión musical para párvulos",
+    "position": 2,
+    "course": "Atención de Párvulos",
+    "specialty": "Atención de Párvulos"
+  },
+  {
+    "id": 266,
+    "course_id": 29,
+    "title": "Relación con la familia",
+    "position": 3,
+    "course": "Atención de Párvulos",
+    "specialty": "Atención de Párvulos"
+  },
+  {
+    "id": 267,
+    "course_id": 29,
+    "title": "Salud en párvulos",
+    "position": 4,
+    "course": "Atención de Párvulos",
+    "specialty": "Atención de Párvulos"
+  },
+  {
+    "id": 268,
+    "course_id": 29,
+    "title": "Recreación y bienestar de los párvulos",
+    "position": 5,
+    "course": "Atención de Párvulos",
+    "specialty": "Atención de Párvulos"
+  },
+  {
+    "id": 269,
+    "course_id": 29,
+    "title": "Actividades educativas para párvulos",
+    "position": 6,
+    "course": "Atención de Párvulos",
+    "specialty": "Atención de Párvulos"
+  },
+  {
+    "id": 270,
+    "course_id": 29,
+    "title": "Expresión literaria y teatral con párvulos",
+    "position": 7,
+    "course": "Atención de Párvulos",
+    "specialty": "Atención de Párvulos"
+  },
+  {
+    "id": 271,
+    "course_id": 29,
+    "title": "Alimentación de los párvulos",
+    "position": 8,
+    "course": "Atención de Párvulos",
+    "specialty": "Atención de Párvulos"
+  },
+  {
+    "id": 272,
+    "course_id": 29,
+    "title": "Higiene y seguridad de los párvulos",
+    "position": 9,
+    "course": "Atención de Párvulos",
+    "specialty": "Atención de Párvulos"
+  },
+  {
+    "id": 273,
+    "course_id": 29,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Atención de Párvulos",
+    "specialty": "Atención de Párvulos"
+  },
+  {
+    "id": 103,
+    "course_id": 30,
+    "title": "Instalación de redes de área local cableadas e inalámbricas",
+    "position": 1,
+    "course": "Conectividad y Redes",
+    "specialty": "Conectividad y Redes"
+  },
+  {
+    "id": 104,
+    "course_id": 30,
+    "title": "Ensamblado y configuración de computadores y equipos terminales portátiles",
+    "position": 2,
+    "course": "Conectividad y Redes",
+    "specialty": "Conectividad y Redes"
+  },
+  {
+    "id": 105,
+    "course_id": 30,
+    "title": "Instalación y explotación de software de aplicaciones productivas",
+    "position": 3,
+    "course": "Conectividad y Redes",
+    "specialty": "Conectividad y Redes"
+  },
+  {
+    "id": 106,
+    "course_id": 30,
+    "title": "Configuración y puesta en servicio de aplicaciones en redes de área local",
+    "position": 4,
+    "course": "Conectividad y Redes",
+    "specialty": "Conectividad y Redes"
+  },
+  {
+    "id": 107,
+    "course_id": 30,
+    "title": "Configuración de la seguridad en redes de área local",
+    "position": 5,
+    "course": "Conectividad y Redes",
+    "specialty": "Conectividad y Redes"
+  },
+  {
+    "id": 108,
+    "course_id": 30,
+    "title": "Mantenimiento y actualización de hardware en redes de área local",
+    "position": 6,
+    "course": "Conectividad y Redes",
+    "specialty": "Conectividad y Redes"
+  },
+  {
+    "id": 109,
+    "course_id": 30,
+    "title": "Mantenimiento y actualización de software en redes de área local",
+    "position": 7,
+    "course": "Conectividad y Redes",
+    "specialty": "Conectividad y Redes"
+  },
+  {
+    "id": 110,
+    "course_id": 30,
+    "title": "Recuperación y respaldo de información en redes de área local",
+    "position": 8,
+    "course": "Conectividad y Redes",
+    "specialty": "Conectividad y Redes"
+  },
+  {
+    "id": 111,
+    "course_id": 30,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Conectividad y Redes",
+    "specialty": "Conectividad y Redes"
+  },
+  {
+    "id": 74,
+    "course_id": 31,
+    "title": "Programación y bases de datos",
+    "position": 1,
+    "course": "Programación",
+    "specialty": "Programación"
+  },
+  {
+    "id": 75,
+    "course_id": 31,
+    "title": "Instalación y configuración de equipos informáticos",
+    "position": 2,
+    "course": "Programación",
+    "specialty": "Programación"
+  },
+  {
+    "id": 76,
+    "course_id": 31,
+    "title": "Soporte a usuarios y productividad",
+    "position": 3,
+    "course": "Programación",
+    "specialty": "Programación"
+  },
+  {
+    "id": 77,
+    "course_id": 31,
+    "title": "Sistemas operativos",
+    "position": 4,
+    "course": "Programación",
+    "specialty": "Programación"
+  },
+  {
+    "id": 78,
+    "course_id": 31,
+    "title": "Diseño de bases de datos relacionales",
+    "position": 5,
+    "course": "Programación",
+    "specialty": "Programación"
+  },
+  {
+    "id": 79,
+    "course_id": 31,
+    "title": "Programación orientada a objetos",
+    "position": 6,
+    "course": "Programación",
+    "specialty": "Programación"
+  },
+  {
+    "id": 80,
+    "course_id": 31,
+    "title": "Administración de bases de datos",
+    "position": 7,
+    "course": "Programación",
+    "specialty": "Programación"
+  },
+  {
+    "id": 81,
+    "course_id": 31,
+    "title": "Desarrollo de aplicaciones web",
+    "position": 8,
+    "course": "Programación",
+    "specialty": "Programación"
+  },
+  {
+    "id": 82,
+    "course_id": 31,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Programación",
+    "specialty": "Programación"
+  },
+  {
+    "id": 122,
+    "course_id": 32,
+    "title": "Operaciones y fundamentos de las telecomunicaciones",
+    "position": 1,
+    "course": "Telecomunicaciones",
+    "specialty": "Telecomunicaciones"
+  },
+  {
+    "id": 123,
+    "course_id": 32,
+    "title": "Instalación y mantenimiento básico de un terminal informático",
+    "position": 2,
+    "course": "Telecomunicaciones",
+    "specialty": "Telecomunicaciones"
+  },
+  {
+    "id": 124,
+    "course_id": 32,
+    "title": "Instalación y configuración de redes",
+    "position": 3,
+    "course": "Telecomunicaciones",
+    "specialty": "Telecomunicaciones"
+  },
+  {
+    "id": 125,
+    "course_id": 32,
+    "title": "Mantenimiento de circuitos electrónicos básicos",
+    "position": 4,
+    "course": "Telecomunicaciones",
+    "specialty": "Telecomunicaciones"
+  },
+  {
+    "id": 126,
+    "course_id": 32,
+    "title": "Instalación de servicios básicos de telecomunicaciones",
+    "position": 5,
+    "course": "Telecomunicaciones",
+    "specialty": "Telecomunicaciones"
+  },
+  {
+    "id": 127,
+    "course_id": 32,
+    "title": "Comunicaciones inalámbricas",
+    "position": 6,
+    "course": "Telecomunicaciones",
+    "specialty": "Telecomunicaciones"
+  },
+  {
+    "id": 128,
+    "course_id": 32,
+    "title": "Instalación de redes telefónicas convergentes",
+    "position": 7,
+    "course": "Telecomunicaciones",
+    "specialty": "Telecomunicaciones"
+  },
+  {
+    "id": 129,
+    "course_id": 32,
+    "title": "Sistemas operativos de redes",
+    "position": 8,
+    "course": "Telecomunicaciones",
+    "specialty": "Telecomunicaciones"
+  },
+  {
+    "id": 130,
+    "course_id": 32,
+    "title": "Mantenimiento de redes de acceso y banda ancha",
+    "position": 9,
+    "course": "Telecomunicaciones",
+    "specialty": "Telecomunicaciones"
+  },
+  {
+    "id": 131,
+    "course_id": 32,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Telecomunicaciones",
+    "specialty": "Telecomunicaciones"
+  },
+  {
+    "id": 301,
+    "course_id": 33,
+    "title": "Utilización de información contable",
+    "position": 1,
+    "course": "Administración, mención Logística",
+    "specialty": "Administración, mención Logística"
+  },
+  {
+    "id": 302,
+    "course_id": 33,
+    "title": "Gestión comercial y tributaria",
+    "position": 2,
+    "course": "Administración, mención Logística",
+    "specialty": "Administración, mención Logística"
+  },
+  {
+    "id": 303,
+    "course_id": 33,
+    "title": "Procesos administrativos",
+    "position": 3,
+    "course": "Administración, mención Logística",
+    "specialty": "Administración, mención Logística"
+  },
+  {
+    "id": 304,
+    "course_id": 33,
+    "title": "Atención de clientes",
+    "position": 4,
+    "course": "Administración, mención Logística",
+    "specialty": "Administración, mención Logística"
+  },
+  {
+    "id": 305,
+    "course_id": 33,
+    "title": "Organización de oficinas",
+    "position": 5,
+    "course": "Administración, mención Logística",
+    "specialty": "Administración, mención Logística"
+  },
+  {
+    "id": 306,
+    "course_id": 33,
+    "title": "Aplicaciones informáticas para la gestión administrativa",
+    "position": 6,
+    "course": "Administración, mención Logística",
+    "specialty": "Administración, mención Logística"
+  },
+  {
+    "id": 307,
+    "course_id": 33,
+    "title": "Operaciones de almacenamiento",
+    "position": 7,
+    "course": "Administración, mención Logística",
+    "specialty": "Administración, mención Logística"
+  },
+  {
+    "id": 308,
+    "course_id": 33,
+    "title": "Operaciones de bodega",
+    "position": 8,
+    "course": "Administración, mención Logística",
+    "specialty": "Administración, mención Logística"
+  },
+  {
+    "id": 309,
+    "course_id": 33,
+    "title": "Logística y distribución",
+    "position": 9,
+    "course": "Administración, mención Logística",
+    "specialty": "Administración, mención Logística"
+  },
+  {
+    "id": 310,
+    "course_id": 33,
+    "title": "Seguridad en bodegas",
+    "position": 10,
+    "course": "Administración, mención Logística",
+    "specialty": "Administración, mención Logística"
+  },
+  {
+    "id": 311,
+    "course_id": 33,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 11,
+    "course": "Administración, mención Logística",
+    "specialty": "Administración, mención Logística"
+  },
+  {
+    "id": 312,
+    "course_id": 34,
+    "title": "Utilización de información contable",
+    "position": 1,
+    "course": "Administración, mención Recursos Humanos",
+    "specialty": "Administración, mención Recursos Humanos"
+  },
+  {
+    "id": 313,
+    "course_id": 34,
+    "title": "Gestión comercial y tributaria",
+    "position": 2,
+    "course": "Administración, mención Recursos Humanos",
+    "specialty": "Administración, mención Recursos Humanos"
+  },
+  {
+    "id": 314,
+    "course_id": 34,
+    "title": "Procesos administrativos",
+    "position": 3,
+    "course": "Administración, mención Recursos Humanos",
+    "specialty": "Administración, mención Recursos Humanos"
+  },
+  {
+    "id": 315,
+    "course_id": 34,
+    "title": "Atención de clientes",
+    "position": 4,
+    "course": "Administración, mención Recursos Humanos",
+    "specialty": "Administración, mención Recursos Humanos"
+  },
+  {
+    "id": 316,
+    "course_id": 34,
+    "title": "Organización de oficinas",
+    "position": 5,
+    "course": "Administración, mención Recursos Humanos",
+    "specialty": "Administración, mención Recursos Humanos"
+  },
+  {
+    "id": 317,
+    "course_id": 34,
+    "title": "Aplicaciones informáticas para la gestión administrativa",
+    "position": 6,
+    "course": "Administración, mención Recursos Humanos",
+    "specialty": "Administración, mención Recursos Humanos"
+  },
+  {
+    "id": 318,
+    "course_id": 34,
+    "title": "Legislación laboral",
+    "position": 7,
+    "course": "Administración, mención Recursos Humanos",
+    "specialty": "Administración, mención Recursos Humanos"
+  },
+  {
+    "id": 319,
+    "course_id": 34,
+    "title": "Cálculo de remuneración, finiquitos y obligaciones laborales",
+    "position": 8,
+    "course": "Administración, mención Recursos Humanos",
+    "specialty": "Administración, mención Recursos Humanos"
+  },
+  {
+    "id": 320,
+    "course_id": 34,
+    "title": "Desarrollo y bienestar del personal",
+    "position": 9,
+    "course": "Administración, mención Recursos Humanos",
+    "specialty": "Administración, mención Recursos Humanos"
+  },
+  {
+    "id": 321,
+    "course_id": 34,
+    "title": "Dotación de personal",
+    "position": 10,
+    "course": "Administración, mención Recursos Humanos",
+    "specialty": "Administración, mención Recursos Humanos"
+  },
+  {
+    "id": 322,
+    "course_id": 34,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 11,
+    "course": "Administración, mención Recursos Humanos",
+    "specialty": "Administración, mención Recursos Humanos"
+  },
+  {
+    "id": 323,
+    "course_id": 35,
+    "title": "Manejo de suelo y residuos",
+    "position": 1,
+    "course": "Agropecuaria, mención Agricultura",
+    "specialty": "Agropecuaria, mención Agricultura"
+  },
+  {
+    "id": 324,
+    "course_id": 35,
+    "title": "Manejo de técnicas de riego",
+    "position": 2,
+    "course": "Agropecuaria, mención Agricultura",
+    "specialty": "Agropecuaria, mención Agricultura"
+  },
+  {
+    "id": 325,
+    "course_id": 35,
+    "title": "Técnicas de reproducción vegetal",
+    "position": 3,
+    "course": "Agropecuaria, mención Agricultura",
+    "specialty": "Agropecuaria, mención Agricultura"
+  },
+  {
+    "id": 326,
+    "course_id": 35,
+    "title": "Alimentación y pesaje pecuario",
+    "position": 4,
+    "course": "Agropecuaria, mención Agricultura",
+    "specialty": "Agropecuaria, mención Agricultura"
+  },
+  {
+    "id": 327,
+    "course_id": 35,
+    "title": "Control de plagas y enfermedades",
+    "position": 5,
+    "course": "Agropecuaria, mención Agricultura",
+    "specialty": "Agropecuaria, mención Agricultura"
+  },
+  {
+    "id": 328,
+    "course_id": 35,
+    "title": "Técnicas de cultivo de especies vegetales",
+    "position": 6,
+    "course": "Agropecuaria, mención Agricultura",
+    "specialty": "Agropecuaria, mención Agricultura"
+  },
+  {
+    "id": 329,
+    "course_id": 35,
+    "title": "Manejos para optimización productiva de frutales",
+    "position": 7,
+    "course": "Agropecuaria, mención Agricultura",
+    "specialty": "Agropecuaria, mención Agricultura"
+  },
+  {
+    "id": 330,
+    "course_id": 35,
+    "title": "Postcosecha y guarda de productos agrícolas",
+    "position": 8,
+    "course": "Agropecuaria, mención Agricultura",
+    "specialty": "Agropecuaria, mención Agricultura"
+  },
+  {
+    "id": 331,
+    "course_id": 35,
+    "title": "Mantenimiento de maquinarias y equipos agrícolas",
+    "position": 9,
+    "course": "Agropecuaria, mención Agricultura",
+    "specialty": "Agropecuaria, mención Agricultura"
+  },
+  {
+    "id": 332,
+    "course_id": 35,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Agropecuaria, mención Agricultura",
+    "specialty": "Agropecuaria, mención Agricultura"
+  },
+  {
+    "id": 333,
+    "course_id": 36,
+    "title": "Manejo de suelo y residuos",
+    "position": 1,
+    "course": "Agropecuaria, mención Pecuaria",
+    "specialty": "Agropecuaria, mención Pecuaria"
+  },
+  {
+    "id": 334,
+    "course_id": 36,
+    "title": "Manejo de técnicas de riego",
+    "position": 2,
+    "course": "Agropecuaria, mención Pecuaria",
+    "specialty": "Agropecuaria, mención Pecuaria"
+  },
+  {
+    "id": 335,
+    "course_id": 36,
+    "title": "Técnicas de reproducción vegetal",
+    "position": 3,
+    "course": "Agropecuaria, mención Pecuaria",
+    "specialty": "Agropecuaria, mención Pecuaria"
+  },
+  {
+    "id": 336,
+    "course_id": 36,
+    "title": "Alimentación y pesaje pecuario",
+    "position": 4,
+    "course": "Agropecuaria, mención Pecuaria",
+    "specialty": "Agropecuaria, mención Pecuaria"
+  },
+  {
+    "id": 337,
+    "course_id": 36,
+    "title": "Control de plagas y enfermedades",
+    "position": 5,
+    "course": "Agropecuaria, mención Pecuaria",
+    "specialty": "Agropecuaria, mención Pecuaria"
+  },
+  {
+    "id": 338,
+    "course_id": 36,
+    "title": "Manejos pecuarios",
+    "position": 6,
+    "course": "Agropecuaria, mención Pecuaria",
+    "specialty": "Agropecuaria, mención Pecuaria"
+  },
+  {
+    "id": 339,
+    "course_id": 36,
+    "title": "Reproducción animal",
+    "position": 7,
+    "course": "Agropecuaria, mención Pecuaria",
+    "specialty": "Agropecuaria, mención Pecuaria"
+  },
+  {
+    "id": 340,
+    "course_id": 36,
+    "title": "Producción lechera",
+    "position": 8,
+    "course": "Agropecuaria, mención Pecuaria",
+    "specialty": "Agropecuaria, mención Pecuaria"
+  },
+  {
+    "id": 341,
+    "course_id": 36,
+    "title": "Sanidad y bienestar animal",
+    "position": 9,
+    "course": "Agropecuaria, mención Pecuaria",
+    "specialty": "Agropecuaria, mención Pecuaria"
+  },
+  {
+    "id": 342,
+    "course_id": 36,
+    "title": "Cultivo de praderas y forrajes",
+    "position": 10,
+    "course": "Agropecuaria, mención Pecuaria",
+    "specialty": "Agropecuaria, mención Pecuaria"
+  },
+  {
+    "id": 343,
+    "course_id": 36,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 11,
+    "course": "Agropecuaria, mención Pecuaria",
+    "specialty": "Agropecuaria, mención Pecuaria"
+  },
+  {
+    "id": 344,
+    "course_id": 37,
+    "title": "Manejo de suelo y residuos",
+    "position": 1,
+    "course": "Agropecuaria, mención Vitivinícola",
+    "specialty": "Agropecuaria, mención Vitivinícola"
+  },
+  {
+    "id": 345,
+    "course_id": 37,
+    "title": "Manejo de técnicas de riego",
+    "position": 2,
+    "course": "Agropecuaria, mención Vitivinícola",
+    "specialty": "Agropecuaria, mención Vitivinícola"
+  },
+  {
+    "id": 346,
+    "course_id": 37,
+    "title": "Técnicas de reproducción vegetal",
+    "position": 3,
+    "course": "Agropecuaria, mención Vitivinícola",
+    "specialty": "Agropecuaria, mención Vitivinícola"
+  },
+  {
+    "id": 347,
+    "course_id": 37,
+    "title": "Alimentación y pesaje pecuario",
+    "position": 4,
+    "course": "Agropecuaria, mención Vitivinícola",
+    "specialty": "Agropecuaria, mención Vitivinícola"
+  },
+  {
+    "id": 348,
+    "course_id": 37,
+    "title": "Control de plagas y enfermedades",
+    "position": 5,
+    "course": "Agropecuaria, mención Vitivinícola",
+    "specialty": "Agropecuaria, mención Vitivinícola"
+  },
+  {
+    "id": 349,
+    "course_id": 37,
+    "title": "Viticultura",
+    "position": 6,
+    "course": "Agropecuaria, mención Vitivinícola",
+    "specialty": "Agropecuaria, mención Vitivinícola"
+  },
+  {
+    "id": 350,
+    "course_id": 37,
+    "title": "Cosecha y transporte de vides",
+    "position": 7,
+    "course": "Agropecuaria, mención Vitivinícola",
+    "specialty": "Agropecuaria, mención Vitivinícola"
+  },
+  {
+    "id": 351,
+    "course_id": 37,
+    "title": "Elaboración de vinos",
+    "position": 8,
+    "course": "Agropecuaria, mención Vitivinícola",
+    "specialty": "Agropecuaria, mención Vitivinícola"
+  },
+  {
+    "id": 352,
+    "course_id": 37,
+    "title": "Envasado y maquinaria vitivinícola",
+    "position": 9,
+    "course": "Agropecuaria, mención Vitivinícola",
+    "specialty": "Agropecuaria, mención Vitivinícola"
+  },
+  {
+    "id": 353,
+    "course_id": 37,
+    "title": "Manejo de bodegas vitivinícolas",
+    "position": 10,
+    "course": "Agropecuaria, mención Vitivinícola",
+    "specialty": "Agropecuaria, mención Vitivinícola"
+  },
+  {
+    "id": 354,
+    "course_id": 37,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 11,
+    "course": "Agropecuaria, mención Vitivinícola",
+    "specialty": "Agropecuaria, mención Vitivinícola"
+  },
+  {
+    "id": 355,
+    "course_id": 38,
+    "title": "Análisis de muestras de hormigón, suelos y materiales",
+    "position": 1,
+    "course": "Construcción, mención Edificación",
+    "specialty": "Construcción, mención Edificación"
+  },
+  {
+    "id": 356,
+    "course_id": 38,
+    "title": "Carpintería de instalación de faenas",
+    "position": 2,
+    "course": "Construcción, mención Edificación",
+    "specialty": "Construcción, mención Edificación"
+  },
+  {
+    "id": 357,
+    "course_id": 38,
+    "title": "Control y mantenimiento de bodegas y pañoles",
+    "position": 3,
+    "course": "Construcción, mención Edificación",
+    "specialty": "Construcción, mención Edificación"
+  },
+  {
+    "id": 358,
+    "course_id": 38,
+    "title": "Cubicación de materiales e insumos",
+    "position": 4,
+    "course": "Construcción, mención Edificación",
+    "specialty": "Construcción, mención Edificación"
+  },
+  {
+    "id": 359,
+    "course_id": 38,
+    "title": "Interpretación de planos de construcción",
+    "position": 5,
+    "course": "Construcción, mención Edificación",
+    "specialty": "Construcción, mención Edificación"
+  },
+  {
+    "id": 360,
+    "course_id": 38,
+    "title": "Prevención de riesgos en la construcción",
+    "position": 6,
+    "course": "Construcción, mención Edificación",
+    "specialty": "Construcción, mención Edificación"
+  },
+  {
+    "id": 361,
+    "course_id": 38,
+    "title": "Trazado de obras de construcción",
+    "position": 7,
+    "course": "Construcción, mención Edificación",
+    "specialty": "Construcción, mención Edificación"
+  },
+  {
+    "id": 362,
+    "course_id": 38,
+    "title": "Albañilerías estructurales y no estructurales",
+    "position": 8,
+    "course": "Construcción, mención Edificación",
+    "specialty": "Construcción, mención Edificación"
+  },
+  {
+    "id": 363,
+    "course_id": 38,
+    "title": "Carpintería estructural",
+    "position": 9,
+    "course": "Construcción, mención Edificación",
+    "specialty": "Construcción, mención Edificación"
+  },
+  {
+    "id": 364,
+    "course_id": 38,
+    "title": "Enfierradura para elementos estructurales",
+    "position": 10,
+    "course": "Construcción, mención Edificación",
+    "specialty": "Construcción, mención Edificación"
+  },
+  {
+    "id": 365,
+    "course_id": 38,
+    "title": "Estructuras de hormigón",
+    "position": 11,
+    "course": "Construcción, mención Edificación",
+    "specialty": "Construcción, mención Edificación"
+  },
+  {
+    "id": 366,
+    "course_id": 38,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 12,
+    "course": "Construcción, mención Edificación",
+    "specialty": "Construcción, mención Edificación"
+  },
+  {
+    "id": 367,
+    "course_id": 39,
+    "title": "Análisis de muestras de hormigón, suelos y materiales",
+    "position": 1,
+    "course": "Construcción, mención Terminaciones de la Construcción",
+    "specialty": "Construcción, mención Terminaciones de la Construcción"
+  },
+  {
+    "id": 368,
+    "course_id": 39,
+    "title": "Carpintería de instalación de faenas",
+    "position": 2,
+    "course": "Construcción, mención Terminaciones de la Construcción",
+    "specialty": "Construcción, mención Terminaciones de la Construcción"
+  },
+  {
+    "id": 369,
+    "course_id": 39,
+    "title": "Control y mantenimiento de bodegas y pañoles",
+    "position": 3,
+    "course": "Construcción, mención Terminaciones de la Construcción",
+    "specialty": "Construcción, mención Terminaciones de la Construcción"
+  },
+  {
+    "id": 370,
+    "course_id": 39,
+    "title": "Cubicación de materiales e insumos",
+    "position": 4,
+    "course": "Construcción, mención Terminaciones de la Construcción",
+    "specialty": "Construcción, mención Terminaciones de la Construcción"
+  },
+  {
+    "id": 371,
+    "course_id": 39,
+    "title": "Interpretación de planos de construcción",
+    "position": 5,
+    "course": "Construcción, mención Terminaciones de la Construcción",
+    "specialty": "Construcción, mención Terminaciones de la Construcción"
+  },
+  {
+    "id": 372,
+    "course_id": 39,
+    "title": "Prevención de riesgos en la construcción",
+    "position": 6,
+    "course": "Construcción, mención Terminaciones de la Construcción",
+    "specialty": "Construcción, mención Terminaciones de la Construcción"
+  },
+  {
+    "id": 373,
+    "course_id": 39,
+    "title": "Trazado de obras de construcción",
+    "position": 7,
+    "course": "Construcción, mención Terminaciones de la Construcción",
+    "specialty": "Construcción, mención Terminaciones de la Construcción"
+  },
+  {
+    "id": 374,
+    "course_id": 39,
+    "title": "Impermeabilización y aislación de elementos",
+    "position": 8,
+    "course": "Construcción, mención Terminaciones de la Construcción",
+    "specialty": "Construcción, mención Terminaciones de la Construcción"
+  },
+  {
+    "id": 375,
+    "course_id": 39,
+    "title": "Instalación de cubiertas y elementos de evacuación de aguas lluvias",
+    "position": 9,
+    "course": "Construcción, mención Terminaciones de la Construcción",
+    "specialty": "Construcción, mención Terminaciones de la Construcción"
+  },
+  {
+    "id": 376,
+    "course_id": 39,
+    "title": "Instalación de muebles, puertas y ventanas",
+    "position": 10,
+    "course": "Construcción, mención Terminaciones de la Construcción",
+    "specialty": "Construcción, mención Terminaciones de la Construcción"
+  },
+  {
+    "id": 377,
+    "course_id": 39,
+    "title": "Revestimientos para pisos, muros y cielos",
+    "position": 11,
+    "course": "Construcción, mención Terminaciones de la Construcción",
+    "specialty": "Construcción, mención Terminaciones de la Construcción"
+  },
+  {
+    "id": 378,
+    "course_id": 39,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 12,
+    "course": "Construcción, mención Terminaciones de la Construcción",
+    "specialty": "Construcción, mención Terminaciones de la Construcción"
+  },
+  {
+    "id": 379,
+    "course_id": 40,
+    "title": "Análisis de muestras de hormigón, suelos y materiales",
+    "position": 1,
+    "course": "Construcción, mención Obras Viales e Infraestructura",
+    "specialty": "Construcción, mención Obras Viales e Infraestructura"
+  },
+  {
+    "id": 380,
+    "course_id": 40,
+    "title": "Carpintería de instalación de faenas",
+    "position": 2,
+    "course": "Construcción, mención Obras Viales e Infraestructura",
+    "specialty": "Construcción, mención Obras Viales e Infraestructura"
+  },
+  {
+    "id": 381,
+    "course_id": 40,
+    "title": "Control y mantenimiento de bodegas y pañoles",
+    "position": 3,
+    "course": "Construcción, mención Obras Viales e Infraestructura",
+    "specialty": "Construcción, mención Obras Viales e Infraestructura"
+  },
+  {
+    "id": 382,
+    "course_id": 40,
+    "title": "Cubicación de materiales e insumos",
+    "position": 4,
+    "course": "Construcción, mención Obras Viales e Infraestructura",
+    "specialty": "Construcción, mención Obras Viales e Infraestructura"
+  },
+  {
+    "id": 383,
+    "course_id": 40,
+    "title": "Interpretación de planos de construcción",
+    "position": 5,
+    "course": "Construcción, mención Obras Viales e Infraestructura",
+    "specialty": "Construcción, mención Obras Viales e Infraestructura"
+  },
+  {
+    "id": 384,
+    "course_id": 40,
+    "title": "Prevención de riesgos en la construcción",
+    "position": 6,
+    "course": "Construcción, mención Obras Viales e Infraestructura",
+    "specialty": "Construcción, mención Obras Viales e Infraestructura"
+  },
+  {
+    "id": 385,
+    "course_id": 40,
+    "title": "Trazado de obras de construcción",
+    "position": 7,
+    "course": "Construcción, mención Obras Viales e Infraestructura",
+    "specialty": "Construcción, mención Obras Viales e Infraestructura"
+  },
+  {
+    "id": 386,
+    "course_id": 40,
+    "title": "Calidad en obras viales e infraestructura",
+    "position": 8,
+    "course": "Construcción, mención Obras Viales e Infraestructura",
+    "specialty": "Construcción, mención Obras Viales e Infraestructura"
+  },
+  {
+    "id": 387,
+    "course_id": 40,
+    "title": "Seguridad vial",
+    "position": 9,
+    "course": "Construcción, mención Obras Viales e Infraestructura",
+    "specialty": "Construcción, mención Obras Viales e Infraestructura"
+  },
+  {
+    "id": 388,
+    "course_id": 40,
+    "title": "Mantenimiento de obras viales",
+    "position": 10,
+    "course": "Construcción, mención Obras Viales e Infraestructura",
+    "specialty": "Construcción, mención Obras Viales e Infraestructura"
+  },
+  {
+    "id": 389,
+    "course_id": 40,
+    "title": "Conformación de la calzada",
+    "position": 11,
+    "course": "Construcción, mención Obras Viales e Infraestructura",
+    "specialty": "Construcción, mención Obras Viales e Infraestructura"
+  },
+  {
+    "id": 390,
+    "course_id": 40,
+    "title": "Infraestructura para la protección de la calzada",
+    "position": 12,
+    "course": "Construcción, mención Obras Viales e Infraestructura",
+    "specialty": "Construcción, mención Obras Viales e Infraestructura"
+  },
+  {
+    "id": 391,
+    "course_id": 40,
+    "title": "Empleabilidad y emprendimiento",
+    "position": 13,
+    "course": "Construcción, mención Obras Viales e Infraestructura",
+    "specialty": "Construcción, mención Obras Viales e Infraestructura"
+  },
+  {
+    "id": 392,
+    "course_id": 41,
+    "title": "Manejo y almacenamiento seguro de materiales",
+    "position": 1,
+    "course": "Química Industrial, mención Laboratorio Químico",
+    "specialty": "Química Industrial, mención Laboratorio Químico"
+  },
+  {
+    "id": 393,
+    "course_id": 41,
+    "title": "Técnicas, procesos y equipos de laboratorio",
+    "position": 2,
+    "course": "Química Industrial, mención Laboratorio Químico",
+    "specialty": "Química Industrial, mención Laboratorio Químico"
+  },
+  {
+    "id": 394,
+    "course_id": 41,
+    "title": "Fabricación de productos industriales",
+    "position": 3,
+    "course": "Química Industrial, mención Laboratorio Químico",
+    "specialty": "Química Industrial, mención Laboratorio Químico"
+  },
+  {
+    "id": 395,
+    "course_id": 41,
+    "title": "Cuidado del medioambiente y tratamiento de residuos",
+    "position": 4,
+    "course": "Química Industrial, mención Laboratorio Químico",
+    "specialty": "Química Industrial, mención Laboratorio Químico"
+  },
+  {
+    "id": 396,
+    "course_id": 41,
+    "title": "Toma de muestra",
+    "position": 5,
+    "course": "Química Industrial, mención Laboratorio Químico",
+    "specialty": "Química Industrial, mención Laboratorio Químico"
+  },
+  {
+    "id": 397,
+    "course_id": 41,
+    "title": "Preparación de muestras para análisis orgánico",
+    "position": 6,
+    "course": "Química Industrial, mención Laboratorio Químico",
+    "specialty": "Química Industrial, mención Laboratorio Químico"
+  },
+  {
+    "id": 398,
+    "course_id": 41,
+    "title": "Técnicas de análisis físico-químico",
+    "position": 7,
+    "course": "Química Industrial, mención Laboratorio Químico",
+    "specialty": "Química Industrial, mención Laboratorio Químico"
+  },
+  {
+    "id": 399,
+    "course_id": 41,
+    "title": "Técnicas de análisis instrumental",
+    "position": 8,
+    "course": "Química Industrial, mención Laboratorio Químico",
+    "specialty": "Química Industrial, mención Laboratorio Químico"
+  },
+  {
+    "id": 400,
+    "course_id": 41,
+    "title": "Mantenimiento de equipos e instrumentos de laboratorio",
+    "position": 9,
+    "course": "Química Industrial, mención Laboratorio Químico",
+    "specialty": "Química Industrial, mención Laboratorio Químico"
+  },
+  {
+    "id": 401,
+    "course_id": 41,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Química Industrial, mención Laboratorio Químico",
+    "specialty": "Química Industrial, mención Laboratorio Químico"
+  },
+  {
+    "id": 402,
+    "course_id": 42,
+    "title": "Manejo y almacenamiento seguro de materiales",
+    "position": 1,
+    "course": "Química Industrial, mención Planta Química",
+    "specialty": "Química Industrial, mención Planta Química"
+  },
+  {
+    "id": 403,
+    "course_id": 42,
+    "title": "Técnicas, procesos y equipos de laboratorio",
+    "position": 2,
+    "course": "Química Industrial, mención Planta Química",
+    "specialty": "Química Industrial, mención Planta Química"
+  },
+  {
+    "id": 404,
+    "course_id": 42,
+    "title": "Fabricación de productos industriales",
+    "position": 3,
+    "course": "Química Industrial, mención Planta Química",
+    "specialty": "Química Industrial, mención Planta Química"
+  },
+  {
+    "id": 405,
+    "course_id": 42,
+    "title": "Cuidado del medioambiente y tratamiento de residuos",
+    "position": 4,
+    "course": "Química Industrial, mención Planta Química",
+    "specialty": "Química Industrial, mención Planta Química"
+  },
+  {
+    "id": 406,
+    "course_id": 42,
+    "title": "Transferencia de calor y operaciones unitarias",
+    "position": 5,
+    "course": "Química Industrial, mención Planta Química",
+    "specialty": "Química Industrial, mención Planta Química"
+  },
+  {
+    "id": 407,
+    "course_id": 42,
+    "title": "Acondicionamiento de sólidos y control automático",
+    "position": 6,
+    "course": "Química Industrial, mención Planta Química",
+    "specialty": "Química Industrial, mención Planta Química"
+  },
+  {
+    "id": 408,
+    "course_id": 42,
+    "title": "Muestreo de productos industriales",
+    "position": 7,
+    "course": "Química Industrial, mención Planta Química",
+    "specialty": "Química Industrial, mención Planta Química"
+  },
+  {
+    "id": 409,
+    "course_id": 42,
+    "title": "Mantenimiento de sistemas auxiliares",
+    "position": 8,
+    "course": "Química Industrial, mención Planta Química",
+    "specialty": "Química Industrial, mención Planta Química"
+  },
+  {
+    "id": 410,
+    "course_id": 42,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 9,
+    "course": "Química Industrial, mención Planta Química",
+    "specialty": "Química Industrial, mención Planta Química"
+  },
+  {
+    "id": 411,
+    "course_id": 43,
+    "title": "Soldadura",
+    "position": 1,
+    "course": "Mecánica Industrial, mención Máquinas-Herramientas",
+    "specialty": "Mecánica Industrial, mención Máquinas-Herramientas"
+  },
+  {
+    "id": 412,
+    "course_id": 43,
+    "title": "Mantenimiento de herramientas",
+    "position": 2,
+    "course": "Mecánica Industrial, mención Máquinas-Herramientas",
+    "specialty": "Mecánica Industrial, mención Máquinas-Herramientas"
+  },
+  {
+    "id": 413,
+    "course_id": 43,
+    "title": "Medición y verificación",
+    "position": 3,
+    "course": "Mecánica Industrial, mención Máquinas-Herramientas",
+    "specialty": "Mecánica Industrial, mención Máquinas-Herramientas"
+  },
+  {
+    "id": 414,
+    "course_id": 43,
+    "title": "Mecánica de banco",
+    "position": 4,
+    "course": "Mecánica Industrial, mención Máquinas-Herramientas",
+    "specialty": "Mecánica Industrial, mención Máquinas-Herramientas"
+  },
+  {
+    "id": 415,
+    "course_id": 43,
+    "title": "Lectura de manuales y planos",
+    "position": 5,
+    "course": "Mecánica Industrial, mención Máquinas-Herramientas",
+    "specialty": "Mecánica Industrial, mención Máquinas-Herramientas"
+  },
+  {
+    "id": 416,
+    "course_id": 43,
+    "title": "Torneado de piezas y conjuntos mecánicos",
+    "position": 6,
+    "course": "Mecánica Industrial, mención Máquinas-Herramientas",
+    "specialty": "Mecánica Industrial, mención Máquinas-Herramientas"
+  },
+  {
+    "id": 417,
+    "course_id": 43,
+    "title": "Fresado de piezas y conjuntos mecánicos",
+    "position": 7,
+    "course": "Mecánica Industrial, mención Máquinas-Herramientas",
+    "specialty": "Mecánica Industrial, mención Máquinas-Herramientas"
+  },
+  {
+    "id": 418,
+    "course_id": 43,
+    "title": "Taladrado y rectificado de piezas mecánicas",
+    "position": 8,
+    "course": "Mecánica Industrial, mención Máquinas-Herramientas",
+    "specialty": "Mecánica Industrial, mención Máquinas-Herramientas"
+  },
+  {
+    "id": 419,
+    "course_id": 43,
+    "title": "Mecanizado con máquinas de control numérico computacional",
+    "position": 9,
+    "course": "Mecánica Industrial, mención Máquinas-Herramientas",
+    "specialty": "Mecánica Industrial, mención Máquinas-Herramientas"
+  },
+  {
+    "id": 420,
+    "course_id": 43,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Mecánica Industrial, mención Máquinas-Herramientas",
+    "specialty": "Mecánica Industrial, mención Máquinas-Herramientas"
+  },
+  {
+    "id": 421,
+    "course_id": 44,
+    "title": "Soldadura",
+    "position": 1,
+    "course": "Mecánica Industrial, mención Matricería",
+    "specialty": "Mecánica Industrial, mención Matricería"
+  },
+  {
+    "id": 422,
+    "course_id": 44,
+    "title": "Mantenimiento de herramientas",
+    "position": 2,
+    "course": "Mecánica Industrial, mención Matricería",
+    "specialty": "Mecánica Industrial, mención Matricería"
+  },
+  {
+    "id": 423,
+    "course_id": 44,
+    "title": "Medición y verificación",
+    "position": 3,
+    "course": "Mecánica Industrial, mención Matricería",
+    "specialty": "Mecánica Industrial, mención Matricería"
+  },
+  {
+    "id": 424,
+    "course_id": 44,
+    "title": "Mecánica de banco",
+    "position": 4,
+    "course": "Mecánica Industrial, mención Matricería",
+    "specialty": "Mecánica Industrial, mención Matricería"
+  },
+  {
+    "id": 425,
+    "course_id": 44,
+    "title": "Lectura de manuales y planos",
+    "position": 5,
+    "course": "Mecánica Industrial, mención Matricería",
+    "specialty": "Mecánica Industrial, mención Matricería"
+  },
+  {
+    "id": 426,
+    "course_id": 44,
+    "title": "Fabricación de matrices",
+    "position": 6,
+    "course": "Mecánica Industrial, mención Matricería",
+    "specialty": "Mecánica Industrial, mención Matricería"
+  },
+  {
+    "id": 427,
+    "course_id": 44,
+    "title": "Fabricación de moldes",
+    "position": 7,
+    "course": "Mecánica Industrial, mención Matricería",
+    "specialty": "Mecánica Industrial, mención Matricería"
+  },
+  {
+    "id": 428,
+    "course_id": 44,
+    "title": "Mantención de matrices y moldes",
+    "position": 8,
+    "course": "Mecánica Industrial, mención Matricería",
+    "specialty": "Mecánica Industrial, mención Matricería"
+  },
+  {
+    "id": 429,
+    "course_id": 44,
+    "title": "Diseño y dibujo de moldes y matrices",
+    "position": 9,
+    "course": "Mecánica Industrial, mención Matricería",
+    "specialty": "Mecánica Industrial, mención Matricería"
+  },
+  {
+    "id": 430,
+    "course_id": 44,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Mecánica Industrial, mención Matricería",
+    "specialty": "Mecánica Industrial, mención Matricería"
+  },
+  {
+    "id": 431,
+    "course_id": 45,
+    "title": "Soldadura",
+    "position": 1,
+    "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+    "specialty": "Mecánica Industrial, mención Mantenimiento Electromecánico"
+  },
+  {
+    "id": 432,
+    "course_id": 45,
+    "title": "Mantenimiento de herramientas",
+    "position": 2,
+    "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+    "specialty": "Mecánica Industrial, mención Mantenimiento Electromecánico"
+  },
+  {
+    "id": 433,
+    "course_id": 45,
+    "title": "Medición y verificación",
+    "position": 3,
+    "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+    "specialty": "Mecánica Industrial, mención Mantenimiento Electromecánico"
+  },
+  {
+    "id": 434,
+    "course_id": 45,
+    "title": "Mecánica de banco",
+    "position": 4,
+    "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+    "specialty": "Mecánica Industrial, mención Mantenimiento Electromecánico"
+  },
+  {
+    "id": 435,
+    "course_id": 45,
+    "title": "Lectura de manuales y planos",
+    "position": 5,
+    "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+    "specialty": "Mecánica Industrial, mención Mantenimiento Electromecánico"
+  },
+  {
+    "id": 436,
+    "course_id": 45,
+    "title": "Mantenimiento y reparación industrial",
+    "position": 6,
+    "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+    "specialty": "Mecánica Industrial, mención Mantenimiento Electromecánico"
+  },
+  {
+    "id": 437,
+    "course_id": 45,
+    "title": "Detección de fallas en sistemas industriales",
+    "position": 7,
+    "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+    "specialty": "Mecánica Industrial, mención Mantenimiento Electromecánico"
+  },
+  {
+    "id": 438,
+    "course_id": 45,
+    "title": "Control de procesos industriales",
+    "position": 8,
+    "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+    "specialty": "Mecánica Industrial, mención Mantenimiento Electromecánico"
+  },
+  {
+    "id": 439,
+    "course_id": 45,
+    "title": "Montaje de equipos y sistemas industriales",
+    "position": 9,
+    "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+    "specialty": "Mecánica Industrial, mención Mantenimiento Electromecánico"
+  },
+  {
+    "id": 440,
+    "course_id": 45,
+    "title": "Emprendimiento y empleabilidad",
+    "position": 10,
+    "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+    "specialty": "Mecánica Industrial, mención Mantenimiento Electromecánico"
+  }
+]

@@ -11,3 +11,6 @@ wheelhouse/
 *.whl
 .DS_Store
 Thumbs.db
+# Complete audit data is published as lossless gzip archives (GitHub file limit).
+reports/auditoria-integral-20261008/relaciones-por-actividad.json
+reports/microauditoria-actividades-20261008/revision-documental.json

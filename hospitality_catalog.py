@@ -6,6 +6,7 @@ from pathlib import Path
 
 from specialty_catalog import _ae, _module, _rotate
 from pedagogy import enrich
+from hospitality_question_repair import repair_repeated_questions
 
 
 ROOT = Path(__file__).resolve().parent
@@ -181,6 +182,7 @@ def _make_module(item, position, key, source, url, dossier, scope):
         task.update(title=f'{product.capitalize()} · {index + 1}',
                     prompt=f'{place}. {conflict} Revisa {resource} y aplica el criterio «{criterion}».',
                     product=product, criterion=criterion)
+    repair_repeated_questions(content)
     return content
 
 

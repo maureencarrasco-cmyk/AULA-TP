@@ -1,0 +1,164 @@
+- link "Saltar al contenido":
+  - /url: "#main"
+- main:
+  - link "Aula TP Chile · Formación técnica con sentido":
+    - /url: "#courses"
+    - img "Aula TP Chile · Formación técnica con sentido"
+  - link "Volver atrás":
+    - /url: "#course/2"
+    - text: Volver atrás
+  - navigation "Ubicación":
+    - link "Inicio":
+      - /url: "#courses"
+      - text: Inicio
+    - link "Módulo 2":
+      - /url: "#course/2"
+      - text: Módulo 2
+    - generic: Contextualización
+  - generic: Tu progreso en el módulo
+  - progressbar
+  - generic: 5 de 5 estaciones
+  - paragraph:
+    - generic: Estación 1 de 6
+    - generic: "1"
+  - paragraph:
+    - generic: Módulo 2 · Instalaciones eléctricas domiciliarias
+  - heading "Contextualización" [level=1]
+  - paragraph: Conoce el contexto y activa tus conocimientos previos.
+  - blockquote: Observar con atención ya es aprender.
+  - img "Entorno profesional de instalaciones eléctricas"
+  - complementary:
+    - emphasis: Observar con atención ya es aprender.
+  - 'region "Módulo 2: Instalaciones eléctricas domiciliarias. AE 1 · Contextualización. Avance del módulo 5 de 5 estaciones. Logro 100 por ciento, 37 de 37 evidencias."':
+    - generic: Módulo 2
+    - generic: Instalaciones eléctricas domiciliarias
+    - generic: AE 1 · Contextualización
+    - article:
+      - text: Tu aprendizaje
+      - generic: Avance del módulo
+      - generic: 5/5
+      - img "5 de 5 estaciones recorridas"
+      - emphasis: ¡Módulo completado!
+    - article:
+      - text: Logro del módulo
+      - generic: 100%
+      - generic: Evidencia registrada
+      - generic: 37 de 37 evidencias
+  - region "Ruta de las 5 estaciones del módulo. Estás en la estación 1 de 6. 5 de 5 estaciones habilitadas completadas.":
+    - generic "Ruta de aprendizaje de las 6 estaciones":
+      - generic: MI RUTA PROFESIONAL
+      - heading "Estación 1 de 6 · Contextualización" [level=2]
+      - paragraph: Comprender la situación
+      - generic: Avance de tu ruta
+      - strong: 100%
+      - progressbar "Estaciones habilitadas completadas"
+      - paragraph:
+        - text: 5 de 5 estaciones
+        - text: habilitadas completadas
+      - text: Misión laboral · en construcción
+    - list:
+      - text: ›
+      - generic: "1"
+      - 'button "Estación 1 de 6: Contextualización. Estás aquí. Comprender la situación."':
+        - generic: Estación 1
+        - generic: Contextualiza
+        - generic: Contextualización
+        - generic: Comprender la situación
+        - emphasis: Estás trabajando en esta etapa.
+        - generic: Estás aquí
+      - text: ›
+      - generic: "2"
+      - 'button "Estación 2 de 6: Aprendizajes esperados. Completada. Analiza, comprende y aplica."':
+        - generic: Estación 2
+        - generic: Aprende
+        - generic: Aprendizajes esperados
+        - generic: Analiza, comprende y aplica
+        - generic: Completada
+      - text: ›
+      - generic: "3"
+      - 'button "Estación 3 de 6: Situación integradora. Completada. Resuelve en contexto."':
+        - generic: Estación 3
+        - generic: Aplica
+        - generic: Situación integradora
+        - generic: Resuelve en contexto
+        - generic: Completada
+      - text: ›
+      - generic: "4"
+      - button "Estación 4 de 6. Misión laboral. En construcción. Estación bloqueada" [disabled]:
+        - generic: MISIÓN LABORAL
+        - text: EN CONSTRUCCIÓN
+        - generic: Misión laboral
+        - generic: Desafío de oficio
+        - generic: Una misión profesional para poner en juego tus aprendizajes.
+        - text: Explora
+        - text: Resuelve
+        - text: Completa
+        - text: Insignia de misión · bloqueada
+      - text: ›
+      - generic: "5"
+      - 'button "Estación 5 de 6: Evaluación final. Completada. Demuestra lo aprendido."':
+        - generic: Estación 5
+        - generic: Demuestra
+        - generic: Evaluación final
+        - generic: Demuestra lo aprendido
+        - generic: Completada
+      - generic: "6"
+      - 'button "Estación 6 de 6: Retroalimentación y cierre. Completada. Reflexiona y avanza."':
+        - generic: Estación 6
+        - generic: Reflexiona
+        - text: Retroalimentación
+        - text: y cierre
+        - generic: Reflexiona y avanza
+        - generic: Completada
+  - region "Contextualización":
+    - generic: ESTACIÓN 1
+    - heading "Contextualización" [level=2]
+    - paragraph: Antes de comenzar a aprender los procedimientos técnicos, conocerás una situación real de la especialidad, observarás sus principales elementos y relacionarás lo que ves con conocimientos que ya tienes.
+    - paragraph: En esta estación no necesitas resolver todavía el caso técnico. El objetivo es comprender el contexto y prepararte para lo que aprenderás después.
+    - tablist "Actividades de Contextualización":
+      - 'tab "Actividad 1: Conoce el contexto profesional. Actual" [selected]':
+        - generic: "1"
+        - generic: Actividad 1
+        - generic: Conoce el contexto profesional
+      - 'tab "Actividad 2: Observa y reconoce. Pendiente"':
+        - generic: "2"
+        - generic: Actividad 2
+        - generic: Observa y reconoce
+      - 'tab "Actividad 3: Conecta con lo que ya sabes. Pendiente"':
+        - generic: "3"
+        - generic: Actividad 3
+        - generic: Conecta con lo que ya sabes
+      - 'tab "Actividad 4: Descubre por qué esto importa. Pendiente"':
+        - generic: "4"
+        - generic: Actividad 4
+        - generic: Descubre por qué esto importa
+      - 'tab "Actividad 5: Anticipa lo que aprenderás. Pendiente"':
+        - generic: "5"
+        - generic: Actividad 5
+        - generic: Anticipa lo que aprenderás
+    - paragraph: Actividad 1 de 5 · Conoce el contexto profesional
+    - 'tabpanel "Actividad 1: Conoce el contexto profesional. Actual"':
+      - generic: ACTIVIDAD 1 DE 5
+      - heading "Conoce el contexto profesional" [level=3]
+      - paragraph: Conoce la situación profesional antes de comenzar a aprender.
+      - heading "Instalaciones eléctricas domiciliarias" [level=3]
+      - paragraph: En un taller o una instalación técnica, el equipo de trabajo recibe antecedentes relacionados con Instalaciones eléctricas domiciliarias. Antes de comenzar, observa los recursos, documentos y elementos disponibles para conocer la situación.
+      - figure:
+        - 'img "Contexto profesional: Instalaciones eléctricas domiciliarias"'
+      - complementary:
+        - heading "¿Dónde se aplica este aprendizaje?" [level=4]
+        - paragraph: En situaciones de Electricidad donde es necesario comprender los antecedentes y el entorno antes de participar en un trabajo relacionado con Instalaciones eléctricas domiciliarias.
+      - button "Continuar a Actividad 2" [disabled]:
+        - text: Continuar a Actividad 2
+  - generic "Navegación de la estación":
+    - link "← Volver al módulo":
+      - /url: "#course/2"
+  - link "Abrir Pliegos Técnicos Normativos RIC de la SEC. Arrastra para mover":
+    - /url: https://www.sec.cl/reglamento-de-seguridad-de-las-instalaciones-de-consumo-de-energia-electrica-decreto-08/
+    - generic: SEC · Pliegos RIC
+- contentinfo:
+  - img "Aula TP Chile · Formación técnica con sentido"
+  - generic: Aprender hoy, construir el mañana.
+  - generic: Aula TP Chile · Formación técnica con sentido
+- status
+- button "Agente Nubi. Arrastra para mover o pulsa para abrir"

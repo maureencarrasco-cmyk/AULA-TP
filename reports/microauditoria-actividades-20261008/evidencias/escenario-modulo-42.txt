@@ -1,0 +1,252 @@
+- link "Saltar al contenido":
+  - /url: "#main"
+- main:
+  - link "Aula TP Chile · Formación técnica con sentido":
+    - /url: "#courses"
+    - img "Aula TP Chile · Formación técnica con sentido"
+  - link "Volver atrás":
+    - /url: "#module/42/2"
+    - text: Volver atrás
+  - navigation "Ubicación":
+    - link "Inicio":
+      - /url: "#courses"
+      - text: Inicio
+    - link "Módulo 1":
+      - /url: "#course/5"
+      - text: Módulo 1
+    - generic: Situación integradora
+  - generic: Tu progreso en el módulo
+  - progressbar
+  - generic: 0 de 5 estaciones
+  - paragraph:
+    - generic: Estación 3 de 6
+    - generic: "3"
+  - paragraph:
+    - generic: Módulo 1 · Higiene para la elaboración de alimentos
+  - heading "Situación Integradora" [level=1]
+  - paragraph: Aplica lo aprendido en escenarios reales y toma decisiones.
+  - blockquote: "Decide con criterio: el taller te espera."
+  - img "Estudiantes preparan y verifican un producto culinario."
+  - complementary:
+    - emphasis: "Decide con criterio: el taller te espera."
+  - 'region "Módulo 1: Higiene para la elaboración de alimentos. AE 1 · Situación integradora. Avance del módulo 0 de 5 estaciones. Logro 0 por ciento, aún sin evidencia registrada."':
+    - generic: Módulo 1
+    - generic: Higiene para la elaboración de alimentos
+    - generic: AE 1 · Situación integradora
+    - article:
+      - text: Tu aprendizaje
+      - generic: Avance del módulo
+      - generic: 0/5
+      - img "0 de 5 estaciones recorridas"
+      - emphasis: ¡Vamos! Cada paso te acerca a tu objetivo.
+    - article:
+      - text: Logro del módulo
+      - generic: 0%
+      - generic: Aún no registrada
+      - generic: Completa la reflexión para construir tu evidencia.
+  - region "Ruta de las 5 estaciones del módulo. Estás en la estación 3 de 6. 0 de 5 estaciones habilitadas completadas.":
+    - generic "Ruta de aprendizaje de las 6 estaciones":
+      - generic: MI RUTA PROFESIONAL
+      - heading "Estación 3 de 6 · Situación integradora" [level=2]
+      - paragraph: Resuelve en contexto
+      - generic: Avance de tu ruta
+      - strong: 0%
+      - progressbar "Estaciones habilitadas completadas"
+      - paragraph:
+        - text: 0 de 5 estaciones
+        - text: habilitadas completadas
+      - text: Misión laboral · en construcción
+    - list:
+      - text: ›
+      - generic: "1"
+      - 'button "Estación 1 de 6: Contextualización. Pendiente. Comprender la situación."':
+        - generic: Estación 1
+        - generic: Contextualiza
+        - generic: Contextualización
+        - generic: Comprender la situación
+        - generic: Pendiente
+      - text: ›
+      - generic: "2"
+      - 'button "Estación 2 de 6: Aprendizajes esperados. Pendiente. Analiza, comprende y aplica."':
+        - generic: Estación 2
+        - generic: Aprende
+        - generic: Aprendizajes esperados
+        - generic: Analiza, comprende y aplica
+        - generic: Pendiente
+      - text: ›
+      - generic: "3"
+      - 'button "Estación 3 de 6: Situación integradora. Estás aquí. Resuelve en contexto."':
+        - generic: Estación 3
+        - generic: Aplica
+        - generic: Situación integradora
+        - generic: Resuelve en contexto
+        - emphasis: Estás trabajando en esta etapa.
+        - generic: Estás aquí
+      - text: ›
+      - generic: "4"
+      - button "Estación 4 de 6. Misión laboral. En construcción. Estación bloqueada" [disabled]:
+        - generic: MISIÓN LABORAL
+        - text: EN CONSTRUCCIÓN
+        - generic: Misión laboral
+        - generic: Desafío de oficio
+        - generic: Una misión profesional para poner en juego tus aprendizajes.
+        - text: Explora
+        - text: Resuelve
+        - text: Completa
+        - text: Insignia de misión · bloqueada
+      - text: ›
+      - generic: "5"
+      - 'button "Estación 5 de 6: Evaluación final. Siguiente. Demuestra lo aprendido."':
+        - generic: Estación 5
+        - generic: Demuestra
+        - generic: Evaluación final
+        - generic: Demuestra lo aprendido
+        - generic: Siguiente
+      - generic: "6"
+      - 'button "Estación 6 de 6: Retroalimentación y cierre. Pendiente. Reflexiona y avanza."':
+        - generic: Estación 6
+        - generic: Reflexiona
+        - text: Retroalimentación
+        - text: y cierre
+        - generic: Reflexiona y avanza
+        - generic: Pendiente
+  - generic "RESPALDO CURRICULAR Fuente curricular y alcance de la simulación":
+    - generic: RESPALDO CURRICULAR
+    - generic: Fuente curricular y alcance de la simulación
+  - region "Instrucciones de la estación 3":
+    - generic: INSTRUCCIONES DE LA ESTACIÓN
+    - generic: Resuelve cada situación en contexto
+    - paragraph: Revisa los datos, elige una decisión y justifícala con evidencia antes de avanzar.
+    - generic: 15 + 1 actividades
+  - article:
+    - heading "Situación Integradora" [level=3]
+    - paragraph: Este es el desafío principal que debes resolver
+    - paragraph: Aplica lo aprendido en escenarios que requieren análisis, aplicación y toma de decisiones.
+  - article:
+    - heading "Propósito de esta estación" [level=3]
+    - paragraph: La Situación Integradora permite movilizar los aprendizajes desarrollados durante el módulo en escenarios que requieren análisis, aplicación y toma de decisiones, aumentando la contextualización y complejidad de la experiencia.
+  - article:
+    - heading "Información que necesitas" [level=3]
+    - paragraph: 15 situaciones integradoras
+    - generic: vinculadas con los Aprendizajes Esperados.
+    - paragraph: 38 encargos de oficio
+    - generic: trabajo largo; no desbloquean el examen.
+  - article:
+    - heading "Desafío final" [level=3]
+    - paragraph: 1 escenario final explorable
+    - generic: Analiza, decide y aplica lo aprendido. Representación con imágenes y puntos de inspección.
+  - heading "Actividad que debes desarrollar" [level=3]: Actividad que debes desarrollar
+  - paragraph: Explora el escenario, examina cada componente y justifica tu conclusión.
+  - text: ACTIVIDAD
+  - button "Situaciones integradoras (1–15)":
+    - text: Situaciones integradoras (1–15)
+  - button "Escenario final explorable" [pressed]:
+    - text: Escenario final explorable
+  - button "Encargos de oficio":
+    - text: Encargos de oficio
+  - list "Ruta de esta actividad":
+    - generic: "1"
+    - generic: Explora
+    - listitem: →
+    - generic: "2"
+    - generic: Observa
+    - listitem: →
+    - generic: "3"
+    - generic: Relaciona
+    - listitem: →
+    - generic: "4"
+    - generic: Justifica
+    - listitem: →
+    - generic: "5"
+    - generic: Verifica
+  - heading "Caso de oficio · Higiene para la elaboración de alimentos" [level=3]
+  - generic: SITUACIÓN INTEGRADORA FINAL · ESTACIÓN 3
+  - heading "Observa antes de decidir" [level=3]:
+    - strong: Observa
+    - text: antes de decidir
+  - paragraph: El equipo necesita revisar los antecedentes de Higiene para la elaboración de alimentos antes de continuar. Tu rol es participar como estudiante técnico de Gastronomía, mención Cocina, dentro de los límites de tu formación.
+  - complementary:
+    - generic: "Tu misión:"
+    - paragraph: reúne evidencias del escenario, relaciónalas con los aprendizajes del módulo y fundamenta cómo actuarías y qué verificarías.
+  - paragraph: "Actividad formativa: puedes revisar la información y corregir tu conclusión. No corresponde a la Evaluación Final de la estación 4."
+  - generic "Escenario profesional explorable. Rota, acerca y examina los puntos.":
+    - img "Escenario profesional para explorar. Revisa lo visible; la descripción no señala el hallazgo."
+    - button "Examinar EVIDENCIA" [active] [pressed]:
+      - generic: EVIDENCIA
+    - button "Examinar CRITERIO":
+      - generic: CRITERIO
+    - button "Examinar RESGUARDO":
+      - generic: RESGUARDO
+    - button "Examinar REGISTRO":
+      - generic: REGISTRO
+  - paragraph: Escenario profesional para explorar. Revisa lo visible; la descripción no señala el hallazgo.
+  - complementary:
+    - paragraph: Evidencia del punto · vuelve al escenario cuando termines
+    - heading "EVIDENCIA" [level=4]
+    - paragraph: "Dato visible: Revisar"
+    - paragraph: Identifica el dato observable y conserva su fuente.
+    - img "Evidencia visual del caso. Contrástala con documentos y etiquetas."
+    - button "Volver al escenario"
+  - toolbar "Controles de cámara":
+    - text: Rotar
+    - slider "Rotar": "-25"
+    - text: Inclinación
+    - slider "Inclinación": "-8"
+    - button "Acercar": +
+    - button "Alejar": −
+    - button "Desplazar izquierda": ←
+    - button "Desplazar derecha": →
+    - button "Enfocar"
+    - button "Restablecer vista"
+  - button "1 EVIDENCIA" [pressed]:
+    - generic: "1"
+    - generic: EVIDENCIA
+  - button "2 CRITERIO":
+    - generic: "2"
+    - generic: CRITERIO
+  - button "3 RESGUARDO":
+    - generic: "3"
+    - generic: RESGUARDO
+  - button "4 REGISTRO":
+    - generic: "4"
+    - generic: REGISTRO
+  - generic: Paso 1 de 4 · EVIDENCIA
+  - generic: Identifica el dato observable y conserva su fuente.
+  - generic: Progreso
+  - progressbar "Puntos inspeccionados"
+  - generic: 1 de 4 puntos revisados
+  - generic: "4"
+  - generic: Relaciona
+  - heading "Relaciona lo observado" [level=4]
+  - paragraph: Revisa planilla de higiene y ficha de limpieza; identifica el dato que falta y prepara un registro de control de higiene.
+  - generic "Aprendizajes que movilizas"
+  - complementary "Nubi · Revisa antes de actuar":
+    - generic: Nubi
+    - heading "Revisa antes de actuar" [level=4]:
+      - strong: Revisa
+      - text: antes de actuar
+    - paragraph: Antes de continuar, detente un momento y revisa la información clave. Esto te ayudará a tomar mejores decisiones.
+    - generic "Focaliza tu revisión":
+      - generic: Focaliza tu revisión
+    - generic "Primera orientación":
+      - generic: Primera orientación
+    - generic "Revisa tu argumento":
+      - generic: Revisa tu argumento
+  - paragraph:
+    - strong: "Las consecuencias descritas son tu previsión:"
+    - text: este recorrido no ejecuta una intervención técnica ni simula su resultado.
+  - generic "Pregunta 1": "1"
+  - text: "Tu evidencia: ¿qué observaste, qué decisión tomarías y cómo verificarías el resultado?"
+  - 'textbox "Pregunta 1 Tu evidencia: ¿qué observaste, qué decisión tomarías y cómo verificarías el resultado?"':
+    - /placeholder: Observé… Lo relaciono con… Decidiría… La consecuencia esperada sería… Verificaría…
+  - button "Guardar evidencia y completar estación 3"
+  - paragraph: Completa antes las 15 situaciones integradoras.
+  - paragraph:
+    - strong: Representación espacial
+    - text: Con imagen y puntos de inspección; no es todavía un modelo 3D interactivo ni sustituye una práctica supervisada.
+- contentinfo:
+  - img "Aula TP Chile · Formación técnica con sentido"
+  - generic: Aprender hoy, construir el mañana.
+  - generic: Aula TP Chile · Formación técnica con sentido
+- status
+- button "Agente Nubi. Arrastra para mover o pulsa para abrir"

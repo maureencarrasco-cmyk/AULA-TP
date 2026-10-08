@@ -100,10 +100,13 @@ for q,opts,good,expl,stim in _DET_QUESTIONS:
 DEVELOPMENT='En una sala de un liceo, la planta revisión B muestra dos unidades interiores UI-01 y UI-02 conectadas a UE-01. El listado revisión A incluye una sola unidad interior y no identifica el drenaje. Explica cómo revisarías la documentación, qué inconsistencias registrarías, qué información solicitarías y cómo verificarías la corrección antes de dar conformidad al plano. Fundamenta tu respuesta.'
 RUBRIC=[{'name':'Identificación de inconsistencias','max':5},{'name':'Uso de leyenda, revisiones y documentos','max':5},{'name':'Relación entre componentes','max':5},{'name':'Decisiones justificadas y consulta','max':5},{'name':'Verificación y claridad de la respuesta','max':5}]
 def _demo_case(i,c):
+    from case_feedback import CASE_FEEDBACK
     fillers=['Continuar sin registrar la información faltante.','Confiar en la apariencia del elemento y continuar sin dejar registro.']
     opts=([c['correct'],c['wrong']] if i%2==0 else [c['wrong'],c['correct']])+fillers
     item={'title':c['title'],'context':c['context'],'options':opts,'answer':i%2,
           'site':c['site'],'lead':c['lead'],'pressure':c['pressure'],'image':c['image'],'alt':c['alt'],
           'stimulus':c['lead'],'question':'¿Qué decisión permite una revisión fundada?'}
+    if c['title'] in CASE_FEEDBACK:
+        item['explanation'] = CASE_FEEDBACK[c['title']]
     return item
 DEFAULT_CONTENT=enrich({'aes':AES,'cases':[_demo_case(i,c) for i,c in enumerate(CASES)],'questions':QUESTIONS,'development':DEVELOPMENT,'context':'Un liceo necesita revisar el proyecto de climatización de una sala. Recibes planos, una leyenda y un listado de equipos. Tu misión en esta estación es comprender la documentación, identificar sus componentes y anticipar inconsistencias. No resuelvas ni cubiques todavía.','rubric':RUBRIC,'case_title':'Climatización en un edificio educacional','application':'En la revisión y coordinación de documentación técnica. Una etiqueta, una leyenda y una referencia de detalle deben contar la misma historia.','reflection_prompt':'¿Qué revisarías primero y qué información necesitarías confirmar?','practice':{'type':'scale','title':'Explorador de escalas'}},1)

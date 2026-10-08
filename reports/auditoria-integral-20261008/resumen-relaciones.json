@@ -1,0 +1,16 @@
+{
+  "cursos": 45,
+  "modulos": 451,
+  "actividades_con_relaciones": 55938,
+  "alertas": 7060,
+  "criterios": {
+    "Pista formal por longitud de alternativa": 3618,
+    "Accion del desarrollo y datos disponibles": 381,
+    "Recurso de calculo y accion solicitada": 1569,
+    "Grafico y accion solicitada": 1183,
+    "Antecedentes del desarrollo y problema del modulo": 309
+  },
+  "alcance": "Revision documental de relaciones; las alertas no equivalen a defectos pedagogicos confirmados",
+  "cumplimiento_integral": null,
+  "cambios_ejecutados": 0
+}

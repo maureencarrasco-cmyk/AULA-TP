@@ -1,0 +1,3159 @@
+[
+  {
+    "Modulo_ID": 1,
+    "Curso_ID": 1,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 2,
+    "Curso_ID": 1,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 3,
+    "Curso_ID": 1,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 4,
+    "Curso_ID": 1,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 5,
+    "Curso_ID": 2,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 6,
+    "Curso_ID": 2,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 7,
+    "Curso_ID": 2,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 8,
+    "Curso_ID": 2,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 9,
+    "Curso_ID": 3,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 10,
+    "Curso_ID": 3,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 11,
+    "Curso_ID": 3,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 12,
+    "Curso_ID": 3,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 13,
+    "Curso_ID": 4,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 14,
+    "Curso_ID": 4,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 15,
+    "Curso_ID": 4,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 16,
+    "Curso_ID": 4,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 17,
+    "Curso_ID": 1,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 18,
+    "Curso_ID": 1,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 19,
+    "Curso_ID": 1,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 20,
+    "Curso_ID": 1,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 21,
+    "Curso_ID": 1,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 22,
+    "Curso_ID": 2,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 23,
+    "Curso_ID": 2,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 24,
+    "Curso_ID": 2,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 25,
+    "Curso_ID": 2,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 26,
+    "Curso_ID": 2,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 27,
+    "Curso_ID": 3,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 28,
+    "Curso_ID": 3,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 29,
+    "Curso_ID": 3,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 30,
+    "Curso_ID": 3,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 31,
+    "Curso_ID": 3,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 32,
+    "Curso_ID": 3,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 33,
+    "Curso_ID": 3,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 34,
+    "Curso_ID": 3,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 35,
+    "Curso_ID": 3,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 36,
+    "Curso_ID": 4,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 37,
+    "Curso_ID": 4,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 38,
+    "Curso_ID": 4,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 39,
+    "Curso_ID": 4,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 40,
+    "Curso_ID": 4,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 41,
+    "Curso_ID": 4,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 42,
+    "Curso_ID": 5,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 43,
+    "Curso_ID": 5,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 44,
+    "Curso_ID": 5,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 45,
+    "Curso_ID": 5,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 46,
+    "Curso_ID": 5,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 47,
+    "Curso_ID": 5,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 48,
+    "Curso_ID": 5,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 49,
+    "Curso_ID": 5,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 50,
+    "Curso_ID": 5,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 51,
+    "Curso_ID": 5,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 52,
+    "Curso_ID": 5,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 53,
+    "Curso_ID": 6,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 54,
+    "Curso_ID": 6,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 55,
+    "Curso_ID": 6,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 56,
+    "Curso_ID": 6,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 57,
+    "Curso_ID": 6,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 58,
+    "Curso_ID": 6,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 59,
+    "Curso_ID": 6,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 60,
+    "Curso_ID": 6,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 61,
+    "Curso_ID": 6,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 62,
+    "Curso_ID": 6,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 63,
+    "Curso_ID": 6,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 64,
+    "Curso_ID": 7,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 65,
+    "Curso_ID": 7,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 66,
+    "Curso_ID": 7,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 67,
+    "Curso_ID": 7,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 68,
+    "Curso_ID": 7,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 69,
+    "Curso_ID": 7,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 70,
+    "Curso_ID": 7,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 71,
+    "Curso_ID": 7,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 72,
+    "Curso_ID": 7,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 73,
+    "Curso_ID": 7,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 74,
+    "Curso_ID": 31,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 75,
+    "Curso_ID": 31,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 76,
+    "Curso_ID": 31,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 77,
+    "Curso_ID": 31,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 78,
+    "Curso_ID": 31,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 79,
+    "Curso_ID": 31,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 80,
+    "Curso_ID": 31,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 81,
+    "Curso_ID": 31,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 82,
+    "Curso_ID": 31,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 83,
+    "Curso_ID": 8,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 84,
+    "Curso_ID": 8,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 85,
+    "Curso_ID": 8,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 86,
+    "Curso_ID": 8,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 87,
+    "Curso_ID": 8,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 88,
+    "Curso_ID": 8,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 89,
+    "Curso_ID": 8,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 90,
+    "Curso_ID": 8,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 91,
+    "Curso_ID": 8,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 92,
+    "Curso_ID": 8,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 93,
+    "Curso_ID": 16,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 94,
+    "Curso_ID": 16,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 95,
+    "Curso_ID": 16,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 96,
+    "Curso_ID": 16,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 97,
+    "Curso_ID": 16,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 98,
+    "Curso_ID": 16,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 99,
+    "Curso_ID": 16,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 100,
+    "Curso_ID": 16,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 101,
+    "Curso_ID": 16,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 102,
+    "Curso_ID": 16,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 103,
+    "Curso_ID": 30,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 104,
+    "Curso_ID": 30,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 105,
+    "Curso_ID": 30,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 106,
+    "Curso_ID": 30,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 107,
+    "Curso_ID": 30,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 108,
+    "Curso_ID": 30,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 109,
+    "Curso_ID": 30,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 110,
+    "Curso_ID": 30,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 111,
+    "Curso_ID": 30,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 112,
+    "Curso_ID": 13,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 113,
+    "Curso_ID": 13,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 114,
+    "Curso_ID": 13,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 115,
+    "Curso_ID": 13,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 116,
+    "Curso_ID": 13,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 117,
+    "Curso_ID": 13,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 118,
+    "Curso_ID": 13,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 119,
+    "Curso_ID": 13,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 120,
+    "Curso_ID": 13,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 121,
+    "Curso_ID": 13,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 122,
+    "Curso_ID": 32,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 123,
+    "Curso_ID": 32,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 124,
+    "Curso_ID": 32,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 125,
+    "Curso_ID": 32,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 126,
+    "Curso_ID": 32,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 127,
+    "Curso_ID": 32,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 128,
+    "Curso_ID": 32,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 129,
+    "Curso_ID": 32,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 130,
+    "Curso_ID": 32,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 131,
+    "Curso_ID": 32,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 132,
+    "Curso_ID": 14,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 133,
+    "Curso_ID": 14,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 134,
+    "Curso_ID": 14,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 135,
+    "Curso_ID": 14,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 136,
+    "Curso_ID": 14,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 137,
+    "Curso_ID": 14,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 138,
+    "Curso_ID": 14,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 139,
+    "Curso_ID": 14,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 140,
+    "Curso_ID": 14,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 141,
+    "Curso_ID": 14,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 142,
+    "Curso_ID": 14,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 143,
+    "Curso_ID": 15,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 144,
+    "Curso_ID": 15,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 145,
+    "Curso_ID": 15,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 146,
+    "Curso_ID": 15,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 147,
+    "Curso_ID": 15,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 148,
+    "Curso_ID": 15,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 149,
+    "Curso_ID": 15,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 150,
+    "Curso_ID": 15,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 151,
+    "Curso_ID": 15,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 152,
+    "Curso_ID": 11,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 153,
+    "Curso_ID": 11,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 154,
+    "Curso_ID": 11,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 155,
+    "Curso_ID": 11,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 156,
+    "Curso_ID": 11,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 157,
+    "Curso_ID": 11,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 158,
+    "Curso_ID": 11,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 159,
+    "Curso_ID": 11,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 160,
+    "Curso_ID": 11,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 161,
+    "Curso_ID": 11,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 162,
+    "Curso_ID": 12,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 163,
+    "Curso_ID": 12,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 164,
+    "Curso_ID": 12,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 165,
+    "Curso_ID": 12,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 166,
+    "Curso_ID": 12,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 167,
+    "Curso_ID": 12,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 168,
+    "Curso_ID": 12,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 169,
+    "Curso_ID": 12,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 170,
+    "Curso_ID": 12,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 171,
+    "Curso_ID": 23,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 172,
+    "Curso_ID": 23,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 173,
+    "Curso_ID": 23,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 174,
+    "Curso_ID": 23,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 175,
+    "Curso_ID": 23,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 176,
+    "Curso_ID": 23,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 177,
+    "Curso_ID": 23,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 178,
+    "Curso_ID": 23,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 179,
+    "Curso_ID": 23,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 180,
+    "Curso_ID": 9,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 181,
+    "Curso_ID": 9,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 182,
+    "Curso_ID": 9,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 183,
+    "Curso_ID": 9,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 184,
+    "Curso_ID": 9,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 185,
+    "Curso_ID": 9,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 186,
+    "Curso_ID": 9,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 187,
+    "Curso_ID": 9,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 188,
+    "Curso_ID": 9,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 189,
+    "Curso_ID": 10,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 190,
+    "Curso_ID": 10,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 191,
+    "Curso_ID": 10,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 192,
+    "Curso_ID": 10,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 193,
+    "Curso_ID": 10,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 194,
+    "Curso_ID": 10,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 195,
+    "Curso_ID": 10,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 196,
+    "Curso_ID": 10,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 197,
+    "Curso_ID": 10,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 198,
+    "Curso_ID": 10,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 199,
+    "Curso_ID": 17,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 200,
+    "Curso_ID": 17,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 201,
+    "Curso_ID": 17,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 202,
+    "Curso_ID": 17,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 203,
+    "Curso_ID": 17,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 204,
+    "Curso_ID": 17,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 205,
+    "Curso_ID": 17,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 206,
+    "Curso_ID": 17,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 207,
+    "Curso_ID": 17,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 208,
+    "Curso_ID": 18,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 209,
+    "Curso_ID": 18,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 210,
+    "Curso_ID": 18,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 211,
+    "Curso_ID": 18,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 212,
+    "Curso_ID": 18,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 213,
+    "Curso_ID": 18,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 214,
+    "Curso_ID": 18,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 215,
+    "Curso_ID": 18,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 216,
+    "Curso_ID": 18,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 217,
+    "Curso_ID": 18,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 218,
+    "Curso_ID": 20,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 219,
+    "Curso_ID": 20,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 220,
+    "Curso_ID": 20,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 221,
+    "Curso_ID": 20,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 222,
+    "Curso_ID": 20,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 223,
+    "Curso_ID": 20,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 224,
+    "Curso_ID": 20,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 225,
+    "Curso_ID": 20,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 226,
+    "Curso_ID": 20,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 227,
+    "Curso_ID": 19,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 228,
+    "Curso_ID": 19,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 229,
+    "Curso_ID": 19,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 230,
+    "Curso_ID": 19,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 231,
+    "Curso_ID": 19,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 232,
+    "Curso_ID": 19,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 233,
+    "Curso_ID": 19,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 234,
+    "Curso_ID": 19,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 235,
+    "Curso_ID": 19,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 236,
+    "Curso_ID": 21,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 237,
+    "Curso_ID": 21,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 238,
+    "Curso_ID": 21,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 239,
+    "Curso_ID": 21,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 240,
+    "Curso_ID": 21,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 241,
+    "Curso_ID": 21,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 242,
+    "Curso_ID": 21,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 243,
+    "Curso_ID": 21,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 244,
+    "Curso_ID": 21,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 245,
+    "Curso_ID": 22,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 246,
+    "Curso_ID": 22,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 247,
+    "Curso_ID": 22,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 248,
+    "Curso_ID": 22,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 249,
+    "Curso_ID": 22,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 250,
+    "Curso_ID": 22,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 251,
+    "Curso_ID": 22,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 252,
+    "Curso_ID": 22,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 253,
+    "Curso_ID": 22,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 254,
+    "Curso_ID": 24,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 255,
+    "Curso_ID": 24,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 256,
+    "Curso_ID": 24,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 257,
+    "Curso_ID": 24,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 258,
+    "Curso_ID": 24,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 259,
+    "Curso_ID": 24,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 260,
+    "Curso_ID": 24,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 261,
+    "Curso_ID": 24,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 262,
+    "Curso_ID": 24,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 263,
+    "Curso_ID": 24,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 264,
+    "Curso_ID": 29,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 265,
+    "Curso_ID": 29,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 266,
+    "Curso_ID": 29,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 267,
+    "Curso_ID": 29,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 268,
+    "Curso_ID": 29,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 269,
+    "Curso_ID": 29,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 270,
+    "Curso_ID": 29,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 271,
+    "Curso_ID": 29,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 272,
+    "Curso_ID": 29,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 273,
+    "Curso_ID": 29,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 274,
+    "Curso_ID": 26,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 275,
+    "Curso_ID": 26,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 276,
+    "Curso_ID": 26,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 277,
+    "Curso_ID": 26,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 278,
+    "Curso_ID": 26,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 279,
+    "Curso_ID": 26,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 280,
+    "Curso_ID": 26,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 281,
+    "Curso_ID": 26,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 282,
+    "Curso_ID": 26,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 283,
+    "Curso_ID": 28,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 284,
+    "Curso_ID": 28,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 285,
+    "Curso_ID": 28,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 286,
+    "Curso_ID": 28,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 287,
+    "Curso_ID": 28,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 288,
+    "Curso_ID": 28,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 289,
+    "Curso_ID": 28,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 290,
+    "Curso_ID": 28,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 291,
+    "Curso_ID": 28,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 292,
+    "Curso_ID": 27,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 293,
+    "Curso_ID": 27,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 294,
+    "Curso_ID": 27,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 295,
+    "Curso_ID": 27,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 296,
+    "Curso_ID": 27,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 297,
+    "Curso_ID": 27,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 298,
+    "Curso_ID": 27,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 299,
+    "Curso_ID": 27,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 300,
+    "Curso_ID": 27,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 301,
+    "Curso_ID": 33,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 302,
+    "Curso_ID": 33,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 303,
+    "Curso_ID": 33,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 304,
+    "Curso_ID": 33,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 305,
+    "Curso_ID": 33,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 306,
+    "Curso_ID": 33,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 307,
+    "Curso_ID": 33,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 308,
+    "Curso_ID": 33,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 309,
+    "Curso_ID": 33,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 310,
+    "Curso_ID": 33,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 311,
+    "Curso_ID": 33,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 312,
+    "Curso_ID": 34,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 313,
+    "Curso_ID": 34,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 314,
+    "Curso_ID": 34,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 315,
+    "Curso_ID": 34,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 316,
+    "Curso_ID": 34,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 317,
+    "Curso_ID": 34,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 318,
+    "Curso_ID": 34,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 319,
+    "Curso_ID": 34,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 320,
+    "Curso_ID": 34,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 321,
+    "Curso_ID": 34,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 322,
+    "Curso_ID": 34,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 323,
+    "Curso_ID": 35,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 324,
+    "Curso_ID": 35,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 325,
+    "Curso_ID": 35,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 326,
+    "Curso_ID": 35,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 327,
+    "Curso_ID": 35,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 328,
+    "Curso_ID": 35,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 329,
+    "Curso_ID": 35,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 330,
+    "Curso_ID": 35,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 331,
+    "Curso_ID": 35,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 332,
+    "Curso_ID": 35,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 333,
+    "Curso_ID": 36,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 334,
+    "Curso_ID": 36,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 335,
+    "Curso_ID": 36,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 336,
+    "Curso_ID": 36,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 337,
+    "Curso_ID": 36,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 338,
+    "Curso_ID": 36,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 339,
+    "Curso_ID": 36,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 340,
+    "Curso_ID": 36,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 341,
+    "Curso_ID": 36,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 342,
+    "Curso_ID": 36,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 343,
+    "Curso_ID": 36,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 344,
+    "Curso_ID": 37,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 345,
+    "Curso_ID": 37,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 346,
+    "Curso_ID": 37,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 347,
+    "Curso_ID": 37,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 348,
+    "Curso_ID": 37,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 349,
+    "Curso_ID": 37,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 350,
+    "Curso_ID": 37,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 351,
+    "Curso_ID": 37,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 352,
+    "Curso_ID": 37,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 353,
+    "Curso_ID": 37,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 354,
+    "Curso_ID": 37,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 355,
+    "Curso_ID": 38,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 356,
+    "Curso_ID": 38,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 357,
+    "Curso_ID": 38,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 358,
+    "Curso_ID": 38,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 359,
+    "Curso_ID": 38,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 360,
+    "Curso_ID": 38,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 361,
+    "Curso_ID": 38,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 362,
+    "Curso_ID": 38,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 363,
+    "Curso_ID": 38,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 364,
+    "Curso_ID": 38,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 365,
+    "Curso_ID": 38,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 366,
+    "Curso_ID": 38,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 367,
+    "Curso_ID": 39,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 368,
+    "Curso_ID": 39,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 369,
+    "Curso_ID": 39,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 370,
+    "Curso_ID": 39,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 371,
+    "Curso_ID": 39,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 372,
+    "Curso_ID": 39,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 373,
+    "Curso_ID": 39,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 374,
+    "Curso_ID": 39,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 375,
+    "Curso_ID": 39,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 376,
+    "Curso_ID": 39,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 377,
+    "Curso_ID": 39,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 378,
+    "Curso_ID": 39,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 379,
+    "Curso_ID": 40,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 380,
+    "Curso_ID": 40,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 381,
+    "Curso_ID": 40,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 382,
+    "Curso_ID": 40,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 383,
+    "Curso_ID": 40,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 384,
+    "Curso_ID": 40,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 385,
+    "Curso_ID": 40,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 386,
+    "Curso_ID": 40,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 387,
+    "Curso_ID": 40,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 388,
+    "Curso_ID": 40,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 389,
+    "Curso_ID": 40,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 390,
+    "Curso_ID": 40,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 391,
+    "Curso_ID": 40,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 392,
+    "Curso_ID": 41,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 393,
+    "Curso_ID": 41,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 394,
+    "Curso_ID": 41,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 395,
+    "Curso_ID": 41,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 396,
+    "Curso_ID": 41,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 397,
+    "Curso_ID": 41,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 398,
+    "Curso_ID": 41,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 399,
+    "Curso_ID": 41,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 400,
+    "Curso_ID": 41,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 401,
+    "Curso_ID": 41,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 402,
+    "Curso_ID": 42,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 403,
+    "Curso_ID": 42,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 404,
+    "Curso_ID": 42,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 405,
+    "Curso_ID": 42,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 406,
+    "Curso_ID": 42,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 407,
+    "Curso_ID": 42,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 408,
+    "Curso_ID": 42,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 409,
+    "Curso_ID": 42,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 410,
+    "Curso_ID": 42,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 411,
+    "Curso_ID": 43,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 412,
+    "Curso_ID": 43,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 413,
+    "Curso_ID": 43,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 414,
+    "Curso_ID": 43,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 415,
+    "Curso_ID": 43,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 416,
+    "Curso_ID": 43,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 417,
+    "Curso_ID": 43,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 418,
+    "Curso_ID": 43,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 419,
+    "Curso_ID": 43,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 420,
+    "Curso_ID": 43,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 421,
+    "Curso_ID": 44,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 422,
+    "Curso_ID": 44,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 423,
+    "Curso_ID": 44,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 424,
+    "Curso_ID": 44,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 425,
+    "Curso_ID": 44,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 426,
+    "Curso_ID": 44,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 427,
+    "Curso_ID": 44,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 428,
+    "Curso_ID": 44,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 429,
+    "Curso_ID": 44,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 430,
+    "Curso_ID": 44,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 431,
+    "Curso_ID": 45,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 432,
+    "Curso_ID": 45,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 433,
+    "Curso_ID": 45,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 434,
+    "Curso_ID": 45,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 435,
+    "Curso_ID": 45,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 436,
+    "Curso_ID": 45,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 437,
+    "Curso_ID": 45,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 438,
+    "Curso_ID": 45,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 439,
+    "Curso_ID": 45,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 440,
+    "Curso_ID": 45,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 441,
+    "Curso_ID": 25,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 442,
+    "Curso_ID": 25,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 443,
+    "Curso_ID": 25,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 444,
+    "Curso_ID": 25,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 445,
+    "Curso_ID": 25,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 446,
+    "Curso_ID": 25,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 447,
+    "Curso_ID": 25,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 448,
+    "Curso_ID": 25,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 449,
+    "Curso_ID": 25,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 450,
+    "Curso_ID": 25,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  },
+  {
+    "Modulo_ID": 451,
+    "Curso_ID": 25,
+    "Preguntas": 25,
+    "Duplicados_exactos": 0,
+    "Incidencias_estructura": []
+  }
+]

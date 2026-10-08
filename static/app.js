@@ -418,56 +418,135 @@ function toolsFabMarkup(station){
  const tools=stationToolsCatalog(station);
  if(!tools.length)return '';
  const cards=tools.map(t=>`<button type="button" class="support-card tone-${t.tone}" data-action="${t.id}" aria-label="${esc(t.title)}. ${esc(t.hint)}"><span class="support-ico" aria-hidden="true">${t.glyph}</span><span class="support-copy"><b>${esc(t.title)}</b><small>${esc(t.hint)}</small></span><span class="tools-fab-open">Abrir</span></button>`).join('');
- return `<button type="button" class="tools-fab-backdrop" data-action="tools-fab-close" tabindex="-1" aria-label="Cerrar Agente Nubi"></button><div class="tools-fab" data-tools-fab><div id="tools-fab-panel" class="tools-fab-panel" role="dialog" aria-modal="true" aria-labelledby="tools-fab-title"><div class="tools-fab-head"><div><h3 id="tools-fab-title">Agente Nubi</h3><p>Tu asistente de apoyo para practicar, orientarte y configurar esta estación.</p></div><button type="button" class="tools-fab-close" data-action="tools-fab-close" aria-label="Cerrar Agente Nubi">×</button></div><div class="tools-fab-list">${cards}</div></div><button type="button" class="tools-fab-btn" data-action="tools-fab-toggle" aria-expanded="false" aria-haspopup="dialog" aria-controls="tools-fab-panel" title="Arrastra para mover. Pulsa el robot para abrir Agente Nubi." aria-label="Agente Nubi. Arrastra para mover o pulsa para abrir"><span class="tools-fab-mascot nubi-robot" data-emotion="idle" aria-hidden="true"></span></button></div>`;
+ return `<button type="button" class="tools-fab-backdrop" data-action="tools-fab-close" tabindex="-1" aria-label="Cerrar Agente Nubi"></button><div class="tools-fab" data-tools-fab><div id="tools-fab-panel" class="tools-fab-panel" role="dialog" aria-modal="true" aria-labelledby="tools-fab-title"><div class="tools-fab-head"><div><h3 id="tools-fab-title">Agente Nubi</h3><p>Tu asistente de apoyo para practicar, orientarte y configurar esta estación.</p></div><button type="button" class="tools-fab-close" data-action="tools-fab-close" aria-label="Cerrar Agente Nubi">×</button></div><div class="tools-fab-list">${cards}</div></div><button type="button" class="tools-fab-btn" data-action="tools-fab-toggle" aria-expanded="false" aria-haspopup="dialog" aria-controls="tools-fab-panel" title="Pulsa para abrir Agente Nubi" aria-label="Abrir Agente Nubi">${nubiCloudMarkup('tools-fab-mascot nubi-robot')}</button></div>`;
 }
 const TOOLS_FAB_POS='aula-tools-fab-pos';
 let nubiEmotionTimer;
+function nubiCloudMarkup(extraClass=''){
+ return `<span class="nubi-cloud ${extraClass}" data-emotion="idle" aria-hidden="true"><svg viewBox="0 0 120 120" focusable="false"><path class="nubi-contour" fill="#1677ff" d="M60 14C81 8 103 29 104 48C116 62 104 87 87 91C77 111 48 109 36 95C15 97 5 75 16 58C7 36 31 21 45 24C49 16 54 14 60 14Z"/></svg><span class="nubi-eyes"><span class="nubi-eye"></span><span class="nubi-eye"></span></span></span>`;
+}
 function setNubiEmotion(emotion='idle',duration=5000){
- const allowed=['idle','wave','celebrate','sad','think','surprised','turn'];
+ const aliases={wave:'happy',celebrate:'happy',turn:'happy',sad:'idle',think:'listening',surprised:'idle'};
+ emotion=aliases[emotion]||emotion;
+ const allowed=['idle','happy','listening','speaking'];
  const mascot=document.querySelector('.nubi-robot');
  if(!mascot||!allowed.includes(emotion))return;
+ if(emotion!=='idle'&&(document.hidden||matchMedia('(prefers-reduced-motion: reduce)').matches||document.documentElement.classList.contains('reduce-motion')||document.body.classList.contains('reduce-motion')))emotion='idle';
  clearTimeout(nubiEmotionTimer);
  mascot.dataset.emotion=emotion;
  mascot.closest('.tools-fab')?.setAttribute('data-emotion',emotion);
- if(emotion!=='idle')nubiEmotionTimer=setTimeout(()=>setNubiEmotion('idle'),duration);
+ if(emotion!=='idle'&&duration!==0)nubiEmotionTimer=setTimeout(()=>{
+  if(document.querySelector('.nubi-robot')!==mascot||mascot.dataset.emotion!==emotion)return;
+  setNubiEmotion('idle');
+ },Math.max(150,Number(duration)||5000));
 }
 function bindNubiEmotions(){
  if(window.__nubiEmotionsBound)return;
  window.__nubiEmotionsBound=true;
+ bindNubiCloudMotion();
  document.addEventListener('nubi-emotion',event=>setNubiEmotion(event.detail?.emotion,event.detail?.duration));
  const motionAllowed=()=>!document.hidden&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('reduce-motion')&&!document.body.classList.contains('reduce-motion')&&!document.activeElement?.matches('input,textarea,[contenteditable="true"]');
  let lastGreeting=0;
- let nextOccasional='turn';
  const greet=event=>{
   if(!event.target.closest('.tools-fab-btn')||!motionAllowed()||Date.now()-lastGreeting<7000)return;
   if(document.querySelector('.tools-fab.is-dragging'))return;
-  lastGreeting=Date.now();setNubiEmotion('wave',2300);
+  lastGreeting=Date.now();setNubiEmotion('happy',1400);
  };
  document.addEventListener('pointerover',greet);
  document.addEventListener('focusin',event=>{
   if(event.target.matches('input,textarea,[contenteditable="true"]'))setNubiEmotion('idle');
   else greet(event);
  });
- setInterval(()=>{
-  const fab=document.querySelector('.tools-fab');
-  if(!motionAllowed()||!fab||fab.matches('.is-open,.is-dragging'))return;
-  const robot=fab.querySelector('.nubi-robot');
-  if(robot?.dataset.emotion==='idle'){
-   setNubiEmotion(nextOccasional,nextOccasional==='turn'?2500:2300);
-   nextOccasional=nextOccasional==='turn'?'wave':'turn';
-  }
- },35000);
  document.addEventListener('click',event=>{
   if(event.target.closest('[data-guidance-next],[data-sequence-check]'))setNubiEmotion('think');
   else if(event.target.closest('[data-action="tools-fab-toggle"]')&&motionAllowed()){
-   lastGreeting=Date.now();setNubiEmotion('wave',2300);
+   lastGreeting=Date.now();setNubiEmotion('happy',1400);
   }
   else if(event.target.closest('[data-action="inspect"]'))setNubiEmotion('surprised',2500);
  });
- document.addEventListener('animationend',event=>{
-  if(event.target.matches('.nubi-robot')&&['nubi-body-turn','nubi-body-wave'].includes(event.animationName))setNubiEmotion('idle');
- });
  document.addEventListener('visibilitychange',()=>{if(document.hidden)setNubiEmotion('idle')});
+}
+function nubiContourPath(seconds){
+ const count=12,points=[];
+ for(let i=0;i<count;i++){
+  const angle=i*Math.PI*2/count;
+  const radius=41*(1+.065*Math.cos(angle*3+.5)+.035*Math.sin(angle*5)+.065*Math.sin(seconds*Math.PI*2/(1.6+i*.025)+i*.55));
+  points.push([60+Math.cos(angle)*radius,60+Math.sin(angle)*radius]);
+ }
+ const point=i=>points[(i+count)%count],f=n=>n.toFixed(3);
+ let d=`M${point(0).map(f).join(' ')}`;
+ // Closed Catmull-Rom spline keeps the contour tangent continuous.
+ for(let i=0;i<count;i++){
+  const p0=point(i-1),p1=point(i),p2=point(i+1),p3=point(i+2);
+  const c1=p1.map((v,j)=>v+(p2[j]-p0[j])/6),c2=p2.map((v,j)=>v-(p3[j]-p1[j])/6);
+  d+=`C${c1.map(f).join(' ')} ${c2.map(f).join(' ')} ${p2.map(f).join(' ')}`;
+ }
+ return d+'Z';
+}
+function bindNubiCloudMotion(){
+ const hosts=new Map(),media=matchMedia('(prefers-reduced-motion: reduce)');
+ let frame=0,last=0,phase=0,previous=0,analyser=null,audioBuffer=null;
+ const reduced=()=>media.matches||document.documentElement.classList.contains('reduce-motion')||document.body.classList.contains('reduce-motion');
+ const visible=new IntersectionObserver(entries=>{
+  for(const entry of entries){const h=hosts.get(entry.target);if(h)h.visible=entry.isIntersecting;}
+  wake();
+ });
+ function sync(){
+  for(const [el] of hosts)if(!el.isConnected){visible.unobserve(el);hosts.delete(el);}
+  for(const el of document.querySelectorAll('.nubi-cloud'))if(!hosts.has(el)){
+   const path=el.querySelector('.nubi-contour');if(!path)continue;
+   hosts.set(el,{path,visible:false,gaze:0});visible.observe(el);path.setAttribute('d',nubiContourPath(phase));
+  }
+  wake();
+ }
+ function wake(){
+  if(!frame&&!document.hidden&&!reduced()&&[...hosts.values()].some(h=>h.visible)){previous=0;frame=requestAnimationFrame(tick);}
+ }
+ function tick(now){
+  frame=0;
+  if(document.hidden||reduced()||![...hosts.values()].some(h=>h.visible)){previous=0;return;}
+  if(previous)phase+=Math.min(now-previous,100)/1000;
+  previous=now;
+  if(now-last>=32){
+   last=now;const path=nubiContourPath(phase);
+   let volume=null;
+   if(analyser&&audioBuffer){analyser.getByteTimeDomainData(audioBuffer);let sum=0;for(const v of audioBuffer)sum+=((v-128)/128)**2;volume=Math.min(1,Math.sqrt(sum/audioBuffer.length)*5);}
+   for(const [el,h] of hosts){
+    if(!h.visible)continue;
+    h.path.setAttribute('d',path);
+    const emotion=el.dataset.emotion||'idle';
+    if(emotion==='idle'&&phase>=h.gaze){
+     const angle=Math.random()*Math.PI*2,r=Math.sqrt(Math.random())*4;
+     el.style.setProperty('--nubi-look-x',(Math.cos(angle)*r).toFixed(2)+'px');
+     el.style.setProperty('--nubi-look-y',(Math.sin(angle)*r).toFixed(2)+'px');
+     h.gaze=phase+.8+Math.random()*.7;
+    }else if(emotion!=='idle'){
+     el.style.setProperty('--nubi-look-x','0px');el.style.setProperty('--nubi-look-y','0px');
+    }
+    if(emotion==='listening'||emotion==='speaking'){
+     const level=volume===null?.5+.25*Math.sin(phase*20):volume;
+     h.level=(h.level??level)*.7+level*.3;
+     el.style.setProperty('--nubi-voice-height',(20+6*h.level).toFixed(2)+'px');
+    }
+   }
+  }
+  frame=requestAnimationFrame(tick);
+ }
+ const observer=new MutationObserver(sync);
+ observer.observe(document.body,{childList:true,subtree:true});
+ const pause=()=>{if(frame)cancelAnimationFrame(frame);frame=0;previous=0;for(const [el] of hosts){el.style.setProperty('--nubi-look-x','0px');el.style.setProperty('--nubi-look-y','0px');el.style.setProperty('--nubi-voice-height','23px');}wake();};
+ new MutationObserver(pause).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
+ new MutationObserver(pause).observe(document.body,{attributes:true,attributeFilter:['class']});
+ media.addEventListener('change',pause);document.addEventListener('visibilitychange',pause);
+ // Accept an already-authorized audio analyser; never acquire a microphone here.
+ document.addEventListener('nubi-audio',event=>{
+  const source=event.detail?.analyser;
+  analyser=source&&typeof source.getByteTimeDomainData==='function'?source:null;
+  audioBuffer=analyser?new Uint8Array(analyser.fftSize):null;
+  if(analyser)setNubiEmotion(event.detail?.speaking?'speaking':'listening',0);
+  else setNubiEmotion('idle');
+ });
+ sync();
 }
 function toolsFabClamp(x,y,el){
  const pad=8,w=el.offsetWidth||220,h=el.offsetHeight||52;

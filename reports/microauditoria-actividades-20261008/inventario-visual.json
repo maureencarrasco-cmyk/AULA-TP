@@ -1,0 +1,1399 @@
+[
+  {
+    "index": 1,
+    "reference": "/static/themes/oficio/oficio-plano-leyenda.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "PNG",
+    "uses": 27,
+    "sheet": "galeria/lamina-01.jpg"
+  },
+  {
+    "index": 2,
+    "reference": "/static/themes/oficio/oficio-cruce.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 10,
+    "sheet": "galeria/lamina-01.jpg"
+  },
+  {
+    "index": 3,
+    "reference": "/static/themes/oficio/oficio-tramos.png",
+    "size": [
+      1152,
+      864
+    ],
+    "format": "JPEG",
+    "uses": 56,
+    "sheet": "galeria/lamina-01.jpg"
+  },
+  {
+    "index": 4,
+    "reference": "/static/themes/oficio/oficio-drenaje.png",
+    "size": [
+      1152,
+      864
+    ],
+    "format": "JPEG",
+    "uses": 7,
+    "sheet": "galeria/lamina-01.jpg"
+  },
+  {
+    "index": 5,
+    "reference": "/static/themes/oficio/oficio-acceso-cm.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 4,
+    "sheet": "galeria/lamina-01.jpg"
+  },
+  {
+    "index": 6,
+    "reference": "/static/themes/oficio/oficio-escala.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 4,
+    "sheet": "galeria/lamina-01.jpg"
+  },
+  {
+    "index": 7,
+    "reference": "/static/themes/oficio/oficio-visor-4c.png",
+    "size": [
+      1152,
+      864
+    ],
+    "format": "JPEG",
+    "uses": 1,
+    "sheet": "galeria/lamina-01.jpg"
+  },
+  {
+    "index": 8,
+    "reference": "/static/themes/oficio/oficio-tuberias.png",
+    "size": [
+      1152,
+      864
+    ],
+    "format": "JPEG",
+    "uses": 2,
+    "sheet": "galeria/lamina-01.jpg"
+  },
+  {
+    "index": 9,
+    "reference": "/static/themes/oficio/oficio-equipo-ctrl.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 64,
+    "sheet": "galeria/lamina-01.jpg"
+  },
+  {
+    "index": 10,
+    "reference": "/static/themes/oficio/oficio-manometro.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 1,
+    "sheet": "galeria/lamina-01.jpg"
+  },
+  {
+    "index": 11,
+    "reference": "/static/themes/oficio/oficio-visor-21c.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 46,
+    "sheet": "galeria/lamina-01.jpg"
+  },
+  {
+    "index": 12,
+    "reference": "/static/themes/oficio/oficio-visor-25.png",
+    "size": [
+      1152,
+      864
+    ],
+    "format": "JPEG",
+    "uses": 3,
+    "sheet": "galeria/lamina-01.jpg"
+  },
+  {
+    "index": 13,
+    "reference": "/static/themes/oficio/oficio-intervalo.png",
+    "size": [
+      1152,
+      864
+    ],
+    "format": "JPEG",
+    "uses": 3,
+    "sheet": "galeria/lamina-02.jpg"
+  },
+  {
+    "index": 14,
+    "reference": "/static/headers/climate/e2.png",
+    "size": [
+      1983,
+      793
+    ],
+    "format": "PNG",
+    "uses": 75,
+    "sheet": "galeria/lamina-02.jpg"
+  },
+  {
+    "index": 15,
+    "reference": "/static/headers/climate/e3.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 85,
+    "sheet": "galeria/lamina-02.jpg"
+  },
+  {
+    "index": 16,
+    "reference": "/static/headers/climate/e4.png",
+    "size": [
+      2048,
+      768
+    ],
+    "format": "PNG",
+    "uses": 125,
+    "sheet": "galeria/lamina-02.jpg"
+  },
+  {
+    "index": 17,
+    "reference": "/static/headers/electricidad/e2.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 125,
+    "sheet": "galeria/lamina-02.jpg"
+  },
+  {
+    "index": 18,
+    "reference": "/static/headers/electricidad/e3.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 144,
+    "sheet": "galeria/lamina-02.jpg"
+  },
+  {
+    "index": 19,
+    "reference": "/static/headers/electricidad/e4.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 225,
+    "sheet": "galeria/lamina-02.jpg"
+  },
+  {
+    "index": 20,
+    "reference": "/static/headers/electricidad/e1.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 9,
+    "sheet": "galeria/lamina-02.jpg"
+  },
+  {
+    "index": 21,
+    "reference": "/static/headers/enfermeria/e2.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 325,
+    "sheet": "galeria/lamina-02.jpg"
+  },
+  {
+    "index": 22,
+    "reference": "/static/headers/enfermeria/e3.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 368,
+    "sheet": "galeria/lamina-02.jpg"
+  },
+  {
+    "index": 23,
+    "reference": "/static/headers/enfermeria/e4.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 575,
+    "sheet": "galeria/lamina-02.jpg"
+  },
+  {
+    "index": 24,
+    "reference": "/static/headers/enfermeria/e1.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 23,
+    "sheet": "galeria/lamina-02.jpg"
+  },
+  {
+    "index": 25,
+    "reference": "/static/headers/gastronomia/e2.webp",
+    "size": [
+      960,
+      640
+    ],
+    "format": "WEBP",
+    "uses": 355,
+    "sheet": "galeria/lamina-03.jpg"
+  },
+  {
+    "index": 26,
+    "reference": "/static/headers/gastronomia/e3.webp",
+    "size": [
+      960,
+      640
+    ],
+    "format": "WEBP",
+    "uses": 330,
+    "sheet": "galeria/lamina-03.jpg"
+  },
+  {
+    "index": 27,
+    "reference": "/static/headers/gastronomia/e4.webp",
+    "size": [
+      960,
+      640
+    ],
+    "format": "WEBP",
+    "uses": 550,
+    "sheet": "galeria/lamina-03.jpg"
+  },
+  {
+    "index": 28,
+    "reference": "/static/headers/gastronomia/e1.webp",
+    "size": [
+      960,
+      640
+    ],
+    "format": "WEBP",
+    "uses": 22,
+    "sheet": "galeria/lamina-03.jpg"
+  },
+  {
+    "index": 29,
+    "reference": "/static/themes/cases/06-cocina.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 15,
+    "sheet": "galeria/lamina-03.jpg"
+  },
+  {
+    "index": 30,
+    "reference": "/static/themes/cases/10-bodega.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 2,
+    "sheet": "galeria/lamina-03.jpg"
+  },
+  {
+    "index": 31,
+    "reference": "/static/themes/cases/04-hotel.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 11,
+    "sheet": "galeria/lamina-03.jpg"
+  },
+  {
+    "index": 32,
+    "reference": "/static/themes/cases/09-oficina.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 3,
+    "sheet": "galeria/lamina-03.jpg"
+  },
+  {
+    "index": 33,
+    "reference": "/static/headers/hoteleria/e2.webp",
+    "size": [
+      960,
+      640
+    ],
+    "format": "WEBP",
+    "uses": 155,
+    "sheet": "galeria/lamina-03.jpg"
+  },
+  {
+    "index": 34,
+    "reference": "/static/headers/hoteleria/e3.webp",
+    "size": [
+      960,
+      640
+    ],
+    "format": "WEBP",
+    "uses": 150,
+    "sheet": "galeria/lamina-03.jpg"
+  },
+  {
+    "index": 35,
+    "reference": "/static/headers/hoteleria/e4.webp",
+    "size": [
+      960,
+      640
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-03.jpg"
+  },
+  {
+    "index": 36,
+    "reference": "/static/headers/hoteleria/e1.webp",
+    "size": [
+      960,
+      640
+    ],
+    "format": "WEBP",
+    "uses": 10,
+    "sheet": "galeria/lamina-03.jpg"
+  },
+  {
+    "index": 37,
+    "reference": "/static/themes/cases/11-terminal.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 1,
+    "sheet": "galeria/lamina-04.jpg"
+  },
+  {
+    "index": 38,
+    "reference": "/static/headers/administracion/e2.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 155,
+    "sheet": "galeria/lamina-04.jpg"
+  },
+  {
+    "index": 39,
+    "reference": "/static/headers/administracion/e3.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 160,
+    "sheet": "galeria/lamina-04.jpg"
+  },
+  {
+    "index": 40,
+    "reference": "/static/headers/administracion/e4.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 250,
+    "sheet": "galeria/lamina-04.jpg"
+  },
+  {
+    "index": 41,
+    "reference": "/static/headers/administracion/e1.png",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "JPEG",
+    "uses": 10,
+    "sheet": "galeria/lamina-04.jpg"
+  },
+  {
+    "index": 42,
+    "reference": "/static/headers/elaboracion-industrial-alimentos/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-04.jpg"
+  },
+  {
+    "index": 43,
+    "reference": "/static/headers/elaboracion-industrial-alimentos/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-04.jpg"
+  },
+  {
+    "index": 44,
+    "reference": "/static/headers/vestuario-confeccion-textil/e2.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "format": "PNG",
+    "uses": 185,
+    "sheet": "galeria/lamina-04.jpg"
+  },
+  {
+    "index": 45,
+    "reference": "/static/headers/vestuario-confeccion-textil/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 160,
+    "sheet": "galeria/lamina-04.jpg"
+  },
+  {
+    "index": 46,
+    "reference": "/static/headers/vestuario-confeccion-textil/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-04.jpg"
+  },
+  {
+    "index": 47,
+    "reference": "/static/headers/sanitarias/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 160,
+    "sheet": "galeria/lamina-04.jpg"
+  },
+  {
+    "index": 48,
+    "reference": "/static/headers/sanitarias/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-04.jpg"
+  },
+  {
+    "index": 49,
+    "reference": "/static/headers/montaje/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-05.jpg"
+  },
+  {
+    "index": 50,
+    "reference": "/static/headers/montaje/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-05.jpg"
+  },
+  {
+    "index": 51,
+    "reference": "/static/headers/electronica/e2.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "format": "PNG",
+    "uses": 210,
+    "sheet": "galeria/lamina-05.jpg"
+  },
+  {
+    "index": 52,
+    "reference": "/static/headers/electronica/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 160,
+    "sheet": "galeria/lamina-05.jpg"
+  },
+  {
+    "index": 53,
+    "reference": "/static/headers/electronica/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-05.jpg"
+  },
+  {
+    "index": 54,
+    "reference": "/static/headers/dibujo/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 176,
+    "sheet": "galeria/lamina-05.jpg"
+  },
+  {
+    "index": 55,
+    "reference": "/static/headers/dibujo/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 275,
+    "sheet": "galeria/lamina-05.jpg"
+  },
+  {
+    "index": 56,
+    "reference": "/static/headers/grafica/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-05.jpg"
+  },
+  {
+    "index": 57,
+    "reference": "/static/headers/grafica/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-05.jpg"
+  },
+  {
+    "index": 58,
+    "reference": "/static/headers/turismo/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 160,
+    "sheet": "galeria/lamina-05.jpg"
+  },
+  {
+    "index": 59,
+    "reference": "/static/headers/turismo/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-05.jpg"
+  },
+  {
+    "index": 60,
+    "reference": "/static/headers/forestal/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-05.jpg"
+  },
+  {
+    "index": 61,
+    "reference": "/static/headers/forestal/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-06.jpg"
+  },
+  {
+    "index": 62,
+    "reference": "/static/headers/muebles-terminaciones-madera/e2.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "format": "PNG",
+    "uses": 205,
+    "sheet": "galeria/lamina-06.jpg"
+  },
+  {
+    "index": 63,
+    "reference": "/static/headers/muebles-terminaciones-madera/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 160,
+    "sheet": "galeria/lamina-06.jpg"
+  },
+  {
+    "index": 64,
+    "reference": "/static/headers/muebles-terminaciones-madera/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-06.jpg"
+  },
+  {
+    "index": 65,
+    "reference": "/static/headers/acuicultura/e2.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "format": "PNG",
+    "uses": 165,
+    "sheet": "galeria/lamina-06.jpg"
+  },
+  {
+    "index": 66,
+    "reference": "/static/headers/acuicultura/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-06.jpg"
+  },
+  {
+    "index": 67,
+    "reference": "/static/headers/acuicultura/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-06.jpg"
+  },
+  {
+    "index": 68,
+    "reference": "/static/headers/operaciones-portuarias/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-06.jpg"
+  },
+  {
+    "index": 69,
+    "reference": "/static/headers/operaciones-portuarias/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-06.jpg"
+  },
+  {
+    "index": 70,
+    "reference": "/static/headers/pesqueria/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-06.jpg"
+  },
+  {
+    "index": 71,
+    "reference": "/static/headers/pesqueria/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-06.jpg"
+  },
+  {
+    "index": 72,
+    "reference": "/static/headers/tripulacion-naves-mercantes-especiales/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-06.jpg"
+  },
+  {
+    "index": 73,
+    "reference": "/static/headers/tripulacion-naves-mercantes-especiales/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-07.jpg"
+  },
+  {
+    "index": 74,
+    "reference": "/static/headers/construcciones-metalicas/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-07.jpg"
+  },
+  {
+    "index": 75,
+    "reference": "/static/headers/construcciones-metalicas/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-07.jpg"
+  },
+  {
+    "index": 76,
+    "reference": "/static/headers/mecanica-automotriz/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 160,
+    "sheet": "galeria/lamina-07.jpg"
+  },
+  {
+    "index": 77,
+    "reference": "/static/headers/mecanica-automotriz/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-07.jpg"
+  },
+  {
+    "index": 78,
+    "reference": "/static/headers/mecanica-mantenimiento-aeronaves/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 176,
+    "sheet": "galeria/lamina-07.jpg"
+  },
+  {
+    "index": 79,
+    "reference": "/static/headers/mecanica-mantenimiento-aeronaves/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 275,
+    "sheet": "galeria/lamina-07.jpg"
+  },
+  {
+    "index": 80,
+    "reference": "/static/headers/asistencia-geologia/e2.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "format": "PNG",
+    "uses": 150,
+    "sheet": "galeria/lamina-07.jpg"
+  },
+  {
+    "index": 81,
+    "reference": "/static/headers/asistencia-geologia/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-07.jpg"
+  },
+  {
+    "index": 82,
+    "reference": "/static/headers/asistencia-geologia/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-07.jpg"
+  },
+  {
+    "index": 83,
+    "reference": "/static/headers/explotacion-minera/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-07.jpg"
+  },
+  {
+    "index": 84,
+    "reference": "/static/headers/explotacion-minera/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-07.jpg"
+  },
+  {
+    "index": 85,
+    "reference": "/static/headers/metalurgia-extractiva/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-08.jpg"
+  },
+  {
+    "index": 86,
+    "reference": "/static/headers/metalurgia-extractiva/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-08.jpg"
+  },
+  {
+    "index": 87,
+    "reference": "/static/headers/atencion-parvulos/e2.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "format": "PNG",
+    "uses": 180,
+    "sheet": "galeria/lamina-08.jpg"
+  },
+  {
+    "index": 88,
+    "reference": "/static/headers/atencion-parvulos/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 160,
+    "sheet": "galeria/lamina-08.jpg"
+  },
+  {
+    "index": 89,
+    "reference": "/static/headers/atencion-parvulos/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-08.jpg"
+  },
+  {
+    "index": 90,
+    "reference": "/static/headers/redes/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-08.jpg"
+  },
+  {
+    "index": 91,
+    "reference": "/static/headers/redes/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-08.jpg"
+  },
+  {
+    "index": 92,
+    "reference": "/static/headers/programacion/e2.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "format": "PNG",
+    "uses": 150,
+    "sheet": "galeria/lamina-08.jpg"
+  },
+  {
+    "index": 93,
+    "reference": "/static/headers/programacion/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-08.jpg"
+  },
+  {
+    "index": 94,
+    "reference": "/static/headers/programacion/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-08.jpg"
+  },
+  {
+    "index": 95,
+    "reference": "/static/headers/telecomunicaciones/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 160,
+    "sheet": "galeria/lamina-08.jpg"
+  },
+  {
+    "index": 96,
+    "reference": "/static/headers/telecomunicaciones/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-08.jpg"
+  },
+  {
+    "index": 97,
+    "reference": "/static/headers/administracion-logistica/e2.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "format": "PNG",
+    "uses": 170,
+    "sheet": "galeria/lamina-09.jpg"
+  },
+  {
+    "index": 98,
+    "reference": "/static/headers/administracion-logistica/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 176,
+    "sheet": "galeria/lamina-09.jpg"
+  },
+  {
+    "index": 99,
+    "reference": "/static/headers/administracion-logistica/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 275,
+    "sheet": "galeria/lamina-09.jpg"
+  },
+  {
+    "index": 100,
+    "reference": "/static/headers/administracion-recursos-humanos/e2.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "format": "PNG",
+    "uses": 155,
+    "sheet": "galeria/lamina-09.jpg"
+  },
+  {
+    "index": 101,
+    "reference": "/static/headers/administracion-recursos-humanos/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 176,
+    "sheet": "galeria/lamina-09.jpg"
+  },
+  {
+    "index": 102,
+    "reference": "/static/headers/administracion-recursos-humanos/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 275,
+    "sheet": "galeria/lamina-09.jpg"
+  },
+  {
+    "index": 103,
+    "reference": "/static/headers/agropecuaria-agricultura/e2.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "format": "PNG",
+    "uses": 185,
+    "sheet": "galeria/lamina-09.jpg"
+  },
+  {
+    "index": 104,
+    "reference": "/static/headers/agropecuaria-agricultura/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 160,
+    "sheet": "galeria/lamina-09.jpg"
+  },
+  {
+    "index": 105,
+    "reference": "/static/headers/agropecuaria-agricultura/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-09.jpg"
+  },
+  {
+    "index": 106,
+    "reference": "/static/headers/agropecuaria-pecuaria/e2.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "format": "PNG",
+    "uses": 210,
+    "sheet": "galeria/lamina-09.jpg"
+  },
+  {
+    "index": 107,
+    "reference": "/static/headers/agropecuaria-pecuaria/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 176,
+    "sheet": "galeria/lamina-09.jpg"
+  },
+  {
+    "index": 108,
+    "reference": "/static/headers/agropecuaria-pecuaria/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 275,
+    "sheet": "galeria/lamina-09.jpg"
+  },
+  {
+    "index": 109,
+    "reference": "/static/headers/agropecuaria-vitivinicola/e2.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "format": "PNG",
+    "uses": 200,
+    "sheet": "galeria/lamina-10.jpg"
+  },
+  {
+    "index": 110,
+    "reference": "/static/headers/agropecuaria-vitivinicola/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 176,
+    "sheet": "galeria/lamina-10.jpg"
+  },
+  {
+    "index": 111,
+    "reference": "/static/headers/agropecuaria-vitivinicola/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 275,
+    "sheet": "galeria/lamina-10.jpg"
+  },
+  {
+    "index": 112,
+    "reference": "/static/headers/construccion-edificacion/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 192,
+    "sheet": "galeria/lamina-10.jpg"
+  },
+  {
+    "index": 113,
+    "reference": "/static/headers/construccion-edificacion/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 300,
+    "sheet": "galeria/lamina-10.jpg"
+  },
+  {
+    "index": 114,
+    "reference": "/static/headers/construccion-terminaciones/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 192,
+    "sheet": "galeria/lamina-10.jpg"
+  },
+  {
+    "index": 115,
+    "reference": "/static/headers/construccion-terminaciones/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 300,
+    "sheet": "galeria/lamina-10.jpg"
+  },
+  {
+    "index": 116,
+    "reference": "/static/headers/construccion-obras-viales/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 208,
+    "sheet": "galeria/lamina-10.jpg"
+  },
+  {
+    "index": 117,
+    "reference": "/static/headers/construccion-obras-viales/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 325,
+    "sheet": "galeria/lamina-10.jpg"
+  },
+  {
+    "index": 118,
+    "reference": "/static/headers/quimica-industrial-laboratorio/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 160,
+    "sheet": "galeria/lamina-10.jpg"
+  },
+  {
+    "index": 119,
+    "reference": "/static/headers/quimica-industrial-laboratorio/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-10.jpg"
+  },
+  {
+    "index": 120,
+    "reference": "/static/headers/quimica-industrial-planta/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 144,
+    "sheet": "galeria/lamina-10.jpg"
+  },
+  {
+    "index": 121,
+    "reference": "/static/headers/quimica-industrial-planta/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 225,
+    "sheet": "galeria/lamina-11.jpg"
+  },
+  {
+    "index": 122,
+    "reference": "/static/headers/mecanica-industrial-maquinas/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 160,
+    "sheet": "galeria/lamina-11.jpg"
+  },
+  {
+    "index": 123,
+    "reference": "/static/headers/mecanica-industrial-maquinas/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-11.jpg"
+  },
+  {
+    "index": 124,
+    "reference": "/static/headers/mecanica-industrial-matriceria/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 160,
+    "sheet": "galeria/lamina-11.jpg"
+  },
+  {
+    "index": 125,
+    "reference": "/static/headers/mecanica-industrial-matriceria/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-11.jpg"
+  },
+  {
+    "index": 126,
+    "reference": "/static/headers/mecanica-industrial-mantenimiento/e3.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 160,
+    "sheet": "galeria/lamina-11.jpg"
+  },
+  {
+    "index": 127,
+    "reference": "/static/headers/mecanica-industrial-mantenimiento/e4.webp",
+    "size": [
+      1280,
+      720
+    ],
+    "format": "WEBP",
+    "uses": 250,
+    "sheet": "galeria/lamina-11.jpg"
+  }
+]

@@ -1,0 +1,452 @@
+﻿Curso_ID,Curso,Modulo_ID,Modulo,Desarrollo,Pestañas_observadas,Regla_reutilizacion_HVAC
+1,Refrigeración y Climatización,1,Lectura de planos y cubicación de materiales de proyectos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+1,Refrigeración y Climatización,2,Instrumentos de medición y de verificación,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+1,Refrigeración y Climatización,3,Instalación y montaje de redes de refrigeración y climatización,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+1,Refrigeración y Climatización,4,Instalación y montaje de equipos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+1,Refrigeración y Climatización,17,Puesta en marcha de equipos de refrigeración y climatización,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+1,Refrigeración y Climatización,18,Diagnóstico en sistemas de refrigeración y climatización,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+1,Refrigeración y Climatización,19,Mantención de sistemas de refrigeración y climatización,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+1,Refrigeración y Climatización,20,Reciclaje y almacenamiento de refrigerantes,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+1,Refrigeración y Climatización,21,Emprendimiento y empleabilidad,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+2,Electricidad,5,Instalación de motores eléctricos y equipos de calefacción,Evaluación ya entregada; no se reabre ni se alteran respuestas para auditar,5,DOCUMENTAL; UI NO CONFIRMADA
+2,Electricidad,6,Instalaciones eléctricas domiciliarias,Evaluación ya entregada; no se reabre ni se alteran respuestas para auditar,5,NO ACTIVA CONTROL TEXTUAL
+2,Electricidad,7,Elaboración de proyectos eléctricos,Evaluación ya entregada; no se reabre ni se alteran respuestas para auditar,5,NO ACTIVA CONTROL TEXTUAL
+2,Electricidad,8,"Mantenimiento de máquinas, equipos y sistemas eléctricos",Evaluación ya entregada; no se reabre ni se alteran respuestas para auditar,5,NO ACTIVA CONTROL TEXTUAL
+2,Electricidad,22,Instalación de sistemas de control eléctrico industrial,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+2,Electricidad,23,Instalaciones eléctricas industriales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+2,Electricidad,24,Instalación de equipos electrónicos de potencia,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+2,Electricidad,25,Automatización de sistemas eléctricos industriales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+2,Electricidad,26,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+3,"Atención de Enfermería, mención Adulto Mayor",9,Aplicación de cuidados básicos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+3,"Atención de Enfermería, mención Adulto Mayor",10,Medición y control de parámetros básicos en salud,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+3,"Atención de Enfermería, mención Adulto Mayor",11,Promoción de la salud y prevención de la enfermedad,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+3,"Atención de Enfermería, mención Adulto Mayor",12,Higiene y bioseguridad del ambiente,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+3,"Atención de Enfermería, mención Adulto Mayor",27,Sistemas de registro e información en salud,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+3,"Atención de Enfermería, mención Adulto Mayor",28,Prevención y control de infecciones intrahospitalarias,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+3,"Atención de Enfermería, mención Adulto Mayor",29,Necesidades psicosociales del adulto mayor,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+3,"Atención de Enfermería, mención Adulto Mayor",30,Orientación familiar para el cuidado del adulto mayor,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+3,"Atención de Enfermería, mención Adulto Mayor",31,Alimentación y nutrición del adulto mayor,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+3,"Atención de Enfermería, mención Adulto Mayor",32,Atención de primeros auxilios del adulto mayor,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+3,"Atención de Enfermería, mención Adulto Mayor",33,Administración de medicamentos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+3,"Atención de Enfermería, mención Adulto Mayor",34,Higiene y confort del adulto mayor,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+3,"Atención de Enfermería, mención Adulto Mayor",35,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+4,"Atención de Enfermería, mención Enfermería",13,Aplicación de cuidados básicos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+4,"Atención de Enfermería, mención Enfermería",14,Medición y control de parámetros básicos en salud,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+4,"Atención de Enfermería, mención Enfermería",15,Promoción de la salud y prevención de la enfermedad,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+4,"Atención de Enfermería, mención Enfermería",16,Higiene y bioseguridad del ambiente,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+4,"Atención de Enfermería, mención Enfermería",36,Sistemas de registro e información en salud,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+4,"Atención de Enfermería, mención Enfermería",37,Prevención y control de infecciones intrahospitalarias,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+4,"Atención de Enfermería, mención Enfermería",38,Técnicas básicas de enfermería y del Programa Nacional de Inmunizaciones,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+4,"Atención de Enfermería, mención Enfermería",39,Atención en servicios de urgencia y primeros auxilios,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+4,"Atención de Enfermería, mención Enfermería",40,Preparación del entorno clínico,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+4,"Atención de Enfermería, mención Enfermería",41,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+5,"Gastronomía, mención Cocina",42,Higiene para la elaboración de alimentos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+5,"Gastronomía, mención Cocina",43,Elaboración de alimentos de baja complejidad,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+5,"Gastronomía, mención Cocina",44,Recepción y almacenamiento de insumos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+5,"Gastronomía, mención Cocina",45,Planificación de la producción gastronómica,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+5,"Gastronomía, mención Cocina",46,"Preparación, diseño y montaje de buffet",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+5,"Gastronomía, mención Cocina",47,"Servicio de comedores, bares y salones",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+5,"Gastronomía, mención Cocina",48,Cocina chilena,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+5,"Gastronomía, mención Cocina",49,Innovación y cocina internacional,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+5,"Gastronomía, mención Cocina",50,Elaboración de bebidas alcohólicas y analcohólicas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+5,"Gastronomía, mención Cocina",51,Elaboración de menús y carta,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+5,"Gastronomía, mención Cocina",52,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+6,"Gastronomía, mención Pastelería y Repostería",53,Higiene para la elaboración de alimentos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+6,"Gastronomía, mención Pastelería y Repostería",54,Elaboración de alimentos de baja complejidad,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+6,"Gastronomía, mención Pastelería y Repostería",55,Recepción y almacenamiento de insumos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+6,"Gastronomía, mención Pastelería y Repostería",56,Planificación de la producción gastronómica,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+6,"Gastronomía, mención Pastelería y Repostería",57,"Preparación, diseño y montaje de buffet",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+6,"Gastronomía, mención Pastelería y Repostería",58,"Servicio de comedores, bares y salones",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+6,"Gastronomía, mención Pastelería y Repostería",59,Elaboración de masas y pastas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+6,"Gastronomía, mención Pastelería y Repostería",60,Elaboración de productos de repostería,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+6,"Gastronomía, mención Pastelería y Repostería",61,Elaboración de productos de pastelería,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+6,"Gastronomía, mención Pastelería y Repostería",62,Innovación en la pastelería y repostería,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+6,"Gastronomía, mención Pastelería y Repostería",63,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+7,Servicios de Hotelería,64,Atención al cliente en servicios de hotelería,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+7,Servicios de Hotelería,65,Servicio de habitaciones,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+7,Servicios de Hotelería,66,Actividades recreativas y de animación,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+7,Servicios de Hotelería,67,Servicio de eventos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+7,Servicios de Hotelería,68,Inglés técnico para la industria de la hospitalidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+7,Servicios de Hotelería,69,Información turística,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+7,Servicios de Hotelería,70,Servicio de recepción y reservas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+7,Servicios de Hotelería,71,Servicio de coctelería y vinos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+7,Servicios de Hotelería,72,Servicio de información bilingüe,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+7,Servicios de Hotelería,73,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+8,Contabilidad,83,Contabilización de operaciones comerciales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+8,Contabilidad,84,Cálculo y registro de remuneraciones,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+8,Contabilidad,85,Control y procesamiento de información contable,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+8,Contabilidad,86,Organización y métodos de trabajo en la oficina,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+8,Contabilidad,87,Atención de clientes,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+8,Contabilidad,88,Elaboración de informes contables,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+8,Contabilidad,89,Cálculo y registro de impuestos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+8,Contabilidad,90,Registro de operaciones de comercio nacional e internacional,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+8,Contabilidad,91,Procesamiento de información contable-financiera,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+8,Contabilidad,92,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+9,Elaboración Industrial de Alimentos,180,Recepción de materias primas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+9,Elaboración Industrial de Alimentos,181,Almacenaje y bodega de alimentos e insumos alimentarios,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+9,Elaboración Industrial de Alimentos,182,Elaboración de alimentos e higiene,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+9,Elaboración Industrial de Alimentos,183,Aseguramiento de la calidad de procesos y alimentos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+9,Elaboración Industrial de Alimentos,184,Tratamientos de conservación de alimentos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+9,Elaboración Industrial de Alimentos,185,Control y registro de procesos de la industria de alimentos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+9,Elaboración Industrial de Alimentos,186,Manejo de desechos de la industria de alimentos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+9,Elaboración Industrial de Alimentos,187,Envasado y rotulación de alimentos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+9,Elaboración Industrial de Alimentos,188,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+10,Vestuario y Confección Textil,189,Patronaje computacional,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+10,Vestuario y Confección Textil,190,Elaboración de fichas técnicas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+10,Vestuario y Confección Textil,191,Mantenimiento de máquinas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+10,Vestuario y Confección Textil,192,"Tendido, trazado y corte de telas",OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+10,Vestuario y Confección Textil,193,Confección y terminaciones,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+10,Vestuario y Confección Textil,194,Diseño computacional de artículos y vestuario,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+10,Vestuario y Confección Textil,195,Patronaje y escalado industrial,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+10,Vestuario y Confección Textil,196,Procesos de confección industrial,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+10,Vestuario y Confección Textil,197,Control de calidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+10,Vestuario y Confección Textil,198,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+11,Instalaciones Sanitarias,152,Lectura de planos de instalaciones sanitarias,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+11,Instalaciones Sanitarias,153,Trazado de redes,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+11,Instalaciones Sanitarias,154,Instalación de redes de agua potable,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+11,Instalaciones Sanitarias,155,Instalación de redes de alcantarillado,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+11,Instalaciones Sanitarias,156,Instalación de redes para riego agrícola,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+11,Instalaciones Sanitarias,157,Cubicación en instalaciones sanitarias,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+11,Instalaciones Sanitarias,158,Instalación de artefactos sanitarios,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+11,Instalaciones Sanitarias,159,Instalación de gas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+11,Instalaciones Sanitarias,160,Mantenimiento de redes y artefactos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+11,Instalaciones Sanitarias,161,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+12,Montaje Industrial,162,Unión y reparación de elementos metálicos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+12,Montaje Industrial,163,Dibujo e interpretación de planos de montaje,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+12,Montaje Industrial,164,"Mediciones, trazados y cálculos de montaje industrial",OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+12,Montaje Industrial,165,Maniobras de levante de cargas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+12,Montaje Industrial,166,Tratamientos superficiales y manejo de residuos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+12,Montaje Industrial,167,Fijación y montaje de elementos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+12,Montaje Industrial,168,Mantenimiento industrial,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+12,Montaje Industrial,169,Cubicación de proyectos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+12,Montaje Industrial,170,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+13,Electrónica,112,Proyectos electrónicos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+13,Electrónica,113,Armado y reparación de circuitos electrónicos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+13,Electrónica,114,Ensamblaje y mantención de sistemas y equipos digitales,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+13,Electrónica,115,Sistemas de control domótico,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+13,Electrónica,116,Mantención y operación de equipos de control electrónico de potencia,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+13,Electrónica,117,Detección de fallas industriales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+13,Electrónica,118,Operación y programación de equipos de control eléctrico industrial,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+13,Electrónica,119,Montaje de equipos industriales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+13,Electrónica,120,Automatización industrial,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+13,Electrónica,121,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+14,Dibujo Técnico,132,Lectura de planos y documentos técnicos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+14,Dibujo Técnico,133,Dibujo manual de levantamientos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+14,Dibujo Técnico,134,Dibujo digital de proyectos de arquitectura,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+14,Dibujo Técnico,135,Dibujo digital de piezas y conjuntos mecánicos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+14,Dibujo Técnico,136,Maquetas virtuales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+14,Dibujo Técnico,137,Dibujo digital de instalaciones domiciliarias,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+14,Dibujo Técnico,138,Dibujo digital de sistemas constructivos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+14,Dibujo Técnico,139,Dibujo digital de montaje industrial,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+14,Dibujo Técnico,140,Cubicación de proyectos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+14,Dibujo Técnico,141,Impresión y reproducción de planos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+14,Dibujo Técnico,142,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+15,Gráfica,143,Verificación y preparación de archivos digitales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+15,Gráfica,144,Preparación de la máquina impresora,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+15,Gráfica,145,Impresión del producto gráfico,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+15,Gráfica,146,Materiales e insumos de la industria gráfica,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+15,Gráfica,147,Encuadernación del producto impreso,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+15,Gráfica,148,Imposición de archivos y obtención de prueba de color,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+15,Gráfica,149,Salida del archivo a matriz impresora e impresión digital,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+15,Gráfica,150,Postimpresión en embalajes y recubrimientos a impresos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+15,Gráfica,151,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+16,Servicios de Turismo,93,Sistemas de reservas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+16,Servicios de Turismo,94,Atención turística al cliente,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+16,Servicios de Turismo,95,"Patrimonio, cultura y atractivos turísticos de Chile",OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+16,Servicios de Turismo,96,Prevención y seguridad en programas turísticos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+16,Servicios de Turismo,97,Inglés para la comunicación oral en turismo,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+16,Servicios de Turismo,98,"Patrimonio, cultura y atractivos turísticos del mundo",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+16,Servicios de Turismo,99,Conducción de grupos turísticos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+16,Servicios de Turismo,100,Elaboración de programas turísticos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+16,Servicios de Turismo,101,Inglés para la comunicación escrita en turismo,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+16,Servicios de Turismo,102,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+17,Forestal,199,Producción de plantas y repoblación,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+17,Forestal,200,Mediciones forestales,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+17,Forestal,201,Control de plagas y enfermedades forestales,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+17,Forestal,202,Uso y mantenimiento de herramientas y máquinas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+17,Forestal,203,Operaciones silvícolas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+17,Forestal,204,Operaciones de cosecha forestal,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+17,Forestal,205,Control de la producción forestal,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+17,Forestal,206,Técnicas de prevención y combate de incendios forestales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+17,Forestal,207,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+18,Muebles y Terminaciones en Madera,208,Abastecimiento y despacho,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+18,Muebles y Terminaciones en Madera,209,Fabricación de componentes de carpintería y muebles,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+18,Muebles y Terminaciones en Madera,210,Cubicaciones,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+18,Muebles y Terminaciones en Madera,211,"Aseguramiento de la calidad, seguridad y cuidado del medio ambiente",OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+18,Muebles y Terminaciones en Madera,212,Representación gráfica de muebles y elementos de carpintería,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+18,Muebles y Terminaciones en Madera,213,Armado de estructuras,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+18,Muebles y Terminaciones en Madera,214,Terminaciones de muebles y elementos de carpintería,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+18,Muebles y Terminaciones en Madera,215,Instalación de muebles y elementos de carpintería,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+18,Muebles y Terminaciones en Madera,216,"Mantenimiento de máquinas, equipos y herramientas",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+18,Muebles y Terminaciones en Madera,217,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+19,Acuicultura,227,"Manejo de reproductores, desove y crías de larvas de especies hidrobiológicas",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+19,Acuicultura,228,Engorde de especies acuícolas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+19,Acuicultura,229,"Operación de sistemas, equipos y maquinarias",OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+19,Acuicultura,230,"Seguridad, prevención de riesgos y cuidado del medio ambiente",OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+19,Acuicultura,231,Cosecha de especies acuícolas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+19,Acuicultura,232,Captación de semillas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+19,Acuicultura,233,Trabajos subacuáticos en acuicultura,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+19,Acuicultura,234,Manejo de información acuícola,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+19,Acuicultura,235,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+20,Operaciones Portuarias,218,Documentación en la operación portuaria,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+20,Operaciones Portuarias,219,Consolidación y desconsolidación de contenedores,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+20,Operaciones Portuarias,220,Seguridad y prevención de riesgos en faenas portuarias,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+20,Operaciones Portuarias,221,Operación de movilización y distribución de cargas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+20,Operaciones Portuarias,222,Tramitación y documentación de recepción y despacho de carga,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+20,Operaciones Portuarias,223,Estiba y desestiba de naves mercantes,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+20,Operaciones Portuarias,224,Tramitación de movilización y distribución de cargas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+20,Operaciones Portuarias,225,Organización y almacenamiento de cargas en zonas de depósito,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+20,Operaciones Portuarias,226,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+21,Pesquería,236,Navegación y meteorología,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+21,Pesquería,237,"Armado, mantenimiento y reparación de implementos de pesca",OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+21,Pesquería,238,Tratamientos de conservación y manipulación de recursos hidrobiológicos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+21,Pesquería,239,Prevención de riesgos en el mar,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+21,Pesquería,240,Primeros auxilios,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+21,Pesquería,241,Maniobras y operación de artes de pesca,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+21,Pesquería,242,Gestión de planes y proyectos de manejo y emprendimiento pesquero,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+21,Pesquería,243,Comunicaciones marítimas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+21,Pesquería,244,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+22,Tripulación de Naves Mercantes y Especiales,245,Operación de equipos de maniobras de cubierta,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+22,Tripulación de Naves Mercantes y Especiales,246,Mantenimiento de máquinas de cubierta,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+22,Tripulación de Naves Mercantes y Especiales,247,Prevención de riesgos en el mar,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+22,Tripulación de Naves Mercantes y Especiales,248,Operación puente de gobierno,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+22,Tripulación de Naves Mercantes y Especiales,249,Primeros auxilios,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+22,Tripulación de Naves Mercantes y Especiales,250,Operación de máquinas propulsoras y auxiliares,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+22,Tripulación de Naves Mercantes y Especiales,251,Mantenimiento de máquinas marinas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+22,Tripulación de Naves Mercantes y Especiales,252,Comunicaciones,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+22,Tripulación de Naves Mercantes y Especiales,253,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+23,Construcciones Metálicas,171,Lectura y dibujo de planos en construcciones metálicas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+23,Construcciones Metálicas,172,Trazado de partes y piezas en construcciones metálicas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+23,Construcciones Metálicas,173,Mantenimiento de equipos y herramientas en construcciones metálicas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+23,Construcciones Metálicas,174,Mecanizado de partes y piezas metálicas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+23,Construcciones Metálicas,175,Corte y soldadura en construcciones metálicas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+23,Construcciones Metálicas,176,Armado y montaje en construcciones metálicas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+23,Construcciones Metálicas,177,Protección de estructuras y tratamientos de residuos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+23,Construcciones Metálicas,178,Cubicación de materiales e insumos en construcciones metálicas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+23,Construcciones Metálicas,179,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+24,Mecánica Automotriz,254,Ajuste de motores,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+24,Mecánica Automotriz,255,Lectura de planos y manuales técnicos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+24,Mecánica Automotriz,256,Manejo de residuos y desechos automotrices,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+24,Mecánica Automotriz,257,Mantenimiento de sistemas de seguridad y confortabilidad,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+24,Mecánica Automotriz,258,Mantenimiento de sistemas eléctricos y electrónicos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+24,Mecánica Automotriz,259,Mantenimiento de motores,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+24,Mecánica Automotriz,260,Mantenimiento de sistemas hidráulicos y neumáticos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+24,Mecánica Automotriz,261,Mantenimiento de los sistemas de transmisión y frenos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+24,Mecánica Automotriz,262,Mantenimiento de sistemas de dirección y suspensión,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+24,Mecánica Automotriz,263,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+25,Mecánica de Mantenimiento de Aeronaves,441,Reparación y remplazo de elementos estructurales de la aeronave,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+25,Mecánica de Mantenimiento de Aeronaves,442,Detección de fallas en instrumentos y sistemas de navegación y comunicación de la aeronave,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+25,Mecánica de Mantenimiento de Aeronaves,443,Mantenimiento de los controles de vuelo de la aeronave,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+25,Mecánica de Mantenimiento de Aeronaves,444,"Inglés técnico de estructura, controles de vuelo y sistemas de navegación y comunicación de la aeronave",OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+25,Mecánica de Mantenimiento de Aeronaves,445,Lectura e interpretación de manuales de mantenimiento de aeronaves,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+25,Mecánica de Mantenimiento de Aeronaves,446,Normativa de mantenimiento aeronáutico,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+25,Mecánica de Mantenimiento de Aeronaves,447,Mantenimiento de las unidades y sistemas asociados al motor recíproco,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+25,Mecánica de Mantenimiento de Aeronaves,448,Mantenimiento de las unidades y sistemas asociados al motor a reacción,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+25,Mecánica de Mantenimiento de Aeronaves,449,Mantenimiento de los sistemas de la aeronave,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+25,Mecánica de Mantenimiento de Aeronaves,450,Inglés técnico de mantenimiento de aeronaves,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+25,Mecánica de Mantenimiento de Aeronaves,451,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+26,Asistencia en Geología,274,Preparación e instalación de campamentos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+26,Asistencia en Geología,275,Marco legal y seguridad en geología,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+26,Asistencia en Geología,276,Clasificación de rocas y minerales,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+26,Asistencia en Geología,277,Lectura y elaboración de mapas topográficos y geológicos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+26,Asistencia en Geología,278,Prospección geológica con sondajes,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+26,Asistencia en Geología,279,Técnicas de muestreo geológico,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+26,Asistencia en Geología,280,Registro y transferencia de información geológica,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+26,Asistencia en Geología,281,Transporte y mantenimiento de equipos e instrumentos geológicos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+26,Asistencia en Geología,282,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+27,Explotación Minera,292,Lectura de planos de ubicación y de tronadura,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+27,Explotación Minera,293,Fortificación de minas subterráneas y a cielo abierto,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+27,Explotación Minera,294,Perforación y tronadura en faenas mineras,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+27,Explotación Minera,295,Marco legal y seguridad en plantas de explotación minera,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+27,Explotación Minera,296,Ventilación secundaria y drenaje de minas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+27,Explotación Minera,297,Muestreo en explotaciones mineras,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+27,Explotación Minera,298,"Cubicación, carguío y transporte",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+27,Explotación Minera,299,Chancado primario de minerales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+27,Explotación Minera,300,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+28,Metalurgia Extractiva,283,Laboratorio y análisis químico,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+28,Metalurgia Extractiva,284,Muestreo y control de procesos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+28,Metalurgia Extractiva,285,Control de inventario,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+28,Metalurgia Extractiva,286,Legislación y prevención de riesgos en la minería,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+28,Metalurgia Extractiva,287,Transformación mecánica de los minerales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+28,Metalurgia Extractiva,288,Acondicionamiento químico de los minerales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+28,Metalurgia Extractiva,289,Técnicas de hidrometalurgia,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+28,Metalurgia Extractiva,290,Fundición y refinería,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+28,Metalurgia Extractiva,291,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+29,Atención de Párvulos,264,Material didáctico y de ambientación,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+29,Atención de Párvulos,265,Expresión musical para párvulos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+29,Atención de Párvulos,266,Relación con la familia,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+29,Atención de Párvulos,267,Salud en párvulos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+29,Atención de Párvulos,268,Recreación y bienestar de los párvulos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+29,Atención de Párvulos,269,Actividades educativas para párvulos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+29,Atención de Párvulos,270,Expresión literaria y teatral con párvulos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+29,Atención de Párvulos,271,Alimentación de los párvulos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+29,Atención de Párvulos,272,Higiene y seguridad de los párvulos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+29,Atención de Párvulos,273,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+30,Conectividad y Redes,103,Instalación de redes de área local cableadas e inalámbricas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+30,Conectividad y Redes,104,Ensamblado y configuración de computadores y equipos terminales portátiles,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+30,Conectividad y Redes,105,Instalación y explotación de software de aplicaciones productivas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+30,Conectividad y Redes,106,Configuración y puesta en servicio de aplicaciones en redes de área local,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+30,Conectividad y Redes,107,Configuración de la seguridad en redes de área local,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+30,Conectividad y Redes,108,Mantenimiento y actualización de hardware en redes de área local,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+30,Conectividad y Redes,109,Mantenimiento y actualización de software en redes de área local,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+30,Conectividad y Redes,110,Recuperación y respaldo de información en redes de área local,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+30,Conectividad y Redes,111,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+31,Programación,74,Programación y bases de datos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+31,Programación,75,Instalación y configuración de equipos informáticos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+31,Programación,76,Soporte a usuarios y productividad,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+31,Programación,77,Sistemas operativos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+31,Programación,78,Diseño de bases de datos relacionales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+31,Programación,79,Programación orientada a objetos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+31,Programación,80,Administración de bases de datos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+31,Programación,81,Desarrollo de aplicaciones web,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+31,Programación,82,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+32,Telecomunicaciones,122,Operaciones y fundamentos de las telecomunicaciones,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+32,Telecomunicaciones,123,Instalación y mantenimiento básico de un terminal informático,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+32,Telecomunicaciones,124,Instalación y configuración de redes,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+32,Telecomunicaciones,125,Mantenimiento de circuitos electrónicos básicos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+32,Telecomunicaciones,126,Instalación de servicios básicos de telecomunicaciones,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+32,Telecomunicaciones,127,Comunicaciones inalámbricas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+32,Telecomunicaciones,128,Instalación de redes telefónicas convergentes,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+32,Telecomunicaciones,129,Sistemas operativos de redes,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+32,Telecomunicaciones,130,Mantenimiento de redes de acceso y banda ancha,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+32,Telecomunicaciones,131,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+33,"Administración, mención Logística",301,Utilización de información contable,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+33,"Administración, mención Logística",302,Gestión comercial y tributaria,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+33,"Administración, mención Logística",303,Procesos administrativos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+33,"Administración, mención Logística",304,Atención de clientes,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+33,"Administración, mención Logística",305,Organización de oficinas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+33,"Administración, mención Logística",306,Aplicaciones informáticas para la gestión administrativa,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+33,"Administración, mención Logística",307,Operaciones de almacenamiento,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+33,"Administración, mención Logística",308,Operaciones de bodega,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+33,"Administración, mención Logística",309,Logística y distribución,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+33,"Administración, mención Logística",310,Seguridad en bodegas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+33,"Administración, mención Logística",311,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+34,"Administración, mención Recursos Humanos",312,Utilización de información contable,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+34,"Administración, mención Recursos Humanos",313,Gestión comercial y tributaria,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+34,"Administración, mención Recursos Humanos",314,Procesos administrativos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+34,"Administración, mención Recursos Humanos",315,Atención de clientes,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+34,"Administración, mención Recursos Humanos",316,Organización de oficinas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+34,"Administración, mención Recursos Humanos",317,Aplicaciones informáticas para la gestión administrativa,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+34,"Administración, mención Recursos Humanos",318,Legislación laboral,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+34,"Administración, mención Recursos Humanos",319,"Cálculo de remuneración, finiquitos y obligaciones laborales",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+34,"Administración, mención Recursos Humanos",320,Desarrollo y bienestar del personal,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+34,"Administración, mención Recursos Humanos",321,Dotación de personal,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+34,"Administración, mención Recursos Humanos",322,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+35,"Agropecuaria, mención Agricultura",323,Manejo de suelo y residuos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+35,"Agropecuaria, mención Agricultura",324,Manejo de técnicas de riego,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+35,"Agropecuaria, mención Agricultura",325,Técnicas de reproducción vegetal,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+35,"Agropecuaria, mención Agricultura",326,Alimentación y pesaje pecuario,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+35,"Agropecuaria, mención Agricultura",327,Control de plagas y enfermedades,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+35,"Agropecuaria, mención Agricultura",328,Técnicas de cultivo de especies vegetales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+35,"Agropecuaria, mención Agricultura",329,Manejos para optimización productiva de frutales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+35,"Agropecuaria, mención Agricultura",330,Postcosecha y guarda de productos agrícolas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+35,"Agropecuaria, mención Agricultura",331,Mantenimiento de maquinarias y equipos agrícolas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+35,"Agropecuaria, mención Agricultura",332,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+36,"Agropecuaria, mención Pecuaria",333,Manejo de suelo y residuos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+36,"Agropecuaria, mención Pecuaria",334,Manejo de técnicas de riego,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+36,"Agropecuaria, mención Pecuaria",335,Técnicas de reproducción vegetal,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+36,"Agropecuaria, mención Pecuaria",336,Alimentación y pesaje pecuario,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+36,"Agropecuaria, mención Pecuaria",337,Control de plagas y enfermedades,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+36,"Agropecuaria, mención Pecuaria",338,Manejos pecuarios,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+36,"Agropecuaria, mención Pecuaria",339,Reproducción animal,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+36,"Agropecuaria, mención Pecuaria",340,Producción lechera,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+36,"Agropecuaria, mención Pecuaria",341,Sanidad y bienestar animal,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+36,"Agropecuaria, mención Pecuaria",342,Cultivo de praderas y forrajes,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+36,"Agropecuaria, mención Pecuaria",343,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+37,"Agropecuaria, mención Vitivinícola",344,Manejo de suelo y residuos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+37,"Agropecuaria, mención Vitivinícola",345,Manejo de técnicas de riego,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+37,"Agropecuaria, mención Vitivinícola",346,Técnicas de reproducción vegetal,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+37,"Agropecuaria, mención Vitivinícola",347,Alimentación y pesaje pecuario,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+37,"Agropecuaria, mención Vitivinícola",348,Control de plagas y enfermedades,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+37,"Agropecuaria, mención Vitivinícola",349,Viticultura,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+37,"Agropecuaria, mención Vitivinícola",350,Cosecha y transporte de vides,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+37,"Agropecuaria, mención Vitivinícola",351,Elaboración de vinos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+37,"Agropecuaria, mención Vitivinícola",352,Envasado y maquinaria vitivinícola,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+37,"Agropecuaria, mención Vitivinícola",353,Manejo de bodegas vitivinícolas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+37,"Agropecuaria, mención Vitivinícola",354,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+38,"Construcción, mención Edificación",355,"Análisis de muestras de hormigón, suelos y materiales",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+38,"Construcción, mención Edificación",356,Carpintería de instalación de faenas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+38,"Construcción, mención Edificación",357,Control y mantenimiento de bodegas y pañoles,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+38,"Construcción, mención Edificación",358,Cubicación de materiales e insumos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+38,"Construcción, mención Edificación",359,Interpretación de planos de construcción,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+38,"Construcción, mención Edificación",360,Prevención de riesgos en la construcción,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+38,"Construcción, mención Edificación",361,Trazado de obras de construcción,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+38,"Construcción, mención Edificación",362,Albañilerías estructurales y no estructurales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+38,"Construcción, mención Edificación",363,Carpintería estructural,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+38,"Construcción, mención Edificación",364,Enfierradura para elementos estructurales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+38,"Construcción, mención Edificación",365,Estructuras de hormigón,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+38,"Construcción, mención Edificación",366,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+39,"Construcción, mención Terminaciones de la Construcción",367,"Análisis de muestras de hormigón, suelos y materiales",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+39,"Construcción, mención Terminaciones de la Construcción",368,Carpintería de instalación de faenas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+39,"Construcción, mención Terminaciones de la Construcción",369,Control y mantenimiento de bodegas y pañoles,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+39,"Construcción, mención Terminaciones de la Construcción",370,Cubicación de materiales e insumos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+39,"Construcción, mención Terminaciones de la Construcción",371,Interpretación de planos de construcción,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+39,"Construcción, mención Terminaciones de la Construcción",372,Prevención de riesgos en la construcción,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+39,"Construcción, mención Terminaciones de la Construcción",373,Trazado de obras de construcción,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+39,"Construcción, mención Terminaciones de la Construcción",374,Impermeabilización y aislación de elementos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+39,"Construcción, mención Terminaciones de la Construcción",375,Instalación de cubiertas y elementos de evacuación de aguas lluvias,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+39,"Construcción, mención Terminaciones de la Construcción",376,"Instalación de muebles, puertas y ventanas",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+39,"Construcción, mención Terminaciones de la Construcción",377,"Revestimientos para pisos, muros y cielos",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+39,"Construcción, mención Terminaciones de la Construcción",378,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+40,"Construcción, mención Obras Viales e Infraestructura",379,"Análisis de muestras de hormigón, suelos y materiales",OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+40,"Construcción, mención Obras Viales e Infraestructura",380,Carpintería de instalación de faenas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+40,"Construcción, mención Obras Viales e Infraestructura",381,Control y mantenimiento de bodegas y pañoles,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+40,"Construcción, mención Obras Viales e Infraestructura",382,Cubicación de materiales e insumos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+40,"Construcción, mención Obras Viales e Infraestructura",383,Interpretación de planos de construcción,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+40,"Construcción, mención Obras Viales e Infraestructura",384,Prevención de riesgos en la construcción,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+40,"Construcción, mención Obras Viales e Infraestructura",385,Trazado de obras de construcción,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+40,"Construcción, mención Obras Viales e Infraestructura",386,Calidad en obras viales e infraestructura,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+40,"Construcción, mención Obras Viales e Infraestructura",387,Seguridad vial,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+40,"Construcción, mención Obras Viales e Infraestructura",388,Mantenimiento de obras viales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+40,"Construcción, mención Obras Viales e Infraestructura",389,Conformación de la calzada,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+40,"Construcción, mención Obras Viales e Infraestructura",390,Infraestructura para la protección de la calzada,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+40,"Construcción, mención Obras Viales e Infraestructura",391,Empleabilidad y emprendimiento,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+41,"Química Industrial, mención Laboratorio Químico",392,Manejo y almacenamiento seguro de materiales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+41,"Química Industrial, mención Laboratorio Químico",393,"Técnicas, procesos y equipos de laboratorio",OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+41,"Química Industrial, mención Laboratorio Químico",394,Fabricación de productos industriales,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+41,"Química Industrial, mención Laboratorio Químico",395,Cuidado del medioambiente y tratamiento de residuos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+41,"Química Industrial, mención Laboratorio Químico",396,Toma de muestra,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+41,"Química Industrial, mención Laboratorio Químico",397,Preparación de muestras para análisis orgánico,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+41,"Química Industrial, mención Laboratorio Químico",398,Técnicas de análisis físico-químico,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+41,"Química Industrial, mención Laboratorio Químico",399,Técnicas de análisis instrumental,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+41,"Química Industrial, mención Laboratorio Químico",400,Mantenimiento de equipos e instrumentos de laboratorio,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+41,"Química Industrial, mención Laboratorio Químico",401,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+42,"Química Industrial, mención Planta Química",402,Manejo y almacenamiento seguro de materiales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+42,"Química Industrial, mención Planta Química",403,"Técnicas, procesos y equipos de laboratorio",OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+42,"Química Industrial, mención Planta Química",404,Fabricación de productos industriales,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+42,"Química Industrial, mención Planta Química",405,Cuidado del medioambiente y tratamiento de residuos,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+42,"Química Industrial, mención Planta Química",406,Transferencia de calor y operaciones unitarias,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+42,"Química Industrial, mención Planta Química",407,Acondicionamiento de sólidos y control automático,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+42,"Química Industrial, mención Planta Química",408,Muestreo de productos industriales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+42,"Química Industrial, mención Planta Química",409,Mantenimiento de sistemas auxiliares,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+42,"Química Industrial, mención Planta Química",410,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+43,"Mecánica Industrial, mención Máquinas-Herramientas",411,Soldadura,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+43,"Mecánica Industrial, mención Máquinas-Herramientas",412,Mantenimiento de herramientas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+43,"Mecánica Industrial, mención Máquinas-Herramientas",413,Medición y verificación,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+43,"Mecánica Industrial, mención Máquinas-Herramientas",414,Mecánica de banco,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+43,"Mecánica Industrial, mención Máquinas-Herramientas",415,Lectura de manuales y planos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+43,"Mecánica Industrial, mención Máquinas-Herramientas",416,Torneado de piezas y conjuntos mecánicos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+43,"Mecánica Industrial, mención Máquinas-Herramientas",417,Fresado de piezas y conjuntos mecánicos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+43,"Mecánica Industrial, mención Máquinas-Herramientas",418,Taladrado y rectificado de piezas mecánicas,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+43,"Mecánica Industrial, mención Máquinas-Herramientas",419,Mecanizado con máquinas de control numérico computacional,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+43,"Mecánica Industrial, mención Máquinas-Herramientas",420,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+44,"Mecánica Industrial, mención Matricería",421,Soldadura,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+44,"Mecánica Industrial, mención Matricería",422,Mantenimiento de herramientas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+44,"Mecánica Industrial, mención Matricería",423,Medición y verificación,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+44,"Mecánica Industrial, mención Matricería",424,Mecánica de banco,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+44,"Mecánica Industrial, mención Matricería",425,Lectura de manuales y planos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+44,"Mecánica Industrial, mención Matricería",426,Fabricación de matrices,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+44,"Mecánica Industrial, mención Matricería",427,Fabricación de moldes,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+44,"Mecánica Industrial, mención Matricería",428,Mantención de matrices y moldes,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+44,"Mecánica Industrial, mención Matricería",429,Diseño y dibujo de moldes y matrices,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+44,"Mecánica Industrial, mención Matricería",430,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",431,Soldadura,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",432,Mantenimiento de herramientas,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",433,Medición y verificación,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",434,Mecánica de banco,OBSERVADO,5,NO ACTIVA CONTROL TEXTUAL
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",435,Lectura de manuales y planos,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",436,Mantenimiento y reparación industrial,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",437,Detección de fallas en sistemas industriales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",438,Control de procesos industriales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",439,Montaje de equipos y sistemas industriales,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",440,Emprendimiento y empleabilidad,OBSERVADO,5,PRESENCIA CONFIRMADA EN UI; CONTRASTAR PERTINENCIA

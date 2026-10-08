@@ -42,7 +42,7 @@ export function Hero() {
             </a>
           </div>
           <p className="mt-6 text-sm text-slate-500">
-            Piloto con evidencia en 3° medio. El 4° medio de Climatización ya tiene ruta M5–M8.
+            Piloto con evidencia en 3° medio 2027. El 4° medio de Climatización ya tiene ruta M5–M8.
           </p>
         </div>
         <div className="relative">

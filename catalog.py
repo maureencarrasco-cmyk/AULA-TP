@@ -3,6 +3,7 @@ depositado en docs/fuentes/. Las consignas, datos y ejemplos de simulación son 
 """
 from copy import deepcopy
 from content import RUBRIC
+from case_feedback import CASE_FEEDBACK
 from pedagogy import FOURTH, enrich, apply_oficio_media
 
 def ae(title,description,concepts,example,steps):
@@ -15,6 +16,8 @@ def case_bank(rows):
         opts=[good,bad]+extra_wrong if i%2==0 else [bad,good]+extra_wrong
         item=dict(title=t,context=c,options=opts,answer=0 if i%2==0 else 1,
                   stimulus=t,question='¿Qué decisión tomarías?')
+        if t in CASE_FEEDBACK:
+            item['explanation'] = CASE_FEEDBACK[t]
         apply_oficio_media(item, 1, i, force=True)
         out.append(item)
     return out

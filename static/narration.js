@@ -2,6 +2,7 @@
 /* Voz guía: español latino, tono educacional, cálido y grato. */
 (function () {
   let cached = null;
+  let activeUtterance = null;
 
   function scoreVoice(v) {
     const lang = String(v.lang || '').toLowerCase();
@@ -86,6 +87,17 @@
     u.pitch = 1.08;
     u.volume = 1;
     if (chosen) u.voice = chosen;
+    activeUtterance = u;
+    u.addEventListener('start', () => {
+      if (activeUtterance === u) document.dispatchEvent(new CustomEvent('nubi-emotion', {detail: {emotion: 'speaking', duration: 0}}));
+    });
+    const finish = () => {
+      if (activeUtterance !== u) return;
+      activeUtterance = null;
+      document.dispatchEvent(new CustomEvent('nubi-emotion', {detail: {emotion: 'idle'}}));
+    };
+    u.addEventListener('end', finish);
+    u.addEventListener('error', finish);
     speechSynthesis.speak(u);
   }
 

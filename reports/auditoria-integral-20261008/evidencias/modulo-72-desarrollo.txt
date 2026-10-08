@@ -1,0 +1,252 @@
+- link "Saltar al contenido":
+  - /url: "#main"
+- main:
+  - link "Aula TP Chile · Formación técnica con sentido":
+    - /url: "#courses"
+    - img "Aula TP Chile · Formación técnica con sentido"
+  - link "Volver atrás":
+    - /url: "#module/72/3"
+    - text: Volver atrás
+  - navigation "Ubicación":
+    - link "Inicio":
+      - /url: "#courses"
+      - text: Inicio
+    - link "Módulo 9":
+      - /url: "#course/7"
+      - text: Módulo 9
+    - generic: Evaluación final
+  - generic: Tu progreso en el módulo
+  - progressbar
+  - generic: 0 de 5 estaciones
+  - paragraph:
+    - generic: Estación 5 de 6
+    - generic: "5"
+  - paragraph:
+    - generic: Módulo 9 · Servicio de información bilingüe
+  - heading "Evaluación Final" [level=1]
+  - paragraph: Demuestra lo aprendido e integra tus conocimientos.
+  - paragraph: En esta etapa aplicarás lo trabajado durante el módulo en una situación real, relacionando conocimientos y demostrando tus competencias técnicas.
+  - blockquote: Demuestra con calma lo que ya sabes hacer.
+  - img "Recurso visual técnico del módulo. Examina la evidencia del ítem antes de responder."
+  - complementary:
+    - emphasis: Demuestra con calma lo que ya sabes hacer.
+  - 'region "Módulo 9: Servicio de información bilingüe. AE 1 · Evaluación final. Avance del módulo 0 de 5 estaciones. Logro 0 por ciento, aún sin evidencia registrada."':
+    - generic: Módulo 9
+    - generic: Servicio de información bilingüe
+    - generic: AE 1 · Evaluación final
+    - article:
+      - text: Tu aprendizaje
+      - generic: Avance del módulo
+      - generic: 0/5
+      - img "0 de 5 estaciones recorridas"
+      - emphasis: ¡Vamos! Cada paso te acerca a tu objetivo.
+    - article:
+      - text: Logro del módulo
+      - generic: 0%
+      - generic: Aún no registrada
+      - generic: Completa la reflexión para construir tu evidencia.
+  - region "Ruta de las 5 estaciones del módulo. Estás en la estación 5 de 6. 0 de 5 estaciones habilitadas completadas.":
+    - generic "Ruta de aprendizaje de las 6 estaciones":
+      - generic: MI RUTA PROFESIONAL
+      - heading "Estación 5 de 6 · Evaluación final" [level=2]
+      - paragraph: Demuestra lo aprendido
+      - generic: Avance de tu ruta
+      - strong: 0%
+      - progressbar "Estaciones habilitadas completadas"
+      - paragraph:
+        - text: 0 de 5 estaciones
+        - text: habilitadas completadas
+      - text: Misión laboral · en construcción
+    - list:
+      - text: ›
+      - generic: "1"
+      - 'button "Estación 1 de 6: Contextualización. Pendiente. Comprender la situación."':
+        - generic: Estación 1
+        - generic: Contextualiza
+        - generic: Contextualización
+        - generic: Comprender la situación
+        - generic: Pendiente
+      - text: ›
+      - generic: "2"
+      - 'button "Estación 2 de 6: Aprendizajes esperados. Pendiente. Analiza, comprende y aplica."':
+        - generic: Estación 2
+        - generic: Aprende
+        - generic: Aprendizajes esperados
+        - generic: Analiza, comprende y aplica
+        - generic: Pendiente
+      - text: ›
+      - generic: "3"
+      - 'button "Estación 3 de 6: Situación integradora. Pendiente. Resuelve en contexto."':
+        - generic: Estación 3
+        - generic: Aplica
+        - generic: Situación integradora
+        - generic: Resuelve en contexto
+        - generic: Pendiente
+      - text: ›
+      - generic: "4"
+      - button "Estación 4 de 6. Misión laboral. En construcción. Estación bloqueada" [disabled]:
+        - generic: MISIÓN LABORAL
+        - text: EN CONSTRUCCIÓN
+        - generic: Misión laboral
+        - generic: Desafío de oficio
+        - generic: Una misión profesional para poner en juego tus aprendizajes.
+        - text: Explora
+        - text: Resuelve
+        - text: Completa
+        - text: Insignia de misión · bloqueada
+      - text: ›
+      - generic: "5"
+      - 'button "Estación 5 de 6: Evaluación final. Estás aquí. Demuestra lo aprendido."':
+        - generic: Estación 5
+        - generic: Demuestra
+        - generic: Evaluación final
+        - generic: Demuestra lo aprendido
+        - emphasis: Estás trabajando en esta etapa.
+        - generic: Estás aquí
+      - generic: "6"
+      - 'button "Estación 6 de 6: Retroalimentación y cierre. Siguiente. Reflexiona y avanza."':
+        - generic: Estación 6
+        - generic: Reflexiona
+        - text: Retroalimentación
+        - text: y cierre
+        - generic: Reflexiona y avanza
+        - generic: Siguiente
+  - generic "RESPALDO CURRICULAR Fuente curricular y alcance de la simulación":
+    - generic: RESPALDO CURRICULAR
+    - generic: Fuente curricular y alcance de la simulación
+  - region "Instrucciones de la estación 5":
+    - generic: INSTRUCCIONES DE LA ESTACIÓN
+    - generic: Completa la evaluación de principio a fin
+    - paragraph: Responde una pregunta a la vez, revisa tus respuestas y finaliza con la situación compleja.
+    - generic: 25 + 1 preguntas
+  - generic: "5"
+  - generic: ESTACIÓN 5 DE 6
+  - heading "Evaluación Final Evaluación" [level=2]:
+    - text: Evaluación Final
+    - text: Evaluación
+  - paragraph:
+    - generic: Demostrar · resolver · verificar
+  - paragraph: Demuestra lo aprendido e integra tus conocimientos.
+  - text: 12 min
+  - group "Secciones de la evaluación":
+    - button "Preguntas 1–25":
+      - text: Preguntas 1–25
+    - button "Actividad 26 · Situación compleja Estás aquí" [pressed]:
+      - text: Actividad 26 · Situación compleja
+      - generic: Estás aquí
+  - status:
+    - generic: 0 de 25 preguntas respondidas
+    - generic: Actividad 26 pendiente
+    - generic: 0 de 26 actividades completas
+  - generic "Preguntas 1 a 25 y situación compleja 26":
+    - button "Pregunta 1": "1"
+    - button "Pregunta 2": "2"
+    - button "Pregunta 3": "3"
+    - button "Pregunta 4": "4"
+    - button "Pregunta 5": "5"
+    - button "Pregunta 6": "6"
+    - button "Pregunta 7": "7"
+    - button "Pregunta 8": "8"
+    - button "Pregunta 9": "9"
+    - button "Pregunta 10": "10"
+    - button "Pregunta 11": "11"
+    - button "Pregunta 12": "12"
+    - button "Pregunta 13": "13"
+    - button "Pregunta 14": "14"
+    - button "Pregunta 15": "15"
+    - button "Pregunta 16": "16"
+    - button "Pregunta 17": "17"
+    - button "Pregunta 18": "18"
+    - button "Pregunta 19": "19"
+    - button "Pregunta 20": "20"
+    - button "Pregunta 21": "21"
+    - button "Pregunta 22": "22"
+    - button "Pregunta 23": "23"
+    - button "Pregunta 24": "24"
+    - button "Pregunta 25": "25"
+    - button "Actividad 26, situación compleja": "26"
+  - list "Ruta de esta actividad":
+    - generic: "1"
+    - generic: Analiza
+    - listitem: →
+    - generic: "2"
+    - generic: Justifica
+    - listitem: →
+    - generic: "3"
+    - generic: Verifica
+  - generic: "2"
+  - generic: Justifica
+  - heading "Respuesta fundamentada" [level=4]
+  - status: Esta pregunta no es de alternativa
+  - generic: ACTIVIDAD 26 DE 26
+  - heading "Situación profesional compleja" [level=3]
+  - complementary "Instrucción completa de la actividad":
+    - generic: Qué debes hacer
+    - emphasis: Representa las evidencias, resuelve los cálculos, decide, argumenta y explica cómo verificarías.
+    - generic: Sobre qué
+    - emphasis: "Analiza el caso de información bilingüe: El correo de respuesta omite la fecha solicitada por el huésped. Usa correo de reserva y folleto turístico en inglés, identifica el AE y el criterio que respaldan tu respuesta y entrega un respuesta escrita bilingüe. Explica cómo comprobarías el resultado."
+    - generic: Cómo comenzar
+    - emphasis: "Organiza la respuesta en cinco apartados: evidencias, modelo o cálculo, decisión, argumento y verificación."
+    - generic: Recurso
+    - emphasis: Caso de desarrollo, antecedentes, restricciones y rúbrica de cinco criterios.
+    - generic: Qué debes entregar
+    - emphasis: Un desarrollo escrito de al menos 80 caracteres que responda los cinco apartados y distinga datos de pendientes.
+    - generic: Condición de cierre
+    - emphasis: Terminas cuando abordas los cinco criterios de la rúbrica y cada conclusión se puede rastrear a un dato del caso.
+    - paragraph:
+      - generic: Para qué
+      - emphasis: Integrar los 3 AE y producir evidencia evaluable con la rúbrica del módulo.
+  - generic: ACTIVIDAD 26 · CASO PROFESIONAL
+  - heading "1. Lee la situación" [level=4]
+  - paragraph: "Analiza el caso de información bilingüe: El correo de respuesta omite la fecha solicitada por el huésped. Usa correo de reserva y folleto turístico en inglés, identifica el AE y el criterio que respaldan tu respuesta y entrega un respuesta escrita bilingüe. Explica cómo comprobarías el resultado."
+  - figure "Imagen de contexto. Utiliza los antecedentes del caso para responder; esta imagen no es evidencia técnica.":
+    - img "Escena ilustrativa del trabajo técnico de la especialidad"
+    - generic: Imagen de contexto. Utiliza los antecedentes del caso para responder; esta imagen no es evidencia técnica.
+  - heading "2. Revisa los antecedentes y criterios" [level=4]
+  - term: Contexto
+  - definition: Sala de un liceo · climatización de aula
+  - term: Rol
+  - definition: Técnico en formación que revisa el dossier antes de cualquier montaje
+  - term: Objetivo
+  - definition: Dejar una revisión fundada, con inconsistencias y consultas trazables
+  - term: Problema
+  - definition: La planta revisión B y el listado revisión A no cuentan la misma historia de equipos y drenaje.
+  - term: Antecedentes
+  - definition: UI-01, UI-02 y UE-01 aparecen en planta. El listado solo declara una unidad interior.
+  - term: Restricciones
+  - definition: Trabaja con las cotas, materiales y procedimientos que figuran en el dossier. Declara lo que falta.
+  - term: Decisión
+  - definition: Qué revisarías, qué registrarías y a quién consultarías.
+  - term: Argumentación
+  - definition: Por qué esa secuencia evita una conformidad infundada.
+  - term: Verificación
+  - definition: Cómo comprobarías que la corrección quedó reflejada en planta, listado y leyenda.
+  - heading "3. Utiliza estas evidencias" [level=4]
+  - list:
+    - listitem: Planta R-B con UI-01 y UI-02
+    - listitem: Listado R-A con una UI
+    - listitem: Drenaje sin destino
+    - listitem: Leyenda parcial
+  - generic: Ahora te toca a ti
+  - generic "Pregunta 1": "1"
+  - text: Respuesta fundamentada
+  - textbox "Ahora te toca a ti Pregunta 1 Respuesta fundamentada":
+    - /placeholder: Representa las evidencias, modela la situación, resuelve, argumenta y explica cómo verificarías…
+  - paragraph: "Al menos 80 caracteres. Rúbrica: Identificación de evidencia; Aplicación del criterio técnico; Seguridad y límites del rol; Decisión justificada; Registro y verificación (5 puntos cada criterio)."
+  - button "Guardar borrador"
+  - button "Entregar evaluación" [disabled]
+  - list:
+    - text: "!"
+    - generic: "Para continuar falta:"
+    - listitem: ○ Escribir tu evidencia
+    - listitem: ○ Completa todos los ítems asignados y el desarrollo cuando corresponda
+  - generic "Navegación de la estación":
+    - link "← Estación anterior":
+      - /url: "#module/72/3"
+    - button "Continuar con Retroalimentación" [disabled]
+- contentinfo:
+  - img "Aula TP Chile · Formación técnica con sentido"
+  - generic: Aprender hoy, construir el mañana.
+  - generic: Aula TP Chile · Formación técnica con sentido
+- status
+- button "Agente Nubi. Arrastra para mover o pulsa para abrir"

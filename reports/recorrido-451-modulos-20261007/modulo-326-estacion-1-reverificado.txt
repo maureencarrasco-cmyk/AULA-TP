@@ -1,0 +1,162 @@
+- link "Saltar al contenido":
+  - /url: "#main"
+- main:
+  - link "Aula TP Chile · Formación técnica con sentido":
+    - /url: "#courses"
+    - img "Aula TP Chile · Formación técnica con sentido"
+  - link "Volver atrás":
+    - /url: "#course/35"
+    - text: Volver atrás
+  - navigation "Ubicación":
+    - link "Inicio":
+      - /url: "#courses"
+      - text: Inicio
+    - link "Módulo 4":
+      - /url: "#course/35"
+      - text: Módulo 4
+    - generic: Contextualización
+  - generic: Tu progreso en el módulo
+  - progressbar
+  - generic: 0 de 5 estaciones
+  - paragraph:
+    - generic: Estación 1 de 6
+    - generic: "1"
+  - paragraph:
+    - generic: Módulo 4 · Alimentación y pesaje pecuario
+  - heading "Contextualización" [level=1]
+  - paragraph: Conoce el contexto y activa tus conocimientos previos.
+  - blockquote: Observar con atención ya es aprender.
+  - img "Contexto profesional de la especialidad"
+  - complementary:
+    - emphasis: Observar con atención ya es aprender.
+  - 'region "Módulo 4: Alimentación y pesaje pecuario. AE 1 · Contextualización. Avance del módulo 0 de 5 estaciones. Logro 0 por ciento, aún sin evidencia registrada."':
+    - generic: Módulo 4
+    - generic: Alimentación y pesaje pecuario
+    - generic: AE 1 · Contextualización
+    - article:
+      - text: Tu aprendizaje
+      - generic: Avance del módulo
+      - generic: 0/5
+      - img "0 de 5 estaciones recorridas"
+      - emphasis: ¡Vamos! Cada paso te acerca a tu objetivo.
+    - article:
+      - text: Logro del módulo
+      - generic: 0%
+      - generic: Aún no registrada
+      - generic: Completa la reflexión para construir tu evidencia.
+  - region "Ruta de las 5 estaciones del módulo. Estás en la estación 1 de 6. 0 de 5 estaciones habilitadas completadas.":
+    - generic "Ruta de aprendizaje de las 6 estaciones":
+      - generic: MI RUTA PROFESIONAL
+      - heading "Estación 1 de 6 · Contextualización" [level=2]
+      - paragraph: Comprender la situación
+      - generic: Avance de tu ruta
+      - strong: 0%
+      - progressbar "Estaciones habilitadas completadas"
+      - paragraph:
+        - text: 0 de 5 estaciones
+        - text: habilitadas completadas
+      - text: Misión laboral · en construcción
+    - list:
+      - text: ›
+      - generic: "1"
+      - 'button "Estación 1 de 6: Contextualización. Estás aquí. Comprender la situación."':
+        - generic: Estación 1
+        - generic: Contextualiza
+        - generic: Contextualización
+        - generic: Comprender la situación
+        - emphasis: Estás trabajando en esta etapa.
+        - generic: Estás aquí
+      - text: ›
+      - generic: "2"
+      - 'button "Estación 2 de 6: Aprendizajes esperados. Siguiente. Analiza, comprende y aplica."':
+        - generic: Estación 2
+        - generic: Aprende
+        - generic: Aprendizajes esperados
+        - generic: Analiza, comprende y aplica
+        - generic: Siguiente
+      - text: ›
+      - generic: "3"
+      - 'button "Estación 3 de 6: Situación integradora. Pendiente. Resuelve en contexto."':
+        - generic: Estación 3
+        - generic: Aplica
+        - generic: Situación integradora
+        - generic: Resuelve en contexto
+        - generic: Pendiente
+      - text: ›
+      - generic: "4"
+      - button "Estación 4 de 6. Misión laboral. En construcción. Estación bloqueada" [disabled]:
+        - generic: MISIÓN LABORAL
+        - text: EN CONSTRUCCIÓN
+        - generic: Misión laboral
+        - generic: Desafío de oficio
+        - generic: Una misión profesional para poner en juego tus aprendizajes.
+        - text: Explora
+        - text: Resuelve
+        - text: Completa
+        - text: Insignia de misión · bloqueada
+      - text: ›
+      - generic: "5"
+      - 'button "Estación 5 de 6: Evaluación final. Pendiente. Demuestra lo aprendido."':
+        - generic: Estación 5
+        - generic: Demuestra
+        - generic: Evaluación final
+        - generic: Demuestra lo aprendido
+        - generic: Pendiente
+      - generic: "6"
+      - 'button "Estación 6 de 6: Retroalimentación y cierre. Pendiente. Reflexiona y avanza."':
+        - generic: Estación 6
+        - generic: Reflexiona
+        - text: Retroalimentación
+        - text: y cierre
+        - generic: Reflexiona y avanza
+        - generic: Pendiente
+  - region "Contextualización":
+    - generic: ESTACIÓN 1
+    - heading "Contextualización" [level=2]
+    - paragraph: Antes de comenzar a aprender los procedimientos técnicos, conocerás una situación real de la especialidad, observarás sus principales elementos y relacionarás lo que ves con conocimientos que ya tienes.
+    - paragraph: En esta estación no necesitas resolver todavía el caso técnico. El objetivo es comprender el contexto y prepararte para lo que aprenderás después.
+    - tablist "Actividades de Contextualización":
+      - 'tab "Actividad 1: Conoce el contexto profesional. Actual" [selected]':
+        - generic: "1"
+        - generic: Actividad 1
+        - generic: Conoce el contexto profesional
+      - 'tab "Actividad 2: Observa y reconoce. Pendiente"':
+        - generic: "2"
+        - generic: Actividad 2
+        - generic: Observa y reconoce
+      - 'tab "Actividad 3: Conecta con lo que ya sabes. Pendiente"':
+        - generic: "3"
+        - generic: Actividad 3
+        - generic: Conecta con lo que ya sabes
+      - 'tab "Actividad 4: Descubre por qué esto importa. Pendiente"':
+        - generic: "4"
+        - generic: Actividad 4
+        - generic: Descubre por qué esto importa
+      - 'tab "Actividad 5: Anticipa lo que aprenderás. Pendiente"':
+        - generic: "5"
+        - generic: Actividad 5
+        - generic: Anticipa lo que aprenderás
+    - paragraph: Actividad 1 de 5 · Conoce el contexto profesional
+    - 'tabpanel "Actividad 1: Conoce el contexto profesional. Actual"':
+      - generic: ACTIVIDAD 1 DE 5
+      - heading "Conoce el contexto profesional" [level=3]
+      - paragraph: Conoce la situación profesional antes de comenzar a aprender.
+      - heading "Alimentación y pesaje pecuario" [level=3]
+      - paragraph: En un entorno de producción y manejo de recursos naturales, el equipo de trabajo recibe antecedentes relacionados con Alimentación y pesaje pecuario. Antes de comenzar, observa los recursos, documentos y elementos disponibles para conocer la situación.
+      - figure "Imagen contextual de la especialidad; no aporta mediciones ni datos técnicos del caso.":
+        - 'img "Contexto profesional: Alimentación y pesaje pecuario"'
+        - generic: Imagen contextual de la especialidad; no aporta mediciones ni datos técnicos del caso.
+      - complementary:
+        - heading "¿Dónde se aplica este aprendizaje?" [level=4]
+        - paragraph: En situaciones de Agropecuaria, mención Agricultura donde es necesario comprender los antecedentes y el entorno antes de participar en un trabajo relacionado con Alimentación y pesaje pecuario.
+      - button "Continuar a Actividad 2":
+        - text: Continuar a Actividad 2
+  - generic "Navegación de la estación":
+    - link "← Volver al módulo":
+      - /url: "#course/35"
+- contentinfo:
+  - img "Aula TP Chile · Formación técnica con sentido"
+  - generic: Aprender hoy, construir el mañana.
+  - generic: Aula TP Chile · Formación técnica con sentido
+- status
+- button "Agente Nubi. Arrastra para mover o pulsa para abrir"
