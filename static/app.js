@@ -423,7 +423,7 @@ function toolsFabMarkup(station){
 const TOOLS_FAB_POS='aula-tools-fab-pos';
 let nubiEmotionTimer;
 function nubiCloudMarkup(extraClass=''){
- return `<span class="nubi-cloud ${extraClass}" data-emotion="idle" aria-hidden="true"><svg viewBox="0 0 120 120" focusable="false"><path class="nubi-contour" fill="#1677ff" d="M60 14C81 8 103 29 104 48C116 62 104 87 87 91C77 111 48 109 36 95C15 97 5 75 16 58C7 36 31 21 45 24C49 16 54 14 60 14Z"/></svg><span class="nubi-eyes"><span class="nubi-eye"></span><span class="nubi-eye"></span></span></span>`;
+ return `<span class="nubi-cloud ${extraClass}" data-emotion="idle" aria-hidden="true"><img class="nubi-reference-art" src="/static/nubi-cloud-reference.png" alt="" draggable="false"><svg class="nubi-motion-guide" viewBox="0 0 120 120" focusable="false"><path class="nubi-contour" fill="#1677ff" d="M60 14C81 8 103 29 104 48C116 62 104 87 87 91C77 111 48 109 36 95C15 97 5 75 16 58C7 36 31 21 45 24C49 16 54 14 60 14Z"/></svg><span class="nubi-eyes"><span class="nubi-eye"></span><span class="nubi-eye"></span></span></span>`;
 }
 function setNubiEmotion(emotion='idle',duration=5000){
  const aliases={wave:'happy',celebrate:'happy',turn:'happy',sad:'idle',think:'listening',surprised:'idle'};

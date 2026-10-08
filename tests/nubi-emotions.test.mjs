@@ -25,7 +25,7 @@ document.hidden=false;
 assert.doesNotMatch(source.slice(source.indexOf('function bindNubiEmotions'),source.indexOf('function nubiContourPath')),/setInterval|animationend|new Image/);
 const markup=scope.nubiCloudMarkup('nubi-robot');
 assert.equal((markup.match(/class="nubi-eye"/g)||[]).length,2);
-assert.doesNotMatch(markup,/gradient|filter|image|pupil/);
+assert.match(markup,/src="\/static\/nubi-cloud-reference.png"/);
 assert.match(markup,/fill="#1677ff"/);
 const path=scope.nubiContourPath(0),later=scope.nubiContourPath(.04);
 assert.notEqual(path,later);assert.equal((path.match(/C/g)||[]).length,12);assert.ok(path.endsWith('Z'));
@@ -38,7 +38,7 @@ for(let t=0;t<10;t+=.03){
 const css=fs.readFileSync(new URL('../static/aula-soft-depth.css',import.meta.url),'utf8').split('/* Flat cloud replaces')[1];
 assert.match(css,/background:none!important;filter:none!important;box-shadow:none!important;animation:none!important;transform:none!important/);
 assert.match(css,/transition:transform 300ms/);assert.match(css,/120ms/);assert.match(css,/prefers-reduced-motion/);
-assert.doesNotMatch(css,/@keyframes|drop-shadow|gradient|opacity:0|scale\(/);
+assert.doesNotMatch(css,/@keyframes|drop-shadow|opacity:0|scale\(/);
 assert.doesNotMatch(source.slice(source.indexOf('function bindNubiCloudMotion'),source.indexOf('function toolsFabClamp')),/getUserMedia/);
 const panel={style:{setProperty(k,v){this[k]=v;}},getBoundingClientRect:()=>({width:380,height:452})};
 const anchor={querySelector:()=>panel,getBoundingClientRect:()=>({left:273,top:63,bottom:195})};

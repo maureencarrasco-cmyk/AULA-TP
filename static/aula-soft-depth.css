@@ -532,7 +532,7 @@ html body[data-screen="module"] #app #main .station-body .sequence-support.seque
 }
 html body[data-screen="module"] #app #main .sequence-support::before{
  content:"";grid-column:1;grid-row:1/4;align-self:stretch;min-height:210px;
- background:url('/static/nubi-cloud-flat.svg') center/contain no-repeat;pointer-events:none;
+ background:url('/static/nubi-cloud-portrait.png') center/contain no-repeat;pointer-events:none;
 }
 html body[data-screen="module"] #app #main .sequence-support h4{
  grid-column:2;grid-row:1;margin:0!important;color:#108f91!important;font-family:var(--font-learning)!important;font-weight:600!important;font-size:22px!important;line-height:1.5!important;
@@ -826,3 +826,11 @@ html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-logro
 html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-logro-copy>small{display:block!important;font-size:16px!important;line-height:1.5!important}
 @media(max-width:1200px){html body[data-screen="module"] #app #main .avance-strip.avance-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important}html body[data-screen="module"] #app #main .avance-strip.avance-strip>.av2-ident{grid-column:1/-1}}
 @media(max-width:650px){html body[data-screen="module"] #app #main .avance-strip.avance-strip{grid-template-columns:minmax(0,1fr)!important}html body[data-screen="module"] #app #main .avance-strip.avance-strip>:is(.av2-ident,.av2-card){padding:18px!important;min-height:180px!important}html body[data-screen="module"] #app #main .avance-strip.avance-strip>.av2-ident::after,html body[data-screen="module"] #app #main .avance-strip.avance-strip>.av2-logro::after{display:none!important}}
+
+/* Reference cloud keeps the established fixed hit area and animated eye states. */
+html body .nubi-cloud>.nubi-reference-art{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
+html body .nubi-cloud>svg.nubi-motion-guide{visibility:hidden}
+html body .nubi-cloud .nubi-eyes{top:14%;gap:18%;padding-left:2%}
+html body .nubi-cloud .nubi-eye{width:10%;height:15%;background:radial-gradient(ellipse at 62% 24%,#fff 0 14%,transparent 16%),linear-gradient(175deg,#061343 55%,#005dac 83%,#24d5f4);border-radius:48%;box-shadow:inset 0 0 1px #fff}
+html body .nubi-cloud[data-emotion="happy"] .nubi-eye{width:11%;height:7%;border-radius:50% 50% 0 0;background:#061343;box-shadow:none}
+html body .nubi-cloud:is([data-emotion="listening"],[data-emotion="speaking"]) .nubi-eye{width:7%;height:calc(var(--nubi-voice-height,23px)*.8);background:#061343}
