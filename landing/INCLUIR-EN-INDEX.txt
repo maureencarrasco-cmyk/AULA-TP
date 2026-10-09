@@ -1,8 +1,7 @@
-La portada pública (nginx, last-modified 2026-09-30) no carga este parche.
-Agregar antes de </body> en el index público:
+La portada pública debe cargar este parche antes de </body>:
 
-<link rel="stylesheet" href="/landing/aula-tp-coherence.css?v=20261007">
-<script src="/landing/aula-tp-coherence.js?v=20261007" defer></script>
+<link rel="stylesheet" href="/landing/aula-tp-coherence.css?v=20261009">
+<script src="/landing/aula-tp-coherence.js?v=20261009" defer></script>
 
 Contrato de menú:
 Inicio → Simulador → Especialidades → Cómo funciona → Comunidad → Ver catálogo → Campus → Solicitar demo
@@ -11,4 +10,5 @@ Inicio → Simulador → Especialidades → Cómo funciona → Comunidad → Ver
 - Campus: /portal/cursos/ (cuenta del establecimiento)
 - Solicitar demo: #lead-form (no #preguntas)
 - Hero: poster de Electricidad, nunca gastronomía
-- Tarjetas: electricidad/enfermería/clima al campus con ?q= ; automotriz a /mision_laboral/ ; resto al catálogo
+- Tarjetas: electricidad/enfermería/clima al campus con ?q= ; automotriz a /mision_laboral/ (Misión 3D, no «en preparación») ; resto al catálogo
+- Pie: si faltan Ver catálogo y Campus, el script los inserta antes de Demo

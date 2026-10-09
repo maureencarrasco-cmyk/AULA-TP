@@ -1,4 +1,4 @@
-/* Aula TP · menú canónico y portada de oficio. 2026-10-07 */
+/* Aula TP · menú canónico y portada de oficio. 2026-10-09 */
 header nav a, footer nav a, #nav a { white-space: nowrap; }
 .nav-cta span, .demo-link span { white-space: nowrap; }
 .hero-media, figure { position: relative; }
@@ -16,6 +16,10 @@ img[data-tp-poster] {
   object-fit: cover;
 }
 .specialty-card[role="link"] { cursor: pointer; }
+.status-badge.is-mission {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
 @media (max-width: 780px) {
   header nav a, footer nav a, #nav a { white-space: normal; }
 }
