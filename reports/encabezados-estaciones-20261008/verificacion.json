@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-08",
+  "scope": "Introduction banners only. The mission under construction (public station 4) is unchanged.",
+  "automated": {
+    "courses": 45,
+    "modules": 451,
+    "banners": 2255,
+    "publicStations": [
+      1,
+      2,
+      3,
+      5,
+      6
+    ],
+    "constructionBannerAbsent": true,
+    "uniqueAssets": 29,
+    "missingAssets": 0,
+    "stateUnchanged": true
+  },
+  "visualChecks": {
+    "courseId": 2,
+    "moduleId": 22,
+    "publicStations": [
+      1,
+      2,
+      3,
+      5,
+      6
+    ],
+    "desktop": true,
+    "mobile": {"width": 390, "height": 844, "bannerOverflow": false, "imageLoaded": true},
+    "tablet": {"width": 820, "height": 1180, "bannerOverflow": false, "imageLoaded": true},
+    "viewportRestored": true,
+    "consoleErrors": 0,
+    "studentAnswersSubmitted": false
+  },
+  "tests": {"passed": 4, "failed": 0, "files": ["station-intro.test.mjs", "activity-number-presentation.test.mjs", "learning-results-ui.test.mjs", "proyecta-close-design.test.mjs"]},
+  "screenshots": ["computador.jpg", "tablet.jpg", "movil.jpg"],
+  "image": {
+    "mode": "Built-in image_gen",
+    "editType": "background-extraction",
+    "reference": "C:/Users/MARTN~1/AppData/Local/Temp/codex-clipboard-a50a3cfc-8fd0-4ac7-bc48-240bbdd839ce.png",
+    "asset": "C:/Respaldo/OneDrive/Aplicaciones/aula-tp-chile/static/station-intro-students.png",
+    "transparentBackground": true,
+    "prompt": "Use case: background-extraction. Asset type: transparent student photo cutout for the contextualization introduction banner of Aula TP Chile. Input image is the edit target: the attached wide banner. Extract ONLY the two photographed young technical students on the RIGHT and their silver laptop. Preserve their exact faces, navy work jackets, poses, natural lighting, and gesture with the boy pointing toward the laptop. Remove all banner text, all numbers, all icons, all decorative circles, waves, bars, card borders and colored background. Output a clean high-resolution natural photographic cutout of the same pair and laptop on true transparent alpha, centered as a compact landscape group, with minimal transparent margins. Keep both heads completely intact and both shoulders visible. No writing, no logos, no added objects, no background or shadow outside the people. This will be placed against a very pale blue banner using editable HTML text on the left."
+  }
+}

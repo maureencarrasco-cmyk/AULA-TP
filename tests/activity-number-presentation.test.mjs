@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const read=name=>fs.readFileSync(new URL('../static/'+name,import.meta.url),'utf8');
+const source=read('activity-number-presentation.js'),scope=vm.createContext({});
+vm.runInContext(source,scope);
+for(const number of ['1.1','1.2','2.1','3.2'])assert.equal(scope.activityNumberPrefix(number+' Titulo')[1],number);
+for(const text of ['Mi resultado general','AE 1','65%','1. Pregunta'])assert.equal(scope.activityNumberPrefix(text),null);
+assert.doesNotMatch(source,/moduleActivityNumber|offset|localStorage|fetch\(|saveActivity/);
+for(const file of ['app.js','activity-engine.js','contextualization.js','learning-sequence.js','encargos.js','exam-station.js','integrated-station.js','feedback-station.js'])assert.doesNotMatch(read(file),/moduleActivityNumber|numberedFeedback|encargoActivityNumber/);
+assert.match(read('contextualization.js'),/Actividad 1 de 5/);
+assert.match(read('learning-sequence.js'),/Actividad 7 · Desafío profesional/);
+assert.match(read('feedback-station.js'),/<span>1\.1<\/span> Mi resultado general/);
+assert.match(read('exam-station.js'),/Preguntas 1–\$\{cfg.count\}/);
+assert.match(source,/badge.textContent=match\[1\]/);
+console.log('Original section numbering restored; blue badge presentation preserves number text and all state keys.');

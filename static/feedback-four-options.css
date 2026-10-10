@@ -1,0 +1,60 @@
+html body[data-screen="module"][data-station="5"] #app #main#main#main .s6-option-card{
+ --option-bg:#eff8ff;--option-border:#c6e4ff;--option-accent:#0872ba;
+ display:grid!important;grid-template-columns:24px 44px minmax(0,1fr)!important;
+ gap:14px!important;align-items:center!important;position:relative!important;
+ width:100%!important;min-height:82px!important;height:auto!important;box-sizing:border-box;
+ padding:14px 16px!important;margin:0 0 10px!important;border:1px solid var(--option-border)!important;
+ border-radius:8px!important;background:var(--option-bg)!important;color:#12366d!important;
+ box-shadow:none!important;transform:none!important;translate:none!important;
+ font-size:16px!important;font-weight:600!important;line-height:1.5!important;
+ letter-spacing:0!important;text-align:left!important;white-space:normal!important;
+ cursor:pointer;transition:none!important;
+}
+html body[data-screen="module"][data-station="5"] #app #main#main#main .s6-option-card.s6-option-tone-1{--option-bg:#effaf5;--option-border:#c0e9d6;--option-accent:#08765e}
+html body[data-screen="module"][data-station="5"] #app #main#main#main .s6-option-card.s6-option-tone-2{--option-bg:#f7f1ff;--option-border:#ddccfa;--option-accent:#7541ad}
+html body[data-screen="module"][data-station="5"] #app #main#main#main .s6-option-card.s6-option-tone-3{--option-bg:#fff8e9;--option-border:#ffdc9e;--option-accent:#966300}
+html body[data-station="5"] #app #main#main#main .s6-option-card>input{
+ position:static!important;opacity:1!important;appearance:auto!important;
+ width:24px!important;height:24px!important;min-width:24px!important;
+ margin:0!important;padding:0!important;accent-color:var(--option-accent);grid-column:1;grid-row:1;
+}
+html body[data-station="5"] #app #main#main#main .s6-option-symbol{
+ display:grid!important;place-items:center!important;grid-column:2;grid-row:1;
+ width:44px!important;height:44px!important;padding:10px!important;box-sizing:border-box;
+ border-radius:50%!important;background:#fff!important;color:var(--option-accent)!important;
+ border:0!important;box-shadow:none!important;
+}
+html body[data-station="5"] #app #main#main#main .s6-option-symbol svg{width:24px!important;height:24px!important}
+html body[data-station="5"] #app #main#main#main .s6-option-copy{
+ display:block!important;grid-column:3;grid-row:1;min-width:0;
+ color:#12366d!important;font-size:16px!important;line-height:1.5!important;
+ text-align:left!important;word-spacing:normal!important;letter-spacing:0!important;
+ white-space:normal!important;word-break:normal!important;overflow-wrap:break-word!important;
+}
+html body[data-station="5"] #app #main#main#main .s6-option-copy .cg-option-letter{
+ display:inline-grid;vertical-align:middle;width:26px;height:26px;margin-right:8px;
+ font-size:14px!important;border-radius:4px;background:#fff;
+}
+html body[data-station="5"] #app #main#main#main .s6-option-card:has(input:checked){
+ border-color:var(--option-accent)!important;box-shadow:inset 4px 0 var(--option-accent)!important;
+ background:var(--option-bg)!important;
+}
+html body[data-station="5"] #app #main#main#main .s6-option-card:focus-within{
+ outline:3px solid #087cff!important;outline-offset:2px;
+}
+html body[data-station="5"] #app #main#main#main .s6-option-card:has(input:disabled){cursor:not-allowed;opacity:1!important}
+html body[data-station="5"] #app #main#main#main .pg-choices.s6-four-option-group{grid-template-columns:minmax(0,1fr)!important;gap:0!important}
+html body:is(.hivis,.high-contrast)[data-screen="module"][data-station="5"] #app #main#main#main .s6-option-card.s6-option-card{
+ --option-bg:#fff;--option-border:#000;--option-accent:#000;color:#000!important;
+}
+html body:is(.hivis,.high-contrast)[data-station="5"] #app #main#main#main .s6-option-copy{color:#000!important}
+html body[data-station="5"][data-access-text="large"] #app #main#main#main .s6-option-copy{font-size:18px!important}
+html body[data-station="5"][data-access-text="xlarge"] #app #main#main#main .s6-option-copy{font-size:20px!important}
+html body[data-station="5"][data-access-leading="wide"] #app #main#main#main .s6-option-copy{line-height:1.75!important}
+@media(max-width:600px){
+ html body[data-station="5"] #app #main#main#main .s6-option-card{
+  grid-template-columns:24px 36px minmax(0,1fr)!important;gap:10px!important;
+  padding:12px!important;min-height:76px!important;
+ }
+ html body[data-station="5"] #app #main#main#main .s6-option-symbol{width:36px!important;height:36px!important;padding:6px!important}
+}

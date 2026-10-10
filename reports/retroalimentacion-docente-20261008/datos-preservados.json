@@ -1,0 +1,26 @@
+{
+  "productionModules": 451,
+  "productionProgressRecords": 481,
+  "before": {
+    "modules": {
+      "count": 451,
+      "digest": "eb32ffe9a1d61cc5a6cacff8ec63dffd45be948db030c84e10f6b4a63eb11619"
+    },
+    "progress": {
+      "count": 481,
+      "digest": "ee2e0fcd3bb1fcd9454c21b67fe4d7ced6e452e39b545ba207d4e6676c9c5da0"
+    }
+  },
+  "after": {
+    "modules": {
+      "count": 451,
+      "digest": "eb32ffe9a1d61cc5a6cacff8ec63dffd45be948db030c84e10f6b4a63eb11619"
+    },
+    "progress": {
+      "count": 481,
+      "digest": "ee2e0fcd3bb1fcd9454c21b67fe4d7ced6e452e39b545ba207d4e6676c9c5da0"
+    }
+  },
+  "unchanged": true,
+  "testPublicationsInActualDatabase": 0
+}

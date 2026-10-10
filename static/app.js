@@ -422,6 +422,14 @@ function toolsFabMarkup(station){
 }
 const TOOLS_FAB_POS='aula-tools-fab-pos';
 let nubiEmotionTimer;
+let nubiTurnAnimation=null,nubiTurnDirection=1,nubiLastTurn=0;
+function turnNubi(mascot){
+ if(!window.Nubi3D||Date.now()-nubiLastTurn<6000||document.hidden||matchMedia('(prefers-reduced-motion: reduce)').matches||document.documentElement.classList.contains('reduce-motion')||document.body.classList.contains('reduce-motion')||document.activeElement?.matches('input,textarea,[contenteditable="true"]')||mascot.closest('.is-dragging'))return;
+ nubiLastTurn=Date.now();nubiTurnDirection*=-1;
+ nubiTurnAnimation?.cancel();
+ window.Nubi3D.turn(mascot,nubiTurnDirection);
+ nubiTurnAnimation={cancel:()=>window.Nubi3D.cancel()};
+}
 function nubiCloudMarkup(extraClass=''){
  return `<span class="nubi-cloud ${extraClass}" data-emotion="idle" aria-hidden="true"><img class="nubi-reference-art" src="/static/nubi-cloud-reference.png" alt="" draggable="false"><svg class="nubi-motion-guide" viewBox="0 0 120 120" focusable="false"><path class="nubi-contour" fill="#1677ff" d="M60 14C81 8 103 29 104 48C116 62 104 87 87 91C77 111 48 109 36 95C15 97 5 75 16 58C7 36 31 21 45 24C49 16 54 14 60 14Z"/></svg><span class="nubi-eyes"><span class="nubi-eye"></span><span class="nubi-eye"></span></span></span>`;
 }
@@ -435,6 +443,8 @@ function setNubiEmotion(emotion='idle',duration=5000){
  clearTimeout(nubiEmotionTimer);
  mascot.dataset.emotion=emotion;
  mascot.closest('.tools-fab')?.setAttribute('data-emotion',emotion);
+ if(emotion==='happy'||emotion==='listening')turnNubi(mascot);
+ if(emotion==='idle'){nubiTurnAnimation?.cancel();nubiTurnAnimation=null;}
  if(emotion!=='idle'&&duration!==0)nubiEmotionTimer=setTimeout(()=>{
   if(document.querySelector('.nubi-robot')!==mascot||mascot.dataset.emotion!==emotion)return;
   setNubiEmotion('idle');
@@ -513,7 +523,7 @@ function bindNubiCloudMotion(){
    if(analyser&&audioBuffer){analyser.getByteTimeDomainData(audioBuffer);let sum=0;for(const v of audioBuffer)sum+=((v-128)/128)**2;volume=Math.min(1,Math.sqrt(sum/audioBuffer.length)*5);}
    for(const [el,h] of hosts){
     if(!h.visible)continue;
-    h.path.setAttribute('d',path);
+    if(!el.querySelector('.nubi-reference-art'))h.path.setAttribute('d',path);
     const emotion=el.dataset.emotion||'idle';
     if(emotion==='idle'&&phase>=h.gaze){
      const angle=Math.random()*Math.PI*2,r=Math.sqrt(Math.random())*4;
@@ -534,7 +544,7 @@ function bindNubiCloudMotion(){
  }
  const observer=new MutationObserver(sync);
  observer.observe(document.body,{childList:true,subtree:true});
- const pause=()=>{if(frame)cancelAnimationFrame(frame);frame=0;previous=0;for(const [el] of hosts){el.style.setProperty('--nubi-look-x','0px');el.style.setProperty('--nubi-look-y','0px');el.style.setProperty('--nubi-voice-height','23px');}wake();};
+ const pause=()=>{if(document.hidden||reduced()){nubiTurnAnimation?.cancel();nubiTurnAnimation=null;}if(frame)cancelAnimationFrame(frame);frame=0;previous=0;for(const [el] of hosts){el.style.setProperty('--nubi-look-x','0px');el.style.setProperty('--nubi-look-y','0px');el.style.setProperty('--nubi-voice-height','23px');}wake();};
  new MutationObserver(pause).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
  new MutationObserver(pause).observe(document.body,{attributes:true,attributeFilter:['class']});
  media.addEventListener('change',pause);document.addEventListener('visibilitychange',pause);
@@ -609,6 +619,7 @@ function bindToolsFabDrag(fab){
   const dx=x-startX,dy=y-startY;
   if(!moved&&Math.hypot(dx,dy)<8)return;
   moved=true;
+  nubiTurnAnimation?.cancel();nubiTurnAnimation=null;
   fab.classList.add('is-dragging');
   closeToolsFab(false);
   toolsFabApplyPos(fab,toolsFabClamp(origX+dx,origY+dy,fab));
@@ -672,7 +683,8 @@ function bindToolsFabResize(){
  window.addEventListener('resize',()=>{
   const fab=document.querySelector('.tools-fab');
   if(!fab)return;
-  if(fab.style.left)toolsFabApplyPos(fab,toolsFabClamp(parseFloat(fab.style.left),parseFloat(fab.style.top),fab));
+  const x=parseFloat(fab.style.left),y=parseFloat(fab.style.top);
+  if(Number.isFinite(x)&&Number.isFinite(y))toolsFabApplyPos(fab,toolsFabClamp(x,y,fab));
   if(fab.classList.contains('is-open'))toolsFabPlacePanel(fab);
  });
 }
@@ -943,8 +955,8 @@ function reflectionForm(id,prompt,value='',label='Guardar y continuar'){const ae
 function contextPanel(){return contextualizationPanel()}
 function aePanel(){return learningSequencePanel()}
 function caseObserveBody(q, stem){
- const photo=q.image||(typeof integrationPhoto==='function'?integrationPhoto(caseIndex):'');
- const alt=q.alt||(q.site||q.title||'Escenario profesional simulado');
+ const photo=typeof integrationPhoto==='function'?integrationPhoto(caseIndex):q.image;
+ const alt=typeof integrationPhotoAlt==='function'?integrationPhotoAlt(caseIndex):(q.alt||q.site||q.title||'Escenario profesional simulado');
  const fig=photo?`<figure class="case-scene"><img src="${esc(photo)}" alt="${esc(alt)}" decoding="async"><figcaption>${esc(q.site||'Escenario profesional · simulación')}</figcaption></figure>`:'';
  const pressure=q.pressure?`<p class="case-pressure">${esc(q.pressure)}</p>`:'';
  const ctx=`<div class="case-brief">${pressure}<p>${esc(q.context)}</p></div>`;
@@ -953,7 +965,7 @@ function caseObserveBody(q, stem){
  const extra=typeof activityStem==='function'?activityStem(rest):(stem||'');
  return `${fig}${extra}${ctx}`;
 }
-function caseForm(){const q=current.content.cases[caseIndex],saved=current.state.cases[caseIndex],heading=view.station===3?integrationLabel(caseIndex)[0]:q.title,nextLabel=caseIndex<14?`Continuar a pregunta ${caseIndex+2}`:'Finalizar preguntas';const casePlan=[{action:'observe',title:'Lee el caso'},{action:'decide',title:'Elige la acción'},{action:'justify',title:'Fundamenta tu decisión'},{action:'verify',title:'Guarda y continúa'}];const item=Object.assign({},q,{question:q.question||'¿Qué decisión tomarías?',stimulus:q.stimulus||q.lead||heading});const mcq=typeof mcqItemMarkup==='function'?mcqItemMarkup(item,{name:'choice',selected:saved?.choice,index:caseIndex+1,total:15,required:true}):'';return `<form id="case-form" class="soft">${typeof pedRoute==='function'?pedRoute(casePlan, saved?3:0):''}<header class="case-question-banner"><span class="case-question-number"><small>PREGUNTA</small><b>${String(caseIndex+1).padStart(2,'0')}</b></span><div><span class="eyebrow">SITUACIÓN ${caseIndex+1} DE 15 · ${esc(q.format||'decisión')} · ${esc(q.difficulty||'')}</span><h3>${esc(heading)}</h3></div></header><div class="ped-step case-step" data-action="observe" data-state="current">${typeof pedStepHead==='function'?pedStepHead(1,'observe','Lee el caso y la evidencia'):''}${q.pressure?`<p class="case-pressure">${esc(q.pressure)}</p>`:''}<p>${esc(q.context)}</p>${q.video&&window.AulaVisual?AulaVisual.videoFigure(q):''}</div><p class="ped-flow" aria-hidden="true">↓</p><section class="student-decision-callout">${icon('target')}<div><small>AHORA DECIDES TÚ</small><b>Observa la información. Piensa. Decide.</b><p>Selecciona una acción y prepárate para fundamentarla con evidencia.</p></div></section><div class="ped-step case-step" data-action="decide" data-state="idle">${typeof pedStepHead==='function'?pedStepHead(2,'decide','Selecciona qué harías'):''}${mcq||`<fieldset><legend>¿Qué decisión tomarías?</legend>${(q.options||[]).map((o,i)=>`<label class="option"><input type="radio" name="choice" value="${i}" ${saved?.choice===i?'checked':''} required><b>${'ABCD'[i]||i+1}</b><span>${esc(o)}</span></label>`).join('')}</fieldset>`}</div><p class="ped-flow" aria-hidden="true">↓</p><div class="ped-step case-step" data-action="justify" data-state="idle">${typeof pedStepHead==='function'?pedStepHead(3,'justify','Fundamenta tu decisión'):''}<label>Justifica tu decisión<textarea name="text" minlength="20" maxlength="10000" required>${esc(saved?.text||'')}</textarea></label><button class="primary case-next-question" ${auth.user.role==='teacher'||current.state.closed?'disabled':''}><span>${esc(nextLabel)}</span>${icon('arrow')}</button></div></form>`}
+function caseForm(){const q=current.content.cases[caseIndex],saved=current.state.cases[caseIndex],heading=view.station===3?integrationLabel(caseIndex)[0]:q.title,nextLabel=caseIndex<14?`Continuar a pregunta ${caseIndex+2}`:'Finalizar preguntas';const casePlan=[{action:'observe',title:'Lee el caso'},{action:'decide',title:'Elige la acción'},{action:'justify',title:'Fundamenta tu decisión'},{action:'verify',title:'Guarda y continúa'}];const item=Object.assign({},q,{question:q.question||'¿Qué decisión tomarías?',stimulus:q.stimulus||q.lead||heading});const casePhoto=typeof integrationSelectedPhoto==='function'?integrationSelectedPhoto(caseIndex):null;if(casePhoto){if(q.image&&(/\/themes\/oficio\//.test(q.image)||q.requires_image)){item.case_evidence_image=q.image;item.case_evidence_alt=q.alt;}item.image=casePhoto.image;item.alt=casePhoto.alt;item.caption='Fotografía de contexto; utiliza los antecedentes del caso para responder.';item.photo_credit=casePhoto;}const mcq=typeof mcqItemMarkup==='function'?mcqItemMarkup(item,{name:'choice',selected:saved?.choice,index:caseIndex+1,total:15,required:true}):'';return `<form id="case-form" class="soft">${typeof pedRoute==='function'?pedRoute(casePlan, saved?3:0):''}<header class="case-question-banner"><span class="case-question-number"><small>PREGUNTA</small><b>${String(caseIndex+1).padStart(2,'0')}</b></span><div><span class="eyebrow">SITUACIÓN ${caseIndex+1} DE 15 · ${esc(q.format||'decisión')} · ${esc(q.difficulty||'')}</span><h3>${esc(heading)}</h3></div></header><div class="ped-step case-step" data-action="observe" data-state="current">${typeof pedStepHead==='function'?pedStepHead(1,'observe','Lee el caso y la evidencia'):''}${q.pressure?`<p class="case-pressure">${esc(q.pressure)}</p>`:''}<p>${esc(q.context)}</p>${q.video&&window.AulaVisual?AulaVisual.videoFigure(q):''}</div><p class="ped-flow" aria-hidden="true">↓</p><section class="student-decision-callout">${icon('target')}<div><small>AHORA DECIDES TÚ</small><b>Observa la información. Piensa. Decide.</b><p>Selecciona una acción y prepárate para fundamentarla con evidencia.</p></div></section><div class="ped-step case-step" data-action="decide" data-state="idle">${typeof pedStepHead==='function'?pedStepHead(2,'decide','Selecciona qué harías'):''}${mcq||`<fieldset><legend>¿Qué decisión tomarías?</legend>${(q.options||[]).map((o,i)=>`<label class="option"><input type="radio" name="choice" value="${i}" ${saved?.choice===i?'checked':''} required><b>${'ABCD'[i]||i+1}</b><span>${esc(o)}</span></label>`).join('')}</fieldset>`}</div><p class="ped-flow" aria-hidden="true">↓</p><div class="ped-step case-step" data-action="justify" data-state="idle">${typeof pedStepHead==='function'?pedStepHead(3,'justify','Fundamenta tu decisión'):''}<label>Justifica tu decisión<textarea name="text" minlength="20" maxlength="10000" required>${esc(saved?.text||'')}</textarea></label><button class="primary case-next-question" ${auth.user.role==='teacher'||current.state.closed?'disabled':''}><span>${esc(nextLabel)}</span>${icon('arrow')}</button></div></form>`}
 function scenePanel(){return enrichedScene()}
 function evaluationPlan(){
  const plan=current?.content?.evaluation_plan||{};
@@ -1374,23 +1386,12 @@ function decorateStationActivities(root,station){
  });
  buildPedagogicalMatrix();
 }
-function stationInstructionBanner(station){
- const guide={
-  1:{title:'Comienza por el contexto profesional',text:'Lee la situación, observa la evidencia disponible y responde la actividad antes de continuar.',count:'1 recorrido'},
-  2:{title:'Avanza aprendizaje por aprendizaje',text:'Selecciona un AE y desarrolla cada subactividad en orden. Lee la instrucción antes de responder.',count:'6 pasos por AE'},
-  3:{title:'Resuelve cada situación en contexto',text:'Revisa los datos, elige una decisión y justifícala con evidencia antes de avanzar.',count:'15 + 1 actividades'},
-  4:{title:'Completa la evaluación de principio a fin',text:'Responde una pregunta a la vez, revisa tus respuestas y finaliza con la situación compleja.',count:'25 + 1 preguntas'},
-  5:{title:'Completa el recorrido pestaña por pestaña',text:'Pincha cada pestaña, revisa sus orientaciones y desarrolla las actividades antes de avanzar.',count:'5 etapas'}
- }[station];
- if(!guide)return '';
- return `<section class="station-instruction-banner instruction-showcase tone-green" aria-label="Instrucciones de la estación ${station}"><span class="station-instruction-icon${station===1?' station-instruction-number':''}"${station===1?' aria-label="Estación 1"':' aria-hidden="true"'}>${station===1?'1':icon('arrow')}</span><div><small>INSTRUCCIONES DE LA ESTACIÓN</small><b>${esc(guide.title)}</b><p>${esc(guide.text)}</p></div><span class="station-instruction-count">${icon('grid')}<b>${esc(guide.count)}</b></span></section>`;
-}
 function renderModule(n){
  view.station=n;
  localDrafts.restoreExam();
- const content=[contextPanel,aePanel,integratedPanel,examPanel,feedbackPanel][n-1]();
+ const content=stationIntroBanner(n>=4?n+1:n)+[contextPanel,aePanel,integratedPanel,examPanel,feedbackPanel][n-1]();
  const aside=n===4?examSidebar():n===5?feedbackSidebar():'';
- shell(`${stationHero(n)}${auth.user.role==='teacher'&&n!==3&&n!==4&&n!==5?'<div class="preview-banner">Vista previa docente · Las evidencias del estudiante se generan desde su cuenta.</div>':''}<div class="module-layout${aside?'':' is-wide'}"><div class="module-main">${avanceStrip(n)}${n===4?examStationRoute():n===5?feedbackStationRoute():stationRoute(n)}${n===1?'':curriculumSourcePanel()+stationInstructionBanner(n)}<section class="panel station-body s${n}">${content}</section><div class="bottom-nav" aria-label="Navegación de la estación"><a class="outline" href="${n===1?'#course/'+current.course_id:'#module/'+current.id+'/'+(n-1)}">← ${n===1?'Volver al módulo':'Estación anterior'}</a>${n<=2?'':n<5?`<button class="primary" data-action="station" data-n="${n+1}" ${!stationUnlocked(n+1)?'disabled':''}>Continuar a ${names[n]} ${icon('arrow')}</button>`:`<a class="primary" href="#course/${current.course_id}">Finalizar y volver a mi ruta ${icon('arrow')}</a>`}</div></div>${aside}</div>${specialtyResourceButton()}`);
+ shell(`${stationHero(n)}${auth.user.role==='teacher'&&n!==3&&n!==4&&n!==5?'<div class="preview-banner">Vista previa docente · Las evidencias del estudiante se generan desde su cuenta.</div>':''}<div class="module-layout${aside?'':' is-wide'}"><div class="module-main">${avanceStrip(n)}${n===4?examStationRoute():n===5?feedbackStationRoute():stationRoute(n)}${curriculumSourcePanel()}<section class="panel station-body s${n}">${content}</section><div class="bottom-nav" aria-label="Navegación de la estación"><a class="outline" href="${n===1?'#course/'+current.course_id:'#module/'+current.id+'/'+(n-1)}">← ${n===1?'Volver al módulo':'Estación anterior'}</a>${n<=2?'':n<5?`<button class="primary" data-action="station" data-n="${n+1}" ${!stationUnlocked(n+1)?'disabled':''}>Continuar a ${names[n]} ${icon('arrow')}</button>`:`<a class="primary" href="#course/${current.course_id}">Finalizar y volver a mi ruta ${icon('arrow')}</a>`}</div></div>${aside}</div>${specialtyResourceButton()}`);
  bindModuleForms(n);
  const stationBody=document.querySelector('.station-body');
  if(n===2)decorateAeOverview(stationBody);

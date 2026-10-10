@@ -1,0 +1,58 @@
+{
+  "url": "http://127.0.0.1:8100/portal/cursos/#module/227/3",
+  "station": 3,
+  "baseline": {
+    "promptUnchanged": true,
+    "casesUnchanged": true,
+    "filterUnchanged": true,
+    "bindingsUnchanged": true
+  },
+  "interactions": [
+    {
+      "cases": 0,
+      "prompt": "Explora el escenario, examina cada componente y justifica tu conclusión.",
+      "sceneForm": true,
+      "selected": "scene",
+      "selectedCount": 1
+    },
+    {
+      "cases": 0,
+      "prompt": "Elige un encargo, trabaja 45 a 90 minutos y entrega el producto con un dato de oficio.",
+      "sceneForm": false,
+      "selected": "encargos",
+      "selectedCount": 1
+    },
+    {
+      "cases": 5,
+      "prompt": "Elige una situación, analiza el caso y toma una decisión justificada.",
+      "sceneForm": false,
+      "selected": "cases",
+      "selectedCount": 1
+    }
+  ],
+  "assignments": {
+    "assignmentSection": true,
+    "visibleCards": 6
+  },
+  "caseOpenAndReturn": true,
+  "desktop": {
+    "columns": 3,
+    "headerImageLoaded": true,
+    "scrollWidth": 1265,
+    "textFits": true,
+    "width": 1265
+  },
+  "mobile": {
+    "columns": 1,
+    "scrollWidth": 375,
+    "textFits": true,
+    "width": 375
+  },
+  "tablet": {
+    "columns": 1,
+    "scrollWidth": 805,
+    "textFits": true,
+    "width": 805
+  },
+  "viewportReset": true
+}

@@ -1,0 +1,324 @@
+{
+  "courses": 45,
+  "modules": 451,
+  "profilesTested": 1353,
+  "presentationOnly": true,
+  "selectorVerified": true,
+  "distributionToggleVerified": true,
+  "layoutChecks": [
+    {
+      "areas": "\"intro intro\" \"profile metrics\" \"selector metrics\" \"table table\" \"strength focus\" \"distribution distribution\" \"note note\"",
+      "blocks": [
+        {
+          "area": "intro",
+          "inside": true
+        },
+        {
+          "area": "profile",
+          "inside": true
+        },
+        {
+          "area": "selector",
+          "inside": true
+        },
+        {
+          "area": "metrics",
+          "inside": true
+        },
+        {
+          "area": "table",
+          "inside": true
+        },
+        {
+          "area": "strength",
+          "inside": true
+        },
+        {
+          "area": "focus",
+          "inside": true
+        },
+        {
+          "area": "distribution",
+          "inside": true
+        },
+        {
+          "area": "note",
+          "inside": true
+        }
+      ],
+      "gap": "14px",
+      "module": "#module/84/5",
+      "pageFits": true,
+      "tableRows": 2,
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    {
+      "areas": "\"intro\" \"profile\" \"selector\" \"metrics\" \"table\" \"strength\" \"focus\" \"distribution\" \"note\"",
+      "blocks": [
+        {
+          "area": "intro",
+          "inside": true
+        },
+        {
+          "area": "profile",
+          "inside": true
+        },
+        {
+          "area": "selector",
+          "inside": true
+        },
+        {
+          "area": "metrics",
+          "inside": true
+        },
+        {
+          "area": "table",
+          "inside": true
+        },
+        {
+          "area": "strength",
+          "inside": true
+        },
+        {
+          "area": "focus",
+          "inside": true
+        },
+        {
+          "area": "distribution",
+          "inside": true
+        },
+        {
+          "area": "note",
+          "inside": true
+        }
+      ],
+      "gap": "14px",
+      "module": "#module/84/5",
+      "pageFits": true,
+      "tableRows": 2,
+      "viewport": {
+        "height": 1024,
+        "width": 768
+      }
+    },
+    {
+      "areas": "\"intro\" \"profile\" \"selector\" \"metrics\" \"table\" \"strength\" \"focus\" \"distribution\" \"note\"",
+      "blocks": [
+        {
+          "area": "intro",
+          "inside": true,
+          "textFits": true
+        },
+        {
+          "area": "profile",
+          "inside": true,
+          "textFits": true
+        },
+        {
+          "area": "selector",
+          "inside": true,
+          "textFits": true
+        },
+        {
+          "area": "metrics",
+          "inside": true,
+          "textFits": true
+        },
+        {
+          "area": "table",
+          "inside": true,
+          "textFits": false
+        },
+        {
+          "area": "strength",
+          "inside": true,
+          "textFits": true
+        },
+        {
+          "area": "focus",
+          "inside": true,
+          "textFits": true
+        },
+        {
+          "area": "distribution",
+          "inside": true,
+          "textFits": true
+        },
+        {
+          "area": "note",
+          "inside": true,
+          "textFits": true
+        }
+      ],
+      "gap": "14px",
+      "module": "#module/84/5",
+      "pageFits": true,
+      "tableRows": 2,
+      "viewport": {
+        "height": 812,
+        "width": 375
+      }
+    },
+    {
+      "areas": "\"intro intro\" \"profile metrics\" \"selector metrics\" \"table table\" \"strength focus\" \"distribution distribution\" \"note note\"",
+      "blocks": {
+        "distribution": {
+          "bottom": 4132.000091552734,
+          "left": 48.79999923706055,
+          "right": 1216.000072479248,
+          "top": 3623.60009765625,
+          "width": 1167.2000732421875
+        },
+        "focus": {
+          "bottom": 3609.599998474121,
+          "left": 642.4000244140625,
+          "right": 1216.0000610351562,
+          "top": 3504,
+          "width": 573.6000366210938
+        },
+        "intro": {
+          "bottom": 2723.2001037597656,
+          "left": 48.79999923706055,
+          "right": 1216.000072479248,
+          "top": 2561.60009765625,
+          "width": 1167.2000732421875
+        },
+        "metrics": {
+          "bottom": 2849.199951171875,
+          "left": 642.4000244140625,
+          "right": 1216.0000610351562,
+          "top": 2737.199951171875,
+          "width": 573.6000366210938
+        },
+        "note": {
+          "bottom": 4230,
+          "left": 48.79999923706055,
+          "right": 1216.000072479248,
+          "top": 4146,
+          "width": 1167.2000732421875
+        },
+        "profile": {
+          "bottom": 2779.199951171875,
+          "left": 48.79999923706055,
+          "right": 622.4000358581543,
+          "top": 2737.199951171875,
+          "width": 573.6000366210938
+        },
+        "selector": {
+          "bottom": 2849.199951171875,
+          "left": 48.79999923706055,
+          "right": 622.4000358581543,
+          "top": 2793.199951171875,
+          "width": 573.6000366210938
+        },
+        "strength": {
+          "bottom": 3609.599998474121,
+          "left": 48.79999923706055,
+          "right": 622.4000358581543,
+          "top": 3504,
+          "width": 573.6000366210938
+        },
+        "table": {
+          "bottom": 3489.999938964844,
+          "left": 48.79999923706055,
+          "right": 1216.000072479248,
+          "top": 2863.199951171875,
+          "width": 1167.2000732421875
+        }
+      },
+      "focusGap": 14.00006103515625,
+      "module": "#module/177/5",
+      "pageFits": true,
+      "rows": 7,
+      "strengthGap": 14.00006103515625,
+      "tableGap": 14,
+      "tableInside": true,
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    {
+      "areas": "\"intro\" \"profile\" \"selector\" \"metrics\" \"table\" \"strength\" \"focus\" \"distribution\" \"note\"",
+      "blocks": {
+        "distribution": {
+          "bottom": 9752.887329101562,
+          "left": 24.80000114440918,
+          "right": 335.19999504089355,
+          "top": 9026.2998046875,
+          "width": 310.3999938964844
+        },
+        "focus": {
+          "bottom": 9012.300201416016,
+          "left": 24.80000114440918,
+          "right": 335.19999504089355,
+          "top": 8810.7001953125,
+          "width": 310.3999938964844
+        },
+        "intro": {
+          "bottom": 6832.700103759766,
+          "left": 24.80000114440918,
+          "right": 335.19999504089355,
+          "top": 6531.10009765625,
+          "width": 310.3999938964844
+        },
+        "metrics": {
+          "bottom": 7300.30029296875,
+          "left": 24.80000114440918,
+          "right": 335.19999504089355,
+          "top": 6976.30029296875,
+          "width": 310.3999938964844
+        },
+        "note": {
+          "bottom": 9978.8876953125,
+          "left": 24.80000114440918,
+          "right": 335.19999504089355,
+          "top": 9766.8876953125,
+          "width": 310.3999938964844
+        },
+        "profile": {
+          "bottom": 6888.7001953125,
+          "left": 24.80000114440918,
+          "right": 335.19999504089355,
+          "top": 6846.7001953125,
+          "width": 310.3999938964844
+        },
+        "selector": {
+          "bottom": 6962.300197601318,
+          "left": 24.80000114440918,
+          "right": 335.19999504089355,
+          "top": 6902.7001953125,
+          "width": 310.3999938964844
+        },
+        "strength": {
+          "bottom": 8796.700592041016,
+          "left": 24.80000114440918,
+          "right": 335.19999504089355,
+          "top": 8643.1005859375,
+          "width": 310.3999938964844
+        },
+        "table": {
+          "bottom": 8629.100341796875,
+          "left": 24.80000114440918,
+          "right": 335.19999504089355,
+          "top": 7314.30029296875,
+          "width": 310.3999938964844
+        }
+      },
+      "focusGap": 181.599853515625,
+      "module": "#module/177/5",
+      "pageFits": true,
+      "rows": 7,
+      "strengthGap": 14.000244140625,
+      "tableGap": 14,
+      "tableInside": true,
+      "viewport": {
+        "height": 812,
+        "width": 375
+      }
+    }
+  ]
+}

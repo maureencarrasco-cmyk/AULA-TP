@@ -103,10 +103,6 @@ body.simple-visual .pf-top-photo,
 body.low-stim .pf-top-photo{display:none}
 body.reduce-motion .pf-card:hover:not(:disabled){box-shadow:none}
 body.practice-open{overflow:hidden}
-body.practice-open .access-fab{display:flex!important}
-.pf-ax{
-  min-height:44px;border-radius:10px;border:0;background:#6B5CE7;color:#fff;font-weight:800
-}
 .pf-top-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .pf-fam-id{
   display:inline-flex;align-items:center;justify-content:center;
@@ -210,3 +206,7 @@ body.practice-open .access-fab{display:flex!important}
   .pf-mode{transition:none}
   .pf-mode:hover{transform:none}
 }
+
+/* Nubi is the shared accessibility entry while free practice is open. */
+html body.practice-open:has(.tools-fab) .access-fab{display:none!important}
+html body.practice-open:not(:has(dialog#tool[open])) .tools-fab{opacity:1!important;pointer-events:auto!important}

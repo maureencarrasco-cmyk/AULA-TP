@@ -1,0 +1,52 @@
+[
+  {
+    "checked": 1,
+    "clientWidth": 1920,
+    "clippedText": [],
+    "height": 1080,
+    "nubiFits": true,
+    "scrollWidth": 1920,
+    "separateDock": null,
+    "width": 1920
+  },
+  {
+    "checked": 1,
+    "clientWidth": 1425,
+    "clippedText": [],
+    "height": 1000,
+    "nubiFits": true,
+    "scrollWidth": 1425,
+    "separateDock": null,
+    "width": 1440
+  },
+  {
+    "checked": 1,
+    "clientWidth": 753,
+    "clippedText": [],
+    "height": 1024,
+    "nubiFits": true,
+    "scrollWidth": 753,
+    "separateDock": true,
+    "width": 768
+  },
+  {
+    "checked": 1,
+    "clientWidth": 360,
+    "clippedText": [],
+    "height": 812,
+    "nubiFits": true,
+    "scrollWidth": 360,
+    "separateDock": true,
+    "width": 375
+  },
+  {
+    "checked": 1,
+    "clientWidth": 305,
+    "clippedText": [],
+    "height": 740,
+    "nubiFits": true,
+    "scrollWidth": 305,
+    "separateDock": true,
+    "width": 320
+  }
+]

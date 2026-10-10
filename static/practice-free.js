@@ -47,9 +47,15 @@
 
   
   const PRACTICE_MODES = [
-    {id:'explore', family:'choice', title:'Explorar', ask:'¿Qué pasa si…?', level:'Baja complejidad', scaffold:'Alto andamiaje', blurb:'Manipula, observa causa–efecto y reinicia sin presión evaluativa.', ico:'search', cls:'is-explore'},
-    {id:'challenge', family:'case', title:'Desafiar', ask:'¿Cómo logro que…?', level:'Complejidad media', scaffold:'Andamiaje medio', blurb:'Recibes una misión y condiciones; tú eliges la estrategia.', ico:'flag', cls:'is-challenge'},
-    {id:'investigate', family:'argue', title:'Investigar', ask:'¿Qué ocurre y por qué?', level:'Alta complejidad', scaffold:'Andamiaje adaptativo', blurb:'Hipótesis, evidencia, medición y decisión. LINKS como biblioteca, no solucionario.', ico:'chat', cls:'is-investigate'}
+    {id:'explore', family:'choice', title:'Explorar', ask:'¿Qué pasa si…?', blurb:'Observa, identifica información y analiza un caso desde distintas perspectivas.', tags:['Lee y comprende','Explora recursos'], ico:'search', cls:'is-explore'},
+    {id:'challenge', family:'case', title:'Desafiar', ask:'¿Cómo logro que…?', blurb:'Aplica tus conocimientos, toma decisiones y justifica tu respuesta.', tags:['Comprueba ideas','Analiza un reto'], ico:'flag', cls:'is-challenge'},
+    {id:'investigate', family:'argue', title:'Investigar', ask:'¿Qué ocurre y por qué?', blurb:'Profundiza en la información, contrasta evidencias y fundamenta tus conclusiones.', tags:['Analiza evidencias','Fundamenta'], ico:'chat', cls:'is-investigate'}
+  ];
+  const PRACTICE_LEVELS = [
+    {id:1, title:'Inicial', tier:1, subtitle:'Aprendo con apoyo', description:'Situaciones sencillas, con orientación paso a paso.', cls:'is-initial', art:'seedling'},
+    {id:2, title:'Intermedio', tier:2, subtitle:'Aplico lo aprendido', description:'Situaciones habituales, con orientación disponible cuando la necesites.', cls:'is-intermediate', art:'book'},
+    {id:3, title:'Avanzado', tier:3, subtitle:'Resuelvo problemas', description:'Casos con varias variables que requieren análisis y justificación.', cls:'is-advanced', art:'chart'},
+    {id:4, title:'Experto', tier:3, subtitle:'Actúo como profesional', description:'Situaciones avanzadas con trabajo autónomo y mínima orientación inicial.', cls:'is-expert', art:'briefcase'}
   ];
 
   const FAMILIES = [
@@ -60,6 +66,55 @@
 
   let root = null;
   let state = emptyState();
+  let selectedLevel = 1;
+  let previousToolsPosition = null;
+  let lastActivityId = null;
+
+  function dockPracticeTools() {
+    const tools = document.querySelector('.tools-fab');
+    if (!tools) return;
+    const position = {left:'auto', top:'auto', right:'16px', bottom:'16px'};
+    previousToolsPosition = {tools, position, saved:Object.keys(position).map(name => [name, tools.style.getPropertyValue(name), tools.style.getPropertyPriority(name)])};
+    for (const [name,value] of Object.entries(position)) tools.style.setProperty(name, value, 'important');
+  }
+  function restorePracticeTools() {
+    if (!previousToolsPosition) return;
+    const {tools,position,saved} = previousToolsPosition;
+    // Preserve a new position if the student moved Nubi while practising.
+    if (Object.entries(position).every(([name,value]) => tools.style.getPropertyValue(name) === value)) {
+      for (const [name,value,priority] of saved) {
+        if (value) tools.style.setProperty(name, value, priority);
+        else tools.style.removeProperty(name);
+      }
+    }
+    previousToolsPosition = null;
+  }
+
+  function practiceLevel() { return PRACTICE_LEVELS.find(level => level.id === selectedLevel) || PRACTICE_LEVELS[0]; }
+  function difficultyRank(item) {
+    const value = String(item?.difficulty || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    if (/inicial/.test(value)) return 1;
+    if (/intermedi/.test(value)) return 2;
+    if (/avanzad/.test(value)) return 3;
+    return 0;
+  }
+  function setPracticeLevel(value) {
+    const number = Number(value);
+    if (!PRACTICE_LEVELS.some(level => level.id === number)) return false;
+    selectedLevel = number;
+    try {
+      const saved = JSON.parse(localStorage.getItem(KEY + '-levels') || '{}');
+      saved[storeKey()] = number;
+      localStorage.setItem(KEY + '-levels', JSON.stringify(saved));
+    } catch (err) { /* The level remains usable without local persistence. */ }
+    return true;
+  }
+  function loadPracticeLevel() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(KEY + '-levels') || '{}')[storeKey()];
+      selectedLevel = PRACTICE_LEVELS.some(level => level.id === saved) ? saved : 1;
+    } catch (err) { selectedLevel = 1; }
+  }
 
   function emptyState() {
     return {
@@ -99,7 +154,7 @@
   }
   function padOptions(options, answer) {
     const opts = (options || []).map(String);
-    let ans = Number(answer) || 0;
+    let ans = Number.isInteger(answer) ? answer : null;
     const extras = [
       FOURTH,
       'Continuar sin registrar la información faltante.',
@@ -109,7 +164,7 @@
       if (opts.length >= 4) return;
       if (!opts.includes(extra)) opts.push(extra);
     });
-    if (ans < 0 || ans >= opts.length) ans = 0;
+    if (ans != null && (ans < 0 || ans >= opts.length)) ans = null;
     return {options: opts.slice(0, 4), answer: ans};
   }
   function errorTypeOf(text) {
@@ -183,6 +238,8 @@
       spots: c.spots,
       format: c.format,
       ae: c.ae != null ? c.ae : i % 3,
+      difficulty: c.difficulty,
+      skill: c.skill,
       representation: c.format || 'caso'
     });
   }
@@ -239,7 +296,7 @@
         bank: questions.map((q, i) => asChoiceItem(q, i, 'mc'))
       });
     }
-    const situ = cases.slice(0, 3).map((cs, i) => ({
+    const situ = cases.map((cs, i) => ({
       id: 'sit-' + i,
       family: 'case',
       type: 'case',
@@ -270,8 +327,19 @@
     ];
     return {choice, case: situ, argue};
   }
+  function levelActivities() {
+    const bank = buildActivities();
+    const tier = practiceLevel().tier;
+    // Expert is advanced content with autonomous support, not an invented fourth bank.
+    for (const family of ['choice', 'case']) {
+      bank[family] = bank[family].map(activity => Object.assign({}, activity, {
+        bank: activity.bank.filter(item => !difficultyRank(item) || difficultyRank(item) === tier)
+      })).filter(activity => activity.bank.length);
+    }
+    return bank;
+  }
   function allActivities() {
-    const b = buildActivities();
+    const b = levelActivities();
     return [].concat(b.choice, b.case, b.argue);
   }
   function findActivity(id) {
@@ -294,25 +362,33 @@
     let idx = rec.nextIndex || 0;
     if (rec.lastResolved && rec.lastHelp === 0) idx = Math.min(bank.length - 1, idx + 1);
     if ((rec.lastHelp || 0) >= 2) idx = Math.max(0, idx - 1);
-    if (rec.lastItemIndex === idx && bank.length > 1) idx = (idx + 1) % bank.length;
-    return idx % bank.length;
+    idx %= bank.length;
+    if (bank.length > 1 && (bank[idx]?.id === rec.lastItemId || (!rec.lastItemId && rec.lastItemIndex === idx))) idx = (idx + 1) % bank.length;
+    return idx;
   }
   function itemFromLog(entry) {
     if (!entry) return null;
     if (entry.snapshot) return entry.snapshot;
-    const act = findActivity(entry.activity_id);
+    const raw = buildActivities();
+    const act = [].concat(raw.choice, raw.case, raw.argue).find(activity => activity.id === entry.activity_id);
     const bank = act?.bank || [];
     return bank.find(it => it.id === entry.item_id) || bank[0] || null;
   }
+  function practiceLog() {
+    return (loadHist().log || []).filter(entry => {
+      const rank = difficultyRank(itemFromLog(entry));
+      return !rank || rank === practiceLevel().tier;
+    });
+  }
   function lastLog(pred) {
-    const log = loadHist().log || [];
+    const log = practiceLog();
     for (let i = log.length - 1; i >= 0; i--) {
       if (!pred || pred(log[i])) return log[i];
     }
     return null;
   }
   function commonError() {
-    const log = (loadHist().log || []).filter(x => !x.resolved && x.error_type);
+    const log = practiceLog().filter(x => !x.resolved && x.error_type);
     const count = {};
     log.forEach(x => { count[x.error_type] = (count[x.error_type] || 0) + 1; });
     const top = Object.entries(count).sort((a, b) => b[1] - a[1])[0];
@@ -320,7 +396,6 @@
     return log.filter(x => x.error_type === top[0]).pop();
   }
   function resolveArgueItem(activity) {
-    const log = loadHist().log || [];
     if (activity.type === 'errors') {
       const entry = commonError();
       const item = itemFromLog(entry);
@@ -455,6 +530,7 @@
     rec.lastResolved = ok;
     rec.lastHelp = state.help;
     rec.lastItemIndex = state.itemIndex;
+    rec.lastItemId = item.id;
     rec.nextIndex = ((state.itemIndex || 0) + 1) % Math.max(1, (activity.bank || [item]).length);
     rec.practiced = true;
     rec.lastAt = Date.now();
@@ -467,6 +543,7 @@
       item_id: item.id,
       content_area: activity.title,
       activity_type: activity.type,
+      practice_level: selectedLevel,
       error_type: ok ? null : errType,
       selected_answer: selected,
       selected_text: item.options ? item.options[selected] : '',
@@ -486,6 +563,9 @@
         table: item.table,
         document: item.document,
         ae: item.ae,
+        difficulty: item.difficulty,
+        representation: item.representation,
+        skill: item.skill,
         title: item.title
       }
     });
@@ -493,6 +573,10 @@
     saveHist(hist);
   }
   function checkChoice(activity, item) {
+    if (!Number.isInteger(item?.answer)) {
+      state.lastFb = {kind:'help',title:'La respuesta requiere verificación',body:'Abre una modalidad de Práctica libre para comprobarla con el registro del módulo.'};
+      return;
+    }
     if (state.choice == null) {
       state.lastFb = {kind: 'help', title: 'Elige una alternativa', body: 'Marca A, B, C o D y luego revisa tu decisión.'};
       return;
@@ -582,44 +666,56 @@
       <span><b>${e(act.title)}</b><small>${e(act.blurb)}</small>${label ? `<i class="pf-st">${label}</i>` : ''}</span>
     </button>`;
   }
+  function artHtml(name) {
+    return `<span class="pf-art pf-art-${name}" aria-hidden="true"></span>`;
+  }
+  function levelStripHtml() {
+    const level = practiceLevel();
+    return `<div class="pf-level-strip"><span>${ico('chart')} Nivel ${level.id} · ${level.title}</span><button type="button" class="outline" data-pf="modes">Cambiar nivel o modalidad ${ico('arrow')}</button></div>`;
+  }
+  function supportHtml(activity) {
+    const text = activity.type === 'lab'
+      ? 'Observa los datos iniciales, cambia un valor y compara el resultado antes de modificar el siguiente.'
+      : activity.type === 'justify'
+        ? 'Describe qué observaste, qué evidencia usaste y cómo verificarías tu decisión.'
+        : 'Revisa el contexto y sus recursos. Distingue los datos observados de las suposiciones y contrasta cada alternativa con la evidencia.';
+    if (selectedLevel === 1) return `<aside class="pf-level-support">${ico('bulb')}<div><b>Orientación paso a paso</b><p>${hx()(text)}</p><ol>${routeSteps(activity).map(step => `<li>${hx()(step.title)}</li>`).join('')}</ol></div></aside>`;
+    if (selectedLevel === 2) return `<aside class="pf-level-support">${ico('bulb')}<div><b>Orientación disponible</b><p>${hx()(text)}</p></div></aside>`;
+    const reminder = selectedLevel === 3 ? '<p class="pf-level-reminder">Contrasta los antecedentes y fundamenta tu decisión con evidencia.</p>' : '';
+    return `${reminder}<details class="pf-level-help"><summary>${ico('bulb')} Consultar orientación</summary><p>${hx()(text)}</p></details>`;
+  }
+  function launchHtml(course) {
+    const e = hx();
+    return `<main class="pf-launch-page" aria-labelledby="pf-launch-title">
+      <div class="pf-launch-utility"><button type="button" data-pf="close" class="pf-launch-back">&larr; Atrás</button><p>${e(course?.title || 'Aula TP Chile')} · Módulo ${e(current?.position || 1)}</p></div>
+      <header class="pf-launch-intro">
+        <div><p class="pf-launch-kicker"><span class="pf-status-bead" aria-hidden="true"></span><b>Práctica libre</b></p><h1 id="pf-launch-title">Tu práctica libre</h1><p class="pf-launch-description">Explora, desafía e investiga. Elige cómo quieres aprender y el nivel de dificultad que más te acomode.<br>Puedes repetir las actividades las veces que necesites. No tiene calificación.</p></div>
+        <aside class="pf-training">${artHtml('bulb')}<div><h2>Tu entrenamiento profesional</h2><p>El sistema controla la variabilidad de las situaciones.<br>Tú decides el camino.</p></div></aside>
+      </header>
+      <section class="pf-launch-modalities" aria-label="Modalidades de práctica">
+        ${PRACTICE_MODES.map(mode => `<article class="pf-launch-mode ${mode.cls}"><div class="pf-launch-mode-body"><span class="pf-art-disc">${artHtml(mode.id)}</span><div><h2>${e(mode.title)}</h2><h3>${e(mode.ask)}</h3><p>${e(mode.blurb)}</p><ul class="pf-launch-tags">${mode.tags.map(tag => `<li>${e(tag)}</li>`).join('')}</ul></div></div><button type="button" class="pf-mode-open" data-pf="mode" data-mode="${mode.id}" aria-label="Abrir ${e(mode.title)}"><span>Abrir</span>${ico('arrow')}</button></article>`).join('')}
+      </section>
+      <div class="pf-launch-lower">
+        <fieldset class="pf-level-selector"><legend class="sr-only">Nivel de dificultad</legend><div class="pf-level-heading">${ico('chart')}<div><h2>1. Selecciona el nivel de dificultad</h2><p>Elige el nivel que más se ajuste a tu preparación. Puedes cambiarlo cuando quieras.</p></div></div>
+          <div class="pf-level-grid">${PRACTICE_LEVELS.map(level => `<label class="pf-level-card ${level.cls}"><input type="radio" name="pf-level" value="${level.id}" ${selectedLevel === level.id ? 'checked' : ''}><span class="pf-level-card-body"><span class="pf-art-disc">${artHtml(level.art)}</span><span class="pf-level-copy"><b>Nivel ${level.id} · ${e(level.title)}</b><span>${e(level.subtitle)}</span><small>${e(level.description)}</small></span></span></label>`).join('')}</div>
+        </fieldset>
+        <aside class="pf-launch-find"><h2>${ico('info')} ¿Qué encontrarás aquí?</h2><ul>${[['refresh','Nuevas situaciones cada vez.'],['target','Puedes intentar, equivocarte y volver a hacerlo.'],['tool','Pistas y orientación cuando lo necesites.'],['book','Sin calificación.']].map(([kind,text]) => `<li>${ico(kind)}<span>${text}</span></li>`).join('')}</ul></aside>
+      </div>
+      <footer class="pf-launch-footer"><button type="button" class="pf-new-situation" data-pf="new-situation">${ico('refresh')} Nueva situación</button><details class="pf-launch-progress"><summary>${ico('chart')} Tu avance del módulo</summary>${asideHtml()}</details></footer>
+      <p class="sr-only">${e(course?.title || '')}. Práctica formativa del módulo ${current?.position || 1}. Sin cambios en tu calificación ni en las evidencias del módulo.</p>
+    </main>`;
+  }
   function hubHtml() {
-    const bank = buildActivities();
+    const bank = levelActivities();
     const e = hx();
     const course = (typeof courses !== 'undefined' ? courses : []).find(c => c.id === current?.course_id);
     const mode = PRACTICE_MODES.find(m => m.id === state.mode);
     if (!mode) {
-      return `${chromeHtml('hub')}
-      <div class="pf-wrap pf-wrap-modes">
-        <section class="pf-launch" aria-labelledby="pf-launch-title">
-          <div class="pf-launch-badge" aria-hidden="true">🟢</div>
-          <h2 id="pf-launch-title">Práctica libre</h2>
-          <p class="pf-launch-tag">Explora · Desafía · Investiga</p>
-          <p class="pf-launch-lead">Elige cómo quieres aprender. Puedes volver a intentarlo cuando quieras. El sistema controla la variabilidad; tú decides el camino.</p>
-          <div class="pf-modes" role="list">
-            ${PRACTICE_MODES.map(m => `<button type="button" class="pf-mode ${m.cls}" data-pf="mode" data-mode="${m.id}" role="listitem">
-              <span class="pf-mode-ico" aria-hidden="true">${ico(m.ico)}</span>
-              <span class="pf-mode-copy">
-                <b>${e(m.title)}</b>
-                <em>${e(m.ask)}</em>
-                <small>${e(m.blurb)}</small>
-                <span class="pf-mode-meta"><i>${e(m.level)}</i><i>${e(m.scaffold)}</i></span>
-              </span>
-              <span class="pf-mode-go" aria-hidden="true">Abrir</span>
-            </button>`).join('')}
-          </div>
-          <div class="pf-launch-actions">
-            <button type="button" class="pf-new-situation" data-pf="new-situation">Nueva situación</button>
-          </div>
-          <p class="pf-launch-note">Laboratorio autónomo: sin nota, con trazabilidad. No es una segunda batería de ejercicios.</p>
-        </section>
-        ${asideHtml()}
-      </div>
-      ${principles()}
-      <p class="sr-only">${e(course?.title || '')}. Práctica formativa del módulo ${current?.position || 1}.</p>`;
+      return launchHtml(course);
     }
     const fam = FAMILIES.find(f => f.id === mode.family) || FAMILIES[0];
     const list = bank[mode.family] || [];
-    return `${chromeHtml('hub')}
+    return `${chromeHtml('hub')}${levelStripHtml()}
     <div class="pf-wrap">
       <div>
         <div class="pf-hero pf-hero-mode ${mode.cls}">
@@ -658,7 +754,6 @@
       </div>
       <div class="pf-top-photo"><img src="${photoSrc()}" alt=""></div>
       <div class="pf-top-actions">
-        <button type="button" class="pf-ax" data-pf="access">Accesibilidad</button>
         ${back}
       </div>
     </header>`;
@@ -700,7 +795,7 @@
         ${showReview ? feedbackHtml(activity, item) : ''}
       </div>`;
     }
-    return `${chromeHtml('play')}
+    return `${chromeHtml('play')}${levelStripHtml()}
     <div class="pf-wrap">
       <div class="pf-play" style="--pf:${fam.id === 'case' ? '#0B7A8C' : fam.id === 'argue' ? '#6818ed' : '#1558A0'}">
         <div class="pf-play-head">${ico(activity.ico || fam.ico)}<div>
@@ -709,6 +804,7 @@
           <p>${e(activity.objective)}</p>
         </div></div>
         ${route}
+        ${!state.lastFb ? supportHtml(activity) : ''}
         ${body}
       </div>
       ${asideHtml()}
@@ -733,6 +829,14 @@
   }
   function paint() {
     if (!root) return;
+    if (state.view === 'workbench' && window.AulaPracticeScreens) {
+      window.AulaPracticeScreens.mount(root, {mode:state.mode, level:selectedLevel, art:artHtml,
+        back:() => { state = emptyState(); paint(); }, close,
+        lab:() => openActivity('lab')});
+      return;
+    }
+    root.classList.remove('is-workbench');
+    root.classList.toggle('is-launch', state.view === 'hub' && !state.mode);
     root.innerHTML = state.view === 'play' ? playerHtml() : hubHtml();
     if (state.view === 'play') bindLab();
     if (window.AulaVisual) window.AulaVisual.hydrate(root);
@@ -749,7 +853,8 @@
     state = emptyState();
     state.view = 'play';
     state.activityId = id;
-    state.itemIndex = activity.family === 'choice' ? pickIndex(activity) : 0;
+    lastActivityId = id;
+    state.itemIndex = activity.bank ? pickIndex(activity) : 0;
     if (activity.family === 'argue') {
       const r = resolveArgueItem(activity);
       if (r.startHelp) state.help = r.startHelp;
@@ -797,6 +902,10 @@
   function variant() {
     const activity = findActivity(state.activityId);
     const n = (activity?.bank || []).length;
+    if (activity?.type === 'case' && n === 1) {
+      const alternatives = levelActivities().case.filter(candidate => candidate.type === 'case' && candidate.id !== activity.id);
+      if (alternatives.length) { openActivity(alternatives[Math.floor(Math.random() * alternatives.length)].id); return; }
+    }
     state.itemIndex = n ? (state.itemIndex + 1) % n : 0;
     state.choice = null;
     state.help = 0;
@@ -814,14 +923,16 @@
     const act = b.dataset.pf;
     if (act === 'close') close();
     else if (act === 'hub' || act === 'other' || act === 'modes') { state = emptyState(); paint(); }
-    else if (act === 'mode') { state.mode = b.dataset.mode || null; paint(); }
+    else if (act === 'mode') { state.mode = b.dataset.mode || null; state.view = 'workbench'; paint(); }
     else if (act === 'new-situation') {
+      if (window.AulaPracticeScreens) { state.mode = state.mode || 'explore'; state.view = 'workbench'; paint(); return; }
       if (!state.mode) state.mode = 'explore';
-      const bank = buildActivities();
+      const bank = levelActivities();
       const mode = PRACTICE_MODES.find(m => m.id === state.mode) || PRACTICE_MODES[0];
       const list = bank[mode.family] || [];
       if (!list.length) { state.lastFb = null; paint(); return; }
-      const pick = list[Math.floor(Math.random() * list.length)];
+      const available = list.length > 1 ? list.filter(activity => activity.id !== lastActivityId) : list;
+      const pick = available[Math.floor(Math.random() * available.length)];
       openActivity(pick.id);
     }
     else if (act === 'open') openActivity(b.dataset.id);
@@ -831,17 +942,16 @@
     else if (act === 'variant') variant();
     else if (act === 'lab-done') finishLabOrJustify('lab');
     else if (act === 'justify') finishLabOrJustify('justify');
-    else if (act === 'access' && window.AulaAccess) {
-      window.AulaAccess.renderPanel(document.querySelector('#tool-content'));
-      document.querySelector('#tool')?.showModal();
-    }
   }
   function onChange(ev) {
+    if (ev.target.name === 'pf-level') setPracticeLevel(ev.target.value);
     if (ev.target.name === 'pf-choice') state.choice = Number(ev.target.value);
     if (ev.target.hasAttribute('data-pf-just')) state.justify = ev.target.value;
   }
   function onKey(ev) {
     if (ev.key === 'Escape') {
+      if (ev.defaultPrevented || document.querySelector('#tool[open],.tools-fab.is-open')) return;
+      if (state.view === 'workbench') { window.AulaPracticeScreens?.back(); return; }
       if (state.view === 'play') { state = emptyState(); paint(); }
       else close();
     }
@@ -872,13 +982,18 @@
     if (!current?.content) return;
     if (root) close();
     state = emptyState();
+    lastActivityId = null;
+    loadPracticeLevel();
     ensureRoot();
     document.body.classList.add('practice-open');
+    dockPracticeTools();
     paint();
     document.addEventListener('keydown', onKey);
     window.addEventListener('hashchange', onHash);
   }
   function close() {
+    window.AulaPracticeScreens?.leave();
+    restorePracticeTools();
     document.body.classList.remove('practice-open');
     document.removeEventListener('keydown', onKey);
     window.removeEventListener('hashchange', onHash);

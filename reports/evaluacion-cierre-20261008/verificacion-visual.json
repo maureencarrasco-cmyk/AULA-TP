@@ -1,0 +1,55 @@
+{
+  "url": "http://127.0.0.1:8100/portal/cursos/#module/227/4",
+  "station": 5,
+  "baseline": {
+    "briefTextUnchanged": true,
+    "controlsUnchanged": true,
+    "timeUnchanged": true,
+    "formUnchanged": true,
+    "questionNavigationUnchanged": true
+  },
+  "interactions": {
+    "answerCount": "0 de 25 preguntas respondidas",
+    "evidenceFieldPresent": true,
+    "lastQuestionReachable": true,
+    "minimumCharacters": 80,
+    "submissionBlocked": true,
+    "writtenSectionSelected": true
+  },
+  "desktop": {
+    "briefColumns": 3,
+    "captionWordsUnbroken": true,
+    "curriculumFirst": true,
+    "scrollWidth": 1265,
+    "tabColumns": 2,
+    "textFits": true,
+    "trophyLoaded": true,
+    "width": 1265
+  },
+  "tablet": {
+    "briefColumns": 1,
+    "captionWordsUnbroken": true,
+    "scrollWidth": 805,
+    "tabColumns": 2,
+    "textFits": true,
+    "width": 805
+  },
+  "mobile": {
+    "briefColumns": 1,
+    "captionWordsUnbroken": true,
+    "scrollWidth": 375,
+    "tabColumns": 1,
+    "textFits": true,
+    "width": 375
+  },
+  "smallMobile": {
+    "briefColumns": 1,
+    "captionWordsUnbroken": true,
+    "scrollWidth": 305,
+    "tabColumns": 1,
+    "textFits": true,
+    "width": 305
+  },
+  "viewportReset": true,
+  "answersNotSubmitted": true
+}

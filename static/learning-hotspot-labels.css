@@ -1,0 +1,23 @@
+/* Text markers need intrinsic width rather than the shared icon-button size. */
+html body[data-screen="module"][data-station="2"] #app #main#main .act-scene .act-spot{
+ width:max-content!important;height:auto!important;min-width:96px!important;min-height:44px!important;
+ max-width:none!important;box-sizing:border-box;padding:10px 12px!important;border-radius:8px!important;
+ display:inline-flex!important;align-items:center;justify-content:center;
+ transform:translate(-50%,-50%)!important;translate:none!important;
+ background:#fff!important;color:#123e68!important;border:2px solid #1265ad!important;
+ font-size:14px!important;font-weight:700!important;line-height:20px!important;letter-spacing:0!important;
+ white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;
+ box-shadow:0 2px 6px #123e6833!important;
+}
+html body[data-screen="module"][data-station="2"] #app #main#main .act-scene .act-spot:hover{
+ background:#edf6ff!important;color:#123e68!important;
+}
+html body[data-screen="module"][data-station="2"] #app #main#main .act-scene .act-spot:is(.is-on,[aria-pressed="true"]){
+ background:#123e68!important;color:#fff!important;border-color:#fff!important;
+}
+html body[data-screen="module"][data-station="2"] #app #main#main .act-scene .act-spot:focus-visible{
+ outline:3px solid #f0b429!important;outline-offset:3px;
+}
+html body.hivis[data-station="2"] #app #main#main .act-scene .act-spot{
+ background:#fff!important;color:#000!important;border-color:#000!important;
+}

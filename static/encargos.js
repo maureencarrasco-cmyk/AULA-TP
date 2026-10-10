@@ -74,19 +74,8 @@ function encargosMarkup(station, aeIndex){
   if(!items.length) return '';
   return `<section id="seccion-encargos" class="seccion-actividades-de-oficio seccion-encargos formative-pack" data-station="${station}" data-ae="${aeIndex||''}" aria-label="Actividades de oficio"></section>`;
 }
-function encargoContextPhoto(course){
-  if(typeof specialtyKey==='function'&&specialtyKey(course)==='climate')return {
-    image:'/static/encargo-climatizacion-real.jpg',
-    alt:'Fotografía real de una unidad exterior de aire acondicionado LG',author:'Dinkun Chen',
-    source:'https://commons.wikimedia.org/wiki/File:LG_AIR_CONDITIONER_OUTDOOR_UNIT_(2).jpg',
-    license:'CC BY-SA 4.0',licenseUrl:'https://creativecommons.org/licenses/by-sa/4.0/'
-  };
-  return {
-    image:'/static/encargo-documentacion-real.jpg',
-    alt:'Fotografía real de una persona escribiendo notas en un cuaderno',author:'Tookapic',
-    source:'https://commons.wikimedia.org/wiki/File:Pen-writing-notes-studying.jpg',
-    license:'CC0 1.0',licenseUrl:'https://creativecommons.org/publicdomain/zero/1.0/'
-  };
+function encargoContextPhoto(course,item){
+  return encargoRealPhoto(item,course,current?.title||'');
 }
 function encargoBrief(item){
   const c=item.instruction||{};
@@ -96,7 +85,7 @@ function encargoBrief(item){
   const criterionRows=Array.isArray(criteria?.criteria)?criteria.criteria:[];
   const criterionMarkup=criterionRows.length?`<ul>${criterionRows.map(row=>`<li>${esc(typeof row==='string'?row:row.text||row.description||row.title||'')}</li>`).join('')}</ul>`:'';
   const course=courses.find(course=>course.id===current?.course_id);
-  const realPhoto=encargoContextPhoto(course);
+  const realPhoto=encargoContextPhoto(course,item);
   return `<section class="encargo-brief" aria-label="Comprende tu encargo">
     <h5 class="encargo-step-title"><span aria-hidden="true">2</span>Comprende tu encargo</h5>
     <figure class="encargo-real-photo"><img src="${esc(realPhoto.image)}" alt="${esc(realPhoto.alt)}" loading="lazy" decoding="async" referrerpolicy="no-referrer"><figcaption>Fotografía de contexto, no evidencia del caso. <a href="${esc(realPhoto.source)}" target="_blank" rel="noopener noreferrer">${esc(realPhoto.author)}</a> · <a href="${esc(realPhoto.licenseUrl)}" target="_blank" rel="noopener noreferrer">${esc(realPhoto.license)}</a>. Sin modificaciones.</figcaption></figure>
@@ -113,42 +102,7 @@ function encargoBrief(item){
   </section>`;
 }
 function encargoArtwork(item, course){
-  const own=item?.image||item?.poster||item?.resource?.image||item?.stimulus?.image;
-  if(typeof own==='string'&&own.trim())return own;
-  const text=[item?.title,item?.product,item?.prompt,item?.instruction?.object].join(' ').toLowerCase();
-  if(typeof specialtyKey==='function'&&specialtyKey(course)==='climate'){
-    const scenes=[
-      [/drenaje|desagüe/,'oficio-drenaje'],
-      [/interferencia|cruce|colisi[oó]n/,'oficio-cruce'],
-      [/cubicaci[oó]n|tramos|longitud/,'oficio-tramos'],
-      [/man[oó]metro|presi[oó]n/,'oficio-manometro'],
-      [/temperatura|term[oó]metro|visor/,'oficio-visor-21c'],
-      [/acceso|mantenci[oó]n/,'oficio-acceso-cm'],
-      [/escala|proporci[oó]n/,'oficio-escala'],
-      [/tuber[ií]a|conexi[oó]n/,'oficio-tuberias'],
-      [/intervalo|rango/,'oficio-intervalo'],
-      [/planta|plano|leyenda|dossier/,'oficio-plano-leyenda']
-    ];
-    const scene=scenes.find(([pattern])=>pattern.test(text));
-    if(scene)return `/static/themes/oficio/${scene[1]}.png`;
-  }
-  const workplaces=[
-    [/sala de servidores|centro de datos/,'05-servidores'],
-    [/farmacia/,'08-farmacia'],[/cl[ií]nica|hospital/,'02-clinica'],
-    [/bodega|almac[eé]n/,'10-bodega'],[/packing/,'12-packing'],
-    [/cocina|preparaci[oó]n culinaria/,'06-cocina'],[/hotel|habitaci[oó]n/,'04-hotel'],
-    [/obra|edificaci[oó]n/,'07-obra'],[/supermercado/,'03-supermercado']
-  ];
-  const workplace=workplaces.find(([pattern])=>pattern.test(text));
-  if(workplace)return `/static/themes/cases/${workplace[1]}.png`;
-  // Product illustrations are decorative, never substitutes for task evidence.
-  const kind=item?.kind;
-  if(/plano|croquis|diseñ|prototipo/.test(text))return '/static/activity-document-icon.png';
-  if(/compar|relacion|conect/.test(text))return '/static/situation-puzzle-icon.png';
-  if(isBitacora(item)||kind==='read')return '/static/open-book-icon.png';
-  if(kind==='procedure'||/procedimiento|secuencia|lista/.test(text))return '/static/evaluation-clipboard-icon.png';
-  if(kind==='reflect'||/reflexi[oó]n|argumento/.test(text))return '/static/objective-target-icon.png';
-  return '/static/activity-document-icon.png';
+  return encargoContextPhoto(course,item).image;
 }
 function encargoCardHtml(item, index, openId, done){
   const saved=done[item.id];
@@ -160,7 +114,7 @@ function encargoCardHtml(item, index, openId, done){
   const course=courses.find(course=>course.id===current?.course_id);
   const photo=encargoArtwork(item,course);
   return `<button type="button" class="oficio-card is-${status}${open}${notebook?' is-bitacora':''}" aria-pressed="${Boolean(open)}" aria-controls="encargo-detail" data-encargo-id="${esc(item.id)}" data-tone="${tone}">
-    ${photo?`<span class="encargo-card-photo" aria-hidden="true"><img src="${esc(photo)}" alt="" loading="lazy" decoding="async"></span>`:`<span class="oficio-tile" aria-hidden="true">${oficioIcon(taskIcon)}</span>`}
+    ${photo?`<span class="encargo-card-photo"><img src="${esc(photo)}" alt="${esc(encargoContextPhoto(course,item).alt)}" loading="lazy" decoding="async"></span>`:`<span class="oficio-tile" aria-hidden="true">${oficioIcon(taskIcon)}</span>`}
     <span class="oficio-card-body">
       <span class="oficio-product-label">Encargo profesional</span>
       <b><span class="student-question-number" aria-label="Encargo ${index+1}">${index+1}</span>${esc(item.title)}</b>

@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-08",
+  "station": 2,
+  "scope": "AE selector presentation only. Official descriptions, criteria, activities, state keys and existing AE click handlers are unchanged.",
+  "coverage": {
+    "courses": 45,
+    "modules": 451,
+    "aeCards": 1519,
+    "aeCountByModule": {
+      "2": 95,
+      "3": 164,
+      "4": 140,
+      "5": 37,
+      "6": 13,
+      "7": 2
+    },
+    "oneSelectedCardPerModule": true,
+    "stateUnchanged": true
+  },
+  "tests": {
+    "passed": 4,
+    "failed": 0,
+    "files": [
+      "learning-ae-selector.test.mjs",
+      "learning-results-ui.test.mjs",
+      "station-intro.test.mjs",
+      "activity-number-presentation.test.mjs"
+    ]
+  },
+  "visualChecks": {
+    "desktop": true,
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "horizontalOverflow": false,
+      "allTextFits": true
+    },
+    "tablet": {"width": 820, "height": 1180, "horizontalOverflow": false, "allTextFits": true},
+    "viewportRestored": true,
+    "consoleErrors": 0,
+    "liveModules": [
+      22,
+      227
+    ],
+    "acuiculturaButtons": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "keyboardSelection": true,
+    "studentAnswersSubmitted": false
+  },
+  "screenshots": [
+    "computador.jpg",
+    "movil.jpg",
+    "tablet.jpg"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "moduleId": 227,
+  "courses": 45,
+  "modules": 451,
+  "enabledStations": [
+    {
+      "instructionStrips": 0,
+      "sourceImmediatelyBeforeIntro": true,
+      "sourceLabel": "Programa de Estudio MINEDUC · Manejo de reproductores, desove y crías de larvas de especies hidrobiológicas",
+      "sources": 1,
+      "station": 1
+    },
+    {
+      "instructionStrips": 0,
+      "sourceImmediatelyBeforeIntro": true,
+      "sourceLabel": "Programa de Estudio MINEDUC · Manejo de reproductores, desove y crías de larvas de especies hidrobiológicas",
+      "sources": 1,
+      "station": 2
+    },
+    {
+      "instructionStrips": 0,
+      "sourceImmediatelyBeforeIntro": true,
+      "sourceLabel": "Programa de Estudio MINEDUC · Manejo de reproductores, desove y crías de larvas de especies hidrobiológicas",
+      "sources": 1,
+      "station": 3
+    },
+    {
+      "instructionStrips": 0,
+      "sourceImmediatelyBeforeIntro": true,
+      "sourceLabel": "Programa de Estudio MINEDUC · Manejo de reproductores, desove y crías de larvas de especies hidrobiológicas",
+      "sources": 1,
+      "station": 5
+    },
+    {
+      "instructionStrips": 0,
+      "sourceImmediatelyBeforeIntro": true,
+      "sourceLabel": "Programa de Estudio MINEDUC · Manejo de reproductores, desove y crías de larvas de especies hidrobiológicas",
+      "sources": 1,
+      "station": 6
+    }
+  ],
+  "station4Disabled": true,
+  "station1BodyUnchanged": true,
+  "station1FieldsUnchanged": true,
+  "sourceExpansionVerified": true,
+  "mobile": {
+    "gap": 13.999992370605469,
+    "scrollWidth": 375,
+    "sourceImmediatelyBeforeIntro": true,
+    "sources": 1,
+    "width": 375
+  }
+}

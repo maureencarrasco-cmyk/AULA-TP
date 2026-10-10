@@ -1,0 +1,11 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+const root=new URL('../',import.meta.url);
+const catalog=JSON.parse(readFileSync(new URL('static/situation-photos/catalog.json',root),'utf8').replace(/^\uFEFF/,''));
+const review=JSON.parse(readFileSync(new URL('scripts/situation-photo-review.json',root),'utf8'));
+const unsuitable=/ruins|abandoned|palace|memorial|tomb|gravestone|headstone|capitol|goddess|pharaoh|MGM.*celebration|Secretary.*greeting|DHS Secretary|railroad|train locomotive/i;
+const strict={dairy:/milking|milk.*cow|cow.*milk|dairy.*farm|cattle/i,electronics:/soldering|solder joint|circuit|pcb|electronic|lotkolben|saving the mission/i,caliper:/caliper|messschieber|paquimetro/i};
+for(const topic of Object.keys(catalog))catalog[topic]=catalog[topic].filter(photo=>!review.rejectedImages.includes(photo.image)&&!unsuitable.test(photo.title)&&(!strict[topic]||strict[topic].test(photo.title))&&/^(CC0|Public domain|CC BY(?:-SA)? [234]|CC-BY(?:-SA)? [234])/.test(photo.license));
+const compact=Object.fromEntries(Object.entries(catalog).map(([topic,photos])=>[topic,photos.map(({image,title,source,author,license,licenseUrl,alt})=>({image,title,source,author,license,licenseUrl:licenseUrl||source,alt,fingerprint:createHash('sha256').update(readFileSync(new URL(image.replace(/^\//,''),root))).digest('hex')}))]));
+writeFileSync(new URL('static/situation-photo-catalog.js',root),"'use strict';\nconst SITUATION_PHOTOS="+JSON.stringify(compact)+';\n');
+console.log(Object.keys(compact).length+' subjects compiled');

@@ -1,0 +1,22 @@
+/* Keep short guidance readable without stretching spaces between words. */
+html body[data-screen="module"][data-station="5"] #app #main#main .cg-result-footer{
+ display:grid!important;grid-template-columns:28px minmax(0,1fr)!important;
+ align-items:start!important;gap:12px!important;
+}
+html body[data-screen="module"][data-station="5"] #app #main#main .cg-result-footer>span{
+ grid-column:1;grid-row:1;padding-top:2px;
+}
+html body[data-screen="module"][data-station="5"] #app #main#main#main .cg-result-footer>p{
+ grid-column:2;grid-row:1;width:auto!important;min-width:0;max-width:none!important;
+ margin:0!important;padding:0!important;text-align:left!important;text-align-last:left!important;
+ text-justify:none!important;word-spacing:normal!important;letter-spacing:0!important;
+ white-space:normal!important;word-break:normal!important;overflow-wrap:break-word!important;
+ font-size:16px!important;line-height:1.6!important;color:#234d70!important;
+}
+html body[data-screen="module"][data-station="5"] #app #main#main .cg-result-footer>button[data-cg-review]{
+ grid-column:2;grid-row:2;justify-self:start;align-self:start;
+ width:auto!important;max-width:100%;margin:0!important;
+}
+@media(max-width:400px){
+ html body[data-screen="module"][data-station="5"] #app #main#main .cg-result-footer>button[data-cg-review]{grid-column:1/-1}
+}

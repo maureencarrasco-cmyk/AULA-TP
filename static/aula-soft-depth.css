@@ -304,6 +304,7 @@ html body[data-screen="module"] #app #main#main .az-guided>.az-guided-intro>deta
 @media(max-width:850px){html body[data-screen="module"] #app #main#main .az-guided>.az-guided-intro{padding:20px!important}html body[data-screen="module"] #app #main#main .az-guided>.az-guided-intro::before{display:none}html body[data-screen="module"] #app #main#main .az-guided>.az-guided-intro::after{width:64px;height:64px;right:14px;top:18px}html body[data-screen="module"] #app #main#main .az-guided>.az-guided-intro>:is(h2,p,.az-mini-route){max-width:100%}html body[data-screen="module"] #app #main#main .az-guided>.az-guided-intro>small{max-width:calc(100% - 76px)}html body[data-screen="module"] #app #main#main .az-guided>.az-guided-intro>h2{font-size:24px!important;margin-top:22px!important}}
 @media(max-width:850px){html body[data-screen="module"] #app #main#main .az-guided>.az-analysis-intro{padding-right:20px!important}html body[data-screen="module"] #app #main#main .az-guided>.az-guided-intro>small{max-width:calc(100% - 76px)!important}html body[data-screen="module"] #app #main#main .az-guided>.az-analysis-intro>small{max-width:100%!important}}
 /* The tile is decoration only: every activity keeps its own live number. */
+.ped-route-letter{display:inline-grid;place-items:center;flex:0 0 44px;width:44px;height:44px;box-sizing:border-box;border-radius:50%;border:1px solid var(--route-color,var(--ped-accent,#1558A0));background:var(--route-line,var(--ped-soft,#E8F1FB));color:#0B3A6B;font:800 18px/1 var(--font-identity);letter-spacing:0}
 html body[data-screen="module"] #app #main#main :is(.ped-num,.az-step-number,.mcq-situation-number,.q-number,.az-result-title>span,.encargo-step-title>span,.case-question-number){background:transparent url('/static/activity-number-tile.svg') center/100% 100% no-repeat!important;color:#075cbd!important;border:0!important;border-radius:0!important;box-shadow:none!important;font-family:var(--font-identity)!important;font-weight:800!important;text-align:center!important;box-sizing:border-box;flex-shrink:0}
 html body[data-screen="module"] #app #main#main :is(.ped-num,.az-step-number,.mcq-situation-number,.q-number,.az-result-title>span,.encargo-step-title>span){display:inline-grid!important;place-items:center;padding:6px 10px 8px 6px!important;line-height:1.2!important;min-width:38px;min-height:40px}
 html body[data-screen="module"] #app #main#main .q-number{width:44px!important;height:46px!important;font-size:18px!important}
@@ -829,8 +830,27 @@ html body[data-screen="module"] #app #main .avance-strip.avance-strip .av2-logro
 
 /* Reference cloud keeps the established fixed hit area and animated eye states. */
 html body .nubi-cloud>.nubi-reference-art{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
-html body .nubi-cloud>svg.nubi-motion-guide{visibility:hidden}
+html body .nubi-cloud svg.nubi-motion-guide{display:none}
 html body .nubi-cloud .nubi-eyes{top:14%;gap:18%;padding-left:2%}
 html body .nubi-cloud .nubi-eye{width:10%;height:15%;background:radial-gradient(ellipse at 62% 24%,#fff 0 14%,transparent 16%),linear-gradient(175deg,#061343 55%,#005dac 83%,#24d5f4);border-radius:48%;box-shadow:inset 0 0 1px #fff}
 html body .nubi-cloud[data-emotion="happy"] .nubi-eye{width:11%;height:7%;border-radius:50% 50% 0 0;background:#061343;box-shadow:none}
 html body .nubi-cloud:is([data-emotion="listening"],[data-emotion="speaking"]) .nubi-eye{width:7%;height:calc(var(--nubi-voice-height,23px)*.8);background:#061343}
+/* Orthographic rotation keeps the front/back views the same apparent size. */
+html body .nubi-cloud .nubi-float{position:absolute;inset:0;animation:nubi-gentle-float 7.3s ease-in-out infinite;transform-style:preserve-3d}
+html body .nubi-cloud .nubi-rotor{position:absolute;inset:0;transform-style:preserve-3d}
+html body .nubi-cloud .nubi-front,html body .nubi-cloud .nubi-back{position:absolute;inset:0;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+html body .nubi-cloud .nubi-reference-art{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:brightness(1.2);pointer-events:none;user-select:none}
+html body .scene-nubi-art{filter:brightness(1.2)}
+html body .sequence-support::before{filter:brightness(1.2)}
+@keyframes nubi-gentle-float{0%,100%{transform:translateY(0) rotateZ(0)}32%{transform:translateY(-2px) rotateZ(.7deg)}71%{transform:translateY(1px) rotateZ(-.5deg)}}
+html body:has(:is(input,textarea,[contenteditable="true"]):focus) .nubi-cloud .nubi-float,
+html body .tools-fab.is-dragging .nubi-cloud .nubi-float{animation:none;transform:none}
+@media(prefers-reduced-motion:reduce){html body .nubi-cloud .nubi-float{animation:none!important;transform:none!important}}
+html body.reduce-motion .nubi-cloud .nubi-float,html.reduce-motion .nubi-cloud .nubi-float{animation:none!important;transform:none!important}
+
+/* Fixed-size viewport; volume and lighting are rendered by the local 3D scene. */
+html body .nubi-cloud>canvas.nubi-volume{position:absolute;inset:0;display:block;width:100%!important;height:100%!important;pointer-events:none;filter:brightness(1.2)!important;transform:none!important}
+html body .nubi-cloud[data-volume-ready]>:not(canvas){visibility:hidden!important}
+
+/* Original activity labels, framed without renumbering or altering their text. */
+html body[data-screen="module"] #app #main .activity-number-badge{display:inline-grid;place-items:center;vertical-align:middle;flex-shrink:0;width:52px;height:52px;margin-right:10px;padding:5px 8px 7px 4px;box-sizing:border-box;background:url('/static/activity-number-tile.svg') center/100% 100% no-repeat;color:#075cbd;font:800 19px/1.2 var(--font-identity);letter-spacing:0;white-space:nowrap}

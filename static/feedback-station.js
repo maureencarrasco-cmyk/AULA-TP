@@ -197,21 +197,22 @@ function analizaEvidDonut(ev){
 }
 
 function analizaTitle(){
-  return `<div class="az-steps-top"><span class="az-time az-time-float">${icon('clock')} 26–36 min</span></div>`;
+  return `<header class="az-steps-top feedback-reference-intro" aria-labelledby="feedback-route-title"><span class="feedback-route-emblem" aria-hidden="true">${icon('chart')}</span><div class="feedback-route-copy"><h2 id="feedback-route-title">Analiza tus avances y proyecta tu aprendizaje.</h2><p>Reconoce qué aprendiste, comprende tus resultados y planifica cómo aplicar tus conocimientos.</p></div><span class="az-time az-time-float">${icon('clock')} 26–36 min</span></header>`;
 }
 
 function analizaSteps(active){
   const steps=[
-    {id:'analiza',n:1,title:'Analiza',sub:'\u00bfC\u00f3mo me fue?',tone:'blue',svg:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V10M10 19V5M16 19v-7M22 19H2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 10h.01M10 5h.01M16 12h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>'},
-    {id:'comprende',n:2,title:'Comprende',sub:'\u00bfQu\u00e9 significan mis resultados?',tone:'violet',svg:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2.2"/><path d="m20 20-3.6-3.6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>'},
-    {id:'conecta',n:3,title:'Conecta',sub:'\u00bfC\u00f3mo se relaciona lo aprendido?',tone:'purple',svg:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="5" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="5" cy="18" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="18" r="2.5" stroke="currentColor" stroke-width="2"/><path d="m10.8 7.2-4.6 8.6M13.2 7.2l4.6 8.6M7.5 18h9" stroke="currentColor" stroke-width="2"/></svg>'},
-    {id:'transfiere',n:4,title:'Transfiere',sub:'\u00bfC\u00f3mo lo utilizo en una situaci\u00f3n nueva?',tone:'green',svg:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2"/></svg>'},
-    {id:'proyecta',n:5,title:'Proyecta',sub:'\u00bfQu\u00e9 aprendizaje me llevo?',tone:'orange',svg:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 20V4m0 1h10l-2 3 2 3H5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>'}
+    {id:'analiza',n:1,title:'Analiza',sub:'\u00bfC\u00f3mo me fue?',tone:'blue',image:'activity-results-illustration.png'},
+    {id:'comprende',n:2,title:'Comprende',sub:'\u00bfQu\u00e9 significan mis resultados?',tone:'violet',image:'open-book-icon.png'},
+    {id:'conecta',n:3,title:'Conecta',sub:'\u00bfC\u00f3mo se relaciona lo aprendido?',tone:'purple',image:'situation-puzzle-icon.png'},
+    {id:'transfiere',n:4,title:'Transfiere',sub:'\u00bfC\u00f3mo lo utilizo en una situaci\u00f3n nueva?',tone:'green',image:'activity-document-icon.png'},
+    {id:'proyecta',n:5,title:'Proyecta',sub:'\u00bfQu\u00e9 aprendizaje me llevo?',tone:'orange',image:'objective-target-icon.png'}
   ];
-  return `<nav class="az-steps az-steps-v2" aria-label="Pasos de la estaci\u00f3n 6">${steps.map(s=>{
+  return `<nav class="az-steps az-steps-v2 az-feedback-reference" aria-label="Pasos de la estaci\u00f3n 6">${steps.map(s=>{
     const on=active===s.id;
     const badge=s.id==='analiza'?`<span class="az-step-badge">ESTACI\u00d3N 6</span>`:'';
-    return `<button type="button" class="az-step tone-${s.tone}${on?' is-active':''}" data-action="tab" data-tab="${s.id}" aria-current="${on?'step':'false'}"><span class="az-step-num">${s.n}</span><span class="az-step-ico" aria-hidden="true">${s.svg}</span><span class="az-step-rule" aria-hidden="true"></span><span class="az-step-copy">${badge}<b>${s.title}</b><small>${s.sub}</small></span></button>`;
+    const connector=s.n<steps.length?`<span class="az-step-connector" aria-hidden="true">${icon('arrow')}</span>`:'';
+    return `<button type="button" class="az-step tone-${s.tone}${on?' is-active':''}" data-action="tab" data-tab="${s.id}" aria-current="${on?'step':'false'}"><span class="az-step-num">${s.n}</span><span class="feedback-route-image" aria-hidden="true"><img src="/static/${s.image}" alt="" width="76" height="76" decoding="async"></span><span class="az-step-rule" aria-hidden="true"></span><span class="az-step-copy">${badge}<b>${s.title}</b><small>${s.sub}</small></span><span class="az-step-arrow" aria-hidden="true">${icon('arrow')}</span>${connector}</button>`;
   }).join('')}</nav>`;
 }
 
@@ -264,7 +265,7 @@ function analizaDash(){
     ${typeof achievementProgressTable==='function'?achievementProgressTable():''}
     ${fbAeChart()}
     <p>Los porcentajes por AE corresponden a los aciertos evaluados. No se atribuye un porcentaje por OA sin una medición específica.</p>
-    <h4 class="az-evidence-title">1.3 Mis evidencias</h4><ul class="az-evidence-cards"><li><b>Situaciones registradas</b><span>${Object.keys(s.cases||{}).length} de 15</span></li><li><b>Evaluación final</b><span>${s.exam?`${s.exam.score} / ${s.exam.max_score||25} puntos en selección múltiple`:'Pendiente de entrega'}</span></li><li><b>Retroalimentación docente</b><span>${s.exam?.review?'Disponible en Comprende':'Sin revisión registrada'}</span></li></ul><p class="az-evidence-note">No hay un historial completo de intentos ni un registro de consultas de retroalimentación; no se muestran cifras estimadas.</p>
+    <h4 class="az-evidence-title">1.3 Mis evidencias</h4><ul class="az-evidence-cards"><li><b>Situaciones registradas</b><span>${Object.keys(s.cases||{}).length} de 15</span></li><li><b>Evaluación final</b><span>${s.exam?`${s.exam.score} / ${s.exam.max_score||25} puntos en selección múltiple`:'Pendiente de entrega'}</span></li>${moduleFeedbackEvidence()}</ul><p class="az-evidence-note">No hay un historial completo de intentos ni un registro de consultas de retroalimentación; no se muestran cifras estimadas.</p>
     ${enough?`<details><summary>Resultados de evaluaciones por módulo</summary><ul>${evolution.series.map(series=>`<li><b>${esc(series.label)}</b><ul>${series.points.filter(p=>Number.isFinite(p.value)).map(p=>`<li>${esc(p.label)}: ${p.value} puntos</li>`).join('')}</ul></li>`).join('')}</ul></details>`:'<p>Aún no hay suficientes resultados para mostrar tu evolución. Completa nuevas evaluaciones para visualizar tu progreso.</p>'}
     </section>
     <section class="az-identify"><h3>2. Identifica — Qué muestran mis resultados</h3><p>Busca una fortaleza, una dificultad y una relación entre tus acciones y resultados. Estas orientaciones no requieren una respuesta escrita todavía.</p><dl><div><dt>2.1 Fortaleza</dt><dd>Localiza tu resultado más alto y su evidencia.</dd></div><div><dt>2.2 Dificultad</dt><dd>Reconoce el aprendizaje con menor logro o sin evidencia suficiente.</dd></div><div><dt>2.3 Relación</dt><dd>Revisa si tus actividades y retroalimentaciones ayudan a interpretar los resultados.</dd></div></dl></section>
@@ -844,7 +845,7 @@ function feedbackPanel(){
     proyecta:{number:5,title:'Proyecta',summary:'Estas son las características y orientaciones de la pestaña Proyecta.',icon:'flag',tone:'orange'}
   }[viewTab];
   const stageExplanation=`<section class="s5-tab-explanation tone-${activeStage.tone}" aria-labelledby="s5-tab-explanation-title"><div class="s5-tab-link">${icon('arrow')}<span><small>PESTAÑA ${activeStage.number} SELECCIONADA</small><b>${activeStage.title} → definición y actividad</b></span></div><header><span aria-hidden="true">${icon(activeStage.icon)}</span><div><small>CARACTERÍSTICAS DE LA PESTAÑA</small><h2 id="s5-tab-explanation-title">${activeStage.title}</h2><p>${activeStage.summary}</p></div></header>${typeof instructionContract==='function'?instructionContract({instruction:instructions[viewTab]}):''}</section>`;
-  return workZone(`${analizaTitle()}${analizaSteps(viewTab)}${feedbackDemoPanel()}<div class="az-summary">${feedbackBody(viewTab)}</div>`,'work-zone-s5');
+  return workZone(`${analizaTitle()}${analizaSteps(viewTab)}${feedbackDemoPanel()}<div class="az-summary">${activityNumberBadges(feedbackBody(viewTab))}</div>`,'work-zone-s5 feedback-reference-zone');
 }
 
 function feedbackBottom(){
@@ -921,6 +922,7 @@ function bindFeedback(){
   bindConectaGuided();
   bindTransfiereGuided();
   bindProyectaGuided();
+  if(typeof enhanceFeedbackFourOptions==='function')enhanceFeedbackFourOptions(document.querySelector('.az-summary'));
 }
 function bindProyectaFinal(){
   const board=document.querySelector('.pf-board');
@@ -1372,7 +1374,7 @@ function bindComprendeGuided(){
     const choice=feedbackResultState().exam?.answers?.[index];
     const selected=question?.options?.[choice];
     const ae=current.content.aes?.[Math.max(0,Number(String(row.ae||'').replace(/\D/g,''))-1)];
-    detail.innerHTML=`<article class="cg-proof"><h4>Pregunta ${index+1}</h4><p>${esc(row.question)}</p>${row.image?`<img src="${esc(row.image)}" alt="${esc(row.alt||row.caption||'Recurso de la pregunta evaluada')}">`:''}<dl><dt>2.1 Qué hiciste</dt><dd>${esc(selected||'La alternativa elegida no está disponible en este registro.')}</dd><dt>2.2 Qué ocurrió</dt><dd>${row.correct?'Tu respuesta fue correcta.':'Tu respuesta necesita revisión.'} ${esc(row.option_feedback||row.explanation||'')}</dd><dt>2.3 Qué criterio estaba involucrado</dt><dd>${esc(ae?.short_title||ae?.title||row.ae||'Aprendizaje por identificar')}<p>${esc(row.explanation||'No hay explicación técnica registrada.')}</p></dd><dt>2.4 Cómo puedes mejorarlo</dt><dd>Compara los datos de la pregunta con esta explicación. Identifica qué parte respalda o contradice tu decisión antes de modificarla.</dd></dl></article>`;
+    detail.innerHTML=activityNumberBadges(`<article class="cg-proof"><h4>Pregunta ${index+1}</h4><p>${esc(row.question)}</p>${row.image?`<img src="${esc(row.image)}" alt="${esc(row.alt||row.caption||'Recurso de la pregunta evaluada')}">`:''}<dl><dt>2.1 Qué hiciste</dt><dd>${esc(selected||'La alternativa elegida no está disponible en este registro.')}</dd><dt>2.2 Qué ocurrió</dt><dd>${row.correct?'Tu respuesta fue correcta.':'Tu respuesta necesita revisión.'} ${esc(row.option_feedback||row.explanation||'')}</dd><dt>2.3 Qué criterio estaba involucrado</dt><dd>${esc(ae?.short_title||ae?.title||row.ae||'Aprendizaje por identificar')}<p>${esc(row.explanation||'No hay explicación técnica registrada.')}</p></dd><dt>2.4 Cómo puedes mejorarlo</dt><dd>Compara los datos de la pregunta con esta explicación. Identifica qué parte respalda o contradice tu decisión antes de modificarla.</dd></dl></article>`);
     update();
   });
   practice.querySelectorAll('input').forEach(el=>el.addEventListener('change',()=>{

@@ -1,0 +1,461 @@
+{
+  "url": "http://127.0.0.1:8100/portal/cursos/#module/227/5",
+  "publicStation": 6,
+  "bodyChecks": [
+    {
+      "id": "analiza",
+      "bodyIdentical": true,
+      "controlsIdentical": true,
+      "timeIdentical": true,
+      "selectedCorrect": true,
+      "images": 5,
+      "selectionColor": "rgb(9, 132, 232)",
+      "stableCardPositions": true
+    },
+    {
+      "id": "comprende",
+      "bodyIdentical": true,
+      "controlsIdentical": true,
+      "timeIdentical": true,
+      "selectedCorrect": true,
+      "images": 5,
+      "selectionColor": "rgb(0, 165, 137)",
+      "stableCardPositions": true
+    },
+    {
+      "id": "conecta",
+      "bodyIdentical": true,
+      "controlsIdentical": true,
+      "timeIdentical": true,
+      "selectedCorrect": true,
+      "images": 5,
+      "selectionColor": "rgb(147, 69, 220)",
+      "stableCardPositions": true
+    },
+    {
+      "id": "transfiere",
+      "bodyIdentical": true,
+      "controlsIdentical": true,
+      "timeIdentical": true,
+      "selectedCorrect": true,
+      "images": 5,
+      "selectionColor": "rgb(237, 145, 0)",
+      "stableCardPositions": true
+    },
+    {
+      "id": "proyecta",
+      "bodyIdentical": true,
+      "controlsIdentical": true,
+      "timeIdentical": true,
+      "selectedCorrect": true,
+      "images": 5,
+      "selectionColor": "rgb(245, 44, 127)",
+      "stableCardPositions": true
+    }
+  ],
+  "keyboardNavigation": true,
+  "responsiveChecks": [
+    {
+      "device": "movil-pequeno",
+      "cards": [
+        {
+          "arrowFits": true,
+          "id": "analiza",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 258,
+            "width": 129.40000915527344,
+            "x": 16,
+            "y": 456.6499938964844
+          },
+          "selected": true,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "comprende",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 258,
+            "width": 129.40000915527344,
+            "x": 159.40000915527344,
+            "y": 456.6499938964844
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "conecta",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 258,
+            "width": 129.40000915527344,
+            "x": 16,
+            "y": 728.6500244140625
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "transfiere",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 258,
+            "width": 129.40000915527344,
+            "x": 159.40000915527344,
+            "y": 728.6500244140625
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "proyecta",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 258,
+            "width": 129.40000915527344,
+            "x": 16,
+            "y": 1000.6500244140624
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        }
+      ],
+      "columns": "129.4px 129.4px",
+      "documentWidth": 305,
+      "header": {
+        "height": 298.3999938964844,
+        "width": 280.8000183105469,
+        "x": 12,
+        "y": 128.25
+      },
+      "headerTextFits": true,
+      "horizontalOverflow": 0,
+      "sourceBeforeIntro": true,
+      "viewport": {
+        "height": 900,
+        "width": 320
+      }
+    },
+    {
+      "device": "movil",
+      "cards": [
+        {
+          "arrowFits": true,
+          "id": "analiza",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 258,
+            "width": 157,
+            "x": 16,
+            "y": 406.1000061035156
+          },
+          "selected": true,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "comprende",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 258,
+            "width": 157,
+            "x": 187,
+            "y": 406.1000061035156
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "conecta",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 258,
+            "width": 157,
+            "x": 16,
+            "y": 678.1000366210938
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "transfiere",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 258,
+            "width": 157,
+            "x": 187,
+            "y": 678.1000366210938
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "proyecta",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 258,
+            "width": 157,
+            "x": 16,
+            "y": 950.1000366210938
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        }
+      ],
+      "columns": "157px 157px",
+      "documentWidth": 360,
+      "header": {
+        "height": 247.6999969482422,
+        "width": 336,
+        "x": 12,
+        "y": 128.40000915527344
+      },
+      "headerTextFits": true,
+      "horizontalOverflow": 0,
+      "sourceBeforeIntro": true,
+      "viewport": {
+        "height": 900,
+        "width": 375
+      }
+    },
+    {
+      "device": "tablet",
+      "cards": [
+        {
+          "arrowFits": true,
+          "id": "analiza",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 268,
+            "width": 233.6000061035156,
+            "x": 28,
+            "y": -637.4500122070312
+          },
+          "selected": true,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "comprende",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 268,
+            "width": 233.6000061035156,
+            "x": 285.6000061035156,
+            "y": -637.4500122070312
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "conecta",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 268,
+            "width": 233.6000061035156,
+            "x": 543.2000122070312,
+            "y": -637.4500122070312
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "transfiere",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 268,
+            "width": 233.6000061035156,
+            "x": 28,
+            "y": -345.45001220703125
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "proyecta",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 268,
+            "width": 233.6000061035156,
+            "x": 285.6000061035156,
+            "y": -345.45001220703125
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        }
+      ],
+      "columns": "233.6px 233.6px 233.6px",
+      "documentWidth": 805,
+      "header": {
+        "height": 157,
+        "width": 756.7999877929688,
+        "x": 24,
+        "y": -824.4500122070312
+      },
+      "headerTextFits": true,
+      "horizontalOverflow": 0,
+      "sourceBeforeIntro": true,
+      "viewport": {
+        "height": 1050,
+        "width": 820
+      }
+    },
+    {
+      "device": "computador",
+      "cards": [
+        {
+          "arrowFits": true,
+          "id": "analiza",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 268,
+            "width": 222.5500030517578,
+            "x": 28,
+            "y": -2066.400146484375
+          },
+          "selected": true,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "comprende",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 268,
+            "width": 222.5625,
+            "x": 274.5500183105469,
+            "y": -2066.400146484375
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "conecta",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 268,
+            "width": 222.5625,
+            "x": 521.1124877929688,
+            "y": -2066.400146484375
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "transfiere",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 268,
+            "width": 222.5625,
+            "x": 767.6749877929688,
+            "y": -2066.400146484375
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        },
+        {
+          "arrowFits": true,
+          "id": "proyecta",
+          "imageFits": true,
+          "imageLoaded": true,
+          "numberFits": true,
+          "rect": {
+            "height": 268,
+            "width": 222.5625,
+            "x": 1014.2374877929688,
+            "y": -2066.400146484375
+          },
+          "selected": false,
+          "textFits": true,
+          "transition": "0.15s, 0.15s"
+        }
+      ],
+      "columns": "222.55px 222.562px 222.562px 222.562px 222.562px",
+      "documentWidth": 1265,
+      "header": {
+        "height": 126,
+        "width": 1216.800048828125,
+        "x": 24,
+        "y": -2222.400146484375
+      },
+      "headerTextFits": true,
+      "horizontalOverflow": 0,
+      "sourceBeforeIntro": true,
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    }
+  ],
+  "noAnswersEntered": true,
+  "noActivitySubmitted": true
+}

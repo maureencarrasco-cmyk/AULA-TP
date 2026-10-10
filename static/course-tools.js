@@ -86,6 +86,8 @@ function openModulePractice(){
 function moduleAgentReply(question){const c=view.station?current?.content:null;const q=question.toLowerCase();
  if(q.includes('respuesta')||q.includes('correcta')||q.includes('alternativa')||q.includes('cuál es'))return 'No te voy a entregar la solución. Anota qué observaste, qué dato falta y qué consecuencia tendría cada decisión.';
  if(view.station===4)return 'En Evaluación Final el agente no ayuda a resolver. Usa Accesibilidad si necesitas leer o ampliar el texto.';
+ const practice=window.AulaPracticeScreens?.context();
+ if(practice)return `Estás en ${practice.stage_label} de una práctica ${practice.level_label}. ${practice.demand} Relaciona tu duda con este criterio: ${practice.criterion || practice.ae_title}. Separa la evidencia comprobable de los pendientes; no supongas datos que el caso no entrega.`;
  if(view.station===1)return '¿Qué elemento del escenario llama tu atención? ¿Qué información consideras importante y qué podría ocurrir si no la confirmas?';
  if(!c?.agent_hints)return null;
  if(q.includes('unidad')||q.includes('med'))return '¿Qué magnitud estás comparando? Conserva las unidades y los puntos de referencia. Explica si ambas observaciones se obtuvieron en condiciones comparables.';

@@ -1,0 +1,20 @@
+html body[data-screen="module"] #app #main#main .seccion-encargos .oficio-card {
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:170px minmax(0,1fr)!important;
+}
+html body[data-screen="module"] #app #main#main .seccion-encargos .encargo-card-photo {
+  height:170px;min-height:0;width:100%;background:#edf3f6;
+  border-bottom:1px solid #d7e4ed;
+}
+html body[data-screen="module"] #app #main#main .seccion-encargos .encargo-card-photo img {
+  object-fit:contain!important;object-position:center;
+}
+html body[data-screen="module"] #app #main#main .seccion-encargos .oficio-card-body {
+  min-height:250px;
+}
+html body[data-screen="module"] #app #main#main .encargo-real-photo figcaption {
+  font-size:12px;overflow-wrap:anywhere;
+}
+@media(max-width:700px){
+  html body[data-screen="module"] #app #main#main .seccion-encargos .oficio-card-body{min-height:210px}
+}

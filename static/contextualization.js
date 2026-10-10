@@ -1,5 +1,9 @@
 'use strict';
 
+function contextActivitySelectorMarkup(activities) {
+ return `<header class="context-selector-guide"><span class="context-selector-symbol" aria-hidden="true">${icon('flag')}</span><div class="context-selector-copy"><h3>Tu recorrido de Contextualización</h3><p>Del contexto profesional a los aprendizajes que desarrollarás, paso a paso.</p></div><ol class="context-selector-progress" aria-label="Recorrido de actividades">${activities.map((title,i)=>`<li data-context-progress="${i}" ${i===0?'class="is-current" aria-current="step"':''} aria-label="Actividad ${i+1}: ${esc(title)}"><span>${i+1}</span></li>`).join('')}</ol></header><nav class="context-tabs" role="tablist" aria-label="Actividades de Contextualización">${activities.map((title,i)=>`<button type="button" role="tab" id="context-tab-${i}" aria-controls="context-panel-${i}" aria-selected="${i===0}" tabindex="${i===0?'0':'-1'}" data-context-tab="${i}"><span data-context-tab-status>${i+1}</span><span class="context-tab-copy"><b>Actividad ${i+1}</b><small>${esc(title)}</small></span><span class="context-tab-art" aria-hidden="true"></span><span class="context-tab-meter" aria-hidden="true"><span></span></span><span class="context-tab-arrow" aria-hidden="true">${icon('arrow')}</span></button>`).join('')}</nav>`;
+}
+
 function contextualizationPanel() {
  const c=current.content, plan=c.contextualization;
  const course=courses.find(item=>item.id===current.course_id);
@@ -17,7 +21,7 @@ function contextualizationPanel() {
   `${instructions(3,'Comprende el sentido profesional de lo que aprenderás.')}<p class="context-consequence">${esc(plan.consequence)}</p><fieldset class="context-choices context-importance"><legend>${esc(plan.importance_question)}</legend>${plan.importance_options.map((item,i)=>`<label><input type="radio" name="importance" value="${i}"><b>${'ABCD'[i]}.</b><span>${esc(item)}</span></label>`).join('')}</fieldset><p class="context-feedback" data-importance-feedback role="status" hidden></p><aside class="context-purpose"><h4>¿Por qué es relevante para tu especialidad?</h4><p>${esc(plan.relevance)}</p></aside>`,
   `${instructions(4,'Reconoce qué necesitarás aprender en la siguiente estación.')}${choices('anticipated',plan.learning)}<aside class="context-purpose context-finish"><h4>Cierre de Contextualización</h4><p>Muy bien. Ya conoces el contexto profesional en el que utilizarás estos aprendizajes.</p><p>En la siguiente estación conocerás y desarrollarás los aprendizajes, conocimientos y procedimientos necesarios para comenzar a abordar este tipo de situaciones profesionales.</p></aside>`
  ];
- return `<section class="context-sequence" aria-labelledby="context-title"><header class="context-station-heading"><span class="eyebrow">ESTACIÓN 1</span><h2 id="context-title">Contextualización</h2><p>Antes de comenzar a aprender los procedimientos técnicos, conocerás una situación real de la especialidad, observarás sus principales elementos y relacionarás lo que ves con conocimientos que ya tienes.</p><p class="context-hint">En esta estación no necesitas resolver todavía el caso técnico. El objetivo es comprender el contexto y prepararte para lo que aprenderás después.</p></header><nav class="context-tabs" role="tablist" aria-label="Actividades de Contextualización">${plan.activities.map((title,i)=>`<button type="button" role="tab" id="context-tab-${i}" aria-controls="context-panel-${i}" aria-selected="${i===0}" tabindex="${i===0?'0':'-1'}" data-context-tab="${i}"><span data-context-tab-status>${i+1}</span><span><b>Actividad ${i+1}</b><small>${esc(title)}</small></span></button>`).join('')}</nav><p class="context-position" data-context-position aria-live="polite">Actividad 1 de 5</p><form id="context-sequence-form" novalidate>${bodies.map((body,i)=>`<section class="context-tab-panel" id="context-panel-${i}" role="tabpanel" aria-labelledby="context-tab-${i}" ${i?'hidden':''}>${body}<p class="context-error" data-context-error="${i}" role="alert" hidden></p><footer class="context-actions">${i?`<button type="button" class="outline" data-context-previous="${i-1}">${icon('arrow','context-back-arrow')} Actividad ${i}</button>`:'<span></span>'}<button type="button" class="primary" data-context-next="${i}">${i===4?'Continuar a Estación 2 · Aprendizajes esperados':'Continuar a Actividad '+(i+2)} ${icon('arrow')}</button></footer></section>`).join('')}</form></section>`;
+ return `<section class="context-sequence" aria-labelledby="context-title">${contextActivitySelectorMarkup(plan.activities)}<p class="context-position" data-context-position aria-live="polite">Actividad 1 de 5</p><form id="context-sequence-form" novalidate>${bodies.map((body,i)=>`<section class="context-tab-panel" id="context-panel-${i}" role="tabpanel" aria-labelledby="context-tab-${i}" ${i?'hidden':''}>${body}<p class="context-error" data-context-error="${i}" role="alert" hidden></p><footer class="context-actions">${i?`<button type="button" class="outline" data-context-previous="${i-1}">${icon('arrow','context-back-arrow')} Actividad ${i}</button>`:'<span></span>'}<button type="button" class="primary" data-context-next="${i}">${i===4?'Continuar a Estación 2 · Aprendizajes esperados':'Continuar a Actividad '+(i+2)} ${icon('arrow')}</button></footer></section>`).join('')}</form></section>`;
 }
 
 function bindContextualization(root) {
@@ -56,6 +60,15 @@ function bindContextualization(root) {
    button.tabIndex=i===active?0:-1;
    button.querySelector('[data-context-tab-status]').innerHTML=done?icon('check'):String(i+1);
    button.setAttribute('aria-label',`Actividad ${i+1}: ${plan.activities[i]}. ${done?'Completada':i===active?'Actual':'Pendiente'}`);
+  });
+  container.querySelectorAll('[data-context-progress]').forEach(indicator=>{
+   const i=Number(indicator.dataset.contextProgress), done=completed.has(i);
+   indicator.classList.toggle('is-current',i===active);
+   indicator.classList.toggle('is-complete',done);
+   if(i===active)indicator.setAttribute('aria-current','step');
+   else indicator.removeAttribute('aria-current');
+   indicator.querySelector('span').innerHTML=done?icon('check'):String(i+1);
+   indicator.setAttribute('aria-label',`Actividad ${i+1}: ${plan.activities[i]}. ${done?'Completada':i===active?'Actual':'Pendiente'}`);
   });
   container.querySelectorAll('[data-context-next]').forEach(button=>{button.disabled=readOnly||pending;});
   container.querySelectorAll('[data-context-previous]').forEach(button=>{button.disabled=pending;});

@@ -64,6 +64,7 @@ function pedRoute(steps,currentIndex){
  return `<ol class="ped-route" aria-label="Ruta de esta actividad">${steps.map((s,i)=>{
   const a=pedAction(s.action);
   const state=i<cur?'done':i===cur?'current':'idle';
-  return `<li class="ped-route-item" data-action="${s.action}" data-state="${state}"><span class="ped-num">${i+1}</span>${workIco(a.icon)}<span class="ped-verb">${a.verb}</span></li>${i<steps.length-1?'<li class="ped-route-arrow" aria-hidden="true">→</li>':''}`;
+  const letter=String.fromCharCode(65+i);
+  return `<li class="ped-route-item" data-action="${s.action}" data-state="${state}"><span class="ped-route-letter" aria-label="Etapa ${letter}">${letter}</span>${workIco(a.icon)}<span class="ped-verb">${a.verb}</span></li>${i<steps.length-1?'<li class="ped-route-arrow" aria-hidden="true">→</li>':''}`;
  }).join('')}</ol>`;
 }

@@ -1,0 +1,3888 @@
+{
+  "courses": 45,
+  "modules": 451,
+  "endpointReads": 902,
+  "testPublications": 45,
+  "database": "Disposable test database only",
+  "progressUnchanged": true,
+  "coursesDetail": [
+    {
+      "id": 1,
+      "title": "Refrigeración y Climatización",
+      "modules": [
+        {
+          "id": 1,
+          "course_id": 1,
+          "title": "Lectura de planos y cubicación de materiales de proyectos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 2,
+          "course_id": 1,
+          "title": "Instrumentos de medición y de verificación",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 3,
+          "course_id": 1,
+          "title": "Instalación y montaje de redes de refrigeración y climatización",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 4,
+          "course_id": 1,
+          "title": "Instalación y montaje de equipos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 447,
+          "course_id": 1,
+          "title": "Puesta en marcha de equipos de refrigeración y climatización",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 448,
+          "course_id": 1,
+          "title": "Diagnóstico en sistemas de refrigeración y climatización",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 449,
+          "course_id": 1,
+          "title": "Mantención de sistemas de refrigeración y climatización",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 450,
+          "course_id": 1,
+          "title": "Reciclaje y almacenamiento de refrigerantes",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 451,
+          "course_id": 1,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Electricidad",
+      "modules": [
+        {
+          "id": 5,
+          "course_id": 2,
+          "title": "Instalación de motores eléctricos y equipos de calefacción",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 6,
+          "course_id": 2,
+          "title": "Instalaciones eléctricas domiciliarias",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 7,
+          "course_id": 2,
+          "title": "Elaboración de proyectos eléctricos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 8,
+          "course_id": 2,
+          "title": "Mantenimiento de máquinas, equipos y sistemas eléctricos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 9,
+          "course_id": 2,
+          "title": "Instalación de sistemas de control eléctrico industrial",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 10,
+          "course_id": 2,
+          "title": "Instalaciones eléctricas industriales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 11,
+          "course_id": 2,
+          "title": "Instalación de equipos electrónicos de potencia",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 12,
+          "course_id": 2,
+          "title": "Automatización de sistemas eléctricos industriales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 13,
+          "course_id": 2,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Atención de Enfermería, mención Adulto Mayor",
+      "modules": [
+        {
+          "id": 14,
+          "course_id": 3,
+          "title": "Aplicación de cuidados básicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 15,
+          "course_id": 3,
+          "title": "Medición y control de parámetros básicos en salud",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 16,
+          "course_id": 3,
+          "title": "Promoción de la salud y prevención de la enfermedad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 17,
+          "course_id": 3,
+          "title": "Higiene y bioseguridad del ambiente",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 18,
+          "course_id": 3,
+          "title": "Sistemas de registro e información en salud",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 19,
+          "course_id": 3,
+          "title": "Prevención y control de infecciones intrahospitalarias",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 20,
+          "course_id": 3,
+          "title": "Necesidades psicosociales del adulto mayor",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 21,
+          "course_id": 3,
+          "title": "Orientación familiar para el cuidado del adulto mayor",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 22,
+          "course_id": 3,
+          "title": "Alimentación y nutrición del adulto mayor",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 23,
+          "course_id": 3,
+          "title": "Atención de primeros auxilios del adulto mayor",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 24,
+          "course_id": 3,
+          "title": "Administración de medicamentos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 25,
+          "course_id": 3,
+          "title": "Higiene y confort del adulto mayor",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 26,
+          "course_id": 3,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Atención de Enfermería, mención Enfermería",
+      "modules": [
+        {
+          "id": 27,
+          "course_id": 4,
+          "title": "Aplicación de cuidados básicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 28,
+          "course_id": 4,
+          "title": "Medición y control de parámetros básicos en salud",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 29,
+          "course_id": 4,
+          "title": "Promoción de la salud y prevención de la enfermedad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 30,
+          "course_id": 4,
+          "title": "Higiene y bioseguridad del ambiente",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 31,
+          "course_id": 4,
+          "title": "Sistemas de registro e información en salud",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 32,
+          "course_id": 4,
+          "title": "Prevención y control de infecciones intrahospitalarias",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 33,
+          "course_id": 4,
+          "title": "Técnicas básicas de enfermería y del Programa Nacional de Inmunizaciones",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 34,
+          "course_id": 4,
+          "title": "Atención en servicios de urgencia y primeros auxilios",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 35,
+          "course_id": 4,
+          "title": "Preparación del entorno clínico",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 36,
+          "course_id": 4,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Gastronomía, mención Cocina",
+      "modules": [
+        {
+          "id": 37,
+          "course_id": 5,
+          "title": "Higiene para la elaboración de alimentos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 38,
+          "course_id": 5,
+          "title": "Elaboración de alimentos de baja complejidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 39,
+          "course_id": 5,
+          "title": "Recepción y almacenamiento de insumos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 40,
+          "course_id": 5,
+          "title": "Planificación de la producción gastronómica",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 41,
+          "course_id": 5,
+          "title": "Preparación, diseño y montaje de buffet",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 42,
+          "course_id": 5,
+          "title": "Servicio de comedores, bares y salones",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 43,
+          "course_id": 5,
+          "title": "Cocina chilena",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 44,
+          "course_id": 5,
+          "title": "Innovación y cocina internacional",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 45,
+          "course_id": 5,
+          "title": "Elaboración de bebidas alcohólicas y analcohólicas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 46,
+          "course_id": 5,
+          "title": "Elaboración de menús y carta",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 47,
+          "course_id": 5,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Gastronomía, mención Pastelería y Repostería",
+      "modules": [
+        {
+          "id": 48,
+          "course_id": 6,
+          "title": "Higiene para la elaboración de alimentos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 49,
+          "course_id": 6,
+          "title": "Elaboración de alimentos de baja complejidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 50,
+          "course_id": 6,
+          "title": "Recepción y almacenamiento de insumos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 51,
+          "course_id": 6,
+          "title": "Planificación de la producción gastronómica",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 52,
+          "course_id": 6,
+          "title": "Preparación, diseño y montaje de buffet",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 53,
+          "course_id": 6,
+          "title": "Servicio de comedores, bares y salones",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 54,
+          "course_id": 6,
+          "title": "Elaboración de masas y pastas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 55,
+          "course_id": 6,
+          "title": "Elaboración de productos de repostería",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 56,
+          "course_id": 6,
+          "title": "Elaboración de productos de pastelería",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 57,
+          "course_id": 6,
+          "title": "Innovación en la pastelería y repostería",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 58,
+          "course_id": 6,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Servicios de Hotelería",
+      "modules": [
+        {
+          "id": 59,
+          "course_id": 7,
+          "title": "Atención al cliente en servicios de hotelería",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 60,
+          "course_id": 7,
+          "title": "Servicio de habitaciones",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 61,
+          "course_id": 7,
+          "title": "Actividades recreativas y de animación",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 62,
+          "course_id": 7,
+          "title": "Servicio de eventos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 63,
+          "course_id": 7,
+          "title": "Inglés técnico para la industria de la hospitalidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 64,
+          "course_id": 7,
+          "title": "Información turística",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 65,
+          "course_id": 7,
+          "title": "Servicio de recepción y reservas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 66,
+          "course_id": 7,
+          "title": "Servicio de coctelería y vinos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 67,
+          "course_id": 7,
+          "title": "Servicio de información bilingüe",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 68,
+          "course_id": 7,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Contabilidad",
+      "modules": [
+        {
+          "id": 78,
+          "course_id": 8,
+          "title": "Contabilización de operaciones comerciales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 79,
+          "course_id": 8,
+          "title": "Cálculo y registro de remuneraciones",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 80,
+          "course_id": 8,
+          "title": "Control y procesamiento de información contable",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 81,
+          "course_id": 8,
+          "title": "Organización y métodos de trabajo en la oficina",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 82,
+          "course_id": 8,
+          "title": "Atención de clientes",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 83,
+          "course_id": 8,
+          "title": "Elaboración de informes contables",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 84,
+          "course_id": 8,
+          "title": "Cálculo y registro de impuestos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 85,
+          "course_id": 8,
+          "title": "Registro de operaciones de comercio nacional e internacional",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 86,
+          "course_id": 8,
+          "title": "Procesamiento de información contable-financiera",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 87,
+          "course_id": 8,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Elaboración Industrial de Alimentos",
+      "modules": [
+        {
+          "id": 175,
+          "course_id": 9,
+          "title": "Recepción de materias primas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 176,
+          "course_id": 9,
+          "title": "Almacenaje y bodega de alimentos e insumos alimentarios",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 177,
+          "course_id": 9,
+          "title": "Elaboración de alimentos e higiene",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 178,
+          "course_id": 9,
+          "title": "Aseguramiento de la calidad de procesos y alimentos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 179,
+          "course_id": 9,
+          "title": "Tratamientos de conservación de alimentos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 180,
+          "course_id": 9,
+          "title": "Control y registro de procesos de la industria de alimentos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 181,
+          "course_id": 9,
+          "title": "Manejo de desechos de la industria de alimentos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 182,
+          "course_id": 9,
+          "title": "Envasado y rotulación de alimentos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 183,
+          "course_id": 9,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Vestuario y Confección Textil",
+      "modules": [
+        {
+          "id": 184,
+          "course_id": 10,
+          "title": "Patronaje computacional",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 185,
+          "course_id": 10,
+          "title": "Elaboración de fichas técnicas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 186,
+          "course_id": 10,
+          "title": "Mantenimiento de máquinas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 187,
+          "course_id": 10,
+          "title": "Tendido, trazado y corte de telas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 188,
+          "course_id": 10,
+          "title": "Confección y terminaciones",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 189,
+          "course_id": 10,
+          "title": "Diseño computacional de artículos y vestuario",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 190,
+          "course_id": 10,
+          "title": "Patronaje y escalado industrial",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 191,
+          "course_id": 10,
+          "title": "Procesos de confección industrial",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 192,
+          "course_id": 10,
+          "title": "Control de calidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 193,
+          "course_id": 10,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Instalaciones Sanitarias",
+      "modules": [
+        {
+          "id": 147,
+          "course_id": 11,
+          "title": "Lectura de planos de instalaciones sanitarias",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 148,
+          "course_id": 11,
+          "title": "Trazado de redes",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 149,
+          "course_id": 11,
+          "title": "Instalación de redes de agua potable",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 150,
+          "course_id": 11,
+          "title": "Instalación de redes de alcantarillado",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 151,
+          "course_id": 11,
+          "title": "Instalación de redes para riego agrícola",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 152,
+          "course_id": 11,
+          "title": "Cubicación en instalaciones sanitarias",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 153,
+          "course_id": 11,
+          "title": "Instalación de artefactos sanitarios",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 154,
+          "course_id": 11,
+          "title": "Instalación de gas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 155,
+          "course_id": 11,
+          "title": "Mantenimiento de redes y artefactos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 156,
+          "course_id": 11,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Montaje Industrial",
+      "modules": [
+        {
+          "id": 157,
+          "course_id": 12,
+          "title": "Unión y reparación de elementos metálicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 158,
+          "course_id": 12,
+          "title": "Dibujo e interpretación de planos de montaje",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 159,
+          "course_id": 12,
+          "title": "Mediciones, trazados y cálculos de montaje industrial",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 160,
+          "course_id": 12,
+          "title": "Maniobras de levante de cargas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 161,
+          "course_id": 12,
+          "title": "Tratamientos superficiales y manejo de residuos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 162,
+          "course_id": 12,
+          "title": "Fijación y montaje de elementos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 163,
+          "course_id": 12,
+          "title": "Mantenimiento industrial",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 164,
+          "course_id": 12,
+          "title": "Cubicación de proyectos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 165,
+          "course_id": 12,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Electrónica",
+      "modules": [
+        {
+          "id": 107,
+          "course_id": 13,
+          "title": "Proyectos electrónicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 108,
+          "course_id": 13,
+          "title": "Armado y reparación de circuitos electrónicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 109,
+          "course_id": 13,
+          "title": "Ensamblaje y mantención de sistemas y equipos digitales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 110,
+          "course_id": 13,
+          "title": "Sistemas de control domótico",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 111,
+          "course_id": 13,
+          "title": "Mantención y operación de equipos de control electrónico de potencia",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 112,
+          "course_id": 13,
+          "title": "Detección de fallas industriales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 113,
+          "course_id": 13,
+          "title": "Operación y programación de equipos de control eléctrico industrial",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 114,
+          "course_id": 13,
+          "title": "Montaje de equipos industriales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 115,
+          "course_id": 13,
+          "title": "Automatización industrial",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 116,
+          "course_id": 13,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Dibujo Técnico",
+      "modules": [
+        {
+          "id": 127,
+          "course_id": 14,
+          "title": "Lectura de planos y documentos técnicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 128,
+          "course_id": 14,
+          "title": "Dibujo manual de levantamientos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 129,
+          "course_id": 14,
+          "title": "Dibujo digital de proyectos de arquitectura",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 130,
+          "course_id": 14,
+          "title": "Dibujo digital de piezas y conjuntos mecánicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 131,
+          "course_id": 14,
+          "title": "Maquetas virtuales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 132,
+          "course_id": 14,
+          "title": "Dibujo digital de instalaciones domiciliarias",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 133,
+          "course_id": 14,
+          "title": "Dibujo digital de sistemas constructivos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 134,
+          "course_id": 14,
+          "title": "Dibujo digital de montaje industrial",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 135,
+          "course_id": 14,
+          "title": "Cubicación de proyectos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 136,
+          "course_id": 14,
+          "title": "Impresión y reproducción de planos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 137,
+          "course_id": 14,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Gráfica",
+      "modules": [
+        {
+          "id": 138,
+          "course_id": 15,
+          "title": "Verificación y preparación de archivos digitales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 139,
+          "course_id": 15,
+          "title": "Preparación de la máquina impresora",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 140,
+          "course_id": 15,
+          "title": "Impresión del producto gráfico",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 141,
+          "course_id": 15,
+          "title": "Materiales e insumos de la industria gráfica",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 142,
+          "course_id": 15,
+          "title": "Encuadernación del producto impreso",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 143,
+          "course_id": 15,
+          "title": "Imposición de archivos y obtención de prueba de color",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 144,
+          "course_id": 15,
+          "title": "Salida del archivo a matriz impresora e impresión digital",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 145,
+          "course_id": 15,
+          "title": "Postimpresión en embalajes y recubrimientos a impresos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 146,
+          "course_id": 15,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Servicios de Turismo",
+      "modules": [
+        {
+          "id": 88,
+          "course_id": 16,
+          "title": "Sistemas de reservas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 89,
+          "course_id": 16,
+          "title": "Atención turística al cliente",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 90,
+          "course_id": 16,
+          "title": "Patrimonio, cultura y atractivos turísticos de Chile",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 91,
+          "course_id": 16,
+          "title": "Prevención y seguridad en programas turísticos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 92,
+          "course_id": 16,
+          "title": "Inglés para la comunicación oral en turismo",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 93,
+          "course_id": 16,
+          "title": "Patrimonio, cultura y atractivos turísticos del mundo",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 94,
+          "course_id": 16,
+          "title": "Conducción de grupos turísticos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 95,
+          "course_id": 16,
+          "title": "Elaboración de programas turísticos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 96,
+          "course_id": 16,
+          "title": "Inglés para la comunicación escrita en turismo",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 97,
+          "course_id": 16,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Forestal",
+      "modules": [
+        {
+          "id": 194,
+          "course_id": 17,
+          "title": "Producción de plantas y repoblación",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 195,
+          "course_id": 17,
+          "title": "Mediciones forestales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 196,
+          "course_id": 17,
+          "title": "Control de plagas y enfermedades forestales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 197,
+          "course_id": 17,
+          "title": "Uso y mantenimiento de herramientas y máquinas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 198,
+          "course_id": 17,
+          "title": "Operaciones silvícolas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 199,
+          "course_id": 17,
+          "title": "Operaciones de cosecha forestal",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 200,
+          "course_id": 17,
+          "title": "Control de la producción forestal",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 201,
+          "course_id": 17,
+          "title": "Técnicas de prevención y combate de incendios forestales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 202,
+          "course_id": 17,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Muebles y Terminaciones en Madera",
+      "modules": [
+        {
+          "id": 203,
+          "course_id": 18,
+          "title": "Abastecimiento y despacho",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 204,
+          "course_id": 18,
+          "title": "Fabricación de componentes de carpintería y muebles",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 205,
+          "course_id": 18,
+          "title": "Cubicaciones",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 206,
+          "course_id": 18,
+          "title": "Aseguramiento de la calidad, seguridad y cuidado del medio ambiente",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 207,
+          "course_id": 18,
+          "title": "Representación gráfica de muebles y elementos de carpintería",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 208,
+          "course_id": 18,
+          "title": "Armado de estructuras",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 209,
+          "course_id": 18,
+          "title": "Terminaciones de muebles y elementos de carpintería",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 210,
+          "course_id": 18,
+          "title": "Instalación de muebles y elementos de carpintería",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 211,
+          "course_id": 18,
+          "title": "Mantenimiento de máquinas, equipos y herramientas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 212,
+          "course_id": 18,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Acuicultura",
+      "modules": [
+        {
+          "id": 222,
+          "course_id": 19,
+          "title": "Manejo de reproductores, desove y crías de larvas de especies hidrobiológicas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 223,
+          "course_id": 19,
+          "title": "Engorde de especies acuícolas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 224,
+          "course_id": 19,
+          "title": "Operación de sistemas, equipos y maquinarias",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 225,
+          "course_id": 19,
+          "title": "Seguridad, prevención de riesgos y cuidado del medio ambiente",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 226,
+          "course_id": 19,
+          "title": "Cosecha de especies acuícolas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 227,
+          "course_id": 19,
+          "title": "Captación de semillas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 228,
+          "course_id": 19,
+          "title": "Trabajos subacuáticos en acuicultura",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 229,
+          "course_id": 19,
+          "title": "Manejo de información acuícola",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 230,
+          "course_id": 19,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Operaciones Portuarias",
+      "modules": [
+        {
+          "id": 213,
+          "course_id": 20,
+          "title": "Documentación en la operación portuaria",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 214,
+          "course_id": 20,
+          "title": "Consolidación y desconsolidación de contenedores",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 215,
+          "course_id": 20,
+          "title": "Seguridad y prevención de riesgos en faenas portuarias",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 216,
+          "course_id": 20,
+          "title": "Operación de movilización y distribución de cargas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 217,
+          "course_id": 20,
+          "title": "Tramitación y documentación de recepción y despacho de carga",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 218,
+          "course_id": 20,
+          "title": "Estiba y desestiba de naves mercantes",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 219,
+          "course_id": 20,
+          "title": "Tramitación de movilización y distribución de cargas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 220,
+          "course_id": 20,
+          "title": "Organización y almacenamiento de cargas en zonas de depósito",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 221,
+          "course_id": 20,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Pesquería",
+      "modules": [
+        {
+          "id": 231,
+          "course_id": 21,
+          "title": "Navegación y meteorología",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 232,
+          "course_id": 21,
+          "title": "Armado, mantenimiento y reparación de implementos de pesca",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 233,
+          "course_id": 21,
+          "title": "Tratamientos de conservación y manipulación de recursos hidrobiológicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 234,
+          "course_id": 21,
+          "title": "Prevención de riesgos en el mar",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 235,
+          "course_id": 21,
+          "title": "Primeros auxilios",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 236,
+          "course_id": 21,
+          "title": "Maniobras y operación de artes de pesca",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 237,
+          "course_id": 21,
+          "title": "Gestión de planes y proyectos de manejo y emprendimiento pesquero",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 238,
+          "course_id": 21,
+          "title": "Comunicaciones marítimas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 239,
+          "course_id": 21,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Tripulación de Naves Mercantes y Especiales",
+      "modules": [
+        {
+          "id": 240,
+          "course_id": 22,
+          "title": "Operación de equipos de maniobras de cubierta",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 241,
+          "course_id": 22,
+          "title": "Mantenimiento de máquinas de cubierta",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 242,
+          "course_id": 22,
+          "title": "Prevención de riesgos en el mar",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 243,
+          "course_id": 22,
+          "title": "Operación puente de gobierno",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 244,
+          "course_id": 22,
+          "title": "Primeros auxilios",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 245,
+          "course_id": 22,
+          "title": "Operación de máquinas propulsoras y auxiliares",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 246,
+          "course_id": 22,
+          "title": "Mantenimiento de máquinas marinas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 247,
+          "course_id": 22,
+          "title": "Comunicaciones",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 248,
+          "course_id": 22,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Construcciones Metálicas",
+      "modules": [
+        {
+          "id": 166,
+          "course_id": 23,
+          "title": "Lectura y dibujo de planos en construcciones metálicas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 167,
+          "course_id": 23,
+          "title": "Trazado de partes y piezas en construcciones metálicas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 168,
+          "course_id": 23,
+          "title": "Mantenimiento de equipos y herramientas en construcciones metálicas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 169,
+          "course_id": 23,
+          "title": "Mecanizado de partes y piezas metálicas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 170,
+          "course_id": 23,
+          "title": "Corte y soldadura en construcciones metálicas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 171,
+          "course_id": 23,
+          "title": "Armado y montaje en construcciones metálicas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 172,
+          "course_id": 23,
+          "title": "Protección de estructuras y tratamientos de residuos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 173,
+          "course_id": 23,
+          "title": "Cubicación de materiales e insumos en construcciones metálicas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 174,
+          "course_id": 23,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Mecánica Automotriz",
+      "modules": [
+        {
+          "id": 249,
+          "course_id": 24,
+          "title": "Ajuste de motores",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 250,
+          "course_id": 24,
+          "title": "Lectura de planos y manuales técnicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 251,
+          "course_id": 24,
+          "title": "Manejo de residuos y desechos automotrices",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 252,
+          "course_id": 24,
+          "title": "Mantenimiento de sistemas de seguridad y confortabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 253,
+          "course_id": 24,
+          "title": "Mantenimiento de sistemas eléctricos y electrónicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 254,
+          "course_id": 24,
+          "title": "Mantenimiento de motores",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 255,
+          "course_id": 24,
+          "title": "Mantenimiento de sistemas hidráulicos y neumáticos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 256,
+          "course_id": 24,
+          "title": "Mantenimiento de los sistemas de transmisión y frenos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 257,
+          "course_id": 24,
+          "title": "Mantenimiento de sistemas de dirección y suspensión",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 258,
+          "course_id": 24,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Mecánica de Mantenimiento de Aeronaves",
+      "modules": [
+        {
+          "id": 436,
+          "course_id": 25,
+          "title": "Reparación y remplazo de elementos estructurales de la aeronave",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 437,
+          "course_id": 25,
+          "title": "Detección de fallas en instrumentos y sistemas de navegación y comunicación de la aeronave",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 438,
+          "course_id": 25,
+          "title": "Mantenimiento de los controles de vuelo de la aeronave",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 439,
+          "course_id": 25,
+          "title": "Inglés técnico de estructura, controles de vuelo y sistemas de navegación y comunicación de la aeronave",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 440,
+          "course_id": 25,
+          "title": "Lectura e interpretación de manuales de mantenimiento de aeronaves",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 441,
+          "course_id": 25,
+          "title": "Normativa de mantenimiento aeronáutico",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 442,
+          "course_id": 25,
+          "title": "Mantenimiento de las unidades y sistemas asociados al motor recíproco",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 443,
+          "course_id": 25,
+          "title": "Mantenimiento de las unidades y sistemas asociados al motor a reacción",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 444,
+          "course_id": 25,
+          "title": "Mantenimiento de los sistemas de la aeronave",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 445,
+          "course_id": 25,
+          "title": "Inglés técnico de mantenimiento de aeronaves",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 446,
+          "course_id": 25,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Asistencia en Geología",
+      "modules": [
+        {
+          "id": 269,
+          "course_id": 26,
+          "title": "Preparación e instalación de campamentos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 270,
+          "course_id": 26,
+          "title": "Marco legal y seguridad en geología",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 271,
+          "course_id": 26,
+          "title": "Clasificación de rocas y minerales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 272,
+          "course_id": 26,
+          "title": "Lectura y elaboración de mapas topográficos y geológicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 273,
+          "course_id": 26,
+          "title": "Prospección geológica con sondajes",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 274,
+          "course_id": 26,
+          "title": "Técnicas de muestreo geológico",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 275,
+          "course_id": 26,
+          "title": "Registro y transferencia de información geológica",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 276,
+          "course_id": 26,
+          "title": "Transporte y mantenimiento de equipos e instrumentos geológicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 277,
+          "course_id": 26,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Explotación Minera",
+      "modules": [
+        {
+          "id": 287,
+          "course_id": 27,
+          "title": "Lectura de planos de ubicación y de tronadura",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 288,
+          "course_id": 27,
+          "title": "Fortificación de minas subterráneas y a cielo abierto",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 289,
+          "course_id": 27,
+          "title": "Perforación y tronadura en faenas mineras",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 290,
+          "course_id": 27,
+          "title": "Marco legal y seguridad en plantas de explotación minera",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 291,
+          "course_id": 27,
+          "title": "Ventilación secundaria y drenaje de minas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 292,
+          "course_id": 27,
+          "title": "Muestreo en explotaciones mineras",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 293,
+          "course_id": 27,
+          "title": "Cubicación, carguío y transporte",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 294,
+          "course_id": 27,
+          "title": "Chancado primario de minerales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 295,
+          "course_id": 27,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Metalurgia Extractiva",
+      "modules": [
+        {
+          "id": 278,
+          "course_id": 28,
+          "title": "Laboratorio y análisis químico",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 279,
+          "course_id": 28,
+          "title": "Muestreo y control de procesos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 280,
+          "course_id": 28,
+          "title": "Control de inventario",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 281,
+          "course_id": 28,
+          "title": "Legislación y prevención de riesgos en la minería",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 282,
+          "course_id": 28,
+          "title": "Transformación mecánica de los minerales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 283,
+          "course_id": 28,
+          "title": "Acondicionamiento químico de los minerales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 284,
+          "course_id": 28,
+          "title": "Técnicas de hidrometalurgia",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 285,
+          "course_id": 28,
+          "title": "Fundición y refinería",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 286,
+          "course_id": 28,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Atención de Párvulos",
+      "modules": [
+        {
+          "id": 259,
+          "course_id": 29,
+          "title": "Material didáctico y de ambientación",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 260,
+          "course_id": 29,
+          "title": "Expresión musical para párvulos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 261,
+          "course_id": 29,
+          "title": "Relación con la familia",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 262,
+          "course_id": 29,
+          "title": "Salud en párvulos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 263,
+          "course_id": 29,
+          "title": "Recreación y bienestar de los párvulos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 264,
+          "course_id": 29,
+          "title": "Actividades educativas para párvulos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 265,
+          "course_id": 29,
+          "title": "Expresión literaria y teatral con párvulos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 266,
+          "course_id": 29,
+          "title": "Alimentación de los párvulos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 267,
+          "course_id": 29,
+          "title": "Higiene y seguridad de los párvulos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 268,
+          "course_id": 29,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Conectividad y Redes",
+      "modules": [
+        {
+          "id": 98,
+          "course_id": 30,
+          "title": "Instalación de redes de área local cableadas e inalámbricas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 99,
+          "course_id": 30,
+          "title": "Ensamblado y configuración de computadores y equipos terminales portátiles",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 100,
+          "course_id": 30,
+          "title": "Instalación y explotación de software de aplicaciones productivas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 101,
+          "course_id": 30,
+          "title": "Configuración y puesta en servicio de aplicaciones en redes de área local",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 102,
+          "course_id": 30,
+          "title": "Configuración de la seguridad en redes de área local",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 103,
+          "course_id": 30,
+          "title": "Mantenimiento y actualización de hardware en redes de área local",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 104,
+          "course_id": 30,
+          "title": "Mantenimiento y actualización de software en redes de área local",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 105,
+          "course_id": 30,
+          "title": "Recuperación y respaldo de información en redes de área local",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 106,
+          "course_id": 30,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "title": "Programación",
+      "modules": [
+        {
+          "id": 69,
+          "course_id": 31,
+          "title": "Programación y bases de datos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 70,
+          "course_id": 31,
+          "title": "Instalación y configuración de equipos informáticos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 71,
+          "course_id": 31,
+          "title": "Soporte a usuarios y productividad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 72,
+          "course_id": 31,
+          "title": "Sistemas operativos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 73,
+          "course_id": 31,
+          "title": "Diseño de bases de datos relacionales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 74,
+          "course_id": 31,
+          "title": "Programación orientada a objetos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 75,
+          "course_id": 31,
+          "title": "Administración de bases de datos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 76,
+          "course_id": 31,
+          "title": "Desarrollo de aplicaciones web",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 77,
+          "course_id": 31,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "title": "Telecomunicaciones",
+      "modules": [
+        {
+          "id": 117,
+          "course_id": 32,
+          "title": "Operaciones y fundamentos de las telecomunicaciones",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 118,
+          "course_id": 32,
+          "title": "Instalación y mantenimiento básico de un terminal informático",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 119,
+          "course_id": 32,
+          "title": "Instalación y configuración de redes",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 120,
+          "course_id": 32,
+          "title": "Mantenimiento de circuitos electrónicos básicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 121,
+          "course_id": 32,
+          "title": "Instalación de servicios básicos de telecomunicaciones",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 122,
+          "course_id": 32,
+          "title": "Comunicaciones inalámbricas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 123,
+          "course_id": 32,
+          "title": "Instalación de redes telefónicas convergentes",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 124,
+          "course_id": 32,
+          "title": "Sistemas operativos de redes",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 125,
+          "course_id": 32,
+          "title": "Mantenimiento de redes de acceso y banda ancha",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 126,
+          "course_id": 32,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "title": "Administración, mención Logística",
+      "modules": [
+        {
+          "id": 296,
+          "course_id": 33,
+          "title": "Utilización de información contable",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 297,
+          "course_id": 33,
+          "title": "Gestión comercial y tributaria",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 298,
+          "course_id": 33,
+          "title": "Procesos administrativos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 299,
+          "course_id": 33,
+          "title": "Atención de clientes",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 300,
+          "course_id": 33,
+          "title": "Organización de oficinas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 301,
+          "course_id": 33,
+          "title": "Aplicaciones informáticas para la gestión administrativa",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 302,
+          "course_id": 33,
+          "title": "Operaciones de almacenamiento",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 303,
+          "course_id": 33,
+          "title": "Operaciones de bodega",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 304,
+          "course_id": 33,
+          "title": "Logística y distribución",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 305,
+          "course_id": 33,
+          "title": "Seguridad en bodegas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 306,
+          "course_id": 33,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "title": "Administración, mención Recursos Humanos",
+      "modules": [
+        {
+          "id": 307,
+          "course_id": 34,
+          "title": "Utilización de información contable",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 308,
+          "course_id": 34,
+          "title": "Gestión comercial y tributaria",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 309,
+          "course_id": 34,
+          "title": "Procesos administrativos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 310,
+          "course_id": 34,
+          "title": "Atención de clientes",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 311,
+          "course_id": 34,
+          "title": "Organización de oficinas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 312,
+          "course_id": 34,
+          "title": "Aplicaciones informáticas para la gestión administrativa",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 313,
+          "course_id": 34,
+          "title": "Legislación laboral",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 314,
+          "course_id": 34,
+          "title": "Cálculo de remuneración, finiquitos y obligaciones laborales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 315,
+          "course_id": 34,
+          "title": "Desarrollo y bienestar del personal",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 316,
+          "course_id": 34,
+          "title": "Dotación de personal",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 317,
+          "course_id": 34,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "title": "Agropecuaria, mención Agricultura",
+      "modules": [
+        {
+          "id": 318,
+          "course_id": 35,
+          "title": "Manejo de suelo y residuos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 319,
+          "course_id": 35,
+          "title": "Manejo de técnicas de riego",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 320,
+          "course_id": 35,
+          "title": "Técnicas de reproducción vegetal",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 321,
+          "course_id": 35,
+          "title": "Alimentación y pesaje pecuario",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 322,
+          "course_id": 35,
+          "title": "Control de plagas y enfermedades",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 323,
+          "course_id": 35,
+          "title": "Técnicas de cultivo de especies vegetales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 324,
+          "course_id": 35,
+          "title": "Manejos para optimización productiva de frutales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 325,
+          "course_id": 35,
+          "title": "Postcosecha y guarda de productos agrícolas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 326,
+          "course_id": 35,
+          "title": "Mantenimiento de maquinarias y equipos agrícolas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 327,
+          "course_id": 35,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "title": "Agropecuaria, mención Pecuaria",
+      "modules": [
+        {
+          "id": 328,
+          "course_id": 36,
+          "title": "Manejo de suelo y residuos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 329,
+          "course_id": 36,
+          "title": "Manejo de técnicas de riego",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 330,
+          "course_id": 36,
+          "title": "Técnicas de reproducción vegetal",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 331,
+          "course_id": 36,
+          "title": "Alimentación y pesaje pecuario",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 332,
+          "course_id": 36,
+          "title": "Control de plagas y enfermedades",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 333,
+          "course_id": 36,
+          "title": "Manejos pecuarios",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 334,
+          "course_id": 36,
+          "title": "Reproducción animal",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 335,
+          "course_id": 36,
+          "title": "Producción lechera",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 336,
+          "course_id": 36,
+          "title": "Sanidad y bienestar animal",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 337,
+          "course_id": 36,
+          "title": "Cultivo de praderas y forrajes",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 338,
+          "course_id": 36,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "title": "Agropecuaria, mención Vitivinícola",
+      "modules": [
+        {
+          "id": 339,
+          "course_id": 37,
+          "title": "Manejo de suelo y residuos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 340,
+          "course_id": 37,
+          "title": "Manejo de técnicas de riego",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 341,
+          "course_id": 37,
+          "title": "Técnicas de reproducción vegetal",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 342,
+          "course_id": 37,
+          "title": "Alimentación y pesaje pecuario",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 343,
+          "course_id": 37,
+          "title": "Control de plagas y enfermedades",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 344,
+          "course_id": 37,
+          "title": "Viticultura",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 345,
+          "course_id": 37,
+          "title": "Cosecha y transporte de vides",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 346,
+          "course_id": 37,
+          "title": "Elaboración de vinos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 347,
+          "course_id": 37,
+          "title": "Envasado y maquinaria vitivinícola",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 348,
+          "course_id": 37,
+          "title": "Manejo de bodegas vitivinícolas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 349,
+          "course_id": 37,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "title": "Construcción, mención Edificación",
+      "modules": [
+        {
+          "id": 350,
+          "course_id": 38,
+          "title": "Análisis de muestras de hormigón, suelos y materiales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 351,
+          "course_id": 38,
+          "title": "Carpintería de instalación de faenas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 352,
+          "course_id": 38,
+          "title": "Control y mantenimiento de bodegas y pañoles",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 353,
+          "course_id": 38,
+          "title": "Cubicación de materiales e insumos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 354,
+          "course_id": 38,
+          "title": "Interpretación de planos de construcción",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 355,
+          "course_id": 38,
+          "title": "Prevención de riesgos en la construcción",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 356,
+          "course_id": 38,
+          "title": "Trazado de obras de construcción",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 357,
+          "course_id": 38,
+          "title": "Albañilerías estructurales y no estructurales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 358,
+          "course_id": 38,
+          "title": "Carpintería estructural",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 359,
+          "course_id": 38,
+          "title": "Enfierradura para elementos estructurales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 360,
+          "course_id": 38,
+          "title": "Estructuras de hormigón",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 361,
+          "course_id": 38,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "title": "Construcción, mención Terminaciones de la Construcción",
+      "modules": [
+        {
+          "id": 362,
+          "course_id": 39,
+          "title": "Análisis de muestras de hormigón, suelos y materiales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 363,
+          "course_id": 39,
+          "title": "Carpintería de instalación de faenas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 364,
+          "course_id": 39,
+          "title": "Control y mantenimiento de bodegas y pañoles",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 365,
+          "course_id": 39,
+          "title": "Cubicación de materiales e insumos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 366,
+          "course_id": 39,
+          "title": "Interpretación de planos de construcción",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 367,
+          "course_id": 39,
+          "title": "Prevención de riesgos en la construcción",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 368,
+          "course_id": 39,
+          "title": "Trazado de obras de construcción",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 369,
+          "course_id": 39,
+          "title": "Impermeabilización y aislación de elementos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 370,
+          "course_id": 39,
+          "title": "Instalación de cubiertas y elementos de evacuación de aguas lluvias",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 371,
+          "course_id": 39,
+          "title": "Instalación de muebles, puertas y ventanas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 372,
+          "course_id": 39,
+          "title": "Revestimientos para pisos, muros y cielos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 373,
+          "course_id": 39,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "title": "Construcción, mención Obras Viales e Infraestructura",
+      "modules": [
+        {
+          "id": 374,
+          "course_id": 40,
+          "title": "Análisis de muestras de hormigón, suelos y materiales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 375,
+          "course_id": 40,
+          "title": "Carpintería de instalación de faenas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 376,
+          "course_id": 40,
+          "title": "Control y mantenimiento de bodegas y pañoles",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 377,
+          "course_id": 40,
+          "title": "Cubicación de materiales e insumos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 378,
+          "course_id": 40,
+          "title": "Interpretación de planos de construcción",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 379,
+          "course_id": 40,
+          "title": "Prevención de riesgos en la construcción",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 380,
+          "course_id": 40,
+          "title": "Trazado de obras de construcción",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 381,
+          "course_id": 40,
+          "title": "Calidad en obras viales e infraestructura",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 382,
+          "course_id": 40,
+          "title": "Seguridad vial",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 383,
+          "course_id": 40,
+          "title": "Mantenimiento de obras viales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 384,
+          "course_id": 40,
+          "title": "Conformación de la calzada",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 385,
+          "course_id": 40,
+          "title": "Infraestructura para la protección de la calzada",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 386,
+          "course_id": 40,
+          "title": "Empleabilidad y emprendimiento",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "title": "Química Industrial, mención Laboratorio Químico",
+      "modules": [
+        {
+          "id": 387,
+          "course_id": 41,
+          "title": "Manejo y almacenamiento seguro de materiales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 388,
+          "course_id": 41,
+          "title": "Técnicas, procesos y equipos de laboratorio",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 389,
+          "course_id": 41,
+          "title": "Fabricación de productos industriales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 390,
+          "course_id": 41,
+          "title": "Cuidado del medioambiente y tratamiento de residuos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 391,
+          "course_id": 41,
+          "title": "Toma de muestra",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 392,
+          "course_id": 41,
+          "title": "Preparación de muestras para análisis orgánico",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 393,
+          "course_id": 41,
+          "title": "Técnicas de análisis físico-químico",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 394,
+          "course_id": 41,
+          "title": "Técnicas de análisis instrumental",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 395,
+          "course_id": 41,
+          "title": "Mantenimiento de equipos e instrumentos de laboratorio",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 396,
+          "course_id": 41,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "title": "Química Industrial, mención Planta Química",
+      "modules": [
+        {
+          "id": 397,
+          "course_id": 42,
+          "title": "Manejo y almacenamiento seguro de materiales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 398,
+          "course_id": 42,
+          "title": "Técnicas, procesos y equipos de laboratorio",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 399,
+          "course_id": 42,
+          "title": "Fabricación de productos industriales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 400,
+          "course_id": 42,
+          "title": "Cuidado del medioambiente y tratamiento de residuos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 401,
+          "course_id": 42,
+          "title": "Transferencia de calor y operaciones unitarias",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 402,
+          "course_id": 42,
+          "title": "Acondicionamiento de sólidos y control automático",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 403,
+          "course_id": 42,
+          "title": "Muestreo de productos industriales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 404,
+          "course_id": 42,
+          "title": "Mantenimiento de sistemas auxiliares",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 405,
+          "course_id": 42,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "title": "Mecánica Industrial, mención Máquinas-Herramientas",
+      "modules": [
+        {
+          "id": 406,
+          "course_id": 43,
+          "title": "Soldadura",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 407,
+          "course_id": 43,
+          "title": "Mantenimiento de herramientas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 408,
+          "course_id": 43,
+          "title": "Medición y verificación",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 409,
+          "course_id": 43,
+          "title": "Mecánica de banco",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 410,
+          "course_id": 43,
+          "title": "Lectura de manuales y planos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 411,
+          "course_id": 43,
+          "title": "Torneado de piezas y conjuntos mecánicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 412,
+          "course_id": 43,
+          "title": "Fresado de piezas y conjuntos mecánicos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 413,
+          "course_id": 43,
+          "title": "Taladrado y rectificado de piezas mecánicas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 414,
+          "course_id": 43,
+          "title": "Mecanizado con máquinas de control numérico computacional",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 415,
+          "course_id": 43,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "title": "Mecánica Industrial, mención Matricería",
+      "modules": [
+        {
+          "id": 416,
+          "course_id": 44,
+          "title": "Soldadura",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 417,
+          "course_id": 44,
+          "title": "Mantenimiento de herramientas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 418,
+          "course_id": 44,
+          "title": "Medición y verificación",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 419,
+          "course_id": 44,
+          "title": "Mecánica de banco",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 420,
+          "course_id": 44,
+          "title": "Lectura de manuales y planos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 421,
+          "course_id": 44,
+          "title": "Fabricación de matrices",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 422,
+          "course_id": 44,
+          "title": "Fabricación de moldes",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 423,
+          "course_id": 44,
+          "title": "Mantención de matrices y moldes",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 424,
+          "course_id": 44,
+          "title": "Diseño y dibujo de moldes y matrices",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 425,
+          "course_id": 44,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "title": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+      "modules": [
+        {
+          "id": 426,
+          "course_id": 45,
+          "title": "Soldadura",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 427,
+          "course_id": 45,
+          "title": "Mantenimiento de herramientas",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 428,
+          "course_id": 45,
+          "title": "Medición y verificación",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 429,
+          "course_id": 45,
+          "title": "Mecánica de banco",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 430,
+          "course_id": 45,
+          "title": "Lectura de manuales y planos",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 431,
+          "course_id": 45,
+          "title": "Mantenimiento y reparación industrial",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 432,
+          "course_id": 45,
+          "title": "Detección de fallas en sistemas industriales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 433,
+          "course_id": 45,
+          "title": "Control de procesos industriales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 434,
+          "course_id": 45,
+          "title": "Montaje de equipos y sistemas industriales",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        },
+        {
+          "id": 435,
+          "course_id": 45,
+          "title": "Emprendimiento y empleabilidad",
+          "teacherAccess": true,
+          "studentAccess": true,
+          "moduleIsolation": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+html body[data-screen="module"] #app #main#main .work-zone-s3 .work-card-activity{display:flex!important;flex-direction:column!important;gap:16px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+html body[data-screen="module"] #app #main#main .integration-activity-header{
+  display:grid!important;grid-template-columns:80px minmax(0,1.15fr) minmax(0,1fr)!important;align-items:center!important;gap:20px!important;box-sizing:border-box;width:100%!important;min-height:154px!important;margin:0!important;padding:22px!important;border:1px solid #d4eafa!important;border-radius:8px!important;background:#f5faff!important;box-shadow:none!important;
+}
+html body[data-screen="module"] #app #main#main .integration-activity-header::before,html body[data-screen="module"] #app #main#main .integration-activity-header::after{content:none!important;display:none!important}
+html body[data-screen="module"] #app #main#main .integration-header-art{display:grid;place-items:center;width:80px;height:80px;border:1px solid #bfe4ff;border-radius:50%;background:#def1ff;box-sizing:border-box}
+html body[data-screen="module"] #app #main#main .integration-header-art>img{display:block!important;width:66px!important;height:70px!important;object-fit:contain!important}
+html body[data-screen="module"] #app #main#main .integration-header-copy{min-width:0}
+html body[data-screen="module"] #app #main#main .integration-header-copy>small{display:block;color:#2585d4!important;font:700 14px/1.4 var(--font-learning)!important;margin:0 0 6px!important}
+html body[data-screen="module"] #app #main#main .integration-header-copy>h3{display:block!important;font:800 26px/1.3 var(--font-identity)!important;color:#123f73!important;margin:0 0 8px!important;letter-spacing:0;overflow-wrap:break-word}
+html body[data-screen="module"] #app #main#main .integration-header-copy>h3>.tp-meaning-icon{display:none!important}
+html body[data-screen="module"] #app #main#main .integration-header-copy>p{font:400 16px/1.55 var(--font-learning)!important;color:#466588!important;margin:0!important;text-align:left!important;overflow-wrap:break-word}
+html body[data-screen="module"] #app #main#main .integration-header-goal{display:flex;align-items:center;gap:16px;padding:18px;background:#e6f3ff;min-width:0;box-sizing:border-box}
+html body[data-screen="module"] #app #main#main .integration-header-goal>.icon{width:38px;height:38px;flex:0 0 38px;color:#1686da}
+html body[data-screen="module"] #app #main#main .integration-header-goal>div{min-width:0}
+html body[data-screen="module"] #app #main#main .integration-header-goal strong{font:700 17px/1.45 var(--font-identity)!important;color:#123f73!important}
+html body[data-screen="module"] #app #main#main .integration-header-goal p{font:400 15px/1.5 var(--font-learning)!important;margin:6px 0 0!important;color:#466588!important;text-align:left!important}
+html body[data-screen="module"] #app #main#main .integration-reference-tabs:not(.exam-tabs){
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:32px!important;box-sizing:border-box;width:100%!important;padding:8px 4px 16px!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important;
+}
+html body[data-screen="module"] #app #main#main .integration-reference-tabs:not(.exam-tabs)>button[data-action="tab"]{
+  --tab-accent:#7048c7;--tab-light:#9776e5;--tab-edge:#dfcff8;--tab-soft:#f6f0ff;--tab-medallion:#e8d8ff;
+  position:relative;display:grid!important;grid-template-columns:64px minmax(0,1fr) 30px!important;align-items:center!important;justify-content:stretch!important;gap:14px!important;min-width:0!important;width:100%!important;min-height:188px!important;box-sizing:border-box;padding:20px 16px!important;border:1px solid var(--tab-edge)!important;border-radius:8px!important;background:linear-gradient(125deg,#ffffffa8,var(--tab-soft))!important;color:#123f73!important;text-align:left!important;white-space:normal!important;box-shadow:0 3px 8px #174b7010!important;outline:none!important;translate:none!important;
+}
+html body[data-screen="module"] #app #main#main .integration-reference-tabs:not(.exam-tabs)>button[data-tab="encargos"]{--tab-accent:#069478;--tab-light:#43bc9d;--tab-edge:#c5eedf;--tab-soft:#effbf6;--tab-medallion:#cdf5e6}
+html body[data-screen="module"] #app #main#main .integration-tab-art{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--tab-medallion);color:var(--tab-accent)!important;box-sizing:border-box}
+html body[data-screen="module"] #app #main#main .integration-tab-art>.icon{width:40px!important;height:40px!important;stroke-width:2.1}
+html body[data-screen="module"] #app #main#main .integration-tab-copy{display:block;min-width:0}
+html body[data-screen="module"] #app #main#main .integration-tab-heading{display:flex;align-items:flex-start;gap:10px;min-width:0}
+html body[data-screen="module"] #app #main#main .integration-tab-number{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;border-radius:50%;background:var(--tab-accent);color:#fff!important;font:700 17px/1 var(--font-identity)!important}
+html body[data-screen="module"] #app #main#main .integration-tab-heading>b{display:block;min-width:0;font:700 19px/1.35 var(--font-identity)!important;color:inherit!important;overflow-wrap:break-word}
+html body[data-screen="module"] #app #main#main .integration-tab-description{display:block;margin-top:10px;min-width:0;font:400 15px/1.5 var(--font-learning)!important;color:#4f6585!important;overflow-wrap:break-word}
+html body[data-screen="module"] #app #main#main .integration-tab-arrow{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--tab-medallion);color:var(--tab-accent)!important}
+html body[data-screen="module"] #app #main#main .integration-tab-arrow>.icon{width:22px!important;height:22px!important;stroke-width:3}
+html body[data-screen="module"] #app #main#main .integration-tab-connector{position:absolute;right:-32px;top:calc(50% - 14px);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#fff;color:#1686ed!important;pointer-events:none;box-shadow:0 2px 5px #174b7010}
+html body[data-screen="module"] #app #main#main .integration-tab-connector>.icon{width:23px!important;height:23px!important;stroke-width:3}
+html body[data-screen="module"] #app #main#main .integration-reference-tabs:not(.exam-tabs)>button[aria-pressed="true"]{border:2px solid var(--tab-light)!important;background:linear-gradient(125deg,var(--tab-light),var(--tab-accent))!important;color:#fff!important;translate:0 -3px!important;outline:2px solid var(--tab-edge)!important;outline-offset:3px!important;box-shadow:inset 0 0 0 2px #ffffffd9,0 4px 0 var(--tab-edge),0 8px 14px #674bb22a!important}
+html body[data-screen="module"] #app #main#main .integration-reference-tabs>button[aria-pressed="true"] :is(.integration-tab-art,.integration-tab-number,.integration-tab-arrow){background:#ffffff30!important;color:#fff!important}
+html body[data-screen="module"] #app #main#main .integration-reference-tabs>button[aria-pressed="true"] .integration-tab-description{color:#fff!important}
+html body[data-screen="module"] #app #main#main .integration-reference-tabs>button:not(:disabled):hover{border-color:var(--tab-accent)!important;box-shadow:0 5px 12px #174b7020!important}
+html body[data-screen="module"] #app #main#main .integration-reference-tabs>button:focus-visible{outline:3px solid #1686ed!important;outline-offset:4px!important}
+@media(max-width:1000px){
+  html body[data-screen="module"] #app #main#main .integration-activity-header{grid-template-columns:64px minmax(0,1fr)!important;gap:16px!important;padding:18px!important}
+  html body[data-screen="module"] #app #main#main .integration-header-art{width:64px;height:64px}
+  html body[data-screen="module"] #app #main#main .integration-header-art>img{width:54px!important;height:58px!important}
+  html body[data-screen="module"] #app #main#main .integration-header-goal{grid-column:1/-1;padding:14px}
+  html body[data-screen="module"] #app #main#main .integration-reference-tabs:not(.exam-tabs){grid-template-columns:1fr!important;gap:28px!important}
+  html body[data-screen="module"] #app #main#main .integration-reference-tabs:not(.exam-tabs)>button[data-action="tab"]{min-height:148px!important;padding:18px!important}
+  html body[data-screen="module"] #app #main#main .integration-tab-connector{top:calc(100% + 2px);left:calc(50% - 12px);right:auto;width:24px;height:24px}
+  html body[data-screen="module"] #app #main#main .integration-tab-connector>.icon{rotate:90deg;width:20px!important;height:20px!important}
+}
+@media(max-width:600px){
+  html body[data-screen="module"] #app #main#main .integration-activity-header{grid-template-columns:54px minmax(0,1fr)!important;gap:12px!important;padding:16px!important}
+  html body[data-screen="module"] #app #main#main .integration-header-art{width:54px;height:54px}
+  html body[data-screen="module"] #app #main#main .integration-header-art>img{width:46px!important;height:48px!important}
+  html body[data-screen="module"] #app #main#main .integration-header-copy>h3{font-size:23px!important}
+  html body[data-screen="module"] #app #main#main .integration-header-copy>p{font-size:15px!important}
+  html body[data-screen="module"] #app #main#main .integration-reference-tabs:not(.exam-tabs)>button[data-action="tab"]{grid-template-columns:52px minmax(0,1fr) 26px!important;gap:12px!important;padding:16px 12px!important;min-height:164px!important}
+  html body[data-screen="module"] #app #main#main .integration-tab-art{width:52px;height:52px}
+  html body[data-screen="module"] #app #main#main .integration-tab-art>.icon{width:34px!important;height:34px!important}
+  html body[data-screen="module"] #app #main#main .integration-tab-heading{flex-direction:column;gap:7px}
+  html body[data-screen="module"] #app #main#main .integration-tab-heading>b{font-size:18px!important}
+  html body[data-screen="module"] #app #main#main .integration-tab-arrow{width:26px;height:26px}
+}
+@media(prefers-reduced-motion:reduce){html body[data-screen="module"] #app #main#main .integration-reference-tabs>button[data-action="tab"][aria-pressed]{transition:none!important;translate:none!important}}
+html.reduce-motion body[data-screen="module"] #app #main#main .integration-reference-tabs>button[data-action="tab"][aria-pressed],html body.reduce-motion[data-screen="module"] #app #main#main .integration-reference-tabs>button[data-action="tab"][aria-pressed]{transition:none!important;translate:none!important}

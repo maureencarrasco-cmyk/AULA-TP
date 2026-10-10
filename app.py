@@ -12,6 +12,8 @@ from encargos import encargos_for
 from contextualization import context_plan, save_context_step
 from learning_sequence import learning_sequence, validate_sequence, sequence_feedback
 from assessment_integrity import assessment_issues
+from itsdangerous import URLSafeTimedSerializer, BadSignature
+from practice_scenarios import scenario as practice_scenario, review as practice_review
 
 ROOT=Path(__file__).resolve().parent
 
@@ -43,6 +45,7 @@ def create_app(test_config=None):
         CREATE TABLE IF NOT EXISTS modules(id INTEGER PRIMARY KEY,course_id INTEGER REFERENCES courses(id),title TEXT NOT NULL,position INTEGER NOT NULL,published INTEGER DEFAULT 0,content TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS enrollments(user_id INTEGER REFERENCES users(id),course_id INTEGER REFERENCES courses(id),PRIMARY KEY(user_id,course_id));
         CREATE TABLE IF NOT EXISTS progress(user_id INTEGER REFERENCES users(id),module_id INTEGER REFERENCES modules(id),state TEXT NOT NULL,updated TEXT DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(user_id,module_id));
+        CREATE TABLE IF NOT EXISTS module_feedback(module_id INTEGER PRIMARY KEY REFERENCES modules(id) ON DELETE CASCADE,teacher_id INTEGER NOT NULL REFERENCES users(id),body TEXT NOT NULL,updated TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
         ''')
         if not con.execute('SELECT 1 FROM users').fetchone():
             for u,n,p,r in [('estudiante','Estudiante Demo','AulaTP2026!','student'),('docente','Docente Demo','DocenteTP2026!','teacher')]:
@@ -118,6 +121,12 @@ def create_app(test_config=None):
                 if not is_demo_student(u) and not con.execute('SELECT 1 FROM enrollments WHERE user_id=? AND course_id=?',(u['id'],m['course_id'])).fetchone():return None,fail('No tienes matrícula en este curso.',403)
             return dict(m),None
     def text_valid(v,n=20):return isinstance(v,str) and n<=len(v.strip())<=10000
+    def published_module_feedback(con,mid):
+        row=con.execute('SELECT f.body AS text,f.updated AS updated_at,f.teacher_id,u.name AS teacher_name FROM module_feedback f JOIN users u ON u.id=f.teacher_id WHERE f.module_id=?',(mid,)).fetchone()
+        if not row:return None
+        result=dict(row)
+        result['updated_at']=result['updated_at'].replace(' ','T')+'Z'
+        return result
     @app.get('/')
     @app.get('/portal/cursos')
     @app.get('/portal/cursos/')
@@ -216,6 +225,7 @@ def create_app(test_config=None):
         active_plan=None
         with db() as con:
             s=getstate(con,mid)
+            m['module_feedback']=published_module_feedback(con,mid)
             course=dict(con.execute('SELECT * FROM courses WHERE id=?',(m['course_id'],)).fetchone())
             course['modules']=[]
             for row in con.execute('SELECT title,position,content FROM modules WHERE course_id=? ORDER BY position,id',(m['course_id'],)):
@@ -233,6 +243,53 @@ def create_app(test_config=None):
         if u['role']=='student':c=strip_for_student(c)
         m.update(content=c,state=s,completed=completed(s,c),stations=STATIONS,steps=STEPS,planning=active_plan or c.get('planning') or module_plan(m['position']))
         return jsonify(m)
+    @app.get('/api/modules/<int:mid>/practice/scenario')
+    @require()
+    def get_practice_scenario(mid):
+        m,err=accessible(mid)
+        if err:return err
+        try:
+            display,claim=practice_scenario(load_content(m['content'],m['position']),request.args.get('mode'),
+                request.args.get('level',type=int),request.args.get('number',type=int),request.args.get('previous'))
+        except ValueError as error:return fail(str(error))
+        claim.update(module_id=mid,user_id=session['uid'])
+        display['token']=URLSafeTimedSerializer(app.secret_key,salt='ungraded-practice-v1').dumps(claim)
+        return jsonify(display)
+    @app.post('/api/modules/<int:mid>/practice/review')
+    @require()
+    def review_practice_scenario(mid):
+        m,err=accessible(mid)
+        if err:return err
+        b=body()
+        if not isinstance(b,dict) or not isinstance(b.get('token'),str):return fail('Abre una situación de práctica válida.')
+        try:
+            claim=URLSafeTimedSerializer(app.secret_key,salt='ungraded-practice-v1').loads(b['token'],max_age=7*24*3600)
+            if claim.get('module_id')!=mid or claim.get('user_id')!=session['uid']:return fail('Esta situación no pertenece a tu sesión.',403)
+            result=practice_review(load_content(m['content'],m['position']),claim,b)
+        except BadSignature:return fail('La situación caducó. Conserva tu borrador y abre una nueva situación.',400)
+        except ValueError as error:return fail(str(error))
+        return jsonify(result)
+    @app.get('/api/modules/<int:mid>/feedback')
+    @require()
+    def module_feedback(mid):
+        m,err=accessible(mid)
+        if err:return err
+        with db() as con:
+            feedback=published_module_feedback(con,mid)
+            # Individual review is private; the shared module comment never replaces it.
+            review=(getstate(con,mid).get('exam') or {}).get('review') if user()['role']=='student' else None
+        return jsonify(module_id=mid,feedback=feedback,individual_feedback=(review or {}).get('feedback'))
+    @app.put('/api/teacher/modules/<int:mid>/feedback')
+    @require('teacher')
+    def publish_module_feedback(mid):
+        b=body()
+        if not isinstance(b,dict) or not text_valid(b.get('text')):return fail('Escribe una retroalimentación de entre 20 y 10.000 caracteres.')
+        m,err=accessible(mid)
+        if err:return err
+        with db() as con:
+            con.execute('INSERT INTO module_feedback(module_id,teacher_id,body) VALUES(?,?,?) ON CONFLICT(module_id) DO UPDATE SET teacher_id=excluded.teacher_id,body=excluded.body,updated=CURRENT_TIMESTAMP',(mid,session['uid'],b['text'].strip()))
+            feedback=published_module_feedback(con,mid)
+        return jsonify(module_id=mid,feedback=feedback)
     @app.get('/api/progress')
     @require('student')
     def student_progress():

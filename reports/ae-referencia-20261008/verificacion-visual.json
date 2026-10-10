@@ -1,0 +1,60 @@
+{
+  "moduleId": 227,
+  "station": 2,
+  "officialTextUnchanged": true,
+  "formUnchanged": true,
+  "bindingsUnchanged": true,
+  "sourceImmediatelyBeforeIntro": true,
+  "interactions": [
+    {
+      "formPresent": true,
+      "heading": "¿Qué información tengo?",
+      "selected": 0
+    },
+    {
+      "formPresent": true,
+      "heading": "¿Qué significa?",
+      "selected": 1
+    },
+    {
+      "formPresent": true,
+      "heading": "¿Cómo se conecta con otros elementos?",
+      "selected": 2
+    },
+    {
+      "formPresent": true,
+      "heading": "¿Qué hago con este conocimiento?",
+      "selected": 3
+    },
+    {
+      "formPresent": true,
+      "heading": "¿Cómo compruebo mi decisión?",
+      "selected": 4
+    },
+    {
+      "formPresent": true,
+      "heading": "¿Qué logré y cómo mejoro?",
+      "selected": 5
+    }
+  ],
+  "aeSelectionVerified": true,
+  "desktop": {
+    "columns": 6,
+    "scrollWidth": 1265,
+    "textFits": true,
+    "width": 1265
+  },
+  "mobile": {
+    "columns": 2,
+    "imagesLoaded": true,
+    "scrollWidth": 375,
+    "textFits": true,
+    "width": 375
+  },
+  "tablet": {
+    "columns": 3,
+    "scrollWidth": 805,
+    "textFits": true,
+    "width": 805
+  }
+}

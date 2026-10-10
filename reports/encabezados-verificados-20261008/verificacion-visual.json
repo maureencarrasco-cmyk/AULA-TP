@@ -1,0 +1,62 @@
+{
+  "moduleId": 227,
+  "stations": [
+    {
+      "count": 1,
+      "station": "1",
+      "station4Excluded": true,
+      "title": "Contextualización"
+    },
+    {
+      "count": 1,
+      "station": "2",
+      "station4Excluded": true,
+      "title": "Aprendizajes esperados"
+    },
+    {
+      "count": 1,
+      "station": "3",
+      "station4Excluded": true,
+      "title": "Situación integradora"
+    },
+    {
+      "count": 1,
+      "station": "5",
+      "station4Excluded": true,
+      "title": "Evaluación final"
+    },
+    {
+      "count": 1,
+      "station": "6",
+      "station4Excluded": true,
+      "title": "Retroalimentación y cierre"
+    }
+  ],
+  "station2Before": 0,
+  "station2After": 1,
+  "officialContentUnchanged": true,
+  "formUnchanged": true,
+  "fieldsUnchanged": true,
+  "desktop": {
+    "bannerCount": 1,
+    "imageLoaded": true,
+    "pageWidth": 1265,
+    "textOverflow": false,
+    "viewport": 1265
+  },
+  "mobile": {
+    "bannerCount": 1,
+    "imageLoaded": true,
+    "pageWidth": 375,
+    "textOverflow": false,
+    "viewport": 375
+  },
+  "tablet": {
+    "bannerCount": 1,
+    "pageWidth": 805,
+    "textOverflow": false,
+    "viewport": 805
+  },
+  "regressionTestsPassed": 5,
+  "noStudentResponsesSubmitted": true
+}

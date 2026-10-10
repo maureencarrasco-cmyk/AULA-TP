@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-09",
+  "scope": ["Explorar", "Desafiar", "Investigar", "Single Atras button on practice launch", "Compact Station 2 AE header"],
+  "shared_catalog": {
+    "database_access": "read-only",
+    "courses": 45,
+    "modules": 451,
+    "scenario_combinations_checked": 21648,
+    "modes": 3,
+    "levels": 4,
+    "formats_alternate_independently_by_mode": true,
+    "original_options_answers_and_criteria_preserved": true,
+    "official_progress_unchanged": true
+  },
+  "tests": {
+    "python_tests_passed": 9,
+    "python_command": ".venv/Scripts/python.exe -m unittest tests.test_practice_screens tests.test_practice_integrity tests.test_module_feedback",
+    "node_tests_passed": 18,
+    "node_command": "node --test tests/practice-screens.test.mjs tests/practice-hub-reference.test.mjs tests/practice-nubi-access.test.mjs tests/practice-defaults.test.mjs tests/learning-ae-selector.test.mjs",
+    "javascript_syntax_checks": "passed",
+    "git_diff_check": "passed"
+  },
+  "browser_pilot": {
+    "course": "Contabilidad",
+    "module_id": 84,
+    "station": 2,
+    "viewports": ["1280x720", "768x1024", "375x812", "320x740"],
+    "verified": [
+      "All three modalities open directly and all four levels remain selectable",
+      "All four stages are navigable and require genuine work before completion",
+      "Correct and incorrect choices use the canonical server-side key, not a default A",
+      "Written cases are editable and provide explicit review criteria without a score",
+      "New situations alternate format independently and change source case",
+      "Partial drafts require confirmation before replacement",
+      "Back navigation and page reload preserve session drafts and notes",
+      "Glossary search, calculator, notes, contextual agent and evidence dialog work",
+      "Escape closes the current evidence dialog without leaving practice",
+      "Expert support begins without an initial hint; hints are requested progressively",
+      "Local course images render with source attribution",
+      "Nubi remains accessible without a duplicate accessibility entry",
+      "320px viewport with enlarged text and simple visual mode has no horizontal overflow",
+      "High contrast has black option backgrounds and white text",
+      "Accessibility preferences and viewport were restored after testing",
+      "Launch has exactly one Atras button and subpages keep their existing return button",
+      "Station 2 title starts 8px below the AE selector edge; header height is about 74px",
+      "No browser console errors in the final loaded page"
+    ]
+  },
+  "limits": [
+    "Written review is an explicit criteria guide, not automated technical grading",
+    "Expert uses existing advanced source cases plus contrast, prioritization, risk and verification tasks",
+    "Drafts and notes last for the browser session on the current device, not a cross-device server archive",
+    "Visual interaction checks used one pilot course; shared catalog behavior was checked across all 45 courses"
+  ],
+  "screenshots": [
+    "portada-atras.png",
+    "explorar-escritorio.png",
+    "desafiar-escritorio.png",
+    "investigar-escritorio.png",
+    "desafiar-movil.png",
+    "investigar-movil-320.png",
+    "investigar-tableta.png",
+    "explorar-texto-ampliado-320.png",
+    "explorar-alto-contraste.png",
+    "estacion-2-cabecera-compacta.png"
+  ]
+}

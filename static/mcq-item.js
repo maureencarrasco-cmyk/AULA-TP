@@ -28,8 +28,12 @@ function mcqMedia(item, exam) {
   const form = Number(item.form || item.mcq_form || 1);
   const photo = mcqPhotoSrc(item);
   const alt = exam ? 'Evidencia visual del ítem. Examina sus datos visibles antes de responder.' : (item.alt || 'Foto del oficio usada como evidencia de la actividad.');
+  const credit = !exam && item.photo_credit;
+  const attribution = credit ? ` <a href="${mcqEsc(credit.source)}" target="_blank" rel="noopener noreferrer">${mcqEsc(credit.author || 'Fuente')}</a> · <a href="${mcqEsc(credit.licenseUrl)}" target="_blank" rel="noopener noreferrer">${mcqEsc(credit.license)}</a>.` : '';
+  const evidence = !exam && item.case_evidence_image && !(form === 3 && item.illustration === item.case_evidence_image)
+    ? `<figure class="mcq-figure"><img src="${mcqEsc(item.case_evidence_image)}" alt="${mcqEsc(item.case_evidence_alt || 'Recurso técnico original del caso')}" decoding="async"><figcaption>Recurso técnico original del caso</figcaption></figure>` : '';
   const photoFig = photo
-    ? `<figure class="mcq-figure"><img src="${mcqEsc(photo)}" alt="${mcqEsc(alt)}" decoding="async"><figcaption>${mcqEsc(exam ? 'Recurso visual del ítem' : (item.caption || 'Recurso visual del oficio'))}</figcaption></figure>`
+    ? `<figure class="mcq-figure"><img src="${mcqEsc(photo)}" alt="${mcqEsc(alt)}" decoding="async"><figcaption>${mcqEsc(exam ? 'Recurso visual del ítem' : (item.caption || 'Recurso visual del oficio'))}${attribution}</figcaption></figure>${evidence}`
     : `<p class="muted small">Falta la foto real de este ítem. No se publica un módulo sin imagen.</p>`;
   const illus = item.illustration
     ? `<figure class="mcq-figure"><img src="${mcqEsc(item.illustration)}" alt="Ilustración técnica del mismo equipo. Acompaña; no reemplaza la foto." decoding="async"><figcaption>Ilustración técnica del mismo equipo</figcaption></figure>`

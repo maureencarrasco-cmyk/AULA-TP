@@ -1,0 +1,31 @@
+{
+  "courses": 45,
+  "modules": 451,
+  "station": 2,
+  "moduleId": 227,
+  "gapBefore": 127.3998031616211,
+  "gapAfter": 12.000007629394531,
+  "titleTopBefore": 0,
+  "titleTopAfter": 103.39999389648438,
+  "selectorUnchanged": true,
+  "officialContentUnchanged": true,
+  "formUnchanged": true,
+  "mobile": {
+    "gap": 12.000022888183594,
+    "guideAboveTitle": true,
+    "noTitleOverflow": true,
+    "noPageOverflow": true
+  },
+  "tablet": {
+    "gap": 11.999992370605412,
+    "guideAboveTitle": true,
+    "noTitleOverflow": true,
+    "noPageOverflow": true
+  },
+  "aeSwitch": {
+    "gap": 12.000007629394531,
+    "position": "Aprendizaje esperado 3 de 5",
+    "selected": "2"
+  },
+  "regressionTestsPassed": 3
+}

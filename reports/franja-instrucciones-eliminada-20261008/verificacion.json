@@ -1,0 +1,39 @@
+{
+  "moduleId": 227,
+  "courses": 45,
+  "modules": 451,
+  "stations": [
+    {
+      "illustratedHeaders": 1,
+      "station": "1",
+      "strips": 0
+    },
+    {
+      "illustratedHeaders": 1,
+      "station": "2",
+      "strips": 0
+    },
+    {
+      "illustratedHeaders": 1,
+      "station": "3",
+      "strips": 0
+    },
+    {
+      "illustratedHeaders": 1,
+      "station": "5",
+      "strips": 0
+    },
+    {
+      "illustratedHeaders": 1,
+      "station": "6",
+      "strips": 0
+    }
+  ],
+  "stripBefore": 1,
+  "stripAfter": 0,
+  "illustratedHeaderUnchanged": true,
+  "activityBodyUnchangedExceptAutomaticSelectId": true,
+  "fieldsUnchanged": true,
+  "nodeRegressionTestsPassed": 5,
+  "noStudentResponsesSubmitted": true
+}

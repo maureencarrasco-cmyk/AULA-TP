@@ -1,0 +1,184 @@
+{
+  "moduleId": 227,
+  "station": 1,
+  "formUnchanged": true,
+  "fieldsUnchanged": true,
+  "tabSwitches": [
+    {
+      "current": "0",
+      "heading": "Conoce el contexto profesional",
+      "panels": [
+        "context-panel-0"
+      ],
+      "selected": "0"
+    },
+    {
+      "current": "1",
+      "heading": "Observa y reconoce",
+      "panels": [
+        "context-panel-1"
+      ],
+      "selected": "1"
+    },
+    {
+      "current": "2",
+      "heading": "Conecta con lo que ya sabes",
+      "panels": [
+        "context-panel-2"
+      ],
+      "selected": "2"
+    },
+    {
+      "current": "3",
+      "heading": "Descubre por qué esto importa",
+      "panels": [
+        "context-panel-3"
+      ],
+      "selected": "3"
+    },
+    {
+      "current": "4",
+      "heading": "Anticipa lo que aprenderás",
+      "panels": [
+        "context-panel-4"
+      ],
+      "selected": "4"
+    }
+  ],
+  "desktop": {
+    "fields": [
+      {
+        "checked": false,
+        "name": "recognized",
+        "value": "0"
+      },
+      {
+        "checked": false,
+        "name": "recognized",
+        "value": "1"
+      },
+      {
+        "checked": false,
+        "name": "recognized",
+        "value": "2"
+      },
+      {
+        "checked": false,
+        "name": "recognized",
+        "value": "3"
+      },
+      {
+        "checked": false,
+        "name": "recognized",
+        "value": "4"
+      },
+      {
+        "checked": false,
+        "name": "recognized",
+        "value": "5"
+      },
+      {
+        "checked": false,
+        "name": "recognized",
+        "value": "6"
+      },
+      {
+        "checked": false,
+        "name": "other",
+        "value": ""
+      },
+      {
+        "checked": false,
+        "name": "prior",
+        "value": ""
+      },
+      {
+        "checked": false,
+        "name": "importance",
+        "value": "0"
+      },
+      {
+        "checked": false,
+        "name": "importance",
+        "value": "1"
+      },
+      {
+        "checked": false,
+        "name": "importance",
+        "value": "2"
+      },
+      {
+        "checked": false,
+        "name": "importance",
+        "value": "3"
+      },
+      {
+        "checked": false,
+        "name": "anticipated",
+        "value": "0"
+      },
+      {
+        "checked": false,
+        "name": "anticipated",
+        "value": "1"
+      },
+      {
+        "checked": false,
+        "name": "anticipated",
+        "value": "2"
+      },
+      {
+        "checked": false,
+        "name": "anticipated",
+        "value": "3"
+      }
+    ],
+    "guideOverflow": false,
+    "pageWidth": 1265,
+    "progressFits": true,
+    "titleOverflow": false,
+    "viewport": 1265
+  },
+  "mobile": {
+    "guideOverflow": false,
+    "pageWidth": 375,
+    "progressFits": true,
+    "titleOverflow": false,
+    "viewport": 375
+  },
+  "mobileLastActivity": {
+    "current": "4",
+    "lastTab": {
+      "bottom": 520.3000183105469,
+      "height": 202,
+      "left": 133.60000610351562,
+      "right": 363.6000061035156,
+      "top": 318.3000183105469,
+      "width": 230,
+      "x": 133.60000610351562,
+      "y": 318.3000183105469
+    },
+    "scrollLeft": 854.4000244140625,
+    "selected": "4",
+    "track": {
+      "bottom": 553.7000274658203,
+      "height": 244.40000915527344,
+      "left": 7,
+      "right": 368.2000122070313,
+      "top": 309.3000183105469,
+      "width": 361.2000122070313,
+      "x": 7,
+      "y": 309.3000183105469
+    }
+  },
+  "tablet": {
+    "guideOverflow": false,
+    "pageWidth": 805,
+    "progressFits": true,
+    "titleOverflow": false,
+    "viewport": 805
+  },
+  "nodeTestsPassed": 4,
+  "flowTestsPassed": 6,
+  "noStudentResponsesSubmitted": true
+}

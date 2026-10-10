@@ -1,0 +1,82 @@
+{
+  "actualCourseUrl": "http://127.0.0.1:8100/portal/cursos/#module/227/5",
+  "actualEmptyStateVerified": true,
+  "teacherEditorVerifiedInIsolatedPreview": true,
+  "studentReadOnlyPreview": {
+    "comment": "PRUEBA VISUAL: Reconoce tus avances al mantener los parámetros ambientales.\nContrasta tus decisiones con las evidencias y explica cómo verificarías el resultado.",
+    "dialogOverflow": 0,
+    "readOnly": true
+  },
+  "mobileReadingFits": true,
+  "buttonChecks": [
+    {
+      "device": "computador",
+      "action": "module-feedback",
+      "button": {
+        "height": 112,
+        "width": 396.2749938964844
+      },
+      "contents": [
+        {
+          "element": "IMG",
+          "fits": true,
+          "text": ""
+        },
+        {
+          "element": "B",
+          "fits": true,
+          "text": "Retroalimentación docente"
+        },
+        {
+          "element": "SMALL",
+          "fits": true,
+          "text": "Pendiente de publicación"
+        },
+        {
+          "element": "SPAN",
+          "fits": true,
+          "text": ""
+        }
+      ],
+      "dialogAccess": "dialog",
+      "documentOverflow": 0,
+      "glow": "rgba(191, 160, 238, 0.208) 0px 0px 0px 3px, rgba(166, 117, 230, 0.29) 0px 0px 18px 0px, rgba(255, 255, 255, 0.7) 0px 0px 14px 0px inset",
+      "viewport": 1280
+    },
+    {
+      "device": "movil",
+      "action": "module-feedback",
+      "button": {
+        "height": 114.8000030517578,
+        "width": 336
+      },
+      "contents": [
+        {
+          "element": "IMG",
+          "fits": true,
+          "text": ""
+        },
+        {
+          "element": "B",
+          "fits": true,
+          "text": "Retroalimentación docente"
+        },
+        {
+          "element": "SMALL",
+          "fits": true,
+          "text": "Pendiente de publicación"
+        },
+        {
+          "element": "SPAN",
+          "fits": true,
+          "text": ""
+        }
+      ],
+      "dialogAccess": "dialog",
+      "documentOverflow": 0,
+      "glow": "rgba(191, 160, 238, 0.208) 0px 0px 0px 3px, rgba(166, 117, 230, 0.29) 0px 0px 18px 0px, rgba(255, 255, 255, 0.7) 0px 0px 14px 0px inset",
+      "viewport": 375
+    }
+  ],
+  "noTestFeedbackPublishedInActualCourses": true
+}
