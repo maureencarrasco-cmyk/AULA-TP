@@ -1,0 +1,121 @@
+/* Parte superior y botones de la portada. */
+.landing-refresh :is(.button,.audience-action,.implementation-cta,.catalog-entry-button,.city-art-link,.mission-brief-go,.menu-button){
+  min-height:52px;
+  padding:12px 18px;
+  border-radius:14px;
+  font-weight:800;
+  line-height:1.2;
+  letter-spacing:0;
+}
+.landing-refresh :is(.button,.audience-action,.implementation-cta,.catalog-entry-button){
+  border:1px solid transparent;
+  box-shadow:0 6px 16px #082b6714;
+}
+.landing-refresh :is(.button-primary,.campus-button,.campus-link.button,.audience-action.campus-link,.catalog-entry-button){
+  background:#0b63c6;border-color:#0b63c6;color:#fff;
+}
+.landing-refresh :is(.button-primary,.campus-button,.campus-link.button,.audience-action.campus-link,.catalog-entry-button):hover{
+  background:#084e9c;border-color:#084e9c;color:#fff;
+}
+.landing-refresh :is(.button-outline,.button-director,.implementation-cta,.demo-link){
+  background:#fff;border-color:#8eb4d8;color:#0d4f96;
+}
+.landing-refresh :is(.button-outline,.button-director,.implementation-cta,.demo-link):hover{
+  background:#eaf3fd;border-color:#5d92c4;color:#0d4f96;
+}
+.landing-refresh :is(.button-teacher,.portal-link.audience-action){
+  background:#efe9fb;border-color:#d4c6f2;color:#54339c;
+}
+.landing-refresh .city-promo-enter{background:#08756f;border-color:#08756f;color:#fff}
+.landing-refresh .city-promo-enter:hover{background:#065e59;border-color:#065e59;color:#fff}
+.landing-refresh .mission-promo-enter,
+.landing-refresh .mission-brief-go{
+  background:linear-gradient(90deg,#e39b1e,#f2c14e);
+  border-color:#d89a22;color:#1b1408;
+}
+.landing-refresh .mission-promo-enter:hover,
+.landing-refresh .mission-brief:hover .mission-brief-go{background:#e7a322;color:#1b1408}
+.landing-refresh :is(.button,.audience-action,.implementation-cta,.catalog-entry-button,.menu-button):hover{
+  transform:translateY(-1px);
+}
+.landing-refresh :is(.button,.audience-action,.implementation-cta,.catalog-entry-button,.menu-button):active{
+  transform:none;box-shadow:0 2px 6px #082b6714;
+}
+.landing-refresh :is(.button,.audience-action,.menu-button) svg{width:18px;height:18px}
+
+@media(min-width:1051px){
+  .landing-refresh .header{
+    min-height:76px;
+    padding-top:0;padding-bottom:0;
+    background:#fff;
+    border-bottom:1px solid #e4ebf3;
+    box-shadow:0 8px 28px #082b670e;
+  }
+  .landing-refresh .header .brand img{width:48px;height:48px}
+  .landing-refresh .header .brand b{font-size:1.15rem}
+  .landing-refresh .header .nav{gap:2px;height:auto}
+  .landing-refresh .header .nav a{
+    flex-direction:row;
+    min-width:0;min-height:44px;
+    padding:8px 10px;gap:6px;
+    border-radius:12px;
+    font-size:.78rem;font-weight:800;
+  }
+  .landing-refresh .header .nav a svg{width:18px;height:18px}
+  .landing-refresh .header .nav a.active{background:#e7f1ff;color:#0b4f9c}
+  .landing-refresh .header .nav a.active:after{display:none}
+  .landing-refresh .header .nav .nav-cta,
+  .landing-refresh .header .nav a[href="/mision_laboral/"],
+  .landing-refresh .header .nav a[href="/landing/catalogo.html"]{display:none}
+  .landing-refresh .header-actions{flex:0 0 auto}
+  .landing-refresh .header-actions{gap:8px}
+  .landing-refresh .demo-link{
+    display:inline-flex;min-width:0;min-height:48px;
+    padding:0 14px;border:1px solid #8eb4d8;border-radius:14px;
+    background:#fff;color:#0d4f96;font-size:.85rem;
+  }
+  .landing-refresh .demo-link svg{width:18px;height:18px}
+  .landing-refresh .campus-button{
+    min-width:0;min-height:48px;padding:0 16px;border-radius:14px;font-size:.9rem;
+  }
+  .landing-refresh .campus-button svg,
+  .landing-refresh .campus-button svg:first-child{width:18px;height:18px}
+}
+
+.landing-refresh .hero{background:linear-gradient(180deg,#f7fbff 0%,#fff 42%)}
+.landing-refresh .hero-copy{padding-top:36px}
+.landing-refresh .hero-actions{align-items:center;gap:12px}
+.landing-refresh .hero-actions .button{min-height:54px;padding:0 18px}
+.landing-refresh :is(.city-discovery,.mission-discovery){
+  margin:18px 10px 0 0;padding:8px 12px;border-radius:999px;
+  border:1px solid #d5e3f0;background:#f4f8fc;
+}
+.landing-refresh .mission-discovery{border-color:#ead7b0;background:#fff6e4}
+.landing-refresh .menu-button{
+  min-height:48px;padding:10px 14px;border-radius:12px;
+  border:1px solid #c5d5e6;background:#fff;font-weight:800;color:#082b67;
+}
+.landing-refresh .visual-footer nav a{
+  min-height:48px;border-radius:12px;
+}
+.landing-refresh button.button,
+.landing-refresh .dialog-close{
+  border-radius:14px;
+}
+
+@media(max-width:1050px){
+  .landing-refresh .header .nav a{min-height:52px;border-radius:12px;font-weight:800}
+  .landing-refresh .header .nav .nav-cta,
+  .landing-refresh .header .nav a[href="/mision_laboral/"]{
+    margin:4px 12px;background:#f4f8fc;
+  }
+  .landing-refresh .header .nav a.campus-link{background:#0b63c6;color:#fff}
+}
+@media(max-width:650px){
+  .landing-refresh .hero-actions{display:grid}
+  .landing-refresh .hero-actions .button{width:100%}
+  .landing-refresh :is(.city-discovery,.mission-discovery){margin-left:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .landing-refresh :is(.button,.audience-action,.implementation-cta,.menu-button){transition:none;transform:none}
+}

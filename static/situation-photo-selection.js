@@ -1,6 +1,6 @@
 'use strict';
 // Select across the entire module, not the current carousel page.
-function situationPhotoSet(module, course) {
+function situationPhotoSet(module, course, practice = false) {
   const used=new Set();
   const related={
     cooling:['coolingtubes','pressure','thermometer','electrical'],electrical:['motor','multimeter','electronics'],
@@ -23,10 +23,11 @@ function situationPhotoSet(module, course) {
     pressure:['coolingtubes','motor'],coolingtubes:['cooling','pressure']
   };
   return (module.content?.cases||[]).map((item,index)=>{
-    const subject=encargoPhotoTopic({title:item.criterion||item.title},course,module.title);
+    const caseText=[item.context,item.question,item.document,item.title,item.criterion].filter(Boolean).join(' ');
+    const subject=encargoPhotoTopic({title:practice?caseText:item.criterion||item.title},course,module.title);
     const pool=[subject,...(related[subject]||[])].flatMap(topic=>(SITUATION_PHOTOS[topic]||[]).map(photo=>({...photo,primary:topic===subject})));
     const normalize=text=>String(text||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-    const criterion=normalize(item.criterion||item.context);
+    const criterion=normalize(practice?caseText:item.criterion||item.context);
     const concepts=[
       [/aliment|nutric|forraj/,/feed|feeding|nutrition|fodder/],
       [/reproduct|reproducc/,/broodstock|breeding|reproduction/],
@@ -48,7 +49,13 @@ function situationPhotoSet(module, course) {
       [/riego/,/irrigation|drip/],
       [/program|software|datos/,/programming|coding|software|computer/]
     ];
-    const score=photo=>concepts.reduce((sum,[task,image])=>sum+(task.test(criterion)&&image.test(normalize(photo.title+' '+photo.description))?1:0),photo.primary?100:0);
+    if(practice)concepts.push(
+      [/remuner|finiquit|contrato|asistencia|registro|document|informe/,/document|record|office|laptop|administrativ/],
+      [/calculo|calcular|operacion.*contable/,/calculator|calculadora/],
+      [/turbidez|agua|oxigen|amonio|nitrito/,/water|aquaculture|laboratory|sample/],
+      [/lechuga|hidropon|hoja|plantas/,/lettuce|hydropon|greenhouse|plant|crop/]
+    );
+    const score=photo=>concepts.reduce((sum,[task,image])=>sum+(task.test(criterion)&&image.test(normalize(photo.title+' '+photo.description+' '+photo.alt))?(practice?10:1):0),photo.primary?(practice?3:100):0);
     const photo=pool.map((candidate,order)=>({candidate,order,score:score(candidate)})).filter(({candidate})=>!used.has(candidate.source)&&!used.has(candidate.fingerprint)).sort((a,b)=>b.score-a.score||a.order-b.order)[0]?.candidate;
     if(!photo)return null;
     used.add(photo.source);
@@ -58,4 +65,7 @@ function situationPhotoSet(module, course) {
 }
 function situationPhotoAt(module,course,index){
   return situationPhotoSet(module,course)[index]||null;
+}
+function practiceSituationPhoto(module,course,scenario){
+  return situationPhotoSet({...module,content:{cases:[scenario]}},course,true)[0]||null;
 }

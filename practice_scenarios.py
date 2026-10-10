@@ -2,6 +2,7 @@
 from hashlib import sha256
 import json
 import unicodedata
+from practice_pedagogy import profile
 
 MODES = ('explore', 'challenge', 'investigate')
 LEVELS = ('Inicial', 'Intermedio', 'Avanzado', 'Experto')
@@ -40,7 +41,7 @@ def digest(item):
     return sha256(json.dumps(item, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
 
-def scenario(content, mode, level, number, previous=None):
+def scenario(content, mode, level, number, previous=None, source_id=None):
     if mode not in MODES or type(level) is not int or not 1 <= level <= 4 or type(number) is not int or not 1 <= number <= 1000000:
         raise ValueError('Selecciona una modalidad y un nivel válidos.')
     bank = practice_bank(content, mode, level)
@@ -50,33 +51,57 @@ def scenario(content, mode, level, number, previous=None):
     index = (number - 1 + offset) % len(bank)
     if len(bank) > 1 and f'{bank[index][0]}:{bank[index][1]}' == previous:
         index = (index + 1) % len(bank)
+    if source_id:
+        index = next((i for i, (family, n, _) in enumerate(bank) if f'{family}:{n}' == source_id), -1)
+        if index < 0:
+            raise ValueError('El caso guardado ya no está disponible para este nivel. Conserva tu borrador.')
     family, source_index, item = bank[index]
     aes = content.get('aes') or []
     ae_index = item.get('ae', 0)
     ae = aes[ae_index] if type(ae_index) is int and 0 <= ae_index < len(aes) else {}
     criterion = item.get('criterion') or next(iter(ae.get('criteria') or []), '')
     context = item.get('context') or item.get('stimulus') or item.get('document') or content.get('context') or ''
-    response_format = 'choice' if number % 2 else 'written'
+    pedagogy = profile(mode, level)
+    response_format = 'written' if pedagogy['response_type'] == 'written' else 'choice' if level == 1 or number % 2 else 'written'
     public = dict(source_id=f'{family}:{source_index}', source_index=source_index, family=family,
                   mode=mode, level=level, level_label=LEVELS[level-1], number=number, bank_size=len(bank),
                   response_format=response_format, title=item.get('title') or content.get('case_title') or 'Caso del módulo',
                   context=context, question=item.get('question') or '¿Qué decisión tomarías con estos antecedentes?',
-                  prompt=WRITTEN[mode] if response_format == 'written' else item.get('question') or '¿Qué decisión tomarías con estos antecedentes?',
+                  prompt=pedagogy['activity'] if response_format == 'written' else item.get('question') or '¿Qué decisión tomarías con estos antecedentes?',
                   options=list(item['options']) if response_format == 'choice' else [],
                   image=item.get('image'), alt=item.get('alt'), table=item.get('table'), document=item.get('document'),
-                  ae_title=ae.get('title') or '', criterion=criterion, stages=STAGES[mode], review_criteria=REVIEW,
+                  ae_title=ae.get('title') or '', criterion=criterion, stages=STAGES[mode], review_criteria=pedagogy['review_criteria'], pedagogy=pedagogy,
                   specialty=content.get('specialty') or '', source=content.get('curriculum') or {})
-    if level >= 3:
-        companion = next((other for _, _, other in bank if other is not item and other.get('criterion') != criterion), None)
-        if companion:
-            public['comparison'] = dict(context=companion.get('context') or companion.get('stimulus') or '',
-                                        criterion=companion.get('criterion') or '')
-    public['demand'] = [
-        'Identifica un dato, su fuente y el criterio antes de decidir.',
-        'Relaciona los antecedentes y explica cómo verificarías tu decisión.',
-        'Contrasta los antecedentes y justifica la diferencia entre los criterios.',
-        'Prioriza una decisión, contrasta el segundo antecedente y declara riesgos, límites y verificación.',
-    ][level-1]
+    companions = [other for _, _, other in bank if other is not item]
+    if level == 4:
+        # Expert integrates prerequisites from the same module, not invented measurements.
+        companions += [other for tier in (1, 2) for _, _, other in practice_bank(content, mode, tier)]
+    companions.sort(key=lambda other: other.get('criterion') == criterion)
+    references = []
+    seen = {(context, criterion, item.get('question') or '')}
+    seen_criteria = {criterion}
+    needed = pedagogy['evidence_count'] - 1
+    for distinct_criterion in (True, False):
+        if len(references) == needed:
+            break
+        for other in companions:
+            other_context = other.get('context') or other.get('stimulus') or other.get('document') or ''
+            other_criterion = other.get('criterion') or ''
+            key = (other_context, other_criterion, other.get('question') or '')
+            if key in seen or (distinct_criterion and other_criterion in seen_criteria):
+                continue
+            seen.add(key)
+            seen_criteria.add(other_criterion)
+            references.append(dict(context=other_context, criterion=other_criterion,
+                                   question=other.get('question') or '', table=other.get('table'), document=other.get('document')))
+            if len(references) == needed:
+                break
+    if pedagogy['evidence_count'] > 1:
+        if len(references) < pedagogy['evidence_count'] - 1:
+            raise ValueError('Faltan antecedentes distintos para este recorrido. Selecciona otro nivel.')
+        public['comparison'] = references[0]
+        public['additional_evidence'] = references[1:]
+    public['demand'] = pedagogy['summary'][:1].upper() + pedagogy['summary'][1:]
     claim = dict(family=family, index=source_index, digest=digest(item), mode=mode, level=level, format=response_format)
     return public, claim
 
@@ -95,14 +120,23 @@ def review(content, claim, response):
         correct = choice == item['answer']
         feedback = item.get('option_feedback') or []
         explanation = feedback[choice] if choice < len(feedback) else item.get('explanation') if correct else None
-        return dict(kind='choice', correct=correct, title='Decisión bien sustentada' if correct else 'Revisa tu decisión',
+        return dict(kind='choice', correct=correct, correct_choice=item['answer'], title='Decisión bien sustentada' if correct else 'Revisa tu decisión',
                     feedback=explanation or 'Contrasta la alternativa elegida con el antecedente y el criterio. Evita completar datos por suposición.',
                     criterion=item.get('criterion') or '',
                     next_action='Explica qué antecedente respalda tu decisión y cómo la verificarías.' if correct else 'Vuelve al recurso, identifica el supuesto y prueba otra alternativa.')
+    pedagogy = profile(claim['mode'], claim['level'])
     text = response.get('text')
-    if not isinstance(text, str) or not 20 <= len(text.strip()) <= 6000:
-        raise ValueError('Escribe entre 20 y 6.000 caracteres para guardar y revisar.')
-    return dict(kind='written', title='Borrador guardado para revisión',
+    minimum = pedagogy['written_minimum']
+    if not isinstance(text, str) or not minimum <= len(text.strip()) <= 6000:
+        raise ValueError(f'Escribe entre {minimum} y 6.000 caracteres para guardar y revisar.')
+    explanation = item.get('explanation') or ''
+    if not explanation:
+        feedback = item.get('option_feedback') or []
+        explanation = feedback[item['answer']] if item['answer'] < len(feedback) else ''
+    model_answer = item['options'][item['answer']]
+    if explanation:
+        model_answer += '\n\n' + explanation
+    return dict(kind='written', title='Borrador guardado para revisión', model_answer=model_answer,
                 feedback='Tu respuesta permanece editable en este dispositivo. Esta guía no comprueba la corrección técnica ni asigna una nota.',
-                review_criteria=REVIEW, criterion=item.get('criterion') or '',
+                review_criteria=pedagogy['review_criteria'], criterion=item.get('criterion') or '',
                 next_action='Revisa cada criterio, identifica lo que ya fundamentaste y amplía los aspectos pendientes.')

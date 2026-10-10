@@ -55,7 +55,7 @@
     {id:1, title:'Inicial', tier:1, subtitle:'Aprendo con apoyo', description:'Situaciones sencillas, con orientación paso a paso.', cls:'is-initial', art:'seedling'},
     {id:2, title:'Intermedio', tier:2, subtitle:'Aplico lo aprendido', description:'Situaciones habituales, con orientación disponible cuando la necesites.', cls:'is-intermediate', art:'book'},
     {id:3, title:'Avanzado', tier:3, subtitle:'Resuelvo problemas', description:'Casos con varias variables que requieren análisis y justificación.', cls:'is-advanced', art:'chart'},
-    {id:4, title:'Experto', tier:3, subtitle:'Actúo como profesional', description:'Situaciones avanzadas con trabajo autónomo y mínima orientación inicial.', cls:'is-expert', art:'briefcase'}
+    {id:4, title:'Experto', tier:3, subtitle:'Actúo como profesional', description:'Evalúa alternativas, riesgos y límites con tres antecedentes y trabajo autónomo.', cls:'is-expert', art:'briefcase'}
   ];
 
   const FAMILIES = [
@@ -69,6 +69,23 @@
   let selectedLevel = 1;
   let previousToolsPosition = null;
   let lastActivityId = null;
+  let profilesRequest = null;
+  function expectation(mode) {
+    return window.AulaPracticeProfiles?.[mode.id]?.[selectedLevel-1]?.summary || mode.blurb;
+  }
+  function refreshExpectations() {
+    if (!root?.isConnected) return;
+    for (const mode of PRACTICE_MODES) {
+      const text = root.querySelector(`[data-pf-expect="${mode.id}"]`);
+      if (text) text.textContent = `${mode.title} · Nivel ${selectedLevel} ${practiceLevel().title}: ${expectation(mode)}`;
+    }
+    const text = root.querySelector('#pf-level-expectation');
+    if (text) text.textContent = `Nivel ${selectedLevel} · ${practiceLevel().title}. ${practiceLevel().description} Elige el modo para comenzar.`;
+  }
+  function loadProfiles() {
+    if (!profilesRequest) profilesRequest = api('/practice/profiles').then(data => { window.AulaPracticeProfiles = data; }).catch(() => { profilesRequest = null; });
+    profilesRequest.then(refreshExpectations);
+  }
 
   function dockPracticeTools() {
     const tools = document.querySelector('.tools-fab');
@@ -693,11 +710,12 @@
         <aside class="pf-training">${artHtml('bulb')}<div><h2>Tu entrenamiento profesional</h2><p>El sistema controla la variabilidad de las situaciones.<br>Tú decides el camino.</p></div></aside>
       </header>
       <section class="pf-launch-modalities" aria-label="Modalidades de práctica">
-        ${PRACTICE_MODES.map(mode => `<article class="pf-launch-mode ${mode.cls}"><div class="pf-launch-mode-body"><span class="pf-art-disc">${artHtml(mode.id)}</span><div><h2>${e(mode.title)}</h2><h3>${e(mode.ask)}</h3><p>${e(mode.blurb)}</p><ul class="pf-launch-tags">${mode.tags.map(tag => `<li>${e(tag)}</li>`).join('')}</ul></div></div><button type="button" class="pf-mode-open" data-pf="mode" data-mode="${mode.id}" aria-label="Abrir ${e(mode.title)}"><span>Abrir</span>${ico('arrow')}</button></article>`).join('')}
+        ${PRACTICE_MODES.map(mode => `<article class="pf-launch-mode ${mode.cls}"><div class="pf-launch-mode-body"><span class="pf-art-disc">${artHtml(mode.id)}</span><div><h2>${e(mode.title)}</h2><h3>${e(mode.ask)}</h3><p>${e(mode.blurb)}</p><ul class="pf-launch-tags">${mode.tags.map(tag => `<li>${e(tag)}</li>`).join('')}</ul></div></div><p class="pf-mode-expectation" data-pf-expect="${mode.id}">${e(mode.title)} · Nivel ${selectedLevel} ${e(practiceLevel().title)}: ${e(expectation(mode))}</p><button type="button" class="pf-mode-open" data-pf="mode" data-mode="${mode.id}" aria-label="Abrir ${e(mode.title)}"><span>Abrir</span>${ico('arrow')}</button></article>`).join('')}
       </section>
       <div class="pf-launch-lower">
         <fieldset class="pf-level-selector"><legend class="sr-only">Nivel de dificultad</legend><div class="pf-level-heading">${ico('chart')}<div><h2>1. Selecciona el nivel de dificultad</h2><p>Elige el nivel que más se ajuste a tu preparación. Puedes cambiarlo cuando quieras.</p></div></div>
           <div class="pf-level-grid">${PRACTICE_LEVELS.map(level => `<label class="pf-level-card ${level.cls}"><input type="radio" name="pf-level" value="${level.id}" ${selectedLevel === level.id ? 'checked' : ''}><span class="pf-level-card-body"><span class="pf-art-disc">${artHtml(level.art)}</span><span class="pf-level-copy"><b>Nivel ${level.id} · ${e(level.title)}</b><span>${e(level.subtitle)}</span><small>${e(level.description)}</small></span></span></label>`).join('')}</div>
+          <p id="pf-level-expectation" class="pf-selection-summary" role="status">Nivel ${selectedLevel} · ${e(practiceLevel().title)}. ${e(practiceLevel().description)} Elige el modo para comenzar.</p>
         </fieldset>
         <aside class="pf-launch-find"><h2>${ico('info')} ¿Qué encontrarás aquí?</h2><ul>${[['refresh','Nuevas situaciones cada vez.'],['target','Puedes intentar, equivocarte y volver a hacerlo.'],['tool','Pistas y orientación cuando lo necesites.'],['book','Sin calificación.']].map(([kind,text]) => `<li>${ico(kind)}<span>${text}</span></li>`).join('')}</ul></aside>
       </div>
@@ -832,6 +850,7 @@
     if (state.view === 'workbench' && window.AulaPracticeScreens) {
       window.AulaPracticeScreens.mount(root, {mode:state.mode, level:selectedLevel, art:artHtml,
         back:() => { state = emptyState(); paint(); }, close,
+        change:(mode,level) => { setPracticeLevel(level); state.mode = mode; state.view = 'workbench'; paint(); },
         lab:() => openActivity('lab')});
       return;
     }
@@ -944,7 +963,7 @@
     else if (act === 'justify') finishLabOrJustify('justify');
   }
   function onChange(ev) {
-    if (ev.target.name === 'pf-level') setPracticeLevel(ev.target.value);
+    if (ev.target.name === 'pf-level') { setPracticeLevel(ev.target.value); refreshExpectations(); }
     if (ev.target.name === 'pf-choice') state.choice = Number(ev.target.value);
     if (ev.target.hasAttribute('data-pf-just')) state.justify = ev.target.value;
   }
@@ -988,6 +1007,7 @@
     document.body.classList.add('practice-open');
     dockPracticeTools();
     paint();
+    loadProfiles();
     document.addEventListener('keydown', onKey);
     window.addEventListener('hashchange', onHash);
   }

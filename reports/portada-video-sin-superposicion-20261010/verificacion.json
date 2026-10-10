@@ -1,0 +1,68 @@
+{
+  "desktop": {
+    "capabilitiesBelowContent": true,
+    "cardsFit": true,
+    "pageOverflow": false,
+    "photoCount": 0,
+    "video": {
+      "controls": true,
+      "duration": 10.005,
+      "ended": true,
+      "readyState": 4,
+      "time": 10.005
+    },
+    "videoOnRight": true,
+    "videoVerticallyCentered": true,
+    "width": 1280
+  },
+  "tablet": {
+    "capabilitiesBelowContent": true,
+    "cards": [
+      {
+        "overflow": false,
+        "text": "Simulasituaciones técnicas"
+      },
+      {
+        "overflow": false,
+        "text": "Practicade forma segura"
+      },
+      {
+        "overflow": false,
+        "text": "Reciberetroalimentación"
+      },
+      {
+        "overflow": false,
+        "text": "Demuestralo aprendido"
+      }
+    ],
+    "pageOverflow": false,
+    "width": 768
+  },
+  "mobile": {
+    "capabilitiesBelowContent": true,
+    "captionOverflow": false,
+    "cards": [
+      {
+        "overflow": false,
+        "text": "Simulasituaciones técnicas"
+      },
+      {
+        "overflow": false,
+        "text": "Practicade forma segura"
+      },
+      {
+        "overflow": false,
+        "text": "Reciberetroalimentación"
+      },
+      {
+        "overflow": false,
+        "text": "Demuestralo aprendido"
+      }
+    ],
+    "iconCount": 13,
+    "pageOverflow": false,
+    "photoCount": 0,
+    "videoReady": true,
+    "width": 320
+  }
+}

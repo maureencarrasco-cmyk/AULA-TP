@@ -15,6 +15,55 @@ img[data-tp-poster] {
   border-radius: 12px;
   object-fit: cover;
 }
+img[data-tp-poster][hidden] { display: none; }
+
+/* Keep the presentation and its caption in flow above the capability strip. */
+#inicio.hero { height: auto; min-height: 0; align-items: center; }
+#inicio.hero > .hero-media {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+}
+#inicio.hero .hero-media > img[data-tp-poster] { display: none; }
+#inicio.hero .hero-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+#inicio.hero .hero-media figcaption {
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  height: auto;
+  min-height: 0;
+}
+#inicio.hero .tp-media-caption { width: 100%; margin: 0; padding: 0 18px 14px; }
+#inicio.hero + .capabilities {
+  position: static;
+  height: auto;
+  margin-top: 0;
+  padding-block: 16px 8px;
+  transform: none;
+}
+#inicio.hero + .capabilities .capability-card {
+  min-width: 0;
+  height: auto;
+  transform: none;
+}
+#inicio.hero + .capabilities .capability-card > span:last-child { min-width: 0; }
+#inicio.hero + .capabilities .capability-card .icon { flex-shrink: 0; }
+@media (max-width: 480px) {
+  #inicio.hero + .capabilities { grid-template-columns: minmax(0, 1fr); }
+}
 .specialty-card[role="link"] { cursor: pointer; }
 .status-badge.is-mission {
   background: #dbeafe;

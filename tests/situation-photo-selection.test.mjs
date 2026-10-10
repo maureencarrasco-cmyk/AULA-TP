@@ -9,6 +9,14 @@ function runtime(photos){
 }
 const photos=Array.from({length:15},(_,i)=>({image:`/static/situation-photos/test-${i}.jpg`,source:`source-${i}`,fingerprint:`hash-${i}`,title:i===7?'Feeding fish at hatchery':'Fish hatchery '+i,alt:'Contexto de criadero'}));
 const module={title:'Manejo de reproductores y larvas',content:{cases:Array.from({length:15},(_,i)=>({title:'Situacion '+(i+1),criterion:i===0?'Planifica la alimentacion de reproductores':'Acondiciona reproductores',answer:i%4,options:['A','B','C','D']}))}};
+test('practice uses the actual question and context rather than another case with the same criterion',()=>{
+ const context=runtime({accounting:[{image:'calculator',title:'Calculator',alt:'Calculadora'}],office:[{image:'records',title:'Office laptop document',source:'source',alt:'Trabajo administrativo'}]});
+ const scenario={title:'Remuneraciones',criterion:'Proceso contable',context:'Las horas del registro de asistencia no coinciden con el contrato y finiquito.'};
+ const before=JSON.stringify(scenario);
+ assert.equal(context.practiceSituationPhoto(module,{id:8},scenario).image,'records');
+ assert.equal(context.practiceSituationPhoto(module,{id:8},{title:'Calcular',context:'Calculo de operaciones contables'}).image,'calculator');
+ assert.equal(JSON.stringify(scenario),before);
+});
 test('all 15 cases have distinct pictures across carousel pages without changing content',()=>{
  const context=runtime({hatchery:photos});const before=JSON.stringify(module);
  const chosen=context.situationPhotoSet(module,{id:19});

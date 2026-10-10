@@ -46,9 +46,12 @@ class PracticeScreens(unittest.TestCase):
             self.assertNotIn('answer', data)
             self.assertNotIn('explanation', data)
             self.assertNotIn('option_feedback', data)
+            self.assertNotIn('correct_choice', data)
+            self.assertNotIn('model_answer', data)
             if item['answer'] != 0:
                 found_nonzero = True
                 self.assertFalse(self.submit(data, choice=0).json['correct'])
+                self.assertEqual(self.submit(data, choice=0).json['correct_choice'], item['answer'])
                 self.assertTrue(self.submit(data, choice=item['answer']).json['correct'])
                 break
         self.assertTrue(found_nonzero)
@@ -66,12 +69,15 @@ class PracticeScreens(unittest.TestCase):
                     self.assertNotEqual(previous, data['source_id'])
                     previous = data['source_id']
                     self.assertEqual(len(data['stages']), 4)
-                    self.assertEqual(data['response_format'], 'choice' if number % 2 else 'written')
-                    self.assertEqual(len(data['options']), 4 if number % 2 else 0)
-                    if not number % 2:
-                        result = self.submit(data, text='Relaciono la evidencia del caso con el criterio y declaro qué antecedente falta confirmar.')
+                    expected = 'choice' if level == 1 or (level == 2 and number % 2) else 'written'
+                    self.assertEqual(data['response_format'], expected)
+                    self.assertEqual(len(data['options']), 4 if expected == 'choice' else 0)
+                    if expected == 'written':
+                        result = self.submit(data, text='Relaciono la evidencia del caso con el criterio y declaro qué antecedente falta confirmar. ' * 3)
                         self.assertEqual(result.status_code, 200)
                         self.assertEqual(result.json['kind'], 'written')
+                        self.assertTrue(result.json['model_answer'])
+                        self.assertNotIn('model_answer', data)
                         self.assertNotIn('score', result.json)
                         self.assertEqual(len(result.json['review_criteria']), 4)
                         self.assertEqual(self.submit(data, text='corto').status_code, 400)
@@ -107,13 +113,43 @@ class PracticeScreens(unittest.TestCase):
                         prior = data['source_id']
                         item = content[claim['family']][claim['index']]
                         self.assertEqual(data['criterion'], item.get('criterion') or data['criterion'])
-                        if number % 2:
+                        if data['response_format'] == 'choice':
                             self.assertEqual(data['options'], item['options'])
                             self.assertTrue(review(content,claim,{'choice':item['answer']})['correct'])
+                        else:
+                            self.assertTrue(review(content,claim,{'text':'Respuesta con evidencia. ' * 10})['model_answer'])
+                        profile = data['pedagogy']
+                        self.assertEqual(profile['mode'], mode)
+                        self.assertEqual(profile['level'], level)
+                        references = ([data['comparison']] if 'comparison' in data else []) + data.get('additional_evidence', [])
+                        self.assertEqual(len(references) + 1, profile['evidence_count'])
+                        for reference in references:
+                            self.assertNotIn('answer', reference)
+                            self.assertNotIn('explanation', reference)
                         self.assertGreater(len(practice_bank(content,mode,level)),1)
                         count += 1
             self.assertEqual(content, original, f'Module {mid} mutated')
         self.assertEqual(count, 21648)
+
+    def test_twelve_profiles_are_distinct_progressive_and_authenticated(self):
+        profiles = self.client.get('/api/practice/profiles').json
+        self.assertEqual(self.app.test_client().get('/api/practice/profiles').status_code, 401)
+        signatures = set()
+        for mode, levels in profiles.items():
+            previous_count = 0
+            for level, data in enumerate(levels, 1):
+                names = {field['name'] for field in data['fields']}
+                self.assertGreater(len(names), previous_count)
+                previous_count = len(names)
+                signatures.add(tuple(sorted((field['name'],field['label']) for field in data['fields'])))
+                self.assertEqual(data['automatic_support'], level == 1)
+                self.assertEqual(data['evidence_count'], 3 if level == 4 else 2 if level == 3 or (mode == 'investigate' and level == 2) else 1)
+                self.assertIn({'explore':'prediction','challenge':'goal','investigate':'hypothesis'}[mode], names if level > 1 else names | {'prediction','goal'})
+        self.assertEqual(len(signatures), 12)
+        data = self.get_case('investigate', 4)
+        self.assertEqual(self.submit(data, text='Texto corto pero supera veinte caracteres.').status_code, 400)
+        refreshed = self.client.get('/api/modules/84/practice/scenario', query_string=dict(mode='investigate',level=4,number=data['number'],source=data['source_id'])).json
+        self.assertEqual(refreshed['source_id'], data['source_id'])
 
 
 if __name__ == '__main__':

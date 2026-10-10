@@ -1,0 +1,53 @@
+/* Landing principal: jerarquía de acciones y lectura más breve. */
+.landing-refresh :is(.button,.audience-action,.implementation-cta,.catalog-entry-button,.nav-cta,.city-art-link){
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:48px;padding:12px 20px;border-radius:12px;
+  font-weight:800;line-height:1.3;text-align:center;
+  transition:background-color .18s,box-shadow .18s,transform .18s;
+}
+.landing-refresh :is(.button,.audience-action,.implementation-cta,.catalog-entry-button){
+  border:1px solid transparent;box-shadow:0 5px 14px #082b6712;
+}
+.landing-refresh :is(.button-primary,.campus-button,.campus-link.button,.audience-action.campus-link,.catalog-entry-button){background:#086bce;border-color:#086bce;color:#fff}
+.landing-refresh :is(.button-outline,.button-director,.implementation-cta){background:#fff;border-color:#a9c5e3;color:#1259a4}
+.landing-refresh :is(.button-teacher,.portal-link.audience-action){background:#eee9fc;border-color:#dacdf5;color:#5b37a8}
+.landing-refresh .city-promo-enter{background:#087c78;border-color:#087c78;color:#fff}
+.landing-refresh :is(.button,.audience-action,.implementation-cta,.catalog-entry-button):hover{transform:translateY(-2px);box-shadow:0 8px 20px #082b6720}
+.landing-refresh :is(.button-primary,.campus-button,.campus-link.button,.audience-action.campus-link,.catalog-entry-button):hover{background:#0756a6;border-color:#0756a6;color:#fff}
+.landing-refresh .city-promo-enter:hover{background:#06635f;border-color:#06635f}
+.landing-refresh :is(.button-outline,.button-director,.implementation-cta):hover{background:#eaf3fd;border-color:#759ecb;color:#1259a4}
+.landing-refresh .button-teacher:hover{background:#e1d6f7;color:#4a288f}
+.landing-refresh :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #1972d2;outline-offset:4px}
+.landing-refresh :is(.button,.audience-action,.implementation-cta):active{transform:translateY(0);box-shadow:0 2px 6px #082b6712}
+.landing-refresh :is(.button,.audience-action,.nav-cta) svg{width:20px;height:20px;flex-shrink:0}
+.landing-refresh .header-actions .button{font-size:.85rem;white-space:nowrap}
+.landing-refresh .hero{min-height:0}
+.landing-refresh .hero-copy{padding-top:30px;padding-bottom:30px}
+.landing-refresh .hero h1{font-size:clamp(2.3rem,4vw,3.6rem);line-height:1.12}
+.landing-refresh .hero .lead{font-size:1.04rem;margin:18px 0 22px}
+.landing-refresh .hero-note{margin-top:18px}
+.landing-refresh .social-proof{font-size:.8rem}
+.landing-refresh .section{padding-top:42px;padding-bottom:42px}
+.landing-refresh .city-promo{margin-top:32px;margin-bottom:38px;padding:30px;gap:30px}
+.landing-refresh .city-promo-features{gap:12px;margin:18px 0 22px}
+.landing-refresh .city-promo-lead{margin:16px 0;font-size:.95rem}
+.landing-refresh .city-promo-art{align-self:center}
+.landing-refresh .city-art-link{display:flex;justify-content:space-between}
+.landing-refresh .audience{min-height:0}
+.landing-refresh .audience-body{padding:20px}
+.landing-refresh .audience h3{min-height:0;font-size:1.45rem}
+.landing-refresh .audience-body>p{min-height:0;margin:12px 0;font-size:.92rem}
+.landing-refresh .audience ul{min-height:0;gap:8px;margin:14px 0 18px;padding:12px;font-size:.86rem}
+.landing-refresh .audience-action{width:100%;margin-top:auto}
+.landing-refresh .section-heading{margin-bottom:24px}
+.landing-refresh .faq-v2 .faq-list summary{min-height:60px}
+.landing-refresh .implementation-intro h2{font-size:clamp(1.7rem,3vw,2.5rem)}
+@media(max-width:650px){
+ .landing-refresh .hero-actions{gap:12px}
+ .landing-refresh .hero-actions .button{flex:1 1 170px;padding:12px 16px}
+ .landing-refresh .city-promo{padding:22px 18px;gap:22px}
+ .landing-refresh .section{padding-top:30px;padding-bottom:30px}
+ .landing-refresh .hero-copy{padding-top:24px;padding-bottom:24px}
+ .landing-refresh .hero h1{font-size:2.3rem}
+}
+@media(prefers-reduced-motion:reduce){.landing-refresh :is(.button,.audience-action,.implementation-cta,.catalog-entry-button,.nav-cta,.city-art-link){transition:none;transform:none}}

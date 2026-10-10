@@ -1,7 +1,7 @@
 La portada pública debe cargar este parche antes de </body>:
 
-<link rel="stylesheet" href="/landing/aula-tp-coherence.css?v=20261009">
-<script src="/landing/aula-tp-coherence.js?v=20261009" defer></script>
+<link rel="stylesheet" href="/landing/aula-tp-coherence.css?v=20261010-home-layout">
+<script src="/landing/aula-tp-coherence.js?v=20261010-home-layout" defer></script>
 
 Contrato de menú:
 Inicio → Simulador → Especialidades → Cómo funciona → Comunidad → Ver catálogo → Campus → Solicitar demo
@@ -9,6 +9,7 @@ Inicio → Simulador → Especialidades → Cómo funciona → Comunidad → Ver
 - Ver catálogo: /landing/catalogo.html (público, sin login)
 - Campus: /portal/cursos/ (cuenta del establecimiento)
 - Solicitar demo: #lead-form (no #preguntas)
-- Hero: poster de Electricidad, nunca gastronomía
+- Hero: solo video, sin la imagen adicional del taller; centrado en la columna derecha
+- Capacidades: debajo del hero y sus leyendas, sin margen negativo ni superposiciones
 - Tarjetas: electricidad/enfermería/clima al campus con ?q= ; automotriz a /mision_laboral/ (Misión 3D, no «en preparación») ; resto al catálogo
 - Pie: si faltan Ver catálogo y Campus, el script los inserta antes de Demo

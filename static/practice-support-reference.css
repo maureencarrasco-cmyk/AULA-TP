@@ -1,0 +1,50 @@
+#practice-root.is-workbench .ps-layout{grid-template-columns:minmax(0,1fr) 340px}
+#practice-root .ps-support-reference{padding:18px;border:1px solid #d3e7fc;border-radius:8px;background:#f6fbff;color:#102252}
+#practice-root .ps-support-heading{display:grid;grid-template-columns:72px minmax(0,1fr);gap:14px;align-items:center;margin-bottom:20px}
+#practice-root .ps-support-heading h2{font-size:calc(24px * var(--ps-scale));color:#08174c;margin:0 0 6px}
+#practice-root .ps-support-heading p{color:#596785;font-size:calc(14px * var(--ps-scale))!important;margin:0}
+/* Show only the reference's illustrations; all labels remain live text. */
+#practice-root .ps-support-art{display:block;flex:none;width:64px;height:64px;background-image:url('/static/practice-support-reference.png');background-repeat:no-repeat;background-size:369.778px 537.956px;border-radius:50%;pointer-events:none}
+#practice-root .support-resources{width:72px;height:72px;background-size:312px 453.9px;background-position:-16.5px -21.6px}
+#practice-root .support-glossary{background-position:-27.378px -126.578px}
+#practice-root .support-calculator{background-position:-27.378px -205.867px}
+#practice-root .support-notes{background-position:-27.378px -285.867px}
+#practice-root .support-agent{background-position:-27.378px -365.867px}
+#practice-root .support-module{width:48px;height:48px;border-radius:8px;background-size:332.8px 484.16px;background-position:-16px -413.76px}
+#practice-root .ps-support-reference .ps-tool-buttons{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+#practice-root .ps-support-reference .ps-tool-buttons button{--support-tint:#eef8f1;--support-border:#b4ddc5;--support-ink:#25804b;--support-disc:#d9efe3;display:grid;grid-template-columns:64px minmax(0,1fr) 32px;gap:10px;align-items:center;min-height:90px;width:100%;padding:12px 10px;border:1px solid var(--support-border);border-radius:8px;background:var(--support-tint);text-align:left;color:#0b1b50;transition:border-color .15s ease,background-color .15s ease}
+#practice-root .ps-support-reference button[data-ps-tool="calculator"]{--support-tint:#f5f1ff;--support-border:#d6c9ff;--support-ink:#7850d4;--support-disc:#e9e0ff}
+#practice-root .ps-support-reference button[data-ps-tool="notes"]{--support-tint:#fff6e9;--support-border:#ffd49a;--support-ink:#c97500;--support-disc:#ffebca}
+#practice-root .ps-support-reference button[data-ps-tool="agent"]{--support-tint:#eef7ff;--support-border:#bedfff;--support-ink:#087bd7;--support-disc:#dcedff}
+#practice-root .ps-support-label{font-size:calc(16px * var(--ps-scale));line-height:1.4;font-weight:700;overflow-wrap:anywhere}
+#practice-root .ps-support-arrow{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--support-disc);color:var(--support-ink)}
+#practice-root .ps-support-arrow .work-ico{color:inherit;width:20px;height:20px}
+#practice-root .ps-support-arrow .work-ico svg{width:20px;height:20px}
+#practice-root .ps-support-reference .ps-tool-buttons button:hover,#practice-root .ps-support-reference .ps-tool-buttons button[aria-expanded="true"]{background:var(--support-disc);border-color:var(--support-ink);transform:none}
+#practice-root .ps-support-reference .ps-tool-buttons button:focus-visible{outline:3px solid #0868b9;outline-offset:3px}
+#practice-root .ps-support-reference .ps-tool-buttons button[aria-expanded="true"] .ps-support-arrow{rotate:90deg}
+#practice-root .ps-support-reference #ps-tool-panel{margin-top:18px;padding-top:18px;border-top:1px solid #d5e3ee}
+#practice-root .ps-support-reference .ps-tools-context{display:grid;grid-template-columns:48px minmax(0,1fr);gap:12px;align-items:center;padding-top:18px;margin-top:20px!important;border-top:1px solid #d5e3ee;color:#0b1b50}
+#practice-root .ps-tools-context strong{font-size:calc(17px * var(--ps-scale));line-height:1.4;overflow-wrap:anywhere}
+#practice-root .ps-tools-context p{margin:4px 0 0;color:#596785;font-size:calc(14px * var(--ps-scale))!important}
+@media(max-width:1100px){
+ #practice-root.is-workbench .ps-layout{grid-template-columns:minmax(0,1fr)}
+ #practice-root .ps-support-reference .ps-tool-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #practice-root .ps-support-heading{max-width:420px}
+}
+@media(max-width:640px){
+ #practice-root .ps-support-reference{padding:14px}
+ #practice-root .ps-support-reference .ps-tool-buttons{grid-template-columns:minmax(0,1fr)}
+ #practice-root .ps-support-heading{grid-template-columns:64px minmax(0,1fr);gap:10px}
+ #practice-root .support-resources{width:64px;height:64px;background-size:277.333px 403.467px;background-position:-14.667px -19.2px}
+ #practice-root .ps-support-heading h2{font-size:calc(23px * var(--ps-scale))}
+}
+body.simple-visual #practice-root .ps-support-art{display:none}
+body.simple-visual #practice-root :is(.ps-support-heading,.ps-tools-context){grid-template-columns:minmax(0,1fr)}
+body.simple-visual #practice-root .ps-support-reference .ps-tool-buttons button{grid-template-columns:minmax(0,1fr) 32px;min-height:60px}
+body.high-contrast #practice-root .ps-support-reference{background:#000;color:#fff;border-color:#fff}
+body.high-contrast #practice-root .ps-support-art{display:none}
+body.high-contrast #practice-root :is(.ps-support-heading,.ps-tools-context){grid-template-columns:minmax(0,1fr)}
+body.high-contrast #practice-root .ps-support-reference .ps-tool-buttons button{grid-template-columns:minmax(0,1fr) 32px;background:#000;border-color:#fff;color:#fff}
+body.high-contrast #practice-root .ps-support-arrow{color:#fff;background:#000}
+@media(prefers-reduced-motion:reduce){#practice-root .ps-support-reference .ps-tool-buttons button{transition:none}}

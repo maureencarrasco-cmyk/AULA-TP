@@ -1,0 +1,34 @@
+#practice-root .ps-utility { position: sticky; top: -20px; z-index: 5; background: #f7fbfe; padding: 10px 0; border-bottom: 1px solid #d6e4ee; align-items: center; }
+#practice-root .ps-session-controls { display: grid; grid-template-columns: repeat(2,minmax(190px,1fr)); gap: 12px; margin-left: auto; flex-shrink: 0; }
+#practice-root .ps-session-controls label { display: grid; grid-template-columns: max-content minmax(128px,1fr); align-items: center; gap: 6px; font-weight: 600; }
+#practice-root .ps-session-controls .atp-select { width: 100%; min-width: 0; }
+#practice-root .ps-session-controls .atp-select__button { width: 100%; border: 1px solid #b8cede; background: #fff; padding: 8px 10px; }
+#practice-root .ps-session-controls select { width: auto; margin: 0; padding: 6px 10px; min-height: 44px; }
+#practice-root .ps-selection-summary, #practice-root .pf-selection-summary { padding: 12px 0; border-block: 1px solid #d6e4ee; color: #163c62; }
+#practice-root .pf-mode-expectation { margin: 10px 0 14px; color: #294662; font-size: 14px; line-height: 1.5; }
+#practice-root .ps-guidance { padding: 12px 0; border-left: 3px solid var(--ps-accent); padding-left: 14px; margin-bottom: 14px; }
+#practice-root .ps-guidance summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; gap: 8px; }
+#practice-root .ps-guidance h3 { display: flex; align-items: center; gap: 8px; }
+#practice-root .ps-guidance ol { padding-left: 24px; }
+#practice-root .ps-stage-action small, #practice-root .ps-comparison-response small { margin: -6px 0 16px; }
+#practice-root .ps-reference-note { color: #4b637a; }
+#practice-root :is(.ps-stage-action h2,.ps-feedback h3,textarea) { scroll-margin-top: 120px; }
+#practice-root .ps-level[data-level="1"] { color: #087344; background: #e9f8ef; }
+#practice-root .ps-level[data-level="2"] { color: #145899; background: #eaf4ff; }
+#practice-root .ps-level[data-level="3"] { color: #6922a4; background: #f3edfc; }
+#practice-root .ps-level[data-level="4"] { color: #935400; background: #fff3df; }
+#practice-root .ps-level-progress { display: flex; gap: 4px; margin: 8px 0; }
+#practice-root .ps-level-progress i { display: block; width: 22px; height: 5px; border: 1px solid currentColor; border-radius: 2px; }
+#practice-root .ps-level-progress .is-filled { background: currentColor; }
+#practice-root .ps-option.is-correct { grid-template-columns: 32px minmax(0,1fr) 28px 20px; }
+#practice-root .ps-answer-mark .work-ico { color: #16834b; }
+@media(max-width:640px) {
+  #practice-root .ps-utility { top: -12px; flex-wrap: wrap; gap: 4px; }
+  #practice-root .ps-session-controls { order: 3; width: 100%; gap: 8px; grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #practice-root .ps-session-controls label { grid-template-columns: minmax(0,1fr); align-items: stretch; font-size: 13px !important; }
+  #practice-root .ps-session-controls select { width: 100%; }
+  #practice-root .ps-utility > button:last-child { margin-left: auto; }
+  #practice-root :is(.ps-stage-action h2,.ps-feedback h3,textarea) { scroll-margin-top: 164px; }
+  #practice-root .ps-option.is-correct { grid-template-columns: 28px minmax(0,1fr) 24px 20px; }
+}
+body.high-contrast #practice-root :is(.ps-utility,.ps-guidance,.ps-level,.ps-selection-summary,.pf-selection-summary,.pf-mode-expectation) { background: #000 !important; color: #fff !important; border-color: #fff; }

@@ -4,15 +4,35 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 const source = readFileSync(new URL('../static/practice-screens.js', import.meta.url),'utf8');
+test('free practice omits the laboratory entry while retaining its support tools',()=>{
+  assert.doesNotMatch(source,/data-ps="lab"/);
+  for(const label of ['Glosario técnico','Calculadora','Mis notas','Ayuda del agente'])assert.ok(source.includes(label));
+});
 function harness() {
   const store = new Map();
   const sandbox = {window:{}, sessionStorage:{getItem:k=>store.get(k),setItem:(k,v)=>store.set(k,v)},
-    auth:{user:{id:1}},current:{id:84},console};
+    auth:{user:{id:1}},current:{id:84},console,esc:value=>String(value).replaceAll('<','&lt;')};
   vm.runInNewContext(source.replace('window.AulaPracticeScreens = {mount, back, leave, context};',
-    `window.test={fresh,completeStep,reviewed,hasDraft,context,readMemory,persist,get:()=>memory,set:(value,options)=>{active=value;config=options;host={classList:{contains:()=>true}};},save:(key,value)=>{memory.sessions[key]=value;},load:(key)=>memory.sessions[key]};`),sandbox);
+    `window.test={fresh,answerHtml,completeStep,reviewed,hasDraft,context,readMemory,persist,get:()=>memory,set:(value,options)=>{active=value;config=options;host={classList:{contains:()=>true}};},save:(key,value)=>{memory.sessions[key]=value;},load:(key)=>memory.sessions[key]};`),sandbox);
   return {api:sandbox.window.test,store,sandbox};
 }
 const fixture = {level:1,response_format:'choice',stages:['Observa','Analiza','Relaciona','Reflexiona']};
+test('solutions appear only after a matching review and distinguish correct, incorrect and written answers',()=>{
+  const {api}=harness(),active=api.fresh({...fixture,options:['A','B','C','D'],prompt:'Caso'});
+  api.set(active,{level:1});
+  assert.doesNotMatch(api.answerHtml(),/is-correct|ps-model-answer/);
+  active.choice=0;active.reviewedChoice=0;active.feedback={kind:'choice',correct:false,correct_choice:2};
+  assert.match(api.answerHtml(),/is-correct-ring/);
+  assert.match(api.answerHtml(),/Respuesta correcta/);
+  active.choice=2;assert.doesNotMatch(api.answerHtml(),/is-correct-ring/);
+  active.reviewedChoice=2;active.feedback.correct=true;
+  assert.match(api.answerHtml(),/ps-option is-correct"/);
+  active.data.response_format='written';active.text='Mi desarrollo';active.reviewedText=active.text;
+  active.feedback={kind:'written',review_criteria:[],model_answer:'Solución curricular <segura>'};
+  assert.match(api.answerHtml(),/ps-model-answer/);
+  assert.match(api.answerHtml(),/&lt;segura>/);
+  active.text+=' editado';assert.doesNotMatch(api.answerHtml(),/ps-model-answer/);
+});
 test('stages require genuine actions and changing answers invalidates review',()=>{
   const {api}=harness(), active=api.fresh(fixture);
   api.set(active,{level:1});

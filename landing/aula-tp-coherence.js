@@ -1,7 +1,7 @@
 'use strict';
 /* Aula TP · menú canónico y multimedia de oficio. 2026-10-09 */
 (function () {
-  var VERSION = '20261009';
+  var VERSION = '20261010-home-layout';
   var ORDER = ['inicio', 'simulador', 'especialidades', 'como funciona', 'comunidad', 'ver catalogo', 'campus', 'solicitar demo', 'demo'];
   var CATALOG = '/landing/catalogo.html';
   var CAMPUS = '/portal/cursos/';
@@ -131,6 +131,17 @@
   }
   function fixHeroMedia() {
     document.querySelectorAll('video').forEach(function (video) {
+      var heroMedia = video.closest('#inicio.hero .hero-media');
+      if (heroMedia) {
+        heroMedia.querySelectorAll('img[data-tp-poster]').forEach(function (image) { image.remove(); });
+        video.hidden = false;
+        video.removeAttribute('poster');
+        video.removeAttribute('data-off-specialty');
+        video.setAttribute('preload', 'metadata');
+        var caption = heroMedia.querySelector('[data-tp-caption]');
+        if (caption) caption.textContent = 'Conoce la propuesta de Aula TP Chile.';
+        return;
+      }
       var blob = ((video.getAttribute('poster') || '') + ' ' + (video.innerHTML || '')).toLowerCase();
       var off = /gastr|pastel|cocina|chef|hoteler|alimento/.test(blob);
       video.setAttribute('poster', POSTER);

@@ -29,12 +29,12 @@
     hivis: {contrast: true, readingFocus: true, text: 'large'}
   };
   const PROFILE_META = [
-    ['read', 'Lectura cómoda', 'Texto mayor, más espaciado y foco visible.'],
-    ['calm', 'Baja estimulación', 'Menos movimiento, diseño simple y ambiente neutro.'],
-    ['guide', 'Apoyo guiado', 'Narración, ayuda visible y más tiempo para leer.'],
-    ['audio', 'Apoyo auditivo', 'Lectura en voz alta, controles de audio y transcripción.'],
-    ['keyboard', 'Navegación sin mouse', 'Teclado, foco reforzado y alternativas a arrastrar.'],
-    ['hivis', 'Alta visibilidad', 'Contraste reforzado, bordes y foco más reconocibles.']
+    ['read', 'Lectura cómoda', 'Texto mayor, más espaciado y foco visible.', 'file'],
+    ['calm', 'Baja estimulación', 'Menos movimiento y diseño simple.', 'palette'],
+    ['guide', 'Apoyo guiado', 'Narración, ayuda visible e instrucciones paso a paso.', 'person'],
+    ['audio', 'Apoyo auditivo', 'Lectura en voz alta y transcripción.', 'speech'],
+    ['keyboard', 'Navegación sin mouse', 'Teclado y alternativas a arrastrar.', 'key'],
+    ['hivis', 'Alta visibilidad', 'Contraste reforzado y foco visible.', 'contrast']
   ];
   const escapeHtml = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 
@@ -399,6 +399,7 @@
     apply();
   }
   function ico(kind) {
+    if (typeof workIco === 'function' && ['file', 'palette', 'person', 'check', 'refresh', 'arrow'].includes(kind)) return workIco(kind);
     const d = {
       contrast: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 2v14a7 7 0 0 0 0-14Z',
       simple: 'M4 6h16M4 12h10M4 18h7',
@@ -415,40 +416,57 @@
     return `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="${d[kind] || d.contrast}"/></svg>`;
   }
   function row(key, title, hint, iconName) {
-    return `<button type="button" class="ax-row" data-ax-toggle="${key}">
+    return `<button type="button" class="ax-row" data-ax-toggle="${key}" role="switch" aria-checked="${prefs[key] ? 'true' : 'false'}" aria-labelledby="ax-${key}-title" aria-describedby="ax-${key}-hint">
       <span class="ax-ico">${ico(iconName)}</span>
-      <span><b>${title}</b><small>${hint}</small></span>
-      <span class="ax-sw" role="switch" aria-checked="${prefs[key] ? 'true' : 'false'}"></span>
+      <span class="ax-row-copy"><b id="ax-${key}-title">${title}</b><small id="ax-${key}-hint">${hint}</small></span>
+      <span class="ax-sw" aria-hidden="true"></span>
     </button>`;
   }
   function syncPanel(panel) {
-    panel.querySelectorAll('[data-ax-profile]').forEach(b => b.classList.toggle('is-on', profileOn(b.dataset.axProfile)));
-    panel.querySelectorAll('[data-ax-text]').forEach(b => b.classList.toggle('is-on', prefs.text === b.dataset.axText));
+    panel.querySelectorAll('[data-ax-profile]').forEach(b => {
+      const on = profileOn(b.dataset.axProfile);
+      b.classList.toggle('is-on', on);
+      b.setAttribute('aria-pressed', String(on));
+      const mark = b.querySelector('.ax-selected');
+      if (mark) mark.hidden = !on;
+    });
+    panel.querySelectorAll('[data-ax-text]').forEach(b => {
+      const on = prefs.text === b.dataset.axText;
+      b.classList.toggle('is-on', on);
+      b.setAttribute('aria-pressed', String(on));
+    });
     panel.querySelectorAll('[data-ax-toggle]').forEach(b => {
       const on = !!prefs[b.dataset.axToggle];
-      const sw = b.querySelector('.ax-sw');
-      if (sw) sw.setAttribute('aria-checked', on ? 'true' : 'false');
+      b.setAttribute('aria-checked', String(on));
     });
-    panel.querySelectorAll('[data-ax-rate]').forEach(b => b.classList.toggle('is-on', Number(prefs.speechRate) === Number(b.dataset.axRate)));
-    panel.querySelectorAll('[data-ax-time]').forEach(b => b.classList.toggle('is-on', Number(prefs.timeScale) === Number(b.dataset.axTime)));
+    panel.querySelectorAll('[data-ax-rate], [data-ax-time]').forEach(b => {
+      const on = b.dataset.axRate ? Number(prefs.speechRate) === Number(b.dataset.axRate) : Number(prefs.timeScale) === Number(b.dataset.axTime);
+      b.classList.toggle('is-on', on);
+      b.setAttribute('aria-pressed', String(on));
+    });
     const sample = panel.querySelector('.ax-preview-sample');
     if (sample) sample.textContent = 'Esto es lo que tienes que hacer ahora. El aprendizaje y su exigencia no cambian.';
   }
   function renderPanel(el) {
     const dialog = document.getElementById('tool');
-    if (dialog) dialog.classList.add('is-access');
-    el.innerHTML = `<div class="ax-panel">
+    if (dialog) {
+      dialog.classList.add('is-access');
+      dialog.setAttribute('aria-labelledby', 'ax-title');
+      dialog.addEventListener('close', () => dialog.removeAttribute('aria-labelledby'), {once: true});
+    }
+    el.innerHTML = `<div class="ax-panel" role="region" aria-labelledby="ax-title">
       <header class="ax-head">
         <span class="ax-mark" aria-hidden="true">Aa</span>
-        <div><small>PREFERENCIAS FUNCIONALES</small><h2>Accesibilidad</h2></div>
-        <button type="button" class="ax-x" data-ax="close" aria-label="Cerrar">×</button>
+        <div class="ax-heading"><small>PREFERENCIAS FUNCIONALES</small><h2 id="ax-title">Accesibilidad</h2></div>
+        <button type="button" class="ax-x" data-ax="close" aria-label="Cerrar accesibilidad" title="Cerrar accesibilidad">×</button>
       </header>
       <div class="ax-body">
-        <p class="ax-lead">Configura cómo quieres percibir y manipular la información. Estas opciones no cambian la dificultad del curso ni entregan la respuesta.</p>
+        <p class="ax-lead"><strong>Configura cómo quieres percibir y manipular la información.</strong><span>Estas opciones no cambian la dificultad del curso ni entregan la respuesta.</span></p>
         <h3 class="ax-h">Perfiles rápidos</h3>
-        <div class="ax-profiles">${PROFILE_META.map(([id, t, h]) => `<button type="button" class="ax-card${profileOn(id)?' is-on':''}" data-ax-profile="${id}"><b>${t}</b><small>${h}</small></button>`).join('')}</div>
+        <div class="ax-profiles">${PROFILE_META.map(([id, t, h, glyph]) => `<button type="button" class="ax-card${profileOn(id)?' is-on':''}" data-ax-profile="${id}" aria-pressed="${profileOn(id)}"><span class="ax-profile-ico" aria-hidden="true">${ico(glyph)}</span><span class="ax-profile-copy"><b>${t}</b><small>${h}</small></span><span class="ax-selected" aria-hidden="true"${profileOn(id)?'':' hidden'}>${ico('check')}</span></button>`).join('')}</div>
         <h3 class="ax-h">Lectura y visualización</h3>
-        <div class="ax-sizes">
+        <p class="ax-size-label" id="ax-text-title">Tamaño del texto</p>
+        <div class="ax-sizes" role="group" aria-labelledby="ax-text-title">
           <button type="button" class="ax-size${prefs.text==='normal'?' is-on':''}" data-ax-text="normal"><strong>A</strong>Normal</button>
           <button type="button" class="ax-size${prefs.text==='large'?' is-on':''}" data-ax-text="large"><strong>A+</strong>Grande</button>
           <button type="button" class="ax-size${prefs.text==='xlarge'?' is-on':''}" data-ax-text="xlarge"><strong>A++</strong>Muy grande</button>
@@ -456,20 +474,20 @@
         ${row('contrast','Alto contraste','Aumenta la diferencia entre fondo, texto y controles.','contrast')}
         ${row('simple','Modo visual simple','Reduce elementos decorativos y mantiene la actividad principal.','simple')}
         ${row('motion','Reducir movimiento','Evita animaciones, rebotes y desplazamientos suaves.','motion')}
-        <div class="ax-preview"><small>Vista previa</small><p class="ax-preview-sample">Esto es lo que tienes que hacer ahora. El aprendizaje y su exigencia no cambian.</p><span class="ax-preview-btn">Continuar</span></div>
-        <details class="ax-acc"><summary>Audio y multimedia</summary>
+        <div class="ax-preview"><small>Vista previa</small><p class="ax-preview-sample">Esto es lo que tienes que hacer ahora. El aprendizaje y su exigencia no cambian.</p><button type="button" class="ax-preview-btn" data-ax="close" aria-label="Continuar con estas preferencias">Continuar ${ico('arrow')}</button></div>
+        <details class="ax-acc"><summary>Audio y multimedia <span class="ax-chevron" aria-hidden="true">${ico('arrow')}</span></summary>
           ${row('speech','Leer contenido','Lee títulos, instrucciones, preguntas y alternativas.','speech')}
           ${row('captions','Subtítulos y transcripción','Muestra una alternativa textual de imágenes y medios.','cap')}
           <p class="muted small">Velocidad de lectura</p>
           <div class="ax-rates">${['0.75','1','1.25','1.5'].map(r => `<button type="button" data-ax-rate="${r}" class="${Number(prefs.speechRate)===Number(r)?'is-on':''}">${r}×</button>`).join('')}</div>
         </details>
-        <details class="ax-acc"><summary>Interacción y navegación</summary>
+        <details class="ax-acc"><summary>Interacción y navegación <span class="ax-chevron" aria-hidden="true">${ico('arrow')}</span></summary>
           ${row('noMouse','Navegación sin mouse','Teclado, zonas más grandes y alternativas a arrastrar.','key')}
           ${row('readingFocus','Foco de lectura','Destaca el bloque actual y suaviza lo secundario.','focus')}
           ${row('highlightInstructions','Resaltar instrucciones','Separa con claridad qué observar, hacer, responder y seguir.','inst')}
           ${row('stepInstructions','Instrucciones paso a paso','Muestra consignas extensas de a un paso, sin añadir contenido.','inst')}
         </details>
-        <details class="ax-acc"><summary>Movimiento, espaciado y tiempo</summary>
+        <details class="ax-acc"><summary>Movimiento, espaciado y tiempo <span class="ax-chevron" aria-hidden="true">${ico('arrow')}</span></summary>
           ${row('spacing','Espaciado ampliado','Aumenta el espacio entre letras y palabras.','space')}
           ${row('leading','Interlineado amplio','Deja más aire entre líneas de texto.','lead')}
           ${row('hideTimer','Ocultar tiempo estimado','Oculta el tiempo de referencia de la actividad. No cambia la Evaluación Final.','time')}
@@ -478,8 +496,8 @@
         </details>
       </div>
       <footer class="ax-foot">
-        <p>Las preferencias se guardan automáticamente.</p>
-        <button type="button" class="ax-reset" data-ax="reset">Restablecer preferencias</button>
+        <p class="ax-saved">${ico('check')} <span>Guardado automáticamente</span></p>
+        <button type="button" class="ax-reset" data-ax="reset" aria-label="Restablecer preferencias">${ico('refresh')} <span>Restablecer</span></button>
       </footer>
     </div>`;
     el.onclick = e => {

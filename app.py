@@ -14,6 +14,7 @@ from learning_sequence import learning_sequence, validate_sequence, sequence_fee
 from assessment_integrity import assessment_issues
 from itsdangerous import URLSafeTimedSerializer, BadSignature
 from practice_scenarios import scenario as practice_scenario, review as practice_review
+from practice_pedagogy import profile as practice_profile
 
 ROOT=Path(__file__).resolve().parent
 
@@ -243,6 +244,11 @@ def create_app(test_config=None):
         if u['role']=='student':c=strip_for_student(c)
         m.update(content=c,state=s,completed=completed(s,c),stations=STATIONS,steps=STEPS,planning=active_plan or c.get('planning') or module_plan(m['position']))
         return jsonify(m)
+    @app.get('/api/practice/profiles')
+    @require()
+    def get_practice_profiles():
+        return jsonify({mode: [practice_profile(mode, level) for level in range(1, 5)]
+                        for mode in ('explore', 'challenge', 'investigate')})
     @app.get('/api/modules/<int:mid>/practice/scenario')
     @require()
     def get_practice_scenario(mid):
@@ -250,7 +256,7 @@ def create_app(test_config=None):
         if err:return err
         try:
             display,claim=practice_scenario(load_content(m['content'],m['position']),request.args.get('mode'),
-                request.args.get('level',type=int),request.args.get('number',type=int),request.args.get('previous'))
+                request.args.get('level',type=int),request.args.get('number',type=int),request.args.get('previous'),request.args.get('source'))
         except ValueError as error:return fail(str(error))
         claim.update(module_id=mid,user_id=session['uid'])
         display['token']=URLSafeTimedSerializer(app.secret_key,salt='ungraded-practice-v1').dumps(claim)
