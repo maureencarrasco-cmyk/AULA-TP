@@ -20,7 +20,7 @@ for(let t=0;t<30;t+=.016){
  assert.ok(Math.abs(a.waveA-b.waveA)+Math.abs(a.waveB-b.waveB)<.003);
 }
 assert.match(source,/body.rotation.set\(0,0,/);
-assert.match(source,/body.position.y=0/);
+assert.match(source,/body.position.set\(quiet\?0:motion.x\|\|0,quiet\?0:motion.y\|\|0,0\)/);
 assert.match(source,/surface.base\[i\*3\+2\]/);
 assert.doesNotMatch(source,/body\.scale\.|getUserMedia|cursor|pointermove/);
-console.log('Video-inspired contour, gaze, eye states and gentle inclination verified; no translation, yaw spin, body scaling or feature changes.');
+console.log('Fallback contour, gaze and eye states verified; recorded motion preserves body scale and agent features.');

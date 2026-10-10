@@ -30,9 +30,9 @@
 
   function visZoomBar() {
     return `<span class="vis-zoom" role="group" aria-label="Zoom de la imagen">
-      <button type="button" data-vis-z="in" aria-label="Acercar">+</button>
-      <button type="button" data-vis-z="out" aria-label="Alejar">−</button>
-      <button type="button" data-vis-z="reset" aria-label="Restablecer zoom">Restablecer</button>
+      <button type="button" class="vis-zoom-button vis-zoom-in" data-vis-z="in" aria-label="Acercar" title="Acercar imagen"><span class="vis-zoom-medallion" aria-hidden="true"><span class="vis-zoom-sign">+</span></span></button>
+      <button type="button" class="vis-zoom-button vis-zoom-out" data-vis-z="out" aria-label="Alejar" title="Alejar imagen"><span class="vis-zoom-medallion" aria-hidden="true"><span class="vis-zoom-sign">&minus;</span></span></button>
+      <button type="button" class="vis-zoom-button vis-zoom-reset" data-vis-z="reset" aria-label="Restablecer zoom" title="Restablecer zoom"><span class="vis-zoom-medallion" aria-hidden="true">${typeof workIco === 'function' ? workIco('refresh') : '&#8635;'}</span><span class="vis-zoom-label">Restablecer</span></button>
     </span>`;
   }
 

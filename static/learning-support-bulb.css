@@ -1,0 +1,41 @@
+html body[data-screen="module"] #app #main .sequence-support h4>.icon {
+  background:linear-gradient(145deg,#fff6b1,#ffe369)!important;
+  color:#8a5900!important;border:2px solid #ffd34b!important;
+  border-radius:50%;pointer-events:none;
+  box-shadow:inset 0 0 0 3px #fff9d2,0 0 18px #ffd12e80,0 0 32px #ffc92845!important;
+  animation:learning-bulb-float 4.5s ease-in-out infinite;
+}
+html body[data-screen="module"] #app #main .sequence-support h4>.icon path {
+  fill:#ffe457;stroke:currentColor;
+}
+@keyframes learning-bulb-float {
+  0%,100% {transform:translateY(0)}
+  50% {transform:translateY(-6px)}
+}
+@media(max-width:760px) {
+  html body[data-screen="module"] #app #main .sequence-support h4:has(>.icon) {
+    flex-direction:column;align-items:flex-start;gap:10px;
+  }
+  html body[data-screen="module"] #app #main .sequence-support h4>.icon {
+    display:block!important;position:static;flex:none;
+    width:44px!important;height:44px!important;padding:10px;
+    margin:4px 0 0;align-self:flex-start;
+  }
+}
+html body.reduce-motion[data-screen="module"] #app #main .sequence-support h4>.icon,
+html body.simple-visual[data-screen="module"] #app #main .sequence-support h4>.icon {
+  animation:none!important;transform:none!important;
+}
+html body.simple-visual[data-screen="module"] #app #main .sequence-support h4>.icon {
+  box-shadow:none!important;
+}
+html body.high-contrast[data-screen="module"] #app #main .sequence-support h4>.icon {
+  background:#fff!important;color:#000!important;border-color:#000!important;
+  box-shadow:none!important;
+}
+html body.high-contrast[data-screen="module"] #app #main .sequence-support h4>.icon path {fill:none}
+@media(prefers-reduced-motion:reduce) {
+  html body[data-screen="module"] #app #main .sequence-support h4>.icon {
+    animation:none!important;transform:none!important;
+  }
+}

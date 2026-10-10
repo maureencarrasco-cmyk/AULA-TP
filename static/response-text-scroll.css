@@ -1,0 +1,11 @@
+html body[data-screen="module"] #app #main#main textarea:not([hidden]) {
+  appearance:auto!important;
+  -webkit-appearance:auto!important;
+  overflow-y:scroll!important;
+  overflow-x:hidden!important;
+  scrollbar-width:auto!important;
+  scrollbar-gutter:stable;
+  overscroll-behavior-y:contain;
+  scroll-behavior:auto!important;
+  resize:vertical!important;
+}

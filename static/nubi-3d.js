@@ -1,6 +1,12 @@
 'use strict';
 
-function nubiReferenceMotion(seconds,emotion='idle'){
+function nubiReferenceMotion(seconds,emotion='idle',track=null){
+ if(track?.samples?.length){
+  const frame=(((seconds%track.duration)+track.duration)%track.duration)*track.fps;
+  const index=Math.floor(frame)%track.samples.length,next=(index+1)%track.samples.length,blend=frame-Math.floor(frame);
+  const pose=Object.fromEntries(track.fields.map((key,i)=>[key,track.samples[index][i]+(track.samples[next][i]-track.samples[index][i])*blend]));
+  return {...pose,eyeMode:'reference',lookX:pose.lookX*.22,lookY:pose.lookY*.2,waveA:0,waveB:0,frame:index};
+ }
  const phase=((seconds%7.2)+7.2)%7.2;
  const eyeMode=emotion==='happy'?'happy':['listening','speaking'].includes(emotion)?'voice':phase>=4.65?'voice':phase>=4.15?'smile':'idle';
  const gaze=[[-.055,-.04],[-.065,.025],[.05,.035],[-.04,-.02],[.03,-.035],[.055,0],[0,0]];
@@ -18,7 +24,7 @@ function nubiReferenceMotion(seconds,emotion='idle'){
 // One local renderer survives route changes; assistant behavior stays in app.js.
 (() => {
  let host=null,renderer=null,scene,body,camera,eyes=[],frame=0,last=0,visible=true,turn=null;
- let motionSeconds=0;
+ let motionSeconds=0,referenceTrack=null;
  const surface={};
  const media=matchMedia('(prefers-reduced-motion: reduce)');
  const reduced=()=>media.matches||document.documentElement.classList.contains('reduce-motion')||document.body.classList.contains('reduce-motion');
@@ -27,6 +33,14 @@ function nubiReferenceMotion(seconds,emotion='idle'){
   wake();
  });
  let loading=null;
+ fetch('/static/nubi-reference-motion.json?v=20261010-recorded-motion').then(response=>{
+  if(!response.ok)throw new Error('Reference motion unavailable');
+  return response.json();
+ }).then(track=>{
+  if(!(track.fps>0&&track.duration>0&&track.fields.length===11&&track.samples.length>1&&track.samples.every(row=>row.length===11&&row.every(Number.isFinite))))return;
+  referenceTrack=track;
+  if(renderer&&host){draw(performance.now());wake();}
+ }).catch(()=>{});
  function sync(){
   const next=document.querySelector('.nubi-cloud.nubi-robot');
   if(next===host)return;
@@ -42,7 +56,6 @@ function nubiReferenceMotion(seconds,emotion='idle'){
  }
  function build(T){
   renderer=new T.WebGLRenderer({alpha:true,antialias:true,powerPreference:'low-power'});
-  renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));
   renderer.setClearColor(0,0);renderer.outputColorSpace=T.SRGBColorSpace;
   renderer.domElement.className='nubi-volume';
   renderer.domElement.setAttribute('aria-hidden','true');
@@ -89,7 +102,7 @@ function nubiReferenceMotion(seconds,emotion='idle'){
    surface.cos3[i]=Math.cos(angle*3);surface.sin5[i]=Math.sin(angle*5);
    surface.rim[i]=Math.max(0,1-(position.getZ(i)/.84)**2)**2;
   }
-  const sphere=new T.SphereGeometry(1,40,28);
+  const sphere=new T.SphereGeometry(1,64,40);
   const face=new T.Mesh(sphere,new T.MeshPhysicalMaterial({color:0xf2f6ff,roughness:.32,clearcoat:.5}));
   face.scale.set(.87,.4,.21);face.position.set(0,-.07,.78);body.add(face);
   const eyeMaterial=new T.MeshPhysicalMaterial({color:0x061343,roughness:.2,clearcoat:1});
@@ -105,15 +118,17 @@ function nubiReferenceMotion(seconds,emotion='idle'){
  function resize(){
   if(!host||!renderer)return;
   const size=host.getBoundingClientRect();
+  // Supersample the small mascot without enlarging its CSS footprint.
+  renderer.setPixelRatio(Math.min(Math.max(devicePixelRatio||1,3),4));
   renderer.setSize(Math.max(1,size.width),Math.max(1,size.height),false);
  }
  function draw(now){
   if(!renderer||!host)return;
-  const quiet=reduced()||document.activeElement?.matches('input,textarea,[contenteditable="true"]')||host.closest('.is-dragging');
+  const quiet=reduced();
   if(quiet)turn=null;
   const elapsed=Math.min(Math.max(now-last||16,0),50);
   if(!quiet)motionSeconds+=elapsed/1000;
-  const emotion=host.dataset.emotion||'idle',motion=nubiReferenceMotion(motionSeconds,emotion);
+  const emotion=host.dataset.emotion||'idle',motion=nubiReferenceMotion(motionSeconds,emotion,referenceTrack);
   let angle=0;
   if(turn){
    const progress=Math.min(1,(now-turn.start)/1400);
@@ -121,26 +136,30 @@ function nubiReferenceMotion(seconds,emotion='idle'){
    if(progress>=1)turn=null;
   }
   body.rotation.set(0,0,quiet?0:motion.lean+angle);
-  body.position.y=0;
+  body.position.set(quiet?0:motion.x||0,quiet?0:motion.y||0,0);
   const position=surface.geometry.attributes.position;
   for(let i=0;i<position.count;i++){
    const factor=quiet?1:1+surface.rim[i]*(motion.waveA*surface.cos3[i]+motion.waveB*surface.sin5[i]);
-   position.setXYZ(i,surface.base[i*3]*factor,surface.base[i*3+1]*factor,surface.base[i*3+2]);
+   const stretchX=quiet?0:((motion.stretchX||1)-1)*surface.rim[i],stretchY=quiet?0:((motion.stretchY||1)-1)*surface.rim[i];
+   position.setXYZ(i,surface.base[i*3]*(factor+stretchX),surface.base[i*3+1]*(factor+stretchY),surface.base[i*3+2]);
   }
   position.needsUpdate=true;surface.geometry.computeVertexNormals();
   const voice=parseFloat(host.style.getPropertyValue('--nubi-voice-height'))||23;
-  const smoothing=quiet?1:1-Math.exp(-elapsed/45),gazeSmoothing=quiet?1:1-Math.exp(-elapsed/100);
+  const smoothing=quiet||motion.eyeMode==='reference'?1:1-Math.exp(-elapsed/45),gazeSmoothing=quiet||motion.eyeMode==='reference'?1:1-Math.exp(-elapsed/100);
   eyes.forEach((eye,i)=>{
    const mode=quiet?'idle':motion.eyeMode;
-   const height=mode==='happy'?(i===0?.025:.095):mode==='smile'?.085:mode==='voice'?.23+Math.max(0,voice-20)*.006+.008*Math.sin(motionSeconds*18):.18;
-   const width=mode==='voice'?.09:.125;
+   const height=mode==='reference'?.18*motion[i===0?'leftHeight':'rightHeight']:mode==='happy'?(i===0?.025:.095):mode==='smile'?.085:mode==='voice'?.23+Math.max(0,voice-20)*.006+.008*Math.sin(motionSeconds*18):.18;
+   const width=mode==='reference'?.125*motion[i===0?'leftWidth':'rightWidth']:mode==='voice'?.09:.125;
    eye.scale.x+=(width-eye.scale.x)*smoothing;
    eye.scale.y+=(height-eye.scale.y)*smoothing;
    eye.position.x+=((i===0?-.29:.29)+(quiet?0:motion.lookX)-eye.position.x)*gazeSmoothing;
    eye.position.y+=(-.075+(quiet?0:motion.lookY)-eye.position.y)*gazeSmoothing;
    eye.children[0].visible=mode!=='happy'&&mode!=='smile';
   });
-  renderer.render(scene,camera);renderer.domElement.dataset.viewAngle=angle.toFixed(3);host.setAttribute('data-volume-ready','true');last=now;
+  renderer.render(scene,camera);renderer.domElement.dataset.viewAngle=angle.toFixed(3);
+  renderer.domElement.dataset.motionSource=referenceTrack?'reference':'fallback';
+  renderer.domElement.dataset.motionFrame=String(motion.frame??0);
+  host.setAttribute('data-volume-ready','true');last=now;
  }
  function tick(now){
   frame=0;
@@ -161,7 +180,6 @@ function nubiReferenceMotion(seconds,emotion='idle'){
  new MutationObserver(pause).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
  new MutationObserver(pause).observe(document.body,{attributes:true,attributeFilter:['class']});
  window.addEventListener('resize',()=>{resize();draw(performance.now());});
- document.addEventListener('focusin',()=>{if(document.activeElement?.matches('input,textarea,[contenteditable="true"]'))pause();});
  document.addEventListener('nubi-emotion',()=>{draw(performance.now());wake();});
  sync();
 })();

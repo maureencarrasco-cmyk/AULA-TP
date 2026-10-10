@@ -1,0 +1,196 @@
+/* Only the five-stage scene route, not the other activity routes. */
+html body[data-screen="module"] #app #main .scene-layout > .ped-route:has(> .ped-route-item:nth-child(9)):not(:has(> .ped-route-item:nth-child(11))) {
+  align-items:stretch!important;
+  padding-block:14px!important;
+}
+
+html body[data-screen="module"] #app #main .scene-layout > .ped-route:has(> .ped-route-item:nth-child(9)):not(:has(> .ped-route-item:nth-child(11))) > .ped-route-item {
+  min-height:126.56px!important;
+  height:auto!important;
+  gap:5.6px!important;
+  padding:7.6px 12.6px 13.2px!important;
+  justify-content:flex-start!important;
+  align-self:stretch!important;
+}
+
+html body[data-screen="module"] #app #main .scene-layout > .ped-route > .ped-route-item .ped-verb {
+  margin-top:auto!important;
+}
+
+html body[data-screen="module"] #app #main .scene-layout > .ped-route > .ped-route-item .ped-route-letter {
+  width:30.8px!important;
+  height:30.8px!important;
+  flex-basis:30.8px!important;
+}
+
+html body[data-screen="module"] #app #main .scene-layout > .ped-route > .ped-route-item .work-ico {
+  width:33.6px!important;
+  height:33.6px!important;
+  flex-basis:33.6px!important;
+}
+
+html body[data-screen="module"] #app #main .scene-layout > .ped-route > .ped-route-item .work-ico svg {
+  width:25.2px!important;
+  height:25.2px!important;
+}
+
+html body[data-screen="module"] #app #main .scene-layout > .ped-route > .ped-route-item::after {
+  bottom:9.1px;
+  height:4.9px;
+}
+
+/* Reset inherited empty grid rows; open disclosures remain content-sized. */
+html body[data-screen="module"] #app #main #scene-form .scene-nubi-support.sequence-support {
+  grid-template-columns:minmax(91px,.455fr) minmax(0,1.65fr) minmax(220px,1.25fr)!important;
+  grid-template-rows:auto!important;
+  gap:18.2px!important;
+  padding:19.6px!important;
+  min-height:248.64px;
+}
+
+html body[data-screen="module"] #app #main #scene-form .scene-nubi-art {
+  height:168px!important;
+}
+
+html body[data-screen="module"] #app #main #scene-form .scene-nubi-name {
+  padding-block:3.5px;
+}
+
+html body[data-screen="module"] #app #main #scene-form .scene-nubi-copy > h4 {
+  margin-block:7px!important;
+}
+
+html body[data-screen="module"] #app #main #scene-form .scene-nubi-copy > p {
+  margin-block:5.6px!important;
+}
+
+html body[data-screen="module"] #app #main #scene-form .scene-nubi-support summary {
+  min-height:64.4px;
+  gap:11.2px!important;
+  padding:12.6px!important;
+}
+
+html body[data-screen="module"] #app #main #scene-form .scene-nubi-support .work-ico {
+  width:39.2px;
+  height:39.2px;
+  flex-basis:39.2px;
+}
+
+html body[data-screen="module"] #app #main #scene-form .scene-nubi-support .work-ico svg {
+  width:24px!important;
+  height:24px!important;
+}
+
+html body[data-screen="module"] #app #main #scene-form .scene-nubi-support details > p {
+  padding:0 12.6px 11.2px!important;
+}
+
+html body[data-screen="module"] #app #main #scene-form .scene-nubi-focus {
+  margin-top:11.2px!important;
+}
+
+html body[data-screen="module"] #app #main #scene-form .scene-nubi-focus summary {
+  min-height:51.8px;
+  padding-block:6.3px!important;
+}
+
+html body[data-screen="module"] #app #main #scene-form .scene-nubi-links {
+  gap:11.2px;
+  padding-left:16.8px;
+}
+
+html body[data-screen="module"] #app #main #scene-form .scene-nubi-links summary > .work-ico:last-child {
+  width:28px;
+  height:28px;
+  flex-basis:28px;
+}
+
+@media(min-width:1101px) {
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-support:has(details[open]) {
+    min-height:360.08px;
+  }
+}
+
+@media(max-width:1100px) {
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-support.sequence-support {
+    grid-template-columns:91px minmax(0,1fr)!important;
+    gap:12.6px!important;
+    min-height:0;
+  }
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-links {
+    padding-left:0;
+  }
+}
+
+@media(max-width:950px) {
+  html body[data-screen="module"] #app #main .scene-layout > .ped-route:has(> .ped-route-item:nth-child(9)):not(:has(> .ped-route-item:nth-child(11))) {
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  html body[data-screen="module"] #app #main .scene-layout > .ped-route > .ped-route-arrow {
+    display:none!important;
+  }
+  html body[data-screen="module"] #app #main .scene-layout > .ped-route > .ped-route-item .ped-verb {
+    white-space:normal!important;
+    overflow-wrap:anywhere!important;
+  }
+}
+
+@media(max-width:650px) {
+  html body[data-screen="module"] #app #main .scene-layout > .ped-route:has(> .ped-route-item:nth-child(9)):not(:has(> .ped-route-item:nth-child(11))) {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    padding:8.4px!important;
+  }
+  html body[data-screen="module"] #app #main .scene-layout > .ped-route:has(> .ped-route-item:nth-child(9)):not(:has(> .ped-route-item:nth-child(11))) > .ped-route-item {
+    min-height:125.16px!important;
+    padding-top:6.2px!important;
+    padding-inline:8.8px!important;
+  }
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-support.sequence-support {
+    grid-template-columns:64px minmax(0,1fr)!important;
+    padding:9px 12.6px!important;
+    gap:7px!important;
+  }
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-art {
+    height:52px!important;
+    grid-column:1;
+    grid-row:1;
+  }
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-copy {
+    display:contents;
+  }
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-name {
+    grid-column:2;
+    grid-row:1;
+    justify-self:start;
+  }
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-copy > h4 {
+    grid-column:1/-1;
+    grid-row:2;
+    margin:0!important;
+  }
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-copy > p,
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-focus {
+    grid-column:1/-1;
+  }
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-copy > p {
+    margin-block:4px!important;
+  }
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-focus {
+    margin-top:8px!important;
+  }
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-support summary {
+    min-height:52px;
+    gap:8.4px!important;
+    padding-block:6.3px!important;
+    padding-inline:9.8px!important;
+  }
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-focus summary {
+    min-height:44px;
+    padding-block:3.2px!important;
+  }
+  html body[data-screen="module"] #app #main #scene-form .scene-nubi-support details > p {
+    padding-inline:9.8px!important;
+    padding-bottom:8px!important;
+  }
+}
