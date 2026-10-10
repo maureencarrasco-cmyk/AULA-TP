@@ -1,8 +1,8 @@
 'use strict';
-/* Aula TP · menú canónico y multimedia de oficio. 2026-10-07 */
+/* Aula TP · menú canónico y multimedia de oficio. 2026-10-09 */
 (function () {
-  var VERSION = '20261007';
-  var ORDER = ['inicio', 'simulador', 'especialidades', 'como funciona', 'comunidad', 'ver catalogo', 'campus', 'solicitar demo'];
+  var VERSION = '20261009';
+  var ORDER = ['inicio', 'simulador', 'especialidades', 'como funciona', 'comunidad', 'ver catalogo', 'campus', 'solicitar demo', 'demo'];
   var CATALOG = '/landing/catalogo.html';
   var CAMPUS = '/portal/cursos/';
   var DEMO = '#lead-form';
@@ -33,6 +33,7 @@
     if (n === 'como' || n.indexOf('como funciona') === 0) return 3;
     if (n.indexOf('ver catalogo') === 0 || n.indexOf('cursos vivos') === 0) return 5;
     if (n.indexOf('entrar a cursos') === 0 || n === 'campus') return 6;
+    if (n === 'demo') return 7;
     var i = ORDER.findIndex(function (key) { return n === key || n.indexOf(key) === 0; });
     return i === -1 ? 50 : i;
   }
@@ -92,6 +93,42 @@
     nav.insertBefore(link, campus);
     nav.dataset.menuOrder = '';
   }
+  function ensureFooter(nav) {
+    if (!nav || !nav.closest('footer')) return;
+    var demo = Array.prototype.find.call(nav.querySelectorAll(':scope > a'), function (a) {
+      return /demo|solicitar/.test(labelOf(a));
+    });
+    function add(label, href, key) {
+      if (nav.querySelector('a[data-catalog="' + key + '"]')) return;
+      var link = document.createElement('a');
+      link.setAttribute('href', href);
+      link.setAttribute('data-catalog', key);
+      var span = document.createElement('span');
+      span.textContent = label;
+      link.appendChild(span);
+      if (demo) nav.insertBefore(link, demo);
+      else nav.appendChild(link);
+      nav.dataset.menuOrder = '';
+    }
+    add('Ver catálogo', CATALOG, 'public');
+    add('Campus', CAMPUS, 'campus');
+  }
+  function syncAutomotriz() {
+    document.querySelectorAll('.specialty-card[data-specialty="automotriz"]').forEach(function (card) {
+      card.setAttribute('data-status', 'mission');
+      card.classList.add('is-mission');
+      var badge = card.querySelector('.status-badge');
+      if (badge) {
+        badge.textContent = 'Misión 3D';
+        badge.classList.remove('is-soon');
+        badge.classList.add('is-mission');
+      }
+      var small = card.querySelector('small');
+      if (small && /preparaci|vehicular/i.test(small.textContent || '')) {
+        small.textContent = 'Misión Laboral 3D: Compresión perdida. Sin video de clima.';
+      }
+    });
+  }
   function fixHeroMedia() {
     document.querySelectorAll('video').forEach(function (video) {
       var blob = ((video.getAttribute('poster') || '') + ' ' + (video.innerHTML || '')).toLowerCase();
@@ -145,10 +182,12 @@
     document.querySelectorAll('header nav, footer nav, #nav').forEach(function (nav) {
       retarget(nav);
       ensureCatalogLink(nav);
+      ensureFooter(nav);
       reorder(nav);
     });
     splitGlued(document);
     fixHeroMedia();
+    syncAutomotriz();
     wireSpecialtyCards();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

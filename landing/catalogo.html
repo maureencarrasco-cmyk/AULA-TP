@@ -4,13 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Catálogo de especialidades · Aula TP Chile</title>
-<meta name="description" content="Catálogo público de especialidades TP. Simulador activo, misión 3D y rutas en preparación, sin mezclar el ingreso al campus.">
+<meta name="description" content="Catálogo público de especialidades TP. Simulador, misión 3D, ruta de campus y preparación, sin mezclar el ingreso al campus.">
 <link rel="stylesheet" href="/landing/portal-reference.css?v=20260925.9">
 <style>
   body{margin:0;background:#f4f7fb;color:#0f2744;font-family:"Nunito Sans",system-ui,sans-serif}
   .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 64px}
   header.bar{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:18px 20px;background:#082b67;color:#fff}
   header.bar a{color:#fff;text-decoration:none;font-weight:700}
+  header.bar nav{display:flex;gap:14px;flex-wrap:wrap}
   h1{font-size:clamp(1.6rem,3vw,2.4rem);margin:0 0 8px}
   .lead{max-width:68ch;color:#334155}
   .filters{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}
@@ -18,10 +19,10 @@
   .filters button[aria-pressed="true"]{background:#082b67;color:#fff;border-color:#082b67}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
   article{background:#fff;border:1px solid #d7e3f4;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-  article img{width:100%;height:120px;object-fit:cover;display:block}
+  article img{width:100%;height:140px;object-fit:cover;display:block;background:#e2e8f0}
   article div{padding:14px 14px 16px;display:grid;gap:6px}
   .tag{font-size:.75rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
-  .tag.live{color:#0f766e}.tag.soon{color:#9a3412}.tag.mission{color:#1d4ed8}
+  .tag.live{color:#0f766e}.tag.soon{color:#9a3412}.tag.mission{color:#1d4ed8}.tag.campus{color:#1e3a8a}
   h2{font-size:1.05rem;margin:0}
   p{margin:0;color:#475569;font-size:.92rem}
   .go{margin-top:8px;font-weight:800;color:#082b67}
@@ -32,68 +33,90 @@
   <a href="/#inicio">Aula TP Chile</a>
   <nav aria-label="Catálogo">
     <a href="/#especialidades">Especialidades</a>
-    · <a href="/portal/cursos/">Campus</a>
-    · <a href="/#preguntas">Demo</a>
+    <a href="/landing/catalogo.html" aria-current="page">Ver catálogo</a>
+    <a href="/portal/cursos/">Campus</a>
+    <a href="/#lead-form">Solicitar demo</a>
   </nav>
 </header>
 <main class="wrap">
   <p class="tag live">Catálogo público · sin login</p>
   <h1>Especialidades TP</h1>
-  <p class="lead">Primero las rutas con simulador o misión. Después el catálogo por sector. Una especialidad en preparación no hereda el video ni la foto de otra. El campus queda aparte: ahí se entra con cuenta.</p>
+  <p class="lead">Primero simulador y misión 3D. Después las rutas que ya están en el campus, sin llamarlas simulador. Una especialidad no hereda el video ni la foto de otra. El campus pide cuenta; este catálogo no.</p>
   <div class="filters" role="toolbar" aria-label="Filtrar por estado">
     <button type="button" data-filter="all" aria-pressed="true">Todas</button>
     <button type="button" data-filter="live" aria-pressed="false">Simulador</button>
     <button type="button" data-filter="mission" aria-pressed="false">Misión 3D</button>
+    <button type="button" data-filter="campus" aria-pressed="false">Ruta en campus</button>
     <button type="button" data-filter="soon" aria-pressed="false">En preparación</button>
   </div>
   <div class="grid" id="grid"></div>
 </main>
 <script>
 (function () {
+  var CAMPUS = '/portal/cursos/?q=';
+  var DEMO = '/#lead-form';
   var items = [
-    ['live','Electricidad','Electricidad','Circuitos, mediciones y decisiones de la especialidad. Simulador activo.','/portal/cursos/','Entrar al simulador','#ca8a04','ELE'],
-    ['live','Salud','Atención de Enfermería','Cuidados básicos, signos vitales y registro. Simulador activo.','/portal/cursos/','Entrar al simulador','#be123c','ENF'],
-    ['live','Construcción','Refrigeración y Climatización','Montaje, puesta en marcha y diagnóstico. Simulador activo.','/portal/cursos/','Entrar al simulador','#0e7490','CLI'],
-    ['mission','Metalmecánica','Mecánica Automotriz','Misión Laboral 3D: Compresión perdida. No reutiliza el video de clima.','/mision_laboral/','Entrar a la misión','#b91c1c','AUT'],
-    ['soon','Administración','Administración de Empresas','Gestión de personas, logística y atención. Video en preparación.','/#preguntas','Solicitar ruta','#1d4e89','ADM'],
-    ['soon','Administración','Contabilidad','Registro, documentos tributarios e información económica.','/#preguntas','Solicitar ruta','#0f6e6e','CON'],
-    ['soon','Alimentación','Elaboración Industrial de Alimentos','Procesos, inocuidad y control. Sin foto de gastronomía ajena.','/#preguntas','Solicitar ruta','#b45309','ALI'],
-    ['soon','Agropecuario','Agropecuaria','Producción vegetal y animal.','/#preguntas','Solicitar ruta','#3f6b2a','AGR'],
-    ['soon','Confección','Vestuario y Confección Textil','Patronaje, corte y costura.','/#preguntas','Solicitar ruta','#9d174d','VES'],
-    ['soon','Construcción','Instalaciones Sanitarias','Agua potable y evacuación.','/#preguntas','Solicitar ruta','#0369a1','SAN'],
-    ['soon','Construcción','Montaje Industrial','Estructuras y equipos.','/#preguntas','Solicitar ruta','#44403c','MON'],
-    ['soon','Gráfico','Dibujo Técnico','Representación, acotado y lectura de planos.','/#preguntas','Solicitar ruta','#1e3a8a','DIB'],
-    ['soon','Gráfico','Gráfica','Preprensa y control de producción.','/#preguntas','Solicitar ruta','#7c3aed','GRA'],
-    ['soon','Hotelería y Turismo','Servicios de Hotelería','Recepción y habitaciones. Póster propio, no el del hero.','/#preguntas','Solicitar ruta','#9a3412','HOT'],
-    ['soon','Hotelería y Turismo','Servicios de Turismo','Atención al visitante.','/#preguntas','Solicitar ruta','#b45309','TUR'],
-    ['soon','Maderero','Forestal','Silvicultura y seguridad.','/#preguntas','Solicitar ruta','#166534','FOR'],
-    ['soon','Maderero','Muebles y Terminaciones en Madera','Trazado, maquinado y ensamble.','/#preguntas','Solicitar ruta','#92400e','MUE'],
-    ['soon','Metalmecánica','Construcciones Metálicas','Trazado, corte y soldadura.','/#preguntas','Solicitar ruta','#334155','MET'],
-    ['soon','Metalmecánica','Mecánica Industrial','Diagnóstico y mantenimiento.','/#preguntas','Solicitar ruta','#1e293b','MEC'],
-    ['soon','Metalmecánica','Mecánica de Mantenimiento de Aeronaves','Inspección y documentación.','/#preguntas','Solicitar ruta','#1d4ed8','AER'],
-    ['soon','Minero','Asistencia en Geología','Muestreo y registro de terreno.','/#preguntas','Solicitar ruta','#854d0e','GEO'],
-    ['soon','Minero','Explotación Minera','Ciclo productivo y seguridad.','/#preguntas','Solicitar ruta','#713f12','MIN'],
-    ['soon','Minero','Metalurgia Extractiva','Chancado, molienda y control.','/#preguntas','Solicitar ruta','#7f1d1d','MTG'],
-    ['soon','Marítimo','Acuicultura','Cultivo y bioseguridad.','/#preguntas','Solicitar ruta','#0f766e','ACU'],
-    ['soon','Marítimo','Operaciones Portuarias','Transferencia de carga.','/#preguntas','Solicitar ruta','#155e75','PUE'],
-    ['soon','Marítimo','Pesquería','Faena y conservación.','/#preguntas','Solicitar ruta','#1e40af','PES'],
-    ['soon','Marítimo','Tripulación de Naves Mercantes y Especiales','Guardias y faena.','/#preguntas','Solicitar ruta','#1e3a8a','NAV'],
-    ['soon','Química e Industria','Química Industrial','Muestreo y control de procesos.','/#preguntas','Solicitar ruta','#6d28d9','QUI'],
-    ['soon','Salud y Educación','Atención de Párvulos','Bienestar, juego y cuidado.','/#preguntas','Solicitar ruta','#db2777','PAR'],
-    ['soon','Tecnología','Conectividad y Redes','Cableado y verificación.','/#preguntas','Solicitar ruta','#0f172a','RED'],
-    ['soon','Tecnología','Programación','Lógica y desarrollo.','/#preguntas','Solicitar ruta','#312e81','PRG'],
-    ['soon','Tecnología','Telecomunicaciones','Instalación y medición.','/#preguntas','Solicitar ruta','#4338ca','TEL']
+    ['live','Electricidad','Electricidad','Circuitos, mediciones y decisiones. Simulador activo.', CAMPUS + 'Electricidad','Entrar al simulador','#ca8a04','ELE','/static/headers/electricidad/e1.png?v=3'],
+    ['live','Salud','Atención de Enfermería','Cuidados básicos, signos vitales y registro. Simulador activo.', CAMPUS + 'Atenci%C3%B3n%20de%20Enfermer%C3%ADa','Entrar al simulador','#be123c','ENF','/static/headers/enfermeria/e1.png'],
+    ['live','Construcción','Refrigeración y Climatización','Montaje, puesta en marcha y diagnóstico. Simulador activo.', CAMPUS + 'Refrigeraci%C3%B3n%20y%20Climatizaci%C3%B3n','Entrar al simulador','#0e7490','CLI','/static/themes/workshop.png'],
+    ['mission','Metalmecánica','Mecánica Automotriz','Misión Laboral 3D: Compresión perdida. No reutiliza el video de clima.','/mision_laboral/','Entrar a la misión','#b91c1c','AUT',''],
+    ['campus','Alimentación','Gastronomía, mención Cocina','Ruta de módulos en el campus. Sin simulador propio ni foto de clima.', CAMPUS + 'Gastronom%C3%ADa%2C%20menci%C3%B3n%20Cocina','Ver ruta en campus','#b45309','COC',''],
+    ['campus','Alimentación','Gastronomía, mención Pastelería y Repostería','Ruta de módulos en el campus. Póster propio, no el de cocina ni el de clima.', CAMPUS + 'Gastronom%C3%ADa%2C%20menci%C3%B3n%20Pasteler%C3%ADa','Ver ruta en campus','#9a3412','PAS',''],
+    ['campus','Administración','Administración, mención Logística','Ruta de módulos en el campus. Simulador propio en preparación.', CAMPUS + 'Administraci%C3%B3n%2C%20menci%C3%B3n%20Log%C3%ADstica','Ver ruta en campus','#1d4e89','LOG',''],
+    ['campus','Administración','Administración, mención Recursos Humanos','Ruta de módulos en el campus. Simulador propio en preparación.', CAMPUS + 'Administraci%C3%B3n%2C%20menci%C3%B3n%20Recursos%20Humanos','Ver ruta en campus','#1e40af','RRH',''],
+    ['campus','Administración','Contabilidad','Registro y documentos. Ruta en campus, sin simulador propio.', CAMPUS + 'Contabilidad','Ver ruta en campus','#0f6e6e','CON',''],
+    ['campus','Alimentación','Elaboración Industrial de Alimentos','Procesos e inocuidad. Ruta en campus, sin foto de gastronomía.', CAMPUS + 'Elaboraci%C3%B3n%20Industrial%20de%20Alimentos','Ver ruta en campus','#c2410c','ALI',''],
+    ['campus','Agropecuario','Agropecuaria','Producción vegetal y animal. Ruta en campus.', CAMPUS + 'Agropecuaria','Ver ruta en campus','#3f6b2a','AGR',''],
+    ['campus','Confección','Vestuario y Confección Textil','Patronaje, corte y costura. Ruta en campus.', CAMPUS + 'Vestuario%20y%20Confecci%C3%B3n%20Textil','Ver ruta en campus','#9d174d','VES',''],
+    ['campus','Construcción','Instalaciones Sanitarias','Agua potable y evacuación. Ruta en campus.', CAMPUS + 'Instalaciones%20Sanitarias','Ver ruta en campus','#0369a1','SAN',''],
+    ['campus','Construcción','Montaje Industrial','Estructuras y equipos. Ruta en campus.', CAMPUS + 'Montaje%20Industrial','Ver ruta en campus','#44403c','MON',''],
+    ['campus','Construcción','Construcción','Edificación, terminaciones y obras viales. Ruta en campus.', CAMPUS + 'Construcci%C3%B3n','Ver ruta en campus','#57534e','EDI',''],
+    ['campus','Gráfico','Dibujo Técnico','Representación y lectura de planos. Ruta en campus.', CAMPUS + 'Dibujo%20T%C3%A9cnico','Ver ruta en campus','#1e3a8a','DIB',''],
+    ['campus','Gráfico','Gráfica','Preprensa y control de producción. Ruta en campus.', CAMPUS + 'Gr%C3%A1fica','Ver ruta en campus','#7c3aed','GRA',''],
+    ['campus','Hotelería y Turismo','Servicios de Hotelería','Recepción y habitaciones. Póster propio, no el del hero.', CAMPUS + 'Servicios%20de%20Hoteler%C3%ADa','Ver ruta en campus','#9a3412','HOT',''],
+    ['campus','Hotelería y Turismo','Servicios de Turismo','Atención al visitante. Ruta en campus.', CAMPUS + 'Servicios%20de%20Turismo','Ver ruta en campus','#b45309','TUR',''],
+    ['campus','Maderero','Forestal','Silvicultura y seguridad. Ruta en campus.', CAMPUS + 'Forestal','Ver ruta en campus','#166534','FOR',''],
+    ['campus','Maderero','Muebles y Terminaciones en Madera','Trazado, maquinado y ensamble. Ruta en campus.', CAMPUS + 'Muebles%20y%20Terminaciones','Ver ruta en campus','#92400e','MUE',''],
+    ['campus','Metalmecánica','Construcciones Metálicas','Trazado, corte y soldadura. Ruta en campus.', CAMPUS + 'Construcciones%20Met%C3%A1licas','Ver ruta en campus','#334155','MET',''],
+    ['campus','Metalmecánica','Mecánica Industrial','Diagnóstico y mantenimiento. Ruta en campus.', CAMPUS + 'Mec%C3%A1nica%20Industrial','Ver ruta en campus','#1e293b','MEC',''],
+    ['campus','Metalmecánica','Mecánica de Mantenimiento de Aeronaves','Inspección y documentación. Ruta en campus.', CAMPUS + 'Aeronaves','Ver ruta en campus','#1d4ed8','AER',''],
+    ['campus','Minero','Asistencia en Geología','Muestreo y registro. Ruta en campus.', CAMPUS + 'Geolog%C3%ADa','Ver ruta en campus','#854d0e','GEO',''],
+    ['campus','Minero','Explotación Minera','Ciclo productivo y seguridad. Ruta en campus.', CAMPUS + 'Explotaci%C3%B3n%20Minera','Ver ruta en campus','#713f12','MIN',''],
+    ['campus','Minero','Metalurgia Extractiva','Chancado, molienda y control. Ruta en campus.', CAMPUS + 'Metalurgia','Ver ruta en campus','#7f1d1d','MTG',''],
+    ['campus','Marítimo','Acuicultura','Cultivo y bioseguridad. Ruta en campus.', CAMPUS + 'Acuicultura','Ver ruta en campus','#0f766e','ACU',''],
+    ['campus','Marítimo','Operaciones Portuarias','Transferencia de carga. Ruta en campus.', CAMPUS + 'Operaciones%20Portuarias','Ver ruta en campus','#155e75','PUE',''],
+    ['campus','Marítimo','Pesquería','Faena y conservación. Ruta en campus.', CAMPUS + 'Pesquer%C3%ADa','Ver ruta en campus','#1e40af','PES',''],
+    ['campus','Marítimo','Tripulación de Naves Mercantes y Especiales','Guardias y faena. Ruta en campus.', CAMPUS + 'Tripulaci%C3%B3n','Ver ruta en campus','#1e3a8a','NAV',''],
+    ['campus','Química e Industria','Química Industrial','Muestreo y control de procesos. Ruta en campus.', CAMPUS + 'Qu%C3%ADmica%20Industrial','Ver ruta en campus','#6d28d9','QUI',''],
+    ['campus','Salud y Educación','Atención de Párvulos','Bienestar, juego y cuidado. Ruta en campus.', CAMPUS + 'Atenci%C3%B3n%20de%20P%C3%A1rvulos','Ver ruta en campus','#db2777','PAR',''],
+    ['campus','Tecnología','Conectividad y Redes','Cableado y verificación. Ruta en campus.', CAMPUS + 'Conectividad%20y%20Redes','Ver ruta en campus','#0f172a','RED',''],
+    ['campus','Tecnología','Programación','Lógica y desarrollo. Ruta en campus.', CAMPUS + 'Programaci%C3%B3n','Ver ruta en campus','#312e81','PRG',''],
+    ['campus','Tecnología','Telecomunicaciones','Instalación y medición. Ruta en campus.', CAMPUS + 'Telecomunicaciones','Ver ruta en campus','#4338ca','TEL','']
   ];
   var grid = document.getElementById('grid');
   function poster(color, code) {
     var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"><rect width="640" height="360" fill="' + color + '"/><text x="32" y="210" fill="#fff" font-family="Nunito Sans,sans-serif" font-size="88" font-weight="800">' + code + '</text></svg>';
     return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
   }
+  function label(state) {
+    if (state === 'live') return 'Simulador';
+    if (state === 'mission') return 'Misión 3D';
+    if (state === 'campus') return 'Ruta en campus';
+    return 'En preparación';
+  }
   function paint(filter) {
     grid.innerHTML = items.filter(function (it) { return filter === 'all' || it[0] === filter; }).map(function (it) {
-      var state = it[0] === 'live' ? 'Simulador' : it[0] === 'mission' ? 'Misión 3D' : 'En preparación';
-      return '<article data-state="' + it[0] + '"><img src="' + poster(it[6], it[7]) + '" alt="Oficio de ' + it[2] + '"><div><span class="tag ' + it[0] + '">' + it[1] + ' · ' + state + '</span><h2>' + it[2] + '</h2><p>' + it[3] + '</p><a class="go" href="' + it[4] + '">' + it[5] + '</a></div></article>';
+      var src = it[8] || poster(it[6], it[7]);
+      var fallback = poster(it[6], it[7]).replace(/"/g, '&quot;');
+      return '<article data-state="' + it[0] + '" id="' + it[7].toLowerCase() + '"><img src="' + src + '" alt="Oficio de ' + it[2] + '" data-fallback="' + fallback + '"><div><span class="tag ' + it[0] + '">' + it[1] + ' · ' + label(it[0]) + '</span><h2>' + it[2] + '</h2><p>' + it[3] + '</p><a class="go" href="' + it[4] + '">' + it[5] + '</a></div></article>';
     }).join('');
+    grid.querySelectorAll('img[data-fallback]').forEach(function (img) {
+      img.addEventListener('error', function () {
+        if (img.dataset.failed) return;
+        img.dataset.failed = '1';
+        img.src = img.dataset.fallback;
+      });
+      });
   }
   paint('all');
   document.querySelectorAll('.filters button').forEach(function (btn) {
