@@ -1,0 +1,23 @@
+/* Keep every homepage section aligned with the header and hero. */
+body.landing-refresh {
+  --home-width: 1180px;
+  --home-gutter: 24px;
+}
+body.landing-refresh > .header,
+body.landing-refresh main > section,
+body.landing-refresh main > section[id],
+body.landing-refresh > .contact-strip,
+body.landing-refresh > .visual-footer {
+  box-sizing: border-box;
+  width: min(calc(100% - 2 * var(--home-gutter)), var(--home-width));
+  max-width: var(--home-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+body.landing-refresh .implementation > div {
+  width: 100%;
+  max-width: none;
+}
+@media (max-width: 650px) {
+  body.landing-refresh { --home-gutter: 14px; }
+}
