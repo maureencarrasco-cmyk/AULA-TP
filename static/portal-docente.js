@@ -832,24 +832,42 @@ function draw() {
   nav();
   const body = { resumen: panel, cursos, estudiantes: students, 'oa-ae': learning, cumplimiento: compliance, reportes: reports }[tab.id]();
   document.getElementById('pd-main').innerHTML = body;
+  document.querySelectorAll('a[href="/api/teacher/export.csv"]').forEach(link => { link.href = portalURL('/api/teacher/export.csv'); });
   document.title = `${tab.label} · Portal Docente`;
   bindSeal();
 }
 async function post(url, data) {
-  const response = await fetch(url, {
+  return requestJSON(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Aula-Portal': 'docente', 'X-CSRF-Token': state.csrf || '' },
     body: JSON.stringify(data)
   });
-  const payload = await response.json();
-  if (!response.ok) throw new Error(payload.error || 'No se pudo registrar el sello.');
-  return payload;
 }
 async function api(url) {
-  const response = await fetch(url, { headers: { 'X-Aula-Portal': 'docente' } });
-  const data = await response.json();
-  if (!response.ok) throw new Error(data.error || 'No se pudo abrir el portal docente.');
-  return data;
+  return requestJSON(url, { headers: { 'X-Aula-Portal': 'docente' } });
+}
+function portalURL(url) {
+  const local = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+  return local ? url : url.replace(/^\/api(?=\/)/, '/portal-docente-api');
+}
+async function requestJSON(url, options) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 20000);
+  try {
+    const response = await fetch(portalURL(url), { ...options, credentials: 'same-origin', signal: controller.signal });
+    if (!(response.headers.get('Content-Type') || '').includes('application/json')) {
+      throw new Error('El servicio del portal no pudo cargar los datos. Vuelve a intentarlo en unos momentos.');
+    }
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'No se pudo abrir el portal docente.');
+    return data;
+  } catch (error) {
+    if (error.name === 'AbortError') throw new Error('La carga tarda demasiado. Comprueba tu conexi\u00f3n y vuelve a intentarlo.');
+    if (error instanceof SyntaxError || error instanceof TypeError) throw new Error('No se pudo conectar con el servicio del portal. Vuelve a intentarlo.');
+    throw error;
+  } finally {
+    clearTimeout(timer);
+  }
 }
 async function boot() {
   nav();
@@ -866,14 +884,15 @@ async function boot() {
   const name = (entered.user && entered.user.name) || 'Docente';
   document.getElementById('pd-name').textContent = name;
   document.getElementById('pd-avatar').textContent = name.slice(0, 1).toUpperCase();
-  state.courses = await api('/api/courses');
+  const [courses, teacher] = await Promise.all([api('/api/courses'), api('/api/teacher')]);
+  state.courses = courses;
   saveCourses(state.courses);
-  state.teacher = await api('/api/teacher');
+  state.teacher = teacher;
   applyCohort();
   draw();
 }
 function readCourses() {
-  try { return JSON.parse(sessionStorage.getItem('aula-pd-courses-v1') || 'null'); }
+  try { const courses = JSON.parse(sessionStorage.getItem('aula-pd-courses-v1') || 'null'); return Array.isArray(courses) ? courses : null; }
   catch (error) { return null; }
 }
 function saveCourses(courses) {
@@ -888,7 +907,14 @@ function applyCohort() {
   }
 }
 nav();
-boot().catch(error => {
+function showLoadError(error) {
   nav();
-  document.getElementById('pd-main').innerHTML = `<p class="pd-card">${esc(error.message)}</p>`;
-});
+  document.getElementById('pd-main').innerHTML = `<section class="pd-card" role="alert"><h2>No se pudo cargar el portal</h2><p>${esc(error.message)}</p><button id="pd-retry" type="button">Reintentar</button></section>`;
+  document.getElementById('pd-retry').onclick = event => {
+    event.currentTarget.disabled = true;
+    event.currentTarget.textContent = 'Cargando...';
+    boot().catch(showLoadError);
+  };
+}
+document.querySelector('.pd-foot')?.addEventListener('error', event => { event.currentTarget.hidden = true; });
+boot().catch(showLoadError);

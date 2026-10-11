@@ -175,7 +175,10 @@ def create_app(test_config=None):
     def completed(s, content=None):
         ae_count=len((content or {}).get('aes') or []) if isinstance(content,dict) else 3
         expected_steps=max(1,ae_count)*6
-        return [bool(s['context']),len(s['ae'])==expected_steps,len(s['cases'])==15 and bool(s['scene']),bool(s['exam']),s['closed']]
+        s=s if isinstance(s,dict) else {}
+        ae=s.get('ae') or {}
+        cases=s.get('cases') or {}
+        return [bool(s.get('context')),isinstance(ae,(dict,list)) and len(ae)==expected_steps,isinstance(cases,(dict,list)) and len(cases)==15 and bool(s.get('scene')),bool(s.get('exam')),bool(s.get('closed'))]
     def accessible(mid):
         with db() as con:
             m=con.execute('SELECT * FROM modules WHERE id=?',(mid,)).fetchone();u=actor()
