@@ -11,19 +11,31 @@ function fixture() {
   const videos = ['presentation', 'mission'].map(name => {
     const attributes = new Map([['data-tp-home-video', name], ['poster', `${name}-poster.jpg`]]);
     const listeners = new Map();
+    const buttonListeners = new Map();
+    const button = {
+      hidden: false, listenerCount: 0,
+      addEventListener(key, callback) { buttonListeners.set(key, callback); this.listenerCount++; },
+      click() { buttonListeners.get('click')(); },
+    };
+    const durationAttributes = new Map();
+    const duration = { textContent: '', parentElement: { setAttribute: (key, value) => durationAttributes.set(key, value) } };
+    const figure = { querySelector: selector => selector === '.tp-home-video-play' ? button : selector === '[data-tp-video-duration]' ? duration : null };
     return {
       controls: true, muted: false, playsInline: true, paused: true, hidden: false,
+      duration: name === 'presentation' ? 10.005 : 39.984762, button, durationLabel: duration, durationAttributes,
       innerHTML: `<source src="${name}.mp4">`, pauseCount: 0, playListenerCount: 0,
       getAttribute: key => attributes.get(key) ?? null,
       setAttribute: (key, value) => attributes.set(key, value),
       removeAttribute: key => attributes.delete(key),
-      closest: () => wrap,
+      closest: selector => selector === '.tp-home-video' ? figure : wrap,
       addEventListener(key, callback) {
         listeners.set(key, callback);
         if (key === 'play') this.playListenerCount++;
       },
       playEvent() { listeners.get('play')(); },
-      pause() { this.paused = true; this.pauseCount++; },
+      emit(key) { listeners.get(key)(); },
+      play() { this.paused = false; this.playEvent(); return Promise.resolve(); },
+      pause() { this.paused = true; this.pauseCount++; this.emit('pause'); },
     };
   });
   const document = {
@@ -67,6 +79,54 @@ for (const directory of ['landing', 'static']) {
     assert.equal(first.pauseCount, 1);
     assert.equal(second.pauseCount, 1);
     videos.forEach(video => assert.equal(video.playListenerCount, 1));
+    videos.forEach(video => assert.equal(video.button.listenerCount, 1));
+  });
+
+  test(`${directory}: center play buttons use the original players and follow native pause and end state`, () => {
+    const { document, videos } = fixture();
+    vm.runInNewContext(read(`${directory}/aula-tp-coherence.js`), { document });
+    const [first, second] = videos;
+    assert.equal(first.button.hidden, false);
+    first.button.click();
+    assert.equal(first.paused, false);
+    assert.equal(first.button.hidden, true);
+    second.button.click();
+    assert.equal(first.paused, true);
+    assert.equal(first.button.hidden, false);
+    assert.equal(second.button.hidden, true);
+    second.ended = true;
+    second.emit('ended');
+    assert.equal(second.button.hidden, false);
+    second.emit('error');
+    assert.equal(second.button.hidden, true);
+    assert.equal(second.controls, true);
+  });
+
+  test(`${directory}: durations come from metadata, including late loading and minute rollover`, () => {
+    const { document, videos } = fixture();
+    videos[0].duration = NaN;
+    videos[0].durationLabel.textContent = '0:10';
+    vm.runInNewContext(read(`${directory}/aula-tp-coherence.js`), { document });
+    assert.equal(videos[0].durationLabel.textContent, '0:10');
+    assert.equal(videos[1].durationLabel.textContent, '0:40');
+    videos[0].duration = 59.9;
+    videos[0].emit('loadedmetadata');
+    assert.equal(videos[0].durationLabel.textContent, '1:00');
+    assert.equal(videos[0].durationAttributes.get('aria-label'), 'Duraci\u00f3n del video: 1:00');
+    videos[0].duration = 65;
+    videos[0].emit('durationchange');
+    assert.equal(videos[0].durationLabel.textContent, '1:05');
+  });
+
+  test(`${directory}: rejected playback keeps the play button usable and preserves a user's mute choice`, async () => {
+    const { document, videos } = fixture();
+    videos[0].muted = true;
+    videos[0].play = () => Promise.reject(new Error('Playback denied'));
+    vm.runInNewContext(read(`${directory}/aula-tp-coherence.js`), { document });
+    videos[0].button.click();
+    await Promise.resolve();
+    assert.equal(videos[0].button.hidden, false);
+    assert.equal(videos[0].muted, true);
   });
 }
 
@@ -79,8 +139,10 @@ test('preview and public snippet contain the same two ordered videos and matchin
     assert.match(html, /Misi&oacute;n Laboral en acci&oacute;n<\/h2>/);
     assert.doesNotMatch(html, /<video[^>]*\b(?:muted|autoplay)\b/);
     assert.match(html, /role="group" aria-label="Videos de Aula TP Chile"/);
+    assert.equal((html.match(/class="tp-home-video-play" type="button"/g) || []).length, 2);
+    assert.equal((html.match(/data-tp-video-duration/g) || []).length, 2);
   }
-  for (const asset of ['aula-tp-presentacion.mp4', 'aula-tp-invitacion.mp4', 'aula-tp-presentacion-poster.jpg', 'aula-tp-invitacion-poster.jpg']) {
+  for (const asset of ['aula-tp-presentacion.mp4', 'aula-tp-invitacion.mp4', 'aula-tp-presentacion-poster.jpg', 'aula-tp-invitacion-poster.jpg', 'hero-estudiante-recorte.png']) {
     const hash = path => createHash('sha256').update(readFileSync(file(path))).digest('hex');
     assert.equal(hash(`landing/${asset}`), hash(`static/landing-preview-assets/${asset}`));
   }

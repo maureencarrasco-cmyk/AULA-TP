@@ -19,7 +19,7 @@ function element(text = '') {
 
 for (const directory of ['landing', 'static']) {
   test(`${directory}: styles only the three homepage entry links without changing navigation`, () => {
-    const selectors = ['#inicio .hero-actions .mission-promo-enter', '#inicio .hero-actions .campus-link', '#ciudad-laboral .city-promo-enter'];
+    const selectors = ['#inicio .mission-promo-enter', '#inicio .campus-link', '#ciudad-laboral .city-promo-enter'];
     const labels = ['Entrar a Mision Laboral', 'Entrar a cursos', 'Entrar a Ciudad Laboral'];
     const destinations = ['/mision_laboral/', '/portal/cursos/', '/ciudad_laboral_aulatp/'];
     const links = selectors.map((_, index) => {

@@ -1,7 +1,7 @@
 'use strict';
 /* Aula TP · menú canónico y multimedia de oficio. 2026-10-09 */
 (function () {
-  var VERSION = '20261010-home-cta-layout';
+  var VERSION = '20261010-home-reference';
   var ORDER = ['inicio', 'simulador', 'especialidades', 'como funciona', 'comunidad', 'ver catalogo', 'campus', 'solicitar demo', 'demo'];
   var CATALOG = '/landing/catalogo.html';
   var CAMPUS = '/portal/cursos/';
@@ -178,7 +178,34 @@
     videos.forEach(function (video) {
       if (video.getAttribute('data-tp-audio-wired') === '1') return;
       video.setAttribute('data-tp-audio-wired', '1');
+      var figure = video.closest('.tp-home-video');
+      var playButton = figure && figure.querySelector('.tp-home-video-play');
+      var duration = figure && figure.querySelector('[data-tp-video-duration]');
+      function syncPlayButton() {
+        if (playButton) playButton.hidden = !video.paused && !video.ended;
+      }
+      function syncDuration() {
+        if (!duration || !Number.isFinite(video.duration) || video.duration <= 0) return;
+        var seconds = Math.round(video.duration);
+        var label = Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2, '0');
+        duration.textContent = label;
+        duration.parentElement.setAttribute('aria-label', 'Duraci\u00f3n del video: ' + label);
+      }
+      if (playButton) {
+        playButton.addEventListener('click', function () {
+          var playback = video.play();
+          if (playback && playback.catch) playback.catch(syncPlayButton);
+        });
+        video.addEventListener('pause', syncPlayButton);
+        video.addEventListener('ended', syncPlayButton);
+        video.addEventListener('error', function () { playButton.hidden = true; });
+        syncPlayButton();
+      }
+      video.addEventListener('loadedmetadata', syncDuration);
+      video.addEventListener('durationchange', syncDuration);
+      syncDuration();
       video.addEventListener('play', function () {
+        syncPlayButton();
         videos.forEach(function (other) {
           if (other !== video && !other.paused) other.pause();
         });
@@ -239,8 +266,8 @@
   }
   function styleHomepageActions() {
     [
-      ['#inicio .hero-actions .mission-promo-enter', 'mission', 'play'],
-      ['#inicio .hero-actions .campus-link', 'courses', 'book-open'],
+      ['#inicio .mission-promo-enter', 'mission', 'play'],
+      ['#inicio .campus-link', 'courses', 'book-open'],
       ['#ciudad-laboral .city-promo-enter', 'city', 'map-pinned']
     ].forEach(function (entry) {
       document.querySelectorAll(entry[0]).forEach(function (link) {
@@ -265,7 +292,6 @@
         link.classList.add('tp-primary-action', 'tp-primary-action--' + entry[1]);
       });
     });
-    if (typeof window !== 'undefined' && window.lucide) window.lucide.createIcons({ attrs: { 'aria-hidden': 'true' } });
   }
   function layoutHomepageHero() {
     var hero = document.querySelector('body.landing-refresh #inicio.hero');
@@ -274,11 +300,36 @@
     var capabilities = document.querySelector('body.landing-refresh #inicio.hero + .capabilities');
     if (capabilities) capabilities.remove();
     var actions = hero.querySelector('.hero-actions');
-    var courses = hero.querySelector('.hero-actions .campus-link');
+    var courses = hero.querySelector('.campus-link');
     if (actions && courses) actions.insertBefore(courses, actions.firstChild);
     var mission = hero.querySelector('.mission-promo-enter');
-    var missionActions = hero.querySelector('.tp-home-mission-actions');
-    if (mission && missionActions && mission.parentElement !== missionActions) missionActions.appendChild(mission);
+    var demo = hero.querySelector('.hero-actions .button-outline');
+    if (actions && mission) actions.insertBefore(mission, demo);
+    var copy = hero.querySelector('.hero-copy');
+    if (copy && !hero.querySelector('.tp-home-student')) {
+      var student = document.createElement('figure');
+      student.className = 'tp-home-student';
+      var photo = document.createElement('img');
+      photo.src = '/landing/hero-estudiante-recorte.png';
+      photo.alt = 'Estudiante con lentes de seguridad trabajando en un equipo neum\u00e1tico';
+      photo.width = 1536;
+      photo.height = 1024;
+      photo.setAttribute('decoding', 'async');
+      student.appendChild(photo);
+      copy.appendChild(student);
+    }
+    var badge = hero.querySelector('.badge > span');
+    if (badge && !badge.querySelector('[data-lucide]')) {
+      var school = document.createElement('i');
+      school.setAttribute('data-lucide', 'landmark');
+      badge.replaceChildren(school);
+      badge.setAttribute('aria-hidden', 'true');
+    }
+    if (demo && !demo.querySelector('[data-lucide]')) {
+      var mail = document.createElement('i');
+      mail.setAttribute('data-lucide', 'mail');
+      demo.insertBefore(mail, demo.firstChild);
+    }
   }
   function boot() {
     document.querySelectorAll('header nav, footer nav, #nav').forEach(function (nav) {
@@ -295,6 +346,7 @@
     styleHomepageDemo();
     styleHomepageActions();
     layoutHomepageHero();
+    if (typeof window !== 'undefined' && window.lucide) window.lucide.createIcons({ attrs: { 'aria-hidden': 'true' } });
     document.querySelectorAll('body.landing-refresh a[href="#como"]').forEach(function (link) {
       if (link.closest('header, footer')) link.remove();
       else {

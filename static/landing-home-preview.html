@@ -13,9 +13,9 @@
   <link rel="stylesheet" href="/static/landing-home-width.css?v=20261010">
   <link rel="stylesheet" href="/static/landing-home-actions.css?v=20261010">
   <link rel="stylesheet" href="/static/landing-home-demo.css?v=20261010">
-  <link rel="stylesheet" href="/static/landing-home-videos.css?v=20261010-home-cta-layout">
+  <link rel="stylesheet" href="/static/landing-home-videos.css?v=20261010-home-reference">
   <script src="/static/landing-preview-assets/lucide.min.js" defer></script>
-  <script src="/static/aula-tp-coherence.js?v=20261010-home-cta-layout" defer></script>
+  <script src="/static/aula-tp-coherence.js?v=20261010-home-reference" defer></script>
   <script src="/static/landing-home-preview.js" defer></script>
   <style>.additional-card[hidden] { display: none !important; }</style>
 </head>
@@ -33,35 +33,45 @@
   <main id="contenido">
     <section class="hero" id="inicio">
       <div class="hero-copy">
-        <p class="badge"><span>CL</span>Plataforma para establecimientos de Educaci&oacute;n Media TP</p>
+        <p class="badge"><span aria-hidden="true"><i data-lucide="landmark"></i></span>Plataforma para establecimientos de Educaci&oacute;n Media TP</p>
         <h1>Pr&aacute;ctica segura y evidencia para tu <em>especialidad TP</em></h1>
         <p class="lead">Simulaciones t&eacute;cnicas, recursos docentes y evidencia de aprendizaje. Una pr&aacute;ctica segura que complementa el taller.</p>
         <div class="hero-actions">
-          <a class="button mission-promo-enter" href="https://aulatpchile.cl/mision_laboral/"><i data-lucide="play"></i>Entrar a Misi&oacute;n Laboral</a>
           <a class="button button-primary campus-link" href="https://aulatpchile.cl/portal/cursos/">Entrar a cursos <span aria-hidden="true">&rarr;</span></a>
-          <a class="button button-outline" href="#lead-form">Solicitar demo</a>
+          <a class="button mission-promo-enter" href="https://aulatpchile.cl/mision_laboral/"><i data-lucide="play"></i>Entrar a Misi&oacute;n Laboral</a>
+          <a class="button button-outline" href="#lead-form"><i data-lucide="mail"></i>Solicitar demo</a>
         </div>
+        <figure class="tp-home-student">
+          <img src="/static/landing-preview-assets/hero-estudiante-recorte.png" alt="Estudiante con lentes de seguridad trabajando en un equipo neum&aacute;tico" width="1536" height="1024" decoding="async">
+        </figure>
       </div>
       <div class="hero-media tp-home-videos" role="group" aria-label="Videos de Aula TP Chile">
         <figure class="tp-home-video">
+          <div class="tp-home-video-screen">
           <video controls playsinline preload="metadata" data-tp-home-video="presentation" poster="/static/landing-preview-assets/aula-tp-presentacion-poster.jpg" aria-label="Conoce Aula TP Chile con sonido">
             <source src="/static/landing-preview-assets/aula-tp-presentacion.mp4" type="video/mp4">
             Tu navegador no puede reproducir este video.
           </video>
+            <button class="tp-home-video-play" type="button" aria-label="Reproducir Conoce Aula TP Chile" title="Reproducir Conoce Aula TP Chile"><i data-lucide="play" aria-hidden="true"></i></button>
+          </div>
           <figcaption>
             <span class="tp-home-video-step" aria-hidden="true">01</span>
             <div class="tp-home-video-copy"><h2>Conoce Aula TP Chile</h2><p>Presentaci&oacute;n de la plataforma.</p></div>
+            <span class="tp-home-video-duration" aria-label="Duraci&oacute;n del video: 0:10"><i data-lucide="clock" aria-hidden="true"></i><span data-tp-video-duration>0:10</span></span>
           </figcaption>
         </figure>
-        <div class="tp-home-mission-actions"></div>
         <figure class="tp-home-video">
+          <div class="tp-home-video-screen">
           <video controls playsinline preload="metadata" data-tp-home-video="mission" poster="/static/landing-preview-assets/aula-tp-invitacion-poster.jpg" aria-label="Mision Laboral en accion con sonido">
             <source src="/static/landing-preview-assets/aula-tp-invitacion.mp4" type="video/mp4">
             Tu navegador no puede reproducir este video.
           </video>
+            <button class="tp-home-video-play" type="button" aria-label="Reproducir Misi&oacute;n Laboral en acci&oacute;n" title="Reproducir Misi&oacute;n Laboral en acci&oacute;n"><i data-lucide="play" aria-hidden="true"></i></button>
+          </div>
           <figcaption>
             <span class="tp-home-video-step" aria-hidden="true">02</span>
             <div class="tp-home-video-copy"><h2>Misi&oacute;n Laboral en acci&oacute;n</h2><p>Recorrido por el taller de Mec&aacute;nica Automotriz.</p></div>
+            <span class="tp-home-video-duration" aria-label="Duraci&oacute;n del video: 0:40"><i data-lucide="clock" aria-hidden="true"></i><span data-tp-video-duration>0:40</span></span>
           </figcaption>
         </figure>
       </div>

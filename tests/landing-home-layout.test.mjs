@@ -96,5 +96,5 @@ test('the layout keeps the video and capabilities in normal flow', () => {
   assert.match(css, /@media \(max-width: 480px\)\s*\{\s*#inicio\.hero \+ \.capabilities\s*\{\s*grid-template-columns:\s*minmax\(0, 1fr\)/s);
   assert.doesNotMatch(css, /margin-top:\s*-|translateY\(-/);
   assert.match(read('landing/INCLUIR-EN-INDEX.txt'), /css\?v=20261010-home-layout/);
-  assert.match(read('landing/INCLUIR-EN-INDEX.txt'), /js\?v=20261010-home-cta-layout/);
+  assert.match(read('landing/INCLUIR-EN-INDEX.txt'), /js\?v=20261010-home-reference/);
 });

@@ -4,10 +4,10 @@ Ancho uniforme: cargar despues de las otras hojas de estilo:
 <link rel="stylesheet" href="/landing/landing-home-width.css?v=20261010">
 <link rel="stylesheet" href="/landing/landing-home-actions.css?v=20261010">
 <link rel="stylesheet" href="/landing/landing-home-demo.css?v=20261010">
-<link rel="stylesheet" href="/landing/landing-home-videos.css?v=20261010-home-cta-layout">
+<link rel="stylesheet" href="/landing/landing-home-videos.css?v=20261010-home-reference">
 
 <link rel="stylesheet" href="/landing/aula-tp-coherence.css?v=20261010-home-layout">
-<script src="/landing/aula-tp-coherence.js?v=20261010-home-cta-layout" defer></script>
+<script src="/landing/aula-tp-coherence.js?v=20261010-home-reference" defer></script>
 
 Contrato de menú:
 Inicio → Simulador → Especialidades → Cómo funciona → Comunidad → Ver catálogo → Campus → Solicitar demo
@@ -19,7 +19,9 @@ Inicio → Simulador → Especialidades → Cómo funciona → Comunidad → Ver
 - Sustituir la figura hero-media completa por landing/portada-video.html; primero presentacion, despues Mision Laboral
 - Ambos conservan sus controles y sonido; al reproducir uno, el otro se pausa
 - Quitar las notas y accesos secundarios del hero, y la franja Simula/Practica/Recibe/Demuestra
-- Boton azul arriba, junto a la presentacion; boton amarillo en la segunda fila, junto al video de Mision Laboral
-- En movil: presentacion y boton azul primero; boton amarillo antes del video de Mision Laboral
+- Agrupar los botones a la izquierda: cursos azul, Mision Laboral amarillo y Solicitar demo; se mueven los enlaces originales sin cambiar sus funciones
+- El script agrega la estudiante de /landing/hero-estudiante-recorte.png debajo de los botones, sin tocar la foto del formulario
+- A la derecha: presentacion azul y Mision Laboral verde suave, con numero, reproduccion y duracion real del archivo (0:10 y 0:40)
+- En movil: texto y accesos, estudiante, y ambos videos en ese orden, sin superposiciones
 - Tarjetas: electricidad/enfermería/clima al campus con ?q= ; automotriz a /mision_laboral/ (Misión 3D, no «en preparación») ; resto al catálogo
 - Pie: si faltan Ver catálogo y Campus, el script los inserta antes de Demo
