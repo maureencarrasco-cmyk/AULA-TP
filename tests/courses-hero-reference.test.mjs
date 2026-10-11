@@ -50,6 +50,23 @@ test('the photo is optimized and the responsive styles are scoped to the new hea
   assert.match(css, /@media\(max-width:380px\)/);
   assert.match(css, /:focus-visible/);
   assert.doesNotMatch(css, /font-size:[^;]*vw|animation:/);
-  assert.match(read('static/index.html'), /courses-hero-reference\.css\?v=20261011/);
-  assert.match(read('static/index.html'), /app\.js\?v=20261011-courses-hero-v2/);
+  assert.match(read('static/index.html'), /courses-hero-reference\.css\?v=20261011-courses-hero-v6/);
+  assert.match(read('static/index.html'), /app\.js\?v=20261011-courses-hero-v3/);
+});
+
+test('smaller screens retain the reference phrase and keep the course entry compact', () => {
+  const css = read('static/courses-hero-reference.css');
+  const tablet = css.slice(css.indexOf('@media(min-width:761px)'), css.indexOf('@media(max-width:760px)'));
+  const mobile = css.slice(css.indexOf('@media(max-width:760px)'));
+  assert.match(tablet, /min-height:340px/);
+  assert.match(tablet, /min-height:340px;aspect-ratio:auto/);
+  assert.match(css, /#app #main \.dash-hero-reference \.dash-hero-copy :is\(h1,h1>span,h1>em\) \{font-weight:900!important;line-height:1\.02!important\}/);
+  assert.match(css, /dash-hero-note :is\(span,strong\) \{font-family:'Segoe Print','Bradley Hand',cursive!important/);
+  assert.match(tablet, /dash-hero-note \{display:flex/);
+  assert.match(mobile, /dash-hero-note \{[^}]*display:flex/);
+  assert.match(mobile, /dash-next \{[^}]*grid-row:4/);
+  assert.match(mobile, /body\[data-screen="courses"\] \.dash-sidebar-journey \{display:none\}/);
+  assert.match(mobile, /dash-progress-link \{min-height:76px/);
+  assert.doesNotMatch(mobile, /dash-hero-note \{display:none/);
+  assert.match(context.dashboardCourseHero(null), /<span>Hoy aprendo <\/span><span>para un mejor <\/span><strong>ma.ana<\/strong>/);
 });

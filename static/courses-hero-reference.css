@@ -39,14 +39,17 @@
 .dash-hero-reference .dash-hero-copy h1 {
   margin:18px 0 10px;
   color:#103764;
-  font-size:48px;
+  font-size:60px;
   font-weight:900;
   line-height:1.02;
   letter-spacing:0;
 }
 .dash-hero-copy h1>span,.dash-hero-copy h1>em {display:block}
 .dash-hero-reference .dash-hero-copy h1>em {color:#087fe9;font-style:normal}
-.dash-hero-reference .dash-hero-copy>p {color:#4e6788;font-size:16px;line-height:1.4}
+.dash-hero-reference .dash-hero-copy>p {color:#4e6788;font-size:18px;line-height:1.4}
+/* The shared lesson typography must not override this reference heading. */
+html body[data-screen="courses"] #app #main .dash-hero-reference .dash-hero-copy :is(h1,h1>span,h1>em) {font-weight:900!important;line-height:1.02!important}
+html body[data-screen="courses"] #app #main .dash-hero-reference .dash-hero-note :is(span,strong) {font-family:'Segoe Print','Bradley Hand',cursive!important;font-weight:700!important;line-height:inherit!important}
 .dash-hero-reference .dash-hero-meta {
   display:grid;
   grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
@@ -130,7 +133,7 @@
 .dash-hero-reference .dash-hero-home:focus-visible {outline:3px solid #d78a0a;outline-offset:3px}
 @media(min-width:1600px) {
   .dash-hero-reference .dash-hero-copy {padding:32px 20px 40px 42px}
-  .dash-hero-reference .dash-hero-copy h1 {font-size:60px}
+  .dash-hero-reference .dash-hero-copy h1 {font-size:72px}
   .dash-hero-reference .dash-hero-copy>p {font-size:19px}
   .dash-hero-reference .dash-hero-eyebrow {font-size:13px}
   .dash-hero-meta b {font-size:17px}
@@ -142,9 +145,11 @@
   .dash-hero-reference .dash-account b {font-size:15px}
 }
 @media(min-width:761px) and (max-width:1180px) {
-  .dash-hero-reference>.dash-hero-background {object-position:left center}
-  .dash-hero-reference .dash-hero-copy {width:51%;padding-left:24px}
-  .dash-hero-reference .dash-hero-copy h1 {font-size:42px}
+  .dashboard-reference .dash-hero-reference {min-height:340px;aspect-ratio:auto}
+  .dash-hero-reference>.dash-hero-background {object-position:center}
+  .dash-hero-reference .dash-hero-copy {width:50%;padding:20px 16px 24px 24px;background:#fffffff0}
+  .dash-hero-reference .dash-hero-copy h1 {font-size:38px}
+  .dash-hero-reference .dash-hero-copy>p {font-size:15px}
   .dash-hero-reference .dash-hero-eyebrow {gap:8px;font-size:10px}
   .dash-hero-eyebrow>b {padding-left:8px}
   .dash-hero-reference .dash-hero-home {padding:8px 10px}
@@ -154,14 +159,25 @@
   .dash-hero-meta>div+div {padding-left:8px}
   .dash-hero-meta b {font-size:12px}
   .dash-hero-meta small {font-size:10px}
-  .dash-hero-reference .dash-hero-note {display:none}
-  .dash-hero-reference .dash-next {top:auto;bottom:38px;width:33%;right:16px}
+  .dash-hero-reference .dash-hero-note {display:flex;top:24%;left:72%;width:24%;height:24%;font-size:18px}
+  .dash-hero-reference .dash-next {top:auto;bottom:24px;width:34%;right:16px}
 }
 @media(max-width:760px) {
+  body[data-screen="courses"] .dashboard-reference .dash-sidebar {grid-template-columns:64px minmax(0,1fr);gap:4px 12px;padding:8px 12px}
+  body[data-screen="courses"] .dash-sidebar .dash-logo {grid-column:1;grid-row:1;width:64px;height:52px;margin:0}
+  body[data-screen="courses"] .dash-sidebar .dash-exit {position:static;grid-column:2;grid-row:1;justify-self:end;align-self:center}
+  body[data-screen="courses"] .dash-sidebar nav {grid-column:1/-1;grid-row:2}
+  body[data-screen="courses"] .dash-sidebar nav .dash-progress-link {min-height:76px;grid-template-columns:34px minmax(0,1fr) 34px;grid-template-rows:auto 22px;gap:4px 6px;margin:4px 0;padding:8px 10px}
+  body[data-screen="courses"] .dash-sidebar nav .dash-progress-link>.dash-portal-icon {width:34px;height:44px}
+  body[data-screen="courses"] .dash-sidebar nav .dash-progress-link>.dash-portal-copy {grid-column:2;grid-row:1;gap:2px}
+  body[data-screen="courses"] .dash-sidebar nav .dash-progress-link>.dash-portal-percent {grid-column:3;grid-row:1;min-width:30px;padding:4px;font-size:12px}
+  body[data-screen="courses"] .dash-sidebar nav .dash-progress-link>.dash-portal-track {grid-column:2;grid-row:2}
+  body[data-screen="courses"] .dash-sidebar nav .dash-progress-link>.dash-portal-arrow {grid-column:3;grid-row:2;justify-self:end;width:22px;height:22px}
+  body[data-screen="courses"] .dash-sidebar-journey {display:none}
   .dashboard-reference .dash-hero-reference {display:grid;min-height:0;aspect-ratio:auto;padding:0 16px 20px}
   .dash-hero-reference>.dash-hero-background {position:relative;grid-row:1;width:calc(100% + 32px);height:auto;min-height:140px;margin:0 -16px;aspect-ratio:3/1;object-fit:cover;object-position:center}
   .dash-hero-reference .dash-hero-copy {grid-row:2;width:100%;padding:16px 0 0}
-  .dash-hero-reference .dash-hero-copy h1 {margin:16px 0 10px;font-size:36px}
+  .dash-hero-reference .dash-hero-copy h1 {margin:16px 0 10px;font-size:32px}
   .dash-hero-reference .dash-hero-eyebrow {gap:8px;font-size:10px}
   .dash-hero-reference .dash-hero-home {min-height:32px;padding:7px 10px}
   .dash-hero-eyebrow>b {padding-left:8px}
@@ -177,11 +193,13 @@
   .dash-hero-reference .dash-account span {width:28px;height:28px;font-size:15px}
   .dash-hero-reference .dash-account b {font-size:11px}
   .dash-hero-reference .dash-account>.icon {width:14px;height:14px}
-  .dash-hero-reference .dash-hero-note {display:none}
-  .dash-hero-reference .dash-next {position:relative;grid-row:3;top:auto;right:auto;width:100%;max-width:none;margin-top:16px;padding:12px;font-size:14px}
+  .dash-hero-reference .dash-hero-note {position:relative;grid-row:3;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:flex-start;gap:0 5px;top:auto;left:auto;right:auto;width:100%;height:auto;margin-top:16px;font-size:18px;line-height:1.5;text-align:left;transform:none}
+  .dash-hero-reference .dash-next {position:relative;grid-row:4;top:auto;right:auto;width:100%;max-width:none;margin-top:16px;padding:12px;font-size:14px}
   .dash-next>span:nth-child(2) br {display:none}
 }
 @media(max-width:380px) {
-  .dash-hero-reference .dash-hero-meta {grid-template-columns:minmax(0,1fr);gap:10px}
-  .dash-hero-reference .dash-hero-meta>div+div {padding:10px 0 0;border-left:0;border-top:1px solid #bed6f1}
+  .dash-hero-reference .dash-hero-meta {padding:8px}
+  .dash-hero-meta .dash-meta-icon {width:24px;height:24px}
+  .dash-hero-meta b {font-size:11px}
+  .dash-hero-meta small {font-size:9px}
 }

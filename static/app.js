@@ -297,7 +297,7 @@ function dashboardCourseHero(user,nextHref='#courses'){
     <div><span class="dash-meta-icon">${icon('clock')}</span><span><b>Especialidades</b><small>MINEDUC</small></span></div>
    </footer>
   </div>
-  <div class="dash-hero-note">Hoy aprendo<br>para un mejor<br><strong>ma\u00f1ana</strong></div>
+  <div class="dash-hero-note"><span>Hoy aprendo </span><span>para un mejor </span><strong>ma\u00f1ana</strong></div>
   <button type="button" class="dash-account" data-dashboard-message="Sesi\u00f3n activa: ${esc(name)}." aria-label="Cuenta de ${esc(name)}"><span>${esc(name.slice(0,1).toUpperCase())}</span><b>${esc(name)}</b>${icon('arrow')}</button>
   <a class="dash-next" href="${esc(nextHref)}"><span class="dash-goal-icon" aria-hidden="true"><img src="/static/courses-goal.svg?v=20261011" width="32" height="32" alt=""></span><span>Tu pr\u00f3ximo <br><b>desaf\u00edo comienza</b> <br>aqu\u00ed.</span><span class="dash-next-arrow" aria-hidden="true">${icon('arrow')}</span></a>
  </header>`;
