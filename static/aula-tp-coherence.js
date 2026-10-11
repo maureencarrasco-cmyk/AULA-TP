@@ -1,7 +1,7 @@
 'use strict';
 /* Aula TP · menú canónico y multimedia de oficio. 2026-10-09. Copia de landing/aula-tp-coherence.js */
 (function () {
-  var VERSION = '20261010-home-layout';
+  var VERSION = '20261010-home-demo';
   var ORDER = ['inicio', 'simulador', 'especialidades', 'como funciona', 'comunidad', 'ver catalogo', 'campus', 'solicitar demo', 'demo'];
   var CATALOG = '/landing/catalogo.html';
   var CAMPUS = '/portal/cursos/';
@@ -189,6 +189,72 @@
     var all = document.querySelector('.all-card');
     if (all) all.setAttribute('href', CATALOG);
   }
+  function styleHomepageDemo() {
+    var form = document.querySelector('body.landing-refresh #lead-form');
+    if (!form || form.classList.contains('tp-demo-form')) return;
+    function icon(name, className) {
+      var wrapper = document.createElement('span');
+      wrapper.className = className;
+      wrapper.setAttribute('aria-hidden', 'true');
+      var glyph = document.createElement('i');
+      glyph.setAttribute('data-lucide', name);
+      wrapper.appendChild(glyph);
+      return wrapper;
+    }
+    var heading = form.querySelector('h3');
+    if (heading) heading.insertBefore(icon('mail', 'tp-demo-badge'), heading.firstChild);
+    [
+      ['[name="establecimiento"]', 'school'],
+      ['[name="cargo"]', 'user-round'],
+      ['[name="especialidad"]', 'settings']
+    ].forEach(function (entry) {
+      var control = form.querySelector(entry[0]);
+      if (!control) return;
+      var wrapper = document.createElement('span');
+      wrapper.className = 'tp-demo-field';
+      control.parentElement.insertBefore(wrapper, control);
+      wrapper.appendChild(icon(entry[1], 'tp-demo-field-icon'));
+      wrapper.appendChild(control);
+      if (control.tagName === 'SELECT') wrapper.appendChild(icon('chevron-down', 'tp-demo-chevron'));
+    });
+    var submit = form.querySelector('button[type="submit"]');
+    if (submit) {
+      var label = document.createElement('span');
+      label.textContent = submit.textContent.trim();
+      submit.replaceChildren(icon('send', 'tp-demo-submit-icon'), label, icon('chevron-right', 'tp-demo-submit-arrow'));
+    }
+    form.classList.add('tp-demo-form');
+  }
+  function styleHomepageActions() {
+    [
+      ['#inicio .hero-actions .mission-promo-enter', 'mission', 'play'],
+      ['#inicio .hero-actions .campus-link', 'courses', 'book-open'],
+      ['#ciudad-laboral .city-promo-enter', 'city', 'map-pinned']
+    ].forEach(function (entry) {
+      document.querySelectorAll(entry[0]).forEach(function (link) {
+        if (link.classList.contains('tp-primary-action')) return;
+        var label = link.textContent.replace(/[\u2190-\u21ff]/g, '').trim();
+        var icon = document.createElement('span');
+        icon.className = 'tp-action-icon';
+        icon.setAttribute('aria-hidden', 'true');
+        var glyph = document.createElement('i');
+        glyph.setAttribute('data-lucide', entry[2]);
+        icon.appendChild(glyph);
+        var text = document.createElement('span');
+        text.className = 'tp-action-label';
+        text.textContent = label;
+        var arrow = document.createElement('span');
+        arrow.className = 'tp-action-arrow';
+        arrow.setAttribute('aria-hidden', 'true');
+        var arrowGlyph = document.createElement('i');
+        arrowGlyph.setAttribute('data-lucide', 'arrow-right');
+        arrow.appendChild(arrowGlyph);
+        link.replaceChildren(icon, text, arrow);
+        link.classList.add('tp-primary-action', 'tp-primary-action--' + entry[1]);
+      });
+    });
+    if (typeof window !== 'undefined' && window.lucide) window.lucide.createIcons({ attrs: { 'aria-hidden': 'true' } });
+  }
   function boot() {
     document.querySelectorAll('header nav, footer nav, #nav').forEach(function (nav) {
       retarget(nav);
@@ -200,6 +266,18 @@
     fixHeroMedia();
     syncAutomotriz();
     wireSpecialtyCards();
+    styleHomepageDemo();
+    styleHomepageActions();
+    document.querySelectorAll('body.landing-refresh a[href="#como"]').forEach(function (link) {
+      if (link.closest('header, footer')) link.remove();
+      else {
+        link.setAttribute('href', '#especialidades');
+        link.textContent = 'Explora las especialidades';
+      }
+    });
+    document.querySelectorAll('body.landing-refresh a[href="#producto"]').forEach(function (link) {
+      link.setAttribute('href', '#inicio');
+    });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();

@@ -2,9 +2,11 @@ La portada pública debe cargar este parche antes de </body>:
 
 Ancho uniforme: cargar despues de las otras hojas de estilo:
 <link rel="stylesheet" href="/landing/landing-home-width.css?v=20261010">
+<link rel="stylesheet" href="/landing/landing-home-actions.css?v=20261010">
+<link rel="stylesheet" href="/landing/landing-home-demo.css?v=20261010">
 
 <link rel="stylesheet" href="/landing/aula-tp-coherence.css?v=20261010-home-layout">
-<script src="/landing/aula-tp-coherence.js?v=20261010-home-layout" defer></script>
+<script src="/landing/aula-tp-coherence.js?v=20261010-home-demo" defer></script>
 
 Contrato de menú:
 Inicio → Simulador → Especialidades → Cómo funciona → Comunidad → Ver catálogo → Campus → Solicitar demo

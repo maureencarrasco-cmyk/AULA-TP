@@ -1,4 +1,17 @@
 /* Keep every homepage section aligned with the header and hero. */
+body.landing-refresh main > section#mision-laboral { display: none; }
+body.landing-refresh main > section#producto { display: none; }
+body.landing-refresh main > section#como { display: none; }
+body.landing-refresh > footer.visual-footer { display: none; }
+body.landing-refresh > .contact-strip {
+  border: 2px solid #edbd36;
+  border-left: 2px solid #edbd36;
+  border-radius: 8px;
+  background: #fffef5;
+  box-shadow: 0 0 0 4px #ffe78366, 0 0 24px 5px #f5cb4b66;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
 body.landing-refresh {
   --home-width: 1180px;
   --home-gutter: 24px;
