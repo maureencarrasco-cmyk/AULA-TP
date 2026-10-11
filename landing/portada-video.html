@@ -1,5 +1,24 @@
-<!-- Replace the hero video with this element, keeping the existing figure. -->
-<video controls playsinline preload="metadata" aria-label="Presentacion de Mision Laboral de Aula TP Chile con sonido">
-  <source src="/landing/aula-tp-invitacion.mp4" type="video/mp4">
-  Tu navegador no puede reproducir este video.
-</video>
+<!-- Replace the existing hero-media figure with this complete media column. -->
+<div class="hero-media tp-home-videos" role="group" aria-label="Videos de Aula TP Chile">
+  <figure class="tp-home-video">
+    <video controls playsinline preload="metadata" data-tp-home-video="presentation" poster="/landing/aula-tp-presentacion-poster.jpg" aria-label="Conoce Aula TP Chile con sonido">
+      <source src="/landing/aula-tp-presentacion.mp4" type="video/mp4">
+      Tu navegador no puede reproducir este video.
+    </video>
+    <figcaption>
+      <span class="tp-home-video-step" aria-hidden="true">01</span>
+      <div class="tp-home-video-copy"><h2>Conoce Aula TP Chile</h2><p>Presentaci&oacute;n de la plataforma.</p></div>
+    </figcaption>
+  </figure>
+  <div class="tp-home-mission-actions"></div>
+  <figure class="tp-home-video">
+    <video controls playsinline preload="metadata" data-tp-home-video="mission" poster="/landing/aula-tp-invitacion-poster.jpg" aria-label="Mision Laboral en accion con sonido">
+      <source src="/landing/aula-tp-invitacion.mp4" type="video/mp4">
+      Tu navegador no puede reproducir este video.
+    </video>
+    <figcaption>
+      <span class="tp-home-video-step" aria-hidden="true">02</span>
+      <div class="tp-home-video-copy"><h2>Misi&oacute;n Laboral en acci&oacute;n</h2><p>Recorrido por el taller de Mec&aacute;nica Automotriz.</p></div>
+    </figcaption>
+  </figure>
+</div>

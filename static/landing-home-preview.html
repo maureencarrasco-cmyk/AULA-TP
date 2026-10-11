@@ -13,8 +13,9 @@
   <link rel="stylesheet" href="/static/landing-home-width.css?v=20261010">
   <link rel="stylesheet" href="/static/landing-home-actions.css?v=20261010">
   <link rel="stylesheet" href="/static/landing-home-demo.css?v=20261010">
+  <link rel="stylesheet" href="/static/landing-home-videos.css?v=20261010-home-cta-layout">
   <script src="/static/landing-preview-assets/lucide.min.js" defer></script>
-  <script src="/static/aula-tp-coherence.js?v=20261010-home-demo" defer></script>
+  <script src="/static/aula-tp-coherence.js?v=20261010-home-cta-layout" defer></script>
   <script src="/static/landing-home-preview.js" defer></script>
   <style>.additional-card[hidden] { display: none !important; }</style>
 </head>
@@ -40,26 +41,30 @@
           <a class="button button-primary campus-link" href="https://aulatpchile.cl/portal/cursos/">Entrar a cursos <span aria-hidden="true">&rarr;</span></a>
           <a class="button button-outline" href="#lead-form">Solicitar demo</a>
         </div>
-        <p class="hero-note">Piloto 3&deg; medio 2027 &middot; 4&deg; medio en la hoja de ruta.</p>
-        <a class="city-discovery" href="#ciudad-laboral"><i data-lucide="map"></i>Conoce Ciudad Laboral 3D <span aria-hidden="true">&#8599;</span></a>
-        <a class="mission-discovery" href="https://aulatpchile.cl/mision_laboral/"><i data-lucide="wrench"></i>Acceso directo a Misi&oacute;n Laboral <span aria-hidden="true">&#8599;</span></a>
-        <p class="social-proof"><i data-lucide="badge-check"></i>Simuladores activos: Electricidad, Enfermer&iacute;a y Climatizaci&oacute;n. Misi&oacute;n Laboral 3D de Mec&aacute;nica Automotriz.</p>
       </div>
-      <figure class="hero-media">
-        <img data-tp-poster="1" hidden src="/static/headers/electricidad/e1.png?v=3" alt="Simulacion interactiva de Electricidad">
-        <video controls playsinline preload="metadata" aria-label="Presentacion de Mision Laboral de Aula TP Chile con sonido">
-          <source src="/static/landing-preview-assets/aula-tp-invitacion.mp4" type="video/mp4">
-          Tu navegador no puede reproducir este video.
-        </video>
-        <figcaption><b>Simulaci&oacute;n en el aula</b><span>Cinco estaciones &middot; evidencia para el docente</span></figcaption>
-        <p data-tp-caption="1" class="tp-media-caption">Explora la simulaci&oacute;n de Electricidad.</p>
-      </figure>
-    </section>
-    <section class="capabilities" aria-label="Capacidades principales">
-      <div class="capability-card"><span class="icon"><i data-lucide="box"></i></span><span><b>Simula</b><small>situaciones t&eacute;cnicas</small></span></div>
-      <div class="capability-card"><span class="icon"><i data-lucide="shield-check"></i></span><span><b>Practica</b><small>de forma segura</small></span></div>
-      <div class="capability-card"><span class="icon"><i data-lucide="message-square-more"></i></span><span><b>Recibe</b><small>retroalimentaci&oacute;n</small></span></div>
-      <div class="capability-card"><span class="icon"><i data-lucide="chart-no-axes-column-increasing"></i></span><span><b>Demuestra</b><small>lo aprendido</small></span></div>
+      <div class="hero-media tp-home-videos" role="group" aria-label="Videos de Aula TP Chile">
+        <figure class="tp-home-video">
+          <video controls playsinline preload="metadata" data-tp-home-video="presentation" poster="/static/landing-preview-assets/aula-tp-presentacion-poster.jpg" aria-label="Conoce Aula TP Chile con sonido">
+            <source src="/static/landing-preview-assets/aula-tp-presentacion.mp4" type="video/mp4">
+            Tu navegador no puede reproducir este video.
+          </video>
+          <figcaption>
+            <span class="tp-home-video-step" aria-hidden="true">01</span>
+            <div class="tp-home-video-copy"><h2>Conoce Aula TP Chile</h2><p>Presentaci&oacute;n de la plataforma.</p></div>
+          </figcaption>
+        </figure>
+        <div class="tp-home-mission-actions"></div>
+        <figure class="tp-home-video">
+          <video controls playsinline preload="metadata" data-tp-home-video="mission" poster="/static/landing-preview-assets/aula-tp-invitacion-poster.jpg" aria-label="Mision Laboral en accion con sonido">
+            <source src="/static/landing-preview-assets/aula-tp-invitacion.mp4" type="video/mp4">
+            Tu navegador no puede reproducir este video.
+          </video>
+          <figcaption>
+            <span class="tp-home-video-step" aria-hidden="true">02</span>
+            <div class="tp-home-video-copy"><h2>Misi&oacute;n Laboral en acci&oacute;n</h2><p>Recorrido por el taller de Mec&aacute;nica Automotriz.</p></div>
+          </figcaption>
+        </figure>
+      </div>
     </section>
  <section class="city-promo" id="ciudad-laboral" aria-labelledby="city-title">
     <div class="city-promo-copy">

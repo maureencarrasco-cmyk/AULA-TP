@@ -4,8 +4,8 @@ import assert from 'node:assert/strict';
 
 const html = readFileSync(new URL('../static/landing-home-preview.html', import.meta.url), 'utf8');
 
-test('preserves the complete homepage after capabilities through the footer', () => {
-  const markers = ['class="capabilities"', 'id="ciudad-laboral"', 'class="curriculum-foundation"', 'id="comunidad"', 'id="especialidades"', 'id="preguntas"', 'class="contact-strip"'];
+test('preserves the remaining homepage from city promotion through contact', () => {
+  const markers = ['id="ciudad-laboral"', 'class="curriculum-foundation"', 'id="comunidad"', 'id="especialidades"', 'id="preguntas"', 'class="contact-strip"'];
   let previous = -1;
   for (const marker of markers) {
     const index = html.indexOf(marker);
@@ -27,6 +27,7 @@ test('retains native video and original local images', () => {
 test('removes only the requested promotional sections and keeps the hero video with sound', () => {
   assert.doesNotMatch(html, /id="(?:mision-laboral|producto|como)"/);
   assert.doesNotMatch(html, /<footer class="visual-footer"/);
+  assert.doesNotMatch(html, /class="(?:capabilities|hero-note|city-discovery|mission-discovery|social-proof)"/);
   assert.match(html, /aula-tp-invitacion\.mp4/);
   assert.doesNotMatch(html, /<video[^>]*\bmuted\b/);
 });

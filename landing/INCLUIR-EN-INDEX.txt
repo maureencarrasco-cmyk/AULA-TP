@@ -4,9 +4,10 @@ Ancho uniforme: cargar despues de las otras hojas de estilo:
 <link rel="stylesheet" href="/landing/landing-home-width.css?v=20261010">
 <link rel="stylesheet" href="/landing/landing-home-actions.css?v=20261010">
 <link rel="stylesheet" href="/landing/landing-home-demo.css?v=20261010">
+<link rel="stylesheet" href="/landing/landing-home-videos.css?v=20261010-home-cta-layout">
 
 <link rel="stylesheet" href="/landing/aula-tp-coherence.css?v=20261010-home-layout">
-<script src="/landing/aula-tp-coherence.js?v=20261010-home-demo" defer></script>
+<script src="/landing/aula-tp-coherence.js?v=20261010-home-cta-layout" defer></script>
 
 Contrato de menú:
 Inicio → Simulador → Especialidades → Cómo funciona → Comunidad → Ver catálogo → Campus → Solicitar demo
@@ -14,7 +15,11 @@ Inicio → Simulador → Especialidades → Cómo funciona → Comunidad → Ver
 - Ver catálogo: /landing/catalogo.html (público, sin login)
 - Campus: /portal/cursos/ (cuenta del establecimiento)
 - Solicitar demo: #lead-form (no #preguntas)
-- Hero: solo video, sin la imagen adicional del taller; centrado en la columna derecha
-- Capacidades: debajo del hero y sus leyendas, sin margen negativo ni superposiciones
+- Hero: dos videos numerados en la columna derecha, sin la imagen adicional del taller
+- Sustituir la figura hero-media completa por landing/portada-video.html; primero presentacion, despues Mision Laboral
+- Ambos conservan sus controles y sonido; al reproducir uno, el otro se pausa
+- Quitar las notas y accesos secundarios del hero, y la franja Simula/Practica/Recibe/Demuestra
+- Boton azul arriba, junto a la presentacion; boton amarillo en la segunda fila, junto al video de Mision Laboral
+- En movil: presentacion y boton azul primero; boton amarillo antes del video de Mision Laboral
 - Tarjetas: electricidad/enfermería/clima al campus con ?q= ; automotriz a /mision_laboral/ (Misión 3D, no «en preparación») ; resto al catálogo
 - Pie: si faltan Ver catálogo y Campus, el script los inserta antes de Demo

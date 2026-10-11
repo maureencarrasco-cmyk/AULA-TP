@@ -1,7 +1,7 @@
 'use strict';
 /* Aula TP · menú canónico y multimedia de oficio. 2026-10-09. Copia de landing/aula-tp-coherence.js */
 (function () {
-  var VERSION = '20261010-home-demo';
+  var VERSION = '20261010-home-cta-layout';
   var ORDER = ['inicio', 'simulador', 'especialidades', 'como funciona', 'comunidad', 'ver catalogo', 'campus', 'solicitar demo', 'demo'];
   var CATALOG = '/landing/catalogo.html';
   var CAMPUS = '/portal/cursos/';
@@ -135,7 +135,7 @@
       if (heroMedia) {
         heroMedia.querySelectorAll('img[data-tp-poster]').forEach(function (image) { image.remove(); });
         video.hidden = false;
-        video.removeAttribute('poster');
+        if (!video.getAttribute('data-tp-home-video')) video.removeAttribute('poster');
         video.removeAttribute('data-off-specialty');
         video.setAttribute('preload', 'metadata');
         var caption = heroMedia.querySelector('[data-tp-caption]');
@@ -171,6 +171,18 @@
         note.textContent = 'Portada de Electricidad, la especialidad del hero. No se reutiliza la foto de otro oficio.';
         wrap.appendChild(note);
       }
+    });
+  }
+  function wireHomepageVideos() {
+    var videos = Array.prototype.slice.call(document.querySelectorAll('#inicio .tp-home-video video'));
+    videos.forEach(function (video) {
+      if (video.getAttribute('data-tp-audio-wired') === '1') return;
+      video.setAttribute('data-tp-audio-wired', '1');
+      video.addEventListener('play', function () {
+        videos.forEach(function (other) {
+          if (other !== video && !other.paused) other.pause();
+        });
+      });
     });
   }
   function wireSpecialtyCards() {
@@ -255,6 +267,19 @@
     });
     if (typeof window !== 'undefined' && window.lucide) window.lucide.createIcons({ attrs: { 'aria-hidden': 'true' } });
   }
+  function layoutHomepageHero() {
+    var hero = document.querySelector('body.landing-refresh #inicio.hero');
+    if (!hero) return;
+    hero.querySelectorAll('.hero-note, .city-discovery, .mission-discovery, .social-proof').forEach(function (element) { element.remove(); });
+    var capabilities = document.querySelector('body.landing-refresh #inicio.hero + .capabilities');
+    if (capabilities) capabilities.remove();
+    var actions = hero.querySelector('.hero-actions');
+    var courses = hero.querySelector('.hero-actions .campus-link');
+    if (actions && courses) actions.insertBefore(courses, actions.firstChild);
+    var mission = hero.querySelector('.mission-promo-enter');
+    var missionActions = hero.querySelector('.tp-home-mission-actions');
+    if (mission && missionActions && mission.parentElement !== missionActions) missionActions.appendChild(mission);
+  }
   function boot() {
     document.querySelectorAll('header nav, footer nav, #nav').forEach(function (nav) {
       retarget(nav);
@@ -264,10 +289,12 @@
     });
     splitGlued(document);
     fixHeroMedia();
+    wireHomepageVideos();
     syncAutomotriz();
     wireSpecialtyCards();
     styleHomepageDemo();
     styleHomepageActions();
+    layoutHomepageHero();
     document.querySelectorAll('body.landing-refresh a[href="#como"]').forEach(function (link) {
       if (link.closest('header, footer')) link.remove();
       else {
