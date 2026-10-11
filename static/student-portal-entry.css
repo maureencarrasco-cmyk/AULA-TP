@@ -1,0 +1,134 @@
+/* Keep the portal entry live: artwork frames the existing link and progress. */
+.dash-sidebar nav .dash-progress-link,
+.dash-sidebar nav .dash-progress-link.is-active {
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr) 25px;
+  grid-template-rows:auto auto 25px;
+  gap:8px;
+  min-height:146px;
+  margin:12px 0 8px;
+  padding:14px 10px 12px;
+  border:2px solid #ffb74a;
+  border-radius:18px;
+  background:linear-gradient(145deg,#fff 48%,#fffaf2 80%,#fff1d9);
+  color:#07184e;
+  box-shadow:0 0 0 3px #fff8e9,0 0 15px #ffbd5b88,0 0 26px #ffc76b55,inset 0 1px 1px #fff;
+  text-decoration:none;
+  isolation:isolate;
+}
+.dash-sidebar nav .dash-progress-link::before,
+.dash-sidebar nav .dash-progress-link::after {
+  content:"";
+  position:absolute;
+  bottom:0;
+  z-index:-1;
+  pointer-events:none;
+  background:#ffebcc;
+  border-radius:0 0 16px 16px;
+}
+.dash-sidebar nav .dash-progress-link::before {
+  left:0;
+  width:65%;
+  height:35%;
+  clip-path:ellipse(100% 100% at 0% 100%);
+}
+.dash-sidebar nav .dash-progress-link::after {
+  right:0;
+  width:32%;
+  height:48%;
+  clip-path:ellipse(100% 100% at 100% 100%);
+  opacity:.5;
+}
+.dash-sidebar nav .dash-progress-link:hover {
+  background:linear-gradient(145deg,#fff 42%,#fff8e9 72%,#ffeac7);
+  border-color:#ff9b21;
+  box-shadow:0 0 0 3px #fff4dd,0 0 20px #ffb13f99,0 0 28px #ffc56466;
+}
+.dash-sidebar nav .dash-progress-link:focus-visible {
+  outline:3px solid #965005;
+  outline-offset:4px;
+}
+.dash-sidebar nav .dash-progress-link.is-active {border-color:#f28b14}
+.dash-sidebar nav .dash-progress-link>.dash-portal-icon {
+  grid-column:1;
+  grid-row:1/3;
+  align-self:center;
+  display:grid;
+  place-items:center;
+  width:44px;
+  height:56px;
+  border:1px solid #ffd08a;
+  border-radius:12px;
+  background:linear-gradient(145deg,#fff8eb,#ffe2b1);
+  box-shadow:inset 0 2px 3px #fff,0 4px 9px #ed921e29;
+  color:#ff8510;
+}
+.dash-portal-icon .icon {width:32px;height:32px;stroke-width:2.5;filter:drop-shadow(0 2px 1px #ffbb57)}
+.dash-sidebar nav .dash-progress-link>.dash-portal-copy {
+  grid-column:2/4;
+  grid-row:2;
+  display:grid;
+  gap:5px;
+  min-width:0;
+}
+.dash-sidebar nav .dash-progress-link b {font-size:15px;line-height:1.15;color:#07184e}
+.dash-sidebar nav .dash-progress-link small,
+.dash-sidebar nav .dash-progress-link.is-active small {font-size:11px;line-height:1.35;color:#687999;font-weight:600}
+.dash-sidebar nav .dash-progress-link>.dash-portal-percent,
+.dash-sidebar nav .dash-progress-link.is-active>.dash-portal-percent {
+  grid-column:2/4;
+  grid-row:1;
+  justify-self:end;
+  align-self:start;
+  min-width:42px;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#e0f6e7;
+  color:#005536;
+  font-size:15px;
+  line-height:1.2;
+}
+.dash-sidebar nav .dash-progress-link>.dash-portal-track,
+.dash-sidebar nav .dash-progress-link.is-active>.dash-portal-track {
+  grid-column:1/3;
+  grid-row:3;
+  align-self:center;
+  width:100%;
+  height:6px;
+  margin:0;
+  background:#e8e8f0;
+}
+.dash-sidebar nav .dash-progress-link .dash-portal-track em {background:linear-gradient(90deg,#ffa31e,#ff7813)}
+.dash-sidebar nav .dash-progress-link>.dash-portal-arrow {
+  grid-column:3;
+  grid-row:3;
+  display:grid;
+  place-items:center;
+  width:25px;
+  height:25px;
+  border:1px solid #ffc582;
+  border-radius:50%;
+  background:linear-gradient(135deg,#fffaf3,#ffe1c2);
+  box-shadow:inset 0 1px 2px #fff,0 2px 6px #f6a44b33;
+  color:#ff790a;
+}
+.dash-portal-arrow .icon {width:16px;height:16px;stroke-width:2.5}
+@media(min-width:761px) and (max-width:1180px) {
+  .dash-sidebar nav .dash-progress-link,
+  .dash-sidebar nav .dash-progress-link.is-active {grid-template-columns:34px minmax(0,1fr) 25px;gap:5px}
+  .dash-sidebar nav .dash-progress-link>.dash-portal-icon {width:34px;height:48px}
+  .dash-portal-icon .icon {width:26px;height:26px}
+  .dash-sidebar nav .dash-progress-link b {font-size:14px}
+}
+@media(max-width:760px) {
+  .dash-sidebar nav {display:grid;grid-template-columns:44px minmax(150px,1fr);align-items:center;gap:10px;overflow:visible}
+  .dash-sidebar nav .dash-progress-link,
+  .dash-sidebar nav .dash-progress-link.is-active {width:100%;min-height:122px;grid-template-columns:40px minmax(0,1fr) 25px;padding:10px;margin:6px 0;gap:5px}
+  .dash-sidebar nav .dash-progress-link>span,
+  .dash-sidebar nav .dash-progress-link>strong {position:static;width:auto;height:auto;overflow:visible;clip:auto}
+  .dash-sidebar nav .dash-progress-link>.dash-portal-icon {width:40px;height:50px}
+  .dash-sidebar nav .dash-progress-link>.dash-portal-arrow {width:25px;height:25px}
+}
+@media(max-width:430px) {
+  .dash-sidebar nav {grid-column:1/-1;width:100%}
+}

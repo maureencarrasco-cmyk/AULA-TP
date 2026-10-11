@@ -15,6 +15,7 @@ from assessment_integrity import assessment_issues
 from itsdangerous import URLSafeTimedSerializer, BadSignature
 from practice_scenarios import scenario as practice_scenario, review as practice_review
 from practice_pedagogy import profile as practice_profile
+from course_catalog import ensure_course_catalog
 
 ROOT=Path(__file__).resolve().parent
 
@@ -57,6 +58,7 @@ def create_app(test_config=None):
                 con.execute('INSERT INTO modules VALUES(?,?,?,?,?,?)',(n,1,MODULE_TITLES[n],n,1,json.dumps(payload,ensure_ascii=False)))
             con.execute('INSERT INTO enrollments VALUES(1,1)')
         upgrade_catalog(con)
+        ensure_course_catalog(con)
     def fail(message,status=400):return jsonify(error=message),status
     def body():return request.get_json(silent=True) or {}
     def user():
@@ -81,8 +83,10 @@ def create_app(test_config=None):
     def headers(response):
         response.headers['X-Content-Type-Options']='nosniff';response.headers['X-Frame-Options']='DENY'
         response.headers['Content-Security-Policy']="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
-        if request.path.startswith('/api/') or request.path.startswith('/static/'):
+        if request.path.startswith('/api/'):
             response.headers['Cache-Control']='no-store, max-age=0'
+        elif request.path.startswith('/static/') and response.status_code in (200,304) and response.mimetype!='text/html':
+            response.headers['Cache-Control']='public, max-age=31536000, immutable' if request.args.get('v') else 'public, max-age=0, must-revalidate'
         return response
     def empty():return {'context':'','ae':{},'cases':{},'scene':None,'exam':None,'draft':{},'reflection':'','plan':'','closed':False,'explore':{},'ae_meta':{},'trace':[],'oficio':{},'encargos':{}}
     # The catalogue contains 451 modules; retain one enriched copy per module.
@@ -166,15 +170,10 @@ def create_app(test_config=None):
             modules_by_course={cid:[] for cid in course_ids}
             if course_ids:
                 marks=','.join('?' for _ in course_ids)
-                module_rows=con.execute(f'''SELECT id,course_id,title,position,published,
-                    json_extract(content,'$.specialty_source.official_hp') AS official_hp,
-                    json_extract(content,'$.specialty_source.scope') AS source_scope,
-                    json_extract(content,'$.specialty_source.pdf') AS source_pdf,
-                    json_extract(content,'$.specialty_source.year') AS official_year,
-                    json_extract(content,'$.encargos.count') AS encargos_count,
-                    json_extract(content,'$.encargos.hours') AS encargos_hours,
-                    json_array_length(json_extract(content,'$.aes')) AS ae_count
-                    FROM modules WHERE course_id IN ({marks}) ORDER BY course_id,position,id''',course_ids).fetchall()
+                module_rows=con.execute(f'''SELECT m.id,m.course_id,m.title,m.position,m.published,
+                    c.official_hp,c.source_scope,c.source_pdf,c.official_year,c.encargos_count,c.encargos_hours,c.ae_count
+                    FROM modules m JOIN course_catalog c ON c.module_id=m.id
+                    WHERE m.course_id IN ({marks}) ORDER BY m.course_id,m.position,m.id''',course_ids).fetchall()
                 states={r['module_id']:json.loads(r['state']) for r in con.execute('SELECT module_id,state FROM progress WHERE user_id=?',(u['id'],)).fetchall()}
                 for m in module_rows:modules_by_course[m['course_id']].append(m)
             result=[]
@@ -205,7 +204,7 @@ def create_app(test_config=None):
                         if pack.get('count'):mod['encargos_count']=pack['count'];mod['encargos_hours']=pack['hours']
                     item['modules'].append(mod)
                 if compact:
-                    keep={'id','title','position','published','completed','percent','evaluation_scores','official_hp','encargos_count','encargos_hours'}
+                    keep={'id','title','position','published','completed','percent','evaluation_scores','official_hp','official_year','encargos_count','encargos_hours'}
                     item['modules']=[{k:v for k,v in mod.items() if k in keep} for mod in item['modules']]
                     result.append(item)
                     continue

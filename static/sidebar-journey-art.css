@@ -1,0 +1,30 @@
+.dashboard-reference .dash-sidebar {
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+}
+.dashboard-reference .dash-sidebar> * {flex-shrink:0}
+.dashboard-reference .dash-sidebar-journey {
+  width:calc(100% - 8px);
+  margin:18px 4px 0;
+  border:1px solid #afe0ff;
+  border-radius:8px;
+  background:#fff;
+  box-shadow:0 0 0 2px #f0faff,0 0 12px #77caff80,0 0 22px #9bddff66;
+  overflow:hidden;
+}
+.dashboard-reference .dash-sidebar-journey img {
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:580/974;
+  margin:0;
+}
+@media(max-width:760px) {
+  .dashboard-reference .dash-sidebar {overflow:visible;overscroll-behavior:auto}
+  .dashboard-reference .dash-sidebar-journey {
+    grid-column:1/-1;
+    width:min(160px,100%);
+    margin:14px auto 6px;
+  }
+}
