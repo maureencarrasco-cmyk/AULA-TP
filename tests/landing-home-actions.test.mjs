@@ -18,6 +18,27 @@ function element(text = '') {
 }
 
 for (const directory of ['landing', 'static']) {
+  test(`${directory}: the city badge keeps its original text and remains non-interactive after repeated initialization`, () => {
+    const badge = element(' Ciudad Laboral \u00b7 Aula TP Chile ');
+    const document = {
+      readyState: 'complete', querySelectorAll: () => [],
+      querySelector: selector => selector === 'body.landing-refresh #ciudad-laboral .city-promo-badge' ? badge : null,
+      createElement: () => element(),
+    };
+    const script = read(`${directory}/aula-tp-coherence.js`);
+    vm.runInNewContext(script, { document });
+    const children = badge.children;
+    vm.runInNewContext(script, { document });
+    assert.equal(badge.children, children);
+    assert.equal(badge.children[1].textContent, 'Ciudad Laboral \u00b7 Aula TP Chile');
+    assert.equal(badge.children[0].children[0].attributes.get('data-lucide'), 'building-2');
+    assert.equal(badge.children[2].children[0].attributes.get('data-lucide'), 'chevron-right');
+    assert.equal(badge.attributes.has('href'), false);
+    assert.equal(badge.attributes.has('role'), false);
+    assert.equal(badge.attributes.has('tabindex'), false);
+    assert.equal(badge.children[0].attributes.get('aria-hidden'), 'true');
+    assert.equal(badge.children[2].attributes.get('aria-hidden'), 'true');
+  });
   test(`${directory}: styles only the three homepage entry links without changing navigation`, () => {
     const selectors = ['#inicio .mission-promo-enter', '#inicio .campus-link', '#ciudad-laboral .city-promo-enter'];
     const labels = ['Entrar a Mision Laboral', 'Entrar a cursos', 'Entrar a Ciudad Laboral'];

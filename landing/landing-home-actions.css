@@ -75,6 +75,68 @@ body.landing-refresh a.button.tp-primary-action:active { transform: translateY(1
 body.landing-refresh a.button.tp-primary-action:focus-visible { outline: 3px solid #163d6e; outline-offset: 10px; }
 body.landing-refresh #inicio .hero-actions,
 body.landing-refresh #ciudad-laboral .city-promo-actions { gap: 20px; }
+/* The city identifier remains a non-interactive badge. */
+body.landing-refresh #ciudad-laboral .city-promo-badge.tp-city-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 100%;
+  min-height: 82px;
+  margin: 0 0 24px;
+  padding: 8px 10px;
+  border: 3px solid #76e9cf;
+  border-radius: 48px;
+  background: linear-gradient(110deg, #f8fffd 45%, #d8f8ee);
+  color: #075c67;
+  box-shadow: inset 0 1px 3px #fff, 0 0 0 4px #fff, 0 0 0 6px #bbfae9, 0 0 20px 4px #77ebcc66;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+body.landing-refresh #ciudad-laboral .tp-city-badge-icon,
+body.landing-refresh #ciudad-laboral .tp-city-badge-arrow {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  box-shadow: none;
+}
+body.landing-refresh #ciudad-laboral .tp-city-badge-icon {
+  width: 58px;
+  height: 58px;
+  background: #b1efdd;
+  color: #077b81;
+}
+body.landing-refresh #ciudad-laboral .tp-city-badge-icon svg { width: 36px; height: 36px; }
+body.landing-refresh #ciudad-laboral .tp-city-badge-label {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  height: auto;
+  padding-left: 12px;
+  border-left: 2px solid #a5e9d7;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #075c67;
+}
+body.landing-refresh #ciudad-laboral .tp-city-badge-arrow {
+  width: 44px;
+  height: 44px;
+  background: #f6fffc;
+  color: #059b87;
+}
+body.landing-refresh #ciudad-laboral .tp-city-badge-arrow svg { width: 28px; height: 28px; }
+@media (max-width: 600px) {
+  body.landing-refresh #ciudad-laboral .city-promo-badge.tp-city-badge { gap: 8px; font-size: 16px; padding: 8px; }
+  body.landing-refresh #ciudad-laboral .tp-city-badge-icon { width: 44px; height: 44px; }
+  body.landing-refresh #ciudad-laboral .tp-city-badge-icon svg { width: 28px; height: 28px; }
+  body.landing-refresh #ciudad-laboral .tp-city-badge-label { padding-left: 8px; }
+  body.landing-refresh #ciudad-laboral .tp-city-badge-arrow { width: 32px; height: 32px; }
+  body.landing-refresh #ciudad-laboral .tp-city-badge-arrow svg { width: 22px; height: 22px; }
+}
 @media (max-width: 400px) {
   body.landing-refresh a.button.tp-primary-action { gap: 9px; padding: 10px; min-height: 76px; font-size: 16px; }
   body.landing-refresh .tp-action-icon { width: 40px; height: 40px; }

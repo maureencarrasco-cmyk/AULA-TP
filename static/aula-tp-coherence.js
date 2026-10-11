@@ -1,7 +1,7 @@
 'use strict';
 /* Aula TP · menú canónico y multimedia de oficio. 2026-10-09 */
 (function () {
-  var VERSION = '20261010-home-reference';
+  var VERSION = '20261010-city-badge';
   var ORDER = ['inicio', 'simulador', 'especialidades', 'como funciona', 'comunidad', 'ver catalogo', 'campus', 'solicitar demo', 'demo'];
   var CATALOG = '/landing/catalogo.html';
   var CAMPUS = '/portal/cursos/';
@@ -331,6 +331,24 @@
       demo.insertBefore(mail, demo.firstChild);
     }
   }
+  function styleHomepageCityBadge() {
+    var badge = document.querySelector('body.landing-refresh #ciudad-laboral .city-promo-badge');
+    if (!badge || badge.classList.contains('tp-city-badge')) return;
+    var label = document.createElement('span');
+    label.className = 'tp-city-badge-label';
+    label.textContent = badge.textContent.trim();
+    function icon(name, className) {
+      var wrapper = document.createElement('span');
+      wrapper.className = className;
+      wrapper.setAttribute('aria-hidden', 'true');
+      var glyph = document.createElement('i');
+      glyph.setAttribute('data-lucide', name);
+      wrapper.appendChild(glyph);
+      return wrapper;
+    }
+    badge.replaceChildren(icon('building-2', 'tp-city-badge-icon'), label, icon('chevron-right', 'tp-city-badge-arrow'));
+    badge.classList.add('tp-city-badge');
+  }
   function boot() {
     document.querySelectorAll('header nav, footer nav, #nav').forEach(function (nav) {
       retarget(nav);
@@ -346,6 +364,7 @@
     styleHomepageDemo();
     styleHomepageActions();
     layoutHomepageHero();
+    styleHomepageCityBadge();
     if (typeof window !== 'undefined' && window.lucide) window.lucide.createIcons({ attrs: { 'aria-hidden': 'true' } });
     document.querySelectorAll('body.landing-refresh a[href="#como"]').forEach(function (link) {
       if (link.closest('header, footer')) link.remove();
