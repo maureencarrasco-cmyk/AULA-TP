@@ -20,3 +20,4 @@
 .course-artwork-credit:focus-visible {outline:3px solid #e9aa21;outline-offset:2px}
 .atp-hero-visual>.course-artwork-credit {right:12px;bottom:10px;max-width:85%}
 .sp-reference-banner>.course-artwork-credit {right:10px;bottom:4px}
+.context-visual .course-artwork-credit {position:static;max-width:100%;width:fit-content;margin:4px auto 0}
