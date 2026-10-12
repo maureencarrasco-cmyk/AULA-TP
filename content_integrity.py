@@ -1,6 +1,7 @@
 """Conservative content repairs; never invent curricular or measured evidence."""
 from pathlib import Path
 from functools import lru_cache
+import json
 
 ROOT = Path(__file__).resolve().parent
 MEDIA_FIELDS = ('image', 'imageB', 'video', 'vtt', 'audio', 'model')
@@ -54,6 +55,14 @@ GENERATED_CONTEXT_ASSETS = {
         'caption': 'Ilustracion generada de aprendizaje en vestuario y confeccion textil. Contexto simulado; no acredita medidas, patrones ni procedimientos de confeccion.',
     },
 }
+
+# Explicit provenance keeps simulated context out of required technical evidence.
+_generated_catalog = json.loads((ROOT / 'static/headers/generated-context-catalog.json').read_text(encoding='utf-8'))
+for _asset in _generated_catalog['assets']:
+    GENERATED_CONTEXT_ASSETS[f"/static/headers/{_asset['folder']}/e2.webp"] = {
+        'alt': _asset['alt'],
+        'caption': f"Ilustracion generada de {_asset['specialty']}. Contexto simulado; no acredita mediciones, resultados, procedimientos ni respuestas. Revision disciplinar pendiente.",
+    }
 
 
 @lru_cache(maxsize=8192)

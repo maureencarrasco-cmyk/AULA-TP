@@ -59,7 +59,14 @@ test('course and module selection remain correct after the legacy menu overrides
       assert.equal(scope.moduleStopArt(course,index),module.photo.image);
       assert.equal(scope.moduleArtworkPhoto(course,module).image,module.photo.image);
       scope.current={...module,course_id:row.id};
-      for(let station=1;station<=5;station++)assert.equal(scope.stationHeaderArt(station,course),module.photo.image);
+      const stationImages=[];
+      for(let station=1;station<=5;station++){
+        const photo=scope.stationArtworkPhoto(course,module,station);
+        assert.equal(scope.stationHeaderArt(station,course),photo.image);
+        stationImages.push(photo.image);
+      }
+      assert.equal(stationImages[0],module.photo.image);
+      assert.equal(new Set(stationImages).size,5);
       assert.equal(JSON.stringify(course),before);
     }
   }

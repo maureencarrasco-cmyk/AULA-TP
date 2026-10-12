@@ -11,14 +11,16 @@
   margin: 0;
   background: #072A4E;
   overflow: hidden;
-  max-height: min(52vh, 420px);
+  max-height: none;
 }
 .vis-frame img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
   height: auto;
   max-height: min(52vh, 420px);
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 }
 .vis-cap {
@@ -114,7 +116,9 @@
 .vis-zoom-target {
   position: relative;
   display: block;
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
   transform-origin: 50% 50%;
 }
 .vis-frame .act-spot {
@@ -241,9 +245,13 @@
 }
 .vis-fig.act-figure img,
 .vis-hotspot .vis-zoom-target img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
   height: auto;
   max-height: min(52vh, 420px);
-  object-fit: cover;
+  object-fit: contain;
 }
 .vis-hotspot .vis-frame.act-scene {
   max-height: none;
@@ -292,7 +300,7 @@ body.low-stim .vis-stage {
 .vis-voice-cue{font-size:13px;color:#0B3A6B;font-weight:600}
 
 @media (max-width: 640px) {
-  .vis-frame { max-height: 46vh; }
+  .vis-frame { max-height: none; }
   .vis-frame img { max-height: 46vh; }
   .vis-stage { height: min(46vh, 280px); }
 }

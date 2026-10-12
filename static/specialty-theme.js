@@ -232,7 +232,7 @@ function stationHeaderAlt(n, course, aeIndex) {
 }
 function stationHeaderArt(n, course, aeIndex) {
   const module=typeof current!=='undefined'&&current?.course_id===course?.id?current:null;
-  const artwork=module&&typeof moduleArtworkPhoto==='function'?moduleArtworkPhoto(course,module):null;
+  const artwork=module&&typeof stationArtworkPhoto==='function'?stationArtworkPhoto(course,module,n):null;
   if(artwork)return artwork.image;
   const i = Math.min(5, Math.max(1, Number(n) || 1));
   if (isClimateSpecialty(course)) {

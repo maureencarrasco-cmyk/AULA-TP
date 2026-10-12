@@ -25,7 +25,9 @@ function situationPhotoSet(module, course, practice = false) {
   return (module.content?.cases||[]).map((item,index)=>{
     const caseText=[item.context,item.question,item.document,item.title,item.criterion].filter(Boolean).join(' ');
     const subject=encargoPhotoTopic({title:practice?caseText:item.criterion||item.title},course,module.title);
-    const pool=[subject,...(related[subject]||[])].flatMap(topic=>(SITUATION_PHOTOS[topic]||[]).map(photo=>({...photo,primary:topic===subject})));
+    const pool=[subject,...(related[subject]||[])].flatMap(topic=>(SITUATION_PHOTOS[topic]||[])
+      .filter(photo=>typeof courseContextPhotoAllowed!=='function'||courseContextPhotoAllowed(photo))
+      .map(photo=>({...photo,primary:topic===subject})));
     const normalize=text=>String(text||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
     const criterion=normalize(practice?caseText:item.criterion||item.context);
     const concepts=[

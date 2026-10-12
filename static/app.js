@@ -111,7 +111,7 @@ function ensureSituationCatalog(){
  if(situationCatalogPromise)return situationCatalogPromise;
  situationCatalogPromise=new Promise((resolve,reject)=>{
   const script=document.createElement('script');
-  script.src='/static/situation-photo-catalog.js?v=20261008-distinct-situations';
+  script.src='/static/situation-photo-catalog.js?v=20261012-image-review-v3';
   script.onload=()=>resolve();
   script.onerror=()=>{script.remove();situationCatalogPromise=null;const error=Error('No se pudieron cargar las im\u00e1genes del m\u00f3dulo. Vuelve a intentarlo.');error.network=true;reject(error)};
   document.head.appendChild(script);
@@ -848,6 +848,16 @@ function avanceStrip(n){
  </section>`;
 }
 function stationUnlocked(n){return auth.user.role==='teacher'||isDemoStudent()||n===1||current.completed.slice(0,n-1).every(Boolean)}
+function stationHeaderProgress(n){
+ const order=[1,2,3,null,4,5], shown=order.indexOf(n)+1;
+ const labels=[names[0],names[1],names[2],'Misión laboral',names[3],names[4]];
+ return `<nav class="atp-hero-sign station-header-progress" aria-label="Recorrido de estaciones">${workIco(stationIcons[n-1]||'flag')}<span class="station-header-position">Estación ${shown} de 6</span><ol>${order.map((internal,i)=>{
+  const active=internal===n, available=internal!==null&&stationUnlocked(internal);
+  const label=`Estación ${i+1}: ${labels[i]}${internal===null?'. En construcción':available?'':'. Completa las estaciones anteriores'}`;
+  const attrs=`class="station-header-node stage-${i+1}${active?' is-current':''}" aria-label="${esc(label)}" title="${esc(label)}"${active?' aria-current="step"':''}`;
+  return `<li>${available?`<a ${attrs} href="#module/${current.id}/${internal}">${i+1}</a>`:`<span ${attrs} aria-disabled="true">${i+1}</span>`}</li>`;
+ }).join('')}</ol></nav>`;
+}
 function aulaTPPageHero(opts={}){
  const n=Number(opts.station)||0;
  const course=opts.course||courses.find(c=>c.id===current?.course_id);
@@ -862,7 +872,7 @@ function aulaTPPageHero(opts={}){
  const showBack=opts.showBack!==false;
  const showBadge=opts.showBadge!==false && n>=1;
  const img=opts.image||(n?stationHeaderArt(n,course,opts.aeIndex):heroPhoto(course));
- const artwork=n&&current?.course_id===course?.id&&typeof moduleArtworkPhoto==='function'?moduleArtworkPhoto(course,current):typeof courseArtworkPhoto==='function'?courseArtworkPhoto(course):null;
+ const artwork=n&&current?.course_id===course?.id&&typeof stationArtworkPhoto==='function'?stationArtworkPhoto(course,current,n):typeof courseArtworkPhoto==='function'?courseArtworkPhoto(course):null;
  const credit=artwork?.image===img&&typeof courseArtworkCredit==='function'?courseArtworkCredit(artwork):'';
  const alt=opts.imageAlt||(artwork?.image===img?artwork.alt:n?stationHeaderAlt(n,course):(isClimateSpecialty(course)?'Aula-taller de refrigeración y climatización, con un cuaderno abierto sobre la mesa y equipos HVAC al fondo':`Contexto profesional de ${course?.specialty||'Aula TP Chile'}`));
  const crumb=opts.breadcrumb||[];
@@ -882,12 +892,12 @@ function aulaTPPageHero(opts={}){
   const home=i===0?icon('home'):'';
   return `<a ${href}>${home}${esc(c.label)}</a>`;
  }).join('<span aria-hidden="true">›</span>');
- const sign=n>=1?`<p class="atp-hero-sign">${workIco(ico)}<span>Estación ${n} de 5</span><b class="atp-hero-sign-num">${n}</b></p>`:'';
+ const sign=n>=1?stationHeaderProgress(n):'';
  const goalHtml=goals.length?`<ul class="atp-hero-goals">${goals.map(([gi,gl])=>`<li>${workIco(gi)}<span>${esc(gl)}</span></li>`).join('')}</ul>`:'';
  const completedCount=(current?.completed||[]).filter(Boolean).length;
  const sideProgress=n>=1?`<div class="atp-hero-progress"><b>Tu progreso en el módulo</b><progress value="${completedCount}" max="5"></progress><span>${completedCount} de 5 estaciones</span></div>`:'';
- const quote=n?`<blockquote class="atp-hero-quote">${esc(spark)}</blockquote>`:'';
- return `<header class="atp-hero s${n}${n>=1?' is-station':''}" data-station-color="${n}">
+ const quote=n?`<blockquote class="atp-hero-quote">${workIco('bulb')}<span>${esc(spark)}</span></blockquote>`:'';
+ return `<header class="atp-hero s${n}${n>=1?' is-station station-header-reference':''}" data-station-color="${n}">
   <div class="atp-hero-id"><a class="atp-hero-logo" href="#courses"><img class="brand-logo" src="${BRAND_LOGO}" alt="Aula TP Chile · Formación técnica con sentido"></a>${showBack?`<a class="atp-hero-back" href="${backHref}">${icon('arrow')} Volver atrás</a>`:''}${sideNav}${sideProgress}${account}</div>
   <div class="atp-hero-copy">
    ${crumbHtml?`<nav class="atp-hero-crumb" aria-label="Ubicación">${crumbHtml}</nav>`:''}
@@ -958,7 +968,7 @@ function stationHero(n){
   purpose:purposes[n-1],
   orient:orients[n-1],
   goals:heroGoals[n-1],
-  imageAlt:n===4?'Recurso visual técnico del módulo. Examina la evidencia del ítem antes de responder.':undefined,
+  imageAlt:undefined,
   badgeNote:gpsStation(n),
   spark:weeklyStationSpark(n),
   backHref:back,

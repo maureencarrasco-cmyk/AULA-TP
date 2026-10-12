@@ -1,0 +1,150 @@
+{
+  "accounting": [
+    {
+      "title": "File:Casio R-2 Electronic Printing Calculator 01.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Casio_R-2_Electronic_Printing_Calculator_01.jpg",
+      "author": "Iswoar",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "description": "Casio calculators R-2",
+      "image": "/static/situation-photos/accounting-review-483d9c0ba0c4.jpg",
+      "alt": "Calculadora de escritorio con impresora para operaciones contables."
+    }
+  ],
+  "preschool": [
+    {
+      "title": "File:Montessori Classroom.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Montessori_Classroom.jpg",
+      "author": "KJJS",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "description": "A Montessori classroom in Indiana, USA.",
+      "image": "/static/situation-photos/preschool-review-891489838bd3.jpg",
+      "alt": "Estanterias con materiales didacticos en un aula Montessori."
+    }
+  ],
+  "plans": [
+    {
+      "title": "File:Drafting board with T square and drawingtools.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Drafting_board_with_T_square_and_drawingtools.jpg",
+      "author": "Swtpc6800 Michael Holley",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "Drafting board with T Square and drawing tools.",
+      "image": "/static/situation-photos/plans-review-98b1b3eb0d85.jpg",
+      "alt": "Tablero de dibujo con regla T y herramientas de dibujo tecnico."
+    },
+    {
+      "title": "File:Drafting Formats.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Drafting_Formats.jpg",
+      "author": "Oilfox",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "description": "This is a sample of the drafting format used internationally by the United States and Canada.",
+      "image": "/static/situation-photos/plans-review-f2a32fa7dca8.jpg",
+      "alt": "Lamina de formatos de dibujo tecnico, utilizada como contexto visual y no como plano del caso."
+    },
+    {
+      "title": "File:320 Newbury Street architectural drawing 02.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:320_Newbury_Street_architectural_drawing_02.jpg",
+      "author": "Unknown authorUnknown author",
+      "license": "Public domain",
+      "description": "320 Newbury Street architectural drawing.",
+      "image": "/static/situation-photos/plans-review-c6e155eb1f2e.jpg",
+      "alt": "Plano arquitectonico de un edificio de Newbury Street; ejemplo de contexto, no plano del caso."
+    }
+  ],
+  "electronics": [
+    {
+      "title": "File:Printed Circuit Board.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Printed_Circuit_Board.jpg",
+      "author": "en:User:Zephyris",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "description": "A small flex circuit, with both SMT and through-hole components. Note the insulating sleeves on the through-hole component leads to prevent unwanted contact with legs of the integrated circuit",
+      "image": "/static/situation-photos/electronics-review-603ed6fcb94f.jpg",
+      "alt": "Placa de circuito impreso con componentes electronicos."
+    },
+    {
+      "title": "File:Canon battery charger CB2LTE - Printed circuit board-1461.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Canon_battery_charger_CB2LTE_-_Printed_circuit_board-1461.jpg",
+      "author": "Raimond Spekking",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "Canon battery charger CB2LTE - Printed circuit board",
+      "image": "/static/situation-photos/electronics-review-c97afbf04b16.jpg",
+      "alt": "Placa electronica de un cargador desconectado."
+    }
+  ],
+  "cooling": [
+    {
+      "title": "File:Baltimore County Central Acceptance Facility Refrigerant Collection.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Baltimore_County_Central_Acceptance_Facility_Refrigerant_Collection.jpg",
+      "author": "Elliott R. Plack",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "description": "Baltimore County Central Acceptance Facility Refrigerant Collection",
+      "image": "/static/situation-photos/cooling-review-24f9e5750a07.jpg",
+      "alt": "Zona de recoleccion de equipos con refrigerante para recuperacion."
+    }
+  ],
+  "warehouse": [
+    {
+      "title": "File:Chittenden Locks - warehouse interior 01.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Chittenden_Locks_-_warehouse_interior_01.jpg",
+      "author": "Joe Mabel",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "Warehouse interior, Hiram M. Chittenden Locks, Seattle, Washington.",
+      "image": "/static/situation-photos/warehouse-review-41c29d836eb9.jpg",
+      "alt": "Interior de una bodega con estanterias y materiales almacenados."
+    }
+  ],
+  "meeting": [
+    {
+      "title": "File:Office meeting room with glass walls - 0Z7A2206.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Office_meeting_room_with_glass_walls_-_0Z7A2206.jpg",
+      "author": "Jalso Music App",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "A creative place to work and deliver.",
+      "image": "/static/situation-photos/meeting-review-685ac83aca63.jpg",
+      "alt": "Sala de reuniones con mesas y cerramiento de vidrio."
+    }
+  ],
+  "welding": [
+    {
+      "title": "File:Metal fabrication desk at the Nile Vocational Institute, Jinja.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Metal_fabrication_desk_at_the_Nile_Vocational_Institute,_Jinja.jpg",
+      "author": "Owobusingye",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "description": "Metal fabrication desk at the Nile Vocational Institute, Jinja",
+      "image": "/static/situation-photos/welding-review-c98af0758b09.jpg",
+      "alt": "Mesa de trabajo para fabricacion de piezas metalicas en un instituto de formacion."
+    }
+  ],
+  "metallurgy": [
+    {
+      "title": "File:LEACHING (SEPARATING) TANKS AT THE ELECTROWINNING COPPER REFINING PLANT - NARA - 544037.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:LEACHING_(SEPARATING)_TANKS_AT_THE_ELECTROWINNING_COPPER_REFINING_PLANT_-_NARA_-_544037.jpg",
+      "author": "Cornelius M. Keyes",
+      "license": "Public domain",
+      "description": "File:LEACHING (SEPARATING) TANKS AT THE ELECTROWINNING COPPER REFINING PLANT - NARA - 544037.jpg",
+      "image": "/static/situation-photos/metallurgy-review-c5ef8307b973.jpg",
+      "alt": "Tanques de lixiviacion de una planta de cobre. Fotografia historica de 1972; contexto, no procedimiento del caso."
+    }
+  ],
+  "wine": [
+    {
+      "title": "File:Labelling in a bottling line.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Labelling_in_a_bottling_line.jpg",
+      "author": "einalem",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "description": "Wine bottles being labeled as they run through an automatic bottling line.",
+      "image": "/static/situation-photos/wine-review-57892edb273a.jpg",
+      "alt": "Botellas de vino en una linea automatica de etiquetado y envasado."
+    }
+  ]
+}

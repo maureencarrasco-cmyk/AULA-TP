@@ -731,12 +731,11 @@ function developmentPackMarkup(pack) {
     ['Argumentación', pack.argument], ['Verificación', pack.verify]
   ];
   const course=(courses||[]).find(c=>Number(c.id)===Number(current.course_id));
-  const specialty=typeof specialtyKey==='function'?specialtyKey(course):'general';
-  const artKey=['climate','electricidad','enfermeria','administracion'].includes(specialty)?specialty:'general';
+  const artwork=typeof moduleArtworkPhoto==='function'?moduleArtworkPhoto(course,current):null;
   return `<div class="dev-pack">
     <header class="dev-case-heading"><small>ACTIVIDAD 26 · CASO PROFESIONAL</small><h4>1. Lee la situación</h4></header>
     <p class="dev-case-description">${esc(pack.development || current.content.development)}</p>
-    <figure class="dev-case-image"><img src="/static/headers/${artKey}/e3.png" alt="Escena ilustrativa del trabajo técnico de la especialidad" width="1280" height="720" loading="lazy"><figcaption>Imagen de contexto. Utiliza los antecedentes del caso para responder; esta imagen no es evidencia técnica.</figcaption></figure>
+    ${artwork?`<figure class="dev-case-image"><img src="${esc(artwork.image)}" alt="${esc(artwork.alt)}" loading="lazy" decoding="async"><figcaption>Imagen de contexto. Utiliza los antecedentes del caso para responder; esta imagen no es evidencia técnica. ${courseArtworkCredit(artwork)}</figcaption></figure>`:''}
     <h4 class="dev-section-heading">2. Revisa los antecedentes y criterios</h4>
     <dl class="dev-grid">${rows.filter(([, v]) => v).map(([k, v],i) => `<div class="dev-info tone-${i%3}"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
     ${pack.evidence?.length ? `<section class="dev-evidence-section"><h4 class="dev-section-heading">3. Utiliza estas evidencias</h4><ul class="dev-evidence">${pack.evidence.map(x => `<li>${esc(x)}</li>`).join('')}</ul></section>` : ''}

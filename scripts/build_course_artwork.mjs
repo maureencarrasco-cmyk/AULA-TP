@@ -18,8 +18,14 @@ for row in c.execute('SELECT id,title,specialty FROM courses ORDER BY id'):
     courses.append(course)
 print(json.dumps(courses))`], { cwd: fileURLToPath(root), encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 }));
 const context = vm.createContext({});
+context.window=context;
+vm.runInContext(read('static/course-artwork-catalog.js'), context);
+vm.runInContext(read('static/course-artwork.js'), context);
 vm.runInContext(read('static/encargo-photo-selection.js'), context);
 const subjects = JSON.parse(read('static/situation-photos/catalog.json'));
+const additions=JSON.parse(read('static/situation-photos/reviewed-additions.json'));
+for(const [topic,photos] of Object.entries(additions))subjects[topic].push(...photos);
+const rejected=new Set(JSON.parse(read('scripts/situation-photo-review.json')).rejectedImages);
 const banks = {
   1:['cooling','coolingtubes','pressure','thermometer','electrical','motor'],2:['electrical','multimeter','motor','electronics'],
   3:['nursing','bloodpressure','medication','firstaid','handwash'],4:['nursing','bloodpressure','medication','firstaid','handwash'],
@@ -41,6 +47,8 @@ const decorative=/post.?card|postkarte|carte.postale|coat.of.arms|caricature|pol
 const topicRules={bakery:/bread|dough|pastry|baking|bakery|cake|knead|panader|croissant|oven|patisser/i,molds:/mould|mold|die.cast|tooling|casting|matri/i};
 const photos = Object.fromEntries(Object.entries(subjects).map(([topic, records]) => [topic, records.flatMap(photo => {
   if (!/^\/static\/(encargo|situation)-photos\/[^/]+\.jpg$/.test(photo.image)) return [];
+  if (!context.courseContextPhotoAllowed(photo)) return [];
+  if(rejected.has(photo.image))return [];
   if (!photo.author || !photo.license || !photo.alt || !/^https:\/\/commons\.wikimedia\.org\//.test(photo.source)) return [];
   const description=[photo.title,photo.description,photo.source].join(' ');
   if(decorative.test(description)||topicRules[topic]&&!topicRules[topic].test(description))return [];
@@ -65,7 +73,26 @@ const usedImages = new Set(), usedSources = new Set();
 const related={warehouse:['packaging','port'],plans:['drawing','tools'],meeting:['office','accounting'],handwash:['nursing','firstaid'],firstaid:['nursing'],waste:['safety'],rocks:['geology','laboratory'],safety:['construction','firstaid'],bloodpressure:['nursing','medication'],medication:['nursing','laboratory']};
 const requests = courses.flatMap(course => [{ course, cover:true, topic:context.encargoPhotoTopic({},course) },
   ...course.modules.map(module => ({ course, module, topic:context.encargoPhotoTopic({},course,module.title) }))]);
+const reviewedImages={
+  1:{'Reciclaje y almacenamiento de refrigerantes':'cooling-review-24f9e5750a07.jpg'},
+  13:{'Mantencion y operacion de equipos de control electronico de potencia':'electronics-review-c97afbf04b16.jpg'},
+  23:{'Trazado de partes y piezas en construcciones metalicas':'welding-review-c98af0758b09.jpg'},
+  28:{'Tecnicas de hidrometalurgia':'metallurgy-review-c5ef8307b973.jpg'},
+  37:{'Envasado y maquinaria vitivinicola':'wine-review-57892edb273a.jpg'},
+  39:{'Interpretacion de planos de construccion':'plans-review-c6e155eb1f2e.jpg'}
+};
+const reviewedTopics={
+  1:{'Reciclaje y almacenamiento de refrigerantes':'cooling'},
+  11:{'Lectura de planos de instalaciones sanitarias':'plans'},
+  29:{'Expresion literaria y teatral con parvulos':'preschool'},
+  37:{'Envasado y maquinaria vitivinicola':'wine'},
+  39:{'Control y mantenimiento de bodegas y panoles':'warehouse','Interpretacion de planos de construccion':'plans','Emprendimiento y empleabilidad':'meeting'},
+  40:{'Seguridad vial':'road'}
+};
 for (const request of requests) {
+  request.reviewed=Object.entries(reviewedImages[request.course.id]||{}).find(([title])=>normalize(title)===normalize(request.module?.title))?.[1];
+  const override=Object.entries(reviewedTopics[request.course.id]||{}).find(([title])=>normalize(title)===normalize(request.module?.title))?.[1];
+  if(override)request.topic=override;
   const bank = banks[request.course.id];
   if (!bank) throw new Error(`Missing artwork bank: ${request.course.title}`);
   const topics = [request.topic, ...(related[request.topic]||[]), ...bank];
@@ -76,9 +103,19 @@ for (const request of requests) {
 }
 // Allocate the narrowest subjects first so shared technical photographs remain available.
 requests.sort((a,b) => a.pool.length - b.pool.length || Number(b.cover) - Number(a.cover) || a.course.id - b.course.id || (a.module?.position || 0) - (b.module?.position || 0));
-const catalog = { version:'20261011-course-artwork-v2', courses:{} };
+// Preserve all unflagged assignments instead of reallocating the whole catalog.
+for(const request of requests){
+  const previous=request.cover?context.courseArtworkPhoto(request.course):context.moduleArtworkPhoto(request.course,request.module);
+  if(previous&&context.courseContextPhotoAllowed(previous)&&(!request.reviewed||previous.image.endsWith('/'+request.reviewed))){
+    request.retained=previous;
+    usedImages.add(previous.fingerprint);usedSources.add(previous.source);
+  }
+}
+const catalog = { version:'20261012-reviewed-artwork-v3', courses:{} };
 for (const request of requests) {
-  const photo = request.pool.filter(p => !usedImages.has(p.fingerprint) && !usedSources.has(p.source)).sort((a,b) => b.score-a.score || a.image.localeCompare(b.image))[0];
+  const reviewed=request.reviewed?Object.values(photos).flat().find(p=>p.image.endsWith('/'+request.reviewed)):null;
+  if(!request.retained&&reviewed&&(usedImages.has(reviewed.fingerprint)||usedSources.has(reviewed.source)))throw new Error('Reviewed photograph already allocated');
+  const photo = request.retained || reviewed || request.pool.filter(p => !usedImages.has(p.fingerprint) && !usedSources.has(p.source)).sort((a,b) => b.score-a.score || a.image.localeCompare(b.image))[0];
   if (!photo) throw new Error(`No distinct photograph available: ${request.course.title} / ${request.module?.title || 'cover'}`);
   usedImages.add(photo.fingerprint);
   usedSources.add(photo.source);

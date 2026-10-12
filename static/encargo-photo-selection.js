@@ -1,7 +1,9 @@
 'use strict';
 // Photographs are context, not fabricated evidence from the learner's case.
 function encargoPhotoTopic(item, course, moduleTitle='') {
-  const id=Number(course?.id);
+  // Production and artwork catalogs do not share numeric specialty IDs.
+  const canonical=typeof courseArtworkRecord==='function'?courseArtworkRecord(course):null;
+  const id=Number(canonical?.id??course?.id);
   const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const taskText=normalize([item?.title,item?.instruction?.object].join(' '));
   const scopes=(ids)=>ids.includes(id);
@@ -64,7 +66,10 @@ function encargoPhotoTopic(item, course, moduleTitle='') {
 }
 function encargoRealPhoto(item,course,moduleTitle='') {
   const topic=encargoPhotoTopic(item,course,moduleTitle);
-  const photo=ENCARGO_PHOTOS[topic];
+  let photo=ENCARGO_PHOTOS[topic];
+  if(photo&&typeof courseContextPhotoAllowed==='function'&&!courseContextPhotoAllowed(photo)){
+    photo=(typeof SITUATION_PHOTOS==='object'?SITUATION_PHOTOS[topic]:[])?.find(courseContextPhotoAllowed);
+  }
   if(!photo)throw new Error(`Missing encargo photograph: ${topic}`);
-  return {...photo,image:`/static/encargo-photos/${photo.file}`,alt:photo.alt||photo.title.replace(/^File:/,'').replace(/\.[^.]+$/,'')};
+  return {...photo,image:photo.image||`/static/encargo-photos/${photo.file}`,alt:photo.alt||photo.title.replace(/^File:/,'').replace(/\.[^.]+$/,'')};
 }

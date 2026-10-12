@@ -2,6 +2,8 @@ import {readFileSync,writeFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 const root=new URL('../',import.meta.url);
 const catalog=JSON.parse(readFileSync(new URL('static/situation-photos/catalog.json',root),'utf8').replace(/^\uFEFF/,''));
+const additions=JSON.parse(readFileSync(new URL('static/situation-photos/reviewed-additions.json',root),'utf8'));
+for(const [topic,photos] of Object.entries(additions))catalog[topic].push(...photos);
 const review=JSON.parse(readFileSync(new URL('scripts/situation-photo-review.json',root),'utf8'));
 const unsuitable=/ruins|abandoned|palace|memorial|tomb|gravestone|headstone|capitol|goddess|pharaoh|MGM.*celebration|Secretary.*greeting|DHS Secretary|railroad|train locomotive/i;
 const strict={dairy:/milking|milk.*cow|cow.*milk|dairy.*farm|cattle/i,electronics:/soldering|solder joint|circuit|pcb|electronic|lotkolben|saving the mission/i,caliper:/caliper|messschieber|paquimetro/i};

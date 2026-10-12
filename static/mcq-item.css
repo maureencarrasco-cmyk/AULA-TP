@@ -28,7 +28,7 @@
   margin:0;border-radius:12px;overflow:hidden;background:#0B0E14;position:relative
 }
 .mcq-figure img{
-  display:block;width:100%;max-height:280px;object-fit:cover;object-position:center
+  display:block;width:auto;max-width:100%;height:auto;max-height:420px;margin-inline:auto;object-fit:contain;object-position:center
 }
 .mcq-figure figcaption{
   padding:8px 12px;font-size:12px;color:#61789c;background:#f8fbff
@@ -72,7 +72,7 @@
 .mcq-options .option:has(input:checked) b{background:#0878f9;color:#fff}
 .mcq-options .option span{padding-top:0;color:#122033;font-size:14px;line-height:1.35}
 .mcq-opt-img{
-  width:56px;height:40px;object-fit:cover;border-radius:6px;flex-shrink:0
+  width:56px;height:40px;object-fit:contain;border-radius:6px;flex-shrink:0
 }
 .mcq-dev-banner{
   margin:0 0 14px;padding:12px 14px;border-radius:12px;

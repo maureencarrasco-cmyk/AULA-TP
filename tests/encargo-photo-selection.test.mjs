@@ -23,7 +23,7 @@ test('all 45 courses have an explicit photographic subject',()=>{
 test('catalog records sources, reusable licenses, and local photographic files',()=>{
   const catalog=JSON.parse(readFileSync(new URL('../static/encargo-photos/catalog.json',import.meta.url),'utf8').replace(/^\uFEFF/,''));
   const code=readFileSync(new URL('../static/encargo-photo-selection.js',import.meta.url),'utf8');
-  const keys=[...new Set([...code.matchAll(/'([a-z]+)'/g)].map(m=>m[1]).filter(k=>!['use','meeting'].includes(k)))];
+  const keys=[...new Set([...code.matchAll(/'([a-z]+)'/g)].map(m=>m[1]).filter(k=>!['use','meeting','function','object'].includes(k)))];
   keys.push('meeting');
   for(const key of keys){
     const photo=catalog[key];assert.ok(photo,`missing ${key}`);
