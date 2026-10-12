@@ -40,5 +40,8 @@ test('the responsive stylesheet is scoped exclusively to station headers and loa
  assert.ok(!/station-body|learning-sequence|mcq-card|sequence-board/.test(css));
  assert.match(css,/@media\(max-width:650px\)/);
  assert.match(css,/focus-visible/);
+ assert.match(css,/overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important/);
+ assert.match(css,/\.atp-hero-side \.is-here \{grid-column:1\/-1\}/);
+ assert.ok(!/\.atp-hero-side[^{}]*\{[^}]*overflow-wrap:anywhere/.test(css));
  assert.ok(html.indexOf('/static/station-header-reference.css')>html.indexOf('/static/feedback-front.css'));
 });
