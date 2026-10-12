@@ -409,6 +409,7 @@ function courseMap(id){
  chips.push(`${pct}% de avance`);
  shell(`<section class="journey-page">${aulaTPPageHero({
   station:0,
+  courseOverview:true,
   course:c,
   title:'Un recorrido. Muchas posibilidades',
   purpose:`${c.title} · ${c.level}`,
@@ -417,17 +418,22 @@ function courseMap(id){
   backHref:'#courses',
   showBadge:false,
   image:heroPhoto(c),
-  imageAlt:isClimateSpecialty(c)?'Aula-taller de refrigeración y climatización, con un cuaderno abierto sobre la mesa y equipos HVAC al fondo':`Taller de ${c.specialty||c.title}`,
   kicker:'Tu camino hacia nuevas habilidades',
   orientLabel:'Ruta de la especialidad',
   orient:`${total} módulos · 5 estaciones por módulo`,
   breadcrumb:[{label:'Inicio',href:'#courses'},{label:c.title,current:true}],
   meta:`<div class="atp-hero-meta">${chips.map(t=>`<span>${esc(t)}</span>`).join('')}</div>`,
   spark:screenSparks.course
- })}<div class="page-with-support"><div class="page-with-support-main"><div class="journey-landscape">
+ })}<section class="course-modules-heading" id="course-modules"><h2>Módulos de la especialidad</h2><div role="group" aria-label="Vista de módulos"><button type="button" data-course-view="grid" aria-pressed="true">${icon('cube')} Vista módulos</button><button type="button" data-course-view="list" aria-pressed="false">${icon('file')} Vista lista</button></div></section><div class="page-with-support"><div class="page-with-support-main"><div class="journey-landscape">
  <p class="journey-bridge"><span class="eyebrow">TU RECORRIDO POR LA ESPECIALIDAD</span><small>Módulo ${trail} → Meta</small></p>
  <ol class="journey-stops" style="--mod-fill:${total>1?Math.round((done/Math.max(1,total-1))*100):finished?100:0}%" aria-label="Recorrido por la especialidad">${c.modules.map((m,i)=>`<li class="journey-stop color-${i%4} ${m.percent===100?'is-complete':''} ${i===here?'is-here':''}"><div class="journey-marker" aria-label="Módulo ${i+1}">${m.percent===100?icon('check'):String(i+1).padStart(2,'0')}</div><article class="journey-card"><div class="journey-photo"><img src="${moduleStopArt(c,i)}" alt="Escenario profesional del módulo ${i+1}: ${esc(m.title)}" width="560" height="336" loading="${i<4?'eager':'lazy'}" decoding="async">${typeof courseArtworkCredit==='function'&&typeof moduleArtworkPhoto==='function'?courseArtworkCredit(moduleArtworkPhoto(c,i)):''}${i===here&&!finished?`<span class="here-chip">${workIco('pin')} Estás aquí</span>`:''}</div><div class="journey-card-body"><div class="journey-card-top"><span class="journey-symbol">${icon(['file','search','link','tool'][i%4])}</span><span class="journey-state">${m.percent===100?'✓ Completado':m.percent?'● En curso':m.published?'Disponible':'En preparación'}</span></div><span class="eyebrow">MÓDULO ${String(i+1).padStart(2,'0')}${i===total-1?' · TRAMO FINAL':''}</span><h2>${esc(m.title)}</h2>${stationMiniRoute(m.completed)}<div class="progress-label"><span>${m.completed.filter(Boolean).length} de 5 estaciones</span><strong>${m.percent}%</strong></div>${m.encargos_count?`<p class="journey-encargos">${m.encargos_count} encargos de oficio · ${m.encargos_hours} h</p>`:''}<progress value="${m.percent}" max="100" aria-label="Progreso del módulo ${i+1}"></progress>${m.published||auth.user.role==='teacher'?`<a class="journey-button" href="${m.published?'#module/'+m.id:'#editor/'+m.id}">${m.published?(m.percent===100?'Revisar módulo':m.percent?'Continuar mi recorrido':'Comenzar módulo'):'Preparar contenido'} ${icon('arrow')}</a>`:'<button class="journey-button" disabled>Próximamente</button>'}</div></article></li>`).join('')}</ol>
  <div class="journey-finish ${finished?'reached':''}"><div class="finish-visual"><span class="finish-flag" aria-hidden="true">${icon('flag')}</span></div><div><span class="eyebrow">${finished?'META ALCANZADA':'TU META · AL FINAL DEL RECORRIDO'}</span><h2>${finished?'¡Completaste tu ruta!':'Llegar, integrar y seguir creciendo'}</h2><p>${finished?'Has completado las cinco estaciones de cada módulo. Revisa la retroalimentación docente para conocer tus resultados.':`Completa el módulo ${total} y el cierre de todos los módulos para alcanzar la meta.`}</p></div><strong>${done}<span> / ${total}<small>módulos completos</small></span></strong></div></div> <div class="journey-bottom"><section class="panel journey-overall"><span class="circle">${icon('chart')}</span><div><h2>Cada paso cuenta</h2><p>Tu progreso general</p><progress value="${pct}" max="100" aria-label="Progreso general del curso"></progress></div><strong>${pct}%</strong></section></div></div></div></section>`);
+ const page=document.querySelector('.journey-page');
+ page.querySelectorAll('[data-course-scroll]').forEach(button=>button.addEventListener('click',()=>page.querySelector(button.dataset.courseScroll)?.scrollIntoView({behavior:'smooth',block:'start'})));
+ page.querySelectorAll('[data-course-view]').forEach(button=>button.addEventListener('click',()=>{
+  page.classList.toggle('course-list-view',button.dataset.courseView==='list');
+  page.querySelectorAll('[data-course-view]').forEach(control=>control.setAttribute('aria-pressed',String(control===button)));
+ }));
 }
 const stationTools={practice:[1,2,3,5],agent:[1,2,3,5],feedback:[1,2,3,5]};
 function toolsMarkup(station,withAccess,layout='stack'){
@@ -863,7 +869,7 @@ function aulaTPPageHero(opts={}){
  const course=opts.course||courses.find(c=>c.id===current?.course_id);
  const title=opts.title||'';
  const tWords=(title||'').trim().split(/\s+/);
- const h1Html=tWords.length>1?`<span>${esc(tWords[0])}</span> <span class="atp-title-accent">${esc(tWords.slice(1).join(' '))}</span>`:esc(title);
+ const h1Html=opts.courseOverview?'<span>Un recorrido.</span> <span class="atp-title-accent">Muchas posibilidades</span>':tWords.length>1?`<span>${esc(tWords[0])}</span> <span class="atp-title-accent">${esc(tWords.slice(1).join(' '))}</span>`:esc(title);
  const purpose=opts.purpose||opts.description||'';
  const detail=opts.detail||'';
  const orientLabel=opts.orientLabel||'Ruta de aprendizaje esperado';
@@ -881,7 +887,7 @@ function aulaTPPageHero(opts={}){
  const badgeNote=opts.badgeNote||(n?`Estación ${n} de 5`:'');
  const spark=opts.spark||(n?screenSparks[n]:screenSparks.courses);
  const account=opts.showAccount===false?'':`<div class="atp-hero-account"><span>${esc(auth.user.name)}<small>${auth.user.role==='teacher'?'Docente':'Estudiante'}</small></span>${action('logout','Salir','plain')}</div>`;
- const sideNav=n>=1?`<nav class="atp-hero-side" aria-label="Ubicación">${crumb.map((c,i)=>{
+ const sideNav=opts.courseOverview?`<nav class="course-overview-side" aria-label="Navegación del curso"><a href="#courses">${icon('home')} Inicio</a><span aria-current="page">${icon('book')}<b>${esc(course.title)}</b></span><button type="button" data-course-scroll="#course-modules">${icon('file')} Módulos</button><a href="#progress">${icon('chart')} Mis avances</a></nav>`:n>=1?`<nav class="atp-hero-side" aria-label="Ubicación">${crumb.map((c,i)=>{
   const icos=['home','book','flag'];
   if(c.current) return `<span class="is-here">${icon(icos[i]||'flag')}<b>${esc(c.label)}</b></span>`;
   return `<a href="${c.href||'#courses'}">${icon(icos[i]||'home')}${esc(c.label)}</a>`;
@@ -897,7 +903,10 @@ function aulaTPPageHero(opts={}){
  const completedCount=(current?.completed||[]).filter(Boolean).length;
  const sideProgress=n>=1?`<div class="atp-hero-progress"><b>Tu progreso en el módulo</b><progress value="${completedCount}" max="5"></progress><span>${completedCount} de 5 estaciones</span></div>`:'';
  const quote=n?`<blockquote class="atp-hero-quote">${workIco('bulb')}<span>${esc(spark)}</span></blockquote>`:'';
- return `<header class="atp-hero s${n}${n>=1?' is-station station-header-reference':''}" data-station-color="${n}">
+ const overview=opts.courseOverview?`<ol class="course-overview-path" aria-label="Tu recorrido profesional">${[
+  ['search','Explora','Conoce la situación profesional.'],['file','Aplica','Realiza actividades y toma decisiones.'],['chart','Analiza','Revisa tus resultados y evidencia tu aprendizaje.'],['monitor','Practica','Entrena en entornos simulados.'],['star','Demuestra','Desarrolla tus competencias para el mundo laboral.']
+ ].map(([symbol,label,description],i)=>`<li>${workIco(symbol)}<b>${i+1}. ${label}</b><p>${description}</p></li>`).join('')}</ol>`:'';
+ return `<header class="atp-hero s${n}${opts.courseOverview?' course-overview-reference':''}${n>=1?' is-station station-header-reference':''}" data-station-color="${n}">
   <div class="atp-hero-id"><a class="atp-hero-logo" href="#courses"><img class="brand-logo" src="${BRAND_LOGO}" alt="Aula TP Chile · Formación técnica con sentido"></a>${showBack?`<a class="atp-hero-back" href="${backHref}">${icon('arrow')} Volver atrás</a>`:''}${sideNav}${sideProgress}${account}</div>
   <div class="atp-hero-copy">
    ${crumbHtml?`<nav class="atp-hero-crumb" aria-label="Ubicación">${crumbHtml}</nav>`:''}
@@ -918,6 +927,7 @@ function aulaTPPageHero(opts={}){
    <aside class="atp-hero-motto atp-spark">${sparkLeaf()}<em>${esc(spark)}</em></aside>
    ${showBadge?`<div class="atp-hero-badge">${workIco(ico)}<b>Estación ${n} de 5</b><small>${esc(opts.badgeName||names[n-1]||badgeNote)}</small></div>`:''}
   </div>
+  ${overview}
  </header>`;
 }
 const heroStationTitles=['Contextualización','Aprendizajes esperados','Situación Integradora','Evaluación Final','Retroalimentación y Cierre'];
