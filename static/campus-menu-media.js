@@ -81,6 +81,8 @@
   }
 
   function specialtyCover(course) {
+    const artwork=typeof courseArtworkPhoto==='function'?courseArtworkPhoto(course):null;
+    if(artwork)return artwork.image;
     const key = specialtyKey(course);
     const title = `${course?.title || ''} ${course?.specialty || ''}`;
     if (key === 'gastronomia' && /pasteler|reposter/i.test(title)) return '/static/themes/posters/pasteleria.svg?v=20261004';
@@ -89,6 +91,8 @@
   }
 
   function moduleStopArt(course, index) {
+    const artwork=typeof moduleArtworkPhoto==='function'?moduleArtworkPhoto(course,index):null;
+    if(artwork)return artwork.image;
     const key = specialtyKey(course);
     const n = ((Number(index) || 0) % 5) + 1;
     if (key === 'climate' && typeof MODULE_OFICIO !== 'undefined') {

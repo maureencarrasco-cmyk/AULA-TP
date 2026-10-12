@@ -11,7 +11,7 @@
  const moduleStatusLabel=m=>m.state?.closed?'Completado':pct(m)?'En curso':'No iniciado';
  const glyph=name=>`<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="/static/student-progress-icons.svg?v=20261011#${name}"></use></svg>`;
  const displayedStation=n=>n>=4?n+1:n;
- const courseInfo=m=>({specialty:m.specialty,title:m.course_title});
+ const courseInfo=m=>({id:m.course_id,specialty:m.specialty,title:m.course_title});
  const courseGlyph=m=>({climate:'Snowflake',electricidad:'Zap',enfermeria:'HeartPulse',gastronomia:'ChefHat',hoteleria:'Building2',administracion:'BriefcaseBusiness'}[typeof specialtyKey==='function'?specialtyKey(courseInfo(m)):'general']||'GraduationCap');
  const photo=(m,n)=>typeof stationRouteArt==='function'?stationRouteArt(n,courseInfo(m)):`/static/themes/route/station-${n}.webp?v=1`;
  const available=(m,n)=>auth.user?.role==='teacher'||(typeof isDemoStudent==='function'&&isDemoStudent())||n===1||(m.completed||[]).slice(0,n-1).every(Boolean);
@@ -22,7 +22,9 @@
   return `<nav class="sp-reference-tabs ${compact?'is-compact':''}" aria-label="Progreso por módulo"><button type="button" class="sp-summary-tab ${moduleId==='all'?'active':''}" data-progress-tab="all" aria-current="${moduleId==='all'?'page':'false'}"><span class="sp-tab-icon">${glyph('ClipboardList')}</span><b>Resumen</b><small>Tu vista completa del curso</small><span class="sp-tab-progress"><progress value="${mean(items.map(pct))}" max="100" aria-label="Avance del curso"></progress><strong>${mean(items.map(pct))}%</strong></span></button>${items.map((m,i)=>`<button type="button" class="sp-module-${moduleStatus(m)} ${moduleId===m.id?'active':''}" data-progress-tab="${m.id}" aria-current="${moduleId===m.id?'page':'false'}" aria-label="Abrir módulo ${m.position}: ${esc(m.title)}"><span class="sp-tab-icon">${glyph(symbols[i%symbols.length])}</span><b>Módulo ${m.position}</b><small title="${esc(m.title)}">${esc(m.title)}</small><span class="sp-tab-progress"><progress value="${pct(m)}" max="100" aria-label="Avance del módulo ${m.position}"></progress><strong>${pct(m)}%</strong></span></button>`).join('')}</nav>`;
  }
  function courseBanner(m,body,stats,overview=false){
-  return `<section class="sp-reference-banner ${overview?'is-summary':'is-module'}"><img class="sp-banner-photo" src="${esc(photo(m,4))}" width="960" height="480" decoding="async" alt="Entorno de ${esc(m.specialty||m.course_title)}"><div class="sp-banner-copy"><span class="sp-specialty-icon">${glyph(courseGlyph(m))}</span><div>${body}</div></div>${stats}${overview?`<p class="sp-banner-caption">${glyph('ChartNoAxesColumnIncreasing')}<b>Tu avance abre<br>nuevas posibilidades.</b></p>`:''}</section>`;
+  const artwork=overview&&typeof courseArtworkPhoto==='function'?courseArtworkPhoto(courseInfo(m)):typeof moduleArtworkPhoto==='function'?moduleArtworkPhoto(courseInfo(m),m):null;
+  const credit=artwork&&typeof courseArtworkCredit==='function'?courseArtworkCredit(artwork):'';
+  return `<section class="sp-reference-banner ${overview?'is-summary':'is-module'}"><img class="sp-banner-photo" src="${esc(artwork?.image||photo(m,4))}" width="960" height="480" decoding="async" alt="Entorno de ${esc(m.specialty||m.course_title)}"><div class="sp-banner-copy"><span class="sp-specialty-icon">${glyph(courseGlyph(m))}</span><div>${body}</div></div>${stats}${overview?`<p class="sp-banner-caption">${glyph('ChartNoAxesColumnIncreasing')}<b>Tu avance abre<br>nuevas posibilidades.</b></p>`:''}${credit}</section>`;
  }
  const practice=m=>{
   try{return JSON.parse(localStorage.getItem('aula-tp-practice')||'{}')[`${auth.user.id}-${m.id}`]||{items:{},log:[]}}

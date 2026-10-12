@@ -116,7 +116,7 @@ test('course and module text stay escaped and the styles/assets are scoped and l
   assert.ok(read('static/student-progress-icons.svg').length<15_000);
   const index=read('static/index.html');
   assert.match(index,/student-progress-reference\.css\?v=20261011-reference-portal/);
-  assert.match(index,/student-progress\.js\?v=20261011-reference-portal/);
+  assert.match(index,/student-progress\.js\?v=20261011-course-artwork-v1/);
   assert.match(source,/moduleId!==selected/);
   assert.match(source,/window\.AulaPractice\.open\(\)/);
   assert.match(source,/observer\.disconnect\(\)/);

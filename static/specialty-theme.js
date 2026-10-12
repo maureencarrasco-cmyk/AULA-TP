@@ -37,6 +37,8 @@ function climateModuleArt() {
   return MODULE_OFICIO[climateModuleIndex()];
 }
 function specialtyCover(course) {
+  const artwork=typeof courseArtworkPhoto==='function'?courseArtworkPhoto(course):null;
+  if(artwork)return artwork.image;
   if (isClimateSpecialty(course)) return oficioPng('oficio-equipo-ctrl');
   if (specialtyKey(course) === 'gastronomia') return '/static/themes/cases/06-cocina.png';
   if (specialtyKey(course) === 'hoteleria') return '/static/themes/cases/04-hotel.png';
@@ -54,6 +56,8 @@ function climateHeroArt() {
   return climateModuleArt();
 }
 function heroPhoto(course) {
+  const artwork=typeof courseArtworkPhoto==='function'?courseArtworkPhoto(course):null;
+  if(artwork)return artwork.image;
   return isClimateSpecialty(course) ? climateHeroArt() : specialtyCover(course);
 }
 const MODULE_OFICIO = [
@@ -69,6 +73,8 @@ const MODULE_OFICIO_ALTS = {
   4: 'Equipo EQ-02 · 220 V 50 Hz y control. Acceso lateral medido.'
 };
 function moduleStopArt(course, index) {
+  const artwork=typeof moduleArtworkPhoto==='function'?moduleArtworkPhoto(course,index):null;
+  if(artwork)return artwork.image;
   const key = specialtyKey(course);
   if (key === 'climate') return index < 4 ? MODULE_OFICIO[index] : `/static/headers/climate/e${((index - 4) % 5) + 1}.png?v=3`;
   if (key === 'gastronomia' || key === 'hoteleria') {
@@ -225,6 +231,9 @@ function stationHeaderAlt(n, course, aeIndex) {
   return (HEADER_PHOTO_ALTS[key] || HEADER_PHOTO_ALTS.general)[i];
 }
 function stationHeaderArt(n, course, aeIndex) {
+  const module=typeof current!=='undefined'&&current?.course_id===course?.id?current:null;
+  const artwork=module&&typeof moduleArtworkPhoto==='function'?moduleArtworkPhoto(course,module):null;
+  if(artwork)return artwork.image;
   const i = Math.min(5, Math.max(1, Number(n) || 1));
   if (isClimateSpecialty(course)) {
     if (Number(typeof current !== 'undefined' && current?.position) > 4) return `/static/themes/route/climate-${i}.webp?v=1`;
