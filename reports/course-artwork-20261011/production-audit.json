@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-12T00:29:33.900Z",
+  "checkedAt": "2026-10-12T01:21:40.658Z",
   "catalogHash": "70c75be13cb18d9e8ba3f821b27261aa7590ba4dc3ecb227bcc57838fa83ef33",
   "origin": "https://aulatpchile.cl",
   "courses": 45,
@@ -15,15 +15,6 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 164770,
-      "ok": true
-    },
-    {
-      "course": "Refrigeración y Climatización",
-      "module": "Instalación y montaje de equipos",
-      "image": "/static/situation-photos/cooling-0553a0d1f5b9.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 157940,
       "ok": true
     },
     {
@@ -64,6 +55,24 @@
     },
     {
       "course": "Refrigeración y Climatización",
+      "module": "Instalación y montaje de equipos",
+      "image": "/static/situation-photos/cooling-0553a0d1f5b9.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 157940,
+      "ok": true
+    },
+    {
+      "course": "Refrigeración y Climatización",
+      "module": "Mantención de sistemas de refrigeración y climatización",
+      "image": "/static/situation-photos/cooling-4acffd606894.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 141774,
+      "ok": true
+    },
+    {
+      "course": "Refrigeración y Climatización",
       "module": "Emprendimiento y empleabilidad",
       "image": "/static/situation-photos/cooling-6a79dcfa148c.jpg",
       "status": 200,
@@ -72,12 +81,12 @@
       "ok": true
     },
     {
-      "course": "Refrigeración y Climatización",
-      "module": "Reciclaje y almacenamiento de refrigerantes",
-      "image": "/static/situation-photos/waste-b75c884467c0.jpg",
+      "course": "Electricidad",
+      "module": "Instalación de motores eléctricos y equipos de calefacción",
+      "image": "/static/situation-photos/motor-69d541bc71d4.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 192566,
+      "bytes": 130769,
       "ok": true
     },
     {
@@ -91,20 +100,11 @@
     },
     {
       "course": "Refrigeración y Climatización",
-      "module": "Mantención de sistemas de refrigeración y climatización",
-      "image": "/static/situation-photos/cooling-4acffd606894.jpg",
+      "module": "Reciclaje y almacenamiento de refrigerantes",
+      "image": "/static/situation-photos/waste-b75c884467c0.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 141774,
-      "ok": true
-    },
-    {
-      "course": "Electricidad",
-      "module": "Instalación de motores eléctricos y equipos de calefacción",
-      "image": "/static/situation-photos/motor-69d541bc71d4.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 130769,
+      "bytes": 192566,
       "ok": true
     },
     {
@@ -118,29 +118,11 @@
     },
     {
       "course": "Electricidad",
-      "module": "Instalación de sistemas de control eléctrico industrial",
-      "image": "/static/situation-photos/electrical-61c762891319.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 377241,
-      "ok": true
-    },
-    {
-      "course": "Electricidad",
       "module": "Instalaciones eléctricas domiciliarias",
       "image": "/static/situation-photos/electrical-1a2f05303092.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 140054,
-      "ok": true
-    },
-    {
-      "course": "Electricidad",
-      "module": "Mantenimiento de máquinas, equipos y sistemas eléctricos",
-      "image": "/static/situation-photos/motor-8a662c45f6de.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 231861,
       "ok": true
     },
     {
@@ -154,11 +136,11 @@
     },
     {
       "course": "Electricidad",
-      "module": "Instalaciones eléctricas industriales",
-      "image": "/static/situation-photos/electrical-8c874a19835a.jpg",
+      "module": "Instalación de sistemas de control eléctrico industrial",
+      "image": "/static/situation-photos/electrical-61c762891319.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 135824,
+      "bytes": 377241,
       "ok": true
     },
     {
@@ -171,12 +153,21 @@
       "ok": true
     },
     {
-      "course": "Atención de Enfermería, mención Adulto Mayor",
-      "module": "Aplicación de cuidados básicos",
-      "image": "/static/situation-photos/nursing-03684c9dba66.jpg",
+      "course": "Electricidad",
+      "module": "Mantenimiento de máquinas, equipos y sistemas eléctricos",
+      "image": "/static/situation-photos/motor-8a662c45f6de.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 147909,
+      "bytes": 231861,
+      "ok": true
+    },
+    {
+      "course": "Electricidad",
+      "module": "Instalaciones eléctricas industriales",
+      "image": "/static/situation-photos/electrical-8c874a19835a.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 135824,
       "ok": true
     },
     {
@@ -208,11 +199,11 @@
     },
     {
       "course": "Atención de Enfermería, mención Adulto Mayor",
-      "module": "Medición y control de parámetros básicos en salud",
-      "image": "/static/situation-photos/bloodpressure-6e79c085e49e.jpg",
+      "module": "Aplicación de cuidados básicos",
+      "image": "/static/situation-photos/nursing-03684c9dba66.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 170063,
+      "bytes": 147909,
       "ok": true
     },
     {
@@ -226,20 +217,11 @@
     },
     {
       "course": "Atención de Enfermería, mención Adulto Mayor",
-      "module": "Sistemas de registro e información en salud",
-      "image": "/static/situation-photos/nursing-9774ac1f4fd9.jpg",
+      "module": "Medición y control de parámetros básicos en salud",
+      "image": "/static/situation-photos/bloodpressure-6e79c085e49e.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 167871,
-      "ok": true
-    },
-    {
-      "course": "Atención de Enfermería, mención Adulto Mayor",
-      "module": "Necesidades psicosociales del adulto mayor",
-      "image": "/static/situation-photos/nursing-989fb9fe4874.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 116352,
+      "bytes": 170063,
       "ok": true
     },
     {
@@ -253,6 +235,24 @@
     },
     {
       "course": "Atención de Enfermería, mención Adulto Mayor",
+      "module": "Orientación familiar para el cuidado del adulto mayor",
+      "image": "/static/situation-photos/nursing-a00da3bbdbf5.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 126118,
+      "ok": true
+    },
+    {
+      "course": "Atención de Enfermería, mención Adulto Mayor",
+      "module": "Sistemas de registro e información en salud",
+      "image": "/static/situation-photos/nursing-9774ac1f4fd9.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 167871,
+      "ok": true
+    },
+    {
+      "course": "Atención de Enfermería, mención Adulto Mayor",
       "module": "Prevención y control de infecciones intrahospitalarias",
       "image": "/static/situation-photos/handwash-2bcf8eb91c86.jpg",
       "status": 200,
@@ -262,11 +262,11 @@
     },
     {
       "course": "Atención de Enfermería, mención Adulto Mayor",
-      "module": "Orientación familiar para el cuidado del adulto mayor",
-      "image": "/static/situation-photos/nursing-a00da3bbdbf5.jpg",
+      "module": "Necesidades psicosociales del adulto mayor",
+      "image": "/static/situation-photos/nursing-989fb9fe4874.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 126118,
+      "bytes": 116352,
       "ok": true
     },
     {
@@ -334,6 +334,15 @@
     },
     {
       "course": "Atención de Enfermería, mención Enfermería",
+      "module": "Promoción de la salud y prevención de la enfermedad",
+      "image": "/static/situation-photos/nursing-de9597d8a605.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 122148,
+      "ok": true
+    },
+    {
+      "course": "Atención de Enfermería, mención Enfermería",
       "module": "Medición y control de parámetros básicos en salud",
       "image": "/static/situation-photos/bloodpressure-950a95e8950f.jpg",
       "status": 200,
@@ -348,15 +357,6 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 247544,
-      "ok": true
-    },
-    {
-      "course": "Atención de Enfermería, mención Enfermería",
-      "module": "Promoción de la salud y prevención de la enfermedad",
-      "image": "/static/situation-photos/nursing-de9597d8a605.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 122148,
       "ok": true
     },
     {
@@ -405,21 +405,21 @@
       "ok": true
     },
     {
-      "course": "Gastronomía, mención Cocina",
-      "module": null,
-      "image": "/static/encargo-photos/cooking.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 193422,
-      "ok": true
-    },
-    {
       "course": "Atención de Enfermería, mención Enfermería",
       "module": "Emprendimiento y empleabilidad",
       "image": "/static/situation-photos/nursing-fd841abbca20.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 301620,
+      "ok": true
+    },
+    {
+      "course": "Gastronomía, mención Cocina",
+      "module": null,
+      "image": "/static/encargo-photos/cooking.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 193422,
       "ok": true
     },
     {
@@ -442,20 +442,11 @@
     },
     {
       "course": "Gastronomía, mención Cocina",
-      "module": "Recepción y almacenamiento de insumos",
-      "image": "/static/situation-photos/packaging-a1be0fdda2b4.jpg",
+      "module": "Planificación de la producción gastronómica",
+      "image": "/static/situation-photos/cooking-19890a5b70fd.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 190198,
-      "ok": true
-    },
-    {
-      "course": "Gastronomía, mención Cocina",
-      "module": "Servicio de comedores, bares y salones",
-      "image": "/static/situation-photos/cocktails-2818248f585c.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 156776,
+      "bytes": 183327,
       "ok": true
     },
     {
@@ -469,11 +460,11 @@
     },
     {
       "course": "Gastronomía, mención Cocina",
-      "module": "Planificación de la producción gastronómica",
-      "image": "/static/situation-photos/cooking-19890a5b70fd.jpg",
+      "module": "Servicio de comedores, bares y salones",
+      "image": "/static/situation-photos/cocktails-2818248f585c.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 183327,
+      "bytes": 156776,
       "ok": true
     },
     {
@@ -504,6 +495,15 @@
       "ok": true
     },
     {
+      "course": "Gastronomía, mención Pastelería y Repostería",
+      "module": null,
+      "image": "/static/encargo-photos/bakery.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 124551,
+      "ok": true
+    },
+    {
       "course": "Gastronomía, mención Cocina",
       "module": "Elaboración de menús y carta",
       "image": "/static/situation-photos/cooking-5f8aef6f8d7e.jpg",
@@ -519,15 +519,6 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 254280,
-      "ok": true
-    },
-    {
-      "course": "Gastronomía, mención Pastelería y Repostería",
-      "module": null,
-      "image": "/static/encargo-photos/bakery.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 124551,
       "ok": true
     },
     {
@@ -550,20 +541,20 @@
     },
     {
       "course": "Gastronomía, mención Pastelería y Repostería",
-      "module": "Recepción y almacenamiento de insumos",
-      "image": "/static/situation-photos/warehouse-dd7d27c23d13.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 136186,
-      "ok": true
-    },
-    {
-      "course": "Gastronomía, mención Pastelería y Repostería",
       "module": "Planificación de la producción gastronómica",
       "image": "/static/situation-photos/bakery-43eae58fcb2e.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 116744,
+      "ok": true
+    },
+    {
+      "course": "Gastronomía, mención Pastelería y Repostería",
+      "module": "Recepción y almacenamiento de insumos",
+      "image": "/static/situation-photos/warehouse-dd7d27c23d13.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 136186,
       "ok": true
     },
     {
@@ -585,21 +576,12 @@
       "ok": true
     },
     {
-      "course": "Gastronomía, mención Pastelería y Repostería",
-      "module": "Elaboración de masas y pastas",
-      "image": "/static/situation-photos/bakery-5de107ec1468.jpg",
+      "course": "Gastronomía, mención Cocina",
+      "module": "Recepción y almacenamiento de insumos",
+      "image": "/static/situation-photos/packaging-a1be0fdda2b4.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 134717,
-      "ok": true
-    },
-    {
-      "course": "Gastronomía, mención Pastelería y Repostería",
-      "module": "Elaboración de productos de repostería",
-      "image": "/static/situation-photos/bakery-672614f64c7b.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 163539,
+      "bytes": 190198,
       "ok": true
     },
     {
@@ -613,20 +595,20 @@
     },
     {
       "course": "Gastronomía, mención Pastelería y Repostería",
+      "module": "Elaboración de masas y pastas",
+      "image": "/static/situation-photos/bakery-5de107ec1468.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 134717,
+      "ok": true
+    },
+    {
+      "course": "Gastronomía, mención Pastelería y Repostería",
       "module": "Innovación en la pastelería y repostería",
       "image": "/static/situation-photos/bakery-acd0de7498f7.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 251304,
-      "ok": true
-    },
-    {
-      "course": "Servicios de Hotelería",
-      "module": null,
-      "image": "/static/encargo-photos/hotel.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 284403,
       "ok": true
     },
     {
@@ -640,11 +622,11 @@
     },
     {
       "course": "Servicios de Hotelería",
-      "module": "Servicio de habitaciones",
-      "image": "/static/situation-photos/hotel-3fcc9ce9817f.jpg",
+      "module": null,
+      "image": "/static/encargo-photos/hotel.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 92299,
+      "bytes": 284403,
       "ok": true
     },
     {
@@ -667,20 +649,11 @@
     },
     {
       "course": "Servicios de Hotelería",
-      "module": "Inglés técnico para la industria de la hospitalidad",
-      "image": "/static/situation-photos/hotel-788d6389dd94.jpg",
+      "module": "Servicio de habitaciones",
+      "image": "/static/situation-photos/hotel-3fcc9ce9817f.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 153517,
-      "ok": true
-    },
-    {
-      "course": "Servicios de Hotelería",
-      "module": "Información turística",
-      "image": "/static/situation-photos/hotel-7b6d3be8f5e6.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 175184,
+      "bytes": 92299,
       "ok": true
     },
     {
@@ -694,11 +667,11 @@
     },
     {
       "course": "Servicios de Hotelería",
-      "module": "Servicio de coctelería y vinos",
-      "image": "/static/encargo-photos/cocktails.jpg",
+      "module": "Inglés técnico para la industria de la hospitalidad",
+      "image": "/static/situation-photos/hotel-788d6389dd94.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 274546,
+      "bytes": 153517,
       "ok": true
     },
     {
@@ -708,6 +681,24 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 113384,
+      "ok": true
+    },
+    {
+      "course": "Servicios de Hotelería",
+      "module": "Información turística",
+      "image": "/static/situation-photos/hotel-7b6d3be8f5e6.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 175184,
+      "ok": true
+    },
+    {
+      "course": "Servicios de Hotelería",
+      "module": "Servicio de coctelería y vinos",
+      "image": "/static/encargo-photos/cocktails.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 274546,
       "ok": true
     },
     {
@@ -729,21 +720,30 @@
       "ok": true
     },
     {
+      "course": "Gastronomía, mención Pastelería y Repostería",
+      "module": "Elaboración de productos de repostería",
+      "image": "/static/situation-photos/bakery-672614f64c7b.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 163539,
+      "ok": true
+    },
+    {
+      "course": "Contabilidad",
+      "module": null,
+      "image": "/static/encargo-photos/accounting.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 44587,
+      "ok": true
+    },
+    {
       "course": "Contabilidad",
       "module": "Contabilización de operaciones comerciales",
       "image": "/static/situation-photos/accounting-0021e2224f86.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 431855,
-      "ok": true
-    },
-    {
-      "course": "Contabilidad",
-      "module": "Cálculo y registro de remuneraciones",
-      "image": "/static/situation-photos/accounting-022cffcb9c57.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 215595,
       "ok": true
     },
     {
@@ -757,6 +757,15 @@
     },
     {
       "course": "Contabilidad",
+      "module": "Atención de clientes",
+      "image": "/static/situation-photos/accounting-2d3b172fb804.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 230305,
+      "ok": true
+    },
+    {
+      "course": "Contabilidad",
       "module": "Organización y métodos de trabajo en la oficina",
       "image": "/static/situation-photos/accounting-2b71cc85ae74.jpg",
       "status": 200,
@@ -766,11 +775,20 @@
     },
     {
       "course": "Contabilidad",
-      "module": "Atención de clientes",
-      "image": "/static/situation-photos/accounting-2d3b172fb804.jpg",
+      "module": "Elaboración de informes contables",
+      "image": "/static/situation-photos/accounting-4242c08750cf.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 230305,
+      "bytes": 312638,
+      "ok": true
+    },
+    {
+      "course": "Contabilidad",
+      "module": "Cálculo y registro de impuestos",
+      "image": "/static/situation-photos/accounting-477b3338c9c0.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 184960,
       "ok": true
     },
     {
@@ -801,12 +819,12 @@
       "ok": true
     },
     {
-      "course": "Contabilidad",
+      "course": "Elaboración Industrial de Alimentos",
       "module": null,
-      "image": "/static/encargo-photos/accounting.jpg",
+      "image": "/static/encargo-photos/food.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 44587,
+      "bytes": 174066,
       "ok": true
     },
     {
@@ -837,30 +855,30 @@
       "ok": true
     },
     {
-      "course": "Contabilidad",
-      "module": "Elaboración de informes contables",
-      "image": "/static/situation-photos/accounting-4242c08750cf.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 312638,
-      "ok": true
-    },
-    {
-      "course": "Contabilidad",
-      "module": "Cálculo y registro de impuestos",
-      "image": "/static/situation-photos/accounting-477b3338c9c0.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 184960,
-      "ok": true
-    },
-    {
       "course": "Elaboración Industrial de Alimentos",
       "module": "Aseguramiento de la calidad de procesos y alimentos",
       "image": "/static/situation-photos/food-0e586ee1d79b.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 150749,
+      "ok": true
+    },
+    {
+      "course": "Contabilidad",
+      "module": "Cálculo y registro de remuneraciones",
+      "image": "/static/situation-photos/accounting-022cffcb9c57.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 215595,
+      "ok": true
+    },
+    {
+      "course": "Elaboración Industrial de Alimentos",
+      "module": "Tratamientos de conservación de alimentos",
+      "image": "/static/situation-photos/food-37df7471c900.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 230321,
       "ok": true
     },
     {
@@ -888,15 +906,6 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 108493,
-      "ok": true
-    },
-    {
-      "course": "Elaboración Industrial de Alimentos",
-      "module": null,
-      "image": "/static/encargo-photos/food.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 174066,
       "ok": true
     },
     {
@@ -936,12 +945,21 @@
       "ok": true
     },
     {
-      "course": "Elaboración Industrial de Alimentos",
-      "module": "Tratamientos de conservación de alimentos",
-      "image": "/static/situation-photos/food-37df7471c900.jpg",
+      "course": "Vestuario y Confección Textil",
+      "module": "Mantenimiento de máquinas",
+      "image": "/static/situation-photos/textile-1a32c09137cd.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 230321,
+      "bytes": 243158,
+      "ok": true
+    },
+    {
+      "course": "Vestuario y Confección Textil",
+      "module": "Tendido, trazado y corte de telas",
+      "image": "/static/situation-photos/textile-22b73db901cd.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 188943,
       "ok": true
     },
     {
@@ -982,15 +1000,6 @@
     },
     {
       "course": "Vestuario y Confección Textil",
-      "module": "Control de calidad",
-      "image": "/static/situation-photos/textile-76e22e103d9a.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 302083,
-      "ok": true
-    },
-    {
-      "course": "Vestuario y Confección Textil",
       "module": "Emprendimiento y empleabilidad",
       "image": "/static/situation-photos/meeting-39387bfeb642.jpg",
       "status": 200,
@@ -1008,15 +1017,6 @@
       "ok": true
     },
     {
-      "course": "Vestuario y Confección Textil",
-      "module": "Mantenimiento de máquinas",
-      "image": "/static/situation-photos/textile-1a32c09137cd.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 243158,
-      "ok": true
-    },
-    {
       "course": "Instalaciones Sanitarias",
       "module": "Lectura de planos de instalaciones sanitarias",
       "image": "/static/situation-photos/tools-53225ac8fdea.jpg",
@@ -1027,20 +1027,11 @@
     },
     {
       "course": "Instalaciones Sanitarias",
-      "module": "Trazado de redes",
-      "image": "/static/situation-photos/plumbing-11c4de06ab9e.jpg",
+      "module": "Instalación de redes de agua potable",
+      "image": "/static/situation-photos/plumbing-15836d32a244.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 226193,
-      "ok": true
-    },
-    {
-      "course": "Instalaciones Sanitarias",
-      "module": "Instalación de redes de alcantarillado",
-      "image": "/static/situation-photos/plumbing-221ba72cb814.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 267463,
+      "bytes": 183269,
       "ok": true
     },
     {
@@ -1050,15 +1041,6 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 301146,
-      "ok": true
-    },
-    {
-      "course": "Instalaciones Sanitarias",
-      "module": "Cubicación en instalaciones sanitarias",
-      "image": "/static/situation-photos/tools-67a85add4581.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 168178,
       "ok": true
     },
     {
@@ -1077,6 +1059,15 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 132548,
+      "ok": true
+    },
+    {
+      "course": "Vestuario y Confección Textil",
+      "module": "Control de calidad",
+      "image": "/static/situation-photos/textile-76e22e103d9a.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 302083,
       "ok": true
     },
     {
@@ -1107,6 +1098,15 @@
       "ok": true
     },
     {
+      "course": "Instalaciones Sanitarias",
+      "module": "Instalación de redes de alcantarillado",
+      "image": "/static/situation-photos/plumbing-221ba72cb814.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 267463,
+      "ok": true
+    },
+    {
       "course": "Montaje Industrial",
       "module": "Unión y reparación de elementos metálicos",
       "image": "/static/situation-photos/welding-4f293b593968.jpg",
@@ -1117,11 +1117,11 @@
     },
     {
       "course": "Instalaciones Sanitarias",
-      "module": "Instalación de redes de agua potable",
-      "image": "/static/situation-photos/plumbing-15836d32a244.jpg",
+      "module": "Cubicación en instalaciones sanitarias",
+      "image": "/static/situation-photos/tools-67a85add4581.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 183269,
+      "bytes": 168178,
       "ok": true
     },
     {
@@ -1135,11 +1135,29 @@
     },
     {
       "course": "Montaje Industrial",
+      "module": "Mediciones, trazados y cálculos de montaje industrial",
+      "image": "/static/situation-photos/assembly-4e4bd3b932ee.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 192553,
+      "ok": true
+    },
+    {
+      "course": "Montaje Industrial",
       "module": "Maniobras de levante de cargas",
       "image": "/static/situation-photos/port-5f39d862119f.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 186865,
+      "ok": true
+    },
+    {
+      "course": "Montaje Industrial",
+      "module": "Tratamientos superficiales y manejo de residuos",
+      "image": "/static/situation-photos/waste-89d0ea0ffb20.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 409158,
       "ok": true
     },
     {
@@ -1170,6 +1188,15 @@
       "ok": true
     },
     {
+      "course": "Instalaciones Sanitarias",
+      "module": "Trazado de redes",
+      "image": "/static/situation-photos/plumbing-11c4de06ab9e.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 226193,
+      "ok": true
+    },
+    {
       "course": "Montaje Industrial",
       "module": "Emprendimiento y empleabilidad",
       "image": "/static/situation-photos/welding-9b11f4e8992d.jpg",
@@ -1188,15 +1215,6 @@
       "ok": true
     },
     {
-      "course": "Vestuario y Confección Textil",
-      "module": "Tendido, trazado y corte de telas",
-      "image": "/static/situation-photos/textile-22b73db901cd.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 188943,
-      "ok": true
-    },
-    {
       "course": "Electrónica",
       "module": "Proyectos electrónicos",
       "image": "/static/situation-photos/electronics-05433fad193b.jpg",
@@ -1212,24 +1230,6 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 110975,
-      "ok": true
-    },
-    {
-      "course": "Montaje Industrial",
-      "module": "Mediciones, trazados y cálculos de montaje industrial",
-      "image": "/static/situation-photos/assembly-4e4bd3b932ee.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 192553,
-      "ok": true
-    },
-    {
-      "course": "Montaje Industrial",
-      "module": "Tratamientos superficiales y manejo de residuos",
-      "image": "/static/situation-photos/waste-89d0ea0ffb20.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 409158,
       "ok": true
     },
     {
@@ -1261,11 +1261,11 @@
     },
     {
       "course": "Electrónica",
-      "module": "Detección de fallas industriales",
-      "image": "/static/situation-photos/electronics-39f62dfa67f9.jpg",
+      "module": "Operación y programación de equipos de control eléctrico industrial",
+      "image": "/static/situation-photos/electronics-3e5632fb91ff.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 143857,
+      "bytes": 99865,
       "ok": true
     },
     {
@@ -1275,6 +1275,15 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 65985,
+      "ok": true
+    },
+    {
+      "course": "Electrónica",
+      "module": "Emprendimiento y empleabilidad",
+      "image": "/static/situation-photos/meeting-b4e221bc4eb4.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 106805,
       "ok": true
     },
     {
@@ -1297,15 +1306,6 @@
     },
     {
       "course": "Dibujo Técnico",
-      "module": "Dibujo manual de levantamientos",
-      "image": "/static/situation-photos/drawing-355fa7a443c2.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 197458,
-      "ok": true
-    },
-    {
-      "course": "Dibujo Técnico",
       "module": "Dibujo digital de proyectos de arquitectura",
       "image": "/static/situation-photos/drawing-a226b26c8126.jpg",
       "status": 200,
@@ -1324,47 +1324,11 @@
     },
     {
       "course": "Dibujo Técnico",
-      "module": "Maquetas virtuales",
-      "image": "/static/situation-photos/office-0abea34cb7be.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 141396,
-      "ok": true
-    },
-    {
-      "course": "Dibujo Técnico",
       "module": "Dibujo digital de instalaciones domiciliarias",
       "image": "/static/situation-photos/office-109cd88f7206.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 110195,
-      "ok": true
-    },
-    {
-      "course": "Electrónica",
-      "module": "Operación y programación de equipos de control eléctrico industrial",
-      "image": "/static/situation-photos/electronics-3e5632fb91ff.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 99865,
-      "ok": true
-    },
-    {
-      "course": "Dibujo Técnico",
-      "module": null,
-      "image": "/static/encargo-photos/drawing.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 126204,
-      "ok": true
-    },
-    {
-      "course": "Electrónica",
-      "module": "Emprendimiento y empleabilidad",
-      "image": "/static/situation-photos/meeting-b4e221bc4eb4.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 106805,
       "ok": true
     },
     {
@@ -1374,6 +1338,24 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 82136,
+      "ok": true
+    },
+    {
+      "course": "Electrónica",
+      "module": "Detección de fallas industriales",
+      "image": "/static/situation-photos/electronics-39f62dfa67f9.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 143857,
+      "ok": true
+    },
+    {
+      "course": "Dibujo Técnico",
+      "module": null,
+      "image": "/static/encargo-photos/drawing.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 126204,
       "ok": true
     },
     {
@@ -1422,57 +1404,12 @@
       "ok": true
     },
     {
-      "course": "Gráfica",
-      "module": "Impresión del producto gráfico",
-      "image": "/static/situation-photos/printing-1948e4cf2b8d.jpg",
+      "course": "Dibujo Técnico",
+      "module": "Maquetas virtuales",
+      "image": "/static/situation-photos/office-0abea34cb7be.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 251401,
-      "ok": true
-    },
-    {
-      "course": "Gráfica",
-      "module": "Encuadernación del producto impreso",
-      "image": "/static/situation-photos/printing-2c6db481b651.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 176141,
-      "ok": true
-    },
-    {
-      "course": "Gráfica",
-      "module": "Imposición de archivos y obtención de prueba de color",
-      "image": "/static/situation-photos/printing-47d0d2a58048.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 133424,
-      "ok": true
-    },
-    {
-      "course": "Gráfica",
-      "module": "Postimpresión en embalajes y recubrimientos a impresos",
-      "image": "/static/situation-photos/printing-56dbb1df5779.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 151918,
-      "ok": true
-    },
-    {
-      "course": "Servicios de Turismo",
-      "module": null,
-      "image": "/static/encargo-photos/tourism.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 249853,
-      "ok": true
-    },
-    {
-      "course": "Gráfica",
-      "module": "Preparación de la máquina impresora",
-      "image": "/static/situation-photos/printing-16d38fc4752b.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 174698,
+      "bytes": 141396,
       "ok": true
     },
     {
@@ -1486,6 +1423,33 @@
     },
     {
       "course": "Gráfica",
+      "module": "Encuadernación del producto impreso",
+      "image": "/static/situation-photos/printing-2c6db481b651.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 176141,
+      "ok": true
+    },
+    {
+      "course": "Dibujo Técnico",
+      "module": "Dibujo digital de montaje industrial",
+      "image": "/static/situation-photos/office-2687713264c1.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 101039,
+      "ok": true
+    },
+    {
+      "course": "Gráfica",
+      "module": "Imposición de archivos y obtención de prueba de color",
+      "image": "/static/situation-photos/printing-47d0d2a58048.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 133424,
+      "ok": true
+    },
+    {
+      "course": "Gráfica",
       "module": "Salida del archivo a matriz impresora e impresión digital",
       "image": "/static/situation-photos/printing-507b75ac778d.jpg",
       "status": 200,
@@ -1494,21 +1458,12 @@
       "ok": true
     },
     {
-      "course": "Servicios de Turismo",
-      "module": "Atención turística al cliente",
-      "image": "/static/situation-photos/tourism-06134b35800b.jpg",
+      "course": "Gráfica",
+      "module": "Postimpresión en embalajes y recubrimientos a impresos",
+      "image": "/static/situation-photos/printing-56dbb1df5779.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 103868,
-      "ok": true
-    },
-    {
-      "course": "Servicios de Turismo",
-      "module": "Patrimonio, cultura y atractivos turísticos de Chile",
-      "image": "/static/situation-photos/tourism-0ab8030756e7.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 146257,
+      "bytes": 151918,
       "ok": true
     },
     {
@@ -1518,6 +1473,51 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 142613,
+      "ok": true
+    },
+    {
+      "course": "Gráfica",
+      "module": "Preparación de la máquina impresora",
+      "image": "/static/situation-photos/printing-16d38fc4752b.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 174698,
+      "ok": true
+    },
+    {
+      "course": "Servicios de Turismo",
+      "module": null,
+      "image": "/static/encargo-photos/tourism.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 249853,
+      "ok": true
+    },
+    {
+      "course": "Gráfica",
+      "module": "Impresión del producto gráfico",
+      "image": "/static/situation-photos/printing-1948e4cf2b8d.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 251401,
+      "ok": true
+    },
+    {
+      "course": "Servicios de Turismo",
+      "module": "Sistemas de reservas",
+      "image": "/static/situation-photos/tourism-051b2925f409.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 300088,
+      "ok": true
+    },
+    {
+      "course": "Servicios de Turismo",
+      "module": "Atención turística al cliente",
+      "image": "/static/situation-photos/tourism-06134b35800b.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 103868,
       "ok": true
     },
     {
@@ -1539,12 +1539,12 @@
       "ok": true
     },
     {
-      "course": "Servicios de Turismo",
-      "module": "Patrimonio, cultura y atractivos turísticos del mundo",
-      "image": "/static/situation-photos/tourism-607e3e5dcc0e.jpg",
+      "course": "Dibujo Técnico",
+      "module": "Dibujo manual de levantamientos",
+      "image": "/static/situation-photos/drawing-355fa7a443c2.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 260256,
+      "bytes": 197458,
       "ok": true
     },
     {
@@ -1558,15 +1558,6 @@
     },
     {
       "course": "Servicios de Turismo",
-      "module": "Elaboración de programas turísticos",
-      "image": "/static/situation-photos/tourism-8d2e120826b4.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 214209,
-      "ok": true
-    },
-    {
-      "course": "Servicios de Turismo",
       "module": "Emprendimiento y empleabilidad",
       "image": "/static/situation-photos/tourism-9f5a874920bb.jpg",
       "status": 200,
@@ -1576,38 +1567,38 @@
     },
     {
       "course": "Servicios de Turismo",
-      "module": "Sistemas de reservas",
-      "image": "/static/situation-photos/tourism-051b2925f409.jpg",
+      "module": "Patrimonio, cultura y atractivos turísticos de Chile",
+      "image": "/static/situation-photos/tourism-0ab8030756e7.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 300088,
-      "ok": true
-    },
-    {
-      "course": "Dibujo Técnico",
-      "module": "Dibujo digital de montaje industrial",
-      "image": "/static/situation-photos/office-2687713264c1.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 101039,
+      "bytes": 146257,
       "ok": true
     },
     {
       "course": "Forestal",
-      "module": "Producción de plantas y repoblación",
-      "image": "/static/encargo-photos/silviculture.jpg",
+      "module": null,
+      "image": "/static/encargo-photos/forestry.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 148637,
+      "bytes": 182788,
       "ok": true
     },
     {
-      "course": "Forestal",
-      "module": "Uso y mantenimiento de herramientas y máquinas",
-      "image": "/static/situation-photos/forestry-5fa3f1e66ae4.jpg",
+      "course": "Servicios de Turismo",
+      "module": "Patrimonio, cultura y atractivos turísticos del mundo",
+      "image": "/static/situation-photos/tourism-607e3e5dcc0e.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 140999,
+      "bytes": 260256,
+      "ok": true
+    },
+    {
+      "course": "Servicios de Turismo",
+      "module": "Elaboración de programas turísticos",
+      "image": "/static/situation-photos/tourism-8d2e120826b4.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 214209,
       "ok": true
     },
     {
@@ -1621,11 +1612,11 @@
     },
     {
       "course": "Forestal",
-      "module": "Control de la producción forestal",
-      "image": "/static/situation-photos/forestry-6200e54a87a2.jpg",
+      "module": "Uso y mantenimiento de herramientas y máquinas",
+      "image": "/static/situation-photos/forestry-5fa3f1e66ae4.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 278097,
+      "bytes": 140999,
       "ok": true
     },
     {
@@ -1638,30 +1629,12 @@
       "ok": true
     },
     {
-      "course": "Servicios de Turismo",
-      "module": "Inglés para la comunicación escrita en turismo",
-      "image": "/static/situation-photos/tourism-9a3b18f38fc2.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 139068,
-      "ok": true
-    },
-    {
       "course": "Forestal",
-      "module": null,
-      "image": "/static/encargo-photos/forestry.jpg",
+      "module": "Operaciones silvícolas",
+      "image": "/static/situation-photos/silviculture-152d515eb0c5.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 182788,
-      "ok": true
-    },
-    {
-      "course": "Forestal",
-      "module": "Emprendimiento y empleabilidad",
-      "image": "/static/situation-photos/forestry-6cd02a18af8d.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 133911,
+      "bytes": 269039,
       "ok": true
     },
     {
@@ -1684,20 +1657,20 @@
     },
     {
       "course": "Muebles y Terminaciones en Madera",
+      "module": null,
+      "image": "/static/encargo-photos/furniture.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 184279,
+      "ok": true
+    },
+    {
+      "course": "Muebles y Terminaciones en Madera",
       "module": "Abastecimiento y despacho",
       "image": "/static/situation-photos/warehouse-e55a6420379c.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 156856,
-      "ok": true
-    },
-    {
-      "course": "Muebles y Terminaciones en Madera",
-      "module": "Fabricación de componentes de carpintería y muebles",
-      "image": "/static/situation-photos/furniture-3a6447e84b52.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 292165,
       "ok": true
     },
     {
@@ -1711,11 +1684,11 @@
     },
     {
       "course": "Forestal",
-      "module": "Operaciones silvícolas",
-      "image": "/static/situation-photos/silviculture-152d515eb0c5.jpg",
+      "module": "Emprendimiento y empleabilidad",
+      "image": "/static/situation-photos/forestry-6cd02a18af8d.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 269039,
+      "bytes": 133911,
       "ok": true
     },
     {
@@ -1725,6 +1698,15 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 254296,
+      "ok": true
+    },
+    {
+      "course": "Servicios de Turismo",
+      "module": "Inglés para la comunicación escrita en turismo",
+      "image": "/static/situation-photos/tourism-9a3b18f38fc2.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 139068,
       "ok": true
     },
     {
@@ -1738,11 +1720,20 @@
     },
     {
       "course": "Muebles y Terminaciones en Madera",
-      "module": "Terminaciones de muebles y elementos de carpintería",
-      "image": "/static/situation-photos/furniture-a9ccf7ab3fa2.jpg",
+      "module": "Armado de estructuras",
+      "image": "/static/situation-photos/furniture-8e6cda20a30d.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 1019167,
+      "bytes": 182207,
+      "ok": true
+    },
+    {
+      "course": "Muebles y Terminaciones en Madera",
+      "module": "Fabricación de componentes de carpintería y muebles",
+      "image": "/static/situation-photos/furniture-3a6447e84b52.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 292165,
       "ok": true
     },
     {
@@ -1755,21 +1746,21 @@
       "ok": true
     },
     {
-      "course": "Muebles y Terminaciones en Madera",
-      "module": null,
-      "image": "/static/encargo-photos/furniture.jpg",
+      "course": "Forestal",
+      "module": "Producción de plantas y repoblación",
+      "image": "/static/encargo-photos/silviculture.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 184279,
+      "bytes": 148637,
       "ok": true
     },
     {
       "course": "Muebles y Terminaciones en Madera",
-      "module": "Emprendimiento y empleabilidad",
-      "image": "/static/situation-photos/furniture-cc434663d1eb.jpg",
+      "module": "Mantenimiento de máquinas, equipos y herramientas",
+      "image": "/static/situation-photos/furniture-c5e56c65e4ae.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 156454,
+      "bytes": 601750,
       "ok": true
     },
     {
@@ -1791,33 +1782,6 @@
       "ok": true
     },
     {
-      "course": "Muebles y Terminaciones en Madera",
-      "module": "Armado de estructuras",
-      "image": "/static/situation-photos/furniture-8e6cda20a30d.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 182207,
-      "ok": true
-    },
-    {
-      "course": "Muebles y Terminaciones en Madera",
-      "module": "Mantenimiento de máquinas, equipos y herramientas",
-      "image": "/static/situation-photos/furniture-c5e56c65e4ae.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 601750,
-      "ok": true
-    },
-    {
-      "course": "Acuicultura",
-      "module": "Captación de semillas",
-      "image": "/static/situation-photos/hatchery-01.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 120155,
-      "ok": true
-    },
-    {
       "course": "Acuicultura",
       "module": "Engorde de especies acuícolas",
       "image": "/static/situation-photos/aquaculture-01.jpg",
@@ -1836,6 +1800,24 @@
       "ok": true
     },
     {
+      "course": "Forestal",
+      "module": "Control de la producción forestal",
+      "image": "/static/situation-photos/forestry-6200e54a87a2.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 278097,
+      "ok": true
+    },
+    {
+      "course": "Muebles y Terminaciones en Madera",
+      "module": "Terminaciones de muebles y elementos de carpintería",
+      "image": "/static/situation-photos/furniture-a9ccf7ab3fa2.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 1019167,
+      "ok": true
+    },
+    {
       "course": "Acuicultura",
       "module": "Seguridad, prevención de riesgos y cuidado del medio ambiente",
       "image": "/static/situation-photos/aquaculture-03.jpg",
@@ -1846,11 +1828,11 @@
     },
     {
       "course": "Acuicultura",
-      "module": "Manejo de información acuícola",
-      "image": "/static/situation-photos/aquaculture-05.jpg",
+      "module": "Captación de semillas",
+      "image": "/static/situation-photos/hatchery-01.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 278609,
+      "bytes": 120155,
       "ok": true
     },
     {
@@ -1863,21 +1845,39 @@
       "ok": true
     },
     {
-      "course": "Operaciones Portuarias",
-      "module": null,
-      "image": "/static/encargo-photos/port.jpg",
+      "course": "Acuicultura",
+      "module": "Emprendimiento y empleabilidad",
+      "image": "/static/situation-photos/aquaculture-06.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 152323,
+      "bytes": 290655,
+      "ok": true
+    },
+    {
+      "course": "Acuicultura",
+      "module": "Manejo de información acuícola",
+      "image": "/static/situation-photos/aquaculture-05.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 278609,
+      "ok": true
+    },
+    {
+      "course": "Muebles y Terminaciones en Madera",
+      "module": "Emprendimiento y empleabilidad",
+      "image": "/static/situation-photos/furniture-cc434663d1eb.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 156454,
       "ok": true
     },
     {
       "course": "Operaciones Portuarias",
-      "module": "Documentación en la operación portuaria",
-      "image": "/static/situation-photos/port-040b2bb5816e.jpg",
+      "module": "Operación de movilización y distribución de cargas",
+      "image": "/static/situation-photos/port-29554c39fba7.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 119754,
+      "bytes": 186889,
       "ok": true
     },
     {
@@ -1899,30 +1899,12 @@
       "ok": true
     },
     {
-      "course": "Acuicultura",
-      "module": "Trabajos subacuáticos en acuicultura",
-      "image": "/static/situation-photos/diving-01.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 127232,
-      "ok": true
-    },
-    {
       "course": "Operaciones Portuarias",
-      "module": "Operación de movilización y distribución de cargas",
-      "image": "/static/situation-photos/port-29554c39fba7.jpg",
+      "module": "Tramitación de movilización y distribución de cargas",
+      "image": "/static/situation-photos/port-5160ffc8520b.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 186889,
-      "ok": true
-    },
-    {
-      "course": "Operaciones Portuarias",
-      "module": "Tramitación y documentación de recepción y despacho de carga",
-      "image": "/static/encargo-photos/warehouse.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 341868,
+      "bytes": 154756,
       "ok": true
     },
     {
@@ -1936,11 +1918,11 @@
     },
     {
       "course": "Operaciones Portuarias",
-      "module": "Tramitación de movilización y distribución de cargas",
-      "image": "/static/situation-photos/port-5160ffc8520b.jpg",
+      "module": null,
+      "image": "/static/encargo-photos/port.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 154756,
+      "bytes": 152323,
       "ok": true
     },
     {
@@ -1954,6 +1936,15 @@
     },
     {
       "course": "Operaciones Portuarias",
+      "module": "Documentación en la operación portuaria",
+      "image": "/static/situation-photos/port-040b2bb5816e.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 119754,
+      "ok": true
+    },
+    {
+      "course": "Operaciones Portuarias",
       "module": "Emprendimiento y empleabilidad",
       "image": "/static/situation-photos/port-69a03a801735.jpg",
       "status": 200,
@@ -1962,30 +1953,12 @@
       "ok": true
     },
     {
-      "course": "Pesquería",
-      "module": null,
-      "image": "/static/encargo-photos/fishing.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 225037,
-      "ok": true
-    },
-    {
-      "course": "Pesquería",
-      "module": "Navegación y meteorología",
-      "image": "/static/encargo-photos/ship.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 153003,
-      "ok": true
-    },
-    {
       "course": "Acuicultura",
-      "module": "Emprendimiento y empleabilidad",
-      "image": "/static/situation-photos/aquaculture-06.jpg",
+      "module": "Trabajos subacuáticos en acuicultura",
+      "image": "/static/situation-photos/diving-01.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 290655,
+      "bytes": 127232,
       "ok": true
     },
     {
@@ -1995,6 +1968,15 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 299441,
+      "ok": true
+    },
+    {
+      "course": "Pesquería",
+      "module": "Navegación y meteorología",
+      "image": "/static/encargo-photos/ship.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 153003,
       "ok": true
     },
     {
@@ -2017,24 +1999,6 @@
     },
     {
       "course": "Pesquería",
-      "module": "Emprendimiento y empleabilidad",
-      "image": "/static/situation-photos/fishing-06.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 274233,
-      "ok": true
-    },
-    {
-      "course": "Pesquería",
-      "module": "Maniobras y operación de artes de pesca",
-      "image": "/static/situation-photos/fishing-04.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 114021,
-      "ok": true
-    },
-    {
-      "course": "Pesquería",
       "module": "Gestión de planes y proyectos de manejo y emprendimiento pesquero",
       "image": "/static/situation-photos/fishing-05.jpg",
       "status": 200,
@@ -2052,12 +2016,12 @@
       "ok": true
     },
     {
-      "course": "Tripulación de Naves Mercantes y Especiales",
-      "module": "Mantenimiento de máquinas de cubierta",
-      "image": "/static/situation-photos/ship-72de3d6b9b1c.jpg",
+      "course": "Pesquería",
+      "module": null,
+      "image": "/static/encargo-photos/fishing.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 190206,
+      "bytes": 225037,
       "ok": true
     },
     {
@@ -2071,20 +2035,38 @@
     },
     {
       "course": "Tripulación de Naves Mercantes y Especiales",
+      "module": "Mantenimiento de máquinas de cubierta",
+      "image": "/static/situation-photos/ship-72de3d6b9b1c.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 190206,
+      "ok": true
+    },
+    {
+      "course": "Pesquería",
+      "module": "Maniobras y operación de artes de pesca",
+      "image": "/static/situation-photos/fishing-04.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 114021,
+      "ok": true
+    },
+    {
+      "course": "Tripulación de Naves Mercantes y Especiales",
+      "module": "Operación puente de gobierno",
+      "image": "/static/situation-photos/ship-7c35ffb65cf5.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 126055,
+      "ok": true
+    },
+    {
+      "course": "Tripulación de Naves Mercantes y Especiales",
       "module": "Prevención de riesgos en el mar",
       "image": "/static/situation-photos/ship-76a8f3dbadc1.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 135922,
-      "ok": true
-    },
-    {
-      "course": "Tripulación de Naves Mercantes y Especiales",
-      "module": "Operación de equipos de maniobras de cubierta",
-      "image": "/static/situation-photos/ship-5636f496a293.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 199071,
       "ok": true
     },
     {
@@ -2106,66 +2088,12 @@
       "ok": true
     },
     {
-      "course": "Construcciones Metálicas",
-      "module": null,
-      "image": "/static/encargo-photos/welding.jpg",
+      "course": "Operaciones Portuarias",
+      "module": "Tramitación y documentación de recepción y despacho de carga",
+      "image": "/static/encargo-photos/warehouse.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 111586,
-      "ok": true
-    },
-    {
-      "course": "Tripulación de Naves Mercantes y Especiales",
-      "module": "Operación puente de gobierno",
-      "image": "/static/situation-photos/ship-7c35ffb65cf5.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 126055,
-      "ok": true
-    },
-    {
-      "course": "Tripulación de Naves Mercantes y Especiales",
-      "module": "Mantenimiento de máquinas marinas",
-      "image": "/static/situation-photos/engine-05abe3ec3ec6.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 169823,
-      "ok": true
-    },
-    {
-      "course": "Construcciones Metálicas",
-      "module": "Trazado de partes y piezas en construcciones metálicas",
-      "image": "/static/situation-photos/welding-1f1488510aef.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 135410,
-      "ok": true
-    },
-    {
-      "course": "Pesquería",
-      "module": "Primeros auxilios",
-      "image": "/static/situation-photos/firstaid-6bd8e4607bdf.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 260962,
-      "ok": true
-    },
-    {
-      "course": "Tripulación de Naves Mercantes y Especiales",
-      "module": "Comunicaciones",
-      "image": "/static/situation-photos/ship-901e921375bd.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 115550,
-      "ok": true
-    },
-    {
-      "course": "Construcciones Metálicas",
-      "module": "Mantenimiento de equipos y herramientas en construcciones metálicas",
-      "image": "/static/situation-photos/welding-2664f07be743.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 137780,
+      "bytes": 341868,
       "ok": true
     },
     {
@@ -2179,11 +2107,101 @@
     },
     {
       "course": "Construcciones Metálicas",
+      "module": null,
+      "image": "/static/encargo-photos/welding.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 111586,
+      "ok": true
+    },
+    {
+      "course": "Pesquería",
+      "module": "Primeros auxilios",
+      "image": "/static/situation-photos/firstaid-6bd8e4607bdf.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 260962,
+      "ok": true
+    },
+    {
+      "course": "Construcciones Metálicas",
+      "module": "Lectura y dibujo de planos en construcciones metálicas",
+      "image": "/static/situation-photos/tools-1d2e1ebd1c72.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 285938,
+      "ok": true
+    },
+    {
+      "course": "Tripulación de Naves Mercantes y Especiales",
+      "module": "Mantenimiento de máquinas marinas",
+      "image": "/static/situation-photos/engine-05abe3ec3ec6.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 169823,
+      "ok": true
+    },
+    {
+      "course": "Tripulación de Naves Mercantes y Especiales",
+      "module": "Comunicaciones",
+      "image": "/static/situation-photos/ship-901e921375bd.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 115550,
+      "ok": true
+    },
+    {
+      "course": "Construcciones Metálicas",
+      "module": "Trazado de partes y piezas en construcciones metálicas",
+      "image": "/static/situation-photos/welding-1f1488510aef.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 135410,
+      "ok": true
+    },
+    {
+      "course": "Construcciones Metálicas",
+      "module": "Mantenimiento de equipos y herramientas en construcciones metálicas",
+      "image": "/static/situation-photos/welding-2664f07be743.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 137780,
+      "ok": true
+    },
+    {
+      "course": "Construcciones Metálicas",
+      "module": "Mecanizado de partes y piezas metálicas",
+      "image": "/static/situation-photos/welding-2b7a936d5744.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 332718,
+      "ok": true
+    },
+    {
+      "course": "Pesquería",
+      "module": "Emprendimiento y empleabilidad",
+      "image": "/static/situation-photos/fishing-06.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 274233,
+      "ok": true
+    },
+    {
+      "course": "Construcciones Metálicas",
       "module": "Corte y soldadura en construcciones metálicas",
       "image": "/static/situation-photos/welding-30120ec94f62.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 225867,
+      "ok": true
+    },
+    {
+      "course": "Construcciones Metálicas",
+      "module": "Protección de estructuras y tratamientos de residuos",
+      "image": "/static/encargo-photos/waste.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 192719,
       "ok": true
     },
     {
@@ -2197,24 +2215,6 @@
     },
     {
       "course": "Construcciones Metálicas",
-      "module": "Cubicación de materiales e insumos en construcciones metálicas",
-      "image": "/static/situation-photos/tools-23fc0973f5a4.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 408417,
-      "ok": true
-    },
-    {
-      "course": "Construcciones Metálicas",
-      "module": "Lectura y dibujo de planos en construcciones metálicas",
-      "image": "/static/situation-photos/tools-1d2e1ebd1c72.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 285938,
-      "ok": true
-    },
-    {
-      "course": "Construcciones Metálicas",
       "module": "Emprendimiento y empleabilidad",
       "image": "/static/situation-photos/meeting-54de88e33736.jpg",
       "status": 200,
@@ -2223,12 +2223,12 @@
       "ok": true
     },
     {
-      "course": "Mecánica Automotriz",
-      "module": "Ajuste de motores",
-      "image": "/static/encargo-photos/enginecar.jpg",
+      "course": "Tripulación de Naves Mercantes y Especiales",
+      "module": "Operación de equipos de maniobras de cubierta",
+      "image": "/static/situation-photos/ship-5636f496a293.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 137408,
+      "bytes": 199071,
       "ok": true
     },
     {
@@ -2241,12 +2241,12 @@
       "ok": true
     },
     {
-      "course": "Construcciones Metálicas",
-      "module": "Mecanizado de partes y piezas metálicas",
-      "image": "/static/situation-photos/welding-2b7a936d5744.jpg",
+      "course": "Mecánica Automotriz",
+      "module": "Lectura de planos y manuales técnicos",
+      "image": "/static/situation-photos/car-1bbea902a4cc.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 332718,
+      "bytes": 375240,
       "ok": true
     },
     {
@@ -2260,38 +2260,11 @@
     },
     {
       "course": "Mecánica Automotriz",
-      "module": "Mantenimiento de sistemas de seguridad y confortabilidad",
-      "image": "/static/situation-photos/car-0629bf2a320b.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 268970,
-      "ok": true
-    },
-    {
-      "course": "Mecánica Automotriz",
       "module": "Mantenimiento de sistemas eléctricos y electrónicos",
       "image": "/static/situation-photos/car-793859dc046f.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 106001,
-      "ok": true
-    },
-    {
-      "course": "Construcciones Metálicas",
-      "module": "Protección de estructuras y tratamientos de residuos",
-      "image": "/static/encargo-photos/waste.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 192719,
-      "ok": true
-    },
-    {
-      "course": "Mecánica Automotriz",
-      "module": "Mantenimiento de motores",
-      "image": "/static/situation-photos/enginecar-5fcf6325a6da.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 232955,
       "ok": true
     },
     {
@@ -2331,6 +2304,24 @@
       "ok": true
     },
     {
+      "course": "Mecánica Automotriz",
+      "module": "Ajuste de motores",
+      "image": "/static/encargo-photos/enginecar.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 137408,
+      "ok": true
+    },
+    {
+      "course": "Mecánica Automotriz",
+      "module": "Mantenimiento de sistemas de seguridad y confortabilidad",
+      "image": "/static/situation-photos/car-0629bf2a320b.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 268970,
+      "ok": true
+    },
+    {
       "course": "Mecánica de Mantenimiento de Aeronaves",
       "module": null,
       "image": "/static/encargo-photos/aircraft.jpg",
@@ -2349,21 +2340,39 @@
       "ok": true
     },
     {
-      "course": "Mecánica de Mantenimiento de Aeronaves",
-      "module": "Inglés técnico de estructura, controles de vuelo y sistemas de navegación y comunicación de la aeronave",
-      "image": "/static/situation-photos/aircraft-3a6c06ad743d.jpg",
+      "course": "Mecánica Automotriz",
+      "module": "Mantenimiento de motores",
+      "image": "/static/situation-photos/enginecar-5fcf6325a6da.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 129792,
+      "bytes": 232955,
       "ok": true
     },
     {
       "course": "Mecánica de Mantenimiento de Aeronaves",
-      "module": "Normativa de mantenimiento aeronáutico",
-      "image": "/static/situation-photos/aircraft-463ca0187a93.jpg",
+      "module": "Detección de fallas en instrumentos y sistemas de navegación y comunicación de la aeronave",
+      "image": "/static/situation-photos/aircraft-0f3db78bbeec.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 146135,
+      "bytes": 254171,
+      "ok": true
+    },
+    {
+      "course": "Mecánica de Mantenimiento de Aeronaves",
+      "module": "Mantenimiento de los controles de vuelo de la aeronave",
+      "image": "/static/situation-photos/aircraft-3221cb43d224.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 85490,
+      "ok": true
+    },
+    {
+      "course": "Mecánica de Mantenimiento de Aeronaves",
+      "module": "Lectura e interpretación de manuales de mantenimiento de aeronaves",
+      "image": "/static/situation-photos/aircraft-3f9963630174.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 119607,
       "ok": true
     },
     {
@@ -2395,38 +2404,11 @@
     },
     {
       "course": "Mecánica de Mantenimiento de Aeronaves",
-      "module": "Detección de fallas en instrumentos y sistemas de navegación y comunicación de la aeronave",
-      "image": "/static/situation-photos/aircraft-0f3db78bbeec.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 254171,
-      "ok": true
-    },
-    {
-      "course": "Mecánica de Mantenimiento de Aeronaves",
-      "module": "Mantenimiento de los controles de vuelo de la aeronave",
-      "image": "/static/situation-photos/aircraft-3221cb43d224.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 85490,
-      "ok": true
-    },
-    {
-      "course": "Mecánica de Mantenimiento de Aeronaves",
       "module": "Inglés técnico de mantenimiento de aeronaves",
       "image": "/static/situation-photos/aircraft-b95761b84464.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 112227,
-      "ok": true
-    },
-    {
-      "course": "Mecánica de Mantenimiento de Aeronaves",
-      "module": "Lectura e interpretación de manuales de mantenimiento de aeronaves",
-      "image": "/static/situation-photos/aircraft-3f9963630174.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 119607,
       "ok": true
     },
     {
@@ -2440,11 +2422,11 @@
     },
     {
       "course": "Asistencia en Geología",
-      "module": null,
-      "image": "/static/encargo-photos/geology.jpg",
+      "module": "Preparación e instalación de campamentos",
+      "image": "/static/situation-photos/geology-048db727932f.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 280297,
+      "bytes": 163489,
       "ok": true
     },
     {
@@ -2454,6 +2436,24 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 268216,
+      "ok": true
+    },
+    {
+      "course": "Construcciones Metálicas",
+      "module": "Cubicación de materiales e insumos en construcciones metálicas",
+      "image": "/static/situation-photos/tools-23fc0973f5a4.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 408417,
+      "ok": true
+    },
+    {
+      "course": "Asistencia en Geología",
+      "module": "Clasificación de rocas y minerales",
+      "image": "/static/encargo-photos/rocks.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 131420,
       "ok": true
     },
     {
@@ -2467,15 +2467,6 @@
     },
     {
       "course": "Asistencia en Geología",
-      "module": "Prospección geológica con sondajes",
-      "image": "/static/situation-photos/geology-295f7cf24ea1.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 200031,
-      "ok": true
-    },
-    {
-      "course": "Asistencia en Geología",
       "module": "Técnicas de muestreo geológico",
       "image": "/static/situation-photos/geology-2f7b6a71148e.jpg",
       "status": 200,
@@ -2484,21 +2475,12 @@
       "ok": true
     },
     {
-      "course": "Mecánica Automotriz",
-      "module": "Lectura de planos y manuales técnicos",
-      "image": "/static/situation-photos/car-1bbea902a4cc.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 375240,
-      "ok": true
-    },
-    {
       "course": "Asistencia en Geología",
-      "module": "Transporte y mantenimiento de equipos e instrumentos geológicos",
-      "image": "/static/situation-photos/geology-461ec132eb78.jpg",
+      "module": null,
+      "image": "/static/encargo-photos/geology.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 222518,
+      "bytes": 280297,
       "ok": true
     },
     {
@@ -2512,11 +2494,47 @@
     },
     {
       "course": "Asistencia en Geología",
-      "module": "Preparación e instalación de campamentos",
-      "image": "/static/situation-photos/geology-048db727932f.jpg",
+      "module": "Prospección geológica con sondajes",
+      "image": "/static/situation-photos/geology-295f7cf24ea1.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 163489,
+      "bytes": 200031,
+      "ok": true
+    },
+    {
+      "course": "Explotación Minera",
+      "module": null,
+      "image": "/static/encargo-photos/mining.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 225413,
+      "ok": true
+    },
+    {
+      "course": "Mecánica de Mantenimiento de Aeronaves",
+      "module": "Inglés técnico de estructura, controles de vuelo y sistemas de navegación y comunicación de la aeronave",
+      "image": "/static/situation-photos/aircraft-3a6c06ad743d.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 129792,
+      "ok": true
+    },
+    {
+      "course": "Asistencia en Geología",
+      "module": "Transporte y mantenimiento de equipos e instrumentos geológicos",
+      "image": "/static/situation-photos/geology-461ec132eb78.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 222518,
+      "ok": true
+    },
+    {
+      "course": "Mecánica de Mantenimiento de Aeronaves",
+      "module": "Normativa de mantenimiento aeronáutico",
+      "image": "/static/situation-photos/aircraft-463ca0187a93.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 146135,
       "ok": true
     },
     {
@@ -2530,20 +2548,11 @@
     },
     {
       "course": "Explotación Minera",
-      "module": "Fortificación de minas subterráneas y a cielo abierto",
-      "image": "/static/situation-photos/mining-02e39b090491.jpg",
+      "module": "Marco legal y seguridad en plantas de explotación minera",
+      "image": "/static/situation-photos/mining-282d1b72fe9a.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 239603,
-      "ok": true
-    },
-    {
-      "course": "Asistencia en Geología",
-      "module": "Registro y transferencia de información geológica",
-      "image": "/static/situation-photos/geology-43dfb1ffdd28.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 207665,
+      "bytes": 148343,
       "ok": true
     },
     {
@@ -2557,20 +2566,11 @@
     },
     {
       "course": "Explotación Minera",
-      "module": "Marco legal y seguridad en plantas de explotación minera",
-      "image": "/static/situation-photos/mining-282d1b72fe9a.jpg",
+      "module": "Lectura de planos de ubicación y de tronadura",
+      "image": "/static/situation-photos/tools-de0b73f1e27a.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 148343,
-      "ok": true
-    },
-    {
-      "course": "Explotación Minera",
-      "module": null,
-      "image": "/static/encargo-photos/mining.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 225413,
+      "bytes": 212593,
       "ok": true
     },
     {
@@ -2584,6 +2584,15 @@
     },
     {
       "course": "Explotación Minera",
+      "module": "Cubicación, carguío y transporte",
+      "image": "/static/situation-photos/tools-e1cd5e163779.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 558443,
+      "ok": true
+    },
+    {
+      "course": "Explotación Minera",
       "module": "Chancado primario de minerales",
       "image": "/static/situation-photos/geology-70b456fe067b.jpg",
       "status": 200,
@@ -2593,20 +2602,11 @@
     },
     {
       "course": "Explotación Minera",
-      "module": "Cubicación, carguío y transporte",
-      "image": "/static/situation-photos/tools-e1cd5e163779.jpg",
+      "module": "Fortificación de minas subterráneas y a cielo abierto",
+      "image": "/static/situation-photos/mining-02e39b090491.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 558443,
-      "ok": true
-    },
-    {
-      "course": "Asistencia en Geología",
-      "module": "Clasificación de rocas y minerales",
-      "image": "/static/encargo-photos/rocks.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 131420,
+      "bytes": 239603,
       "ok": true
     },
     {
@@ -2620,11 +2620,11 @@
     },
     {
       "course": "Metalurgia Extractiva",
-      "module": "Muestreo y control de procesos",
-      "image": "/static/situation-photos/metallurgy-008e8177228d.jpg",
+      "module": null,
+      "image": "/static/encargo-photos/metallurgy.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 293266,
+      "bytes": 184103,
       "ok": true
     },
     {
@@ -2634,6 +2634,24 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 192109,
+      "ok": true
+    },
+    {
+      "course": "Metalurgia Extractiva",
+      "module": "Muestreo y control de procesos",
+      "image": "/static/situation-photos/metallurgy-008e8177228d.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 293266,
+      "ok": true
+    },
+    {
+      "course": "Metalurgia Extractiva",
+      "module": "Control de inventario",
+      "image": "/static/situation-photos/metallurgy-05b8797eb855.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 219589,
       "ok": true
     },
     {
@@ -2655,30 +2673,12 @@
       "ok": true
     },
     {
-      "course": "Explotación Minera",
-      "module": "Lectura de planos de ubicación y de tronadura",
-      "image": "/static/situation-photos/tools-de0b73f1e27a.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 212593,
-      "ok": true
-    },
-    {
       "course": "Metalurgia Extractiva",
       "module": "Fundición y refinería",
       "image": "/static/situation-photos/metallurgy-74f915427762.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 220827,
-      "ok": true
-    },
-    {
-      "course": "Metalurgia Extractiva",
-      "module": "Control de inventario",
-      "image": "/static/situation-photos/metallurgy-05b8797eb855.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 219589,
       "ok": true
     },
     {
@@ -2691,66 +2691,12 @@
       "ok": true
     },
     {
-      "course": "Atención de Párvulos",
-      "module": "Material didáctico y de ambientación",
-      "image": "/static/situation-photos/preschool-246cf78f3d7f.jpg",
+      "course": "Asistencia en Geología",
+      "module": "Registro y transferencia de información geológica",
+      "image": "/static/situation-photos/geology-43dfb1ffdd28.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 159509,
-      "ok": true
-    },
-    {
-      "course": "Metalurgia Extractiva",
-      "module": "Técnicas de hidrometalurgia",
-      "image": "/static/situation-photos/metallurgy-60136274d7f7.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 175112,
-      "ok": true
-    },
-    {
-      "course": "Atención de Párvulos",
-      "module": "Expresión musical para párvulos",
-      "image": "/static/situation-photos/preschool-54d8fd05699f.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 333455,
-      "ok": true
-    },
-    {
-      "course": "Atención de Párvulos",
-      "module": "Relación con la familia",
-      "image": "/static/situation-photos/preschool-8ae5ceba31c0.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 233934,
-      "ok": true
-    },
-    {
-      "course": "Metalurgia Extractiva",
-      "module": null,
-      "image": "/static/encargo-photos/metallurgy.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 184103,
-      "ok": true
-    },
-    {
-      "course": "Atención de Párvulos",
-      "module": "Recreación y bienestar de los párvulos",
-      "image": "/static/situation-photos/preschool-ebf9251d5c0e.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 205513,
-      "ok": true
-    },
-    {
-      "course": "Atención de Párvulos",
-      "module": "Salud en párvulos",
-      "image": "/static/situation-photos/preschool-a1a601ca9125.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 243453,
+      "bytes": 207665,
       "ok": true
     },
     {
@@ -2764,6 +2710,51 @@
     },
     {
       "course": "Atención de Párvulos",
+      "module": "Material didáctico y de ambientación",
+      "image": "/static/situation-photos/preschool-246cf78f3d7f.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 159509,
+      "ok": true
+    },
+    {
+      "course": "Metalurgia Extractiva",
+      "module": "Transformación mecánica de los minerales",
+      "image": "/static/situation-photos/metallurgy-1f75bffbdab3.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 70860,
+      "ok": true
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module": "Relación con la familia",
+      "image": "/static/situation-photos/preschool-8ae5ceba31c0.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 233934,
+      "ok": true
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module": "Salud en párvulos",
+      "image": "/static/situation-photos/preschool-a1a601ca9125.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 243453,
+      "ok": true
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module": "Recreación y bienestar de los párvulos",
+      "image": "/static/situation-photos/preschool-ebf9251d5c0e.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 205513,
+      "ok": true
+    },
+    {
+      "course": "Atención de Párvulos",
       "module": "Expresión literaria y teatral con párvulos",
       "image": "/static/situation-photos/firstaid-05b77ba1bcb4.jpg",
       "status": 200,
@@ -2773,11 +2764,11 @@
     },
     {
       "course": "Atención de Párvulos",
-      "module": "Higiene y seguridad de los párvulos",
-      "image": "/static/encargo-photos/handwash.jpg",
+      "module": "Actividades educativas para párvulos",
+      "image": "/static/encargo-photos/firstaid.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 119107,
+      "bytes": 122875,
       "ok": true
     },
     {
@@ -2787,6 +2778,15 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 106239,
+      "ok": true
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module": "Expresión musical para párvulos",
+      "image": "/static/situation-photos/preschool-54d8fd05699f.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 333455,
       "ok": true
     },
     {
@@ -2808,15 +2808,6 @@
       "ok": true
     },
     {
-      "course": "Metalurgia Extractiva",
-      "module": "Transformación mecánica de los minerales",
-      "image": "/static/situation-photos/metallurgy-1f75bffbdab3.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 70860,
-      "ok": true
-    },
-    {
       "course": "Conectividad y Redes",
       "module": "Instalación de redes de área local cableadas e inalámbricas",
       "image": "/static/situation-photos/network-3e5525c82a87.jpg",
@@ -2827,11 +2818,11 @@
     },
     {
       "course": "Conectividad y Redes",
-      "module": "Ensamblado y configuración de computadores y equipos terminales portátiles",
-      "image": "/static/situation-photos/network-5d3f81a2c319.jpg",
+      "module": "Configuración y puesta en servicio de aplicaciones en redes de área local",
+      "image": "/static/situation-photos/programming-ad61288ffefe.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 98745,
+      "bytes": 129405,
       "ok": true
     },
     {
@@ -2844,21 +2835,21 @@
       "ok": true
     },
     {
-      "course": "Conectividad y Redes",
-      "module": "Instalación y explotación de software de aplicaciones productivas",
-      "image": "/static/situation-photos/programming-a21852c9eb06.jpg",
+      "course": "Atención de Párvulos",
+      "module": "Higiene y seguridad de los párvulos",
+      "image": "/static/encargo-photos/handwash.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 200443,
+      "bytes": 119107,
       "ok": true
     },
     {
       "course": "Conectividad y Redes",
-      "module": "Mantenimiento y actualización de software en redes de área local",
-      "image": "/static/situation-photos/programming-c103c4da6a7c.jpg",
+      "module": "Mantenimiento y actualización de hardware en redes de área local",
+      "image": "/static/situation-photos/server-1061931b9b7e.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 225433,
+      "bytes": 223519,
       "ok": true
     },
     {
@@ -2880,6 +2871,15 @@
       "ok": true
     },
     {
+      "course": "Conectividad y Redes",
+      "module": "Instalación y explotación de software de aplicaciones productivas",
+      "image": "/static/situation-photos/programming-a21852c9eb06.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 200443,
+      "ok": true
+    },
+    {
       "course": "Programación",
       "module": null,
       "image": "/static/encargo-photos/programming.jpg",
@@ -2889,30 +2889,21 @@
       "ok": true
     },
     {
-      "course": "Programación",
-      "module": "Programación y bases de datos",
-      "image": "/static/situation-photos/programming-1540b0879964.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 394180,
-      "ok": true
-    },
-    {
-      "course": "Programación",
-      "module": "Instalación y configuración de equipos informáticos",
-      "image": "/static/situation-photos/programming-2d218575e294.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 80008,
-      "ok": true
-    },
-    {
       "course": "Conectividad y Redes",
-      "module": "Mantenimiento y actualización de hardware en redes de área local",
-      "image": "/static/situation-photos/server-1061931b9b7e.jpg",
+      "module": "Mantenimiento y actualización de software en redes de área local",
+      "image": "/static/situation-photos/programming-c103c4da6a7c.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 223519,
+      "bytes": 225433,
+      "ok": true
+    },
+    {
+      "course": "Programación",
+      "module": "Sistemas operativos",
+      "image": "/static/situation-photos/programming-38b08409160b.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 132459,
       "ok": true
     },
     {
@@ -2925,12 +2916,12 @@
       "ok": true
     },
     {
-      "course": "Atención de Párvulos",
-      "module": "Actividades educativas para párvulos",
-      "image": "/static/encargo-photos/firstaid.jpg",
+      "course": "Programación",
+      "module": "Soporte a usuarios y productividad",
+      "image": "/static/situation-photos/programming-2fc5ffe1722a.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 122875,
+      "bytes": 107480,
       "ok": true
     },
     {
@@ -2952,12 +2943,39 @@
       "ok": true
     },
     {
+      "course": "Conectividad y Redes",
+      "module": "Ensamblado y configuración de computadores y equipos terminales portátiles",
+      "image": "/static/situation-photos/network-5d3f81a2c319.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 98745,
+      "ok": true
+    },
+    {
       "course": "Programación",
       "module": "Desarrollo de aplicaciones web",
       "image": "/static/situation-photos/programming-97e51b439c02.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 135826,
+      "ok": true
+    },
+    {
+      "course": "Telecomunicaciones",
+      "module": null,
+      "image": "/static/encargo-photos/telecom.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 164779,
+      "ok": true
+    },
+    {
+      "course": "Telecomunicaciones",
+      "module": "Instalación y mantenimiento básico de un terminal informático",
+      "image": "/static/situation-photos/telecom-0ef5b59433ae.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 94209,
       "ok": true
     },
     {
@@ -2971,47 +2989,11 @@
     },
     {
       "course": "Programación",
-      "module": "Soporte a usuarios y productividad",
-      "image": "/static/situation-photos/programming-2fc5ffe1722a.jpg",
+      "module": "Programación y bases de datos",
+      "image": "/static/situation-photos/programming-1540b0879964.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 107480,
-      "ok": true
-    },
-    {
-      "course": "Programación",
-      "module": "Sistemas operativos",
-      "image": "/static/situation-photos/programming-38b08409160b.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 132459,
-      "ok": true
-    },
-    {
-      "course": "Telecomunicaciones",
-      "module": "Operaciones y fundamentos de las telecomunicaciones",
-      "image": "/static/situation-photos/telecom-00a4d9f553c0.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 264440,
-      "ok": true
-    },
-    {
-      "course": "Conectividad y Redes",
-      "module": "Configuración y puesta en servicio de aplicaciones en redes de área local",
-      "image": "/static/situation-photos/programming-ad61288ffefe.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 129405,
-      "ok": true
-    },
-    {
-      "course": "Telecomunicaciones",
-      "module": "Instalación y mantenimiento básico de un terminal informático",
-      "image": "/static/situation-photos/telecom-0ef5b59433ae.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 94209,
+      "bytes": 394180,
       "ok": true
     },
     {
@@ -3021,6 +3003,24 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 283382,
+      "ok": true
+    },
+    {
+      "course": "Programación",
+      "module": "Instalación y configuración de equipos informáticos",
+      "image": "/static/situation-photos/programming-2d218575e294.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 80008,
+      "ok": true
+    },
+    {
+      "course": "Telecomunicaciones",
+      "module": "Operaciones y fundamentos de las telecomunicaciones",
+      "image": "/static/situation-photos/telecom-00a4d9f553c0.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 264440,
       "ok": true
     },
     {
@@ -3060,57 +3060,12 @@
       "ok": true
     },
     {
-      "course": "Telecomunicaciones",
-      "module": "Emprendimiento y empleabilidad",
-      "image": "/static/situation-photos/meeting-bcfbe5bfea8a.jpg",
+      "course": "Metalurgia Extractiva",
+      "module": "Técnicas de hidrometalurgia",
+      "image": "/static/situation-photos/metallurgy-60136274d7f7.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 74146,
-      "ok": true
-    },
-    {
-      "course": "Administración, mención Logística",
-      "module": null,
-      "image": "/static/situation-photos/warehouse-18aa199619f9.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 154529,
-      "ok": true
-    },
-    {
-      "course": "Telecomunicaciones",
-      "module": null,
-      "image": "/static/encargo-photos/telecom.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 164779,
-      "ok": true
-    },
-    {
-      "course": "Administración, mención Logística",
-      "module": "Utilización de información contable",
-      "image": "/static/situation-photos/accounting-ee0c3fdbf233.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 293761,
-      "ok": true
-    },
-    {
-      "course": "Administración, mención Logística",
-      "module": "Atención de clientes",
-      "image": "/static/situation-photos/warehouse-3b2c42171be4.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 163928,
-      "ok": true
-    },
-    {
-      "course": "Telecomunicaciones",
-      "module": "Instalación de redes telefónicas convergentes",
-      "image": "/static/situation-photos/telecom-93490028fc23.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 261468,
+      "bytes": 175112,
       "ok": true
     },
     {
@@ -3124,11 +3079,47 @@
     },
     {
       "course": "Administración, mención Logística",
+      "module": null,
+      "image": "/static/situation-photos/warehouse-18aa199619f9.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 154529,
+      "ok": true
+    },
+    {
+      "course": "Administración, mención Logística",
+      "module": "Utilización de información contable",
+      "image": "/static/situation-photos/accounting-ee0c3fdbf233.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 293761,
+      "ok": true
+    },
+    {
+      "course": "Administración, mención Logística",
+      "module": "Gestión comercial y tributaria",
+      "image": "/static/situation-photos/accounting-f501aac725de.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 108142,
+      "ok": true
+    },
+    {
+      "course": "Administración, mención Logística",
       "module": "Procesos administrativos",
       "image": "/static/situation-photos/warehouse-31e2105197a7.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 279130,
+      "ok": true
+    },
+    {
+      "course": "Administración, mención Logística",
+      "module": "Atención de clientes",
+      "image": "/static/situation-photos/warehouse-3b2c42171be4.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 163928,
       "ok": true
     },
     {
@@ -3141,21 +3132,12 @@
       "ok": true
     },
     {
-      "course": "Administración, mención Logística",
-      "module": "Operaciones de almacenamiento",
-      "image": "/static/situation-photos/warehouse-7087a449796f.jpg",
+      "course": "Telecomunicaciones",
+      "module": "Instalación de redes telefónicas convergentes",
+      "image": "/static/situation-photos/telecom-93490028fc23.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 218541,
-      "ok": true
-    },
-    {
-      "course": "Administración, mención Logística",
-      "module": "Operaciones de bodega",
-      "image": "/static/situation-photos/warehouse-999de9f1c1cd.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 231752,
+      "bytes": 261468,
       "ok": true
     },
     {
@@ -3177,12 +3159,21 @@
       "ok": true
     },
     {
-      "course": "Administración, mención Recursos Humanos",
-      "module": "Utilización de información contable",
-      "image": "/static/situation-photos/accounting-845d5f9a22d1.jpg",
+      "course": "Administración, mención Logística",
+      "module": "Organización de oficinas",
+      "image": "/static/situation-photos/warehouse-3b3a40d4dd73.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 141762,
+      "bytes": 148309,
+      "ok": true
+    },
+    {
+      "course": "Administración, mención Recursos Humanos",
+      "module": null,
+      "image": "/static/situation-photos/office-48743566506f.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 124350,
       "ok": true
     },
     {
@@ -3192,15 +3183,6 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 367929,
-      "ok": true
-    },
-    {
-      "course": "Administración, mención Recursos Humanos",
-      "module": "Gestión comercial y tributaria",
-      "image": "/static/situation-photos/accounting-992d4a20392f.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 211523,
       "ok": true
     },
     {
@@ -3223,29 +3205,20 @@
     },
     {
       "course": "Administración, mención Recursos Humanos",
-      "module": "Organización de oficinas",
-      "image": "/static/situation-photos/office-a2f1c54bca16.jpg",
+      "module": "Utilización de información contable",
+      "image": "/static/situation-photos/accounting-845d5f9a22d1.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 144153,
+      "bytes": 141762,
       "ok": true
     },
     {
-      "course": "Administración, mención Logística",
-      "module": "Gestión comercial y tributaria",
-      "image": "/static/situation-photos/accounting-f501aac725de.jpg",
+      "course": "Telecomunicaciones",
+      "module": "Emprendimiento y empleabilidad",
+      "image": "/static/situation-photos/meeting-bcfbe5bfea8a.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 108142,
-      "ok": true
-    },
-    {
-      "course": "Administración, mención Recursos Humanos",
-      "module": "Aplicaciones informáticas para la gestión administrativa",
-      "image": "/static/situation-photos/office-bef741e894c4.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 339600,
+      "bytes": 74146,
       "ok": true
     },
     {
@@ -3259,11 +3232,29 @@
     },
     {
       "course": "Administración, mención Recursos Humanos",
-      "module": null,
-      "image": "/static/situation-photos/office-48743566506f.jpg",
+      "module": "Cálculo de remuneración, finiquitos y obligaciones laborales",
+      "image": "/static/situation-photos/accounting-ddec19777539.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 124350,
+      "bytes": 150769,
+      "ok": true
+    },
+    {
+      "course": "Administración, mención Logística",
+      "module": "Operaciones de bodega",
+      "image": "/static/situation-photos/warehouse-999de9f1c1cd.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 231752,
+      "ok": true
+    },
+    {
+      "course": "Administración, mención Recursos Humanos",
+      "module": "Organización de oficinas",
+      "image": "/static/situation-photos/office-a2f1c54bca16.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 144153,
       "ok": true
     },
     {
@@ -3285,12 +3276,21 @@
       "ok": true
     },
     {
-      "course": "Agropecuaria, mención Agricultura",
-      "module": null,
-      "image": "/static/encargo-photos/crops.jpg",
+      "course": "Administración, mención Recursos Humanos",
+      "module": "Aplicaciones informáticas para la gestión administrativa",
+      "image": "/static/situation-photos/office-bef741e894c4.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 248121,
+      "bytes": 339600,
+      "ok": true
+    },
+    {
+      "course": "Administración, mención Recursos Humanos",
+      "module": "Emprendimiento y empleabilidad",
+      "image": "/static/situation-photos/meeting-044ca375e494.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 114651,
       "ok": true
     },
     {
@@ -3304,6 +3304,15 @@
     },
     {
       "course": "Agropecuaria, mención Agricultura",
+      "module": "Manejo de técnicas de riego",
+      "image": "/static/situation-photos/irrigation-36a258c52b8a.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 413798,
+      "ok": true
+    },
+    {
+      "course": "Agropecuaria, mención Agricultura",
       "module": "Técnicas de reproducción vegetal",
       "image": "/static/encargo-photos/seedlings.jpg",
       "status": 200,
@@ -3312,12 +3321,12 @@
       "ok": true
     },
     {
-      "course": "Administración, mención Recursos Humanos",
-      "module": "Cálculo de remuneración, finiquitos y obligaciones laborales",
-      "image": "/static/situation-photos/accounting-ddec19777539.jpg",
+      "course": "Agropecuaria, mención Agricultura",
+      "module": "Alimentación y pesaje pecuario",
+      "image": "/static/situation-photos/cattle-7ddfc10a5980.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 150769,
+      "bytes": 251695,
       "ok": true
     },
     {
@@ -3330,12 +3339,12 @@
       "ok": true
     },
     {
-      "course": "Agropecuaria, mención Agricultura",
-      "module": "Alimentación y pesaje pecuario",
-      "image": "/static/situation-photos/cattle-7ddfc10a5980.jpg",
+      "course": "Administración, mención Recursos Humanos",
+      "module": "Gestión comercial y tributaria",
+      "image": "/static/situation-photos/accounting-992d4a20392f.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 251695,
+      "bytes": 211523,
       "ok": true
     },
     {
@@ -3358,20 +3367,11 @@
     },
     {
       "course": "Agropecuaria, mención Agricultura",
-      "module": "Mantenimiento de maquinarias y equipos agrícolas",
-      "image": "/static/situation-photos/crops-59ba77c32de6.jpg",
+      "module": "Postcosecha y guarda de productos agrícolas",
+      "image": "/static/situation-photos/crops-2a0114588b7b.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 129966,
-      "ok": true
-    },
-    {
-      "course": "Agropecuaria, mención Agricultura",
-      "module": "Emprendimiento y empleabilidad",
-      "image": "/static/situation-photos/crops-5b3303b97aa2.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 198075,
+      "bytes": 145613,
       "ok": true
     },
     {
@@ -3393,21 +3393,39 @@
       "ok": true
     },
     {
-      "course": "Agropecuaria, mención Agricultura",
-      "module": "Postcosecha y guarda de productos agrícolas",
-      "image": "/static/situation-photos/crops-2a0114588b7b.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 145613,
-      "ok": true
-    },
-    {
       "course": "Agropecuaria, mención Pecuaria",
       "module": "Manejo de técnicas de riego",
       "image": "/static/situation-photos/irrigation-4045d889a497.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 227729,
+      "ok": true
+    },
+    {
+      "course": "Agropecuaria, mención Pecuaria",
+      "module": "Alimentación y pesaje pecuario",
+      "image": "/static/situation-photos/cattle-15645b98819f.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 348789,
+      "ok": true
+    },
+    {
+      "course": "Agropecuaria, mención Agricultura",
+      "module": "Mantenimiento de maquinarias y equipos agrícolas",
+      "image": "/static/situation-photos/crops-59ba77c32de6.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 129966,
+      "ok": true
+    },
+    {
+      "course": "Agropecuaria, mención Agricultura",
+      "module": "Emprendimiento y empleabilidad",
+      "image": "/static/situation-photos/crops-5b3303b97aa2.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 198075,
       "ok": true
     },
     {
@@ -3421,38 +3439,20 @@
     },
     {
       "course": "Agropecuaria, mención Agricultura",
-      "module": "Manejo de técnicas de riego",
-      "image": "/static/situation-photos/irrigation-36a258c52b8a.jpg",
+      "module": null,
+      "image": "/static/encargo-photos/crops.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 413798,
+      "bytes": 248121,
       "ok": true
     },
     {
       "course": "Agropecuaria, mención Pecuaria",
-      "module": "Alimentación y pesaje pecuario",
-      "image": "/static/situation-photos/cattle-15645b98819f.jpg",
+      "module": "Producción lechera",
+      "image": "/static/encargo-photos/dairy.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 348789,
-      "ok": true
-    },
-    {
-      "course": "Administración, mención Logística",
-      "module": "Organización de oficinas",
-      "image": "/static/situation-photos/warehouse-3b3a40d4dd73.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 148309,
-      "ok": true
-    },
-    {
-      "course": "Agropecuaria, mención Pecuaria",
-      "module": "Control de plagas y enfermedades",
-      "image": "/static/situation-photos/cattle-332451e26d5b.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 300644,
+      "bytes": 166920,
       "ok": true
     },
     {
@@ -3475,15 +3475,6 @@
     },
     {
       "course": "Agropecuaria, mención Pecuaria",
-      "module": "Producción lechera",
-      "image": "/static/encargo-photos/dairy.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 166920,
-      "ok": true
-    },
-    {
-      "course": "Agropecuaria, mención Pecuaria",
       "module": "Sanidad y bienestar animal",
       "image": "/static/situation-photos/cattle-7411f04c4cd9.jpg",
       "status": 200,
@@ -3502,38 +3493,11 @@
     },
     {
       "course": "Agropecuaria, mención Vitivinícola",
-      "module": "Manejo de técnicas de riego",
-      "image": "/static/situation-photos/irrigation-4bb4b2a43613.jpg",
+      "module": "Manejo de suelo y residuos",
+      "image": "/static/situation-photos/waste-3dd61747fa83.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 160219,
-      "ok": true
-    },
-    {
-      "course": "Agropecuaria, mención Vitivinícola",
-      "module": "Técnicas de reproducción vegetal",
-      "image": "/static/situation-photos/seedlings-01529b5c7c7f.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 102629,
-      "ok": true
-    },
-    {
-      "course": "Agropecuaria, mención Vitivinícola",
-      "module": "Alimentación y pesaje pecuario",
-      "image": "/static/situation-photos/cattle-aae14011108d.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 205648,
-      "ok": true
-    },
-    {
-      "course": "Agropecuaria, mención Vitivinícola",
-      "module": "Control de plagas y enfermedades",
-      "image": "/static/situation-photos/vineyard-0e7d5e485406.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 221475,
+      "bytes": 135215,
       "ok": true
     },
     {
@@ -3556,38 +3520,20 @@
     },
     {
       "course": "Agropecuaria, mención Vitivinícola",
-      "module": "Manejo de suelo y residuos",
-      "image": "/static/situation-photos/waste-3dd61747fa83.jpg",
+      "module": "Control de plagas y enfermedades",
+      "image": "/static/situation-photos/vineyard-0e7d5e485406.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 135215,
+      "bytes": 221475,
       "ok": true
     },
     {
       "course": "Agropecuaria, mención Vitivinícola",
-      "module": "Elaboración de vinos",
-      "image": "/static/encargo-photos/wine.jpg",
+      "module": "Alimentación y pesaje pecuario",
+      "image": "/static/situation-photos/cattle-aae14011108d.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 218871,
-      "ok": true
-    },
-    {
-      "course": "Agropecuaria, mención Vitivinícola",
-      "module": "Manejo de bodegas vitivinícolas",
-      "image": "/static/situation-photos/wine-6d5809309930.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 164402,
-      "ok": true
-    },
-    {
-      "course": "Agropecuaria, mención Vitivinícola",
-      "module": "Viticultura",
-      "image": "/static/situation-photos/vineyard-1a9f5a8095e2.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 666986,
+      "bytes": 205648,
       "ok": true
     },
     {
@@ -3601,20 +3547,65 @@
     },
     {
       "course": "Agropecuaria, mención Vitivinícola",
-      "module": "Envasado y maquinaria vitivinícola",
-      "image": "/static/situation-photos/packaging-31da584ac032.jpg",
+      "module": "Elaboración de vinos",
+      "image": "/static/encargo-photos/wine.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 181595,
+      "bytes": 218871,
+      "ok": true
+    },
+    {
+      "course": "Agropecuaria, mención Vitivinícola",
+      "module": "Técnicas de reproducción vegetal",
+      "image": "/static/situation-photos/seedlings-01529b5c7c7f.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 102629,
+      "ok": true
+    },
+    {
+      "course": "Agropecuaria, mención Pecuaria",
+      "module": "Control de plagas y enfermedades",
+      "image": "/static/situation-photos/cattle-332451e26d5b.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 300644,
+      "ok": true
+    },
+    {
+      "course": "Agropecuaria, mención Vitivinícola",
+      "module": "Viticultura",
+      "image": "/static/situation-photos/vineyard-1a9f5a8095e2.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 666986,
+      "ok": true
+    },
+    {
+      "course": "Agropecuaria, mención Vitivinícola",
+      "module": "Emprendimiento y empleabilidad",
+      "image": "/static/situation-photos/vineyard-590552b85e87.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 584299,
       "ok": true
     },
     {
       "course": "Construcción, mención Edificación",
-      "module": "Análisis de muestras de hormigón, suelos y materiales",
-      "image": "/static/situation-photos/concrete-2523aaf0c071.jpg",
+      "module": null,
+      "image": "/static/encargo-photos/construction.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 218755,
+      "bytes": 144354,
+      "ok": true
+    },
+    {
+      "course": "Administración, mención Logística",
+      "module": "Operaciones de almacenamiento",
+      "image": "/static/situation-photos/warehouse-7087a449796f.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 218541,
       "ok": true
     },
     {
@@ -3628,83 +3619,20 @@
     },
     {
       "course": "Agropecuaria, mención Vitivinícola",
-      "module": "Emprendimiento y empleabilidad",
-      "image": "/static/situation-photos/vineyard-590552b85e87.jpg",
+      "module": "Envasado y maquinaria vitivinícola",
+      "image": "/static/situation-photos/packaging-31da584ac032.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 584299,
+      "bytes": 181595,
       "ok": true
     },
     {
-      "course": "Administración, mención Recursos Humanos",
-      "module": "Emprendimiento y empleabilidad",
-      "image": "/static/situation-photos/meeting-044ca375e494.jpg",
+      "course": "Agropecuaria, mención Vitivinícola",
+      "module": "Manejo de bodegas vitivinícolas",
+      "image": "/static/situation-photos/wine-6d5809309930.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 114651,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Edificación",
-      "module": "Cubicación de materiales e insumos",
-      "image": "/static/situation-photos/tools-e8ae5a37962a.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 123708,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Edificación",
-      "module": null,
-      "image": "/static/encargo-photos/construction.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 144354,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Edificación",
-      "module": "Trazado de obras de construcción",
-      "image": "/static/situation-photos/construction-0629bf14efca.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 239139,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Edificación",
-      "module": "Prevención de riesgos en la construcción",
-      "image": "/static/situation-photos/safety-3b7284ca13a7.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 114983,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Edificación",
-      "module": "Carpintería estructural",
-      "image": "/static/situation-photos/construction-5fee9284d41f.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 180663,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Edificación",
-      "module": "Enfierradura para elementos estructurales",
-      "image": "/static/situation-photos/construction-7056c2d84e75.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 201339,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Edificación",
-      "module": "Emprendimiento y empleabilidad",
-      "image": "/static/situation-photos/construction-ae6f1bb6232f.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 267781,
+      "bytes": 164402,
       "ok": true
     },
     {
@@ -3726,21 +3654,39 @@
       "ok": true
     },
     {
-      "course": "Construcción, mención Terminaciones de la Construcción",
-      "module": null,
-      "image": "/static/situation-photos/construction-70da4e0547ec.jpg",
+      "course": "Construcción, mención Edificación",
+      "module": "Prevención de riesgos en la construcción",
+      "image": "/static/situation-photos/safety-3b7284ca13a7.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 241026,
+      "bytes": 114983,
       "ok": true
     },
     {
-      "course": "Construcción, mención Terminaciones de la Construcción",
-      "module": "Carpintería de instalación de faenas",
-      "image": "/static/situation-photos/construction-a282489df52b.jpg",
+      "course": "Agropecuaria, mención Vitivinícola",
+      "module": "Manejo de técnicas de riego",
+      "image": "/static/situation-photos/irrigation-4bb4b2a43613.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 189515,
+      "bytes": 160219,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Edificación",
+      "module": "Trazado de obras de construcción",
+      "image": "/static/situation-photos/construction-0629bf14efca.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 239139,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Edificación",
+      "module": "Análisis de muestras de hormigón, suelos y materiales",
+      "image": "/static/situation-photos/concrete-2523aaf0c071.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 218755,
       "ok": true
     },
     {
@@ -3753,6 +3699,78 @@
       "ok": true
     },
     {
+      "course": "Construcción, mención Edificación",
+      "module": "Carpintería estructural",
+      "image": "/static/situation-photos/construction-5fee9284d41f.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 180663,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Edificación",
+      "module": "Estructuras de hormigón",
+      "image": "/static/situation-photos/concrete-59256f31eb0e.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 201989,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Terminaciones de la Construcción",
+      "module": null,
+      "image": "/static/situation-photos/construction-70da4e0547ec.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 241026,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Edificación",
+      "module": "Cubicación de materiales e insumos",
+      "image": "/static/situation-photos/tools-e8ae5a37962a.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 123708,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Terminaciones de la Construcción",
+      "module": "Carpintería de instalación de faenas",
+      "image": "/static/situation-photos/construction-a282489df52b.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 189515,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Terminaciones de la Construcción",
+      "module": "Control y mantenimiento de bodegas y pañoles",
+      "image": "/static/situation-photos/packaging-88ad01efa02e.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 168464,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Terminaciones de la Construcción",
+      "module": "Cubicación de materiales e insumos",
+      "image": "/static/situation-photos/tiles-18dde294bc01.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 166000,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Edificación",
+      "module": "Enfierradura para elementos estructurales",
+      "image": "/static/situation-photos/construction-7056c2d84e75.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 201339,
+      "ok": true
+    },
+    {
       "course": "Construcción, mención Terminaciones de la Construcción",
       "module": "Interpretación de planos de construcción",
       "image": "/static/situation-photos/tiles-25f5fd35cfff.jpg",
@@ -3762,30 +3780,12 @@
       "ok": true
     },
     {
-      "course": "Construcción, mención Terminaciones de la Construcción",
-      "module": "Prevención de riesgos en la construcción",
-      "image": "/static/situation-photos/safety-8ec6ad63e8f5.jpg",
+      "course": "Construcción, mención Edificación",
+      "module": "Emprendimiento y empleabilidad",
+      "image": "/static/situation-photos/construction-ae6f1bb6232f.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 113535,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Terminaciones de la Construcción",
-      "module": "Trazado de obras de construcción",
-      "image": "/static/situation-photos/construction-a401ade53234.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 108337,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Terminaciones de la Construcción",
-      "module": "Impermeabilización y aislación de elementos",
-      "image": "/static/situation-photos/construction-a672e2185d21.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 217516,
+      "bytes": 267781,
       "ok": true
     },
     {
@@ -3799,11 +3799,20 @@
     },
     {
       "course": "Construcción, mención Terminaciones de la Construcción",
-      "module": "Cubicación de materiales e insumos",
-      "image": "/static/situation-photos/tiles-18dde294bc01.jpg",
+      "module": "Prevención de riesgos en la construcción",
+      "image": "/static/situation-photos/safety-8ec6ad63e8f5.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 166000,
+      "bytes": 113535,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Terminaciones de la Construcción",
+      "module": "Impermeabilización y aislación de elementos",
+      "image": "/static/situation-photos/construction-a672e2185d21.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 217516,
       "ok": true
     },
     {
@@ -3817,74 +3826,11 @@
     },
     {
       "course": "Construcción, mención Terminaciones de la Construcción",
-      "module": "Revestimientos para pisos, muros y cielos",
-      "image": "/static/encargo-photos/tiles.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 406863,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Terminaciones de la Construcción",
       "module": "Emprendimiento y empleabilidad",
       "image": "/static/situation-photos/tiles-2cbe9bacc4ad.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 197757,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Obras Viales e Infraestructura",
-      "module": "Análisis de muestras de hormigón, suelos y materiales",
-      "image": "/static/situation-photos/concrete-070914cba2d6.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 187642,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Obras Viales e Infraestructura",
-      "module": "Carpintería de instalación de faenas",
-      "image": "/static/situation-photos/road-017425426159.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 169413,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Terminaciones de la Construcción",
-      "module": "Instalación de cubiertas y elementos de evacuación de aguas lluvias",
-      "image": "/static/encargo-photos/roof.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 115223,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Obras Viales e Infraestructura",
-      "module": "Cubicación de materiales e insumos",
-      "image": "/static/situation-photos/road-7969793b3783.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 171395,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Edificación",
-      "module": "Estructuras de hormigón",
-      "image": "/static/situation-photos/concrete-59256f31eb0e.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 201989,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Obras Viales e Infraestructura",
-      "module": "Interpretación de planos de construcción",
-      "image": "/static/situation-photos/road-862f0a0a3959.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 284102,
       "ok": true
     },
     {
@@ -3898,6 +3844,42 @@
     },
     {
       "course": "Construcción, mención Obras Viales e Infraestructura",
+      "module": "Análisis de muestras de hormigón, suelos y materiales",
+      "image": "/static/situation-photos/concrete-070914cba2d6.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 187642,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Terminaciones de la Construcción",
+      "module": "Trazado de obras de construcción",
+      "image": "/static/situation-photos/construction-a401ade53234.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 108337,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Terminaciones de la Construcción",
+      "module": "Instalación de cubiertas y elementos de evacuación de aguas lluvias",
+      "image": "/static/encargo-photos/roof.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 115223,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Terminaciones de la Construcción",
+      "module": "Revestimientos para pisos, muros y cielos",
+      "image": "/static/encargo-photos/tiles.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 406863,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Obras Viales e Infraestructura",
       "module": "Prevención de riesgos en la construcción",
       "image": "/static/encargo-photos/safety.jpg",
       "status": 200,
@@ -3907,29 +3889,11 @@
     },
     {
       "course": "Construcción, mención Obras Viales e Infraestructura",
-      "module": "Trazado de obras de construcción",
-      "image": "/static/situation-photos/road-0c5a5c08a5e1.jpg",
+      "module": "Carpintería de instalación de faenas",
+      "image": "/static/situation-photos/road-017425426159.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 144554,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Obras Viales e Infraestructura",
-      "module": "Calidad en obras viales e infraestructura",
-      "image": "/static/situation-photos/road-21776ba8b495.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 181757,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Terminaciones de la Construcción",
-      "module": "Control y mantenimiento de bodegas y pañoles",
-      "image": "/static/situation-photos/packaging-88ad01efa02e.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 168464,
+      "bytes": 169413,
       "ok": true
     },
     {
@@ -3943,6 +3907,24 @@
     },
     {
       "course": "Construcción, mención Obras Viales e Infraestructura",
+      "module": "Calidad en obras viales e infraestructura",
+      "image": "/static/situation-photos/road-21776ba8b495.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 181757,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Obras Viales e Infraestructura",
+      "module": "Cubicación de materiales e insumos",
+      "image": "/static/situation-photos/road-7969793b3783.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 171395,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Obras Viales e Infraestructura",
       "module": "Mantenimiento de obras viales",
       "image": "/static/situation-photos/road-5f90cb2008c1.jpg",
       "status": 200,
@@ -3952,11 +3934,11 @@
     },
     {
       "course": "Construcción, mención Obras Viales e Infraestructura",
-      "module": "Infraestructura para la protección de la calzada",
-      "image": "/static/situation-photos/road-745a98962865.jpg",
+      "module": "Trazado de obras de construcción",
+      "image": "/static/situation-photos/road-0c5a5c08a5e1.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 173466,
+      "bytes": 144554,
       "ok": true
     },
     {
@@ -3966,6 +3948,15 @@
       "status": 200,
       "type": "image/jpeg",
       "bytes": 228751,
+      "ok": true
+    },
+    {
+      "course": "Química Industrial, mención Laboratorio Químico",
+      "module": null,
+      "image": "/static/situation-photos/laboratory-04ac107a0501.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 122078,
       "ok": true
     },
     {
@@ -3988,20 +3979,20 @@
     },
     {
       "course": "Química Industrial, mención Laboratorio Químico",
+      "module": "Fabricación de productos industriales",
+      "image": "/static/situation-photos/laboratory-07.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 77323,
+      "ok": true
+    },
+    {
+      "course": "Química Industrial, mención Laboratorio Químico",
       "module": "Cuidado del medioambiente y tratamiento de residuos",
       "image": "/static/situation-photos/waste-21eb3a5ccd4a.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 133592,
-      "ok": true
-    },
-    {
-      "course": "Construcción, mención Obras Viales e Infraestructura",
-      "module": "Conformación de la calzada",
-      "image": "/static/situation-photos/road-72e02908bec9.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 290853,
       "ok": true
     },
     {
@@ -4023,12 +4014,12 @@
       "ok": true
     },
     {
-      "course": "Química Industrial, mención Laboratorio Químico",
-      "module": null,
-      "image": "/static/situation-photos/laboratory-04ac107a0501.jpg",
+      "course": "Construcción, mención Obras Viales e Infraestructura",
+      "module": "Interpretación de planos de construcción",
+      "image": "/static/situation-photos/road-862f0a0a3959.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 122078,
+      "bytes": 284102,
       "ok": true
     },
     {
@@ -4060,20 +4051,11 @@
     },
     {
       "course": "Química Industrial, mención Laboratorio Químico",
-      "module": "Fabricación de productos industriales",
-      "image": "/static/situation-photos/laboratory-07.jpg",
+      "module": "Mantenimiento de equipos e instrumentos de laboratorio",
+      "image": "/static/situation-photos/laboratory-14.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 77323,
-      "ok": true
-    },
-    {
-      "course": "Química Industrial, mención Laboratorio Químico",
-      "module": "Emprendimiento y empleabilidad",
-      "image": "/static/situation-photos/laboratory-7e5aa4de7c96.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 150212,
+      "bytes": 132588,
       "ok": true
     },
     {
@@ -4087,24 +4069,6 @@
     },
     {
       "course": "Química Industrial, mención Planta Química",
-      "module": "Manejo y almacenamiento seguro de materiales",
-      "image": "/static/situation-photos/plant-01ade21a0a73.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 164284,
-      "ok": true
-    },
-    {
-      "course": "Química Industrial, mención Planta Química",
-      "module": "Técnicas, procesos y equipos de laboratorio",
-      "image": "/static/situation-photos/laboratory-02.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 156910,
-      "ok": true
-    },
-    {
-      "course": "Química Industrial, mención Planta Química",
       "module": "Fabricación de productos industriales",
       "image": "/static/situation-photos/plant-0241a6c05fb3.jpg",
       "status": 200,
@@ -4113,12 +4077,57 @@
       "ok": true
     },
     {
-      "course": "Química Industrial, mención Planta Química",
-      "module": "Acondicionamiento de sólidos y control automático",
-      "image": "/static/situation-photos/plant-22701b22748a.jpg",
+      "course": "Construcción, mención Obras Viales e Infraestructura",
+      "module": "Conformación de la calzada",
+      "image": "/static/situation-photos/road-72e02908bec9.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 151471,
+      "bytes": 290853,
+      "ok": true
+    },
+    {
+      "course": "Química Industrial, mención Planta Química",
+      "module": "Cuidado del medioambiente y tratamiento de residuos",
+      "image": "/static/situation-photos/waste-1fbd8a987fc8.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 170851,
+      "ok": true
+    },
+    {
+      "course": "Construcción, mención Obras Viales e Infraestructura",
+      "module": "Infraestructura para la protección de la calzada",
+      "image": "/static/situation-photos/road-745a98962865.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 173466,
+      "ok": true
+    },
+    {
+      "course": "Química Industrial, mención Laboratorio Químico",
+      "module": "Emprendimiento y empleabilidad",
+      "image": "/static/situation-photos/laboratory-7e5aa4de7c96.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 150212,
+      "ok": true
+    },
+    {
+      "course": "Química Industrial, mención Planta Química",
+      "module": "Transferencia de calor y operaciones unitarias",
+      "image": "/static/situation-photos/plant-1d7fef38c395.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 169216,
+      "ok": true
+    },
+    {
+      "course": "Química Industrial, mención Planta Química",
+      "module": "Manejo y almacenamiento seguro de materiales",
+      "image": "/static/situation-photos/plant-01ade21a0a73.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 164284,
       "ok": true
     },
     {
@@ -4167,30 +4176,12 @@
       "ok": true
     },
     {
-      "course": "Química Industrial, mención Planta Química",
-      "module": "Cuidado del medioambiente y tratamiento de residuos",
-      "image": "/static/situation-photos/waste-1fbd8a987fc8.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 170851,
-      "ok": true
-    },
-    {
       "course": "Mecánica Industrial, mención Máquinas-Herramientas",
       "module": "Mantenimiento de herramientas",
       "image": "/static/situation-photos/tools-41b42e64a724.jpg",
       "status": 200,
       "type": "image/jpeg",
       "bytes": 186979,
-      "ok": true
-    },
-    {
-      "course": "Química Industrial, mención Planta Química",
-      "module": "Transferencia de calor y operaciones unitarias",
-      "image": "/static/situation-photos/plant-1d7fef38c395.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 169216,
       "ok": true
     },
     {
@@ -4239,6 +4230,15 @@
       "ok": true
     },
     {
+      "course": "Química Industrial, mención Planta Química",
+      "module": "Acondicionamiento de sólidos y control automático",
+      "image": "/static/situation-photos/plant-22701b22748a.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 151471,
+      "ok": true
+    },
+    {
       "course": "Mecánica Industrial, mención Máquinas-Herramientas",
       "module": "Taladrado y rectificado de piezas mecánicas",
       "image": "/static/situation-photos/machining-3d1ce0b264ad.jpg",
@@ -4257,6 +4257,15 @@
       "ok": true
     },
     {
+      "course": "Mecánica Industrial, mención Máquinas-Herramientas",
+      "module": "Emprendimiento y empleabilidad",
+      "image": "/static/situation-photos/machining-418774ec9562.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 155167,
+      "ok": true
+    },
+    {
       "course": "Mecánica Industrial, mención Matricería",
       "module": null,
       "image": "/static/encargo-photos/molds.jpg",
@@ -4267,11 +4276,20 @@
     },
     {
       "course": "Mecánica Industrial, mención Matricería",
-      "module": "Soldadura",
-      "image": "/static/situation-photos/welding-7619691ba494.jpg",
+      "module": "Mantenimiento de herramientas",
+      "image": "/static/situation-photos/machining-764a903fa0e7.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 211936,
+      "bytes": 227912,
+      "ok": true
+    },
+    {
+      "course": "Mecánica Industrial, mención Matricería",
+      "module": "Lectura de manuales y planos",
+      "image": "/static/situation-photos/molds-67afb6573a86.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 125305,
       "ok": true
     },
     {
@@ -4294,15 +4312,6 @@
     },
     {
       "course": "Mecánica Industrial, mención Matricería",
-      "module": "Lectura de manuales y planos",
-      "image": "/static/situation-photos/molds-67afb6573a86.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 125305,
-      "ok": true
-    },
-    {
-      "course": "Mecánica Industrial, mención Matricería",
       "module": "Fabricación de matrices",
       "image": "/static/situation-photos/molds-19524a6f3bd4.jpg",
       "status": 200,
@@ -4311,39 +4320,48 @@
       "ok": true
     },
     {
-      "course": "Mecánica Industrial, mención Matricería",
-      "module": "Fabricación de moldes",
-      "image": "/static/situation-photos/molds-32830eeb32db.jpg",
+      "course": "Química Industrial, mención Planta Química",
+      "module": "Técnicas, procesos y equipos de laboratorio",
+      "image": "/static/situation-photos/laboratory-02.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 67899,
-      "ok": true
-    },
-    {
-      "course": "Mecánica Industrial, mención Máquinas-Herramientas",
-      "module": "Emprendimiento y empleabilidad",
-      "image": "/static/situation-photos/machining-418774ec9562.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 155167,
+      "bytes": 156910,
       "ok": true
     },
     {
       "course": "Mecánica Industrial, mención Matricería",
-      "module": "Emprendimiento y empleabilidad",
-      "image": "/static/situation-photos/molds-826c95be81d2.jpg",
+      "module": "Mantención de matrices y moldes",
+      "image": "/static/situation-photos/molds-418207ec5967.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 167022,
+      "bytes": 74652,
+      "ok": true
+    },
+    {
+      "course": "Mecánica Industrial, mención Matricería",
+      "module": "Diseño y dibujo de moldes y matrices",
+      "image": "/static/situation-photos/molds-4726917bf1b0.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 211800,
+      "ok": true
+    },
+    {
+      "course": "Mecánica Industrial, mención Matricería",
+      "module": "Soldadura",
+      "image": "/static/situation-photos/welding-7619691ba494.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 211936,
       "ok": true
     },
     {
       "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
-      "module": null,
-      "image": "/static/situation-photos/motor-7a0909c9bf90.jpg",
+      "module": "Soldadura",
+      "image": "/static/situation-photos/welding-8bdc2d2f3ce6.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 214324,
+      "bytes": 121591,
       "ok": true
     },
     {
@@ -4365,12 +4383,12 @@
       "ok": true
     },
     {
-      "course": "Mecánica Industrial, mención Matricería",
-      "module": "Mantenimiento de herramientas",
-      "image": "/static/situation-photos/machining-764a903fa0e7.jpg",
+      "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+      "module": "Mecánica de banco",
+      "image": "/static/encargo-photos/motor.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 227912,
+      "bytes": 188398,
       "ok": true
     },
     {
@@ -4384,47 +4402,29 @@
     },
     {
       "course": "Mecánica Industrial, mención Matricería",
-      "module": "Mantención de matrices y moldes",
-      "image": "/static/situation-photos/molds-418207ec5967.jpg",
+      "module": "Fabricación de moldes",
+      "image": "/static/situation-photos/molds-32830eeb32db.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 74652,
+      "bytes": 67899,
+      "ok": true
+    },
+    {
+      "course": "Mecánica Industrial, mención Matricería",
+      "module": "Emprendimiento y empleabilidad",
+      "image": "/static/situation-photos/molds-826c95be81d2.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 167022,
       "ok": true
     },
     {
       "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
-      "module": "Mecánica de banco",
-      "image": "/static/encargo-photos/motor.jpg",
+      "module": "Detección de fallas en sistemas industriales",
+      "image": "/static/situation-photos/motor-15819110f9b4.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 188398,
-      "ok": true
-    },
-    {
-      "course": "Química Industrial, mención Laboratorio Químico",
-      "module": "Mantenimiento de equipos e instrumentos de laboratorio",
-      "image": "/static/situation-photos/laboratory-14.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 132588,
-      "ok": true
-    },
-    {
-      "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
-      "module": "Soldadura",
-      "image": "/static/situation-photos/welding-8bdc2d2f3ce6.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 121591,
-      "ok": true
-    },
-    {
-      "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
-      "module": "Mantenimiento y reparación industrial",
-      "image": "/static/situation-photos/motor-045788c56e60.jpg",
-      "status": 200,
-      "type": "image/jpeg",
-      "bytes": 267843,
+      "bytes": 124648,
       "ok": true
     },
     {
@@ -4438,11 +4438,11 @@
     },
     {
       "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
-      "module": "Montaje de equipos y sistemas industriales",
-      "image": "/static/situation-photos/motor-65c62d018778.jpg",
+      "module": null,
+      "image": "/static/situation-photos/motor-7a0909c9bf90.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 50754,
+      "bytes": 214324,
       "ok": true
     },
     {
@@ -4455,21 +4455,21 @@
       "ok": true
     },
     {
-      "course": "Mecánica Industrial, mención Matricería",
-      "module": "Diseño y dibujo de moldes y matrices",
-      "image": "/static/situation-photos/molds-4726917bf1b0.jpg",
+      "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+      "module": "Montaje de equipos y sistemas industriales",
+      "image": "/static/situation-photos/motor-65c62d018778.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 211800,
+      "bytes": 50754,
       "ok": true
     },
     {
       "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
-      "module": "Detección de fallas en sistemas industriales",
-      "image": "/static/situation-photos/motor-15819110f9b4.jpg",
+      "module": "Mantenimiento y reparación industrial",
+      "image": "/static/situation-photos/motor-045788c56e60.jpg",
       "status": 200,
       "type": "image/jpeg",
-      "bytes": 124648,
+      "bytes": 267843,
       "ok": true
     }
   ]
