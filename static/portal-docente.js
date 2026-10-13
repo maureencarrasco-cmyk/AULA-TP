@@ -89,6 +89,7 @@ function nav() {
   const links = TABS.map(item => `<a href="${href(item.path)}" class="${item.id === tab.id ? 'is-active' : ''}" ${item.id === tab.id ? 'aria-current="page"' : ''}><span class="pd-ico ${item.id}" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="${ICONS[item.id]}" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>${esc(item.label)}</span></a>`).join('');
   document.getElementById('pd-nav').innerHTML = links;
   document.getElementById('pd-mobile').innerHTML = links;
+  document.getElementById('pd-topnav').innerHTML = links;
 }
 function courseTitle() {
   const course = fiveCourse();
@@ -121,7 +122,7 @@ function frame(body) {
   const tab = currentTab();
   const photo = HEAD[tab.id] || PHOTOS[2];
   const pos = photo[2] ? ` style="object-position:${photo[2]}"` : '';
-  return `<header class="pd-pagehead"><div class="pd-pagehead-copy"><p class="pd-kicker-page">${esc(tab.label)}</p><h1>${esc(tab.question)}</h1></div><div class="pd-pagehead-photo"><img src="${photo[0]}" alt="${esc(photo[1])}"${pos}></div></header><div class="pd-board">${body}</div>`;
+  return `<header class="pd-pagehead"><div class="pd-pagehead-copy"><h1>${esc(tab.label)}</h1><p>${esc(tab.question)}</p>${state.cohort ? '<p class="pd-note">Cohorte de demostración · Los indicadores no representan estudiantes reales.</p>' : ''}</div><div class="pd-pagehead-photo"><img src="${photo[0]}" alt="${esc(photo[1])}"${pos}></div></header><div class="pd-board">${body}</div>`;
 }
 function quad(index, tone, kicker, title, body, flags) {
   const options = flags || {};
@@ -623,7 +624,7 @@ function panel() {
   }).join('');
   return `<div class="pd-home">
     <section class="pd-home-hero">
-      <div><p class="pd-home-kicker">Tu aula está viva</p><h1>${esc(greeting)}, ${esc(teacherName)}</h1><p>¿Cómo están avanzando tus estudiantes y qué conviene mirar hoy?</p></div>
+      <div><h1>Panel general</h1><p>${esc(greeting)}, ${esc(teacherName)}. Visión del aprendizaje y progreso de tus estudiantes.</p>${state.cohort ? '<p class="pd-note">Cohorte de demostración · Los indicadores no representan estudiantes reales.</p>' : ''}</div>
       <img src="${PHOTOS[2][0]}" alt="${esc(PHOTOS[2][1])}">
     </section>
     <section class="pd-home-metrics" aria-label="Indicadores esenciales">
@@ -757,7 +758,7 @@ function compliance() {
     quad(6, 'celeste', 'Decisión', 'Dónde mirar después de este número', spotlight('Si la media y la mediana se separan, abre el listado antes de comunicar un solo porcentaje.', [['Por estudiante', 'Pestaña Estudiantes'], ['Poca evidencia', 'Pestaña OA y AE']], `<p><a href="${href('/portal-docente/estudiantes')}">Ver estudiantes</a> · <a href="${href('/portal-docente/oa-ae')}">Revisar AE</a></p>`))
   ].join(''));
 }
-function reports() {
+function reportsEvidence() {
   const kpi = (((state.teacher || {}).kpi || {}).avance_porcentaje) || {};
   const values = scopedRecords().map(cumplimientoPct);
   const counts = signalCounts(studentGroups());
@@ -778,6 +779,111 @@ function reports() {
     quad(5, 'lila', 'Archivo', 'Qué descarga el CSV', spotlight('El CSV trae los registros reales del campus, no los 200 de demostración.', [['Gráficos', 'No se repiten en el archivo']], '<p><a href="/api/teacher/export.csv">Descargar CSV del cumplimiento del campus</a></p>')),
     quad(6, 'celeste', 'Decisión', 'Dónde está el resto de la evidencia', spotlight('La tendencia, el listado y el plan están en otras pestañas.', [['Tendencia y logro', 'Panel general'], ['Por estudiante', 'Estudiantes'], ['Plan', 'Cursos']], `<p><a href="${href('/portal-docente')}">Abrir el panel</a> · <a href="${href('/portal-docente/estudiantes')}">Ver estudiantes</a> · <a href="${href('/portal-docente/cursos')}">Ver la planificación</a></p>`))
   ].join(''));
+}
+const reportView = { tab: 'general', module: '', search: '', status: '', page: 0, size: 10 };
+const REPORT_TABS = [
+  ['general', 'Resumen general'], ['modules', 'Por módulo'], ['stations', 'Por estación'],
+  ['learning', 'Por OA y AE'], ['students', 'Por estudiante'], ['exams', 'Evaluaciones'], ['compare', 'Comparativos']
+];
+function reportRecords() {
+  return scopedRecords().filter(record => !reportView.module || String(record.module_id) === reportView.module);
+}
+function reportPeople(records) {
+  const groups = new Map();
+  records.forEach(record => {
+    const key = record.name || 'Sin nombre';
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(record);
+  });
+  return [...groups.values()].sort((a, b) => String(a[0].name).localeCompare(String(b[0].name), 'es'));
+}
+function reportPanel(title, content, className = '') {
+  return `<section class="pd-report-panel ${className}"><h2>${esc(title)}</h2>${content}</section>`;
+}
+function reportMetric(label, value, note, tone) {
+  const icon = ICONS[{ mint: 'estudiantes', violet: 'cumplimiento', orange: 'reportes', blue: 'oa-ae' }[tone]];
+  return `<article class="pd-report-metric ${tone}"><span class="pd-report-metric-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="${icon}" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>${esc(value)}</strong><h2>${esc(label)}</h2><p>${esc(note)}</p></div></article>`;
+}
+function reportDistribution(counts) {
+  const parts = [['Progreso esperado', counts.ok, '#48bd8b'], ['Conviene observar', counts.watch, '#ffc34c'], ['Requiere apoyo', counts.support, '#ff8058'], ['Sin recorrido', counts.none, '#b8cadc']];
+  const total = parts.reduce((sum, item) => sum + item[1], 0);
+  if (!total) return '<p class="pd-report-empty">Sin estudiantes registrados.</p>';
+  let cursor = 0;
+  const stops = parts.map(([, amount, color]) => {
+    const start = cursor; cursor += amount / total * 100;
+    return `${color} ${start}% ${cursor}%`;
+  }).join(',');
+  return `<div class="pd-report-distribution"><div class="pd-report-donut" style="background:conic-gradient(${stops})" role="img" aria-label="${esc(parts.map(([label, amount]) => `${label}: ${amount}`).join('; '))}"><div><strong>${total}</strong><span>estudiantes</span></div></div><ul>${parts.map(([label, amount, color]) => `<li><i style="background:${color}" aria-hidden="true"></i><span>${label}</span><b>${amount} (${Math.round(amount / total * 100)}%)</b></li>`).join('')}</ul></div>`;
+}
+function reportStudentTable(groups) {
+  const filtered = groups.filter(group => (!reportView.search || String(group[0].name).toLocaleLowerCase('es').includes(reportView.search.toLocaleLowerCase('es'))) && (!reportView.status || groupSignal(group).level === reportView.status));
+  const pages = Math.max(1, Math.ceil(filtered.length / reportView.size));
+  reportView.page = Math.min(reportView.page, pages - 1);
+  const start = reportView.page * reportView.size;
+  return `<div class="pd-report-table-tools"><label>Buscar estudiante<input id="pd-report-search" type="search" value="${esc(reportView.search)}" placeholder="Buscar estudiante..."></label><label>Estado<select id="pd-report-status"><option value="">Todos los estados</option>${[['ok', 'Progreso esperado'], ['watch', 'Conviene observar'], ['support', 'Requiere apoyo'], ['none', 'Sin recorrido']].map(([key, name]) => `<option value="${key}" ${reportView.status === key ? 'selected' : ''}>${name}</option>`).join('')}</select></label></div>${filtered.length ? peopleTable(filtered.slice(start, start + reportView.size)) : '<p class="pd-report-empty">No hay estudiantes que coincidan con estos filtros.</p>'}<footer class="pd-report-pagination"><span>${filtered.length ? `${start + 1}–${Math.min(start + reportView.size, filtered.length)}` : '0'} de ${filtered.length} estudiantes</span><div><button id="pd-report-prev" aria-label="Página anterior" ${reportView.page === 0 ? 'disabled' : ''}>‹</button><span>Página ${reportView.page + 1} de ${pages}</span><button id="pd-report-next" aria-label="Página siguiente" ${reportView.page >= pages - 1 ? 'disabled' : ''}>›</button></div></footer>`;
+}
+function reports() {
+  const records = reportRecords();
+  const people = reportPeople(records);
+  const modules = scopedModules().filter(module => !reportView.module || String(module.id) === reportView.module);
+  const scores = records.map(logro).filter(value => value != null);
+  const values = records.map(cumplimientoPct);
+  const coverage = aeCoverage().filter(item => modules.some(module => String(module.id) === String(item.module.id)));
+  const totalAe = coverage.reduce((sum, item) => sum + item.total, 0);
+  const coveredAe = coverage.reduce((sum, item) => sum + item.covered, 0);
+  const counts = signalCounts(people);
+  const moduleBars = modules.map(module => {
+    const list = records.filter(record => String(record.module_id) === String(module.id));
+    return { label: `M${module.position} · ${module.title}`, value: list.length ? mean(list.map(cumplimientoPct)) : null };
+  });
+  const stationNames = ['Contextualización', 'Aprendizajes esperados', 'Situación integradora', 'Evaluación', 'Retroalimentación y cierre'];
+  const stationBars = stationNames.map((name, index) => ({ label: `${index + 1}. ${name}`, value: records.length ? records.filter(record => stations(record) > index).length / records.length * 100 : null }));
+  const availableBars = (list, title) => list.some(item => item.value != null) ? bars(list.filter(item => item.value != null), { title }) : '<p class="pd-report-empty">Sin registros suficientes para mostrar este gráfico.</p>';
+  const byModules = reportPanel('Progreso por módulos', availableBars(moduleBars, 'Cumplimiento medio del recorrido'));
+  const byStations = reportPanel('Resultados por estaciones', availableBars(stationBars, 'Registros que completaron cada estación') + '<p class="pd-note">Estimación según el recorrido registrado de cinco estaciones; no representa actividades individuales.</p>');
+  const byLearning = reportPanel('Evidencia por Aprendizaje Esperado', availableBars(coverage.map(item => ({ label: `${item.ae.code || 'AE'} · M${item.module.position}`, value: item.total ? item.covered / item.total * 100 : null })).slice(0, 6), 'Cobertura de evidencia de AE') + `<p class="pd-note">${coverage.length} AE en el alcance seleccionado. Cobertura no equivale a logro de OA o AE.</p><a href="${href('/portal-docente/oa-ae')}">Ver OA, AE y criterios →</a>`);
+  const distribution = reportPanel('Distribución del acompañamiento', reportDistribution(counts));
+  const trend = reportPanel('Evolución del desempeño de selección', lineChart(weeklyPoints(records), 'Desempeño por semana') + '<p class="pd-note">Serie de resultados comparables; no es tiempo de uso ni evolución del cumplimiento.</p>');
+  const exams = reportPanel('Evaluaciones registradas', `<div class="pd-report-exam-total"><strong>${scores.length}</strong><span>registros con evaluación de selección</span></div><p>Logro medio: <b>${scores.length ? pct(mean(scores)) : 'Sin evaluaciones'}</b></p><p class="pd-note">No hay datos suficientes para clasificar evaluaciones por tipo formativo, sumativo o proyecto.</p>`);
+  const studentsPanel = reportPanel('Listado de estudiantes', `<div id="pd-report-student-list">${reportStudentTable(people)}</div>`, 'pd-report-students');
+  const actions = reportPanel('Acciones rápidas', `<div class="pd-report-actions"><button id="pd-report-print" type="button">Imprimir reporte / guardar PDF →</button><a href="/api/teacher/export.csv">Descargar datos reales del campus (CSV) →</a><a href="${href('/portal-docente/estudiantes')}">Revisar evidencia individual →</a><a href="${href('/portal-docente/cumplimiento')}">Ver cumplimiento →</a></div><p class="pd-note">El CSV original no incluye la cohorte de demostración ni los filtros de esta vista.</p>`);
+  const views = {
+    general: byModules + byLearning + byStations + trend + distribution + exams + studentsPanel + actions,
+    modules: byModules + exams + actions,
+    stations: byStations + distribution + actions,
+    learning: byLearning + reportPanel('OA y criterios del módulo', `<p>La evidencia de actividades y el logro de selección no permiten calcular por sí solos un porcentaje de OA logrados.</p><a href="${href('/portal-docente/oa-ae')}">Abrir la referencia curricular y sus criterios →</a>`) + actions,
+    students: studentsPanel + distribution + actions,
+    exams: exams + trend + actions,
+    compare: trend + byModules + reportPanel('Comparación entre períodos', '<p class="pd-report-empty">No hay cortes históricos del cumplimiento para comparar períodos. La serie semanal disponible corresponde a resultados de selección.</p>') + actions
+  };
+  return `<div class="pd-report"><header class="pd-report-heading"><div><h1>Reportes</h1><p>Genera, visualiza y descarga reportes del aprendizaje de tus estudiantes.</p></div><div class="pd-report-filters"><label>Curso<span>${esc(courseTitle())}</span></label><label>Período<span>${state.cohort ? '12 semanas · Demostración' : 'Estado actual'}</span></label><label>Módulo<select id="pd-report-module"><option value="">Todos los módulos</option>${scopedModules().map(module => `<option value="${module.id}" ${String(module.id) === reportView.module ? 'selected' : ''}>M${module.position} · ${esc(module.title)}</option>`).join('')}</select></label></div></header>${state.cohort ? '<p class="pd-report-demo" role="note">Cohorte de demostración: los indicadores y estudiantes de esta pantalla son ficticios. El CSV conserva los registros reales del campus.</p>' : ''}<section class="pd-report-metrics" aria-label="Indicadores del reporte">${reportMetric('Estudiantes', people.length, 'En el alcance seleccionado', 'mint')}${reportMetric('Cumplimiento medio', values.length ? pct(mean(values)) : '—', 'Recorrido de cinco estaciones', 'violet')}${reportMetric('Logro de selección', scores.length ? pct(mean(scores)) : '—', `${scores.length} registros evaluados`, 'orange')}${reportMetric('Evidencia de AE', totalAe ? pct(coveredAe / totalAe * 100) : '—', 'Cobertura, no logro curricular', 'blue')}</section><nav class="pd-report-tabs" aria-label="Vistas de reportes">${REPORT_TABS.map(([id, label]) => `<button type="button" data-report-tab="${id}" aria-pressed="${reportView.tab === id}">${esc(label)}</button>`).join('')}</nav><div class="pd-report-grid" id="pd-report-results">${views[reportView.tab]}</div><details class="pd-report-method"><summary>Definiciones, alcance y reporte original</summary>${reportsEvidence()}</details></div>`;
+}
+function bindReports() {
+  if (currentTab().id !== 'reportes') return;
+  document.querySelectorAll('[data-report-tab]').forEach(button => {
+    button.onclick = () => { reportView.tab = button.dataset.reportTab; draw(); };
+  });
+  document.getElementById('pd-report-module').onchange = event => { reportView.module = event.target.value; reportView.page = 0; draw(); };
+  const print = document.getElementById('pd-report-print');
+  if (print) print.onclick = () => window.print();
+  const refreshList = () => {
+    document.getElementById('pd-report-student-list').innerHTML = reportStudentTable(reportPeople(reportRecords()));
+    bindList();
+  };
+  const bindList = () => {
+    const search = document.getElementById('pd-report-search');
+    if (!search) return;
+    search.oninput = event => {
+      const cursor = event.target.selectionStart;
+      reportView.search = event.target.value; reportView.page = 0;
+      refreshList();
+      const field = document.getElementById('pd-report-search'); field.focus(); field.setSelectionRange(cursor, cursor);
+    };
+    document.getElementById('pd-report-status').onchange = event => { reportView.status = event.target.value; reportView.page = 0; refreshList(); };
+    document.getElementById('pd-report-prev').onclick = () => { reportView.page -= 1; refreshList(); };
+    document.getElementById('pd-report-next').onclick = () => { reportView.page += 1; refreshList(); };
+  };
+  bindList();
 }
 function sealRows() {
   return ((state.teacher && state.teacher.specialist_reviews) || []).filter(row => row.verdict === 'Sello del docente de la especialidad');
@@ -835,6 +941,7 @@ function draw() {
   document.querySelectorAll('a[href="/api/teacher/export.csv"]').forEach(link => { link.href = portalURL('/api/teacher/export.csv'); });
   document.title = `${tab.label} · Portal Docente`;
   bindSeal();
+  bindReports();
 }
 async function post(url, data) {
   return requestJSON(url, {
