@@ -213,6 +213,19 @@ tbody tr:nth-child(even) { background:#f8fbfe; }
 .pd-report-filters label { flex:1; }
 .pd-report-filters label > span, .pd-report :is(input,select) { display:block; border:1px solid #cfe0f4; border-radius:6px; background:#fff; color:#183567; font:inherit; padding:9px 12px; min-height:38px; max-width:100%; }
 .pd-report-filters label > span { font-weight:400; }
+.pd-report-heading { flex-direction:column; }
+.pd-report-filters.pd-filter-band { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); width:100%; max-width:100%; gap:20px; padding:16px; background:#f8fbff; border:1px solid #dce9f7; border-radius:8px; }
+.pd-filter-band label { gap:8px; }
+.pd-report-filters.pd-filter-band label > .pd-filter-label { border:0; border-radius:0; background:transparent; min-height:0; padding:0; color:#153b71; font-size:14px; font-weight:650; }
+.pd-report-filters.pd-filter-band label > .pd-filter-control { display:flex; align-items:center; gap:0; padding:0; min-height:50px; border:1px solid #c7def9; border-radius:6px; background:#fff; overflow:hidden; }
+.pd-filter-icon { flex:0 0 40px; height:40px; margin:4px; display:grid; place-items:center; background:#dfedff; color:#086abc; border-radius:5px; }
+.pd-filter-icon svg { width:26px; height:26px; }
+.pd-filter-icon.is-period { background:#d9f4ee; color:#007f73; font-size:27px; }
+.pd-filter-icon.is-module { background:#eee5ff; color:#7644bc; }
+.pd-filter-current { display:block; flex:1; min-width:0; padding:10px; color:#183c6f; font-size:14px; line-height:1.5; overflow-wrap:normal; word-break:normal; }
+.pd-filter-band .pd-filter-control select { flex:1; width:100%; min-width:0; min-height:48px; border:0; border-radius:0; padding:10px; background:#fff; color:#183c6f; font-size:14px; cursor:pointer; }
+.pd-filter-control:focus-within { outline:3px solid #007f79; outline-offset:2px; }
+@media (max-width:640px) { .pd-report-filters.pd-filter-band { grid-template-columns:minmax(0,1fr); padding:12px; gap:14px; } }
 .pd-report-demo { padding:8px 12px; border-left:3px solid #4196ef; background:#e4f2ff; font-size:12px; color:#254b77; }
 .pd-report-metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:16px 0; }
 .pd-report-metric { display:flex; align-items:center; gap:16px; padding:18px; border:1px solid #e0ebf7; background:#fff; border-radius:8px; min-width:0; --report-color:#087cff; --report-tint:#e3f1ff; }

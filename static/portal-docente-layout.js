@@ -27,7 +27,7 @@
   }
   function header(id) {
     const tab = TABS.find(item => item.id === id);
-    return `<header class="pd-report-heading"><div><h1>${esc(tab.label)}</h1><p>${esc(descriptions[id])}</p></div><div class="pd-report-filters"><label>Curso<span>${esc(courseTitle())}</span></label><label>Período<span>${state.cohort ? 'Demostración · 12 semanas' : 'Estado actual'}</span></label><label>Módulo<select id="pd-layout-module"><option value="">Todos los módulos</option>${scopedModules().map(module => `<option value="${module.id}" ${view.module === String(module.id) ? 'selected' : ''}>M${module.position} · ${esc(module.title)}</option>`).join('')}</select></label></div></header>${state.cohort ? '<p class="pd-report-demo">Cohorte de demostración. Los estudiantes e indicadores de esta pantalla no representan registros reales del campus.</p>' : ''}`;
+    return `<header class="pd-report-heading"><div><h1>${esc(tab.label)}</h1><p>${esc(descriptions[id])}</p></div>${teacherFilters('pd-layout-module',view.module,state.cohort ? 'Demostración · 12 semanas' : 'Estado actual')}</header>${state.cohort ? '<p class="pd-report-demo">Cohorte de demostración. Los estudiantes e indicadores de esta pantalla no representan registros reales del campus.</p>' : ''}`;
   }
   function moduleTable(data) {
     return `<div class="pd-table-wrap"><table><thead><tr><th>Módulo</th><th>Progreso medio</th><th>Registros</th></tr></thead><tbody>${data.modules.map(module => {

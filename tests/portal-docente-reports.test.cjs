@@ -62,3 +62,21 @@ test('pagination retains the selected page and clamps an exhausted filter', () =
   const filtered = vm.runInContext("reportView.search='Alumno 22'; reportStudentTable(reportPeople(reportRecords()))", context);
   assert.match(filtered, /Página 1 de 1/);
 });
+test('reference filter band keeps informative fields and original module options', () => {
+  const context = fixture();
+  const before = vm.runInContext('JSON.stringify(state.courses)', context);
+  const html = vm.runInContext("teacherFilters('pd-report-module','2','12 semanas · Demostración')", context);
+  assert.match(html, /pd-filter-band/);
+  assert.match(html, /pd-filter-icon is-course/);
+  assert.match(html, /pd-filter-icon is-period/);
+  assert.match(html, /pd-filter-icon is-module/);
+  assert.match(html, /M3 9h18/);
+  assert.match(html, /M12\.83 2\.18/);
+  assert.match(html, /Refrigeración y Climatización/);
+  assert.match(html, /12 semanas · Demostración/);
+  assert.match(html, /<select id="pd-report-module">/);
+  assert.match(html, /value="2" selected/);
+  assert.match(html, /value="1" >M1 · Planos/);
+  assert.equal((html.match(/<select/g) || []).length, 1);
+  assert.equal(vm.runInContext('JSON.stringify(state.courses)', context), before);
+});
