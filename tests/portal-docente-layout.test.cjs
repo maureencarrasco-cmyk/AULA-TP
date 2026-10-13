@@ -107,3 +107,29 @@ test('empty groups display zero rather than invented students',()=>{
   assert.match(groups,/Sin estudiantes en este grupo/);
   assert.doesNotMatch(groups,/data-layout-person=/);
 });
+test('pedagogical panels preserve counts, evidence and all seven existing navigation links',()=>{
+  const {context}=fixture();
+  const before=vm.runInContext('JSON.stringify([state.teacher,state.courses])',context);
+  const html=vm.runInContext("window.PortalLayout.render('resumen')",context);
+  const panels=html.split('<div class="pd-ped-panels">')[1].split('<details class="pd-report-method">')[0];
+  assert.match(panels,/pd-ped-panel is-alerts/);
+  assert.match(panels,/pd-ped-panel is-recommendations/);
+  assert.match(panels,/pd-ped-panel is-shortcuts/);
+  assert.match(panels,/<strong>1<\/strong><span>estudiantes requieren apoyo/);
+  assert.match(panels,/<strong>0<\/strong><span>conviene observar/);
+  assert.match(panels,/Revisar <strong>AE2<\/strong> del módulo 2/);
+  assert.match(panels,/<strong>0 de 1<\/strong> registros de evidencia/);
+  assert.equal((panels.match(/<a href=|<a class="pd-ped-cta" href=/g)||[]).length,7);
+  for(const url of ['/portal-docente/estudiantes','/portal-docente/cursos','/portal-docente/oa-ae','/portal-docente/reportes','/api/teacher/export.csv'])assert.ok(panels.includes(`href="${url}"`));
+  assert.equal(vm.runInContext('JSON.stringify([state.teacher,state.courses])',context),before);
+});
+test('pedagogical empty state and existing URL filters remain intact',()=>{
+  const {context}=fixture();
+  vm.runInContext("state.teacher.records=[];state.q='planos'",context);
+  const html=vm.runInContext("window.PortalLayout.render('resumen')",context);
+  const panels=html.split('<div class="pd-ped-panels">')[1].split('<details class="pd-report-method">')[0];
+  assert.match(panels,/Sin evidencia suficiente para una recomendación/);
+  assert.ok(panels.includes('href="/portal-docente/estudiantes?q=planos"'));
+  assert.ok(panels.includes('href="/api/teacher/export.csv"'));
+  assert.ok(!panels.includes('Ver criterios y evidencia'));
+});
