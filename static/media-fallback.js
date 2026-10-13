@@ -7,22 +7,17 @@
     climate: 'climate-secuencia',
     climatizacion: 'climate-secuencia'
   };
-  const POSTER = {
-    electricidad: '/static/themes/poster-electricidad.svg',
-    enfermeria: '/static/themes/poster-enfermeria.svg',
-    climate: '/static/themes/poster-climatizacion.svg',
-    climatizacion: '/static/themes/poster-climatizacion.svg',
-    automotriz: '/static/themes/poster-automotriz.svg',
-    automotive: '/static/themes/poster-automotriz.svg',
-    general: '/static/themes/poster-general.svg'
-  };
 
   function keyOf(course) {
     return typeof specialtyKey === 'function' ? specialtyKey(course) : 'general';
   }
 
   function posterFor(course) {
-    return POSTER[keyOf(course)] || POSTER.general;
+    const module = typeof current !== 'undefined' ? current : null;
+    const photo = typeof moduleArtworkPhoto === 'function' && module
+      ? moduleArtworkPhoto(course, module) : null;
+    const cover = typeof courseArtworkPhoto === 'function' ? courseArtworkPhoto(course) : null;
+    return photo?.image || cover?.image || '';
   }
 
   function sequenceFor(course, position) {
@@ -40,7 +35,9 @@
 
   function decorateVideo(html, poster) {
     if (!html) return '';
-    return html.replace('<video ', `<video poster="${poster || POSTER.general}" `);
+    if (!poster || /<video\b[^>]*\bposter=/.test(html)) return html;
+    const safe = String(poster).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+    return html.replace('<video ', `<video poster="${safe}" `);
   }
 
   function attach() {
@@ -51,7 +48,9 @@
     const origMedia = vis.mediaFor;
     vis.videoFigure = function (exp) {
       const html = origVideo(exp);
-      return decorateVideo(html, exp && exp.poster);
+      const course = typeof courses !== 'undefined' && typeof current !== 'undefined'
+        ? courses.find(item => item.id === current?.course_id) : null;
+      return decorateVideo(html, exp?.poster || posterFor(course));
     };
     vis.mediaFor = function (exp, opts) {
       return origMedia(exp, opts);
@@ -69,7 +68,7 @@
         v.replaceWith(note);
       });
     });
-    (root || document).querySelectorAll('img.header-photo, .vis-env, .vis-zoom-target img, .situation-photo img, .module-media-card img, .case-scene img').forEach(img => {
+    (root || document).querySelectorAll('img.header-photo, img.vis-env, img.vis-zoom-target, .situation-photo img, .module-media-card img, .case-scene img').forEach(img => {
       if (img.dataset.fallbackBound) return;
       img.dataset.fallbackBound = '1';
       img.addEventListener('error', () => {

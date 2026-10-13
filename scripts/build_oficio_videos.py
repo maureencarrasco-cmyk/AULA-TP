@@ -1,8 +1,10 @@
-"""Genera videos 60 s + VTT de procedimiento a partir del banco de oficio."""
+"""Build documentary sequences without changing the original activities."""
+import argparse
+import json
 from pathlib import Path
 import imageio.v2 as imageio
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
 OFICIO = ROOT / 'static' / 'themes' / 'oficio'
@@ -12,10 +14,24 @@ HEADERS = ROOT / 'static' / 'headers'
 
 FRAMES = {
     1: ['oficio-plano-leyenda.png', 'oficio-escala.png', 'oficio-cruce.png', 'oficio-drenaje.png'],
-    2: ['oficio-visor-21c.png', 'oficio-visor-25.png', 'oficio-intervalo.png', 'oficio-manometro.png'],
-    3: ['oficio-tramos.png', 'oficio-tuberias.png', 'oficio-cruce.png', 'oficio-acceso-cm.png'],
-    4: ['oficio-equipo-ctrl.png', 'oficio-acceso-cm.png', 'oficio-drenaje.png', 'oficio-visor-4c.png'],
+    2: ['oficio-visor-21c.png', 'oficio-visor-25.png', 'oficio-intervalo.png', 'table-2'],
+    3: ['oficio-tramos.png', 'oficio-tuberias.png', 'oficio-cruce.png', 'table-3'],
+    4: ['oficio-equipo-ctrl.png', 'table-4', 'oficio-drenaje.png', 'oficio-visor-4c.png'],
 }
+TABLES = {
+    2: [['Punto', 'Valor', 'Unidad'], ['A', '20,0', '°C'], ['B', '25', '—']],
+    3: [['Tramo', 'Longitud', 'Unidad'], ['A', '2,5', 'm'], ['B', '150', 'cm'], ['C', '3', 'm']],
+    4: [['Ítem', 'Dossier', 'Recibido'], ['Equipo', 'EQ-02', 'EQ-02'], ['Control', 'CTRL-01', 'CTRL-02'], ['Acceso', '30 cm', '24 cm']],
+}
+
+
+def verified_table(mid):
+    records = json.loads((ROOT / 'static/original-table-catalog.json').read_text(encoding='utf-8'))['records']
+    table = TABLES[mid]
+    if not any(row['table'] == table and row['course'] == 'Refrigeración y Climatización'
+               and any(location['moduleId'] == mid for location in row['locations']) for row in records):
+        raise ValueError(f'Table {mid} does not match the original module')
+    return table
 CAPTIONS = {
     1: [
         (0, 15, 'Paso 1. Lee el cajetín y la leyenda antes del color.'),
@@ -27,49 +43,83 @@ CAPTIONS = {
         (0, 15, 'Paso 1. Extrae valor, unidad y punto del visor.'),
         (15, 30, 'Paso 2. 25 sin unidad no es una lectura.'),
         (30, 45, 'Paso 3. Comprueba que el intervalo cubra el valor esperado.'),
-        (45, 60, 'Paso 4. La presión se lee en la escala del manómetro.'),
+        (45, 60, 'Paso 4. Contrasta valor, punto y unidad con el registro original.'),
     ],
     3: [
         (0, 15, 'Paso 1. Identifica tramos y unifica unidades.'),
         (15, 30, 'Paso 2. Líquido y succión no se distinguen solo por el color.'),
-        (30, 45, 'Paso 3. Prepara el puesto y la unión según NCh3241.'),
-        (45, 60, 'Paso 4. Verifica acceso y hermeticidad antes de cerrar.'),
+        (30, 45, 'Paso 3. Un cruce en planta no prueba colisión sin cota.'),
+        (45, 60, 'Paso 4. Registra los tramos y sus unidades antes de calcular.'),
     ],
     4: [
         (0, 15, 'Paso 1. Contrasta equipo recibido con el dossier.'),
-        (15, 30, 'Paso 2. Mide el acceso lateral contra la ficha.'),
-        (30, 45, 'Paso 3. Revisa drenaje y obras previas del recinto.'),
-        (45, 60, 'Paso 4. Verifica el control automático antes de firmar.'),
+        (15, 30, 'Paso 2. Contrasta acceso y control con el dossier original.'),
+        (30, 45, 'Paso 3. Observa el recinto; el drenaje requiere documentación.'),
+        (45, 60, 'Paso 4. Una lectura aislada no confirma funcionamiento estable.'),
     ],
 }
 
 
-def load_frame(name, size=(960, 540), caption=''):
-    src = OFICIO / name
-    im = Image.open(src).convert('RGB')
-    im = im.resize(size, Image.Resampling.LANCZOS)
+def load_frame(name, size=(1280, 864), caption=''):
+    im = Image.new('RGB', size, '#edf5fa')
     draw = ImageDraw.Draw(im)
-    draw.rectangle((0, size[1] - 72, size[0], size[1]), fill=(11, 58, 107))
     try:
-        font = ImageFont.truetype('arial.ttf', 22)
+        font = ImageFont.truetype('arial.ttf', 26)
     except OSError:
         font = ImageFont.load_default()
-    draw.text((24, size[1] - 52), caption, fill=(247, 241, 227), font=font)
+    image_height = size[1] - 144
+    if name.startswith('table-'):
+        table = verified_table(int(name.split('-')[1]))
+        draw.text((48, 40), 'Registro original del ejercicio · sin datos añadidos', font=font, fill='#123957')
+        col_width = (size[0] - 96) // len(table[0])
+        for i, row in enumerate(table):
+            for j, cell in enumerate(row):
+                x, y = 48 + j * col_width, 120 + i * 90
+                draw.rectangle((x, y, x + col_width, y + 90), fill='#dceef7' if i == 0 else '#ffffff', outline='#83bdce', width=2)
+                draw.text((x + 20, y + 30), str(cell), font=font, fill='#123957')
+    else:
+        with Image.open(OFICIO / name) as source:
+            fitted = ImageOps.contain(source.convert('RGB'), (size[0], image_height), Image.Resampling.LANCZOS)
+        im.paste(fitted, ((size[0] - fitted.width) // 2, (image_height - fitted.height) // 2))
+    draw.rectangle((0, image_height, size[0], size[1]), fill=(11, 58, 107))
+    draw.text((24, image_height + 18), 'REVISIÓN DOCUMENTAL · No demuestra una ejecución técnica', fill='white', font=font)
+    words, lines, line = caption.split(), [], ''
+    for word in words:
+        candidate = (line + ' ' + word).strip()
+        if draw.textlength(candidate, font=font) > size[0] - 48:
+            lines.append(line)
+            line = word
+        else:
+            line = candidate
+    lines.append(line)
+    if len(lines) > 2:
+        raise ValueError('Caption exceeds the reserved area')
+    draw.multiline_text((24, image_height + 62), '\n'.join(lines), fill='white', font=font, spacing=5)
     return np.array(im)
 
 
 def write_vtt(path, cues):
+    def timestamp(seconds):
+        minutes, seconds = divmod(seconds, 60)
+        hours, minutes = divmod(minutes, 60)
+        return f'{hours:02d}:{minutes:02d}:{seconds:02d}.000'
+
     lines = ['WEBVTT', '']
     for a, b, text in cues:
-        lines.append(f'00:{a:02d}.000 --> 00:{b:02d}.000')
+        lines.append(f'{timestamp(a)} --> {timestamp(b)}')
         lines.append(text)
         lines.append('')
     path.write_text('\n'.join(lines), encoding='utf-8')
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--modules', nargs='+', type=int, choices=FRAMES, default=list(FRAMES))
+    parser.add_argument('--include-context', action='store_true')
+    args = parser.parse_args()
     fps = 2
-    for mid, files in FRAMES.items():
+    for mid in args.modules:
+        files = FRAMES[mid]
         cues = CAPTIONS[mid]
         frames = []
         for i, name in enumerate(files):
@@ -80,6 +130,8 @@ def main():
         imageio.mimsave(dest, frames, fps=fps, codec='libx264', quality=7)
         write_vtt(OUT / f'm{mid}-secuencia.vtt', cues)
         print('wrote', dest, 'frames', len(frames))
+    if not args.include_context:
+        return
     generic_cues = [
         (0, 5, 'Paso 1. Observa la evidencia antes de decidir.'),
         (5, 10, 'Paso 2. Relaciona el dato con el criterio del aprendizaje.'),

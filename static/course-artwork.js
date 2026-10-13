@@ -11,9 +11,12 @@ const courseContextExcludedFiles = new Set([
   'welding-b31e7f47391e.jpg', 'metallurgy-bf8c217d4332.jpg',
   'silviculture.jpg', 'accounting.jpg'
 ]);
+const courseReviewedExcludedFiles = new Set((window.AulaCourseArtworkData?.rejectedImages || [])
+  .map(path => path.split('/').pop()));
 function courseContextPhotoAllowed(photo) {
   const file = String(photo?.image || photo?.file || '').split('?')[0].split('/').pop();
-  return Boolean(file) && !courseContextExcludedFiles.has(file);
+  return Boolean(file) && !courseContextExcludedFiles.has(file)
+    && !courseReviewedExcludedFiles.has(file);
 }
 function courseArtworkRecord(course) {
   const title = courseArtworkFold(course?.title || course?.course_title);

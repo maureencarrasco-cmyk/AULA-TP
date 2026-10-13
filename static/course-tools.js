@@ -19,7 +19,7 @@ function curriculumNote(){const c=current.content.curriculum;if(!c)return '';con
 function ctxStepMark(n,kicker,title){return `<span class="ctx-step-n">${n}</span><div><span class="work-kicker">${kicker}</span><h4>${title}</h4></div>`}
 function ctxStepHead(n,kicker,title){return `<header class="ctx-step-head">${ctxStepMark(n,kicker,title)}</header>`}
 function enrichedContext(){return contextualizationPanel()}
-function currentScene(){return current.content.scene||{title:'Inspección del sistema · Escenario 3D simplificado',prompt:'La planta identifica UI-01 y UE-01, pero el listado recibido omite el control. ¿Cómo comprobarías esa diferencia y qué registrarías?',parts:[{id:'exterior',label:'UE-01',value:'Exterior',detail:'UE-01 · Unidad exterior identificada en la planta. Contrasta su etiqueta con el listado.'},{id:'interior',label:'UI-01',value:'Interior',detail:'UI-01 · Unidad interior conectada en el esquema a UE-01. Verifica su ubicación en la planta.'},{id:'control',label:'CONTROL',value:'22°',detail:'Control · Representado en la escena, pero omitido en el listado. Registra la discrepancia.'}]}}
+function currentScene(){const scene=current?.content?.scene;return scene&&Array.isArray(scene.parts)&&scene.parts.length?scene:null}
 function sceneNubiSupport(){
  return `<aside class="sequence-support scene-nubi-support" aria-label="Nubi · Revisa antes de actuar"><img class="scene-nubi-art" src="/static/nubi-cloud-portrait.png" alt="" aria-hidden="true"><div class="scene-nubi-copy"><span class="scene-nubi-name">Nubi</span><h4><strong>Revisa</strong> antes de actuar</h4><p>Antes de continuar, detente un momento y revisa la información clave. Esto te ayudará a tomar mejores decisiones.</p><details class="scene-nubi-focus"><summary>${workIco('search')}<span>Focaliza tu revisión</span></summary><p>Compara dos evidencias del escenario. ¿Coinciden sus etiquetas, valores o referencias?</p></details></div><div class="scene-nubi-links"><details><summary>${workIco('book')}<span>Primera orientación</span>${workIco('arrow')}</summary><p>¿Qué dato observaste y qué información todavía necesitas confirmar?</p></details><details><summary>${workIco('file')}<span>Revisa tu argumento</span>${workIco('arrow')}</summary><p>Separa el dato visible de tu interpretación. Explica qué aprendizaje utilizas y qué comprobarías antes de intervenir.</p></details></div></aside>`;
 }
@@ -27,11 +27,12 @@ function sceneEvidenceClosing(){
  return `<div class="scene-save-notice"><p><strong>Las consecuencias descritas son tu previsión:</strong> este recorrido no ejecuta una intervención técnica ni simula su resultado.</p><section class="scene-evidence-entry"><label for="scene-evidence-text">Tu evidencia: ¿qué observaste, qué decisión tomarías y cómo verificarías el resultado?</label><textarea id="scene-evidence-text" name="text" rows="7" minlength="20" maxlength="10000" required ${auth.user.role==='teacher'||current.state.closed?'readonly':''} placeholder="Observé… Lo relaciono con… Decidiría… La consecuencia esperada sería… Verificaría…">${esc(current.state.scene?.text||'')}</textarea></section><button type="submit" class="primary" ${auth.user.role==='teacher'||current.state.closed?'disabled':''}>Guardar evidencia y completar estación 3</button></div>`;
 }
 function sceneInspectionSummary(part){
- const parts=currentScene().parts,index=part?parts.findIndex(p=>p.id===part.id):-1;
+ const parts=currentScene()?.parts||[],index=part?parts.findIndex(p=>p.id===part.id):-1;
  return `<span class="scene-inspection-heading">${part?`Paso ${index+1} de ${parts.length} · ${esc(part.label)}`:'Explora los puntos del escenario'}</span>${part?`<span class="scene-inspection-copy">${esc(part.detail)}</span>`:''}<span class="scene-inspection-progress"><b>Progreso</b><progress max="${parts.length}" value="${inspected.size}" aria-label="Puntos inspeccionados"></progress><span>${inspected.size} de ${parts.length} puntos revisados</span></span>`;
 }
 function enrichedScene(){
  const scene=currentScene();
+ if(!scene)return '<p class="media-missing" role="status">El escenario original no está disponible. No se puede registrar una inspección sin sus antecedentes.</p>';
  const sceneRoute=typeof pedRoute==='function'?pedRoute([{action:'explore',title:'Observa'},{action:'observe',title:'Recopila evidencias'},{action:'relate',title:'Analiza y relaciona'},{action:'justify',title:'Fundamenta tu decisión'},{action:'verify',title:'Verifica'}],inspected.size?Math.min(2,inspected.size):0):'';
  const sceneHead=typeof pedStepHead==='function'?pedStepHead(4,'relate','Relaciona lo observado'):'<h3>Relaciona lo observado</h3>';
  const vis=window.AulaVisual;
@@ -40,7 +41,7 @@ function enrichedScene(){
  const role=course?.specialty||course?.title||'tu especialidad';
  const cycle='';
  const video='';
- return `<div class="scene-layout">${sceneRoute}<div>
+ return `<div class="scene-layout">${sceneRoute}${window.AulaComplementary?.launcher()||''}<div>
   ${/^Recorrido espacial interactivo(?:\s|$)/i.test(scene.title||'')?'':`<h3>${esc(scene.title)}</h3>`}
   <header class="instruction-showcase tone-green sequence-instruction scene-observe-intro"><div class="scene-observe-copy"><small>SITUACIÓN INTEGRADORA FINAL · ESTACIÓN 3</small><h3><span class="scene-observe-symbol" aria-hidden="true">${icon('search')}</span><span><strong>Observa</strong> antes de decidir</span></h3><p>El equipo necesita revisar los antecedentes de ${esc(current.title)} antes de continuar. Tu rol es participar como estudiante técnico de ${esc(role)}, dentro de los límites de tu formación.</p><aside class="scene-observe-mission"><span aria-hidden="true">${icon('target')}</span><div><b>Tu misión:</b><p>reúne evidencias del escenario, relaciónalas con los aprendizajes del módulo y fundamenta cómo actuarías y qué verificarías.</p></div></aside></div><img class="scene-observe-art" src="/static/activity-results-illustration.png" alt="" aria-hidden="true"></header>
   ${cycle}
@@ -54,7 +55,7 @@ function enrichedScene(){
  <form id="scene-form" class="soft ped-step" data-action="justify">${sceneHead}<p>${esc(scene.prompt)}</p><details class="sequence-official"><summary>Aprendizajes que movilizas</summary>${current.content.aes.map(a=>`<p>${esc(a.description||a.title)}</p>`).join('')}</details>${sceneNubiSupport()}${sceneEvidenceClosing()}</form></div>`;
 }
 function inspectPart(id){
- const p=currentScene().parts.find(p=>p.id===id);
+ const p=currentScene()?.parts.find(p=>p.id===id);
  if(!p)return;
  inspected.add(id);
  document.querySelectorAll('[data-action="inspect"]').forEach(b=>{

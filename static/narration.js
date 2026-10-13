@@ -49,14 +49,17 @@
     const blocks = String(text).replace(/\r/g, '').split(/\n\n+/);
     for (const block of blocks) {
       const lines = block.split('\n').filter(Boolean);
+      if (/^(?:NOTE(?:\s|$)|STYLE$|REGION$)/.test(lines[0] || '')) continue;
       const time = lines.find(l => l.includes('-->'));
       if (!time) continue;
-      const m = time.match(/(\d+):(\d+)(?:\.(\d+))?\s*-->\s*(\d+):(\d+)(?:\.(\d+))?/);
+      const stamp = '(?:(\\d{2,}):)?([0-5]\\d):([0-5]\\d)\\.(\\d{3})';
+      const m = time.match(new RegExp('^' + stamp + '\\s+-->\\s+' + stamp + '(?:\\s+.*)?$'));
       if (!m) continue;
-      const toSec = (mm, ss, ms) => Number(mm) * 60 + Number(ss) + Number(ms || 0) / 1000;
-      const start = toSec(m[1], m[2], m[3]);
-      const end = toSec(m[4], m[5], m[6]);
-      const payload = lines.filter(l => l !== time && !/^WEBVTT/i.test(l) && !/^\d+$/.test(l)).join(' ').trim();
+      const toSec = (hh, mm, ss, ms) => Number(hh || 0) * 3600 + Number(mm) * 60 + Number(ss) + Number(ms) / 1000;
+      const start = toSec(m[1], m[2], m[3], m[4]);
+      const end = toSec(m[5], m[6], m[7], m[8]);
+      if (end <= start) continue;
+      const payload = lines.slice(lines.indexOf(time) + 1).join(' ').trim();
       if (payload) cues.push({start, end, text: payload});
     }
     return cues;
@@ -76,7 +79,7 @@
   }
 
   function speak(text, voice) {
-    if (typeof speechSynthesis === 'undefined') return;
+    if (typeof speechSynthesis === 'undefined' || typeof SpeechSynthesisUtterance === 'undefined') return;
     speechSynthesis.cancel();
     const line = tutorLine(text);
     if (!line) return;
@@ -101,44 +104,48 @@
     speechSynthesis.speak(u);
   }
 
+  function cancelVoice() {
+    if (typeof speechSynthesis !== 'undefined') speechSynthesis.cancel();
+  }
+
   function bindVideo(video) {
     if (!video || video.dataset.narrateBound) return;
     video.dataset.narrateBound = '1';
     const figure = video.closest('figure') || video.parentElement;
     let cues = [];
     let last = '';
-    let voiceOn = true;
+    let voiceOn = typeof speechSynthesis !== 'undefined' && typeof SpeechSynthesisUtterance !== 'undefined';
     const cueEl = figure?.querySelector('.vis-voice-cue');
     const btn = figure?.querySelector('[data-voice="toggle"]');
     const setBtn = () => {
       if (!btn) return;
+      btn.disabled = typeof speechSynthesis === 'undefined' || typeof SpeechSynthesisUtterance === 'undefined';
       btn.textContent = voiceOn ? 'Voz de Chile: encendida' : 'Voz de Chile: silenciada';
       btn.setAttribute('aria-pressed', String(voiceOn));
     };
     setBtn();
     btn?.addEventListener('click', () => {
       voiceOn = !voiceOn;
-      if (!voiceOn) speechSynthesis.cancel();
+      if (!voiceOn) cancelVoice();
       setBtn();
-      if (voiceOn && !video.paused) tick();
+      if (voiceOn && !video.paused) { last = ''; tick(); }
     });
     loadCues(video).then(list => { cues = list; });
     const tick = () => {
-      if (!voiceOn || video.paused) return;
       const t = video.currentTime || 0;
       const cue = cues.find(c => t >= c.start && t < c.end);
       const text = cue?.text || '';
       if (cueEl) cueEl.textContent = text;
-      if (text && text !== last) {
+      if (voiceOn && !video.paused && text && text !== last) {
         last = text;
         speak(text, pickVoice());
       }
     };
     video.addEventListener('play', () => { last = ''; pickVoice(); tick(); });
-    video.addEventListener('pause', () => speechSynthesis.cancel());
+    video.addEventListener('pause', cancelVoice);
     video.addEventListener('seeked', () => { last = ''; tick(); });
     video.addEventListener('timeupdate', tick);
-    video.addEventListener('ended', () => speechSynthesis.cancel());
+    video.addEventListener('ended', () => { cancelVoice(); tick(); });
   }
 
   function hydrate(root) {
@@ -149,5 +156,5 @@
     speechSynthesis.addEventListener('voiceschanged', () => { cached = null; pickVoice(); });
   }
 
-  window.AulaNarration = {hydrate, speak, pickVoice};
+  window.AulaNarration = {hydrate, speak, pickVoice, parseVtt};
 })();

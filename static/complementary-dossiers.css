@@ -1,0 +1,15 @@
+.complementary-launch{margin:12px 0}
+.complementary-dossier{min-width:0;overflow-wrap:break-word}
+.complementary-dossier .mcq-table-wrap{max-width:100%;overflow-x:auto}
+.complementary-dossier th,.complementary-dossier td{overflow-wrap:anywhere}
+.complementary-dossier h2{font-size:22px;line-height:1.3;margin:0 0 12px}
+.complementary-dossier h3{font-size:17px;line-height:1.4;margin:0 0 10px}
+.complementary-dossier section{padding:18px 0;border-bottom:1px solid #d9e7f5}
+.complementary-dossier pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:12px;background:#f1f8fc;color:#123957;font-size:14px;line-height:1.6}
+.complementary-dossier label{display:block;margin:12px 0}
+.complementary-dossier textarea{display:block;width:100%;box-sizing:border-box;margin-top:8px;min-height:100px}
+.complementary-flow{display:grid;justify-items:center;gap:10px;padding:12px 0;color:#123957}
+.complementary-flow>span:not([aria-hidden]){padding:10px 16px;border:1px solid #a9cfe5;border-radius:6px;max-width:100%;box-sizing:border-box;text-align:center;background:#f2f9fc}
+.complementary-branches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;width:100%;max-width:460px;text-align:center}
+.complementary-branches span{padding:10px;border-bottom:3px solid #009b83;background:#f1fcf8}
+.complementary-branches span+span{border-color:#ed9e23;background:#fff8eb}

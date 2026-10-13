@@ -35,6 +35,11 @@ try:
 except (OSError, ValueError):
     MINEDUC_PAGE_INDEX = {}
 
+from curriculum_corrections import CORRECTIONS, SOURCES, restore_original_ae
+
+for _correction, (_pdf, _page) in zip(CORRECTIONS, SOURCES):
+    MINEDUC_PAGE_INDEX[_source_key(f'docs/fuentes/tp-programas/{_pdf}.pdf', _correction['new'])] = _page
+
 ADMINISTRATION_OA1 = {
     'code': 'OA 1',
     'title': ('Leer y utilizar información contable básica acerca de la marcha de la empresa, incluida información '
@@ -1120,7 +1125,7 @@ def enrich(content, module_id=1):
     """Idempotente: agrega motor pedagógico sin borrar textos curriculares."""
     if not isinstance(content, dict) or not content.get('aes'):
         return content
-    c = content
+    c = restore_original_ae(content)
     draft = str(c.get('version', '')).endswith('-mineduc-draft-v1')
     mid = int(module_id or 1)
     custom = c.get('specialty_source') if isinstance(c.get('specialty_source'), dict) else None
@@ -1180,17 +1185,17 @@ def enrich(content, module_id=1):
     primary_criterion = (primary_ae.get('criteria') or ['Reconocer y aplicar el procedimiento técnico']) [0]
     media_root = f'/static/headers/{media_key}'
     c['media_resources'] = [
-        {'kind': '3d', 'image': f'{media_root}/e2.png?v=3', 'title': 'Identifica componentes y relaciones',
+        {'kind': 'image', 'image': f'{media_root}/e2.png?v=3', 'title': 'Identifica componentes y relaciones',
          'oa': (primary_ae.get('oa') or primary_ae.get('oa_code') or 'OA del módulo'), 'ae': primary_ae.get('title', ''),
          'content': primary_criterion, 'activity': 'Observa e identifica antes de avanzar.',
          'purpose': 'Distinguir partes, señales y condiciones relevantes del procedimiento.',
          'observe': 'Qué componente interviene, qué función cumple y qué evidencia lo demuestra.'},
-        {'kind': '3d', 'image': f'{media_root}/e3.png?v=3', 'title': 'Analiza una situación de trabajo',
+        {'kind': 'image', 'image': f'{media_root}/e3.png?v=3', 'title': 'Analiza una situación de trabajo',
          'oa': (primary_ae.get('oa') or primary_ae.get('oa_code') or 'OA del módulo'), 'ae': primary_ae.get('title', ''),
          'content': primary_criterion, 'activity': 'Relaciona la representación con el caso y decide.',
          'purpose': 'Comparar una condición segura con una decisión técnicamente fundada.',
          'observe': 'Qué dato cambia la decisión y qué riesgo o consecuencia debes prevenir.'},
-        {'kind': '3d', 'image': f'{media_root}/e4.png?v=3', 'title': 'Verifica la aplicación',
+        {'kind': 'image', 'image': f'{media_root}/e4.png?v=3', 'title': 'Verifica la aplicación',
          'oa': (primary_ae.get('oa') or primary_ae.get('oa_code') or 'OA del módulo'), 'ae': primary_ae.get('title', ''),
          'content': primary_criterion, 'activity': 'Aplica el criterio y comprueba tu respuesta.',
          'purpose': 'Verificar el resultado del procedimiento usando evidencia observable.',
@@ -1226,12 +1231,12 @@ def enrich(content, module_id=1):
                 exp.setdefault('image', f'/static/headers/{media_key}/e2.png?v=3')
                 exp.setdefault('caption', 'Recurso visual del aprendizaje esperado; analiza la evidencia antes de decidir.')
                 exp.setdefault('alt', f'Recurso profesional de {ae.get("short_title") or ae.get("title")}.')
-                exp['media_kind'] = '3d' if exp.get('type') == 'hotspot' else 'foto'
+                exp['media_kind'] = 'interactive-2d' if exp.get('type') == 'hotspot' else 'foto'
                 exp['media_key'] = media_key
             else:
                 apply_oficio_media(exp, mid, i * 6 + si, force=True)
             if exp.get('type') == 'hotspot':
-                exp['media_kind'] = '3d'
+                exp['media_kind'] = 'interactive-2d'
             if si == 2:
                 exp['video'] = c.get('video')
                 exp['vtt'] = c.get('vtt')

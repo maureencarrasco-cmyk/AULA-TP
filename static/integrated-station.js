@@ -9,20 +9,12 @@ function integrationLevel(i){return current.content.cases?.[i]?.difficulty||'Sin
 function integrationCases(){return current.content.cases.map((c,i)=>({c,i})).filter(({i})=>integrationFilter==='all'||integrationLevel(i)===integrationFilter)}
 function integrationUnlocked(i){return isDemoStudent()||i===0||Boolean(current.state.cases[i-1])}
 function photoV(src){return String(src||'').split('?')[0]+'?v=4'}
-const integrationCaseImages=[
- '/static/themes/cases/01-liceo.png','/static/themes/cases/02-clinica.png','/static/themes/cases/03-supermercado.png',
- '/static/themes/cases/04-hotel.png','/static/themes/cases/05-servidores.png','/static/themes/cases/06-cocina.png',
- '/static/themes/cases/07-obra.png','/static/themes/cases/08-farmacia.png','/static/themes/cases/09-oficina.png',
- '/static/themes/cases/10-bodega.png','/static/themes/cases/11-terminal.png','/static/themes/cases/12-packing.png',
- '/static/themes/cases/13-mall.png','/static/themes/cases/14-gimnasio.png','/static/themes/cases/15-oficina-tecnica.png'
-];
 function integrationPhoto(i){
  const photo=integrationSelectedPhoto(i);
  if(photo)return photoV(photo.image);
  const q=current.content.cases?.[i];
  if(q?.image)return photoV(q.image);
- if(q?.unavailable_media?.image||current.content.specialty_source)return '';
- return photoV(integrationCaseImages[i%integrationCaseImages.length]);
+ return '';
 }
 function integrationSelectedPhoto(i){
  if(typeof situationPhotoAt!=='function')return null;

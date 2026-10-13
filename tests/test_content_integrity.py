@@ -13,6 +13,30 @@ from pedagogy import build_traceability, enrich, publication_gaps
 
 
 class ContentIntegrityTests(unittest.TestCase):
+    def test_generated_short_labels_never_end_midword(self):
+        c = self.fixture()
+        ae = c['aes'][0]
+        ae.update(title='Contextualización del proyecto', short_title='Contextualizació')
+        questions = deepcopy(c['questions'])
+        repair_content_integrity(c)
+        self.assertEqual('Contextualización', ae['short_title'])
+        self.assertEqual(questions[0]['options'], c['questions'][0]['options'])
+        self.assertEqual(questions[0]['answer'], c['questions'][0]['answer'])
+        repair_content_integrity(c)
+        self.assertEqual('Contextualización', ae['short_title'])
+
+    def test_custom_short_labels_and_whole_word_prefixes_remain_unchanged(self):
+        c = self.fixture()
+        c['aes'][0].update(title='Instala motores eléctricos', short_title='Instala motores')
+        repair_content_integrity(c)
+        self.assertEqual('Instala motores', c['aes'][0]['short_title'])
+        c['aes'][0]['short_title'] = 'Montaje eléctrico'
+        repair_content_integrity(c)
+        self.assertEqual('Montaje eléctrico', c['aes'][0]['short_title'])
+        c['aes'][0].update(title='Elabora informes, según el dossier', short_title='Elabora informes')
+        repair_content_integrity(c)
+        self.assertEqual('Elabora informes', c['aes'][0]['short_title'])
+
     def fixture(self):
         return {'specialty_source':{'pdf':'docs/fuentes/MINEDUC_Electricidad_programa.pdf','official_hp':100},
             'planning':{'minutes':22500}, 'hp_minutes':45,
@@ -154,6 +178,12 @@ class ContentIntegrityTests(unittest.TestCase):
         self.assertEqual('Interpretar informacion',result['questions'][0]['skill'])
         self.assertEqual('Criterio existente',result['questions'][0]['criterion'])
         self.assertIsNone(result['question_calibration']['distribution_valid'])
+        self.assertTrue(result['media_resources'])
+        self.assertTrue(all(item['kind'] == 'image' for item in result['media_resources']))
+        for ae in result['aes']:
+            for experience in ae['experiences']:
+                if experience['type'] == 'hotspot':
+                    self.assertEqual('interactive-2d', experience['media_kind'])
 
     def test_optional_context_photo_not_mandatory_evidence(self):
         c=self.fixture()

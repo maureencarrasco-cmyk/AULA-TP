@@ -57,7 +57,7 @@
     "aes": [
       {
         "code": "M2-AE1",
-        "title": "Traza en terreno la red de agua potable y de evacuación, fijando sus niveles según cada proyecto, de acuerdo a estándares de calidad, a la normativa de seguridad y considerand el cuidado del medioambiente.",
+        "title": "Traza en terreno la red de agua potable y de evacuación, fijando sus niveles según cada proyecto, de acuerdo a estándares de calidad, a la normativa de seguridad y considerando el cuidado del medioambiente.",
         "criteria": [
           "1.1 Traza la red de agua domiciliaria respetando el diámetro, los materiales, las pendientes, las longitudes, las protecciones y las aislaciones, según los planos del proyecto, cumpliendo con las normas de seguridad y del medioambiente, de acuerdo a los estándares.",
           "1.2 Traza la red de alcantarillado particular en terreno respetando los distanciamientos de los sistemas primarios (fosas sépticas) con respecto a los sistemas secundarios (pozos y drenes), el diámetro, los materiales, las pendientes y las longitudes, según los planos del proyecto, cumpliendo con las normas de seguridad y del medioambiente, de acuerdo a los estándares de calidad requeridos."
@@ -212,7 +212,7 @@
       },
       {
         "code": "M5-AE2",
-        "title": "Instala elementos complementarios (llaves de corte, válvulas y fitting) de una red de riego agrícola, cumpliendo con el procedimiento de seguridad y el medioambiente.",
+        "title": "Instala elementos complementarios (llaves de corte, válvulas y fitting) de una red de riego agrícola, cumpliendo con el procedimiento de seguridad y del medioambiente.",
         "criteria": [
           "2.1 Selecciona materiales e insumos para la instalación de una red de sistema de regadío, según cada proyecto y las especificaciones técnicas, respetando las normas de seguridad y del medioambiente.",
           "2.2 Instala elementos complementarios para la red de distribución, considerando la normalización para los componentes de la red, siguiendo los procedimientos y las normas de seguridad y cuidado del medioambiente."

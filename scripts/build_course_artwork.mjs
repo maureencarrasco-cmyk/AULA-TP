@@ -74,15 +74,28 @@ const related={warehouse:['packaging','port'],plans:['drawing','tools'],meeting:
 const requests = courses.flatMap(course => [{ course, cover:true, topic:context.encargoPhotoTopic({},course) },
   ...course.modules.map(module => ({ course, module, topic:context.encargoPhotoTopic({},course,module.title) }))]);
 const reviewedImages={
-  1:{'Reciclaje y almacenamiento de refrigerantes':'cooling-review-24f9e5750a07.jpg'},
+  1:{'Reciclaje y almacenamiento de refrigerantes':'cooling-review-24f9e5750a07.jpg',
+    'Lectura de planos y cubicacion de materiales de proyectos':'plans-new-2a900ef57d3a.jpg',
+    'Emprendimiento y empleabilidad':'meeting-new-64222626d5b0.jpg'},
+  7:{'Actividades recreativas y de animacion':'hotel-new-20c59acc2e97.jpg'},
+  18:{'Fabricacion de componentes de carpinteria y muebles':'furniture-new-d21cd4e53113.jpg'},
+  28:{'Laboratorio y analisis quimico':'laboratory-new-e94dfa0c9d84.jpg'},
   13:{'Mantencion y operacion de equipos de control electronico de potencia':'electronics-review-c97afbf04b16.jpg'},
   23:{'Trazado de partes y piezas en construcciones metalicas':'welding-review-c98af0758b09.jpg'},
+  25:{'Emprendimiento y empleabilidad':'meeting-new-32133fd1b105.jpg'},
+  26:{'Emprendimiento y empleabilidad':'meeting-new-2a946e3fe66c.jpg'},
   28:{'Tecnicas de hidrometalurgia':'metallurgy-review-c5ef8307b973.jpg'},
   37:{'Envasado y maquinaria vitivinicola':'wine-review-57892edb273a.jpg'},
-  39:{'Interpretacion de planos de construccion':'plans-review-c6e155eb1f2e.jpg'}
+  38:{'Enfierradura para elementos estructurales':'construction-new-caa084958a30.jpg'},
+  39:{'Interpretacion de planos de construccion':'plans-review-c6e155eb1f2e.jpg',
+    'Trazado de obras de construccion':'plans-new-00ac48f44c89.jpg'},
+  43:{'Taladrado y rectificado de piezas mecanicas':'machining-new-b93870f75d96.jpg'},
+  45:{'Emprendimiento y empleabilidad':'meeting-new-492e3713df1e.jpg'}
 };
 const reviewedTopics={
   1:{'Reciclaje y almacenamiento de refrigerantes':'cooling'},
+  2:{'Instalacion de equipos electronicos de potencia':'electronics'},
+  9:{'Recepcion de materias primas':'warehouse','Aseguramiento de la calidad de procesos y alimentos':'laboratory'},
   11:{'Lectura de planos de instalaciones sanitarias':'plans'},
   29:{'Expresion literaria y teatral con parvulos':'preschool'},
   37:{'Envasado y maquinaria vitivinicola':'wine'},
@@ -106,19 +119,20 @@ requests.sort((a,b) => a.pool.length - b.pool.length || Number(b.cover) - Number
 // Preserve all unflagged assignments instead of reallocating the whole catalog.
 for(const request of requests){
   const previous=request.cover?context.courseArtworkPhoto(request.course):context.moduleArtworkPhoto(request.course,request.module);
-  if(previous&&context.courseContextPhotoAllowed(previous)&&(!request.reviewed||previous.image.endsWith('/'+request.reviewed))){
+  if(previous&&context.courseContextPhotoAllowed(previous)&&!rejected.has(previous.image)&&(!request.reviewed||previous.image.endsWith('/'+request.reviewed))){
     request.retained=previous;
     usedImages.add(previous.fingerprint);usedSources.add(previous.source);
   }
 }
-const catalog = { version:'20261012-reviewed-artwork-v3', courses:{} };
+const catalog = { version:'20261012-reviewed-artwork-v5', rejectedImages:[...rejected], courses:{} };
 for (const request of requests) {
   const reviewed=request.reviewed?Object.values(photos).flat().find(p=>p.image.endsWith('/'+request.reviewed)):null;
+  if(request.reviewed&&!reviewed)throw new Error(`Reviewed photograph unavailable: ${request.reviewed}`);
   if(!request.retained&&reviewed&&(usedImages.has(reviewed.fingerprint)||usedSources.has(reviewed.source)))throw new Error('Reviewed photograph already allocated');
-  const photo = request.retained || reviewed || request.pool.filter(p => !usedImages.has(p.fingerprint) && !usedSources.has(p.source)).sort((a,b) => b.score-a.score || a.image.localeCompare(b.image))[0];
+  const pool = request.pool.filter(p => !usedImages.has(p.fingerprint) && !usedSources.has(p.source));
+  const photo = request.retained || reviewed || pool.sort((a,b) => b.score-a.score || a.image.localeCompare(b.image))[0];
   if (!photo) throw new Error(`No distinct photograph available: ${request.course.title} / ${request.module?.title || 'cover'}`);
-  usedImages.add(photo.fingerprint);
-  usedSources.add(photo.source);
+  usedImages.add(photo.fingerprint);usedSources.add(photo.source);
   const {score,...credit} = photo;
   const record = catalog.courses[request.course.id] ||= { id:request.course.id, title:request.course.title, cover:null, modules:[] };
   if (request.cover) record.cover = credit;

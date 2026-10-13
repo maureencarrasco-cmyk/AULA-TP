@@ -53,50 +53,47 @@
   function envSrc() {
     if (current?.content?.scene?.image) return current.content.scene.image;
     if (current?.content?.explore?.image) return current.content.explore.image;
-    return typeof oficioPng==='function'?oficioPng('oficio-plano-leyenda'):'/static/themes/oficio/oficio-plano-leyenda.png?v=3';
-  }
-
-  function comparePair() {
-    const png = typeof oficioPng==='function'?oficioPng:n=>`/static/themes/oficio/${n}.png?v=3`;
-    const pos = Math.max(1, current?.position || 1);
-    const pack = {
-      1: [png('oficio-plano-leyenda'), png('oficio-escala')],
-      2: [png('oficio-visor-21c'), png('oficio-visor-25')],
-      3: [png('oficio-tramos'), png('oficio-cruce')],
-      4: [png('oficio-equipo-ctrl'), png('oficio-acceso-cm')]
-    };
-    return pack[pos] || pack[1];
+    return '';
   }
 
   function videoFigure(exp) {
     if (!exp?.video) return '';
-    const vtt = exp.vtt ? `<track kind="subtitles" src="${hx(exp.vtt)}" srclang="es" label="Español de Chile" default>` : '';
+    const revised = source => {
+      if (!/\/m[1-4]-secuencia\.(?:mp4|vtt)(?:\?|$)/.test(source || '')) return source;
+      const url = new URL(source, 'https://aulatpchile.cl');
+      url.searchParams.set('rev', '20261012-documentary-video-v2');
+      return url.pathname + url.search + url.hash;
+    };
+    const vtt = exp.vtt ? `<track kind="subtitles" src="${hx(revised(exp.vtt))}" srclang="es" label="Español de Chile" default>` : '';
+    const contextual = /\/(?:general|climate|electricidad|enfermeria)-secuencia\.mp4(?:\?|$)/.test(exp.video);
+    const purpose = contextual ? 'Apoyo contextual. No demuestra un procedimiento técnico ni acredita el aprendizaje por sí solo.' : 'Secuencia documental. Contrasta los datos con el dossier; no acredita una ejecución técnica.';
     return `<figure class="vis-fig vis-video" data-narrate="1">
-      <video controls playsinline controlslist="nodownload" src="${hx(exp.video)}">${vtt}</video>
+      <video controls playsinline preload="metadata" controlslist="nodownload" src="${hx(revised(exp.video))}">${vtt}</video>
       <div class="vis-voice">
         <button type="button" class="outline" data-voice="toggle" aria-pressed="true">Voz guía: encendida</button>
         <span class="vis-voice-cue" aria-live="polite"></span>
       </div>
-      <figcaption class="act-media-caption vis-cap">${hx(exp.caption || 'Secuencia del procedimiento. Play o pausa cuando quieras. La voz de Chile te guía con calma.')}</figcaption>
+      <figcaption class="act-media-caption vis-cap">${hx(purpose)}${exp.caption ? `<br>${hx(exp.caption)}` : ''}</figcaption>
     </figure>`;
   }
 
   function mediaFor(exp, opts) {
     opts = opts || {};
     if (!exp) return '';
-    if (exp.unavailable_media?.image && !exp.image) return exp.type === 'hotspot' ? '' : missingMedia();
-    if (exp.video) return videoFigure(exp);
+    const imageUnavailable = exp.unavailable_media?.image && !exp.image;
+    if (imageUnavailable && !exp.video) return exp.type === 'hotspot' ? '' : missingMedia();
     const role = opts.role || (opts.exam ? 'exam' : 'evidence');
     const zoom = opts.zoom != null ? opts.zoom : shouldZoom(exp) || opts.exam;
     const cap = opts.caption || exp.caption;
     const alt = exp.alt;
+    if (exp.video) return videoFigure(exp) + (exp.image && exp.type !== 'hotspot'
+      ? figure(exp.image, {role, zoom, caption: cap, alt: alt || pedagogicalAlt(role)})
+      : imageUnavailable && exp.type !== 'hotspot' ? missingMedia() : '');
     const rep = `${exp.format || ''} ${exp.representation || ''} ${exp.type || ''}`;
     if (/compar/i.test(rep) && (!opts.exam || exp.image || exp.imageB)) {
       if (exp.image && exp.imageB) return compare(exp.image, exp.imageB, {captionA: cap, captionB: exp.captionB});
-      if (!current?.content?.specialty_source) {
-        const pair = comparePair();
-        return compare(exp.image || pair[0], exp.imageB || pair[1], {captionA: cap, captionB: exp.captionB});
-      }
+      return figure(exp.image || exp.imageB, {role, zoom, caption: cap, alt: alt || pedagogicalAlt(role)})
+        + '<p class="media-missing" role="status">No está disponible una segunda imagen original. Consulta los documentos y datos del caso para comparar.</p>';
     }
     if (exp.image && exp.type !== 'hotspot') return figure(exp.image, {role, zoom, caption: cap, alt: alt || pedagogicalAlt(role)});
     return '';
@@ -195,7 +192,7 @@
   function sceneStage(scene) {
     const parts = scene.parts || [];
     const src = scene.image || envSrc();
-    if (scene.unavailable_media?.image && !scene.image) {
+    if (!src || (scene.unavailable_media?.image && !scene.image)) {
       return `${missingMedia()}<ul class="vis-resource-list">${parts.map(p=>`<li><button type="button" data-action="inspect" data-part="${hx(p.id)}">${hx(p.label)}</button></li>`).join('')}</ul>`;
     }
     const cam = window.sceneCam;

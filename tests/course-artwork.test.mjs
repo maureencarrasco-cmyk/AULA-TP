@@ -48,6 +48,27 @@ for path in json.loads(sys.argv[1]):
 print(json.dumps(failed))`,JSON.stringify(images)],{cwd:fileURLToPath(root),encoding:'utf8'}));
   assert.deepEqual(result,[]);
 });
+
+test('the complete prior review excludes rejected photos from every selected header',()=>{
+  const rejected=new Set(JSON.parse(read('scripts/situation-photo-review.json')).rejectedImages);
+  assert.deepEqual(new Set(scope.AulaCourseArtworkData.rejectedImages),rejected);
+  for(const row of rows)for(const photo of [row.cover,...row.modules.map(m=>m.photo)]){
+    assert.ok(!rejected.has(photo.image),photo.image);
+    assert.equal(scope.courseContextPhotoAllowed(photo),true);
+  }
+  for(const image of rejected)assert.equal(scope.courseContextPhotoAllowed({image}),false,image);
+  const expected=[
+    [1,1,'plans-new-2a900ef57d3a.jpg'],
+    [1,21,'meeting-new-64222626d5b0.jpg'],
+    [7,66,'hotel-new-20c59acc2e97.jpg'],
+    [18,209,'furniture-new-d21cd4e53113.jpg'],
+    [38,364,'construction-new-caa084958a30.jpg'],
+    [39,373,'plans-new-00ac48f44c89.jpg']
+  ];
+  for(const [courseId,moduleId,file] of expected){
+    assert.ok(rows.find(row=>row.id===courseId).modules.find(m=>m.id===moduleId).photo.image.endsWith('/'+file));
+  }
+});
 test('course and module selection remain correct after the legacy menu overrides load',()=>{
   for(const row of rows){
     const course={id:row.id,title:row.title,modules:row.modules};

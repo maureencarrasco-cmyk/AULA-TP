@@ -52,6 +52,26 @@
       "description": "320 Newbury Street architectural drawing.",
       "image": "/static/situation-photos/plans-review-c6e155eb1f2e.jpg",
       "alt": "Plano arquitectonico de un edificio de Newbury Street; ejemplo de contexto, no plano del caso."
+    },
+    {
+      "title": "File:Floorplan-image.jpg",
+      "author": "Hafizjunaid06",
+      "alt": "Floorplan-image",
+      "image": "/static/situation-photos/plans-new-00ac48f44c89.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Floorplan-image.jpg",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "plan",
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "title": "File:Sample Floorplan.jpg",
+      "author": "Boereck",
+      "alt": "Sample Floorplan",
+      "image": "/static/situation-photos/plans-new-2a900ef57d3a.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Sample_Floorplan.jpg",
+      "licenseUrl": null,
+      "description": "A sample floor plan for a wealthy-family home",
+      "license": "Public domain"
     }
   ],
   "electronics": [
@@ -74,6 +94,36 @@
       "description": "Canon battery charger CB2LTE - Printed circuit board",
       "image": "/static/situation-photos/electronics-review-c97afbf04b16.jpg",
       "alt": "Placa electronica de un cargador desconectado."
+    },
+    {
+      "image": "/static/situation-photos/electronics-new-e4c847ca3360.jpg",
+      "title": "File:100Kw wireless charging demo in the Power Electronics and Electric Machinery lab (49773119033).jpg",
+      "alt": "100Kw wireless charging demo in the Power Electronics and Electric Machinery lab (49773119033)",
+      "source": "https://commons.wikimedia.org/wiki/File:100Kw_wireless_charging_demo_in_the_Power_Electronics_and_Electric_Machinery_lab_(49773119033).jpg",
+      "author": "Oak Ridge National Laboratory",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "description": "Electrical and Electrics Systems Research"
+    },
+    {
+      "image": "/static/situation-photos/electronics-new-87e623bd61da.jpg",
+      "title": "File:Power electronics packaging (16386561558).jpg",
+      "alt": "Power electronics packaging (16386561558)",
+      "source": "https://commons.wikimedia.org/wiki/File:Power_electronics_packaging_(16386561558).jpg",
+      "author": "Oak Ridge National Laboratory",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "description": "Current projects are focused on developing novel power packaging techniques that exploit the superior attributes of wide bandgap semiconductor materials. For example, this highly integrated power module package features double-sided cooling and three-dimensional, planar power interconnection. The novel design improves efficiency, power density, system cost savings, and ease of manufacturability."
+    },
+    {
+      "image": "/static/situation-photos/electronics-new-e413577e0ece.jpg",
+      "title": "File:ASRock 775Twins-HDTV - Advanced Power Electronics 9T16GH-7814.jpg",
+      "alt": "ASRock 775Twins-HDTV - Advanced Power Electronics 9T16GH-7814",
+      "source": "https://commons.wikimedia.org/wiki/File:ASRock_775Twins-HDTV_-_Advanced_Power_Electronics_9T16GH-7814.jpg",
+      "author": "Raimond Spekking",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "ASRock 775Twins-HDTV - Advanced Power Electronics 9T16GH (AP9T16GH) - N-Channel Enhancement Mode Power MOSFET.. Package: TO-252"
     }
   ],
   "cooling": [
@@ -98,6 +148,16 @@
       "description": "Warehouse interior, Hiram M. Chittenden Locks, Seattle, Washington.",
       "image": "/static/situation-photos/warehouse-review-41c29d836eb9.jpg",
       "alt": "Interior de una bodega con estanterias y materiales almacenados."
+    },
+    {
+      "image": "/static/situation-photos/warehouse-new-91e79431c586.jpg",
+      "title": "File:IKEA New Haven warehouse interior.jpg",
+      "alt": "IKEA New Haven warehouse interior",
+      "source": "https://commons.wikimedia.org/wiki/File:IKEA_New_Haven_warehouse_interior.jpg",
+      "author": "Kenneth C. Zirkel",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "IKEA New Haven Connecticut warehouse interior"
     }
   ],
   "meeting": [
@@ -110,6 +170,206 @@
       "description": "A creative place to work and deliver.",
       "image": "/static/situation-photos/meeting-review-685ac83aca63.jpg",
       "alt": "Sala de reuniones con mesas y cerramiento de vidrio."
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-652a351f51cb.jpg",
+      "title": "File:Coffee-desk-notes-workspace (24243718641).jpg",
+      "alt": "Coffee-desk-notes-workspace (24243718641)",
+      "source": "https://commons.wikimedia.org/wiki/File:Coffee-desk-notes-workspace_(24243718641).jpg",
+      "author": "www.Pixel.la Free Stock Photos",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "description": "Startup Stock Photos"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-834a617c6849.jpg",
+      "title": "File:Coffee-iphone-laptop-notebook (24030510540).jpg",
+      "alt": "Coffee-iphone-laptop-notebook (24030510540)",
+      "source": "https://commons.wikimedia.org/wiki/File:Coffee-iphone-laptop-notebook_(24030510540).jpg",
+      "author": "www.Pixel.la Free Stock Photos",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "description": "Startup Stock Photos"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-d5522ba1c642.jpg",
+      "title": "File:Desk-office-workspace-coworking (23699033283).jpg",
+      "alt": "Desk-office-workspace-coworking (23699033283)",
+      "source": "https://commons.wikimedia.org/wiki/File:Desk-office-workspace-coworking_(23699033283).jpg",
+      "author": "www.Pixel.la Free Stock Photos",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "description": "Startup Stock Photos"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-3057b26e83d9.jpg",
+      "title": "File:Macbook-computer-clean-hero (24326723285).jpg",
+      "alt": "Macbook-computer-clean-hero (24326723285)",
+      "source": "https://commons.wikimedia.org/wiki/File:Macbook-computer-clean-hero_(24326723285).jpg",
+      "author": "www.Pixel.la Free Stock Photos",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "description": "Startup Stock Photos"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-7c82da16937e.jpg",
+      "title": "File:Wiki Loves Monuments International Team Meeting 2026 at Lagos, Nigeria 13.jpg",
+      "alt": "Wiki Loves Monuments International Team Meeting 2026 at Lagos, Nigeria 13",
+      "source": "https://commons.wikimedia.org/wiki/File:Wiki_Loves_Monuments_International_Team_Meeting_2026_at_Lagos,_Nigeria_13.jpg",
+      "author": "King ChristLike",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "Wiki Loves Monuments International Team Meeting 2026 at Lagos, Nigeria"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-d998246e68a0.jpg",
+      "title": "File:Marketing Team Meeting First Landing 2012 (9316211747).jpg",
+      "alt": "Marketing Team Meeting First Landing 2012 (9316211747)",
+      "source": "https://commons.wikimedia.org/wiki/File:Marketing_Team_Meeting_First_Landing_2012_(9316211747).jpg",
+      "author": "Virginia State Parks staff",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "description": "Marketing Team Meeting First Landing 2012"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-585281d928ef.jpg",
+      "title": "File:2019 07Jul 26 Northern Arterial team meeting.jpg",
+      "alt": "2019 07Jul 26 Northern Arterial team meeting",
+      "source": "https://commons.wikimedia.org/wiki/File:2019_07Jul_26_Northern_Arterial_team_meeting.jpg",
+      "author": "Angulidayaaluta",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "Northern Arterial team meeting"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-4f8c86921ae0.jpg",
+      "title": "File:IAEA Team meeting Ukraine Officials (02011396) (52638587090).jpg",
+      "alt": "IAEA Team meeting Ukraine Officials (02011396) (52638587090)",
+      "source": "https://commons.wikimedia.org/wiki/File:IAEA_Team_meeting_Ukraine_Officials_(02011396)_(52638587090).jpg",
+      "author": "IAEA Imagebank",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "description": "IAEA Director-General Rafael Mariano Grossi, met with the Ukrainian officials during their official visit to South Ukraine Nuclear Power Plant. 16 January 2023\n\nPhoto Credit: Fredrik Dahl / IAEA"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-660e1edfbbdf.jpg",
+      "title": "File:WLM international team meeting in Lagos 10.jpg",
+      "alt": "WLM international team meeting in Lagos 10",
+      "source": "https://commons.wikimedia.org/wiki/File:WLM_international_team_meeting_in_Lagos_10.jpg",
+      "author": "Ndahiro derrick",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "description": "WLM international team meeting in Lagos 020"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-01751cf0da6b.jpg",
+      "title": "File:IAEA Team meeting Ukraine Officials Second Day (02011406) (52638154521).jpg",
+      "alt": "IAEA Team meeting Ukraine Officials Second Day (02011406) (52638154521)",
+      "source": "https://commons.wikimedia.org/wiki/File:IAEA_Team_meeting_Ukraine_Officials_Second_Day_(02011406)_(52638154521).jpg",
+      "author": "IAEA Imagebank",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "description": "IAEA Director-General Rafael Mariano Grossi, with his team meeting with the Ukrainian officials on the second day of their official visit to Rivne Nuclear Power Plants (NPPs), Ukraine. 17 January 2023\n\nPhoto Credit: Fredrik Dahl / IAEA"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-13b3781bd522.jpg",
+      "title": "File:Change.org team meeting 2 (8460335401).jpg",
+      "alt": "Change.org team meeting 2 (8460335401)",
+      "source": "https://commons.wikimedia.org/wiki/File:Change.org_team_meeting_2_(8460335401).jpg",
+      "author": "Weldon Kennedy from London, UK",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "description": "Autosave-File vom d-lab2/3 der AgfaPhoto GmbH"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-ad355c113ccb.jpg",
+      "title": "File:WLM international team meeting in Lagos 04.jpg",
+      "alt": "WLM international team meeting in Lagos 04",
+      "source": "https://commons.wikimedia.org/wiki/File:WLM_international_team_meeting_in_Lagos_04.jpg",
+      "author": "Ndahiro derrick",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "description": "WLM international team meeting in Lagos 03"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-ecae44014950.jpg",
+      "title": "File:Bill and Jami in Wiki Ed team meeting 2, 2015-01-13.jpg",
+      "alt": "Bill and Jami in Wiki Ed team meeting 2, 2015-01-13",
+      "source": "https://commons.wikimedia.org/wiki/File:Bill_and_Jami_in_Wiki_Ed_team_meeting_2,_2015-01-13.jpg",
+      "author": "ragesoss",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "description": "Photo from Wiki Education Foundation Program Team meeting in San Francisco, January 2015"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-1c7d2d21b588.jpg",
+      "title": "File:WLM international team meeting Vienna 2023-05-27 10.jpg",
+      "alt": "WLM international team meeting Vienna 2023-05-27 10",
+      "source": "https://commons.wikimedia.org/wiki/File:WLM_international_team_meeting_Vienna_2023-05-27_10.jpg",
+      "author": "Manfred Werner (Tsui)",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "Meeting of the team of Wiki Loves Monuments international at the office of Wikimedia Österreich in Vienna, Austria."
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-1ed51b24bb30.jpg",
+      "title": "File:WMB team meeting for WikidataCon 2021 filming 41.jpg",
+      "alt": "WMB team meeting for WikidataCon 2021 filming 41",
+      "source": "https://commons.wikimedia.org/wiki/File:WMB_team_meeting_for_WikidataCon_2021_filming_41.jpg",
+      "author": "AJurno (WMB)",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "WMB team meeting for WikidataCon 2021 filming"
+    },
+    {
+      "image": "/static/situation-photos/meeting-new-4e85b820c71e.jpg",
+      "title": "File:WLM international team meeting in Lagos 01.jpg",
+      "alt": "WLM international team meeting in Lagos 01",
+      "source": "https://commons.wikimedia.org/wiki/File:WLM_international_team_meeting_in_Lagos_01.jpg",
+      "author": "Ndahiro derrick",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "description": "WLM international team meeting in Lagos 01"
+    },
+    {
+      "license": "CC0",
+      "title": "File:Casual Meeting Room (Unsplash).jpg",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "alt": "Casual Meeting Room (Unsplash)",
+      "source": "https://commons.wikimedia.org/wiki/File:Casual_Meeting_Room_(Unsplash).jpg",
+      "description": "Comunal Coworking, Lima, Peru",
+      "author": "Dan Gold danielcgold",
+      "image": "/static/situation-photos/meeting-new-2a946e3fe66c.jpg"
+    },
+    {
+      "license": "CC BY-SA 4.0",
+      "title": "File:Coworking spaces in Mumbai Executive Spaces.jpg",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt": "Coworking spaces in Mumbai Executive Spaces",
+      "source": "https://commons.wikimedia.org/wiki/File:Coworking_spaces_in_Mumbai_Executive_Spaces.jpg",
+      "description": "Executive Spaces - Chintamani Plaza Andheri East",
+      "author": "Executivespacesmumbai",
+      "image": "/static/situation-photos/meeting-new-492e3713df1e.jpg"
+    },
+    {
+      "license": "CC BY-SA 4.0",
+      "title": "File:Empty office in a coworking building.jpg",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt": "Empty office in a coworking building",
+      "source": "https://commons.wikimedia.org/wiki/File:Empty_office_in_a_coworking_building.jpg",
+      "description": "Empty office space",
+      "author": "Ser Amantio di Nicolao",
+      "image": "/static/situation-photos/meeting-new-32133fd1b105.jpg"
+    },
+    {
+      "license": "CC0",
+      "title": "File:Friends Work Here.jpg",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "alt": "Friends Work Here",
+      "source": "https://commons.wikimedia.org/wiki/File:Friends_Work_Here.jpg",
+      "description": "Photo of the common area at Friends Work Here, a coworking space for creatives in Brooklyn NY",
+      "author": "Mathias Jakobsen",
+      "image": "/static/situation-photos/meeting-new-64222626d5b0.jpg"
     }
   ],
   "welding": [
@@ -145,6 +405,256 @@
       "description": "Wine bottles being labeled as they run through an automatic bottling line.",
       "image": "/static/situation-photos/wine-review-57892edb273a.jpg",
       "alt": "Botellas de vino en una linea automatica de etiquetado y envasado."
+    }
+  ],
+  "construction": [
+    {
+      "image": "/static/situation-photos/construction-new-caa084958a30.jpg",
+      "title": "File:Installing rebar reinforcement for the 47th Street entrance to the future LIRR Concourse. 05-29-2019 (47974619121).jpg",
+      "alt": "Installing rebar reinforcement for the 47th Street entrance to the future LIRR Concourse. 05-29-2019 (47974619121)",
+      "source": "https://commons.wikimedia.org/wiki/File:Installing_rebar_reinforcement_for_the_47th_Street_entrance_to_the_future_LIRR_Concourse._05-29-2019_(47974619121).jpg",
+      "author": "MTA Capital Construction Mega Projects",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "description": "Installing rebar reinforcement for the 47th Street entrance to the future LIRR Concourse. 05-29-2019"
+    },
+    {
+      "image": "/static/situation-photos/construction-new-53a76a5191fd.jpg",
+      "title": "File:RebarLinearSpacer.JPG",
+      "alt": "RebarLinearSpacer",
+      "source": "https://commons.wikimedia.org/wiki/File:RebarLinearSpacer.JPG",
+      "author": "Rebarbeams.JPG: Useradd\nderivative work: Technyck (talk)",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "description": "Rebar Linear spacer"
+    },
+    {
+      "image": "/static/situation-photos/construction-new-52389d7e7c80.jpg",
+      "title": "File:A63 Mar25 Rebar Piles 02.jpg",
+      "alt": "A63 Mar25 Rebar Piles 02",
+      "source": "https://commons.wikimedia.org/wiki/File:A63_Mar25_Rebar_Piles_02.jpg",
+      "author": "Hullian111",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "Piles of rebar in the Balfour Beatty compound adjacent to the A63 in Kingston upon Hull during a set of weekend road closures for concrete pouring and piledriving."
+    }
+  ],
+  "forestry": [
+    {
+      "image": "/static/situation-photos/forestry-new-2833b515289c.jpg",
+      "title": "File:Komatsu 931 forest harvester (c144) 2.jpg",
+      "alt": "Komatsu 931 forest harvester (c144) 2",
+      "source": "https://commons.wikimedia.org/wiki/File:Komatsu_931_forest_harvester_(c144)_2.jpg",
+      "author": "Homoatrox",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "description": "Komatsu 931 forest harvester with C144 manipulator. Lesdrevtech (Lesdreŭtech) 2021 exhibition. Minsk, Belarus"
+    },
+    {
+      "image": "/static/situation-photos/forestry-new-188ea4b6392a.jpg",
+      "title": "File:A John Deere 1270G forest harvester operating in Tipperary Woods - geograph.org.uk - 7784808.jpg",
+      "alt": "A John Deere 1270G forest harvester operating in Tipperary Woods - geograph.org.uk - 7784808",
+      "source": "https://commons.wikimedia.org/wiki/File:A_John_Deere_1270G_forest_harvester_operating_in_Tipperary_Woods_-_geograph.org.uk_-_7784808.jpg",
+      "author": "Eric Jones",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "description": "A John Deere 1270G forest harvester operating in Tipperary Woods"
+    }
+  ],
+  "furniture": [
+    {
+      "image": "/static/situation-photos/furniture-new-541397826c6f.jpg",
+      "title": "File:Carpentry workshop (3).jpg",
+      "alt": "Carpentry workshop (3)",
+      "source": "https://commons.wikimedia.org/wiki/File:Carpentry_workshop_(3).jpg",
+      "author": "Myousry6666",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "This is an image with the theme \"Africa Creates\" from: Egypt"
+    },
+    {
+      "image": "/static/situation-photos/furniture-new-b759e4285b53.jpg",
+      "title": "File:Carpentry workshop. Iran. Qom city کارگاه نجاری برادران حاج محمدی. ایران، قم 11.jpg",
+      "alt": "Carpentry workshop. Iran. Qom city کارگاه نجاری برادران حاج محمدی. ایران، قم 11",
+      "source": "https://commons.wikimedia.org/wiki/File:Carpentry_workshop._Iran._Qom_city_%DA%A9%D8%A7%D8%B1%DA%AF%D8%A7%D9%87_%D9%86%D8%AC%D8%A7%D8%B1%DB%8C_%D8%A8%D8%B1%D8%A7%D8%AF%D8%B1%D8%A7%D9%86_%D8%AD%D8%A7%D8%AC_%D9%85%D8%AD%D9%85%D8%AF%DB%8C._%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%D8%8C_%D9%82%D9%85_11.jpg",
+      "author": "Mostafameraji",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "Carpentry is a skilled trade in which the primary work performed is the cutting, shaping and installation of building materials during the construction of buildings, ships, timber bridges, concrete formwork, etc. Carpenters traditionally worked with natural wood and did the rougher work such as framing, but today many other materials are also used  and sometimes the finer trades of cabinetmaking and furniture building are considered carpentry. Carpentry in the United States is almost always done by men. With 98.5% of carpenters being male, it was the fourth most male-dominated occupation in the country in 1999, and there were about 1.5 million positions in 2006. Carpenters are usually the first tradesmen on a job and the last to leave."
+    },
+    {
+      "title": "File:Woodworking workshop (Unsplash).jpg",
+      "author": "s w wengenroad",
+      "alt": "Woodworking workshop (Unsplash)",
+      "image": "/static/situation-photos/furniture-new-d21cd4e53113.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Woodworking_workshop_(Unsplash).jpg",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "description": "s w 2015-10-07",
+      "license": "CC0"
+    }
+  ],
+  "hotel": [
+    {
+      "image": "/static/situation-photos/hotel-new-20c59acc2e97.jpg",
+      "title": "File:Place d'Armes hotel pool New Orleans.jpg",
+      "alt": "Place d'Armes hotel pool New Orleans",
+      "source": "https://commons.wikimedia.org/wiki/File:Place_d%27Armes_hotel_pool_New_Orleans.jpg",
+      "author": "mrpolyonymous",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "description": "Place d'Armes hotel pool New Orleans"
+    },
+    {
+      "image": "/static/situation-photos/hotel-new-066cbba699fa.jpg",
+      "title": "File:Red Rock Hotel pool.jpg",
+      "alt": "Red Rock Hotel pool",
+      "source": "https://commons.wikimedia.org/wiki/File:Red_Rock_Hotel_pool.jpg",
+      "author": "Blane",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "description": "Pool Party at the Red Rock Hotel, Las Vegas"
+    }
+  ],
+  "laboratory": [
+    {
+      "image": "/static/situation-photos/laboratory-new-9bb51812ec7a.jpg",
+      "title": "File:Working in analytical chemistry 1.jpg",
+      "alt": "Working in analytical chemistry 1",
+      "source": "https://commons.wikimedia.org/wiki/File:Working_in_analytical_chemistry_1.jpg",
+      "author": "Martin Schaier",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "description": "A typical analytical balance used in a cleanroom together with some pipettes."
+    },
+    {
+      "image": "/static/situation-photos/laboratory-new-3f4bf22fe2d0.jpg",
+      "title": "File:Working in analytical chemistry 5.jpg",
+      "alt": "Working in analytical chemistry 5",
+      "source": "https://commons.wikimedia.org/wiki/File:Working_in_analytical_chemistry_5.jpg",
+      "author": "Martin Schaier",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "description": "A small centrifuge used for the precipitation of proteins and other biological substances."
+    },
+    {
+      "image": "/static/situation-photos/laboratory-new-4d07ffd76147.jpg",
+      "title": "File:Working in analytical chemistry 2.jpg",
+      "alt": "Working in analytical chemistry 2",
+      "source": "https://commons.wikimedia.org/wiki/File:Working_in_analytical_chemistry_2.jpg",
+      "author": "Martin Schaier",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "description": "Typical safety glasses worn in the lab."
+    },
+    {
+      "image": "/static/situation-photos/laboratory-new-e94dfa0c9d84.jpg",
+      "title": "File:Working in analytical chemistry 3.jpg",
+      "alt": "Working in analytical chemistry 3",
+      "source": "https://commons.wikimedia.org/wiki/File:Working_in_analytical_chemistry_3.jpg",
+      "author": "Martin Schaier",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "description": "Different sizes of pipette tips used for the precise making of solutions."
+    },
+    {
+      "image": "/static/situation-photos/laboratory-new-a3a60ab7270e.jpg",
+      "title": "File:Working in analytical chemistry 6.jpg",
+      "alt": "Working in analytical chemistry 6",
+      "source": "https://commons.wikimedia.org/wiki/File:Working_in_analytical_chemistry_6.jpg",
+      "author": "Martin Schaier",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "description": "A compact pH meter used to control the precise pH of buffer solutions."
+    },
+    {
+      "image": "/static/situation-photos/laboratory-new-a1fefb9d9045.jpg",
+      "title": "File:Working in analytical chemistry 7.jpg",
+      "alt": "Working in analytical chemistry 7",
+      "source": "https://commons.wikimedia.org/wiki/File:Working_in_analytical_chemistry_7.jpg",
+      "author": "Martin Schaier",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "description": "This picture shows some Falcon Tubes typically used in analytical chemistry. Here they are filled with internal standard and calibration solution."
+    }
+  ],
+  "machining": [
+    {
+      "image": "/static/situation-photos/machining-new-d4ef7cb43eb1.jpg",
+      "title": "File:Camelback Drill Press 01.jpg",
+      "alt": "Camelback Drill Press 01",
+      "source": "https://commons.wikimedia.org/wiki/File:Camelback_Drill_Press_01.jpg",
+      "author": "Shoot stufz",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "Camelback drill press."
+    },
+    {
+      "image": "/static/situation-photos/machining-new-b93870f75d96.jpg",
+      "title": "File:Magnetic drill press using twist drill bits.jpg",
+      "alt": "Magnetic drill press using twist drill bits",
+      "source": "https://commons.wikimedia.org/wiki/File:Magnetic_drill_press_using_twist_drill_bits.jpg",
+      "author": "RBR1986",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "Magnetic drill press using twist drill bits on morse taper 3 Arbor"
+    }
+  ],
+  "office": [
+    {
+      "image": "/static/situation-photos/office-new-c1bfecdd9ff8.jpg",
+      "title": "File:Brigade S1 Hosts Human Resources University (9031845).jpg",
+      "alt": "Brigade S1 Hosts Human Resources University (9031845)",
+      "source": "https://commons.wikimedia.org/wiki/File:Brigade_S1_Hosts_Human_Resources_University_(9031845).jpg",
+      "author": "U.S. Army photo by Capt. Frank Spatt",
+      "license": "Public domain",
+      "licenseUrl": null,
+      "description": "The Brigade S1 led a three-day training course, HR University, focused on human resources, legal, finance, and data analytics from February 4-6, 2025 at Camp Zama, Japan. The training bolstered a shared understanding of S1 roles and tools to maintain readiness and support the warfighter. Attendees included personnel from 1st Battalion, 1st Air Defense Artillery Regiment, the 14th Missile Defense Battery, 765th Transportation Terminal Battalion and G1 from U.S. Army Japan. (U.S. Army photo by Capt. Frank Spatt)"
+    }
+  ],
+  "plumbing": [
+    {
+      "image": "/static/situation-photos/plumbing-new-9a90622a4e89.jpg",
+      "title": "File:Water pipes for the power station - geograph.org.uk - 3320166.jpg",
+      "alt": "Water pipes for the power station - geograph.org.uk - 3320166",
+      "source": "https://commons.wikimedia.org/wiki/File:Water_pipes_for_the_power_station_-_geograph.org.uk_-_3320166.jpg",
+      "author": "Barbara Carr",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "description": "Water pipes for the power station"
+    },
+    {
+      "image": "/static/situation-photos/plumbing-new-6e044b6e809b.jpg",
+      "title": "File:Workers from Public Utilities Board putting pressure onto water pipes to ensure they aren’t moved or damaged during high tides, Ambo village, Kiribati, February 2013. Photo- DFAT (12426379604).jpg",
+      "alt": "Workers from Public Utilities Board putting pressure onto water pipes to ensure they aren’t moved or damaged during high tides, Ambo village, Kiribati, February 2013. Photo- DFAT (12426379604)",
+      "source": "https://commons.wikimedia.org/wiki/File:Workers_from_Public_Utilities_Board_putting_pressure_onto_water_pipes_to_ensure_they_aren%E2%80%99t_moved_or_damaged_during_high_tides,_Ambo_village,_Kiribati,_February_2013._Photo-_DFAT_(12426379604).jpg",
+      "author": "Department of Foreign Affairs and Trade",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "description": "Workers from Public Utilities Board putting pressure onto water pipes to ensure they aren’t moved or damaged during high tides, Ambo village, Kiribati, February 2013. Photo: DFAT"
+    }
+  ],
+  "programming": [
+    {
+      "image": "/static/situation-photos/programming-new-4f9b83fd2284.jpg",
+      "title": "File:Mariam and Uche, a statistician and a software developer in Lagos (8102029130).jpg",
+      "alt": "Mariam and Uche, a statistician and a software developer in Lagos (8102029130)",
+      "source": "https://commons.wikimedia.org/wiki/File:Mariam_and_Uche,_a_statistician_and_a_software_developer_in_Lagos_(8102029130).jpg",
+      "author": "DFID - UK Department for International Development",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "description": "Mariam (left) and Uche are, respectivley, a statistician and a software developer in Lagos. \nThey were both in involved in DFID's recent Trade Transparency Project, where DFID challenged young technology experts in Lagos, Capetown and London to interpret complex trade data and come up with visualisation, mobile apps or websites to help people understand the data.\nUche occasionally works on projects with the Co-Creation Hub in Lagos, a shared working space for small IT start-up companies. She curently works as a mobile app developer for a Nigerian bank, but says it's good that there's a place like Co-Creation Hub in Lagos, as it's a place to come and share ideas and build her skills in developing business ideas.\n\"It's important that software developers also know how to market their ideas and apps. It's not enough to just be able to create a product, you have to know how to sell it as well\", she says. \nPicture: Russell Watkins/Department for International Development\nTerms of use\n\nThis image is posted under a Creative Commons - Attribution Licence, in accordance with the Open Government Licence. You are free to embed, download or otherwise re-use it, as long as you credit the source as Russell Watkins/Department for International Development'."
+    }
+  ],
+  "tools": [
+    {
+      "image": "/static/situation-photos/tools-new-7e5fd978e40a.jpg",
+      "title": "File:HK SSP 深水埗 Sham Shui Po Apliu Street Kweilin Street 地攤 stall 2nd hand tools April 2022 Px3 01.jpg",
+      "alt": "HK SSP 深水埗 Sham Shui Po Apliu Street Kweilin Street 地攤 stall 2nd hand tools April 2022 Px3 01",
+      "source": "https://commons.wikimedia.org/wiki/File:HK_SSP_%E6%B7%B1%E6%B0%B4%E5%9F%97_Sham_Shui_Po_Apliu_Street_Kweilin_Street_%E5%9C%B0%E6%94%A4_stall_2nd_hand_tools_April_2022_Px3_01.jpg",
+      "author": "HAUMW LAMM 01",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "HK SSP zh:深水埗 Sham Shui Po in April 2022"
     }
   ]
 }

@@ -94,6 +94,7 @@ function professionalDocument(text) {
 }
 function activityStem(exp) {
   let html = '';
+  if(window.AulaOriginalDiagrams)html+=window.AulaOriginalDiagrams.figure(exp);
   if (window.AulaVisual) html += AulaVisual.mediaFor(exp, {role: 'observe'});
   else if (exp.image && exp.type !== 'hotspot') html += `<figure class="act-figure"><img src="${esc(exp.image)}" alt="Representación profesional de la actividad. Muestra el escenario de trabajo, no el resultado esperado." decoding="async"><figcaption class="act-media-caption">Representación profesional de la actividad. Muestra el escenario de trabajo, no el resultado esperado.</figcaption></figure>`;
   if (exp.document) html += professionalDocument(exp.document);
@@ -114,13 +115,16 @@ function hotspotMap(exp, selected, opts) {
   const picked = new Set(selected || []);
   const stem = opts && opts.skipStem ? '' : activityStem(exp);
   const spots = exp.spots || [];
-  const spotsHtml = spots.map(s => `<button type="button" class="act-spot ${picked.has(s.id) ? 'is-on' : ''}" data-spot="${esc(s.id)}" style="left:${s.x}%;top:${s.y}%" aria-pressed="${picked.has(s.id)}" aria-label="${esc(s.label)}">${esc(s.label)}</button>`).join('');
+  const documentary = spots.filter(s => /\/oficio-plano-leyenda\.png(?:\?|$)/.test(exp.image || '') && s.label === 'UE-01');
+  const spotsHtml = spots.filter(s => !documentary.includes(s)).map(s => `<button type="button" class="act-spot ${picked.has(s.id) ? 'is-on' : ''}" data-spot="${esc(s.id)}" style="left:${s.x}%;top:${s.y}%" aria-pressed="${picked.has(s.id)}" aria-label="${esc(s.label)}">${esc(s.label)}</button>`).join('');
+  const references = documentary.length ? `<aside class="act-dossier"><p>Referencia documental: UE-01 no aparece localizado en este plano.</p>${documentary.map(s => `<button type="button" class="act-spot-list ${picked.has(s.id) ? 'is-on' : ''}" data-spot="${esc(s.id)}" aria-pressed="${picked.has(s.id)}">${esc(s.label)} · Revisar referencia</button>`).join('')}</aside>` : '';
   const list = `<details class="act-hotspot-alt"><summary>Recorrer puntos con teclado o lista</summary><ol>${spots.map(s => `<li><button type="button" class="act-spot-list ${picked.has(s.id) ? 'is-on' : ''}" data-spot="${esc(s.id)}" aria-pressed="${picked.has(s.id)}">${esc(s.label)}</button></li>`).join('')}</ol><p class="muted small">Los nombres identifican zonas del escenario. No indican cuál es la respuesta.</p></details>`;
   const scene = window.AulaVisual
     ? AulaVisual.hotspotScene(exp, spotsHtml)
     : `<div class="act-scene"><img src="${esc(exp.image)}" alt="Escenario profesional para explorar. Revisa cada zona visible; la descripción no señala el hallazgo.">${spotsHtml}</div>`;
   return `<div class="act-hotspot" data-field="hotspot">${stem}
     ${scene}
+    ${references}
     ${list}
     <p class="act-spot-note" aria-live="polite">Abre cada punto del escenario. ${picked.size} de ${spots.length} observados.</p>
   </div>`;

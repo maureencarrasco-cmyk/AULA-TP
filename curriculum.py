@@ -475,7 +475,8 @@ def apply_official(content, module_id=1):
         ae['official_code'] = src['code']
         ae['official_page'] = src['page']
         ae['criteria'] = src['criteria']
-        ae['oa'] = spec['oa'][0] if spec['oa'] else ''
+        oa_index = 1 if mid == 1 and i >= 2 else 0
+        ae['oa'] = spec['oa'][oa_index] if len(spec['oa']) > oa_index else ''
         if not ae.get('lesson'):
             ae['lesson'] = src['criteria'][:2]
         if not ae.get('example') or 'sin inventar' in str(ae.get('example') or '').lower() or 'inventes' in str(ae.get('example') or '').lower():

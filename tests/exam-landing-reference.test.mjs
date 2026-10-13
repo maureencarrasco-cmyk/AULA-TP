@@ -96,3 +96,15 @@ test('Question navigation, written evidence and submission requirements are unch
   assert.match(scope.examForm(),/data-action="submit-exam" disabled/);
   assert.ok(fs.existsSync(new URL('../static/themes/evaluation-trophy.png',import.meta.url)));
 });
+
+test('Assessment artwork uses the campus media route and preserves the original image',()=>{
+  const scope=assessmentScope();
+  for(const html of [scope.examLanding(),scope.examHeroPhoto()]){
+    assert.match(html,/src="\/static\/media\/evaluation-trophy\.png\?v=20261012"/);
+    assert.doesNotMatch(html,/src="\/static\/themes\/evaluation-trophy/);
+  }
+  assert.deepEqual(
+    fs.readFileSync(new URL('../static/media/evaluation-trophy.png',import.meta.url)),
+    fs.readFileSync(new URL('../static/themes/evaluation-trophy.png',import.meta.url))
+  );
+});

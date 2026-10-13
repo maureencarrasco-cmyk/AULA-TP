@@ -27,16 +27,16 @@ function mcqChipLabel(item, opts) {
 function mcqMedia(item, exam) {
   const form = Number(item.form || item.mcq_form || 1);
   const photo = mcqPhotoSrc(item);
-  const alt = exam ? 'Evidencia visual del ítem. Examina sus datos visibles antes de responder.' : (item.alt || 'Foto del oficio usada como evidencia de la actividad.');
+  const alt = exam ? 'Recurso visual del ítem. Contrasta sus datos con los documentos del caso.' : (item.alt || 'Recurso visual original del caso.');
   const credit = !exam && item.photo_credit;
   const attribution = credit ? ` <a href="${mcqEsc(credit.source)}" target="_blank" rel="noopener noreferrer">${mcqEsc(credit.author || 'Fuente')}</a> · <a href="${mcqEsc(credit.licenseUrl)}" target="_blank" rel="noopener noreferrer">${mcqEsc(credit.license)}</a>.` : '';
   const evidence = !exam && item.case_evidence_image && !(form === 3 && item.illustration === item.case_evidence_image)
-    ? `<figure class="mcq-figure"><img src="${mcqEsc(item.case_evidence_image)}" alt="${mcqEsc(item.case_evidence_alt || 'Recurso técnico original del caso')}" decoding="async"><figcaption>Recurso técnico original del caso</figcaption></figure>` : '';
+    ? `<figure class="mcq-figure"><img src="${mcqEsc(item.case_evidence_image)}" alt="${mcqEsc(item.case_evidence_alt || 'Recurso visual original del caso')}" decoding="async"><figcaption>Recurso visual original del caso</figcaption></figure>` : '';
   const photoFig = photo
     ? `<figure class="mcq-figure"><img src="${mcqEsc(photo)}" alt="${mcqEsc(alt)}" decoding="async"><figcaption>${mcqEsc(exam ? 'Recurso visual del ítem' : (item.caption || 'Recurso visual del oficio'))}${attribution}</figcaption></figure>${evidence}`
-    : `<p class="muted small">Falta la foto real de este ítem. No se publica un módulo sin imagen.</p>`;
+    : `<p class="muted small">La imagen original no está disponible. Revisa los documentos y datos del caso.</p>${evidence}`;
   const illus = item.illustration
-    ? `<figure class="mcq-figure"><img src="${mcqEsc(item.illustration)}" alt="Ilustración técnica del mismo equipo. Acompaña; no reemplaza la foto." decoding="async"><figcaption>Ilustración técnica del mismo equipo</figcaption></figure>`
+    ? `<figure class="mcq-figure"><img src="${mcqEsc(item.illustration)}" alt="${mcqEsc(item.illustration_alt || 'Ilustración original de apoyo al caso.')}" decoding="async"><figcaption>Ilustración original de apoyo</figcaption></figure>`
     : '';
   const pictos = (item.pictograms || []).map(p => `<span class="mcq-picto">${mcqEsc(p.label || p)}</span>`).join('');
   const table = item.table && item.table.length
@@ -48,13 +48,13 @@ function mcqMedia(item, exam) {
     ? professionalDocument(item.document)
     : (item.document ? `<pre class="mcq-formula">${mcqEsc(item.document)}</pre>` : '');
 
-  if (form === 2) return `<div class="mcq-pictos">${pictos}</div><div class="mcq-media">${photoFig}</div>`;
-  if (form === 3) return `<div class="mcq-media is-pair">${photoFig}${illus || photoFig}</div>`;
-  if (form === 5) return `${table}<div class="mcq-media">${photoFig}</div>`;
-  if (form === 6) return `${formula}<div class="mcq-media">${photoFig}</div>`;
-  if (form === 7) return `${chart}<div class="mcq-media">${photoFig}</div>`;
-  if (form === 9 && doc) return `${doc}<div class="mcq-media">${photoFig}</div>`;
-  return `<div class="mcq-media">${photoFig}</div>`;
+  const primary = form === 5 ? table : form === 6 ? formula : form === 7 ? chart : form === 9 ? doc : '';
+  const supporting = (form !== 9 ? doc : '') + (form !== 5 ? table : '')
+    + (form !== 6 ? formula : '') + (form !== 7 ? chart : '');
+  const records = primary + supporting;
+  if (form === 2) return `<div class="mcq-pictos">${pictos}</div>${records}<div class="mcq-media">${photoFig}</div>`;
+  if (form === 3) return `${records}<div class="mcq-media${illus ? ' is-pair' : ''}">${photoFig}${illus}</div>`;
+  return `${records}<div class="mcq-media">${photoFig}</div>`;
 }
 
 function mcqOptions(item, opts) {

@@ -80,6 +80,19 @@ def repair_content_integrity(content, page_lookup=None):
     pdf = source.get('pdf')
     aes = content.get('aes') or []
     source_changes = 0
+    short_labels_repaired = 0
+    for ae in aes:
+        short = ae.get('short_title')
+        title = ae.get('title')
+        if not isinstance(short, str) or not isinstance(title, str) or not short.strip():
+            continue
+        prefix = short.rstrip()
+        if (title.startswith(prefix) and len(title) > len(prefix)
+                and prefix[-1].isalnum() and title[len(prefix)].isalnum()):
+            complete = prefix.rsplit(' ', 1)[0] if ' ' in prefix else title.split()[0]
+            if complete != short:
+                ae['short_title'] = complete
+                short_labels_repaired += 1
     for row in content.get('traceability') or []:
         if content.get('specialty'):
             row['specialty'] = content['specialty']
@@ -163,6 +176,7 @@ def repair_content_integrity(content, page_lookup=None):
         'status':'REQUIERE REVISION DISCIPLINAR', 'source_references_repaired':source_changes,
         'missing_media':missing, 'missing_media_count':len(missing),
         'alternative_labels_added':alternative_labels,
+        'short_labels_repaired':short_labels_repaired,
         'curriculum_validated':False, 'technical_content_validated':False,
         'accessibility_certified':False,
     }
