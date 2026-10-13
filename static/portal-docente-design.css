@@ -350,6 +350,45 @@ tbody tr:nth-child(even) { background:#f8fbfe; }
 .pd-layout-name-list b { font-size:13px; }
 .pd-layout-name-list small { display:block; color:#5c7495; }
 .pd-layout-initial { display:grid; place-items:center; flex:0 0 34px; height:34px; background:#d8edff; color:#0871cd; border-radius:50%; font-weight:700; }
+.pd-student-group-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; margin:24px 0; }
+.pd-student-group { --group-accent:#d62d40; --group-muted:#8d4550; --group-tint:#fff3f4; --group-line:#f4cdd3; --group-badge:#ffe0e4; padding:22px; border:1px solid var(--group-line); border-radius:8px; background:var(--group-tint); min-width:0; }
+.pd-student-group.is-ok { --group-accent:#007f42; --group-muted:#427055; --group-tint:#f1fcf4; --group-line:#c1e9cb; --group-badge:#d9f5e0; }
+.pd-student-group > header { display:flex; align-items:center; gap:14px; margin-bottom:20px; }
+.pd-student-group-icon { display:grid; place-items:center; width:52px; height:52px; flex:0 0 52px; border-radius:50%; background:var(--group-badge); color:var(--group-accent); }
+.pd-student-group-icon svg { width:30px; height:30px; }
+.pd-student-group-heading { flex:1; min-width:0; }
+.pd-student-group-heading h2 { margin:0 0 5px; color:#102c59; font-size:18px; line-height:1.35; word-break:normal; overflow-wrap:normal; }
+.pd-student-group-heading p { margin:0; color:#566e8b; font-size:13px; line-height:1.4; }
+.pd-student-group-count { flex:0 0 82px; min-height:68px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:var(--group-badge); border-radius:8px; padding:8px; color:var(--group-accent); }
+.pd-student-group-count strong { font-size:30px; line-height:1.1; font-variant-numeric:tabular-nums; }
+.pd-student-group-count span { font-size:11px; margin-top:3px; }
+.pd-student-group-list { list-style:none; padding:0; margin:0; display:grid; gap:10px; }
+.pd-student-group-person { display:flex; align-items:center; gap:14px; width:100%; min-height:76px; padding:12px; border:0; border-bottom:1px solid var(--group-line); border-radius:0; background:#ffffffc9; text-align:left; font:inherit; color:#102c59; cursor:pointer; }
+.pd-student-group-person:hover { background:#fff; box-shadow:inset 3px 0 var(--group-accent); }
+.pd-student-group-avatar { flex:0 0 42px; height:42px; border-radius:50%; background:var(--group-badge); color:var(--group-accent); display:grid; place-items:center; font-size:21px; font-weight:700; }
+.pd-student-group-name { flex:1; min-width:0; }
+.pd-student-group-name b { display:block; font-size:15px; line-height:1.4; word-break:normal; overflow-wrap:break-word; }
+.pd-student-group-name small { display:block; color:#5a718d; font-size:12px; line-height:1.4; margin-top:3px; }
+.pd-student-group-status { flex:0 0 30px; height:30px; border-radius:50%; background:var(--group-accent); color:#fff; display:grid; place-items:center; font-size:20px; font-weight:700; }
+.pd-student-group-arrow { flex:0 0 12px; color:#677f97; font-size:27px; line-height:1; }
+.pd-student-group > footer { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:16px; color:var(--group-muted); font-size:12px; }
+.pd-student-group > footer button { border:0; background:transparent; color:var(--group-accent); font:inherit; font-weight:600; padding:6px; cursor:pointer; }
+.pd-student-group-empty { min-height:76px; padding:14px 0; color:var(--group-muted); font-size:13px; }
+@media (max-width:1050px) { .pd-student-group-pair { grid-template-columns:minmax(0,1fr); } }
+@media (max-width:640px) {
+  .pd-student-group { padding:16px; }
+  .pd-student-group > header { flex-wrap:wrap; gap:10px; }
+  .pd-student-group-icon { width:42px; height:42px; flex-basis:42px; }
+  .pd-student-group-heading { flex-basis:calc(100% - 54px); }
+  .pd-student-group-heading h2 { font-size:17px; }
+  .pd-student-group-count { flex-direction:row; flex:1 1 100%; min-height:42px; gap:8px; }
+  .pd-student-group-count strong { font-size:24px; }
+  .pd-student-group-count span { margin:0; font-size:12px; }
+  .pd-student-group-person { gap:10px; padding:12px 8px; }
+  .pd-student-group-avatar { flex-basis:36px; height:36px; font-size:18px; }
+  .pd-student-group-status { flex-basis:24px; height:24px; font-size:16px; }
+  .pd-student-group-name b { font-size:14px; }
+}
 @media (max-width:1200px) {
   .pd-layout-three { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .pd-layout-three > :last-child { grid-column:span 2; }

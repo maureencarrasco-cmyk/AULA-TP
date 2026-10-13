@@ -85,10 +85,15 @@
   }
   function studentsLayout(data) {
     const metrics = metric('Estudiantes',data.people.length,'En el alcance seleccionado','blue') + metric('Cumplimiento medio',data.records.length?pct(mean(data.records.map(cumplimientoPct))):'—','Recorrido registrado','violet') + metric('Logro de selección',data.scores.length?pct(mean(data.scores)):'—',`${data.scores.length} registros evaluados`,'orange') + metric('Requieren apoyo',data.counts.support,'Seguimiento según las reglas existentes','mint');
-    const support = data.people.filter(group=>groupSignal(group).level==='support').slice(0,3);
-    const good = data.people.filter(group=>groupSignal(group).level==='ok').slice(0,3);
-    const list = groups => groups.length ? `<ul class="pd-layout-name-list">${groups.map(group=>`<li><span class="pd-layout-initial" aria-hidden="true">${esc((group[0].name||'?').slice(0,1))}</span><span><b>${esc(group[0].name)}</b><small>${esc(groupSignal(group).label)}</small></span></li>`).join('')}</ul>` : '<p class="pd-report-empty">Sin estudiantes en este grupo.</p>';
-    return `<section class="pd-report-metrics">${metrics}</section><div class="pd-layout-student-grid">${block('Listado de estudiantes',peopleList(data),'pd-layout-main-column')}<aside>${block('Distribución del desempeño',reportDistribution(data.counts))}${block('Avance por estaciones',stationProgress(data))}</aside></div><div class="pd-layout-three">${block('Estudiantes que requieren apoyo',list(support))}${block('Progreso esperado',list(good))}${block('Acciones rápidas',shortcuts())}</div>`;
+    const support = data.people.filter(group=>groupSignal(group).level==='support');
+    const good = data.people.filter(group=>groupSignal(group).level==='ok');
+    return `<section class="pd-report-metrics">${metrics}</section><div class="pd-layout-student-grid">${block('Listado de estudiantes',peopleList(data),'pd-layout-main-column')}<aside>${block('Distribución del desempeño',reportDistribution(data.counts))}${block('Avance por estaciones',stationProgress(data))}</aside></div><div class="pd-student-group-pair">${studentGroup(support,'support','Estudiantes que requieren apoyo','Necesitan acompañamiento adicional')}${studentGroup(good,'ok','Progreso esperado','Avanzan según lo esperado')}</div>${block('Acciones rápidas',shortcuts())}`;
+  }
+  function studentGroup(groups, level, title, subtitle) {
+    const shown = groups.slice(0,5);
+    const icon = ICONS[level==='support'?'estudiantes':'reportes'];
+    const status = level==='support' ? '<span aria-hidden="true">!</span>' : '<span aria-hidden="true">✓</span>';
+    return `<section class="pd-student-group is-${level}" aria-label="${esc(title)}"><header><span class="pd-student-group-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="${icon}" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="pd-student-group-heading"><h2>${esc(title)}</h2><p>${esc(subtitle)}</p></div><div class="pd-student-group-count"><strong>${groups.length}</strong><span>${groups.length===1?'estudiante':'estudiantes'}</span></div></header>${shown.length ? `<ul class="pd-student-group-list">${shown.map(group=>`<li><button type="button" class="pd-student-group-person" data-layout-person="${esc(group[0].name)}" data-layout-signal="${level}" aria-label="Ver evidencia de ${esc(group[0].name)}"><span class="pd-student-group-avatar" aria-hidden="true">${esc((group[0].name||'?').slice(0,1))}</span><span class="pd-student-group-name"><b>${esc(group[0].name)}</b><small>${esc(groupSignal(group).label)}</small></span><span class="pd-student-group-status" aria-hidden="true">${status}</span><span class="pd-student-group-arrow" aria-hidden="true">›</span></button></li>`).join('')}</ul>` : '<p class="pd-student-group-empty">Sin estudiantes en este grupo para el módulo seleccionado.</p>'}<footer><span>${shown.length} de ${groups.length} estudiantes</span>${groups.length?`<button type="button" data-layout-people="${level}" aria-label="Ver todos: ${esc(title)}">Ver todos →</button>`:''}</footer></section>`;
   }
   function curriculumRows(data, mode) {
     const rows = [];
@@ -152,6 +157,22 @@
       document.getElementById('pd-report-next').onclick=()=>{reportView.page+=1;refresh();};
     };
     bindList();
+    document.querySelectorAll('[data-layout-person]').forEach(button=>{
+      button.onclick=()=>{
+        reportView.search=button.dataset.layoutPerson;reportView.status=button.dataset.layoutSignal;reportView.page=0;
+        refresh();
+        const row=[...document.querySelectorAll('#pd-report-student-list tbody tr')].find(item=>item.querySelector('td')?.textContent===button.dataset.layoutPerson);
+        const evidence=row?.querySelector('details');
+        if(evidence){evidence.open=true;evidence.querySelector('summary')?.focus();row.scrollIntoView({block:'center'});}
+      };
+    });
+    document.querySelectorAll('[data-layout-people]').forEach(button=>{
+      button.onclick=()=>{
+        reportView.search='';reportView.status=button.dataset.layoutPeople;reportView.page=0;refresh();
+        document.getElementById('pd-report-search').focus();
+        document.getElementById('pd-report-student-list').scrollIntoView({block:'start'});
+      };
+    });
   }
   window.PortalLayout={render,bind};
 })();

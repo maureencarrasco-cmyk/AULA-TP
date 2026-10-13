@@ -61,3 +61,49 @@ test('panel retains its original mean-by-module formula with unequal populations
   assert.match(html,/<strong>60 %<\/strong><h2>Progreso general/);
   assert.match(html,/Media por módulo/);
 });
+test('red and green groups show actual totals and at most five original names',()=>{
+  const {context}=fixture();
+  vm.runInContext(`state.teacher.records=[
+    ...Array.from({length:8},(_,i)=>({name:'Apoyo '+i,module_id:1,position:1,percent:20,state:{}})),
+    ...Array.from({length:7},(_,i)=>({name:'Progreso '+i,module_id:1,position:1,percent:100,state:{exam:{score:9,max_score:10}}}))];`,context);
+  const before=vm.runInContext('JSON.stringify(state.teacher)',context);
+  const html=vm.runInContext("window.PortalLayout.render('estudiantes')",context);
+  const groups=html.split('<div class="pd-student-group-pair">')[1].split('<section class="pd-report-panel')[0];
+  assert.match(groups,/class="pd-student-group is-support"/);
+  assert.match(groups,/class="pd-student-group is-ok"/);
+  assert.match(groups,/<strong>8<\/strong><span>estudiantes/);
+  assert.match(groups,/<strong>7<\/strong><span>estudiantes/);
+  assert.equal((groups.match(/data-layout-person=/g)||[]).length,10);
+  assert.match(groups,/5 de 8 estudiantes/);
+  assert.match(groups,/5 de 7 estudiantes/);
+  assert.doesNotMatch(groups,/Apoyo 5|Progreso 5/);
+  assert.equal(vm.runInContext('JSON.stringify(state.teacher)',context),before);
+});
+test('student group action opens existing evidence without changing academic records',()=>{
+  const {context,elements}=fixture();
+  let focused=false,scrolled=false;
+  const evidence={open:false,querySelector:()=>({focus:()=>{focused=true;}})};
+  const row={querySelector:selector=>selector==='td'?{textContent:'Luis'}:evidence,scrollIntoView:()=>{scrolled=true;}};
+  const button={dataset:{layoutPerson:'Luis',layoutSignal:'support'}};
+  elements['pd-layout-module']={};
+  elements['pd-report-student-list']={innerHTML:''};
+  for(const id of ['pd-report-search','pd-report-status','pd-report-prev','pd-report-next'])elements[id]={};
+  context.document.querySelectorAll=selector=>selector==='[data-layout-person]'?[button]:selector==='#pd-report-student-list tbody tr'?[row]:[];
+  const before=vm.runInContext('JSON.stringify(state.teacher)',context);
+  vm.runInContext('window.PortalLayout.bind()',context);
+  button.onclick();
+  assert.equal(evidence.open,true);
+  assert.ok(focused&&scrolled);
+  assert.equal(vm.runInContext('reportView.search',context),'Luis');
+  assert.equal(vm.runInContext('reportView.status',context),'support');
+  assert.equal(vm.runInContext('JSON.stringify(state.teacher)',context),before);
+});
+test('empty groups display zero rather than invented students',()=>{
+  const {context}=fixture();
+  vm.runInContext('state.teacher.records=[]',context);
+  const html=vm.runInContext("window.PortalLayout.render('estudiantes')",context);
+  const groups=html.split('<div class="pd-student-group-pair">')[1].split('<section class="pd-report-panel')[0];
+  assert.equal((groups.match(/<strong>0<\/strong>/g)||[]).length,2);
+  assert.match(groups,/Sin estudiantes en este grupo/);
+  assert.doesNotMatch(groups,/data-layout-person=/);
+});
