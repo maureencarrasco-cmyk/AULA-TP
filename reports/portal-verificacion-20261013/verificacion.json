@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-13",
+  "url": "https://aulatpchile.cl/portal-docente",
+  "branch": "analiza-vacios",
+  "checks": [
+    {
+      "brokenImages": [],
+      "filterCount": 1,
+      "horizontalOverflow": false,
+      "labels": [
+        "Curso",
+        "Período",
+        "Módulo"
+      ],
+      "path": "/portal-docente",
+      "selectedModule": "2",
+      "sidebarImage": {
+        "src": "/static/portal-docente/sidebar-foot.jpg?v=20261013-verified",
+        "width": 1280
+      }
+    },
+    {
+      "brokenImages": [],
+      "filterCount": 1,
+      "horizontalOverflow": false,
+      "labels": [
+        "Curso",
+        "Período",
+        "Módulo"
+      ],
+      "path": "/portal-docente/cursos",
+      "selectedModule": "2",
+      "sidebarImage": {
+        "src": "/static/portal-docente/sidebar-foot.jpg?v=20261013-verified",
+        "width": 1280
+      }
+    },
+    {
+      "brokenImages": [],
+      "filterCount": 1,
+      "horizontalOverflow": false,
+      "labels": [
+        "Curso",
+        "Período",
+        "Módulo"
+      ],
+      "path": "/portal-docente/estudiantes",
+      "selectedModule": "2",
+      "sidebarImage": {
+        "src": "/static/portal-docente/sidebar-foot.jpg?v=20261013-verified",
+        "width": 1280
+      }
+    },
+    {
+      "brokenImages": [],
+      "filterCount": 1,
+      "horizontalOverflow": false,
+      "labels": [
+        "Curso",
+        "Período",
+        "Módulo"
+      ],
+      "path": "/portal-docente/oa-ae",
+      "selectedModule": "2",
+      "sidebarImage": {
+        "src": "/static/portal-docente/sidebar-foot.jpg?v=20261013-verified",
+        "width": 1280
+      }
+    },
+    {
+      "brokenImages": [],
+      "filterCount": 1,
+      "horizontalOverflow": false,
+      "labels": [
+        "Curso",
+        "Período",
+        "Módulo"
+      ],
+      "path": "/portal-docente/cumplimiento",
+      "selectedModule": "2",
+      "sidebarImage": {
+        "src": "/static/portal-docente/sidebar-foot.jpg?v=20261013-verified",
+        "width": 1280
+      }
+    },
+    {
+      "brokenImages": [],
+      "filterCount": 1,
+      "horizontalOverflow": false,
+      "labels": [
+        "Curso",
+        "Período",
+        "Módulo"
+      ],
+      "path": "/portal-docente/reportes",
+      "selectedModule": "2",
+      "sidebarImage": {
+        "src": "/static/portal-docente/sidebar-foot.jpg?v=20261013-verified",
+        "width": 1280
+      }
+    }
+  ]
+}
