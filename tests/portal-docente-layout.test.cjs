@@ -4,9 +4,9 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const source = fs.readFileSync('static/portal-docente.js','utf8').replace(/\r\n/g,'\n').split('\nnav();\nfunction showLoadError')[0];
 const layout = fs.readFileSync('static/portal-docente-layout.js','utf8');
-function fixture() {
+function fixture(search = '') {
   const elements = {};
-  const context = vm.createContext({window:{},location:{pathname:'/portal-docente'},document:{getElementById:id=>elements[id]||null,querySelectorAll:()=>[],querySelector:()=>null}});
+  const context = vm.createContext({URLSearchParams,window:{},location:{pathname:'/portal-docente',search},document:{getElementById:id=>elements[id]||null,querySelectorAll:()=>[],querySelector:()=>null}});
   vm.runInContext(source,context);
   vm.runInContext(layout,context);
   vm.runInContext(`state.user={name:'Docente',role:'teacher'};state.courses=[{id:1,title:'Refrigeración y Climatización',modules:[
@@ -132,4 +132,55 @@ test('pedagogical empty state and existing URL filters remain intact',()=>{
   assert.ok(panels.includes('href="/portal-docente/estudiantes?q=planos"'));
   assert.ok(panels.includes('href="/api/teacher/export.csv"'));
   assert.ok(!panels.includes('Ver criterios y evidencia'));
+});
+
+test('quick actions retain the selected module and the alert opens the support group',()=>{
+  const {context,elements}=fixture();
+  elements['pd-layout-module']={};
+  vm.runInContext('draw=()=>{};window.PortalLayout.bind()',context);
+  elements['pd-layout-module'].onchange({target:{value:'2'}});
+  const html=vm.runInContext("window.PortalLayout.render('resumen')",context);
+  for(const section of ['estudiantes','cursos','oa-ae','reportes']) assert.ok(html.includes(`href="/portal-docente/${section}?module=2"`));
+  assert.match(html,/href="\/portal-docente\/estudiantes\?module=2&amp;status=support"/);
+  assert.match(html,/href="\/portal-docente\/oa-ae\?module=2&amp;learning=criteria&amp;ae=0#pd-ae-2-0"/);
+  assert.match(html,/download="aula-tp-cumplimiento\.csv"/);
+});
+
+test('direct student navigation applies the support filter and leaves original records intact',()=>{
+  const {context}=fixture('?module=2&status=support');
+  const before=vm.runInContext('JSON.stringify(state.teacher)',context);
+  const html=vm.runInContext("window.PortalLayout.render('estudiantes')",context).split('<details class="pd-report-method">')[0];
+  assert.match(html,/value="2" selected/);
+  assert.match(html,/value="support" selected/);
+  assert.match(html,/Luis/);
+  assert.doesNotMatch(html,/<td>Ana<\/td>/);
+  assert.equal(vm.runInContext('JSON.stringify(state.teacher)',context),before);
+});
+
+test('recommendation opens the original criteria and focuses the matching AE after loading',()=>{
+  const {context,elements}=fixture('?module=2&learning=criteria&ae=0');
+  const html=vm.runInContext("window.PortalLayout.render('oa-ae')",context);
+  assert.match(html,/data-layout-tab="criteria" aria-pressed="true"/);
+  assert.match(html,/id="pd-ae-2-0" tabindex="-1"/);
+  assert.match(html,/Contrasta registros/);
+  let focused=false,scrolled=false;
+  elements['pd-layout-module']={};
+  elements['pd-ae-2-0']={focus:()=>{focused=true;},scrollIntoView:()=>{scrolled=true;}};
+  vm.runInContext('window.PortalLayout.bind()',context);
+  assert.ok(focused&&scrolled);
+});
+
+test('navigation respects URL searches and safely ignores invalid module and view parameters',()=>{
+  const {context}=fixture('?module=999&learning=invalid&ae=<script>');
+  const html=vm.runInContext("window.PortalLayout.render('oa-ae')",context);
+  assert.match(html,/data-layout-tab="oa" aria-pressed="true"/);
+  assert.doesNotMatch(html,/value="999" selected/);
+  vm.runInContext("state.q='planos & más'",context);
+  assert.equal(vm.runInContext("portalLink('/portal-docente/cursos',{module:1})",context),'/portal-docente/cursos?q=planos+%26+m%C3%A1s&module=1');
+});
+
+test('layout initialization works before the main script, matching the HTML load order',()=>{
+  const context=vm.createContext({window:{},URLSearchParams,location:{pathname:'/portal-docente',search:'?module=2'}});
+  assert.doesNotThrow(()=>vm.runInContext(layout,context));
+  assert.equal(typeof context.window.PortalLayout.render,'function');
 });

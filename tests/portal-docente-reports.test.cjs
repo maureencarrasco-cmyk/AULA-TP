@@ -3,8 +3,8 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const source = fs.readFileSync('static/portal-docente.js', 'utf8').replace(/\r\n/g, '\n').split('\nnav();\nfunction showLoadError')[0];
-function fixture() {
-  const context = vm.createContext({ location: { pathname: '/portal-docente/reportes' }, window: {} });
+function fixture(search = '') {
+  const context = vm.createContext({ URLSearchParams, location: { pathname: '/portal-docente/reportes',search }, window: {} });
   vm.runInContext(source, context);
   vm.runInContext(`state.courses = [{title:'Refrigeración y Climatización', modules:[
     {id:1,position:1,title:'Planos',aes:[{code:'AE1',title:'Interpretar planos'}]},
@@ -79,4 +79,14 @@ test('reference filter band keeps informative fields and original module options
   assert.match(html, /value="1" >M1 · Planos/);
   assert.equal((html.match(/<select/g) || []).length, 1);
   assert.equal(vm.runInContext('JSON.stringify(state.courses)', context), before);
+});
+
+test('report quick navigation restores its module and ignores unknown modules', () => {
+  const context = fixture('?module=2');
+  const html = vm.runInContext('reports()', context);
+  assert.match(html,/value="2" selected/);
+  assert.equal(vm.runInContext('reportRecords().length',context),1);
+  const unknown = fixture('?module=999');
+  vm.runInContext('reports()',unknown);
+  assert.equal(vm.runInContext('reportView.module',unknown),'');
 });

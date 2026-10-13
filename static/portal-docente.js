@@ -30,7 +30,8 @@ const HEAD = {
   cumplimiento: PHOTOS[5],
   reportes: PHOTOS[2]
 };
-const state = { courses: [], teacher: null, user: null, q: '' };
+const navigationParams = typeof URLSearchParams === 'function' && typeof location === 'object' ? new URLSearchParams(location.search || '') : null;
+const state = { courses: [], teacher: null, user: null, q: navigationParams?.get('q') || '' };
 
 function esc(value) {
   return String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
@@ -83,6 +84,15 @@ function scopedRecords() {
 function href(path) {
   const q = state.q.trim();
   return q ? `${path}?q=${encodeURIComponent(q)}` : path;
+}
+function portalLink(path, options = {}) {
+  const params = new URLSearchParams();
+  if (state.q.trim()) params.set('q', state.q.trim());
+  for (const [key, value] of Object.entries(options)) {
+    if (value !== '' && value != null) params.set(key, String(value));
+  }
+  const search = params.toString();
+  return path + (search ? '?' + search : '');
 }
 function nav() {
   const tab = currentTab();
@@ -780,12 +790,13 @@ function reportsEvidence() {
     quad(6, 'celeste', 'Decisión', 'Dónde está el resto de la evidencia', spotlight('La tendencia, el listado y el plan están en otras pestañas.', [['Tendencia y logro', 'Panel general'], ['Por estudiante', 'Estudiantes'], ['Plan', 'Cursos']], `<p><a href="${href('/portal-docente')}">Abrir el panel</a> · <a href="${href('/portal-docente/estudiantes')}">Ver estudiantes</a> · <a href="${href('/portal-docente/cursos')}">Ver la planificación</a></p>`))
   ].join(''));
 }
-const reportView = { tab: 'general', module: '', search: '', status: '', page: 0, size: 10 };
+const reportView = { tab: 'general', module: navigationParams?.get('module') || '', search: '', status: ['ok','watch','support','none'].includes(navigationParams?.get('status')) ? navigationParams.get('status') : '', page: 0, size: 10 };
 const REPORT_TABS = [
   ['general', 'Resumen general'], ['modules', 'Por módulo'], ['stations', 'Por estación'],
   ['learning', 'Por OA y AE'], ['students', 'Por estudiante'], ['exams', 'Evaluaciones'], ['compare', 'Comparativos']
 ];
 function reportRecords() {
+  if (reportView.module && fiveModules().length && !scopedModules().some(module => String(module.id) === reportView.module)) reportView.module = '';
   return scopedRecords().filter(record => !reportView.module || String(record.module_id) === reportView.module);
 }
 function reportPeople(records) {
@@ -990,7 +1001,11 @@ async function requestJSON(url, options) {
     if (!response.ok) throw new Error(data.error || 'No se pudo abrir el portal docente.');
     return data;
   } catch (error) {
-    if (error.name === 'AbortError') throw new Error('La carga tarda demasiado. Comprueba tu conexi\u00f3n y vuelve a intentarlo.');
+    if (error.name === 'AbortError') {
+      const timeout = new Error('La carga tarda demasiado. Comprueba tu conexi\u00f3n y vuelve a intentarlo.');
+      timeout.code = 'NETWORK_TIMEOUT';
+      throw timeout;
+    }
     if (error instanceof SyntaxError || error instanceof TypeError) throw new Error('No se pudo conectar con el servicio del portal. Vuelve a intentarlo.');
     throw error;
   } finally {
@@ -1037,7 +1052,12 @@ function applyCohort() {
 nav();
 function showLoadError(error) {
   nav();
-  document.getElementById('pd-main').innerHTML = `<section class="pd-card" role="alert"><h2>No se pudo cargar el portal</h2><p>${esc(error.message)}</p><button id="pd-retry" type="button">Reintentar</button></section>`;
+  if (error.code === 'NETWORK_TIMEOUT' && state.user && state.cohort && fiveModules().length) {
+    draw();
+    document.getElementById('pd-main').insertAdjacentHTML('afterbegin', '<div class="pd-report-demo" role="status">No se pudo actualizar la información. Se mantiene la demostración ya cargada. <button id="pd-retry" type="button">Reintentar actualización</button></div>');
+  } else {
+    document.getElementById('pd-main').innerHTML = `<section class="pd-card" role="alert"><h2>No se pudo cargar el portal</h2><p>${esc(error.message)}</p><button id="pd-retry" type="button">Reintentar</button></section>`;
+  }
   document.getElementById('pd-retry').onclick = event => {
     event.currentTarget.disabled = true;
     event.currentTarget.textContent = 'Cargando...';

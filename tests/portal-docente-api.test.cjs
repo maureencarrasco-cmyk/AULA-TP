@@ -26,3 +26,36 @@ test('successful JSON request preserves authentication headers and cookies', asy
   });
   assert.deepEqual(await api.requestJSON('/api/teacher', { headers: { 'X-Aula-Portal': 'docente' } }), { records: [] });
 });
+
+test('timeouts carry a distinct code rather than hiding authentication failures', async () => {
+  const api = context('www.aulatpchile.cl', async () => { throw { name:'AbortError' }; });
+  await assert.rejects(api.requestJSON('/api/courses', {}), error => error.code === 'NETWORK_TIMEOUT');
+});
+
+function errorView({ loaded = true } = {}) {
+  const main = { innerHTML:'existing navigation', insertAdjacentHTML(position,html) { this.notice=html; } };
+  const retry = {};
+  const sandbox = { state:{user:loaded?{role:'teacher'}:null,cohort:loaded}, fiveModules:()=>loaded?[{}]:[],nav:()=>{},draw:()=>{sandbox.redrawn=true;},esc:String,boot:()=>Promise.resolve(),document:{getElementById:id=>id==='pd-main'?main:retry} };
+  vm.createContext(sandbox);
+  vm.runInContext(source.slice(source.indexOf('function showLoadError('),source.indexOf("\ndocument.querySelector('.pd-foot')")),sandbox);
+  return {sandbox,main,retry};
+}
+
+test('a slow refresh retains the loaded demonstration and its navigation with an explicit notice', () => {
+  const {sandbox,main,retry}=errorView();
+  sandbox.showLoadError({code:'NETWORK_TIMEOUT',message:'Slow refresh'});
+  assert.ok(sandbox.redrawn);
+  assert.equal(main.innerHTML,'existing navigation');
+  assert.match(main.notice,/Se mantiene la demostración ya cargada/);
+  assert.equal(typeof retry.onclick,'function');
+});
+
+test('access errors and timeouts without authorized loaded data keep the blocking error state', () => {
+  for(const [loaded,error] of [[true,{message:'Access denied'}],[false,{code:'NETWORK_TIMEOUT',message:'Slow refresh'}]]) {
+    const {sandbox,main}=errorView({loaded});
+    sandbox.showLoadError(error);
+    assert.match(main.innerHTML,/No se pudo cargar el portal/);
+    assert.equal(main.notice,undefined);
+    assert.equal(sandbox.redrawn,undefined);
+  }
+});

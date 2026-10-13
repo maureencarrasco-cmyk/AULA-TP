@@ -1,6 +1,7 @@
 'use strict';
 (function () {
-  const view = { module: '', planning: 'plan', learning: 'oa', moduleSearch: '' };
+  const params = typeof URLSearchParams === 'function' && typeof location === 'object' ? new URLSearchParams(location.search || '') : null;
+  const view = { module: params?.get('module') || '', planning: 'plan', learning: ['oa','ae','criteria','alignment','coverage'].includes(params?.get('learning')) ? params.get('learning') : 'oa', moduleSearch: '', targetAe: /^\d+$/.test(params?.get('ae') || '') ? params.get('ae') : '' };
   const stationsList = ['Contextualización', 'Aprendizajes esperados', 'Situación integradora', 'Evaluación', 'Retroalimentación y cierre'];
   const descriptions = {
     resumen: 'Visión integral del aprendizaje y progreso de tus estudiantes.',
@@ -10,6 +11,7 @@
     cumplimiento: 'Monitorea el recorrido y las evaluaciones registradas.'
   };
   function context() {
+    if (view.module && fiveModules().length && !scopedModules().some(module => String(module.id) === view.module)) view.module = '';
     const modules = scopedModules().filter(module => !view.module || String(module.id) === view.module);
     const ids = new Set(modules.map(module => String(module.id)));
     const records = scopedRecords().filter(record => ids.has(String(record.module_id)));
@@ -51,15 +53,20 @@
   }
   function shortcuts(enhanced = false) {
     const links = [
-      ['estudiantes','Ver estudiantes',href('/portal-docente/estudiantes'),'blue'],
-      ['cursos','Revisar planificación',href('/portal-docente/cursos'),'violet'],
-      ['oa-ae','Revisar OA, AE y criterios',href('/portal-docente/oa-ae'),'green'],
-      ['reportes','Abrir Reportes',href('/portal-docente/reportes'),'orange'],
+      ['estudiantes','Ver estudiantes',portalLink('/portal-docente/estudiantes',{module:view.module}),'blue'],
+      ['cursos','Revisar planificación',portalLink('/portal-docente/cursos',{module:view.module}),'violet'],
+      ['oa-ae','Revisar OA, AE y criterios',portalLink('/portal-docente/oa-ae',{module:view.module}),'green'],
+      ['reportes','Abrir Reportes',portalLink('/portal-docente/reportes',{module:view.module}),'orange'],
       ['download','Descargar datos reales del campus (CSV)','/api/teacher/export.csv','cyan']
     ];
-    return `<div class="${enhanced?'pd-ped-quicklinks':'pd-report-actions'}">${links.map(([icon,label,url,tone])=>`<a href="${url}">${enhanced?`<span class="pd-ped-action-icon is-${tone}" aria-hidden="true">${icon==='download'?'↓':smallIcon(icon)}</span><span>${esc(label)}</span><span class="pd-ped-arrow" aria-hidden="true">→</span>`:`${esc(label)} →`}</a>`).join('')}</div>`;
+    return `<div class="${enhanced?'pd-ped-quicklinks':'pd-report-actions'}">${links.map(([icon,label,url,tone])=>`<a href="${esc(url)}"${icon==='download'?' download="aula-tp-cumplimiento.csv"':''}>${enhanced?`<span class="pd-ped-action-icon is-${tone}" aria-hidden="true">${icon==='download'?'↓':smallIcon(icon)}</span><span>${esc(label)}</span><span class="pd-ped-arrow" aria-hidden="true">→</span>`:`${esc(label)} →`}</a>`).join('')}</div>`;
   }
   function pedagogicalActions(data, weakest) {
+    const href = path => {
+      if (path === '/portal-docente/estudiantes') return esc(portalLink(path,{module:view.module,status:'support'}));
+      const mode = weakest?.ae.criteria?.length ? 'criteria' : 'ae';
+      return esc(portalLink(path,{module:weakest?.module.id,learning:mode,ae:weakest?.index})) + `#pd-ae-${weakest?.module.id}-${weakest?.index}`;
+    };
     return `<div class="pd-ped-panels"><section class="pd-ped-panel is-alerts"><header class="pd-ped-heading"><h2>Alertas pedagógicas</h2><p>Estudiantes que requieren apoyo.</p></header><div class="pd-ped-stats"><div class="is-support"><span class="pd-ped-stat-icon" aria-hidden="true">${smallIcon('estudiantes')}</span><strong>${data.counts.support}</strong><span>estudiantes requieren apoyo</span></div><div class="is-watch"><span class="pd-ped-stat-icon" aria-hidden="true">◎</span><strong>${data.counts.watch}</strong><span>conviene observar</span></div></div><p class="pd-ped-rules"><span aria-hidden="true">i</span>La señal conserva las reglas del portal: estaciones registradas y resultados de selección.</p><a class="pd-ped-cta" href="${href('/portal-docente/estudiantes')}"><span>Revisar estudiantes</span><span class="pd-ped-arrow" aria-hidden="true">→</span></a></section><section class="pd-ped-panel is-recommendations"><header class="pd-ped-heading"><span class="pd-ped-heading-icon" aria-hidden="true">${smallIcon('oa-ae')}</span><div><h2>Recomendaciones pedagógicas</h2><p>Sugerencias basadas en la evidencia disponible.</p></div></header>${weakest?`<div class="pd-ped-recommendation"><span class="pd-ped-document" aria-hidden="true">${smallIcon('oa-ae')}</span><p>Revisar <strong>${esc(weakest.ae.code||'AE')}</strong> del módulo ${weakest.module.position}, con <strong>${weakest.covered} de ${weakest.total}</strong> registros de evidencia.</p></div><a class="pd-ped-cta" href="${href('/portal-docente/oa-ae')}"><span>Ver criterios y evidencia</span><span class="pd-ped-arrow" aria-hidden="true">→</span></a>`:'<p class="pd-report-empty">Sin evidencia suficiente para una recomendación.</p>'}</section><section class="pd-ped-panel is-shortcuts"><header class="pd-ped-heading"><h2>Accesos rápidos</h2><p>Herramientas para tu gestión pedagógica.</p></header>${shortcuts(true)}</section></div>`;
   }
   function peopleList(data) {
@@ -114,8 +121,9 @@
       if (mode === 'oa') (module.oa||[]).forEach((oa,index) => rows.push(`<tr><td>OA · ${index+1}</td><td>${esc(oa)}</td><td>M${module.position}</td><td>Sin indicador de logro individual</td></tr>`));
       else (module.aes||[]).forEach((ae,index) => {
         const coverage = data.coverage.find(item=>item.module.id===module.id && item.index===index);
-        if (mode === 'criteria') (ae.criteria||[]).forEach(criterion=>rows.push(`<tr><td>${esc(ae.code||`AE ${index+1}`)}</td><td>${esc(typeof criterion==='string'?criterion:criterion.description||criterion.title||criterion.text||JSON.stringify(criterion))}</td><td>M${module.position}</td><td>Criterio original</td></tr>`));
-        else rows.push(`<tr><td>${esc(ae.code||`AE ${index+1}`)}</td><td>${esc(ae.title||'Sin enunciado')}</td><td>M${module.position}</td><td>${bar(coverage?.total ? coverage.covered/coverage.total*100 : null)}</td></tr>`);
+        const anchor = `id="pd-ae-${module.id}-${index}" tabindex="-1"`;
+        if (mode === 'criteria') (ae.criteria||[]).forEach((criterion,criterionIndex)=>rows.push(`<tr ${criterionIndex===0?anchor:''}><td>${esc(ae.code||`AE ${index+1}`)}</td><td>${esc(typeof criterion==='string'?criterion:criterion.description||criterion.title||criterion.text||JSON.stringify(criterion))}</td><td>M${module.position}</td><td>Criterio original</td></tr>`));
+        else rows.push(`<tr ${anchor}><td>${esc(ae.code||`AE ${index+1}`)}</td><td>${esc(ae.title||'Sin enunciado')}</td><td>M${module.position}</td><td>${bar(coverage?.total ? coverage.covered/coverage.total*100 : null)}</td></tr>`);
       });
     });
     return `<div class="pd-table-wrap"><table><thead><tr><th>${mode==='oa'?'Referencia OA':'AE'}</th><th>${mode==='criteria'?'Criterio de evaluación':'Descripción original'}</th><th>Módulo</th><th>${mode==='ae'?'Cobertura de evidencia':'Referencia'}</th></tr></thead><tbody>${rows.join('')||'<tr><td colspan="4">No hay referencias en este alcance.</td></tr>'}</tbody></table></div>`;
@@ -148,9 +156,11 @@
   function bind() {
     const select=document.getElementById('pd-layout-module');
     if(!select)return;
-    select.onchange=event=>{view.module=event.target.value;reportView.page=0;draw();};
-    document.querySelectorAll('[data-layout-tab]').forEach(button=>{button.onclick=()=>{view[button.dataset.layoutGroup]=button.dataset.layoutTab;draw();};});
-    document.querySelectorAll('[data-layout-module]').forEach(button=>{button.onclick=()=>{view.module=button.dataset.layoutModule;draw();};});
+    select.onchange=event=>{view.module=event.target.value;view.targetAe='';reportView.page=0;draw();};
+    document.querySelectorAll('[data-layout-tab]').forEach(button=>{button.onclick=()=>{view[button.dataset.layoutGroup]=button.dataset.layoutTab;view.targetAe='';draw();};});
+    document.querySelectorAll('[data-layout-module]').forEach(button=>{button.onclick=()=>{view.module=button.dataset.layoutModule;view.targetAe='';draw();};});
+    const target=view.targetAe!=='' ? document.getElementById(`pd-ae-${view.module}-${view.targetAe}`) : null;
+    if(target){target.focus({preventScroll:true});target.scrollIntoView({block:'center'});}
     const review=document.querySelector('[data-layout-review]');
     if(review)review.onclick=()=>{
       document.querySelector('.pd-layout > .pd-report-method').open=true;

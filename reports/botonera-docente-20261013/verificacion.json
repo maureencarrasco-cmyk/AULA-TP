@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-13",
+  "checks": [
+    {
+      "button": "Revisar estudiantes",
+      "focused": "",
+      "heading": "Estudiantes",
+      "module": "2",
+      "status": "support",
+      "url": "https://aulatpchile.cl/portal-docente/estudiantes?module=2&status=support"
+    },
+    {
+      "button": "Ver criterios y evidencia",
+      "focused": "pd-ae-2-2",
+      "heading": "OA, AE y criterios de evaluación",
+      "learning": "Criterios de evaluación",
+      "module": "2",
+      "url": "https://aulatpchile.cl/portal-docente/oa-ae?module=2&learning=criteria&ae=2#pd-ae-2-2"
+    },
+    {
+      "button": "Ver estudiantes",
+      "focused": "",
+      "heading": "Estudiantes",
+      "module": "2",
+      "status": "",
+      "url": "https://aulatpchile.cl/portal-docente/estudiantes?module=2"
+    },
+    {
+      "button": "Revisar planificación",
+      "focused": "",
+      "heading": "Cursos / Planificación",
+      "module": "2",
+      "url": "https://aulatpchile.cl/portal-docente/cursos?module=2"
+    },
+    {
+      "button": "Revisar OA, AE y criterios",
+      "focused": "",
+      "heading": "OA, AE y criterios de evaluación",
+      "learning": "Vista por OA",
+      "module": "2",
+      "url": "https://aulatpchile.cl/portal-docente/oa-ae?module=2"
+    },
+    {
+      "button": "Abrir Reportes",
+      "focused": "",
+      "heading": "Reportes",
+      "module": "2",
+      "status": "",
+      "url": "https://aulatpchile.cl/portal-docente/reportes?module=2"
+    }
+  ],
+  "csv": {
+    "downloaded": true,
+    "file": "avance-aula-tp.csv",
+    "staysInPortal": true
+  },
+  "mobile": {
+    "module": "220",
+    "overflow": false,
+    "url": "https://aulatpchile.cl/portal-docente/estudiantes?module=220"
+  },
+  "version": "20261013-navigation-v10"
+}
