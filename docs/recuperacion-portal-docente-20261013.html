@@ -1,0 +1,14 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recuperación del Portal Docente</title>
+<style>body{font:16px/1.6 system-ui;max-width:950px;margin:30px auto;padding:20px;color:#17314b}code{overflow-wrap:anywhere}li{margin:8px 0}</style>
+<h1>Recuperación del Portal Docente · 13 octubre 2026</h1>
+<p>El sitio respondía con HTTP 200, pero el portal permanecía en «Cargando el portal docente…». La publicación utilizaba archivos antiguos y no la corrección de la ruta dedicada <code>/portal-docente-api/</code> disponible en GitHub.</p>
+<h2>Corrección aplicada</h2><ul>
+<li>Se actualizaron exclusivamente seis archivos estáticos del portal docente, conservando la aplicación, su servicio, sus controles de acceso y su base de datos.</li>
+<li>Se añadieron dos rutas exactas de nginx para servir <code>portal-docente-design.css</code> y <code>portal-docente-layout.js</code> desde el mismo servicio docente que ya existía.</li>
+<li>Se versionaron CSS y cohorte para invalidar cachés antiguas. La cohorte continúa identificada como ficticia en pantalla.</li>
+<li>Se validó nginx antes de recargarlo. El procedimiento conserva respaldos y restaura los archivos si falla una comprobación.</li>
+</ul>
+<h2>Verificación pública</h2><p>Panel general, Cursos / Planificación, Estudiantes, OA/AE/criterios, Cumplimiento y Reportes cargaron con sus títulos y sin mensaje de error ni carga pendiente. Se comprobó el acceso en escritorio y móvil. No se enviaron sellos docentes, respuestas ni calificaciones.</p>
+<h2>Respaldo y alcance</h2><p>Respaldos bajo <code>/var/backups/aulatp-docente-recovery/</code>; recuperación final de caché en <code>20261013-141220</code>. El fallo de <code>aula-tp-portal-sync.service</code> corresponde a una tarea diferente de publicación de la portada que intenta sobrescribir un archivo protegido. No se quitó esa protección ni se modificó dicha tarea.</p>
+<p>Procedimiento: <code>scripts/recover_teacher_frontend.sh</code>. Exige una carpeta de staging con los seis archivos y una copia de la configuración del sitio, además del SHA-256 actual de nginx para rechazar cambios concurrentes. No despliega automáticamente otros servicios o ramas.</p>
+</html>
