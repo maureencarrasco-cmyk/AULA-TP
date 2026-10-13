@@ -7,7 +7,8 @@ test('design layer preserves the existing portal entry points',()=>{
  for(const id of ['pd-main','pd-nav','pd-mobile','pd-name','pd-avatar'])assert.ok(html.includes(`id="${id}"`));
  assert.ok(html.indexOf('portal-docente-design.css')>html.indexOf('portal-docente.css'));
  assert.ok(html.includes('portal-docente-cohort.js?v=4'));
- assert.ok(html.includes('portal-docente.js?v=20261012-reports-v3'));
+ assert.ok(html.includes('portal-docente.js?v=20261013-layout-v4'));
+ assert.ok(html.indexOf('portal-docente-layout.js')<html.indexOf('portal-docente.js'));
 });
 test('responsive design makes every section reachable on mobile',()=>{
  assert.match(css,/\.pd-side\s*\{\s*display: none/);

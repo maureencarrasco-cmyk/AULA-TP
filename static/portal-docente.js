@@ -936,12 +936,13 @@ function bindSeal() {
 function draw() {
   const tab = currentTab();
   nav();
-  const body = { resumen: panel, cursos, estudiantes: students, 'oa-ae': learning, cumplimiento: compliance, reportes: reports }[tab.id]();
+  const body = window.PortalLayout?.render(tab.id) || { resumen: panel, cursos, estudiantes: students, 'oa-ae': learning, cumplimiento: compliance, reportes: reports }[tab.id]();
   document.getElementById('pd-main').innerHTML = body;
   document.querySelectorAll('a[href="/api/teacher/export.csv"]').forEach(link => { link.href = portalURL('/api/teacher/export.csv'); });
   document.title = `${tab.label} · Portal Docente`;
   bindSeal();
   bindReports();
+  window.PortalLayout?.bind();
 }
 async function post(url, data) {
   return requestJSON(url, {
