@@ -1,0 +1,18 @@
+.pd-content .is-teacher-actions .pd-review-heading { min-height:112px; padding:18px 10px; background-image:url('/static/portal-docente/acciones-docentes-sprite.png'); background-size:100% 600%; background-position:center 0%; background-repeat:no-repeat; }
+.is-teacher-actions .pd-review-heading img { display:none; }
+.is-teacher-actions .pd-review-heading > div { width:65%; }
+.pd-app .is-teacher-actions .pd-review-heading h2 { font-size:30px !important; font-weight:700 !important; }
+.pd-content .is-teacher-actions .pd-review-links { grid-template-columns:minmax(0,1fr); gap:12px; }
+.pd-content .is-teacher-actions .pd-review-link { position:relative; min-height:104px; padding:16px 22px; background-image:url('/static/portal-docente/acciones-docentes-sprite.png'); background-size:100% 600%; background-repeat:no-repeat; background-position:center 20%; box-shadow:0 2px 6px #234e7812; }
+.pd-content .is-teacher-actions .pd-review-link:nth-child(2) { background-position:center 40%; }
+.pd-content .is-teacher-actions .pd-review-link:nth-child(3) { background-position:center 60%; }
+.pd-content .is-teacher-actions .pd-review-link:nth-child(4) { background-position:center 80%; }
+.pd-content .is-teacher-actions .pd-review-link:nth-child(5) { background-position:center 100%; }
+.is-teacher-actions .pd-review-icon { width:64px; height:64px; flex-basis:64px; }
+.is-teacher-actions .pd-review-icon svg { width:36px; height:36px; }
+.is-teacher-actions .pd-review-copy { flex:0 1 62%; padding-left:18px; border-left:1px solid var(--review-border); }
+.pd-app .is-teacher-actions .pd-review-copy strong { font-size:18px !important; }
+.is-teacher-actions .pd-review-arrow { margin-left:auto; flex-basis:44px; height:44px; }
+.is-teacher-actions .pd-review-link[aria-disabled="true"] .pd-review-arrow { visibility:visible; opacity:.45; }
+@media (max-width:900px) { .pd-content .is-teacher-actions .pd-review-link { background-image:none; } .is-teacher-actions .pd-review-copy { flex:1; } }
+@media (max-width:640px) { .pd-content .is-teacher-actions .pd-review-heading { background-image:none; min-height:0; padding:12px 0; } .is-teacher-actions .pd-review-heading > div { width:100%; } .pd-app .is-teacher-actions .pd-review-heading h2 { font-size:22px !important; } .pd-content .is-teacher-actions .pd-review-link { gap:10px; padding:14px 10px; } .is-teacher-actions .pd-review-icon { width:40px; height:48px; flex-basis:40px; } .is-teacher-actions .pd-review-icon svg { width:26px; height:26px; } .is-teacher-actions .pd-review-copy { padding-left:10px; } .is-teacher-actions .pd-review-arrow { flex-basis:30px; height:30px; } }
