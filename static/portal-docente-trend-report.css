@@ -1,0 +1,34 @@
+.pd-report-grid .pd-report-trend { padding:0; }
+.pd-trend-reference-heading { display:grid; grid-template-columns:64px minmax(0,1fr) auto; gap:10px 18px; padding:22px 20px; min-height:130px; margin-bottom:14px; background:#f7fbff url('/static/portal-docente/acciones-rapidas-escritorio.png') right center / cover no-repeat; }
+.pd-trend-reference-icon { display:grid; place-items:center; grid-column:1; grid-row:1 / 3; align-self:center; width:64px; height:68px; border-radius:8px; color:#198bda; background:#d9eeff; }
+.pd-trend-reference-icon svg { width:40px; height:40px; }
+.pd-app .pd-report-trend .pd-trend-reference-heading h2 { grid-column:2; align-self:end; padding:0; margin:0; border:0; font-size:28px !important; color:#123f75 !important; }
+.pd-trend-reference-heading .pd-evaluation-chart-note { grid-column:2; margin:0; }
+.pd-trend-reference-heading .pd-chart-legend { grid-column:3; grid-row:1 / 3; align-self:center; justify-content:center; margin:0; padding:12px; background:#ffffffed; border:1px solid #d8e9fb; border-radius:8px; }
+.pd-trend-reference-heading .pd-chart-legend i { height:5px; }
+.pd-report-trend .pd-evaluation-chart { border-radius:8px; padding:12px 10px; background:#fff; }
+.pd-evaluation-chart svg circle[stroke] { stroke-width:3px; }
+.pd-report-trend .pd-evaluation-footer { padding:14px 0; gap:12px; grid-template-columns:repeat(4,minmax(0,1fr)); }
+.pd-report-trend .pd-evaluation-footer > div { position:relative; grid-template-columns:52px minmax(0,1fr); gap:8px 12px; padding:16px 12px; background:#edf7ff; border:1px solid #d1e7fc; border-radius:8px; min-width:0; }
+.pd-evaluation-footer .pd-trend-footer-icon { display:grid; place-items:center; grid-column:1; grid-row:1 / 3; align-self:center; width:52px; height:56px; border-radius:50%; color:#147bd3; background:#d7ecff; }
+.pd-trend-footer-icon svg { width:32px; height:32px; }
+.pd-evaluation-footer > div > span:not(.pd-trend-footer-icon),.pd-evaluation-footer > div > strong { grid-column:2; }
+.pd-evaluation-footer > div > strong { overflow-wrap:anywhere; }
+.pd-report-trend .pd-evaluation-footer > div:nth-child(2) { background:#f7f2ff; border-color:#e7dcfc; }
+.pd-evaluation-footer > div:nth-child(2) .pd-trend-footer-icon { background:#eaddff; color:#8750d5; }
+.pd-evaluation-footer > div:nth-child(2) strong { color:#8750d5; }
+.pd-report-trend .pd-evaluation-footer > div:nth-child(3) { background:#fff7ee; border-color:#ffe4c8; }
+.pd-evaluation-footer > div:nth-child(3) .pd-trend-footer-icon { background:#ffe9cf; color:#c36c13; }
+.pd-evaluation-footer > div:nth-child(3) strong { color:#c36c13; }
+.pd-report-trend .pd-evaluation-footer > .pd-evaluation-direction { background:#edf9f3; border-color:#ceeedd; }
+.pd-evaluation-direction .pd-trend-footer-icon { background:#d3f0e3; color:#267a59; }
+.pd-report-trend .pd-evaluation-footer > .is-declining { background:#fff0ef; border-color:#f4d4d1; }
+.pd-evaluation-footer .is-declining strong { color:#c04444; }
+.pd-report-trend .pd-evaluation-footer > .is-neutral { background:#f0f4f8; border-color:#dae4ee; }
+.pd-evaluation-footer .is-neutral strong { color:#526b89; }
+.pd-trend-reference-notes { position:relative; padding:14px 16px 14px 50px; background:#e9f4ff; border-radius:8px; }
+.pd-trend-reference-notes::before { content:'i'; position:absolute; top:16px; left:16px; width:22px; height:22px; display:grid; place-items:center; border-radius:50%; color:#fff; background:#2385d8; font-weight:700; }
+.pd-trend-reference-notes p { margin:0; }
+.pd-trend-reference-notes p + p { margin-top:8px; }
+@media (max-width:1200px) { .pd-trend-reference-heading { grid-template-columns:56px minmax(0,1fr); } .pd-trend-reference-heading .pd-chart-legend { grid-column:2; grid-row:auto; justify-self:start; } .pd-report-trend .pd-evaluation-footer { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:640px) { .pd-trend-reference-heading { background-image:none; padding:16px 0; column-gap:12px; } .pd-trend-reference-icon { width:48px; height:52px; } .pd-app .pd-report-trend .pd-trend-reference-heading h2 { font-size:22px !important; } .pd-report-trend .pd-evaluation-footer { grid-template-columns:minmax(0,1fr); } .pd-trend-reference-heading .pd-evaluation-chart-note { grid-column:1 / -1; } .pd-trend-reference-heading .pd-chart-legend { grid-column:1 / -1; } }

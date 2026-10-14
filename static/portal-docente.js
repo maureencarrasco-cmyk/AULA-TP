@@ -372,6 +372,7 @@ function lineChart(points, title, presentation = '') {
     const next = maxX + 1;
     const projected = Math.max(0, Math.min(100, reg.intercept + reg.slope * next));
     trend += `<line x1="${sx(maxX)}" y1="${sy(y2)}" x2="${sx(next)}" y2="${sy(projected)}" stroke="#ed6b32" stroke-width="2.4" stroke-dasharray="6 5"></line>`;
+    if(presentation==='report') trend+=`<circle cx="${sx(next)}" cy="${sy(projected)}" r="5" fill="#ed6b32"><title>Proyección, semana ${next}: ${Math.round(projected)} %. No es un resultado observado.</title></circle>`;
     const direction = reg.slope > 0.4 ? 'ascendente' : reg.slope < -0.4 ? 'descendente' : 'estable';
     note = `La tendencia es ${direction}, con ${reg.n} semanas comparables. La línea continua resume lo observado. El tramo punteado estima la semana siguiente: no es un resultado ya obtenido.`;
   }
@@ -1091,7 +1092,31 @@ function draw() {
       button.insertAdjacentHTML('afterbegin', `<span class="pd-report-tab-icon is-${button.dataset.reportTab}" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="${ICONS[tabIcons[button.dataset.reportTab]]}" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`);
     });
     const chart = reportResults.querySelector('.pd-report-trend');
-    if(chart) chart.querySelector('h2').insertAdjacentHTML('afterend','<div class="pd-chart-legend"><span><i class="pd-legend-observed"></i>Desempeño medio</span><span><i class="pd-legend-trend"></i>Tendencia</span></div>');
+    if(chart) {
+      const header=document.createElement('header');header.className='pd-trend-reference-heading';
+      header.insertAdjacentHTML('beforeend',`<span class="pd-trend-reference-icon" aria-hidden="true">${reviewIcon('reportes')}</span>`);
+      header.append(chart.querySelector('h2'));
+      const note=chart.querySelector('.pd-evaluation-chart-note');
+      if(note)header.append(note);
+      header.insertAdjacentHTML('beforeend','<div class="pd-chart-legend"><span><i class="pd-legend-observed"></i>Desempeño medio</span><span><i class="pd-legend-trend"></i>Tendencia</span></div>');
+      chart.prepend(header);
+      const footerIcons=['cursos','oa-ae','reportes','reportes'];
+      chart.querySelectorAll('.pd-evaluation-footer > div').forEach((item,index)=>{
+        item.insertAdjacentHTML('afterbegin',`<span class="pd-trend-footer-icon" aria-hidden="true">${reviewIcon(footerIcons[index])}</span>`);
+      });
+      const direction=chart.querySelector('.pd-evaluation-direction');
+      if(direction) {
+        const title=direction.querySelector('strong').textContent;
+        direction.classList.toggle('is-declining',title==='Tendencia descendente');
+        direction.classList.toggle('is-neutral',title==='Tendencia estable'||title==='Sin serie suficiente');
+      }
+      const notes=document.createElement('div');notes.className='pd-trend-reference-notes';
+      const caution=chart.querySelector(':scope > .pd-note');
+      if(caution)notes.append(caution);
+      const limitation=reportResults.querySelector('.pd-evaluation-limit');
+      if(limitation)notes.append(limitation);
+      if(notes.children.length)chart.append(notes);
+    }
   }
   if(state.preview)document.getElementById('pd-main').insertAdjacentHTML('afterbegin','<p class="pd-report-demo" role="status">Entorno local de pruebas. Las cuentas y matrículas son ficticias; el catálogo procede de los contenidos existentes.</p>');
   if(!state.cohort && !state.courses.length) document.getElementById('pd-main').insertAdjacentHTML('afterbegin','<p class="pd-report-demo" role="status">No tienes cursos asignados. Solicita al administrador del establecimiento que registre tu asignación; no se muestran datos de otros cursos.</p>');
