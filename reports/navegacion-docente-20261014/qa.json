@@ -1,0 +1,138 @@
+{
+  "date": "2026-10-14",
+  "mode": "demostracion local ficticia",
+  "checks": [
+    {
+      "tab": "resumen",
+      "width": 1280,
+      "active": [
+        "Panel general"
+      ],
+      "heading": "Panel general",
+      "linkCount": 6,
+      "logoLoaded": true,
+      "overflow": false
+    },
+    {
+      "tab": "cursos",
+      "width": 1280,
+      "active": [
+        "Cursos / Planificación"
+      ],
+      "heading": "Cursos / Planificación",
+      "linkCount": 6,
+      "logoLoaded": true,
+      "overflow": false
+    },
+    {
+      "tab": "estudiantes",
+      "width": 1280,
+      "active": [
+        "Estudiantes"
+      ],
+      "heading": "Estudiantes",
+      "linkCount": 6,
+      "logoLoaded": true,
+      "overflow": false
+    },
+    {
+      "tab": "oa-ae",
+      "width": 1280,
+      "active": [
+        "OA, AE y criterios de evaluación"
+      ],
+      "heading": "OA, AE y criterios de evaluación",
+      "linkCount": 6,
+      "logoLoaded": true,
+      "overflow": false
+    },
+    {
+      "tab": "cumplimiento",
+      "width": 1280,
+      "active": [
+        "Cumplimiento"
+      ],
+      "heading": "Cumplimiento",
+      "linkCount": 6,
+      "logoLoaded": true,
+      "overflow": false
+    },
+    {
+      "tab": "reportes",
+      "width": 1280,
+      "active": [
+        "Reportes"
+      ],
+      "heading": "Reportes",
+      "linkCount": 6,
+      "logoLoaded": true,
+      "overflow": false
+    },
+    {
+      "tab": "resumen",
+      "width": 390,
+      "active": [
+        "Panel general"
+      ],
+      "heading": "Panel general",
+      "linkCount": 6,
+      "logoLoaded": true,
+      "overflow": false
+    },
+    {
+      "tab": "cursos",
+      "width": 390,
+      "active": [
+        "Cursos / Planificación"
+      ],
+      "heading": "Cursos / Planificación",
+      "linkCount": 6,
+      "logoLoaded": true,
+      "overflow": false
+    },
+    {
+      "tab": "estudiantes",
+      "width": 390,
+      "active": [
+        "Estudiantes"
+      ],
+      "heading": "Estudiantes",
+      "linkCount": 6,
+      "logoLoaded": true,
+      "overflow": false
+    },
+    {
+      "tab": "oa-ae",
+      "width": 390,
+      "active": [
+        "OA, AE y criterios de evaluación"
+      ],
+      "heading": "OA, AE y criterios de evaluación",
+      "linkCount": 6,
+      "logoLoaded": true,
+      "overflow": false
+    },
+    {
+      "tab": "cumplimiento",
+      "width": 390,
+      "active": [
+        "Cumplimiento"
+      ],
+      "heading": "Cumplimiento",
+      "linkCount": 6,
+      "logoLoaded": true,
+      "overflow": false
+    },
+    {
+      "tab": "reportes",
+      "width": 390,
+      "active": [
+        "Reportes"
+      ],
+      "heading": "Reportes",
+      "linkCount": 6,
+      "logoLoaded": true,
+      "overflow": false
+    }
+  ]
+}

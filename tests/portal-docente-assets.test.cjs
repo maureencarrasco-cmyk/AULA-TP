@@ -5,9 +5,11 @@ const path = require('node:path');
 const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 
-test('original sidebar image uses its true JPEG format and a renewed resource URL', () => {
+test('sidebar uses the reference waves and the original illustration keeps its true JPEG format', () => {
   const html = fs.readFileSync(path.join(root, 'static/portal-docente.html'), 'utf8');
-  assert.match(html, /sidebar-foot\.jpg\?v=20261013-verified/);
+  assert.match(html, /navigation-waves\.svg/);
+  assert.ok(fs.existsSync(path.join(root,'static/portal-docente/navigation-waves.svg')));
+  assert.match(fs.readFileSync(path.join(root,'static/portal-docente.js'),'utf8'), /sidebar-foot\.jpg\?v=20261013-verified/);
   const bytes = fs.readFileSync(path.join(root, 'static/portal-docente/sidebar-foot.jpg'));
   assert.equal(bytes.subarray(0, 3).toString('hex'), 'ffd8ff');
   assert.equal(bytes.subarray(-2).toString('hex'), 'ffd9');
