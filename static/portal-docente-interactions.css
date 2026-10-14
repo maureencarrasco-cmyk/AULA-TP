@@ -1,0 +1,10 @@
+.pd-app :is(button,a,summary,input,select) { -webkit-tap-highlight-color:transparent; }
+.pd-app :is(button,.pd-nav a,.pd-mobile a,.pd-topnav a,.pd-review-link,.pd-ped-cta,.pd-ped-quicklinks a) { touch-action:manipulation; transition:background-color 120ms ease,border-color 120ms ease,box-shadow 120ms ease,transform 120ms ease; }
+.pd-app :is(button,.pd-review-link,.pd-ped-cta,.pd-ped-quicklinks a):not(:disabled):not([aria-disabled="true"]):hover { box-shadow:0 3px 9px #234e7826; }
+.pd-app :is(button,a,summary):focus-visible { outline:3px solid #1479cd; outline-offset:3px; }
+.pd-app :is(.pd-nav a,.pd-mobile a,.pd-topnav a):hover { background:#dceeff; }
+.pd-app :is(.pd-nav a,.pd-mobile a,.pd-topnav a)[aria-current="page"] { box-shadow:inset 4px 0 #1479cd; background:#deedff; }
+.pd-app :is(button,.pd-nav a,.pd-mobile a,.pd-topnav a,.pd-review-link,.pd-ped-cta):not(:disabled):not([aria-disabled="true"]):active { transform:translateY(1px); box-shadow:inset 0 0 0 2px #234e7826; }
+.pd-app :is(button:disabled,[aria-disabled="true"]) { cursor:not-allowed; }
+.pd-content.is-navigating { cursor:progress; }
+@media (prefers-reduced-motion:reduce) { .pd-app :is(button,a,summary) { transition:none; transform:none !important; } }

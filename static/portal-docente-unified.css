@@ -68,5 +68,39 @@
 #pd-login .pd-login-submit:disabled { opacity:.6; cursor:wait; }
 #pd-login-error { grid-column:1 / -1; margin:0; color:#c04444 !important; }
 #pd-login-error:empty { display:none; }
+.pd-content .pd-report-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 28px; align-items:start; }
+.pd-content .pd-report-grid > :is(.pd-report-trend,.pd-report-students,.pd-continue-review) { grid-column:1 / -1; }
+.pd-content .pd-report-grid[data-view="general"] > .pd-report-panel,
+.pd-content .pd-report-grid[data-view="exams"] > .pd-report-panel,
+.pd-content .pd-report-grid[data-view="compare"] > .pd-report-panel:nth-last-child(2) { grid-column:1 / -1; }
+.pd-report-grid > .pd-report-panel { padding:12px 0; }
+.pd-report-grid .pd-report-panel h2 { margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid #d8e7f3; }
+.pd-report-grid .pd-report-panel > p:last-child { margin-bottom:0; }
+.pd-report-grid .pd-report-exam-total { display:flex; align-items:center; gap:12px; margin:12px 0; }
+.pd-report-grid .pd-report-trend .pd-chart { width:100%; max-width:none; }
+.pd-report-grid[data-view="general"] .pd-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px 24px; }
+.pd-app .pd-report-grid[data-view="general"] .pd-facts div { grid-template-columns:minmax(0,1fr); gap:4px; padding:8px 0; }
+.pd-report-grid[data-view="general"] .pd-facts dt { text-transform:none; }
+.pd-report-grid[data-view="general"] .pd-facts dd { margin:0; color:#263445 !important; }
+.pd-report-grid .pd-continue-review .pd-review-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.pd-report-grid .pd-continue-review .pd-review-links { grid-template-columns:minmax(0,1fr); gap:14px; }
+.pd-report-grid .pd-continue-review .pd-review-heading { min-height:120px; padding:16px 20px; background:#f7fbff url('/static/portal-docente/acciones-rapidas-escritorio.png') right center / cover no-repeat; }
+.pd-report-grid .pd-review-heading img { display:none; }
+.pd-report-grid .pd-review-heading > div { width:67%; }
+.pd-app .pd-report-grid .pd-review-heading h2 { font-size:30px !important; color:#234e78 !important; }
+.pd-report-grid .pd-review-heading p { margin-top:8px; }
+.pd-report-grid .pd-review-link { position:relative; overflow:hidden; min-height:94px; padding:16px 22px; box-shadow:0 2px 8px #234e7812; }
+.pd-report-grid .pd-review-link::before { content:''; position:absolute; inset:0; background:var(--review-badge); opacity:.35; clip-path:polygon(44% 100%,100% 18%,100% 100%); pointer-events:none; }
+.pd-report-grid .pd-review-link > span { position:relative; }
+.pd-report-grid .pd-review-link.is-rose { --review-tint:#fff8f2; --review-border:#ffcfa9; --review-badge:#ffe3cd; --review-accent:#c35b08; }
+.pd-report-grid .pd-review-icon { width:64px; height:64px; flex-basis:64px; }
+.pd-report-grid .pd-review-icon svg { width:34px; height:34px; }
+.pd-report-grid .pd-review-arrow { flex-basis:44px; height:44px; }
+.pd-report-grid .pd-review-link[aria-disabled="true"] .pd-review-arrow { visibility:visible; opacity:.45; }
+.pd-report-grid .pd-continue-review > .pd-note { margin:12px 0 0; padding-left:28px; position:relative; }
+.pd-report-grid .pd-continue-review > .pd-note::before { content:'i'; position:absolute; left:0; top:0; width:20px; height:20px; display:grid; place-items:center; border:2px solid #4197ed; border-radius:50%; color:#1877c9; font-weight:700; }
+@media (max-width:640px) { .pd-report-grid .pd-review-heading > div { width:100%; } .pd-report-grid .pd-continue-review .pd-review-heading { background-image:none; padding:12px 0; min-height:0; } .pd-app .pd-report-grid .pd-review-heading h2 { font-size:22px !important; } .pd-report-grid .pd-review-link { padding:14px 10px; gap:12px; } .pd-report-grid .pd-review-icon { width:42px; height:48px; flex-basis:42px; } .pd-report-grid .pd-review-arrow { flex-basis:32px; height:32px; } }
+@media (max-width:900px) { .pd-content .pd-report-grid { grid-template-columns:minmax(0,1fr); } }
+@media (max-width:640px) { .pd-report-grid[data-view="general"] .pd-facts { grid-template-columns:repeat(2,minmax(0,1fr)); } .pd-report-grid .pd-continue-review .pd-review-links { grid-template-columns:minmax(0,1fr); } }
 @media (max-width:1200px) { #pd-login .pd-login-field { flex-direction:column; align-items:stretch; } }
 @media (max-width:640px) { #pd-login { grid-template-columns:minmax(0,1fr); gap:16px; } #pd-login .pd-login-submit { width:100%; } }

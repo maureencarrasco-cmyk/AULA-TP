@@ -298,5 +298,5 @@
       };
     });
   }
-  window.PortalLayout={render,bind};
+  window.PortalLayout={render,bind,hasUnsavedChanges:()=>drafts.size>0};
 })();
