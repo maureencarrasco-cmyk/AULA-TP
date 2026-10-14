@@ -1,0 +1,206 @@
+[
+  {
+    "course": true,
+    "label": "Resumen general",
+    "overflow": false,
+    "title": "Resumen general",
+    "width": 1600
+  },
+  {
+    "course": true,
+    "label": "Por módulo",
+    "overflow": false,
+    "title": "Por módulo",
+    "width": 1600
+  },
+  {
+    "course": true,
+    "label": "Por estación",
+    "overflow": false,
+    "title": "Por estación",
+    "width": 1600
+  },
+  {
+    "course": true,
+    "label": "Por OA y AE",
+    "overflow": false,
+    "title": "Por OA y AE",
+    "width": 1600
+  },
+  {
+    "course": true,
+    "label": "Por estudiante",
+    "overflow": false,
+    "title": "Por estudiante",
+    "width": 1600
+  },
+  {
+    "chart": "0 0 1120 320",
+    "course": true,
+    "label": "Evaluaciones",
+    "overflow": false,
+    "title": "Evaluaciones",
+    "width": 1600
+  },
+  {
+    "chart": "0 0 1120 320",
+    "course": true,
+    "label": "Comparativos",
+    "overflow": false,
+    "title": "Comparativos",
+    "width": 1600
+  },
+  {
+    "course": true,
+    "label": "Resumen general",
+    "overflow": false,
+    "title": "Resumen general",
+    "width": 768
+  },
+  {
+    "course": true,
+    "label": "Por módulo",
+    "overflow": false,
+    "title": "Por módulo",
+    "width": 768
+  },
+  {
+    "course": true,
+    "label": "Por estación",
+    "overflow": false,
+    "title": "Por estación",
+    "width": 768
+  },
+  {
+    "course": true,
+    "label": "Por OA y AE",
+    "overflow": false,
+    "title": "Por OA y AE",
+    "width": 768
+  },
+  {
+    "course": true,
+    "label": "Por estudiante",
+    "overflow": false,
+    "title": "Por estudiante",
+    "width": 768
+  },
+  {
+    "chart": "0 0 1120 320",
+    "course": true,
+    "label": "Evaluaciones",
+    "overflow": false,
+    "title": "Evaluaciones",
+    "width": 768
+  },
+  {
+    "chart": "0 0 1120 320",
+    "course": true,
+    "label": "Comparativos",
+    "overflow": false,
+    "title": "Comparativos",
+    "width": 768
+  },
+  {
+    "course": true,
+    "label": "Resumen general",
+    "overflow": false,
+    "title": "Resumen general",
+    "width": 390
+  },
+  {
+    "course": true,
+    "label": "Por módulo",
+    "overflow": false,
+    "title": "Por módulo",
+    "width": 390
+  },
+  {
+    "course": true,
+    "label": "Por estación",
+    "overflow": false,
+    "title": "Por estación",
+    "width": 390
+  },
+  {
+    "course": true,
+    "label": "Por OA y AE",
+    "overflow": false,
+    "title": "Por OA y AE",
+    "width": 390
+  },
+  {
+    "course": true,
+    "label": "Por estudiante",
+    "overflow": false,
+    "title": "Por estudiante",
+    "width": 390
+  },
+  {
+    "chart": "0 0 1120 320",
+    "course": true,
+    "label": "Evaluaciones",
+    "overflow": false,
+    "title": "Evaluaciones",
+    "width": 390
+  },
+  {
+    "chart": "0 0 1120 320",
+    "course": true,
+    "label": "Comparativos",
+    "overflow": false,
+    "title": "Comparativos",
+    "width": 390
+  },
+  {
+    "course": true,
+    "label": "Resumen general",
+    "overflow": false,
+    "title": "Resumen general",
+    "width": 320
+  },
+  {
+    "course": true,
+    "label": "Por módulo",
+    "overflow": false,
+    "title": "Por módulo",
+    "width": 320
+  },
+  {
+    "course": true,
+    "label": "Por estación",
+    "overflow": false,
+    "title": "Por estación",
+    "width": 320
+  },
+  {
+    "course": true,
+    "label": "Por OA y AE",
+    "overflow": false,
+    "title": "Por OA y AE",
+    "width": 320
+  },
+  {
+    "course": true,
+    "label": "Por estudiante",
+    "overflow": false,
+    "title": "Por estudiante",
+    "width": 320
+  },
+  {
+    "chart": "0 0 1120 320",
+    "course": true,
+    "label": "Evaluaciones",
+    "overflow": false,
+    "title": "Evaluaciones",
+    "width": 320
+  },
+  {
+    "chart": "0 0 1120 320",
+    "course": true,
+    "label": "Comparativos",
+    "overflow": false,
+    "title": "Comparativos",
+    "width": 320
+  }
+]

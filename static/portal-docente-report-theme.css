@@ -1,5 +1,27 @@
 .pd-report-tabs { display:flex; align-items:stretch; gap:4px; padding:6px; border:1px solid #d9e9f9; border-radius:8px; background:#fff; overflow-x:auto; }
 .pd-report[data-view="exams"] > .pd-report-metrics { display:none; }
+.pd-report > .pd-report-heading { display:none; }
+.pd-app .pd-report-view-heading h1 { font-size:36px !important; line-height:1.25; margin:0; color:#123f75 !important; }
+.pd-report-view-heading { flex-wrap:wrap; }
+.pd-report-view-heading .pd-report-filters { margin-left:auto; width:min(640px,100%); padding:0; }
+.pd-app .pd-report-view-heading h2 { font-size:36px !important; color:#123f75 !important; }
+.pd-report-view-heading .pd-filter-control { min-height:42px !important; }
+.pd-report-view-heading .pd-report-filters select { min-height:42px; }
+.pd-app .pd-evaluation-metrics .pd-report-metric strong { color:#086bff !important; }
+.pd-report-view-heading .pd-report-filters .pd-filter-current { line-height:1.5; }
+.pd-report-grid .pd-report-trend .pd-chart-legend { margin-bottom:6px; }
+.pd-evaluation-chart { border:1px solid #dbeafa; border-radius:8px; background:#fff; overflow-x:auto; padding:12px 6px; }
+.pd-evaluation-chart .pd-chart { display:block; width:100%; max-width:none; min-width:760px; border:0; }
+.pd-evaluation-chart-note { margin:0 0 14px; }
+.pd-evaluation-footer { display:grid; grid-template-columns:1fr 1fr 1.3fr 1.3fr; gap:18px; padding:18px 0; }
+.pd-evaluation-footer > div { display:grid; gap:8px; align-content:center; padding:8px 14px; border-left:1px solid #dbeafa; }
+.pd-evaluation-footer span { color:#64748b; font-size:14px; }
+.pd-evaluation-footer strong { color:#0874df; font-size:18px; }
+.pd-evaluation-footer > div:first-child strong { font-size:30px; }
+.pd-evaluation-footer .pd-evaluation-direction { background:#e9f8f1; border:1px solid #c5eada; border-radius:8px; }
+.pd-evaluation-direction strong { color:#267a59; }
+.pd-report-grid .pd-report-trend { position:relative; }
+.pd-report-grid .pd-report-trend > h2 { padding-left:14px; border-left:4px solid #ff9b24; }
 .pd-report-tabs button { display:flex; align-items:center; justify-content:center; gap:10px; flex:1 0 auto; min-height:52px; padding:12px 14px; border:0; border-radius:6px; background:transparent; color:#234e78; }
 .pd-report-tabs button svg { width:24px; height:24px; flex:0 0 24px; }
 .pd-report-tabs button[aria-pressed="true"] { color:#0869d5; background:#e2f0ff; box-shadow:inset 0 -3px #147eea; }
@@ -30,3 +52,6 @@
 .pd-content .pd-layout .pd-chart-stage { background:#fff; border:1px solid #dbeafa; border-radius:8px; padding:10px; }
 @media (max-width:1100px) { .pd-evaluation-metrics { grid-template-columns:minmax(0,1fr); } .pd-evaluation-metrics .pd-report-metric { min-height:90px; } }
 @media (max-width:640px) { .pd-report-tabs button { min-height:48px; padding:10px; } .pd-report-view-heading { margin-top:18px; } .pd-app .pd-report-view-heading h2 { font-size:22px !important; } .pd-chart-legend { justify-content:flex-start; } .pd-report-grid .pd-chart-stage { padding:6px; } }
+@media (max-width:1200px) { .pd-report-view-heading .pd-report-filters { width:100%; margin:10px 0 0; } .pd-evaluation-footer { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:640px) { .pd-evaluation-footer { grid-template-columns:minmax(0,1fr); gap:10px; } }
+@media (max-width:640px) { .pd-app .pd-report-view-heading h1 { font-size:28px !important; } }

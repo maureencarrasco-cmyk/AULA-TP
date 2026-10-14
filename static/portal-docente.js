@@ -343,10 +343,10 @@ function trendWord(points) {
   if (start > end + 4) return '↓ descenso';
   return '→ estable';
 }
-function lineChart(points, title) {
+function lineChart(points, title, presentation = '') {
   if (!points.length) return spotlight('No hay una serie semanal con suficientes observaciones comparables.');
   const reg = linreg(points);
-  const w = 680, h = 320;
+  const w = presentation === 'report' ? 1120 : 680, h = 320;
   const xs = points.map(point => point.x);
   const minX = Math.min(...xs), maxX = Math.max(...xs);
   const plotMax = reg ? maxX + 1 : maxX;
@@ -362,6 +362,7 @@ function lineChart(points, title) {
     ? `<polygon points="${sx(points[0].x)},${baseline} ${observed} ${sx(points[points.length - 1].x)},${baseline}" fill="#d8ebfb" opacity="0.86"></polygon>`
     : '';
   const dots = points.map(point => `<circle cx="${sx(point.x)}" cy="${sy(point.y)}" r="4.6" fill="#fff" stroke="#168bf0" stroke-width="2.5"><title>Semana ${point.x}: ${Math.round(point.y)} %</title></circle>`).join('');
+  const verticalGrid = presentation === 'report' ? weeks.map(week=>`<line x1="${sx(week)}" x2="${sx(week)}" y1="${drawn.top}" y2="${sy(0)}" stroke="#e4eef8" stroke-dasharray="3 3"></line>`).join('') : '';
   let trend = '';
   let note = 'Menos de 8 observaciones comparables: no se traza regresión.';
   if (reg) {
@@ -376,7 +377,14 @@ function lineChart(points, title) {
   }
   const yName = 'Desempeño medio (%)';
   const xName = 'Semana';
-  const svg = chartSvg(w, h, title, `${drawn.marks}${area}<polyline fill="none" stroke="#168bf0" stroke-width="2.5" points="${observed}"></polyline>${dots}${trend}`);
+  const last = points[points.length - 1];
+  const lastX = Math.min(w - 110, sx(last.x) - 38), lastY = Math.max(4, sy(last.y) - 62);
+  const callout = presentation === 'report' ? `<g aria-hidden="true"><rect x="${lastX}" y="${lastY}" width="96" height="46" rx="6" fill="#e6f2ff" stroke="#b9ddff"></rect><text x="${lastX+48}" y="${lastY+17}" text-anchor="middle" fill="#234e78">Semana ${last.x}</text><text x="${lastX+48}" y="${lastY+36}" text-anchor="middle" fill="#123f75" font-weight="700">${Math.round(last.y)} %</text></g>` : '';
+  const svg = chartSvg(w, h, title, `${drawn.marks}${verticalGrid}${area}<polyline fill="none" stroke="#168bf0" stroke-width="2.5" points="${observed}"></polyline>${trend}${dots}${callout}`);
+  if(presentation === 'report') {
+    const direction = !reg ? 'Sin serie suficiente' : reg.slope > .4 ? 'Tendencia ascendente' : reg.slope < -.4 ? 'Tendencia descendente' : 'Tendencia estable';
+    return `<p class="pd-evaluation-chart-note">${esc(note)}</p><div class="pd-evaluation-chart">${svg}</div><footer class="pd-evaluation-footer"><div><span>Semanas con registros</span><strong>${points.length}</strong></div><div><span>Evaluación registrada</span><strong>Selección</strong></div><div><span>Desempeño por semana</span><strong>Promedio general</strong></div><div class="pd-evaluation-direction"><span>Evolución de la serie</span><strong>${esc(direction)}</strong></div></footer>`;
+  }
   return spotlight(note, [['Semanas', String(points.length)], ['Evolución', trendWord(points)]], cartesianFigure(title, yName, xName, svg));
 }
 function pieChart(parts, title) {
@@ -834,8 +842,8 @@ function reportPeople(records) {
 function reportPanel(title, content, className = '') {
   return `<section class="pd-report-panel ${className}"><h2>${esc(title)}</h2>${content}</section>`;
 }
-function reportMetric(label, value, note, tone) {
-  const icon = ICONS[{ mint: 'estudiantes', violet: 'cumplimiento', orange: 'reportes', blue: 'oa-ae' }[tone]];
+function reportMetric(label, value, note, tone, iconName) {
+  const icon = ICONS[iconName || { mint: 'estudiantes', violet: 'cumplimiento', orange: 'reportes', blue: 'oa-ae' }[tone]];
   return `<article class="pd-report-metric ${tone}"><span class="pd-report-metric-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="${icon}" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>${esc(value)}</strong><h2>${esc(label)}</h2><p>${esc(note)}</p></div></article>`;
 }
 function reportDistribution(counts) {
@@ -921,7 +929,7 @@ function reports() {
   const byStations = reportPanel('Resultados por estaciones', availableBars(stationBars, 'Registros que completaron cada estación') + '<p class="pd-note">Estimación según el recorrido registrado de cinco estaciones; no representa actividades individuales.</p>');
   const byLearning = reportPanel('Evidencia por Aprendizaje Esperado', availableBars(coverage.map(item => ({ label: `${item.ae.code || 'AE'} · M${item.module.position}`, value: item.total ? item.covered / item.total * 100 : null })).slice(0, 6), 'Cobertura de evidencia de AE') + `<p class="pd-note">${coverage.length} AE en el alcance seleccionado. Cobertura no equivale a logro de OA o AE.</p><a href="${href('/portal-docente/oa-ae')}">Ver OA, AE y criterios →</a>`);
   const distribution = reportPanel('Distribución del acompañamiento', reportDistribution(counts));
-  const trend = reportPanel('Evolución del desempeño de selección', lineChart(weeklyPoints(records), 'Desempeño por semana') + '<p class="pd-note">Serie de resultados comparables; no es tiempo de uso ni evolución del cumplimiento.</p>', 'pd-report-trend');
+  const trend = reportPanel('Evolución del desempeño de selección', lineChart(weeklyPoints(records), 'Desempeño por semana', 'report') + '<p class="pd-note">Serie de resultados comparables; no es tiempo de uso ni evolución del cumplimiento.</p>', 'pd-report-trend');
   const exams = reportPanel('Evaluaciones registradas', `<div class="pd-report-exam-total"><strong>${scores.length}</strong><span>registros con evaluación de selección</span></div><p>Logro medio: <b>${scores.length ? pct(mean(scores)) : 'Sin evaluaciones'}</b></p><p class="pd-note">No hay datos suficientes para clasificar evaluaciones por tipo formativo, sumativo o proyecto.</p>`);
   const studentsPanel = reportPanel('Listado de estudiantes', `<div id="pd-report-student-list">${reportStudentTable(people)}</div>`, 'pd-report-students');
   const actions = reviewActions('Acciones rápidas',[
@@ -936,7 +944,7 @@ function reports() {
     stations: byStations + distribution + actions,
     learning: byLearning + reportPanel('OA y criterios del módulo', `<p>La evidencia de actividades y el logro de selección no permiten calcular por sí solos un porcentaje de OA logrados.</p><a href="${href('/portal-docente/oa-ae')}">Abrir la referencia curricular y sus criterios →</a>`) + actions,
     students: studentsPanel + distribution + actions,
-    exams: `<section class="pd-evaluation-metrics" aria-label="Indicadores de evaluaciones">${reportMetric('Registros con evaluación de selección',scores.length,'En el curso y módulo seleccionados','blue')}${reportMetric('Logro medio',scores.length?pct(mean(scores)):'—','Resultado de selección, no logro de OA','mint')}${reportMetric('Semanas con registros',comparableWeeks.length,'Observaciones comparables','violet')}</section>` + trend + '<p class="pd-note pd-evaluation-limit">No hay datos suficientes para clasificar evaluaciones por tipo formativo, sumativo o proyecto.</p>' + actions,
+    exams: `<section class="pd-evaluation-metrics" aria-label="Indicadores de evaluaciones">${reportMetric('Registros con evaluación de selección',scores.length,'En el curso y módulo seleccionados','blue','estudiantes')}${reportMetric('Logro medio',scores.length?pct(mean(scores)):'—','Resultado de selección, no logro de OA','mint','cumplimiento')}${reportMetric('Semanas con registros',comparableWeeks.length,'Observaciones comparables','violet','oa-ae')}</section>` + trend + '<p class="pd-note pd-evaluation-limit">No hay datos suficientes para clasificar evaluaciones por tipo formativo, sumativo o proyecto.</p>' + actions,
     compare: reportPanel('Cortes históricos del curso',snapshotReport()) + byModules + trend + reportPanel('Comparación entre períodos', '<p class="pd-note">No hay cortes históricos anteriores al registro de esta función. La serie semanal disponible corresponde a resultados de selección; no se convierte en una evolución de recorrido.</p>') + actions
   };
   return `<div class="pd-report"><header class="pd-report-heading"><div><h1>Reportes</h1><p>Genera, visualiza y descarga reportes del aprendizaje de tus estudiantes.</p></div>${teacherFilters('pd-report-module',reportView.module,state.cohort ? '12 semanas · Demostración' : 'Estado actual')}</header>${state.cohort ? '<p class="pd-report-demo" role="note">Cohorte de demostración: los indicadores y estudiantes de esta pantalla son ficticios. El CSV conserva los registros reales del campus.</p>' : ''}<section class="pd-report-metrics" aria-label="Indicadores del reporte">${reportMetric('Estudiantes', people.length, 'En el alcance seleccionado', 'mint')}${reportMetric('Cumplimiento medio', values.length ? pct(mean(values)) : '—', 'Recorrido de cinco estaciones', 'violet')}${reportMetric('Logro de selección', scores.length ? pct(mean(scores)) : '—', `${scores.length} registros evaluados`, 'orange')}${reportMetric('Evidencia de AE', totalAe ? pct(coveredAe / totalAe * 100) : '—', 'Cobertura, no logro curricular', 'blue')}</section><nav class="pd-report-tabs" aria-label="Vistas de reportes">${REPORT_TABS.map(([id, label]) => `<button type="button" data-report-tab="${id}" aria-pressed="${reportView.tab === id}">${esc(label)}</button>`).join('')}</nav><div class="pd-report-grid" id="pd-report-results">${views[reportView.tab]}</div><details class="pd-report-method"><summary>Definiciones, alcance y reporte original</summary>${reportsEvidence()}</details></div>`;
@@ -1038,7 +1046,15 @@ function draw() {
     reportResults.dataset.view = reportView.tab;
     reportResults.closest('.pd-report').dataset.view = reportView.tab;
     const tabLabel = REPORT_TABS.find(([id])=>id===reportView.tab)?.[1] || 'Reportes';
-    reportResults.insertAdjacentHTML('beforebegin', `<header class="pd-report-view-heading"><span class="pd-report-view-icon" aria-hidden="true">${reviewIcon(reportView.tab==='exams'?'reportes':'oa-ae')}</span><h2>${esc(tabLabel)}</h2></header>`);
+    reportResults.insertAdjacentHTML('beforebegin', `<header class="pd-report-view-heading"><span class="pd-report-view-icon" aria-hidden="true">${reviewIcon(reportView.tab==='exams'?'reportes':'oa-ae')}</span><h1>${esc(tabLabel)}</h1></header>`);
+    const report = reportResults.closest('.pd-report');
+    const viewHeading = report.querySelector('.pd-report-view-heading');
+    const filters = report.querySelector('.pd-report-filters');
+    if(filters) viewHeading.append(filters);
+    const reportTabs = report.querySelector('.pd-report-tabs');
+    const overview = report.querySelector('.pd-report-metrics');
+    report.insertBefore(reportTabs,viewHeading);
+    viewHeading.insertAdjacentElement('afterend',overview);
     const tabIcons={general:'resumen',modules:'oa-ae',stations:'cumplimiento',learning:'oa-ae',students:'estudiantes',exams:'reportes',compare:'reportes'};
     document.querySelectorAll('[data-report-tab]').forEach(button=>{
       button.insertAdjacentHTML('afterbegin', `<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="${ICONS[tabIcons[button.dataset.reportTab]]}" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`);
@@ -1054,7 +1070,12 @@ function draw() {
   // Move live controls, rather than recreating them, into the shared page banner.
   const main = document.getElementById('pd-main');
   const heading = main.querySelector('.pd-report-heading');
-  if (heading) {
+  if(tab.id === 'reportes' && state.preview) {
+    const previewNotice = main.querySelector(':scope > .pd-report-demo');
+    const access = main.querySelector(':scope > .pd-report-method');
+    if(previewNotice && access) access.append(previewNotice);
+  }
+  if (heading && tab.id !== 'reportes') {
     const banner = document.createElement('header');
     banner.className = 'pd-unified-banner';
     const access = main.firstElementChild;
