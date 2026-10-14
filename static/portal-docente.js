@@ -1030,7 +1030,10 @@ function draw() {
     link.href=portalURL('/api/teacher/export.csv')+(filters.size?'?'+filters.toString():'');
   });
   if (state.cohort) document.querySelectorAll('a[href*="teacher/export.csv"]').forEach(link => {
-    link.removeAttribute('href');link.removeAttribute('download');link.setAttribute('aria-disabled','true');link.textContent='Exportación real: requiere iniciar sesión';
+    link.removeAttribute('href');link.removeAttribute('download');link.setAttribute('aria-disabled','true');
+    const label=link.querySelector('.pd-review-label');
+    if(label)label.textContent='Exportación real: requiere iniciar sesión';
+    else link.textContent='Exportación real: requiere iniciar sesión';
   });
   const demoNote=document.querySelector('.pd-report-demo[role="note"]');
   if(state.cohort && demoNote) demoNote.textContent='Cohorte de demostración: indicadores y estudiantes ficticios. Las exportaciones de datos escolares requieren una sesión docente autorizada.';

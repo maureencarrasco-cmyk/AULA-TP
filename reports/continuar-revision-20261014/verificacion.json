@@ -1,0 +1,26 @@
+{
+  "fecha": "2026-10-14",
+  "alcance": "Solo presentacion de Continuar revision en Cursos / Planificacion; funciones originales conservadas",
+  "pruebas_interfaz": 46,
+  "entorno": "Local aislado; cuentas y matriculas ficticias. Sin cambios en produccion",
+  "capturas": ["escritorio.png", "movil.png"],
+  "viewports": [{"width": 1280, "height": 900}, {"width": 390, "height": 844}],
+  "desbordamiento_horizontal": false,
+  "titulos_o_botones_desbordados": false,
+  "imagen_encabezado": "Reutiliza la ilustracion existente static/portal-docente/sidebar-foot.jpg; no modifica recursos de cursos",
+  "navegacion_comprobada": [
+    "/portal-docente/estudiantes?course=1&module=1",
+    "/portal-docente/cursos?course=1&module=1",
+    "/portal-docente/oa-ae?course=1&module=1",
+    "/portal-docente/reportes?course=1&module=1"
+  ],
+  "csv": {
+    "demostracion": "Deshabilitado como antes; conserva icono, colores y mensaje de inicio de sesion",
+    "sesion_local_autenticada": "Descarga comprobada con cuenta ficticia",
+    "enlace": "/api/teacher/export.csv?course=1&module=1",
+    "filtros_del_archivo": {"course": 1, "module": 1},
+    "incidencia_local": "Carga inicial de sesion fallo mientras se preparaba el catalogo temporal; reintento y descarga posterior correctos"
+  },
+  "sin_modificaciones": ["backend", "contenidos", "actividades", "evaluaciones", "calificaciones", "permisos", "datos de produccion"],
+  "despliegue_web": false
+}

@@ -433,6 +433,46 @@ tbody tr:nth-child(even) { background:#f8fbfe; }
 .pd-ped-action-icon.is-orange { background:#fff2dc; color:#ab6a00; }
 .pd-ped-action-icon.is-cyan { background:#dff6fa; color:#007d90; }
 .pd-ped-quicklinks a:hover, .pd-ped-cta:hover { box-shadow:inset 3px 0 var(--ped-accent); }
+.pd-continue-review { padding:24px 0; margin-top:24px; border-top:1px solid #dce8f5; letter-spacing:0; }
+.pd-review-heading { position:relative; display:flex; align-items:center; min-height:116px; padding:18px 20px; margin-bottom:18px; overflow:hidden; background:#f3f8ff; }
+.pd-review-heading > div { position:relative; z-index:1; width:70%; }
+.pd-review-heading h2 { border:0; padding:0 0 0 14px; margin:0 0 8px; font-size:25px; line-height:1.25; color:#102d60; border-left:4px solid #2974bb; }
+.pd-review-heading p { margin:0 0 0 18px; color:#556e92; font-size:14px; line-height:1.6; }
+.pd-review-heading img { position:absolute; right:0; top:0; height:100%; width:28%; object-fit:cover; object-position:55% 50%; }
+.pd-review-links { display:grid; gap:12px; }
+.pd-content .pd-review-link { --review-tint:#f3f8ff; --review-border:#acd1ff; --review-badge:#deedff; --review-accent:#1465ab; display:flex; gap:20px; align-items:center; min-height:88px; padding:14px 20px; border:1px solid var(--review-border); border-radius:8px; background:var(--review-tint); text-decoration:none; color:#153565; box-shadow:0 2px 8px #173e6910; }
+.pd-content .pd-review-link.is-orange { --review-tint:#fff9f4; --review-border:#ffd7b4; --review-badge:#ffebd8; --review-accent:#b34c08; }
+.pd-content .pd-review-link.is-violet { --review-tint:#faf7ff; --review-border:#d4bdff; --review-badge:#ece0ff; --review-accent:#6841b5; }
+.pd-content .pd-review-link.is-mint { --review-tint:#f3fcf9; --review-border:#a9e4d5; --review-badge:#d9f6ee; --review-accent:#007c69; }
+.pd-content .pd-review-link.is-rose { --review-tint:#fff7f9; --review-border:#ffbfd0; --review-badge:#ffe0e8; --review-accent:#b82448; }
+.pd-review-icon { display:grid; place-items:center; width:64px; height:56px; flex:0 0 64px; border-radius:8px; color:var(--review-accent); background:var(--review-badge); }
+.pd-review-icon svg { width:32px; height:32px; }
+.pd-review-copy { display:grid; gap:4px; flex:1; min-width:0; }
+.pd-review-copy strong { font-size:17px; line-height:1.4; color:#123465; word-break:normal; overflow-wrap:normal; }
+.pd-review-copy > span { color:#556e92; font-size:13px; line-height:1.6; font-weight:400; }
+.pd-review-arrow { display:grid; place-items:center; flex:0 0 40px; height:40px; border-radius:50%; background:var(--review-badge); color:var(--review-accent); }
+.pd-review-arrow svg { width:24px; height:24px; }
+.pd-content .pd-review-link:hover { border-color:var(--review-accent); box-shadow:0 3px 10px #173e6920; }
+.pd-content .pd-review-link:focus-visible { outline:3px solid var(--review-accent); outline-offset:3px; }
+.pd-content .pd-review-link[aria-disabled="true"] { cursor:default; box-shadow:none; }
+.pd-review-link[aria-disabled="true"] .pd-review-arrow { visibility:hidden; }
+@media (max-width:900px) {
+  .pd-review-heading > div { width:100%; }
+  .pd-review-heading img { display:none; }
+}
+@media (max-width:640px) {
+  .pd-review-heading { min-height:0; padding:16px 12px; }
+  .pd-review-heading h2 { font-size:21px; }
+  .pd-review-heading p { font-size:13px; }
+  .pd-content .pd-review-link { padding:14px 10px; gap:10px; align-items:flex-start; }
+  .pd-review-icon { width:36px; height:40px; flex-basis:36px; }
+  .pd-review-icon svg { width:24px; height:24px; }
+  .pd-review-copy strong { font-size:14px; }
+  .pd-review-copy > span { font-size:12px; }
+  .pd-review-arrow { height:28px; flex-basis:28px; margin-top:6px; }
+  .pd-review-arrow svg { width:19px; height:19px; }
+}
+@media print { .pd-continue-review { display:none !important; } }
 @media (max-width:1100px) { .pd-ped-panels { grid-template-columns:minmax(0,1fr); } .pd-ped-heading { min-height:0; } }
 @media (max-width:640px) { .pd-ped-panel { padding:18px; } .pd-ped-heading h2 { font-size:17px; } .pd-ped-recommendation { min-height:0; } }
 @media (max-width:1050px) { .pd-student-group-pair { grid-template-columns:minmax(0,1fr); } }

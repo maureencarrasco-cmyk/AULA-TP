@@ -184,3 +184,35 @@ test('layout initialization works before the main script, matching the HTML load
   assert.doesNotThrow(()=>vm.runInContext(layout,context));
   assert.equal(typeof context.window.PortalLayout.render,'function');
 });
+
+test('continuing review keeps all five actions, original data and selected context',()=>{
+  const {context}=fixture('?course=1&module=2');
+  const before=vm.runInContext('JSON.stringify([state.courses,state.teacher])',context);
+  const html=vm.runInContext("window.PortalLayout.render('cursos')",context);
+  const section=html.split('<section class="pd-continue-review"')[1].split('</section>')[0];
+  assert.match(section,/aria-labelledby="pd-continue-title"/);
+  assert.match(section,/Continuar revisión/);
+  assert.equal((section.match(/class="pd-review-link is-/g)||[]).length,5);
+  for(const target of ['estudiantes','cursos','oa-ae','reportes']) {
+    assert.ok(section.includes(`href="/portal-docente/${target}?course=1&amp;module=2"`));
+  }
+  assert.match(section,/href="\/api\/teacher\/export.csv" download="aula-tp-cumplimiento.csv"/);
+  for(const tone of ['blue','orange','violet','mint','rose'])assert.ok(section.includes(`is-${tone}`));
+  assert.equal((section.match(/class="pd-review-arrow"/g)||[]).length,5);
+  assert.equal((section.match(/class="pd-review-label"/g)||[]).length,5);
+  assert.match(section,/sidebar-foot.jpg/);
+  assert.doesNotMatch(section,/onclick=|undefined|NaN/);
+  assert.equal(vm.runInContext('JSON.stringify([state.courses,state.teacher])',context),before);
+});
+
+test('review design remains scoped and responsive without changing the other shortcuts',()=>{
+  const {context}=fixture();
+  assert.doesNotMatch(vm.runInContext("window.PortalLayout.render('resumen')",context),/pd-continue-review/);
+  const css=fs.readFileSync('static/portal-docente-design.css','utf8');
+  assert.match(css,/\.pd-content \.pd-review-link:focus-visible/);
+  assert.match(css,/\.pd-review-copy[^}]*min-width:0/s);
+  assert.match(css,/\.pd-review-copy strong[^}]*word-break:normal[^}]*overflow-wrap:normal/s);
+  assert.match(css,/\[aria-disabled="true"\] \.pd-review-arrow/);
+  assert.match(css,/@media print \{ \.pd-continue-review/);
+  assert.ok(fs.existsSync('static/portal-docente/sidebar-foot.jpg'));
+});
