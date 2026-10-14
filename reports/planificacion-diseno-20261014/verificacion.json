@@ -1,0 +1,16 @@
+{
+  "fecha": "2026-10-14",
+  "alcance": "Diseno de la ficha y formulario en Cursos / Planificacion",
+  "pruebas_interfaz": 49,
+  "viewports": [{"width":1280,"height":900},{"width":390,"height":844}],
+  "overflow": false,
+  "campos_visibles_conservados": ["objective","sequence","instrument","resources","adaptations","start_date","end_date","status"],
+  "campos_internos_conservados": ["module_id","version"],
+  "subvistas": ["plan","modules","stations","learning","exams","resources"],
+  "datos": "Horas, conteos, objetivos y fotografia originales; no se copian los valores de ejemplo del mockup",
+  "guardado": "Manual por nueva version. No se incorpora guardado automatico ni edicion de imagen inexistentes",
+  "historial": "Conserva versiones, campos originales y control de conflictos",
+  "seguridad": "Formulario deshabilitado en demostracion como antes; no se modificaron backend, permisos, contenidos, evaluaciones o datos de produccion",
+  "capturas": ["escritorio.png","movil.png"],
+  "despliegue_web": false
+}

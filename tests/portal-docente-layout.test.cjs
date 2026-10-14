@@ -224,3 +224,29 @@ test('all five layouts share review design while retaining every existing shortc
   assert.match(css,/@media print \{ \.pd-continue-review/);
   assert.ok(fs.existsSync('static/portal-docente/sidebar-foot.jpg'));
 });
+
+test('planning reference layout preserves original hours, objectives and every form field',()=>{
+  const {context}=fixture('?module=1');
+  vm.runInContext('state.courses[0].modules[0].official_hp=190',context);
+  const before=vm.runInContext('JSON.stringify([state.courses,state.teacher])',context);
+  const html=vm.runInContext("window.PortalLayout.render('cursos')",context);
+  assert.match(html,/pd-course-navigation/);
+  assert.match(html,/pd-course-information/);
+  assert.match(html,/190 HP/);
+  assert.match(html,/OA1 · Interpretar planos/);
+  for(const name of ['module_id','version','objective','sequence','instrument','resources','adaptations','start_date','end_date','status'])assert.ok(html.includes(`name="${name}"`));
+  assert.match(html,/Guardar nueva versión/);
+  assert.match(html,/los cambios no se guardan automáticamente/);
+  assert.doesNotMatch(html,/Editar imagen|160 HP/);
+  assert.equal(vm.runInContext('JSON.stringify([state.courses,state.teacher])',context),before);
+});
+
+test('planning preserves disabled demo fields and all six subview controls',()=>{
+  const {context}=fixture();
+  vm.runInContext('state.cohort=true',context);
+  const html=vm.runInContext("window.PortalLayout.render('cursos')",context);
+  assert.match(html,/<form data-teacher-document="plans"><fieldset disabled>/);
+  for(const id of ['plan','modules','stations','learning','exams','resources'])assert.ok(html.includes(`data-layout-tab="${id}"`));
+  assert.match(html,/Historial de planificación \(0\)/);
+  assert.match(html,/Sin versiones guardadas/);
+});
