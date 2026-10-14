@@ -1,0 +1,8 @@
+{
+  "asset": "continuar-revision-escritorio.png",
+  "date": "2026-10-14",
+  "method": "Built-in image_gen tool",
+  "purpose": "Decorative photo for the Continuar revision heading in Cursos / Planificacion; not curricular evidence",
+  "references": ["User-supplied layout reference", "static/logo-aula-tp-oficial.png"],
+  "prompt": "Create a photorealistic website header image asset, NOT a screenshot or a UI. The first reference is only a style/composition reference: recreate just its upper-right photographic workspace scene, never its buttons, heading, colored cards, icons or text outside the laptop screen. Wide panorama with aspect ratio about 3:1. Bright professional teacher desk: laptop with complete screen visible near the right-center, white ceramic cup with colored pencils beside it on the left, closed notebook and a few neatly stacked books, softly lit shelving in the background. Laptop screen white and displays the exact official Aula TP Chile logo from reference 2, preserve that supplied logo rather than invent a new one. Natural daylight, sharp objects, realistic photographic materials, clean pale ice-blue wall on left. Frame laptop screen fully in the central horizontal band so it remains visible in a shallow 120px header. No people, no infographic elements, no floating shapes, no decorative orbs, no bokeh dots. Only desk photograph; all website controls will be live HTML separately."
+}

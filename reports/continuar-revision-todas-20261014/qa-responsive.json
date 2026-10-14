@@ -1,0 +1,520 @@
+{
+  "date": "2026-10-14",
+  "mode": "demostracion local ficticia",
+  "checks": [
+    {
+      "tab": "resumen",
+      "width": 1280,
+      "actions": [
+        {
+          "disabled": null,
+          "href": "/portal-docente/estudiantes?course=1&module=1",
+          "label": "Ver estudiantes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/cursos?course=1&module=1",
+          "label": "Revisar planificación",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/oa-ae?course=1&module=1",
+          "label": "Revisar OA, AE y criterios",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/reportes?course=1&module=1",
+          "label": "Abrir Reportes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": "true",
+          "href": null,
+          "label": "Exportación real: requiere iniciar sesión",
+          "overflow": false,
+          "titleOverflow": false
+        }
+      ],
+      "heading": "Panel general",
+      "overflow": false,
+      "sections": 1
+    },
+    {
+      "tab": "cursos",
+      "width": 1280,
+      "actions": [
+        {
+          "disabled": null,
+          "href": "/portal-docente/estudiantes?course=1&module=1",
+          "label": "Ver estudiantes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/cursos?course=1&module=1",
+          "label": "Revisar planificación",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/oa-ae?course=1&module=1",
+          "label": "Revisar OA, AE y criterios",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/reportes?course=1&module=1",
+          "label": "Abrir Reportes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": "true",
+          "href": null,
+          "label": "Exportación real: requiere iniciar sesión",
+          "overflow": false,
+          "titleOverflow": false
+        }
+      ],
+      "heading": "Cursos / Planificación",
+      "overflow": false,
+      "sections": 1
+    },
+    {
+      "tab": "estudiantes",
+      "width": 1280,
+      "actions": [
+        {
+          "disabled": null,
+          "href": "/portal-docente/estudiantes?course=1&module=1",
+          "label": "Ver estudiantes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/cursos?course=1&module=1",
+          "label": "Revisar planificación",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/oa-ae?course=1&module=1",
+          "label": "Revisar OA, AE y criterios",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/reportes?course=1&module=1",
+          "label": "Abrir Reportes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": "true",
+          "href": null,
+          "label": "Exportación real: requiere iniciar sesión",
+          "overflow": false,
+          "titleOverflow": false
+        }
+      ],
+      "heading": "Estudiantes",
+      "overflow": false,
+      "sections": 1
+    },
+    {
+      "tab": "oa-ae",
+      "width": 1280,
+      "actions": [
+        {
+          "disabled": null,
+          "href": "/portal-docente/estudiantes?course=1&module=1",
+          "label": "Ver estudiantes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/cursos?course=1&module=1",
+          "label": "Revisar planificación",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/oa-ae?course=1&module=1",
+          "label": "Revisar OA, AE y criterios",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/reportes?course=1&module=1",
+          "label": "Abrir Reportes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": "true",
+          "href": null,
+          "label": "Exportación real: requiere iniciar sesión",
+          "overflow": false,
+          "titleOverflow": false
+        }
+      ],
+      "heading": "OA, AE y criterios de evaluación",
+      "overflow": false,
+      "sections": 1
+    },
+    {
+      "tab": "cumplimiento",
+      "width": 1280,
+      "actions": [
+        {
+          "disabled": null,
+          "href": "/portal-docente/estudiantes?course=1&module=1",
+          "label": "Ver estudiantes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/cursos?course=1&module=1",
+          "label": "Revisar planificación",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/oa-ae?course=1&module=1",
+          "label": "Revisar OA, AE y criterios",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/reportes?course=1&module=1",
+          "label": "Abrir Reportes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": "true",
+          "href": null,
+          "label": "Exportación real: requiere iniciar sesión",
+          "overflow": false,
+          "titleOverflow": false
+        }
+      ],
+      "heading": "Cumplimiento",
+      "overflow": false,
+      "sections": 1
+    },
+    {
+      "tab": "reportes",
+      "width": 1280,
+      "actions": [
+        {
+          "disabled": null,
+          "href": null,
+          "label": "Imprimir reporte / guardar PDF",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": "true",
+          "href": null,
+          "label": "Exportación real: requiere iniciar sesión",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/estudiantes?course=1&module=1",
+          "label": "Revisar evidencia individual",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/cumplimiento?course=1&module=1",
+          "label": "Ver cumplimiento",
+          "overflow": false,
+          "titleOverflow": false
+        }
+      ],
+      "heading": "Reportes",
+      "overflow": false,
+      "sections": 1
+    },
+    {
+      "tab": "resumen",
+      "width": 390,
+      "actions": [
+        {
+          "disabled": null,
+          "href": "/portal-docente/estudiantes?course=1&module=1",
+          "label": "Ver estudiantes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/cursos?course=1&module=1",
+          "label": "Revisar planificación",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/oa-ae?course=1&module=1",
+          "label": "Revisar OA, AE y criterios",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/reportes?course=1&module=1",
+          "label": "Abrir Reportes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": "true",
+          "href": null,
+          "label": "Exportación real: requiere iniciar sesión",
+          "overflow": false,
+          "titleOverflow": false
+        }
+      ],
+      "heading": "Panel general",
+      "overflow": false,
+      "sections": 1
+    },
+    {
+      "tab": "cursos",
+      "width": 390,
+      "actions": [
+        {
+          "disabled": null,
+          "href": "/portal-docente/estudiantes?course=1&module=1",
+          "label": "Ver estudiantes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/cursos?course=1&module=1",
+          "label": "Revisar planificación",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/oa-ae?course=1&module=1",
+          "label": "Revisar OA, AE y criterios",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/reportes?course=1&module=1",
+          "label": "Abrir Reportes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": "true",
+          "href": null,
+          "label": "Exportación real: requiere iniciar sesión",
+          "overflow": false,
+          "titleOverflow": false
+        }
+      ],
+      "heading": "Cursos / Planificación",
+      "overflow": false,
+      "sections": 1
+    },
+    {
+      "tab": "estudiantes",
+      "width": 390,
+      "actions": [
+        {
+          "disabled": null,
+          "href": "/portal-docente/estudiantes?course=1&module=1",
+          "label": "Ver estudiantes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/cursos?course=1&module=1",
+          "label": "Revisar planificación",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/oa-ae?course=1&module=1",
+          "label": "Revisar OA, AE y criterios",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/reportes?course=1&module=1",
+          "label": "Abrir Reportes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": "true",
+          "href": null,
+          "label": "Exportación real: requiere iniciar sesión",
+          "overflow": false,
+          "titleOverflow": false
+        }
+      ],
+      "heading": "Estudiantes",
+      "overflow": false,
+      "sections": 1
+    },
+    {
+      "tab": "oa-ae",
+      "width": 390,
+      "actions": [
+        {
+          "disabled": null,
+          "href": "/portal-docente/estudiantes?course=1&module=1",
+          "label": "Ver estudiantes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/cursos?course=1&module=1",
+          "label": "Revisar planificación",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/oa-ae?course=1&module=1",
+          "label": "Revisar OA, AE y criterios",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/reportes?course=1&module=1",
+          "label": "Abrir Reportes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": "true",
+          "href": null,
+          "label": "Exportación real: requiere iniciar sesión",
+          "overflow": false,
+          "titleOverflow": false
+        }
+      ],
+      "heading": "OA, AE y criterios de evaluación",
+      "overflow": false,
+      "sections": 1
+    },
+    {
+      "tab": "cumplimiento",
+      "width": 390,
+      "actions": [
+        {
+          "disabled": null,
+          "href": "/portal-docente/estudiantes?course=1&module=1",
+          "label": "Ver estudiantes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/cursos?course=1&module=1",
+          "label": "Revisar planificación",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/oa-ae?course=1&module=1",
+          "label": "Revisar OA, AE y criterios",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/reportes?course=1&module=1",
+          "label": "Abrir Reportes",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": "true",
+          "href": null,
+          "label": "Exportación real: requiere iniciar sesión",
+          "overflow": false,
+          "titleOverflow": false
+        }
+      ],
+      "heading": "Cumplimiento",
+      "overflow": false,
+      "sections": 1
+    },
+    {
+      "tab": "reportes",
+      "width": 390,
+      "actions": [
+        {
+          "disabled": null,
+          "href": null,
+          "label": "Imprimir reporte / guardar PDF",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": "true",
+          "href": null,
+          "label": "Exportación real: requiere iniciar sesión",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/estudiantes?course=1&module=1",
+          "label": "Revisar evidencia individual",
+          "overflow": false,
+          "titleOverflow": false
+        },
+        {
+          "disabled": null,
+          "href": "/portal-docente/cumplimiento?course=1&module=1",
+          "label": "Ver cumplimiento",
+          "overflow": false,
+          "titleOverflow": false
+        }
+      ],
+      "heading": "Reportes",
+      "overflow": false,
+      "sections": 1
+    }
+  ]
+}

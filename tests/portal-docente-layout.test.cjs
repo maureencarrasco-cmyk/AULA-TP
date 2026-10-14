@@ -119,7 +119,7 @@ test('pedagogical panels preserve counts, evidence and all seven existing naviga
   assert.match(panels,/<strong>0<\/strong><span>conviene observar/);
   assert.match(panels,/Revisar <strong>AE2<\/strong> del módulo 2/);
   assert.match(panels,/<strong>0 de 1<\/strong> registros de evidencia/);
-  assert.equal((panels.match(/<a href=|<a class="pd-ped-cta" href=/g)||[]).length,7);
+  assert.equal((panels.match(/<a\b/g)||[]).length,7);
   for(const url of ['/portal-docente/estudiantes','/portal-docente/cursos','/portal-docente/oa-ae','/portal-docente/reportes','/api/teacher/export.csv'])assert.ok(panels.includes(`href="${url}"`));
   assert.equal(vm.runInContext('JSON.stringify([state.teacher,state.courses])',context),before);
 });
@@ -189,7 +189,7 @@ test('continuing review keeps all five actions, original data and selected conte
   const {context}=fixture('?course=1&module=2');
   const before=vm.runInContext('JSON.stringify([state.courses,state.teacher])',context);
   const html=vm.runInContext("window.PortalLayout.render('cursos')",context);
-  const section=html.split('<section class="pd-continue-review"')[1].split('</section>')[0];
+  const section=html.split('<section class="pd-continue-review is-reference"')[1].split('</section>')[0];
   assert.match(section,/aria-labelledby="pd-continue-title"/);
   assert.match(section,/Continuar revisión/);
   assert.equal((section.match(/class="pd-review-link is-/g)||[]).length,5);
@@ -200,14 +200,22 @@ test('continuing review keeps all five actions, original data and selected conte
   for(const tone of ['blue','orange','violet','mint','rose'])assert.ok(section.includes(`is-${tone}`));
   assert.equal((section.match(/class="pd-review-arrow"/g)||[]).length,5);
   assert.equal((section.match(/class="pd-review-label"/g)||[]).length,5);
-  assert.match(section,/sidebar-foot.jpg/);
+  assert.match(section,/continuar-revision-escritorio.png/);
+  assert.ok(fs.existsSync('static/portal-docente/continuar-revision-escritorio.png'));
   assert.doesNotMatch(section,/onclick=|undefined|NaN/);
   assert.equal(vm.runInContext('JSON.stringify([state.courses,state.teacher])',context),before);
 });
 
-test('review design remains scoped and responsive without changing the other shortcuts',()=>{
+test('all five layouts share review design while retaining every existing shortcut',()=>{
   const {context}=fixture();
-  assert.doesNotMatch(vm.runInContext("window.PortalLayout.render('resumen')",context),/pd-continue-review/);
+  for(const tab of ['resumen','cursos','estudiantes','oa-ae','cumplimiento']) {
+    const before=vm.runInContext('JSON.stringify([state.courses,state.teacher])',context);
+    const html=vm.runInContext(`window.PortalLayout.render('${tab}')`,context);
+    assert.equal((html.match(/aria-labelledby="pd-continue-title"/g)||[]).length,1);
+    assert.equal((html.match(/class="pd-review-link is-/g)||[]).length,5);
+    for(const url of ['/portal-docente/estudiantes','/portal-docente/cursos','/portal-docente/oa-ae','/portal-docente/reportes','/api/teacher/export.csv'])assert.ok(html.includes(`href="${url}"`));
+    assert.equal(vm.runInContext('JSON.stringify([state.courses,state.teacher])',context),before);
+  }
   const css=fs.readFileSync('static/portal-docente-design.css','utf8');
   assert.match(css,/\.pd-content \.pd-review-link:focus-visible/);
   assert.match(css,/\.pd-review-copy[^}]*min-width:0/s);

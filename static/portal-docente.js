@@ -849,6 +849,28 @@ function reportDistribution(counts) {
   }).join(',');
   return `<div class="pd-report-distribution"><div class="pd-report-donut" style="background:conic-gradient(${stops})" role="img" aria-label="${esc(parts.map(([label, amount]) => `${label}: ${amount}`).join('; '))}"><div><strong>${total}</strong><span>estudiantes</span></div></div><ul>${parts.map(([label, amount, color]) => `<li><i style="background:${color}" aria-hidden="true"></i><span>${label}</span><b>${amount} (${Math.round(amount / total * 100)}%)</b></li>`).join('')}</ul></div>`;
 }
+// Lucide icons, ISC; license notice below with the filter icons.
+function reviewIcon(name) {
+  const shapes={
+    estudiantes:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    cursos:'<path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>',
+    'oa-ae':'<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v6h6M8 13h8M8 17h8M8 9h2"/>',
+    reportes:'<path d="M8 20v-4M13 20V10M18 20V4"/>',
+    cumplimiento:'<path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
+    print:'<path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/><path d="M18 12h.01"/>',
+    download:'<path d="M12 13v8M8 17l4 4 4-4"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/>',
+    arrow:'<path d="M5 12h14m-7-7 7 7-7 7"/>'
+  };
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${shapes[name]}</svg>`;
+}
+function reviewActions(title,actions,{compact=false,note='',reference=false}={}) {
+  const image=reference?'/static/portal-docente/continuar-revision-escritorio.png':'/static/portal-docente/sidebar-foot.jpg?v=20261013-verified';
+  return `<section class="pd-continue-review${compact?' is-compact':''}${reference?' is-reference':''}" aria-labelledby="pd-continue-title"><header class="pd-review-heading"><div><h2 id="pd-continue-title">${esc(title)}</h2><p>Accede rápidamente a las tareas más importantes de tu gestión docente.</p></div><img src="${image}" alt="" loading="lazy" width="${reference?2172:1280}" height="${reference?724:720}"></header><div class="pd-review-links">${actions.map(action=>{
+    const attrs=action.url?`href="${esc(action.url)}"${action.download?' download="aula-tp-cumplimiento.csv"':''}`:`type="button" id="${esc(action.id)}"`;
+    const tag=action.url?'a':'button';
+    return `<${tag} class="pd-review-link is-${esc(action.tone)}" ${attrs}><span class="pd-review-icon" aria-hidden="true">${reviewIcon(action.icon)}</span><span class="pd-review-copy"><strong class="pd-review-label">${esc(action.label)}</strong><span>${esc(action.description)}</span></span><span class="pd-review-arrow" aria-hidden="true">${reviewIcon('arrow')}</span></${tag}>`;
+  }).join('')}</div>${note?`<p class="pd-note">${esc(note)}</p>`:''}</section>`;
+}
 function reportStudentTable(groups) {
   const filtered = groups.filter(group => (!reportView.search || String(group[0].name).toLocaleLowerCase('es').includes(reportView.search.toLocaleLowerCase('es'))) && (!reportView.status || groupSignal(group).level === reportView.status));
   const pages = Math.max(1, Math.ceil(filtered.length / reportView.size));
@@ -901,7 +923,12 @@ function reports() {
   const trend = reportPanel('Evolución del desempeño de selección', lineChart(weeklyPoints(records), 'Desempeño por semana') + '<p class="pd-note">Serie de resultados comparables; no es tiempo de uso ni evolución del cumplimiento.</p>');
   const exams = reportPanel('Evaluaciones registradas', `<div class="pd-report-exam-total"><strong>${scores.length}</strong><span>registros con evaluación de selección</span></div><p>Logro medio: <b>${scores.length ? pct(mean(scores)) : 'Sin evaluaciones'}</b></p><p class="pd-note">No hay datos suficientes para clasificar evaluaciones por tipo formativo, sumativo o proyecto.</p>`);
   const studentsPanel = reportPanel('Listado de estudiantes', `<div id="pd-report-student-list">${reportStudentTable(people)}</div>`, 'pd-report-students');
-  const actions = reportPanel('Acciones rápidas', `<div class="pd-report-actions"><button id="pd-report-print" type="button">Imprimir reporte / guardar PDF →</button><a href="/api/teacher/export.csv">Descargar avance del curso y módulo (CSV) →</a><a href="${href('/portal-docente/estudiantes')}">Revisar evidencia individual →</a><a href="${href('/portal-docente/cumplimiento')}">Ver cumplimiento →</a></div><p class="pd-note">El CSV respeta permisos, curso y módulo. Incluye registros de progreso, no toda la matrícula ni filtros de nombre o señal; no contiene la cohorte de demostración.</p>`);
+  const actions = reviewActions('Acciones rápidas',[
+    {icon:'print',label:'Imprimir reporte / guardar PDF',id:'pd-report-print',tone:'violet',description:'Conserva una copia del informe seleccionado.'},
+    {icon:'download',label:'Descargar avance del curso y módulo (CSV)',url:'/api/teacher/export.csv',tone:'rose',download:true,description:'Exporta los registros del curso y módulo seleccionados.'},
+    {icon:'estudiantes',label:'Revisar evidencia individual',url:href('/portal-docente/estudiantes'),tone:'blue',description:'Consulta las evidencias originales de tus estudiantes.'},
+    {icon:'cumplimiento',label:'Ver cumplimiento',url:href('/portal-docente/cumplimiento'),tone:'mint',description:'Revisa el recorrido y las evaluaciones registradas.'}
+  ],{note:'El CSV respeta permisos, curso y módulo. Incluye registros de progreso, no toda la matrícula ni filtros de nombre o señal; no contiene la cohorte de demostración.'});
   const views = {
     general: reportPanel('Alcance del informe', `<dl class="pd-facts"><div><dt>Curso</dt><dd>${esc(courseTitle())}</dd></div><div><dt>Módulos</dt><dd>${modules.length}</dd></div><div><dt>Estudiantes</dt><dd>${people.length}</dd></div><div><dt>Registros de módulo</dt><dd>${records.length}</dd></div><div><dt>Origen</dt><dd>${state.cohort?'Demostración ficticia':'Datos del campus autorizado'}</dd></div></dl><p>Elige el tipo de informe. Cada salida conserva el alcance del curso y módulo seleccionados. La matrícula sin actividad se muestra en el listado; el CSV de avance contiene únicamente registros de progreso.</p>`) + actions,
     modules: byModules + exams + actions,

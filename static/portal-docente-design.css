@@ -456,6 +456,33 @@ tbody tr:nth-child(even) { background:#f8fbfe; }
 .pd-content .pd-review-link:focus-visible { outline:3px solid var(--review-accent); outline-offset:3px; }
 .pd-content .pd-review-link[aria-disabled="true"] { cursor:default; box-shadow:none; }
 .pd-review-link[aria-disabled="true"] .pd-review-arrow { visibility:hidden; }
+.pd-content button.pd-review-link { width:100%; text-align:left; font-family:inherit; cursor:pointer; }
+.pd-report-grid > .pd-continue-review { grid-column:1 / -1; }
+.pd-continue-review.is-reference { padding:20px; background:#f6faff; }
+.pd-continue-review.is-reference .pd-review-heading { min-height:130px; padding:18px 12px; }
+.pd-continue-review.is-reference .pd-review-heading > div { width:58%; }
+.pd-continue-review.is-reference .pd-review-heading h2 { font-size:28px; }
+.pd-continue-review.is-reference .pd-review-heading img { width:40%; object-position:65% 50%; }
+@media (max-width:900px) {
+  .pd-continue-review.is-reference .pd-review-heading > div { width:100%; }
+}
+@media (max-width:640px) {
+  .pd-continue-review.is-reference { padding:12px 0; }
+  .pd-continue-review.is-reference .pd-review-heading { min-height:0; }
+  .pd-continue-review.is-reference .pd-review-heading h2 { font-size:21px; }
+}
+.pd-continue-review.is-compact { margin-top:0; padding-top:0; border-top:0; }
+.pd-continue-review.is-compact .pd-review-heading { padding:12px 0; min-height:0; }
+.pd-continue-review.is-compact .pd-review-heading > div { width:100%; }
+.pd-continue-review.is-compact .pd-review-heading img { display:none; }
+.pd-continue-review.is-compact .pd-review-heading h2 { font-size:19px; }
+.pd-content .pd-continue-review.is-compact .pd-review-link { gap:10px; padding:12px 10px; }
+.pd-continue-review.is-compact .pd-review-icon { width:36px; height:40px; flex-basis:36px; }
+.pd-continue-review.is-compact .pd-review-icon svg { width:24px; height:24px; }
+.pd-continue-review.is-compact .pd-review-copy strong { font-size:13px; }
+.pd-continue-review.is-compact .pd-review-copy > span { font-size:12px; }
+.pd-continue-review.is-compact .pd-review-arrow { height:28px; flex-basis:28px; }
+.pd-continue-review.is-compact .pd-review-arrow svg { width:19px; height:19px; }
 @media (max-width:900px) {
   .pd-review-heading > div { width:100%; }
   .pd-review-heading img { display:none; }

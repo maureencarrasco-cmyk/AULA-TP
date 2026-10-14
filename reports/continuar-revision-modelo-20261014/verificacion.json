@@ -1,0 +1,12 @@
+{
+  "fecha": "2026-10-14",
+  "alcance": "Diseno de accesos compartido en las seis pestanas; nuevo modelo fotografico de Continuar revision en Cursos / Planificacion",
+  "pruebas_interfaz": 47,
+  "responsive": "Seis pestanas a 1280px y 390px en demostracion local; nueva fotografia comprobada posteriormente en Cursos a ambos anchos",
+  "overflow": false,
+  "funciones": "Enlaces y contexto conservados; Reportes mantiene sus cuatro acciones propias, incluido imprimir / guardar PDF. Exportaciones en demostracion siguen deshabilitadas",
+  "fotografia": "static/portal-docente/continuar-revision-escritorio.png",
+  "procedencia_y_prompt": "static/portal-docente/continuar-revision-escritorio.source.json",
+  "limitaciones": "Verificacion de interfaz con datos ficticios, no validacion curricular. No se modificaron backend, contenidos, preguntas, claves, rubricas, calificaciones o produccion",
+  "despliegue_web": false
+}

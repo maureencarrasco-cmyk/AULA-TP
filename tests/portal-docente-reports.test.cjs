@@ -15,6 +15,19 @@ function fixture(search = '') {
       {name:'Luis',module_id:1,position:1,percent:0,state:{}}]};`, context);
   return context;
 }
+
+test('restyled print button retains its original print action without altering records',()=>{
+  const context=fixture();
+  const button={};
+  let calls=0;
+  context.window.print=()=>{calls+=1;};
+  context.document={querySelectorAll:()=>[],getElementById:id=>id==='pd-report-print'?button:id==='pd-report-module'?{}:null};
+  const before=vm.runInContext('JSON.stringify(state.teacher)',context);
+  vm.runInContext('bindReports()',context);
+  button.onclick();
+  assert.equal(calls,1);
+  assert.equal(vm.runInContext('JSON.stringify(state.teacher)',context),before);
+});
 test('report metrics use existing evidence and preserve original records', () => {
   const context = fixture();
   const before = vm.runInContext('JSON.stringify(state.teacher)', context);
@@ -32,6 +45,12 @@ test('all seven report views render and module filtering changes the population'
     const html = vm.runInContext(`reportView.tab='${tab}'; reports()`, context);
     assert.match(html, new RegExp(`data-report-tab="${tab}" aria-pressed="true"`));
     assert.match(html, /pd-report-print/);
+    assert.equal((html.match(/aria-labelledby="pd-continue-title"/g)||[]).length,1);
+    assert.equal((html.match(/class="pd-review-link is-/g)||[]).length,4);
+    assert.match(html, /<button class="pd-review-link is-violet" type="button" id="pd-report-print"/);
+    assert.match(html, /href="\/api\/teacher\/export.csv" download="aula-tp-cumplimiento.csv"/);
+    assert.match(html, /Revisar evidencia individual/);
+    assert.match(html, /Ver cumplimiento/);
   }
   assert.equal(vm.runInContext("reportView.module='2'; reportPeople(reportRecords()).length", context), 1);
 });
