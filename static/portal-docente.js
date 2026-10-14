@@ -1057,7 +1057,7 @@ function draw() {
     viewHeading.insertAdjacentElement('afterend',overview);
     const tabIcons={general:'resumen',modules:'oa-ae',stations:'cumplimiento',learning:'oa-ae',students:'estudiantes',exams:'reportes',compare:'reportes'};
     document.querySelectorAll('[data-report-tab]').forEach(button=>{
-      button.insertAdjacentHTML('afterbegin', `<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="${ICONS[tabIcons[button.dataset.reportTab]]}" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`);
+      button.insertAdjacentHTML('afterbegin', `<span class="pd-report-tab-icon is-${button.dataset.reportTab}" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="${ICONS[tabIcons[button.dataset.reportTab]]}" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`);
     });
     const chart = reportResults.querySelector('.pd-report-trend');
     if(chart) chart.querySelector('h2').insertAdjacentHTML('afterend','<div class="pd-chart-legend"><span><i class="pd-legend-observed"></i>Desempeño medio</span><span><i class="pd-legend-trend"></i>Tendencia</span></div>');

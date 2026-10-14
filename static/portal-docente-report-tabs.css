@@ -1,0 +1,14 @@
+.pd-report > .pd-report-tabs { gap:0; padding:6px; border-radius:8px; }
+.pd-report > .pd-report-tabs button { position:relative; min-height:76px; gap:14px; padding:12px 18px; border-radius:8px; }
+.pd-report > .pd-report-tabs button:not(:last-child)::after { content:''; position:absolute; width:1px; right:0; top:18px; bottom:18px; background:#dceafa; }
+.pd-report > .pd-report-tabs button[aria-pressed="true"] { background:#e2f0ff; color:#086bff; box-shadow:inset 0 -4px #086bff; }
+.pd-report > .pd-report-tabs button[aria-pressed="true"]::after { display:none; }
+.pd-report-tab-icon { display:grid; place-items:center; flex:0 0 48px; width:48px; height:48px; border-radius:8px; background:#cce7ff; color:#0875d8; }
+.pd-report > .pd-report-tabs .pd-report-tab-icon svg { width:28px; height:28px; }
+.pd-report-tab-icon.is-modules { background:#ffe6d4; color:#c06013; }
+.pd-report-tab-icon.is-stations { background:#dbf5e9; color:#00896a; }
+.pd-report-tab-icon.is-learning { background:#ebe0ff; color:#7141bc; }
+.pd-report-tab-icon.is-students { background:#d5efff; color:#1264ad; }
+.pd-report-tab-icon.is-exams { background:#fff0c9; color:#a16a00; }
+.pd-report-tab-icon.is-compare { background:#ffdeea; color:#b2225a; }
+@media (max-width:640px) { .pd-report > .pd-report-tabs button { min-height:64px; padding:10px 12px; gap:10px; } .pd-report-tab-icon { flex-basis:38px; width:38px; height:40px; } .pd-report > .pd-report-tabs .pd-report-tab-icon svg { width:24px; height:24px; } }
