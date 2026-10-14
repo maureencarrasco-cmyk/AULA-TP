@@ -15,7 +15,9 @@ class PortalLegacyProgressTest(unittest.TestCase):
             app = create_app({'TESTING': True, 'DATABASE': database, 'SECRET_KEY': 'test'})
             client = app.test_client()
             entered = client.get('/api/portal-docente/enter').get_json()
-            uid = entered['user']['id']
+            with client.session_transaction() as session:
+                session['uid'] = 2
+            uid = 1
             with sqlite3.connect(database) as connection:
                 module = connection.execute('SELECT id FROM modules LIMIT 1').fetchone()[0]
                 original = json.dumps({'context': 'avance anterior', 'ae': None, 'cases': None})

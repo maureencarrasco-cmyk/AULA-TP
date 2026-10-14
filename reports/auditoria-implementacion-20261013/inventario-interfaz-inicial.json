@@ -1,0 +1,1471 @@
+{
+  "date": "2026-10-13",
+  "scope": "Inventario DOM; incluye encabezados del detalle colapsado. No contiene expedientes individuales.",
+  "tabs": [
+    {
+      "path": "",
+      "headings": [
+        "Portal Docente",
+        "Panel general",
+        "Progreso general",
+        "Estudiantes con recorrido",
+        "Estaciones completadas",
+        "Requieren apoyo",
+        "Avance por módulo",
+        "Desempeño y evidencia de AE",
+        "Evolución del desempeño",
+        "Recorrido de aprendizaje por estaciones",
+        "Alertas pedagógicas",
+        "Recomendaciones pedagógicas",
+        "Accesos rápidos",
+        "Panel general",
+        "Para ti hoy",
+        "¿Cómo está el curso?",
+        "Refrigeración y Climatización",
+        "El grupo está aquí",
+        "Cumplimiento por módulo",
+        "Semana vs desempeño medio",
+        "Práctica y logro",
+        "Logro de la evaluación de selección",
+        "Relación con la frecuencia de práctica"
+      ],
+      "links": [
+        {
+          "href": "/portal-docente/oa-ae",
+          "text": "Ver detalle →"
+        },
+        {
+          "href": "/portal-docente/estudiantes?status=support",
+          "text": "Revisar estudiantes→"
+        },
+        {
+          "href": "/portal-docente/oa-ae?module=1&learning=criteria&ae=2#pd-ae-1-2",
+          "text": "Ver criterios y evidencia→"
+        },
+        {
+          "href": "/portal-docente/estudiantes",
+          "text": "Ver estudiantes→"
+        },
+        {
+          "href": "/portal-docente/cursos",
+          "text": "Revisar planificación→"
+        },
+        {
+          "href": "/portal-docente/oa-ae",
+          "text": "Revisar OA, AE y criterios→"
+        },
+        {
+          "href": "/portal-docente/reportes",
+          "text": "Abrir Reportes→"
+        },
+        {
+          "href": "/portal-docente-api/teacher/export.csv",
+          "text": "↓Descargar datos reales del campus (CSV)→"
+        },
+        {
+          "href": "/portal-docente/estudiantes",
+          "text": "Ver estudiantes →"
+        },
+        {
+          "href": "/portal-docente/oa-ae",
+          "text": "Revisar resultados →"
+        },
+        {
+          "href": "/portal-docente/cumplimiento",
+          "text": "Ver recorrido →"
+        },
+        {
+          "href": "/portal-docente/estudiantes",
+          "text": "Abrir detalle →"
+        },
+        {
+          "href": "/portal-docente/cursos",
+          "text": "Abrir curso →"
+        },
+        {
+          "href": "/portal-docente/cumplimiento",
+          "text": "Ver cumplimiento →"
+        }
+      ],
+      "selects": [
+        {
+          "id": "pd-layout-module",
+          "options": [
+            "Todos los módulos",
+            "M1 · Lectura de planos y cubicación de materiales de proyectos",
+            "M2 · Instrumentos de medición y de verificación",
+            "M3 · Instalación y montaje de redes de refrigeración y climatización",
+            "M4 · Instalación y montaje de equipos",
+            "M5 · Puesta en marcha de equipos de refrigeración y climatización"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cursos",
+      "headings": [
+        "Portal Docente",
+        "Cursos / Planificación",
+        "Curso en esta vista",
+        "Módulos",
+        "Horas del módulo",
+        "Estudiantes",
+        "Curso y módulos",
+        "Módulo 1 · Lectura de planos y cubicación de materiales de proyectos",
+        "Planificación del curso",
+        "Módulo 1. Lectura de planos y cubicación de materiales de proyectos",
+        "Objetivos de aprendizaje",
+        "Avance del módulo y estaciones",
+        "Continuar revisión",
+        "Cursos / Planificación",
+        "Qué abarca esta planificación",
+        "Lo que ya se está ejecutando",
+        "Módulos 1 y 2. Planos y medición",
+        "Módulo 1. Lectura de planos y cubicación de materiales de proyectos",
+        "Objetivos de aprendizaje",
+        "Módulo 2. Instrumentos de medición y de verificación",
+        "Objetivos de aprendizaje",
+        "Módulos 3 y 4. Instalación y montaje",
+        "Módulo 3. Instalación y montaje de redes de refrigeración y climatización",
+        "Objetivos de aprendizaje",
+        "Módulo 4. Instalación y montaje de equipos",
+        "Objetivos de aprendizaje",
+        "Módulo 5. Puesta en marcha",
+        "Módulo 5. Puesta en marcha de equipos de refrigeración y climatización",
+        "Objetivos de aprendizaje",
+        "Dónde continuar la lectura"
+      ],
+      "links": [
+        {
+          "href": "/portal-docente/cumplimiento",
+          "text": "Ver cumplimiento →"
+        },
+        {
+          "href": "/portal-docente/estudiantes",
+          "text": "Ver estudiantes →"
+        },
+        {
+          "href": "/portal-docente/cursos",
+          "text": "Revisar planificación →"
+        },
+        {
+          "href": "/portal-docente/oa-ae",
+          "text": "Revisar OA, AE y criterios →"
+        },
+        {
+          "href": "/portal-docente/reportes",
+          "text": "Abrir Reportes →"
+        },
+        {
+          "href": "/portal-docente-api/teacher/export.csv",
+          "text": "Descargar datos reales del campus (CSV) →"
+        },
+        {
+          "href": "/portal-docente/cumplimiento",
+          "text": "Ver progreso del recorrido"
+        },
+        {
+          "href": "/portal-docente/oa-ae",
+          "text": "Revisar AE"
+        }
+      ],
+      "selects": [
+        {
+          "id": "pd-layout-module",
+          "options": [
+            "Todos los módulos",
+            "M1 · Lectura de planos y cubicación de materiales de proyectos",
+            "M2 · Instrumentos de medición y de verificación",
+            "M3 · Instalación y montaje de redes de refrigeración y climatización",
+            "M4 · Instalación y montaje de equipos",
+            "M5 · Puesta en marcha de equipos de refrigeración y climatización"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/estudiantes",
+      "headings": [
+        "Portal Docente",
+        "Estudiantes",
+        "Estudiantes",
+        "Cumplimiento medio",
+        "Logro de selección",
+        "Requieren apoyo",
+        "Listado de estudiantes",
+        "Distribución del desempeño",
+        "Avance por estaciones",
+        "Estudiantes que requieren apoyo",
+        "Progreso esperado",
+        "Acciones rápidas",
+        "Estudiantes",
+        "Cómo se lee la señal",
+        "Requiere mayor apoyo",
+        "Conviene observar",
+        "Progreso esperado",
+        "Todavía sin estaciones registradas",
+        "Cómo acompañar"
+      ],
+      "links": [
+        {
+          "href": "mailto:agustin.contreras.185@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.diaz.95@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.gonzalez.5@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.munoz.35@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.perez.125@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.rojas.65@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.soto.155@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.contreras.192@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.diaz.102@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.gonzalez.12@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "/portal-docente/estudiantes",
+          "text": "Ver estudiantes →"
+        },
+        {
+          "href": "/portal-docente/cursos",
+          "text": "Revisar planificación →"
+        },
+        {
+          "href": "/portal-docente/oa-ae",
+          "text": "Revisar OA, AE y criterios →"
+        },
+        {
+          "href": "/portal-docente/reportes",
+          "text": "Abrir Reportes →"
+        },
+        {
+          "href": "/portal-docente-api/teacher/export.csv",
+          "text": "Descargar datos reales del campus (CSV) →"
+        },
+        {
+          "href": "mailto:agustin.munoz.35@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.rojas.65@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.munoz.42@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.rojas.72@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:antonella.munoz.44@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:antonella.rojas.74@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:antonia.gonzalez.24@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:antonia.munoz.54@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:benjamin.munoz.33@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:benjamin.rojas.63@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:catalina.gonzalez.28@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:catalina.munoz.58@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:constanza.munoz.46@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:constanza.rojas.76@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:cristobal.gonzalez.23@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:cristobal.munoz.53@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:diego.munoz.45@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:diego.rojas.75@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:emilia.munoz.40@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:emilia.rojas.70@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:felipe.gonzalez.21@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:felipe.munoz.51@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:felipe.rojas.81@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:florencia.munoz.36@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:florencia.rojas.66@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:ignacio.gonzalez.25@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:ignacio.munoz.55@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:isidora.munoz.34@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:isidora.rojas.64@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:javiera.gonzalez.26@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:javiera.munoz.56@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:joaquin.gonzalez.19@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:joaquin.munoz.49@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:joaquin.rojas.79@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:josefa.munoz.38@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:josefa.rojas.68@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:lucas.munoz.43@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:lucas.rojas.73@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:maite.gonzalez.22@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:maite.munoz.52@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:maite.rojas.82@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:martin.munoz.39@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:martin.rojas.69@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:matias.munoz.31@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:matias.rojas.61@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:maximiliano.gonzalez.27@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:maximiliano.munoz.57@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:nicolas.munoz.47@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:nicolas.rojas.77@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:renata.gonzalez.20@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:renata.munoz.50@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:renata.rojas.80@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:sebastian.gonzalez.29@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:sebastian.munoz.59@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:sofia.munoz.32@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:sofia.rojas.62@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:tomas.munoz.41@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:tomas.rojas.71@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:trinidad.munoz.48@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:trinidad.rojas.78@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:valentina.gonzalez.30@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:valentina.munoz.60@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:vicente.munoz.37@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:vicente.rojas.67@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.diaz.95@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.perez.125@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.diaz.102@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.perez.132@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:antonella.diaz.104@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:antonella.perez.134@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:antonia.diaz.114@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:antonia.rojas.84@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:benjamin.diaz.93@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:benjamin.perez.123@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:catalina.diaz.118@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:catalina.rojas.88@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:constanza.diaz.106@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:constanza.perez.136@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:cristobal.diaz.113@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:cristobal.rojas.83@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:diego.diaz.105@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:diego.perez.135@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:emilia.diaz.100@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:emilia.perez.130@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:felipe.diaz.111@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:florencia.diaz.96@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:florencia.perez.126@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:ignacio.diaz.115@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:ignacio.rojas.85@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:isidora.diaz.94@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:isidora.perez.124@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:javiera.diaz.116@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:javiera.rojas.86@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:joaquin.diaz.109@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:joaquin.perez.139@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:josefa.diaz.98@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:josefa.perez.128@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:lucas.diaz.103@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:lucas.perez.133@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:maite.diaz.112@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:martin.diaz.99@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:martin.perez.129@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:matias.diaz.91@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:matias.perez.121@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:maximiliano.diaz.117@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:maximiliano.rojas.87@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:nicolas.diaz.107@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:nicolas.perez.137@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:renata.diaz.110@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:renata.perez.140@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:sebastian.diaz.119@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:sebastian.rojas.89@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:sofia.diaz.92@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:sofia.perez.122@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:tomas.diaz.101@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:tomas.perez.131@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:trinidad.diaz.108@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:trinidad.perez.138@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:valentina.diaz.120@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:valentina.rojas.90@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:vicente.diaz.97@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:vicente.perez.127@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.contreras.185@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.soto.155@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.contreras.192@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.soto.162@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:antonella.contreras.194@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:antonella.soto.164@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:antonia.perez.144@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:antonia.soto.174@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:benjamin.contreras.183@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:benjamin.soto.153@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:catalina.perez.148@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:catalina.soto.178@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:constanza.contreras.196@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:constanza.soto.166@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:cristobal.perez.143@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:cristobal.soto.173@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:diego.contreras.195@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:diego.soto.165@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:emilia.contreras.190@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:emilia.soto.160@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:felipe.perez.141@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:felipe.soto.171@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:florencia.contreras.186@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:florencia.soto.156@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:ignacio.perez.145@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:ignacio.soto.175@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:isidora.contreras.184@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:isidora.soto.154@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:javiera.perez.146@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:javiera.soto.176@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:joaquin.contreras.199@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:joaquin.soto.169@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:josefa.contreras.188@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:josefa.soto.158@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:lucas.contreras.193@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:lucas.soto.163@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:maite.perez.142@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:maite.soto.172@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:martin.contreras.189@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:martin.soto.159@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:matias.contreras.181@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:matias.soto.151@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:maximiliano.perez.147@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:maximiliano.soto.177@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:nicolas.contreras.197@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:nicolas.soto.167@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:renata.contreras.200@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:renata.soto.170@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:sebastian.perez.149@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:sebastian.soto.179@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:sofia.contreras.182@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:sofia.soto.152@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:tomas.contreras.191@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:tomas.soto.161@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:trinidad.contreras.198@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:trinidad.soto.168@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:valentina.perez.150@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:valentina.soto.180@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:vicente.contreras.187@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:vicente.soto.157@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.gonzalez.5@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.gonzalez.12@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:antonella.gonzalez.14@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:benjamin.gonzalez.3@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:constanza.gonzalez.16@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:diego.gonzalez.15@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:emilia.gonzalez.10@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:florencia.gonzalez.6@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:isidora.gonzalez.4@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:josefa.gonzalez.8@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:lucas.gonzalez.13@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:martin.gonzalez.9@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:matias.gonzalez.1@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:nicolas.gonzalez.17@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:sofia.gonzalez.2@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:tomas.gonzalez.11@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:trinidad.gonzalez.18@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:vicente.gonzalez.7@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "/portal-docente/oa-ae",
+          "text": "Revisar AE"
+        },
+        {
+          "href": "/portal-docente/cumplimiento",
+          "text": "Ver cumplimiento del curso"
+        }
+      ],
+      "selects": [
+        {
+          "id": "pd-layout-module",
+          "options": [
+            "Todos los módulos",
+            "M1 · Lectura de planos y cubicación de materiales de proyectos",
+            "M2 · Instrumentos de medición y de verificación",
+            "M3 · Instalación y montaje de redes de refrigeración y climatización",
+            "M4 · Instalación y montaje de equipos",
+            "M5 · Puesta en marcha de equipos de refrigeración y climatización"
+          ]
+        },
+        {
+          "id": "pd-report-status",
+          "options": [
+            "Todos los estados",
+            "Progreso esperado",
+            "Conviene observar",
+            "Requiere apoyo",
+            "Sin recorrido"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/oa-ae",
+      "headings": [
+        "Portal Docente",
+        "OA, AE y criterios de evaluación",
+        "OA referenciados",
+        "Aprendizajes esperados",
+        "Criterios de evaluación",
+        "Cobertura de evidencia",
+        "Objetivos de Aprendizaje (OA)",
+        "Cobertura por módulos",
+        "Cobertura por estaciones",
+        "Referencia y apoyo docente",
+        "Accesos rápidos",
+        "OA, AE y criterios de evaluación",
+        "Qué parte del perfil se observa aquí",
+        "Aprendizajes con menos evidencia",
+        "M1-AE3 · módulo 1",
+        "M2-AE3 · módulo 2",
+        "M3-AE3 · módulo 3",
+        "M4-AE3 · módulo 4",
+        "Mapa de aprendizajes observados",
+        "Objetivos de Aprendizaje Genéricos",
+        "AE de los módulos 1 y 2",
+        "Módulo 1. Lectura de planos y cubicación de materiales de proyectos",
+        "M1-AE1",
+        "M1-AE2",
+        "M1-AE3",
+        "Módulo 2. Instrumentos de medición y de verificación",
+        "M2-AE1",
+        "M2-AE2",
+        "M2-AE3",
+        "AE de los módulos 3, 4 y 5",
+        "Módulo 3. Instalación y montaje de redes de refrigeración y climatización",
+        "M3-AE1",
+        "M3-AE2",
+        "M3-AE3",
+        "Módulo 4. Instalación y montaje de equipos",
+        "M4-AE1",
+        "M4-AE2",
+        "M4-AE3",
+        "Módulo 5. Puesta en marcha de equipos de refrigeración y climatización",
+        "M5-AE1",
+        "M5-AE2",
+        "M5-AE3",
+        "Sello por especialidad"
+      ],
+      "links": [
+        {
+          "href": "/portal-docente/reportes",
+          "text": "Abrir Reportes →"
+        },
+        {
+          "href": "/portal-docente/estudiantes",
+          "text": "Ver estudiantes →"
+        },
+        {
+          "href": "/portal-docente/cursos",
+          "text": "Revisar planificación →"
+        },
+        {
+          "href": "/portal-docente/oa-ae",
+          "text": "Revisar OA, AE y criterios →"
+        },
+        {
+          "href": "/portal-docente/reportes",
+          "text": "Abrir Reportes →"
+        },
+        {
+          "href": "/portal-docente-api/teacher/export.csv",
+          "text": "Descargar datos reales del campus (CSV) →"
+        }
+      ],
+      "selects": [
+        {
+          "id": "pd-layout-module",
+          "options": [
+            "Todos los módulos",
+            "M1 · Lectura de planos y cubicación de materiales de proyectos",
+            "M2 · Instrumentos de medición y de verificación",
+            "M3 · Instalación y montaje de redes de refrigeración y climatización",
+            "M4 · Instalación y montaje de equipos",
+            "M5 · Puesta en marcha de equipos de refrigeración y climatización"
+          ]
+        },
+        {
+          "id": "",
+          "options": [
+            "Refrigeración y Climatización",
+            "Electricidad",
+            "Atención de Enfermería, mención Adulto Mayor",
+            "Atención de Enfermería, mención Enfermería",
+            "Gastronomía, mención Cocina",
+            "Gastronomía, mención Pastelería y Repostería",
+            "Servicios de Hotelería",
+            "Administración, mención Logística",
+            "Administración, mención Recursos Humanos",
+            "Agropecuaria, mención Agricultura",
+            "Agropecuaria, mención Pecuaria",
+            "Agropecuaria, mención Vitivinícola",
+            "Construcción, mención Edificación",
+            "Construcción, mención Terminaciones de la Construcción",
+            "Construcción, mención Obras Viales e Infraestructura",
+            "Química Industrial, mención Laboratorio Químico",
+            "Química Industrial, mención Planta Química",
+            "Mecánica Industrial, mención Máquinas-Herramientas",
+            "Mecánica Industrial, mención Matricería",
+            "Mecánica Industrial, mención Mantenimiento Electromecánico",
+            "Mecánica de Mantenimiento de Aeronaves"
+          ]
+        },
+        {
+          "id": "",
+          "options": [
+            "Módulo 1. Lectura de planos y cubicación de materiales de proyectos",
+            "Módulo 2. Instrumentos de medición y de verificación",
+            "Módulo 3. Instalación y montaje de redes de refrigeración y climatización",
+            "Módulo 4. Instalación y montaje de equipos",
+            "Módulo 5. Puesta en marcha de equipos de refrigeración y climatización",
+            "Módulo 6. Diagnóstico en sistemas de refrigeración y climatización",
+            "Módulo 7. Mantención de sistemas de refrigeración y climatización",
+            "Módulo 8. Reciclaje y almacenamiento de refrigerantes",
+            "Módulo 9. Emprendimiento y empleabilidad"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cumplimiento",
+      "headings": [
+        "Portal Docente",
+        "Cumplimiento",
+        "Cumplimiento general",
+        "Recorridos completos",
+        "Estudiantes con progreso esperado",
+        "Evaluaciones registradas",
+        "Cumplimiento por módulos",
+        "Cumplimiento por estaciones",
+        "Estado de las evaluaciones",
+        "Detalle de cumplimiento por estudiante",
+        "Seguimiento del grupo",
+        "Acciones docentes",
+        "Cumplimiento",
+        "Qué cuenta este indicador",
+        "Lectura del curso completo",
+        "Módulo con menor recorrido",
+        "Módulo con mayor recorrido",
+        "Los cinco módulos, uno al lado del otro",
+        "Dónde mirar después de este número"
+      ],
+      "links": [
+        {
+          "href": "mailto:agustin.contreras.185@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.diaz.95@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.gonzalez.5@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.munoz.35@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.perez.125@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.rojas.65@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.soto.155@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.contreras.192@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.diaz.102@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.gonzalez.12@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "/portal-docente/estudiantes",
+          "text": "Ver estudiantes →"
+        },
+        {
+          "href": "/portal-docente/cursos",
+          "text": "Revisar planificación →"
+        },
+        {
+          "href": "/portal-docente/oa-ae",
+          "text": "Revisar OA, AE y criterios →"
+        },
+        {
+          "href": "/portal-docente/reportes",
+          "text": "Abrir Reportes →"
+        },
+        {
+          "href": "/portal-docente-api/teacher/export.csv",
+          "text": "Descargar datos reales del campus (CSV) →"
+        },
+        {
+          "href": "/portal-docente/estudiantes",
+          "text": "Ver estudiantes"
+        },
+        {
+          "href": "/portal-docente/oa-ae",
+          "text": "Revisar AE"
+        }
+      ],
+      "selects": [
+        {
+          "id": "pd-layout-module",
+          "options": [
+            "Todos los módulos",
+            "M1 · Lectura de planos y cubicación de materiales de proyectos",
+            "M2 · Instrumentos de medición y de verificación",
+            "M3 · Instalación y montaje de redes de refrigeración y climatización",
+            "M4 · Instalación y montaje de equipos",
+            "M5 · Puesta en marcha de equipos de refrigeración y climatización"
+          ]
+        },
+        {
+          "id": "pd-report-status",
+          "options": [
+            "Todos los estados",
+            "Progreso esperado",
+            "Conviene observar",
+            "Requiere apoyo",
+            "Sin recorrido"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/reportes",
+      "headings": [
+        "Portal Docente",
+        "Reportes",
+        "Estudiantes",
+        "Cumplimiento medio",
+        "Logro de selección",
+        "Evidencia de AE",
+        "Progreso por módulos",
+        "Evidencia por Aprendizaje Esperado",
+        "Resultados por estaciones",
+        "Evolución del desempeño de selección",
+        "Distribución del acompañamiento",
+        "Evaluaciones registradas",
+        "Listado de estudiantes",
+        "Acciones rápidas",
+        "Reportes",
+        "Para qué sirve este reporte",
+        "Lectura que se puede comunicar",
+        "El indicador, con su fórmula",
+        "Qué muestra esta vista",
+        "Qué descarga el CSV",
+        "Dónde está el resto de la evidencia"
+      ],
+      "links": [
+        {
+          "href": "/portal-docente/oa-ae",
+          "text": "Ver OA, AE y criterios →"
+        },
+        {
+          "href": "mailto:agustin.contreras.185@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.diaz.95@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.gonzalez.5@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.munoz.35@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.perez.125@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.rojas.65@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:agustin.soto.155@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.contreras.192@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.diaz.102@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "mailto:amanda.gonzalez.12@demo.aulatp.cl",
+          "text": "Contactar estudiante"
+        },
+        {
+          "href": "/portal-docente-api/teacher/export.csv",
+          "text": "Descargar datos reales del campus (CSV) →"
+        },
+        {
+          "href": "/portal-docente/estudiantes",
+          "text": "Revisar evidencia individual →"
+        },
+        {
+          "href": "/portal-docente/cumplimiento",
+          "text": "Ver cumplimiento →"
+        },
+        {
+          "href": "/portal-docente-api/teacher/export.csv",
+          "text": "Descargar CSV del cumplimiento del campus"
+        },
+        {
+          "href": "/portal-docente",
+          "text": "Abrir el panel"
+        },
+        {
+          "href": "/portal-docente/estudiantes",
+          "text": "Ver estudiantes"
+        },
+        {
+          "href": "/portal-docente/cursos",
+          "text": "Ver la planificación"
+        }
+      ],
+      "selects": [
+        {
+          "id": "pd-report-module",
+          "options": [
+            "Todos los módulos",
+            "M1 · Lectura de planos y cubicación de materiales de proyectos",
+            "M2 · Instrumentos de medición y de verificación",
+            "M3 · Instalación y montaje de redes de refrigeración y climatización",
+            "M4 · Instalación y montaje de equipos",
+            "M5 · Puesta en marcha de equipos de refrigeración y climatización"
+          ]
+        },
+        {
+          "id": "pd-report-status",
+          "options": [
+            "Todos los estados",
+            "Progreso esperado",
+            "Conviene observar",
+            "Requiere apoyo",
+            "Sin recorrido"
+          ]
+        }
+      ]
+    }
+  ]
+}

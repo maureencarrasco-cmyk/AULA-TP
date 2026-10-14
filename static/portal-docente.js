@@ -31,7 +31,7 @@ const HEAD = {
   reportes: PHOTOS[2]
 };
 const navigationParams = typeof URLSearchParams === 'function' && typeof location === 'object' ? new URLSearchParams(location.search || '') : null;
-const state = { courses: [], teacher: null, user: null, q: navigationParams?.get('q') || '' };
+const state = { courses: [], teacher: null, user: null, courseId: navigationParams?.get('course') || '', moduleId: navigationParams?.get('module') || '', q: navigationParams?.get('q') || '' };
 
 function esc(value) {
   return String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
@@ -42,17 +42,20 @@ function currentTab() {
 }
 function query() { return state.q.trim().toLowerCase(); }
 function fiveCourse() {
-  return (state.courses || []).find(course => /refrigeraci[oó]n y climatizaci[oó]n/i.test(course.title || '')) || null;
+  return (state.courses || []).find(course => String(course.id) === state.courseId) || (state.courses || [])[0] || null;
 }
 function fiveModules() {
   const course = fiveCourse();
   return ((course && course.modules) || [])
-    .filter(module => Number(module.position) >= 1 && Number(module.position) <= 5)
-    .sort((a, b) => Number(a.position) - Number(b.position))
-    .slice(0, 5);
+    .sort((a, b) => Number(a.position) - Number(b.position));
 }
 function moduleById(id) {
   return fiveModules().find(module => String(module.id) === String(id)) || null;
+}
+function modulePhoto(module) {
+  const resource=(module.resources||[]).find(item=>item.type==='Imagen' && (item.locations||[]).some(location=>location.startsWith('context.')||location==='explore.image') && /^\/static\//.test(item.url||''));
+  if(resource)return [resource.url,`Contexto profesional del módulo: ${module.title}`];
+  return /refrigeraci[oó]n y climatizaci[oó]n/i.test(courseTitle())?PHOTOS[module.position]||null:null;
 }
 function moduleMatches(module, q) {
   return `${module.position} ${module.title} ${(module.oa || []).join(' ')}`.toLowerCase().includes(q);
@@ -82,13 +85,15 @@ function scopedRecords() {
   return baseRecords().filter(record => ids.has(String(record.module_id)) && (!q || recordMatches(record, q) || matched.length));
 }
 function href(path) {
-  const q = state.q.trim();
-  return q ? `${path}?q=${encodeURIComponent(q)}` : path;
+  return portalLink(path);
 }
 function portalLink(path, options = {}) {
   const params = new URLSearchParams();
+  if (state.courseId && fiveCourse()?.id != null) params.set('course', String(fiveCourse().id));
+  if (state.moduleId && moduleById(state.moduleId)) params.set('module',state.moduleId);
   if (state.q.trim()) params.set('q', state.q.trim());
   for (const [key, value] of Object.entries(options)) {
+    if (value === '') { params.delete(key); continue; }
     if (value !== '' && value != null) params.set(key, String(value));
   }
   const search = params.toString();
@@ -103,14 +108,14 @@ function nav() {
 }
 function courseTitle() {
   const course = fiveCourse();
-  return (course && course.title) || 'Refrigeración y Climatización';
+  return (course && course.title) || 'Sin curso asignado';
 }
 function orientFacts() {
   const rows = scopedRecords();
   const mods = scopedModules();
   const facts = [
     ['Curso', courseTitle()],
-    ['Alcance', 'Módulos 1 a 5'],
+    ['Alcance', `${mods.length} módulos del curso seleccionado`],
     ['Periodo', state.cohort ? '12 semanas de demostración' : 'Estado actual'],
     ['Estudiantes', state.cohort ? '200, cohorte de demostración' : 'Registros del campus'],
     ['Registros', `${rows.length} en ${mods.length} módulo${mods.length === 1 ? '' : 's'}`]
@@ -141,7 +146,12 @@ function quad(index, tone, kicker, title, body, flags) {
   const n = String(index).padStart(2, '0');
   return `<section class="pd-quad q-${tone}${lead}${wide}" aria-label="${esc(title)}"><p class="pd-kicker"><span>${n}</span> ${esc(kicker)}</p><h2>${esc(title)}</h2><div class="pd-quad-body">${body}</div></section>`;
 }
-function stations(record) { return Math.round(Number(record.percent || 0) / 20); }
+function stationStates(record) {
+  if (Array.isArray(record.completed) && record.completed.length === 5) return record.completed;
+  if (record.demo) return Array.from({length:5}, (_, index) => index < Math.round(Number(record.percent || 0) / 20));
+  return null;
+}
+function stations(record) { return stationStates(record)?.filter(Boolean).length ?? Math.round(Number(record.percent || 0) / 20); }
 function logro(record) {
   const exam = (record.state || {}).exam;
   if (!exam || exam.score == null || exam.max_score == null) return null;
@@ -418,8 +428,9 @@ function scatterChart(points) {
 function studentGroups() {
   const groups = new Map();
   scopedRecords().forEach(record => {
-    if (!groups.has(record.name)) groups.set(record.name, []);
-    groups.get(record.name).push(record);
+    const key = record.user_id ?? record.email ?? record.name;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(record);
   });
   const rank = { support: 0, watch: 1, ok: 2, none: 3 };
   return [...groups.values()].sort((a, b) => rank[groupSignal(a).level] - rank[groupSignal(b).level] || a[0].name.localeCompare(b[0].name, 'es'));
@@ -456,7 +467,8 @@ function signalCounts(people) {
   people.forEach(group => { counts[groupSignal(group).level] += 1; });
   return counts;
 }
-function personRow(group) {
+function personKey(record) { return String(record.user_id ?? record.email ?? record.name ?? ''); }
+function personRow(group, distinguish=false) {
   const item = groupSignal(group);
   const scores = group.map(logro).filter(value => value != null);
   const score = scores.length ? Math.round(mean(scores)) : null;
@@ -466,12 +478,16 @@ function personRow(group) {
   const series = ((group.find(record => ((record.state || {}).series || []).length >= 8) || group[0]).state || {}).series || [];
   const points = series.map(point => ({ x: point.week, y: point.score }));
   const trend = points.length >= 8 ? trendWord(points) : 'Sin serie suficiente';
-  const modules = group.map(record => `Módulo ${record.position}: ${stations(record)} de 5. ${logro(record) == null ? 'Sin evaluación de selección.' : `Logro ${logro(record)} %.`} ${practica(record)} prácticas.`).join(' ');
-  return `<tr><td>${esc(group[0].name)}</td><td>${signalMark(item)}<br><span class="pd-note">${item.reasons.map(esc).join(' ')}</span></td><td>${done} %</td><td>${score == null ? 'Sin evaluación de selección' : `${score} %`}</td><td>${practice}</td><td>${email ? `<a href="mailto:${esc(email)}">Contactar estudiante</a>` : ''}<details><summary>Ver evidencia</summary><p>${esc(modules)} Evolución: ${esc(trend)}.</p></details></td></tr>`;
+  const modules = group.map(record => record.unstarted ? 'Matriculado sin registro de actividad.' : `Módulo ${record.position}: ${stations(record)} de 5. ${logro(record) == null ? 'Sin evaluación de selección.' : `Logro ${logro(record)} %.`} ${practica(record)} prácticas.`).join(' ');
+  const evidence=group.filter(record=>!record.unstarted).map(record=>{
+    const saved=record.state||{};const review=saved.exam?.review;
+    return `<section><h3>Módulo ${esc(record.position)}</h3>${practiceEntries(record).map(entry=>`<p><b>${esc(entry.kind)} · ${esc(entry.paso||entry.id)}</b></p><p>${esc(entry.text)}</p>`).join('')}${review?`<p>Desarrollo revisado: ${esc(review.score??'Sin puntaje')} / 25</p><p>${esc(review.feedback||'')}</p>`:'<p>Sin revisión docente de desarrollo registrada.</p>'}${saved.reflection?`<p>Reflexión: ${esc(saved.reflection)}</p>`:''}</section>`;
+  }).join('');
+  return `<tr data-person-key="${esc(personKey(group[0]))}"><td>${esc(group[0].name)}${distinguish?`<br><small>Identidad: ${esc(personKey(group[0]))}</small>`:''}</td><td>${signalMark(item)}<br><span class="pd-note">${item.reasons.map(esc).join(' ')}</span></td><td>${done} %</td><td>${score == null ? 'Sin evaluación de selección' : `${score} %`}</td><td>${practice}</td><td>${email ? `<a href="mailto:${esc(email)}">Contactar estudiante</a>` : ''}<details><summary>Ver evidencia</summary><p>${esc(modules)} Evolución: ${esc(trend)}.</p>${evidence}</details></td></tr>`;
 }
 function peopleTable(people) {
   if (!people.length) return '<p class="pd-interp">Ningún estudiante de esta vista cae en este grupo.</p>';
-  return `<div class="pd-table-wrap pd-scroll"><table><thead><tr><th>Estudiante</th><th>Señal y por qué</th><th>Cumplimiento</th><th>Logro de selección</th><th>Prácticas</th><th>Acompañamiento</th></tr></thead><tbody>${people.map(personRow).join('')}</tbody></table></div>`;
+  return `<div class="pd-table-wrap pd-scroll"><table><thead><tr><th>Estudiante</th><th>Señal y por qué</th><th>Cumplimiento</th><th>Logro de selección</th><th>Prácticas</th><th>Acompañamiento</th></tr></thead><tbody>${people.map(group=>personRow(group,group[0].user_id!=null)).join('')}</tbody></table></div>`;
 }
 function modulesIn(from, to) {
   return scopedModules().filter(module => {
@@ -483,9 +499,9 @@ function modulePlan(module, solo) {
   const rows = moduleRows(module);
   const hechos = rows.reduce((sum, record) => sum + practica(record), 0);
   const previstos = Number(module.encargos_count || 0);
-  const photo = PHOTOS[module.position];
+  const photo = modulePhoto(module);
   const oa = (module.oa || []).slice(0, 4).map(item => `<li>${esc(item)}</li>`).join('') || '<li>Este módulo no trae objetivos de aprendizaje en el contenido.</li>';
-  const image = photo ? `<img class="pd-photo" src="${photo[0]}" alt="${esc(photo[1])}">` : '<p class="pd-note">Este módulo no tiene una fotografía de la puesta en marcha.</p>';
+  const image = photo ? `<img class="pd-photo" src="${photo[0]}" alt="${esc(photo[1])}">` : '';
   const planLead = rows.length
     ? `${rows.length} registro${rows.length === 1 ? '' : 's'} ya ejecutan este módulo.`
     : 'Este módulo todavía no tiene registros en esta vista.';
@@ -779,14 +795,14 @@ function reportsEvidence() {
     ['Pregunta', '¿Cuánto del recorrido de cinco estaciones está registrado?'],
     ['Fórmula', kpi.formula || 'estaciones_completadas / 5 × 100'],
     ['Periodo', state.cohort ? '12 semanas de prácticas comparables en la cohorte de demostración.' : (kpi.periodo || 'Estado actual')],
-    ['Población', 'Módulos 1 a 5 de esta vista.']
+    ['Población', `${scopedModules().length} módulos del curso seleccionado; registros de progreso.`]
   ];
   return frame([
     quad(1, 'cielo', 'Orientación', 'Para qué sirve este reporte', orient('Este reporte deja escrito qué se mide y qué se puede comunicar.', '<p>Los gráficos de tendencia están en el Panel general.</p>')),
     quad(2, 'rosa', 'Atención', 'Lectura que se puede comunicar', spotlight(avg == null ? 'No hay registros para leer el curso.' : `El recorrido medio es ${avg} % y el del medio es ${mid} %.`, avg == null ? [] : [['Promedio', `${avg} %`], ['Mediana', `${mid} %`], ['Mayor apoyo', `${counts.support} estudiantes`], ['Módulo más bajo', low ? `Módulo ${low.module.position}, ${Math.round(low.value)} %` : '—']], '<p>Esto cuenta estaciones hechas, no el nivel de logro.</p>'), { lead: true }),
     quad(3, 'menta', 'Definición', 'El indicador, con su fórmula', spotlight('La fórmula cuenta estaciones completadas entre cinco.', [], `<div class="pd-table-wrap"><table><thead><tr><th>Campo</th><th>Definición</th></tr></thead><tbody>${fields.map(([key, value]) => `<tr><td>${esc(key)}</td><td>${esc(value)}</td></tr>`).join('')}</tbody></table></div>`)),
-    quad(4, 'ambar', 'Pantalla', 'Qué muestra esta vista', spotlight('Los nombres de esta pantalla son una cohorte de demostración.', [['Estudiantes', '200'], ['Para qué', 'Leer medias, dispersión y señales'], ['Registro real', 'No. El campus está en el CSV']])),
-    quad(5, 'lila', 'Archivo', 'Qué descarga el CSV', spotlight('El CSV trae los registros reales del campus, no los 200 de demostración.', [['Gráficos', 'No se repiten en el archivo']], '<p><a href="/api/teacher/export.csv">Descargar CSV del cumplimiento del campus</a></p>')),
+    quad(4, 'ambar', 'Pantalla', 'Qué muestra esta vista', spotlight(state.cohort?'Cohorte ficticia; no representa estudiantes reales.':'Registros de los cursos autorizados para esta sesión.', [['Estudiantes', String(reportPeople(reportRecords()).length)], ['Origen', state.cohort?'Demostración':'Campus autorizado']])),
+    quad(5, 'lila', 'Archivo', 'Qué descarga el CSV', spotlight(state.cohort?'La demostración no permite descargar datos escolares.':'El archivo incluye registros de progreso del curso y módulo seleccionados.', [['Población', 'Registros de progreso; no toda la matrícula']], '<p><a href="/api/teacher/export.csv">Descargar avance del curso (CSV)</a></p>')),
     quad(6, 'celeste', 'Decisión', 'Dónde está el resto de la evidencia', spotlight('La tendencia, el listado y el plan están en otras pestañas.', [['Tendencia y logro', 'Panel general'], ['Por estudiante', 'Estudiantes'], ['Plan', 'Cursos']], `<p><a href="${href('/portal-docente')}">Abrir el panel</a> · <a href="${href('/portal-docente/estudiantes')}">Ver estudiantes</a> · <a href="${href('/portal-docente/cursos')}">Ver la planificación</a></p>`))
   ].join(''));
 }
@@ -802,10 +818,17 @@ function reportRecords() {
 function reportPeople(records) {
   const groups = new Map();
   records.forEach(record => {
-    const key = record.name || 'Sin nombre';
+    const key = record.user_id ?? record.email ?? record.name ?? 'Sin identidad';
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(record);
   });
+  if (!state.cohort) {
+    const course = fiveCourse();
+    const enrolled = new Set((state.teacher?.enrollments || []).filter(item => String(item.course_id) === String(course?.id)).map(item => item.user_id));
+    (state.teacher?.users || []).filter(user => enrolled.has(user.id)).forEach(user => {
+      if (!groups.has(user.id)) groups.set(user.id, [{user_id:user.id,name:user.name,state:{},percent:0,completed:[false,false,false,false,false],unstarted:true}]);
+    });
+  }
   return [...groups.values()].sort((a, b) => String(a[0].name).localeCompare(String(b[0].name), 'es'));
 }
 function reportPanel(title, content, className = '') {
@@ -851,7 +874,7 @@ function teacherFilters(moduleId, selectedModule, period) {
   const lucide = content => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${content}</svg>`;
   const calendar = lucide('<path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M8 13h.01"/><path d="M12 13h.01"/><path d="M16 13h.01"/><path d="M8 17h.01"/><path d="M12 17h.01"/><path d="M16 17h.01"/>');
   const layers = lucide('<path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/>');
-  return `<div class="pd-report-filters pd-filter-band"><label><span class="pd-filter-label">Curso</span><span class="pd-filter-control"><span class="pd-filter-icon is-course" aria-hidden="true">${svg('cursos')}</span><span class="pd-filter-current">${esc(courseTitle())}</span></span></label><label><span class="pd-filter-label">Período</span><span class="pd-filter-control"><span class="pd-filter-icon is-period" aria-hidden="true">${calendar}</span><span class="pd-filter-current">${esc(period)}</span></span></label><label><span class="pd-filter-label">Módulo</span><span class="pd-filter-control"><span class="pd-filter-icon is-module" aria-hidden="true">${layers}</span><select id="${esc(moduleId)}"><option value="">Todos los módulos</option>${scopedModules().map(module => `<option value="${module.id}" ${String(module.id) === selectedModule ? 'selected' : ''}>M${module.position} · ${esc(module.title)}</option>`).join('')}</select></span></label></div>`;
+  return `<div class="pd-report-filters pd-filter-band"><label><span class="pd-filter-label">Curso</span><span class="pd-filter-control"><span class="pd-filter-icon is-course" aria-hidden="true">${svg('cursos')}</span><select id="pd-course">${state.courses.map(course=>`<option value="${esc(course.id)}" ${course.id===fiveCourse()?.id?'selected':''}>${esc(course.title)}</option>`).join('')}</select></span></label><label><span class="pd-filter-label">Período</span><span class="pd-filter-control"><span class="pd-filter-icon is-period" aria-hidden="true">${calendar}</span><span class="pd-filter-current">${esc(period)}</span></span></label><label><span class="pd-filter-label">Módulo</span><span class="pd-filter-control"><span class="pd-filter-icon is-module" aria-hidden="true">${layers}</span><select id="${esc(moduleId)}"><option value="">Todos los módulos</option>${scopedModules().map(module => `<option value="${module.id}" ${String(module.id) === selectedModule ? 'selected' : ''}>M${module.position} · ${esc(module.title)}</option>`).join('')}</select></span></label></div>`;
 }
 function reports() {
   const records = reportRecords();
@@ -868,7 +891,8 @@ function reports() {
     return { label: `M${module.position} · ${module.title}`, value: list.length ? mean(list.map(cumplimientoPct)) : null };
   });
   const stationNames = ['Contextualización', 'Aprendizajes esperados', 'Situación integradora', 'Evaluación', 'Retroalimentación y cierre'];
-  const stationBars = stationNames.map((name, index) => ({ label: `${index + 1}. ${name}`, value: records.length ? records.filter(record => stations(record) > index).length / records.length * 100 : null }));
+  const knownStations=records.filter(record=>stationStates(record));
+  const stationBars = stationNames.map((name, index) => ({ label: `${index + 1}. ${name}`, value: knownStations.length ? knownStations.filter(record => stationStates(record)[index]).length / knownStations.length * 100 : null }));
   const availableBars = (list, title) => list.some(item => item.value != null) ? bars(list.filter(item => item.value != null), { title }) : '<p class="pd-report-empty">Sin registros suficientes para mostrar este gráfico.</p>';
   const byModules = reportPanel('Progreso por módulos', availableBars(moduleBars, 'Cumplimiento medio del recorrido'));
   const byStations = reportPanel('Resultados por estaciones', availableBars(stationBars, 'Registros que completaron cada estación') + '<p class="pd-note">Estimación según el recorrido registrado de cinco estaciones; no representa actividades individuales.</p>');
@@ -877,15 +901,15 @@ function reports() {
   const trend = reportPanel('Evolución del desempeño de selección', lineChart(weeklyPoints(records), 'Desempeño por semana') + '<p class="pd-note">Serie de resultados comparables; no es tiempo de uso ni evolución del cumplimiento.</p>');
   const exams = reportPanel('Evaluaciones registradas', `<div class="pd-report-exam-total"><strong>${scores.length}</strong><span>registros con evaluación de selección</span></div><p>Logro medio: <b>${scores.length ? pct(mean(scores)) : 'Sin evaluaciones'}</b></p><p class="pd-note">No hay datos suficientes para clasificar evaluaciones por tipo formativo, sumativo o proyecto.</p>`);
   const studentsPanel = reportPanel('Listado de estudiantes', `<div id="pd-report-student-list">${reportStudentTable(people)}</div>`, 'pd-report-students');
-  const actions = reportPanel('Acciones rápidas', `<div class="pd-report-actions"><button id="pd-report-print" type="button">Imprimir reporte / guardar PDF →</button><a href="/api/teacher/export.csv">Descargar datos reales del campus (CSV) →</a><a href="${href('/portal-docente/estudiantes')}">Revisar evidencia individual →</a><a href="${href('/portal-docente/cumplimiento')}">Ver cumplimiento →</a></div><p class="pd-note">El CSV original no incluye la cohorte de demostración ni los filtros de esta vista.</p>`);
+  const actions = reportPanel('Acciones rápidas', `<div class="pd-report-actions"><button id="pd-report-print" type="button">Imprimir reporte / guardar PDF →</button><a href="/api/teacher/export.csv">Descargar avance del curso y módulo (CSV) →</a><a href="${href('/portal-docente/estudiantes')}">Revisar evidencia individual →</a><a href="${href('/portal-docente/cumplimiento')}">Ver cumplimiento →</a></div><p class="pd-note">El CSV respeta permisos, curso y módulo. Incluye registros de progreso, no toda la matrícula ni filtros de nombre o señal; no contiene la cohorte de demostración.</p>`);
   const views = {
-    general: byModules + byLearning + byStations + trend + distribution + exams + studentsPanel + actions,
+    general: reportPanel('Alcance del informe', `<dl class="pd-facts"><div><dt>Curso</dt><dd>${esc(courseTitle())}</dd></div><div><dt>Módulos</dt><dd>${modules.length}</dd></div><div><dt>Estudiantes</dt><dd>${people.length}</dd></div><div><dt>Registros de módulo</dt><dd>${records.length}</dd></div><div><dt>Origen</dt><dd>${state.cohort?'Demostración ficticia':'Datos del campus autorizado'}</dd></div></dl><p>Elige el tipo de informe. Cada salida conserva el alcance del curso y módulo seleccionados. La matrícula sin actividad se muestra en el listado; el CSV de avance contiene únicamente registros de progreso.</p>`) + actions,
     modules: byModules + exams + actions,
     stations: byStations + distribution + actions,
     learning: byLearning + reportPanel('OA y criterios del módulo', `<p>La evidencia de actividades y el logro de selección no permiten calcular por sí solos un porcentaje de OA logrados.</p><a href="${href('/portal-docente/oa-ae')}">Abrir la referencia curricular y sus criterios →</a>`) + actions,
     students: studentsPanel + distribution + actions,
     exams: exams + trend + actions,
-    compare: trend + byModules + reportPanel('Comparación entre períodos', '<p class="pd-report-empty">No hay cortes históricos del cumplimiento para comparar períodos. La serie semanal disponible corresponde a resultados de selección.</p>') + actions
+    compare: reportPanel('Cortes históricos del curso',snapshotReport()) + trend + byModules + reportPanel('Comparación entre períodos', '<p class="pd-note">No hay cortes históricos anteriores al registro de esta función. La serie semanal disponible corresponde a resultados de selección; no se convierte en una evolución de recorrido.</p>') + actions
   };
   return `<div class="pd-report"><header class="pd-report-heading"><div><h1>Reportes</h1><p>Genera, visualiza y descarga reportes del aprendizaje de tus estudiantes.</p></div>${teacherFilters('pd-report-module',reportView.module,state.cohort ? '12 semanas · Demostración' : 'Estado actual')}</header>${state.cohort ? '<p class="pd-report-demo" role="note">Cohorte de demostración: los indicadores y estudiantes de esta pantalla son ficticios. El CSV conserva los registros reales del campus.</p>' : ''}<section class="pd-report-metrics" aria-label="Indicadores del reporte">${reportMetric('Estudiantes', people.length, 'En el alcance seleccionado', 'mint')}${reportMetric('Cumplimiento medio', values.length ? pct(mean(values)) : '—', 'Recorrido de cinco estaciones', 'violet')}${reportMetric('Logro de selección', scores.length ? pct(mean(scores)) : '—', `${scores.length} registros evaluados`, 'orange')}${reportMetric('Evidencia de AE', totalAe ? pct(coveredAe / totalAe * 100) : '—', 'Cobertura, no logro curricular', 'blue')}</section><nav class="pd-report-tabs" aria-label="Vistas de reportes">${REPORT_TABS.map(([id, label]) => `<button type="button" data-report-tab="${id}" aria-pressed="${reportView.tab === id}">${esc(label)}</button>`).join('')}</nav><div class="pd-report-grid" id="pd-report-results">${views[reportView.tab]}</div><details class="pd-report-method"><summary>Definiciones, alcance y reporte original</summary>${reportsEvidence()}</details></div>`;
 }
@@ -894,8 +918,14 @@ function bindReports() {
   document.querySelectorAll('[data-report-tab]').forEach(button => {
     button.onclick = () => { reportView.tab = button.dataset.reportTab; draw(); };
   });
-  document.getElementById('pd-report-module').onchange = event => { reportView.module = event.target.value; reportView.page = 0; draw(); };
+  document.getElementById('pd-report-module').onchange = event => { reportView.module = event.target.value; state.moduleId=event.target.value; reportView.page = 0; draw(); };
   const print = document.getElementById('pd-report-print');
+  const snapshot=document.getElementById('pd-save-snapshot');
+  if(snapshot)snapshot.onclick=async()=>{
+    snapshot.disabled=true;
+    try{await post('/api/teacher/snapshots',{course_id:fiveCourse().id});state.teacher=await api('/api/teacher');draw();}
+    catch(error){document.getElementById('pd-snapshot-message').textContent=error.message;}
+  };
   if (print) print.onclick = () => window.print();
   const refreshList = () => {
     document.getElementById('pd-report-student-list').innerHTML = reportStudentTable(reportPeople(reportRecords()));
@@ -915,6 +945,11 @@ function bindReports() {
     document.getElementById('pd-report-next').onclick = () => { reportView.page += 1; refreshList(); };
   };
   bindList();
+}
+function snapshotReport() {
+  if(reportView.module)return '<p>Los cortes históricos corresponden al curso completo. Selecciona todos los módulos para consultarlos.</p>';
+  const rows=(state.teacher?.snapshots||[]).filter(item=>String(item.course_id)===String(fiveCourse()?.id));
+  return `<button type="button" id="pd-save-snapshot" ${state.cohort||!fiveCourse()?'disabled':''}>Registrar corte del curso</button><p id="pd-snapshot-message" role="status"></p><p class="pd-note">Cortes agregados e inmutables registrados desde esta fecha; sin expedientes individuales. Cambios de matrícula, módulos o definición impiden interpretar diferencias como mejora de aprendizaje.</p>${rows.length?`<div class="pd-table-wrap"><table><thead><tr><th>Fecha</th><th>Matrícula</th><th>Registros</th><th>Módulos con registro</th><th>Recorrido medio</th><th>Definición</th></tr></thead><tbody>${rows.map(item=>`<tr><td>${esc(item.created)}</td><td>${esc(item.payload.population)}</td><td>${esc(item.payload.records)}</td><td>${esc(item.payload.modules.join(', '))}</td><td>${item.payload.mean_progress==null?'Sin registros':pct(item.payload.mean_progress)}</td><td>${esc(item.payload.definition)}</td></tr>`).join('')}</tbody></table></div>`:'<p>No hay cortes históricos registrados.</p>'}`;
 }
 function sealRows() {
   return ((state.teacher && state.teacher.specialist_reviews) || []).filter(row => row.verdict === 'Sello del docente de la especialidad');
@@ -938,6 +973,7 @@ function sealForm() {
 function bindSeal() {
   const form = document.getElementById('pd-seal');
   if (!form) return;
+  if(state.cohort){form.querySelectorAll('input,select,textarea,button').forEach(control=>{control.disabled=true;});return;}
   const courseSelect = form.querySelector('[name="course_id"]');
   if (courseSelect) courseSelect.onchange = () => { state.sealCourse = Number(courseSelect.value); draw(); };
   form.onsubmit = async event => {
@@ -969,7 +1005,39 @@ function draw() {
   nav();
   const body = window.PortalLayout?.render(tab.id) || { resumen: panel, cursos, estudiantes: students, 'oa-ae': learning, cumplimiento: compliance, reportes: reports }[tab.id]();
   document.getElementById('pd-main').innerHTML = body;
-  document.querySelectorAll('a[href="/api/teacher/export.csv"]').forEach(link => { link.href = portalURL('/api/teacher/export.csv'); });
+  if(state.preview)document.getElementById('pd-main').insertAdjacentHTML('afterbegin','<p class="pd-report-demo" role="status">Entorno local de pruebas. Las cuentas y matrículas son ficticias; el catálogo procede de los contenidos existentes.</p>');
+  if(!state.cohort && !state.courses.length) document.getElementById('pd-main').insertAdjacentHTML('afterbegin','<p class="pd-report-demo" role="status">No tienes cursos asignados. Solicita al administrador del establecimiento que registre tu asignación; no se muestran datos de otros cursos.</p>');
+  document.getElementById('pd-main').insertAdjacentHTML('afterbegin', state.cohort
+    ? '<details class="pd-report-method"><summary>Acceso docente con datos reales</summary><form id="pd-login"><label>Usuario<input name="username" autocomplete="username" required></label><label>Contraseña<input name="password" type="password" autocomplete="current-password" required></label><button type="submit">Iniciar sesión</button><p id="pd-login-error" role="alert"></p></form></details>'
+    : '<p class="pd-note">Sesión docente · Datos del campus <button type="button" id="pd-logout">Cerrar sesión</button></p>');
+  const login=document.getElementById('pd-login');
+  if(login) login.onsubmit=async event=>{
+    event.preventDefault();
+    const button=login.querySelector('button');button.disabled=true;
+    try {
+      const result=await post('/api/login',Object.fromEntries(new FormData(login)));
+      if(result.user?.role!=='teacher') throw new Error('Se requiere una cuenta docente.');
+      await boot();
+    } catch(error) { document.getElementById('pd-login-error').textContent=error.message;button.disabled=false; }
+  };
+  const logout=document.getElementById('pd-logout');
+  if(logout) logout.onclick=async()=>{await post('/api/logout',{});state.teacher=null;await boot();};
+  document.querySelectorAll('a[href="/api/teacher/export.csv"]').forEach(link => {
+    const filters=new URLSearchParams();
+    if(fiveCourse()?.id!=null)filters.set('course',String(fiveCourse().id));
+    const moduleSelect=document.getElementById('pd-layout-module') || document.getElementById('pd-report-module');
+    if(moduleSelect?.value)filters.set('module',moduleSelect.value);
+    link.href=portalURL('/api/teacher/export.csv')+(filters.size?'?'+filters.toString():'');
+  });
+  if (state.cohort) document.querySelectorAll('a[href*="teacher/export.csv"]').forEach(link => {
+    link.removeAttribute('href');link.removeAttribute('download');link.setAttribute('aria-disabled','true');link.textContent='Exportación real: requiere iniciar sesión';
+  });
+  const demoNote=document.querySelector('.pd-report-demo[role="note"]');
+  if(state.cohort && demoNote) demoNote.textContent='Cohorte de demostración: indicadores y estudiantes ficticios. Las exportaciones de datos escolares requieren una sesión docente autorizada.';
+  const courseSelect=document.getElementById('pd-course');
+  if(courseSelect) courseSelect.onchange=event=>{
+    const url=new URL(location.href);url.search='';url.searchParams.set('course',event.target.value);location.assign(url.href);
+  };
   document.title = `${tab.label} · Portal Docente`;
   bindSeal();
   bindReports();
@@ -1014,20 +1082,16 @@ async function requestJSON(url, options) {
 }
 async function boot() {
   nav();
-  const cached = readCourses();
-  if (cached) {
-    state.courses = cached;
-    state.teacher = state.teacher || { records: [] };
-    applyCohort();
-    draw();
-  }
   const entered = await api('/api/portal-docente/enter');
   state.user = entered.user;
+  state.preview = entered.environment === 'preview';
+  state.cohort = entered.mode === 'demo';
   state.csrf = entered.csrf || '';
   const name = (entered.user && entered.user.name) || 'Docente';
   document.getElementById('pd-name').textContent = name;
   document.getElementById('pd-avatar').textContent = name.slice(0, 1).toUpperCase();
-  const [courses, teacher] = await Promise.all([api('/api/courses'), api('/api/teacher')]);
+  const catalogUrl='/api/portal-docente/catalog'+(state.courseId?'?course='+encodeURIComponent(state.courseId):'');
+  const [courses, teacher] = await Promise.all([api(state.cohort ? catalogUrl : '/api/courses'), state.cohort ? Promise.resolve({records:[]}) : api('/api/teacher')]);
   state.courses = courses;
   saveCourses(state.courses);
   state.teacher = teacher;
@@ -1044,7 +1108,7 @@ function saveCourses(courses) {
 }
 function applyCohort() {
   if (!state.teacher) state.teacher = { records: [] };
-  if (window.AulaCohort && fiveModules().length) {
+  if (state.cohort && window.AulaCohort && fiveModules().length) {
     state.teacher.records = window.AulaCohort.build(fiveModules());
     state.cohort = true;
   }

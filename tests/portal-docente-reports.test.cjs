@@ -77,7 +77,7 @@ test('reference filter band keeps informative fields and original module options
   assert.match(html, /<select id="pd-report-module">/);
   assert.match(html, /value="2" selected/);
   assert.match(html, /value="1" >M1 · Planos/);
-  assert.equal((html.match(/<select/g) || []).length, 1);
+  assert.equal((html.match(/<select/g) || []).length, 2);
   assert.equal(vm.runInContext('JSON.stringify(state.courses)', context), before);
 });
 

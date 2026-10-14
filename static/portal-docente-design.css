@@ -97,6 +97,12 @@ tbody tr:hover { background: #eaf4f6; }
 .pd-action-card { min-height: 132px; border-radius: 6px; }
 .pd-dot-field { border-radius: 4px; background: #fff; }
 .pd-seal :is(select,textarea) { border-radius: 6px; border-color: #bdcfd7; background: #fff; }
+[data-teacher-document] fieldset { border:0; padding:0; margin:16px 0; display:grid; grid-template-columns:minmax(0,1fr); gap:14px; min-width:0; }
+[data-teacher-document] label { display:grid; gap:6px; font-weight:600; font-size:14px; min-width:0; }
+[data-teacher-document] :is(textarea,input,select) { width:100%; min-width:0; box-sizing:border-box; border:1px solid #bdcfd7; border-radius:6px; padding:10px; background:#fff; color:#123e55; font:inherit; }
+[data-teacher-document] textarea { resize:vertical; }
+[data-teacher-document] button { justify-self:start; padding:10px 16px; }
+[data-teacher-document] :disabled { opacity:.65; }
 .pd-seal button { border-radius: 6px; min-height: 44px; background: #007c6d; }
 @media (max-width:1100px) {
   .pd-side { width: 218px; flex-basis: 218px; }

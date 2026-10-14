@@ -1,6 +1,6 @@
 from pathlib import Path
-import csv, io, json, os, secrets, sqlite3
-from functools import wraps
+import csv, io, json, os, secrets, sqlite3, hashlib
+from functools import wraps, lru_cache
 from flask import Flask, request, session, jsonify, send_from_directory, Response
 from werkzeug.security import generate_password_hash, check_password_hash
 from content import DEFAULT_CONTENT, STATIONS, STEPS
@@ -11,6 +11,70 @@ from level_audit import collect_oa, module_year
 from encargos import encargos_for
 
 ROOT=Path(__file__).resolve().parent
+
+def visual_resource_index(content):
+    from urllib.parse import urlsplit, parse_qs
+    found={}
+    types={'.png':'Imagen','.jpg':'Imagen','.jpeg':'Imagen','.webp':'Imagen','.avif':'Imagen','.gif':'Imagen','.svg':'Ilustración','.mp4':'Video','.webm':'Video','.glb':'Modelo 3D','.gltf':'Modelo 3D','.obj':'Modelo 3D','.stl':'Modelo 3D','.pdf':'Documento'}
+    def walk(value,path='',depth=0):
+        if depth>20:return
+        if isinstance(value,dict):
+            for key,item in value.items():
+                location=path+'.'+str(key) if path else str(key)
+                if isinstance(item,str) and str(key).lower() in ('src','url','image','photo','video','model','pdf','asset','file','illustration','path','poster','thumbnail'):
+                    try:parsed=urlsplit(item)
+                    except ValueError:continue
+                    kind=types.get(Path(parsed.path).suffix.lower())
+                    if parsed.hostname in ('youtube.com','www.youtube.com','youtu.be') and (parsed.path.startswith('/embed/') or (parsed.path=='/watch' and parse_qs(parsed.query).get('v')) or (parsed.hostname=='youtu.be' and len(parsed.path)>1)):kind='Video externo'
+                    safe=not any(ch.isspace() for ch in item) and not parsed.username and not parsed.password
+                    if kind and safe and (item.startswith('/static/') or (parsed.scheme=='https' and parsed.hostname)):
+                        found.setdefault(item,{'url':item,'type':kind,'locations':[]})['locations'].append(location)
+                walk(item,location,depth+1)
+        elif isinstance(value,list):
+            for index,item in enumerate(value):walk(item,path+'.'+str(index),depth+1)
+    walk(content)
+    return list(found.values())
+
+def curriculum_references(content):
+    fields=('ae_code','criterion','activity','practiced_in','exam_item','page','pdf','source_status')
+    entries=content.get('traceability') or []
+    if not isinstance(entries,list):entries=[]
+    return [{key:item.get(key) for key in fields if key in item} for item in entries if isinstance(item,dict)]
+
+@lru_cache(maxsize=1)
+def documentary_index(path,modified):
+    try:
+        report=json.loads(Path(path).read_text(encoding='utf-8'))
+        return {(item['course'],item['module']):item for item in report['modules']}
+    except (OSError,ValueError,KeyError,TypeError):return {}
+
+@lru_cache(maxsize=64)
+def documentary_file_hash(path,modified):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+@lru_cache(maxsize=1)
+def documentary_table_index(path,modified):
+    try:
+        report=json.loads(Path(path).read_text(encoding='utf-8'))
+        index={}
+        for item in report['cases']:index.setdefault((item['course'],item['module']),[]).append(item)
+        return index
+    except (OSError,ValueError,KeyError,TypeError):return {}
+
+def documentary_metadata(raw,course,title):
+    path=ROOT/'reports'/'auditoria-implementacion-20261013'/'cotejo-pdf.json'
+    if not path.is_file():return None
+    item=documentary_index(str(path),path.stat().st_mtime_ns).get((course,title))
+    if not item or item.get('content_sha256')!=hashlib.sha256(raw.encode('utf-8')).hexdigest():return None
+    source=(ROOT/str(item.get('pdf') or '')).resolve()
+    if not source.is_relative_to(ROOT.resolve()) or not source.is_file():return None
+    if documentary_file_hash(str(source),source.stat().st_mtime_ns)!=item.get('sha256'):return None
+    table_path=path.parent/'revision-tablas-pdf.json'
+    references=documentary_table_index(str(table_path),table_path.stat().st_mtime_ns).get((course,title),[]) if table_path.is_file() else []
+    return {'source':item['pdf'],'source_sha256':item['sha256'],
+            'checks':[{key:check.get(key) for key in ('type','ae','text','status','pdf_pages')} for check in item['comparisons']],
+            'references':references,
+            'limit':'Coincidencia textual en fuente local cotejada; no certificación curricular ni pedagógica.'}
 
 def ensure_module_catalog_table(con):
     con.execute('''CREATE TABLE IF NOT EXISTS module_catalog(
@@ -110,6 +174,10 @@ def create_app(test_config=None):
         CREATE TABLE IF NOT EXISTS progress(user_id INTEGER REFERENCES users(id),module_id INTEGER REFERENCES modules(id),state TEXT NOT NULL,updated TEXT DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(user_id,module_id));
         CREATE TABLE IF NOT EXISTS content_incidents(id INTEGER PRIMARY KEY,user_id INTEGER REFERENCES users(id),module_id INTEGER REFERENCES modules(id),station INTEGER,claim TEXT NOT NULL,note TEXT NOT NULL,created TEXT DEFAULT CURRENT_TIMESTAMP);
         CREATE TABLE IF NOT EXISTS specialist_reviews(id INTEGER PRIMARY KEY,module_id INTEGER REFERENCES modules(id),teacher_id INTEGER REFERENCES users(id),verdict TEXT NOT NULL,note TEXT NOT NULL,created TEXT DEFAULT CURRENT_TIMESTAMP);
+        CREATE TABLE IF NOT EXISTS teacher_plans(id INTEGER PRIMARY KEY,teacher_id INTEGER REFERENCES users(id),module_id INTEGER REFERENCES modules(id),version INTEGER NOT NULL,payload TEXT NOT NULL,created TEXT DEFAULT CURRENT_TIMESTAMP,UNIQUE(teacher_id,module_id,version));
+        CREATE TABLE IF NOT EXISTS teacher_supports(id INTEGER PRIMARY KEY,teacher_id INTEGER REFERENCES users(id),user_id INTEGER REFERENCES users(id),module_id INTEGER REFERENCES modules(id),payload TEXT NOT NULL,created TEXT DEFAULT CURRENT_TIMESTAMP);
+        CREATE TABLE IF NOT EXISTS teacher_courses(teacher_id INTEGER REFERENCES users(id),course_id INTEGER REFERENCES courses(id),PRIMARY KEY(teacher_id,course_id));
+        CREATE TABLE IF NOT EXISTS teacher_snapshots(id INTEGER PRIMARY KEY,teacher_id INTEGER REFERENCES users(id),course_id INTEGER REFERENCES courses(id),payload TEXT NOT NULL,created TEXT DEFAULT CURRENT_TIMESTAMP);
         ''')
         if not con.execute('SELECT 1 FROM users').fetchone():
             for u,n,p,r in [('estudiante','Estudiante Demo','AulaTP2026!','student'),('docente','Docente Demo','DocenteTP2026!','teacher')]:
@@ -119,15 +187,15 @@ def create_app(test_config=None):
                 payload = DEFAULT_CONTENT if n == 1 else EXTENDED_MODULES[n]
                 con.execute('INSERT INTO modules VALUES(?,?,?,?,?,?)',(n,1,MODULE_TITLES[n],n,1,json.dumps(payload,ensure_ascii=False)))
             con.execute('INSERT INTO enrollments VALUES(1,1)')
+            con.execute('INSERT INTO teacher_courses VALUES(2,1)')
         upgrade_catalog(con)
     def fail(message,status=400):return jsonify(error=message),status
     def body():return request.get_json(silent=True) or {}
     def user():
         with db() as con:return con.execute('SELECT id,username,name,role FROM users WHERE id=?',(session.get('uid'),)).fetchone()
     def portal_teacher():
-        tid=session.get('teacher_uid')
-        if not tid:return None
-        with db() as con:return con.execute("SELECT id,username,name,role FROM users WHERE id=? AND role='teacher'",(tid,)).fetchone()
+        u=user()
+        return u if u and u['role']=='teacher' else None
     def actor():
         # El portal docente no comparte la sesión del campus de cursos.
         if request.headers.get('X-Aula-Portal')=='docente' or request.path.startswith('/api/teacher'):
@@ -137,6 +205,15 @@ def create_app(test_config=None):
     def subject_id():
         u=actor()
         return u['id'] if u else session.get('uid')
+    def teacher_course_ids():
+        u=actor()
+        if not u or u['role']!='teacher':return set()
+        with db() as con:
+            return {row[0] for row in con.execute('SELECT course_id FROM teacher_courses WHERE teacher_id=?',(u['id'],))}
+    def teacher_module_allowed(mid):
+        with db() as con:
+            row=con.execute('SELECT course_id FROM modules WHERE id=?',(mid,)).fetchone()
+        return bool(row and row[0] in teacher_course_ids())
     def require(role=None):
         def deco(fn):
             @wraps(fn)
@@ -144,12 +221,19 @@ def create_app(test_config=None):
                 u=actor()
                 if not u:return fail('Inicia sesión para continuar.',401)
                 if role and u['role']!=role:return fail('Esta acción requiere el rol '+('docente' if role=='teacher' else 'estudiante')+'.',403)
+                if role=='teacher' and 'mid' in kw and not teacher_module_allowed(kw['mid']):return fail('No tienes asignado este curso.',403)
+                if role=='teacher' and request.method not in ('GET','HEAD','OPTIONS'):
+                    b=body()
+                    if any(key in b and type(b[key])!=int for key in ('module_id','course_id')):return fail('Identificador de curso o módulo inválido.',400)
+                    if 'module_id' in b and not teacher_module_allowed(b['module_id']):return fail('No tienes asignado este curso.',403)
+                    if 'course_id' in b and b['course_id'] not in teacher_course_ids():return fail('No tienes asignado este curso.',403)
                 return fn(*a,**kw)
             return run
         return deco
     @app.before_request
     def csrf():
         if request.path.startswith('/api/') and request.method not in ('GET','HEAD','OPTIONS'):
+            if request.is_json and not isinstance(request.get_json(silent=True),dict):return fail('Envía un objeto de datos válido.',400)
             if not session.get('csrf') or not secrets.compare_digest(request.headers.get('X-CSRF-Token',''),session['csrf']):return fail('La sesión cambió. Recarga la página.',403)
     @app.after_request
     def headers(response):
@@ -183,6 +267,7 @@ def create_app(test_config=None):
         with db() as con:
             m=con.execute('SELECT * FROM modules WHERE id=?',(mid,)).fetchone();u=actor()
             if not m:return None,fail('Módulo inexistente.',404)
+            if u['role']=='teacher' and not teacher_module_allowed(mid):return None,fail('No tienes asignado este curso.',403)
             if u['role']=='student':
                 if not m['published']:return None,fail('El módulo está en preparación.',403)
                 if not con.execute('SELECT 1 FROM enrollments WHERE user_id=? AND course_id=?',(u['id'],m['course_id'])).fetchone():return None,fail('No tienes matrícula en este curso.',403)
@@ -229,11 +314,45 @@ def create_app(test_config=None):
         return jsonify(user=dict(u) if u else None,csrf=session['csrf'])
     @app.get('/api/portal-docente/enter')
     def portal_docente_enter():
-        with db() as con:u=con.execute("SELECT id,username,name,role FROM users WHERE role='teacher' ORDER BY id LIMIT 1").fetchone()
-        if not u:return fail('El portal docente no está disponible.',503)
-        session['teacher_uid']=u['id']
+        session.pop('teacher_uid',None)
+        u=user()
         session.setdefault('csrf',secrets.token_hex(24))
-        return jsonify(user=dict(u),csrf=session['csrf'],portal='docente')
+        if u and u['role']=='teacher':
+            return jsonify(user=dict(u),csrf=session['csrf'],portal='docente',mode='real',environment='preview' if os.environ.get('AULATP_PREVIEW')=='1' else 'production')
+        return jsonify(user={'name':'Demostración','role':'demo'},csrf=session['csrf'],portal='docente',mode='demo',environment='preview' if os.environ.get('AULATP_PREVIEW')=='1' else 'production')
+    @app.get('/api/portal-docente/catalog')
+    def portal_docente_catalog():
+        # Public curriculum metadata only; never include users or progress.
+        with db() as con:
+            courses=[]
+            ensure_module_catalog_table(con)
+            catalog_courses=con.execute('SELECT id,title FROM courses ORDER BY title').fetchall()
+            raw_id=request.args.get('course','')
+            selected_id=int(raw_id) if raw_id.isdigit() else None
+            if not any(course['id']==selected_id for course in catalog_courses):selected_id=catalog_courses[0]['id'] if catalog_courses else None
+            for course in catalog_courses:
+                item=dict(course);item['modules']=[]
+                if course['id']!=selected_id:
+                    courses.append(item)
+                    continue
+                for module in con.execute('SELECT id,title,position,content FROM modules WHERE course_id=? AND published=1 ORDER BY position,id',(course['id'],)):
+                    content=json.loads(module['content'] or '{}')
+                    source=content.get('official_source') or {}
+                    if not isinstance(source,dict):source={}
+                    catalog=con.execute('SELECT * FROM module_catalog WHERE module_id=?',(module['id'],)).fetchone()
+                    official=OFFICIAL.get(module['position'],{}) if course['title']=='Refrigeración y Climatización' else {}
+                    aes=json.loads(catalog['ae_json'] or '[]') if catalog else content.get('aes',[])
+                    oa=json.loads(catalog['oa_json'] or '[]') if catalog else public_oa(content.get('oa',[]))
+                    item['modules'].append({'id':module['id'],'title':module['title'],'position':module['position'],
+                        'aes':[public_ae(a) for a in aes],
+                        'oa':oa or public_oa(source.get('oa',[])) or public_oa(official.get('oa',[])),
+                        'official_hp':catalog['official_hp'] if catalog else source.get('official_hp',content.get('official_hp')), 'year':catalog['year'] if catalog else content.get('year'),
+                        'pdf':catalog['pdf'] if catalog else content.get('pdf'), 'resources':visual_resource_index(content),
+                        'curricular_references':curriculum_references(content),
+                        'source_url':(content.get('curriculum') or {}).get('url') if isinstance(content.get('curriculum'),dict) else None,
+                        'documentary':documentary_metadata(module['content'],course['title'],module['title'])})
+                courses.append(item)
+        return jsonify(courses)
     @app.post('/api/login')
     def login():
         b=body()
@@ -249,6 +368,7 @@ def create_app(test_config=None):
         with db() as con:
             ensure_module_catalog_table(con)
             u=actor();rows=con.execute('SELECT * FROM courses ORDER BY id').fetchall() if u['role']=='teacher' else con.execute('SELECT c.* FROM courses c JOIN enrollments e ON e.course_id=c.id WHERE e.user_id=? ORDER BY c.id',(u['id'],)).fetchall()
+            if u['role']=='teacher':rows=[row for row in rows if row['id'] in teacher_course_ids()]
             result=[]
             for c in rows:
                 item=dict(c);item['modules']=[]
@@ -281,10 +401,16 @@ def create_app(test_config=None):
                     if m['pdf']:
                         item.setdefault('pdf',m['pdf'])
                     if u['role']=='teacher':
+                        raw=con.execute('SELECT content FROM modules WHERE id=?',(m['id'],)).fetchone()
+                        raw_content=json.loads(raw['content'] or '{}')
+                        mod['resources']=visual_resource_index(raw_content)
+                        mod['curricular_references']=curriculum_references(raw_content)
+                        mod['source_url']=(raw_content.get('curriculum') or {}).get('url') if isinstance(raw_content.get('curriculum'),dict) else None
+                        mod['documentary']=documentary_metadata(raw['content'],item['title'],m['title'])
                         aes=json.loads(m['ae_json'] or '[]')
                         mod['aes']=[{'title':a.get('title') or '','code':a.get('code') or '','criteria':a.get('criteria') or []} for a in aes]
                         oa=json.loads(m['oa_json'] or '[]')
-                        if not oa and not m['scope']:
+                        if not oa and not m['scope'] and item['title']=='Refrigeración y Climatización':
                             oa=public_oa((OFFICIAL.get(m['position']) or {}).get('oa'))
                         mod['oa']=oa
                     source=bool(m['scope'] or m['official_hp'])
@@ -502,11 +628,11 @@ def create_app(test_config=None):
         with db() as con:
             users=[dict(r) for r in con.execute("SELECT id,username,name FROM users WHERE role='student'")]
             records=[]
-            for r in con.execute('SELECT p.*,u.name,m.title,m.course_id,m.position,c.title AS course_title,m.content AS module_content FROM progress p JOIN users u ON u.id=p.user_id JOIN modules m ON m.id=p.module_id JOIN courses c ON c.id=m.course_id'):
-                x=dict(r);module_content=json.loads(x.pop('module_content'));x['rubric']=module_content.get('rubric',DEFAULT_CONTENT['rubric']);x['state']=json.loads(x['state']);x['percent']=sum(completed(x['state'],module_content))*20;records.append(x)
+            for r in con.execute('SELECT p.*,u.name,m.title,m.course_id,m.position,c.title AS course_title,m.content AS module_content FROM progress p JOIN users u ON u.id=p.user_id JOIN modules m ON m.id=p.module_id JOIN courses c ON c.id=m.course_id JOIN enrollments e ON e.user_id=p.user_id AND e.course_id=m.course_id'):
+                x=dict(r);module_content=json.loads(x.pop('module_content'));x['rubric']=module_content.get('rubric',DEFAULT_CONTENT['rubric']);x['state']=json.loads(x['state']);x['completed']=completed(x['state'],module_content);x['percent']=sum(x['completed'])*20;records.append(x)
             enrollments=[dict(r) for r in con.execute('SELECT * FROM enrollments')]
             incidents=[dict(r) for r in con.execute(
-                'SELECT i.id,i.module_id,i.station,i.claim,i.note,i.created,u.name,m.title FROM content_incidents i JOIN users u ON u.id=i.user_id JOIN modules m ON m.id=i.module_id ORDER BY i.id DESC LIMIT 200'
+                'SELECT i.id,i.module_id,i.station,i.claim,i.note,i.created,u.name,m.title FROM content_incidents i JOIN users u ON u.id=i.user_id JOIN modules m ON m.id=i.module_id JOIN enrollments e ON e.user_id=i.user_id AND e.course_id=m.course_id ORDER BY i.id DESC LIMIT 200'
             )]
             reviews=[dict(r) for r in con.execute(
                 '''SELECT s.id,s.module_id,s.verdict,s.note,s.created,u.name,m.title,c.title AS course
@@ -537,7 +663,87 @@ def create_app(test_config=None):
                 'poblacion':'estudiantes con al menos un registro de progreso',
             }
         }
-        return jsonify(users=users,records=records,enrollments=enrollments,incidents=incidents,specialist_reviews=reviews,content_health=health,kpi=kpi)
+        allowed=teacher_course_ids()
+        with db() as con:
+            plans=[dict(row) for row in con.execute('SELECT * FROM teacher_plans WHERE teacher_id=? ORDER BY id DESC',(actor()['id'],))]
+            supports=[dict(row) for row in con.execute('SELECT * FROM teacher_supports WHERE teacher_id=? ORDER BY id DESC',(actor()['id'],))]
+            snapshots=[dict(row) for row in con.execute('SELECT * FROM teacher_snapshots WHERE teacher_id=? ORDER BY id DESC',(actor()['id'],))]
+        for row in plans+supports:row['payload']=json.loads(row['payload'])
+        with db() as con:
+            module_courses={row['id']:row['course_id'] for row in con.execute('SELECT id,course_id FROM modules') if row['course_id'] in allowed}
+            module_ids=set(module_courses)
+        enrollments=[row for row in enrollments if row['course_id'] in allowed]
+        enrolled_pairs={(row['user_id'],row['course_id']) for row in enrollments}
+        student_ids={row['user_id'] for row in enrollments}
+        users=[row for row in users if row['id'] in student_ids]
+        records=[row for row in records if row['course_id'] in allowed and row['user_id'] in student_ids]
+        incidents=[row for row in incidents if row['module_id'] in module_ids]
+        reviews=[row for row in reviews if row['module_id'] in module_ids]
+        health=[row for row in health if row['module_id'] in module_ids]
+        plans=[row for row in plans if row['module_id'] in module_ids]
+        supports=[row for row in supports if (row['user_id'],module_courses.get(row['module_id'])) in enrolled_pairs]
+        snapshots=[row for row in snapshots if row['course_id'] in allowed]
+        for row in snapshots:row['payload']=json.loads(row['payload'])
+        return jsonify(users=users,records=records,enrollments=enrollments,incidents=incidents,specialist_reviews=reviews,content_health=health,kpi=kpi,plans=plans,supports=supports,snapshots=snapshots)
+    @app.post('/api/teacher/snapshots')
+    @require('teacher')
+    def save_teacher_snapshot():
+        cid=body().get('course_id')
+        if type(cid)!=int or cid not in teacher_course_ids():return fail('Curso no asignado.',403)
+        data=teacher().get_json()
+        records=[row for row in data['records'] if row['course_id']==cid]
+        population={row['user_id'] for row in data['enrollments'] if row['course_id']==cid}
+        payload={'definition':'record-weighted-digital-progress-v1','population':len(population),'records':len(records),
+                 'mean_progress':sum(row['percent'] for row in records)/len(records) if records else None,
+                 'modules':sorted({row['module_id'] for row in records})}
+        with db() as con:
+            cursor=con.execute('INSERT INTO teacher_snapshots(teacher_id,course_id,payload) VALUES(?,?,?)',(actor()['id'],cid,json.dumps(payload)))
+        return jsonify(ok=True,id=cursor.lastrowid)
+    def teacher_document(fields):
+        from datetime import date
+        b=body();payload={}
+        for field in fields:
+            value=b.get(field,'')
+            if not isinstance(value,str) or len(value)>5000:return None,fail('Campo inválido: '+field,400)
+            payload[field]=value.strip()
+        for field in ('start_date','end_date','review_date'):
+            if payload.get(field):
+                try:date.fromisoformat(payload[field])
+                except ValueError:return None,fail('Fecha inválida.',400)
+        if payload.get('start_date') and payload.get('end_date') and payload['start_date']>payload['end_date']:
+            return None,fail('El término no puede preceder al inicio.',400)
+        return payload,None
+    @app.post('/api/teacher/plans')
+    @require('teacher')
+    def save_teacher_plan():
+        b=body();mid=b.get('module_id');expected=b.get('version')
+        if type(mid)!=int or type(expected)!=int or expected<0:return fail('Módulo y versión requeridos.',400)
+        payload,error=teacher_document(('objective','sequence','instrument','resources','adaptations','start_date','end_date','status'))
+        if error:return error
+        if not payload['sequence']:return fail('Indica la secuencia de enseñanza.',400)
+        if payload['status'] not in ('draft','planned','executed'):return fail('Estado de planificación inválido.',400)
+        with db() as con:
+            if not con.execute('SELECT 1 FROM modules WHERE id=?',(mid,)).fetchone():return fail('Módulo inexistente.',404)
+            con.execute('BEGIN IMMEDIATE')
+            current=con.execute('SELECT COALESCE(MAX(version),0) FROM teacher_plans WHERE teacher_id=? AND module_id=?',(actor()['id'],mid)).fetchone()[0]
+            if current!=expected:return fail('La planificación cambió. Recarga antes de guardar.',409)
+            cursor=con.execute('INSERT INTO teacher_plans(teacher_id,module_id,version,payload) VALUES(?,?,?,?)',(actor()['id'],mid,current+1,json.dumps(payload,ensure_ascii=False)))
+            return jsonify(ok=True,id=cursor.lastrowid,version=current+1)
+    @app.post('/api/teacher/supports')
+    @require('teacher')
+    def save_teacher_support():
+        b=body();mid=b.get('module_id');uid=b.get('user_id')
+        if type(mid)!=int or type(uid)!=int:return fail('Estudiante y módulo requeridos.',400)
+        payload,error=teacher_document(('criterion','evidence','action','feedback','review_date','status'))
+        if error:return error
+        if not payload['action'] or not payload['evidence']:return fail('Indica evidencia y acción de apoyo.',400)
+        if payload['status'] not in ('open','followup','closed'):return fail('Estado de apoyo inválido.',400)
+        if payload['status']=='closed' and not payload['feedback']:return fail('Documenta la retroalimentación o nueva evidencia para cerrar el apoyo.',400)
+        with db() as con:
+            enrolled=con.execute("SELECT 1 FROM enrollments e JOIN modules m ON m.course_id=e.course_id JOIN users u ON u.id=e.user_id WHERE e.user_id=? AND m.id=? AND u.role='student'",(uid,mid)).fetchone()
+            if not enrolled:return fail('El estudiante no está matriculado en este curso.',403)
+            cursor=con.execute('INSERT INTO teacher_supports(teacher_id,user_id,module_id,payload) VALUES(?,?,?,?)',(actor()['id'],uid,mid,json.dumps(payload,ensure_ascii=False)))
+            return jsonify(ok=True,id=cursor.lastrowid)
     @app.post('/api/teacher/users')
     @require('teacher')
     def adduser():
@@ -562,6 +768,7 @@ def create_app(test_config=None):
         if not all(text_valid(b.get(k),2) for k in ('title','specialty','level')):return fail('Completa los datos del curso.')
         with db() as con:
             cur=con.execute('INSERT INTO courses(title,specialty,level) VALUES(?,?,?)',(b['title'],b['specialty'],b['level']))
+            con.execute('INSERT INTO teacher_courses(teacher_id,course_id) VALUES(?,?)',(actor()['id'],cur.lastrowid))
             return jsonify(id=cur.lastrowid)
     @app.post('/api/teacher/modules')
     @require('teacher')
@@ -639,6 +846,7 @@ def create_app(test_config=None):
         b=body();points=b.get('points',[])
         if not isinstance(points,list) or len(points)!=5 or any(type(p)!=int or p not in range(6) for p in points) or not text_valid(b.get('feedback')):return fail('Asigna de 0 a 5 puntos a cada criterio y escribe retroalimentación.')
         with db() as con:
+            if not con.execute('SELECT 1 FROM enrollments e JOIN modules m ON m.course_id=e.course_id WHERE e.user_id=? AND m.id=?',(b.get('user_id'),b.get('module_id'))).fetchone():return fail('El estudiante no está matriculado en este curso.',403)
             row=con.execute('SELECT state FROM progress WHERE user_id=? AND module_id=?',(b.get('user_id'),b.get('module_id'))).fetchone()
             if not row:return fail('Entrega inexistente.',404)
             s=json.loads(row['state'])
@@ -665,16 +873,32 @@ def create_app(test_config=None):
     @require('teacher')
     def export():
         from datetime import date as date_cls
+        filters={}
+        allowed=teacher_course_ids()
+        for key in ('course','module'):
+            raw=request.args.get(key)
+            if raw is not None:
+                if not raw.isdigit():return fail('Filtro inválido.',400)
+                filters[key]=int(raw)
+        if 'course' in filters and filters['course'] not in allowed:return fail('No tienes asignado este curso.',403)
+        if 'module' in filters and not teacher_module_allowed(filters['module']):return fail('No tienes asignado este curso.',403)
         stream=io.StringIO();w=csv.writer(stream)
         w.writerow(['Aula TP Chile · exportación docente'])
         w.writerow(['Fecha',date_cls.today().isoformat()])
         w.writerow(['Fórmula de avance %','Estaciones completadas / 5 × 100 (misma definición que el portal estudiante)'])
-        w.writerow(['Población','Estudiantes con al menos un registro de progreso'])
+        w.writerow(['Población','Estudiantes con al menos un registro de progreso; no equivale a matrícula total'])
+        w.writerow(['Filtros',json.dumps(filters,ensure_ascii=False)])
         w.writerow([])
         w.writerow(['Estudiante','Curso','Módulo','Avance %','Selección','Desarrollo /25','Estado revisión'])
         with db() as con:
-            for r in con.execute('SELECT u.name,c.title AS course,m.title,m.content,p.state FROM progress p JOIN users u ON u.id=p.user_id JOIN modules m ON m.id=p.module_id JOIN courses c ON c.id=m.course_id ORDER BY c.id,m.position,u.name'):
-                s=json.loads(r['state']);content=json.loads(r['content']);ex=s['exam'];rev=ex and ex['review']
+            sql='SELECT u.name,c.title AS course,m.title,m.content,p.state FROM progress p JOIN users u ON u.id=p.user_id JOIN modules m ON m.id=p.module_id JOIN courses c ON c.id=m.course_id JOIN enrollments e ON e.user_id=p.user_id AND e.course_id=c.id'
+            clauses=['c.id IN ('+','.join('?' for _ in allowed)+')'];values=list(allowed)
+            for key,column in (('course','c.id'),('module','m.id')):
+                if key in filters:clauses.append(column+'=?');values.append(filters[key])
+            if clauses:sql+=' WHERE '+' AND '.join(clauses)
+            sql+=' ORDER BY c.id,m.position,u.name'
+            for r in con.execute(sql,values):
+                s=json.loads(r['state']);content=json.loads(r['content']);ex=s.get('exam');rev=ex and ex.get('review')
                 safe=lambda v:"'"+v if isinstance(v,str) and v.startswith(('=','+','-','@','\t','\r')) else v
                 w.writerow([safe(r['name']),safe(r['course']),safe(r['title']),sum(completed(s,content))*20,ex['score'] if ex else '',rev['score'] if rev else '', 'Revisado' if rev else ('Evaluación pendiente de revisión' if ex else 'Sin evaluación')])
         return Response('\ufeff'+stream.getvalue(),mimetype='text/csv',headers={'Content-Disposition':'attachment; filename=avance-aula-tp.csv'})

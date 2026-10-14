@@ -1,0 +1,11 @@
+{
+  "fecha": "2026-10-13",
+  "fuente": "Base local aula-tp-chile/data/aulatp.sqlite3, consulta en modo solo lectura",
+  "cursos_publicados": 45,
+  "modulos_publicados": 451,
+  "modulos_con_fuente_declarada": 451,
+  "modulos_con_oa_en_ae": 4,
+  "modulos_con_trazabilidad": 451,
+  "modulos_con_estados_de_validacion_pendiente": 451,
+  "interpretacion": "Conteos estructurales, no certificacion de pertinencia curricular. Las referencias pendientes no se convierten automaticamente en relaciones validadas. La base no fue modificada."
+}

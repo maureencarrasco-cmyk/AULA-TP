@@ -54,12 +54,12 @@ test('missing evidence remains explicit, not fabricated dates or outcomes',()=>{
   assert.match(vm.runInContext("window.PortalLayout.render('cumplimiento')",context),/No hay fechas límite/);
   assert.match(vm.runInContext("window.PortalLayout.render('oa-ae')",context),/Sin indicador de logro individual/);
 });
-test('panel retains its original mean-by-module formula with unequal populations',()=>{
+test('panel uses the same record-weighted mean as other views with unequal populations',()=>{
   const {context}=fixture();
   vm.runInContext("state.teacher.records.push({...state.teacher.records[0],name:'Otra persona'})",context);
   const html=vm.runInContext("window.PortalLayout.render('resumen')",context).split('<details class="pd-report-method">')[0];
-  assert.match(html,/<strong>60 %<\/strong><h2>Progreso general/);
-  assert.match(html,/Media por módulo/);
+  assert.match(html,/<strong>73 %<\/strong><h2>Recorrido digital/);
+  assert.match(html,/Media de registros/);
 });
 test('red and green groups show actual totals and at most five original names',()=>{
   const {context}=fixture();

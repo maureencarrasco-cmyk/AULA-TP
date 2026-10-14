@@ -1,0 +1,1663 @@
+{
+  "summary": {
+    "cases": 66,
+    "with_candidate": 26
+  },
+  "cases": [
+    {
+      "course": "Refrigeración y Climatización",
+      "module_id": 1,
+      "module": "Lectura de planos y cubicación de materiales de proyectos",
+      "ae": "M1-AE3",
+      "type": "Criterio",
+      "original": "4.3 Elabora un informe de cubicación de elementos y materiales, según los cálculos realizados, de acuerdo con lo establecido en la Norma Chilena relativa a Cubicaciones.",
+      "pdf": "docs/fuentes/MINEDUC_Refrigeracion_y_Climatizacion_programa.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "4",
+        "text": "4.3\nElabora un informe de cubicación de elementos y materiales,\nsegún los cálculos realizados, para determinar el costo final\nde la cubicación, de acuerdo con lo establecido en la Norma\nChilena relativa a Cubicaciones, trabajando en equipos y\nutilizando procesadores de texto y planillas de cálculo.",
+        "pdf_page": 39
+      },
+      "similarity": 0.7188,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 5,
+      "module": "Instalación de motores eléctricos y equipos de calefacción",
+      "ae": "M1-AE1",
+      "type": "Criterio",
+      "original": "Instala motores eléctricos en baja tensión, de acuerdo a los requerimientos y considerando la normativa eléctrica vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.5241,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.1\nanaliza manuales y diagramas técnicos para establecer\nprocedimientos de instalación y montaje de motores\neléctricos, de acuerdo a la normativa vigente.",
+          "pdf_page": 37
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.2\nPrepara fundaciones para montaje de motor, considerando\nnaturaleza del suelo, resistencia de pisos y nivelación de\nla superficie, de acuerdo a las especificaciones y a las\ntécnicas de montaje.",
+          "pdf_page": 37
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.3\nSelecciona conductores, materiales eléctricos y accesorios\npara montaje y conexión del motor, de acuerdo a las\nespecificaciones técnicas y a los manuales de fábrica,\nconsiderando la potencia eléctrica y los sistemas de control\no de accionamiento eléctrico.",
+          "pdf_page": 37
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.4\nUtiliza las herramientas aptas para el montaje y la instalación\nde motores eléctricos, previniendo situaciones de riesgo,\nutilizando los elementos de protección personal y considerando\nlas normas de seguridad e higiene.",
+          "pdf_page": 37
+        }
+      ],
+      "source_criteria_basis": "ae_texto_exacto",
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 5,
+      "module": "Instalación de motores eléctricos y equipos de calefacción",
+      "ae": "M1-AE2",
+      "type": "Criterio",
+      "original": "Instala equipos de calefacción en baja tensión, de acuerdo a los requerimientos y considerando la normativa eléctrica vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.5156,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.1\nlee manuales y diagramas técnicos para establecer\nprocedimientos de instalación de equipos de calefacción,\nsegún la normativa vigente.",
+          "pdf_page": 39
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.2\nSelecciona conductores, materiales eléctricos y accesorios\npara montaje y conexión de equipos de calefacción, de\nacuerdo a las especificaciones técnicas y manuales de\nfábrica, considerando la potencia eléctrica y los sistemas\nde control o de accionamiento eléctrico.",
+          "pdf_page": 39
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.3\ninstala los sistemas de control o accionamiento eléctrico\nde acuerdo a las especificaciones técnicas de instalación\ny conexión eléctrica.",
+          "pdf_page": 39
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.4\nVerifica que el equipo de calefacción tenga incorporada su\nplaca de características, de acuerdo a la normativa vigente,\npara determinar los aspectos eléctricos relacionados con\nla conexión eléctrica y con la puesta en marcha.",
+          "pdf_page": 39
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.5\nEjecuta el montaje y la conexión del equipo de calefacción al\nsistema de accionamiento o control eléctrico, considerando\nlas especificaciones técnicas, la normativa vigente y el\nuso de herramientas.",
+          "pdf_page": 39
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.6\nElabora un informe técnico con los resultados de análisis\ny las conclusiones para la instalación de equipos de\ncalefacción, considerando la normativa vigente.",
+          "pdf_page": 39
+        }
+      ],
+      "source_criteria_basis": "ae_texto_exacto",
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 6,
+      "module": "Instalaciones eléctricas domiciliarias",
+      "ae": "M2-AE1",
+      "type": "Criterio",
+      "original": "Monta ductos y canalizaciones para instalación eléctrica domiciliaria, de acuerdo a los planos, al proyecto eléctrico y a la normativa vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.5701,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.1\nanaliza diagramas y planos eléctricos para establecer\nprocedimientos de instalación de circuitos y componentes,\nde acuerdo a las especificaciones del proyecto eléctrico.",
+          "pdf_page": 49
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.2\nGenera procedimiento de instalación de componentes de una\ninstalación eléctrica de acuerdo a las especificaciones y a las\ncaracterísticas técnicas, considerando las normas seguridad.",
+          "pdf_page": 49
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.3\nSelecciona y cuantifica los ductos, accesorios y canalizaciones\na instalar, según las especificaciones técnicas consignadas\nen el plano y/o proyecto eléctrico.",
+          "pdf_page": 49
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.4\nSelecciona y utiliza herramientas e implementos de\nseguridad, de acuerdo a las normas y las tareas a realizar,\nconsiderando las capacidades eléctricas de materiales y\nde herramientas.",
+          "pdf_page": 49
+        }
+      ],
+      "source_criteria_basis": "ae_texto_exacto",
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 6,
+      "module": "Instalaciones eléctricas domiciliarias",
+      "ae": "M2-AE2",
+      "type": "Criterio",
+      "original": "Realiza cableado y conexionado de conductores y componentes de una instalación eléctrica de alumbrado, de acuerdo las especificaciones técnicas del plano o proyecto eléctrico, considerando la normativa vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.6409,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.1\nSelecciona el conductor de acuerdo al tipo y la cantidad\nseñalados en el plano eléctrico, considerando los aspectos\ngeográficos y ambientales y la normativa eléctrica vigente.",
+          "pdf_page": 50
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.2\nrealiza el cableado de circuitos de acuerdo a las\nespecificaciones del plano eléctrico y a la normativa vigente.",
+          "pdf_page": 50
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.3\nEjecuta las uniones de conductores aplicando técnicas de\nconexión, soldadura, aislación, ordenamiento, principios\nde resistencia de materiales y normativa técnica.",
+          "pdf_page": 50
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.4\ninstala y conecta los centros de luces y accesorios de\nacuerdo a las especificaciones del proyecto, utilizando\neficientemente los insumos para los procesos productivos,\ndisponiendo cuidadosamente los desechos y realizando\nun trabajo en equipo.",
+          "pdf_page": 50
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.5\nSelecciona equipos o componentes de iluminación, de\nacuerdo a las especificaciones del plano o proyecto\neléctrico, considerando los aspectos de eficiencia y de\noptimización energética.",
+          "pdf_page": 50
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.6\nrealiza pruebas mecánicas de fijación y de funcionamiento\neléctrico, haciendo uso de herramientas e instrumentos\nde medición.",
+          "pdf_page": 50
+        }
+      ],
+      "source_criteria_basis": "ae_texto_exacto",
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 6,
+      "module": "Instalaciones eléctricas domiciliarias",
+      "ae": "M2-AE3",
+      "type": "Criterio",
+      "original": "Instala tablero eléctrico y elementos de protección eléctrica para instalación eléctrica de alumbrado, de acuerdo a las especificaciones técnicas del plano y/o proyecto eléctrico, considerando la normativa vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.6093,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.1\nMonta el tablero eléctrico de acuerdo a las especificaciones\ntécnicas de montaje, de anclaje y de fijación, considerando\nla normativa vigente.",
+          "pdf_page": 51
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.2\ninstala los dispositivos de protección de acuerdo al número\nde circuitos y de especificaciones del plano o proyecto\neléctrico, previniendo situaciones de riesgo, utilizando\nlos elementos de protección personal.",
+          "pdf_page": 51
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.3\ninterconecta los dispositivos de protección a los circuitos\neléctricos de alumbrado, de acuerdo a las especificaciones\ntécnicas, realizando las tareas de manera prolija y según\nlos estándares de calidad.",
+          "pdf_page": 51
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.4\nrealiza pruebas de funcionamiento eléctrico haciendo uso\nde herramientas e instrumentos, según el protocolo y las\nnormas de seguridad eléctricas y de cuidado personal.",
+          "pdf_page": 51
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.5\nConecta los sistemas de puesta a tierra al tablero, de\nacuerdo a las indicaciones del plano eléctrico, considerando\nlas características del suelo y las normativas asociadas\na niveles de electrificación, previniendo situaciones de\nriesgo y evaluando las condiciones del entorno.",
+          "pdf_page": 51
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.6\nElabora un informe técnico con los resultados del análisis y\nlas conclusiones, para la instalación de tableros eléctricos\nen instalaciones eléctricas domiciliarias, considerando la\nnormativa vigente.",
+          "pdf_page": 51
+        }
+      ],
+      "source_criteria_basis": "ae_texto_exacto",
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 7,
+      "module": "Elaboración de proyectos eléctricos",
+      "ae": "M3-AE1",
+      "type": "Criterio",
+      "original": "Utiliza sistemas computacionales para la ejecución de programas de diseño de circuitos eléctricos, de acuerdo a lo expresado en la solicitud.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.5798,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.1\nUtiliza software y herramientas de diseño de acuerdo a los\nrequerimientos, manejando tecnologías de la información\ny comunicación para obtener y procesar datos pertinentes\nal trabajo.",
+          "pdf_page": 61
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.2\nSelecciona la simbología de los componentes eléctricos\ncontenidos en el software para diseño de circuito, de\nacuerdo al diagrama básico, a la pauta de trabajo y a los\nrequerimientos técnicos, manejando las tecnologías de\nla información y comunicación para obtener y procesar\nlos datos pertinentes al trabajo.",
+          "pdf_page": 61
+        }
+      ],
+      "source_criteria_basis": "ae_texto_exacto",
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 7,
+      "module": "Elaboración de proyectos eléctricos",
+      "ae": "M3-AE2",
+      "type": "AE",
+      "original": "Dibuja circuitos eléctricos según las especificaciones y requerimientos de un proyecto, considerando la normativa eléctrica.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": {
+        "type": "AE",
+        "source_ae": "2",
+        "text": "Dibuja circuitos\neléctricos según las\nespecificaciones y\nlos requerimientos\nde un proyecto,\nconsiderando la\nnormativa eléctrica.",
+        "pdf_page": 62
+      },
+      "similarity": 0.9863,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 7,
+      "module": "Elaboración de proyectos eléctricos",
+      "ae": "M3-AE2",
+      "type": "Criterio",
+      "original": "Dibuja circuitos eléctricos según las especificaciones y requerimientos de un proyecto, considerando la normativa eléctrica.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.5198,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.1\nDibuja planta arquitectónica de proyecto eléctrico, de\nacuerdo a las mediciones en terreno, aplicando las escalas\nde reducción normalizada, según la normativa técnica.",
+          "pdf_page": 62
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.2\nTraza el circuito unilineal de alumbrado y de enchufes,\nde acuerdo a las especificaciones del proyecto eléctrico\ny a la normativa de seguridad.",
+          "pdf_page": 62
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.3\nSeñala la cantidad de conductores en cada tramo de\nlas canalizaciones de acuerdo a las especificaciones del\nproyecto eléctrico, considerando el número de circuitos\nproyectados.",
+          "pdf_page": 62
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.4\nrepresenta gráficamente los componentes del circuito\neléctrico, considerando el uso de simbología normalizada,\nla función de los componentes y la normativa eléctrica.",
+          "pdf_page": 62
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.5\nDibuja cuadros de información y estructuras de una\ninstalación en un plano eléctrico, considerando la\nubicación geográfica del proyecto y los cuadros de carga,\nde acuerdo a los formatos normados y considerando la\nnormativa vigente.",
+          "pdf_page": 62
+        }
+      ],
+      "source_criteria_basis": "asociacion_ae_candidata",
+      "source_ae_candidate": {
+        "type": "AE",
+        "source_ae": "2",
+        "text": "Dibuja circuitos\neléctricos según las\nespecificaciones y\nlos requerimientos\nde un proyecto,\nconsiderando la\nnormativa eléctrica.",
+        "pdf_page": 62
+      },
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 7,
+      "module": "Elaboración de proyectos eléctricos",
+      "ae": "M3-AE3",
+      "type": "Criterio",
+      "original": "Dimensiona cantidad de materiales para ejecutar la instalación eléctrica de circuitos, de acuerdo a los planos, a la normativa eléctrica y a las especificaciones técnicas.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "3",
+        "text": "3.3\nElabora una lista de materiales e insumos para la ejecución\nde un proyecto eléctrico, de acuerdo a los planos y a las\nespecificaciones técnicas.",
+        "pdf_page": 62
+      },
+      "similarity": 0.6616,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.1\nCalcula cantidad de ductos, equipos, conductores eléctricos,\nmateriales y accesorios necesarios para una instalación\neléctrica, según especificaciones del plano.",
+          "pdf_page": 62
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.2\nregistra la cantidad de accesorios, canalizaciones, tipo de\nconductores, cajas de derivación, equipos y componentes,\nde acuerdo a los requerimientos eléctricos.",
+          "pdf_page": 62
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.3\nElabora una lista de materiales e insumos para la ejecución\nde un proyecto eléctrico, de acuerdo a los planos y a las\nespecificaciones técnicas.",
+          "pdf_page": 62
+        }
+      ],
+      "source_criteria_basis": "ae_texto_exacto",
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 8,
+      "module": "Mantenimiento de máquinas, equipos y sistemas eléctricos",
+      "ae": "M4-AE1",
+      "type": "AE",
+      "original": "Realiza mantenimiento preventivo de equipos, máquinas y sistemas eléctricos para prevenir fallas y dar continuidad a los servicios, considerando la normativa vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": {
+        "type": "AE",
+        "source_ae": "1",
+        "text": "realiza\nmantenimiento\npreventivo de los\nequipos, de las\nmáquinas y de\nsistemas eléctricos,\npara prevenir fallas\ny dar continuidad\na los servicios,\nconsiderando la\nnormativa vigente.",
+        "pdf_page": 71
+      },
+      "similarity": 0.966,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 8,
+      "module": "Mantenimiento de máquinas, equipos y sistemas eléctricos",
+      "ae": "M4-AE1",
+      "type": "Criterio",
+      "original": "Realiza mantenimiento preventivo de equipos, máquinas y sistemas eléctricos para prevenir fallas y dar continuidad a los servicios, considerando la normativa vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.6286,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.1\nEstudia fichas, diagramas y planos eléctricos para establecer\nprocedimientos de ajuste o reparación de máquinas,\nequipos y sistemas eléctricos, de acuerdo a los planes o\nlos programas de mantenimiento.",
+          "pdf_page": 71
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.2\nEjecuta funciones de los equipos o sistema eléctrico para\ndiagnosticar el estado de funcionamiento de acuerdo a\nsus características, al plan de mantenimiento y a las\nespecificaciones técnicas de los fabricantes.",
+          "pdf_page": 71
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.3\nMide magnitudes y variables eléctricas de equipos y sistemas\neléctricos, para determinar estados de funcionamiento\nanormales, de acuerdo a las especificaciones técnicas o las\npautas de mantenimiento, considerando la normativa vigente.",
+          "pdf_page": 71
+        }
+      ],
+      "source_criteria_basis": "asociacion_ae_candidata",
+      "source_ae_candidate": {
+        "type": "AE",
+        "source_ae": "1",
+        "text": "realiza\nmantenimiento\npreventivo de los\nequipos, de las\nmáquinas y de\nsistemas eléctricos,\npara prevenir fallas\ny dar continuidad\na los servicios,\nconsiderando la\nnormativa vigente.",
+        "pdf_page": 71
+      },
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 8,
+      "module": "Mantenimiento de máquinas, equipos y sistemas eléctricos",
+      "ae": "M4-AE2",
+      "type": "AE",
+      "original": "Realiza mantenimiento correctivo de equipos y sistemas eléctricos para restablecer o mejorar su funcionamiento, de acuerdo a los informes de falla o a las pautas de mantenimiento, a la normativa vigente y a las normas de seguridad.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": {
+        "type": "AE",
+        "source_ae": "2",
+        "text": "realiza\nmantenimiento\ncorrectivo de los\nequipos y sistemas\neléctricos para\nrestablecer o mejorar\nsu funcionamiento,\nde acuerdo a los\ninformes de falla\no las pautas de\nmantenimiento, a la\nnormativa vigente\ny a las normas de\nseguridad.",
+        "pdf_page": 73
+      },
+      "similarity": 0.9896,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 8,
+      "module": "Mantenimiento de máquinas, equipos y sistemas eléctricos",
+      "ae": "M4-AE2",
+      "type": "Criterio",
+      "original": "Realiza mantenimiento correctivo de equipos y sistemas eléctricos para restablecer o mejorar su funcionamiento, de acuerdo a los informes de falla o a las pautas de mantenimiento, a la normativa vigente y a las normas de seguridad.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.6378,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.1\nUtiliza las herramientas aptas para el mantenimiento\ncorrectivo de equipos y sistemas eléctricos, de acuerdo\na las recomendaciones y a las especificaciones técnicas\nde los fabricantes.",
+          "pdf_page": 73
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.2\nExamina los equipos y los sistemas eléctricos, con apoyo\nde instrumentos, para medir, verificar y registrar signos\no evidencias de funcionamiento anormal, considerando\nlas especificaciones de fábrica o de los planos eléctricos.",
+          "pdf_page": 73
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.3\najusta, corrige u optimiza los componentes mecánicos,\neléctricos o de control, constitutivos de los equipos y\nsistemas eléctricos, para dar continuidad a los servicios\nde operación o producción, considerando las normas de\nseguridad personal e higiene.",
+          "pdf_page": 73
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.4\nSelecciona los repuestos y los materiales necesarios para\nel mantenimiento, de acuerdo al plan de mantenimiento\no de reparación.",
+          "pdf_page": 73
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.5\nDesarma y arma equipos o sistemas eléctricos, de acuerdo\na los procedimientos y al manual de desarme, considerando\nlas estructuras de partes, la ubicación y los elementos\nde fijación y anclaje.",
+          "pdf_page": 73
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.6\nMide las magnitudes y las variables eléctricas de los\nequipos y los sistemas eléctricos, para verificar el estado\nde buen funcionamiento, de acuerdo a las especificaciones\ntécnicas o las pautas de mantenimiento, considerando la\nnormativa vigente.",
+          "pdf_page": 73
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.7\nregistra y documenta las modificaciones o reparaciones\nrealizadas en plantillas de mantenimiento o informes\nde reparación.",
+          "pdf_page": 73
+        }
+      ],
+      "source_criteria_basis": "asociacion_ae_candidata",
+      "source_ae_candidate": {
+        "type": "AE",
+        "source_ae": "2",
+        "text": "realiza\nmantenimiento\ncorrectivo de los\nequipos y sistemas\neléctricos para\nrestablecer o mejorar\nsu funcionamiento,\nde acuerdo a los\ninformes de falla\no las pautas de\nmantenimiento, a la\nnormativa vigente\ny a las normas de\nseguridad.",
+        "pdf_page": 73
+      },
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 22,
+      "module": "Instalación de sistemas de control eléctrico industrial",
+      "ae": "M5-AE1",
+      "type": "Criterio",
+      "original": "Instala circuitos eléctricos para el control y comando de equipos, máquinas e instalaciones eléctricas, de acuerdo a la normativa vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.5941,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.1\nlee diagramas y planos eléctricos para establecer los\nprocedimientos de instalación de circuitos y componentes,\nde acuerdo a las especificaciones del proyecto eléctrico.",
+          "pdf_page": 83
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.2\nVerifica escalerillas y sistemas de canalización para\nejecutar la instalación de circuitos eléctricos, de acuerdo\na las especificaciones del plano o proyecto eléctrico y a\nlas normas de seguridad.",
+          "pdf_page": 83
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.3\nSelecciona materiales y componentes para la instalación\nde circuitos eléctricos de control y comando de equipos\ny máquinas eléctricas según plano y especificaciones\ntécnicas, considerando normativa eléctrica vigente.",
+          "pdf_page": 83
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.4\nrealiza el cableado de circuitos eléctricos de control, de\nacuerdo a las especificaciones técnicas, al proyecto eléctrico,\na las definiciones del plano y a las normas de seguridad.",
+          "pdf_page": 84
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.5\nUtiliza las herramientas aptas para la instalación de\ncircuitos eléctricos, previniendo situaciones de riesgo,\nutilizando los elementos de protección personal y\nconsiderando las normas de seguridad personal e higiene.",
+          "pdf_page": 84
+        }
+      ],
+      "source_criteria_basis": "ae_texto_exacto",
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 22,
+      "module": "Instalación de sistemas de control eléctrico industrial",
+      "ae": "M5-AE2",
+      "type": "Criterio",
+      "original": "Instala circuitos de fuerza para abastecer de energía a equipos, máquinas y sistemas eléctricos, de acuerdo a la normativa vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.5668,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.1\nVerifica las escalerillas y los sistemas de canalización para\nejecutar la instalación de circuitos de fuerza, de acuerdo\na las especificaciones del plano eléctrico.",
+          "pdf_page": 84
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.2\nSelecciona materiales, accesorios y componentes para la\ninstalación de circuitos de fuerza según plano eléctrico,\nconsiderando la normativa eléctrica vigente.",
+          "pdf_page": 84
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.3\nrealiza el cableado de circuitos eléctricos de fuerza, de\nacuerdo a las especificaciones técnicas, utilizando las\nherramientas adecuadas, haciendo uso eficiente de los\ninsumos involucrados en los procesos productivos.",
+          "pdf_page": 84
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.4\nEmpalma y une conductores con elementos normalizados,\nconsiderando aspectos eléctricos, físicos, relacionados\ncon sobrecargas de consumo, capacidad de conductores\ny aisladores.",
+          "pdf_page": 84
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.5\nConecta circuitos de fuerza a tableros de alimentación de\nacuerdo a las especificaciones y a los procedimientos de\ninstalación, considerando las normativas de seguridad y\nde protección personal.",
+          "pdf_page": 84
+        }
+      ],
+      "source_criteria_basis": "ae_texto_exacto",
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 22,
+      "module": "Instalación de sistemas de control eléctrico industrial",
+      "ae": "M5-AE3",
+      "type": "Criterio",
+      "original": "Instala tablero eléctrico, sistemas y dispositivos de protección para proteger máquinas y usuarios, de acuerdo a la normativa vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.4784,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.1\nVerifica las características de los dispositivos de sistemas\ny de los dispositivos de protección, según los manuales e\ninterpretando los planos y las especificaciones técnicas.",
+          "pdf_page": 85
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.2\nMonta y fija dispositivos de protección, usando herramientas\ny procedimientos técnicos para la instalación y el montaje\neléctrico, de acuerdo a las normativas técnicas y de\nseguridad, previniendo situaciones de riesgo y enfermedades\nocupacionales.",
+          "pdf_page": 85
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.3\nimplementa y conecta los sistemas de tierra al tablero de\nacuerdo a las indicaciones del plano eléctrico, considerando\nlas características del suelo y las normativas asociadas a\nniveles de electrificación.",
+          "pdf_page": 85
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.4\nrealiza pruebas de aislamiento y resistencia de la\ninstalación, considerando la normativa eléctrica y la\nseguridad de los usuarios y las usuarias.",
+          "pdf_page": 85
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "3",
+          "text": "3.5\nPrueba el funcionamiento de los dispositivos de protección,\nverificando su operación ante fallas eléctricas, considerando\nla seguridad de las personas y la protección de los\nequipos, previniendo situaciones de riesgo y enfermedades\nocupacionales.",
+          "pdf_page": 85
+        }
+      ],
+      "source_criteria_basis": "ae_texto_exacto",
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 22,
+      "module": "Instalación de sistemas de control eléctrico industrial",
+      "ae": "M5-AE4",
+      "type": "Criterio",
+      "original": "Instala cuadros de maniobra para el control o temporización de máquinas, equipos e instalaciones eléctricas.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.4215,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "4",
+          "text": "4.1\nrepresenta esquemas de funcionamiento eléctrico de máquinas\no sistemas eléctricos, de acuerdo a los requerimientos de\ncontrol, considerando la normativa vigente.",
+          "pdf_page": 86
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "4",
+          "text": "4.2\nExamina la documentación técnica relativa a los dispositivos\nde temporización, control y comando, para determinar los\nestados de operación y los valores nominales, de acuerdo\na los procedimientos de instalación y de montaje.",
+          "pdf_page": 86
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "4",
+          "text": "4.3\nMonta y fija los dispositivos de temporización, control y\ncomando especificados en el proyecto eléctrico, aplicando\nlos procedimientos de instalación y de montaje, de acuerdo\na las normativas técnicas y de seguridad, previniendo\nsituaciones de riesgo y enfermedades ocupacionales.",
+          "pdf_page": 86
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "4",
+          "text": "4.4\nrealiza pruebas de funcionamiento, control y temporización,\nsegún los procedimientos técnicos, utilizando los instrumentos\nde medición y los elementos de protección personal,\naplicando las normas eléctricas de seguridad vigentes.",
+          "pdf_page": 86
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "4",
+          "text": "4.5\nElabora un informe técnico con los resultados de análisis y\nlas conclusiones para la instalación de sistemas de control\neléctrico industrial, considerando la normativa vigente.",
+          "pdf_page": 86
+        }
+      ],
+      "source_criteria_basis": "ae_texto_exacto",
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 23,
+      "module": "Instalaciones eléctricas industriales",
+      "ae": "M6-AE1",
+      "type": "AE",
+      "original": "Ejecuta instalación eléctrica de fuerza motriz de acuerdo a las especificaciones técnicas del plano o proyecto eléctrico, considerando las exigencias generales para instalaciones de fuerza y de calefacción de la normativa vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 23,
+      "module": "Instalaciones eléctricas industriales",
+      "ae": "M6-AE1",
+      "type": "Criterio",
+      "original": "Ejecuta instalación eléctrica de fuerza motriz de acuerdo a las especificaciones técnicas del plano o proyecto eléctrico, considerando las exigencias generales para instalaciones de fuerza y de calefacción de la normativa vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 23,
+      "module": "Instalaciones eléctricas industriales",
+      "ae": "M6-AE2",
+      "type": "AE",
+      "original": "Realiza instalación eléctrica de calefacción de acuerdo a las especificaciones técnicas del proyecto eléctrico, considerando las exigencias y normativa generales para instalaciones de calefacción.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 23,
+      "module": "Instalaciones eléctricas industriales",
+      "ae": "M6-AE2",
+      "type": "Criterio",
+      "original": "Realiza instalación eléctrica de calefacción de acuerdo a las especificaciones técnicas del proyecto eléctrico, considerando las exigencias y normativa generales para instalaciones de calefacción.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 24,
+      "module": "Instalación de equipos electrónicos de potencia",
+      "ae": "M7-AE1",
+      "type": "Criterio",
+      "original": "Instala dispositivos electrónicos de potencia para el control de sistemas o equipos eléctricos, de acuerdo a las especificaciones técnicas y a los estándares de calidad.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.589,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.1\nSelecciona los componentes y accesorios para la instalación\nde dispositivos electrónicos de potencia, de acuerdo a los\nrequerimientos y a las especificaciones técnicas, utilizando\neficientemente los insumos para los procesos productivos.",
+          "pdf_page": 107
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.2\nMide y verifica las características técnicas y los parámetros de\nlos dispositivos electrónicos de potencia, leyendo instrumentos\ny utilizando distintos tipos de textos relacionados con las\nespecificaciones técnicas y normativas diversas.",
+          "pdf_page": 107
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "1",
+          "text": "1.3\nMonta y fija dispositivos electrónicos de potencia, con\nelementos especificados en procedimientos de instalación y\nmontaje, de acuerdo a las normativas técnicas y de seguridad.",
+          "pdf_page": 107
+        }
+      ],
+      "source_criteria_basis": "ae_texto_exacto",
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 24,
+      "module": "Instalación de equipos electrónicos de potencia",
+      "ae": "M7-AE2",
+      "type": "Criterio",
+      "original": "Instala circuitos de control utilizando dispositivos electrónicos de potencia de acuerdo a los requerimientos técnicos.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0.526,
+      "source_criteria_for_repeated_ae": [
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.1\nrealiza el cableado de circuitos de control de acuerdo a\nlas especificaciones técnicas, utilizando eficientemente\nherramientas, instrumentos e insumos.",
+          "pdf_page": 108
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.2\nConecta los dispositivos y elementos de control de acuerdo a\nlos diagramas y a las especificaciones técnicas, considerando\nlas normativas de seguridad y protección personal.",
+          "pdf_page": 108
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.3\nEnergiza y comprueba funcionamiento de los circuitos\neléctricos, de acuerdo a las especificaciones técnicas\nde operación y control, considerando las normativas de\nseguridad y de protección personal.",
+          "pdf_page": 108
+        },
+        {
+          "type": "Criterio",
+          "source_ae": "2",
+          "text": "2.4\nregistra y documenta las modificaciones o reparaciones\nrealizadas en plantillas de mantenimiento o informes\nde reparación.",
+          "pdf_page": 108
+        }
+      ],
+      "source_criteria_basis": "ae_texto_exacto",
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 25,
+      "module": "Automatización de sistemas eléctricos industriales",
+      "ae": "M8-AE1",
+      "type": "AE",
+      "original": "Maneja y ajusta parámetros en equipos y sistemas eléctricos y electrónicos utilizados en control de procesos, según los requerimientos operacionales del equipo o de la planta y la normativa eléctrica vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 25,
+      "module": "Automatización de sistemas eléctricos industriales",
+      "ae": "M8-AE1",
+      "type": "Criterio",
+      "original": "Maneja y ajusta parámetros en equipos y sistemas eléctricos y electrónicos utilizados en control de procesos, según los requerimientos operacionales del equipo o de la planta y la normativa eléctrica vigente.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 26,
+      "module": "Emprendimiento y empleabilidad",
+      "ae": "AE 1",
+      "type": "AE",
+      "original": "Diseña y ejecuta un proyecto para concretar iniciativas de emprendimiento, identificando las acciones a realizar, el cronograma de su ejecución y los presupuestos, definiendo alternativas de financiamiento y evaluando y controlando su avance.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Electricidad",
+      "module_id": 26,
+      "module": "Emprendimiento y empleabilidad",
+      "ae": "AE 1",
+      "type": "Criterio",
+      "original": "Diseña y ejecuta un proyecto para concretar iniciativas de emprendimiento, identificando las acciones a realizar, el cronograma de su ejecución y los presupuestos, definiendo alternativas de financiamiento y evaluando y controlando su avance.",
+      "pdf": "docs/fuentes/MINEDUC_Electricidad_programa.pdf",
+      "candidate": null,
+      "similarity": 0,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Contabilidad",
+      "module_id": 89,
+      "module": "Cálculo y registro de impuestos",
+      "ae": "M7-AE2",
+      "type": "Criterio",
+      "original": "2.3 Realiza seguimiento vía internet de la declaración y del pago oportuno del IVA según los requerimientos del Servici de Impuestos Internos y la normativa vigente.",
+      "pdf": "docs/fuentes/tp-programas/contabilidad.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "2",
+        "text": "2.3\nRealiza seguimiento vía internet de la declaración y del\npago oportuno del iVA según los requerimientos del Servicio\nde impuestos internos y la normativa vigente.",
+        "pdf_page": 102
+      },
+      "similarity": 0.9963,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Vestuario y Confección Textil",
+      "module_id": 191,
+      "module": "Mantenimiento de máquinas",
+      "ae": "M3-AE1",
+      "type": "Criterio",
+      "original": "1.1 Confecciona un listado de chequeo con apoyo de las TIC en formato digital, indicando todas las etapas de verificación y horas de uso de las máquinas rectas especiales, herramientas, y equipos de planchado, a utilizar en la especialidad de acuerdo al manual del fabricante.",
+      "pdf": "docs/fuentes/tp-programas/vestuario-confeccion-textil.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "1",
+        "text": "1.1\nConfecciona un listado de chequeo con apoyo de las\nTiC en formato digital, indicando todas las etapas de\nverificación y horas de uso de las máquinas rectas y\nespeciales, herramientas, y equipos de planchado, a utilizar\nen la especialidad de acuerdo al manual del fabricante.",
+        "pdf_page": 57
+      },
+      "similarity": 0.9978,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Instalaciones Sanitarias",
+      "module_id": 153,
+      "module": "Trazado de redes",
+      "ae": "M2-AE1",
+      "type": "AE",
+      "original": "Traza en terreno la red de agua potable y de evacuación, fijando sus niveles según cada proyecto, de acuerdo a estándares de calidad, a la normativa de seguridad y considerand el cuidado del medioambiente.",
+      "pdf": "docs/fuentes/tp-programas/instalaciones-sanitarias.pdf",
+      "candidate": null,
+      "similarity": 0.463,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Instalaciones Sanitarias",
+      "module_id": 156,
+      "module": "Instalación de redes para riego agrícola",
+      "ae": "M5-AE2",
+      "type": "AE",
+      "original": "Instala elementos complementarios (llaves de corte, válvulas y fitting) de una red de riego agrícola, cumpliendo con el procedimiento de seguridad y el medioambiente.",
+      "pdf": "docs/fuentes/tp-programas/instalaciones-sanitarias.pdf",
+      "candidate": {
+        "type": "AE",
+        "source_ae": "2",
+        "text": "instala elementos\ncomplementarios\n(llaves de corte,\nválvulas y fitting)\nde una red de riego\nagrícola, cumpliendo\ncon el procedimiento\nde seguridad y del\nmedioambiente.",
+        "pdf_page": 80
+      },
+      "similarity": 0.9964,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Acuicultura",
+      "module_id": 229,
+      "module": "Operación de sistemas, equipos y maquinarias",
+      "ae": "M3-AE2",
+      "type": "Criterio",
+      "original": "2.1 Opera maquinaria e implementos que se usan en las operaciones de cultivo (siembra, desdobles, cosecha), de manera prolija y de acuerdo a las instrucciones de manual del fabricante.",
+      "pdf": "docs/fuentes/tp-programas/acuicultura.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "2",
+        "text": "2.1\nOpera maquinaria e implementos que se usan en las\noperaciones de cultivo (siembra, desdobles, cosecha),\nde manera prolija y de acuerdo a las instrucciones del\nmanual del fabricante.",
+        "pdf_page": 58
+      },
+      "similarity": 0.9966,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Tripulación de Naves Mercantes y Especiales",
+      "module_id": 245,
+      "module": "Operación de equipos de maniobras de cubierta",
+      "ae": "M1-AE4",
+      "type": "Criterio",
+      "original": "4.2 Arría el bote salvavidas trabajando en equipo, usando el comando sociado a su fuente de poder, o manualmente, tras verificar que la embarcación fue destrincada y está en condiciones de ser puesta en el agua, de acuerdo al manual del fabricante.",
+      "pdf": "docs/fuentes/tp-programas/tripulacion-naves-mercantes-especiales.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "4",
+        "text": "4.2\narría el bote salvavidas trabajando en equipo, usando el\ncomando asociado a su fuente de poder, o manualmente,\ntras verificar que la embarcación fue destrincada y está\nen condiciones de ser puesta en el agua, de acuerdo al\nmanual del fabricante.",
+        "pdf_page": 41
+      },
+      "similarity": 0.9975,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Tripulación de Naves Mercantes y Especiales",
+      "module_id": 250,
+      "module": "Operación de máquinas propulsoras y auxiliares",
+      "ae": "M6-AE3",
+      "type": "AE",
+      "original": "Controla los niveles de combustibles y de lubricación de los distintos sistemas, en la guardia en el departamento de máquinas de una nav mercante o especial, aplicando procedimientos administrativos y reglamentarios establecidos y las instrucciones del manual del fabricante.",
+      "pdf": "docs/fuentes/tp-programas/tripulacion-naves-mercantes-especiales.pdf",
+      "candidate": null,
+      "similarity": 0.4594,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Construcciones Metálicas",
+      "module_id": 174,
+      "module": "Mecanizado de partes y piezas metálicas",
+      "ae": "M4-AE1",
+      "type": "Criterio",
+      "original": "1.4 Selecciona las herramientas y las máquinas para el taladrado, esmerilado, aserrado, plegado, cilindrado, doblado y forjadura más adecuada y onveniente, según las normas de calidad, las especificaciones técnicas y las características del material.",
+      "pdf": "docs/fuentes/tp-programas/construcciones-metalicas.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "1",
+        "text": "1.4\nSelecciona las herramientas y las máquinas para el\ntaladrado, esmerilado, aserrado, plegado, cilindrado,\ndoblado y forjadura más adecuada y conveniente, según\nlas normas de calidad, las especificaciones técnicas y las\ncaracterísticas del material.",
+        "pdf_page": 71
+      },
+      "similarity": 0.9976,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Construcciones Metálicas",
+      "module_id": 177,
+      "module": "Protección de estructuras y tratamientos de residuos",
+      "ae": "M7-AE1",
+      "type": "Criterio",
+      "original": "1.3 Selecciona todas las herramientas y todos los equipos a utilizar en la reparación, el tratamiento y la terminación de la superficie de la estructura metálica, según la orden de trabajo, las especificaciones técnicas del proyecto y las normas de seguridad y medioambientales.",
+      "pdf": "docs/fuentes/tp-programas/construcciones-metalicas.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "1",
+        "text": "1.3\nSelecciona todas las herramientas y todos los equipos a\nutilizar en la preparación, el tratamiento y la terminación\nde la superficie de la estructura metálica, según la orden\nde trabajo, las especificaciones técnicas del proyecto y\nlas normas de seguridad y medioambientales.",
+        "pdf_page": 105
+      },
+      "similarity": 0.9978,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Mecánica de Mantenimiento de Aeronaves",
+      "module_id": 442,
+      "module": "Detección de fallas en instrumentos y sistemas de navegación y comunicación de la aeronave",
+      "ae": "M2-AE3",
+      "type": "Criterio",
+      "original": "3.3 Utiliza instrumentos de medicion de diferentes magnitudes para detectar fallas de los sistemas electrico y electronico, de acuerdo a la documentacion téecnica aplicable.",
+      "pdf": "docs/fuentes/tp-programas/mecanica-mantenimiento-aeronaves.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "3",
+        "text": "3.3\nUtiliza instrumentos de medición de diferentes magnitudes\npara detectar fallas de los sistemas eléctrico y electrónico,\nde acuerdo a la documentación técnica aplicable.",
+        "pdf_page": 56
+      },
+      "similarity": 0.9965,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Mecánica de Mantenimiento de Aeronaves",
+      "module_id": 448,
+      "module": "Mantenimiento de las unidades y sistemas asociados al motor a reacción",
+      "ae": "M8-AE1",
+      "type": "Criterio",
+      "original": "1.2 Desinstala bomba de aceite, bomba de combustible y generador para analizar su estructura, funcionamiento y finalidad utilizando téecnicas de remocion y montaje, segun el manual de mantenimiento.",
+      "pdf": "docs/fuentes/tp-programas/mecanica-mantenimiento-aeronaves.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "1",
+        "text": "1.2\nDesinstala bomba de aceite, bomba de combustible y\ngenerador para analizar su estructura, funcionamiento\ny finalidad utilizando técnicas de remoción y montaje,\nsegún el manual de mantenimiento.",
+        "pdf_page": 117
+      },
+      "similarity": 0.9969,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Mecánica de Mantenimiento de Aeronaves",
+      "module_id": 450,
+      "module": "Inglés técnico de mantenimiento de aeronaves",
+      "ae": "M10-AE4",
+      "type": "Criterio",
+      "original": "4.3 Establece criterios de seleccion y toma de decisiones a base de la informacion obtenida en inglées desde los textos.",
+      "pdf": "docs/fuentes/tp-programas/mecanica-mantenimiento-aeronaves.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "4",
+        "text": "4.3\nEstablece criterios de selección y toma de decisiones a\nbase de la información obtenida en inglés desde los textos.",
+        "pdf_page": 142
+      },
+      "similarity": 0.9948,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Mecánica de Mantenimiento de Aeronaves",
+      "module_id": 451,
+      "module": "Emprendimiento y empleabilidad",
+      "ae": "M11-AE3",
+      "type": "Criterio",
+      "original": "3.4 Evalia si la remuneracionmensual osemanal y elfiniquito se han determinado de acuerdo al tipo de contrato firmado y a la legislacion laboral vigente.",
+      "pdf": "docs/fuentes/tp-programas/mecanica-mantenimiento-aeronaves.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "3",
+        "text": "3.4\nEvalúa si la remuneración mensual o semanal y el finiquito\nse han determinado de acuerdo al tipo de contrato firmado\ny a la legislación laboral vigente.",
+        "pdf_page": 153
+      },
+      "similarity": 0.9921,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 265,
+      "module": "Expresión musical para párvulos",
+      "ae": "M2-AE2",
+      "type": "AE",
+      "original": "Organiza experiencias pedagógicas que favorecen la apreciación musical, respetando los intereses y las posibilidades de las niñas y los niños menores de seis años, en un ambiente pedagógico seguro, y cuidando la integralidad de los aprendizajes en un contexto de respeto por sus derechos.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.4328,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 265,
+      "module": "Expresión musical para párvulos",
+      "ae": "M2-AE3",
+      "type": "AE",
+      "original": "Colabora en la evaluación de actividades educativas musicales aplicadas a los niños y las niñas, considerando Aprendizajes Esperados e indicadores establecidos en los instrumentos de evaluación.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.398,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 265,
+      "module": "Expresión musical para párvulos",
+      "ae": "M2-AE3",
+      "type": "Criterio",
+      "original": "3.4 Colabora con los procesos evaluativos implementados por el educador o la educadora referidos al desarrollo y aprendizaje musical de los infantes, referenciando principios pedagógicos e indicadores establecidos en la planificación, en un marco de inclusión y respeto por sus derechos, considerando la evaluación de los contextos de aprendizaje o factores curriculares que han intervenido.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.2967,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 266,
+      "module": "Relación con la familia",
+      "ae": "M3-AE1",
+      "type": "AE",
+      "original": "Participa en actividades individuales o colectivas con las familias, aplicando estrategias de comunicación efectiva y positiva, en un ambiente de respeto por la diversidad sociocultural, cumpliendo las normas, resguardando el bienestar integral de las niñas y los niños.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.4019,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 266,
+      "module": "Relación con la familia",
+      "ae": "M3-AE3",
+      "type": "Criterio",
+      "original": "3.4 Maneja el sistema de archivo computacional dispuesto por la institución para procesar el registro de información referente a las niñas, los niños y sus familias y a la comunidad.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "3",
+        "text": "3.4\nManeja el sistema de archivo computacional dispuesto\npor la institución para procesar el registro de información\nreferente a las niñas y los niños, a sus familias y a la\ncomunidad.",
+        "pdf_page": 70
+      },
+      "similarity": 0.9899,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 267,
+      "module": "Salud en párvulos",
+      "ae": "M4-AE2",
+      "type": "Criterio",
+      "original": "2.2 Informa a quien corresponda irregularidades en la salud de los párvulos, de acuerdo a protocolos establecidos por la institución y las orientaciones de la educadora o el educador, en el marco de los derechos de los niños y niñas.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "2",
+        "text": "2.2\ninforma a quien corresponda irregularidades en la salud\nde los párvulos, de acuerdo a protocolos establecidos\npor la institución y las orientaciones de la educadora o\nel educador, en el marco de los derechos de los niños y\nlas niñas.",
+        "pdf_page": 84
+      },
+      "similarity": 0.9921,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 267,
+      "module": "Salud en párvulos",
+      "ae": "M4-AE2",
+      "type": "Criterio",
+      "original": "2.4 Fomenta la prevención de situaciones que afecten la salud de los párvulos, por medio de diversas instancias de sensibilización y promoción de interacciones positivas y pautas de crianza respetuosa, con un enfoque de derechos de los niños y niñas.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "2",
+        "text": "2.4\nFomenta la prevención de situaciones que afecten la\nsalud de los párvulos, por medio de diversas instancias de\nsensibilización y promoción de interacciones positivas y\npautas de crianza respetuosa, con un enfoque de derechos\nde los niños y las niñas.",
+        "pdf_page": 84
+      },
+      "similarity": 0.9927,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 269,
+      "module": "Actividades educativas para párvulos",
+      "ae": "M6-AE1",
+      "type": "AE",
+      "original": "Colabora en el proceso de evaluación de los aprendizajes y desarrollo biopsicosocial del párvulo de entre cero y seis años, verificando su diversidad y relación con el nivel de desarrollo evolutivo.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.3187,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 269,
+      "module": "Actividades educativas para párvulos",
+      "ae": "M6-AE3",
+      "type": "AE",
+      "original": "Colabora con la planificación de actividades educativas adecuadas a la etapa de desarrollo y aprendizaje de niños y niñas menores de seis años, que favorezcan su bienestar integral, acorde a las Bases Curriculares de la Educación Parvularia.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.4211,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 269,
+      "module": "Actividades educativas para párvulos",
+      "ae": "M6-AE3",
+      "type": "Criterio",
+      "original": "3.2 Colabora en la planificación de actividades de aprendizaje, considerando el nivel de desarrollo y aprendizaje, las características biopsicosociales y culturales y los derechos e intereses de los niños y las niñas.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.6108,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 269,
+      "module": "Actividades educativas para párvulos",
+      "ae": "M6-AE3",
+      "type": "Criterio",
+      "original": "3.4 Propone a la educadora o el educador ideas para formular indicadores de evaluación que consideren el nivel de desarrollo de los niños y las niñas, generando alternativas que atiendan la diversidad de necesidades de los párvulos.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.4224,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 269,
+      "module": "Actividades educativas para párvulos",
+      "ae": "M6-AE4",
+      "type": "Criterio",
+      "original": "4.4 Realiza actividades de aprendizaje inclusivas, potenciando su carácter lúdico de acuerdo a los principios pedagógicos y las especificaciones técnicas de la planificación (inicio, desarrollo y cierre), en un marco de desarrollo progresivo de autonomía.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "4",
+        "text": "4.4\nRealiza experiencias de aprendizaje inclusivas, potenciando\nsu carácter lúdico de acuerdo a los principios pedagógicos\ny las especificaciones técnicas de la planificación (inicio,\ndesarrollo y cierre), en un marco de desarrollo progresivo\nde autonomía.",
+        "pdf_page": 120
+      },
+      "similarity": 0.9553,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 269,
+      "module": "Actividades educativas para párvulos",
+      "ae": "M6-AE5",
+      "type": "AE",
+      "original": "Colabora en la evaluación de actividades educativas realizadas por las niñas y los niños, considerando Aprendizajes Esperados e indicadores establecidos en los instrumentos consensuados con el educador o la educadora.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.345,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 269,
+      "module": "Actividades educativas para párvulos",
+      "ae": "M6-AE5",
+      "type": "Criterio",
+      "original": "5.4 Emite un juicio evaluativo sobre el desarrollo y aprendizaje de los párvulos, haciendo referencia a principios pedagógicos y a los indicadores establecidos en la planificación, considerando las características de cada uno y los factores del contexto presentes en la experiencia.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.4588,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 270,
+      "module": "Expresión literaria y teatral con párvulos",
+      "ae": "M7-AE1",
+      "type": "AE",
+      "original": "Ofrece instancias pedagógicas de carácter integral de fomento de la literatura con recursos pertinentes a niños y niñas menores de seis años, aplicando metodología acorde a las características de los párvulos, según criterios consensuados con la educadora o el educador y principios pedagógicos.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.4024,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 270,
+      "module": "Expresión literaria y teatral con párvulos",
+      "ae": "M7-AE1",
+      "type": "Criterio",
+      "original": "1.2 Lee o narra diversos recursos literarios, tales como cuentos, leyendas y fábulas, y genera un repertorio amplio que le permita aportar a la experiencia educativa que se ofrece a los niños y las niñas.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.3817,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 270,
+      "module": "Expresión literaria y teatral con párvulos",
+      "ae": "M7-AE1",
+      "type": "Criterio",
+      "original": "1.3 Declama con fluidez una variedad de textos de tradición oral, tales como rimas, poesías y trabalenguas, utilizando voz alta y considerando las características y etapas de desarrollo y aprendizaje de las niñas y los niños",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.3929,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 270,
+      "module": "Expresión literaria y teatral con párvulos",
+      "ae": "M7-AE1",
+      "type": "Criterio",
+      "original": "1.4 Selecciona y utiliza una variedad de recursos literarios en las experiencias de aprendizaje con los niños y las niñas, según su etapa de desarrollo y los acuerdos explicitados en la planificación, mediando su uso según los principios pedagógicos.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.4223,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 270,
+      "module": "Expresión literaria y teatral con párvulos",
+      "ae": "M7-AE3",
+      "type": "AE",
+      "original": "Colabora en la evaluación de actividades educativas literarias y teatrales aplicadas a los niños y niñas, considerando Aprendizajes Esperados e indicadores establecidos en los instrumentos de evaluación.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": {
+        "type": "AE",
+        "source_ae": "3",
+        "text": "Colabora en la\nevaluación de\nexperiencias\neducativas literarias\ny teatrales aplicadas\na los niños y las\nniñas, considerando\naprendizajes\nEsperados e\nindicadores\nestablecidos en los\ninstrumentos de\nevaluación.",
+        "pdf_page": 142
+      },
+      "similarity": 0.9379,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 270,
+      "module": "Expresión literaria y teatral con párvulos",
+      "ae": "M7-AE3",
+      "type": "Criterio",
+      "original": "3.3 Aplica instrumentos cuantitativos y cualitativos de registro evaluativo de experiencias educativas literarias y teatrales, de acuerdo a lo establecido en la planificación y a la etapa del desarrollo de los niños y las niñas.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "3",
+        "text": "3.3\naplica instrumentos cuantitativos y cualitativos de\nregistro evaluativo de experiencias educativas literarias y\nteatrales, de acuerdo a lo establecido en la planificación,\na la etapa del desarrollo y el nivel de aprendizaje de los\nniños y las niñas.",
+        "pdf_page": 142
+      },
+      "similarity": 0.9447,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Atención de Párvulos",
+      "module_id": 270,
+      "module": "Expresión literaria y teatral con párvulos",
+      "ae": "M7-AE3",
+      "type": "Criterio",
+      "original": "3.4 Propone a la educadora o el educador ideas para formular indicadores de evaluación que consideren el nivel de desarrollo de los niños y las niñas, generando alternativas que atiendan a la diversidad de necesidades de los párvulos.",
+      "pdf": "docs/fuentes/tp-programas/atencion-parvulos.pdf",
+      "candidate": null,
+      "similarity": 0.3283,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "sin_candidato_suficiente",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+      "module_id": 436,
+      "module": "Mantenimiento y reparación industrial",
+      "ae": "M6-AE4",
+      "type": "Criterio",
+      "original": "4.6 Verifica el funcionamiento de las partes o piezas reparadas o repuestas en los sistemas mecanicos de un equipo o [B maquina, considerando las indicaciones y especificaciones del manual de fabricante, respetando las normas de seguridad y de proteccion del medio ambiente.",
+      "pdf": "docs/fuentes/tp-programas/mecanica-industrial.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "4",
+        "text": "4.6\nVerifica el funcionamiento de las partes o piezas reparadas\no repuestas en los sistemas mecánicos de un equipo o\nmáquina, considerando las indicaciones y especificaciones\ndel manual de fabricante, respetando las normas de\nseguridad y de protección del medio ambiente.",
+        "pdf_page": 105
+      },
+      "similarity": 0.9978,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+      "module_id": 437,
+      "module": "Detección de fallas en sistemas industriales",
+      "ae": "M7-AE2",
+      "type": "Criterio",
+      "original": "2.3 Determina el buen funcionamiento o falla del sistema mecanico,de equipos mecanicos,electromecanicos, hidraulicos y neumaticos de procesos industriales, considerando el adecuado uso de herramientas e instrumentos y las especificaciones téecnicas del manual del fabricante.",
+      "pdf": "docs/fuentes/tp-programas/mecanica-industrial.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "2",
+        "text": "2.3\nDetermina el buen funcionamiento o falla del sistema\nmecánico, de equipos mecánicos, electromecánicos,\nhidráulicos y neumáticos de procesos industriales,\nconsiderando el adecuado uso de herramientas e\ninstrumentos y las especificaciones técnicas del manual\ndel fabricante.",
+        "pdf_page": 116
+      },
+      "similarity": 0.9979,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+      "module_id": 439,
+      "module": "Montaje de equipos y sistemas industriales",
+      "ae": "M9-AE1",
+      "type": "Criterio",
+      "original": "1.1 Selecciona, prepara y organiza los medios, utiles, herramientas e instrumentos necesarios, para poner en marcha un equipo y comprobar el correcto funcionamiento de sus sistemas mecanicos, de acuerdo a especificaciones téecnicas del fabricante.",
+      "pdf": "docs/fuentes/tp-programas/mecanica-industrial.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "1",
+        "text": "1.1\nSelecciona, prepara y organiza los medios, útiles,\nherramientas e instrumentos necesarios, para poner en\nmarcha un equipo y comprobar el correcto funcionamiento\nde sus sistemas mecánicos, de acuerdo a especificaciones\ntécnicas del fabricante.",
+        "pdf_page": 135
+      },
+      "similarity": 0.9976,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    },
+    {
+      "course": "Mecánica Industrial, mención Mantenimiento Electromecánico",
+      "module_id": 439,
+      "module": "Montaje de equipos y sistemas industriales",
+      "ae": "M9-AE2",
+      "type": "Criterio",
+      "original": "2.1 Selecciona, prepara y organiza los medios, itiles, herramientas e instrumentos necesarios, para poner en marcha un equipo y comprobar el correcto funcionamiento de sus sistemas electromecanicos, de acuerdo a especificaciones téecnicas del fabricante.",
+      "pdf": "docs/fuentes/tp-programas/mecanica-industrial.pdf",
+      "candidate": {
+        "type": "Criterio",
+        "source_ae": "2",
+        "text": "2.1\nSelecciona, prepara y organiza los medios, útiles,\nherramientas e instrumentos necesarios, para poner en\nmarcha un equipo y comprobar el correcto funcionamiento de\nsus sistemas electromecánicos, de acuerdo a especificaciones\ntécnicas del fabricante.",
+        "pdf_page": 136
+      },
+      "similarity": 0.9929,
+      "source_criteria_for_repeated_ae": [],
+      "source_criteria_basis": null,
+      "source_ae_candidate": null,
+      "status": "candidato_documental_por_verificar",
+      "limit": "La similitud no valida asociaciones, vigencia normativa ni pertinencia pedagógica. No se modificó el curso."
+    }
+  ]
+}
