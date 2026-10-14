@@ -1,0 +1,27 @@
+.pd-content .pd-report-scope { padding:0; }
+.pd-scope-heading { position:relative; display:grid; grid-template-columns:60px minmax(0,1fr); column-gap:16px; padding:22px; min-height:130px; background:#f7fbff url('/static/portal-docente/acciones-docentes-sprite.png') center 40% / 100% 600% no-repeat; }
+.pd-app .pd-report-scope .pd-scope-heading h2 { grid-column:2; align-self:end; border:0; margin:0 0 8px; padding:0; font-size:28px !important; font-weight:700 !important; color:#123f75 !important; max-width:75%; }
+.pd-scope-heading p { grid-column:2; margin:0; max-width:72%; }
+.pd-scope-heading-icon { grid-column:1; grid-row:1 / 3; align-self:center; display:grid; place-items:center; width:60px; height:64px; border-radius:8px; background:#cce6ff; color:#197bd0; }
+.pd-scope-heading-icon svg { width:36px; height:36px; }
+.pd-report-grid[data-view="general"] .pd-report-scope .pd-facts { grid-template-columns:repeat(5,minmax(0,1fr)); gap:14px; margin:20px 0; }
+.pd-app .pd-report-grid[data-view="general"] .pd-report-scope .pd-facts > div { position:relative; display:grid; grid-template-columns:48px minmax(0,1fr); grid-template-rows:auto 1fr; gap:6px 12px; padding:18px 14px; border:1px solid #d9eafa; border-radius:8px; background:#edf6ff; min-width:0; }
+.pd-report-scope .pd-scope-icon { display:grid; place-items:center; grid-row:1 / 3; align-self:center; width:48px; height:54px; border-radius:50%; background:#d6ebff; color:#1774c5; }
+.pd-scope-icon svg { width:30px; height:30px; }
+.pd-app .pd-report-scope .pd-facts dt { align-self:end; grid-column:2; font-size:14px !important; letter-spacing:0; }
+.pd-app .pd-report-scope .pd-facts dd { grid-column:2; font-size:30px !important; font-weight:700 !important; line-height:1.25 !important; color:#176cba !important; overflow-wrap:anywhere; }
+.pd-app .pd-report-scope .pd-facts > div:first-child dd,.pd-app .pd-report-scope .pd-facts > div:last-child dd { font-size:20px !important; }
+.pd-app .pd-report-scope .pd-facts > div:nth-child(2) { background:#fff5ec; border-color:#ffe4cf; }
+.pd-app .pd-report-scope .pd-facts > div:nth-child(2) dd { color:#a45413 !important; }
+.pd-report-scope .pd-facts > div:nth-child(2) .pd-scope-icon { background:#ffe5cf; color:#c57426; }
+.pd-app .pd-report-scope .pd-facts > div:nth-child(3) { background:#ecfaf4; border-color:#d5f1e5; }
+.pd-app .pd-report-scope .pd-facts > div:nth-child(3) dd { color:#267a59 !important; }
+.pd-report-scope .pd-facts > div:nth-child(3) .pd-scope-icon { background:#d4f2e5; color:#158468; }
+.pd-app .pd-report-scope .pd-facts > div:nth-child(4) { background:#f4eeff; border-color:#e5dcfa; }
+.pd-app .pd-report-scope .pd-facts > div:nth-child(4) dd { color:#7444ba !important; }
+.pd-report-scope .pd-facts > div:nth-child(4) .pd-scope-icon { background:#e8dbff; color:#7444ba; }
+.pd-report-scope .pd-scope-note { position:relative; padding:18px 20px 18px 52px; border:1px solid #d5e9fd; border-radius:8px; background:#eaf4ff; }
+.pd-scope-note::before { content:'i'; position:absolute; left:18px; top:20px; width:22px; height:22px; display:grid; place-items:center; background:#247bc6; color:#fff; border-radius:50%; font-weight:700; }
+@media (max-width:1400px) { .pd-report-grid[data-view="general"] .pd-report-scope .pd-facts { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media (max-width:800px) { .pd-report-grid[data-view="general"] .pd-report-scope .pd-facts { grid-template-columns:repeat(2,minmax(0,1fr)); } .pd-scope-heading { background-image:none; } .pd-scope-heading p,.pd-app .pd-report-scope .pd-scope-heading h2 { max-width:100%; } }
+@media (max-width:480px) { .pd-report-grid[data-view="general"] .pd-report-scope .pd-facts { grid-template-columns:minmax(0,1fr); } .pd-scope-heading { padding:14px 0; grid-template-columns:44px minmax(0,1fr); gap:10px; } .pd-scope-heading-icon { width:44px; height:48px; } .pd-app .pd-report-scope .pd-scope-heading h2 { font-size:22px !important; } }

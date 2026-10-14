@@ -1044,6 +1044,20 @@ function draw() {
   const reportResults = document.getElementById('pd-report-results');
   if (reportResults) {
     reportResults.dataset.view = reportView.tab;
+    if(reportView.tab==='general') {
+      const scope=reportResults.querySelector('.pd-report-panel');
+      scope.classList.add('pd-report-scope');
+      const heading=document.createElement('header');heading.className='pd-scope-heading';
+      heading.insertAdjacentHTML('beforeend',`<span class="pd-scope-heading-icon" aria-hidden="true">${reviewIcon('reportes')}</span>`);
+      const title=scope.querySelector('h2');heading.append(title);
+      heading.insertAdjacentHTML('beforeend','<p>Resumen de la información incluida en este informe. Cada salida muestra el alcance del curso y módulo seleccionado.</p>');
+      scope.prepend(heading);
+      const icons=['cursos','oa-ae','estudiantes','reportes','oa-ae'];
+      scope.querySelectorAll('.pd-facts > div').forEach((item,index)=>{
+        item.insertAdjacentHTML('afterbegin',`<span class="pd-scope-icon" aria-hidden="true">${reviewIcon(icons[index])}</span>`);
+      });
+      scope.querySelector(':scope > p').classList.add('pd-scope-note');
+    }
     reportResults.closest('.pd-report').dataset.view = reportView.tab;
     const tabLabel = REPORT_TABS.find(([id])=>id===reportView.tab)?.[1] || 'Reportes';
     reportResults.insertAdjacentHTML('beforebegin', `<header class="pd-report-view-heading"><span class="pd-report-view-icon" aria-hidden="true">${reviewIcon(reportView.tab==='exams'?'reportes':'oa-ae')}</span><h1>${esc(tabLabel)}</h1></header>`);
