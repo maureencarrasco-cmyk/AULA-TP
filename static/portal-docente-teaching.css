@@ -1,0 +1,43 @@
+.pd-teaching-workspace { margin-top:20px; }
+.pd-layout-planning > .pd-teaching-workspace { grid-column:1 / -1; min-width:0; }
+.pd-teaching-heading { padding:22px 20px; min-height:116px; background:#f7fbff url('/static/portal-docente/acciones-rapidas-escritorio.png') right center / cover no-repeat; }
+.pd-teaching-heading h3 { display:flex; align-items:center; gap:14px; margin:0 0 8px; max-width:70%; }
+.pd-app .pd-teaching-heading h3 { font-size:28px !important; font-weight:700 !important; color:#123f75 !important; }
+.pd-teaching-heading h3 > span { display:grid; place-items:center; width:54px; height:54px; flex:0 0 54px; border-radius:8px; background:#ffe2c8; color:#e97b29; }
+.pd-teaching-heading h3 svg { width:32px; height:32px; }
+.pd-teaching-heading p { max-width:68%; margin:0; }
+.pd-teaching-content { display:grid; grid-template-columns:minmax(0,3fr) minmax(270px,1fr); gap:24px; align-items:start; }
+.pd-teaching-main { min-width:0; }
+.pd-content .pd-teaching-main .pd-course-editor { margin:0; padding:18px 0; }
+.pd-teaching-main .pd-course-editor fieldset { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:0; padding:0; border:0; min-width:0; }
+.pd-teaching-main .pd-course-editor label[data-field] { display:grid; grid-template-columns:minmax(230px,40%) minmax(0,1fr); align-items:start; gap:16px; margin:0; padding:12px 0; border-bottom:1px solid #dbeafa; }
+.pd-teaching-label { display:flex; align-items:start; gap:14px; min-width:0; }
+.pd-teaching-label > span:last-child { display:grid; gap:6px; }
+.pd-app .pd-teaching-label strong { font-size:17px; line-height:1.25; font-weight:600; color:#123f75; }
+.pd-teaching-label small { display:block; }
+.pd-teaching-icon { display:grid; place-items:center; flex:0 0 48px; height:54px; background:#deedff; border-radius:8px; color:#1774cd; }
+.pd-teaching-icon svg { width:30px; height:30px; }
+[data-field="sequence"] .pd-teaching-icon { background:#ffead9; color:#df7625; }
+[data-field="instrument"] .pd-teaching-icon { background:#dff6ef; color:#16947d; }
+[data-field="resources"] .pd-teaching-icon { background:#efe5ff; color:#7d4cca; }
+.pd-teaching-main .pd-course-editor textarea { width:100%; min-height:88px; height:88px; padding:12px; background:#fbfdff; resize:vertical; }
+.pd-teaching-main .pd-course-editor :is(input,textarea,select):focus-visible { outline:3px solid #80baf0; outline-offset:2px; }
+.pd-teaching-main .pd-course-editor label[data-field="start_date"],.pd-teaching-main .pd-course-editor label[data-field="end_date"],.pd-teaching-main .pd-course-editor label[data-field="status"] { grid-template-columns:minmax(0,1fr); border:0; padding:8px 0; }
+.pd-teaching-main .pd-course-editor :is(input,select) { width:100%; min-width:0; height:44px; }
+.pd-teaching-main .pd-course-editor button[type="submit"] { justify-self:start; width:auto; min-height:44px; padding:10px 18px; }
+.pd-teaching-main [data-document-message] { margin:12px 0 0; padding:10px 12px; background:#edf5ff; border:1px solid #cfe3fa; border-radius:6px; }
+.pd-content .pd-teaching-main .pd-course-history { margin:0; padding:0; }
+.pd-teaching-main .pd-course-history summary { padding:12px; background:#e7f1fc; border-radius:6px; }
+.pd-teaching-guidance { display:grid; gap:14px; padding-top:18px; }
+.pd-teaching-guidance article { padding:16px; border:1px solid #dfebf8; border-radius:8px; background:#fff8f2; }
+.pd-teaching-guidance article.is-blue { background:#f1f7ff; }
+.pd-teaching-guidance article.is-mint { background:#eaf8f3; }
+.pd-teaching-guidance h3 { margin:0 0 14px; }
+.pd-app .pd-teaching-guidance h3 { font-size:17px !important; }
+.pd-teaching-guidance ul { margin:0; padding:0; list-style:none; }
+.pd-teaching-guidance li { position:relative; padding-left:24px; margin:10px 0; }
+.pd-teaching-guidance li::before { content:''; position:absolute; left:0; top:7px; width:10px; height:10px; border-radius:50%; background:#ff963d; }
+.pd-teaching-guidance .is-blue li::before { background:#60a3eb; }
+.pd-teaching-guidance p { margin:0; }
+@media (max-width:1200px) { .pd-teaching-content { grid-template-columns:minmax(0,1fr); } .pd-teaching-guidance { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media (max-width:760px) { .pd-teaching-main .pd-course-editor label[data-field] { grid-template-columns:minmax(0,1fr); } .pd-teaching-guidance { grid-template-columns:minmax(0,1fr); } .pd-teaching-heading { background-image:none; padding:18px 0; } .pd-teaching-heading h3,.pd-teaching-heading p { max-width:100%; } .pd-teaching-main .pd-course-editor fieldset { grid-template-columns:minmax(0,1fr); } .pd-teaching-main .pd-course-editor label { grid-column:1 !important; } }

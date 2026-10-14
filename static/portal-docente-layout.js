@@ -223,7 +223,47 @@
     const original=climate?{resumen:panel,cursos,estudiantes:students,'oa-ae':learning,cumplimiento:compliance}[id]:()=>id==='oa-ae'?aeArticles(data.modules)+sealForm():'<p>El detalle heredado de Refrigeración no se aplica a esta especialidad. La información del curso seleccionado se muestra arriba.</p>';
     return `<div class="pd-report pd-layout" data-layout-page="${id}">${header(id)}${layouts[id](data)}${id==='estudiantes'?supportEditor(data):''}<details class="pd-report-method"><summary>Lectura detallada original, criterios y controles del portal</summary><p class="pd-note">Este detalle conserva el alcance original completo de la vista, sin el filtro de módulo de arriba.</p>${original()}</details></div>`;
   }
+  function decorateTeachingPlan() {
+    const editor=document.querySelector('.pd-course-editor');
+    if(!editor || editor.closest('.pd-teaching-workspace'))return;
+    const workspace=document.createElement('div');
+    workspace.className='pd-teaching-workspace';
+    editor.before(workspace);
+    const heading=editor.querySelector('h3');
+    const hero=document.createElement('header');
+    hero.className='pd-teaching-heading';
+    hero.append(heading);
+    hero.insertAdjacentHTML('beforeend','<p>Diseña y organiza la ruta de aprendizaje de tu curso, considerando los OA, AE y criterios de evaluación.</p>');
+    workspace.append(hero);
+    const content=document.createElement('div');content.className='pd-teaching-content';workspace.append(content);
+    const column=document.createElement('div');column.className='pd-teaching-main';content.append(column);column.append(editor);
+    const history=workspace.nextElementSibling;
+    if(history?.matches('.pd-course-history'))column.append(history);
+    const descriptions={
+      objective:['oa-ae','Indica los OA, AE y criterios que abordarás en este plan.'],
+      sequence:['cursos','Describe la secuencia de actividades y experiencias que realizarán los estudiantes.'],
+      instrument:['reportes','Indica los instrumentos de evaluación y la evidencia de aprendizaje que se espera.'],
+      resources:['oa-ae','Lista los recursos y materiales que utilizarás en la implementación.'],
+      adaptations:['cumplimiento','Describe los apoyos y ajustes para diversificar y responder a las necesidades de tus estudiantes.']
+    };
+    editor.querySelectorAll('label[data-field]').forEach(label=>{
+      const control=label.querySelector('textarea,input,select');
+      if(!control)return;
+      const title=label.firstChild.textContent;
+      const [icon,description]=descriptions[label.dataset.field]||['cursos',''];
+      label.firstChild.remove();
+      label.insertAdjacentHTML('afterbegin',`<span class="pd-teaching-label"><span class="pd-teaching-icon" aria-hidden="true">${reviewIcon(icon)}</span><span><strong>${esc(title)}</strong>${description?`<small id="pd-plan-help-${label.dataset.field}">${esc(description)}</small>`:''}</span></span>`);
+      control.setAttribute('aria-label',title);
+      if(description)control.setAttribute('aria-describedby',`pd-plan-help-${label.dataset.field}`);
+    });
+    const aside=document.createElement('aside');aside.className='pd-teaching-guidance';aside.setAttribute('aria-label','Orientaciones para la planificación');
+    aside.innerHTML=`<article class="is-orange"><h3>Consejos para tu plan de enseñanza</h3><ul><li>Vincula los OA, AE y criterios de evaluación.</li><li>Define una secuencia de actividades clara y progresiva.</li><li>Considera instrumentos y evidencias realistas.</li><li>Incluye recursos pertinentes al contexto TP.</li><li>Identifica apoyos y ajustes para todos los estudiantes.</li></ul></article><article class="is-blue"><h3>¿Qué puedes incluir?</h3><ul><li>Actividades por estación</li><li>Uso del simulador y práctica</li><li>Trabajo colaborativo y proyectos</li><li>Evaluaciones formativas y sumativas</li><li>Conexión con la Misión Laboral</li><li>Recursos digitales y materiales físicos</li></ul></article><article class="is-mint"><h3>Objetivo</h3><p>Planificar experiencias de aprendizaje significativas que desarrollen las habilidades técnicas y transversales de tus estudiantes, en coherencia con el currículo TP.</p></article>`;
+    content.append(aside);
+    const planning=workspace.closest('.pd-layout-planning');
+    if(planning)planning.append(workspace);
+  }
   function bind() {
+    decorateTeachingPlan();
     const owner=String(state.user?.id||state.user?.role||'');
     if(owner!==draftOwner){drafts.clear();draftOwner=owner;}
     const select=document.getElementById('pd-layout-module');
