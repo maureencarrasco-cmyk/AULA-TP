@@ -1,0 +1,170 @@
+[
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "resumen",
+    "title": "Panel general",
+    "width": 1280
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "cursos",
+    "title": "Cursos / Planificación",
+    "width": 1280
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "estudiantes",
+    "title": "Estudiantes",
+    "width": 1280
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "oa-ae",
+    "title": "OA, AE y criterios de evaluación",
+    "width": 1280
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "cumplimiento",
+    "title": "Cumplimiento",
+    "width": 1280
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "reportes",
+    "title": "Reportes",
+    "width": 1280
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "resumen",
+    "title": "Panel general",
+    "width": 768
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "cursos",
+    "title": "Cursos / Planificación",
+    "width": 768
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "estudiantes",
+    "title": "Estudiantes",
+    "width": 768
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "oa-ae",
+    "title": "OA, AE y criterios de evaluación",
+    "width": 768
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "cumplimiento",
+    "title": "Cumplimiento",
+    "width": 768
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "reportes",
+    "title": "Reportes",
+    "width": 768
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "resumen",
+    "title": "Panel general",
+    "width": 390
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "cursos",
+    "title": "Cursos / Planificación",
+    "width": 390
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "estudiantes",
+    "title": "Estudiantes",
+    "width": 390
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "oa-ae",
+    "title": "OA, AE y criterios de evaluación",
+    "width": 390
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "cumplimiento",
+    "title": "Cumplimiento",
+    "width": 390
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "reportes",
+    "title": "Reportes",
+    "width": 390
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "resumen",
+    "title": "Panel general",
+    "width": 320
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "cursos",
+    "title": "Cursos / Planificación",
+    "width": 320
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "estudiantes",
+    "title": "Estudiantes",
+    "width": 320
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "oa-ae",
+    "title": "OA, AE y criterios de evaluación",
+    "width": 320
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "cumplimiento",
+    "title": "Cumplimiento",
+    "width": 320
+  },
+  {
+    "login": 1,
+    "overflow": false,
+    "route": "reportes",
+    "title": "Reportes",
+    "width": 320
+  }
+]

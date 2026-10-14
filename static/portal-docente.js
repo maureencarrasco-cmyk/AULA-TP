@@ -1037,6 +1037,29 @@ function draw() {
   document.getElementById('pd-main').insertAdjacentHTML('afterbegin', state.cohort
     ? '<details class="pd-report-method"><summary>Acceso docente con datos reales</summary><form id="pd-login"><label>Usuario<input name="username" autocomplete="username" required></label><label>Contraseña<input name="password" type="password" autocomplete="current-password" required></label><button type="submit">Iniciar sesión</button><p id="pd-login-error" role="alert"></p></form></details>'
     : '<p class="pd-note">Sesión docente · Datos del campus <button type="button" id="pd-logout">Cerrar sesión</button></p>');
+  // Move live controls, rather than recreating them, into the shared page banner.
+  const main = document.getElementById('pd-main');
+  const heading = main.querySelector('.pd-report-heading');
+  if (heading) {
+    const banner = document.createElement('header');
+    banner.className = 'pd-unified-banner';
+    const access = main.firstElementChild;
+    if (access?.matches('.pd-report-method,.pd-note')) {
+      access.classList.add('pd-banner-access');
+      const summary = access.querySelector('summary');
+      if (summary) summary.insertAdjacentHTML('afterbegin', `<span class="pd-banner-user-icon" aria-hidden="true">${ICONS.estudiantes}</span>`);
+      banner.append(access);
+    }
+    const preview = main.querySelector(':scope > .pd-report-demo');
+    if (preview && state.preview) {
+      preview.classList.add('pd-banner-notice');
+      banner.append(preview);
+    }
+    const title = heading.querySelector(':scope > div');
+    if (title) { title.classList.add('pd-banner-title'); banner.append(title); }
+    main.prepend(banner);
+    heading.classList.add('pd-unified-filters');
+  }
   const login=document.getElementById('pd-login');
   if(login) login.onsubmit=async event=>{
     event.preventDefault();
