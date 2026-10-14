@@ -1,0 +1,26 @@
+.pd-content .pd-report-grid[data-view="stations"] { grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:24px; }
+.pd-report-grid[data-view="stations"] > .pd-report-panel { padding:18px 0; }
+.pd-report-grid[data-view="stations"] > .pd-report-panel > h2 { padding-left:14px; border-left:4px solid #35a3ed; }
+.pd-station-report-row { grid-template-columns:40px 28px minmax(0,1.2fr) minmax(80px,1fr) 62px; gap:10px; }
+.pd-station-report-row .pd-module-report-code { min-height:38px; font-size:16px; }
+.pd-station-report-icon { color:var(--module-ink); display:grid; place-items:center; }
+.pd-station-report-icon svg { width:26px; height:26px; }
+.pd-station-report-note { position:relative; padding:16px 16px 16px 46px; border-radius:8px; background:#eaf4ff; }
+.pd-station-report-note::before { content:'i'; position:absolute; left:16px; top:18px; width:20px; height:20px; display:grid; place-items:center; border-radius:50%; background:#197bd0; color:#fff; font-weight:700; }
+.pd-station-distribution-report .pd-report-distribution { display:grid; grid-template-columns:180px minmax(0,1fr); gap:20px; padding:18px 0; }
+.pd-station-distribution-report .pd-report-donut { width:180px; height:180px; }
+.pd-station-distribution-report .pd-report-donut > div { width:132px; height:132px; background:#f7fbff; }
+.pd-station-distribution-report .pd-report-distribution ul { min-width:0; }
+.pd-station-distribution-report .pd-report-distribution li { display:grid; grid-template-columns:14px minmax(0,1fr) auto; gap:10px; margin:12px 0; }
+.pd-station-distribution-report .pd-report-distribution li i { width:14px; height:14px; }
+.pd-station-distribution-report .pd-report-distribution li b { padding:10px 8px; background:#eaf8f1; color:#267a59; border-radius:6px; font-size:14px; }
+.pd-station-distribution-report .pd-report-distribution li:nth-child(2) b { background:#fff5e1; color:#9c6700; }
+.pd-station-distribution-report .pd-report-distribution li:nth-child(3) b { background:#fff0e9; color:#bb512b; }
+.pd-station-distribution-report .pd-report-distribution li:nth-child(4) b { background:#eaf0f8; color:#526b89; }
+.pd-station-report-total { display:flex; gap:18px; align-items:center; padding:18px; background:#eaf4ff; border-radius:8px; margin-top:14px; }
+.pd-station-report-total > span { display:grid; place-items:center; width:58px; height:58px; border-radius:50%; background:#d2e9ff; color:#1679d2; }
+.pd-station-report-total svg { width:34px; height:34px; }
+.pd-station-report-total > div { display:grid; gap:6px; }
+.pd-station-report-total strong { color:#147bd3; font-size:30px; line-height:1.25; }
+@media (max-width:1200px) { .pd-content .pd-report-grid[data-view="stations"] { grid-template-columns:minmax(0,1fr); } }
+@media (max-width:540px) { .pd-station-report-row { grid-template-columns:36px 24px minmax(0,1fr) 58px; } .pd-station-report-row .pd-module-report-name { grid-column:3 / 5; } .pd-station-report-row .pd-module-report-code { grid-row:1 / 3; } .pd-station-report-icon { grid-row:1 / 3; } .pd-station-report-row .pd-module-report-track { grid-column:3; } .pd-station-report-row > strong { grid-column:4; } .pd-station-distribution-report .pd-report-distribution { grid-template-columns:minmax(0,1fr); justify-items:center; } .pd-station-distribution-report .pd-report-distribution ul { width:100%; } }
