@@ -1,0 +1,31 @@
+.pd-content .pd-report-grid[data-view="learning"] { grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:24px; }
+.pd-report-grid[data-view="learning"] > .pd-report-panel { padding:18px 0; min-width:0; }
+.pd-report-grid[data-view="learning"] > .pd-report-panel > h2 { padding-left:14px; border-left:4px solid #3199e4; }
+.pd-learning-report-row { grid-template-columns:minmax(80px,.75fr) 40px minmax(90px,2fr) 64px; }
+.pd-learning-report-row .pd-module-report-code { font-size:15px; padding:8px 6px; overflow-wrap:anywhere; }
+.pd-learning-report-row:nth-child(6n) { --module-ink:#3e9c50; --module-tint:#eff9f0; --module-badge:#d9f1dd; }
+.pd-learning-module { color:#234e78; font-size:16px; font-weight:600; }
+.pd-learning-report-row .pd-module-report-code { grid-column:1; grid-row:1; }
+.pd-learning-report-row .pd-module-report-track { grid-column:3; grid-row:1; }
+.pd-learning-report-row > strong { grid-column:4; grid-row:1; }
+.pd-learning-report-footer { display:flex; align-items:center; gap:16px; margin-top:18px; flex-wrap:wrap; }
+.pd-learning-scope-note { margin:0; padding:14px 14px 14px 40px; position:relative; background:#eaf4ff; border-radius:8px; flex:1 1 230px; }
+.pd-learning-scope-note::before { content:'i'; position:absolute; left:12px; top:17px; width:20px; height:20px; border-radius:50%; background:#197bd0; display:grid; place-items:center; color:#fff; font-weight:700; }
+.pd-content .pd-learning-open { display:flex; align-items:center; justify-content:center; gap:10px; padding:12px 16px; border:1px solid #1c8ae1; border-radius:8px; text-decoration:none; font-weight:600; min-height:44px; }
+.pd-learning-open svg,.pd-learning-reference-link svg { width:22px; height:22px; flex:0 0 22px; }
+.pd-learning-caution { margin:0 0 20px; }
+.pd-learning-reference { display:grid; grid-template-columns:54px minmax(0,1fr); gap:14px; padding:22px 26% 22px 18px; background:#f5f0ff url('/static/portal-docente/acciones-docentes-sprite.png') right 60% / 100% 600% no-repeat; border-radius:8px; min-height:220px; align-content:center; }
+.pd-learning-reference-icon { width:54px; height:64px; display:grid; place-items:center; background:#e5d9ff; color:#7847c7; border-radius:8px; }
+.pd-learning-reference-icon svg { width:34px; height:34px; }
+.pd-app .pd-learning-reference h3 { margin:0 0 8px; font-size:18px !important; }
+.pd-learning-reference p { margin:0; }
+.pd-content .pd-learning-reference-link { grid-column:1 / -1; display:flex; align-items:center; justify-content:center; gap:12px; min-height:48px; padding:12px 16px; border-radius:8px; background:#7046c6; color:#fff; text-decoration:none; font-size:15px; font-weight:600; }
+.pd-content .pd-learning-reference-link:hover { color:#fff; background:#5f38b2; }
+.pd-learning-destinations { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:18px; }
+.pd-content .pd-learning-destinations a { display:flex; align-items:center; gap:10px; padding:14px 12px; min-height:90px; background:#edf6ff; border-radius:8px; color:#234e78; text-decoration:none; font-size:14px; }
+.pd-learning-destinations a:nth-child(2) { background:#edf9f2; }
+.pd-learning-destinations a:nth-child(3) { background:#fff4e9; }
+.pd-learning-destinations img { flex:0 0 30px; opacity:.7; }
+.pd-content :is(.pd-learning-open,.pd-learning-reference-link,.pd-learning-destinations a):focus-visible { outline:3px solid #1479cd; outline-offset:3px; }
+@media (max-width:1200px) { .pd-content .pd-report-grid[data-view="learning"] { grid-template-columns:minmax(0,1fr); } }
+@media (max-width:640px) { .pd-learning-reference { padding:18px; background-image:none; } .pd-learning-destinations { grid-template-columns:minmax(0,1fr); } .pd-learning-destinations a { min-height:64px; } .pd-learning-report-row { grid-template-columns:minmax(70px,1fr) 32px minmax(50px,1.5fr) 58px; gap:8px; } }
