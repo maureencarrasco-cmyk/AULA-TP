@@ -48,3 +48,25 @@
   .pd-unified-banner::after { content:''; display:block; height:140px; margin-top:16px; background:url('/static/portal-docente/panel-docente-banner-reference.png') right center / auto 180px no-repeat; }
 }
 @media print { .pd-unified-banner { min-height:0; padding:0; background:none; } .pd-banner-access { display:none; } .pd-banner-title { max-width:100%; } }
+
+.pd-unified-banner .pd-banner-access[open] { grid-column:1 / -1 !important; }
+.pd-unified-banner .pd-banner-access[open] summary { height:auto; min-height:60px; }
+.pd-unified-banner .pd-banner-access form { background:#f3f9ff; }
+#pd-login { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto; align-items:center; gap:18px; }
+#pd-login .pd-login-field { display:flex; align-items:center; gap:12px; min-width:0; }
+#pd-login .pd-login-field > span:first-child { display:flex; align-items:center; gap:10px; flex-shrink:0; color:#536b86; }
+#pd-login img { flex-shrink:0; opacity:.65; }
+#pd-login input { min-width:0; width:100%; height:52px; padding:12px 14px; background:#fff; border:1px solid #a9b4c0; border-radius:8px; box-sizing:border-box; }
+#pd-login input::placeholder { color:#64748b; opacity:1; }
+#pd-login input:focus-visible { outline:3px solid #8fc2f2; outline-offset:2px; }
+#pd-login .pd-login-password { position:relative; flex:1; min-width:0; }
+#pd-login .pd-login-password input { padding-right:48px; }
+#pd-login #pd-password-toggle { position:absolute; right:4px; top:4px; height:44px; width:40px; display:grid; place-items:center; padding:0; border:0; border-radius:6px; background:transparent; cursor:pointer; }
+#pd-login .pd-login-submit { display:flex; align-items:center; justify-content:center; gap:12px; min-height:52px; padding:12px 20px; border:0; border-bottom:3px solid #e87918; border-radius:8px; background:#ff8d27; color:#fff; white-space:nowrap; cursor:pointer; }
+#pd-login .pd-login-submit img { filter:invert(1); opacity:1; }
+#pd-login button:focus-visible { outline:3px solid #234e78; outline-offset:3px; }
+#pd-login .pd-login-submit:disabled { opacity:.6; cursor:wait; }
+#pd-login-error { grid-column:1 / -1; margin:0; color:#c04444 !important; }
+#pd-login-error:empty { display:none; }
+@media (max-width:1200px) { #pd-login .pd-login-field { flex-direction:column; align-items:stretch; } }
+@media (max-width:640px) { #pd-login { grid-template-columns:minmax(0,1fr); gap:16px; } #pd-login .pd-login-submit { width:100%; } }

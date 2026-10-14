@@ -1035,7 +1035,7 @@ function draw() {
   if(state.preview)document.getElementById('pd-main').insertAdjacentHTML('afterbegin','<p class="pd-report-demo" role="status">Entorno local de pruebas. Las cuentas y matrículas son ficticias; el catálogo procede de los contenidos existentes.</p>');
   if(!state.cohort && !state.courses.length) document.getElementById('pd-main').insertAdjacentHTML('afterbegin','<p class="pd-report-demo" role="status">No tienes cursos asignados. Solicita al administrador del establecimiento que registre tu asignación; no se muestran datos de otros cursos.</p>');
   document.getElementById('pd-main').insertAdjacentHTML('afterbegin', state.cohort
-    ? '<details class="pd-report-method"><summary>Acceso docente con datos reales</summary><form id="pd-login"><label>Usuario<input name="username" autocomplete="username" required></label><label>Contraseña<input name="password" type="password" autocomplete="current-password" required></label><button type="submit">Iniciar sesión</button><p id="pd-login-error" role="alert"></p></form></details>'
+    ? '<details class="pd-report-method"><summary>Acceso docente con datos reales</summary><form id="pd-login"><label class="pd-login-field"><span><img src="/static/portal-docente/login-user-round.svg" alt="" width="26" height="26">Usuario</span><input name="username" placeholder="Ingresa tu usuario" autocomplete="username" required></label><label class="pd-login-field"><span><img src="/static/portal-docente/login-lock-keyhole.svg" alt="" width="26" height="26">Contraseña</span><span class="pd-login-password"><input id="pd-login-password" name="password" type="password" placeholder="Ingresa tu contraseña" autocomplete="current-password" required><button type="button" id="pd-password-toggle" aria-label="Mostrar contraseña" title="Mostrar contraseña" aria-controls="pd-login-password" aria-pressed="false"><img src="/static/portal-docente/login-eye.svg" alt="" width="24" height="24"></button></span></label><button class="pd-login-submit" type="submit">Iniciar sesión<img src="/static/portal-docente/login-arrow-right.svg" alt="" width="26" height="26"></button><p id="pd-login-error" role="alert"></p></form></details>'
     : '<p class="pd-note">Sesión docente · Datos del campus <button type="button" id="pd-logout">Cerrar sesión</button></p>');
   // Move live controls, rather than recreating them, into the shared page banner.
   const main = document.getElementById('pd-main');
@@ -1047,7 +1047,7 @@ function draw() {
     if (access?.matches('.pd-report-method,.pd-note')) {
       access.classList.add('pd-banner-access');
       const summary = access.querySelector('summary');
-      if (summary) summary.insertAdjacentHTML('afterbegin', `<span class="pd-banner-user-icon" aria-hidden="true">${ICONS.estudiantes}</span>`);
+      if (summary) summary.insertAdjacentHTML('afterbegin', '<span class="pd-banner-user-icon" aria-hidden="true"><img src="/static/portal-docente/login-user-round.svg" alt="" width="30" height="30"></span>');
       banner.append(access);
     }
     const preview = main.querySelector(':scope > .pd-report-demo');
@@ -1061,9 +1061,18 @@ function draw() {
     heading.classList.add('pd-unified-filters');
   }
   const login=document.getElementById('pd-login');
+  const passwordToggle=document.getElementById('pd-password-toggle');
+  if(passwordToggle) passwordToggle.onclick=()=>{
+    const input=document.getElementById('pd-login-password');
+    const show=input.type==='password';
+    input.type=show?'text':'password';
+    passwordToggle.setAttribute('aria-pressed',String(show));
+    passwordToggle.setAttribute('aria-label',show?'Ocultar contraseña':'Mostrar contraseña');
+    passwordToggle.title=show?'Ocultar contraseña':'Mostrar contraseña';
+  };
   if(login) login.onsubmit=async event=>{
     event.preventDefault();
-    const button=login.querySelector('button');button.disabled=true;
+    const button=login.querySelector('button[type="submit"]');button.disabled=true;
     try {
       const result=await post('/api/login',Object.fromEntries(new FormData(login)));
       if(result.user?.role!=='teacher') throw new Error('Se requiere una cuenta docente.');

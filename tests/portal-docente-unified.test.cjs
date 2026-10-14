@@ -18,3 +18,10 @@ test('continuous workspace remains responsive and preserves readable headings', 
   assert.ok(css.includes('box-shadow:none'));
   assert.ok(css.includes('.pd-app .pd-banner-title h1'));
 });
+test('password toggle does not submit and pending state targets only login submission', () => {
+  const script = fs.readFileSync(path.join(root, 'static/portal-docente.js'), 'utf8');
+  assert.ok(script.includes('type="button" id="pd-password-toggle"'));
+  assert.ok(script.includes("input.type=show?'text':'password'"));
+  assert.ok(script.includes("login.querySelector('button[type=\"submit\"]')"));
+  assert.ok(script.includes('autocomplete="current-password"'));
+});
