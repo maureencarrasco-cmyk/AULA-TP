@@ -1,0 +1,226 @@
+[
+  {
+    "heading": "Resumen general",
+    "icons": 7,
+    "label": "Resumen general",
+    "metrics": 0,
+    "overflow": false,
+    "width": 1600
+  },
+  {
+    "heading": "Por módulo",
+    "icons": 7,
+    "label": "Por módulo",
+    "metrics": 0,
+    "overflow": false,
+    "width": 1600
+  },
+  {
+    "heading": "Por estación",
+    "icons": 7,
+    "label": "Por estación",
+    "metrics": 0,
+    "overflow": false,
+    "width": 1600
+  },
+  {
+    "heading": "Por OA y AE",
+    "icons": 7,
+    "label": "Por OA y AE",
+    "metrics": 0,
+    "overflow": false,
+    "width": 1600
+  },
+  {
+    "heading": "Por estudiante",
+    "icons": 7,
+    "label": "Por estudiante",
+    "metrics": 0,
+    "overflow": false,
+    "width": 1600
+  },
+  {
+    "heading": "Evaluaciones",
+    "icons": 7,
+    "label": "Evaluaciones",
+    "metrics": 3,
+    "overflow": false,
+    "width": 1600
+  },
+  {
+    "heading": "Comparativos",
+    "icons": 7,
+    "label": "Comparativos",
+    "metrics": 0,
+    "overflow": false,
+    "width": 1600
+  },
+  {
+    "heading": "Resumen general",
+    "icons": 7,
+    "label": "Resumen general",
+    "metrics": 0,
+    "overflow": false,
+    "width": 768
+  },
+  {
+    "heading": "Por módulo",
+    "icons": 7,
+    "label": "Por módulo",
+    "metrics": 0,
+    "overflow": false,
+    "width": 768
+  },
+  {
+    "heading": "Por estación",
+    "icons": 7,
+    "label": "Por estación",
+    "metrics": 0,
+    "overflow": false,
+    "width": 768
+  },
+  {
+    "heading": "Por OA y AE",
+    "icons": 7,
+    "label": "Por OA y AE",
+    "metrics": 0,
+    "overflow": false,
+    "width": 768
+  },
+  {
+    "heading": "Por estudiante",
+    "icons": 7,
+    "label": "Por estudiante",
+    "metrics": 0,
+    "overflow": false,
+    "width": 768
+  },
+  {
+    "heading": "Evaluaciones",
+    "icons": 7,
+    "label": "Evaluaciones",
+    "metrics": 3,
+    "overflow": false,
+    "width": 768
+  },
+  {
+    "heading": "Comparativos",
+    "icons": 7,
+    "label": "Comparativos",
+    "metrics": 0,
+    "overflow": false,
+    "width": 768
+  },
+  {
+    "heading": "Resumen general",
+    "icons": 7,
+    "label": "Resumen general",
+    "metrics": 0,
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "heading": "Por módulo",
+    "icons": 7,
+    "label": "Por módulo",
+    "metrics": 0,
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "heading": "Por estación",
+    "icons": 7,
+    "label": "Por estación",
+    "metrics": 0,
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "heading": "Por OA y AE",
+    "icons": 7,
+    "label": "Por OA y AE",
+    "metrics": 0,
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "heading": "Por estudiante",
+    "icons": 7,
+    "label": "Por estudiante",
+    "metrics": 0,
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "heading": "Evaluaciones",
+    "icons": 7,
+    "label": "Evaluaciones",
+    "metrics": 3,
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "heading": "Comparativos",
+    "icons": 7,
+    "label": "Comparativos",
+    "metrics": 0,
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "heading": "Resumen general",
+    "icons": 7,
+    "label": "Resumen general",
+    "metrics": 0,
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "heading": "Por módulo",
+    "icons": 7,
+    "label": "Por módulo",
+    "metrics": 0,
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "heading": "Por estación",
+    "icons": 7,
+    "label": "Por estación",
+    "metrics": 0,
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "heading": "Por OA y AE",
+    "icons": 7,
+    "label": "Por OA y AE",
+    "metrics": 0,
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "heading": "Por estudiante",
+    "icons": 7,
+    "label": "Por estudiante",
+    "metrics": 0,
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "heading": "Evaluaciones",
+    "icons": 7,
+    "label": "Evaluaciones",
+    "metrics": 3,
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "heading": "Comparativos",
+    "icons": 7,
+    "label": "Comparativos",
+    "metrics": 0,
+    "overflow": false,
+    "width": 320
+  }
+]

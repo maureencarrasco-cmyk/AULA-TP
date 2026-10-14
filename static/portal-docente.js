@@ -904,6 +904,7 @@ function reports() {
   const modules = scopedModules().filter(module => !reportView.module || String(module.id) === reportView.module);
   const scores = records.map(logro).filter(value => value != null);
   const values = records.map(cumplimientoPct);
+  const comparableWeeks = weeklyPoints(records);
   const coverage = aeCoverage().filter(item => modules.some(module => String(module.id) === String(item.module.id)));
   const totalAe = coverage.reduce((sum, item) => sum + item.total, 0);
   const coveredAe = coverage.reduce((sum, item) => sum + item.covered, 0);
@@ -935,7 +936,7 @@ function reports() {
     stations: byStations + distribution + actions,
     learning: byLearning + reportPanel('OA y criterios del módulo', `<p>La evidencia de actividades y el logro de selección no permiten calcular por sí solos un porcentaje de OA logrados.</p><a href="${href('/portal-docente/oa-ae')}">Abrir la referencia curricular y sus criterios →</a>`) + actions,
     students: studentsPanel + distribution + actions,
-    exams: exams + trend + actions,
+    exams: `<section class="pd-evaluation-metrics" aria-label="Indicadores de evaluaciones">${reportMetric('Registros con evaluación de selección',scores.length,'En el curso y módulo seleccionados','blue')}${reportMetric('Logro medio',scores.length?pct(mean(scores)):'—','Resultado de selección, no logro de OA','mint')}${reportMetric('Semanas con registros',comparableWeeks.length,'Observaciones comparables','violet')}</section>` + trend + '<p class="pd-note pd-evaluation-limit">No hay datos suficientes para clasificar evaluaciones por tipo formativo, sumativo o proyecto.</p>' + actions,
     compare: reportPanel('Cortes históricos del curso',snapshotReport()) + byModules + trend + reportPanel('Comparación entre períodos', '<p class="pd-note">No hay cortes históricos anteriores al registro de esta función. La serie semanal disponible corresponde a resultados de selección; no se convierte en una evolución de recorrido.</p>') + actions
   };
   return `<div class="pd-report"><header class="pd-report-heading"><div><h1>Reportes</h1><p>Genera, visualiza y descarga reportes del aprendizaje de tus estudiantes.</p></div>${teacherFilters('pd-report-module',reportView.module,state.cohort ? '12 semanas · Demostración' : 'Estado actual')}</header>${state.cohort ? '<p class="pd-report-demo" role="note">Cohorte de demostración: los indicadores y estudiantes de esta pantalla son ficticios. El CSV conserva los registros reales del campus.</p>' : ''}<section class="pd-report-metrics" aria-label="Indicadores del reporte">${reportMetric('Estudiantes', people.length, 'En el alcance seleccionado', 'mint')}${reportMetric('Cumplimiento medio', values.length ? pct(mean(values)) : '—', 'Recorrido de cinco estaciones', 'violet')}${reportMetric('Logro de selección', scores.length ? pct(mean(scores)) : '—', `${scores.length} registros evaluados`, 'orange')}${reportMetric('Evidencia de AE', totalAe ? pct(coveredAe / totalAe * 100) : '—', 'Cobertura, no logro curricular', 'blue')}</section><nav class="pd-report-tabs" aria-label="Vistas de reportes">${REPORT_TABS.map(([id, label]) => `<button type="button" data-report-tab="${id}" aria-pressed="${reportView.tab === id}">${esc(label)}</button>`).join('')}</nav><div class="pd-report-grid" id="pd-report-results">${views[reportView.tab]}</div><details class="pd-report-method"><summary>Definiciones, alcance y reporte original</summary>${reportsEvidence()}</details></div>`;
@@ -1033,7 +1034,18 @@ function draw() {
   const body = window.PortalLayout?.render(tab.id) || { resumen: panel, cursos, estudiantes: students, 'oa-ae': learning, cumplimiento: compliance, reportes: reports }[tab.id]();
   document.getElementById('pd-main').innerHTML = body;
   const reportResults = document.getElementById('pd-report-results');
-  if (reportResults) reportResults.dataset.view = reportView.tab;
+  if (reportResults) {
+    reportResults.dataset.view = reportView.tab;
+    reportResults.closest('.pd-report').dataset.view = reportView.tab;
+    const tabLabel = REPORT_TABS.find(([id])=>id===reportView.tab)?.[1] || 'Reportes';
+    reportResults.insertAdjacentHTML('beforebegin', `<header class="pd-report-view-heading"><span class="pd-report-view-icon" aria-hidden="true">${reviewIcon(reportView.tab==='exams'?'reportes':'oa-ae')}</span><h2>${esc(tabLabel)}</h2></header>`);
+    const tabIcons={general:'resumen',modules:'oa-ae',stations:'cumplimiento',learning:'oa-ae',students:'estudiantes',exams:'reportes',compare:'reportes'};
+    document.querySelectorAll('[data-report-tab]').forEach(button=>{
+      button.insertAdjacentHTML('afterbegin', `<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="${ICONS[tabIcons[button.dataset.reportTab]]}" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`);
+    });
+    const chart = reportResults.querySelector('.pd-report-trend');
+    if(chart) chart.querySelector('h2').insertAdjacentHTML('afterend','<div class="pd-chart-legend"><span><i class="pd-legend-observed"></i>Desempeño medio</span><span><i class="pd-legend-trend"></i>Tendencia</span></div>');
+  }
   if(state.preview)document.getElementById('pd-main').insertAdjacentHTML('afterbegin','<p class="pd-report-demo" role="status">Entorno local de pruebas. Las cuentas y matrículas son ficticias; el catálogo procede de los contenidos existentes.</p>');
   if(!state.cohort && !state.courses.length) document.getElementById('pd-main').insertAdjacentHTML('afterbegin','<p class="pd-report-demo" role="status">No tienes cursos asignados. Solicita al administrador del establecimiento que registre tu asignación; no se muestran datos de otros cursos.</p>');
   document.getElementById('pd-main').insertAdjacentHTML('afterbegin', state.cohort
