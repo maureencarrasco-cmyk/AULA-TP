@@ -97,7 +97,8 @@
   }
   function tabs(group, options, selected) {
     const icons={plan:'cursos',modules:'oa-ae',stations:'cumplimiento',learning:'oa-ae',exams:'reportes',resources:'download'};
-    return `<nav class="pd-report-tabs${group==='planning'?' pd-course-tabs':''}" aria-label="Vistas de ${group === 'planning' ? 'planificación' : 'referencia curricular'}">${options.map(([id, label]) => `<button type="button" data-layout-group="${group}" data-layout-tab="${id}" aria-pressed="${selected === id}">${group==='planning'?`<span aria-hidden="true">${reviewIcon(icons[id])}</span>`:''}${esc(label)}</button>`).join('')}</nav>`;
+    const learningIcons={oa:'book-open',ae:'list',criteria:'clipboard-check',alignment:'target',coverage:'chart-no-axes-column-increasing'};
+    return `<nav class="pd-report-tabs${group==='planning'?' pd-course-tabs':' pd-learning-tabs'}" aria-label="Vistas de ${group === 'planning' ? 'planificación' : 'referencia curricular'}">${options.map(([id, label]) => `<button type="button" data-layout-group="${group}" data-layout-tab="${id}" aria-pressed="${selected === id}">${group==='planning'?`<span aria-hidden="true">${reviewIcon(icons[id])}</span>`:`<span class="pd-learning-icon is-${id}" aria-hidden="true"><img src="/static/portal-docente/learning-${learningIcons[id]}.svg" alt="" width="28" height="28"></span>`}${esc(label)}</button>`).join('')}</nav>`;
   }
   function field(name,label,value='',type='textarea') {
     const hints={objective:'Ingresa la referencia...',sequence:'Describe la secuencia y experiencias...',instrument:'Indica los instrumentos...',resources:'Lista los recursos y materiales...',adaptations:'Describe apoyos y ajustes...'};
