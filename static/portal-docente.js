@@ -927,7 +927,7 @@ function reports() {
   const stationBars = stationNames.map((name, index) => ({ label: `${index + 1}. ${name}`, value: knownStations.length ? knownStations.filter(record => stationStates(record)[index]).length / knownStations.length * 100 : null }));
   const availableBars = (list, title) => list.some(item => item.value != null) ? bars(list.filter(item => item.value != null), { title }) : '<p class="pd-report-empty">Sin registros suficientes para mostrar este gráfico.</p>';
   const byModules = reportPanel('Progreso por módulos', availableBars(moduleBars, 'Cumplimiento medio del recorrido'));
-  const moduleProgress = reportPanel('Progreso por módulos', `<p class="pd-module-subtitle">Cumplimiento medio del recorrido</p><div class="pd-module-report-rows">${modules.map((module,index)=>{
+  const moduleProgress = reportPanel('Progreso por módulos', `<p class="pd-module-subtitle">Cumplimiento medio del recorrido</p>${moduleBars.some(item=>item.value!=null)?'':'<p class="pd-report-empty">Sin registros suficientes para mostrar este gráfico.</p>'}<div class="pd-module-report-rows">${modules.map((module,index)=>{
     const value=moduleBars[index].value;
     const amount=value==null?null:Math.max(0,Math.min(100,Math.round(value)));
     return `<div class="pd-module-report-row"><span class="pd-module-report-code">M${esc(module.position)}</span><span class="pd-module-report-name">${esc(module.title)}</span><span class="pd-module-report-track" ${amount==null?'':`role="progressbar" aria-label="Recorrido M${esc(module.position)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${amount}"`}><i style="width:${amount??0}%"></i></span><strong>${amount==null?'Sin datos':`${amount} %`}</strong></div>`;
@@ -963,7 +963,7 @@ function reports() {
     learning: byLearning + curricularReference + actions,
     students: studentsPanel + distribution + actions,
     exams: `<section class="pd-evaluation-metrics" aria-label="Indicadores de evaluaciones">${reportMetric('Registros con evaluación de selección',scores.length,'En el curso y módulo seleccionados','blue','estudiantes')}${reportMetric('Logro medio',scores.length?pct(mean(scores)):'—','Resultado de selección, no logro de OA','mint','cumplimiento')}${reportMetric('Semanas con registros',comparableWeeks.length,'Observaciones comparables','violet','oa-ae')}</section>` + trend + '<p class="pd-note pd-evaluation-limit">No hay datos suficientes para clasificar evaluaciones por tipo formativo, sumativo o proyecto.</p>' + actions,
-    compare: reportPanel('Cortes históricos del curso',snapshotReport()) + byModules + trend + reportPanel('Comparación entre períodos', '<p class="pd-note">No hay cortes históricos anteriores al registro de esta función. La serie semanal disponible corresponde a resultados de selección; no se convierte en una evolución de recorrido.</p>') + actions
+    compare: reportPanel('Cortes históricos del curso', '<p class="pd-comparison-subtitle">Registra y compara el avance del curso</p>'+snapshotReport(),'pd-snapshot-report') + moduleProgress + trend + reportPanel('Comparación entre períodos',snapshotComparison(),'pd-period-comparison') + actions
   };
   return `<div class="pd-report"><header class="pd-report-heading"><div><h1>Reportes</h1><p>Genera, visualiza y descarga reportes del aprendizaje de tus estudiantes.</p></div>${teacherFilters('pd-report-module',reportView.module,state.cohort ? '12 semanas · Demostración' : 'Estado actual')}</header>${state.cohort ? '<p class="pd-report-demo" role="note">Cohorte de demostración: los indicadores y estudiantes de esta pantalla son ficticios. El CSV conserva los registros reales del campus.</p>' : ''}<section class="pd-report-metrics" aria-label="Indicadores del reporte">${reportMetric('Estudiantes', people.length, 'En el alcance seleccionado', 'mint')}${reportMetric('Cumplimiento medio', values.length ? pct(mean(values)) : '—', 'Recorrido de cinco estaciones', 'violet')}${reportMetric('Logro de selección', scores.length ? pct(mean(scores)) : '—', `${scores.length} registros evaluados`, 'orange')}${reportMetric('Evidencia de AE', totalAe ? pct(coveredAe / totalAe * 100) : '—', 'Cobertura, no logro curricular', 'blue')}</section><nav class="pd-report-tabs" aria-label="Vistas de reportes">${REPORT_TABS.map(([id, label]) => `<button type="button" data-report-tab="${id}" aria-pressed="${reportView.tab === id}">${esc(label)}</button>`).join('')}</nav><div class="pd-report-grid" id="pd-report-results">${views[reportView.tab]}</div><details class="pd-report-method"><summary>Definiciones, alcance y reporte original</summary>${reportsEvidence()}</details></div>`;
 }
@@ -975,6 +975,8 @@ function bindReports() {
   document.getElementById('pd-report-module').onchange = event => { reportView.module = event.target.value; state.moduleId=event.target.value; reportView.page = 0; draw(); };
   const print = document.getElementById('pd-report-print');
   const snapshot=document.getElementById('pd-save-snapshot');
+  const comparison=document.getElementById('pd-comparison-period');
+  if(comparison)comparison.onchange=event=>{reportView.snapshotId=event.target.value;draw();};
   if(snapshot)snapshot.onclick=async()=>{
     snapshot.disabled=true;
     try{await post('/api/teacher/snapshots',{course_id:fiveCourse().id});state.teacher=await api('/api/teacher');draw();}
@@ -999,6 +1001,15 @@ function bindReports() {
     document.getElementById('pd-report-next').onclick = () => { reportView.page += 1; refreshList(); };
   };
   bindList();
+}
+function snapshotComparison() {
+  if(reportView.module)return '<div class="pd-period-empty">Selecciona todos los módulos para consultar los cortes del curso completo.</div><p class="pd-note">La serie semanal corresponde a resultados de selección; no se convierte en una evolución de recorrido.</p>';
+  const rows=(state.teacher?.snapshots||[]).filter(item=>String(item.course_id)===String(fiveCourse()?.id)).slice().sort((a,b)=>String(b.created).localeCompare(String(a.created)));
+  if(rows.length<2)return '<label class="pd-period-selector">Período<select disabled><option>Sin períodos comparables</option></select></label><div class="pd-period-empty">No hay dos cortes históricos registrados para comparar períodos. Los cortes se conservan desde el registro de esta función.</div><p class="pd-note">La serie semanal disponible corresponde a resultados de selección; no se convierte en una evolución de recorrido.</p>';
+  const latest=rows[0];
+  const previous=rows.slice(1).find(row=>String(row.id)===reportView.snapshotId)||rows[1];
+  const columns=[['Fecha',latest.created,previous.created],['Matrícula',latest.payload.population,previous.payload.population],['Registros',latest.payload.records,previous.payload.records],['Recorrido medio',latest.payload.mean_progress==null?'Sin registros':pct(latest.payload.mean_progress),previous.payload.mean_progress==null?'Sin registros':pct(previous.payload.mean_progress)]];
+  return `<label class="pd-period-selector">Comparar corte actual con<select id="pd-comparison-period">${rows.slice(1).map(row=>`<option value="${esc(row.id)}" ${row===previous?'selected':''}>${esc(row.created)}</option>`).join('')}</select></label><div class="pd-table-wrap"><table><thead><tr><th>Indicador</th><th>Corte actual</th><th>Corte anterior</th></tr></thead><tbody>${columns.map(([label,current,prior])=>`<tr><th scope="row">${label}</th><td>${esc(current)}</td><td>${esc(prior)}</td></tr>`).join('')}</tbody></table></div><p class="pd-period-caution">Cambios de matrícula, módulos o definición impiden interpretar diferencias como mejora de aprendizaje. Estos cortes agregados no incluyen una comparación histórica por módulo.</p>`;
 }
 function snapshotReport() {
   if(reportView.module)return '<p>Los cortes históricos corresponden al curso completo. Selecciona todos los módulos para consultarlos.</p>';
