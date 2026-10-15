@@ -1,0 +1,27 @@
+.pd-unified-banner { --header-image:url('/static/portal-docente/panel-docente-banner-reference.png'); --header-size:cover; --header-position:center right; }
+.pd-unified-banner:not([data-page="resumen"]) { --header-image:url('/static/portal-docente/encabezados-tematicos.png'); --header-size:100% 500%; }
+.pd-unified-banner[data-page="cursos"] { --header-position:center 0%; }
+.pd-unified-banner[data-page="estudiantes"] { --header-position:center 25%; }
+.pd-unified-banner[data-page="oa-ae"] { --header-position:center 50%; }
+.pd-unified-banner[data-page="cumplimiento"] { --header-position:center 75%; }
+.pd-unified-banner[data-page="reportes"] { --header-position:center 100%; }
+.pd-unified-banner { background-image:var(--header-image); background-size:var(--header-size); background-position:var(--header-position); }
+.pd-unified-banner:not([data-page="resumen"]) .pd-banner-title { background:#ffffffdd; }
+.pd-report > .pd-report-tabs button { --tab-edge:#a5dafa; --tab-glow:#6bc5ff3d; margin:0 5px; border:2px solid var(--tab-edge); box-shadow:0 0 10px var(--tab-glow); }
+.pd-report > .pd-report-tabs button:nth-child(2) { --tab-edge:#ffd4bb; --tab-glow:#ffac7440; background:#fffaf5; }
+.pd-report > .pd-report-tabs button:nth-child(3) { --tab-edge:#b9eedc; --tab-glow:#59d5ac30; background:#f5fdf9; }
+.pd-report > .pd-report-tabs button:nth-child(4) { --tab-edge:#e1ccfb; --tab-glow:#b387ef35; background:#fcf8ff; }
+.pd-report > .pd-report-tabs button:nth-child(5) { --tab-edge:#bcdffd; --tab-glow:#63b3f535; background:#f5fbff; }
+.pd-report > .pd-report-tabs button:nth-child(6) { --tab-edge:#ffe1a0; --tab-glow:#ffd06c35; background:#fffdf6; }
+.pd-report > .pd-report-tabs button:nth-child(7) { --tab-edge:#ffc9e3; --tab-glow:#f794c93a; background:#fff7fb; }
+.pd-report > .pd-report-tabs button::after { display:none; }
+.pd-report > .pd-report-tabs button[aria-pressed="true"] { border-color:#24acfa; background:#e5f3ff; box-shadow:0 0 12px #51bdff52,inset 0 -3px #087cff; }
+.pd-report > .pd-report-tabs button:hover { box-shadow:0 0 14px var(--tab-glow); border-color:#4aacf3; }
+@media (min-width:1200px) { .pd-report > .pd-report-tabs button { flex:1 1 0; min-width:0; padding:12px 10px; gap:10px; white-space:normal; } .pd-report > .pd-report-tabs .pd-report-tab-icon { width:40px; flex-basis:40px; } }
+.pd-content .pd-review-link:not([aria-disabled="true"]) { box-shadow:0 0 9px #98caff33; }
+.pd-content .pd-review-link:not([aria-disabled="true"]):is(:hover,:focus-visible) { box-shadow:0 0 14px #65b9f65c; }
+.pd-learning-tabs button[aria-pressed="true"],.pd-course-tabs button[aria-pressed="true"] { box-shadow:0 0 10px #5dbaff45,inset 0 -3px #147eea; }
+.pd-content :is(.pd-report-panel,.pd-course-editor):has(button:not(:disabled),a[href]):focus-within { outline:1px solid #92cafa; outline-offset:5px; box-shadow:0 0 12px #9bcefb35; }
+.pd-content button:not(:disabled):focus-visible { outline:3px solid #1479cd; box-shadow:0 0 12px #65b9f64d; }
+@media (max-width:640px) { .pd-unified-banner { background-image:none; } .pd-unified-banner::after { height:140px; background-image:var(--header-image); background-size:var(--header-size); background-position:var(--header-position); } .pd-unified-banner:not([data-page="resumen"])::after { background-size:100% 500%; } .pd-unified-banner:not([data-page="resumen"]) .pd-banner-title { background:transparent; } .pd-report > .pd-report-tabs button { margin:0 4px; } }
+@media print { .pd-unified-banner { background:none; } .pd-content *, .pd-report > .pd-report-tabs button { box-shadow:none !important; } }

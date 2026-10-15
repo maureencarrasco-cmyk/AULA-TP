@@ -5,7 +5,7 @@
   const contextKey = url => [...url.searchParams.entries()].sort(([a],[b]) => a.localeCompare(b)).map(pair => JSON.stringify(pair)).join('|');
   const renderPage = () => {
     draw();
-    const title = document.querySelector('.pd-banner-title h1,.pd-report-view-heading h1');
+    const title = document.querySelector('.pd-banner-title h1,.pd-report-view-heading h2');
     if (title) { title.tabIndex = -1; title.focus({preventScroll:true}); }
     window.scrollTo({top:0,behavior:'instant'});
   };

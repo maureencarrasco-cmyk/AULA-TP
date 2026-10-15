@@ -1,0 +1,146 @@
+[
+  {
+    "background": "100% 50%",
+    "banner": "resumen",
+    "overflow": false,
+    "page": "resumen",
+    "title": "Panel general",
+    "width": 1600
+  },
+  {
+    "background": "50% 0%",
+    "banner": "cursos",
+    "overflow": false,
+    "page": "cursos",
+    "title": "Cursos / Planificación",
+    "width": 1600
+  },
+  {
+    "background": "50% 25%",
+    "banner": "estudiantes",
+    "overflow": false,
+    "page": "estudiantes",
+    "title": "Estudiantes",
+    "width": 1600
+  },
+  {
+    "background": "50% 50%",
+    "banner": "oa-ae",
+    "overflow": false,
+    "page": "oa-ae",
+    "title": "OA, AE y criterios de evaluación",
+    "width": 1600
+  },
+  {
+    "background": "50% 75%",
+    "banner": "cumplimiento",
+    "overflow": false,
+    "page": "cumplimiento",
+    "title": "Cumplimiento",
+    "width": 1600
+  },
+  {
+    "background": "50% 100%",
+    "banner": "reportes",
+    "overflow": false,
+    "page": "reportes",
+    "title": "Reportes",
+    "width": 1600
+  },
+  {
+    "background": "100% 50%",
+    "banner": "resumen",
+    "overflow": false,
+    "page": "resumen",
+    "title": "Panel general",
+    "width": 768
+  },
+  {
+    "background": "50% 0%",
+    "banner": "cursos",
+    "overflow": false,
+    "page": "cursos",
+    "title": "Cursos / Planificación",
+    "width": 768
+  },
+  {
+    "background": "50% 25%",
+    "banner": "estudiantes",
+    "overflow": false,
+    "page": "estudiantes",
+    "title": "Estudiantes",
+    "width": 768
+  },
+  {
+    "background": "50% 50%",
+    "banner": "oa-ae",
+    "overflow": false,
+    "page": "oa-ae",
+    "title": "OA, AE y criterios de evaluación",
+    "width": 768
+  },
+  {
+    "background": "50% 75%",
+    "banner": "cumplimiento",
+    "overflow": false,
+    "page": "cumplimiento",
+    "title": "Cumplimiento",
+    "width": 768
+  },
+  {
+    "background": "50% 100%",
+    "banner": "reportes",
+    "overflow": false,
+    "page": "reportes",
+    "title": "Reportes",
+    "width": 768
+  },
+  {
+    "background": "100% 50%",
+    "banner": "resumen",
+    "overflow": false,
+    "page": "resumen",
+    "title": "Panel general",
+    "width": 390
+  },
+  {
+    "background": "50% 0%",
+    "banner": "cursos",
+    "overflow": false,
+    "page": "cursos",
+    "title": "Cursos / Planificación",
+    "width": 390
+  },
+  {
+    "background": "50% 25%",
+    "banner": "estudiantes",
+    "overflow": false,
+    "page": "estudiantes",
+    "title": "Estudiantes",
+    "width": 390
+  },
+  {
+    "background": "50% 50%",
+    "banner": "oa-ae",
+    "overflow": false,
+    "page": "oa-ae",
+    "title": "OA, AE y criterios de evaluación",
+    "width": 390
+  },
+  {
+    "background": "50% 75%",
+    "banner": "cumplimiento",
+    "overflow": false,
+    "page": "cumplimiento",
+    "title": "Cumplimiento",
+    "width": 390
+  },
+  {
+    "background": "50% 100%",
+    "banner": "reportes",
+    "overflow": false,
+    "page": "reportes",
+    "title": "Reportes",
+    "width": 390
+  }
+]

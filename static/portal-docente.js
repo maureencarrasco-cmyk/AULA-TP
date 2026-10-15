@@ -1089,7 +1089,7 @@ function draw() {
     }
     reportResults.closest('.pd-report').dataset.view = reportView.tab;
     const tabLabel = REPORT_TABS.find(([id])=>id===reportView.tab)?.[1] || 'Reportes';
-    reportResults.insertAdjacentHTML('beforebegin', `<header class="pd-report-view-heading"><span class="pd-report-view-icon" aria-hidden="true">${reviewIcon(reportView.tab==='exams'?'reportes':'oa-ae')}</span><h1>${esc(tabLabel)}</h1></header>`);
+    reportResults.insertAdjacentHTML('beforebegin', `<header class="pd-report-view-heading"><span class="pd-report-view-icon" aria-hidden="true">${reviewIcon(reportView.tab==='exams'?'reportes':'oa-ae')}</span><h2>${esc(tabLabel)}</h2></header>`);
     const report = reportResults.closest('.pd-report');
     const viewHeading = report.querySelector('.pd-report-view-heading');
     const filters = report.querySelector('.pd-report-filters');
@@ -1137,14 +1137,10 @@ function draw() {
   // Move live controls, rather than recreating them, into the shared page banner.
   const main = document.getElementById('pd-main');
   const heading = main.querySelector('.pd-report-heading');
-  if(tab.id === 'reportes' && state.preview) {
-    const previewNotice = main.querySelector(':scope > .pd-report-demo');
-    const access = main.querySelector(':scope > .pd-report-method');
-    if(previewNotice && access) access.append(previewNotice);
-  }
-  if (heading && tab.id !== 'reportes') {
+  if (heading) {
     const banner = document.createElement('header');
     banner.className = 'pd-unified-banner';
+    banner.dataset.page = tab.id;
     const access = main.firstElementChild;
     if (access?.matches('.pd-report-method,.pd-note')) {
       access.classList.add('pd-banner-access');
