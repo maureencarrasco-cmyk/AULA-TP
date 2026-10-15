@@ -2,7 +2,7 @@
 (function () {
   const params = typeof URLSearchParams === 'function' && typeof location === 'object' ? new URLSearchParams(location.search || '') : null;
   const view = { module: params?.get('module') || '', planning: 'plan', learning: ['oa','ae','criteria','alignment','coverage'].includes(params?.get('learning')) ? params.get('learning') : 'oa', moduleSearch: '', targetAe: /^\d+$/.test(params?.get('ae') || '') ? params.get('ae') : '' };
-  const stationsList = ['Contextualización', 'Aprendizajes esperados', 'Situación integradora', 'Evaluación', 'Retroalimentación y cierre'];
+  const stationsList = ['Contextualización', 'Aprendizajes esperados', 'Situación integradora', 'Misión laboral', 'Evaluación', 'Retroalimentación y cierre'];
   const drafts=new Map();
   let draftOwner='';
   window.addEventListener?.('beforeunload',event=>{
@@ -45,11 +45,11 @@
   }
   function stationProgress(data, photographic = false) {
     return `<ol class="pd-layout-stations ${photographic ? 'has-photos' : ''}">${stationsList.map((name, index) => {
-      const known=data.records.filter(record=>stationStates(record));
-      const value = known.length ? known.filter(record => stationStates(record)[index]).length / known.length * 100 : null;
-      const photo = /refrigeraci[oó]n y climatizaci[oó]n/i.test(courseTitle())?PHOTOS[index + 1]:null;
-      return `<li>${photographic && photo ? `<img src="${photo[0]}" alt="${esc(photo[1])}" loading="lazy">` : ''}<div><span class="pd-layout-station-number">${index + 1}</span><b>${esc(name)}</b></div>${bar(value)}</li>`;
-    }).join('')}</ol><p class="pd-note">Recorrido registrado de cinco estaciones; Misión laboral sigue en construcción y no se contabiliza.</p>`;
+      const known=data.records.filter(record=>teacherStationStates(record)?.[index] != null);
+      const value = known.length ? known.filter(record => teacherStationStates(record)[index]).length / known.length * 100 : null;
+      const photo = index !== 3 && /refrigeraci[oó]n y climatizaci[oó]n/i.test(courseTitle())?PHOTOS[index < 3 ? index + 1 : index]:null;
+      return `<li>${photographic && photo ? `<img src="${photo[0]}" alt="${esc(photo[1])}" loading="lazy">` : ''}<div><span class="pd-layout-station-number">${index + 1}</span><b>${esc(name)}</b></div>${index === 3 ? '<span class="pd-note">En construcción</span>' : bar(value)}</li>`;
+    }).join('')}</ol><p class="pd-note">Ruta de 6 estaciones: 5 habilitadas y Misión laboral en construcción. El avance se calcula sobre las 5 habilitadas.</p>`;
   }
   function aeSummary(data) {
     const items = data.coverage.filter(item => item.total).slice(0, 6);
@@ -91,7 +91,7 @@
   }
   function panelLayout(data) {
     const completed = data.records.reduce((sum, record) => sum + stations(record), 0);
-    const metrics = metric('Recorrido digital', data.records.length ? pct(mean(data.records.map(cumplimientoPct))) : '—', 'Media de registros; no logro curricular', 'mint') + metric('Estudiantes con recorrido', data.people.length - data.counts.none, `${data.people.length} estudiantes en la vista`, 'blue') + metric('Estaciones completadas', completed, `De ${data.records.length * 5} posibles en los registros`, 'violet') + metric('Señales de apoyo', data.counts.support, 'Requieren confirmación docente', 'orange');
+    const metrics = metric('Recorrido digital', data.records.length ? pct(mean(data.records.map(cumplimientoPct))) : '—', 'Media de registros; no logro curricular', 'mint') + metric('Estudiantes con recorrido', data.people.length - data.counts.none, `${data.people.length} estudiantes en la vista`, 'blue') + metric('Estaciones completadas', completed, `De ${data.records.length * 5} habilitadas posibles en los registros`, 'violet') + metric('Señales de apoyo', data.counts.support, 'Requieren confirmación docente', 'orange');
     const weakest = data.coverage.find(item => item.total);
     return `<section class="pd-report-metrics">${metrics}</section>${pedagogicalActions(data,weakest)}`;
   }
@@ -114,7 +114,7 @@
   function coursePlan(module) {
     const rows=moduleRows(module);
     const photo=modulePhoto(module);
-    const stats=[['Horas oficiales',`${module.official_hp||module.hours||0} HP`,'cursos','blue'],['Encargos previstos',String(Number(module.encargos_count||0)),'estudiantes','orange'],['Estaciones','5','oa-ae','violet'],['Encargos registrados',String(rows.reduce((sum,row)=>sum+practica(row),0)),'estudiantes','mint']];
+    const stats=[['Horas oficiales',`${module.official_hp||module.hours||0} HP`,'cursos','blue'],['Encargos previstos',String(Number(module.encargos_count||0)),'estudiantes','orange'],['Estaciones','6 (5 habilitadas)','oa-ae','violet'],['Encargos registrados',String(rows.reduce((sum,row)=>sum+practica(row),0)),'estudiantes','mint']];
     const oa=(module.oa||[]).slice(0,4).map(item=>`<li>${esc(item)}</li>`).join('')||'<li>Este módulo no trae objetivos de aprendizaje en el contenido.</li>';
     return `<section class="pd-course-banner"><h2>Planificación del curso</h2>${photo?`<img src="${esc(photo[0])}" alt="${esc(photo[1])}">`:'<p>Sin imagen de contexto declarada para este módulo.</p>'}</section><section class="pd-course-information"><h2>Información del módulo</h2><p>Módulo ${module.position} · ${esc(module.title)}</p><p class="pd-note">${rows.length?`${rows.length} registros ya ejecutan este módulo.`:'Este módulo todavía no tiene registros en esta vista.'}</p><dl class="pd-course-stats">${stats.map(([label,value,icon,tone])=>`<div class="is-${tone}"><span aria-hidden="true">${reviewIcon(icon)}</span><div><dt>${label}</dt><dd>${esc(value)}</dd></div></div>`).join('')}</dl><div class="pd-course-objectives"><span aria-hidden="true">${reviewIcon('cumplimiento')}</span><div><h3>Objetivos de aprendizaje</h3><ul>${oa}</ul></div></div></section>`;
   }
@@ -213,7 +213,7 @@
       return `<tr><td>M${module.position} · ${esc(module.title)}</td><td>${esc(p?({draft:'Borrador',planned:'Planificado',executed:'Ejecutado'}[p.status]||'Por verificar'):'Sin planificación registrada')}</td><td>${esc(p?.start_date||'Sin fecha')}</td><td>${esc(p?.end_date||'Sin fecha')}</td><td>${plan?.version||'—'}</td></tr>`;
     }).join('')}</tbody></table></div><p class="pd-note">Estado declarado por el docente; no certifica logro curricular ni transforma el recorrido digital en ejecución de enseñanza.</p><a href="${href('/portal-docente/cursos')}">Revisar planificación →</a>`);
     const completed = data.records.filter(record=>Number(record.percent)>=100).length;
-    const metrics = metric('Cumplimiento general',data.records.length?pct(mean(data.records.map(cumplimientoPct))):'—','Recorrido de cinco estaciones','mint')+metric('Recorridos completos',completed,`${data.records.length} registros de módulo`,'violet')+metric('Estudiantes con progreso esperado',data.counts.ok,`${data.people.length} estudiantes en la vista`,'blue')+metric('Evaluaciones registradas',data.scores.length,'Sin datos de vencimiento disponibles','orange');
+    const metrics = metric('Cumplimiento general',data.records.length?pct(mean(data.records.map(cumplimientoPct))):'—','6 estaciones · 5 habilitadas','mint')+metric('Recorridos completos',completed,`${data.records.length} registros de módulo`,'violet')+metric('Estudiantes con progreso esperado',data.counts.ok,`${data.people.length} estudiantes en la vista`,'blue')+metric('Evaluaciones registradas',data.scores.length,'Sin datos de vencimiento disponibles','orange');
     return `<section class="pd-report-metrics">${metrics}</section>${execution}<div class="pd-layout-three">${block('Cumplimiento por módulos',moduleTable(data))}${block('Cumplimiento por estaciones',stationProgress(data))}${block('Estado de las evaluaciones',`<div class="pd-report-exam-total"><strong>${data.scores.length}</strong><span>registros evaluados</span></div><p>Logro medio: ${data.scores.length?pct(mean(data.scores)):'Sin evaluaciones'}.</p><p class="pd-note">No hay fechas límite en estos registros. No se clasifican actividades o evaluaciones como vencidas.</p>`)}</div>${continueReview('Acciones docentes')}`;
   }
   const layouts = { resumen:panelLayout, cursos:courseLayout, estudiantes:studentsLayout, 'oa-ae':learningLayout, cumplimiento:complianceLayout };

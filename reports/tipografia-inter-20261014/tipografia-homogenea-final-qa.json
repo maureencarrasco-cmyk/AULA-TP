@@ -1,0 +1,164 @@
+[
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "resumen",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 1600
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "cursos",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 1600
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "estudiantes",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 1600
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "oa-ae",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 1600
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "cumplimiento",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 1600
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "reportes",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 1600
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "resumen",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 768
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "cursos",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 768
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "estudiantes",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 768
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "oa-ae",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 768
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "cumplimiento",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 768
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "reportes",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 768
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "resumen",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 390
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "cursos",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 390
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "estudiantes",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 390
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "oa-ae",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 390
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "cumplimiento",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 390
+  },
+  {
+    "body": "16px",
+    "font": "Inter, sans-serif",
+    "overflow": false,
+    "page": "reportes",
+    "title": "28px",
+    "titleWeight": "700",
+    "width": 390
+  }
+]

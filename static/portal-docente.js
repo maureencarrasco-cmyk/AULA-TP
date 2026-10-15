@@ -104,7 +104,6 @@ function nav() {
   const links = TABS.map(item => `<a href="${href(item.path)}" class="${item.id === tab.id ? 'is-active' : ''}" ${item.id === tab.id ? 'aria-current="page"' : ''}><span class="pd-ico ${item.id}" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="${ICONS[item.id]}" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>${esc(item.label)}</span></a>`).join('');
   document.getElementById('pd-nav').innerHTML = links;
   document.getElementById('pd-mobile').innerHTML = links;
-  document.getElementById('pd-topnav').innerHTML = links;
 }
 function courseTitle() {
   const course = fiveCourse();
@@ -150,6 +149,11 @@ function stationStates(record) {
   if (Array.isArray(record.completed) && record.completed.length === 5) return record.completed;
   if (record.demo) return Array.from({length:5}, (_, index) => index < Math.round(Number(record.percent || 0) / 20));
   return null;
+}
+const TEACHER_STATIONS = ['Contextualización', 'Aprendizajes esperados', 'Situación integradora', 'Misión laboral', 'Evaluación', 'Retroalimentación y cierre'];
+function teacherStationStates(record) {
+  const saved = stationStates(record);
+  return saved ? [...saved.slice(0, 3), null, ...saved.slice(3)] : null;
 }
 function stations(record) { return stationStates(record)?.filter(Boolean).length ?? Math.round(Number(record.percent || 0) / 20); }
 function logro(record) {
@@ -202,15 +206,15 @@ function signal(record) {
     return { level: 'none', label: 'Sin recorrido', reasons: ['No hay estaciones, pasos de AE ni evaluación de selección en este registro.'] };
   }
   const support = [];
-  if (done > 0 && done < 2) support.push(`${done} de 5 estaciones del recorrido.`);
+  if (done > 0 && done < 2) support.push(`${done} de 5 estaciones habilitadas (ruta de 6) del recorrido.`);
   if (score != null && score < 60) support.push(`Logro de la evaluación de selección: ${score} %.`);
   if (support.length && (done < 2 || (score != null && score < 60))) return { level: 'support', label: 'Requiere mayor apoyo', reasons: support };
   const watch = [];
-  if (done >= 2 && done <= 3) watch.push(`${done} de 5 estaciones.`);
+  if (done >= 2 && done <= 3) watch.push(`${done} de 5 estaciones habilitadas (ruta de 6).`);
   if (score != null && score >= 60 && score < 80) watch.push(`Logro de selección ${score} %. Conviene observar ese resultado.`);
   if (done >= 4 && score == null) watch.push('La evaluación está marcada, pero no hay puntaje.');
   if (watch.length) return { level: 'watch', label: 'Conviene observar', reasons: watch };
-  const ok = [`${done} de 5 estaciones.`];
+  const ok = [`${done} de 5 estaciones habilitadas (ruta de 6).`];
   if (score != null) ok.push(`Logro de selección ${score} %.`);
   return { level: 'ok', label: 'Progreso esperado', reasons: ok };
 }
@@ -487,7 +491,7 @@ function personRow(group, distinguish=false) {
   const series = ((group.find(record => ((record.state || {}).series || []).length >= 8) || group[0]).state || {}).series || [];
   const points = series.map(point => ({ x: point.week, y: point.score }));
   const trend = points.length >= 8 ? trendWord(points) : 'Sin serie suficiente';
-  const modules = group.map(record => record.unstarted ? 'Matriculado sin registro de actividad.' : `Módulo ${record.position}: ${stations(record)} de 5. ${logro(record) == null ? 'Sin evaluación de selección.' : `Logro ${logro(record)} %.`} ${practica(record)} prácticas.`).join(' ');
+  const modules = group.map(record => record.unstarted ? 'Matriculado sin registro de actividad.' : `Módulo ${record.position}: ${stations(record)} de 5 habilitadas (ruta de 6 estaciones). ${logro(record) == null ? 'Sin evaluación de selección.' : `Logro ${logro(record)} %.`} ${practica(record)} prácticas.`).join(' ');
   const evidence=group.filter(record=>!record.unstarted).map(record=>{
     const saved=record.state||{};const review=saved.exam?.review;
     return `<section><h3>Módulo ${esc(record.position)}</h3>${practiceEntries(record).map(entry=>`<p><b>${esc(entry.kind)} · ${esc(entry.paso||entry.id)}</b></p><p>${esc(entry.text)}</p>`).join('')}${review?`<p>Desarrollo revisado: ${esc(review.score??'Sin puntaje')} / 25</p><p>${esc(review.feedback||'')}</p>`:'<p>Sin revisión docente de desarrollo registrada.</p>'}${saved.reflection?`<p>Reflexión: ${esc(saved.reflection)}</p>`:''}</section>`;
@@ -515,7 +519,7 @@ function modulePlan(module, solo) {
     ? `${rows.length} registro${rows.length === 1 ? '' : 's'} ya ejecutan este módulo.`
     : 'Este módulo todavía no tiene registros en esta vista.';
   const layout = solo ? ' pd-plan-solo' : '';
-  return `<article class="pd-card pd-plan${layout}">${image}<div><h3>Módulo ${module.position}. ${esc(module.title)}</h3>${spotlight(planLead, [['Horas oficiales', `${module.official_hp || module.hours || 0} HP`], ['Estaciones', '5'], ['Encargos previstos', String(previstos)], ['Encargos registrados', String(hechos)]])}<h3>Objetivos de aprendizaje</h3><ul>${oa}</ul></div></article>`;
+  return `<article class="pd-card pd-plan${layout}">${image}<div><h3>Módulo ${module.position}. ${esc(module.title)}</h3>${spotlight(planLead, [['Horas oficiales', `${module.official_hp || module.hours || 0} HP`], ['Estaciones', '6 (5 habilitadas)'], ['Encargos previstos', String(previstos)], ['Encargos registrados', String(hechos)]])}<h3>Objetivos de aprendizaje</h3><ul>${oa}</ul></div></article>`;
 }
 function modulePlans(list) {
   if (!list.length) return '<p class="pd-interp">Ningún módulo de este tramo coincide con la búsqueda.</p>';
@@ -801,7 +805,7 @@ function reportsEvidence() {
   const avg = values.length ? Math.round(mean(values)) : null;
   const mid = values.length ? Math.round(median(values)) : null;
   const fields = [
-    ['Pregunta', '¿Cuánto del recorrido de cinco estaciones está registrado?'],
+    ['Pregunta', '¿Cuánto del recorrido habilitado está registrado? La ruta incluye 6 estaciones; Misión laboral está en construcción.'],
     ['Fórmula', kpi.formula || 'estaciones_completadas / 5 × 100'],
     ['Periodo', state.cohort ? '12 semanas de prácticas comparables en la cohorte de demostración.' : (kpi.periodo || 'Estado actual')],
     ['Población', `${scopedModules().length} módulos del curso seleccionado; registros de progreso.`]
@@ -922,9 +926,9 @@ function reports() {
     const list = records.filter(record => String(record.module_id) === String(module.id));
     return { label: `M${module.position} · ${module.title}`, value: list.length ? mean(list.map(cumplimientoPct)) : null };
   });
-  const stationNames = ['Contextualización', 'Aprendizajes esperados', 'Situación integradora', 'Evaluación', 'Retroalimentación y cierre'];
-  const knownStations=records.filter(record=>stationStates(record));
-  const stationBars = stationNames.map((name, index) => ({ label: `${index + 1}. ${name}`, value: knownStations.length ? knownStations.filter(record => stationStates(record)[index]).length / knownStations.length * 100 : null }));
+  const stationNames = TEACHER_STATIONS;
+  const knownStations=records.filter(record=>teacherStationStates(record));
+  const stationBars = stationNames.map((name, index) => ({ label: `${index + 1}. ${name}`, value: index !== 3 && knownStations.length ? knownStations.filter(record => teacherStationStates(record)[index]).length / knownStations.length * 100 : null }));
   const availableBars = (list, title) => list.some(item => item.value != null) ? bars(list.filter(item => item.value != null), { title }) : '<p class="pd-report-empty">Sin registros suficientes para mostrar este gráfico.</p>';
   const byModules = reportPanel('Progreso por módulos', availableBars(moduleBars, 'Cumplimiento medio del recorrido'));
   const moduleProgress = reportPanel('Progreso por módulos', `<p class="pd-module-subtitle">Cumplimiento medio del recorrido</p>${moduleBars.some(item=>item.value!=null)?'':'<p class="pd-report-empty">Sin registros suficientes para mostrar este gráfico.</p>'}<div class="pd-module-report-rows">${modules.map((module,index)=>{
@@ -934,12 +938,12 @@ function reports() {
   }).join('')||'<p class="pd-report-empty">No hay módulos en este alcance.</p>'}</div>`, 'pd-module-progress-report');
   const moduleAverage=scores.length?Math.max(0,Math.min(100,Math.round(mean(scores)))):null;
   const moduleExams=reportPanel('Evaluaciones registradas', `<p class="pd-module-subtitle">Registros con evaluación de selección</p><div class="pd-module-exams-body"><span class="pd-module-exams-icon" aria-hidden="true">${reviewIcon('oa-ae')}</span><div class="pd-module-exams-count"><strong>${scores.length}</strong><span>registros con evaluación de selección</span></div><div class="pd-module-score-ring" style="--score:${moduleAverage??0}%" role="img" aria-label="Logro medio: ${moduleAverage==null?'sin evaluaciones':`${moduleAverage} por ciento`}"><div><strong>${moduleAverage==null?'—':`${moduleAverage} %`}</strong><span>Logro medio</span></div></div></div><p class="pd-module-exams-note">No hay datos suficientes para clasificar evaluaciones por tipo formativo, sumativo o proyecto.</p>`, 'pd-module-exams-report');
-  const byStations = reportPanel('Resultados por estaciones', availableBars(stationBars, 'Registros que completaron cada estación') + '<p class="pd-note">Estimación según el recorrido registrado de cinco estaciones; no representa actividades individuales.</p>');
-  const stationIcons=['oa-ae','reportes','estudiantes','cumplimiento','cursos'];
+  const byStations = reportPanel('Resultados por estaciones', availableBars(stationBars, 'Registros que completaron cada estación') + '<p class="pd-note">Ruta de 6 estaciones: 5 habilitadas y Misión laboral en construcción. El avance considera las habilitadas; no representa actividades individuales.</p>');
+  const stationIcons=['oa-ae','reportes','estudiantes','cursos','cumplimiento','cursos'];
   const stationProgressReport=reportPanel('Resultados por estaciones',`<p class="pd-module-subtitle">Registros que completaron cada estación</p><div class="pd-module-report-rows">${stationBars.map((station,index)=>{
     const amount=station.value==null?null:Math.max(0,Math.min(100,Math.round(station.value)));
-    return `<div class="pd-module-report-row pd-station-report-row"><span class="pd-module-report-code">${index+1}</span><span class="pd-station-report-icon" aria-hidden="true">${reviewIcon(stationIcons[index])}</span><span class="pd-module-report-name">${esc(stationNames[index])}</span><span class="pd-module-report-track" ${amount==null?'':`role="progressbar" aria-label="${esc(stationNames[index])}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${amount}"`}><i style="width:${amount??0}%"></i></span><strong>${amount==null?'Sin datos':`${amount} %`}</strong></div>`;
-  }).join('')}</div><p class="pd-station-report-note">Estimación según el recorrido registrado de cinco estaciones; no representa actividades individuales.</p>`,'pd-station-progress-report');
+    return `<div class="pd-module-report-row pd-station-report-row"><span class="pd-module-report-code">${index+1}</span><span class="pd-station-report-icon" aria-hidden="true">${reviewIcon(stationIcons[index])}</span><span class="pd-module-report-name">${esc(stationNames[index])}</span><span class="pd-module-report-track" ${amount==null?'':`role="progressbar" aria-label="${esc(stationNames[index])}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${amount}"`}><i style="width:${amount??0}%"></i></span><strong>${index===3?'En construcción':amount==null?'Sin datos':`${amount} %`}</strong></div>`;
+  }).join('')}</div><p class="pd-station-report-note">Ruta de 6 estaciones: 5 habilitadas y Misión laboral en construcción. El avance considera las habilitadas; no representa actividades individuales.</p>`,'pd-station-progress-report');
   const stationDistributionReport=reportPanel('Distribución del acompañamiento',reportDistribution(counts)+`<div class="pd-station-report-total"><span aria-hidden="true">${reviewIcon('estudiantes')}</span><div><span>Total de estudiantes</span><strong>${counts.ok+counts.watch+counts.support+counts.none}</strong></div></div>`,'pd-station-distribution-report');
   const byLearning = reportPanel('Evidencia por Aprendizaje Esperado', `<p class="pd-module-subtitle">Cobertura de evidencia de AE</p><div class="pd-module-report-rows">${coverage.slice(0,6).map(item=>{
     const amount=item.total?Math.max(0,Math.min(100,Math.round(item.covered/item.total*100))):null;
@@ -965,7 +969,7 @@ function reports() {
     exams: `<section class="pd-evaluation-metrics" aria-label="Indicadores de evaluaciones">${reportMetric('Registros con evaluación de selección',scores.length,'En el curso y módulo seleccionados','blue','estudiantes')}${reportMetric('Logro medio',scores.length?pct(mean(scores)):'—','Resultado de selección, no logro de OA','mint','cumplimiento')}${reportMetric('Semanas con registros',comparableWeeks.length,'Observaciones comparables','violet','oa-ae')}</section>` + trend + '<p class="pd-note pd-evaluation-limit">No hay datos suficientes para clasificar evaluaciones por tipo formativo, sumativo o proyecto.</p>' + actions,
     compare: reportPanel('Cortes históricos del curso', '<p class="pd-comparison-subtitle">Registra y compara el avance del curso</p>'+snapshotReport(),'pd-snapshot-report') + moduleProgress + trend + reportPanel('Comparación entre períodos',snapshotComparison(),'pd-period-comparison') + actions
   };
-  return `<div class="pd-report"><header class="pd-report-heading"><div><h1>Reportes</h1><p>Genera, visualiza y descarga reportes del aprendizaje de tus estudiantes.</p></div>${teacherFilters('pd-report-module',reportView.module,state.cohort ? '12 semanas · Demostración' : 'Estado actual')}</header>${state.cohort ? '<p class="pd-report-demo" role="note">Cohorte de demostración: los indicadores y estudiantes de esta pantalla son ficticios. El CSV conserva los registros reales del campus.</p>' : ''}<section class="pd-report-metrics" aria-label="Indicadores del reporte">${reportMetric('Estudiantes', people.length, 'En el alcance seleccionado', 'mint')}${reportMetric('Cumplimiento medio', values.length ? pct(mean(values)) : '—', 'Recorrido de cinco estaciones', 'violet')}${reportMetric('Logro de selección', scores.length ? pct(mean(scores)) : '—', `${scores.length} registros evaluados`, 'orange')}${reportMetric('Evidencia de AE', totalAe ? pct(coveredAe / totalAe * 100) : '—', 'Cobertura, no logro curricular', 'blue')}</section><nav class="pd-report-tabs" aria-label="Vistas de reportes">${REPORT_TABS.map(([id, label]) => `<button type="button" data-report-tab="${id}" aria-pressed="${reportView.tab === id}">${esc(label)}</button>`).join('')}</nav><div class="pd-report-grid" id="pd-report-results">${views[reportView.tab]}</div><details class="pd-report-method"><summary>Definiciones, alcance y reporte original</summary>${reportsEvidence()}</details></div>`;
+  return `<div class="pd-report"><header class="pd-report-heading"><div><h1>Reportes</h1><p>Genera, visualiza y descarga reportes del aprendizaje de tus estudiantes.</p></div>${teacherFilters('pd-report-module',reportView.module,state.cohort ? '12 semanas · Demostración' : 'Estado actual')}</header>${state.cohort ? '<p class="pd-report-demo" role="note">Cohorte de demostración: los indicadores y estudiantes de esta pantalla son ficticios. El CSV conserva los registros reales del campus.</p>' : ''}<section class="pd-report-metrics" aria-label="Indicadores del reporte">${reportMetric('Estudiantes', people.length, 'En el alcance seleccionado', 'mint')}${reportMetric('Cumplimiento medio', values.length ? pct(mean(values)) : '—', '6 estaciones · 5 habilitadas', 'violet')}${reportMetric('Logro de selección', scores.length ? pct(mean(scores)) : '—', `${scores.length} registros evaluados`, 'orange')}${reportMetric('Evidencia de AE', totalAe ? pct(coveredAe / totalAe * 100) : '—', 'Cobertura, no logro curricular', 'blue')}</section><nav class="pd-report-tabs" aria-label="Vistas de reportes">${REPORT_TABS.map(([id, label]) => `<button type="button" data-report-tab="${id}" aria-pressed="${reportView.tab === id}">${esc(label)}</button>`).join('')}</nav><div class="pd-report-grid" id="pd-report-results">${views[reportView.tab]}</div><details class="pd-report-method"><summary>Definiciones, alcance y reporte original</summary>${reportsEvidence()}</details></div>`;
 }
 function bindReports() {
   if (currentTab().id !== 'reportes') return;
@@ -1158,6 +1162,17 @@ function draw() {
     main.prepend(banner);
     heading.classList.add('pd-unified-filters');
   }
+  const shellHeader=document.querySelector('.pd-header');
+  shellHeader?.querySelector('.pd-header-access')?.remove();
+  const accessControl=main.querySelector('.pd-banner-access');
+  if(shellHeader && accessControl) {
+    const accessGroup=document.createElement('div');
+    accessGroup.className='pd-header-access';
+    accessGroup.append(accessControl);
+    const previewNotice=main.querySelector('.pd-banner-notice');
+    if(previewNotice)accessGroup.append(previewNotice);
+    shellHeader.querySelector('.pd-header-label').after(accessGroup);
+  }
   const login=document.getElementById('pd-login');
   const passwordToggle=document.getElementById('pd-password-toggle');
   if(passwordToggle) passwordToggle.onclick=()=>{
@@ -1289,4 +1304,12 @@ function showLoadError(error) {
   };
 }
 document.querySelector('.pd-foot')?.addEventListener('error', event => { event.currentTarget.hidden = true; });
+const shellHeaderElement=document.querySelector('.pd-header');
+if(shellHeaderElement && typeof ResizeObserver==='function') {
+  const headerSizeObserver=new ResizeObserver(entries=>{
+    const height=Math.ceil(entries[0].target.getBoundingClientRect().height);
+    document.querySelector('.pd-app').style.setProperty('--pd-shell-header-height',`${height}px`);
+  });
+  headerSizeObserver.observe(shellHeaderElement);
+}
 boot().catch(showLoadError);

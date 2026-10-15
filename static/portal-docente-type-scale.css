@@ -1,0 +1,21 @@
+/* Final shared scale, after component styles, so each role stays consistent. */
+.pd-app { --pd-font-title:28px; --pd-font-section:22px; --pd-font-subtitle:18px; --pd-font-card:17px; --pd-font-body:16px; --pd-font-control:15px; --pd-font-secondary:14px; --pd-font-number:30px; }
+.pd-app, .pd-app * { font-family:Inter,sans-serif !important; letter-spacing:0 !important; }
+#pd-main { font-size:var(--pd-font-body); font-weight:400; line-height:1.5; }
+#pd-main h1, .pd-app .pd-header-brand b { font-size:var(--pd-font-title) !important; font-weight:700 !important; line-height:1.25 !important; }
+#pd-main h2 { font-size:var(--pd-font-section) !important; font-weight:600 !important; line-height:1.25 !important; }
+#pd-main h3 { font-size:var(--pd-font-subtitle) !important; font-weight:600 !important; line-height:1.25 !important; }
+#pd-main :is(.pd-report-view-heading h2,.pd-teaching-heading h3) { font-size:var(--pd-font-section) !important; font-weight:600 !important; }
+#pd-main :is(.pd-report-metric h2,.pd-card h2,.pd-card h3,.pd-action-card h3,.pd-teaching-guidance h3,.pd-course-history article h3,.pd-learning-reference h3,.pd-review-copy strong,.pd-teaching-label strong) { font-size:var(--pd-font-card) !important; font-weight:600 !important; line-height:1.25 !important; }
+#pd-main :is(p,li,textarea,input,select,.pd-module-exams-count > span,.pd-learning-caution) { font-size:var(--pd-font-body) !important; line-height:1.5 !important; font-weight:400 !important; }
+#pd-main :is(button,.pd-review-link,.pd-ped-cta,.pd-learning-open,.pd-learning-reference-link,.pd-report-actions a,.pd-period-selector,.pd-learning-destinations a), #pd-nav a, #pd-mobile a { font-size:var(--pd-font-control) !important; font-weight:600 !important; line-height:1.5 !important; }
+#pd-nav a, #pd-mobile a { font-weight:500 !important; }
+#pd-main :is(label,small,figcaption,.pd-note,.pd-report-demo,.pd-report-metric p,.pd-review-copy > span,.pd-filter-label,.pd-filter-current,.pd-chart-legend,.pd-axis-summary,.pd-report-distribution li,.pd-module-subtitle,.pd-module-report-name,.pd-learning-module,.pd-facts dt,.pd-evaluation-footer > div > span:not(.pd-trend-footer-icon),.pd-station-report-total > div > span,[data-document-message]) { font-size:var(--pd-font-secondary) !important; line-height:1.5 !important; font-weight:400 !important; }
+#pd-main :is(table,th,td) { font-size:var(--pd-font-secondary) !important; line-height:1.5 !important; }
+#pd-main th { font-weight:600 !important; }
+#pd-main td { font-weight:400 !important; }
+#pd-main :is(.pd-report-metric strong,.pd-report-donut strong,.pd-report-exam-total strong,.pd-course-stats dd,.pd-home-metrics b,.pd-kpi strong,.pd-measure b,.pd-student-group-count strong,.pd-ped-stats strong,.pd-module-exams-count > strong,.pd-module-score-ring strong,.pd-station-report-total strong,.pd-report-scope .pd-facts dd,.pd-evaluation-footer > div:first-child strong) { font-size:var(--pd-font-number) !important; line-height:1.25 !important; font-weight:700 !important; font-variant-numeric:tabular-nums; }
+#pd-main :is(.pd-report-scope .pd-facts > div:first-child dd,.pd-report-scope .pd-facts > div:last-child dd,.pd-evaluation-footer > div:not(:first-child) strong) { font-size:var(--pd-font-card) !important; line-height:1.25 !important; font-weight:600 !important; }
+#pd-main :is(.pd-module-report-code,.pd-module-report-row > strong) { font-size:var(--pd-font-control) !important; line-height:1.5 !important; font-weight:600 !important; }
+#pd-main svg text { font-family:Inter,sans-serif !important; font-size:var(--pd-font-secondary) !important; }
+#pd-main .pd-banner-title { overflow-wrap:break-word; }

@@ -3,11 +3,12 @@
 .is-teacher-actions .pd-review-heading > div { width:65%; }
 .pd-app .is-teacher-actions .pd-review-heading h2 { font-size:30px !important; font-weight:700 !important; }
 .pd-content .is-teacher-actions .pd-review-links { grid-template-columns:minmax(0,1fr); gap:12px; }
-.pd-content .is-teacher-actions .pd-review-link { position:relative; min-height:104px; padding:16px 22px; background-image:url('/static/portal-docente/acciones-docentes-sprite.png'); background-size:100% 600%; background-repeat:no-repeat; background-position:center 20%; box-shadow:0 2px 6px #234e7812; }
-.pd-content .is-teacher-actions .pd-review-link:nth-child(2) { background-position:center 40%; }
-.pd-content .is-teacher-actions .pd-review-link:nth-child(3) { background-position:center 60%; }
-.pd-content .is-teacher-actions .pd-review-link:nth-child(4) { background-position:center 80%; }
-.pd-content .is-teacher-actions .pd-review-link:nth-child(5) { background-position:center 100%; }
+/* Crop inside each photographic strip; generated strip heights are not equal. */
+.pd-content .is-teacher-actions .pd-review-link { position:relative; min-height:104px; padding:16px 22px; background-image:url('/static/portal-docente/acciones-docentes-sprite.png'); background-size:100% 642.373%; background-repeat:no-repeat; background-position:center 22.1875%; box-shadow:0 2px 6px #234e7812; }
+.pd-content .is-teacher-actions .pd-review-link:nth-child(2) { background-size:100% 676.786%; background-position:center 41.7957%; }
+.pd-content .is-teacher-actions .pd-review-link:nth-child(3) { background-size:100% 676.786%; background-position:center 60.5263%; }
+.pd-content .is-teacher-actions .pd-review-link:nth-child(4) { background-size:100% 689.091%; background-position:center 79.1667%; }
+.pd-content .is-teacher-actions .pd-review-link:nth-child(5) { background-size:100% 631.667%; background-position:center 99.373%; }
 .is-teacher-actions .pd-review-icon { width:64px; height:64px; flex-basis:64px; }
 .is-teacher-actions .pd-review-icon svg { width:36px; height:36px; }
 .is-teacher-actions .pd-review-copy { flex:0 1 62%; padding-left:18px; border-left:1px solid var(--review-border); }

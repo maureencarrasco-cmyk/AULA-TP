@@ -1,0 +1,34 @@
+.pd-header { height:auto; min-height:80px; flex-wrap:wrap; gap:12px; padding:12px 20px; align-items:center; }
+.pd-header .pd-header-label { margin-right:0; flex:0 0 auto; }
+.pd-header .pd-user { margin-left:auto; }
+.pd-app { padding-top:var(--pd-shell-header-height,96px); }
+.pd-side { top:var(--pd-shell-header-height,96px); height:calc(100vh - var(--pd-shell-header-height,96px)); }
+.pd-mobile { top:var(--pd-shell-header-height,96px); }
+.pd-header-access { display:flex; align-items:stretch; gap:0; flex:1 1 520px; min-width:0; }
+.pd-header-access .pd-banner-access { position:relative; max-width:none; margin:0; border:0; padding:0; flex:0 1 310px; background:#e7f2fc; border-radius:8px 0 0 8px; }
+.pd-header-access .pd-banner-access summary { display:flex; align-items:center; gap:10px; min-height:52px; height:auto; padding:8px 12px; font-size:15px; font-weight:600; color:#234e78; cursor:pointer; }
+.pd-header-access .pd-banner-access { background:#fff0df; border:1px solid #f7c898; border-radius:8px; box-shadow:0 0 12px #ffb56b55; }
+.pd-header-access .pd-banner-access summary { border-radius:7px; background:#fff0df; color:#854a20; }
+.pd-header-access .pd-banner-access .pd-banner-user-icon { background:#ffdfbd; }
+.pd-header-access .pd-banner-access:has(summary:hover),.pd-header-access .pd-banner-access:focus-within { border-color:#eba45f; box-shadow:0 0 16px #ffad6666; }
+.pd-header-access .pd-banner-user-icon { flex-basis:32px; height:36px; }
+.pd-header-access .pd-banner-user-icon img { width:24px; height:24px; }
+.pd-header-access .pd-banner-notice { display:flex; align-items:center; flex:1 1 250px; margin:0; max-width:none; padding:8px 12px; border:0; border-left:1px solid #bbd5ed; border-radius:0 8px 8px 0; background:#e7f2fc; color:#64748b; font-size:14px; font-weight:400; line-height:1.5; }
+.pd-header-access .pd-banner-access > form { position:absolute; top:calc(100% + 10px); left:0; width:min(900px,calc(100vw - 40px)); padding:18px; border:1px solid #c7def5; border-radius:8px; background:#f7fbff; box-shadow:0 8px 24px #234e7826; z-index:20; }
+.pd-header-access #pd-login { grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto; }
+.pd-header-access #pd-login .pd-login-field { flex-direction:column; align-items:stretch; font-size:14px; }
+.pd-header-access .pd-note { display:flex; align-items:center; gap:12px; margin:0; flex:1; }
+.pd-unified-banner:not([data-page="resumen"]) { --header-size:auto 500%; }
+.pd-unified-banner[data-page="cursos"] { --header-position:right 0%; }
+.pd-unified-banner[data-page="estudiantes"] { --header-position:right 25%; }
+.pd-unified-banner[data-page="oa-ae"] { --header-position:right 50%; }
+.pd-unified-banner[data-page="cumplimiento"] { --header-position:right 75%; }
+.pd-unified-banner[data-page="reportes"] { --header-position:right 100%; }
+.pd-content .pd-unified-banner { width:100%; min-width:0; max-width:100%; aspect-ratio:4 / 1; min-height:220px; align-content:center; }
+.pd-content .pd-unified-banner .pd-banner-title { padding-top:20px; }
+.pd-content .pd-unified-banner::before { mask-image:linear-gradient(to right,transparent,#000 6%,#000 97%,transparent),linear-gradient(to bottom,transparent,#000 6%,#000 92%,transparent); }
+@media (min-width:900px) { .pd-content .pd-unified-banner .pd-banner-title { max-width:82%; } }
+.pd-header-access :is(button,summary):focus-visible { outline:3px solid #1479cd; outline-offset:3px; }
+@media (max-width:1200px) { .pd-header .pd-user { order:1; } .pd-header-access { order:2; flex-basis:100%; } .pd-header-access .pd-banner-access { flex:0 1 330px; } }
+@media (max-width:640px) { .pd-header { padding:10px 12px; gap:8px; } .pd-header-access { display:block; } .pd-header-access .pd-banner-access { border-radius:6px; } .pd-header-access .pd-banner-notice { display:block; border-left:0; border-top:1px solid #c9dfee; } .pd-header-access .pd-banner-access[open] { position:static; } .pd-header-access .pd-banner-access > form { left:12px; right:12px; width:auto; max-height:60vh; overflow:auto; } .pd-header-access #pd-login { grid-template-columns:minmax(0,1fr); } .pd-content .pd-unified-banner { min-height:0; } .pd-content .pd-unified-banner:not([data-page="resumen"])::after { background-size:auto 500%; background-position:var(--header-position); } }
+@media (max-width:640px) { .pd-content .pd-unified-banner { aspect-ratio:auto; } .pd-content .pd-unified-banner::after { width:100%; height:auto; aspect-ratio:4 / 1; margin-top:12px; } }
