@@ -1,0 +1,271 @@
+﻿curso_id,curso,nivel,estacion,nombre,actividades_revisadas,actividades_requieren_cambios_documentales,porcentaje_cambios_documentales,porcentaje_pedagogico_documental,porcentaje_problemas_tiempo_confirmados,tiempos_pendientes,estado
+1,Refrigeración y Climatización,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+1,Refrigeración y Climatización,3° y 4° medio,2,Aprendizajes Esperados,292,41,14.04,14.04,,292,Revision documental; validacion pedagogica integral pendiente
+1,Refrigeración y Climatización,3° y 4° medio,3,Situacion Integradora,422,52,12.32,12.32,,422,Revision documental; validacion pedagogica integral pendiente
+1,Refrigeración y Climatización,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+1,Refrigeración y Climatización,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+1,Refrigeración y Climatización,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+2,Electricidad,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+2,Electricidad,3° y 4° medio,2,Aprendizajes Esperados,291,18,6.19,6.19,,291,Revision documental; validacion pedagogica integral pendiente
+2,Electricidad,3° y 4° medio,3,Situacion Integradora,407,85,20.88,20.88,,407,Revision documental; validacion pedagogica integral pendiente
+2,Electricidad,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+2,Electricidad,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+2,Electricidad,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+3,"Atención de Enfermería, mención Adulto Mayor",3° y 4° medio,1,Contextualizacion,13,0,0.0,0.0,,13,Revision documental; validacion pedagogica integral pendiente
+3,"Atención de Enfermería, mención Adulto Mayor",3° y 4° medio,2,Aprendizajes Esperados,355,23,6.48,6.48,,355,Revision documental; validacion pedagogica integral pendiente
+3,"Atención de Enfermería, mención Adulto Mayor",3° y 4° medio,3,Situacion Integradora,526,79,15.02,15.02,,526,Revision documental; validacion pedagogica integral pendiente
+3,"Atención de Enfermería, mención Adulto Mayor",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+3,"Atención de Enfermería, mención Adulto Mayor",3° y 4° medio,5,Evaluacion Final,338,0,0.0,0.0,,338,Revision documental; validacion pedagogica integral pendiente
+3,"Atención de Enfermería, mención Adulto Mayor",3° y 4° medio,6,Retroalimentacion y Cierre,13,0,0.0,0.0,,13,Revision documental; validacion pedagogica integral pendiente
+4,"Atención de Enfermería, mención Enfermería",3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+4,"Atención de Enfermería, mención Enfermería",3° y 4° medio,2,Aprendizajes Esperados,322,29,9.01,9.01,,322,Revision documental; validacion pedagogica integral pendiente
+4,"Atención de Enfermería, mención Enfermería",3° y 4° medio,3,Situacion Integradora,438,63,14.38,14.38,,438,Revision documental; validacion pedagogica integral pendiente
+4,"Atención de Enfermería, mención Enfermería",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+4,"Atención de Enfermería, mención Enfermería",3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+4,"Atención de Enfermería, mención Enfermería",3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+5,"Gastronomía, mención Cocina",3° y 4° medio,1,Contextualizacion,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+5,"Gastronomía, mención Cocina",3° y 4° medio,2,Aprendizajes Esperados,359,14,3.9,3.9,,359,Revision documental; validacion pedagogica integral pendiente
+5,"Gastronomía, mención Cocina",3° y 4° medio,3,Situacion Integradora,466,71,15.24,15.24,,466,Revision documental; validacion pedagogica integral pendiente
+5,"Gastronomía, mención Cocina",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+5,"Gastronomía, mención Cocina",3° y 4° medio,5,Evaluacion Final,286,0,0.0,0.0,,286,Revision documental; validacion pedagogica integral pendiente
+5,"Gastronomía, mención Cocina",3° y 4° medio,6,Retroalimentacion y Cierre,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+6,"Gastronomía, mención Pastelería y Repostería",3° y 4° medio,1,Contextualizacion,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+6,"Gastronomía, mención Pastelería y Repostería",3° y 4° medio,2,Aprendizajes Esperados,353,8,2.27,2.27,,353,Revision documental; validacion pedagogica integral pendiente
+6,"Gastronomía, mención Pastelería y Repostería",3° y 4° medio,3,Situacion Integradora,467,85,18.2,18.2,,467,Revision documental; validacion pedagogica integral pendiente
+6,"Gastronomía, mención Pastelería y Repostería",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+6,"Gastronomía, mención Pastelería y Repostería",3° y 4° medio,5,Evaluacion Final,286,0,0.0,0.0,,286,Revision documental; validacion pedagogica integral pendiente
+6,"Gastronomía, mención Pastelería y Repostería",3° y 4° medio,6,Retroalimentacion y Cierre,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+7,Servicios de Hotelería,3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+7,Servicios de Hotelería,3° y 4° medio,2,Aprendizajes Esperados,328,16,4.88,4.88,,328,Revision documental; validacion pedagogica integral pendiente
+7,Servicios de Hotelería,3° y 4° medio,3,Situacion Integradora,437,75,17.16,17.16,,437,Revision documental; validacion pedagogica integral pendiente
+7,Servicios de Hotelería,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+7,Servicios de Hotelería,3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+7,Servicios de Hotelería,3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+8,Contabilidad,3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+8,Contabilidad,3° y 4° medio,2,Aprendizajes Esperados,328,22,6.71,6.71,,328,Revision documental; validacion pedagogica integral pendiente
+8,Contabilidad,3° y 4° medio,3,Situacion Integradora,437,70,16.02,16.02,,437,Revision documental; validacion pedagogica integral pendiente
+8,Contabilidad,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+8,Contabilidad,3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+8,Contabilidad,3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+9,Elaboración Industrial de Alimentos,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+9,Elaboración Industrial de Alimentos,3° y 4° medio,2,Aprendizajes Esperados,285,11,3.86,3.86,,285,Revision documental; validacion pedagogica integral pendiente
+9,Elaboración Industrial de Alimentos,3° y 4° medio,3,Situacion Integradora,409,102,24.94,24.94,,409,Revision documental; validacion pedagogica integral pendiente
+9,Elaboración Industrial de Alimentos,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+9,Elaboración Industrial de Alimentos,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+9,Elaboración Industrial de Alimentos,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+10,Vestuario y Confección Textil,3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+10,Vestuario y Confección Textil,3° y 4° medio,2,Aprendizajes Esperados,364,4,1.1,1.1,,364,Revision documental; validacion pedagogica integral pendiente
+10,Vestuario y Confección Textil,3° y 4° medio,3,Situacion Integradora,438,73,16.67,16.67,,438,Revision documental; validacion pedagogica integral pendiente
+10,Vestuario y Confección Textil,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+10,Vestuario y Confección Textil,3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+10,Vestuario y Confección Textil,3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+11,Instalaciones Sanitarias,3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+11,Instalaciones Sanitarias,3° y 4° medio,2,Aprendizajes Esperados,352,30,8.52,8.52,,352,Revision documental; validacion pedagogica integral pendiente
+11,Instalaciones Sanitarias,3° y 4° medio,3,Situacion Integradora,437,53,12.13,12.13,,437,Revision documental; validacion pedagogica integral pendiente
+11,Instalaciones Sanitarias,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+11,Instalaciones Sanitarias,3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+11,Instalaciones Sanitarias,3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+12,Montaje Industrial,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+12,Montaje Industrial,3° y 4° medio,2,Aprendizajes Esperados,321,19,5.92,5.92,,321,Revision documental; validacion pedagogica integral pendiente
+12,Montaje Industrial,3° y 4° medio,3,Situacion Integradora,407,72,17.69,17.69,,407,Revision documental; validacion pedagogica integral pendiente
+12,Montaje Industrial,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+12,Montaje Industrial,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+12,Montaje Industrial,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+13,Electrónica,3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+13,Electrónica,3° y 4° medio,2,Aprendizajes Esperados,394,6,1.52,1.52,,394,Revision documental; validacion pedagogica integral pendiente
+13,Electrónica,3° y 4° medio,3,Situacion Integradora,436,58,13.3,13.3,,436,Revision documental; validacion pedagogica integral pendiente
+13,Electrónica,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+13,Electrónica,3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+13,Electrónica,3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+14,Dibujo Técnico,3° y 4° medio,1,Contextualizacion,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+14,Dibujo Técnico,3° y 4° medio,2,Aprendizajes Esperados,365,11,3.01,3.01,,365,Revision documental; validacion pedagogica integral pendiente
+14,Dibujo Técnico,3° y 4° medio,3,Situacion Integradora,467,71,15.2,15.2,,467,Revision documental; validacion pedagogica integral pendiente
+14,Dibujo Técnico,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+14,Dibujo Técnico,3° y 4° medio,5,Evaluacion Final,286,0,0.0,0.0,,286,Revision documental; validacion pedagogica integral pendiente
+14,Dibujo Técnico,3° y 4° medio,6,Retroalimentacion y Cierre,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+15,Gráfica,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+15,Gráfica,3° y 4° medio,2,Aprendizajes Esperados,291,14,4.81,4.81,,291,Revision documental; validacion pedagogica integral pendiente
+15,Gráfica,3° y 4° medio,3,Situacion Integradora,407,95,23.34,23.34,,407,Revision documental; validacion pedagogica integral pendiente
+15,Gráfica,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+15,Gráfica,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+15,Gráfica,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+16,Servicios de Turismo,3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+16,Servicios de Turismo,3° y 4° medio,2,Aprendizajes Esperados,334,8,2.4,2.4,,334,Revision documental; validacion pedagogica integral pendiente
+16,Servicios de Turismo,3° y 4° medio,3,Situacion Integradora,437,82,18.76,18.76,,437,Revision documental; validacion pedagogica integral pendiente
+16,Servicios de Turismo,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+16,Servicios de Turismo,3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+16,Servicios de Turismo,3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+17,Forestal,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+17,Forestal,3° y 4° medio,2,Aprendizajes Esperados,321,33,10.28,10.28,,321,Revision documental; validacion pedagogica integral pendiente
+17,Forestal,3° y 4° medio,3,Situacion Integradora,407,53,13.02,13.02,,407,Revision documental; validacion pedagogica integral pendiente
+17,Forestal,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+17,Forestal,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+17,Forestal,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+18,Muebles y Terminaciones en Madera,3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+18,Muebles y Terminaciones en Madera,3° y 4° medio,2,Aprendizajes Esperados,388,25,6.44,6.44,,388,Revision documental; validacion pedagogica integral pendiente
+18,Muebles y Terminaciones en Madera,3° y 4° medio,3,Situacion Integradora,436,40,9.17,9.17,,436,Revision documental; validacion pedagogica integral pendiente
+18,Muebles y Terminaciones en Madera,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+18,Muebles y Terminaciones en Madera,3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+18,Muebles y Terminaciones en Madera,3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+19,Acuicultura,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+19,Acuicultura,3° y 4° medio,2,Aprendizajes Esperados,339,32,9.44,9.44,,339,Revision documental; validacion pedagogica integral pendiente
+19,Acuicultura,3° y 4° medio,3,Situacion Integradora,407,42,10.32,10.32,,407,Revision documental; validacion pedagogica integral pendiente
+19,Acuicultura,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+19,Acuicultura,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+19,Acuicultura,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+20,Operaciones Portuarias,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+20,Operaciones Portuarias,3° y 4° medio,2,Aprendizajes Esperados,318,31,9.75,9.75,,318,Revision documental; validacion pedagogica integral pendiente
+20,Operaciones Portuarias,3° y 4° medio,3,Situacion Integradora,405,49,12.1,12.1,,405,Revision documental; validacion pedagogica integral pendiente
+20,Operaciones Portuarias,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+20,Operaciones Portuarias,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+20,Operaciones Portuarias,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+21,Pesquería,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+21,Pesquería,3° y 4° medio,2,Aprendizajes Esperados,363,23,6.34,6.34,,363,Revision documental; validacion pedagogica integral pendiente
+21,Pesquería,3° y 4° medio,3,Situacion Integradora,407,45,11.06,11.06,,407,Revision documental; validacion pedagogica integral pendiente
+21,Pesquería,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+21,Pesquería,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+21,Pesquería,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+22,Tripulación de Naves Mercantes y Especiales,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+22,Tripulación de Naves Mercantes y Especiales,3° y 4° medio,2,Aprendizajes Esperados,357,9,2.52,2.52,,357,Revision documental; validacion pedagogica integral pendiente
+22,Tripulación de Naves Mercantes y Especiales,3° y 4° medio,3,Situacion Integradora,407,59,14.5,14.5,,407,Revision documental; validacion pedagogica integral pendiente
+22,Tripulación de Naves Mercantes y Especiales,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+22,Tripulación de Naves Mercantes y Especiales,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+22,Tripulación de Naves Mercantes y Especiales,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+23,Construcciones Metálicas,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+23,Construcciones Metálicas,3° y 4° medio,2,Aprendizajes Esperados,345,16,4.64,4.64,,345,Revision documental; validacion pedagogica integral pendiente
+23,Construcciones Metálicas,3° y 4° medio,3,Situacion Integradora,409,71,17.36,17.36,,409,Revision documental; validacion pedagogica integral pendiente
+23,Construcciones Metálicas,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+23,Construcciones Metálicas,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+23,Construcciones Metálicas,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+24,Mecánica Automotriz,3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+24,Mecánica Automotriz,3° y 4° medio,2,Aprendizajes Esperados,364,20,5.49,5.49,,364,Revision documental; validacion pedagogica integral pendiente
+24,Mecánica Automotriz,3° y 4° medio,3,Situacion Integradora,438,53,12.1,12.1,,438,Revision documental; validacion pedagogica integral pendiente
+24,Mecánica Automotriz,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+24,Mecánica Automotriz,3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+24,Mecánica Automotriz,3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+25,Mecánica de Mantenimiento de Aeronaves,3° y 4° medio,1,Contextualizacion,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+25,Mecánica de Mantenimiento de Aeronaves,3° y 4° medio,2,Aprendizajes Esperados,383,12,3.13,3.13,,383,Revision documental; validacion pedagogica integral pendiente
+25,Mecánica de Mantenimiento de Aeronaves,3° y 4° medio,3,Situacion Integradora,467,60,12.85,12.85,,467,Revision documental; validacion pedagogica integral pendiente
+25,Mecánica de Mantenimiento de Aeronaves,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+25,Mecánica de Mantenimiento de Aeronaves,3° y 4° medio,5,Evaluacion Final,286,0,0.0,0.0,,286,Revision documental; validacion pedagogica integral pendiente
+25,Mecánica de Mantenimiento de Aeronaves,3° y 4° medio,6,Retroalimentacion y Cierre,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+26,Asistencia en Geología,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+26,Asistencia en Geología,3° y 4° medio,2,Aprendizajes Esperados,315,28,8.89,8.89,,315,Revision documental; validacion pedagogica integral pendiente
+26,Asistencia en Geología,3° y 4° medio,3,Situacion Integradora,402,55,13.68,13.68,,402,Revision documental; validacion pedagogica integral pendiente
+26,Asistencia en Geología,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+26,Asistencia en Geología,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+26,Asistencia en Geología,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+27,Explotación Minera,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+27,Explotación Minera,3° y 4° medio,2,Aprendizajes Esperados,363,15,4.13,4.13,,363,Revision documental; validacion pedagogica integral pendiente
+27,Explotación Minera,3° y 4° medio,3,Situacion Integradora,407,53,13.02,13.02,,407,Revision documental; validacion pedagogica integral pendiente
+27,Explotación Minera,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+27,Explotación Minera,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+27,Explotación Minera,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+28,Metalurgia Extractiva,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+28,Metalurgia Extractiva,3° y 4° medio,2,Aprendizajes Esperados,309,30,9.71,9.71,,309,Revision documental; validacion pedagogica integral pendiente
+28,Metalurgia Extractiva,3° y 4° medio,3,Situacion Integradora,409,61,14.91,14.91,,409,Revision documental; validacion pedagogica integral pendiente
+28,Metalurgia Extractiva,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+28,Metalurgia Extractiva,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+28,Metalurgia Extractiva,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+29,Atención de Párvulos,3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+29,Atención de Párvulos,3° y 4° medio,2,Aprendizajes Esperados,355,34,9.58,9.58,,355,Revision documental; validacion pedagogica integral pendiente
+29,Atención de Párvulos,3° y 4° medio,3,Situacion Integradora,433,43,9.93,9.93,,433,Revision documental; validacion pedagogica integral pendiente
+29,Atención de Párvulos,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+29,Atención de Párvulos,3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+29,Atención de Párvulos,3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+30,Conectividad y Redes,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+30,Conectividad y Redes,3° y 4° medio,2,Aprendizajes Esperados,327,24,7.34,7.34,,327,Revision documental; validacion pedagogica integral pendiente
+30,Conectividad y Redes,3° y 4° medio,3,Situacion Integradora,407,63,15.48,15.48,,407,Revision documental; validacion pedagogica integral pendiente
+30,Conectividad y Redes,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+30,Conectividad y Redes,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+30,Conectividad y Redes,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+31,Programación,3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+31,Programación,3° y 4° medio,2,Aprendizajes Esperados,321,21,6.54,6.54,,321,Revision documental; validacion pedagogica integral pendiente
+31,Programación,3° y 4° medio,3,Situacion Integradora,408,66,16.18,16.18,,408,Revision documental; validacion pedagogica integral pendiente
+31,Programación,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+31,Programación,3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+31,Programación,3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+32,Telecomunicaciones,3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+32,Telecomunicaciones,3° y 4° medio,2,Aprendizajes Esperados,352,12,3.41,3.41,,352,Revision documental; validacion pedagogica integral pendiente
+32,Telecomunicaciones,3° y 4° medio,3,Situacion Integradora,437,69,15.79,15.79,,437,Revision documental; validacion pedagogica integral pendiente
+32,Telecomunicaciones,3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+32,Telecomunicaciones,3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+32,Telecomunicaciones,3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+33,"Administración, mención Logística",3° y 4° medio,1,Contextualizacion,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+33,"Administración, mención Logística",3° y 4° medio,2,Aprendizajes Esperados,347,7,2.02,2.02,,347,Revision documental; validacion pedagogica integral pendiente
+33,"Administración, mención Logística",3° y 4° medio,3,Situacion Integradora,466,90,19.31,19.31,,466,Revision documental; validacion pedagogica integral pendiente
+33,"Administración, mención Logística",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+33,"Administración, mención Logística",3° y 4° medio,5,Evaluacion Final,286,0,0.0,0.0,,286,Revision documental; validacion pedagogica integral pendiente
+33,"Administración, mención Logística",3° y 4° medio,6,Retroalimentacion y Cierre,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+34,"Administración, mención Recursos Humanos",3° y 4° medio,1,Contextualizacion,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+34,"Administración, mención Recursos Humanos",3° y 4° medio,2,Aprendizajes Esperados,329,23,6.99,6.99,,329,Revision documental; validacion pedagogica integral pendiente
+34,"Administración, mención Recursos Humanos",3° y 4° medio,3,Situacion Integradora,465,76,16.34,16.34,,465,Revision documental; validacion pedagogica integral pendiente
+34,"Administración, mención Recursos Humanos",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+34,"Administración, mención Recursos Humanos",3° y 4° medio,5,Evaluacion Final,286,0,0.0,0.0,,286,Revision documental; validacion pedagogica integral pendiente
+34,"Administración, mención Recursos Humanos",3° y 4° medio,6,Retroalimentacion y Cierre,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+35,"Agropecuaria, mención Agricultura",3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+35,"Agropecuaria, mención Agricultura",3° y 4° medio,2,Aprendizajes Esperados,364,21,5.77,5.77,,364,Revision documental; validacion pedagogica integral pendiente
+35,"Agropecuaria, mención Agricultura",3° y 4° medio,3,Situacion Integradora,437,59,13.5,13.5,,437,Revision documental; validacion pedagogica integral pendiente
+35,"Agropecuaria, mención Agricultura",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+35,"Agropecuaria, mención Agricultura",3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+35,"Agropecuaria, mención Agricultura",3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+36,"Agropecuaria, mención Pecuaria",3° y 4° medio,1,Contextualizacion,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+36,"Agropecuaria, mención Pecuaria",3° y 4° medio,2,Aprendizajes Esperados,395,22,5.57,5.57,,395,Revision documental; validacion pedagogica integral pendiente
+36,"Agropecuaria, mención Pecuaria",3° y 4° medio,3,Situacion Integradora,465,56,12.04,12.04,,465,Revision documental; validacion pedagogica integral pendiente
+36,"Agropecuaria, mención Pecuaria",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+36,"Agropecuaria, mención Pecuaria",3° y 4° medio,5,Evaluacion Final,286,0,0.0,0.0,,286,Revision documental; validacion pedagogica integral pendiente
+36,"Agropecuaria, mención Pecuaria",3° y 4° medio,6,Retroalimentacion y Cierre,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+37,"Agropecuaria, mención Vitivinícola",3° y 4° medio,1,Contextualizacion,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+37,"Agropecuaria, mención Vitivinícola",3° y 4° medio,2,Aprendizajes Esperados,383,14,3.66,3.66,,383,Revision documental; validacion pedagogica integral pendiente
+37,"Agropecuaria, mención Vitivinícola",3° y 4° medio,3,Situacion Integradora,465,71,15.27,15.27,,465,Revision documental; validacion pedagogica integral pendiente
+37,"Agropecuaria, mención Vitivinícola",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+37,"Agropecuaria, mención Vitivinícola",3° y 4° medio,5,Evaluacion Final,286,0,0.0,0.0,,286,Revision documental; validacion pedagogica integral pendiente
+37,"Agropecuaria, mención Vitivinícola",3° y 4° medio,6,Retroalimentacion y Cierre,11,0,0.0,0.0,,11,Revision documental; validacion pedagogica integral pendiente
+38,"Construcción, mención Edificación",3° y 4° medio,1,Contextualizacion,12,0,0.0,0.0,,12,Revision documental; validacion pedagogica integral pendiente
+38,"Construcción, mención Edificación",3° y 4° medio,2,Aprendizajes Esperados,348,10,2.87,2.87,,348,Revision documental; validacion pedagogica integral pendiente
+38,"Construcción, mención Edificación",3° y 4° medio,3,Situacion Integradora,494,91,18.42,18.42,,494,Revision documental; validacion pedagogica integral pendiente
+38,"Construcción, mención Edificación",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+38,"Construcción, mención Edificación",3° y 4° medio,5,Evaluacion Final,312,0,0.0,0.0,,312,Revision documental; validacion pedagogica integral pendiente
+38,"Construcción, mención Edificación",3° y 4° medio,6,Retroalimentacion y Cierre,12,0,0.0,0.0,,12,Revision documental; validacion pedagogica integral pendiente
+39,"Construcción, mención Terminaciones de la Construcción",3° y 4° medio,1,Contextualizacion,12,0,0.0,0.0,,12,Revision documental; validacion pedagogica integral pendiente
+39,"Construcción, mención Terminaciones de la Construcción",3° y 4° medio,2,Aprendizajes Esperados,342,16,4.68,4.68,,342,Revision documental; validacion pedagogica integral pendiente
+39,"Construcción, mención Terminaciones de la Construcción",3° y 4° medio,3,Situacion Integradora,494,88,17.81,17.81,,494,Revision documental; validacion pedagogica integral pendiente
+39,"Construcción, mención Terminaciones de la Construcción",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+39,"Construcción, mención Terminaciones de la Construcción",3° y 4° medio,5,Evaluacion Final,312,0,0.0,0.0,,312,Revision documental; validacion pedagogica integral pendiente
+39,"Construcción, mención Terminaciones de la Construcción",3° y 4° medio,6,Retroalimentacion y Cierre,12,0,0.0,0.0,,12,Revision documental; validacion pedagogica integral pendiente
+40,"Construcción, mención Obras Viales e Infraestructura",3° y 4° medio,1,Contextualizacion,13,0,0.0,0.0,,13,Revision documental; validacion pedagogica integral pendiente
+40,"Construcción, mención Obras Viales e Infraestructura",3° y 4° medio,2,Aprendizajes Esperados,361,15,4.16,4.16,,361,Revision documental; validacion pedagogica integral pendiente
+40,"Construcción, mención Obras Viales e Infraestructura",3° y 4° medio,3,Situacion Integradora,523,91,17.4,17.4,,523,Revision documental; validacion pedagogica integral pendiente
+40,"Construcción, mención Obras Viales e Infraestructura",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+40,"Construcción, mención Obras Viales e Infraestructura",3° y 4° medio,5,Evaluacion Final,338,0,0.0,0.0,,338,Revision documental; validacion pedagogica integral pendiente
+40,"Construcción, mención Obras Viales e Infraestructura",3° y 4° medio,6,Retroalimentacion y Cierre,13,0,0.0,0.0,,13,Revision documental; validacion pedagogica integral pendiente
+41,"Química Industrial, mención Laboratorio Químico",3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+41,"Química Industrial, mención Laboratorio Químico",3° y 4° medio,2,Aprendizajes Esperados,370,25,6.76,6.76,,370,Revision documental; validacion pedagogica integral pendiente
+41,"Química Industrial, mención Laboratorio Químico",3° y 4° medio,3,Situacion Integradora,437,48,10.98,10.98,,437,Revision documental; validacion pedagogica integral pendiente
+41,"Química Industrial, mención Laboratorio Químico",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+41,"Química Industrial, mención Laboratorio Químico",3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+41,"Química Industrial, mención Laboratorio Químico",3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+42,"Química Industrial, mención Planta Química",3° y 4° medio,1,Contextualizacion,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+42,"Química Industrial, mención Planta Química",3° y 4° medio,2,Aprendizajes Esperados,333,30,9.01,9.01,,333,Revision documental; validacion pedagogica integral pendiente
+42,"Química Industrial, mención Planta Química",3° y 4° medio,3,Situacion Integradora,408,49,12.01,12.01,,408,Revision documental; validacion pedagogica integral pendiente
+42,"Química Industrial, mención Planta Química",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+42,"Química Industrial, mención Planta Química",3° y 4° medio,5,Evaluacion Final,234,0,0.0,0.0,,234,Revision documental; validacion pedagogica integral pendiente
+42,"Química Industrial, mención Planta Química",3° y 4° medio,6,Retroalimentacion y Cierre,9,0,0.0,0.0,,9,Revision documental; validacion pedagogica integral pendiente
+43,"Mecánica Industrial, mención Máquinas-Herramientas",3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+43,"Mecánica Industrial, mención Máquinas-Herramientas",3° y 4° medio,2,Aprendizajes Esperados,352,31,8.81,8.81,,352,Revision documental; validacion pedagogica integral pendiente
+43,"Mecánica Industrial, mención Máquinas-Herramientas",3° y 4° medio,3,Situacion Integradora,438,47,10.73,10.73,,438,Revision documental; validacion pedagogica integral pendiente
+43,"Mecánica Industrial, mención Máquinas-Herramientas",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+43,"Mecánica Industrial, mención Máquinas-Herramientas",3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+43,"Mecánica Industrial, mención Máquinas-Herramientas",3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+44,"Mecánica Industrial, mención Matricería",3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+44,"Mecánica Industrial, mención Matricería",3° y 4° medio,2,Aprendizajes Esperados,358,28,7.82,7.82,,358,Revision documental; validacion pedagogica integral pendiente
+44,"Mecánica Industrial, mención Matricería",3° y 4° medio,3,Situacion Integradora,439,50,11.39,11.39,,439,Revision documental; validacion pedagogica integral pendiente
+44,"Mecánica Industrial, mención Matricería",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+44,"Mecánica Industrial, mención Matricería",3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+44,"Mecánica Industrial, mención Matricería",3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",3° y 4° medio,1,Contextualizacion,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",3° y 4° medio,2,Aprendizajes Esperados,346,27,7.8,7.8,,346,Revision documental; validacion pedagogica integral pendiente
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",3° y 4° medio,3,Situacion Integradora,437,53,12.13,12.13,,437,Revision documental; validacion pedagogica integral pendiente
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",3° y 4° medio,4,Mision Laboral,0,0,,,,0,Sin unidades integradas; no equivale a 0% de problemas
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",3° y 4° medio,5,Evaluacion Final,260,0,0.0,0.0,,260,Revision documental; validacion pedagogica integral pendiente
+45,"Mecánica Industrial, mención Mantenimiento Electromecánico",3° y 4° medio,6,Retroalimentacion y Cierre,10,0,0.0,0.0,,10,Revision documental; validacion pedagogica integral pendiente

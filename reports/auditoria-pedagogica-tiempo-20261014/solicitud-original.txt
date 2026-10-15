@@ -1,0 +1,173 @@
+Incorporaría dos exigencias fundamentales al prompt maestro de auditoría pedagógica de Aula TP Chile: que la pertinencia de cada actividad se evalúe conjuntamente con su tiempo real de aprendizaje y que se entregue un informe cuantitativo de los cambios recomendados por estación, para cada uno de los 45 cursos.
+
+El factor ×5 debe aplicarse al tiempo que tarda un docente experto en resolver la actividad, considerando que el estudiante necesita leer, comprender, analizar, decidir, ejecutar, equivocarse y corregir. Este factor es un criterio de planificación pedagógica, no una duración obligatoria para todos los estudiantes.
+
+# AMPLIACIÓN DEL PROMPT MAESTRO — AUDITORÍA PEDAGÓGICA, TIEMPO DE APRENDIZAJE Y PORCENTAJES DE MEJORA
+
+## 1. Relación obligatoria entre pedagogía y tiempo
+
+Realiza una auditoría pedagógica integral de los 45 cursos de Aula TP Chile, correspondientes a 3° y 4° medio, considerando sus seis estaciones.
+
+**La pertinencia pedagógica y la estimación del tiempo deben analizarse conjuntamente.**
+
+Una actividad no debe considerarse adecuada únicamente porque esté relacionada con el Aprendizaje Esperado. También debe disponer de tiempo suficiente para que el estudiante comprenda, procese la información, aplique conocimientos, tome decisiones y consolide su aprendizaje.
+
+### Criterio obligatorio de estimación: factor ×5
+
+Para estimar el tiempo pedagógico de cada actividad, utiliza como referencia el tiempo que requiere un docente experto para resolverla y multiplícalo por cinco.
+
+**Tiempo pedagógico estimado del estudiante = Tiempo de resolución del docente experto × 5.**
+
+Ejemplo:
+
+- Docente experto: 3 minutos.
+- Estudiante en proceso de aprendizaje: 15 minutos estimados.
+
+El factor ×5 constituye un margen pedagógico de planificación y no debe interpretarse como una constante científica universal ni como una obligación de que todos los estudiantes tarden exactamente ese tiempo.
+
+Cuando sea posible, contrasta las estimaciones con tiempos reales de estudiantes para mejorar su precisión.
+
+## 2. Procesos que deben considerarse en el tiempo
+
+La estimación debe contemplar el tiempo necesario para:
+
+1. Leer las instrucciones y comprender la actividad.
+2. Interpretar imágenes, videos, gráficos o situaciones técnicas.
+3. Recuperar conocimientos previos.
+4. Relacionar los contenidos con el AE correspondiente.
+5. Analizar alternativas o procedimientos.
+6. Tomar decisiones fundamentadas.
+7. Ejecutar la actividad o resolver el problema.
+8. Identificar errores y recibir orientación cuando corresponda.
+9. Corregir y volver a intentar en los espacios de práctica.
+10. Reflexionar sobre el procedimiento y el resultado.
+
+Evita estimar los tiempos únicamente desde la rapidez de un docente que domina el contenido.
+
+No contabilices dos veces procesos que ya estén incluidos en el tiempo de resolución de referencia.
+
+## 3. Auditoría del tiempo por las seis estaciones
+
+**Estación 1. Contextualización**
+
+Verifica que el tiempo permita interpretar el escenario, activar conocimientos previos y comprender el propósito del aprendizaje.
+
+**Estación 2. Aprendizajes Esperados**
+
+Comprueba que las actividades dispongan de tiempo suficiente para desarrollar la progresión cognitiva establecida y aplicar los conocimientos.
+
+**Estación 3. Situación Integradora**
+
+Evalúa el tiempo necesario para analizar situaciones, interpretar información, resolver problemas y tomar decisiones, incluyendo las simulaciones 3D.
+
+**Estación 4. Misión Laboral**
+
+Verifica que el tiempo contemple la comprensión de los desafíos gamificados, la exploración del entorno, las decisiones técnicas, la ejecución de acciones y la resolución de problemas laborales.
+
+**Estación 5. Evaluación Final**
+
+Respeta la duración de dos horas establecida en la propuesta pedagógica, que forma parte del tiempo total asignado a la plataforma.
+
+Comprueba si las 25 preguntas y la situación de desarrollo pueden resolverse razonablemente dentro de ese tiempo.
+
+No modifiques automáticamente la duración ni los instrumentos evaluativos.
+
+**Estación 6. Retroalimentación y Cierre**
+
+Verifica que exista tiempo suficiente para interpretar los resultados, reconocer errores, identificar fortalezas y reflexionar sobre los aprendizajes.
+
+## 4. Distribución del tiempo curricular
+
+Respeta el criterio institucional de Aula TP Chile de destinar aproximadamente el 30% de las horas de cada AE a experiencias desarrolladas mediante la plataforma.
+
+Dentro de este porcentaje deben incluirse las dos horas correspondientes a la Evaluación Final del módulo, según el criterio establecido en la propuesta.
+
+Comprueba:
+
+- Que la suma de los tiempos estimados sea coherente con la planificación.
+- Que no existan actividades cuya duración sea desproporcionada respecto de su aporte pedagógico.
+- Que las actividades esenciales dispongan de tiempo suficiente.
+- Que la incorporación de Misión Laboral se considere dentro de la planificación total, sin sumar horas arbitrariamente.
+- Que se identifiquen posibles excesos o déficits de tiempo.
+
+Cuando falten datos sobre las horas curriculares o los tiempos docentes, registra la información como pendiente de verificación. No inventes tiempos.
+
+## 5. Tabla obligatoria de porcentajes de cambios por estación
+
+Al finalizar la auditoría de cada curso, entrega una tabla que muestre el porcentaje de actividades que requieren mejoras pedagógicas en cada una de las seis estaciones.
+
+| Estación                      | Actividades revisadas | Actividades que requieren cambios | % de cambios |
+| ----------------------------- | --------------------- | --------------------------------- | ------------ |
+| 1. Contextualización          | —                     | —                                 | —            |
+| 2. Aprendizajes Esperados     | —                     | —                                 | —            |
+| 3. Situación Integradora      | —                     | —                                 | —            |
+| 4. Misión Laboral             | —                     | —                                 | —            |
+| 5. Evaluación Final           | —                     | —                                 | —            |
+| 6. Retroalimentación y Cierre | —                     | —                                 | —            |
+| **Total del curso**           | **—**                 | **—**                             | **—**        |
+
+### Fórmula obligatoria
+
+**Porcentaje de cambios por estación = (Número de actividades que requieren cambios / Número total de actividades revisadas en esa estación) × 100.**
+
+Para evitar duplicaciones, contabiliza cada actividad una sola vez, aunque presente varias observaciones pedagógicas.
+
+Cuando una estación contenga elementos que no sean actividades, utiliza unidades de análisis equivalentes claramente definidas e informa su denominador.
+
+No confundas el porcentaje de cambios recomendados con el porcentaje de cumplimiento pedagógico.
+
+## 6. Clasificación de los cambios
+
+Distingue las recomendaciones según su naturaleza:
+
+- **Pedagógicas:** alineamiento curricular, pertinencia, progresión cognitiva y aplicación.
+- **Temporales:** tiempo insuficiente, excesivo o incoherente con la dificultad.
+- **Evaluativas:** correspondencia entre aprendizajes desarrollados y evidencias evaluadas.
+- **De simulación:** autenticidad, transferencia y pertinencia de los escenarios laborales.
+- **De retroalimentación:** calidad de los apoyos y oportunidades de mejora.
+
+Cada observación debe indicar la estación, actividad, problema detectado, evidencia y recomendación.
+
+## 7. Informe consolidado de los 45 cursos
+
+Además de las tablas individuales, entrega una tabla general con:
+
+- Nombre del curso.
+- Nivel: 3° o 4° medio.
+- Porcentaje de cambios recomendados en cada una de las seis estaciones.
+- Porcentaje total de actividades que requieren cambios.
+- Tiempo pedagógico estimado.
+- Diferencia respecto del tiempo disponible.
+- Prioridad de intervención.
+
+Incluye un resumen general que identifique las estaciones con mayor concentración de problemas y las brechas pedagógicas y temporales más frecuentes.
+
+Calcula el porcentaje global utilizando los totales de actividades revisadas y actividades que requieren cambios, no el promedio simple de porcentajes de cursos con tamaños diferentes.
+
+## 8. Condición inalterable
+
+**La auditoría es exclusivamente diagnóstica y propositiva.**
+
+No modificar:
+
+- Contenidos, actividades ni evaluaciones.
+- Preguntas, respuestas ni alternativas.
+- Formato, diseño visual o interfaz.
+- Imágenes, videos o simulaciones.
+- Estructura y orden de las seis estaciones.
+- Numeración y organización de los módulos.
+- Tiempos establecidos sin autorización previa.
+
+Todas las recomendaciones deben entregarse por separado para su revisión y aprobación.
+
+## 9. Resultado final esperado
+
+La auditoría debe demostrar, con evidencias pedagógicas y temporales, que las actividades son pertinentes para los Aprendizajes Esperados, preparan adecuadamente al estudiante para las evaluaciones y cuentan con tiempos de aprendizaje razonables.
+
+**Objetivo final: asegurar que cada minuto utilizado en Aula TP Chile tenga una finalidad pedagógica y contribuya al aprendizaje, la aplicación de conocimientos y la autonomía progresiva del estudiante, sin alterar lo que ya está construido.**
+
+### Una mejora adicional que considero importante
+
+Sugiero que la tabla de resultados distinga porcentaje de cambios pedagógicos y porcentaje de actividades con problemas de tiempo. Así podrán identificar, por ejemplo, si una estación tiene actividades bien diseñadas pero demasiado extensas, o si el problema está realmente en su calidad pedagógica.
+
+También conviene mantener separados dos indicadores que cumplen funciones distintas: el 30% de horas curriculares es un criterio de planificación, mientras que el porcentaje de cambios por estación es un resultado de la auditoría. Esto permitirá tomar decisiones con datos más precisos, sin confundir duración con calidad del aprendizaje.
