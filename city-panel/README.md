@@ -23,6 +23,12 @@ Encabezado de Ciudad Laboral: `/opt/ciudad-laboral-releases/city-20261017-city-h
 
 ## Verificación
 
+### Recuperación tras publicación del motor
+
+La publicación `city-20261017-professional-learning-v47` reemplazó los HTML y omitió el diseño. Se restauró sobre esa misma base en `city-20261017-learning-and-design-v48`, usando `--skin-version panel-ui-v6`, conservando sus 39 archivos JavaScript y las mejoras pedagógicas. No fue un problema de caché. Las futuras publicaciones completas deben incluir esta capa visual en ambos HTML y sus recursos, además del motor; subir este repositorio a GitHub por sí solo no modifica la publicación del servidor.
+
+Comprobación posterior: la página pública debe referenciar `panel-ui-v6/city-panel.css` y `panel-ui-v6/city-panel.js`, sus imágenes deben responder 200 y `panel-ui-release.json` debe identificar la base conservada. Antes de activar otra versión, comprobar también visualmente el encabezado y el panel.
+
 `node --test city-panel/panel.test.cjs`
 
 Se verificaron el renderizado de la escena, la selección de distrito, el acceso a Isla Minera y su cambio de personaje, la disponibilidad de las 35 especialidades, la casilla de modo ligero y el diseño en escritorio y teléfono. La apertura del mapa resultó demasiado exigente para el navegador de pruebas; su código y su botón original se conservaron sin modificaciones.
