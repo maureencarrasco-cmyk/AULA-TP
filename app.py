@@ -293,11 +293,17 @@ def create_app(test_config=None):
         if u['role']=='student':c=strip_for_student(c)
         m.update(content=c,state=s,completed=completed(s,c),stations=STATIONS,steps=STEPS,planning=active_plan or c.get('planning') or module_plan(m['position']))
         return jsonify(m)
-    @app.get('/portal/experiencia-ciudad')
+    @app.get('/api/city-experience')
     def city_experience_page():
         response=send_from_directory(app.static_folder,'city-experience.html')
         response.headers['Cache-Control']='no-store'
         return response
+    @app.get('/api/city-experience.css')
+    def city_experience_styles():
+        return send_from_directory(app.static_folder,'city-experience.css')
+    @app.get('/api/city-experience.js')
+    def city_experience_script():
+        return send_from_directory(app.static_folder,'city-experience.js')
     @app.get('/api/modules/<int:mid>/city-experience')
     @require('student')
     def get_city_experience(mid):

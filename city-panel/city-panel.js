@@ -30,7 +30,7 @@
     if(!card||card.querySelector('[data-city-learning-experience]'))return;
     const link=document.createElement('a');
     link.dataset.cityLearningExperience='';
-    link.href='/portal/experiencia-ciudad';
+    link.href='/api/city-experience';
     link.target='_blank';
     link.rel='noopener';
     link.textContent='Quiz + misión laboral · 45 min';
