@@ -1,0 +1,12 @@
+{
+  "base": "/opt/ciudad-laboral-releases/city-20261014-circuit-bikes-v41",
+  "release": "/opt/ciudad-laboral-releases/city-20261017-panel-reference-v42",
+  "html_modified": [
+    "index.html",
+    "ciudad/index.html"
+  ],
+  "original_game_chunks_unchanged": 37,
+  "business_logic_modified": false,
+  "panel_css_sha256": "d5755d693045c2c3c0bd72955360b49f3a51c49332087e69dff5e2cb8eb63436",
+  "panel_js_sha256": "6f73909aafa1d20d7f68b316284981396f2fdb39bbddd8bb9c3aea48f37d6fe8"
+}

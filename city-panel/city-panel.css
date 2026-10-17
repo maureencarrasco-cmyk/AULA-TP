@@ -1,0 +1,103 @@
+/* Presentation only: original React controls, destinations and scene remain intact. */
+.city-page .city-walk-workspace { grid-template-columns:minmax(0,1fr) 540px;max-width:1840px;gap:18px; }
+.city-page .city-walk-inspector { padding:20px;min-width:0;min-height:0;overflow:auto;scrollbar-width:thin;scrollbar-color:#a8cdd8 transparent;background:#f8fcff;border:1px solid #c8e5fb;border-radius:24px;box-shadow:0 6px 25px #9cd8f039;display:flex;flex-direction:column;gap:14px; }
+.city-walk-inspector *, .city-walk-inspector *::before, .city-walk-inspector *::after { box-sizing:border-box;letter-spacing:0; }
+.city-walk-inspector { --panel-photo:url('./assets/panel-reference.png');font-family:Arial,Helvetica,sans-serif; }
+.city-walk-inspector .city-entry-header { position:static;background:transparent;padding:0;display:grid;grid-template-columns:minmax(0,1fr) 146px;gap:14px;align-items:center;flex:none; }
+.city-entry-header .city-inspector-top { border:0;padding:0;gap:12px;align-items:center; }
+.city-entry-header .city-eyebrow { color:#0a4693;font-size:20px;font-weight:800;line-height:1.13;max-width:190px;position:relative;padding-bottom:9px; }
+.city-entry-header .city-eyebrow::after { content:'';position:absolute;bottom:0;left:0;width:30px;height:4px;border-radius:3px;background:#09a69f; }
+.city-entry-header .city-inspector-top strong { font-size:13px;color:#5d7b92;line-height:1.3;border-left:1px solid #bad8ee;padding-left:12px;max-width:94px; }
+.city-entry-header .city-inspector-top strong::first-line { color:#009e96;font-size:26px;font-weight:800; }
+.city-walk-inspector .city-entry-map { margin:0;min-height:52px;padding:10px;background:#007e91;border-radius:12px;font-size:15px;gap:8px;box-shadow:0 3px 0 #00677b; }
+.city-entry-map::after { content:'›';font-size:28px;font-weight:400;margin-left:4px;line-height:1; }
+.city-walk-inspector .city-entry-map svg { width:22px;height:22px;flex:none; }
+.city-walk-inspector .city-clock { margin:0;min-height:72px;padding:14px 26% 12px 84px;position:relative;background:#e4f3fd;border-radius:18px;gap:4px;isolation:isolate;flex:none;overflow:hidden; }
+.city-clock::before { content:'';position:absolute;left:10px;top:14px;width:64px;height:38px;background-image:var(--panel-photo);background-size:746.087% 2735.821%;background-position:7.402% 8.097%;border-radius:12px; }
+.city-clock::after { content:'';position:absolute;right:0;inset-block:0;width:29%;background-image:var(--panel-photo);background-size:315.441% 1992.391%;background-position:93.174% 7.467%;z-index:-1; }
+.city-walk-inspector .city-clock strong { font-size:16px;line-height:1.2;color:#063d83; }
+.city-walk-inspector .city-clock small { font-size:12px;color:#5c7d96;line-height:1.4; }
+.city-walk-inspector .city-mission-card { margin:0;padding:18px 42% 18px 18px;min-height:204px;gap:11px;position:relative;background:#edf9f4;border:1px solid #a3ded0;border-radius:20px;display:grid;align-content:center;flex:none; }
+.city-mission-card::after { content:'';position:absolute;right:14px;top:18px;width:35%;aspect-ratio:310/242;background-image:var(--panel-photo);background-size:276.774% 757.438%;background-position:88.321% 16.907%;border-radius:12px;box-shadow:0 5px 12px #28687922; }
+.city-walk-inspector .city-mission-card>strong { font-size:19px;line-height:1.25;font-weight:800;color:#095b78;align-items:flex-start; }
+.city-mission-card>strong svg { flex:none;width:25px;height:25px;color:#00a397;margin-top:2px; }
+.city-walk-inspector .city-mission-card>p { color:#5d7e91;font-size:14px;line-height:1.45; }
+.city-walk-inspector .city-mission-card>button { background:#008397;border:0;color:white;padding:10px 12px;min-height:42px;font-size:14px;justify-content:center;border-radius:10px; }
+.city-walk-inspector .city-mission-card>a { font-size:12px;line-height:1.4;color:#007184; }
+.city-walk-inspector .city-island-card { margin:0;padding:14px 10px 12px;background:#fffbef;border:1px solid #ffda94;border-radius:20px;gap:10px;flex:none;display:block; }
+.city-walk-inspector .city-island-heading { position:relative;min-height:63px;padding:3px 33% 0 6px;display:block;list-style:none; }
+.city-walk-inspector .city-island-heading::marker, .city-walk-inspector .city-specialty-section>summary::marker { content:''; }
+.city-walk-inspector .city-island-heading::-webkit-details-marker,.city-walk-inspector .city-specialty-section>summary::-webkit-details-marker { display:none; }
+.city-island-heading::after { content:'';position:absolute;right:2px;top:0;width:34%;aspect-ratio:342/134;background-image:var(--panel-photo);background-size:250.877% 1367.91%;background-position:89.922% 33.078%;border-radius:8px; }
+.city-walk-inspector .city-island-heading>span { font-size:11px;color:#d17606;font-weight:800; }
+.city-walk-inspector .city-island-heading>strong { font-size:24px;line-height:1.2;color:#073f83;font-weight:800;margin-top:4px; }
+.city-walk-inspector .city-island-card>p { padding:0 5px;margin:0 0 14px;font-size:13px;color:#63829a; }
+.city-walk-inspector .city-island-grid { grid-template-columns:repeat(2,minmax(0,1fr));gap:9px; }
+.city-walk-inspector .city-island-grid button { display:grid;grid-template-columns:64px minmax(0,1fr) 14px;align-items:center;gap:8px;min-height:110px;padding:7px 8px 7px 6px;border:1px solid #dce4e9;border-radius:13px;background:#fff;box-shadow:0 2px 5px #153c5f07; }
+.city-walk-inspector .city-island-grid button:first-child { grid-column:auto; }
+.city-island-grid button::before { content:'';grid-column:1;grid-row:1;width:64px;height:72px;border-radius:9px;background-image:var(--panel-photo);background-size:auto 1636.607%;background-position:var(--photo-x) var(--photo-y); }
+.city-walk-inspector .city-island-grid button>svg { display:none; }
+.city-walk-inspector .city-island-grid button>span { grid-column:2;grid-row:1;gap:5px; }
+.city-island-grid button::after { content:'›';grid-column:3;grid-row:1;display:grid;place-items:center;background:#e7f4ff;color:#0065a9;width:18px;height:27px;font-size:26px;line-height:1;border-radius:12px; }
+.city-walk-inspector .city-island-grid button strong { font-size:12px;color:#063d83;font-weight:800;line-height:1.25;overflow-wrap:anywhere; }
+.city-walk-inspector .city-island-grid button small { font-size:11.5px;line-height:1.35;color:#5d7b93; }
+.city-island-grid button:nth-child(1) { --photo-x:8.356%;--photo-y:41.604%; }
+.city-island-grid button:nth-child(2) { --photo-x:60.243%;--photo-y:41.604%; }
+.city-island-grid button:nth-child(3) { --photo-x:8.356%;--photo-y:49.913%; }
+.city-island-grid button:nth-child(4) { --photo-x:60.243%;--photo-y:49.913%; }
+.city-island-grid button:nth-child(5) { --photo-x:8.356%;--photo-y:58.221%; }
+.city-island-grid button:nth-child(6) { --photo-x:60.243%;--photo-y:58.221%; }
+.city-island-grid button:nth-child(7) { --photo-x:8.356%;--photo-y:66.531%; }
+.city-island-grid button:nth-child(8) { --photo-x:60.243%;--photo-y:66.531%; }
+.city-walk-inspector .city-approach { border:1px solid #83d4e7;background:#f7fdff;color:#007a90;font-size:14px;padding:11px;min-height:42px;border-radius:10px; }
+.city-walk-inspector .city-island-card>.city-approach { margin-top:10px; }
+.city-walk-inspector .city-specialty-section { margin:0;padding:15px 12px 12px;background:#edf7ff;border:1px solid #bcdefd;border-radius:20px;flex:none; }
+.city-walk-inspector .city-specialty-section>summary { display:block;list-style:none; }
+.city-walk-inspector .city-specialty-section>summary .city-eyebrow { font-size:11px;color:#168de5;font-weight:800; }
+.city-walk-inspector .city-specialty-section>summary>strong { font-size:23px;line-height:1.2;color:#073f83;font-weight:800;margin:5px 0 12px; }
+.city-walk-inspector .city-district-select { margin:0 0 14px;font-size:12px;color:#567a95;display:grid;gap:5px; }
+.city-walk-inspector .city-district-select select { font-size:14px;background:#f9fcff;border:1px solid #99caf2;min-height:42px;padding:9px 10px;border-radius:9px;font-weight:600; }
+.city-walk-inspector .city-selected-accent { width:28px;height:4px;border-radius:3px;margin:6px 0 7px; }
+.city-walk-inspector .city-specialty-section h2 { font-size:21px;line-height:1.2;font-weight:700;color:#073f83;margin:0 0 7px;letter-spacing:0; }
+.city-walk-inspector .city-specialty-section>p { font-size:13px;color:#5c7c95; }
+.city-walk-inspector .city-specialties { grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0; }
+.city-walk-inspector .city-specialties button { position:relative;display:block;padding:54px 8px 9px;min-height:120px;background:#fff;border:1px solid #d2e8f8;border-radius:9px;overflow:hidden; }
+.city-specialties button::before { content:'';position:absolute;left:0;right:0;top:0;height:44px;background-image:var(--panel-photo);background-size:auto 3106.78%;background-position:var(--specialty-x,12.54%) 88.106%; }
+.city-specialties button:nth-child(3n+2) { --specialty-x:50%; }
+.city-specialties button:nth-child(3n) { --specialty-x:88.715%; }
+.city-walk-inspector .city-specialties .city-specialty-copy { color:#073f83;font-size:12px;line-height:1.25;gap:4px; }
+.city-walk-inspector .city-specialty-copy small { font-size:10.5px;line-height:1.3;color:#628097; }
+.city-walk-inspector .city-specialties button>svg { position:absolute;right:6px;top:51px;width:13px;height:13px;color:#0b6999; }
+.city-walk-inspector .city-specialties strong { padding-right:9px;overflow-wrap:anywhere; }
+.city-specialty-section:not(:has(select option[value="mecanica"]:checked)) .city-specialties button::before { background-image:none;background-color:#e1eff9;border-bottom:1px solid #c2dff1; }
+.city-walk-inspector .city-light-toggle { padding:0 4px;margin:0;align-items:center;gap:10px;font-size:12px;flex:none; }
+.city-walk-inspector .city-light-toggle input { width:17px;height:17px;accent-color:#0a939b;flex:none; }
+.city-walk-inspector .city-light-toggle small { font-size:11px; }
+.city-walk-inspector .city-prototype-note { padding:10px 4px 0;margin:0;font-size:11px;line-height:1.5;flex:none; }
+.city-walk-inspector button,.city-walk-inspector a,.city-walk-inspector summary,.city-walk-inspector select { transition:border-color .15s,box-shadow .15s,background-color .15s; }
+.city-walk-inspector button:not(:disabled):hover { border-color:#21a5b1;box-shadow:0 0 0 2px #52c0c323; }
+.city-walk-inspector .city-island-grid button[aria-pressed=true],.city-walk-inspector .city-specialties button[aria-pressed=true] { background:#e8f9f5;border-color:#17a497;box-shadow:0 0 0 2px #17a49722; }
+.city-walk-inspector :is(button,a,select,input,summary):focus-visible { outline:3px solid #087ee7;outline-offset:3px; }
+@media(min-width:1700px) { .city-page .city-walk-workspace { grid-template-columns:minmax(0,1fr) 620px; }.city-walk-inspector .city-island-grid button { grid-template-columns:74px minmax(0,1fr) 18px; }.city-island-grid button::before { width:74px;height:80px; }.city-walk-inspector .city-island-grid button strong { font-size:14px; }.city-walk-inspector .city-island-grid button small { font-size:13px; } }
+@media(min-width:1001px) and (max-width:1300px) { .city-page .city-walk-workspace { grid-template-columns:minmax(0,1fr) 430px;gap:12px; }.city-page .city-walk-inspector { padding:14px; }.city-entry-header .city-eyebrow { font-size:17px; }.city-entry-header .city-inspector-top strong { display:none; }.city-walk-inspector .city-island-grid button { grid-template-columns:52px minmax(0,1fr) 12px;gap:6px; }.city-island-grid button::before { width:52px;height:66px; }.city-walk-inspector .city-island-grid button small { font-size:11px; }.city-walk-inspector .city-mission-card { padding-left:12px; }.city-walk-inspector .city-mission-card>strong { font-size:17px; } }
+@media(max-width:1000px) { .city-page { height:100dvh;overflow-y:auto; }.city-page .city-walk-workspace { display:flex;flex-direction:column;height:auto;min-height:0; }.city-page .city-viewport { height:62svh;min-height:420px;flex:none; }.city-page .city-walk-inspector { width:100%;max-width:840px;min-height:0;overflow:visible;align-self:center;padding:20px; }.city-walk-inspector .city-entry-header { grid-template-columns:minmax(0,1fr) 146px; }.city-walk-inspector .city-island-grid button { grid-template-columns:74px minmax(0,1fr) 18px; }.city-island-grid button::before { width:74px;height:80px; } }
+@media(max-width:520px) { .city-page .city-walk-inspector { padding:13px;gap:12px;border-radius:18px; }.city-walk-inspector .city-entry-header { grid-template-columns:minmax(0,1fr) 112px;gap:9px; }.city-entry-header .city-eyebrow { font-size:17px; }.city-entry-header .city-inspector-top strong { display:none; }.city-walk-inspector .city-entry-map { font-size:13px;min-height:45px;padding:8px; }.city-walk-inspector .city-clock { padding-left:70px;padding-right:22%; }.city-clock::before { width:54px;height:32px;top:18px;left:8px; }.city-walk-inspector .city-clock strong { font-size:14px; }.city-walk-inspector .city-clock small { font-size:10px; }.city-walk-inspector .city-clock::after { width:23%; }.city-walk-inspector .city-mission-card { min-height:190px;padding:13px 39% 13px 12px;gap:10px; }.city-mission-card::after { top:22px;right:9px;width:34%; }.city-walk-inspector .city-mission-card>strong { font-size:16px; }.city-mission-card>strong svg { width:19px;height:19px; }.city-walk-inspector .city-mission-card>p { font-size:12px; }.city-walk-inspector .city-mission-card>button { font-size:12px;gap:5px;padding:8px 6px; }.city-walk-inspector .city-mission-card>a { font-size:11px; }.city-walk-inspector .city-island-heading>strong { font-size:21px; }.city-walk-inspector .city-island-card { padding:12px 8px; }.city-walk-inspector .city-island-grid { gap:7px; }.city-walk-inspector .city-island-grid button { grid-template-columns:48px minmax(0,1fr);gap:6px;min-height:118px;padding:6px; }.city-island-grid button::before { width:48px;height:69px; }.city-island-grid button::after { display:none; }.city-walk-inspector .city-island-grid button strong { font-size:11px; }.city-walk-inspector .city-island-grid button small { font-size:10.5px; }.city-walk-inspector .city-specialties { grid-template-columns:1fr; }.city-walk-inspector .city-specialties button { padding:12px 27px 12px 105px;min-height:79px; }.city-specialties button::before { width:95px;height:70px;left:4px;top:4px;background-size:390% 3106.78%; }.city-walk-inspector .city-specialties button>svg { top:15px; }.city-walk-inspector .city-specialty-section>summary>strong { font-size:21px; } }
+.city-walk-inspector :is(button,strong,span,summary,small,p,select,a) { letter-spacing:0; }
+.city-walk-inspector .city-eyebrow { letter-spacing:0; }
+.city-walk-inspector .city-entry-header .city-inspector-top strong { display:block;flex:none; }
+.city-walk-inspector .city-entry-header .city-eyebrow { flex:1;min-width:0; }
+.city-page .city-toolbar-actions { display:flex;flex:1;min-width:0;flex-wrap:wrap;justify-content:flex-end;gap:6px; }
+.city-page .city-view-toolbar { align-items:flex-start; }
+.city-page .city-view-toolbar button { max-width:none;min-height:34px;white-space:nowrap;font-size:11px;padding:8px 10px; }
+.city-page .city-toolbar-actions button span { display:inline; }
+@media(min-width:1001px) { .city-page .city-walk-workspace { min-height:0;height:calc(100dvh - 190px); }.city-page .city-viewport,.city-page .city-walk-stage { min-height:0;height:100%; } }
+@media(max-width:1300px) { .city-walk-inspector .city-entry-header .city-inspector-top strong { max-width:72px;font-size:11px;padding-left:8px; }.city-walk-inspector .city-entry-header .city-inspector-top strong::first-line { font-size:23px; } }
+@media(max-width:520px) { .city-walk-inspector .city-entry-header .city-inspector-top { gap:8px; }.city-walk-inspector .city-entry-header .city-eyebrow { font-size:15px; }.city-walk-inspector .city-entry-header .city-inspector-top strong { max-width:62px;font-size:9px;padding-left:6px; }.city-walk-inspector .city-entry-header .city-inspector-top strong::first-line { font-size:20px; }.city-specialties button::before { background-size:auto 3106.78%; } }
+@media(max-width:520px) {
+  .city-walk-inspector .city-entry-header .city-inspector-top strong { max-width:74px;flex-basis:74px; }
+  .city-walk-inspector .city-entry-header .city-eyebrow { font-size:13.5px; }
+  .city-walk-inspector .city-island-grid button { grid-template-columns:42px minmax(0,1fr); }
+  .city-island-grid button::before { width:42px; }
+  .city-walk-inspector .city-island-grid button strong { font-size:10.5px;font-weight:700;overflow-wrap:normal;word-break:normal; }
+}
+@media(prefers-reduced-motion:reduce) { .city-walk-inspector * { transition:none!important; } }
