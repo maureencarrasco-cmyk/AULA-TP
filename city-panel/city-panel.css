@@ -40,6 +40,8 @@
 .city-walk-inspector .city-mission-card>p { color:#5d7e91;font-size:14px;line-height:1.45; }
 .city-walk-inspector .city-mission-card>button { background:#008397;border:0;color:white;padding:10px 12px;min-height:42px;font-size:14px;justify-content:center;border-radius:10px; }
 .city-walk-inspector .city-mission-card>a { font-size:12px;line-height:1.4;color:#007184; }
+.city-walk-inspector .city-mission-card>a[data-city-learning-experience] { display:flex;align-items:center;justify-content:center;min-height:40px;padding:8px 12px;border:1px solid #9bd6cd;border-radius:10px;background:#f0fbf8;color:#087c70;font-weight:800;text-decoration:none; }
+.city-walk-inspector .city-mission-card>a[data-city-learning-experience]:hover { background:#e2f7f1;border-color:#62c6b2; }
 .city-walk-inspector .city-island-card { margin:0;padding:14px 10px 12px;background:#fffbef;border:1px solid #ffda94;border-radius:20px;gap:10px;flex:none;display:block; }
 .city-walk-inspector .city-island-heading { position:relative;min-height:63px;padding:3px 33% 0 6px;display:block;list-style:none; }
 .city-walk-inspector .city-island-heading::marker, .city-walk-inspector .city-specialty-section>summary::marker { content:''; }

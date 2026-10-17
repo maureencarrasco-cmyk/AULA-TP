@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f8fc">
+  <title>Experiencia de aprendizaje · Aula TP Chile</title>
+  <link rel="stylesheet" href="/static/city-experience.css?v=20261017-45min-v1">
+</head>
+<body>
+  <a class="skip-link" href="#experience-main">Saltar al recorrido</a>
+  <main id="experience-main" class="experience-shell">
+    <header class="experience-header">
+      <div class="brand-mark" aria-hidden="true">AT</div>
+      <div class="header-copy">
+        <p class="eyebrow">Aula TP Chile · Ciudad Laboral</p>
+        <h1>Experiencia de aprendizaje</h1>
+        <p>Un recorrido profesional integrado a tu módulo.</p>
+      </div>
+      <a class="return-link" href="/ciudad_laboral_aulatp/">Volver a Ciudad Laboral</a>
+    </header>
+
+    <section class="setup-panel" id="setup-panel" aria-labelledby="setup-title">
+      <div class="setup-copy">
+        <p class="eyebrow">Recorrido de 45 minutos</p>
+        <h2 id="setup-title">Elige tu curso y módulo</h2>
+        <p>15 minutos de quiz y 30 minutos para resolver una situación laboral completa.</p>
+      </div>
+      <div class="selectors">
+        <label>Curso<select id="course-select"><option value="">Cargando cursos…</option></select></label>
+        <label>Módulo<select id="module-select" disabled><option value="">Selecciona un curso</option></select></label>
+        <button id="start-button" class="primary-button" type="button" disabled>Iniciar recorrido</button>
+      </div>
+      <p class="notice" id="setup-notice" role="status"></p>
+    </section>
+
+    <section class="journey" id="journey" hidden>
+      <header class="journey-top">
+        <div>
+          <p class="eyebrow" id="course-label"></p>
+          <h2 id="module-title"></h2>
+          <p id="module-case" class="muted"></p>
+        </div>
+        <div class="timer" aria-live="polite"><span>Tiempo activo</span><strong id="timer-value">00:00</strong><small>Meta: 45 min · el tiempo orienta, no provoca fracaso</small></div>
+      </header>
+      <div class="journey-progress" aria-label="Avance del recorrido"><span id="progress-bar"></span></div>
+      <nav class="stage-tabs" aria-label="Etapas del recorrido">
+        <button type="button" data-stage="quiz" class="stage-tab active"><span>01</span> Quiz <small>15 min</small></button>
+        <span class="stage-connector" aria-hidden="true"></span>
+        <button id="mission-tab" type="button" data-stage="mission" class="stage-tab" disabled><span>02</span> Misión laboral <small>30 min</small></button>
+      </nav>
+
+      <div class="work-area">
+        <section class="work-main" id="work-main" aria-live="polite"></section>
+        <aside class="work-aside" id="work-aside"></aside>
+      </div>
+      <p class="notice" id="journey-notice" role="status"></p>
+    </section>
+  </main>
+  <script src="/static/city-experience.js?v=20261017-45min-v1" defer></script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 from pathlib import Path
-import csv, io, json, math, os, secrets, sqlite3
+import csv, io, json, math, os, random, secrets, sqlite3
+from datetime import datetime, timezone
 from contextlib import contextmanager
 from functools import lru_cache, wraps
 from flask import Flask, request, session, jsonify, send_from_directory, Response
@@ -125,6 +126,55 @@ def create_app(test_config=None):
                 if not m['published']:return None,fail('El módulo está en preparación.',403)
                 if not is_demo_student(u) and not con.execute('SELECT 1 FROM enrollments WHERE user_id=? AND course_id=?',(u['id'],m['course_id'])).fetchone():return None,fail('No tienes matrícula en este curso.',403)
             return dict(m),None
+    def city_experience_content(content, mid, uid):
+        questions=content.get('questions') or []
+        rng=random.Random(f'city-45-v1:{uid}:{mid}')
+        selected=[]
+        for difficulty,count in (('Inicial',4),('Intermedia',5),('Avanzada',1)):
+            pool=[q for q in questions if q.get('difficulty')==difficulty]
+            chosen=[]
+            while pool and len(chosen)<count:
+                pool.sort(key=lambda q:(
+                    q.get('ae') in {item.get('ae') for item in chosen},
+                    q.get('skill') in {item.get('skill') for item in chosen},
+                    rng.random()))
+                chosen.append(pool.pop(0))
+            selected.extend(chosen)
+        quiz=[{k:q.get(k) for k in ('question','options','explanation','stimulus','image','caption','alt','ae','skill','difficulty','criterion') if k in q} for q in selected]
+        aes=[{'title':a.get('title') or a.get('name') or f'Aprendizaje esperado {i+1}',
+              'description':a.get('description') or ''} for i,a in enumerate(content.get('aes') or [])]
+        candidates=[item for item in (content.get('encargos') or {}).get('items') or [] if item.get('station') in (2,3)]
+        tasks=[]
+        for item in candidates:
+            if not any(existing.get('ae')==item.get('ae') for existing in tasks):tasks.append(item)
+            if len(tasks)>=3:break
+        if len(tasks)<3:
+            for item in candidates:
+                if item not in tasks:tasks.append(item)
+                if len(tasks)>=3:break
+        case=(content.get('cases') or [{}])[0]
+        return {
+            'version':1,
+            'module':{'id':mid,'title':content.get('title') or '', 'case_title':content.get('case_title') or case.get('title') or 'Situación laboral integrada'},
+            'timing':{'total':45,'quiz':15,'mission':30,'quiz_per_question':1.5,'phases':[5,15,5,5]},
+            'quiz':quiz,
+            'mission':{
+                'scenario':case.get('context') or content.get('context') or content.get('application') or '',
+                'question':case.get('question') or '',
+                'aes':aes,
+                'tasks':[{'id':x.get('id') or '', 'title':x.get('title') or '', 'product':x.get('product') or '',
+                          'prompt':x.get('prompt') or '', 'ae':x.get('ae'),
+                          'ae_title':aes[int(x.get('ae') or 0)-1]['title'] if type(x.get('ae')) is int and 0<int(x.get('ae'))<=len(aes) else '',
+                          'criterion':(x.get('instruction') or {}).get('criterion') or ''} for x in tasks],
+                'rubric':[{'name':x.get('name') or '', 'max':x.get('max')} for x in content.get('rubric') or []],
+                'phases':[
+                    {'id':'planificar','title':'Planificar','minutes':5,'prompt':'Define el objetivo y el orden de trabajo. Vincula tu plan con al menos dos aprendizajes esperados y señala los recursos o antecedentes que revisarás.'},
+                    {'id':'actuar','title':'Actuar','minutes':15,'prompt':'Resuelve la orden de trabajo usando los encargos del módulo. Describe las decisiones y acciones profesionales en el orden en que las realizarías, respetando seguridad y alcance del rol.'},
+                    {'id':'verificar','title':'Verificar','minutes':5,'prompt':'Contrasta el resultado con los criterios y productos solicitados. Indica qué evidencia revisarías, qué condición confirmarías y qué corregirías si no cumple.'},
+                    {'id':'justificar','title':'Justificar','minutes':5,'prompt':'Justifica la decisión final con datos del caso, aprendizajes esperados y criterios. Deja explícito cualquier antecedente pendiente y a quién lo consultarías.'}
+                ]
+            }
+        }
     def text_valid(v,n=20):return isinstance(v,str) and n<=len(v.strip())<=10000
     def published_module_feedback(con,mid):
         row=con.execute('SELECT f.body AS text,f.updated AS updated_at,f.teacher_id,u.name AS teacher_name FROM module_feedback f JOIN users u ON u.id=f.teacher_id WHERE f.module_id=?',(mid,)).fetchone()
@@ -243,6 +293,87 @@ def create_app(test_config=None):
         if u['role']=='student':c=strip_for_student(c)
         m.update(content=c,state=s,completed=completed(s,c),stations=STATIONS,steps=STEPS,planning=active_plan or c.get('planning') or module_plan(m['position']))
         return jsonify(m)
+    @app.get('/portal/experiencia-ciudad')
+    def city_experience_page():
+        response=send_from_directory(app.static_folder,'city-experience.html')
+        response.headers['Cache-Control']='no-store'
+        return response
+    @app.get('/api/modules/<int:mid>/city-experience')
+    @require('student')
+    def get_city_experience(mid):
+        m,err=accessible(mid)
+        if err:return err
+        content=load_content(m['content'],m['position']);content['title']=m['title']
+        with db() as con:
+            state=getstate(con,mid)
+            experience=state.get('city_experience') or {}
+            if not experience.get('started_at'):
+                now=datetime.now(timezone.utc).isoformat()
+                experience={'version':1,'started_at':now,'active_seconds':0,'quiz':{'answers':{},'attempts':{}},
+                            'mission':{'responses':{},'drafts':{}}}
+                state['city_experience']=experience
+                trace(state,'city-experience-started',version=1)
+                putstate(con,mid,state)
+            course=con.execute('SELECT title FROM courses WHERE id=?',(m['course_id'],)).fetchone()
+        plan=city_experience_content(content,mid,session['uid'])
+        for question in plan['quiz']:question.pop('explanation',None)
+        return jsonify(course_title=course['title'],plan=plan,state=experience)
+    @app.post('/api/modules/<int:mid>/city-experience')
+    @require('student')
+    def save_city_experience(mid):
+        m,err=accessible(mid)
+        if err:return err
+        payload=body();operation=payload.get('operation')
+        content=load_content(m['content'],m['position']);content['title']=m['title']
+        plan=city_experience_content(content,mid,session['uid'])
+        with db() as con:
+            state=getstate(con,mid)
+            experience=state.get('city_experience')
+            if not experience:return fail('Inicia la experiencia antes de guardar avances.',409)
+            quiz=experience.setdefault('quiz',{'answers':{},'attempts':{}})
+            mission=experience.setdefault('mission',{'responses':{},'drafts':{}})
+            if operation=='heartbeat':
+                seconds=payload.get('seconds')
+                if type(seconds)!=int or not 1<=seconds<=60:return fail('Intervalo de actividad inválido.')
+                experience['active_seconds']=int(experience.get('active_seconds') or 0)+seconds
+            elif operation=='quiz-answer':
+                index=payload.get('index');choice=payload.get('choice');answers=quiz.setdefault('answers',{})
+                if type(index)!=int or not 0<=index<len(plan['quiz']) or type(choice)!=int or choice not in range(len(plan['quiz'][index].get('options') or [])):
+                    return fail('Selecciona una respuesta disponible.')
+                if str(index) in answers:return fail('Esta respuesta ya quedó registrada.')
+                if index!=len(answers):return fail('Responde los desafíos en orden.')
+                question=plan['quiz'][index]
+                original=next((q for q in content.get('questions') or [] if q.get('question')==question['question']),None)
+                correct=bool(original and choice==original.get('answer'))
+                answers[str(index)]={'choice':choice,'correct':correct,'explanation':question.get('explanation') or '',
+                                     'at':datetime.now(timezone.utc).isoformat()}
+                quiz.setdefault('attempts',{})[str(index)]=int(quiz.get('attempts',{}).get(str(index),0))+1
+                if len(answers)==len(plan['quiz']):
+                    quiz['completed_at']=datetime.now(timezone.utc).isoformat()
+                    quiz['score']=sum(bool(answer.get('correct')) for answer in answers.values())
+                trace(state,'city-quiz-answer',index=index,correct=correct,difficulty=question.get('difficulty'))
+            elif operation in ('mission-draft','mission-submit'):
+                phase=payload.get('phase');phases=plan['mission']['phases']
+                phase_index=next((i for i,item in enumerate(phases) if item['id']==phase),-1)
+                if len(quiz.get('answers',{}))!=len(plan['quiz']):return fail('Completa primero los diez desafíos del quiz.',403)
+                if phase_index<0:return fail('Fase de misión inválida.')
+                responses=mission.setdefault('responses',{});drafts=mission.setdefault('drafts',{})
+                if phase_index>len(responses):return fail('Completa la fase anterior antes de continuar.',403)
+                text=payload.get('text')
+                if not isinstance(text,str) or len(text)>10000:return fail('Respuesta inválida.')
+                if operation=='mission-draft':
+                    drafts[phase]=text
+                else:
+                    if not text_valid(text,20):return fail('Escribe al menos 20 caracteres para guardar esta fase.')
+                    responses[phase]=text.strip();drafts.pop(phase,None)
+                    mission.setdefault('completed_at_by_phase',{})[phase]=datetime.now(timezone.utc).isoformat()
+                    if len(responses)==len(phases):mission['completed_at']=datetime.now(timezone.utc).isoformat()
+                    trace(state,'city-mission-phase',phase=phase,index=phase_index,
+                          aes=list(range(1,len(plan['mission']['aes'])+1)),
+                          tasks=[item.get('id') for item in plan['mission']['tasks']])
+            else:return fail('Acción de aprendizaje desconocida.')
+            putstate(con,mid,state)
+        return jsonify(state=experience)
     @app.get('/api/practice/profiles')
     @require()
     def get_practice_profiles():

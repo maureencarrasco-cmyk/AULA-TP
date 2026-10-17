@@ -25,7 +25,19 @@
     }
     if(tile&&tile.disabled!==original.disabled)tile.disabled=original.disabled;
   }
-  const observer=new MutationObserver(syncMiningTile);
+  function syncLearningLink() {
+    const card=document.querySelector('.city-walk-inspector .city-mission-card');
+    if(!card||card.querySelector('[data-city-learning-experience]'))return;
+    const link=document.createElement('a');
+    link.dataset.cityLearningExperience='';
+    link.href='/portal/experiencia-ciudad';
+    link.target='_blank';
+    link.rel='noopener';
+    link.textContent='Quiz + misión laboral · 45 min';
+    card.append(link);
+  }
+  function syncPanel() { syncMiningTile(); syncLearningLink(); }
+  const observer=new MutationObserver(syncPanel);
   observer.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['disabled']});
-  syncMiningTile();
+  syncPanel();
 })();
