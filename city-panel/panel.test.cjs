@@ -46,3 +46,11 @@ test('learning section adapts its header and specialty cards to panel width',()=
  assert.ok(css.includes('@container(max-width:380px)'));
  assert.ok(css.includes('.city-specialty-section>.city-approach { width:100%'));
 });
+
+test('city header keeps live copy and original return link with responsive artwork',()=>{
+ const css=fs.readFileSync(path.join(__dirname,'city-panel.css'),'utf8');
+ assert.ok(css.includes('city-header-reference.png'));
+ assert.ok(css.includes('.city-header .city-back:focus-visible'));
+ assert.ok(css.includes('@media(max-width:700px)'));
+ assert.ok(!/city-header[^{}]*\{[^}]*opacity:\s*0/.test(css));
+});

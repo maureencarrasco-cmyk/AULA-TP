@@ -17,6 +17,8 @@ Nueva versión: `/opt/ciudad-laboral-releases/city-20261017-panel-reference-v42`
 
 Actualización de aprendizaje: `/opt/ciudad-laboral-releases/city-20261017-learning-panel-v43`, con `--skin-version panel-ui-v2`. Mejora el encabezado, selector y tarjetas de distritos según el ancho disponible. El selector original sigue cambiando las especialidades y el personaje. Los recursos versionados evitan servir estilos antiguos desde la caché. El instalador sustituye las referencias anteriores sin duplicarlas y conserva el manifiesto de la versión previa.
 
+Encabezado de Ciudad Laboral: `/opt/ciudad-laboral-releases/city-20261017-city-header-v44`, con `--skin-version panel-ui-v3`. Usa la segunda imagen proporcionada para la ilustración de fondo (`assets/city-header-reference.png`), sin modificar el archivo. El título, descripción y enlace de regreso siguen siendo elementos originales accesibles. La ilustración se recorta proporcionalmente con CSS; en teléfono se coloca debajo del texto. Los 37 archivos originales del motor permanecen intactos.
+
 `deploy.py` crea una versión separada, reemplaza mediante nuevos archivos solamente los dos HTML de entrada y agrega la carpeta `panel-ui-v1`. Verifica que los 37 archivos JavaScript originales del juego conserven sus hashes. La activación cambia el enlace simbólico del sitio de forma atómica; la versión anterior sigue disponible para recuperación. No cambia Nginx, certificados, bases de datos ni archivos del motor.
 
 ## Verificación

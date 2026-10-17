@@ -1,4 +1,16 @@
 /* Presentation only: original React controls, destinations and scene remain intact. */
+.city-page .city-header { position:relative;isolation:isolate;overflow:hidden;min-height:270px;padding:30px 36px;margin-bottom:18px;border-radius:8px;background:#f3faff;align-items:center; }
+.city-page .city-header::before { content:'';position:absolute;inset:0;z-index:-1;background-image:url('./assets/city-header-reference.png');background-repeat:no-repeat;background-size:auto 145%;background-position:right top;mask-image:linear-gradient(to right,transparent 35%,#000 54%),linear-gradient(to bottom,#000 72%,transparent 95%);mask-composite:intersect; }
+.city-page .city-header>div { width:49%;max-width:590px; }
+.city-page .city-header .city-eyebrow { display:block;color:#0879c7;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:800;letter-spacing:0; }
+.city-page .city-header .city-eyebrow::after { content:'';display:block;width:48px;height:5px;background:#81ddc6;border-radius:3px;margin-top:10px; }
+.city-page .city-header h1 { font-family:Arial,Helvetica,sans-serif;font-size:44px;line-height:1.08;font-weight:800;letter-spacing:0;color:#076fbf;margin:15px 0;max-width:540px; }
+.city-page .city-header p { font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;color:#617d99;max-width:480px;margin:0; }
+.city-page .city-header .city-back { position:absolute;right:26px;bottom:20px;min-height:48px;padding:12px 22px;background:#fff;border:1px solid #a4d0ff;border-radius:8px;box-shadow:0 4px 14px #1971c526;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;color:#0963ac; }
+.city-page .city-header .city-back::after { content:'›';margin-left:16px;font-size:22px;line-height:1; }
+.city-page .city-header .city-back:focus-visible { outline:3px solid #087ee7;outline-offset:3px; }
+@media(min-width:1001px) { .city-page .city-walk-workspace { height:calc(100dvh - 340px)!important;min-height:360px!important; }.city-page { overflow-y:auto; } }
+@media(max-width:700px) { .city-page .city-header { min-height:370px;padding:22px 20px 160px; }.city-page .city-header>div { width:100%;max-width:none; }.city-page .city-header h1 { font-size:32px;max-width:420px; }.city-page .city-header p { font-size:14px; }.city-page .city-header .city-eyebrow { font-size:11px; }.city-page .city-header::before { inset:auto 0 0;height:155px;background-size:auto 145%;mask-image:linear-gradient(to right,transparent 0%,#000 24%); }.city-page .city-header .city-back { bottom:12px;right:12px;font-size:13px;padding:10px 14px;min-height:42px; } }
 .city-page .city-walk-workspace { grid-template-columns:minmax(0,1fr) 540px;max-width:1840px;gap:18px; }
 .city-page .city-walk-inspector { padding:20px;min-width:0;min-height:0;overflow:auto;scrollbar-width:thin;scrollbar-color:#a8cdd8 transparent;background:#f8fcff;border:1px solid #c8e5fb;border-radius:24px;box-shadow:0 6px 25px #9cd8f039;display:flex;flex-direction:column;gap:14px; }
 .city-walk-inspector *, .city-walk-inspector *::before, .city-walk-inspector *::after { box-sizing:border-box;letter-spacing:0; }
