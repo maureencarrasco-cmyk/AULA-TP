@@ -38,3 +38,11 @@ test('skin retains native dropdown, checkbox, collapsed sections and focus state
  assert.ok(!/input\s*\{[^}]*display:\s*none/.test(css));
  assert.ok(!css.includes('pointer-events:none'));
 });
+
+test('learning section adapts its header and specialty cards to panel width',()=>{
+ const css=fs.readFileSync(path.join(__dirname,'city-panel.css'),'utf8');
+ assert.ok(css.includes('container-type:inline-size'));
+ assert.ok(css.includes('@container(min-width:500px)'));
+ assert.ok(css.includes('@container(max-width:380px)'));
+ assert.ok(css.includes('.city-specialty-section>.city-approach { width:100%'));
+});

@@ -15,6 +15,8 @@ Versión anterior: `/opt/ciudad-laboral-releases/city-20261014-circuit-bikes-v41
 
 Nueva versión: `/opt/ciudad-laboral-releases/city-20261017-panel-reference-v42`.
 
+Actualización de aprendizaje: `/opt/ciudad-laboral-releases/city-20261017-learning-panel-v43`, con `--skin-version panel-ui-v2`. Mejora el encabezado, selector y tarjetas de distritos según el ancho disponible. El selector original sigue cambiando las especialidades y el personaje. Los recursos versionados evitan servir estilos antiguos desde la caché. El instalador sustituye las referencias anteriores sin duplicarlas y conserva el manifiesto de la versión previa.
+
 `deploy.py` crea una versión separada, reemplaza mediante nuevos archivos solamente los dos HTML de entrada y agrega la carpeta `panel-ui-v1`. Verifica que los 37 archivos JavaScript originales del juego conserven sus hashes. La activación cambia el enlace simbólico del sitio de forma atómica; la versión anterior sigue disponible para recuperación. No cambia Nginx, certificados, bases de datos ni archivos del motor.
 
 ## Verificación
