@@ -1,0 +1,25 @@
+/* Three live dashboard actions arranged over the supplied illustration. */
+body[data-screen="courses"] .dash-widgets{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:14px 16px 18px}
+body[data-screen="courses"] .dash-widgets article{position:relative;grid-template-columns:74px minmax(0,1fr) auto;grid-template-rows:minmax(112px,1fr) auto;align-items:start;gap:12px 16px;min-width:0;min-height:244px;padding:28px 26px 24px;overflow:hidden;border:1px solid transparent;border-radius:18px;background-color:#f2f8ff;background-image:url('/static/dashboard-widgets-art.png?v=20261017-cards-v1');background-repeat:no-repeat;background-size:300% 231%;background-position-y:50%;box-shadow:0 4px 14px rgba(32,90,142,.08)}
+body[data-screen="courses"] .dash-widgets article:nth-child(1){background-position-x:0%}
+body[data-screen="courses"] .dash-widgets article:nth-child(2){background-position-x:50%}
+body[data-screen="courses"] .dash-widgets article:nth-child(3){background-position-x:100%}
+body[data-screen="courses"] .dash-widgets article>.icon{grid-column:1;grid-row:1;width:72px;height:72px;padding:16px;border-radius:18px;background:rgba(255,255,255,.76);color:#0874df}
+body[data-screen="courses"] .dash-widgets article:nth-child(2)>.icon{color:#e96920}
+body[data-screen="courses"] .dash-widgets article:nth-child(3)>.icon{color:#0aa88f}
+body[data-screen="courses"] .dash-widgets article>div{grid-column:2;grid-row:1;min-width:0}
+body[data-screen="courses"] .dash-widgets h3{margin:8px 0 5px;color:#092f72;font-size:25px;font-weight:800;line-height:1.15}
+body[data-screen="courses"] .dash-widgets p{color:#55769b;font-size:15px;line-height:1.45}
+body[data-screen="courses"] .dash-widgets progress{display:block;height:13px;margin:20px 0 0;accent-color:#4386f7}
+body[data-screen="courses"] .dash-widgets progress::-webkit-progress-value{background:linear-gradient(90deg,#4485f6,#2876ee)}
+body[data-screen="courses"] .dash-widgets article>b{position:absolute;z-index:1;top:27px;right:28px;min-width:40px;height:40px;border-radius:50%;background:#ff5b40;color:#fff;font-size:18px}
+body[data-screen="courses"] .dash-widgets article:first-child>b{top:112px;right:24px;color:#0767c8;background:transparent;font-size:24px}
+body[data-screen="courses"] .dash-widgets article>a,body[data-screen="courses"] .dash-widgets article>button{grid-column:1/3;grid-row:2;justify-self:start;align-self:end;display:inline-flex;align-items:center;justify-content:center;gap:14px;min-width:235px;min-height:52px;padding:10px 20px;border:1px solid #4386f7;border-radius:999px;background:rgba(255,255,255,.92);color:#0863d0;font-size:16px;font-weight:800;text-decoration:none}
+body[data-screen="courses"] .dash-widgets article>button{grid-column:2/4}
+body[data-screen="courses"] .dash-widgets article:nth-child(2)>button{border-color:#ff6734;background:linear-gradient(100deg,#ff7c35,#fa5135);color:#fff}
+body[data-screen="courses"] .dash-widgets article:nth-child(3)>button{border-color:#08a98f;background:linear-gradient(100deg,#10bea5,#08a88d);color:#fff}
+body[data-screen="courses"] .dash-widgets article>a .icon,body[data-screen="courses"] .dash-widgets article>button .icon{width:20px;height:20px}
+body[data-screen="courses"] .dash-widgets :is(a,button):focus-visible{outline:3px solid #075fc9;outline-offset:3px}
+@media(max-width:1180px){body[data-screen="courses"] .dash-widgets{grid-template-columns:repeat(2,minmax(0,1fr))}body[data-screen="courses"] .dash-widgets article:last-child{grid-column:1/-1}}
+@media(max-width:760px){body[data-screen="courses"] .dash-widgets{grid-template-columns:minmax(0,1fr);padding:10px}body[data-screen="courses"] .dash-widgets article,body[data-screen="courses"] .dash-widgets article:last-child{grid-column:auto;min-height:220px;padding:24px 20px 20px}body[data-screen="courses"] .dash-widgets article>.icon{width:60px;height:60px;padding:13px}body[data-screen="courses"] .dash-widgets h3{margin-top:5px;font-size:21px}body[data-screen="courses"] .dash-widgets p{font-size:13px}body[data-screen="courses"] .dash-widgets article:first-child>b{top:106px;right:18px;font-size:19px}body[data-screen="courses"] .dash-widgets article>a,body[data-screen="courses"] .dash-widgets article>button{min-width:0;min-height:46px;font-size:14px}}
+@media(max-width:380px){body[data-screen="courses"] .dash-widgets article{grid-template-columns:52px minmax(0,1fr) auto;gap:10px;padding-inline:14px}body[data-screen="courses"] .dash-widgets article>.icon{width:50px;height:50px;padding:11px}body[data-screen="courses"] .dash-widgets h3{font-size:18px}body[data-screen="courses"] .dash-widgets article>button,body[data-screen="courses"] .dash-widgets article>a{grid-column:1/-1}}
