@@ -1,5 +1,5 @@
 from pathlib import Path
-import csv, io, json, math, os, random, secrets, sqlite3
+import csv, io, json, math, os, random, secrets, sqlite3, unicodedata
 from datetime import datetime, timezone
 from contextlib import contextmanager
 from functools import lru_cache, wraps
@@ -19,6 +19,39 @@ from practice_pedagogy import profile as practice_profile
 from course_catalog import ensure_course_catalog
 
 ROOT=Path(__file__).resolve().parent
+
+CITY_DISTRICTS=('Administración','Agropecuaria y Forestal','Alimentación','Construcción','Electricidad y sistemas','Metalmecánica','Minería y procesos','Salud y atención','Marítimo','Turismo','Madera y vestuario','Tecnologías digitales')
+
+def city_district_for_course(title):
+    value=''.join(char for char in unicodedata.normalize('NFD',str(title or '').casefold()) if unicodedata.category(char)!='Mn')
+    if 'instalaciones sanitarias' in value:return 'Construcción'
+    if 'construcciones metalicas' in value:return 'Metalmecánica'
+    if any(term in value for term in ('construccion','dibujo tecnico')):return 'Construcción'
+    if any(term in value for term in ('agropecuaria','forestal')):return 'Agropecuaria y Forestal'
+    if any(term in value for term in ('gastronomia','alimentos')):return 'Alimentación'
+    if any(term in value for term in ('enfermeria','parvulos')):return 'Salud y atención'
+    if any(term in value for term in ('acuicultura','portuarias','pesqueria','naves')):return 'Marítimo'
+    if any(term in value for term in ('hoteleria','turismo')):return 'Turismo'
+    if any(term in value for term in ('vestuario','madera')):return 'Madera y vestuario'
+    if any(term in value for term in ('administracion','contabilidad')):return 'Administración'
+    if any(term in value for term in ('geologia','minera','metalurgia','quimica industrial')):return 'Minería y procesos'
+    if any(term in value for term in ('programacion','conectividad','grafica')):return 'Tecnologías digitales'
+    if any(term in value for term in ('electricidad','electronica','telecomunicaciones')):return 'Electricidad y sistemas'
+    return 'Metalmecánica'
+
+def city_locations_for_courses(course_rows):
+    counts={}
+    locations={}
+    for course in course_rows:
+        course_id=int(course['id'])
+        title=course['title']
+        district=city_district_for_course(title)
+        floor=counts.get(district,0)+1
+        counts[district]=floor
+        locations[course_id]={'district':district,'building':f'Pabellón {district}',
+                              'floor':'Planta baja' if floor==1 else f'Piso {floor}',
+                              'space':f'Taller {title}'}
+    return locations
 
 def create_app(test_config=None):
     app=Flask(__name__,static_folder='static')
@@ -129,9 +162,13 @@ def create_app(test_config=None):
     def city_experience_content(content, mid, uid):
         questions=content.get('questions') or []
         rng=random.Random(f'city-45-v1:{uid}:{mid}')
+        difficulty_aliases={'Fácil':'Inicial','Facil':'Inicial','Media':'Intermedia','Difícil':'Avanzada','Dificil':'Avanzada'}
+        def normalized_difficulty(question):
+            level=question.get('difficulty')
+            return difficulty_aliases.get(level,level)
         selected=[]
         for difficulty,count in (('Inicial',4),('Intermedia',5),('Avanzada',1)):
-            pool=[q for q in questions if q.get('difficulty')==difficulty]
+            pool=[q for q in questions if normalized_difficulty(q)==difficulty and q not in [item[0] for item in selected]]
             chosen=[]
             while pool and len(chosen)<count:
                 pool.sort(key=lambda q:(
@@ -139,24 +176,34 @@ def create_app(test_config=None):
                     q.get('skill') in {item.get('skill') for item in chosen},
                     rng.random()))
                 chosen.append(pool.pop(0))
-            selected.extend(chosen)
-        quiz=[{k:q.get(k) for k in ('question','options','explanation','stimulus','image','caption','alt','ae','skill','difficulty','criterion') if k in q} for q in selected]
+            fallback_levels={'Inicial':('Intermedia','Avanzada'),'Intermedia':('Inicial','Avanzada'),'Avanzada':('Intermedia','Inicial')}
+            for fallback in fallback_levels[difficulty]:
+                if len(chosen)>=count:break
+                fallback_pool=[q for q in questions if normalized_difficulty(q)==fallback and q not in [item[0] for item in selected] and q not in chosen]
+                while fallback_pool and len(chosen)<count:
+                    fallback_pool.sort(key=lambda q:(
+                        q.get('ae') in {item.get('ae') for item in chosen},
+                        q.get('skill') in {item.get('skill') for item in chosen},
+                        rng.random()))
+                    chosen.append(fallback_pool.pop(0))
+            selected.extend((q,difficulty) for q in chosen)
+        quiz=[{**{k:q.get(k) for k in ('question','options','explanation','stimulus','image','caption','alt','ae','skill','criterion') if k in q},'difficulty':difficulty} for q,difficulty in selected]
         aes=[{'title':a.get('title') or a.get('name') or f'Aprendizaje esperado {i+1}',
               'description':a.get('description') or ''} for i,a in enumerate(content.get('aes') or [])]
         candidates=[item for item in (content.get('encargos') or {}).get('items') or [] if item.get('station') in (2,3)]
         tasks=[]
         for item in candidates:
             if not any(existing.get('ae')==item.get('ae') for existing in tasks):tasks.append(item)
-            if len(tasks)>=3:break
-        if len(tasks)<3:
+            if len(tasks)>=4:break
+        if len(tasks)<4:
             for item in candidates:
                 if item not in tasks:tasks.append(item)
-                if len(tasks)>=3:break
+                if len(tasks)>=4:break
         case=(content.get('cases') or [{}])[0]
         return {
-            'version':1,
+            'version':2,
             'module':{'id':mid,'title':content.get('title') or '', 'case_title':content.get('case_title') or case.get('title') or 'Situación laboral integrada'},
-            'timing':{'total':45,'quiz':15,'mission':30,'quiz_per_question':1.5,'phases':[5,15,5,5]},
+            'timing':{'total':90,'quiz':45,'mission':45,'quiz_per_question':4.5,'phases':[10,15,10,10]},
             'quiz':quiz,
             'mission':{
                 'scenario':case.get('context') or content.get('context') or content.get('application') or '',
@@ -168,10 +215,10 @@ def create_app(test_config=None):
                           'criterion':(x.get('instruction') or {}).get('criterion') or ''} for x in tasks],
                 'rubric':[{'name':x.get('name') or '', 'max':x.get('max')} for x in content.get('rubric') or []],
                 'phases':[
-                    {'id':'planificar','title':'Planificar','minutes':5,'prompt':'Define el objetivo y el orden de trabajo. Vincula tu plan con al menos dos aprendizajes esperados y señala los recursos o antecedentes que revisarás.'},
-                    {'id':'actuar','title':'Actuar','minutes':15,'prompt':'Resuelve la orden de trabajo usando los encargos del módulo. Describe las decisiones y acciones profesionales en el orden en que las realizarías, respetando seguridad y alcance del rol.'},
-                    {'id':'verificar','title':'Verificar','minutes':5,'prompt':'Contrasta el resultado con los criterios y productos solicitados. Indica qué evidencia revisarías, qué condición confirmarías y qué corregirías si no cumple.'},
-                    {'id':'justificar','title':'Justificar','minutes':5,'prompt':'Justifica la decisión final con datos del caso, aprendizajes esperados y criterios. Deja explícito cualquier antecedente pendiente y a quién lo consultarías.'}
+                    {'id':'planificar','number':1,'title':'Planificar','minutes':10,'prompt':'Analiza la orden completa, identifica los datos disponibles y pendientes, vincula el plan con al menos dos aprendizajes esperados y ordena recursos, riesgos y verificaciones antes de intervenir.'},
+                    {'id':'actuar','number':2,'title':'Actuar','minutes':15,'prompt':'Desarrolla el procedimiento integrado del módulo. Explica las acciones y decisiones en secuencia, relaciona los encargos con sus criterios y respeta seguridad, normativa y alcance del rol.'},
+                    {'id':'verificar','number':3,'title':'Verificar','minutes':10,'prompt':'Contrasta el producto y el procedimiento con los criterios del módulo. Registra evidencia, identifica desviaciones, propone correcciones y define qué condición impide entregar el trabajo.'},
+                    {'id':'justificar','number':4,'title':'Justificar y cerrar','minutes':10,'prompt':'Justifica la decisión final con datos del caso, aprendizajes esperados y criterios. Deja un registro de cierre, declara pendientes y explica a quién escalarías cualquier condición no resuelta.'}
                 ]
             }
         }
@@ -216,6 +263,7 @@ def create_app(test_config=None):
         compact=request.args.get('compact')=='1'
         with db() as con:
             u=user();rows=con.execute('SELECT * FROM courses ORDER BY id').fetchall() if u['role']=='teacher' or is_demo_student(u) else con.execute('SELECT c.* FROM courses c JOIN enrollments e ON e.course_id=c.id WHERE e.user_id=? ORDER BY c.id',(u['id'],)).fetchall()
+            city_locations=city_locations_for_courses(con.execute('SELECT id,title FROM courses ORDER BY id').fetchall())
             course_ids=[c['id'] for c in rows]
             modules_by_course={cid:[] for cid in course_ids}
             if course_ids:
@@ -228,9 +276,12 @@ def create_app(test_config=None):
                 for m in module_rows:modules_by_course[m['course_id']].append(m)
             result=[]
             for c in rows:
-                item=dict(c);item['modules']=[]
+                item=dict(c);item['modules']=[];item['city_location']=city_locations.get(item['id'])
                 for m in modules_by_course.get(c['id'],[]):
-                    mod=dict(m);mod.pop('course_id',None);s=states.get(m['id']) or empty();s.setdefault('oficio',{});s.setdefault('encargos',{});ae_count=int(mod.pop('ae_count') or 3);expected_steps=max(1,ae_count)*6;mod['completed']=[bool(s['context']),len(s['ae'])==expected_steps,len(s['cases'])==15 and bool(s['scene']),bool(s['exam']),s['closed']];mod['percent']=round(sum(mod['completed'])*20)
+                    mod=dict(m);mod.pop('course_id',None);s=states.get(m['id']) or empty();s.setdefault('oficio',{});s.setdefault('encargos',{});ae_count=int(mod.pop('ae_count') or 3);expected_steps=max(1,ae_count)*6;mod['completed']=[bool(s['context']),len(s['ae'])==expected_steps,len(s['cases'])==15 and bool(s['scene']),bool(s['exam']),s['closed']]
+                    city_completed=bool((s.get('city_experience') or {}).get('quiz',{}).get('completed_at') and (s.get('city_experience') or {}).get('mission',{}).get('completed_at'))
+                    mod['city_completed']=city_completed
+                    mod['percent']=round((sum(mod['completed'])+int(city_completed))*100/6)
                     exam=s.get('exam')
                     selection_max=(exam or {}).get('max_score') or {1:5,2:5,3:7,4:8}.get(m['position'],5)
                     mod['evaluation_scores']={
@@ -315,15 +366,19 @@ def create_app(test_config=None):
             experience=state.get('city_experience') or {}
             if not experience.get('started_at'):
                 now=datetime.now(timezone.utc).isoformat()
-                experience={'version':1,'started_at':now,'active_seconds':0,'quiz':{'answers':{},'attempts':{}},
-                            'mission':{'responses':{},'drafts':{}}}
+                experience={'version':2,'started_at':now,'active_seconds':0,'quiz':{'answers':{},'attempts':{},'active_seconds':0},
+                            'mission':{'responses':{},'drafts':{},'active_seconds':0}}
                 state['city_experience']=experience
-                trace(state,'city-experience-started',version=1)
+                trace(state,'city-experience-started',version=2)
                 putstate(con,mid,state)
+            experience.setdefault('quiz',{}).setdefault('active_seconds',0)
+            experience.setdefault('mission',{}).setdefault('active_seconds',0)
+            city_courses=con.execute('SELECT id,title FROM courses ORDER BY id').fetchall()
+            location=city_locations_for_courses(city_courses).get(m['course_id'])
             course=con.execute('SELECT title FROM courses WHERE id=?',(m['course_id'],)).fetchone()
         plan=city_experience_content(content,mid,session['uid'])
         for question in plan['quiz']:question.pop('explanation',None)
-        return jsonify(course_title=course['title'],plan=plan,state=experience)
+        return jsonify(course_title=course['title'],location=location,plan=plan,state=experience)
     @app.post('/api/modules/<int:mid>/city-experience')
     @require('student')
     def save_city_experience(mid):
@@ -340,8 +395,11 @@ def create_app(test_config=None):
             mission=experience.setdefault('mission',{'responses':{},'drafts':{}})
             if operation=='heartbeat':
                 seconds=payload.get('seconds')
-                if type(seconds)!=int or not 1<=seconds<=60:return fail('Intervalo de actividad inválido.')
+                stage=payload.get('stage')
+                if type(seconds)!=int or not 1<=seconds<=60 or stage not in ('quiz','mission'):return fail('Intervalo de actividad inválido.')
+                if stage=='mission' and len(quiz.get('answers',{}))!=len(plan['quiz']):return fail('Completa primero todos los desafíos del quiz.',403)
                 experience['active_seconds']=int(experience.get('active_seconds') or 0)+seconds
+                experience.setdefault(stage,{})['active_seconds']=int(experience[stage].get('active_seconds') or 0)+seconds
             elif operation=='quiz-answer':
                 index=payload.get('index');choice=payload.get('choice');answers=quiz.setdefault('answers',{})
                 if type(index)!=int or not 0<=index<len(plan['quiz']) or type(choice)!=int or choice not in range(len(plan['quiz'][index].get('options') or [])):
@@ -361,7 +419,7 @@ def create_app(test_config=None):
             elif operation in ('mission-draft','mission-submit'):
                 phase=payload.get('phase');phases=plan['mission']['phases']
                 phase_index=next((i for i,item in enumerate(phases) if item['id']==phase),-1)
-                if len(quiz.get('answers',{}))!=len(plan['quiz']):return fail('Completa primero los diez desafíos del quiz.',403)
+                if len(quiz.get('answers',{}))!=len(plan['quiz']):return fail('Completa primero todos los desafíos del quiz.',403)
                 if phase_index<0:return fail('Fase de misión inválida.')
                 responses=mission.setdefault('responses',{});drafts=mission.setdefault('drafts',{})
                 if phase_index>len(responses):return fail('Completa la fase anterior antes de continuar.',403)

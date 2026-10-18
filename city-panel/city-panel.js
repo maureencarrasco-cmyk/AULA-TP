@@ -33,10 +33,26 @@
     link.href='/api/city-experience';
     link.target='_blank';
     link.rel='noopener';
-    link.textContent='Quiz + misión laboral · 45 min';
+    link.textContent='Estación 4 · Quiz + Misiones Laborales · 90 min';
     card.append(link);
   }
-  function syncPanel() { syncMiningTile(); syncLearningLink(); }
+  function syncConstructionDistrict() {
+    const cards=[...document.querySelectorAll('.city-island-card')];
+    const card=cards.find(item=>item.textContent.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleUpperCase().includes('CONSTRUCCION'));
+    const action=card?.querySelector('.city-approach');
+    if(!action||action.dataset.cityDistrictNavigation)return;
+    action.dataset.cityDistrictNavigation='construction';
+    action.addEventListener('click',()=>setTimeout(()=>{
+      const section=document.querySelector('.city-specialty-section');
+      const select=section?.querySelector('.city-district-select');
+      if(!section||!select)return;
+      const option=[...select.options].find(item=>item.textContent.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase()==='construccion');
+      if(!option)return;
+      section.open=true;select.value=option.value;select.dispatchEvent(new Event('change',{bubbles:true}));
+      section.scrollIntoView({behavior:'smooth',block:'center'});
+    },0));
+  }
+  function syncPanel() { syncMiningTile(); syncLearningLink(); syncConstructionDistrict(); }
   const observer=new MutationObserver(syncPanel);
   observer.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['disabled']});
   syncPanel();

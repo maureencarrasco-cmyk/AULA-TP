@@ -2,6 +2,7 @@
 const $=s=>document.querySelector(s), esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function isDemoStudent(){return auth?.user?.role==='student'&&auth.user.username==='estudiante'}
 const BRAND_LOGO='/static/logo-aula-tp-oficial.png?v=2';
+function stationDisplayNumber(n){return Number(n)>=4?Number(n)+1:Number(n)}
 function brandImg(cls='logo'){return `<img class="brand-logo ${esc(cls)}" src="${BRAND_LOGO}" alt="Aula TP Chile · Formación técnica con sentido">`}
 function floatingBackButton(){return `<button class="floating-back-button" type="button" data-dashboard-back aria-label="Volver a la pantalla anterior">${icon('arrow')}<span>Atrás</span></button>`}
 const names=['Contextualización','Aprendizajes esperados','Situación integradora','Evaluación final','Retroalimentación y cierre'];
@@ -261,10 +262,10 @@ function courseList(){
   level:course.level||'III medio',modules:course.modules?.length||0,available:!!course.modules?.some(module=>module.published)
  }));
  const specialties=[...realCourses.filter(item=>item.available),...realCourses.filter(item=>!item.available)];
- const courseCards=specialties.map(item=>`<article class="dash-course-card tone-${item.tone}${item.href?' is-available':' is-building'}"${item.href?` data-course-href="${item.href}" role="link" tabindex="0" aria-label="Abrir ${esc(item.name)}"`:''}><div class="dash-course-photo"><img src="${item.image}" loading="lazy" decoding="async" width="480" height="300" alt="Contexto profesional de ${esc(item.area)}">${typeof courseArtworkCredit==='function'?courseArtworkCredit(item.photo):''}<span>${esc(item.level||'III medio')}</span><button type="button" data-dashboard-message="${item.available?'Opciones del curso disponibles dentro de la ruta.':'Esta especialidad está en fabricación.'}" aria-label="Opciones de ${esc(item.name)}">•••</button></div><div class="dash-course-body"><small>${item.href?esc(item.area):'EN FABRICACIÓN'}</small><h3>${esc(item.name)}</h3><p>${item.href?`${item.modules} módulos | 5 estaciones`:'Contenido curricular en preparación'}</p><div class="progress-label"><span>${item.href?'Tu progreso':'Estado'}</span><b>${item.href?`${item.pct}%`:'En preparación'}</b></div><progress value="${item.href?item.pct:0}" max="100"></progress>${item.href?`<a class="dash-course-action" href="${item.href}">${esc(item.action)} ${icon('arrow')}</a>`:`<button class="dash-course-action" type="button" data-dashboard-message="${esc(unavailable)}">En fabricación</button>`}</div></article>`).join('');
+ const courseCards=specialties.map(item=>`<article class="dash-course-card tone-${item.tone}${item.href?' is-available':' is-building'}"${item.href?` data-course-href="${item.href}" role="link" tabindex="0" aria-label="Abrir ${esc(item.name)}"`:''}><div class="dash-course-photo"><img src="${item.image}" loading="lazy" decoding="async" width="480" height="300" alt="Contexto profesional de ${esc(item.area)}">${typeof courseArtworkCredit==='function'?courseArtworkCredit(item.photo):''}<span>${esc(item.level||'III medio')}</span><button type="button" data-dashboard-message="${item.available?'Opciones del curso disponibles dentro de la ruta.':'Esta especialidad está en fabricación.'}" aria-label="Opciones de ${esc(item.name)}">•••</button></div><div class="dash-course-body"><small>${item.href?esc(item.area):'EN FABRICACIÓN'}</small><h3>${esc(item.name)}</h3><p>${item.href?`${item.modules} módulos | 6 estaciones`:'Contenido curricular en preparación'}</p><div class="progress-label"><span>${item.href?'Tu progreso':'Estado'}</span><b>${item.href?`${item.pct}%`:'En preparación'}</b></div><progress value="${item.href?item.pct:0}" max="100"></progress>${item.href?`<a class="dash-course-action" href="${item.href}">${esc(item.action)} ${icon('arrow')}</a>`:`<button class="dash-course-action" type="button" data-dashboard-message="${esc(unavailable)}">En fabricación</button>`}</div></article>`).join('');
  const sideNav=dashboardSideNav('',progress);
  const nextCourse=specialties.find(item=>item.href&&item.pct<100)||specialties.find(item=>item.href);
- shell(`<section class="dashboard-reference" aria-label="Tu espacio de aprendizaje"><aside class="dash-sidebar">${brandImg('dash-logo')}<p>Formación técnica<br><b>con sentido</b></p><nav aria-label="Navegación principal">${sideNav}</nav><div class="dash-sidebar-journey"><img src="/static/sidebar-learning-journey.webp?v=20261011" width="580" height="974" loading="lazy" decoding="async" alt="Aprender también es un viaje. Chile se construye con más oportunidades."></div></aside><div class="dash-main">${dashboardCourseHero(auth.user,nextCourse?.href||'#courses')}<ol class="dash-journey" aria-label="Recorrido de aprendizaje"><li><span>1</span>${icon('home')}<b>Elige tu curso</b><small>Explora las especialidades</small></li><li><span>2</span>${icon('book')}<b>Recorre los módulos</b><small>Conoce tus aprendizajes</small></li><li><span>3</span>${icon('cube')}<b>Completa 5 estaciones</b><small>Contextualiza, practica y evalúa</small></li><li><span>4</span>${icon('check')}<b>Cierra con evidencia</b><small>Demuestra lo aprendido</small></li></ol><section class="dash-courses"><header><h2>Mis cursos de especialidad</h2><div><button class="dash-scroll dash-scroll-prev" type="button" aria-label="Cursos anteriores">‹</button><button class="dash-scroll dash-scroll-next" type="button" aria-label="Cursos siguientes">›</button></div></header><div class="dash-course-track">${courseCards}</div></section><section class="dash-widgets"><article>${icon('chart')}<div><h3>Mi avance general</h3><p>Revisa tu progreso en todos tus cursos.</p><progress value="${progress}" max="100"></progress></div><b>${progress}%</b><a href="#progress">Ver reporte completo ${icon('arrow')}</a></article><article>${icon('file')}<div><h3>Tareas y actividades</h3><p>Actividades pendientes y próximas fechas.</p></div><b>3</b><button type="button" data-dashboard-message="Las tareas activas se muestran dentro de cada módulo.">Ver mis tareas ${icon('arrow')}</button></article><article>${icon('bulb')}<div><h3>Recursos de apoyo</h3><p>Guías, videos, simuladores y más.</p></div><button type="button" data-dashboard-message="Los recursos se abren dentro de cada módulo.">Explorar recursos ${icon('arrow')}</button></article></section><footer class="dash-footer"><span>${icon('bulb')} Tecnología que potencia personas</span><b>AULA TP CHILE</b><nav><a href="#courses">Sobre Aula TP</a><a href="#courses">Soporte</a><a href="#courses">Términos de uso</a><a href="#courses">Privacidad</a></nav></footer></div></section>`,'Tu espacio de aprendizaje','Aprender haciendo');
+ shell(`<section class="dashboard-reference" aria-label="Tu espacio de aprendizaje"><aside class="dash-sidebar">${brandImg('dash-logo')}<p>Formación técnica<br><b>con sentido</b></p><nav aria-label="Navegación principal">${sideNav}</nav><div class="dash-sidebar-journey"><img src="/static/sidebar-learning-journey.webp?v=20261011" width="580" height="974" loading="lazy" decoding="async" alt="Aprender también es un viaje. Chile se construye con más oportunidades."></div></aside><div class="dash-main">${dashboardCourseHero(auth.user,nextCourse?.href||'#courses')}<ol class="dash-journey" aria-label="Recorrido de aprendizaje"><li><span>1</span>${icon('home')}<b>Elige tu curso</b><small>Explora las especialidades</small></li><li><span>2</span>${icon('book')}<b>Recorre los módulos</b><small>Conoce tus aprendizajes</small></li><li><span>3</span>${icon('cube')}<b>Completa 6 estaciones</b><small>Contextualiza, practica y evalúa</small></li><li><span>4</span>${icon('check')}<b>Cierra con evidencia</b><small>Demuestra lo aprendido</small></li></ol><section class="dash-courses"><header><h2>Mis cursos de especialidad</h2><div><button class="dash-scroll dash-scroll-prev" type="button" aria-label="Cursos anteriores">‹</button><button class="dash-scroll dash-scroll-next" type="button" aria-label="Cursos siguientes">›</button></div></header><div class="dash-course-track">${courseCards}</div></section><section class="dash-widgets"><article>${icon('chart')}<div><h3>Mi avance general</h3><p>Revisa tu progreso en todos tus cursos.</p><progress value="${progress}" max="100"></progress></div><b>${progress}%</b><a href="#progress">Ver reporte completo ${icon('arrow')}</a></article><article>${icon('file')}<div><h3>Tareas y actividades</h3><p>Actividades pendientes y próximas fechas.</p></div><b>3</b><button type="button" data-dashboard-message="Las tareas activas se muestran dentro de cada módulo.">Ver mis tareas ${icon('arrow')}</button></article><article>${icon('bulb')}<div><h3>Recursos de apoyo</h3><p>Guías, videos, simuladores y más.</p></div><button type="button" data-dashboard-message="Los recursos se abren dentro de cada módulo.">Explorar recursos ${icon('arrow')}</button></article></section><footer class="dash-footer"><span>${icon('bulb')} Tecnología que potencia personas</span><b>AULA TP CHILE</b><nav><a href="#courses">Sobre Aula TP</a><a href="#courses">Soporte</a><a href="#courses">Términos de uso</a><a href="#courses">Privacidad</a></nav></div></section>`,'Tu espacio de aprendizaje','Aprender haciendo');
  const catalogHeading=$('.dash-courses h2');
  if(catalogHeading)catalogHeading.textContent=`Catálogo de ${specialties.length} cursos`;
  $('.dash-sidebar')?.insertAdjacentHTML('afterbegin',dashboardExitButton());
@@ -344,24 +345,26 @@ function stationCta(m){
  const st=stationStateLabel(m);
  return `<span class="lr-cta lr-state"><span class="lr-cta-ico" aria-hidden="true">${workIco(st.ico)}</span><span class="lr-cta-label">${esc(st.text)}</span></span>`;
 }
-function learningRoute({currentN=1,completed=[],moduleId=null,course=null,interactive=true,title='Ruta de las 5 estaciones del módulo',lead='Diseño + tecnología + pedagogía: explora cada estación, conecta teoría con el oficio y haz visible tu aprendizaje.'}={}){
+function learningRoute({currentN=1,completed=[],moduleId=null,course=null,interactive=true,title='Ruta de las 6 estaciones del módulo',lead='Diseño + tecnología + pedagogía: explora cada estación, conecta teoría con el oficio y haz visible tu aprendizaje.'}={}){
  const displayStation=n=>n>=4?n+1:n;
  const shownCurrent=displayStation(currentN);
  const done=names.map((_,i)=>!!completed[i]);
  const doneCount=done.filter(Boolean).length;
- const completionPercent=Math.round(doneCount/done.length*100);
+ const cityCompleted=!!current?.state?.city_experience?.mission?.completed_at;
+ const completedTotal=doneCount+Number(cityCompleted);
+ const completionPercent=Math.round(completedTotal/6*100);
  const reached=Math.max(currentN,doneCount||1);
- const fill=Math.round(((Math.min(5,reached)-1)/4)*100);
+ const fill=Math.round(((Math.min(6,Math.max(stationDisplayNumber(reached),completedTotal||1))-1)/5)*100);
  const mid=moduleId||current?.id||'';
  const models=names.map((_,i)=>stationModel(i,currentN,done));
- const live=`Estás en la estación ${shownCurrent} de 6. ${doneCount} de 5 estaciones habilitadas completadas.`;
+ const live=`Estás en la estación ${shownCurrent} de 6. ${completedTotal} de 6 estaciones completadas.`;
  const currentModel=models[currentN-1];
  const currentAction=stationActions[currentN-1];
  return `<section class="panel route-panel lr" aria-label="${esc(title)}. ${esc(live)}">
   <header class="lr-head lr-head-compact" aria-label="Ruta de aprendizaje de las 6 estaciones">
    <span class="lr-head-compact-icon" aria-hidden="true">${workIco('pin')}</span>
    <div class="lr-head-compact-copy"><small>MI RUTA PROFESIONAL</small><h2>Estación ${shownCurrent} de 6 · <span>${esc(currentModel.stationName)}</span></h2><p>${esc(descriptions[currentN-1])}</p></div>
-   <div class="lr-progress"><div class="lr-progress-heading"><span>Avance de tu ruta</span><strong>${completionPercent}%</strong></div><div class="lr-completion-bar" role="progressbar" aria-label="Estaciones habilitadas completadas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${completionPercent}" aria-valuetext="${doneCount} de 5 estaciones habilitadas completadas" style="--completion:${completionPercent}%"><span class="lr-completion-fill"></span></div><p><span class="lr-progress-flag" aria-hidden="true">${icon('flag')}</span><span><b>${doneCount} de 5 estaciones</b><br>habilitadas completadas</span></p><small>${icon('lock')} Misión laboral · en construcción</small></div>
+   <div class="lr-progress"><div class="lr-progress-heading"><span>Avance de tu ruta</span><strong>${completionPercent}%</strong></div><div class="lr-completion-bar" role="progressbar" aria-label="Estaciones completadas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${completionPercent}" aria-valuetext="${completedTotal} de 6 estaciones completadas" style="--completion:${completionPercent}%"><span class="lr-completion-fill"></span></div><p><span class="lr-progress-flag" aria-hidden="true">${icon('flag')}</span><span><b>${completedTotal} de 6 estaciones</b><br>completadas</span></p><small>${icon('lock')} Estación 4 · Quiz y Misiones Laborales</small></div>
   </header>
   <ol class="lr-track" style="--lr-fill:${fill}%" role="list">${models.map((m,i)=>{
    const st=stationStateLabel(m);
@@ -376,7 +379,8 @@ function learningRoute({currentN=1,completed=[],moduleId=null,course=null,intera
     :`class="lr-card station s${m.stationNumber}" ${m.isCurrent?'aria-current="step"':''} aria-label="${esc(label)}"`;
    const Tag=interactive?'button':'div';
    const routeImage=typeof stationRouteArt==='function'?stationRouteArt(m.stationNumber,course):`/static/themes/route/station-${m.stationNumber}.webp?v=1`;
-   const mission=i===3?`<li class="lr-stop mission-laboral-stop is-locked" data-station-name="Misión laboral"><span class="lr-node" aria-hidden="true"><span class="lr-num">4</span></span><button type="button" class="lr-card station mission-laboral" disabled aria-label="Estación 4 de 6. Misión laboral. En construcción. Estación bloqueada"><span class="mission-scene" aria-hidden="true"><img src="/static/themes/workshop.webp" alt=""><img class="mission-controller" src="/static/mission-game-controller.png?v=1" alt=""><span class="mission-level">MISIÓN LABORAL</span><span class="mission-emblem">${icon('flag')}</span></span><span class="lr-body"><small class="mission-status">${icon('lock')} EN CONSTRUCCIÓN</small><b class="lr-name">Misión laboral</b><span class="mission-objective">Desafío de oficio</span><small class="lr-purpose">Una misión profesional para poner en juego tus aprendizajes.</small><span class="mission-checkpoints"><span>${icon('search')} Explora</span><span>${icon('check')} Resuelve</span><span>${icon('flag')} Completa</span></span><span class="mission-reward">${icon('lock')} Insignia de misión · bloqueada</span></span></button></li>`:'';
+   const cityCourseId=course?.id||current?.course_id||'';
+   const mission=i===3?`<li class="lr-stop mission-laboral-stop is-available" data-station-name="Misión laboral"><span class="lr-node" aria-hidden="true"><span class="lr-num">4</span>${cityCompleted?`<span class="lr-check" aria-hidden="true">${icon('check')}</span>`:''}</span><a class="lr-card station mission-laboral" href="/api/city-experience?course=${encodeURIComponent(cityCourseId)}&module=${encodeURIComponent(mid)}" target="_blank" rel="noopener" aria-label="Estación 4 de 6. Quiz y Misiones Laborales del módulo. 90 minutos"><span class="mission-scene" aria-hidden="true"><img src="/static/themes/workshop.webp" alt=""><img class="mission-controller" src="/static/mission-game-controller.png?v=1" alt=""><span class="mission-level">QUIZ + MISIONES</span><span class="mission-emblem">${icon('flag')}</span></span><span class="lr-body"><small class="mission-status">${icon('flag')} ${cityCompleted?'COMPLETADA':'DISPONIBLE'} · 90 MIN</small><b class="lr-name">Misión laboral</b><span class="mission-objective">45 min de quiz · 45 min de misiones</span><small class="lr-purpose">Elige el distrito, llega al espacio de tu especialidad y aplica los aprendizajes de este módulo.</small><span class="mission-checkpoints"><span>${icon('search')} Explora</span><span>${icon('check')} Resuelve</span><span>${icon('flag')} Completa</span></span><span class="mission-reward">${icon('arrow')} Abrir experiencia del módulo</span></span></a></li>`:'';
    return `${mission}<li class="${cls}" data-station-number="${m.stationNumber}" data-station-status="${m.stationStatus}" data-station-name="${esc(m.stationName)}" data-completed="${m.isCompleted}" data-available="${m.isAvailable}" data-locked="${m.isLocked}" data-current="${m.isCurrent}">
     <span class="lr-node" aria-hidden="true"><span class="lr-num">${displayStation(m.stationNumber)}</span>${badge}</span>
     <${Tag} ${attrs}><span class="lr-card-photo" aria-hidden="true"><img src="${esc(routeImage)}" alt="" loading="${m.isCurrent?'eager':'lazy'}" decoding="async"><span class="lr-photo-shade"></span><span class="lr-photo-caption">Estación ${displayStation(m.stationNumber)}</span></span><span class="lr-body"><span class="lr-stage-icon" aria-hidden="true">${workIco(stationIcons[i])}</span><small class="lr-action">${stationActions[i]}</small><b class="lr-name">${stationTitleMarkup(m.stationName)}</b><small class="lr-purpose">${esc(descriptions[i])}</small>${hint}${stationCta(m)}</span></${Tag}>
@@ -386,15 +390,15 @@ function learningRoute({currentN=1,completed=[],moduleId=null,course=null,intera
 }
 
 
-function stationMiniRoute(completed=[]){
+function stationMiniRoute(completed=[],cityCompleted=false){
  const done=names.map((_,i)=>!!completed[i]);
- const doneCount=done.filter(Boolean).length;
+ const doneCount=done.filter(Boolean).length+Number(cityCompleted);
  const open=done.findIndex(ok=>!ok);
  const currentN=open<0?(done.every(Boolean)?5:1):open+1;
- const fill=Math.round(((Math.max(currentN,doneCount||1)-1)/4)*100);
- return `<ol class="lr-mini" style="--lr-fill:${fill}%" aria-label="${doneCount} de 5 estaciones completadas">${names.map((name,j)=>{
-  const m=stationModel(j,currentN,done);
-  return `<li class="lr-mini-stop is-${m.stationStatus} is-s${j+1}" title="${esc(name)}: ${stationStateLabel(m).text.toLowerCase()}"><span>${j+1}</span></li>`;
+ const fill=Math.round(Math.min(doneCount,6)/6*100);
+ const items=[...names.slice(0,3).map((name,j)=>({name,number:j+1,status:stationModel(j,currentN,done).stationStatus})),{name:'Misión laboral',number:4,status:cityCompleted?'completed':'next'},...names.slice(3).map((name,j)=>({name,number:j+5,status:stationModel(j+3,currentN,done).stationStatus}))];
+ return `<ol class="lr-mini" style="--lr-fill:${fill}%" aria-label="${doneCount} de 6 estaciones completadas">${items.map(item=>{
+  return `<li class="lr-mini-stop is-${item.status} is-s${item.number}" title="${esc(item.name)}: ${item.status==='completed'?'completada':item.status==='next'?'disponible':'pendiente'}"><span>${item.number}</span></li>`;
  }).join('')}</ol>`;
 }
 function courseMap(id){
@@ -404,7 +408,7 @@ function courseMap(id){
  const finished=total>0&&done===total;
  const here=currentModuleIndex(c.modules);
  const trail=c.modules.map((_,i)=>String(i+1).padStart(2,'0')).join(' → ');
- const chips=[c.specialty||'Especialidad TP',c.level,`${total} módulos`,'5 estaciones por módulo'];
+ const chips=[c.specialty||'Especialidad TP',c.level,`${total} módulos`,'6 estaciones por módulo'];
  if(c.planning)chips.push(`${c.planning.course_hp} HP oficiales · 30% Aula TP = ${numberDisplay(c.planning.course_aula_hp||c.planning.course_sim_hp)} HP`);
  chips.push(`${pct}% de avance`);
  shell(`<section class="journey-page">${aulaTPPageHero({
@@ -420,13 +424,13 @@ function courseMap(id){
   image:heroPhoto(c),
   kicker:'Tu camino hacia nuevas habilidades',
   orientLabel:'Ruta de la especialidad',
-  orient:`${total} módulos · 5 estaciones por módulo`,
+  orient:`${total} módulos · 6 estaciones por módulo`,
   breadcrumb:[{label:'Inicio',href:'#courses'},{label:c.title,current:true}],
   meta:`<div class="atp-hero-meta">${chips.map(t=>`<span>${esc(t)}</span>`).join('')}</div>`,
   spark:screenSparks.course
  })}<section class="course-modules-heading" id="course-modules"><h2>Módulos de la especialidad</h2><div role="group" aria-label="Vista de módulos"><button type="button" data-course-view="grid" aria-pressed="true">${icon('cube')} Vista módulos</button><button type="button" data-course-view="list" aria-pressed="false">${icon('file')} Vista lista</button></div></section><div class="page-with-support"><div class="page-with-support-main"><div class="journey-landscape">
  <p class="journey-bridge"><span class="eyebrow">TU RECORRIDO POR LA ESPECIALIDAD</span><small>Módulo ${trail} → Meta</small></p>
- <ol class="journey-stops" style="--mod-fill:${total>1?Math.round((done/Math.max(1,total-1))*100):finished?100:0}%" aria-label="Recorrido por la especialidad">${c.modules.map((m,i)=>`<li class="journey-stop color-${i%4} ${m.percent===100?'is-complete':''} ${i===here?'is-here':''}"><div class="journey-marker" aria-label="Módulo ${i+1}">${m.percent===100?icon('check'):String(i+1).padStart(2,'0')}</div><article class="journey-card"><div class="journey-photo"><img src="${moduleStopArt(c,i)}" alt="Escenario profesional del módulo ${i+1}: ${esc(m.title)}" width="560" height="336" loading="${i<4?'eager':'lazy'}" decoding="async">${typeof courseArtworkCredit==='function'&&typeof moduleArtworkPhoto==='function'?courseArtworkCredit(moduleArtworkPhoto(c,i)):''}${i===here&&!finished?`<span class="here-chip">${workIco('pin')} Estás aquí</span>`:''}</div><div class="journey-card-body"><div class="journey-card-top"><span class="journey-symbol">${icon(['file','search','link','tool'][i%4])}</span><span class="journey-state">${m.percent===100?'✓ Completado':m.percent?'● En curso':m.published?'Disponible':'En preparación'}</span></div><span class="eyebrow">MÓDULO ${String(i+1).padStart(2,'0')}${i===total-1?' · TRAMO FINAL':''}</span><h2>${esc(m.title)}</h2>${stationMiniRoute(m.completed)}<div class="progress-label"><span>${m.completed.filter(Boolean).length} de 5 estaciones</span><strong>${m.percent}%</strong></div>${m.encargos_count?`<p class="journey-encargos">${m.encargos_count} encargos de oficio · ${m.encargos_hours} h</p>`:''}<progress value="${m.percent}" max="100" aria-label="Progreso del módulo ${i+1}"></progress>${m.published||auth.user.role==='teacher'?`<a class="journey-button" href="${m.published?'#module/'+m.id:'#editor/'+m.id}">${m.published?(m.percent===100?'Revisar módulo':m.percent?'Continuar mi recorrido':'Comenzar módulo'):'Preparar contenido'} ${icon('arrow')}</a>`:'<button class="journey-button" disabled>Próximamente</button>'}</div></article></li>`).join('')}</ol>
+  <ol class="journey-stops" style="--mod-fill:${total>1?Math.round((done/Math.max(1,total-1))*100):finished?100:0}%" aria-label="Recorrido por la especialidad">${c.modules.map((m,i)=>`<li class="journey-stop color-${i%4} ${m.percent===100?'is-complete':''} ${i===here?'is-here':''}"><div class="journey-marker" aria-label="Módulo ${i+1}">${m.percent===100?icon('check'):String(i+1).padStart(2,'0')}</div><article class="journey-card"><div class="journey-photo"><img src="${moduleStopArt(c,i)}" alt="Escenario profesional del módulo ${i+1}: ${esc(m.title)}" width="560" height="336" loading="${i<4?'eager':'lazy'}" decoding="async">${typeof courseArtworkCredit==='function'&&typeof moduleArtworkPhoto==='function'?courseArtworkCredit(moduleArtworkPhoto(c,i)):''}${i===here&&!finished?`<span class="here-chip">${workIco('pin')} Estás aquí</span>`:''}</div><div class="journey-card-body"><div class="journey-card-top"><span class="journey-symbol">${icon(['file','search','link','tool'][i%4])}</span><span class="journey-state">${m.percent===100?'✓ Completado':m.percent?'● En curso':m.published?'Disponible':'En preparación'}</span></div><span class="eyebrow">MÓDULO ${String(i+1).padStart(2,'0')}${i===total-1?' · TRAMO FINAL':''}</span><h2>${esc(m.title)}</h2>${stationMiniRoute(m.completed,m.city_completed)}<div class="progress-label"><span>${m.completed.filter(Boolean).length+Number(m.city_completed)} de 6 estaciones</span><strong>${m.percent}%</strong></div>${m.encargos_count?`<p class="journey-encargos">${m.encargos_count} encargos de oficio · ${m.encargos_hours} h</p>`:''}<progress value="${m.percent}" max="100" aria-label="Progreso del módulo ${i+1}"></progress>${m.published||auth.user.role==='teacher'?`<a class="journey-button" href="${m.published?'#module/'+m.id:'#editor/'+m.id}">${m.published?(m.percent===100?'Revisar módulo':m.percent?'Continuar mi recorrido':'Comenzar módulo'):'Preparar contenido'} ${icon('arrow')}</a>`:'<button class="journey-button" disabled>Próximamente</button>'}</div></article></li>`).join('')}</ol>
  <div class="journey-finish ${finished?'reached':''}"><div class="finish-visual"><span class="finish-flag" aria-hidden="true">${icon('flag')}</span></div><div><span class="eyebrow">${finished?'META ALCANZADA':'TU META · AL FINAL DEL RECORRIDO'}</span><h2>${finished?'¡Completaste tu ruta!':'Llegar, integrar y seguir creciendo'}</h2><p>${finished?'Has completado las cinco estaciones de cada módulo. Revisa la retroalimentación docente para conocer tus resultados.':`Completa el módulo ${total} y el cierre de todos los módulos para alcanzar la meta.`}</p></div><strong>${done}<span> / ${total}<small>módulos completos</small></span></strong></div></div> <div class="journey-bottom"><section class="panel journey-overall"><span class="circle">${icon('chart')}</span><div><h2>Cada paso cuenta</h2><p>Tu progreso general</p><progress value="${pct}" max="100" aria-label="Progreso general del curso"></progress></div><strong>${pct}%</strong></section></div></div></div></section>`);
  const page=document.querySelector('.journey-page');
  page.querySelectorAll('[data-course-scroll]').forEach(button=>button.addEventListener('click',()=>page.querySelector(button.dataset.courseScroll)?.scrollIntoView({behavior:'smooth',block:'start'})));
@@ -855,13 +859,16 @@ function avanceStrip(n){
 }
 function stationUnlocked(n){return auth.user.role==='teacher'||isDemoStudent()||n===1||current.completed.slice(0,n-1).every(Boolean)}
 function stationHeaderProgress(n){
- const order=[1,2,3,null,4,5], shown=order.indexOf(n)+1;
+ const order=[1,2,3,'city',4,5], shown=order.indexOf(n)+1;
  const labels=[names[0],names[1],names[2],'Misión laboral',names[3],names[4]];
  return `<nav class="atp-hero-sign station-header-progress" aria-label="Recorrido de estaciones">${workIco(stationIcons[n-1]||'flag')}<span class="station-header-position">Estación ${shown} de 6</span><ol>${order.map((internal,i)=>{
-  const active=internal===n, available=internal!==null&&stationUnlocked(internal);
-  const label=`Estación ${i+1}: ${labels[i]}${internal===null?'. En construcción':available?'':'. Completa las estaciones anteriores'}`;
+  const mission=internal==='city';
+  const active=!mission&&internal===n, available=mission?stationUnlocked(4):stationUnlocked(internal);
+  const label=`Estación ${i+1}: ${labels[i]}${available?'':'. Completa las estaciones anteriores'}`;
   const attrs=`class="station-header-node stage-${i+1}${active?' is-current':''}" aria-label="${esc(label)}" title="${esc(label)}"${active?' aria-current="step"':''}`;
-  return `<li>${available?`<a ${attrs} href="#module/${current.id}/${internal}">${i+1}</a>`:`<span ${attrs} aria-disabled="true">${i+1}</span>`}</li>`;
+  const href=mission?`/api/city-experience?course=${encodeURIComponent(current?.course_id||'')}&module=${encodeURIComponent(current?.id||'')}`:`#module/${current.id}/${internal}`;
+  const target=mission?' target="_blank" rel="noopener"':'';
+  return `<li>${available?`<a ${attrs} href="${href}"${target}>${i+1}</a>`:`<span ${attrs} aria-disabled="true">${i+1}</span>`}</li>`;
  }).join('')}</ol></nav>`;
 }
 function aulaTPPageHero(opts={}){
@@ -884,7 +891,8 @@ function aulaTPPageHero(opts={}){
  const crumb=opts.breadcrumb||[];
  const ico=stationIcons[Math.max(0,n-1)]||'flag';
  const goals=opts.goals||[];
- const badgeNote=opts.badgeNote||(n?`Estación ${n} de 5`:'');
+ const shownStation=stationDisplayNumber(n);
+ const badgeNote=opts.badgeNote||(n?`Estación ${shownStation} de 6`:'');
  const spark=opts.spark||(n?screenSparks[n]:screenSparks.courses);
  const account=opts.showAccount===false?'':`<div class="atp-hero-account"><span>${esc(auth.user.name)}<small>${auth.user.role==='teacher'?'Docente':'Estudiante'}</small></span>${action('logout','Salir','plain')}</div>`;
  const sideNav=opts.courseOverview?`<nav class="course-overview-side" aria-label="Navegación del curso"><a href="#courses">${icon('home')} Inicio</a><span aria-current="page">${icon('book')}<b>${esc(course.title)}</b></span><button type="button" data-course-scroll="#course-modules">${icon('file')} Módulos</button><a href="#progress">${icon('chart')} Mis avances</a></nav>`:n>=1?`<nav class="atp-hero-side" aria-label="Ubicación">${crumb.map((c,i)=>{
@@ -900,8 +908,9 @@ function aulaTPPageHero(opts={}){
  }).join('<span aria-hidden="true">›</span>');
  const sign=n>=1?stationHeaderProgress(n):'';
  const goalHtml=goals.length?`<ul class="atp-hero-goals">${goals.map(([gi,gl])=>`<li>${workIco(gi)}<span>${esc(gl)}</span></li>`).join('')}</ul>`:'';
- const completedCount=(current?.completed||[]).filter(Boolean).length;
- const sideProgress=n>=1?`<div class="atp-hero-progress"><b>Tu progreso en el módulo</b><progress value="${completedCount}" max="5"></progress><span>${completedCount} de 5 estaciones</span></div>`:'';
+ const cityExperienceDone=!!(current?.state?.city_experience?.quiz?.completed_at&&current?.state?.city_experience?.mission?.completed_at);
+ const completedCount=(current?.completed||[]).filter(Boolean).length+Number(cityExperienceDone);
+ const sideProgress=n>=1?`<div class="atp-hero-progress"><b>Tu progreso en el módulo</b><progress value="${completedCount}" max="6"></progress><span>${completedCount} de 6 estaciones</span></div>`:'';
  const quote=n?`<blockquote class="atp-hero-quote">${workIco('bulb')}<span>${esc(spark)}</span></blockquote>`:'';
  const overview=opts.courseOverview?`<ol class="course-overview-path" aria-label="Tu recorrido profesional">${[
   ['search','Explora','Conoce la situación profesional.'],['file','Aplica','Realiza actividades y toma decisiones.'],['chart','Analiza','Revisa tus resultados y evidencia tu aprendizaje.'],['monitor','Practica','Entrena en entornos simulados.'],['star','Demuestra','Desarrolla tus competencias para el mundo laboral.']
@@ -925,7 +934,7 @@ function aulaTPPageHero(opts={}){
    <span class="atp-hero-fade" aria-hidden="true"></span>
    ${credit}
    <aside class="atp-hero-motto atp-spark">${sparkLeaf()}<em>${esc(spark)}</em></aside>
-   ${showBadge?`<div class="atp-hero-badge">${workIco(ico)}<b>Estación ${n} de 5</b><small>${esc(opts.badgeName||names[n-1]||badgeNote)}</small></div>`:''}
+   ${showBadge?`<div class="atp-hero-badge">${workIco(ico)}<b>Estación ${shownStation} de 6</b><small>${esc(opts.badgeName||names[n-1]||badgeNote)}</small></div>`:''}
   </div>
   ${overview}
  </header>`;
@@ -957,7 +966,7 @@ function gpsModuleShort(){
 }
 function aeLabel(a){return (a&& (a.short_title||a.title))||''}
 function gpsStation(n){
- return `Estación ${n} de 5 · ${names[n-1]||''}`;
+ return `Estación ${stationDisplayNumber(n)} de 6 · ${names[n-1]||''}`;
 }
 function stationHero(n){
  const course=courses.find(c=>c.id===current.course_id);
@@ -1000,7 +1009,7 @@ const stationActionGuides=[
 ];
 function stationLearningGuide(n){
  const guide=stationActionGuides[n-1];
- const items=[['pin','Dónde estás',`Estación ${n} de 5`],['book','Qué aprenderás',guide.learn],['tool','Qué harás',guide.do],['file','Qué entregarás',guide.deliver]];
+ const items=[['pin','Dónde estás',`Estación ${stationDisplayNumber(n)} de 6`],['book','Qué aprenderás',guide.learn],['tool','Qué harás',guide.do],['file','Qué entregarás',guide.deliver]];
  return `<section class="learning-compass s${n}" data-support-level="${n}" aria-label="Orientación para esta estación"><div class="learning-compass-head"><span>${icon('pin')}</span><div><small>GUÍA DE ACCIÓN</small><b>Tu ruta en esta pantalla</b></div><div class="learning-capacity"><small>ESTÁS DESARROLLANDO</small><b>${esc(guide.capacity)}</b></div><em>Siguiente: ${esc(guide.next)}</em></div><ol>${items.map(([ico,label,value],i)=>`<li><span class="learning-compass-number">${i+1}</span>${icon(ico)}<div><small>${esc(label)}</small><b>${esc(value)}</b></div></li>`).join('')}</ol></section>`;
 }
 function stationActivityPrimer(n){

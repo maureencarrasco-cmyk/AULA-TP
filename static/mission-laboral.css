@@ -39,3 +39,7 @@ body[data-screen="module"] .lr .lr-track:has(.mission-laboral-stop)>.lr-stop:not
 body[data-screen="module"] .lr .lr-track:has(.mission-laboral-stop)>.lr-stop:not(:last-child)::before{content:'↓';left:-29px;top:calc(100% + 2px);width:28px;height:28px;font-size:20px;color:#345a69;background:#f6faff}
 body[data-screen="module"] .lr .lr-track:has(.mission-laboral-stop) .lr-card{width:100%!important;min-height:220px!important}
 }
+.lr .mission-laboral-stop .mission-laboral{opacity:1!important;cursor:pointer!important;border:2px solid #f0ab3f!important;background:linear-gradient(145deg,#fffaf0,#fff)!important;color:#183f54!important;min-height:300px!important;text-decoration:none!important}
+.lr .mission-laboral-stop .mission-laboral:hover,.lr .mission-laboral-stop .mission-laboral:focus-visible{border-color:#e5792d!important;box-shadow:0 0 0 4px #ffe0b8,0 8px 22px #d57a2b26!important;transform:translateY(-2px)}
+.lr .mission-laboral-stop .mission-status{color:#087f73}
+.lr .mission-laboral-stop .mission-reward{color:#b14c13;border-color:#f4d4b8}

@@ -24,6 +24,46 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual(len(courses.json),45)
   last_published=next(module for module in courses.json[-1]['modules'] if module['published'])
   self.assertEqual(visitor.get('/api/modules/'+str(last_published['id'])).status_code,200)
+ def test_city_experience_covers_all_modules_with_two_independent_45_minute_stages(self):
+  courses=self.s.get('/api/courses?compact=1').json
+  self.assertEqual(len(courses),45)
+  self.assertEqual(sum(len(course['modules']) for course in courses),451)
+  self.assertEqual({course['city_location']['district'] for course in courses},set(('Administración','Agropecuaria y Forestal','Alimentación','Construcción','Electricidad y sistemas','Metalmecánica','Minería y procesos','Salud y atención','Marítimo','Turismo','Madera y vestuario','Tecnologías digitales')))
+  for course in courses:
+   for module in course['modules']:
+    response=self.s.get(f"/api/modules/{module['id']}/city-experience")
+    self.assertEqual(response.status_code,200,(course['title'],module['title']))
+    plan=response.json['plan']
+    self.assertEqual(len(plan['quiz']),10,(course['title'],module['title']))
+    self.assertEqual({level:sum(item['difficulty']==level for item in plan['quiz']) for level in ('Inicial','Intermedia','Avanzada')},{'Inicial':4,'Intermedia':5,'Avanzada':1},(course['title'],module['title']))
+    self.assertEqual(len(plan['mission']['tasks']),4,(course['title'],module['title']))
+    self.assertEqual(plan['timing']['quiz'],45)
+    self.assertEqual(plan['timing']['mission'],45)
+  response=self.s.get('/api/modules/1/city-experience')
+  self.assertEqual(response.status_code,200)
+  payload=response.json
+  self.assertEqual(payload['location']['district'],'Metalmecánica')
+  self.assertEqual(payload['plan']['timing'],{'total':90,'quiz':45,'mission':45,'quiz_per_question':4.5,'phases':[10,15,10,10]})
+  quiz=payload['plan']['quiz']
+  self.assertEqual(len(quiz),10)
+  self.assertEqual({level:sum(item['difficulty']==level for item in quiz) for level in ('Inicial','Intermedia','Avanzada')},{'Inicial':4,'Intermedia':5,'Avanzada':1})
+  self.assertEqual(len(payload['plan']['mission']['tasks']),4)
+  self.assertEqual(sum(phase['minutes'] for phase in payload['plan']['mission']['phases']),45)
+  self.assertEqual(self.req('/modules/1/city-experience',{'operation':'heartbeat','stage':'mission','seconds':30}).status_code,403)
+  for index in range(len(quiz)):
+   saved=self.req('/modules/1/city-experience',{'operation':'quiz-answer','index':index,'choice':0})
+   self.assertEqual(saved.status_code,200)
+  self.assertEqual(self.req('/modules/1/city-experience',{'operation':'heartbeat','stage':'quiz','seconds':30}).json['state']['quiz']['active_seconds'],30)
+  self.assertEqual(self.req('/modules/1/city-experience',{'operation':'heartbeat','stage':'mission','seconds':45}).json['state']['mission']['active_seconds'],45)
+  for phase in ('planificar','actuar','verificar','justificar'):
+   result=self.req('/modules/1/city-experience',{'operation':'mission-submit','phase':phase,'text':TEXT})
+   self.assertEqual(result.status_code,200)
+  saved=self.s.get('/api/progress').json
+  module=next(item for item in saved if item['id']==1)
+  experience=module['state']['city_experience']
+  self.assertEqual(len(experience['quiz']['answers']),10)
+  self.assertEqual(len(experience['mission']['responses']),4)
+  self.assertTrue(experience['mission']['completed_at'])
  def through_integration(self):
   self.assertEqual(self.activity(kind='context',text=TEXT).status_code,200)
   for a in range(3):

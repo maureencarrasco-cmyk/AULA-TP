@@ -8,10 +8,10 @@ const source=fs.readFileSync(path.join(__dirname,'city-panel.js'),'utf8');
 function fixture(disabled=false){
  let callback;
  let clicks=0;
- const original={disabled,querySelector(){return null;},click(){clicks++;}};
+ const original={disabled,querySelector(){return null;},children:[],append(node){this.children.push(node);},click(){clicks++;}};
  const grid={tile:null,querySelector(){return this.tile;},append(node){this.tile=node;}};
  const panel={querySelector(selector){return selector==='.city-island-grid'?grid:original;}};
- const document={documentElement:{},querySelector(selector){return selector==='.city-walk-inspector'?panel:original;},createElement(){return {dataset:{},children:[],disabled:false,append(...items){this.children.push(...items);},addEventListener(event,action){this[event]=action;}};}};
+ const document={documentElement:{},querySelector(selector){return selector==='.city-walk-inspector'?panel:original;},querySelectorAll(){return [];},createElement(){return {dataset:{},children:[],disabled:false,append(...items){this.children.push(...items);},addEventListener(event,action){this[event]=action;}};}};
  const context=vm.createContext({document,MutationObserver:class {constructor(action){callback=action;}observe(){}}});
  vm.runInContext(source,context);
  return {original,grid,sync:()=>callback(),clicks:()=>clicks};
@@ -29,6 +29,8 @@ test('mining tile forwards to the original action and does not duplicate itself'
 test('frontend adapter does not implement or replace game controls',()=>{
  for(const value of ['fetch(','localStorage','WebGLRenderer','location.href','keydown','innerHTML'])assert.ok(!source.includes(value));
  assert.ok(source.includes('action.click()'));
+ assert.ok(source.includes('Estación 4 · Quiz + Misiones Laborales · 90 min'));
+ assert.ok(source.includes("querySelector('.city-specialty-section')"));
 });
 test('skin retains native dropdown, checkbox, collapsed sections and focus states',()=>{
  const css=fs.readFileSync(path.join(__dirname,'city-panel.css'),'utf8');

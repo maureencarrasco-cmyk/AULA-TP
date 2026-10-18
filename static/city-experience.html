@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f3f8fc">
   <title>Experiencia de aprendizaje · Aula TP Chile</title>
-  <link rel="stylesheet" href="/api/city-experience.css?v=20261017-45min-v1">
+  <link rel="stylesheet" href="/api/city-experience.css?v=20261017-90min-v2">
 </head>
 <body>
   <a class="skip-link" href="#experience-main">Saltar al recorrido</a>
@@ -22,15 +22,17 @@
 
     <section class="setup-panel" id="setup-panel" aria-labelledby="setup-title">
       <div class="setup-copy">
-        <p class="eyebrow">Recorrido de 45 minutos</p>
-        <h2 id="setup-title">Elige tu curso y módulo</h2>
-        <p>15 minutos de quiz y 30 minutos para resolver una situación laboral completa.</p>
+        <p class="eyebrow">Estación 4 · Recorrido de 90 minutos</p>
+        <h2 id="setup-title">Entra al distrito de tu especialidad</h2>
+        <p>Selecciona distrito, curso y módulo. Completarás 45 minutos de quiz y 45 minutos de misiones laborales.</p>
       </div>
       <div class="selectors">
-        <label>Curso<select id="course-select"><option value="">Cargando cursos…</option></select></label>
+        <label>Distrito<select id="district-select"><option value="">Cargando distritos…</option></select></label>
+        <label>Especialidad / curso<select id="course-select" disabled><option value="">Selecciona un distrito</option></select></label>
         <label>Módulo<select id="module-select" disabled><option value="">Selecciona un curso</option></select></label>
         <button id="start-button" class="primary-button" type="button" disabled>Iniciar recorrido</button>
       </div>
+      <p class="location-summary" id="location-summary" aria-live="polite">Elige primero un distrito para ver sus especialidades.</p>
       <p class="notice" id="setup-notice" role="status"></p>
     </section>
 
@@ -40,14 +42,15 @@
           <p class="eyebrow" id="course-label"></p>
           <h2 id="module-title"></h2>
           <p id="module-case" class="muted"></p>
+          <p id="journey-location" class="location-summary"></p>
         </div>
-        <div class="timer" aria-live="polite"><span>Tiempo activo</span><strong id="timer-value">00:00</strong><small>Meta: 45 min · el tiempo orienta, no provoca fracaso</small></div>
+        <div class="timer" aria-live="polite"><span>Tiempo activo · etapa</span><strong id="timer-value">00:00</strong><small>Meta: 45 min por etapa · el tiempo orienta, no provoca fracaso</small></div>
       </header>
       <div class="journey-progress" aria-label="Avance del recorrido"><span id="progress-bar"></span></div>
       <nav class="stage-tabs" aria-label="Etapas del recorrido">
-        <button type="button" data-stage="quiz" class="stage-tab active"><span>01</span> Quiz <small>15 min</small></button>
+        <button type="button" data-stage="quiz" class="stage-tab active"><span>01</span> Quiz <small>45 min</small></button>
         <span class="stage-connector" aria-hidden="true"></span>
-        <button id="mission-tab" type="button" data-stage="mission" class="stage-tab" disabled><span>02</span> Misión laboral <small>30 min</small></button>
+        <button id="mission-tab" type="button" data-stage="mission" class="stage-tab" disabled><span>02</span> Misiones laborales <small>45 min</small></button>
       </nav>
 
       <div class="work-area">
@@ -57,6 +60,6 @@
       <p class="notice" id="journey-notice" role="status"></p>
     </section>
   </main>
-  <script src="/api/city-experience.js?v=20261017-45min-v1" defer></script>
+  <script src="/api/city-experience.js?v=20261017-90min-v2" defer></script>
 </body>
 </html>
