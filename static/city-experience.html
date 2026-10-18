@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f3f8fc">
   <title>Ciudad Laboral · Aula TP Chile</title>
-  <link rel="stylesheet" href="/api/city-experience.css?v=20261018-existing-city-v1">
-  <link rel="stylesheet" href="/static/city-experience-entry.css?v=20261018-existing-city-v1">
+  <link rel="stylesheet" href="/api/city-experience.css?v=20261018-direct-city-entry-v2">
+  <link rel="stylesheet" href="/static/city-experience-entry.css?v=20261018-direct-city-entry-v2">
 </head>
 <body>
   <a class="skip-link" href="#experience-main">Saltar al recorrido</a>
@@ -17,7 +17,7 @@
         <h1 id="welcome-title">Ciudad Laboral</h1>
         <p>Explora tu especialidad y resuelve desafíos conectados con el trabajo real.</p>
       </div>
-      <button id="enter-city" class="primary-button enter-city-button" type="button" aria-label="Abrir la Ciudad Laboral 3D existente">Entrar a la Ciudad Laboral <span aria-hidden="true">→</span></button>
+      <a id="enter-city" class="primary-button enter-city-button" href="https://www.aulatpchile.cl/ciudad_laboral_aulatp/" target="_blank" rel="noopener" aria-label="Abrir la Ciudad Laboral 3D existente en una nueva pestaña">Entrar a la Ciudad Laboral <span aria-hidden="true">→</span></a>
       <div class="welcome-art" role="img" aria-label="Vista panorámica de Ciudad Laboral con sus distritos de especialidad"></div>
       <a class="return-link city-return-link" href="/ciudad_laboral_aulatp/">Volver a Ciudad Laboral <span aria-hidden="true">→</span></a>
     </section>
@@ -62,14 +62,20 @@
 
     <section class="city-navigation" id="city-navigation" aria-labelledby="city-scene-title" hidden>
       <div class="city-map-heading">
-        <div><p class="eyebrow">Mapa general · Ciudad Laboral original</p><h2 id="city-scene-title">Explora la ciudad y sus distritos</h2></div>
-        <p id="route-status" class="route-status" role="status" aria-live="polite">El mapa general de la Ciudad Laboral se está cargando.</p>
+        <div><p class="eyebrow">Ciudad Laboral original · Mundo 3D</p><h2 id="city-scene-title">Explora la ciudad y sus distritos</h2></div>
+        <p id="route-status" class="route-status" role="status" aria-live="polite">La ciudad se abre en una pestaña nueva; esta página mantiene tu selección de curso y módulo.</p>
       </div>
-      <div class="city-scene-frame">
-        <iframe id="existing-city-frame" title="Mapa general interactivo de la Ciudad Laboral 3D de Aula TP Chile" loading="lazy" allow="fullscreen; gamepad" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <div class="city-live-entry">
+        <img src="/static/city-experience-station4-banner.png" alt="Vista aérea general de la Ciudad Laboral y sus distritos" loading="lazy" decoding="async">
+        <div class="city-live-entry-copy">
+          <p class="eyebrow">Aula TP Chile · Estación 4</p>
+          <h3>Ciudad Laboral 3D</h3>
+          <p>Entra al mundo original para recorrer la ciudad, ver el mapa general y llegar a tu especialidad.</p>
+          <a class="primary-button" href="https://www.aulatpchile.cl/ciudad_laboral_aulatp/" target="_blank" rel="noopener">Abrir Ciudad Laboral <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
       <div class="route-footer">
-        <p id="route-instructions">Explora el mapa general y sus distritos en la Ciudad Laboral original. Selecciona tu curso y módulo abajo para iniciar las actividades evaluadas.</p>
+        <p id="route-instructions">En la nueva pestaña puedes usar «Mapa de la ciudad» en los controles originales. Selecciona tu curso y módulo aquí para iniciar las actividades evaluadas.</p>
       </div>
     </section>
 
@@ -113,6 +119,6 @@
       <p class="notice" id="journey-notice" role="status"></p>
     </section>
   </main>
-  <script src="/api/city-experience.js?v=20261018-existing-city-v1" defer></script>
+  <script src="/api/city-experience.js?v=20261018-direct-city-entry-v2" defer></script>
 </body>
 </html>
