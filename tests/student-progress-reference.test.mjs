@@ -15,9 +15,10 @@ const context=vm.createContext({
   specialtyKey:()=> 'climate',stationRouteArt:n=>`/static/themes/route/climate-${n}.webp?v=1`,
   isDemoStudent:()=>false,
 });
-vm.runInContext(source.replace(/\}\)\(\);\s*$/,`window.progressTest={pct,stations,evidence,moduleView,overview,closing,practiceSummary,moduleTabs};})();`),context);
+vm.runInContext(source.replace(/\}\)\(\);\s*$/,`window.progressTest={pct,stations,evidence,moduleRoute,moduleView,overview,closing,practiceSummary,moduleTabs};})();`),context);
+vm.runInContext(read('static/course-artwork-catalog.js'),context);
 const ui=context.window.progressTest;
-const module=(id=1)=>({id,course_id:1,course_title:'Refrigeracion y Climatizacion',specialty:'Refrigeracion',position:id,title:`Modulo real ${id}`,aes:[{label:'Planos',description:'Descripcion del aprendizaje real'},{label:'Medicion',description:'Otra descripcion'},{label:'Calculo'}],oa:[],state:{ae:{},cases:{}},completed:[false,false,false,false,false]});
+const module=(id=1,courseId=1)=>({id,course_id:courseId,course_title:'Refrigeracion y Climatizacion',specialty:'Refrigeracion',position:id,title:`Modulo real ${id}`,aes:[{label:'Planos',description:'Descripcion del aprendizaje real'},{label:'Medicion',description:'Otra descripcion'},{label:'Calculo'}],oa:[],state:{ae:{},cases:{}},completed:[false,false,false,false,false]});
 
 test('overview retains actual modules, progress, station totals and next route',()=>{
   const items=Array.from({length:9},(_,i)=>module(i+1));
@@ -32,24 +33,47 @@ test('overview retains actual modules, progress, station totals and next route',
   assert.match(html,/climate-4\.webp/);
 });
 
-test('module view keeps five graded stations and a disabled mission, with real route IDs',()=>{
+test('Estación 4 opens its real module simulator and progress includes six stations',()=>{
   const m=module();m.completed[0]=true;m.state.context='Evidencia';
   const html=ui.moduleView(m);
-  assert.equal(ui.pct(m),20);
+  assert.equal(ui.pct(m),17);
   assert.equal((html.match(/data-portal-station="[1-5]"/g)||[]).length,5);
-  assert.match(html,/sp-mission-card[\s\S]*?EN CONSTRUCCI.N/);
+  assert.match(html,/6 estaciones habilitadas · Misión Laboral disponible/);
+  assert.match(html,/sp-mission-card[\s\S]*?href="\/api\/city-experience\?course=1&amp;module=1"[\s\S]*?ENTRAR A MISIÓN/);
+  assert.doesNotMatch(html,/EN CONSTRUCCIÓN|EN CONSTRUCCI.N/);
   assert.match(html,/href="#module\/1\/2"/);
   assert.doesNotMatch(html,/href="#module\/1\/[3-6]"/);
   assert.doesNotMatch(html,/#module\/1\/6/);
-  assert.match(html,/Estaciones completadas<\/dt><dd>1 de 5/);
+  assert.match(html,/Estaciones completadas<\/dt><dd>1 de 6/);
   assert.match(html,/Sin medici.n/);
   assert.doesNotMatch(html,/25%|0 de 9 actividades/);
+  m.state.city_experience={quiz:{completed_at:'2026-10-17'},mission:{completed_at:'2026-10-17'}};
+  assert.equal(ui.pct(m),33);
+  assert.match(ui.moduleView(m),/Estaciones completadas<\/dt><dd>2 de 6/);
+});
+
+test('Estación 4 has the matching simulator link in all 451 modules across 45 courses',()=>{
+  const courses=Object.values(context.window.AulaCourseArtworkData.courses);
+  assert.equal(courses.length,45);
+  assert.equal(courses.reduce((count,course)=>count+course.modules.length,0),451);
+  for(const course of courses)for(const item of course.modules){
+    const m=module(item.id,course.id);
+    const html=ui.moduleRoute(m);
+    assert.ok(html.includes(`href="/api/city-experience?course=${course.id}&amp;module=${item.id}"`),`${course.title} · ${item.title}`);
+    assert.match(html,/aria-label="Estación 4 de 6\. Misión Laboral\. Disponible"/);
+    const mission=html.match(/<article class="sp-station-card sp-mission-card"[\s\S]*?<\/article>/)?.[0]||'';
+    assert.ok(mission);
+    assert.match(mission,/<a href="\/api\/city-experience\?course=\d+&amp;module=\d+"/);
+    assert.doesNotMatch(mission,/EN CONSTRUCCIÓN|<button[^>]*disabled/);
+  }
 });
 
 test('a completed module preserves real scores, feedback, OA and station destinations',()=>{
   const m=module();m.completed.fill(true);
+  m.state.city_experience={quiz:{completed_at:'2026-10-17'},mission:{completed_at:'2026-10-17'}};
   m.oa=[{code:'OA1',title:'Objetivo conservado'}];
-  m.state={closed:true,reflection:'Mi reflexion',plan:'Mi plan',ae:{},cases:{},exam:{score:8,max_score:10,profile:{ae:{AE1:{percent:84}}},review:{feedback:'Comentario docente'}}};
+  m.state={closed:true,reflection:'Mi reflexion',plan:'Mi plan',ae:{},cases:{},city_experience:{quiz:{completed_at:'2026-10-17'},mission:{completed_at:'2026-10-17'}},exam:{score:8,max_score:10,profile:{ae:{AE1:{percent:84}}},review:{feedback:'Comentario docente'}}};
+  assert.equal(ui.pct(m),100);
   const html=ui.moduleView(m);
   assert.match(html,/>100%<\/b>/);
   assert.match(html,/>84%<\/strong>/);
@@ -115,8 +139,8 @@ test('course and module text stay escaped and the styles/assets are scoped and l
   assert.doesNotMatch(css,/font-size:[^;]*vw|animation:/);
   assert.ok(read('static/student-progress-icons.svg').length<15_000);
   const index=read('static/index.html');
-  assert.match(index,/student-progress-reference\.css\?v=20261011-reference-portal/);
-  assert.match(index,/student-progress\.js\?v=20261011-course-artwork-v1/);
+  assert.match(index,/student-progress-reference\.css\?v=20261018-station4-live-v1/);
+  assert.match(index,/student-progress\.js\?v=20261018-station4-live-v1/);
   assert.match(source,/moduleId!==selected/);
   assert.match(source,/window\.AulaPractice\.open\(\)/);
   assert.match(source,/observer\.disconnect\(\)/);

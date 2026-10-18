@@ -1,14 +1,16 @@
 'use strict';
 (function(){
  let rows=[],courseId=null,moduleId='all',evidenceType=null;
- const pct=m=>Math.round((m.completed||[]).filter(Boolean).length*20);
+ const cityCompleted=m=>Boolean(m.city_completed||((m.state?.city_experience||{}).quiz?.completed_at&&(m.state?.city_experience||{}).mission?.completed_at));
+ const pct=m=>Math.round(((m.completed||[]).filter(Boolean).length+Number(cityCompleted(m)))*100/6);
+ const moduleCompleted=m=>Boolean(m.state?.closed&&cityCompleted(m));
  const mean=values=>values.length?Math.round(values.reduce((a,b)=>a+b,0)/values.length):0;
  const label=v=>esc(v==null||v===''?'Sin medición':v);
  const courseRows=()=>rows.filter(m=>m.course_id===courseId);
  const stationPurpose=['Contextualiza','Aprende','Integra','Demuestra','Reflexiona y cierra'];
  const nextStation=m=>Math.min(5,Math.max(1,(m.completed||[]).findIndex(done=>!done)+1 || 5));
- const moduleStatus=m=>m.state?.closed?'complete':pct(m)?'working':'new';
- const moduleStatusLabel=m=>m.state?.closed?'Completado':pct(m)?'En curso':'No iniciado';
+ const moduleStatus=m=>moduleCompleted(m)?'complete':pct(m)?'working':'new';
+ const moduleStatusLabel=m=>moduleCompleted(m)?'Completado':pct(m)?'En curso':'No iniciado';
  const glyph=name=>`<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="/static/student-progress-icons.svg?v=20261011#${name}"></use></svg>`;
  const displayedStation=n=>n>=4?n+1:n;
  const courseInfo=m=>({id:m.course_id,specialty:m.specialty,title:m.course_title});
@@ -93,18 +95,19 @@
   return `<div class="sp-insights"><section class="sp-section sp-strengths">${heading('Mis fortalezas','Star','green')}${strengths.length?`<ul>${strengths.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`:'<p class="sp-empty">Aún no hay resultados suficientes para identificar fortalezas.</p>'}</section><section class="sp-section sp-needs">${heading('Aspectos por reforzar','TriangleAlert','orange')}${needs.length?`<ul>${needs.map(v=>`<li>${esc(v)}</li>`).join('')}</ul><a class="sp-text-action" href="#module/${items.find(m=>m.state?.exam?.profile?.ae&&Object.values(m.state.exam.profile.ae).some(v=>v.percent<60))?.id||items[0].id}/2">Practicar nuevamente ${icon('arrow')}</a>`:'<p class="sp-empty">Aún no hay resultados suficientes para identificar aspectos por reforzar.</p>'}</section></div>`;
  }
  function moduleRoute(m){
-  const next=nextStation(m),finished=Boolean(m.state?.closed),ss=stations(m);
+  const next=nextStation(m),finished=moduleCompleted(m),ss=stations(m);
   const titles=['CONTEXTUALIZA','APRENDE','APLICA','DEMUESTRA','REFLEXIONA'];
   const purposes=['Comprender la situación','Analiza, comprende y aplica','Resuelve en contexto','Demuestra lo aprendido','Reflexiona y avanza'];
   const icons=['Cog','BookOpen','Target','ClipboardList','MessageSquare'];
-  const mission=`<article class="sp-station-card sp-mission-card tone-red" aria-label="Misión Laboral. En construcción. No forma parte del porcentaje de avance"><span class="sp-station-number">4</span><div class="sp-station-photo"><img src="/static/themes/workshop.webp" width="480" height="240" alt="" loading="lazy" decoding="async"><img class="sp-mission-controller" src="/static/mission-game-controller.png?v=1" width="150" height="90" alt=""></div><small class="sp-station-label">MISIÓN LABORAL</small><div class="sp-station-name">${glyph('Gamepad2')}<b>MISIÓN LABORAL</b></div><p>Simulador y desafíos profesionales</p><small>Una misión profesional para poner en juego tus aprendizajes.</small><button type="button" disabled>${glyph('Lock')} EN CONSTRUCCIÓN</button></article>`;
+  const cityHref=`/api/city-experience?course=${encodeURIComponent(m.course_id)}&amp;module=${encodeURIComponent(m.id)}`;
+  const mission=`<article class="sp-station-card sp-mission-card" aria-label="Estación 4 de 6. Misión Laboral. ${cityCompleted(m)?'Completada':'Disponible'}"><span class="sp-station-number">4</span><div class="sp-station-photo"><img src="/static/themes/workshop.webp" width="480" height="240" alt="" loading="lazy" decoding="async"><img class="sp-mission-controller" src="/static/mission-game-controller.png?v=1" width="150" height="90" alt=""></div><small class="sp-station-label">ESTACIÓN 4</small><div class="sp-station-name">${glyph('Gamepad2')}<b>MISIÓN LABORAL</b></div><p>Simulador y desafíos profesionales</p><small>Completa el desafío de conocimientos y las misiones laborales del módulo.</small><a href="${cityHref}" aria-label="${cityCompleted(m)?'Revisar':'Iniciar o continuar'} la Misión Laboral del módulo ${esc(m.position)}">${glyph(cityCompleted(m)?'Check':'ArrowRight')} ${cityCompleted(m)?'COMPLETADA':'ENTRAR A MISIÓN'}</a></article>`;
   const cards=ss.map((st,i)=>{
    const n=i+1,done=Boolean(m.completed?.[i]),unlocked=available(m,n),state=done?'done':n===next&&!finished?'here':unlocked?'available':'locked';
    const action=done?'COMPLETADA':state==='here'?'EN CURSO':unlocked?'DISPONIBLE':'PENDIENTE';
    const control=unlocked?`<a href="#module/${m.id}/${n}" aria-label="Abrir Estación ${displayedStation(n)}: ${esc(st.name)}">${glyph(done?'Check':'ArrowRight')} ${action}</a>`:`<button type="button" disabled aria-label="Estación ${displayedStation(n)}: ${esc(st.name)}. Completa las estaciones anteriores">${glyph('Lock')} ${action}</button>`;
    return `${i===3?mission:''}<article class="sp-station-card sp-station-${n} ${state}" data-portal-station="${n}" ${state==='here'?'aria-current="step"':''}><span class="sp-station-number">${displayedStation(n)}</span><div class="sp-station-photo"><img src="${esc(photo(m,n))}" width="480" height="240" alt="" loading="lazy" decoding="async"></div><small class="sp-station-label">ESTACIÓN ${displayedStation(n)}</small><div class="sp-station-name">${glyph(icons[i])}<b>${titles[i]}</b></div><p>${esc(st.name)}</p><small>${purposes[i]}</small><strong class="sp-station-count">${st.done}/${st.total} actividades</strong>${control}</article>`;
   }).join('');
-  return `<section class="sp-module-route">${heading('Ruta de aprendizaje del módulo','Flag','blue','5 estaciones habilitadas · Misión Laboral en construcción')}<div class="sp-reference-stations">${cards}</div></section>`;
+  return `<section class="sp-module-route">${heading('Ruta de aprendizaje del módulo','Flag','blue','6 estaciones habilitadas · Misión Laboral disponible')}<div class="sp-reference-stations">${cards}</div></section>`;
  }
  function moduleActivities(m){
   const next=nextStation(m);
@@ -116,18 +119,18 @@
  function moduleView(m){
   const ss=stations(m),exam=m.state?.exam,profile=exam?.profile?.ae||{},oa=m.oa||[];
   const description=m.aes?.[0]?.description||m.aes?.[0]?.label||'';
-  const next=nextStation(m),finished=Boolean(m.state?.closed),value=pct(m);
+  const next=nextStation(m),finished=moduleCompleted(m),value=pct(m);
   const aeMarkup=m.aes?.length?m.aes.map((a,i)=>{
    const score=profile[`AE${i+1}`]?.percent,measured=Number.isFinite(Number(score))&&score!=null;
    const guide=a.description&&a.description!==a.label?a.description:'Trabaja este AE en la Estación 2 y revisa tus evidencias antes de la evaluación.';
    return `<details class="sp-learning-row"><summary><b>AE ${i+1}</b>${measured?`<progress value="${score}" max="100" aria-label="Logro de AE ${i+1}"></progress><strong>${score}%</strong>`:'<small>Sin medición</small>'}<span>Ver detalle ${glyph('ArrowRight')}</span></summary><h3>${esc(a.label)}</h3><p>${esc(guide)}</p></details>`;
   }).join(''):'<p class="sp-empty">No hay AE disponibles.</p>';
-  const state=`<div class="sp-module-state">${progressRing(value,'Avance del módulo')}<div><small>Tu progreso en este módulo</small><strong>${moduleStatusLabel(m)}</strong><progress value="${value}" max="100" aria-label="Avance del módulo"></progress><span>${finished?'Terminaste las cinco estaciones habilitadas.':value?`Estás trabajando en la Estación ${displayedStation(next)}.`:'Aún no comienzas. Inicia la Estación 1.'}</span></div></div>`;
-  const completedCount=(m.completed||[]).filter(Boolean).length,activityCount=ss.reduce((sum,st)=>sum+st.done,0),activityTotal=ss.reduce((sum,st)=>sum+st.total,0);
+  const state=`<div class="sp-module-state">${progressRing(value,'Avance del módulo')}<div><small>Tu progreso en este módulo</small><strong>${moduleStatusLabel(m)}</strong><progress value="${value}" max="100" aria-label="Avance del módulo"></progress><span>${finished?'Terminaste las seis estaciones habilitadas.':value?`Estás trabajando en la Estación ${displayedStation(next)}.`:'Aún no comienzas. Inicia la Estación 1.'}</span></div></div>`;
+  const completedCount=(m.completed||[]).filter(Boolean).length+Number(cityCompleted(m)),activityCount=ss.reduce((sum,st)=>sum+st.done,0),activityTotal=ss.reduce((sum,st)=>sum+st.total,0);
   const banner=courseBanner(m,`<small>MÓDULO ${m.position}</small><h2>${esc(m.title)}</h2><p>${esc(description)}</p>`,state);
   return `${banner}${moduleRoute(m)}
    <div class="sp-module-summary-grid">
-    <section class="sp-section sp-module-summary">${heading('Resumen de tu avance en el módulo','ChartNoAxesColumnIncreasing','blue','Revisa tu progreso general.')}<div class="sp-summary-body">${progressRing(value,'Avance general')}<dl><div><dt>Actividades registradas</dt><dd>${activityCount} de ${activityTotal}</dd></div><div><dt>Estaciones completadas</dt><dd>${completedCount} de 5</dd></div><div><dt>Estaciones pendientes</dt><dd>${5-completedCount}</dd></div></dl></div></section>
+    <section class="sp-section sp-module-summary">${heading('Resumen de tu avance en el módulo','ChartNoAxesColumnIncreasing','blue','Revisa tu progreso general.')}<div class="sp-summary-body">${progressRing(value,'Avance general')}<dl><div><dt>Actividades registradas</dt><dd>${activityCount} de ${activityTotal}</dd></div><div><dt>Estaciones completadas</dt><dd>${completedCount} de 6</dd></div><div><dt>Estaciones pendientes</dt><dd>${6-completedCount}</dd></div></dl></div></section>
     <section class="sp-section sp-next">${heading('Tu próximo paso','Send','orange')}<h3>${finished?'Revisa tu aprendizaje':`Estación ${displayedStation(next)} · ${esc(stationPurpose[next-1])}`}</h3><p>${finished?'Puedes volver a consultar tus evidencias y resultados.':'Continúa tu recorrido y registra tu trabajo en esta estación.'}</p><a class="sp-primary-action" href="#module/${m.id}/${next}">${finished?'Revisar módulo':`Continuar en Estación ${displayedStation(next)}`} ${glyph('ArrowRight')}</a><p class="sp-next-hint">${glyph('Info')} Revisa tus actividades pendientes y completa las evidencias para avanzar.</p></section>
     <section class="sp-section sp-ae-panel">${heading('Logro de Aprendizajes Esperados (AE)','Target','purple','Resultados de la evaluación final por AE.')}${aeMarkup}</section>
    </div>
@@ -140,16 +143,16 @@
   return `<div class="sp-metrics"><div><b>${logs.length}</b><span>intentos registrados</span></div><div><b>${areas.size}</b><span>contenidos practicados</span></div><div><b>No registrado</b><span>tiempo total</span></div></div><p class="sp-note">La práctica libre se guarda en este navegador y no forma parte de la calificación formal.</p>`;
  }
  function closing(items){
-  const done=items.filter(m=>m.state?.closed);
+  const done=items.filter(moduleCompleted);
   return `<section class="sp-section sp-closing">${heading('Retroalimentación y cierre','MessageSquare','purple')}${done.length?done.map(m=>`<article class="sp-close"><h3>Módulo ${m.position} · ${esc(m.title)}</h3><p><b>Mi reflexión:</b> ${esc(m.state.reflection)}</p><p><b>Mi plan de mejora:</b> ${esc(m.state.plan)}</p>${m.state.exam?.review?.feedback?`<p><b>Docente:</b> ${esc(m.state.exam.review.feedback)}</p>`:''}</article>`).join(''):'<p class="sp-empty">Al completar la Estación 6, tu reflexión y la retroalimentación aparecerán aquí.</p>'}</section>`;
  }
  function overview(items){
-  const progress=mean(items.map(pct)),done=items.filter(m=>m.state?.closed).length,next=items.find(m=>!m.state?.closed)||items.at(-1),nextStations=stations(next),nextN=Math.max(1,nextStations.findIndex(s=>s.done<s.total)+1||5);
+  const progress=mean(items.map(pct)),done=items.filter(moduleCompleted).length,next=items.find(m=>!moduleCompleted(m))||items.at(-1),nextStations=stations(next),nextN=Math.max(1,nextStations.findIndex(s=>s.done<s.total)+1||5);
   const stats=`<div class="sp-overview-stats"><div><b>${done}</b><span>Completados</span></div><div><b>${Math.max(0,items.length-done)}</b><span>Pendientes</span></div><div class="sp-overview-kpi"><strong>${progress}%</strong><span>Avance general</span><progress value="${progress}" max="100" aria-label="Avance general del curso"></progress></div></div>`;
   return `${courseBanner(items[0],`<small>RESUMEN GENERAL</small><h2>${esc(items[0]?.course_title||'Mi curso')}</h2><p>${done} de ${items.length} módulos completados. Sigue así, vas por buen camino.</p>`,stats,true)}
    <section class="sp-course-route">${heading('Ruta del curso','Flag','blue')}${moduleTabs(items)}</section>
    <section class="sp-next-module">
-    <div class="sp-recommendation"><div><small>RECOMENDACIÓN PERSONALIZADA</small><h2>${glyph('ArrowRight')} Tu próximo paso</h2><h3>${next?.state?.closed?'Revisa tu último módulo':`Continúa con el Módulo ${next?.position||1}`}</h3><strong>${esc(next?.title||'Continúa tu aprendizaje')}</strong><p>Avanza en la ruta y registra nuevas evidencias de aprendizaje.</p><a class="sp-primary-action" href="#module/${next?.id||items[0]?.id}/${nextN}">${next?.state?.closed?'Revisar módulo':`Ir al Módulo ${next?.position||1}`} ${glyph('ArrowRight')}</a></div><img src="${esc(photo(next,2))}" width="480" height="240" alt="Materiales de aprendizaje de ${esc(next.specialty)}" loading="lazy" decoding="async"></div>
+    <div class="sp-recommendation"><div><small>RECOMENDACIÓN PERSONALIZADA</small><h2>${glyph('ArrowRight')} Tu próximo paso</h2><h3>${moduleCompleted(next)?'Revisa tu último módulo':`Continúa con el Módulo ${next?.position||1}`}</h3><strong>${esc(next?.title||'Continúa tu aprendizaje')}</strong><p>Avanza en la ruta y registra nuevas evidencias de aprendizaje.</p><a class="sp-primary-action" href="#module/${next?.id||items[0]?.id}/${nextN}">${moduleCompleted(next)?'Revisar módulo':`Ir al Módulo ${next?.position||1}`} ${glyph('ArrowRight')}</a></div><img src="${esc(photo(next,2))}" width="480" height="240" alt="Materiales de aprendizaje de ${esc(next.specialty)}" loading="lazy" decoding="async"></div>
     <aside><h3>${glyph('Info')} ¿Por qué este módulo?</h3><span>Es el siguiente en tu ruta.</span><span>Te permitirá aplicar lo aprendido.</span><span>Es fundamental para los módulos siguientes.</span></aside>
     <figure><img src="${esc(photo(next,1))}" width="480" height="240" alt="Entorno de aprendizaje de ${esc(next.specialty)}" loading="lazy" decoding="async"><figcaption>Comprende, aplica y avanza.</figcaption></figure>
    </section>
@@ -163,7 +166,7 @@
   const items=courseRows(),course=items[0]||courses.find(c=>c.id===courseId),root=document.querySelector('#progress-content');
   if(!root)return;
   const overall=mean(items.map(pct)),header=document.querySelector('.sp-progress-header');
-  if(header&&course){const current=items.find(m=>m.id===moduleId)||items.find(m=>pct(m)>0&&pct(m)<100)||items[0];header.querySelector('.sp-progress-course').textContent=course.course_title||course.title;header.querySelector('.sp-progress-context').textContent=!items.length?'Este curso aún no tiene módulos disponibles.':moduleId==='all'?`${items.filter(m=>m.state?.closed).length} de ${items.length} módulos completados`:`Módulo ${current.position} · ${current.title}`;header.querySelector('progress').value=overall;header.querySelector('.sp-progress-value').textContent=`${overall}%`}
+  if(header&&course){const current=items.find(m=>m.id===moduleId)||items.find(m=>pct(m)>0&&pct(m)<100)||items[0];header.querySelector('.sp-progress-course').textContent=course.course_title||course.title;header.querySelector('.sp-progress-context').textContent=!items.length?'Este curso aún no tiene módulos disponibles.':moduleId==='all'?`${items.filter(moduleCompleted).length} de ${items.length} módulos completados`:`Módulo ${current.position} · ${current.title}`;header.querySelector('progress').value=overall;header.querySelector('.sp-progress-value').textContent=`${overall}%`}
   const selector=`<div class="sp-course-select"><label for="sp-course">${icon('book')}<span>Curso</span></label><select id="sp-course"></select></div>`;
   root.innerHTML=selector+(items.length?`${moduleId==='all'?'':moduleTabs(items,true)}<div class="sp-content">${moduleId==='all'?overview(items):moduleView(items.find(m=>m.id===moduleId)||items[0])}</div>`:`<div class="sp-content sp-no-modules"><section class="sp-section"><h2>${icon('book')} Curso en preparación</h2><p>Este curso aún no tiene módulos disponibles para revisar. Selecciona otro curso para continuar explorando tu progreso.</p></section></div>`);
   root.querySelector('.sp-content')?.classList.toggle('is-overview',moduleId==='all');

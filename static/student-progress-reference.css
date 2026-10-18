@@ -128,7 +128,7 @@
 .sp-reference-portal .sp-station-3 {--ink:#9835ed;--tint:#f3e8ff}
 .sp-reference-portal .sp-station-4 {--ink:#f3a013;--tint:#fff2d5}
 .sp-reference-portal .sp-station-5 {--ink:#00a66f;--tint:#e6faf0}
-.sp-reference-portal .sp-mission-card {--ink:#ee446e;--tint:#ffedf2}
+.sp-reference-portal .sp-mission-card {--ink:#e96b16;--tint:#fff0df}
 .sp-reference-portal .sp-station-card::after {position:absolute;right:-15px;top:46%;color:#087feb;content:'\2192';font-size:21px;font-weight:800;z-index:2}
 .sp-reference-portal .sp-station-card:last-child::after {display:none}
 .sp-reference-portal .sp-station-photo {position:relative;width:100%;height:84px;flex:none;border-radius:6px;overflow:hidden}
@@ -143,8 +143,10 @@
 .sp-reference-portal .sp-station-count {margin:auto 0 7px 29px;color:#537498;font-size:10px;font-weight:600}
 .sp-reference-portal .sp-station-card>a,.sp-reference-portal .sp-station-card>button {display:flex;align-items:center;justify-content:center;gap:7px;flex:none;min-height:36px;padding:6px 4px;border:1px solid var(--ink);border-radius:6px;background:var(--tint);color:var(--ink);font-size:10px;font-weight:800;text-decoration:none;box-shadow:none}
 .sp-reference-portal .sp-station-card>a .icon,.sp-reference-portal .sp-station-card>button .icon {width:16px;height:16px}
+.sp-reference-portal .sp-station-card>a:hover {background:var(--ink);color:#fff}
+.sp-reference-portal .sp-station-card>a:focus-visible {outline:3px solid #1677df;outline-offset:2px}
 .sp-reference-portal .sp-station-card>button:disabled {opacity:1;cursor:not-allowed}
-.sp-reference-portal .sp-mission-card>button {margin-top:auto}
+.sp-reference-portal .sp-mission-card>a {margin-top:auto}
 .sp-reference-portal .sp-station-card.here {border:2px solid var(--ink);padding:4px 7px 9px;background:var(--tint);box-shadow:0 0 0 3px #ffcf7129}
 .sp-reference-portal .sp-module-summary-grid {display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px;align-items:start}
 .sp-reference-portal .sp-summary-body {display:flex;align-items:center;gap:16px}
