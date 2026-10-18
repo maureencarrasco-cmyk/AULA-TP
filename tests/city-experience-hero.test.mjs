@@ -18,8 +18,10 @@ test('Station 4 banner replaces the old header and preserves its navigation acti
   assert.match(css,/aspect-ratio:1707\/405/);
   assert.match(html,/id="enter-city" class="primary-button enter-city-button" type="button" aria-label="Abrir la Ciudad Laboral 3D existente"/);
   assert.match(script,/enterCity\.addEventListener\('click',beginCityEntry\)/);
-  assert.match(html,/id="existing-city-frame" title="Ciudad Laboral 3D de Aula TP Chile"/);
+  assert.match(html,/id="existing-city-frame" title="Mapa general interactivo de la Ciudad Laboral 3D de Aula TP Chile"/);
   assert.match(script,/new URL\('https:\/\/www\.aulatpchile\.cl\/ciudad_laboral_aulatp\/'\)/);
+  assert.match(script,/contentDocument\?\.querySelector\('\[aria-label="Mapa de la ciudad"\],\[title="Mapa de la ciudad"\]'\)/);
+  assert.match(script,/if\(!enabled\)mapControl\.click\(\)/);
   assert.match(script,/frame\.src=existingCity\.href/);
   assert.doesNotMatch(html,/city-experience-scene\.js/);
   assert.doesNotMatch(script,/cityExperienceSceneReady|new window\.cityExperienceSceneReady/);

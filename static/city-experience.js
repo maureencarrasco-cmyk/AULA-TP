@@ -69,12 +69,25 @@
     const params=new URLSearchParams(location.search),courseId=courseSelect.value,module=moduleSelect.value;
     const existingCity=new URL('https://www.aulatpchile.cl/ciudad_laboral_aulatp/');
     const frame=$('#existing-city-frame');
-    if(!frame.hasAttribute('src'))frame.src=existingCity.href;
+    if(!frame.hasAttribute('src')){
+      frame.addEventListener('load',()=>{
+        try{
+          const mapControl=frame.contentDocument?.querySelector('[aria-label="Mapa de la ciudad"],[title="Mapa de la ciudad"]');
+          if(!mapControl)throw new Error('El control del mapa no está disponible.');
+          const enabled=mapControl.checked===true||mapControl.getAttribute('aria-checked')==='true'||mapControl.getAttribute('aria-pressed')==='true';
+          if(!enabled)mapControl.click();
+          $('#route-status').textContent='Mapa general de la Ciudad Laboral listo. Selecciona el distrito, la especialidad y el módulo.';
+        }catch{
+          $('#route-status').textContent='La Ciudad Laboral original está abierta. Activa «Mapa de la ciudad» en sus controles para ver el mapa general.';
+        }
+      },{once:true});
+      frame.src=existingCity.href;
+    }
     welcome.hidden=true;onboarding.hidden=false;navigation.hidden=false;setupPanel.hidden=false;
     districtArrived=true;
     if(params.has('district')&&districtSelect.value!==params.get('district'))districtSelect.value=params.get('district');
     selectModules(courseId,module);
-    $('#route-status').textContent='Estás explorando la Ciudad Laboral 3D original de Aula TP Chile.';
+    $('#route-status').textContent='Cargando el mapa general de la Ciudad Laboral original de Aula TP Chile.';
     navigation.scrollIntoView({behavior:'smooth',block:'start'});
   }
   async function openJourney(){

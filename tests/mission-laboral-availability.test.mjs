@@ -35,7 +35,10 @@ test('Estación 4 is available for all 451 modules across 45 courses',()=>{
       `${course.title} · ${module.title}`);
     assert.ok(html.includes(`href="/api/city-experience?course=${course.id}&module=${module.id}"`),
       `${course.title} · ${module.title} has no matching experience link`);
-    assert.match(html,/aria-label="Estación 4 de 6\. Quiz y práctica profesional del módulo\. 45 minutos"/);
-    assert.match(html,/15 min de quiz · 30 min de práctica profesional/);
+    assert.match(html,/aria-label="Estación 4 de 6\. Quiz y práctica profesional del módulo\."/);
+    assert.match(html,/Desafío de conocimientos y práctica profesional/);
+    const stationFour=html.match(/<li class="lr-stop mission-laboral-stop is-available"[\s\S]*?<\/li>/)?.[0]||'';
+    assert.doesNotMatch(stationFour,/\b\d+\s*(?:min(?:utos?)?|h(?:oras?)?)\b/i,
+      `${course.title} · ${module.title} still displays a duration`);
   }
 });
