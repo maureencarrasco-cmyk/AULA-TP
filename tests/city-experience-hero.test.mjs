@@ -10,7 +10,7 @@ const script=read('static/city-experience.js').toString();
 test('Station 4 banner replaces the old header and preserves its navigation actions',()=>{
   const image=read('static/city-experience-station4-banner.png');
   assert.deepEqual([...image.subarray(0,8)],[137,80,78,71,13,10,26,10]);
-  assert.match(html,/city-experience-entry\.css\?v=20261018-city-recovery-v3/);
+  assert.match(html,/city-experience-entry\.css\?v=20261018-city-recovery-v4/);
   assert.match(css,/background-image:url\('\/static\/city-experience-station4-banner\.png'\)/);
   assert.doesNotMatch(html,/class="experience-header"/);
   assert.match(html,/id="city-welcome" aria-labelledby="welcome-title"/);
@@ -25,14 +25,14 @@ test('Station 4 banner replaces the old header and preserves its navigation acti
   assert.doesNotMatch(script,/cityExperienceSceneReady|new window\.cityExperienceSceneReady/);
   assert.match(script,/welcome\.hidden=true;onboarding\.hidden=false;navigation\.hidden=false;setupPanel\.hidden=false/);
   assert.match(script,/startButton\.addEventListener\('click',openJourney\)/);
-  assert.match(html,/id="city-onboarding"[\s\S]*?Desafío de conocimientos[\s\S]*?15 minutos[\s\S]*?Aprendizajes Esperados[\s\S]*?Práctica profesional[\s\S]*?30 minutos[\s\S]*?Tu recorrido en la/);
-  assert.match(html,/Duración mínima: 15 min de quiz \+ 30 min de práctica/);
-  assert.match(script,/15 minutos activos del quiz antes de iniciar la práctica profesional/);
+  assert.match(html,/id="city-onboarding"[\s\S]*?Desafío de conocimientos[\s\S]*?20 minutos[\s\S]*?Aprendizajes Esperados[\s\S]*?Práctica profesional[\s\S]*?30 minutos[\s\S]*?Tu recorrido en la/);
+  assert.match(html,/Duración mínima: 20 min de quiz \+ 30 min de práctica/);
+  assert.match(script,/20 minutos activos del quiz antes de iniciar la práctica profesional/);
   assert.match(script,/Tiempo activo de práctica restante para cerrar/);
   assert.match(script,/const missionRemaining=\(\)=>/);
   assert.match(html,/Elige especialidad y piso[\s\S]*?Completa las dos etapas/);
   assert.match(script,/updateOnboardingContext\(preCourse,preModule\)/);
-  assert.match(html,/route-guidance[\s\S]*?Abre el mapa y los controles de la Ciudad Laboral original[\s\S]*?no simula flechas de seguimiento automático/);
+  assert.match(html,/route-guidance[\s\S]*?Consulta el mapa 3D para ubicar tu distrito[\s\S]*?revisa la retroalimentación antes de iniciar las misiones laborales/);
   assert.match(html,/class="journey-city-link" href="https:\/\/www\.aulatpchile\.cl\/ciudad_laboral_aulatp\/" target="_blank" rel="noopener"/);
   assert.match(script,/Abrir mapa de la ciudad/);
   assert.match(script,/Referencia de trabajo/);

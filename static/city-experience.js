@@ -12,7 +12,10 @@
   const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const savedCount=()=>Object.keys(state?.quiz?.answers||{}).length;
   const answeredPhases=()=>Object.keys(state?.mission?.responses||{}).length;
-  const nextPhase=()=>phases.find(phase=>!state?.mission?.responses?.[phase])||phases.at(-1);
+  const phaseApproved=phase=>state?.mission?.recovery&&!state.mission.required_phases.includes(phase)?Boolean(state.mission.responses?.[phase]):state?.mission?.validation_version?Boolean(state.mission.phase_checks?.[phase]?.approved):Boolean(state?.mission?.responses?.[phase]);
+  const nextPhase=()=>phases.find(phase=>!phaseApproved(phase))||phases.at(-1);
+  const quizScore=()=>Object.values(state?.quiz?.answers||{}).filter(answer=>answer.correct||answer.recovered).length;
+  const quizApproved=()=>Boolean(state?.quiz?.completed_at&&savedCount()===plan?.quiz.length&&quizScore()*100/plan.quiz.length>=75);
   const elapsedFor=stage=>(Number(state?.[stage]?.active_seconds)||0)+(stage===activeStage?pendingSeconds:0);
   const quizRemaining=()=>Math.max(0,plan.timing.quiz*60-elapsedFor('quiz'));
   const missionRemaining=()=>Math.max(0,(state.mission?.required_seconds??plan.timing.mission*60)-elapsedFor('mission'));
@@ -41,12 +44,17 @@
     if(district)url.searchParams.set('cityRoute',district);
     if(area?.name)url.searchParams.set('cityArea',area.name);
     if(course?.title)url.searchParams.set('cityCourse',course.title);
+    if(course?.id)url.searchParams.set('cityCourseId',course.id);
     if(plan?.module?.title)url.searchParams.set('cityModule',plan.module.title);
+    const selectedModule=moduleId||moduleSelect.value;
+    if(selectedModule)url.searchParams.set('cityModuleId',selectedModule);
     return url.toString();
   }
   function updateCityGuideLink(area=null){
     const link=$('#city-live-entry .city-guide-link');
     if(link)link.href=cityGuideUrl(area);
+    const journeyLink=$('.journey-city-link');
+    if(journeyLink)journeyLink.href=cityGuideUrl(area);
   }
   function selectCourseOptions(district,preferred=''){
     const matches=courses.filter(item=>item.city_location?.district===district);
@@ -111,13 +119,14 @@
       $('#module-case').textContent=plan.module.case_title;
       const place=data.location;
       $('#journey-location').textContent=place?`Distrito ${place.district} · ${place.building} · ${place.floor} · ${place.space}`:'';
-      setupPanel.hidden=true;journey.hidden=false;
-      $('#mission-tab').disabled=savedCount()<plan.quiz.length||quizRemaining()>0;
-      activeStage=savedCount()===plan.quiz.length&&Number(state.mission?.active_seconds)>0?'mission':'quiz';
-      if(savedCount()===plan.quiz.length&&Number(state.quiz?.active_seconds)>=plan.timing.quiz*60)activeStage='mission';
+      updateCityGuideLink();
+      setupPanel.hidden=true;onboarding.hidden=true;navigation.hidden=true;journey.hidden=false;
+      $('#mission-tab').disabled=!quizApproved()||quizRemaining()>0;
+      activeStage=quizApproved()&&Number(state.mission?.active_seconds)>0?'mission':'quiz';
+      if(quizApproved()&&Number(state.quiz?.active_seconds)>=plan.timing.quiz*60)activeStage='mission';
       activeSeconds=Number(state[activeStage]?.active_seconds)||0;
       $('#timer-value').textContent=formatTime(activeSeconds);
-      $('.timer small').textContent=state.mission?.recovery?`Recuperación: ${state.mission.required_seconds/60} min · adicional al recorrido inicial de 45 min`:'Duración mínima: 15 min de quiz + 30 min de práctica';
+      $('.timer small').textContent=state.mission?.recovery?`Recuperación: ${state.mission.required_seconds/60} min · adicional al recorrido inicial de 50 min`:'Duración mínima: 20 min de quiz + 30 min de práctica';
       $('#mission-tab small').textContent=state.mission?.recovery?`${state.mission.required_seconds/60} min de recuperación`:'30 min';
       $('.stage-tab[data-stage="quiz"]').classList.toggle('active',activeStage==='quiz');
       $('#mission-tab').classList.toggle('active',activeStage==='mission');
@@ -136,7 +145,7 @@
   }
   function renderProgress(){
     const done=savedCount()+answeredPhases();$('#progress-bar').style.width=`${Math.round(done/(plan.quiz.length+plan.mission.phases.length)*100)}%`;
-    $('#mission-tab').disabled=savedCount()<plan.quiz.length||quizRemaining()>0;
+    $('#mission-tab').disabled=!quizApproved()||quizRemaining()>0;
     $('.stage-tab[data-stage="quiz"]').classList.toggle('active',activeStage==='quiz');
     $('#mission-tab').classList.toggle('active',activeStage==='mission');
   }
@@ -144,48 +153,81 @@
     const answers=state.quiz?.answers||{}, index=Math.min(activeQuestion,plan.quiz.length-1), q=plan.quiz[index], saved=answers[String(index)];
     const current=savedCount();
     if(current===plan.quiz.length){
+      if(!quizApproved()){renderQuizRecovery();renderQuizAside(index,current);return;}
       const score=Number(state.quiz?.score)||Object.values(answers).filter(answer=>answer.correct).length;
       const remaining=quizRemaining();
-      $('#work-main').innerHTML=`<div class="completion"><p class="section-kicker">${remaining?'Respuestas registradas · tiempo activo en curso':'Etapa 1 completada · 15 minutos activos'}</p><h3>Desafíos registrados</h3><p>Tu resultado formativo es</p><div class="summary-score">${score} / ${plan.quiz.length}</div><p>Las respuestas quedaron guardadas en este módulo. ${remaining?'Completa el tiempo activo restante antes de iniciar la práctica profesional.':'Ya puedes continuar con la práctica profesional integrada.'}</p><p class="phase-time" id="quiz-time-gate" ${remaining?'':'hidden'}>Tiempo activo restante: ${formatTime(remaining)}</p><button class="action-button" id="open-mission" type="button" ${remaining?'disabled':''}>Continuar a práctica profesional · 30 min</button></div>`;
+      $('#work-main').innerHTML=`<div class="completion"><p class="section-kicker">${remaining?'Respuestas registradas · tiempo activo en curso':'Etapa 1 completada · 20 minutos activos'}</p><h3>Desafíos registrados</h3><p>Tu resultado formativo es</p><div class="summary-score">${score} / ${plan.quiz.length}</div><p>Las respuestas quedaron guardadas en este módulo. ${remaining?'Completa el tiempo activo restante antes de iniciar la práctica profesional.':'Ya puedes continuar con la práctica profesional integrada.'}</p><p class="phase-time" id="quiz-time-gate" ${remaining?'':'hidden'}>Tiempo activo restante: ${formatTime(remaining)}</p><button class="action-button" id="open-mission" type="button" ${remaining?'disabled':''}>Continuar a práctica profesional · 30 min</button></div>`;
       $('#open-mission').addEventListener('click',()=>setStage('mission'));
       renderQuizAside(index,current);return;
     }
     activeQuestion=current;activeQuestion=Math.min(activeQuestion,plan.quiz.length-1);
     $('#route-instructions').textContent=`Desafío ${String(index+1).padStart(2,'0')} de ${plan.quiz.length} · ${currentLocation?.space||'tu especialidad'}. Usa el mapa de la Ciudad Laboral original para orientarte.`;
     const item=q, activated=activatedQuestion===index;
-    $('#work-main').innerHTML=`<p class="section-kicker">Etapa 1 · punto ${String(index+1).padStart(2,'0')} de ${plan.quiz.length} · ${esc(item.difficulty||'')}</p><h3 id="question-heading" tabindex="-1">${esc(item.stimulus||'Desafío de aprendizaje')}</h3>${item.image?`<figure class="question-stimulus"><img src="${esc(item.image)}" alt="${esc(item.alt||item.caption||'Recurso del módulo')}" style="display:block;max-width:100%;max-height:230px;object-fit:contain;margin:0 auto 8px"><figcaption>${esc(item.caption||'')}</figcaption></figure>`:''}<p class="question">${esc(item.question)}</p><fieldset class="choices" ${saved||!activated?'disabled':''}><legend class="hidden">Selecciona una respuesta</legend>${(item.options||[]).map((option,i)=>`<label class="choice"><input type="radio" name="city-choice" value="${i}" ${saved?.choice===i?'checked':''}><span>${esc(option)}</span></label>`).join('')}</fieldset><div class="action-row"><span class="subtle">${saved?'Respuesta guardada':activated?'Desafío activado · elige una respuesta':'Activa el punto y levanta la mano para responder'}</span><button class="action-button" id="save-answer" type="button" ${saved||!activated?'disabled':''}>${saved?'Registrada':'Guardar respuesta'}</button></div>${saved?`<p class="feedback ${saved.correct?'good':'bad'}">${saved.correct?'Respuesta correcta.':'Respuesta registrada.'} ${esc(saved.explanation||'')}</p>`:''}`;
+    const aeIndex=Number(item.ae),aeTitle=Number.isInteger(aeIndex)?plan.mission.aes?.[aeIndex]?.title:'';
+    const difficultyLabel={Inicial:'Fácil',Intermedia:'Intermedia',Avanzada:'Alta'}[item.difficulty]||item.difficulty||'Sin nivel';
+    const cognitiveSkill=item.cognitive_skill||item.skill||'Aplicación técnica';
+    $('#work-main').innerHTML=`<div class="question-meta"><span class="quiz-number">QUIZ ${String(index+1).padStart(2,'0')} / ${String(plan.quiz.length).padStart(2,'0')}</span><span class="quiz-difficulty ${esc(item.difficulty||'').toLowerCase()}">${esc(difficultyLabel)}</span><span class="quiz-skill">${esc(cognitiveSkill)}</span></div>${aeTitle?`<details class="question-alignment"><summary>Aprendizaje esperado y criterio</summary><strong>AE ${aeIndex+1} · ${esc(aeTitle)}</strong>${item.criterion?`<p>${esc(item.criterion)}</p>`:''}</details>`:''}<h3 id="question-heading" tabindex="-1">${esc(item.stimulus||'Desafío de aprendizaje')}</h3>${item.image?`<figure class="question-stimulus"><img src="${esc(item.image)}" alt="${esc(item.alt||item.caption||'Recurso del módulo')}" style="display:block;max-width:100%;max-height:230px;object-fit:contain;margin:0 auto 8px"><figcaption>${esc(item.caption||'')}</figcaption></figure>`:''}<p class="question">${esc(item.question)}</p><fieldset class="choices" ${saved||!activated?'disabled':''}><legend class="hidden">Selecciona una respuesta</legend>${(item.options||[]).map((option,i)=>`<label class="choice"><input type="radio" name="city-choice" value="${i}" ${saved?.choice===i?'checked':''}><span>${esc(option)}</span></label>`).join('')}</fieldset><div class="action-row"><span class="subtle">${saved?'Respuesta guardada':activated?'Desafío activado · elige una respuesta':'Activa el punto y levanta la mano para responder'}</span><button class="action-button" id="save-answer" type="button" ${saved||!activated?'disabled':''}>${saved?'Registrada':'Guardar respuesta'}</button></div>${saved?`<p class="feedback ${saved.correct?'good':'bad'}">${saved.correct?'Respuesta correcta.':'Respuesta registrada.'} ${esc(saved.explanation||'')}</p>`:''}`;
     const submit=$('#save-answer');
     submit?.addEventListener('click',async()=>{
       const choice=$('input[name="city-choice"]:checked')?.value;
       if(choice===undefined){setNotice('Selecciona una alternativa antes de continuar.');return;}
       submit.disabled=true;setNotice('Guardando respuesta…');
       try{const response=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'quiz-answer',index,choice:Number(choice)})});state=response.state;setNotice('Respuesta registrada.');
+        if(savedCount()===plan.quiz.length)await refreshLearning();
         if(savedCount()===plan.quiz.length){activeStage='quiz';activeQuestion=plan.quiz.length-1;render();}
         else{activeQuestion=savedCount();activatedQuestion=-1;render();}
       }catch(error){setNotice(error.message);submit.disabled=false;}
     });
     renderQuizAside(index,current);
   }
+  async function refreshLearning(){
+    const data=await request(`/api/modules/${moduleId}/city-experience`);
+    state=data.state;recoveries=data.recoveries||[];reward=data.reward;specialtyProgress=data.specialty_progress;
+  }
+  function renderQuizRecovery(){
+    $('#work-main').innerHTML=`<section class="quiz-reinforcement"><p class="section-kicker">Etapa 1 · refuerzo y nuevo intento</p><h3>Fortalece los aprendizajes pendientes</h3><p class="quiz-result" role="status">${quizScore()}/${plan.quiz.length} · ${Math.round(quizScore()*100/plan.quiz.length)}% · mínimo de aprobación: 75%</p><p>La práctica se habilita cuando demuestres al menos 75%. Tus logros se conservan. Estudia la explicación y responde una pregunta distinta del mismo aprendizaje.</p>${recoveries.map((item,i)=>{const lesson=item.reinforcement||{},last=item.reassessment_attempts?.at(-1),variant=item.reassessment;return `<details class="recovery-card" ${i===0?'open':''}><summary>Quiz ${String(item.index+1).padStart(2,'0')} · ${esc(lesson.ae_title||'Aprendizaje pendiente')}</summary><p>${esc(last?.question||item.question)}</p><p class="feedback bad">${esc(item.latest_feedback||item.explanation)}</p><p><strong>Respuesta correcta:</strong> ${esc(item.correct_answer)}</p><p><strong>Criterio:</strong> ${esc(lesson.criterion)}</p>${(Array.isArray(lesson.lesson)?lesson.lesson:[lesson.lesson]).filter(Boolean).map(text=>`<p>${esc(text)}</p>`).join('')}${lesson.example?`<p><strong>Ejemplo trabajado en el módulo:</strong> ${esc(lesson.example)}</p>`:''}<p>${item.reassessment_attempts.length} intento(s) equivalente(s) registrado(s).</p>${variant?`<form data-quiz-retry="${item.index}"><label>Explica qué corregirás y por qué<textarea name="reinforcement" minlength="20" maxlength="10000" required></textarea></label><h4>Nuevo desafío equivalente</h4>${variant.image?`<img class="recovery-image" src="${esc(variant.image)}" alt="${esc(variant.alt||'Recurso del módulo')}">`:''}<p>${esc(variant.question)}</p><fieldset class="choices"><legend>Selecciona una alternativa</legend>${variant.options.map((option,n)=>`<label class="choice"><input type="radio" name="choice" value="${n}" required><span>${esc(option)}</span></label>`).join('')}</fieldset><button class="action-button" type="submit">Comprobar aprendizaje</button></form>`:'<p class="feedback">El banco de este AE no tiene más preguntas equivalentes inéditas. Solicita al docente ampliar el banco; tu avance queda guardado y la práctica sigue bloqueada.</p>'}</details>`;}).join('')}</section>`;
+    $$('[data-quiz-retry]').forEach(form=>form.addEventListener('submit',async event=>{
+      event.preventDefault();const button=form.querySelector('button'),data=new FormData(form),index=Number(form.dataset.quizRetry),item=recoveries.find(item=>item.index===index);button.disabled=true;
+      try{
+        await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'quiz-reinforcement',index,text:data.get('reinforcement')})});
+        const response=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'quiz-retry-answer',index,question:item.reassessment.question,choice:Number(data.get('choice'))})});
+        const feedback=response.state.quiz.recovery_answers[String(index)].at(-1);
+        await refreshLearning();render();
+        setNotice(`${feedback.correct?'Aprendizaje demostrado.':'Necesitas reforzar este aprendizaje.'} Respuesta correcta: ${feedback.correct_answer}. ${feedback.choice_feedback||feedback.explanation}`);
+      }catch(error){setNotice(error.message);button.disabled=false;}
+    }));
+  }
   function renderQuizAside(index,current){
-    $('#work-aside').innerHTML=`<p class="markers-title">Puntos del quiz · <span>${current}/${plan.quiz.length}</span></p><div class="markers">${plan.quiz.map((_,i)=>`<button class="marker ${i<current?'done':''} ${i===index?'current':''}" type="button" aria-label="${i<current?'Punto '+String(i+1).padStart(2,'0')+' completado':i===current?'Punto '+String(i+1).padStart(2,'0')+', activar con botón accesible':'Punto '+String(i+1).padStart(2,'0')+' bloqueado'}" ${i>current?'disabled':''}>${i<current?'✓':String(i+1).padStart(2,'0')}</button>`).join('')}</div><p class="quiz-location">${esc(currentLocation?.district||'Ciudad Laboral')} · ${esc(currentLocation?.building||'Distrito')} · ${esc(currentLocation?.floor||'')} · ${esc(currentLocation?.space||'')}</p><p class="marker-help">Los desafíos se habilitan en orden. Actívalos aquí y usa el mapa original para ubicar el distrito y el taller.</p><a class="city-map-link" href="https://www.aulatpchile.cl/ciudad_laboral_aulatp/" target="_blank" rel="noopener">Abrir mapa de la ciudad ↗</a><button id="raise-hand" class="raise-button" type="button" ${current>=plan.quiz.length?'disabled':''}>✋ Levantar la mano · activar punto</button><p class="phase-time">${plan.quiz.length} desafíos · 15 min en total</p>`;
+    const lastIndex=current-1,lastAnswer=lastIndex>=0?state.quiz?.answers?.[String(lastIndex)]:null;
+    const feedback=lastAnswer?`<div class="quiz-feedback ${lastAnswer.correct?'good':'bad'}" role="status"><strong>${lastAnswer.correct?'Quiz '+String(lastIndex+1).padStart(2,'0')+' correcto':'Quiz '+String(lastIndex+1).padStart(2,'0')+' incorrecto'}</strong><span>${esc(lastAnswer.choice_feedback||lastAnswer.explanation||'Respuesta guardada.')}</span>${lastAnswer.correct_answer?`<span>Respuesta correcta: ${esc(lastAnswer.correct_answer)}</span>`:''}${current<plan.quiz.length?`<small>Siguiente: Quiz ${String(current+1).padStart(2,'0')}</small>`:`<small>${quizApproved()?'Quiz aprobado.':'Completa el refuerzo para habilitar la práctica.'}</small>`}</div>`:'';
+    $('#work-aside').innerHTML=`<p class="markers-title">Secuencia de quizzes <span>${current}/${plan.quiz.length}</span></p>${feedback}<div class="markers">${plan.quiz.map((_,i)=>{const answer=state.quiz?.answers?.[String(i)],status=i<current?'Respondido':i===current?'Disponible':'Bloqueado';return `<button class="marker ${i<current?'done':''} ${i===index?'current':''} ${answer&&!answer.correct?'incorrect':''}" type="button" aria-label="Quiz ${String(i+1).padStart(2,'0')}: ${status}${answer&&!answer.correct?', respuesta incorrecta':''}" ${i>current?'disabled':''}><span class="marker-number">${i<current?'✓':String(i+1).padStart(2,'0')}</span><span class="marker-copy"><strong>Quiz ${String(i+1).padStart(2,'0')}</strong><small>${answer?(answer.correct?'Completado':'Reforzar'):i===current?'En curso':'Bloqueado'}</small></span></button>`;}).join('')}</div><p class="quiz-location">${esc(currentLocation?.district||'Ciudad Laboral')} · ${esc(currentLocation?.building||'Distrito')} · ${esc(currentLocation?.floor||'')} · ${esc(currentLocation?.space||'')}</p><p class="marker-help">Los quizzes se responden en orden. Una respuesta incorrecta queda guardada con su explicación; no se repite de inmediato y puede reforzarse en recuperación.</p><a class="city-map-link" href="https://www.aulatpchile.cl/ciudad_laboral_aulatp/" target="_blank" rel="noopener">Abrir mapa de la ciudad ↗</a><button id="raise-hand" class="raise-button" type="button" ${current>=plan.quiz.length?'disabled':''}>✋ Activar Quiz ${String(Math.min(current+1,plan.quiz.length)).padStart(2,'0')}</button><p class="phase-time">${plan.quiz.length} quizzes · 20 min en total</p>`;
     $$('.marker',$('#work-aside')).forEach((button,i)=>button.addEventListener('click',()=>{if(i<current){activeQuestion=i;renderQuiz();}}));
     $('#raise-hand')?.addEventListener('click',()=>{if(current<plan.quiz.length){activatedQuestion=index;renderQuiz();$('#question-heading')?.focus();}});
   }
   function renderMission(){
     const responses=phaseState(), count=answeredPhases();
-    if(count===plan.mission.phases.length){
+    if(count===plan.mission.phases.length&&(!state.mission?.validation_version||state.mission?.completed_at)){
       const score=Number(state.quiz?.score)||0;
       renderMissionCompletion(score);renderMissionAside(count);return;
     }
     if(!phases.includes(activePhase)||!responses[activePhase]&&phases.slice(0,phases.indexOf(activePhase)).some(phase=>!responses[phase]))activePhase=nextPhase();
     const phase=plan.mission.phases.find(item=>item.id===activePhase), saved=responses[phase.id], draft=state.mission?.drafts?.[phase.id]||'';
     const finalPhase=phases.every(key=>key===phase.id||responses[key]), remaining=finalPhase?missionRemaining():0;
+    const check=state.mission?.phase_checks?.[phase.id],awaiting=Boolean(state.mission?.validation_version&&saved&&!check),validated=phaseApproved(phase.id);
     const preserved=Boolean(state.mission?.recovery&&!state.mission.required_phases.includes(phase.id));
     $('#route-status').textContent=`Misión ${String(phase.number).padStart(2,'0')} · ${currentLocation?.district||'Ciudad Laboral'}`;
     $('#route-instructions').textContent='Desarrolla la misión con la Ciudad Laboral original abierta en otra pestaña y consulta su mapa para ubicar tu especialidad.';
     const task=plan.mission.tasks[phase.number-1];
     $('#work-main').innerHTML=`<p class="section-kicker">Misión ${String(phase.number).padStart(2,'0')} de 04 · ${phase.minutes} min</p><h3>${esc(phase.title)} · orden laboral integrada</h3><div class="scenario"><strong>${esc(plan.module.case_title)}</strong><br>${esc(plan.mission.scenario)}</div>${task?`<article class="mission-task mission-active"><strong>${esc(task.title)}${task.ae?` · AE ${esc(task.ae)}`:''}</strong>${task.ae_title?`<p>${esc(task.ae_title)}</p>`:''}<p>${esc(task.prompt)}</p><p class="task-product">Producto: ${esc(task.product)}</p>${task.criterion?`<p>Criterio: ${esc(task.criterion)}</p>`:''}</article>`:''}<p class="question">${esc(phase.prompt)}</p>${plan.mission.question?`<p class="subtle">Punto de decisión del caso: ${esc(plan.mission.question)}</p>`:''}${remaining?`<p class="phase-time" id="mission-time-gate">Tiempo activo de práctica restante para cerrar: ${formatTime(remaining)}</p>`:''}<form class="phase-form" id="phase-form"><label for="phase-response">Evidencia de la misión ${String(phase.number).padStart(2,'0')}</label><textarea id="phase-response" maxlength="10000" placeholder="Registra decisiones, acciones, verificaciones y fundamento con datos y criterios del módulo.">${esc(saved||draft)}</textarea><div class="counter" id="response-count"></div><div class="action-row"><span class="subtle" id="save-state">${saved?'Misión guardada':'Borrador guardado automáticamente'}</span><button class="action-button" id="save-phase" type="submit" ${remaining?'disabled':''}>${saved?'Actualizar y continuar':'Guardar misión'}</button></div></form>`;
     const input=$('#phase-response'), counter=$('#response-count');
+    if(check)$('#work-main').insertAdjacentHTML('afterbegin',`<p class="feedback ${check.approved?'good':'bad'}">${check.approved?'Misión validada.':'Corrige tu procedimiento antes de continuar.'} ${esc(check.feedback)}</p>`);
+    if(awaiting){input.readOnly=true;$('#save-phase').disabled=true;$('#save-state').textContent='Entrega pendiente de validación docente';}
+    if(validated){input.readOnly=true;$('#save-phase').disabled=true;}
+    $('#work-main').insertAdjacentHTML('afterbegin',`<p class="mission-location"><strong>Misión ${String(phase.number).padStart(2,'0')} · ubicación:</strong> ${esc(currentLocation?.building||'')} · ${esc(currentLocation?.floor||'')} · ${esc(currentLocation?.space||'')} · ${esc(task?.title||phase.title)}</p>`);
+    if(state.mission?.validation_version){
+      $('#work-main').insertAdjacentHTML('beforeend','<button class="outline" type="button" id="refresh-mission">Actualizar validación de la misión</button>');
+      $('#refresh-mission').addEventListener('click',async()=>{try{await refreshLearning();activePhase=nextPhase();render();}catch(error){setNotice(error.message);}});
+    }
     if(preserved){input.readOnly=true;$('#save-phase').disabled=true;$('#save-state').textContent='Competencia ya lograda · evidencia conservada';}
     const countText=()=>{counter.textContent=`${input.value.trim().length} caracteres · mínimo 20`;};countText();input.addEventListener('input',()=>{countText();clearTimeout(draftTimer);$('#save-state').textContent='Guardando borrador…';draftTimer=setTimeout(()=>{draftRequest=saveDraft(phase.id,input.value);},650);});
     $('#phase-form').addEventListener('submit',async event=>{
@@ -200,11 +242,11 @@
   function renderMissionCompletion(score){
     const specialtyNote=specialtyProgress?.recognized?'<strong class="specialty-recognition">Profesional TP en formación · especialidad completada</strong>':specialtyProgress?`<p class="reward-note">Progreso aprobado de la especialidad: ${specialtyProgress.approved_modules||0} de ${specialtyProgress.total_modules} módulos · ${specialtyProgress.unlocked_areas} áreas acumuladas.</p>`:'';
     const conditions=reward?.conditions||{};
-    const conditionLabels=[['final_score','Puntaje final mínimo: 75%'],['practice_score','Desempeño práctico mínimo: 75%'],['essential_competencies','Competencias esenciales demostradas'],['critical_safety','Criterios críticos de seguridad aprobados'],['activities_complete','Quiz y práctica completados']];
+    const conditionLabels=[['quiz_score','Quiz aprobado: mínimo 75%'],['final_score','Puntaje final mínimo: 75%'],['practice_score','Desempeño práctico mínimo: 75%'],['essential_competencies','Competencias esenciales demostradas'],['critical_safety','Criterios críticos de seguridad aprobados'],['activities_complete','Quiz y práctica completados']];
     const requirementList=`<ul class="ae-list approval-conditions">${conditionLabels.map(([key,label])=>`<li class="${conditions[key]?'is-met':'is-pending'}">${conditions[key]?'✓':'○'} ${label}</li>`).join('')}</ul>`;
     const recoveryLabel={practica_integral:'Recuperación asignada: refuerzo y nueva práctica profesional integral de 30 minutos.',refuerzo_especifico:'Recuperación asignada: refuerza aprendizajes pendientes y repite solo las misiones relacionadas.',repetir_practica_pendiente:'Recuperación asignada: fortalece y vuelve a demostrar el desempeño práctico pendiente.',demostrar_competencias_criticas:'Recuperación asignada: refuerza y demuestra nuevamente las competencias esenciales o críticas pendientes.'};
-    const result=reward?.status==='reviewed'?`<section class="reward-result level-${reward.level}"><p class="section-kicker">Resultado revisado · ${reward.attempts} intento${reward.attempts===1?'':'s'}</p><h3>${reward.approved?'¡Misión profesional aprobada!':'Aún tienes competencias por fortalecer'}</h3><div class="reward-score">${reward.final_score}<span>%</span></div><p>Quiz ${reward.quiz_score}% × 30% + práctica ${reward.practice_score}% × 70%</p><strong class="reward-level">${esc(reward.level_name)}</strong>${requirementList}${!reward.approved?`<p class="reward-feedback">${esc(recoveryLabel[reward.recovery_type]||'Revisa la retroalimentación y acuerda con tu docente el siguiente paso.')}</p>`:''}<p class="reward-feedback">${esc(reward.feedback)}</p>${reward.areas.length?`<div class="reward-area-list"><h4>Áreas desbloqueadas en ${esc(currentLocation?.district||'tu distrito')}</h4>${reward.areas.map(area=>`<article><div><strong>${esc(area.name)}</strong><small>${esc(area.ae_title||plan.module.title)}</small></div><button class="action-button explore-reward" type="button" data-level="${area.level}">Explorar área →</button></article>`).join('')}</div>`:reward.approved?'<p>El módulo está aprobado. No hay nuevas áreas adicionales para este nivel.</p>':''}${specialtyNote}<p class="reward-note">La exploración es opcional y no añade tiempo a los 45 minutos curriculares.</p></section>`:`<section class="reward-result pending"><p class="section-kicker">Estación 4 completa · ${plan.timing.total} minutos planificados</p><h3>Práctica profesional registrada</h3><p>Quiz formativo: <strong>${score}/${plan.quiz.length}</strong>. Planificaste, actuaste, verificaste y justificaste una situación laboral integrada con los aprendizajes esperados del módulo.</p><p class="reward-feedback">${esc(reward?.message||'Tu resultado final se publicará después de la revisión docente de las cuatro fases y de los criterios de seguridad.')}</p><p class="reward-note">Al revisar, tu docente comprobará el puntaje final (75%), el mínimo práctico (75%), las competencias esenciales y la seguridad crítica.</p><button class="action-button" id="refresh-reward" type="button">Actualizar resultado</button></section>`;
-    const recoveryHtml=recoveries.length?`<section class="recovery-list"><h3>Recupera tus aprendizajes</h3><p>Misiones opcionales basadas en las respuestas que necesitas reforzar. No suman tiempo a los 45 minutos del módulo.</p>${recoveries.map(item=>{const last=item.attempts?.at(-1);return `<form class="recovery-card" data-recovery-form="${item.index}"><strong>Pregunta ${item.index+1}${item.ae?` · AE ${esc(item.ae)}`:''}</strong><p>${esc(item.question)}</p>${item.skill?`<small>Habilidad · ${esc(item.skill)}</small>`:''}<p class="reward-feedback">${esc(item.explanation)}</p>${(item.attempts||[]).length?`<p class="recovery-saved">${item.attempts.length} intento${item.attempts.length===1?'':'s'} registrado${item.attempts.length===1?'':'s'}; último: ${esc(last.text)}</p>`:''}<label>Explica cómo resolverías ahora esta situación<textarea data-recovery-index="${item.index}" minlength="20" required placeholder="Relaciona el aprendizaje, el procedimiento y cómo verificarías el resultado."></textarea></label><button class="outline" type="submit">Guardar recuperación opcional</button></form>`}).join('')}</section>`:'';
+    const result=reward?.status==='reviewed'?`<section class="reward-result level-${reward.level}"><p class="section-kicker">Resultado revisado · ${reward.attempts} intento${reward.attempts===1?'':'s'}</p><h3>${reward.approved?'¡Misión profesional aprobada!':'Aún tienes competencias por fortalecer'}</h3><div class="reward-score">${reward.final_score}<span>%</span></div><p>Quiz ${reward.quiz_score}% × 30% + práctica ${reward.practice_score}% × 70%</p><strong class="reward-level">${esc(reward.level_name)}</strong>${requirementList}${!reward.approved?`<p class="reward-feedback">${esc(recoveryLabel[reward.recovery_type]||'Revisa la retroalimentación y acuerda con tu docente el siguiente paso.')}</p>`:''}<p class="reward-feedback">${esc(reward.feedback)}</p>${reward.areas.length?`<div class="reward-area-list"><h4>Áreas desbloqueadas en ${esc(currentLocation?.district||'tu distrito')}</h4>${reward.areas.map(area=>`<article><div><strong>${esc(area.name)}</strong><small>${esc(area.ae_title||plan.module.title)}</small></div><button class="action-button explore-reward" type="button" data-level="${area.level}">Explorar área →</button></article>`).join('')}</div>`:reward.approved?'<p>El módulo está aprobado. No hay nuevas áreas adicionales para este nivel.</p>':''}${specialtyNote}<p class="reward-note">La exploración es opcional y no añade tiempo a los 50 minutos curriculares.</p></section>`:`<section class="reward-result pending"><p class="section-kicker">Estación 4 completa · ${plan.timing.total} minutos planificados</p><h3>Práctica profesional registrada</h3><p>Quiz formativo: <strong>${score}/${plan.quiz.length}</strong>. Planificaste, actuaste, verificaste y justificaste una situación laboral integrada con los aprendizajes esperados del módulo.</p><p class="reward-feedback">${esc(reward?.message||'Tu resultado final se publicará después de la revisión docente de las cuatro fases y de los criterios de seguridad.')}</p><p class="reward-note">Al revisar, tu docente comprobará el puntaje final (75%), el mínimo práctico (75%), las competencias esenciales y la seguridad crítica.</p><button class="action-button" id="refresh-reward" type="button">Actualizar resultado</button></section>`;
+    const recoveryHtml=recoveries.length?`<section class="recovery-list"><h3>Recupera tus aprendizajes</h3><p>Misiones opcionales basadas en las respuestas que necesitas reforzar. No suman tiempo a los 50 minutos del módulo.</p>${recoveries.map(item=>{const last=item.attempts?.at(-1);return `<form class="recovery-card" data-recovery-form="${item.index}"><strong>Pregunta ${item.index+1}${item.ae?` · AE ${esc(item.ae)}`:''}</strong><p>${esc(item.question)}</p>${item.skill?`<small>Habilidad · ${esc(item.skill)}</small>`:''}<p class="reward-feedback">${esc(item.explanation)}</p>${(item.attempts||[]).length?`<p class="recovery-saved">${item.attempts.length} intento${item.attempts.length===1?'':'s'} registrado${item.attempts.length===1?'':'s'}; último: ${esc(last.text)}</p>`:''}<label>Explica cómo resolverías ahora esta situación<textarea data-recovery-index="${item.index}" minlength="20" required placeholder="Relaciona el aprendizaje, el procedimiento y cómo verificarías el resultado."></textarea></label><button class="outline" type="submit">Guardar recuperación opcional</button></form>`}).join('')}</section>`:'';
     $('#work-main').innerHTML=`${result}${recoveryHtml}<button class="outline" id="back-quiz" type="button">Revisar quiz</button>`;
     $('#back-quiz').addEventListener('click',()=>{activeRewardArea=null;setStage('quiz')});
     $('#refresh-reward')?.addEventListener('click',async()=>{try{const data=await request(`/api/modules/${moduleId}/city-experience`);state=data.state;reward=data.reward;specialtyProgress=data.specialty_progress;recoveries=data.recoveries||[];renderMissionCompletion(Number(state.quiz?.score)||0)}catch(error){setNotice(error.message)}});
@@ -254,7 +296,7 @@
   function renderMissionAside(count){
     const workspace=currentLocation?.space||'taller de especialidad';
     const destinations=[`Preparación de orden · ${workspace}`,`Intervención técnica · ${workspace}`,`Control de calidad · ${workspace}`,`Entrega y justificación · ${workspace}`];
-    const phasesHtml=plan.mission.phases.map((phase,i)=>{const task=plan.mission.tasks[i],done=Boolean(phaseState()[phase.id]),locked=!done&&phases.slice(0,i).some(key=>!phaseState()[key]);return `<li><button type="button" class="${phase.id===activePhase?'active':''}" ${locked?'disabled':''}><span class="phase-card-copy"><strong>${done?'✓ ':'Misión '+String(i+1).padStart(2,'0')+' · '}${esc(phase.title)}</strong><small>${esc(task?.title||phase.prompt)}</small><small>Destino · ${esc(destinations[i])}</small></span><small>${phase.minutes} min</small></button></li>`;}).join('');
+    const phasesHtml=plan.mission.phases.map((phase,i)=>{const task=plan.mission.tasks[i],done=phaseApproved(phase.id),locked=!done&&phases.slice(0,i).some(key=>!phaseApproved(key)),check=state.mission?.phase_checks?.[phase.id],submitted=Boolean(phaseState()[phase.id]);return `<li><button type="button" class="${phase.id===activePhase?'active':''}" ${locked?'disabled':''}><span class="phase-card-copy"><strong>${done?'✓ ':''}Misión ${String(i+1).padStart(2,'0')} · ${esc(phase.title)}</strong><small>${esc(task?.title||phase.prompt)}</small><small>Destino · ${esc(destinations[i])}</small><small>${done?'Validada':check?'Requiere corrección':submitted?'Pendiente de validación':'Por realizar'}</small></span><small>${phase.minutes} min</small></button></li>`;}).join('');
     const rubricHtml=plan.mission.rubric.length?`<details class="rubric-details"><summary>Criterios de verificación · ${plan.mission.rubric.length}</summary><ul class="ae-list">${plan.mission.rubric.map(item=>`<li>${esc(item.name)}</li>`).join('')}</ul></details>`:'';
     const destination=destinations[Math.max(0,Math.min(3,phases.indexOf(activePhase)))];
     $('#work-aside').innerHTML=`<section class="mission-comic"><p class="markers-title">Práctica profesional · misiones laborales</p><ol class="phase-list">${phasesHtml}</ol><p class="mission-location"><strong>Referencia de trabajo:</strong><br>${esc(destination)} · ${esc(currentLocation?.building||'Distrito')} · ${esc(currentLocation?.floor||'Piso asignado')}<br>La ruta amarilla del mapa 3D sigue la posición del personaje hasta tu distrito.</p><a class="city-map-link city-guide-link" href="${esc(cityGuideUrl())}" target="_blank" rel="noopener">Abrir mapa 3D con ruta amarilla ↗</a><p class="phase-time">Etapa 2 · 30 min · secuencia 5 + 15 + 5 + 5</p></section><div class="mission-resources"><p class="markers-title">Aprendizajes que se integran</p><ul class="ae-list">${plan.mission.aes.map((ae,i)=>`<li><strong>AE ${i+1}</strong> · ${esc(ae.title)}</li>`).join('')}</ul>${rubricHtml}</div>`;
@@ -263,8 +305,9 @@
   }
   async function setStage(stage){
     if(switchingStage)return;
+    if(stage==='mission'&&!quizApproved()){setNotice('Aprueba el quiz con al menos 75% antes de iniciar las misiones laborales.');return;}
     if(stage==='mission'&&savedCount()<plan.quiz.length){setNotice('Completa los diez desafíos antes de abrir las misiones laborales.');return;}
-    if(stage==='mission'&&quizRemaining()>0){setNotice('Completa los 15 minutos activos del quiz antes de iniciar la práctica profesional.');return;}
+    if(stage==='mission'&&quizRemaining()>0){setNotice('Completa los 20 minutos activos del quiz antes de iniciar la práctica profesional.');return;}
     if(stage!==activeStage){
       switchingStage=true;await heartbeatRequest;
       if(pendingSeconds)await sendHeartbeat(activeStage);
@@ -283,10 +326,10 @@
     if(journey.hidden||!plan)return;
     const quizGate=$('#quiz-time-gate'),openMission=$('#open-mission');
     if(quizGate){const remaining=quizRemaining();quizGate.textContent=`Tiempo activo restante: ${formatTime(remaining)}`;quizGate.hidden=remaining<=0;}
-    if(openMission)openMission.disabled=quizRemaining()>0;
+    if(openMission)openMission.disabled=!quizApproved()||quizRemaining()>0;
     const missionGate=$('#mission-time-gate'),savePhase=$('#save-phase');
-    if(missionGate&&savePhase){const remaining=missionRemaining();missionGate.textContent=`Tiempo activo de práctica restante para cerrar: ${formatTime(remaining)}`;missionGate.hidden=remaining<=0;savePhase.disabled=remaining>0||Boolean(savePhase.dataset.saving);}
-    const missionTab=$('#mission-tab');if(missionTab)missionTab.disabled=savedCount()<plan.quiz.length||quizRemaining()>0;
+    if(missionGate&&savePhase){const remaining=missionRemaining(),mission=state.mission||{},waiting=mission.validation_version&&mission.responses?.[activePhase]&&!mission.phase_checks?.[activePhase];missionGate.textContent=`Tiempo activo de práctica restante para cerrar: ${formatTime(remaining)}`;missionGate.hidden=remaining<=0;savePhase.disabled=remaining>0||Boolean(savePhase.dataset.saving)||Boolean(waiting)||phaseApproved(activePhase);}
+    const missionTab=$('#mission-tab');if(missionTab)missionTab.disabled=!quizApproved()||quizRemaining()>0;
   }
   function formatTime(value){const mins=Math.floor(value/60),secs=value%60;return `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;}
   async function sendHeartbeat(stage=pendingStage){
@@ -294,7 +337,14 @@
     try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'heartbeat',stage,seconds})});state=result.state;if(stage===activeStage)activeSeconds=Number(state[stage]?.active_seconds)||activeSeconds;$('#timer-value').textContent=formatTime(activeSeconds+pendingSeconds);updateTimeGates();}
     catch(_error){pendingSeconds+=seconds;}
   }
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)heartbeatRequest=sendHeartbeat();});
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){heartbeatRequest=sendHeartbeat();return;}
+    if(moduleId&&plan&&!journey.hidden)Promise.resolve(heartbeatRequest).then(()=>request(`/api/modules/${moduleId}/city-experience`)).then(data=>{
+      state=data.state;activeSeconds=Number(state?.[activeStage]?.active_seconds)||0;
+      $('#timer-value').textContent=formatTime(activeSeconds+pendingSeconds);renderProgress();updateTimeGates();
+      if(activeStage==='quiz')renderQuizAside(Math.min(savedCount(),plan.quiz.length-1),savedCount());
+    }).catch(()=>{});
+  });
   setInterval(tick,1000);
   init();
 })();

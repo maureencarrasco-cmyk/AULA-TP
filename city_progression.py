@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from decimal import Decimal
 
 PHASE_MINUTES = {'planificar': 5, 'actuar': 15, 'verificar': 5, 'justificar': 5}
+QUIZ_PASS_PERCENT = 75
 
 
 def now():
@@ -17,11 +18,40 @@ def quiz_percent(experience):
     return Decimal(correct * 100) / max(1, len(answers))
 
 
-def result_for(experience, review):
+def quiz_learning_status(experience, total=10):
+    quiz = experience.get('quiz') or {}
+    answers = quiz.get('answers') or {}
+    correct = sum(bool(answer.get('correct') or answer.get('recovered')) for answer in answers.values())
+    percent = Decimal(correct * 100) / max(1, total)
+    complete = bool(quiz.get('completed_at') and len(answers) == total)
+    return {'total': total, 'answered': len(answers), 'correct': correct, 'percent': float(percent),
+            'minimum': QUIZ_PASS_PERCENT, 'complete': complete,
+            'approved': complete and percent >= QUIZ_PASS_PERCENT}
+
+
+def answer_feedback(question, choice):
+    correct_choice = question['answer']
+    option_feedback = question.get('option_feedback') or []
+    return {'correct': choice == correct_choice, 'explanation': question.get('explanation') or '',
+            'correct_choice': correct_choice, 'correct_answer': question['options'][correct_choice],
+            'choice_feedback': option_feedback[choice] if choice < len(option_feedback) else question.get('explanation') or ''}
+
+
+def phase_approved(mission, phase):
+    if mission.get('recovery') and phase not in mission.get('required_phases', []):
+        return phase in (mission.get('responses') or {})
+    check = (mission.get('phase_checks') or {}).get(phase) or {}
+    if mission.get('validation_version'):
+        return bool(check.get('approved') and check.get('revision') == len((mission.get('submissions') or {}).get(phase, [])))
+    return phase in (mission.get('responses') or {})
+
+
+def result_for(experience, review, legacy=False):
     quiz = quiz_percent(experience)
     practice = sum(sum(row) for row in review['points'])
     weighted = quiz * Decimal('0.30') + Decimal(practice) * Decimal('0.70')
-    conditions = {'final_score': weighted >= 75, 'practice_score': practice >= 75,
+    conditions = {'quiz_score': legacy or quiz_learning_status(experience)['approved'],
+                  'final_score': weighted >= 75, 'practice_score': practice >= 75,
                   'essential_competencies': bool(review.get('competencies_approved')),
                   'critical_safety': bool(review.get('safety_approved')),
                   'activities_complete': bool(experience.get('quiz', {}).get('completed_at') and
@@ -66,7 +96,7 @@ def evaluate_city(experience, plan=None):
     review = mission.get('review')
     base = {'status': 'in_progress', 'approved': False, 'quiz_score': None, 'practice_score': None,
             'final_score': None, 'level': 0, 'areas': deepcopy(experience.get('earned_areas') or []),
-            'conditions': dict.fromkeys(('final_score', 'practice_score', 'essential_competencies',
+            'conditions': dict.fromkeys(('quiz_score', 'final_score', 'practice_score', 'essential_competencies',
                                         'critical_safety', 'activities_complete'), False),
             'attempts': len({item.get('attempt_id', 1) for item in mission.get('reviews') or []}),
             'attempt_id': mission.get('attempt_id', 1), 'failed_attempts': len(failed_attempts(experience)),
@@ -93,6 +123,8 @@ def evaluate_city(experience, plan=None):
 
 def sync_awards(experience, plan, module_id, legacy=False):
     result = evaluate_city(experience, plan)
+    if legacy and experience.get('mission', {}).get('review'):
+        result.update(result_for(experience, experience['mission']['review'], legacy=True))
     if not result['approved']:
         return
     if not legacy and experience.get('teacher_alert'):
@@ -160,7 +192,7 @@ def start_recovery(experience, reinforcement):
     mission['required_seconds'] = recovery['minutes'] * 60
     mission['active_seconds'] = 0
     for phase in recovery['phases']:
-        for key in ('responses', 'drafts', 'completed_at_by_phase'):
+        for key in ('responses', 'drafts', 'completed_at_by_phase', 'phase_checks'):
             mission.setdefault(key, {}).pop(phase, None)
     mission.pop('review', None)
     mission.pop('completed_at', None)

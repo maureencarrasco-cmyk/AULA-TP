@@ -17,7 +17,7 @@ from itsdangerous import URLSafeTimedSerializer, BadSignature
 from practice_scenarios import scenario as practice_scenario, review as practice_review
 from practice_pedagogy import profile as practice_profile
 from course_catalog import ensure_course_catalog
-from city_progression import evaluate_city, apply_review, sync_awards, start_recovery, migrate_awards, recovery_question, PHASE_MINUTES
+from city_progression import evaluate_city, apply_review, sync_awards, start_recovery, migrate_awards, recovery_question, PHASE_MINUTES, quiz_learning_status, answer_feedback, phase_approved
 
 ROOT=Path(__file__).resolve().parent
 
@@ -160,10 +160,31 @@ def create_app(test_config=None):
                 if not m['published']:return None,fail('El módulo está en preparación.',403)
                 if not is_demo_student(u) and not con.execute('SELECT 1 FROM enrollments WHERE user_id=? AND course_id=?',(u['id'],m['course_id'])).fetchone():return None,fail('No tienes matrícula en este curso.',403)
             return dict(m),None
-    def city_experience_content(content, mid, uid, attempt_id=1):
+    def city_experience_content(content, mid, uid, attempt_id=1, question_order=None):
         questions=content.get('questions') or []
         rng=random.Random(f'city-45-v1:{uid}:{mid}')
         difficulty_aliases={'Fácil':'Inicial','Facil':'Inicial','Media':'Intermedia','Difícil':'Avanzada','Dificil':'Avanzada'}
+        cognitive_aliases={'modelar':'Modelar','resolver':'Modelar','aplicar':'Modelar','relacionar':'Modelar',
+                           'argumentar':'Argumentar','verificar':'Argumentar','justificar':'Argumentar','fundamentar':'Argumentar',
+                           'representar':'Representar','interpretar':'Representar','leer planos':'Representar'}
+        def normalized_text(value):
+            decomposed=unicodedata.normalize('NFKD',str(value or '').casefold())
+            return ''.join(char for char in decomposed if not unicodedata.combining(char))
+        def cognitive_skill(question):
+            source=normalized_text(question.get('skill')).strip()
+            for alias,category in cognitive_aliases.items():
+                if source==alias or source.startswith(alias+' ') or source.startswith(alias+'-'):
+                    return category
+            evidence=normalized_text(' '.join(str(question.get(key) or '') for key in ('question','stimulus','criterion','explanation','caption')))
+            cues={
+                'Representar':('plano','esquema','grafico','diagrama','croquis','simbologia','representacion','interpretar','lectura de','tabla','modelo visual'),
+                'Argumentar':('justific','fundament','evidencia','verific','criterio','decidir','decision','riesgo','alternativa','validar','inconsistencia','por que'),
+                'Modelar':('model','calcular','estimar','resolver','aplicar','dimension','proponer','disenar','planificar','procedimiento','preparar','montar','ejecutar','construir')}
+            ranked=sorted(((sum(evidence.count(cue) for cue in terms),category) for category,terms in cues.items()),reverse=True)
+            if ranked[0][0]:return ranked[0][1]
+            for prefix,category in (('analiz','Argumentar'),('comprend','Representar'),('identific','Representar'),('describ','Argumentar'),('seleccion','Argumentar'),('calific','Modelar')):
+                if source.startswith(prefix):return category
+            return 'Modelar'
         def normalized_difficulty(question):
             level=question.get('difficulty')
             return difficulty_aliases.get(level,level)
@@ -174,7 +195,7 @@ def create_app(test_config=None):
             while pool and len(chosen)<count:
                 pool.sort(key=lambda q:(
                     q.get('ae') in {item.get('ae') for item in chosen},
-                    q.get('skill') in {item.get('skill') for item in chosen},
+                    cognitive_skill(q) in {cognitive_skill(item) for item in chosen},
                     rng.random()))
                 chosen.append(pool.pop(0))
             fallback_levels={'Inicial':('Intermedia','Avanzada'),'Intermedia':('Inicial','Avanzada'),'Avanzada':('Intermedia','Inicial')}
@@ -184,11 +205,32 @@ def create_app(test_config=None):
                 while fallback_pool and len(chosen)<count:
                     fallback_pool.sort(key=lambda q:(
                         q.get('ae') in {item.get('ae') for item in chosen},
-                        q.get('skill') in {item.get('skill') for item in chosen},
+                        cognitive_skill(q) in {cognitive_skill(item) for item in chosen},
                         rng.random()))
                     chosen.append(fallback_pool.pop(0))
             selected.extend((q,difficulty) for q in chosen)
-        quiz=[{**{k:q.get(k) for k in ('question','options','explanation','stimulus','image','caption','alt','ae','skill','criterion') if k in q},'difficulty':difficulty} for q,difficulty in selected]
+        # Keep the 4/5/1 difficulty quota while ensuring each quiz exercises all three requested skills.
+        for target in ('Modelar','Argumentar','Representar'):
+            if any(cognitive_skill(question)==target for question,_ in selected):continue
+            selected_questions=[question for question,_ in selected]
+            swaps=[]
+            for index,(current,current_level) in enumerate(selected):
+                current_skill=cognitive_skill(current)
+                if not current_skill or sum(cognitive_skill(question)==current_skill for question,_ in selected)<2:continue
+                for candidate in questions:
+                    if candidate in selected_questions or cognitive_skill(candidate)!=target or normalized_difficulty(candidate)!=current_level:continue
+                    other=[question for pos,(question,_) in enumerate(selected) if pos!=index]
+                    swaps.append((current.get('ae') not in {question.get('ae') for question in other},
+                                  candidate.get('ae') in {question.get('ae') for question in other},
+                                  rng.random(),index,candidate))
+            if swaps:
+                _,_,_,index,candidate=min(swaps,key=lambda swap:swap[:3])
+                selected[index]=(candidate,selected[index][1])
+        if question_order:
+            bank={question['question']:question for question in questions}
+            if len(question_order)==10 and all(item['question'] in bank for item in question_order):
+                selected=[(bank[item['question']],item['difficulty']) for item in question_order]
+        quiz=[{**{k:q.get(k) for k in ('question','options','explanation','stimulus','image','caption','alt','ae','skill','criterion') if k in q},'difficulty':difficulty,'cognitive_skill':cognitive_skill(q)} for q,difficulty in selected]
         aes=[{'title':a.get('title') or a.get('name') or f'Aprendizaje esperado {i+1}',
               'description':a.get('description') or ''} for i,a in enumerate(content.get('aes') or [])]
         candidates=[item for item in (content.get('encargos') or {}).get('items') or [] if item.get('station') in (2,3)]
@@ -206,7 +248,7 @@ def create_app(test_config=None):
             'version':2,
             'module':{'id':mid,'title':content.get('title') or '', 'case_title':case.get('title') if attempt_id>1 else content.get('case_title') or case.get('title') or 'Situación laboral integrada'},
             'attempt_id':attempt_id,
-            'timing':{'total':45,'quiz':15,'mission':30,'quiz_per_question':1.5,'phases':[5,15,5,5]},
+            'timing':{'total':50,'quiz':20,'mission':30,'quiz_per_question':2,'phases':[5,15,5,5]},
             'quiz':quiz,
             'mission':{
                 'scenario':case.get('context') or content.get('context') or content.get('application') or '',
@@ -373,7 +415,7 @@ def create_app(test_config=None):
             if not experience.get('started_at'):
                 now=datetime.now(timezone.utc).isoformat()
                 experience={'version':2,'started_at':now,'active_seconds':0,'quiz':{'answers':{},'attempts':{},'active_seconds':0},
-                            'mission':{'responses':{},'drafts':{},'active_seconds':0}}
+                            'mission':{'responses':{},'drafts':{},'active_seconds':0,'validation_version':1}}
                 state['city_experience']=experience
                 trace(state,'city-experience-started',version=2)
                 putstate(con,mid,state)
@@ -382,7 +424,10 @@ def create_app(test_config=None):
             city_courses=con.execute('SELECT id,title FROM courses ORDER BY id').fetchall()
             location=city_locations_for_courses(city_courses).get(m['course_id'])
             course=con.execute('SELECT title FROM courses WHERE id=?',(m['course_id'],)).fetchone()
-            plan=city_experience_content(content,mid,session['uid'],experience.get('mission',{}).get('attempt_id',1))
+            plan=city_experience_content(content,mid,session['uid'],experience.get('mission',{}).get('attempt_id',1),experience['quiz'].get('question_order'))
+            if not experience['quiz'].get('question_order'):
+                experience['quiz']['question_order']=[{'question':q['question'],'difficulty':q['difficulty']} for q in plan['quiz']]
+                putstate(con,mid,state)
             for question in plan['quiz']:question.pop('explanation',None)
             if 'earned_areas' not in experience:
                 migrate_awards(experience,plan,mid)
@@ -404,12 +449,20 @@ def create_app(test_config=None):
             answer=(experience.get('quiz',{}).get('answers') or {}).get(str(index)) or {}
             if answer and not answer.get('correct') and not answer.get('recovered'):
                 variant=recovery_question(content,plan,experience,index)
+                ae_index=question.get('ae');ae=(content.get('aes') or [])[ae_index] if type(ae_index) is int and 0<=ae_index<len(content.get('aes') or []) else {}
+                latest=(experience.get('quiz',{}).get('recovery_answers',{}).get(str(index)) or [answer])[-1]
                 recoveries.append({'index':index,'question':question.get('question',''),'ae':question.get('ae'),
                                    'skill':question.get('skill',''),'explanation':answer.get('explanation',''),
+                                   'correct_answer':latest.get('correct_answer') or answer.get('correct_answer') or '',
+                                   'latest_feedback':latest.get('choice_feedback') or latest.get('explanation') or answer.get('explanation',''),
+                                   'reinforcement':{'ae_title':ae.get('title') or '', 'criterion':question.get('criterion') or '',
+                                                    'lesson':ae.get('lesson') or [ae.get('description') or ''],
+                                                    'example':ae.get('example') or (ae.get('steps') or [''])[0]},
+                                   'reinforcement_attempts':experience.get('quiz',{}).get('reinforcements',{}).get(str(index),[]),
                                    'reassessment':{k:v for k,v in variant.items() if k not in ('answer','explanation','option_feedback')} if variant else None,
                                    'reassessment_attempts':experience.get('quiz',{}).get('recovery_answers',{}).get(str(index),[]),
                                    'attempts':(experience.get('mission',{}).get('recovery_missions') or {}).get(str(index),[])})
-        return jsonify(course_title=course['title'],location=location,plan=plan,state=experience,
+        return jsonify(course_title=course['title'],location=location,plan=plan,state=experience,quiz_learning=quiz_learning_status(experience,len(plan['quiz'])),
                        reward=city_reward(experience,plan),specialty_progress=specialty_progress,recoveries=recoveries)
     @app.post('/api/modules/<int:mid>/city-experience')
     @require('student')
@@ -423,7 +476,7 @@ def create_app(test_config=None):
             state=getstate(con,mid)
             experience=state.get('city_experience')
             if not experience:return fail('Inicia la experiencia antes de guardar avances.',409)
-            plan=city_experience_content(content,mid,session['uid'],experience.get('mission',{}).get('attempt_id',1))
+            plan=city_experience_content(content,mid,session['uid'],experience.get('mission',{}).get('attempt_id',1),experience.get('quiz',{}).get('question_order'))
             migrate_awards(experience,plan,mid)
             quiz=experience.setdefault('quiz',{'answers':{},'attempts':{}})
             mission=experience.setdefault('mission',{'responses':{},'drafts':{}})
@@ -434,7 +487,8 @@ def create_app(test_config=None):
                 stage=payload.get('stage')
                 if type(seconds)!=int or not 1<=seconds<=60 or stage not in ('quiz','mission'):return fail('Intervalo de actividad inválido.')
                 if stage=='mission' and len(quiz.get('answers',{}))!=len(plan['quiz']):return fail('Completa primero todos los desafíos del quiz.',403)
-                if stage=='mission' and int(quiz.get('active_seconds') or 0)<plan['timing']['quiz']*60:return fail('Completa los 15 minutos activos del quiz antes de iniciar la práctica profesional.',403)
+                if stage=='mission' and not quiz_learning_status(experience,len(plan['quiz']))['approved']:return fail('Aprueba el quiz con al menos 75% antes de iniciar las misiones laborales.',403)
+                if stage=='mission' and int(quiz.get('active_seconds') or 0)<plan['timing']['quiz']*60:return fail('Completa los 20 minutos activos del quiz antes de iniciar la práctica profesional.',403)
                 experience['active_seconds']=int(experience.get('active_seconds') or 0)+seconds
                 experience.setdefault(stage,{})['active_seconds']=int(experience[stage].get('active_seconds') or 0)+seconds
             elif operation=='recovery-start':
@@ -442,28 +496,40 @@ def create_app(test_config=None):
                     return fail('No quedan situaciones equivalentes inéditas. El docente debe ampliar el banco en una nueva versión de práctica.',409)
                 try:recovery=start_recovery(experience,payload.get('reinforcement'))
                 except ValueError as error:return fail(str(error),409)
-                retry_plan=city_experience_content(content,mid,session['uid'],mission['attempt_id'])
+                retry_plan=city_experience_content(content,mid,session['uid'],mission['attempt_id'],quiz.get('question_order'))
                 mission['case_title']=retry_plan['module']['case_title'];mission['scenario']=retry_plan['mission']['scenario']
                 trace(state,'city-recovery-started',attempt_id=mission['attempt_id'],phases=recovery['phases'])
+            elif operation=='quiz-reinforcement':
+                index=payload.get('index');answer=(quiz.get('answers') or {}).get(str(index)) or {}
+                if type(index) is not int or not 0<=index<len(plan['quiz']) or not quiz.get('completed_at') or not answer or answer.get('correct') or answer.get('recovered'):
+                    return fail('Selecciona un aprendizaje pendiente después de completar el quiz.',403)
+                if not text_valid(payload.get('text'),20):return fail('Explica qué aprendiste y cómo corregirías el procedimiento (mínimo 20 caracteres).')
+                quiz.setdefault('reinforcements',{}).setdefault(str(index),[]).append({'text':payload['text'].strip(),'at':datetime.now(timezone.utc).isoformat()})
+                trace(state,'city-quiz-reinforcement',index=index,ae=plan['quiz'][index].get('ae'))
             elif operation=='quiz-retry-answer':
                 index=payload.get('index');choice=payload.get('choice')
                 answers=quiz.get('answers') or {}
                 current_result=city_reward(experience)
-                if not mission.get('review') or current_result['approved']:
-                    return fail('La recuperación evaluada requiere una revisión docente insuficiente.',403)
+                before_practice=bool(quiz.get('completed_at') and not quiz_learning_status(experience,len(plan['quiz']))['approved'])
+                if not before_practice and (not mission.get('review') or current_result['approved']):
+                    return fail('Este quiz ya habilita el avance o no tiene una recuperación pendiente.',403)
                 if (current_result.get('recovery') or {}).get('type')=='practica_integral':
                     mission.setdefault('integral_required_after',mission.get('attempt_id',1))
                 if type(index) is not int or not 0<=index<len(plan['quiz']) or str(index) not in answers or answers[str(index)].get('correct') or answers[str(index)].get('recovered'):
                     return fail('Selecciona un desafío pendiente de recuperación.',403)
-                if not (mission.get('recovery_missions') or {}).get(str(index)):
+                reinforcements=(quiz.get('reinforcements') or {}).get(str(index)) or []
+                retries=(quiz.get('recovery_answers') or {}).get(str(index)) or []
+                if before_practice and len(reinforcements)<((retries[-1].get('reinforcement_count',0) if retries else 0)+1):
+                    return fail('Revisa la explicación y registra un nuevo refuerzo antes de reintentar.',409)
+                if not before_practice and not (mission.get('recovery_missions') or {}).get(str(index)):
                     return fail('Registra primero el refuerzo y la reflexión de este desafío.',409)
                 variant=recovery_question(content,plan,experience,index)
                 if not variant or payload.get('question')!=variant['question']:
                     return fail('Abre el desafío equivalente actualizado antes de responder.',409)
                 if type(choice) is not int or choice not in range(len(variant.get('options') or [])):
                     return fail('Selecciona una alternativa disponible.')
-                correct=choice==variant.get('answer')
-                quiz.setdefault('recovery_answers',{}).setdefault(str(index),[]).append({'question':variant['question'],'choice':choice,'correct':correct,'at':datetime.now(timezone.utc).isoformat()})
+                feedback=answer_feedback(variant,choice);correct=feedback['correct']
+                quiz.setdefault('recovery_answers',{}).setdefault(str(index),[]).append({'question':variant['question'],'choice':choice,**feedback,'reinforcement_count':len(reinforcements),'at':datetime.now(timezone.utc).isoformat()})
                 if correct:answers[str(index)]['recovered']=True
                 quiz['score']=sum(bool(answer.get('correct') or answer.get('recovered')) for answer in answers.values())
                 sync_awards(experience,plan,mid)
@@ -501,7 +567,7 @@ def create_app(test_config=None):
                 question=plan['quiz'][index]
                 original=next((q for q in content.get('questions') or [] if q.get('question')==question['question']),None)
                 correct=bool(original and choice==original.get('answer'))
-                answers[str(index)]={'choice':choice,'correct':correct,'explanation':question.get('explanation') or '',
+                answers[str(index)]={'question':question['question'],'choice':choice,**answer_feedback(original,choice),
                                      'at':datetime.now(timezone.utc).isoformat()}
                 quiz.setdefault('attempts',{})[str(index)]=int(quiz.get('attempts',{}).get(str(index),0))+1
                 if len(answers)==len(plan['quiz']):
@@ -513,24 +579,29 @@ def create_app(test_config=None):
                 if mission.get('review'):return fail('Este intento ya está revisado. Inicia una recuperación para registrar nuevas evidencias.',409)
                 phase_index=next((i for i,item in enumerate(phases) if item['id']==phase),-1)
                 if len(quiz.get('answers',{}))!=len(plan['quiz']):return fail('Completa primero todos los desafíos del quiz.',403)
+                if not quiz_learning_status(experience,len(plan['quiz']))['approved']:return fail('Necesitas al menos 75% en el quiz para realizar la práctica profesional.',403)
                 if phase_index<0:return fail('Fase de misión inválida.')
-                if int(quiz.get('active_seconds') or 0)<plan['timing']['quiz']*60:return fail('Completa primero los 15 minutos del quiz.',403)
+                if int(quiz.get('active_seconds') or 0)<plan['timing']['quiz']*60:return fail('Completa primero los 20 minutos del quiz.',403)
                 responses=mission.setdefault('responses',{});drafts=mission.setdefault('drafts',{})
-                if any(item['id'] not in responses for item in phases[:phase_index]):return fail('Completa la fase anterior antes de continuar.',403)
+                if any(not phase_approved(mission,item['id']) for item in phases[:phase_index]):return fail('La misión anterior debe estar validada antes de continuar.',403)
                 if mission.get('recovery') and phase not in mission.get('required_phases',[]):return fail('Esta fase ya está lograda y se conserva en la recuperación.',403)
                 text=payload.get('text')
                 if not isinstance(text,str) or len(text)>10000:return fail('Respuesta inválida.')
                 if operation=='mission-draft':
                     drafts[phase]=text
                 else:
+                    if mission.get('validation_version') and phase_approved(mission,phase):return fail('Esta misión ya está validada. Su evidencia se conserva.',409)
+                    if mission.get('validation_version') and phase in responses and phase not in mission.get('phase_checks',{}):return fail('Tu entrega está pendiente de validación docente.',409)
                     if not text_valid(text,20):return fail('Escribe al menos 20 caracteres para guardar esta fase.')
                     required_seconds=mission.get('required_seconds',plan['timing']['mission']*60)
                     if len(set(responses)|{phase})==len(phases) and int(mission.get('active_seconds') or 0)<required_seconds:
                         return fail(f'Completa los {required_seconds//60} minutos de práctica de este intento antes de cerrarlo.',403)
                     responses[phase]=text.strip();drafts.pop(phase,None)
+                    mission.setdefault('submissions',{}).setdefault(phase,[]).append({'text':text.strip(),'at':datetime.now(timezone.utc).isoformat(),'attempt_id':mission.get('attempt_id',1)})
+                    mission.setdefault('phase_checks',{}).pop(phase,None)
                     mission.setdefault('completed_at_by_phase',{})[phase]=datetime.now(timezone.utc).isoformat()
                     if mission.pop('review',None):trace(state,'city-review-invalidated',phase=phase)
-                    if len(responses)==len(phases):mission['completed_at']=datetime.now(timezone.utc).isoformat()
+                    if len(responses)==len(phases) and not mission.get('validation_version'):mission['completed_at']=datetime.now(timezone.utc).isoformat()
                     trace(state,'city-mission-phase',phase=phase,index=phase_index,
                           aes=list(range(1,len(plan['mission']['aes'])+1)),
                           tasks=[item.get('id') for item in plan['mission']['tasks']])
@@ -887,6 +958,36 @@ def create_app(test_config=None):
             s['exam']['review']={'points':points,'score':sum(points),'feedback':b['feedback'].strip(),'teacher_id':session['uid']}
             con.execute('UPDATE progress SET state=?,updated=CURRENT_TIMESTAMP WHERE user_id=? AND module_id=?',(json.dumps(s,ensure_ascii=False),b['user_id'],b['module_id']))
         return jsonify(ok=True)
+    @app.post('/api/teacher/city-phase-review')
+    @require('teacher')
+    def review_city_phase():
+        b=body();phase=b.get('phase');points=b.get('points')
+        if (not isinstance(phase,str) or phase not in PHASE_MINUTES or not isinstance(points,list) or len(points)!=5 or
+                any(type(point) is not int or point not in range(6) for point in points) or
+                type(b.get('competencies_approved')) is not bool or type(b.get('safety_approved')) is not bool or not text_valid(b.get('feedback'),20)):
+            return fail('Evalúa los cinco criterios de 0 a 5, confirma competencias y seguridad y escribe la orientación.')
+        with db() as con:
+            con.execute('BEGIN IMMEDIATE')
+            row=con.execute("SELECT p.state FROM progress p JOIN users u ON u.id=p.user_id WHERE p.user_id=? AND p.module_id=? AND u.role='student'",(b.get('user_id'),b.get('module_id'))).fetchone()
+            if not row:return fail('Progreso inexistente.',404)
+            state=json.loads(row['state']);experience=state.get('city_experience') or {};mission=experience.get('mission') or {}
+            submissions=mission.get('submissions',{}).get(phase) or []
+            if (not mission.get('validation_version') or not submissions or phase not in mission.get('responses',{}) or mission.get('review')):
+                return fail('Esta misión no tiene una entrega pendiente de validación.',409)
+            if b.get('attempt_id')!=mission.get('attempt_id',1) or b.get('revision')!=len(submissions):
+                return fail('La entrega cambió. Abre de nuevo la evidencia antes de evaluar.',409)
+            check={'phase':phase,'points':points,'competencies_approved':b['competencies_approved'],
+                   'safety_approved':b['safety_approved'],'feedback':b['feedback'].strip(),
+                   'attempt_id':mission.get('attempt_id',1),'revision':len(submissions),
+                   'teacher_id':session['uid'],'at':datetime.now(timezone.utc).isoformat(),
+                   'approved':sum(points)*4>=75 and b['competencies_approved'] and b['safety_approved']}
+            if phase_approved(mission,phase):return fail('Esta entrega ya está validada.',409)
+            mission.setdefault('phase_checks',{})[phase]=check
+            mission.setdefault('phase_check_history',[]).append(check)
+            if all(phase_approved(mission,key) for key in PHASE_MINUTES):mission['completed_at']=datetime.now(timezone.utc).isoformat()
+            trace(state,'city-mission-validated',phase=phase,approved=check['approved'],revision=check['revision'])
+            con.execute('UPDATE progress SET state=?,updated=CURRENT_TIMESTAMP WHERE user_id=? AND module_id=?',(json.dumps(state,ensure_ascii=False),b['user_id'],b['module_id']))
+        return jsonify(ok=True,check=check)
     @app.post('/api/teacher/city-review')
     @require('teacher')
     def review_city_experience():
@@ -904,6 +1005,7 @@ def create_app(test_config=None):
             state=json.loads(row['state']);experience=state.get('city_experience') or {};mission=experience.get('mission') or {}
             if not experience.get('quiz',{}).get('completed_at') or not mission.get('completed_at'):
                 return fail('El estudiante debe completar las dos etapas antes de revisar.',409)
+            if not quiz_learning_status(experience)['approved']:return fail('El quiz debe estar aprobado con al menos 75% antes de cerrar la práctica.',409)
             if b.get('attempt_id',mission.get('attempt_id',1))!=mission.get('attempt_id',1):return fail('El intento cambió. Vuelve a abrir las evidencias antes de evaluar.',409)
             if mission.get('recovery'):
                 previous=mission['attempt_history'][-1]['review']
@@ -911,7 +1013,7 @@ def create_app(test_config=None):
                     if phase not in mission['required_phases'] and values!=previous['points'][list(PHASE_MINUTES).index(phase)]:
                         return fail('Conserva la calificación de las fases ya logradas; evalúa solo las fases de recuperación.',409)
             content=load_content(row['content'],row['position']);content['title']=row['title']
-            plan=city_experience_content(content,b['module_id'],b['user_id'],mission.get('attempt_id',1))
+            plan=city_experience_content(content,b['module_id'],b['user_id'],mission.get('attempt_id',1),experience.get('quiz',{}).get('question_order'))
             migrate_awards(experience,plan,b['module_id'])
             result=apply_review(experience,{'points':points,'safety_approved':safety_approved,'competencies_approved':competencies_approved,
                                           'critical_phases':critical_phases,'feedback':feedback.strip(),'teacher_id':session['uid']},plan,b['module_id'])

@@ -106,6 +106,7 @@
     'tecnologias digitales':[36,26]
   };
   let route=null,routeTimer=0,routeSvg=null,routeStatus=null;
+  let roomGuide=null,roomGuideActive=false,quizClock=null,quizClockLoading='';
   const params=new URLSearchParams(globalThis.location?.search||'');
   const queryRoute=params.get('cityRoute');
   if(queryRoute&&districts[normalize(queryRoute)])route={district:normalize(queryRoute),label:queryRoute,area:params.get('cityArea')||''};
@@ -117,6 +118,44 @@
   }
   function clearRoute(){
     route=null;clearInterval(routeTimer);routeTimer=0;routeSvg?.remove();routeSvg=null;routeStatus?.remove();routeStatus=null;
+  }
+  async function flushQuizClock(clock=quizClock){
+    if(!clock?.pending||clock.saving)return clock?.saving;
+    const seconds=Math.min(60,clock.pending,Math.max(0,1200-clock.activeSeconds));
+    if(!seconds){clearInterval(clock.timer);return;}
+    clock.pending-=seconds;
+    clock.saving=(async()=>{
+      try{
+        const response=await fetch(`/api/modules/${encodeURIComponent(clock.moduleId)}/city-experience`,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRF-Token':clock.csrf},body:JSON.stringify({operation:'heartbeat',stage:'quiz',seconds})});
+        const data=await response.json().catch(()=>({}));
+        if(!response.ok)throw new Error(data.error||'No se pudo guardar el tiempo del quiz.');
+        clock.activeSeconds=Number(data.state?.quiz?.active_seconds)||clock.activeSeconds+seconds;
+      }catch(_error){clock.pending+=seconds;}
+      finally{clock.saving=null;if(clock.activeSeconds>=1200)clearInterval(clock.timer);}
+    })();
+    return clock.saving;
+  }
+  async function startQuizClock(moduleId){
+    if(!/^\d+$/.test(String(moduleId||''))||quizClock?.moduleId===String(moduleId)||quizClockLoading===String(moduleId))return;
+    quizClockLoading=String(moduleId);
+    try{
+      const sessionResponse=await fetch('/api/session',{credentials:'same-origin'}),session=await sessionResponse.json();
+      if(!roomGuideActive||session.user?.role!=='student'||!session.csrf)return;
+      const response=await fetch(`/api/modules/${encodeURIComponent(moduleId)}/city-experience`,{credentials:'same-origin'}),data=await response.json();
+      if(!roomGuideActive||!response.ok)return;
+      const clock={moduleId:String(moduleId),csrf:session.csrf,activeSeconds:Number(data.state?.quiz?.active_seconds)||0,pending:0,timer:0,saving:null};
+      if(clock.activeSeconds>=1200)return;
+      quizClock=clock;
+      clock.timer=setInterval(()=>{
+        if(document.visibilityState!=='visible'||!roomGuideActive||clock.activeSeconds+clock.pending>=1200)return;
+        clock.pending++;
+        if(clock.pending>=30||clock.activeSeconds+clock.pending>=1200)flushQuizClock(clock);
+      },1000);
+    }catch(_error){}finally{quizClockLoading='';}
+  }
+  function stopQuizClock(){
+    if(!quizClock)return;
+    const clock=quizClock;quizClock=null;clearInterval(clock.timer);flushQuizClock(clock);
   }
   function startRoute(){
     const map=document.querySelector('.city-map-overlay');
@@ -160,8 +199,34 @@
     if(areaNode.textContent!==areaText)areaNode.textContent=areaText;
     if(!routeTimer)routeTimer=setInterval(startRoute,120);
   }
+  function syncRoomGuide(){
+    const workspace=document.querySelector('.city-walk-workspace');
+    const roomButton=workspace?.querySelector('.city-open-pilot');
+    const active=Boolean(roomButton&&!roomButton.hidden&&getComputedStyle(roomButton).display!=='none');
+    if(!active){roomGuide?.remove();roomGuide=null;if(roomGuideActive)stopQuizClock();roomGuideActive=false;return;}
+    if(roomGuideActive)return;
+    roomGuideActive=true;
+    const params=new URLSearchParams(globalThis.location?.search||''),courseId=params.get('cityCourseId'),moduleId=params.get('cityModuleId');
+    if(moduleId)startQuizClock(moduleId);
+    const course=params.get('cityCourse')||'tu especialidad',module=params.get('cityModule')||'tu módulo';
+    const guide=document.createElement('section');guide.className='city-quiz-guide';guide.setAttribute('role','dialog');guide.setAttribute('aria-labelledby','city-quiz-guide-title');
+    const kicker=document.createElement('p');kicker.className='city-quiz-guide-kicker';kicker.textContent='Recorrido de aprendizaje';
+    const title=document.createElement('h2');title.id='city-quiz-guide-title';title.textContent='¡Comencemos!';
+    const copy=document.createElement('p');copy.textContent=`En ${course}, recorre el espacio laboral y resuelve en orden los 10 quizzes de ${module}. Cada respuesta habilita el siguiente desafío.`;
+    const structure=document.createElement('p');structure.className='city-quiz-guide-structure';structure.textContent='Etapa 1 · 20 min · 4 fáciles · 5 intermedios · 1 avanzado';
+    const context=document.createElement('p');context.className='city-quiz-guide-context';context.textContent=`Especialidad: ${course} · Módulo: ${module}`;
+    const skills=document.createElement('ul');skills.className='city-quiz-guide-skills';
+    for(const label of ['Modelar','Argumentar','Representar']){const item=document.createElement('li');item.textContent=label;skills.append(item);}
+    const actions=document.createElement('div');actions.className='city-quiz-guide-actions';
+    if(courseId&&moduleId){
+      const link=document.createElement('a');link.href=`/api/city-experience?course=${encodeURIComponent(courseId)}&module=${encodeURIComponent(moduleId)}`;link.target='_blank';link.rel='noopener';link.textContent='Abrir quizzes del módulo';actions.append(link);
+    }
+    const dismiss=document.createElement('button');dismiss.type='button';dismiss.textContent='Entendido';dismiss.addEventListener('click',()=>{guide.remove();roomGuide=null;});actions.append(dismiss);
+    guide.append(kicker,title,copy,structure,context,skills,actions);workspace.querySelector('.city-viewport')?.append(guide);roomGuide=guide;
+  }
   function syncPanel() {
     syncMiningTile();syncLearningLink();syncGuideButton();syncConstructionDistrict();syncSpecialtyCards();
+    syncRoomGuide();
     if(route)startRoute();
   }
   if(route){
@@ -173,5 +238,7 @@
   }
   const guideObserver=new MutationObserver(syncPanel);
   guideObserver.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['disabled','hidden']});
+  document.addEventListener?.('visibilitychange',()=>{if(document.hidden)flushQuizClock();else if(roomGuideActive){const id=new URLSearchParams(globalThis.location?.search||'').get('cityModuleId');if(id)startQuizClock(id);}});
+  globalThis.addEventListener?.('pagehide',()=>flushQuizClock());
   syncPanel();
 })();

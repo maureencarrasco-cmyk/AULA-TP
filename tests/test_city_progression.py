@@ -38,10 +38,10 @@ class CityProgression(unittest.TestCase):
         for competency, safety in ((False, True), (True, False)):
             self.assertFalse(apply_review(experience(), review(competencies=competency, safety=safety), PLAN, 1)['approved'])
 
-    def test_one_area_at_75_and_three_at_90_accumulate_without_duplicates(self):
-        state = experience(4)
-        result = apply_review(state, review([[5]*5]*3+[[3]*5]), PLAN, 8)
-        self.assertEqual(result['final_score'], 75)
+    def test_one_area_for_pass_and_three_at_90_accumulate_without_duplicates(self):
+        state = experience(8)
+        result = apply_review(state, review([[4]*5]*4), PLAN, 8)
+        self.assertEqual(result['final_score'], 80)
         self.assertEqual(len(result['areas']), 1)
         state['quiz']['answers'] = experience()['quiz']['answers']
         result = apply_review(state, review(), PLAN, 8)

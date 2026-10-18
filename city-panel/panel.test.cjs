@@ -27,8 +27,10 @@ test('mining tile forwards to the original action and does not duplicate itself'
  f.original.disabled=true;f.sync();assert.equal(first.disabled,true);
  first.click();assert.equal(f.clicks(),1);
 });
-test('frontend adapter does not implement or replace game controls',()=>{
- for(const value of ['fetch(','localStorage','WebGLRenderer','location.href','keydown','innerHTML'])assert.ok(!source.includes(value));
+test('frontend adapter preserves game controls and only syncs the module quiz clock',()=>{
+ for(const value of ['localStorage','WebGLRenderer','location.href','keydown','innerHTML'])assert.ok(!source.includes(value));
+ assert.ok(source.includes("fetch('/api/session'"));
+ assert.ok(source.includes("stage:'quiz',seconds"));
  assert.ok(source.includes('action.click()'));
  assert.ok(source.includes('Estación 4 · Quiz + Práctica profesional'));
  assert.ok(!source.includes('90 min'));
@@ -40,7 +42,8 @@ test('skin retains native dropdown, checkbox, collapsed sections and focus state
  assert.ok(css.includes('max-width:520px'));
  assert.ok(!/select\s*\{[^}]*display:\s*none/.test(css));
  assert.ok(!/input\s*\{[^}]*display:\s*none/.test(css));
- assert.ok(!css.includes('pointer-events:none'));
+ assert.ok(css.includes('.city-quiz-guide { position:absolute;'));
+ assert.ok(css.includes('pointer-events:auto'));
 });
 
 test('learning section adapts its header and specialty cards to panel width',()=>{
@@ -69,6 +72,20 @@ test('entering an interior expands the panorama and hides the room action dock',
  assert.ok(css.includes('.city-walk-workspace:has(.city-open-pilot) .city-open-workshop { display:none!important; }'));
  for(const button of ['.city-open-pilot','.city-open-workshop','.city-open-learning'])assert.ok(css.includes(button));
  assert.ok(css.includes('0 0 24px #ff8b27a6'));
+});
+
+test('specialty entry shows a dismissible quiz guide and hides the city header',()=>{
+ const css=fs.readFileSync(path.join(__dirname,'city-panel.css'),'utf8');
+ assert.ok(css.includes('.city-page:has(.city-open-pilot) .city-header { display:none!important; }'));
+ assert.ok(css.includes('.city-quiz-guide { position:absolute;'));
+ assert.ok(source.includes('function syncRoomGuide()'));
+ assert.ok(source.includes("dismiss.addEventListener('click'"));
+ assert.ok(source.includes("dismiss.textContent='Entendido'"));
+ assert.ok(source.includes('4 fáciles · 5 intermedios · 1 avanzado'));
+ assert.ok(source.includes("for(const label of ['Modelar','Argumentar','Representar'])"));
+ assert.ok(source.includes("/api/city-experience?course=${encodeURIComponent(courseId)}&module=${encodeURIComponent(moduleId)}"));
+ assert.ok(source.includes("stage:'quiz',seconds"));
+ assert.ok(source.includes('clock.activeSeconds>=1200'));
 });
 
 test('city header keeps live copy and original return link with responsive artwork',()=>{
