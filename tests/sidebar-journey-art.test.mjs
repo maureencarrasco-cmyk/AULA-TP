@@ -32,5 +32,5 @@ test('the illuminated artwork is lightweight, stable and responsive', () => {
   assert.ok(asset.byteLength < 100_000);
   const html = read('static/index.html');
   assert.match(html, /sidebar-journey-art\.css\?v=20261011-glowing-journey/);
-  assert.match(html, /app\.js\?v=20261018-course-aware-stations-v1/);
+  assert.match(html, /app\.js\?v=20261018-city-rewards-v1/);
 });

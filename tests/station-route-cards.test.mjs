@@ -9,9 +9,11 @@ const app=read('static/app.js');
 const css=read('static/station-route-cards.css');
 
 test('station cards use the supplied visual direction with real, responsive cards',()=>{
-  assert.match(html,/station-route-cards\.css\?v=20261018-course-aware-v1/);
-  assert.match(html,/app\.js\?v=20261018-course-aware-stations-v1/);
+  assert.match(html,/station-route-cards\.css\?v=20261018-reference-redesign-v1/);
+  assert.match(html,/app\.js\?v=20261018-city-rewards-v1/);
   assert.match(css,/lr-track:has\(\.mission-laboral-stop\)/);
+  assert.match(css,/grid-template-columns:repeat\(6,minmax\(0,1fr\)\)!important/);
+  assert.match(css,/min-height:510px!important/);
   assert.match(css,/lr-card-photo img[\s\S]*?object-fit:cover/);
   assert.match(css,/lr-stop\.s1\{--lr:#1676ed/);
   assert.match(css,/lr-stop\.s2\{--lr:#f36e16/);
@@ -19,6 +21,7 @@ test('station cards use the supplied visual direction with real, responsive card
   assert.match(css,/lr-stop\.s4\{--lr:#ef315f/);
   assert.match(css,/lr-stop\.s5\{--lr:#149b65/);
   assert.match(css,/@media\(max-width:620px\)/);
+  assert.match(css,/flex:0 0 228px!important;scroll-snap-align:start/);
   assert.match(app,/data-action="station" data-n="\$\{m\.stationNumber\}"/);
   assert.match(app,/href="\/api\/city-experience\?course=\$\{encodeURIComponent\(cityCourseId\)\}&module=\$\{encodeURIComponent\(mid\)\}"/);
 });

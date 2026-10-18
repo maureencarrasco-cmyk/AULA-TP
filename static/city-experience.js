@@ -4,8 +4,8 @@
   const districtSelect=$('#district-select'), courseSelect=$('#course-select'), moduleSelect=$('#module-select'), startButton=$('#start-button');
   const locationSummary=$('#location-summary');
   const setupPanel=$('#setup-panel'), journey=$('#journey'), setupNotice=$('#setup-notice'), journeyNotice=$('#journey-notice');
-  const welcome=$('#city-welcome'),onboarding=$('#city-onboarding'),navigation=$('#city-navigation'),enterCity=$('#enter-city'),arrivalButton=$('#arrival-button');
-  let csrf='', courses=[], plan=null, state=null, moduleId=null, currentLocation=null, cityScene=null, districtArrived=false, activeStage='quiz', activeQuestion=0, activatedQuestion=-1, activePhase='planificar';
+  const welcome=$('#city-welcome'),onboarding=$('#city-onboarding'),navigation=$('#city-navigation'),enterCity=$('#enter-city');
+  let csrf='', courses=[], plan=null, state=null, reward=null, specialtyProgress=null, recoveries=[], moduleId=null, currentLocation=null, activeRewardArea=null, districtArrived=false, activeStage='quiz', activeQuestion=0, activatedQuestion=-1, activePhase='planificar';
   let activeSeconds=0, pendingSeconds=0, pendingStage='quiz', draftTimer=0;
   const phases=['planificar','actuar','verificar','justificar'];
   const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -38,8 +38,8 @@
     (course?.modules||[]).filter(mod=>mod.published).forEach(mod=>moduleSelect.add(new Option(`${mod.position}. ${mod.title}`,mod.id)));
     moduleSelect.disabled=!course||!districtArrived;
     if(preferred&&[...moduleSelect.options].some(option=>option.value===String(preferred)))moduleSelect.value=String(preferred);
-    startButton.disabled=!course;
-    arrivalButton.disabled=!moduleSelect.value||!districtArrived;
+    startButton.disabled=!course||!moduleSelect.value||!districtArrived;
+    startButton.innerHTML='Comenzar Etapa 1 <span aria-hidden="true">→</span>';
     const place=course?.city_location;
     $('#floor-value').textContent=place?.floor||'Se asigna con la especialidad';
     locationSummary.textContent=place?`Edificio: ${place.building} · Espacio de trabajo: ${place.space}`:'Elige una especialidad para identificar su edificio y piso.';
@@ -62,53 +62,20 @@
   }
   districtSelect.addEventListener('change',()=>selectCourseOptions(districtSelect.value));
   courseSelect.addEventListener('change',()=>{selectModules(courseSelect.value);updateOnboardingContext(courseSelect.value,moduleSelect.value);});
-  moduleSelect.addEventListener('change',()=>{arrivalButton.disabled=!moduleSelect.value||!districtArrived;arrivalButton.textContent=moduleSelect.value?'Comenzar Etapa 1 →':'Selecciona un módulo para continuar';updateOnboardingContext(courseSelect.value,moduleSelect.value);});
+  moduleSelect.addEventListener('change',()=>{startButton.disabled=!moduleSelect.value||!districtArrived;updateOnboardingContext(courseSelect.value,moduleSelect.value);});
   enterCity.addEventListener('click',beginCityEntry);
-  startButton.addEventListener('click',descendToDistrict);
-  arrivalButton.addEventListener('click',openJourney);
+  startButton.addEventListener('click',openJourney);
   function beginCityEntry(){
-    welcome.hidden=true;onboarding.hidden=true;navigation.hidden=false;setupPanel.hidden=false;
+    const params=new URLSearchParams(location.search),courseId=courseSelect.value,module=moduleSelect.value;
+    const existingCity=new URL('https://www.aulatpchile.cl/ciudad_laboral_aulatp/');
+    const frame=$('#existing-city-frame');
+    if(!frame.hasAttribute('src'))frame.src=existingCity.href;
+    welcome.hidden=true;onboarding.hidden=false;navigation.hidden=false;setupPanel.hidden=false;
+    districtArrived=true;
+    if(params.has('district')&&districtSelect.value!==params.get('district'))districtSelect.value=params.get('district');
+    selectModules(courseId,module);
+    $('#route-status').textContent='Estás explorando la Ciudad Laboral 3D original de Aula TP Chile.';
     navigation.scrollIntoView({behavior:'smooth',block:'start'});
-    try{
-      if(!window.cityExperienceSceneReady)throw new Error('No se pudo cargar la vista 3D. Recarga la página para intentarlo otra vez.');
-      cityScene=new window.cityExperienceSceneReady($('#city-scene'),arrived=>{
-        districtArrived=arrived;
-        moduleSelect.disabled=!arrived||!courseSelect.value;
-        arrivalButton.disabled=!arrived||!moduleSelect.value;
-        if(arrived){arrivalButton.hidden=false;arrivalButton.textContent=moduleSelect.value?'Comenzar Etapa 1 →':'Selecciona un módulo para continuar';$('#route-status').textContent='Llegaste al edificio de la especialidad.';$('#route-instructions').textContent='Selecciona el módulo asignado para entrar y comenzar la Etapa 1.';}
-        else if(cityScene?.mode==='walk'){$('#route-status').textContent=`Sigue las flechas amarillas hacia ${currentLocation?.building||'el edificio'}.`;$('#route-instructions').textContent='Usa WASD, las flechas del teclado o el control táctil para llegar al acceso.';}
-      });
-      $('#route-status').textContent='El dron recorre la ciudad antes del descenso.';
-      cityScene.flyover().then(()=>{$('#route-status').textContent='Vista aérea lista. Selecciona el distrito, la especialidad y el módulo.';});
-      wireMovementPad();
-    }catch(error){setNotice(error.message,setupNotice);}
-  }
-  function wireMovementPad(){
-    const pad=$('#movement-pad');pad.hidden=false;
-    $$('button[data-move]',pad).forEach(button=>{
-      const move=active=>cityScene?.move(button.dataset.move,active);
-      button.addEventListener('pointerdown',event=>{event.preventDefault();button.setPointerCapture(event.pointerId);move(true);});
-      for(const name of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(name,()=>move(false));
-    });
-  }
-  async function descendToDistrict(){
-    const course=courses.find(item=>String(item.id)===String(courseSelect.value));
-    if(!cityScene||!course?.city_location)return;
-    [districtSelect,courseSelect,startButton].forEach(control=>control.disabled=true);
-    startButton.textContent='Descendiendo al distrito…';
-    arrivalButton.hidden=true;arrivalButton.disabled=true;
-    currentLocation=course.city_location;
-    $('#route-status').textContent=`Descenso hacia ${currentLocation.district} · ${currentLocation.building} · ${currentLocation.floor}.`;
-    $('#route-instructions').textContent='La cámara se aproxima al edificio de tu especialidad.';
-    $('#movement-pad').hidden=false;
-    try{
-      await cityScene.enterDistrict(currentLocation);
-      cityScene.setQuizPoint(0);
-      $('#route-status').textContent=`Distrito ${currentLocation.district} · ${currentLocation.floor}`;
-      $('#scene-label').textContent=`Ruta a ${currentLocation.space}`;
-      $('#route-instructions').textContent='Sigue las flechas luminosas amarillas hasta el edificio. Muévete con WASD, las flechas o los controles táctiles.';
-      startButton.textContent='Recorrido hacia el edificio en curso';
-    }catch(error){setNotice(error.message,setupNotice);[districtSelect,courseSelect,moduleSelect].forEach(control=>control.disabled=false);startButton.disabled=false;}
   }
   async function openJourney(){
     moduleId=moduleSelect.value;
@@ -116,14 +83,14 @@
     startButton.disabled=true;setNotice('Cargando el módulo…',setupNotice);
     try{
       const data=await request(`/api/modules/${moduleId}/city-experience`);
-      plan=data.plan;state=data.state;pendingSeconds=0;
+      plan=data.plan;state=data.state;reward=data.reward;specialtyProgress=data.specialty_progress;recoveries=data.recoveries||[];pendingSeconds=0;activeRewardArea=null;
       currentLocation=data.location||currentLocation;
       $('#course-label').textContent=data.course_title;
       $('#module-title').textContent=plan.module.title;
       $('#module-case').textContent=plan.module.case_title;
       const place=data.location;
       $('#journey-location').textContent=place?`Distrito ${place.district} · ${place.building} · ${place.floor} · ${place.space}`:'';
-      setupPanel.hidden=true;journey.hidden=false;arrivalButton.hidden=true;
+      setupPanel.hidden=true;journey.hidden=false;
       $('#mission-tab').disabled=savedCount()<plan.quiz.length;
       activeStage=savedCount()===plan.quiz.length?'mission':'quiz';
       activeSeconds=Number(state[activeStage]?.active_seconds)||0;
@@ -131,10 +98,8 @@
       $('#mission-tab').classList.toggle('active',activeStage==='mission');
       activeQuestion=Math.min(savedCount(),plan.quiz.length-1);activatedQuestion=-1;
       activePhase=phases[Math.min(answeredPhases(),phases.length-1)];
-      $('#route-status').textContent=activeStage==='mission'?'Ruta de misión laboral · flechas amarillas activas':'Etapa 1 · explora los puntos del desafío en el edificio';
-      $('#scene-label').textContent=activeStage==='mission'?'Ruta de misión · '+(currentLocation?.space||'Ciudad Laboral'):'Puntos del desafío · '+(currentLocation?.space||'Ciudad Laboral');
-      $('#route-instructions').textContent=activeStage==='mission'?'Sigue las flechas amarillas al primer destino de la misión laboral.':'Activa los puntos numerados del quiz con el botón de levantar la mano.';
-      if(activeStage==='mission')cityScene?.setMissionPhase(answeredPhases());else cityScene?.setQuizPoint(savedCount());
+      $('#route-status').textContent=activeStage==='mission'?'Práctica profesional · Ciudad Laboral 3D original':'Etapa 1 · desafío de conocimientos del módulo';
+      $('#route-instructions').textContent='La Ciudad Laboral original permanece disponible arriba mientras completas las actividades de este módulo.';
       render();setNotice('');tick();
     }catch(error){setNotice(error.message,setupNotice);startButton.disabled=false;}
   }
@@ -159,8 +124,7 @@
       renderQuizAside(index,current);return;
     }
     activeQuestion=current;activeQuestion=Math.min(activeQuestion,plan.quiz.length-1);
-    cityScene?.setQuizPoint(index);
-    $('#route-instructions').textContent=`Punto ${String(index+1).padStart(2,'0')} de ${plan.quiz.length} iluminado en ${currentLocation?.space||'el edificio'}. Levanta la mano para activarlo.`;
+    $('#route-instructions').textContent=`Desafío ${String(index+1).padStart(2,'0')} de ${plan.quiz.length} · ${currentLocation?.space||'tu especialidad'}. Usa la Ciudad Laboral original como contexto.`;
     const item=q, activated=activatedQuestion===index;
     $('#work-main').innerHTML=`<p class="section-kicker">Etapa 1 · punto ${String(index+1).padStart(2,'0')} de ${plan.quiz.length} · ${esc(item.difficulty||'')}</p><h3 id="question-heading" tabindex="-1">${esc(item.stimulus||'Desafío de aprendizaje')}</h3>${item.image?`<figure class="question-stimulus"><img src="${esc(item.image)}" alt="${esc(item.alt||item.caption||'Recurso del módulo')}" style="display:block;max-width:100%;max-height:230px;object-fit:contain;margin:0 auto 8px"><figcaption>${esc(item.caption||'')}</figcaption></figure>`:''}<p class="question">${esc(item.question)}</p><fieldset class="choices" ${saved||!activated?'disabled':''}><legend class="hidden">Selecciona una respuesta</legend>${(item.options||[]).map((option,i)=>`<label class="choice"><input type="radio" name="city-choice" value="${i}" ${saved?.choice===i?'checked':''}><span>${esc(option)}</span></label>`).join('')}</fieldset><div class="action-row"><span class="subtle">${saved?'Respuesta guardada':activated?'Desafío activado · elige una respuesta':'Activa el punto y levanta la mano para responder'}</span><button class="action-button" id="save-answer" type="button" ${saved||!activated?'disabled':''}>${saved?'Registrada':'Guardar respuesta'}</button></div>${saved?`<p class="feedback ${saved.correct?'good':'bad'}">${saved.correct?'Respuesta correcta.':'Respuesta registrada.'} ${esc(saved.explanation||'')}</p>`:''}`;
     const submit=$('#save-answer');
@@ -184,15 +148,12 @@
     const responses=phaseState(), count=answeredPhases();
     if(count===plan.mission.phases.length){
       const score=Number(state.quiz?.score)||0;
-      $('#work-main').innerHTML=`<div class="completion"><p class="section-kicker">Estación 4 completa · ${plan.timing.total} minutos planificados</p><h3>Cuatro misiones registradas</h3><p>Planificaste, actuaste, verificaste y justificaste una situación laboral integrada con los aprendizajes esperados del módulo.</p><p>Quiz formativo: <strong>${score}/${plan.quiz.length}</strong>. El avance, tiempo y evidencias de ambas etapas quedaron guardados por módulo.</p><button class="action-button" id="back-quiz" type="button">Revisar quiz</button></div>`;
-      $('#back-quiz').addEventListener('click',()=>setStage('quiz'));renderMissionAside(count);return;
+      renderMissionCompletion(score);renderMissionAside(count);return;
     }
     if(!phases.includes(activePhase)||phases.indexOf(activePhase)>count)activePhase=phases[count];
     const phase=plan.mission.phases.find(item=>item.id===activePhase), saved=responses[phase.id], draft=state.mission?.drafts?.[phase.id]||'';
-    cityScene?.setMissionPhase(phase.number-1);
-    $('#route-status').textContent=`Misión ${String(phase.number).padStart(2,'0')} · ruta a ${['planificación','taller de especialidad','control de calidad','recepción técnica'][phase.number-1]}.`;
-    $('#scene-label').textContent=`Misión ${String(phase.number).padStart(2,'0')} · ${currentLocation?.district||'Ciudad Laboral'}`;
-    $('#route-instructions').textContent=`Sigue las flechas amarillas al destino de la misión ${String(phase.number).padStart(2,'0')}: ${['Puesto de planificación','Taller de especialidad','Control de calidad','Recepción técnica'][phase.number-1]}.`;
+    $('#route-status').textContent=`Misión ${String(phase.number).padStart(2,'0')} · ${currentLocation?.district||'Ciudad Laboral'}`;
+    $('#route-instructions').textContent='Desarrolla la misión con la Ciudad Laboral original disponible arriba.';
     const task=plan.mission.tasks[phase.number-1];
     $('#work-main').innerHTML=`<p class="section-kicker">Misión ${String(phase.number).padStart(2,'0')} de 04 · ${phase.minutes} min</p><h3>${esc(phase.title)} · orden laboral integrada</h3><div class="scenario"><strong>${esc(plan.module.case_title)}</strong><br>${esc(plan.mission.scenario)}</div>${task?`<article class="mission-task mission-active"><strong>${esc(task.title)}${task.ae?` · AE ${esc(task.ae)}`:''}</strong>${task.ae_title?`<p>${esc(task.ae_title)}</p>`:''}<p>${esc(task.prompt)}</p><p class="task-product">Producto: ${esc(task.product)}</p>${task.criterion?`<p>Criterio: ${esc(task.criterion)}</p>`:''}</article>`:''}<p class="question">${esc(phase.prompt)}</p>${plan.mission.question?`<p class="subtle">Punto de decisión del caso: ${esc(plan.mission.question)}</p>`:''}<form class="phase-form" id="phase-form"><label for="phase-response">Evidencia de la misión ${String(phase.number).padStart(2,'0')}</label><textarea id="phase-response" maxlength="10000" placeholder="Registra decisiones, acciones, verificaciones y fundamento con datos y criterios del módulo.">${esc(saved||draft)}</textarea><div class="counter" id="response-count"></div><div class="action-row"><span class="subtle" id="save-state">${saved?'Misión guardada':'Borrador guardado automáticamente'}</span><button class="action-button" id="save-phase" type="submit">${saved?'Actualizar y continuar':'Guardar misión'}</button></div></form>`;
     const input=$('#phase-response'), counter=$('#response-count');
@@ -204,6 +165,26 @@
       }catch(error){setNotice(error.message);submit.disabled=false;}
     });
     renderMissionAside(count);
+  }
+  function renderMissionCompletion(score){
+    const specialtyNote=specialtyProgress?.recognized?'<strong class="specialty-recognition">Profesional TP en formación · especialidad completada</strong>':specialtyProgress?`<p class="reward-note">Progreso aprobado de la especialidad: ${specialtyProgress.approved_modules||0} de ${specialtyProgress.total_modules} módulos · ${specialtyProgress.unlocked_areas} áreas acumuladas.</p>`:'';
+    const conditions=reward?.conditions||{};
+    const conditionLabels=[['final_score','Puntaje final mínimo: 75%'],['practice_score','Desempeño práctico mínimo: 75%'],['essential_competencies','Competencias esenciales demostradas'],['critical_safety','Criterios críticos de seguridad aprobados'],['activities_complete','Quiz y práctica completados']];
+    const requirementList=`<ul class="ae-list approval-conditions">${conditionLabels.map(([key,label])=>`<li class="${conditions[key]?'is-met':'is-pending'}">${conditions[key]?'✓':'○'} ${label}</li>`).join('')}</ul>`;
+    const recoveryLabel={practica_integral:'Recuperación asignada: refuerzo y nueva práctica profesional integral de 30 minutos.',refuerzo_especifico:'Recuperación asignada: refuerza aprendizajes pendientes y repite solo las misiones relacionadas.',repetir_practica_pendiente:'Recuperación asignada: fortalece y vuelve a demostrar el desempeño práctico pendiente.',demostrar_competencias_criticas:'Recuperación asignada: refuerza y demuestra nuevamente las competencias esenciales o críticas pendientes.'};
+    const result=reward?.status==='reviewed'?`<section class="reward-result level-${reward.level}"><p class="section-kicker">Resultado revisado · ${reward.attempts} intento${reward.attempts===1?'':'s'}</p><h3>${reward.approved?'¡Misión profesional aprobada!':'Aún tienes competencias por fortalecer'}</h3><div class="reward-score">${reward.final_score}<span>%</span></div><p>Quiz ${reward.quiz_score}% × 30% + práctica ${reward.practice_score}% × 70%</p><strong class="reward-level">${esc(reward.level_name)}</strong>${requirementList}${!reward.approved?`<p class="reward-feedback">${esc(recoveryLabel[reward.recovery_type]||'Revisa la retroalimentación y acuerda con tu docente el siguiente paso.')}</p>`:''}<p class="reward-feedback">${esc(reward.feedback)}</p>${reward.areas.length?`<div class="reward-area-list"><h4>Áreas desbloqueadas en ${esc(currentLocation?.district||'tu distrito')}</h4>${reward.areas.map(area=>`<article><div><strong>${esc(area.name)}</strong><small>${esc(area.ae_title||plan.module.title)}</small></div><button class="action-button explore-reward" type="button" data-level="${area.level}">Explorar área →</button></article>`).join('')}</div>`:reward.approved?'<p>El módulo está aprobado. No hay nuevas áreas adicionales para este nivel.</p>':''}${specialtyNote}<p class="reward-note">La exploración es opcional y no añade tiempo a los 45 minutos curriculares.</p></section>`:`<section class="reward-result pending"><p class="section-kicker">Estación 4 completa · ${plan.timing.total} minutos planificados</p><h3>Práctica profesional registrada</h3><p>Quiz formativo: <strong>${score}/${plan.quiz.length}</strong>. Planificaste, actuaste, verificaste y justificaste una situación laboral integrada con los aprendizajes esperados del módulo.</p><p class="reward-feedback">${esc(reward?.message||'Tu resultado final se publicará después de la revisión docente de las cuatro fases y de los criterios de seguridad.')}</p><p class="reward-note">Al revisar, tu docente comprobará el puntaje final (75%), el mínimo práctico (75%), las competencias esenciales y la seguridad crítica.</p><button class="action-button" id="refresh-reward" type="button">Actualizar resultado</button></section>`;
+    const recoveryHtml=recoveries.length?`<section class="recovery-list"><h3>Recupera tus aprendizajes</h3><p>Misiones opcionales basadas en las respuestas que necesitas reforzar. No suman tiempo a los 45 minutos del módulo.</p>${recoveries.map(item=>{const last=item.attempts?.at(-1);return `<form class="recovery-card" data-recovery-form="${item.index}"><strong>Pregunta ${item.index+1}${item.ae?` · AE ${esc(item.ae)}`:''}</strong><p>${esc(item.question)}</p>${item.skill?`<small>Habilidad · ${esc(item.skill)}</small>`:''}<p class="reward-feedback">${esc(item.explanation)}</p>${(item.attempts||[]).length?`<p class="recovery-saved">${item.attempts.length} intento${item.attempts.length===1?'':'s'} registrado${item.attempts.length===1?'':'s'}; último: ${esc(last.text)}</p>`:''}<label>Explica cómo resolverías ahora esta situación<textarea data-recovery-index="${item.index}" minlength="20" required placeholder="Relaciona el aprendizaje, el procedimiento y cómo verificarías el resultado."></textarea></label><button class="outline" type="submit">Guardar recuperación opcional</button></form>`}).join('')}</section>`:'';
+    $('#work-main').innerHTML=`${result}${recoveryHtml}<button class="outline" id="back-quiz" type="button">Revisar quiz</button>`;
+    $('#back-quiz').addEventListener('click',()=>{activeRewardArea=null;setStage('quiz')});
+    $('#refresh-reward')?.addEventListener('click',async()=>{try{const data=await request(`/api/modules/${moduleId}/city-experience`);state=data.state;reward=data.reward;specialtyProgress=data.specialty_progress;recoveries=data.recoveries||[];renderMissionCompletion(Number(state.quiz?.score)||0)}catch(error){setNotice(error.message)}});
+    $$('.explore-reward').forEach(button=>button.addEventListener('click',()=>{const area=reward.areas.find(item=>item.level===Number(button.dataset.level));if(area)exploreRewardArea(area)}));
+    $$('[data-recovery-form]').forEach(form=>form.addEventListener('submit',async event=>{event.preventDefault();const input=form.querySelector('textarea[data-recovery-index]'),button=form.querySelector('button[type="submit"]');button.disabled=true;try{await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'recovery-submit',index:Number(form.dataset.recoveryForm),text:input.value})});const data=await request(`/api/modules/${moduleId}/city-experience`);state=data.state;reward=data.reward;specialtyProgress=data.specialty_progress;recoveries=data.recoveries||[];setNotice('Misión de recuperación guardada para el seguimiento docente.');renderMissionCompletion(Number(state.quiz?.score)||0)}catch(error){button.disabled=false;setNotice(error.message)}}));
+  }
+  function exploreRewardArea(area){
+    activeRewardArea=area;const visited=state.mission?.explored_areas?.[String(area.level)];
+    $('#route-status').textContent=`Exploración complementaria · ${area.name}`;$('#route-instructions').textContent='Usa el mapa y los controles de la Ciudad Laboral original para llegar a este espacio.';
+    $('#work-main').innerHTML=`<section class="reward-result level-${area.level}"><p class="section-kicker">Exploración complementaria · fuera del tiempo obligatorio</p><h3>${esc(area.name)}</h3><p>${esc(area.ae_title||plan.module.title)}</p><p>Espacio de práctica complementaria para profundizar el módulo <strong>${esc(plan.module.title)}</strong> en ${esc(currentLocation?.district||'tu distrito')}.</p><p id="area-arrival" class="reward-feedback">Sigue las flechas luminosas para llegar al punto de trabajo.</p><button class="action-button" id="record-area" type="button" ${visited?'disabled':''}>${visited?'Exploración registrada':'Registrar exploración opcional'}</button></section>`;
+    $('#record-area').addEventListener('click',async event=>{event.currentTarget.disabled=true;try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'area-visit',level:area.level})});state=result.state;event.currentTarget.textContent='Exploración registrada';setNotice('Tu exploración opcional quedó guardada en este módulo.')}catch(error){event.currentTarget.disabled=false;setNotice(error.message)}});
   }
   async function saveDraft(phase,text){
     try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'mission-draft',phase,text})});state=result.state;const status=$('#save-state');if(status)status.textContent='Borrador guardado automáticamente';}
@@ -224,7 +205,7 @@
   }
   $$('.stage-tab').forEach(button=>button.addEventListener('click',()=>{if(!button.disabled)setStage(button.dataset.stage);}));
   function tick(){
-    if(!journey.hidden&&!document.hidden){if(!pendingSeconds)pendingStage=activeStage;pendingSeconds++;$('#timer-value').textContent=formatTime(activeSeconds+pendingSeconds);}
+    if(!journey.hidden&&!document.hidden&&!state.mission?.completed_at){if(!pendingSeconds)pendingStage=activeStage;pendingSeconds++;$('#timer-value').textContent=formatTime(activeSeconds+pendingSeconds);}
     if(pendingSeconds>=30)sendHeartbeat();
   }
   function formatTime(value){const mins=Math.floor(value/60),secs=value%60;return `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;}

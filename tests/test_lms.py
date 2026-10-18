@@ -66,6 +66,75 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual(len(experience['quiz']['answers']),10)
   self.assertEqual(len(experience['mission']['responses']),4)
   self.assertTrue(experience['mission']['completed_at'])
+ def test_city_rewards_require_teacher_review_and_protect_expert_safety_gate(self):
+  import json,sqlite3
+  payload=self.s.get('/api/modules/1/city-experience').json;plan=payload['plan']
+  self.assertEqual(payload['reward']['status'],'in_progress')
+  with sqlite3.connect(self.app.config['DATABASE']) as con:
+   raw=con.execute('SELECT content FROM modules WHERE id=1').fetchone()[0]
+  content=json.loads(raw)
+  for index,question in enumerate(plan['quiz']):
+   original=next(item for item in content['questions'] if item['question']==question['question'])
+   choice=(original['answer']+1)%4 if index==0 else original['answer']
+   self.assertEqual(self.req('/modules/1/city-experience',{'operation':'quiz-answer','index':index,'choice':choice}).status_code,200)
+  for phase in ('planificar','actuar','verificar','justificar'):
+   self.assertEqual(self.req('/modules/1/city-experience',{'operation':'mission-submit','phase':phase,'text':TEXT}).status_code,200)
+  self.assertEqual(len(self.s.get('/api/modules/1/city-experience').json['recoveries']),1)
+  self.assertEqual(self.req('/modules/1/city-experience',{'operation':'recovery-submit','index':0,'text':'breve'}).status_code,400)
+  self.assertEqual(self.req('/modules/1/city-experience',{'operation':'recovery-submit','index':0,'text':TEXT}).status_code,200)
+  self.assertEqual(len(self.s.get('/api/modules/1/city-experience').json['recoveries'][0]['attempts']),1)
+  self.assertEqual(self.s.get('/api/modules/1/city-experience').json['reward']['status'],'pending_review')
+  review={'user_id':1,'module_id':1,'points':[[5]*5 for _ in range(4)],'competencies_approved':True,'safety_approved':True,'feedback':TEXT}
+  denied=self.req('/teacher/city-review',review)
+  self.assertEqual(denied.status_code,403)
+  invalid=self.req('/teacher/city-review',{**review,'points':[[6]*5 for _ in range(4)]},teacher=True)
+  self.assertEqual(invalid.status_code,400)
+  approved=self.req('/teacher/city-review',review,teacher=True)
+  self.assertEqual(approved.status_code,200)
+  self.assertEqual(approved.json['reward']['final_score'],97)
+  self.assertEqual(approved.json['reward']['level'],4)
+  self.assertEqual(self.s.post('/api/modules/1/city-experience',json={'operation':'area-visit','level':4},headers={'X-CSRF-Token':self.st}).status_code,200)
+  state=self.s.get('/api/modules/1/city-experience').json['state']
+  self.assertIn('4',state['mission']['explored_areas'])
+  capped=self.req('/teacher/city-review',{**review,'safety_approved':False},teacher=True)
+  self.assertEqual(capped.json['reward']['final_score'],97)
+  self.assertFalse(capped.json['reward']['approved'])
+  self.assertEqual(capped.json['reward']['areas'],[])
+  self.assertEqual(capped.json['reward']['attempts'],2)
+  self.assertTrue(capped.json['reward']['teacher_alert'])
+  changed=self.req('/modules/1/city-experience',{'operation':'mission-submit','phase':'justificar','text':TEXT+' Una nueva verificación queda registrada.'})
+  self.assertEqual(changed.status_code,200)
+  self.assertEqual(self.s.get('/api/modules/1/city-experience').json['reward']['status'],'pending_review')
+  self.assertEqual(self.s.post('/api/modules/1/city-experience',json={'operation':'area-visit','level':2},headers={'X-CSRF-Token':self.st}).status_code,403)
+ def test_city_approval_requires_independent_score_practice_competencies_and_safety_gates(self):
+  import json,sqlite3
+  plan=self.s.get('/api/modules/1/city-experience').json['plan']
+  with sqlite3.connect(self.app.config['DATABASE']) as con:
+   content=json.loads(con.execute('SELECT content FROM modules WHERE id=1').fetchone()[0])
+  for index,question in enumerate(plan['quiz']):
+   original=next(item for item in content['questions'] if item['question']==question['question'])
+   self.assertEqual(self.req('/modules/1/city-experience',{'operation':'quiz-answer','index':index,'choice':original['answer']}).status_code,200)
+  for phase in ('planificar','actuar','verificar','justificar'):
+   self.assertEqual(self.req('/modules/1/city-experience',{'operation':'mission-submit','phase':phase,'text':TEXT}).status_code,200)
+  review={'user_id':1,'module_id':1,'points':[[4]*5,[4]*5,[4]*5,[1]*5],
+          'competencies_approved':True,'safety_approved':True,'feedback':TEXT}
+  result=self.req('/teacher/city-review',review,teacher=True)
+  self.assertEqual(result.status_code,200)
+  self.assertEqual(result.json['reward']['practice_score'],65)
+  self.assertGreaterEqual(result.json['reward']['final_score'],75)
+  self.assertFalse(result.json['reward']['conditions']['practice_score'])
+  self.assertTrue(result.json['reward']['conditions']['final_score'])
+  self.assertFalse(result.json['reward']['approved'])
+  self.assertEqual(result.json['reward']['areas'],[])
+  self.assertEqual(self.req('/modules/1/city-experience',{'operation':'area-visit','level':2}).status_code,403)
+  adequate={'user_id':1,'module_id':1,'points':[[5]*5 for _ in range(4)],
+            'competencies_approved':False,'safety_approved':True,'feedback':TEXT}
+  result=self.req('/teacher/city-review',adequate,teacher=True)
+  self.assertFalse(result.json['reward']['approved'])
+  self.assertFalse(result.json['reward']['conditions']['essential_competencies'])
+  adequate['competencies_approved']=True
+  result=self.req('/teacher/city-review',adequate,teacher=True)
+  self.assertTrue(result.json['reward']['approved'])
  def through_integration(self):
   self.assertEqual(self.activity(kind='context',text=TEXT).status_code,200)
   for a in range(3):

@@ -222,6 +222,39 @@ def create_app(test_config=None):
                 ]
             }
         }
+    def city_reward(experience, plan=None):
+        quiz=experience.get('quiz') or {};mission=experience.get('mission') or {};review=mission.get('review') or {}
+        if not quiz.get('completed_at') or not mission.get('completed_at'):
+            return {'status':'in_progress','approved':False,'quiz_score':None,'practice_score':None,'final_score':None,'level':0,'areas':[],
+                    'conditions':{'final_score':False,'practice_score':False,'essential_competencies':False,'critical_safety':False,'activities_complete':False}}
+        answer_count=max(1,len(quiz.get('answers') or {}));quiz_score=round(100*int(quiz.get('score') or 0)/answer_count)
+        if not review:
+            return {'status':'pending_review','approved':False,'quiz_score':quiz_score,'practice_score':None,'final_score':None,'level':0,'areas':[],
+                    'conditions':{'final_score':False,'practice_score':False,'essential_competencies':False,'critical_safety':False,'activities_complete':True},
+                    'message':'La práctica quedó registrada y está pendiente de revisión docente.'}
+        practice_score=round(sum(sum(row) for row in review['points']))
+        final_score=round(quiz_score*.30+practice_score*.70)
+        conditions={'final_score':final_score>=75,'practice_score':practice_score>=75,
+                    'essential_competencies':bool(review.get('competencies_approved')),
+                    'critical_safety':bool(review.get('safety_approved')),'activities_complete':True}
+        approved=all(conditions.values())
+        level=4 if approved and final_score>=90 else 3 if approved else 2 if final_score>=60 else 1
+        names={1:'Aprendiz en desarrollo',2:'Explorador profesional',3:'Técnico avanzado',4:'Experto de misión'}
+        areas=[{'level':2,'name':'Sala complementaria de especialidad'},
+               {'level':3,'name':'Zona técnica especializada'},
+               {'level':4,'name':'Área profesional avanzada'}]
+        unlocked=[area for area in areas if approved and level>=area['level']]
+        tasks=(plan or {}).get('mission',{}).get('tasks') or []
+        for index,area in enumerate(unlocked):
+            task=tasks[min(index,len(tasks)-1)] if tasks else {}
+            area['name']=(task.get('title') or area['name'])[:100]
+            area['ae_title']=task.get('ae_title') or ''
+        return {'status':'reviewed','approved':approved,'quiz_score':quiz_score,'practice_score':practice_score,'final_score':final_score,
+                'level':level,'level_name':names[level] if approved else 'Aún tienes competencias por fortalecer','areas':unlocked,'conditions':conditions,
+                'safety_approved':bool(review.get('safety_approved')),'competencies_approved':bool(review.get('competencies_approved')),
+                'recovery_type':'practica_integral' if final_score<60 else 'refuerzo_especifico' if final_score<75 else 'repetir_practica_pendiente' if practice_score<75 else 'demostrar_competencias_criticas' if not approved else None,
+                'feedback':review.get('feedback',''),'reviewed_at':review.get('at'),'attempts':len(mission.get('reviews') or []),
+                'teacher_alert':bool(not approved and len(mission.get('reviews') or [])>=2)}
     def text_valid(v,n=20):return isinstance(v,str) and n<=len(v.strip())<=10000
     def published_module_feedback(con,mid):
         row=con.execute('SELECT f.body AS text,f.updated AS updated_at,f.teacher_id,u.name AS teacher_name FROM module_feedback f JOIN users u ON u.id=f.teacher_id WHERE f.module_id=?',(mid,)).fetchone()
@@ -279,7 +312,7 @@ def create_app(test_config=None):
                 item=dict(c);item['modules']=[];item['city_location']=city_locations.get(item['id'])
                 for m in modules_by_course.get(c['id'],[]):
                     mod=dict(m);mod.pop('course_id',None);s=states.get(m['id']) or empty();s.setdefault('oficio',{});s.setdefault('encargos',{});ae_count=int(mod.pop('ae_count') or 3);expected_steps=max(1,ae_count)*6;mod['completed']=[bool(s['context']),len(s['ae'])==expected_steps,len(s['cases'])==15 and bool(s['scene']),bool(s['exam']),s['closed']]
-                    city_completed=bool((s.get('city_experience') or {}).get('quiz',{}).get('completed_at') and (s.get('city_experience') or {}).get('mission',{}).get('completed_at'))
+                    city_completed=city_reward(s.get('city_experience') or {})['approved']
                     mod['city_completed']=city_completed
                     mod['percent']=round((sum(mod['completed'])+int(city_completed))*100/6)
                     exam=s.get('exam')
@@ -378,7 +411,28 @@ def create_app(test_config=None):
             course=con.execute('SELECT title FROM courses WHERE id=?',(m['course_id'],)).fetchone()
         plan=city_experience_content(content,mid,session['uid'])
         for question in plan['quiz']:question.pop('explanation',None)
-        return jsonify(course_title=course['title'],location=location,plan=plan,state=experience)
+        with db() as con:
+            module_rows=con.execute('SELECT p.state FROM progress p JOIN modules m ON m.id=p.module_id WHERE p.user_id=? AND m.course_id=? AND m.published=1',(session['uid'],m['course_id'])).fetchall()
+            total_modules=con.execute('SELECT COUNT(*) FROM modules WHERE course_id=? AND published=1',(m['course_id'],)).fetchone()[0]
+        reviewed=[]
+        for row in module_rows:
+            module_state=json.loads(row['state']);module_experience=module_state.get('city_experience') or {}
+            if module_experience.get('mission',{}).get('review'):
+                reviewed.append(city_reward(module_experience))
+        specialty_progress={'reviewed_modules':len(reviewed),'total_modules':total_modules,
+                            'approved_modules':sum(item['approved'] for item in reviewed),
+                            'best_level':max((item['level'] for item in reviewed),default=0),
+                            'unlocked_areas':sum(len(item['areas']) for item in reviewed),
+                            'recognized':bool(total_modules and len(reviewed)>=total_modules and all(item['approved'] for item in reviewed))}
+        recoveries=[]
+        for index,question in enumerate(plan['quiz']):
+            answer=(experience.get('quiz',{}).get('answers') or {}).get(str(index)) or {}
+            if answer and not answer.get('correct'):
+                recoveries.append({'index':index,'question':question.get('question',''),'ae':question.get('ae'),
+                                   'skill':question.get('skill',''),'explanation':answer.get('explanation',''),
+                                   'attempts':(experience.get('mission',{}).get('recovery_missions') or {}).get(str(index),[])})
+        return jsonify(course_title=course['title'],location=location,plan=plan,state=experience,
+                       reward=city_reward(experience,plan),specialty_progress=specialty_progress,recoveries=recoveries)
     @app.post('/api/modules/<int:mid>/city-experience')
     @require('student')
     def save_city_experience(mid):
@@ -400,6 +454,24 @@ def create_app(test_config=None):
                 if stage=='mission' and len(quiz.get('answers',{}))!=len(plan['quiz']):return fail('Completa primero todos los desafíos del quiz.',403)
                 experience['active_seconds']=int(experience.get('active_seconds') or 0)+seconds
                 experience.setdefault(stage,{})['active_seconds']=int(experience[stage].get('active_seconds') or 0)+seconds
+            elif operation=='area-visit':
+                level=payload.get('level');reward=city_reward(experience,plan)
+                if type(level) is not int or level not in (2,3,4) or not reward['approved'] or reward['level']<level:
+                    return fail('Esta área todavía no está desbloqueada.',403)
+                mission.setdefault('explored_areas',{})[str(level)]={'visited_at':datetime.now(timezone.utc).isoformat()}
+                trace(state,'city-reward-area-visited',level=level,module_id=mid)
+            elif operation=='recovery-submit':
+                index=payload.get('index');answers=quiz.get('answers') or {}
+                if type(index) is not int or not 0<=index<len(plan['quiz']) or str(index) not in answers or answers[str(index)].get('correct'):
+                    return fail('Esta misión de recuperación no corresponde a una respuesta pendiente.',403)
+                if len(mission.get('responses') or {})!=len(plan['mission']['phases']):
+                    return fail('Completa primero la práctica profesional del módulo.',403)
+                text=payload.get('text')
+                if not text_valid(text,20):return fail('Escribe al menos 20 caracteres para guardar la recuperación.')
+                attempts=mission.setdefault('recovery_missions',{}).setdefault(str(index),[])
+                attempts.append({'text':text.strip(),'at':datetime.now(timezone.utc).isoformat()})
+                mission['recovery_missions'][str(index)]=attempts[-20:]
+                trace(state,'city-recovery-submitted',index=index,ae=plan['quiz'][index].get('ae'),attempt=len(attempts))
             elif operation=='quiz-answer':
                 index=payload.get('index');choice=payload.get('choice');answers=quiz.setdefault('answers',{})
                 if type(index)!=int or not 0<=index<len(plan['quiz']) or type(choice)!=int or choice not in range(len(plan['quiz'][index].get('options') or [])):
@@ -431,6 +503,7 @@ def create_app(test_config=None):
                     if not text_valid(text,20):return fail('Escribe al menos 20 caracteres para guardar esta fase.')
                     responses[phase]=text.strip();drafts.pop(phase,None)
                     mission.setdefault('completed_at_by_phase',{})[phase]=datetime.now(timezone.utc).isoformat()
+                    if mission.pop('review',None):trace(state,'city-review-invalidated',phase=phase)
                     if len(responses)==len(phases):mission['completed_at']=datetime.now(timezone.utc).isoformat()
                     trace(state,'city-mission-phase',phase=phase,index=phase_index,
                           aes=list(range(1,len(plan['mission']['aes'])+1)),
@@ -784,6 +857,28 @@ def create_app(test_config=None):
             s['exam']['review']={'points':points,'score':sum(points),'feedback':b['feedback'].strip(),'teacher_id':session['uid']}
             con.execute('UPDATE progress SET state=?,updated=CURRENT_TIMESTAMP WHERE user_id=? AND module_id=?',(json.dumps(s,ensure_ascii=False),b['user_id'],b['module_id']))
         return jsonify(ok=True)
+    @app.post('/api/teacher/city-review')
+    @require('teacher')
+    def review_city_experience():
+        b=body();points=b.get('points');feedback=b.get('feedback');safety_approved=b.get('safety_approved');competencies_approved=b.get('competencies_approved')
+        if (not isinstance(points,list) or len(points)!=4 or any(not isinstance(row,list) or len(row)!=5 or
+                any(type(point) is not int or point not in range(6) for point in row) for row in points) or
+                not isinstance(safety_approved,bool) or not isinstance(competencies_approved,bool) or not text_valid(feedback,20)):
+            return fail('Revisa los 20 criterios (0 a 5), las competencias esenciales, la seguridad crítica y la retroalimentación.')
+        with db() as con:
+            row=con.execute('SELECT p.state,m.content,m.title,m.course_id FROM progress p JOIN modules m ON m.id=p.module_id JOIN users u ON u.id=p.user_id WHERE p.user_id=? AND p.module_id=? AND u.role=\'student\'',(b.get('user_id'),b.get('module_id'))).fetchone()
+            if not row:return fail('No existe el progreso de ese estudiante y módulo.',404)
+            state=json.loads(row['state']);experience=state.get('city_experience') or {};mission=experience.get('mission') or {}
+            if not experience.get('quiz',{}).get('completed_at') or not mission.get('completed_at'):
+                return fail('El estudiante debe completar las dos etapas antes de revisar.',409)
+            now=datetime.now(timezone.utc).isoformat();reviews=mission.setdefault('reviews',[])
+            reviews.append({'points':points,'safety_approved':safety_approved,'competencies_approved':competencies_approved,'feedback':feedback.strip(),
+                            'teacher_id':session['uid'],'at':now})
+            mission['reviews']=reviews[-30:];mission['review']=reviews[-1]
+            state['city_experience']=experience
+            con.execute('UPDATE progress SET state=?,updated=CURRENT_TIMESTAMP WHERE user_id=? AND module_id=?',
+                        (json.dumps(state,ensure_ascii=False),b['user_id'],b['module_id']))
+        return jsonify(ok=True,reward=city_reward(experience))
     @app.get('/api/teacher/export.csv')
     @require('teacher')
     def export():
