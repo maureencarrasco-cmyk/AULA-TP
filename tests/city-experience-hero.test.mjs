@@ -19,9 +19,10 @@ test('Station 4 banner replaces the old header and preserves its navigation acti
   assert.match(html,/id="enter-city" class="primary-button enter-city-button" type="button" aria-label="Entrar a la Ciudad Laboral y comenzar el recorrido 3D"/);
   assert.match(script,/enterCity\.addEventListener\('click',beginCityEntry\)/);
   assert.match(script,/welcome\.hidden=true;onboarding\.hidden=true;navigation\.hidden=false;setupPanel\.hidden=false/);
-  assert.match(html,/id="city-onboarding"[\s\S]*?Desafío de conocimientos[\s\S]*?15 minutos[\s\S]*?Práctica libre · misiones laborales[\s\S]*?30 minutos[\s\S]*?Tu recorrido en la/);
+  assert.match(html,/id="city-onboarding"[\s\S]*?Desafío de conocimientos[\s\S]*?15 minutos[\s\S]*?Aprendizajes Esperados[\s\S]*?Práctica profesional[\s\S]*?30 minutos[\s\S]*?Tu recorrido en la/);
+  assert.match(html,/Elige especialidad y piso[\s\S]*?Completa las dos etapas/);
   assert.match(script,/updateOnboardingContext\(preCourse,preModule\)/);
-  assert.match(html,/route-guidance[\s\S]*?flechas amarillas luminosas/);
+  assert.match(html,/route-guidance[\s\S]*?flechas amarillas luminosas[\s\S]*?cuestionarios y las misiones profesionales/);
   assert.match(css,/\.enter-city-button:focus-visible/);
   assert.match(css,/@media\(max-width:760px\).*?\.enter-city-button\{left:10%;top:63\.8%;width:75%/);
 });
