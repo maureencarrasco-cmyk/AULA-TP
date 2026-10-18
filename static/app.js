@@ -316,6 +316,11 @@ function currentModuleIndex(modules){
 }
 const stationIcons=['eye','book','puzzle','list','flag'];
 const stationActions=['Contextualiza','Aprende','Aplica','Demuestra','Reflexiona'];
+function routeStationImage(n,course,module){
+ const tailored=course&&module&&module.course_id===course.id&&typeof stationArtworkPhoto==='function'?stationArtworkPhoto(course,module,n):null;
+ if(tailored?.image)return tailored.image;
+ return typeof stationRouteArt==='function'?stationRouteArt(n,course):`/static/themes/route/station-${n}.webp?v=1`;
+}
 function stationModel(i,currentN,completed){
  const n=i+1;
  const isCurrent=n===currentN;
@@ -360,6 +365,9 @@ function learningRoute({currentN=1,completed=[],moduleId=null,course=null,intera
  const live=`Estás en la estación ${shownCurrent} de 6. ${completedTotal} de 6 estaciones completadas.`;
  const currentModel=models[currentN-1];
  const currentAction=stationActions[currentN-1];
+ const routeCourse=course||courses.find(c=>c.id===current?.course_id);
+ const routeModule=routeCourse&&current?.course_id===routeCourse.id?current:null;
+ const missionImage=routeStationImage(4,routeCourse,routeModule);
  return `<section class="panel route-panel lr" aria-label="${esc(title)}. ${esc(live)}">
   <header class="lr-head lr-head-compact" aria-label="Ruta de aprendizaje de las 6 estaciones">
    <span class="lr-head-compact-icon" aria-hidden="true">${workIco('pin')}</span>
@@ -378,9 +386,9 @@ function learningRoute({currentN=1,completed=[],moduleId=null,course=null,intera
       :`type="button" class="lr-card station s${m.stationNumber}" data-action="station" data-n="${m.stationNumber}" data-module="${mid}" ${m.isCurrent?'aria-current="step"':''} aria-label="${esc(label)}"`)
     :`class="lr-card station s${m.stationNumber}" ${m.isCurrent?'aria-current="step"':''} aria-label="${esc(label)}"`;
    const Tag=interactive?'button':'div';
-   const routeImage=typeof stationRouteArt==='function'?stationRouteArt(m.stationNumber,course):`/static/themes/route/station-${m.stationNumber}.webp?v=1`;
+   const routeImage=routeStationImage(m.stationNumber,routeCourse,routeModule);
    const cityCourseId=course?.id||current?.course_id||'';
-   const mission=i===3?`<li class="lr-stop mission-laboral-stop is-available" data-station-name="Misión laboral"><span class="lr-node" aria-hidden="true"><span class="lr-num">4</span>${cityCompleted?`<span class="lr-check" aria-hidden="true">${icon('check')}</span>`:''}</span><a class="lr-card station mission-laboral" href="/api/city-experience?course=${encodeURIComponent(cityCourseId)}&module=${encodeURIComponent(mid)}" target="_blank" rel="noopener" aria-label="Estación 4 de 6. Quiz y Misiones Laborales del módulo. 90 minutos"><span class="mission-scene" aria-hidden="true"><img src="/static/themes/workshop.webp" alt=""><img class="mission-controller" src="/static/mission-game-controller.png?v=1" alt=""><span class="mission-level">QUIZ + MISIONES</span><span class="mission-emblem">${icon('flag')}</span></span><span class="lr-body"><small class="mission-status">${icon('flag')} ${cityCompleted?'COMPLETADA':'DISPONIBLE'} · 90 MIN</small><b class="lr-name">Misión laboral</b><span class="mission-objective">45 min de quiz · 45 min de misiones</span><small class="lr-purpose">Elige el distrito, llega al espacio de tu especialidad y aplica los aprendizajes de este módulo.</small><span class="mission-checkpoints"><span>${icon('search')} Explora</span><span>${icon('check')} Resuelve</span><span>${icon('flag')} Completa</span></span><span class="mission-reward">${icon('arrow')} Abrir experiencia del módulo</span></span></a></li>`:'';
+   const mission=i===3?`<li class="lr-stop mission-laboral-stop is-available" data-station-name="Misión laboral"><span class="lr-node" aria-hidden="true"><span class="lr-num">4</span>${cityCompleted?`<span class="lr-check" aria-hidden="true">${icon('check')}</span>`:''}</span><a class="lr-card station mission-laboral" href="/api/city-experience?course=${encodeURIComponent(cityCourseId)}&module=${encodeURIComponent(mid)}" target="_blank" rel="noopener" aria-label="Estación 4 de 6. Quiz y Misiones Laborales del módulo. 90 minutos"><span class="mission-scene" aria-hidden="true"><img src="${esc(missionImage)}" alt="" loading="lazy" decoding="async"><span class="mission-level">QUIZ + MISIONES</span><span class="mission-emblem">${icon('flag')}</span></span><span class="lr-body"><small class="mission-status">${icon('flag')} ${cityCompleted?'COMPLETADA':'DISPONIBLE'} · 90 MIN</small><b class="lr-name">Misión laboral</b><span class="mission-objective">45 min de quiz · 45 min de misiones</span><small class="lr-purpose">Elige el distrito, llega al espacio de tu especialidad y aplica los aprendizajes de este módulo.</small><span class="mission-checkpoints"><span>${icon('search')} Explora</span><span>${icon('check')} Resuelve</span><span>${icon('flag')} Completa</span></span><span class="mission-reward">${icon('arrow')} Abrir experiencia del módulo</span></span></a></li>`:'';
    return `${mission}<li class="${cls}" data-station-number="${m.stationNumber}" data-station-status="${m.stationStatus}" data-station-name="${esc(m.stationName)}" data-completed="${m.isCompleted}" data-available="${m.isAvailable}" data-locked="${m.isLocked}" data-current="${m.isCurrent}">
     <span class="lr-node" aria-hidden="true"><span class="lr-num">${displayStation(m.stationNumber)}</span>${badge}</span>
     <${Tag} ${attrs}><span class="lr-card-photo" aria-hidden="true"><img src="${esc(routeImage)}" alt="" loading="${m.isCurrent?'eager':'lazy'}" decoding="async"><span class="lr-photo-shade"></span><span class="lr-photo-caption">Estación ${displayStation(m.stationNumber)}</span></span><span class="lr-body"><span class="lr-stage-icon" aria-hidden="true">${workIco(stationIcons[i])}</span><small class="lr-action">${stationActions[i]}</small><b class="lr-name">${stationTitleMarkup(m.stationName)}</b><small class="lr-purpose">${esc(descriptions[i])}</small>${hint}${stationCta(m)}</span></${Tag}>

@@ -51,7 +51,7 @@ test('the photo is optimized and the responsive styles are scoped to the new hea
   assert.match(css, /:focus-visible/);
   assert.doesNotMatch(css, /font-size:[^;]*vw|animation:/);
   assert.match(read('static/index.html'), /courses-hero-reference\.css\?v=20261011-courses-hero-v6/);
-  assert.match(read('static/index.html'), /app\.js\?v=20261011-course-artwork-v1/);
+  assert.match(read('static/index.html'), /app\.js\?v=20261018-course-aware-stations-v1/);
 });
 
 test('smaller screens retain the reference phrase and keep the course entry compact', () => {

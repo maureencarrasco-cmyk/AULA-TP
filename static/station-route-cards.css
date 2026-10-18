@@ -1,0 +1,197 @@
+body[data-screen="module"] .panel.route-panel.lr{
+  padding:18px 20px 16px;
+  border:1px solid #cfe0f2;
+  border-radius:20px;
+  background:linear-gradient(145deg,#f8fbff 0%,#fff 56%,#f4faff 100%);
+  box-shadow:0 12px 30px rgba(24,75,125,.08);
+}
+body[data-screen="module"] .lr .lr-track:has(.mission-laboral-stop){
+  gap:24px!important;
+  padding:28px 0 14px!important;
+  align-items:stretch;
+}
+body[data-screen="module"] .lr .lr-stop.s1{--lr:#1676ed;--lr-soft:#e8f3ff;--lr-edge:#b9d8ff;--lr-ink:#0753a8}
+body[data-screen="module"] .lr .lr-stop.s2{--lr:#f36e16;--lr-soft:#fff1e4;--lr-edge:#ffd1ad;--lr-ink:#9a4208}
+body[data-screen="module"] .lr .lr-stop.s3{--lr:#7547e8;--lr-soft:#f1eaff;--lr-edge:#d7c5ff;--lr-ink:#4821a8}
+body[data-screen="module"] .lr .lr-stop.s4{--lr:#ef315f;--lr-soft:#fff0f4;--lr-edge:#ffc6d3;--lr-ink:#a9153d}
+body[data-screen="module"] .lr .lr-stop.s5{--lr:#149b65;--lr-soft:#e8f8f1;--lr-edge:#b8ead4;--lr-ink:#087248}
+body[data-screen="module"] .lr .mission-laboral-stop{--lr:#f0a30b;--lr-soft:#fff5dc;--lr-edge:#ffdf8a;--lr-ink:#8b5300}
+body[data-screen="module"] .lr .lr-stop{height:auto;padding:0}
+body[data-screen="module"] .lr .lr-node,
+body[data-screen="module"] .lr .lr-stop.is-current .lr-node{
+  top:12px!important;
+  left:12px!important;
+  width:48px!important;
+  height:48px!important;
+  transform:none!important;
+  border:3px solid #fff!important;
+  background:var(--lr)!important;
+  color:#fff!important;
+  box-shadow:0 4px 14px color-mix(in srgb,var(--lr) 38%,transparent)!important;
+  font-size:19px!important;
+}
+body[data-screen="module"] .lr .lr-card.station{
+  position:relative;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  min-height:410px!important;
+  height:100%;
+  padding:0!important;
+  overflow:hidden;
+  border:1.5px solid var(--lr-edge)!important;
+  border-radius:20px!important;
+  background:linear-gradient(155deg,var(--lr-soft),#fff 55%,color-mix(in srgb,var(--lr-soft) 62%,#fff))!important;
+  box-shadow:0 8px 22px color-mix(in srgb,var(--lr) 12%,transparent)!important;
+  text-align:left!important;
+}
+body[data-screen="module"] .lr .lr-card-photo,
+body[data-screen="module"] .lr .mission-scene{
+  position:relative;
+  display:block;
+  width:100%;
+  height:142px!important;
+  flex:0 0 142px!important;
+  overflow:hidden;
+  background:var(--lr-soft);
+}
+body[data-screen="module"] .lr .lr-card-photo img,
+body[data-screen="module"] .lr .mission-scene>img:first-child{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  transition:transform .25s ease;
+}
+body[data-screen="module"] .lr .lr-card.station:hover .lr-card-photo img,
+body[data-screen="module"] .lr .mission-laboral:hover .mission-scene>img:first-child{transform:scale(1.035)}
+body[data-screen="module"] .lr .lr-photo-shade,
+body[data-screen="module"] .lr .mission-scene::after{
+  position:absolute;
+  inset:35% 0 0;
+  content:"";
+  background:linear-gradient(180deg,transparent,#102c4b8c);
+  pointer-events:none;
+}
+body[data-screen="module"] .lr .lr-photo-caption{
+  position:absolute;
+  left:12px;
+  bottom:10px;
+  z-index:1;
+  padding:6px 10px;
+  border-radius:8px;
+  background:#ffffffed;
+  color:var(--lr-ink);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:0;
+  text-transform:uppercase;
+}
+body[data-screen="module"] .lr .mission-level{
+  top:auto;
+  bottom:10px;
+  left:12px;
+  z-index:1;
+  padding:6px 10px;
+  border-radius:8px;
+  background:#ffffffed;
+  color:var(--lr-ink);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:0;
+}
+body[data-screen="module"] .lr .lr-body{
+  display:flex!important;
+  flex:1!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  min-height:0!important;
+  gap:9px!important;
+  padding:18px 17px 16px!important;
+  background:linear-gradient(150deg,color-mix(in srgb,var(--lr-soft) 62%,#fff),#fff 70%);
+}
+body[data-screen="module"] .lr .lr-stage-icon{
+  display:grid!important;
+  place-items:center;
+  width:54px!important;
+  height:54px!important;
+  flex:none;
+  margin:0!important;
+  border-radius:50%!important;
+  background:color-mix(in srgb,var(--lr) 13%,#fff)!important;
+  color:var(--lr)!important;
+}
+body[data-screen="module"] .lr .lr-stage-icon .work-ico,
+body[data-screen="module"] .lr .lr-stage-icon svg{width:28px!important;height:28px!important}
+body[data-screen="module"] .lr .lr-action{
+  margin:0!important;
+  color:var(--lr-ink)!important;
+  font-size:clamp(14px,1.1vw,19px)!important;
+  font-weight:900!important;
+  line-height:1.15!important;
+  letter-spacing:0!important;
+  text-transform:uppercase;
+}
+body[data-screen="module"] .lr .lr-name{
+  min-height:0!important;
+  color:#12375f!important;
+  font-size:clamp(14px,1vw,18px)!important;
+  font-weight:650!important;
+  line-height:1.3!important;
+  letter-spacing:0!important;
+}
+body[data-screen="module"] .lr .lr-purpose,
+body[data-screen="module"] .lr .lr-hint{
+  min-height:0!important;
+  color:#526d89!important;
+  font-size:clamp(13px,.9vw,16px)!important;
+  line-height:1.42!important;
+}
+body[data-screen="module"] .lr .lr-cta{
+  min-height:54px!important;
+  margin-top:auto!important;
+  padding:9px 12px!important;
+  border:1.5px solid var(--lr)!important;
+  border-radius:13px!important;
+  background:#ffffffd9!important;
+  color:var(--lr-ink)!important;
+  box-shadow:0 3px 10px color-mix(in srgb,var(--lr) 10%,transparent)!important;
+  font-size:clamp(11px,.82vw,14px)!important;
+  letter-spacing:0!important;
+}
+body[data-screen="module"] .lr .lr-cta-ico{background:color-mix(in srgb,var(--lr) 14%,#fff)!important;color:var(--lr)!important}
+body[data-screen="module"] .lr .lr-stop.is-current .lr-cta{background:var(--lr)!important;color:#fff!important}
+body[data-screen="module"] .lr .lr-stop.is-current .lr-cta-ico{background:#ffffff30!important;color:#fff!important}
+body[data-screen="module"] .lr .mission-laboral-stop .mission-laboral{
+  min-height:410px!important;
+  border:1.5px solid var(--lr-edge)!important;
+  border-radius:20px!important;
+  background:linear-gradient(155deg,var(--lr-soft),#fff 55%,#fffaf0)!important;
+  color:#183f54!important;
+  text-decoration:none!important;
+}
+body[data-screen="module"] .lr .mission-status{color:#0b8878!important;font-size:13px!important;font-weight:850!important}
+body[data-screen="module"] .lr .mission-objective{color:#087d73!important;font-size:clamp(14px,1vw,18px)!important;font-weight:850!important;line-height:1.35}
+body[data-screen="module"] .lr .mission-checkpoints{gap:7px 10px;margin:5px 0 8px!important;font-size:12px!important}
+body[data-screen="module"] .lr .mission-reward{margin-top:auto;padding-top:10px;border-top:1px solid var(--lr-edge)!important;color:#a74a12!important;font-size:13px!important}
+body[data-screen="module"] .lr .mission-laboral-stop .mission-laboral:hover,
+body[data-screen="module"] .lr .mission-laboral-stop .mission-laboral:focus-visible{transform:translateY(-2px);box-shadow:0 10px 24px color-mix(in srgb,var(--lr) 19%,transparent)!important}
+body[data-screen="module"] .lr .lr-card.station:focus-visible{outline:3px solid var(--lr)!important;outline-offset:3px}
+@media(max-width:1200px){
+  body[data-screen="module"] .lr .lr-track:has(.mission-laboral-stop){gap:24px!important;padding-top:12px!important}
+  body[data-screen="module"] .lr .lr-card.station,
+  body[data-screen="module"] .lr .mission-laboral-stop .mission-laboral{min-height:360px!important}
+}
+@media(max-width:620px){
+  body[data-screen="module"] .panel.route-panel.lr{padding:12px!important;border-radius:15px!important}
+  body[data-screen="module"] .lr .lr-track:has(.mission-laboral-stop){gap:23px!important}
+  body[data-screen="module"] .lr .lr-node,
+  body[data-screen="module"] .lr .lr-stop.is-current .lr-node{width:42px!important;height:42px!important;font-size:16px!important}
+  body[data-screen="module"] .lr .lr-card-photo,
+  body[data-screen="module"] .lr .mission-scene{height:160px!important;flex-basis:160px!important}
+  body[data-screen="module"] .lr .lr-card.station,
+  body[data-screen="module"] .lr .mission-laboral-stop .mission-laboral{min-height:350px!important}
+  body[data-screen="module"] .lr .lr-body{padding:16px!important}
+}
+@media(prefers-reduced-motion:reduce){body[data-screen="module"] .lr .lr-card-photo img,body[data-screen="module"] .lr .mission-scene>img:first-child{transition:none}}
