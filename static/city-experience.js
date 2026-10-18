@@ -7,15 +7,24 @@
   const welcome=$('#city-welcome'),onboarding=$('#city-onboarding'),navigation=$('#city-navigation'),enterCity=$('#enter-city');
   let csrf='', courses=[], plan=null, state=null, reward=null, specialtyProgress=null, recoveries=[], moduleId=null, currentLocation=null, activeRewardArea=null, districtArrived=false, activeStage='quiz', activeQuestion=0, activatedQuestion=-1, activePhase='planificar';
   let activeSeconds=0, pendingSeconds=0, pendingStage='quiz', draftTimer=0;
+  let mutationQueue=Promise.resolve(),draftRequest=Promise.resolve(),heartbeatRequest=Promise.resolve(),switchingStage=false;
   const phases=['planificar','actuar','verificar','justificar'];
   const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const savedCount=()=>Object.keys(state?.quiz?.answers||{}).length;
   const answeredPhases=()=>Object.keys(state?.mission?.responses||{}).length;
+  const nextPhase=()=>phases.find(phase=>!state?.mission?.responses?.[phase])||phases.at(-1);
+  const elapsedFor=stage=>(Number(state?.[stage]?.active_seconds)||0)+(stage===activeStage?pendingSeconds:0);
+  const quizRemaining=()=>Math.max(0,plan.timing.quiz*60-elapsedFor('quiz'));
+  const missionRemaining=()=>Math.max(0,(state.mission?.required_seconds??plan.timing.mission*60)-elapsedFor('mission'));
   const request=async(url,options={})=>{
-    const response=await fetch(url,{credentials:'same-origin',...options,headers:{...(options.headers||{}),...(options.method?{'X-CSRF-Token':csrf}:{}),...(options.body?{'Content-Type':'application/json'}:{})}});
-    const data=await response.json().catch(()=>({}));
-    if(!response.ok)throw new Error(data.error||'No se pudo guardar el avance.');
-    return data;
+    const perform=async()=>{
+      const response=await fetch(url,{credentials:'same-origin',...options,headers:{...(options.headers||{}),...(options.method?{'X-CSRF-Token':csrf}:{}),...(options.body?{'Content-Type':'application/json'}:{})}});
+      const data=await response.json().catch(()=>({}));
+      if(!response.ok)throw new Error(data.error||'No se pudo guardar el avance.');
+      return data;
+    };
+    if(!options.method)return perform();
+    const pending=mutationQueue.then(perform,perform);mutationQueue=pending.catch(()=>{});return pending;
   };
   function setNotice(message,where=journeyNotice){where.textContent=message||'';}
   function updateOnboardingContext(courseId,moduleId=''){
@@ -88,26 +97,31 @@
       const place=data.location;
       $('#journey-location').textContent=place?`Distrito ${place.district} · ${place.building} · ${place.floor} · ${place.space}`:'';
       setupPanel.hidden=true;journey.hidden=false;
-      $('#mission-tab').disabled=savedCount()<plan.quiz.length;
-      activeStage=savedCount()===plan.quiz.length?'mission':'quiz';
+      $('#mission-tab').disabled=savedCount()<plan.quiz.length||quizRemaining()>0;
+      activeStage=savedCount()===plan.quiz.length&&Number(state.mission?.active_seconds)>0?'mission':'quiz';
+      if(savedCount()===plan.quiz.length&&Number(state.quiz?.active_seconds)>=plan.timing.quiz*60)activeStage='mission';
       activeSeconds=Number(state[activeStage]?.active_seconds)||0;
+      $('#timer-value').textContent=formatTime(activeSeconds);
+      $('.timer small').textContent=state.mission?.recovery?`Recuperación: ${state.mission.required_seconds/60} min · adicional al recorrido inicial de 45 min`:'Duración mínima: 15 min de quiz + 30 min de práctica';
+      $('#mission-tab small').textContent=state.mission?.recovery?`${state.mission.required_seconds/60} min de recuperación`:'30 min';
       $('.stage-tab[data-stage="quiz"]').classList.toggle('active',activeStage==='quiz');
       $('#mission-tab').classList.toggle('active',activeStage==='mission');
       activeQuestion=Math.min(savedCount(),plan.quiz.length-1);activatedQuestion=-1;
-      activePhase=phases[Math.min(answeredPhases(),phases.length-1)];
+      activePhase=nextPhase();
       $('#route-status').textContent=activeStage==='mission'?'Práctica profesional · Ciudad Laboral 3D original':'Etapa 1 · desafío de conocimientos del módulo';
-      $('#route-instructions').textContent='La Ciudad Laboral original permanece disponible arriba mientras completas las actividades de este módulo.';
+    $('#route-instructions').textContent='La Ciudad Laboral original permanece disponible en otra pestaña. Usa su mapa para orientarte mientras completas las actividades de este módulo.';
       render();setNotice('');tick();
     }catch(error){setNotice(error.message,setupNotice);startButton.disabled=false;}
   }
   function phaseState(){return state.mission?.responses||{};}
   function render(){
+    journey.classList.toggle('is-reviewed',activeStage==='mission'&&Boolean(state.mission?.completed_at));
     renderProgress();
     if(activeStage==='quiz')renderQuiz();else renderMission();
   }
   function renderProgress(){
     const done=savedCount()+answeredPhases();$('#progress-bar').style.width=`${Math.round(done/(plan.quiz.length+plan.mission.phases.length)*100)}%`;
-    $('#mission-tab').disabled=savedCount()<plan.quiz.length;
+    $('#mission-tab').disabled=savedCount()<plan.quiz.length||quizRemaining()>0;
     $('.stage-tab[data-stage="quiz"]').classList.toggle('active',activeStage==='quiz');
     $('#mission-tab').classList.toggle('active',activeStage==='mission');
   }
@@ -116,12 +130,13 @@
     const current=savedCount();
     if(current===plan.quiz.length){
       const score=Number(state.quiz?.score)||Object.values(answers).filter(answer=>answer.correct).length;
-      $('#work-main').innerHTML=`<div class="completion"><p class="section-kicker">Etapa 1 completada · 15 minutos planificados</p><h3>Desafíos registrados</h3><p>Tu resultado formativo es</p><div class="summary-score">${score} / ${plan.quiz.length}</div><p>Las respuestas quedaron guardadas en este módulo. Continúa con la práctica profesional integrada.</p><button class="action-button" id="open-mission" type="button">Continuar a práctica profesional · 30 min</button></div>`;
+      const remaining=quizRemaining();
+      $('#work-main').innerHTML=`<div class="completion"><p class="section-kicker">${remaining?'Respuestas registradas · tiempo activo en curso':'Etapa 1 completada · 15 minutos activos'}</p><h3>Desafíos registrados</h3><p>Tu resultado formativo es</p><div class="summary-score">${score} / ${plan.quiz.length}</div><p>Las respuestas quedaron guardadas en este módulo. ${remaining?'Completa el tiempo activo restante antes de iniciar la práctica profesional.':'Ya puedes continuar con la práctica profesional integrada.'}</p><p class="phase-time" id="quiz-time-gate" ${remaining?'':'hidden'}>Tiempo activo restante: ${formatTime(remaining)}</p><button class="action-button" id="open-mission" type="button" ${remaining?'disabled':''}>Continuar a práctica profesional · 30 min</button></div>`;
       $('#open-mission').addEventListener('click',()=>setStage('mission'));
       renderQuizAside(index,current);return;
     }
     activeQuestion=current;activeQuestion=Math.min(activeQuestion,plan.quiz.length-1);
-    $('#route-instructions').textContent=`Desafío ${String(index+1).padStart(2,'0')} de ${plan.quiz.length} · ${currentLocation?.space||'tu especialidad'}. Usa la Ciudad Laboral original como contexto.`;
+    $('#route-instructions').textContent=`Desafío ${String(index+1).padStart(2,'0')} de ${plan.quiz.length} · ${currentLocation?.space||'tu especialidad'}. Usa el mapa de la Ciudad Laboral original para orientarte.`;
     const item=q, activated=activatedQuestion===index;
     $('#work-main').innerHTML=`<p class="section-kicker">Etapa 1 · punto ${String(index+1).padStart(2,'0')} de ${plan.quiz.length} · ${esc(item.difficulty||'')}</p><h3 id="question-heading" tabindex="-1">${esc(item.stimulus||'Desafío de aprendizaje')}</h3>${item.image?`<figure class="question-stimulus"><img src="${esc(item.image)}" alt="${esc(item.alt||item.caption||'Recurso del módulo')}" style="display:block;max-width:100%;max-height:230px;object-fit:contain;margin:0 auto 8px"><figcaption>${esc(item.caption||'')}</figcaption></figure>`:''}<p class="question">${esc(item.question)}</p><fieldset class="choices" ${saved||!activated?'disabled':''}><legend class="hidden">Selecciona una respuesta</legend>${(item.options||[]).map((option,i)=>`<label class="choice"><input type="radio" name="city-choice" value="${i}" ${saved?.choice===i?'checked':''}><span>${esc(option)}</span></label>`).join('')}</fieldset><div class="action-row"><span class="subtle">${saved?'Respuesta guardada':activated?'Desafío activado · elige una respuesta':'Activa el punto y levanta la mano para responder'}</span><button class="action-button" id="save-answer" type="button" ${saved||!activated?'disabled':''}>${saved?'Registrada':'Guardar respuesta'}</button></div>${saved?`<p class="feedback ${saved.correct?'good':'bad'}">${saved.correct?'Respuesta correcta.':'Respuesta registrada.'} ${esc(saved.explanation||'')}</p>`:''}`;
     const submit=$('#save-answer');
@@ -137,7 +152,7 @@
     renderQuizAside(index,current);
   }
   function renderQuizAside(index,current){
-    $('#work-aside').innerHTML=`<p class="markers-title">Puntos del quiz · <span>${current}/${plan.quiz.length}</span></p><div class="markers">${plan.quiz.map((_,i)=>`<button class="marker ${i<current?'done':''} ${i===index?'current':''}" type="button" aria-label="${i<current?'Punto '+String(i+1).padStart(2,'0')+' completado':i===current?'Punto '+String(i+1).padStart(2,'0')+', activar con botón accesible':'Punto '+String(i+1).padStart(2,'0')+' bloqueado'}" ${i>current?'disabled':''}>${i<current?'✓':String(i+1).padStart(2,'0')}</button>`).join('')}</div><p class="quiz-location">${esc(currentLocation?.district||'Ciudad Laboral')} · ${esc(currentLocation?.building||'Distrito')} · Punto ${String(index+1).padStart(2,'0')} iluminado en el mapa.</p><p class="marker-help">Los puntos se habilitan en orden. Usa el botón para activar cada desafío; la ruta amarilla señala el sector.</p><button id="raise-hand" class="raise-button" type="button" ${current>=plan.quiz.length?'disabled':''}>✋ Levantar la mano · activar punto</button><p class="phase-time">${plan.quiz.length} desafíos · 15 min en total</p>`;
+    $('#work-aside').innerHTML=`<p class="markers-title">Puntos del quiz · <span>${current}/${plan.quiz.length}</span></p><div class="markers">${plan.quiz.map((_,i)=>`<button class="marker ${i<current?'done':''} ${i===index?'current':''}" type="button" aria-label="${i<current?'Punto '+String(i+1).padStart(2,'0')+' completado':i===current?'Punto '+String(i+1).padStart(2,'0')+', activar con botón accesible':'Punto '+String(i+1).padStart(2,'0')+' bloqueado'}" ${i>current?'disabled':''}>${i<current?'✓':String(i+1).padStart(2,'0')}</button>`).join('')}</div><p class="quiz-location">${esc(currentLocation?.district||'Ciudad Laboral')} · ${esc(currentLocation?.building||'Distrito')} · ${esc(currentLocation?.floor||'')} · ${esc(currentLocation?.space||'')}</p><p class="marker-help">Los desafíos se habilitan en orden. Actívalos aquí y usa el mapa original para ubicar el distrito y el taller.</p><a class="city-map-link" href="https://www.aulatpchile.cl/ciudad_laboral_aulatp/" target="_blank" rel="noopener">Abrir mapa de la ciudad ↗</a><button id="raise-hand" class="raise-button" type="button" ${current>=plan.quiz.length?'disabled':''}>✋ Levantar la mano · activar punto</button><p class="phase-time">${plan.quiz.length} desafíos · 15 min en total</p>`;
     $$('.marker',$('#work-aside')).forEach((button,i)=>button.addEventListener('click',()=>{if(i<current){activeQuestion=i;renderQuiz();}}));
     $('#raise-hand')?.addEventListener('click',()=>{if(current<plan.quiz.length){activatedQuestion=index;renderQuiz();$('#question-heading')?.focus();}});
   }
@@ -147,20 +162,24 @@
       const score=Number(state.quiz?.score)||0;
       renderMissionCompletion(score);renderMissionAside(count);return;
     }
-    if(!phases.includes(activePhase)||phases.indexOf(activePhase)>count)activePhase=phases[count];
+    if(!phases.includes(activePhase)||!responses[activePhase]&&phases.slice(0,phases.indexOf(activePhase)).some(phase=>!responses[phase]))activePhase=nextPhase();
     const phase=plan.mission.phases.find(item=>item.id===activePhase), saved=responses[phase.id], draft=state.mission?.drafts?.[phase.id]||'';
+    const finalPhase=phases.every(key=>key===phase.id||responses[key]), remaining=finalPhase?missionRemaining():0;
+    const preserved=Boolean(state.mission?.recovery&&!state.mission.required_phases.includes(phase.id));
     $('#route-status').textContent=`Misión ${String(phase.number).padStart(2,'0')} · ${currentLocation?.district||'Ciudad Laboral'}`;
-    $('#route-instructions').textContent='Desarrolla la misión con la Ciudad Laboral original disponible arriba.';
+    $('#route-instructions').textContent='Desarrolla la misión con la Ciudad Laboral original abierta en otra pestaña y consulta su mapa para ubicar tu especialidad.';
     const task=plan.mission.tasks[phase.number-1];
-    $('#work-main').innerHTML=`<p class="section-kicker">Misión ${String(phase.number).padStart(2,'0')} de 04 · ${phase.minutes} min</p><h3>${esc(phase.title)} · orden laboral integrada</h3><div class="scenario"><strong>${esc(plan.module.case_title)}</strong><br>${esc(plan.mission.scenario)}</div>${task?`<article class="mission-task mission-active"><strong>${esc(task.title)}${task.ae?` · AE ${esc(task.ae)}`:''}</strong>${task.ae_title?`<p>${esc(task.ae_title)}</p>`:''}<p>${esc(task.prompt)}</p><p class="task-product">Producto: ${esc(task.product)}</p>${task.criterion?`<p>Criterio: ${esc(task.criterion)}</p>`:''}</article>`:''}<p class="question">${esc(phase.prompt)}</p>${plan.mission.question?`<p class="subtle">Punto de decisión del caso: ${esc(plan.mission.question)}</p>`:''}<form class="phase-form" id="phase-form"><label for="phase-response">Evidencia de la misión ${String(phase.number).padStart(2,'0')}</label><textarea id="phase-response" maxlength="10000" placeholder="Registra decisiones, acciones, verificaciones y fundamento con datos y criterios del módulo.">${esc(saved||draft)}</textarea><div class="counter" id="response-count"></div><div class="action-row"><span class="subtle" id="save-state">${saved?'Misión guardada':'Borrador guardado automáticamente'}</span><button class="action-button" id="save-phase" type="submit">${saved?'Actualizar y continuar':'Guardar misión'}</button></div></form>`;
+    $('#work-main').innerHTML=`<p class="section-kicker">Misión ${String(phase.number).padStart(2,'0')} de 04 · ${phase.minutes} min</p><h3>${esc(phase.title)} · orden laboral integrada</h3><div class="scenario"><strong>${esc(plan.module.case_title)}</strong><br>${esc(plan.mission.scenario)}</div>${task?`<article class="mission-task mission-active"><strong>${esc(task.title)}${task.ae?` · AE ${esc(task.ae)}`:''}</strong>${task.ae_title?`<p>${esc(task.ae_title)}</p>`:''}<p>${esc(task.prompt)}</p><p class="task-product">Producto: ${esc(task.product)}</p>${task.criterion?`<p>Criterio: ${esc(task.criterion)}</p>`:''}</article>`:''}<p class="question">${esc(phase.prompt)}</p>${plan.mission.question?`<p class="subtle">Punto de decisión del caso: ${esc(plan.mission.question)}</p>`:''}${remaining?`<p class="phase-time" id="mission-time-gate">Tiempo activo de práctica restante para cerrar: ${formatTime(remaining)}</p>`:''}<form class="phase-form" id="phase-form"><label for="phase-response">Evidencia de la misión ${String(phase.number).padStart(2,'0')}</label><textarea id="phase-response" maxlength="10000" placeholder="Registra decisiones, acciones, verificaciones y fundamento con datos y criterios del módulo.">${esc(saved||draft)}</textarea><div class="counter" id="response-count"></div><div class="action-row"><span class="subtle" id="save-state">${saved?'Misión guardada':'Borrador guardado automáticamente'}</span><button class="action-button" id="save-phase" type="submit" ${remaining?'disabled':''}>${saved?'Actualizar y continuar':'Guardar misión'}</button></div></form>`;
     const input=$('#phase-response'), counter=$('#response-count');
-    const countText=()=>{counter.textContent=`${input.value.trim().length} caracteres · mínimo 20`;};countText();input.addEventListener('input',()=>{countText();clearTimeout(draftTimer);$('#save-state').textContent='Guardando borrador…';draftTimer=setTimeout(()=>saveDraft(phase.id,input.value),650);});
+    if(preserved){input.readOnly=true;$('#save-phase').disabled=true;$('#save-state').textContent='Competencia ya lograda · evidencia conservada';}
+    const countText=()=>{counter.textContent=`${input.value.trim().length} caracteres · mínimo 20`;};countText();input.addEventListener('input',()=>{countText();clearTimeout(draftTimer);$('#save-state').textContent='Guardando borrador…';draftTimer=setTimeout(()=>{draftRequest=saveDraft(phase.id,input.value);},650);});
     $('#phase-form').addEventListener('submit',async event=>{
-      event.preventDefault();const submit=$('#save-phase');submit.disabled=true;setNotice('Guardando evidencia…');
+      event.preventDefault();const submit=$('#save-phase');if(submit.dataset.saving)return;submit.dataset.saving='true';submit.disabled=true;clearTimeout(draftTimer);await draftRequest;setNotice('Guardando evidencia…');
       try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'mission-submit',phase:phase.id,text:input.value})});state=result.state;setNotice('Fase guardada.');
-        if(answeredPhases()<plan.mission.phases.length)activePhase=phases[answeredPhases()];render();
-      }catch(error){setNotice(error.message);submit.disabled=false;}
+        if(answeredPhases()<plan.mission.phases.length)activePhase=nextPhase();render();
+      }catch(error){setNotice(error.message);delete submit.dataset.saving;submit.disabled=false;}
     });
+    if(state.mission?.recovery)$('#work-main').insertAdjacentHTML('afterbegin',`<p class="feedback">Recuperación · intento ${esc(state.mission.attempt_id)} · ${state.mission.required_seconds/60} min. Se conservan las fases ya logradas y se utiliza una situación equivalente diferente.</p>`);
     renderMissionAside(count);
   }
   function renderMissionCompletion(score){
@@ -176,42 +195,91 @@
     $('#refresh-reward')?.addEventListener('click',async()=>{try{const data=await request(`/api/modules/${moduleId}/city-experience`);state=data.state;reward=data.reward;specialtyProgress=data.specialty_progress;recoveries=data.recoveries||[];renderMissionCompletion(Number(state.quiz?.score)||0)}catch(error){setNotice(error.message)}});
     $$('.explore-reward').forEach(button=>button.addEventListener('click',()=>{const area=reward.areas.find(item=>item.level===Number(button.dataset.level));if(area)exploreRewardArea(area)}));
     $$('[data-recovery-form]').forEach(form=>form.addEventListener('submit',async event=>{event.preventDefault();const input=form.querySelector('textarea[data-recovery-index]'),button=form.querySelector('button[type="submit"]');button.disabled=true;try{await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'recovery-submit',index:Number(form.dataset.recoveryForm),text:input.value})});const data=await request(`/api/modules/${moduleId}/city-experience`);state=data.state;reward=data.reward;specialtyProgress=data.specialty_progress;recoveries=data.recoveries||[];setNotice('Misión de recuperación guardada para el seguimiento docente.');renderMissionCompletion(Number(state.quiz?.score)||0)}catch(error){button.disabled=false;setNotice(error.message)}}));
+    renderRecoveryControls();
+  }
+  function renderRecoveryControls(){
+    const recovery=reward?.recovery;
+    const refuerzo=$('#work-main .recovery-list');
+    if(refuerzo){$('h3',refuerzo).textContent='Refuerzo de conocimientos pendientes';$('p',refuerzo).textContent='Registra cómo mejorarás tu respuesta. Después de la revisión docente podrás demostrar el aprendizaje en un desafío equivalente diferente.';$$('button[type="submit"]',refuerzo).forEach(button=>button.textContent='Guardar refuerzo');}
+    const areasHeading=$('#work-main .reward-area-list h4');if(areasHeading)areasHeading.textContent='Áreas profesionales ganadas · acumulativas';
+    if(reward?.approved){
+      $('#work-main .reward-result h3').textContent='¡Misión profesional completada!';
+      const area=reward.areas.at(-1);
+      if(area)$('#work-main .reward-result').insertAdjacentHTML('beforeend',`<section class="earned-area-preview"><p class="section-kicker">Premio obtenido · ${esc(area.name)}</p>${area.preview?`<figure><img src="${esc(area.preview)}" alt="Referencia profesional del módulo ${esc(plan.module.title)}"><figcaption>Referencia del módulo · ${esc(area.ae_title)}</figcaption></figure>`:''}<p>${esc(area.objective)}</p><button type="button" class="outline" disabled>Explorar nueva área · integración 3D pendiente</button></section>`);
+    }
+    $$('.explore-reward').forEach(button=>button.textContent='Ver premio y desafío');
+    if(recovery?.phases?.length){
+      $('#work-main').insertAdjacentHTML('beforeend',`<form class="recovery-card" id="start-recovery-form"><h3>${recovery.type==='practica_integral'?'Nueva práctica profesional integral':'Recuperación de competencias pendientes'}</h3><p>Nuevo intento de ${recovery.minutes} minutos. Fases por demostrar: ${recovery.phases.map(esc).join(', ')}. Tus respuestas anteriores y las fases logradas se conservan.</p><label>Refuerzo realizado y plan de mejora<textarea name="reinforcement" minlength="20" maxlength="10000" required></textarea></label><button class="action-button" type="submit">Iniciar recuperación profesional</button></form>`);
+      $('#start-recovery-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget,button=form.querySelector('button');button.disabled=true;try{await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'recovery-start',reinforcement:new FormData(form).get('reinforcement')})});await openJourney();}catch(error){button.disabled=false;setNotice(error.message);}});
+    }
+    if(reward?.status==='reviewed'&&!reward.approved){
+      recoveries.forEach(item=>{
+        if(!item.reassessment){$('#work-main').insertAdjacentHTML('beforeend',`<p class="feedback">Desafío ${item.index+1}: se agotaron las preguntas equivalentes inéditas de este AE. Solicita al docente un nuevo desafío para continuar la recuperación.</p>`);return;}
+        if(!item.attempts.length)return;
+        const form=document.createElement('form');form.className='recovery-card';
+        form.innerHTML=`<h4>Nuevo desafío equivalente · AE ${esc(item.ae||'')}</h4><p>${esc(item.reassessment.question)}</p><fieldset class="choices"><legend>Demuestra el aprendizaje</legend>${item.reassessment.options.map((option,index)=>`<label class="choice"><input type="radio" name="choice" value="${index}" required><span>${esc(option)}</span></label>`).join('')}</fieldset><p>${item.reassessment_attempts.length} intento(s) de recuperación registrados</p><button type="submit" class="action-button">Responder recuperación evaluada</button>`;
+        $('#work-main').append(form);
+        form.addEventListener('submit',async event=>{event.preventDefault();const button=form.querySelector('button');button.disabled=true;try{await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'quiz-retry-answer',index:item.index,question:item.reassessment.question,choice:Number(new FormData(form).get('choice'))})});const data=await request(`/api/modules/${moduleId}/city-experience`);state=data.state;reward=data.reward;recoveries=data.recoveries;specialtyProgress=data.specialty_progress;renderMissionCompletion(Number(state.quiz?.score)||0);setNotice('Recuperación registrada y resultado actualizado.');}catch(error){button.disabled=false;setNotice(error.message);}});
+      });
+    }
+    if(reward?.alert)$('#work-main').insertAdjacentHTML('beforeend',`<p class="feedback">Seguimiento docente: ${esc(reward.alert.status==='open'?'alerta abierta tras dos intentos insuficientes':reward.alert.status==='acknowledged'?'intervención docente registrada':'alerta resuelta')}${reward.alert.intervention?` · ${esc(reward.alert.intervention)}`:''}</p>`);
   }
   function exploreRewardArea(area){
-    activeRewardArea=area;const visited=state.mission?.explored_areas?.[String(area.level)];
-    $('#route-status').textContent=`Exploración complementaria · ${area.name}`;$('#route-instructions').textContent='Usa el mapa y los controles de la Ciudad Laboral original para llegar a este espacio.';
-    $('#work-main').innerHTML=`<section class="reward-result level-${area.level}"><p class="section-kicker">Exploración complementaria · fuera del tiempo obligatorio</p><h3>${esc(area.name)}</h3><p>${esc(area.ae_title||plan.module.title)}</p><p>Espacio de práctica complementaria para profundizar el módulo <strong>${esc(plan.module.title)}</strong> en ${esc(currentLocation?.district||'tu distrito')}.</p><p id="area-arrival" class="reward-feedback">Sigue las flechas luminosas para llegar al punto de trabajo.</p><button class="action-button" id="record-area" type="button" ${visited?'disabled':''}>${visited?'Exploración registrada':'Registrar exploración opcional'}</button></section>`;
-    $('#record-area').addEventListener('click',async event=>{event.currentTarget.disabled=true;try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'area-visit',level:area.level})});state=result.state;event.currentTarget.textContent='Exploración registrada';setNotice('Tu exploración opcional quedó guardada en este módulo.')}catch(error){event.currentTarget.disabled=false;setNotice(error.message)}});
+    activeRewardArea=area;
+    const evidence=state.mission?.area_evidence?.[area.id]||[];
+    $('#route-status').textContent=`Premio profesional · ${area.name}`;
+    $('#work-main').innerHTML=`<section class="reward-result level-${area.level}"><p class="section-kicker">Desafío complementario · fuera del tiempo obligatorio</p><h3>${esc(area.name)}</h3><p>${esc(area.ae_title||plan.module.title)}</p><p>${esc(area.objective)}</p><p><strong>Producto:</strong> ${esc(area.product)}</p><p><strong>Criterio:</strong> ${esc(area.criterion)}</p><p>Área ganada el ${esc(area.earned_at)}. El acceso físico al espacio 3D está pendiente de conexión con el motor original.</p><button class="outline" type="button" disabled>Explorar nueva área</button><form id="area-evidence-form"><label>Evidencias y decisiones de la actividad opcional<textarea name="text" minlength="20" maxlength="10000" required></textarea></label><button type="submit" class="action-button">Guardar evidencia complementaria</button></form><p>${evidence.length} evidencia(s) registrada(s)</p>${evidence.map(item=>`<p>${esc(item.text)}</p>`).join('')}<button type="button" class="outline" id="back-result">Volver al resultado</button></section>`;
+    $('#back-result').addEventListener('click',()=>renderMissionCompletion(Number(state.quiz?.score)||0));
+    $('#area-evidence-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget,button=form.querySelector('button');button.disabled=true;try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'area-evidence',area_id:area.id,text:new FormData(form).get('text')})});state=result.state;exploreRewardArea(area);setNotice('Evidencia complementaria guardada. No modifica el tiempo ni la nota obligatoria.');}catch(error){button.disabled=false;setNotice(error.message);}});
   }
   async function saveDraft(phase,text){
     try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'mission-draft',phase,text})});state=result.state;const status=$('#save-state');if(status)status.textContent='Borrador guardado automáticamente';}
     catch(error){setNotice(error.message);}
   }
   function renderMissionAside(count){
-    const destinations=['Puesto de planificación','Taller de especialidad','Control de calidad','Recepción técnica'];
-    const phasesHtml=plan.mission.phases.map((phase,i)=>{const task=plan.mission.tasks[i];return `<li><button type="button" class="${phase.id===activePhase?'active':''}" ${i>count?'disabled':''}><span class="phase-card-copy"><strong>${i<count?'✓ ':'Misión '+String(i+1).padStart(2,'0')+' · '}${esc(phase.title)}</strong><small>${esc(task?.title||phase.prompt)}</small><small>Destino · ${esc(destinations[i])}</small></span><small>${phase.minutes} min</small></button></li>`;}).join('');
+    const workspace=currentLocation?.space||'taller de especialidad';
+    const destinations=[`Preparación de orden · ${workspace}`,`Intervención técnica · ${workspace}`,`Control de calidad · ${workspace}`,`Entrega y justificación · ${workspace}`];
+    const phasesHtml=plan.mission.phases.map((phase,i)=>{const task=plan.mission.tasks[i],done=Boolean(phaseState()[phase.id]),locked=!done&&phases.slice(0,i).some(key=>!phaseState()[key]);return `<li><button type="button" class="${phase.id===activePhase?'active':''}" ${locked?'disabled':''}><span class="phase-card-copy"><strong>${done?'✓ ':'Misión '+String(i+1).padStart(2,'0')+' · '}${esc(phase.title)}</strong><small>${esc(task?.title||phase.prompt)}</small><small>Destino · ${esc(destinations[i])}</small></span><small>${phase.minutes} min</small></button></li>`;}).join('');
     const rubricHtml=plan.mission.rubric.length?`<details class="rubric-details"><summary>Criterios de verificación · ${plan.mission.rubric.length}</summary><ul class="ae-list">${plan.mission.rubric.map(item=>`<li>${esc(item.name)}</li>`).join('')}</ul></details>`:'';
-    const destination=destinations[Math.max(0,Math.min(3,phases.findIndex(item=>item.id===activePhase)))];
-    $('#work-aside').innerHTML=`<section class="mission-comic"><p class="markers-title">Práctica profesional · misiones laborales</p><ol class="phase-list">${phasesHtml}</ol><p class="mission-location"><strong>Destino actual:</strong><br>${esc(destination)} · ${esc(currentLocation?.building||'Distrito')} · ${esc(currentLocation?.floor||'Piso asignado')}<br>Las flechas amarillas indican el trayecto.</p><p class="phase-time">Etapa 2 · 30 min · secuencia 5 + 15 + 5 + 5</p></section><div class="mission-resources"><p class="markers-title">Aprendizajes que se integran</p><ul class="ae-list">${plan.mission.aes.map((ae,i)=>`<li><strong>AE ${i+1}</strong> · ${esc(ae.title)}</li>`).join('')}</ul>${rubricHtml}</div>`;
-    $$('.phase-list button',$('#work-aside')).forEach((button,i)=>button.addEventListener('click',()=>{if(i<=count){activePhase=phases[i];renderMission();}}));
+    const destination=destinations[Math.max(0,Math.min(3,phases.indexOf(activePhase)))];
+    $('#work-aside').innerHTML=`<section class="mission-comic"><p class="markers-title">Práctica profesional · misiones laborales</p><ol class="phase-list">${phasesHtml}</ol><p class="mission-location"><strong>Referencia de trabajo:</strong><br>${esc(destination)} · ${esc(currentLocation?.building||'Distrito')} · ${esc(currentLocation?.floor||'Piso asignado')}<br>Consulta el mapa original para orientarte; no hay seguimiento automático de posición en este portal.</p><a class="city-map-link" href="https://www.aulatpchile.cl/ciudad_laboral_aulatp/" target="_blank" rel="noopener">Abrir mapa de la ciudad ↗</a><p class="phase-time">Etapa 2 · 30 min · secuencia 5 + 15 + 5 + 5</p></section><div class="mission-resources"><p class="markers-title">Aprendizajes que se integran</p><ul class="ae-list">${plan.mission.aes.map((ae,i)=>`<li><strong>AE ${i+1}</strong> · ${esc(ae.title)}</li>`).join('')}</ul>${rubricHtml}</div>`;
+    if(state.mission?.recovery)$('#work-aside .phase-time').textContent=`Recuperación · ${state.mission.required_seconds/60} min · intento ${state.mission.attempt_id}`;
+    $$('.phase-list button',$('#work-aside')).forEach((button,i)=>button.addEventListener('click',()=>{if(!button.disabled){activePhase=phases[i];renderMission();}}));
   }
-  function setStage(stage){
+  async function setStage(stage){
+    if(switchingStage)return;
     if(stage==='mission'&&savedCount()<plan.quiz.length){setNotice('Completa los diez desafíos antes de abrir las misiones laborales.');return;}
-    if(stage!==activeStage&&pendingSeconds)sendHeartbeat(activeStage);
-    activeStage=stage;pendingStage=stage;activeSeconds=Number(state[stage]?.active_seconds)||0;activePhase=phases[Math.min(answeredPhases(),phases.length-1)];render();setNotice('');
+    if(stage==='mission'&&quizRemaining()>0){setNotice('Completa los 15 minutos activos del quiz antes de iniciar la práctica profesional.');return;}
+    if(stage!==activeStage){
+      switchingStage=true;await heartbeatRequest;
+      if(pendingSeconds)await sendHeartbeat(activeStage);
+      if(pendingSeconds){switchingStage=false;setNotice('No se pudo guardar el tiempo de la etapa. Reintenta cuando se restablezca la conexión.');return;}
+      switchingStage=false;
+    }
+    activeStage=stage;pendingStage=stage;activeSeconds=Number(state[stage]?.active_seconds)||0;activePhase=nextPhase();render();setNotice('');
   }
   $$('.stage-tab').forEach(button=>button.addEventListener('click',()=>{if(!button.disabled)setStage(button.dataset.stage);}));
   function tick(){
-    if(!journey.hidden&&!document.hidden&&!state.mission?.completed_at){if(!pendingSeconds)pendingStage=activeStage;pendingSeconds++;$('#timer-value').textContent=formatTime(activeSeconds+pendingSeconds);}
-    if(pendingSeconds>=30)sendHeartbeat();
+    if(!journey.hidden&&!document.hidden&&!switchingStage&&!state.mission?.completed_at){if(!pendingSeconds)pendingStage=activeStage;pendingSeconds++;$('#timer-value').textContent=formatTime(activeSeconds+pendingSeconds);}
+    updateTimeGates();
+    if(pendingSeconds>=30)heartbeatRequest=sendHeartbeat();
+  }
+  function updateTimeGates(){
+    if(journey.hidden||!plan)return;
+    const quizGate=$('#quiz-time-gate'),openMission=$('#open-mission');
+    if(quizGate){const remaining=quizRemaining();quizGate.textContent=`Tiempo activo restante: ${formatTime(remaining)}`;quizGate.hidden=remaining<=0;}
+    if(openMission)openMission.disabled=quizRemaining()>0;
+    const missionGate=$('#mission-time-gate'),savePhase=$('#save-phase');
+    if(missionGate&&savePhase){const remaining=missionRemaining();missionGate.textContent=`Tiempo activo de práctica restante para cerrar: ${formatTime(remaining)}`;missionGate.hidden=remaining<=0;savePhase.disabled=remaining>0||Boolean(savePhase.dataset.saving);}
+    const missionTab=$('#mission-tab');if(missionTab)missionTab.disabled=savedCount()<plan.quiz.length||quizRemaining()>0;
   }
   function formatTime(value){const mins=Math.floor(value/60),secs=value%60;return `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;}
   async function sendHeartbeat(stage=pendingStage){
     if(!pendingSeconds||!moduleId)return;const seconds=Math.min(60,pendingSeconds);pendingSeconds-=seconds;
-    try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'heartbeat',stage,seconds})});state=result.state;if(stage===activeStage)activeSeconds=Number(state[stage]?.active_seconds)||activeSeconds;$('#timer-value').textContent=formatTime(activeSeconds+pendingSeconds);}
+    try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'heartbeat',stage,seconds})});state=result.state;if(stage===activeStage)activeSeconds=Number(state[stage]?.active_seconds)||activeSeconds;$('#timer-value').textContent=formatTime(activeSeconds+pendingSeconds);updateTimeGates();}
     catch(_error){pendingSeconds+=seconds;}
   }
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)sendHeartbeat();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)heartbeatRequest=sendHeartbeat();});
   setInterval(tick,1000);
   init();
 })();

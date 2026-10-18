@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f3f8fc">
   <title>Ciudad Laboral · Aula TP Chile</title>
-  <link rel="stylesheet" href="/api/city-experience.css?v=20261018-direct-city-entry-v2">
-  <link rel="stylesheet" href="/static/city-experience-entry.css?v=20261018-direct-city-entry-v2">
+  <link rel="stylesheet" href="/api/city-experience.css?v=20261018-city-recovery-v3">
+  <link rel="stylesheet" href="/static/city-experience-entry.css?v=20261018-city-recovery-v3">
 </head>
 <body>
   <a class="skip-link" href="#experience-main">Saltar al recorrido</a>
@@ -27,7 +27,7 @@
         <div>
           <p class="eyebrow">Estación 4 · <span id="onboarding-context">Tu especialidad y módulo</span></p>
           <h2 id="onboarding-title">Prepárate para tu <span>misión laboral</span></h2>
-          <p>En esta estación vivirás una experiencia de aprendizaje en dos etapas por cada módulo.</p>
+          <p>En esta estación vivirás una experiencia de aprendizaje en dos etapas por cada módulo publicado.</p>
         </div>
         <strong class="total-time"><span aria-hidden="true">◷</span> 45 minutos por módulo</strong>
       </div>
@@ -55,7 +55,7 @@
 
       <div class="route-guidance">
         <span class="guidance-arrows" aria-hidden="true"><b>➜</b><i>› › ›</i></span>
-        <div><h3>¿Cómo sabrás dónde ir?</h3><p>Sigue las flechas amarillas luminosas en el suelo. Te guiarán hacia los cuestionarios y las misiones profesionales de tu módulo.</p></div>
+        <div><h3>Oriéntate en la ciudad</h3><p>Abre el mapa y los controles de la Ciudad Laboral original para ubicar tu distrito. Este portal no recibe la posición del personaje, así que no simula flechas de seguimiento automático.</p></div>
         <span class="guidance-path" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
       </div>
     </section>
@@ -103,8 +103,9 @@
           <h2 id="module-title"></h2>
           <p id="module-case" class="muted"></p>
           <p id="journey-location" class="location-summary"></p>
+          <a class="journey-city-link" href="https://www.aulatpchile.cl/ciudad_laboral_aulatp/" target="_blank" rel="noopener">Abrir Ciudad Laboral 3D <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="timer" aria-live="polite"><span>Tiempo activo · etapa</span><strong id="timer-value">00:00</strong><small>Etapa 1: 15 min · Etapa 2: 30 min · tiempo orientativo</small></div>
+        <div class="timer" aria-live="polite"><span>Tiempo activo · etapa</span><strong id="timer-value">00:00</strong><small>Duración mínima: 15 min de quiz + 30 min de práctica</small></div>
       </header>
       <div class="journey-progress" aria-label="Avance del recorrido"><span id="progress-bar"></span></div>
       <nav class="stage-tabs" aria-label="Etapas del recorrido">
@@ -119,6 +120,6 @@
       <p class="notice" id="journey-notice" role="status"></p>
     </section>
   </main>
-  <script src="/api/city-experience.js?v=20261018-direct-city-entry-v2" defer></script>
+  <script src="/api/city-experience.js?v=20261018-city-recovery-v3" defer></script>
 </body>
 </html>

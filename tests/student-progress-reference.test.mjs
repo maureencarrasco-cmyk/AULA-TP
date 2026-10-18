@@ -48,6 +48,8 @@ test('Estación 4 opens its real module simulator and progress includes six stat
   assert.match(html,/Sin medici.n/);
   assert.doesNotMatch(html,/25%|0 de 9 actividades/);
   m.state.city_experience={quiz:{completed_at:'2026-10-17'},mission:{completed_at:'2026-10-17'}};
+  assert.equal(ui.pct(m),17,'Una entrega sin aprobación no completa Estación 4');
+  m.city_completed=true;
   assert.equal(ui.pct(m),33);
   assert.match(ui.moduleView(m),/Estaciones completadas<\/dt><dd>2 de 6/);
 });
@@ -70,6 +72,7 @@ test('Estación 4 has the matching simulator link in all 451 modules across 45 c
 
 test('a completed module preserves real scores, feedback, OA and station destinations',()=>{
   const m=module();m.completed.fill(true);
+  m.city_completed=true;
   m.state.city_experience={quiz:{completed_at:'2026-10-17'},mission:{completed_at:'2026-10-17'}};
   m.oa=[{code:'OA1',title:'Objetivo conservado'}];
   m.state={closed:true,reflection:'Mi reflexion',plan:'Mi plan',ae:{},cases:{},city_experience:{quiz:{completed_at:'2026-10-17'},mission:{completed_at:'2026-10-17'}},exam:{score:8,max_score:10,profile:{ae:{AE1:{percent:84}}},review:{feedback:'Comentario docente'}}};
@@ -140,7 +143,7 @@ test('course and module text stay escaped and the styles/assets are scoped and l
   assert.ok(read('static/student-progress-icons.svg').length<15_000);
   const index=read('static/index.html');
   assert.match(index,/student-progress-reference\.css\?v=20261018-station4-live-v1/);
-  assert.match(index,/student-progress\.js\?v=20261018-station4-live-v1/);
+  assert.match(index,/student-progress\.js\?v=20261018-city-recovery-v3/);
   assert.match(source,/moduleId!==selected/);
   assert.match(source,/window\.AulaPractice\.open\(\)/);
   assert.match(source,/observer\.disconnect\(\)/);

@@ -13,6 +13,12 @@ class LMSFlow(unittest.TestCase):
   token=client.get('/api/session').json['csrf'];r=client.post('/api/login',json={'username':user,'password':pwd},headers={'X-CSRF-Token':token});self.assertEqual(r.status_code,200);return r.json['csrf']
  def req(self,path,data,teacher=False,method='POST'):
   return (self.t if teacher else self.s).open('/api'+path,method=method,json=data,headers={'X-CSRF-Token':self.tt if teacher else self.st})
+ def city_time(self,stage,seconds):
+  while seconds:
+   interval=min(60,seconds)
+   result=self.req('/modules/1/city-experience',{'operation':'heartbeat','stage':stage,'seconds':interval})
+   self.assertEqual(result.status_code,200,result.json)
+   seconds-=interval
  def activity(self,**kw):return self.req('/modules/1/activity',kw)
  def test_demo_catalog_opens_without_credentials(self):
   visitor=self.app.test_client()
@@ -56,10 +62,15 @@ class LMSFlow(unittest.TestCase):
    saved=self.req('/modules/1/city-experience',{'operation':'quiz-answer','index':index,'choice':0})
    self.assertEqual(saved.status_code,200)
   self.assertEqual(self.req('/modules/1/city-experience',{'operation':'heartbeat','stage':'quiz','seconds':30}).json['state']['quiz']['active_seconds'],30)
+  self.assertEqual(self.req('/modules/1/city-experience',{'operation':'heartbeat','stage':'mission','seconds':30}).status_code,403)
+  self.city_time('quiz',870)
   self.assertEqual(self.req('/modules/1/city-experience',{'operation':'heartbeat','stage':'mission','seconds':45}).json['state']['mission']['active_seconds'],45)
-  for phase in ('planificar','actuar','verificar','justificar'):
+  for phase in ('planificar','actuar','verificar'):
    result=self.req('/modules/1/city-experience',{'operation':'mission-submit','phase':phase,'text':TEXT})
    self.assertEqual(result.status_code,200)
+  self.assertEqual(self.req('/modules/1/city-experience',{'operation':'mission-submit','phase':'justificar','text':TEXT}).status_code,403)
+  self.city_time('mission',1755)
+  self.assertEqual(self.req('/modules/1/city-experience',{'operation':'mission-submit','phase':'justificar','text':TEXT}).status_code,200)
   saved=self.s.get('/api/progress').json
   module=next(item for item in saved if item['id']==1)
   experience=module['state']['city_experience']
@@ -77,6 +88,8 @@ class LMSFlow(unittest.TestCase):
    original=next(item for item in content['questions'] if item['question']==question['question'])
    choice=(original['answer']+1)%4 if index==0 else original['answer']
    self.assertEqual(self.req('/modules/1/city-experience',{'operation':'quiz-answer','index':index,'choice':choice}).status_code,200)
+  self.city_time('quiz',900)
+  self.city_time('mission',1800)
   for phase in ('planificar','actuar','verificar','justificar'):
    self.assertEqual(self.req('/modules/1/city-experience',{'operation':'mission-submit','phase':phase,'text':TEXT}).status_code,200)
   self.assertEqual(len(self.s.get('/api/modules/1/city-experience').json['recoveries']),1)
@@ -99,13 +112,13 @@ class LMSFlow(unittest.TestCase):
   capped=self.req('/teacher/city-review',{**review,'safety_approved':False},teacher=True)
   self.assertEqual(capped.json['reward']['final_score'],97)
   self.assertFalse(capped.json['reward']['approved'])
-  self.assertEqual(capped.json['reward']['areas'],[])
-  self.assertEqual(capped.json['reward']['attempts'],2)
-  self.assertTrue(capped.json['reward']['teacher_alert'])
+  self.assertEqual(len(capped.json['reward']['areas']),3)
+  self.assertEqual(capped.json['reward']['attempts'],1)
+  self.assertFalse(capped.json['reward']['teacher_alert'])
   changed=self.req('/modules/1/city-experience',{'operation':'mission-submit','phase':'justificar','text':TEXT+' Una nueva verificación queda registrada.'})
-  self.assertEqual(changed.status_code,200)
-  self.assertEqual(self.s.get('/api/modules/1/city-experience').json['reward']['status'],'pending_review')
-  self.assertEqual(self.s.post('/api/modules/1/city-experience',json={'operation':'area-visit','level':2},headers={'X-CSRF-Token':self.st}).status_code,403)
+  self.assertEqual(changed.status_code,409)
+  self.assertEqual(self.s.get('/api/modules/1/city-experience').json['reward']['status'],'reviewed')
+  self.assertEqual(self.s.post('/api/modules/1/city-experience',json={'operation':'area-visit','level':2},headers={'X-CSRF-Token':self.st}).status_code,200)
  def test_city_approval_requires_independent_score_practice_competencies_and_safety_gates(self):
   import json,sqlite3
   plan=self.s.get('/api/modules/1/city-experience').json['plan']
@@ -114,6 +127,8 @@ class LMSFlow(unittest.TestCase):
   for index,question in enumerate(plan['quiz']):
    original=next(item for item in content['questions'] if item['question']==question['question'])
    self.assertEqual(self.req('/modules/1/city-experience',{'operation':'quiz-answer','index':index,'choice':original['answer']}).status_code,200)
+  self.city_time('quiz',900)
+  self.city_time('mission',1800)
   for phase in ('planificar','actuar','verificar','justificar'):
    self.assertEqual(self.req('/modules/1/city-experience',{'operation':'mission-submit','phase':phase,'text':TEXT}).status_code,200)
   review={'user_id':1,'module_id':1,'points':[[4]*5,[4]*5,[4]*5,[1]*5],

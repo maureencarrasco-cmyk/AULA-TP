@@ -33,7 +33,7 @@
     link.href='/api/city-experience';
     link.target='_blank';
     link.rel='noopener';
-    link.textContent='Estación 4 · Quiz + Misiones Laborales · 90 min';
+    link.textContent='Estación 4 · Quiz + Práctica profesional';
     card.append(link);
   }
   function syncConstructionDistrict() {

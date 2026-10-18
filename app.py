@@ -17,6 +17,7 @@ from itsdangerous import URLSafeTimedSerializer, BadSignature
 from practice_scenarios import scenario as practice_scenario, review as practice_review
 from practice_pedagogy import profile as practice_profile
 from course_catalog import ensure_course_catalog
+from city_progression import evaluate_city, apply_review, sync_awards, start_recovery, migrate_awards, recovery_question, PHASE_MINUTES
 
 ROOT=Path(__file__).resolve().parent
 
@@ -159,7 +160,7 @@ def create_app(test_config=None):
                 if not m['published']:return None,fail('El módulo está en preparación.',403)
                 if not is_demo_student(u) and not con.execute('SELECT 1 FROM enrollments WHERE user_id=? AND course_id=?',(u['id'],m['course_id'])).fetchone():return None,fail('No tienes matrícula en este curso.',403)
             return dict(m),None
-    def city_experience_content(content, mid, uid):
+    def city_experience_content(content, mid, uid, attempt_id=1):
         questions=content.get('questions') or []
         rng=random.Random(f'city-45-v1:{uid}:{mid}')
         difficulty_aliases={'Fácil':'Inicial','Facil':'Inicial','Media':'Intermedia','Difícil':'Avanzada','Dificil':'Avanzada'}
@@ -199,10 +200,12 @@ def create_app(test_config=None):
             for item in candidates:
                 if item not in tasks:tasks.append(item)
                 if len(tasks)>=4:break
-        case=(content.get('cases') or [{}])[0]
+        cases=content.get('cases') or [{}]
+        case=cases[(attempt_id-1)%len(cases)]
         return {
             'version':2,
-            'module':{'id':mid,'title':content.get('title') or '', 'case_title':content.get('case_title') or case.get('title') or 'Situación laboral integrada'},
+            'module':{'id':mid,'title':content.get('title') or '', 'case_title':case.get('title') if attempt_id>1 else content.get('case_title') or case.get('title') or 'Situación laboral integrada'},
+            'attempt_id':attempt_id,
             'timing':{'total':45,'quiz':15,'mission':30,'quiz_per_question':1.5,'phases':[5,15,5,5]},
             'quiz':quiz,
             'mission':{
@@ -223,38 +226,7 @@ def create_app(test_config=None):
             }
         }
     def city_reward(experience, plan=None):
-        quiz=experience.get('quiz') or {};mission=experience.get('mission') or {};review=mission.get('review') or {}
-        if not quiz.get('completed_at') or not mission.get('completed_at'):
-            return {'status':'in_progress','approved':False,'quiz_score':None,'practice_score':None,'final_score':None,'level':0,'areas':[],
-                    'conditions':{'final_score':False,'practice_score':False,'essential_competencies':False,'critical_safety':False,'activities_complete':False}}
-        answer_count=max(1,len(quiz.get('answers') or {}));quiz_score=round(100*int(quiz.get('score') or 0)/answer_count)
-        if not review:
-            return {'status':'pending_review','approved':False,'quiz_score':quiz_score,'practice_score':None,'final_score':None,'level':0,'areas':[],
-                    'conditions':{'final_score':False,'practice_score':False,'essential_competencies':False,'critical_safety':False,'activities_complete':True},
-                    'message':'La práctica quedó registrada y está pendiente de revisión docente.'}
-        practice_score=round(sum(sum(row) for row in review['points']))
-        final_score=round(quiz_score*.30+practice_score*.70)
-        conditions={'final_score':final_score>=75,'practice_score':practice_score>=75,
-                    'essential_competencies':bool(review.get('competencies_approved')),
-                    'critical_safety':bool(review.get('safety_approved')),'activities_complete':True}
-        approved=all(conditions.values())
-        level=4 if approved and final_score>=90 else 3 if approved else 2 if final_score>=60 else 1
-        names={1:'Aprendiz en desarrollo',2:'Explorador profesional',3:'Técnico avanzado',4:'Experto de misión'}
-        areas=[{'level':2,'name':'Sala complementaria de especialidad'},
-               {'level':3,'name':'Zona técnica especializada'},
-               {'level':4,'name':'Área profesional avanzada'}]
-        unlocked=[area for area in areas if approved and level>=area['level']]
-        tasks=(plan or {}).get('mission',{}).get('tasks') or []
-        for index,area in enumerate(unlocked):
-            task=tasks[min(index,len(tasks)-1)] if tasks else {}
-            area['name']=(task.get('title') or area['name'])[:100]
-            area['ae_title']=task.get('ae_title') or ''
-        return {'status':'reviewed','approved':approved,'quiz_score':quiz_score,'practice_score':practice_score,'final_score':final_score,
-                'level':level,'level_name':names[level] if approved else 'Aún tienes competencias por fortalecer','areas':unlocked,'conditions':conditions,
-                'safety_approved':bool(review.get('safety_approved')),'competencies_approved':bool(review.get('competencies_approved')),
-                'recovery_type':'practica_integral' if final_score<60 else 'refuerzo_especifico' if final_score<75 else 'repetir_practica_pendiente' if practice_score<75 else 'demostrar_competencias_criticas' if not approved else None,
-                'feedback':review.get('feedback',''),'reviewed_at':review.get('at'),'attempts':len(mission.get('reviews') or []),
-                'teacher_alert':bool(not approved and len(mission.get('reviews') or [])>=2)}
+        return evaluate_city(experience, plan)
     def text_valid(v,n=20):return isinstance(v,str) and n<=len(v.strip())<=10000
     def published_module_feedback(con,mid):
         row=con.execute('SELECT f.body AS text,f.updated AS updated_at,f.teacher_id,u.name AS teacher_name FROM module_feedback f JOIN users u ON u.id=f.teacher_id WHERE f.module_id=?',(mid,)).fetchone()
@@ -338,7 +310,7 @@ def create_app(test_config=None):
                         if pack.get('count'):mod['encargos_count']=pack['count'];mod['encargos_hours']=pack['hours']
                     item['modules'].append(mod)
                 if compact:
-                    keep={'id','title','position','published','completed','percent','evaluation_scores','official_hp','official_year','encargos_count','encargos_hours'}
+                    keep={'id','title','position','published','completed','city_completed','percent','evaluation_scores','official_hp','official_year','encargos_count','encargos_hours'}
                     item['modules']=[{k:v for k,v in mod.items() if k in keep} for mod in item['modules']]
                     result.append(item)
                     continue
@@ -375,7 +347,7 @@ def create_app(test_config=None):
         c['contextualization']=context_plan(c,course,m['title'])
         for item in c.get('aes') or []:item['learning_sequence']=learning_sequence(item)
         if u['role']=='student':c=strip_for_student(c)
-        m.update(content=c,state=s,completed=completed(s,c),stations=STATIONS,steps=STEPS,planning=active_plan or c.get('planning') or module_plan(m['position']))
+        m.update(content=c,state=s,completed=completed(s,c),city_completed=city_reward(s.get('city_experience') or {})['approved'],stations=STATIONS,steps=STEPS,planning=active_plan or c.get('planning') or module_plan(m['position']))
         return jsonify(m)
     @app.get('/api/city-experience')
     def city_experience_page():
@@ -395,6 +367,7 @@ def create_app(test_config=None):
         if err:return err
         content=load_content(m['content'],m['position']);content['title']=m['title']
         with db() as con:
+            con.execute('BEGIN IMMEDIATE')
             state=getstate(con,mid)
             experience=state.get('city_experience') or {}
             if not experience.get('started_at'):
@@ -409,27 +382,32 @@ def create_app(test_config=None):
             city_courses=con.execute('SELECT id,title FROM courses ORDER BY id').fetchall()
             location=city_locations_for_courses(city_courses).get(m['course_id'])
             course=con.execute('SELECT title FROM courses WHERE id=?',(m['course_id'],)).fetchone()
-        plan=city_experience_content(content,mid,session['uid'])
-        for question in plan['quiz']:question.pop('explanation',None)
-        with db() as con:
+            plan=city_experience_content(content,mid,session['uid'],experience.get('mission',{}).get('attempt_id',1))
+            for question in plan['quiz']:question.pop('explanation',None)
+            if 'earned_areas' not in experience:
+                migrate_awards(experience,plan,mid)
+                putstate(con,mid,state)
             module_rows=con.execute('SELECT p.state FROM progress p JOIN modules m ON m.id=p.module_id WHERE p.user_id=? AND m.course_id=? AND m.published=1',(session['uid'],m['course_id'])).fetchall()
             total_modules=con.execute('SELECT COUNT(*) FROM modules WHERE course_id=? AND published=1',(m['course_id'],)).fetchone()[0]
         reviewed=[]
         for row in module_rows:
             module_state=json.loads(row['state']);module_experience=module_state.get('city_experience') or {}
-            if module_experience.get('mission',{}).get('review'):
+            if module_experience.get('started_at'):
                 reviewed.append(city_reward(module_experience))
-        specialty_progress={'reviewed_modules':len(reviewed),'total_modules':total_modules,
+        specialty_progress={'reviewed_modules':sum(item['status']=='reviewed' for item in reviewed),'total_modules':total_modules,
                             'approved_modules':sum(item['approved'] for item in reviewed),
-                            'best_level':max((item['level'] for item in reviewed),default=0),
+                            'best_level':max((area['level'] for item in reviewed for area in item['areas']),default=0),
                             'unlocked_areas':sum(len(item['areas']) for item in reviewed),
                             'recognized':bool(total_modules and len(reviewed)>=total_modules and all(item['approved'] for item in reviewed))}
         recoveries=[]
         for index,question in enumerate(plan['quiz']):
             answer=(experience.get('quiz',{}).get('answers') or {}).get(str(index)) or {}
-            if answer and not answer.get('correct'):
+            if answer and not answer.get('correct') and not answer.get('recovered'):
+                variant=recovery_question(content,plan,experience,index)
                 recoveries.append({'index':index,'question':question.get('question',''),'ae':question.get('ae'),
                                    'skill':question.get('skill',''),'explanation':answer.get('explanation',''),
+                                   'reassessment':{k:v for k,v in variant.items() if k not in ('answer','explanation','option_feedback')} if variant else None,
+                                   'reassessment_attempts':experience.get('quiz',{}).get('recovery_answers',{}).get(str(index),[]),
                                    'attempts':(experience.get('mission',{}).get('recovery_missions') or {}).get(str(index),[])})
         return jsonify(course_title=course['title'],location=location,plan=plan,state=experience,
                        reward=city_reward(experience,plan),specialty_progress=specialty_progress,recoveries=recoveries)
@@ -440,29 +418,71 @@ def create_app(test_config=None):
         if err:return err
         payload=body();operation=payload.get('operation')
         content=load_content(m['content'],m['position']);content['title']=m['title']
-        plan=city_experience_content(content,mid,session['uid'])
         with db() as con:
+            con.execute('BEGIN IMMEDIATE')
             state=getstate(con,mid)
             experience=state.get('city_experience')
             if not experience:return fail('Inicia la experiencia antes de guardar avances.',409)
+            plan=city_experience_content(content,mid,session['uid'],experience.get('mission',{}).get('attempt_id',1))
+            migrate_awards(experience,plan,mid)
             quiz=experience.setdefault('quiz',{'answers':{},'attempts':{}})
             mission=experience.setdefault('mission',{'responses':{},'drafts':{}})
+            mission.setdefault('case_title',plan['module']['case_title'])
+            mission.setdefault('scenario',plan['mission']['scenario'])
             if operation=='heartbeat':
                 seconds=payload.get('seconds')
                 stage=payload.get('stage')
                 if type(seconds)!=int or not 1<=seconds<=60 or stage not in ('quiz','mission'):return fail('Intervalo de actividad inválido.')
                 if stage=='mission' and len(quiz.get('answers',{}))!=len(plan['quiz']):return fail('Completa primero todos los desafíos del quiz.',403)
+                if stage=='mission' and int(quiz.get('active_seconds') or 0)<plan['timing']['quiz']*60:return fail('Completa los 15 minutos activos del quiz antes de iniciar la práctica profesional.',403)
                 experience['active_seconds']=int(experience.get('active_seconds') or 0)+seconds
                 experience.setdefault(stage,{})['active_seconds']=int(experience[stage].get('active_seconds') or 0)+seconds
+            elif operation=='recovery-start':
+                if mission.get('attempt_id',1)>=len(content.get('cases') or []):
+                    return fail('No quedan situaciones equivalentes inéditas. El docente debe ampliar el banco en una nueva versión de práctica.',409)
+                try:recovery=start_recovery(experience,payload.get('reinforcement'))
+                except ValueError as error:return fail(str(error),409)
+                retry_plan=city_experience_content(content,mid,session['uid'],mission['attempt_id'])
+                mission['case_title']=retry_plan['module']['case_title'];mission['scenario']=retry_plan['mission']['scenario']
+                trace(state,'city-recovery-started',attempt_id=mission['attempt_id'],phases=recovery['phases'])
+            elif operation=='quiz-retry-answer':
+                index=payload.get('index');choice=payload.get('choice')
+                answers=quiz.get('answers') or {}
+                current_result=city_reward(experience)
+                if not mission.get('review') or current_result['approved']:
+                    return fail('La recuperación evaluada requiere una revisión docente insuficiente.',403)
+                if (current_result.get('recovery') or {}).get('type')=='practica_integral':
+                    mission.setdefault('integral_required_after',mission.get('attempt_id',1))
+                if type(index) is not int or not 0<=index<len(plan['quiz']) or str(index) not in answers or answers[str(index)].get('correct') or answers[str(index)].get('recovered'):
+                    return fail('Selecciona un desafío pendiente de recuperación.',403)
+                if not (mission.get('recovery_missions') or {}).get(str(index)):
+                    return fail('Registra primero el refuerzo y la reflexión de este desafío.',409)
+                variant=recovery_question(content,plan,experience,index)
+                if not variant or payload.get('question')!=variant['question']:
+                    return fail('Abre el desafío equivalente actualizado antes de responder.',409)
+                if type(choice) is not int or choice not in range(len(variant.get('options') or [])):
+                    return fail('Selecciona una alternativa disponible.')
+                correct=choice==variant.get('answer')
+                quiz.setdefault('recovery_answers',{}).setdefault(str(index),[]).append({'question':variant['question'],'choice':choice,'correct':correct,'at':datetime.now(timezone.utc).isoformat()})
+                if correct:answers[str(index)]['recovered']=True
+                quiz['score']=sum(bool(answer.get('correct') or answer.get('recovered')) for answer in answers.values())
+                sync_awards(experience,plan,mid)
+                trace(state,'city-quiz-reassessed',index=index,correct=correct)
+            elif operation=='area-evidence':
+                area=next((area for area in experience.get('earned_areas',[]) if area['id']==payload.get('area_id')),None)
+                if not area:return fail('Esta área no figura entre tus premios obtenidos.',403)
+                if not text_valid(payload.get('text'),20):return fail('Registra decisiones, evidencias y verificaciones del desafío complementario.')
+                mission.setdefault('area_evidence',{}).setdefault(area['id'],[]).append({'text':payload['text'].strip(),'at':datetime.now(timezone.utc).isoformat()})
+                trace(state,'city-area-evidence',area_id=area['id'])
             elif operation=='area-visit':
                 level=payload.get('level');reward=city_reward(experience,plan)
-                if type(level) is not int or level not in (2,3,4) or not reward['approved'] or reward['level']<level:
+                if type(level) is not int or not any(area['level']==level for area in reward['areas']):
                     return fail('Esta área todavía no está desbloqueada.',403)
-                mission.setdefault('explored_areas',{})[str(level)]={'visited_at':datetime.now(timezone.utc).isoformat()}
+                mission.setdefault('explored_areas',{})[str(level)]={'visited_at':datetime.now(timezone.utc).isoformat(),'source':'student_declaration'}
                 trace(state,'city-reward-area-visited',level=level,module_id=mid)
             elif operation=='recovery-submit':
                 index=payload.get('index');answers=quiz.get('answers') or {}
-                if type(index) is not int or not 0<=index<len(plan['quiz']) or str(index) not in answers or answers[str(index)].get('correct'):
+                if type(index) is not int or not 0<=index<len(plan['quiz']) or str(index) not in answers or answers[str(index)].get('correct') or answers[str(index)].get('recovered'):
                     return fail('Esta misión de recuperación no corresponde a una respuesta pendiente.',403)
                 if len(mission.get('responses') or {})!=len(plan['mission']['phases']):
                     return fail('Completa primero la práctica profesional del módulo.',403)
@@ -490,17 +510,23 @@ def create_app(test_config=None):
                 trace(state,'city-quiz-answer',index=index,correct=correct,difficulty=question.get('difficulty'))
             elif operation in ('mission-draft','mission-submit'):
                 phase=payload.get('phase');phases=plan['mission']['phases']
+                if mission.get('review'):return fail('Este intento ya está revisado. Inicia una recuperación para registrar nuevas evidencias.',409)
                 phase_index=next((i for i,item in enumerate(phases) if item['id']==phase),-1)
                 if len(quiz.get('answers',{}))!=len(plan['quiz']):return fail('Completa primero todos los desafíos del quiz.',403)
                 if phase_index<0:return fail('Fase de misión inválida.')
+                if int(quiz.get('active_seconds') or 0)<plan['timing']['quiz']*60:return fail('Completa primero los 15 minutos del quiz.',403)
                 responses=mission.setdefault('responses',{});drafts=mission.setdefault('drafts',{})
-                if phase_index>len(responses):return fail('Completa la fase anterior antes de continuar.',403)
+                if any(item['id'] not in responses for item in phases[:phase_index]):return fail('Completa la fase anterior antes de continuar.',403)
+                if mission.get('recovery') and phase not in mission.get('required_phases',[]):return fail('Esta fase ya está lograda y se conserva en la recuperación.',403)
                 text=payload.get('text')
                 if not isinstance(text,str) or len(text)>10000:return fail('Respuesta inválida.')
                 if operation=='mission-draft':
                     drafts[phase]=text
                 else:
                     if not text_valid(text,20):return fail('Escribe al menos 20 caracteres para guardar esta fase.')
+                    required_seconds=mission.get('required_seconds',plan['timing']['mission']*60)
+                    if len(set(responses)|{phase})==len(phases) and int(mission.get('active_seconds') or 0)<required_seconds:
+                        return fail(f'Completa los {required_seconds//60} minutos de práctica de este intento antes de cerrarlo.',403)
                     responses[phase]=text.strip();drafts.pop(phase,None)
                     mission.setdefault('completed_at_by_phase',{})[phase]=datetime.now(timezone.utc).isoformat()
                     if mission.pop('review',None):trace(state,'city-review-invalidated',phase=phase)
@@ -592,7 +618,7 @@ def create_app(test_config=None):
                     aes=[{'label':a.get('title') or a.get('name') or f'AE {i+1}','description':a.get('description') or ''} for i,a in enumerate(c.get('aes') or [])],
                     oa=(c.get('specialty_source') or {}).get('oa') or [],
                     question_count=min(len(c.get('questions') or []),int((c.get('evaluation_plan') or {}).get('question_count') or 25)),
-                    state=s,completed=completed(s,c),updated=row['updated']))
+                    state=s,completed=completed(s,c),city_completed=city_reward(s.get('city_experience') or {})['approved'],updated=row['updated']))
         return jsonify(result)
     @app.post('/api/modules/<int:mid>/activity')
     @require('student')
@@ -601,6 +627,7 @@ def create_app(test_config=None):
         if err:return err
         b=body();kind=b.get('kind');c=load_content(m['content'], m['position'])
         with db() as con:
+            con.execute('BEGIN IMMEDIATE')
             s=getstate(con,mid)
             if s['closed']:return fail('El módulo ya está cerrado. Tus evidencias están conservadas.')
             if kind=='context-step':
@@ -739,7 +766,9 @@ def create_app(test_config=None):
             users=[dict(r) for r in con.execute("SELECT id,username,name FROM users WHERE role='student'")]
             records=[]
             for r in con.execute('SELECT p.*,u.name,m.title,m.content AS module_content FROM progress p JOIN users u ON u.id=p.user_id JOIN modules m ON m.id=p.module_id'):
-                x=dict(r);module_content=json.loads(x.pop('module_content'));x['rubric']=module_content.get('rubric',DEFAULT_CONTENT['rubric']);x['state']=json.loads(x['state']);x['percent']=sum(completed(x['state'],module_content))*20;records.append(x)
+                x=dict(r);module_content=json.loads(x.pop('module_content'));x['rubric']=module_content.get('rubric',DEFAULT_CONTENT['rubric']);x['state']=json.loads(x['state']);x['percent']=sum(completed(x['state'],module_content))*20
+                x['city_reward']=city_reward(x['state'].get('city_experience') or {})
+                records.append(x)
             enrollments=[dict(r) for r in con.execute('SELECT * FROM enrollments')]
         return jsonify(users=users,records=records,enrollments=enrollments)
     @app.post('/api/teacher/users')
@@ -850,6 +879,7 @@ def create_app(test_config=None):
         b=body();points=b.get('points',[])
         if not isinstance(points,list) or len(points)!=5 or any(type(p)!=int or p not in range(6) for p in points) or not text_valid(b.get('feedback')):return fail('Asigna de 0 a 5 puntos a cada criterio y escribe retroalimentación.')
         with db() as con:
+            con.execute('BEGIN IMMEDIATE')
             row=con.execute('SELECT state FROM progress WHERE user_id=? AND module_id=?',(b.get('user_id'),b.get('module_id'))).fetchone()
             if not row:return fail('Entrega inexistente.',404)
             s=json.loads(row['state'])
@@ -861,24 +891,48 @@ def create_app(test_config=None):
     @require('teacher')
     def review_city_experience():
         b=body();points=b.get('points');feedback=b.get('feedback');safety_approved=b.get('safety_approved');competencies_approved=b.get('competencies_approved')
+        critical_phases=b.get('critical_phases') or ['actuar','verificar']
         if (not isinstance(points,list) or len(points)!=4 or any(not isinstance(row,list) or len(row)!=5 or
                 any(type(point) is not int or point not in range(6) for point in row) for row in points) or
                 not isinstance(safety_approved,bool) or not isinstance(competencies_approved,bool) or not text_valid(feedback,20)):
             return fail('Revisa los 20 criterios (0 a 5), las competencias esenciales, la seguridad crítica y la retroalimentación.')
+        if not isinstance(critical_phases,list) or not critical_phases or any(not isinstance(phase,str) or phase not in PHASE_MINUTES for phase in critical_phases):return fail('Selecciona las fases que deben demostrar las competencias críticas.')
         with db() as con:
-            row=con.execute('SELECT p.state,m.content,m.title,m.course_id FROM progress p JOIN modules m ON m.id=p.module_id JOIN users u ON u.id=p.user_id WHERE p.user_id=? AND p.module_id=? AND u.role=\'student\'',(b.get('user_id'),b.get('module_id'))).fetchone()
+            con.execute('BEGIN IMMEDIATE')
+            row=con.execute('SELECT p.state,m.content,m.title,m.position,m.course_id FROM progress p JOIN modules m ON m.id=p.module_id JOIN users u ON u.id=p.user_id WHERE p.user_id=? AND p.module_id=? AND u.role=\'student\'',(b.get('user_id'),b.get('module_id'))).fetchone()
             if not row:return fail('No existe el progreso de ese estudiante y módulo.',404)
             state=json.loads(row['state']);experience=state.get('city_experience') or {};mission=experience.get('mission') or {}
             if not experience.get('quiz',{}).get('completed_at') or not mission.get('completed_at'):
                 return fail('El estudiante debe completar las dos etapas antes de revisar.',409)
-            now=datetime.now(timezone.utc).isoformat();reviews=mission.setdefault('reviews',[])
-            reviews.append({'points':points,'safety_approved':safety_approved,'competencies_approved':competencies_approved,'feedback':feedback.strip(),
-                            'teacher_id':session['uid'],'at':now})
-            mission['reviews']=reviews[-30:];mission['review']=reviews[-1]
+            if b.get('attempt_id',mission.get('attempt_id',1))!=mission.get('attempt_id',1):return fail('El intento cambió. Vuelve a abrir las evidencias antes de evaluar.',409)
+            if mission.get('recovery'):
+                previous=mission['attempt_history'][-1]['review']
+                for phase,values in zip(PHASE_MINUTES,points):
+                    if phase not in mission['required_phases'] and values!=previous['points'][list(PHASE_MINUTES).index(phase)]:
+                        return fail('Conserva la calificación de las fases ya logradas; evalúa solo las fases de recuperación.',409)
+            content=load_content(row['content'],row['position']);content['title']=row['title']
+            plan=city_experience_content(content,b['module_id'],b['user_id'],mission.get('attempt_id',1))
+            migrate_awards(experience,plan,b['module_id'])
+            result=apply_review(experience,{'points':points,'safety_approved':safety_approved,'competencies_approved':competencies_approved,
+                                          'critical_phases':critical_phases,'feedback':feedback.strip(),'teacher_id':session['uid']},plan,b['module_id'])
             state['city_experience']=experience
             con.execute('UPDATE progress SET state=?,updated=CURRENT_TIMESTAMP WHERE user_id=? AND module_id=?',
                         (json.dumps(state,ensure_ascii=False),b['user_id'],b['module_id']))
-        return jsonify(ok=True,reward=city_reward(experience))
+        return jsonify(ok=True,reward=result)
+    @app.post('/api/teacher/city-alert')
+    @require('teacher')
+    def acknowledge_city_alert():
+        b=body()
+        if not text_valid(b.get('intervention'),20):return fail('Registra la intervención pedagógica y el seguimiento acordado (mínimo 20 caracteres).')
+        with db() as con:
+            con.execute('BEGIN IMMEDIATE')
+            row=con.execute('SELECT state FROM progress WHERE user_id=? AND module_id=?',(b.get('user_id'),b.get('module_id'))).fetchone()
+            if not row:return fail('Progreso inexistente.',404)
+            state=json.loads(row['state']);alert=(state.get('city_experience') or {}).get('teacher_alert')
+            if not alert or alert.get('id')!=b.get('alert_id') or alert.get('status')!='open':return fail('La alerta ya cambió. Actualiza el seguimiento.',409)
+            alert.update(status='acknowledged',intervention=b['intervention'].strip(),teacher_id=session['uid'],acknowledged_at=datetime.now(timezone.utc).isoformat())
+            con.execute('UPDATE progress SET state=?,updated=CURRENT_TIMESTAMP WHERE user_id=? AND module_id=?',(json.dumps(state,ensure_ascii=False),b['user_id'],b['module_id']))
+        return jsonify(ok=True,alert=alert)
     @app.get('/api/teacher/export.csv')
     @require('teacher')
     def export():

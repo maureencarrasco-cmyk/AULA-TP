@@ -1,5 +1,29 @@
 # Aula TP Chile — Campus LMS local
 
+## Estación 4: evaluación, recuperación y premios
+
+La ruta actual tiene seis estaciones. Ciudad Laboral ocupa la Estación 4 y utiliza la misma lógica por módulo en los 45 cursos (451 módulos). Los apartados históricos de este documento que describen cinco estaciones corresponden a la versión inicial del campus.
+
+El primer recorrido comprende 15 minutos de quiz y 30 de práctica. La nota es `quiz × 0,30 + práctica × 0,70`. Se aprueba únicamente si el resultado sin redondear es al menos 75%, la práctica alcanza 75%, se completan ambas etapas y el docente confirma competencias esenciales y seguridad crítica. Entregar respuestas no equivale a aprobar. El servidor entrega `city_completed` a las vistas del curso, módulo y progreso.
+
+El flujo de datos es el siguiente:
+
+1. `GET /api/modules/{id}/city-experience` recupera el plan contextual, el intento vigente, las evidencias, el resultado y las áreas ganadas. El curso determina distrito, edificio y piso; el módulo conserva sus AE y banco de situaciones.
+2. Las operaciones `quiz-answer`, `heartbeat`, `mission-draft` y `mission-submit` guardan el recorrido. La práctica comprende planificar, actuar, verificar y justificar. Cada etapa conserva su contador; un nuevo intento práctico usa su propio contador.
+3. `POST /api/teacher/city-review` valida las cuatro filas de cinco criterios (0 a 5), competencias, seguridad y retroalimentación. La práctica suma 100 puntos. Las correcciones de una revisión conservan el mismo identificador de intento y no se cuentan como prácticas adicionales.
+4. Con resultado final menor de 60%, `recovery-start` exige registrar el refuerzo y abre otra práctica integral de 30 minutos. Entre 60% y 74%, o con práctica/competencias/seguridad pendientes pese a un promedio mayor, repite las fases insuficientes. El docente identifica las fases críticas. Las fases logradas y sus puntos se conservan y no pueden sobrescribirse durante una recuperación selectiva.
+5. El nuevo intento toma otra situación inédita del banco del mismo módulo. Al agotar el banco se requiere una nueva versión preparada por el docente; no se generan situaciones curriculares ficticias ni se repite el caso original. Se archivan escenario, respuestas, tiempos y revisión previos. El primer recorrido sigue siendo de 45 minutos; las recuperaciones son tiempo adicional de apoyo.
+6. Si la práctica está lograda pero el quiz impide alcanzar 75% final, el estudiante registra refuerzo (`recovery-submit`) y responde otra pregunta disponible del mismo AE (`quiz-retry-answer`). No se repiten preguntas originales ni preguntas ya usadas en recuperaciones; si el banco equivalente se agota, se requiere ampliación docente. La respuesta original y los intentos se conservan y se actualiza el resultado. Mejorar el quiz no exime de la práctica integral de 30 minutos si un resultado previo menor de 60% la dejó como obligación pendiente.
+7. Una aprobación entre 75% y menos de 90% concede un área complementaria. Desde 90% concede también dos áreas avanzadas. `earned_areas` es un registro acumulativo por estudiante y módulo, con identificadores estables, fecha, intento, puntaje, AE, objetivo, producto y criterio. Una revisión posterior insuficiente no borra premios anteriores; tampoco concede premios nuevos. Los registros históricos se migran al abrir el módulo, conservando también las áreas adicionales concedidas bajo la regla anterior.
+
+La alerta docente se genera después de **dos intentos profesionales distintos** con resultado insuficiente. No se activa por corregir dos veces la misma rúbrica. Queda registrada con estudiante/módulo (en su registro de progreso), fecha, identificador, intentos y criterios pendientes. Aparece en el Portal Docente incluso si el estudiante está realizando una recuperación. `POST /api/teacher/city-alert` permite registrar la intervención y pasar de `open` a `acknowledged`; esto no cambia notas ni autoriza el avance. La aprobación resuelve la alerta (`resolved`) y conserva el historial. No se envían correos ni mensajes externos.
+
+Las áreas ganadas incluyen actividades complementarias con evidencias guardadas mediante `area-evidence`; no alteran la nota obligatoria. La celebración muestra «¡Misión profesional completada!», nota y nivel. Las referencias gráficas del módulo no se presentan como capturas de espacios 3D aún no conectados.
+
+**Límite de integración pendiente:** este repositorio contiene el campus y la capa `city-panel` del juego original, pero no su motor fuente. La publicación conserva modelos y archivos compilados. No está implementada la apertura física de nuevas áreas, su iluminación en el mapa, las animaciones de puertas ni el guiado según la posición del personaje. El acceso correspondiente permanece deshabilitado; no se sustituye la ciudad original ni se simula que se visitó un espacio. Se necesita el código fuente del motor para consumir los premios guardados y conectar esos eventos con el mundo existente.
+
+La lógica de dominio está en `city_progression.py`; las rutas y permisos, en `app.py`; las vistas estudiantil y docente, en `static/city-experience.js` y `static/app.js`. Las pruebas focalizadas de recuperación están en `tests/test_city_progression.py` y `tests/test_city_recovery_api.py`.
+
 Versión local ampliada del curso, construida a partir de `INSTRUCCION_MAESTRA_CODEX_AULA_TP_V2_VISUAL.docx` y las referencias de `final.zip`. Se ejecuta exclusivamente en **http://127.0.0.1:8000**, en el equipo que inicia Python. No publica en Internet ni utiliza servicios de nube.
 
 ## Entrar ahora

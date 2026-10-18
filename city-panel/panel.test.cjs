@@ -29,7 +29,8 @@ test('mining tile forwards to the original action and does not duplicate itself'
 test('frontend adapter does not implement or replace game controls',()=>{
  for(const value of ['fetch(','localStorage','WebGLRenderer','location.href','keydown','innerHTML'])assert.ok(!source.includes(value));
  assert.ok(source.includes('action.click()'));
- assert.ok(source.includes('Estación 4 · Quiz + Misiones Laborales · 90 min'));
+ assert.ok(source.includes('Estación 4 · Quiz + Práctica profesional'));
+ assert.ok(!source.includes('90 min'));
  assert.ok(source.includes("querySelector('.city-specialty-section')"));
 });
 test('skin retains native dropdown, checkbox, collapsed sections and focus states',()=>{

@@ -1,7 +1,7 @@
 'use strict';
 (function(){
  let rows=[],courseId=null,moduleId='all',evidenceType=null;
- const cityCompleted=m=>Boolean(m.city_completed||((m.state?.city_experience||{}).quiz?.completed_at&&(m.state?.city_experience||{}).mission?.completed_at));
+ const cityCompleted=m=>m.city_completed===true;
  const pct=m=>Math.round(((m.completed||[]).filter(Boolean).length+Number(cityCompleted(m)))*100/6);
  const moduleCompleted=m=>Boolean(m.state?.closed&&cityCompleted(m));
  const mean=values=>values.length?Math.round(values.reduce((a,b)=>a+b,0)/values.length):0;

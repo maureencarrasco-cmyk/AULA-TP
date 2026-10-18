@@ -10,7 +10,7 @@ const css=read('static/station-route-cards.css');
 
 test('station cards use the supplied visual direction with real, responsive cards',()=>{
   assert.match(html,/station-route-cards\.css\?v=20261018-reference-redesign-v1/);
-  assert.match(html,/app\.js\?v=20261018-city-rewards-v1/);
+  assert.match(html,/app\.js\?v=20261018-city-recovery-v3/);
   assert.match(css,/lr-track:has\(\.mission-laboral-stop\)/);
   assert.match(css,/grid-template-columns:repeat\(6,minmax\(0,1fr\)\)!important/);
   assert.match(css,/min-height:510px!important/);

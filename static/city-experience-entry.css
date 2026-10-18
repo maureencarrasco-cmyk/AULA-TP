@@ -39,6 +39,16 @@
 .selectors .primary-button{min-height:46px;white-space:nowrap}
 .location-summary{margin:13px 0 0;padding:11px 13px;border-left:3px solid #21a88f;border-radius:0 10px 10px 0;background:#effaf6;color:#386b69;font-size:13px;line-height:1.5}
 .journey{scroll-margin-top:12px}.journey-top{align-items:flex-start}.journey-top h2{color:#123568;font-size:23px}
+.journey-city-link,.city-map-link{display:inline-flex;align-items:center;gap:7px;width:max-content;max-width:100%;margin-top:8px;padding:9px 12px;border:1px solid #b9d9f4;border-radius:9px;background:#f4faff;color:#086fbe;font-size:13px;font-weight:750;line-height:1.35;text-decoration:none}
+.journey-city-link:hover,.city-map-link:hover{background:#e8f4ff;border-color:#7dbaf0}
+.journey-city-link:focus-visible,.city-map-link:focus-visible{outline:3px solid #81c6ff;outline-offset:3px}
+.earned-area-preview{margin-top:18px;padding-top:14px;border-top:1px solid #c8e5db}
+.earned-area-preview figure{margin:12px 0}.earned-area-preview img{display:block;width:100%;max-height:220px;object-fit:contain;background:#fff}.earned-area-preview figcaption{font-size:12px;color:#4e6f90;margin-top:6px}
+.recovery-card textarea,#area-evidence-form textarea{display:block;width:100%;min-height:110px;margin:8px 0 12px;box-sizing:border-box}
+.journey .outline{min-height:40px;max-width:100%;padding:9px 14px;border:1px solid #b9d9f4;border-radius:8px;background:#fff;color:#12649e;font:inherit;line-height:1.4;cursor:pointer}
+.journey .outline:disabled{border-color:#d1dfe7;background:#f1f5f8;color:#536978;cursor:not-allowed}
+.journey .outline:focus-visible{outline:3px solid #81c6ff;outline-offset:3px}
+@media(max-width:760px){.journey.is-reviewed .work-aside{order:1}}
 .stage-tabs{flex-wrap:wrap}.stage-tab{min-height:48px}.stage-tab.active{box-shadow:0 3px 12px #218ce41a}
 .work-area{grid-template-columns:minmax(0,1fr) 310px}.work-main,.work-aside{border-radius:12px}
 .work-aside{position:sticky;top:12px}
