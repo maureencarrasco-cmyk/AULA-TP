@@ -198,6 +198,7 @@
 .city-page .city-walk-workspace:has(.city-open-pilot) .city-specialty-section>:not(.city-room-summary) { display:none!important; }
 .city-page .city-walk-workspace:has(.city-open-pilot)>.city-viewport { width:100%; }
 .city-page .city-walk-workspace:has(.city-room-summary) .city-room-summary { position:absolute;top:50%;right:22px;z-index:13;width:min(510px,39vw);min-width:350px;display:grid;gap:12px;padding:0;transform:translateY(-50%);background:transparent;border:0;box-shadow:none;pointer-events:auto; }
+.city-page .city-walk-workspace:has(.city-open-pilot) .city-room-summary { display:none!important; }
 .city-page .city-walk-workspace:has(.city-room-summary) .city-room-summary>:not(button):not(a) { display:none!important; }
 .city-page .city-walk-workspace:has(.city-room-summary) .city-room-summary>button,
 .city-page .city-walk-workspace:has(.city-room-summary) .city-room-summary>a { position:relative;display:flex;align-items:center;width:100%;min-height:76px;padding:12px 68px 12px 90px;border:2px solid;border-radius:23px;text-align:left;text-decoration:none;color:#0b4085;font:700 17px/1.25 Arial,Helvetica,sans-serif;overflow:hidden;transition:transform .18s,box-shadow .18s,filter .18s; }
