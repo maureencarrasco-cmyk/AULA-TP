@@ -4,7 +4,7 @@
   const districtSelect=$('#district-select'), courseSelect=$('#course-select'), moduleSelect=$('#module-select'), startButton=$('#start-button');
   const locationSummary=$('#location-summary');
   const setupPanel=$('#setup-panel'), journey=$('#journey'), setupNotice=$('#setup-notice'), journeyNotice=$('#journey-notice');
-  const welcome=$('#city-welcome'),navigation=$('#city-navigation'),enterCity=$('#enter-city'),arrivalButton=$('#arrival-button');
+  const welcome=$('#city-welcome'),onboarding=$('#city-onboarding'),navigation=$('#city-navigation'),enterCity=$('#enter-city'),arrivalButton=$('#arrival-button');
   let csrf='', courses=[], plan=null, state=null, moduleId=null, currentLocation=null, cityScene=null, districtArrived=false, activeStage='quiz', activeQuestion=0, activatedQuestion=-1, activePhase='planificar';
   let activeSeconds=0, pendingSeconds=0, pendingStage='quiz', draftTimer=0;
   const phases=['planificar','actuar','verificar','justificar'];
@@ -18,6 +18,12 @@
     return data;
   };
   function setNotice(message,where=journeyNotice){where.textContent=message||'';}
+  function updateOnboardingContext(courseId,moduleId=''){
+    const course=courses.find(item=>String(item.id)===String(courseId));
+    const module=course?.modules?.find(item=>String(item.id)===String(moduleId));
+    const label=[course?.specialty||course?.title,module?.title].filter(Boolean).join(' · ');
+    $('#onboarding-context').textContent=label||'Tu especialidad y módulo';
+  }
   function selectCourseOptions(district,preferred=''){
     const matches=courses.filter(item=>item.city_location?.district===district);
     courseSelect.replaceChildren(new Option(matches.length?'Selecciona una especialidad':'No hay cursos disponibles en este distrito',''));
@@ -51,16 +57,17 @@
       const preferredCourse=courses.find(course=>String(course.id)===String(preCourse));
       const district=params.get('district')||preferredCourse?.city_location?.district;
       if(district&&districts.includes(district)){districtSelect.value=district;selectCourseOptions(district,preCourse);selectModules(preCourse||courseSelect.value,preModule);}
+      updateOnboardingContext(preCourse,preModule);
     }catch(error){setupNotice.textContent=error.message;}
   }
   districtSelect.addEventListener('change',()=>selectCourseOptions(districtSelect.value));
-  courseSelect.addEventListener('change',()=>selectModules(courseSelect.value));
-  moduleSelect.addEventListener('change',()=>{arrivalButton.disabled=!moduleSelect.value||!districtArrived;arrivalButton.textContent=moduleSelect.value?'Comenzar Etapa 1 →':'Selecciona un módulo para continuar';});
+  courseSelect.addEventListener('change',()=>{selectModules(courseSelect.value);updateOnboardingContext(courseSelect.value,moduleSelect.value);});
+  moduleSelect.addEventListener('change',()=>{arrivalButton.disabled=!moduleSelect.value||!districtArrived;arrivalButton.textContent=moduleSelect.value?'Comenzar Etapa 1 →':'Selecciona un módulo para continuar';updateOnboardingContext(courseSelect.value,moduleSelect.value);});
   enterCity.addEventListener('click',beginCityEntry);
   startButton.addEventListener('click',descendToDistrict);
   arrivalButton.addEventListener('click',openJourney);
   function beginCityEntry(){
-    welcome.hidden=true;navigation.hidden=false;setupPanel.hidden=false;
+    welcome.hidden=true;onboarding.hidden=true;navigation.hidden=false;setupPanel.hidden=false;
     navigation.scrollIntoView({behavior:'smooth',block:'start'});
     try{
       if(!window.cityExperienceSceneReady)throw new Error('No se pudo cargar la vista 3D. Recarga la página para intentarlo otra vez.');
@@ -147,7 +154,7 @@
     const current=savedCount();
     if(current===plan.quiz.length){
       const score=Number(state.quiz?.score)||Object.values(answers).filter(answer=>answer.correct).length;
-      $('#work-main').innerHTML=`<div class="completion"><p class="section-kicker">Etapa 1 completada · 45 minutos planificados</p><h3>Desafíos registrados</h3><p>Tu resultado formativo es</p><div class="summary-score">${score} / ${plan.quiz.length}</div><p>Las respuestas quedaron guardadas en este módulo. Continúa con las cuatro misiones laborales integradas.</p><button class="action-button" id="open-mission" type="button">Continuar a Misiones Laborales · 45 min</button></div>`;
+      $('#work-main').innerHTML=`<div class="completion"><p class="section-kicker">Etapa 1 completada · 15 minutos planificados</p><h3>Desafíos registrados</h3><p>Tu resultado formativo es</p><div class="summary-score">${score} / ${plan.quiz.length}</div><p>Las respuestas quedaron guardadas en este módulo. Continúa con la práctica laboral integrada.</p><button class="action-button" id="open-mission" type="button">Continuar a práctica laboral · 30 min</button></div>`;
       $('#open-mission').addEventListener('click',()=>setStage('mission'));
       renderQuizAside(index,current);return;
     }
@@ -169,7 +176,7 @@
     renderQuizAside(index,current);
   }
   function renderQuizAside(index,current){
-    $('#work-aside').innerHTML=`<p class="markers-title">Puntos del quiz · <span>${current}/${plan.quiz.length}</span></p><div class="markers">${plan.quiz.map((_,i)=>`<button class="marker ${i<current?'done':''} ${i===index?'current':''}" type="button" aria-label="${i<current?'Punto '+String(i+1).padStart(2,'0')+' completado':i===current?'Punto '+String(i+1).padStart(2,'0')+', activar con botón accesible':'Punto '+String(i+1).padStart(2,'0')+' bloqueado'}" ${i>current?'disabled':''}>${i<current?'✓':String(i+1).padStart(2,'0')}</button>`).join('')}</div><p class="quiz-location">${esc(currentLocation?.district||'Ciudad Laboral')} · ${esc(currentLocation?.building||'Distrito')} · Punto ${String(index+1).padStart(2,'0')} iluminado en el mapa.</p><p class="marker-help">Los puntos se habilitan en orden. Usa el botón para activar cada desafío; la ruta amarilla señala el sector.</p><button id="raise-hand" class="raise-button" type="button" ${current>=plan.quiz.length?'disabled':''}>✋ Levantar la mano · activar punto</button><p class="phase-time">${plan.quiz.length} desafíos × 4,5 min = 45 min</p>`;
+    $('#work-aside').innerHTML=`<p class="markers-title">Puntos del quiz · <span>${current}/${plan.quiz.length}</span></p><div class="markers">${plan.quiz.map((_,i)=>`<button class="marker ${i<current?'done':''} ${i===index?'current':''}" type="button" aria-label="${i<current?'Punto '+String(i+1).padStart(2,'0')+' completado':i===current?'Punto '+String(i+1).padStart(2,'0')+', activar con botón accesible':'Punto '+String(i+1).padStart(2,'0')+' bloqueado'}" ${i>current?'disabled':''}>${i<current?'✓':String(i+1).padStart(2,'0')}</button>`).join('')}</div><p class="quiz-location">${esc(currentLocation?.district||'Ciudad Laboral')} · ${esc(currentLocation?.building||'Distrito')} · Punto ${String(index+1).padStart(2,'0')} iluminado en el mapa.</p><p class="marker-help">Los puntos se habilitan en orden. Usa el botón para activar cada desafío; la ruta amarilla señala el sector.</p><button id="raise-hand" class="raise-button" type="button" ${current>=plan.quiz.length?'disabled':''}>✋ Levantar la mano · activar punto</button><p class="phase-time">${plan.quiz.length} desafíos · 15 min en total</p>`;
     $$('.marker',$('#work-aside')).forEach((button,i)=>button.addEventListener('click',()=>{if(i<current){activeQuestion=i;renderQuiz();}}));
     $('#raise-hand')?.addEventListener('click',()=>{if(current<plan.quiz.length){activatedQuestion=index;renderQuiz();$('#question-heading')?.focus();}});
   }
@@ -207,7 +214,7 @@
     const phasesHtml=plan.mission.phases.map((phase,i)=>{const task=plan.mission.tasks[i];return `<li><button type="button" class="${phase.id===activePhase?'active':''}" ${i>count?'disabled':''}><span class="phase-card-copy"><strong>${i<count?'✓ ':'Misión '+String(i+1).padStart(2,'0')+' · '}${esc(phase.title)}</strong><small>${esc(task?.title||phase.prompt)}</small><small>Destino · ${esc(destinations[i])}</small></span><small>${phase.minutes} min</small></button></li>`;}).join('');
     const rubricHtml=plan.mission.rubric.length?`<details class="rubric-details"><summary>Criterios de verificación · ${plan.mission.rubric.length}</summary><ul class="ae-list">${plan.mission.rubric.map(item=>`<li>${esc(item.name)}</li>`).join('')}</ul></details>`:'';
     const destination=destinations[Math.max(0,Math.min(3,phases.findIndex(item=>item.id===activePhase)))];
-    $('#work-aside').innerHTML=`<section class="mission-comic"><p class="markers-title">Misiones Laborales</p><ol class="phase-list">${phasesHtml}</ol><p class="mission-location"><strong>Destino actual:</strong><br>${esc(destination)} · ${esc(currentLocation?.building||'Distrito')} · ${esc(currentLocation?.floor||'Piso asignado')}<br>Las flechas amarillas indican el trayecto.</p><p class="phase-time">Etapa 2 · 45 min · secuencia 10 + 15 + 10 + 10</p></section><div class="mission-resources"><p class="markers-title">Aprendizajes que se integran</p><ul class="ae-list">${plan.mission.aes.map((ae,i)=>`<li><strong>AE ${i+1}</strong> · ${esc(ae.title)}</li>`).join('')}</ul>${rubricHtml}</div>`;
+    $('#work-aside').innerHTML=`<section class="mission-comic"><p class="markers-title">Práctica libre · Misiones laborales</p><ol class="phase-list">${phasesHtml}</ol><p class="mission-location"><strong>Destino actual:</strong><br>${esc(destination)} · ${esc(currentLocation?.building||'Distrito')} · ${esc(currentLocation?.floor||'Piso asignado')}<br>Las flechas amarillas indican el trayecto.</p><p class="phase-time">Etapa 2 · 30 min · secuencia 5 + 15 + 5 + 5</p></section><div class="mission-resources"><p class="markers-title">Aprendizajes que se integran</p><ul class="ae-list">${plan.mission.aes.map((ae,i)=>`<li><strong>AE ${i+1}</strong> · ${esc(ae.title)}</li>`).join('')}</ul>${rubricHtml}</div>`;
     $$('.phase-list button',$('#work-aside')).forEach((button,i)=>button.addEventListener('click',()=>{if(i<=count){activePhase=phases[i];renderMission();}}));
   }
   function setStage(stage){

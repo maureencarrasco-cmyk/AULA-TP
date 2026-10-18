@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f3f8fc">
   <title>Ciudad Laboral · Aula TP Chile</title>
   <link rel="stylesheet" href="/api/city-experience.css?v=20261017-city-route-v5">
-  <link rel="stylesheet" href="/static/city-experience-entry.css?v=20261018-city-station4-banner-v1">
+  <link rel="stylesheet" href="/static/city-experience-entry.css?v=20261018-city-station4-overview-v1">
 </head>
 <body>
   <a class="skip-link" href="#experience-main">Saltar al recorrido</a>
@@ -20,6 +20,44 @@
       <button id="enter-city" class="primary-button enter-city-button" type="button" aria-label="Entrar a la Ciudad Laboral y comenzar el recorrido 3D">Entrar a la Ciudad Laboral <span aria-hidden="true">→</span></button>
       <div class="welcome-art" role="img" aria-label="Vista panorámica de Ciudad Laboral con sus distritos de especialidad"></div>
       <a class="return-link city-return-link" href="/ciudad_laboral_aulatp/">Volver a Ciudad Laboral <span aria-hidden="true">→</span></a>
+    </section>
+
+    <section class="city-onboarding" id="city-onboarding" aria-labelledby="onboarding-title">
+      <div class="onboarding-heading">
+        <div>
+          <p class="eyebrow">Estación 4 · <span id="onboarding-context">Tu especialidad y módulo</span></p>
+          <h2 id="onboarding-title">Prepárate para tu <span>misión laboral</span></h2>
+          <p>En esta estación aprenderás y practicarás en dos etapas para cada módulo.</p>
+        </div>
+        <strong class="total-time"><span aria-hidden="true">◷</span> 45 minutos por módulo</strong>
+      </div>
+
+      <div class="stage-overview">
+        <article class="stage-overview-card quiz-overview">
+          <span class="overview-icon" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><rect x="13" y="9" width="36" height="47" rx="6" fill="#fff" stroke="currentColor" stroke-width="3"/><path d="M22 23l4 4 8-9M22 37l4 4 8-9M38 24h6M38 38h6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M43 13h9v39a4 4 0 0 1-4 4h-4" stroke="currentColor" stroke-width="3"/></svg></span>
+          <div><span class="stage-label">Etapa 1</span><h3>Desafío de conocimientos</h3><p class="stage-duration">◷ <strong>15 minutos</strong></p><p>Responde desafíos breves del módulo mientras exploras el edificio de tu especialidad.</p></div>
+        </article>
+        <article class="stage-overview-card practice-overview">
+          <span class="overview-icon" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M21 17h22l4 8-8 6H25l-8-6 4-8Z" fill="#ffd17a" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M19 25h26v8l-5 4v14H24V37l-5-4v-8Z" fill="#ff9b36" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="42" cy="43" r="11" fill="#fff4dc" stroke="currentColor" stroke-width="3"/><path d="m37 43 4 4 7-8M13 49l7-7M12 37l6 2" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><span class="stage-label">Etapa 2</span><h3>Práctica libre · misiones laborales</h3><p class="stage-duration">◷ <strong>30 minutos</strong></p><p>Aplica lo aprendido en una situación de trabajo, toma decisiones y registra cómo verificas tu resultado.</p></div>
+        </article>
+      </div>
+
+      <div class="onboarding-route" aria-labelledby="route-title">
+        <div class="route-title"><h3 id="route-title">Tu recorrido en la <span>Ciudad Laboral</span></h3><p>Sigue estos pasos para comenzar tu experiencia.</p></div>
+        <ol class="route-steps">
+          <li><span class="route-step-number">01</span><span class="route-step-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="m16 28-9-9a12.7 12.7 0 1 1 18 0l-9 9Z" stroke="currentColor" stroke-width="2.5"/><circle cx="16" cy="13" r="4" stroke="currentColor" stroke-width="2.5"/></svg></span><strong>Ingresa a tu distrito</strong></li>
+          <li><span class="route-step-number orange">02</span><span class="route-step-icon orange" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M5 27V9l11-5 11 5v18H5Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M11 27v-8h10v8M10 12h2m7 0h2m-11 4h2m7 0h2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span><strong>Elige tu especialidad</strong></li>
+          <li><span class="route-step-number violet">03</span><span class="route-step-icon violet" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="m16 4 12 6-12 6-12-6 12-6Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="m4 16 12 6 12-6M4 22l12 6 12-6" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></svg></span><strong>Selecciona tu módulo</strong></li>
+          <li><span class="route-step-number green">04</span><span class="route-step-icon green" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M6 27V6m1 2h17l-4 5 4 5H7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="m12 22 3 3 7-8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><strong>Completa ambas etapas</strong></li>
+        </ol>
+      </div>
+
+      <div class="route-guidance">
+        <span class="guidance-arrows" aria-hidden="true"><b>➜</b><i>› › ›</i></span>
+        <div><h3>¿Cómo sabrás dónde ir?</h3><p>Sigue las flechas amarillas luminosas del suelo. Te guiarán hacia los desafíos y las misiones de tu módulo.</p></div>
+        <span class="guidance-path" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      </div>
     </section>
 
     <section class="city-navigation" id="city-navigation" aria-labelledby="city-scene-title" hidden>
@@ -68,13 +106,13 @@
           <p id="module-case" class="muted"></p>
           <p id="journey-location" class="location-summary"></p>
         </div>
-        <div class="timer" aria-live="polite"><span>Tiempo activo · etapa</span><strong id="timer-value">00:00</strong><small>Meta: 45 min por etapa · el tiempo orienta, no provoca fracaso</small></div>
+        <div class="timer" aria-live="polite"><span>Tiempo activo · etapa</span><strong id="timer-value">00:00</strong><small>Etapa 1: 15 min · Etapa 2: 30 min · tiempo orientativo</small></div>
       </header>
       <div class="journey-progress" aria-label="Avance del recorrido"><span id="progress-bar"></span></div>
       <nav class="stage-tabs" aria-label="Etapas del recorrido">
-        <button type="button" data-stage="quiz" class="stage-tab active"><span>01</span> Desafío de conocimientos <small>45 min</small></button>
+        <button type="button" data-stage="quiz" class="stage-tab active"><span>01</span> Desafío de conocimientos <small>15 min</small></button>
         <span class="stage-connector" aria-hidden="true"></span>
-        <button id="mission-tab" type="button" data-stage="mission" class="stage-tab" disabled><span>02</span> Misiones laborales <small>45 min</small></button>
+        <button id="mission-tab" type="button" data-stage="mission" class="stage-tab" disabled><span>02</span> Práctica libre · misiones <small>30 min</small></button>
       </nav>
       <div class="work-area">
         <section class="work-main" id="work-main" aria-live="polite"></section>

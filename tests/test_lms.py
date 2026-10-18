@@ -24,7 +24,7 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual(len(courses.json),45)
   last_published=next(module for module in courses.json[-1]['modules'] if module['published'])
   self.assertEqual(visitor.get('/api/modules/'+str(last_published['id'])).status_code,200)
- def test_city_experience_covers_all_modules_with_two_independent_45_minute_stages(self):
+ def test_city_experience_covers_all_modules_with_15_minute_quiz_and_30_minute_practice(self):
   courses=self.s.get('/api/courses?compact=1').json
   self.assertEqual(len(courses),45)
   self.assertEqual(sum(len(course['modules']) for course in courses),451)
@@ -37,18 +37,20 @@ class LMSFlow(unittest.TestCase):
     self.assertEqual(len(plan['quiz']),10,(course['title'],module['title']))
     self.assertEqual({level:sum(item['difficulty']==level for item in plan['quiz']) for level in ('Inicial','Intermedia','Avanzada')},{'Inicial':4,'Intermedia':5,'Avanzada':1},(course['title'],module['title']))
     self.assertEqual(len(plan['mission']['tasks']),4,(course['title'],module['title']))
-    self.assertEqual(plan['timing']['quiz'],45)
-    self.assertEqual(plan['timing']['mission'],45)
+    self.assertEqual(plan['timing']['total'],45)
+    self.assertEqual(plan['timing']['quiz'],15)
+    self.assertEqual(plan['timing']['mission'],30)
+    self.assertEqual(sum(phase['minutes'] for phase in plan['mission']['phases']),30)
   response=self.s.get('/api/modules/1/city-experience')
   self.assertEqual(response.status_code,200)
   payload=response.json
   self.assertEqual(payload['location']['district'],'Metalmecánica')
-  self.assertEqual(payload['plan']['timing'],{'total':90,'quiz':45,'mission':45,'quiz_per_question':4.5,'phases':[10,15,10,10]})
+  self.assertEqual(payload['plan']['timing'],{'total':45,'quiz':15,'mission':30,'quiz_per_question':1.5,'phases':[5,15,5,5]})
   quiz=payload['plan']['quiz']
   self.assertEqual(len(quiz),10)
   self.assertEqual({level:sum(item['difficulty']==level for item in quiz) for level in ('Inicial','Intermedia','Avanzada')},{'Inicial':4,'Intermedia':5,'Avanzada':1})
   self.assertEqual(len(payload['plan']['mission']['tasks']),4)
-  self.assertEqual(sum(phase['minutes'] for phase in payload['plan']['mission']['phases']),45)
+  self.assertEqual(sum(phase['minutes'] for phase in payload['plan']['mission']['phases']),30)
   self.assertEqual(self.req('/modules/1/city-experience',{'operation':'heartbeat','stage':'mission','seconds':30}).status_code,403)
   for index in range(len(quiz)):
    saved=self.req('/modules/1/city-experience',{'operation':'quiz-answer','index':index,'choice':0})

@@ -203,7 +203,7 @@ def create_app(test_config=None):
         return {
             'version':2,
             'module':{'id':mid,'title':content.get('title') or '', 'case_title':content.get('case_title') or case.get('title') or 'Situación laboral integrada'},
-            'timing':{'total':90,'quiz':45,'mission':45,'quiz_per_question':4.5,'phases':[10,15,10,10]},
+            'timing':{'total':45,'quiz':15,'mission':30,'quiz_per_question':1.5,'phases':[5,15,5,5]},
             'quiz':quiz,
             'mission':{
                 'scenario':case.get('context') or content.get('context') or content.get('application') or '',
@@ -215,10 +215,10 @@ def create_app(test_config=None):
                           'criterion':(x.get('instruction') or {}).get('criterion') or ''} for x in tasks],
                 'rubric':[{'name':x.get('name') or '', 'max':x.get('max')} for x in content.get('rubric') or []],
                 'phases':[
-                    {'id':'planificar','number':1,'title':'Planificar','minutes':10,'prompt':'Analiza la orden completa, identifica los datos disponibles y pendientes, vincula el plan con al menos dos aprendizajes esperados y ordena recursos, riesgos y verificaciones antes de intervenir.'},
+                    {'id':'planificar','number':1,'title':'Planificar','minutes':5,'prompt':'Analiza la orden completa, identifica los datos disponibles y pendientes, vincula el plan con al menos dos aprendizajes esperados y ordena recursos, riesgos y verificaciones antes de intervenir.'},
                     {'id':'actuar','number':2,'title':'Actuar','minutes':15,'prompt':'Desarrolla el procedimiento integrado del módulo. Explica las acciones y decisiones en secuencia, relaciona los encargos con sus criterios y respeta seguridad, normativa y alcance del rol.'},
-                    {'id':'verificar','number':3,'title':'Verificar','minutes':10,'prompt':'Contrasta el producto y el procedimiento con los criterios del módulo. Registra evidencia, identifica desviaciones, propone correcciones y define qué condición impide entregar el trabajo.'},
-                    {'id':'justificar','number':4,'title':'Justificar y cerrar','minutes':10,'prompt':'Justifica la decisión final con datos del caso, aprendizajes esperados y criterios. Deja un registro de cierre, declara pendientes y explica a quién escalarías cualquier condición no resuelta.'}
+                    {'id':'verificar','number':3,'title':'Verificar','minutes':5,'prompt':'Contrasta el producto y el procedimiento con los criterios del módulo. Registra evidencia, identifica desviaciones, propone correcciones y define qué condición impide entregar el trabajo.'},
+                    {'id':'justificar','number':4,'title':'Justificar y cerrar','minutes':5,'prompt':'Justifica la decisión final con datos del caso, aprendizajes esperados y criterios. Deja un registro de cierre, declara pendientes y explica a quién escalarías cualquier condición no resuelta.'}
                 ]
             }
         }
