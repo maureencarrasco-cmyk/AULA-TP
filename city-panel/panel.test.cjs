@@ -5,16 +5,17 @@ const fs=require('node:fs');
 const path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'city-panel.js'),'utf8');
 
-function fixture(disabled=false){
+function fixture(disabled=false,specialtyNames=[]){
  let callback;
  let clicks=0;
  const original={disabled,querySelector(){return null;},children:[],append(node){this.children.push(node);},click(){clicks++;}};
  const grid={tile:null,querySelector(){return this.tile;},append(node){this.tile=node;}};
+ const specialtyButtons=specialtyNames.map(name=>({dataset:{},querySelector(selector){return selector==='.city-specialty-copy strong'?{textContent:name}:null;}}));
  const panel={querySelector(selector){return selector==='.city-island-grid'?grid:original;}};
- const document={documentElement:{},querySelector(selector){return selector==='.city-walk-inspector'?panel:original;},querySelectorAll(){return [];},createElement(){return {dataset:{},children:[],disabled:false,append(...items){this.children.push(...items);},addEventListener(event,action){this[event]=action;}};}};
- const context=vm.createContext({document,MutationObserver:class {constructor(action){callback=action;}observe(){}}});
+ const document={documentElement:{},querySelector(selector){return selector==='.city-walk-inspector'?panel:original;},querySelectorAll(selector){return selector==='.city-specialties button'?specialtyButtons:[];},createElement(){return {dataset:{},children:[],disabled:false,append(...items){this.children.push(...items);},addEventListener(event,action){this[event]=action;}};}};
+ const context=vm.createContext({document,URLSearchParams,MutationObserver:class {constructor(action){callback=action;}observe(){}}});
  vm.runInContext(source,context);
- return {original,grid,sync:()=>callback(),clicks:()=>clicks};
+ return {original,grid,specialtyButtons,sync:()=>callback(),clicks:()=>clicks};
 }
 test('does not modify the server-rendered control tree before hydration',()=>{
  const f=fixture(true);assert.equal(f.grid.tile,null);
@@ -48,6 +49,16 @@ test('learning section adapts its header and specialty cards to panel width',()=
  assert.ok(css.includes('@container(min-width:500px)'));
  assert.ok(css.includes('@container(max-width:380px)'));
  assert.ok(css.includes('.city-specialty-section>.city-approach { width:100%'));
+ assert.ok(!css.includes('.city-specialty-section:not(:has(select option[value="mecanica"]:checked)) .city-specialties button::before'));
+ for(const kind of ['office','agro','food','construction','electric','design','mechanical','mining','care','maritime','tourism','craft','digital','general'])assert.ok(css.includes(`button[data-city-art="${kind}"]`));
+ for(const term of ['function specialtyArt','function syncSpecialtyCards','button.dataset.cityArt=art','acuicultura|portuaria|pesqueria|tripulacion|naves'])assert.ok(source.includes(term));
+});
+
+test('all 35 specialties receive visual identity from their own profession',()=>{
+ const names=['Administración','Contabilidad','Agropecuaria','Forestal','Elaboración Industrial de Alimentos','Gastronomía','Construcción','Instalaciones Sanitarias','Montaje Industrial','Construcciones Metálicas','Electricidad','Electrónica','Refrigeración y Climatización','Dibujo Técnico','Gráfica','Mecánica Automotriz','Mecánica Industrial','Mecánica de Mantenimiento de Aeronaves','Explotación Minera','Asistencia en Geología','Metalurgia Extractiva','Química Industrial','Atención de Enfermería','Atención de Párvulos','Acuicultura','Operaciones Portuarias','Pesquería','Tripulación de Naves Mercantes y Especiales','Servicios de Hotelería','Servicios de Turismo','Muebles y Terminaciones en Madera','Vestuario y Confección Textil','Conectividad y Redes','Programación','Telecomunicaciones'];
+ const expected=['office','office','agro','agro','food','food','construction','construction','construction','construction','electric','electric','electric','design','design','mechanical','mechanical','mechanical','mining','mining','mining','mining','care','care','maritime','maritime','maritime','maritime','tourism','tourism','craft','design','digital','digital','digital'];
+ const f=fixture(false,names);
+ assert.deepEqual(f.specialtyButtons.map(button=>button.dataset.cityArt),expected);
 });
 
 test('entering an interior expands the panorama and hides the room action dock',()=>{

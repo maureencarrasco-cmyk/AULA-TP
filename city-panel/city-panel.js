@@ -67,6 +67,30 @@
     },0));
   }
   const normalize=value=>String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase().trim();
+  function specialtyArt(name){
+    const value=normalize(name);
+    if(/administr|contab/.test(value))return 'office';
+    if(/agropec|forest/.test(value))return 'agro';
+    if(/alimento|gastronom/.test(value))return 'food';
+    if(/constru|instalacion|montaje|metalica/.test(value))return 'construction';
+    if(/electric|electron|refrigeracion|climatizacion/.test(value))return 'electric';
+    if(/dibujo|grafica|diseno|textil|vestuario/.test(value))return 'design';
+    if(/mecanica|aeronave/.test(value))return 'mechanical';
+    if(/minera|geologia|metalurgia|quimica/.test(value))return 'mining';
+    if(/enfermeria|parvul/.test(value))return 'care';
+    if(/acuicultura|portuaria|pesqueria|tripulacion|naves/.test(value))return 'maritime';
+    if(/hoteleria|turismo/.test(value))return 'tourism';
+    if(/muebles|madera|carpinteria/.test(value))return 'craft';
+    if(/conectividad|redes|programacion|telecomunic/.test(value))return 'digital';
+    return 'general';
+  }
+  function syncSpecialtyCards(){
+    document.querySelectorAll('.city-specialties button').forEach(button=>{
+      const title=button.querySelector('.city-specialty-copy strong')?.textContent||'';
+      const art=specialtyArt(title);
+      if(button.dataset.cityArt!==art)button.dataset.cityArt=art;
+    });
+  }
   const districts={
     'administracion':[-36,-26],
     'agropecuaria y forestal':[-12,-26],
@@ -137,7 +161,7 @@
     if(!routeTimer)routeTimer=setInterval(startRoute,120);
   }
   function syncPanel() {
-    syncMiningTile();syncLearningLink();syncGuideButton();syncConstructionDistrict();
+    syncMiningTile();syncLearningLink();syncGuideButton();syncConstructionDistrict();syncSpecialtyCards();
     if(route)startRoute();
   }
   if(route){
