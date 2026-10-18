@@ -189,3 +189,44 @@
   .city-walk-inspector .city-specialties button::after { left:40px;right:auto;top:25px; }
   .city-walk-inspector .city-specialties button>svg { top:14px; }
 }
+
+/* Entered rooms use the full canvas; the three original actions become a luminous dock. */
+.city-page .city-walk-workspace:has(.city-open-pilot) { grid-template-columns:minmax(0,1fr); }
+.city-page .city-walk-workspace:has(.city-open-pilot)>.city-walk-inspector { display:none!important; }
+.city-page .city-walk-workspace:has(.city-open-pilot)>.city-viewport { width:100%; }
+.city-page .city-walk-workspace .city-open-pilot,
+.city-page .city-walk-workspace .city-open-workshop,
+.city-page .city-walk-workspace .city-open-learning {
+  right:24px;
+  width:min(250px,calc(100vw - 72px));
+  min-height:52px;
+  justify-content:flex-start;
+  padding:12px 16px;
+  border:1px solid #ffffffd9;
+  border-radius:15px;
+  color:#fff;
+  font:700 14px/1.25 Arial,Helvetica,sans-serif;
+  backdrop-filter:blur(12px);
+  transition:transform .18s,box-shadow .18s,filter .18s;
+}
+.city-page .city-walk-workspace .city-open-pilot { bottom:210px;background:linear-gradient(115deg,#ff7a23,#ffad32);box-shadow:0 0 0 3px #ff992b32,0 0 24px #ff8b27a6,0 8px 22px #72380744,inset 0 1px #ffffffaa; }
+.city-page .city-walk-workspace .city-open-workshop { bottom:148px;background:linear-gradient(115deg,#078e91,#16bca7);box-shadow:0 0 0 3px #16bca736,0 0 24px #16bca780,0 8px 22px #063c3c44,inset 0 1px #ffffffaa; }
+.city-page .city-walk-workspace .city-open-learning { bottom:86px;background:linear-gradient(115deg,#126ac2,#278df2);box-shadow:0 0 0 3px #2387f13d,0 0 24px #2387f18a,0 8px 22px #062b6444,inset 0 1px #ffffffaa; }
+.city-page .city-walk-workspace .city-open-pilot::before,
+.city-page .city-walk-workspace .city-open-workshop::before { width:25px;height:25px;display:grid;place-items:center;flex:none;border:1px solid #ffffff80;border-radius:9px;background:#ffffff26;font-size:16px;line-height:1; }
+.city-page .city-walk-workspace .city-open-pilot::before { content:'\2726'; }
+.city-page .city-walk-workspace .city-open-workshop::before { content:'\2699'; }
+.city-page .city-walk-workspace :is(.city-open-pilot,.city-open-workshop,.city-open-learning):hover { transform:translateY(-2px);filter:brightness(1.08); }
+.city-page .city-walk-workspace :is(.city-open-pilot,.city-open-workshop,.city-open-learning):focus-visible { outline:3px solid #fff;outline-offset:4px; }
+@media(max-width:1000px) {
+  .city-page .city-walk-workspace:has(.city-open-pilot) { display:block; }
+  .city-page .city-walk-workspace:has(.city-open-pilot)>.city-viewport { width:100%; }
+}
+@media(max-width:520px) {
+  .city-page .city-walk-workspace .city-open-pilot,
+  .city-page .city-walk-workspace .city-open-workshop,
+  .city-page .city-walk-workspace .city-open-learning { right:12px;width:min(236px,calc(100vw - 52px));min-height:46px;padding:9px 12px;font-size:12px; }
+  .city-page .city-walk-workspace .city-open-pilot { bottom:188px; }
+  .city-page .city-walk-workspace .city-open-workshop { bottom:132px; }
+  .city-page .city-walk-workspace .city-open-learning { bottom:76px; }
+}

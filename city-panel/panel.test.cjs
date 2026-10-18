@@ -50,6 +50,14 @@ test('learning section adapts its header and specialty cards to panel width',()=
  assert.ok(css.includes('.city-specialty-section>.city-approach { width:100%'));
 });
 
+test('entering an interior expands the panorama and preserves the three original action buttons',()=>{
+ const css=fs.readFileSync(path.join(__dirname,'city-panel.css'),'utf8');
+ assert.ok(css.includes('.city-walk-workspace:has(.city-open-pilot) { grid-template-columns:minmax(0,1fr); }'));
+ assert.ok(css.includes('.city-walk-workspace:has(.city-open-pilot)>.city-walk-inspector { display:none!important; }'));
+ for(const button of ['.city-open-pilot','.city-open-workshop','.city-open-learning'])assert.ok(css.includes(button));
+ assert.ok(css.includes('0 0 24px #ff8b27a6'));
+});
+
 test('city header keeps live copy and original return link with responsive artwork',()=>{
  const css=fs.readFileSync(path.join(__dirname,'city-panel.css'),'utf8');
  assert.ok(css.includes('city-header-reference.png'));
