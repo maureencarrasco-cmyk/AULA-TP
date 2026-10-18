@@ -32,6 +32,21 @@
     const module=course?.modules?.find(item=>String(item.id)===String(moduleId));
     const label=[course?.specialty||course?.title,module?.title].filter(Boolean).join(' · ');
     $('#onboarding-context').textContent=label||'Tu especialidad y módulo';
+    updateCityGuideLink();
+  }
+  function cityGuideUrl(area=null){
+    const course=courses.find(item=>String(item.id)===String(courseSelect.value));
+    const district=currentLocation?.district||course?.city_location?.district||districtSelect.value;
+    const url=new URL('https://www.aulatpchile.cl/ciudad_laboral_aulatp/');
+    if(district)url.searchParams.set('cityRoute',district);
+    if(area?.name)url.searchParams.set('cityArea',area.name);
+    if(course?.title)url.searchParams.set('cityCourse',course.title);
+    if(plan?.module?.title)url.searchParams.set('cityModule',plan.module.title);
+    return url.toString();
+  }
+  function updateCityGuideLink(area=null){
+    const link=$('#city-live-entry .city-guide-link');
+    if(link)link.href=cityGuideUrl(area);
   }
   function selectCourseOptions(district,preferred=''){
     const matches=courses.filter(item=>item.city_location?.district===district);
@@ -205,7 +220,7 @@
     if(reward?.approved){
       $('#work-main .reward-result h3').textContent='¡Misión profesional completada!';
       const area=reward.areas.at(-1);
-      if(area)$('#work-main .reward-result').insertAdjacentHTML('beforeend',`<section class="earned-area-preview"><p class="section-kicker">Premio obtenido · ${esc(area.name)}</p>${area.preview?`<figure><img src="${esc(area.preview)}" alt="Referencia profesional del módulo ${esc(plan.module.title)}"><figcaption>Referencia del módulo · ${esc(area.ae_title)}</figcaption></figure>`:''}<p>${esc(area.objective)}</p><button type="button" class="outline" disabled>Explorar nueva área · integración 3D pendiente</button></section>`);
+      if(area)$('#work-main .reward-result').insertAdjacentHTML('beforeend',`<section class="earned-area-preview"><p class="section-kicker">Premio obtenido · ${esc(area.name)}</p>${area.preview?`<figure><img src="${esc(area.preview)}" alt="Referencia profesional del módulo ${esc(plan.module.title)}"><figcaption>Referencia del módulo · ${esc(area.ae_title)}</figcaption></figure>`:''}<p>${esc(area.objective)}</p><a class="outline city-guide-link" href="${esc(cityGuideUrl(area))}" target="_blank" rel="noopener">Guiarme al distrito en Ciudad Laboral ↗</a><p class="reward-note">La ruta sigue la posición del personaje en el mapa 3D. El motor aún no ofrece puertas para espacios nuevos.</p></section>`);
     }
     $$('.explore-reward').forEach(button=>button.textContent='Ver premio y desafío');
     if(recovery?.phases?.length){
@@ -228,7 +243,7 @@
     activeRewardArea=area;
     const evidence=state.mission?.area_evidence?.[area.id]||[];
     $('#route-status').textContent=`Premio profesional · ${area.name}`;
-    $('#work-main').innerHTML=`<section class="reward-result level-${area.level}"><p class="section-kicker">Desafío complementario · fuera del tiempo obligatorio</p><h3>${esc(area.name)}</h3><p>${esc(area.ae_title||plan.module.title)}</p><p>${esc(area.objective)}</p><p><strong>Producto:</strong> ${esc(area.product)}</p><p><strong>Criterio:</strong> ${esc(area.criterion)}</p><p>Área ganada el ${esc(area.earned_at)}. El acceso físico al espacio 3D está pendiente de conexión con el motor original.</p><button class="outline" type="button" disabled>Explorar nueva área</button><form id="area-evidence-form"><label>Evidencias y decisiones de la actividad opcional<textarea name="text" minlength="20" maxlength="10000" required></textarea></label><button type="submit" class="action-button">Guardar evidencia complementaria</button></form><p>${evidence.length} evidencia(s) registrada(s)</p>${evidence.map(item=>`<p>${esc(item.text)}</p>`).join('')}<button type="button" class="outline" id="back-result">Volver al resultado</button></section>`;
+    $('#work-main').innerHTML=`<section class="reward-result level-${area.level}"><p class="section-kicker">Desafío complementario · fuera del tiempo obligatorio</p><h3>${esc(area.name)}</h3><p>${esc(area.ae_title||plan.module.title)}</p><p>${esc(area.objective)}</p><p><strong>Producto:</strong> ${esc(area.product)}</p><p><strong>Criterio:</strong> ${esc(area.criterion)}</p><p>Área ganada el ${esc(area.earned_at)}. La guía lleva al distrito existente y se actualiza con la posición del personaje en su mapa 3D.</p><a class="outline city-guide-link" href="${esc(cityGuideUrl(area))}" target="_blank" rel="noopener">Guiarme al distrito en Ciudad Laboral ↗</a><p class="reward-note">El motor original no expone todavía puertas para añadir espacios físicos nuevos.</p><form id="area-evidence-form"><label>Evidencias y decisiones de la actividad opcional<textarea name="text" minlength="20" maxlength="10000" required></textarea></label><button type="submit" class="action-button">Guardar evidencia complementaria</button></form><p>${evidence.length} evidencia(s) registrada(s)</p>${evidence.map(item=>`<p>${esc(item.text)}</p>`).join('')}<button type="button" class="outline" id="back-result">Volver al resultado</button></section>`;
     $('#back-result').addEventListener('click',()=>renderMissionCompletion(Number(state.quiz?.score)||0));
     $('#area-evidence-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget,button=form.querySelector('button');button.disabled=true;try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'area-evidence',area_id:area.id,text:new FormData(form).get('text')})});state=result.state;exploreRewardArea(area);setNotice('Evidencia complementaria guardada. No modifica el tiempo ni la nota obligatoria.');}catch(error){button.disabled=false;setNotice(error.message);}});
   }
@@ -242,7 +257,7 @@
     const phasesHtml=plan.mission.phases.map((phase,i)=>{const task=plan.mission.tasks[i],done=Boolean(phaseState()[phase.id]),locked=!done&&phases.slice(0,i).some(key=>!phaseState()[key]);return `<li><button type="button" class="${phase.id===activePhase?'active':''}" ${locked?'disabled':''}><span class="phase-card-copy"><strong>${done?'✓ ':'Misión '+String(i+1).padStart(2,'0')+' · '}${esc(phase.title)}</strong><small>${esc(task?.title||phase.prompt)}</small><small>Destino · ${esc(destinations[i])}</small></span><small>${phase.minutes} min</small></button></li>`;}).join('');
     const rubricHtml=plan.mission.rubric.length?`<details class="rubric-details"><summary>Criterios de verificación · ${plan.mission.rubric.length}</summary><ul class="ae-list">${plan.mission.rubric.map(item=>`<li>${esc(item.name)}</li>`).join('')}</ul></details>`:'';
     const destination=destinations[Math.max(0,Math.min(3,phases.indexOf(activePhase)))];
-    $('#work-aside').innerHTML=`<section class="mission-comic"><p class="markers-title">Práctica profesional · misiones laborales</p><ol class="phase-list">${phasesHtml}</ol><p class="mission-location"><strong>Referencia de trabajo:</strong><br>${esc(destination)} · ${esc(currentLocation?.building||'Distrito')} · ${esc(currentLocation?.floor||'Piso asignado')}<br>Consulta el mapa original para orientarte; no hay seguimiento automático de posición en este portal.</p><a class="city-map-link" href="https://www.aulatpchile.cl/ciudad_laboral_aulatp/" target="_blank" rel="noopener">Abrir mapa de la ciudad ↗</a><p class="phase-time">Etapa 2 · 30 min · secuencia 5 + 15 + 5 + 5</p></section><div class="mission-resources"><p class="markers-title">Aprendizajes que se integran</p><ul class="ae-list">${plan.mission.aes.map((ae,i)=>`<li><strong>AE ${i+1}</strong> · ${esc(ae.title)}</li>`).join('')}</ul>${rubricHtml}</div>`;
+    $('#work-aside').innerHTML=`<section class="mission-comic"><p class="markers-title">Práctica profesional · misiones laborales</p><ol class="phase-list">${phasesHtml}</ol><p class="mission-location"><strong>Referencia de trabajo:</strong><br>${esc(destination)} · ${esc(currentLocation?.building||'Distrito')} · ${esc(currentLocation?.floor||'Piso asignado')}<br>La ruta amarilla del mapa 3D sigue la posición del personaje hasta tu distrito.</p><a class="city-map-link city-guide-link" href="${esc(cityGuideUrl())}" target="_blank" rel="noopener">Abrir mapa 3D con ruta amarilla ↗</a><p class="phase-time">Etapa 2 · 30 min · secuencia 5 + 15 + 5 + 5</p></section><div class="mission-resources"><p class="markers-title">Aprendizajes que se integran</p><ul class="ae-list">${plan.mission.aes.map((ae,i)=>`<li><strong>AE ${i+1}</strong> · ${esc(ae.title)}</li>`).join('')}</ul>${rubricHtml}</div>`;
     if(state.mission?.recovery)$('#work-aside .phase-time').textContent=`Recuperación · ${state.mission.required_seconds/60} min · intento ${state.mission.attempt_id}`;
     $$('.phase-list button',$('#work-aside')).forEach((button,i)=>button.addEventListener('click',()=>{if(!button.disabled){activePhase=phases[i];renderMission();}}));
   }

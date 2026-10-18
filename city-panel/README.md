@@ -6,8 +6,14 @@ Panel publicado el 17 de octubre de 2026 en la ruta existente de Ciudad Laboral.
 
 - `city-panel.css` presenta los controles originales con el estilo de la quinta referencia del usuario.
 - `assets/panel-reference.png` es la referencia proporcionada por el usuario. Solo sus regiones fotográficas e ilustradas se usan como fondos recortados por CSS. Los textos, el reloj, los botones, el selector y la casilla siguen siendo elementos interactivos de la aplicación, no una captura superpuesta.
-- `city-panel.js` agrega únicamente una tarjeta visual de Isla Minera que invoca el botón original. Espera a que termine la hidratación y respeta el estado deshabilitado de ese control.
+- `city-panel.js` conserva la tarjeta de Isla Minera que invoca el botón original y añade la guía de ruta en el mapa sin reemplazar controles ni escenas del motor.
 - Se mantienen los destinos originales, las 35 especialidades, los enlaces de misión, el modo ligero y el motor 3D. Las fotos de las tres especialidades mecánicas no se reutilizan para distritos de otras áreas.
+
+## Guía dinámica por distrito
+
+`city-panel.js` lee las coordenadas `data-player-x` y `data-player-z` que publica el escenario original, junto a las posiciones de los marcadores del mapa. Un enlace con `cityRoute=<distrito>` abre el mapa y traza una ruta amarilla en su proyección 3D; la ruta y el estado de llegada se actualizan mientras se mueve el personaje. `static/city-experience.js` genera ese enlace para el curso/módulo seleccionado y para las áreas ganadas.
+
+La ruta termina en el distrito existente. El motor publicado no expone una API para crear o abrir puertas de nuevas áreas profesionales, así que el adaptador no altera el motor ni simula ese desbloqueo físico.
 
 ## Publicación
 
