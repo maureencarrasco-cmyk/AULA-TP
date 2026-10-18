@@ -66,8 +66,8 @@ test('entering an interior expands the panorama and hides the room action dock',
  assert.ok(css.includes('.city-walk-workspace:has(.city-open-pilot) { grid-template-columns:minmax(0,1fr); }'));
  assert.ok(css.includes('.city-walk-workspace:has(.city-open-pilot)>.city-walk-inspector { position:absolute;inset:0;'));
  assert.ok(css.includes('.city-walk-workspace:has(.city-open-pilot) .city-room-summary { display:none!important; }'));
+ assert.ok(css.includes('.city-walk-workspace:has(.city-open-pilot) .city-open-workshop { display:none!important; }'));
  for(const button of ['.city-open-pilot','.city-open-workshop','.city-open-learning'])assert.ok(css.includes(button));
- assert.ok(css.includes('.city-walk-workspace:has(.city-room-summary) .city-open-workshop'));
  assert.ok(css.includes('0 0 24px #ff8b27a6'));
 });
 

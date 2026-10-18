@@ -234,7 +234,7 @@
 .city-page .city-walk-workspace:has(.city-room-summary) .city-room-summary>:is(button,a):focus-visible { outline:3px solid #fff;outline-offset:5px; }
 .city-page .city-walk-workspace:has(.city-room-summary) .city-open-pilot,
 .city-page .city-walk-workspace:has(.city-room-summary) .city-open-learning { display:none!important; }
-.city-page .city-walk-workspace:has(.city-room-summary) .city-open-workshop { left:24px;right:auto;top:76px;bottom:auto; }
+.city-page .city-walk-workspace:has(.city-open-pilot) .city-open-workshop { display:none!important; }
 .city-page .city-walk-workspace .city-open-pilot,
 .city-page .city-walk-workspace .city-open-workshop,
 .city-page .city-walk-workspace .city-open-learning {
@@ -274,7 +274,6 @@
   .city-page .city-walk-workspace:has(.city-room-summary) .city-room-summary>a::after { right:8px;width:36px;height:36px;font-size:32px; }
   .city-page .city-walk-workspace:has(.city-room-summary) .city-room-summary>button svg,
   .city-page .city-walk-workspace:has(.city-room-summary) .city-room-summary>a svg { left:21px;width:20px;height:20px; }
-  .city-page .city-walk-workspace:has(.city-room-summary) .city-open-workshop { left:12px;top:68px;right:auto;bottom:auto;width:min(220px,calc(100vw - 48px));font-size:11px; }
   .city-page .city-walk-workspace .city-open-pilot,
   .city-page .city-walk-workspace .city-open-workshop,
   .city-page .city-walk-workspace .city-open-learning { right:12px;width:min(236px,calc(100vw - 52px));min-height:46px;padding:9px 12px;font-size:12px; }
