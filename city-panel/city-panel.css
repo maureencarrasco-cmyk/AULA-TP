@@ -153,3 +153,39 @@
   .city-walk-inspector .city-specialties button>svg { top:14px; }
 }
 @media(prefers-reduced-motion:reduce) { .city-walk-inspector * { transition:none!important; } }
+
+/* Specialty cards keep contextual artwork without borrowing mechanical photos. */
+.city-walk-inspector .city-specialty-section {
+  --specialty-art: radial-gradient(ellipse at 78% 20%,#ffffffc9 0 12%,transparent 13%),radial-gradient(ellipse at 92% 88%,#ffffff80 0 23%,transparent 24%),linear-gradient(120deg,#dceeff,#b9dcff);
+  --specialty-mark: '\2692';
+  padding:16px 12px 13px;
+  background:linear-gradient(145deg,#f3f9ff,#e7f4ff 70%,#f8fcff);
+  box-shadow:0 8px 20px #0b5da00d;
+}
+.city-walk-inspector .city-specialty-section:has(select option[value*="aliment"]:checked) { --specialty-art:radial-gradient(ellipse at 80% 15%,#fff9 0 12%,transparent 13%),radial-gradient(ellipse at 91% 88%,#ffd36b80 0 24%,transparent 25%),linear-gradient(120deg,#fff0d9,#ffd49a);--specialty-mark:'\1F37D'; }
+.city-walk-inspector .city-specialty-section:has(select option[value*="constru"]:checked) { --specialty-art:radial-gradient(ellipse at 80% 15%,#fff9 0 12%,transparent 13%),radial-gradient(ellipse at 92% 88%,#ffc5728c 0 24%,transparent 25%),linear-gradient(120deg,#fff0d9,#ffc77c);--specialty-mark:'\1F3D7'; }
+.city-walk-inspector .city-specialty-section:has(select option[value*="agro"]:checked) { --specialty-art:radial-gradient(ellipse at 80% 15%,#fff9 0 12%,transparent 13%),radial-gradient(ellipse at 92% 88%,#83d69b88 0 24%,transparent 25%),linear-gradient(120deg,#e6f8e9,#bce9c8);--specialty-mark:'\1F33F'; }
+.city-walk-inspector .city-specialty-section:has(select option[value*="admin"]:checked) { --specialty-art:radial-gradient(ellipse at 80% 15%,#fff9 0 12%,transparent 13%),radial-gradient(ellipse at 92% 88%,#f09acb80 0 24%,transparent 25%),linear-gradient(120deg,#fce9f4,#f3c8df);--specialty-mark:'\1F4CA'; }
+.city-walk-inspector .city-specialty-section:has(select option[value*="electri"]:checked) { --specialty-art:radial-gradient(ellipse at 80% 15%,#fff9 0 12%,transparent 13%),radial-gradient(ellipse at 92% 88%,#d398fb80 0 24%,transparent 25%),linear-gradient(120deg,#f3eaff,#d7c2ff);--specialty-mark:'\26A1'; }
+.city-walk-inspector .city-specialty-section:has(select option[value*="min"]:checked) { --specialty-art:radial-gradient(ellipse at 80% 15%,#fff9 0 12%,transparent 13%),radial-gradient(ellipse at 92% 88%,#a7b8c780 0 24%,transparent 25%),linear-gradient(120deg,#edf2f5,#cbd5df);--specialty-mark:'\26CF'; }
+.city-walk-inspector .city-specialty-section:has(select option[value*="salud"]:checked) { --specialty-art:radial-gradient(ellipse at 80% 15%,#fff9 0 12%,transparent 13%),radial-gradient(ellipse at 92% 88%,#82ded180 0 24%,transparent 25%),linear-gradient(120deg,#e4f9f4,#b8eade);--specialty-mark:'\2695'; }
+.city-walk-inspector .city-specialty-section:has(select option[value*="marit"]:checked) { --specialty-art:radial-gradient(ellipse at 80% 15%,#fff9 0 12%,transparent 13%),radial-gradient(ellipse at 92% 88%,#7ec9e980 0 24%,transparent 25%),linear-gradient(120deg,#e3f6ff,#b9e4f4);--specialty-mark:'\2693'; }
+.city-walk-inspector .city-specialty-section:has(select option[value*="turis"]:checked) { --specialty-art:radial-gradient(ellipse at 80% 15%,#fff9 0 12%,transparent 13%),radial-gradient(ellipse at 92% 88%,#f5cb7880 0 24%,transparent 25%),linear-gradient(120deg,#fff5df,#f7dba8);--specialty-mark:'\1F9ED'; }
+.city-walk-inspector .city-specialty-section:has(select option[value*="madera"]:checked) { --specialty-art:radial-gradient(ellipse at 80% 15%,#fff9 0 12%,transparent 13%),radial-gradient(ellipse at 92% 88%,#dba97980 0 24%,transparent 25%),linear-gradient(120deg,#fff0df,#e9c39c);--specialty-mark:'\1FAB5'; }
+.city-walk-inspector .city-specialty-section:has(select option[value*="digital"]:checked),.city-walk-inspector .city-specialty-section:has(select option[value*="tecnolog"]:checked) { --specialty-art:radial-gradient(ellipse at 80% 15%,#fff9 0 12%,transparent 13%),radial-gradient(ellipse at 92% 88%,#89c9ff80 0 24%,transparent 25%),linear-gradient(120deg,#e5f3ff,#c0dcff);--specialty-mark:'\1F4BB'; }
+.city-walk-inspector .city-specialties { gap:10px;margin:14px 0; }
+.city-walk-inspector .city-specialties button { min-height:154px;padding:71px 11px 13px;border-radius:12px;border-color:#cfe3f3;box-shadow:0 4px 10px #06467810; }
+.city-walk-inspector .city-specialties button::before { height:60px;background-size:auto 3106.78%;background-position:var(--specialty-x,12.54%) 88.106%; }
+.city-walk-inspector .city-specialties button>svg { top:66px;right:8px; }
+.city-walk-inspector .city-specialty-section:not(:has(select option[value="mecanica"]:checked)) .city-specialties button::before { height:60px;background-image:var(--specialty-art);border-bottom:1px solid #ffffffa8; }
+.city-walk-inspector .city-specialty-section:not(:has(select option[value="mecanica"]:checked)) .city-specialties button::after { content:var(--specialty-mark);position:absolute;right:12px;top:11px;font-size:28px;line-height:1;filter:drop-shadow(0 2px 2px #17415c24); }
+.city-walk-inspector .city-specialty-copy strong { font-size:12.5px;line-height:1.35; }
+.city-walk-inspector .city-specialty-copy small { font-size:11px;line-height:1.4; }
+.city-walk-inspector .city-specialties button[aria-pressed=true] { box-shadow:0 0 0 2px #17a49724,0 7px 16px #06467816; }
+@container(max-width:430px) {
+  .city-walk-inspector .city-specialties { grid-template-columns:1fr; }
+  .city-walk-inspector .city-specialties button { min-height:90px;padding:12px 34px 12px 116px; }
+  .city-walk-inspector .city-specialties button::before { width:103px;height:80px;left:4px;top:4px; }
+  .city-walk-inspector .city-specialties button::after { left:40px;right:auto;top:25px; }
+  .city-walk-inspector .city-specialties button>svg { top:14px; }
+}
