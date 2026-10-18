@@ -21,6 +21,8 @@ Versión anterior: `/opt/ciudad-laboral-releases/city-20261014-circuit-bikes-v41
 
 Nueva versión: `/opt/ciudad-laboral-releases/city-20261017-panel-reference-v42`.
 
+Guía de ruta amarilla: `/opt/ciudad-laboral-releases/city-20261018-dynamic-guide-v54`, con `--skin-version panel-ui-v8`. El panel añade «Guiarme a mi distrito» y dibuja una línea sobre el mapa 3D usando la posición actual del personaje y la proyección de los marcadores existentes. El despliegue conservó los 42 archivos JavaScript originales del motor y dejó la versión anterior enlazada para recuperación. Se verificaron HTTP 200 en la página y recursos v8.
+
 Actualización de aprendizaje: `/opt/ciudad-laboral-releases/city-20261017-learning-panel-v43`, con `--skin-version panel-ui-v2`. Mejora el encabezado, selector y tarjetas de distritos según el ancho disponible. El selector original sigue cambiando las especialidades y el personaje. Los recursos versionados evitan servir estilos antiguos desde la caché. El instalador sustituye las referencias anteriores sin duplicarlas y conserva el manifiesto de la versión previa.
 
 Encabezado de Ciudad Laboral: `/opt/ciudad-laboral-releases/city-20261017-city-header-v44`, con `--skin-version panel-ui-v3`. Usa la segunda imagen proporcionada para la ilustración de fondo (`assets/city-header-reference.png`), sin modificar el archivo. El título, descripción y enlace de regreso siguen siendo elementos originales accesibles. La ilustración se recorta proporcionalmente con CSS; en teléfono se coloca debajo del texto. Los 37 archivos originales del motor permanecen intactos.
@@ -33,7 +35,7 @@ Encabezado de Ciudad Laboral: `/opt/ciudad-laboral-releases/city-20261017-city-h
 
 La publicación `city-20261017-professional-learning-v47` reemplazó los HTML y omitió el diseño. Se restauró sobre esa misma base en `city-20261017-learning-and-design-v48`, usando `--skin-version panel-ui-v6`, conservando sus 39 archivos JavaScript y las mejoras pedagógicas. No fue un problema de caché. Las futuras publicaciones completas deben incluir esta capa visual en ambos HTML y sus recursos, además del motor; subir este repositorio a GitHub por sí solo no modifica la publicación del servidor.
 
-Comprobación posterior: la página pública debe referenciar `panel-ui-v6/city-panel.css` y `panel-ui-v6/city-panel.js`, sus imágenes deben responder 200 y `panel-ui-release.json` debe identificar la base conservada. Antes de activar otra versión, comprobar también visualmente el encabezado y el panel.
+Comprobación posterior: la página pública debe referenciar `panel-ui-v8/city-panel.css` y `panel-ui-v8/city-panel.js`, sus imágenes deben responder 200 y `panel-ui-release.json` debe identificar `/opt/ciudad-laboral-releases/city-20261018-dynamic-guide-v54`. Antes de activar otra versión, comprobar también visualmente el encabezado, el panel y la guía de ruta.
 
 `node --test city-panel/panel.test.cjs`
 
