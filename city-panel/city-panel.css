@@ -107,6 +107,7 @@
 .city-map-overlay .city-guide-route-status strong { color:#ffe35c;font-size:14px; }
 .city-map-overlay .city-guide-route-status small { color:#fff;font-size:12px;line-height:1.35; }
 .city-map-overlay .city-guide-route-status button { position:absolute;right:8px;top:8px;width:28px;height:28px;padding:0;border:1px solid #fff8;border-radius:50%;background:#fff2;color:#fff;font-size:20px;line-height:1; }
+.city-walk-inspector .city-mission-card>button.city-guide-action { background:#ffbd24;color:#173d51;border:1px solid #efad12;box-shadow:0 2px 8px #d59b1c30; }
 .city-walk-inspector .city-eyebrow { letter-spacing:0; }
 .city-walk-inspector .city-entry-header .city-inspector-top strong { display:block;flex:none; }
 .city-walk-inspector .city-entry-header .city-eyebrow { flex:1;min-width:0; }

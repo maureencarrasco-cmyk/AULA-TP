@@ -11,7 +11,7 @@ Panel publicado el 17 de octubre de 2026 en la ruta existente de Ciudad Laboral.
 
 ## Guía dinámica por distrito
 
-`city-panel.js` lee las coordenadas `data-player-x` y `data-player-z` que publica el escenario original, junto a las posiciones de los marcadores del mapa. Un enlace con `cityRoute=<distrito>` abre el mapa y traza una ruta amarilla en su proyección 3D; la ruta y el estado de llegada se actualizan mientras se mueve el personaje. `static/city-experience.js` genera ese enlace para el curso/módulo seleccionado y para las áreas ganadas.
+`city-panel.js` añade «Guiarme a mi distrito» al panel original, lee las coordenadas `data-player-x` y `data-player-z` del personaje y proyecta su posición y los marcadores del mapa. Traza una ruta amarilla en el mapa 3D y actualiza la ruta y el estado de llegada mientras se mueve el personaje. Un enlace con `cityRoute=<distrito>` activa la misma guía al abrir la ciudad; `static/city-experience.js` genera ese enlace para el curso/módulo seleccionado y para las áreas ganadas.
 
 La ruta termina en el distrito existente. El motor publicado no expone una API para crear o abrir puertas de nuevas áreas profesionales, así que el adaptador no altera el motor ni simula ese desbloqueo físico.
 

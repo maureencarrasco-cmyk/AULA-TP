@@ -36,6 +36,20 @@
     link.textContent='Estación 4 · Quiz + Práctica profesional';
     card.append(link);
   }
+  function syncGuideButton() {
+    const card=document.querySelector('.city-walk-inspector .city-mission-card');
+    if(!card||card.querySelector('[data-city-guide-start]'))return;
+    const button=document.createElement('button');
+    button.type='button';button.dataset.cityGuideStart='';button.className='city-guide-action';button.textContent='Guiarme a mi distrito';
+    button.addEventListener('click',()=>{
+      const select=document.querySelector('.city-specialty-section .city-district-select select');
+      const label=select?.selectedOptions?.[0]?.textContent?.trim()||'';
+      const district=normalize(label);
+      if(!districts[district])return;
+      clearRoute();route={district,label,area:''};startRoute();
+    });
+    card.append(button);
+  }
   function syncConstructionDistrict() {
     const cards=[...document.querySelectorAll('.city-island-card')];
     const card=cards.find(item=>item.textContent.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleUpperCase().includes('CONSTRUCCION'));
@@ -115,12 +129,15 @@
     const playerX=Number(stage?.dataset.playerX),playerZ=Number(stage?.dataset.playerZ);
     const [targetX,targetZ]=districts[route.district];
     const arrived=Number.isFinite(playerX)&&Number.isFinite(playerZ)&&Math.hypot(playerX-targetX,playerZ-targetZ)<8;
-    routeStatus.querySelector('.city-guide-route-title').textContent=`Ruta amarilla · ${marker.querySelector('span')?.textContent||route.label}`;
-    routeStatus.querySelector('.city-guide-route-area').textContent=`${route.area?`Premio: ${route.area} · `:''}${arrived?'Llegaste al distrito':'Sigue la ruta en el mapa 3D'}`;
+    const titleText=`Ruta amarilla · ${marker.querySelector('span')?.textContent||route.label}`;
+    const areaText=`${route.area?`Premio: ${route.area} · `:''}${arrived?'Llegaste al distrito':'Sigue la ruta en el mapa 3D'}`;
+    const titleNode=routeStatus.querySelector('.city-guide-route-title'),areaNode=routeStatus.querySelector('.city-guide-route-area');
+    if(titleNode.textContent!==titleText)titleNode.textContent=titleText;
+    if(areaNode.textContent!==areaText)areaNode.textContent=areaText;
     if(!routeTimer)routeTimer=setInterval(startRoute,120);
   }
   function syncPanel() {
-    syncMiningTile();syncLearningLink();syncConstructionDistrict();
+    syncMiningTile();syncLearningLink();syncGuideButton();syncConstructionDistrict();
     if(route)startRoute();
   }
   if(route){
