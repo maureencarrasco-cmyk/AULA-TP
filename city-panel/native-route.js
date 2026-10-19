@@ -8,8 +8,8 @@
   const quizMarkers=[];
   const stageAnchors=[];
   let roomStations=[];
-  let markerGeometry,markerImageGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial,markerBeamGeometry,markerBeamTexture,markerBeamMaterial,markerSparkGeometry,markerSparkTexture,markerSparkMaterial,markerCylinderGeometry,markerCylinderMaterial;
-  const beams=[],sparkles=[],cylinders=[],quizImages=[];
+  let markerGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial,markerBeamGeometry,markerBeamTexture,markerBeamMaterial,markerSparkGeometry,markerSparkTexture,markerSparkMaterial,markerCylinderGeometry,markerCylinderMaterial;
+  const beams=[],sparkles=[],cylinders=[];
   function progress(event){
     const data=event.detail;
     if(!data||!Array.isArray(data.questions)||!data.answers||typeof data.specialty!=='string')return;
@@ -24,10 +24,9 @@
     markerGeometry?.dispose();markerHaloGeometry?.dispose();markerHaloTexture?.dispose();markerHaloMaterial?.dispose();
     markerBeamGeometry?.dispose();markerBeamTexture?.dispose();markerBeamMaterial?.dispose();beams.length=0;
     markerSparkGeometry?.dispose();markerSparkTexture?.dispose();markerSparkMaterial?.dispose();sparkles.length=0;
-    markerImageGeometry?.dispose();markerCylinderGeometry?.dispose();markerCylinderMaterial?.dispose();cylinders.length=0;
-    for(const item of quizImages){item.texture.dispose();item.material.dispose();}quizImages.length=0;
+    markerCylinderGeometry?.dispose();markerCylinderMaterial?.dispose();cylinders.length=0;
     for(const marker of quizMarkers){marker.texture.dispose();marker.material.dispose();}
-    quizMarkers.length=0;markerGeometry=markerImageGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=markerBeamGeometry=markerBeamTexture=markerBeamMaterial=markerSparkGeometry=markerSparkTexture=markerSparkMaterial=markerCylinderGeometry=markerCylinderMaterial=null;
+    quizMarkers.length=0;markerGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=markerBeamGeometry=markerBeamTexture=markerBeamMaterial=markerSparkGeometry=markerSparkTexture=markerSparkMaterial=markerCylinderGeometry=markerCylinderMaterial=null;
     stageAnchors.length=0;
     roomStations=[];
     for(const [sign,visible,oldGeometry,oldMaterial,oldName] of originalSigns){sign.visible=visible;sign.geometry=oldGeometry;sign.material=oldMaterial;sign.name=oldName;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityQuizMarker;}
@@ -209,21 +208,42 @@
     }
     return new URL(`${specialtyPhotos(ctx.specialty.name)[index%4]}.webp`,base).href;
   }
-  function createStationImage(ctx,station,displayX,displayZ,floorY,token,imageUrl){
-    const image=new Image();image.decoding='async';image.src=imageUrl;
+  function createStationArtwork(ctx,station,index,token,imageUrl,sign,texture,canvas){
+    const image=new Image();image.decoding='async';
     image.onload=()=>{
       if(token!==generation||!root)return;
-      const T=ctx.three,texture=new T.GOR(image);texture.colorSpace=T.er$;texture.anisotropy=4;
-      const imageMaterial=new T.V9B({map:texture,transparent:false,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
-      const imageMesh=new T.eaF(markerImageGeometry,imageMaterial);imageMesh.position.set(displayX,floorY+.43,displayZ);imageMesh.renderOrder=19;imageMesh.userData.cityQuizImage=true;root.add(imageMesh);
-      quizImages.push({mesh:imageMesh,texture,material:imageMaterial});
+      const c=canvas.getContext('2d'),w=canvas.width,h=canvas.height;
+      const rounded=(x,y,width,height,radius)=>{c.beginPath();c.roundRect(x,y,width,height,radius);};
+      c.clearRect(0,0,w,h);
+      c.save();c.shadowColor='#00cfff';c.shadowBlur=44;c.fillStyle='rgba(238,250,255,.94)';c.strokeStyle='#f5fdff';c.lineWidth=18;
+      rounded(36,32,1128,786,118);c.fill();c.stroke();c.shadowBlur=0;c.strokeStyle='#08c7f2';c.lineWidth=12;rounded(48,44,1104,762,108);c.stroke();c.restore();
+      const header=c.createLinearGradient(0,82,0,320);header.addColorStop(0,'rgba(255,255,255,.98)');header.addColorStop(1,'rgba(218,245,255,.92)');
+      c.save();c.shadowColor='rgba(0,174,255,.48)';c.shadowBlur=30;c.fillStyle=header;rounded(120,76,1000,254,76);c.fill();c.restore();
+      c.save();c.shadowColor='#00cfff';c.shadowBlur=26;c.fillStyle='rgba(86,220,250,.38)';c.strokeStyle='#ffffff';c.lineWidth=9;
+      c.beginPath();c.arc(220,203,116,0,Math.PI*2);c.fill();c.stroke();c.restore();
+      c.textAlign='center';c.textBaseline='middle';c.fillStyle='#0874ef';c.font='900 138px Arial';c.fillText(String(index+1),220,205);
+      c.textAlign='left';c.fillStyle='#1263ec';c.font='900 94px Arial';c.fillText(`Quiz ${index+1}`,370,165,680);
+      const title=String(station.quizQuestion?.object||station.equipment||station.name||station.title||station.label||'Estación de trabajo');
+      c.fillStyle='#102653';c.font='800 53px Arial';c.fillText(title.length>34?`${title.slice(0,31)}...`:title,378,253,690);
+      c.save();c.shadowColor='rgba(0,164,255,.88)';c.shadowBlur=42;c.fillStyle='rgba(26,162,255,.3)';rounded(164,354,872,390,54);c.fill();c.restore();
+      c.save();rounded(188,368,824,352,40);c.clip();
+      const scale=Math.max(824/image.width,352/image.height),imageWidth=image.width*scale,imageHeight=image.height*scale;
+      c.drawImage(image,600-imageWidth/2,544-imageHeight/2,imageWidth,imageHeight);c.restore();
+      c.save();c.shadowColor='#00baff';c.shadowBlur=30;c.strokeStyle='#f4fdff';c.lineWidth=15;rounded(184,364,832,360,44);c.stroke();
+      c.shadowBlur=0;c.strokeStyle='#5de6ff';c.lineWidth=8;rounded(195,375,810,338,36);c.stroke();c.restore();
+      const platform=c.createLinearGradient(0,748,0,820);platform.addColorStop(0,'rgba(13,187,255,.84)');platform.addColorStop(1,'rgba(0,102,230,.18)');
+      c.save();c.shadowColor='#00cfff';c.shadowBlur=45;c.fillStyle=platform;c.beginPath();c.ellipse(600,772,400,45,0,0,Math.PI*2);c.fill();
+      c.strokeStyle='#ffffff';c.lineWidth=8;c.beginPath();c.ellipse(600,770,360,30,0,0,Math.PI*2);c.stroke();
+      c.strokeStyle='#51ddff';c.lineWidth=11;c.beginPath();c.ellipse(600,780,430,53,0,0,Math.PI*2);c.stroke();c.restore();
+      for(const [x,y] of [[116,516],[1082,494],[146,700],[1048,682]]){const glow=c.createRadialGradient(x,y,2,x,y,26);glow.addColorStop(0,'rgba(255,255,255,1)');glow.addColorStop(.3,'rgba(96,240,255,.95)');glow.addColorStop(1,'rgba(0,183,255,0)');c.fillStyle=glow;c.fillRect(x-26,y-26,52,52);}
+      texture.needsUpdate=true;sign.userData.cityQuizArtworkReady=true;
     };
+    image.src=imageUrl;
   }
   function createQuizMarkers(ctx){
     const T=ctx.three,stations=roomStations=configureStations(ctx);
     if(!stations.length)return;
-    markerGeometry=new T.bdM(2.05,.62);
-    markerImageGeometry=new T.bdM(1.18,.76);
+    markerGeometry=new T.bdM(2.7,1.92);
     markerHaloGeometry=new T.bdM(2.25,2.25);
     const haloCanvas=document.createElement('canvas');haloCanvas.width=256;haloCanvas.height=256;
     const haloContext=haloCanvas.getContext('2d'),glow=haloContext.createRadialGradient(128,128,24,128,128,124);
@@ -259,7 +279,7 @@
     const forward=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*5.9;
     const haloOffset=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*1.8;
     const mobileViewport=window.innerWidth<700,mobileShiftX=mobileViewport?-.45:0,token=generation;
-    const markerScale=Math.min(1.45,Math.max(1,1200/window.innerWidth));
+    const markerScale=Math.min(1.05,Math.max(1,1200/window.innerWidth));
     const usedImages=new Set();
     stations.forEach((station,index)=>{
       const [dx,dz]=station.totem||[station.x,station.z],x=ctx.district.x+dx,z=ctx.district.z+dz;
@@ -276,22 +296,16 @@
       beam.position.set(displayX,floorY+.94,displayZ+haloOffset*.55);root.add(beam);beam.renderOrder=19;beams.push(beam);
       const cylinder=new T.eaF(markerCylinderGeometry,markerCylinderMaterial);cylinder.name=`Aula TP · soporte Quiz ${index+1}`;
       cylinder.position.set(displayX,floorY+.77,displayZ);root.add(cylinder);cylinders.push(cylinder);
-      const imageUrl=stationImageUrl(ctx,station,index,usedImages);
-      createStationImage(ctx,station,displayX,displayZ,floorY,token,imageUrl);
-      const canvas=document.createElement('canvas');canvas.width=1050;canvas.height=320;
-      const c=canvas.getContext('2d');c.clearRect(0,0,canvas.width,canvas.height);
-      c.shadowColor='#00c9ff';c.shadowBlur=24;c.fillStyle='rgba(248,253,255,.9)';c.strokeStyle='#18c9ed';c.lineWidth=10;
-      c.beginPath();c.roundRect(24,24,1002,272,62);c.fill();c.stroke();c.shadowBlur=0;
-      c.textAlign='left';c.textBaseline='middle';c.fillStyle='#102d62';c.font='900 64px Arial';c.fillText(`Quiz ${index+1}`,76,112);
-      c.fillStyle='#345477';c.font='600 40px Arial';
-      const title=String(station.equipment||station.name||station.title||station.label||'Puesto de trabajo');
-      c.fillText(title.length>38?`${title.slice(0,35)}...`:title,76,220,760);
+      const title=String(station.quizQuestion?.object||station.equipment||station.name||station.title||station.label||'Puesto de trabajo');
+      const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=850;
       const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
       const signMaterial=new T.V9B({map:texture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
       const sign=new T.eaF(markerGeometry,signMaterial);
-      sign.position.set(displayX,ctx.floorY+(mobileViewport ? 1.14 : 1.38),displayZ);sign.scale.setScalar(markerScale);root.add(sign);
+      sign.position.set(displayX,ctx.floorY+.99,displayZ);sign.scale.setScalar(markerScale);root.add(sign);
       sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
       quizMarkers.push({sign,texture,material:signMaterial});
+      const imageUrl=stationImageUrl(ctx,station,index,usedImages);
+      createStationArtwork(ctx,station,index,token,imageUrl,sign,texture,canvas);
     });
   }
   function next(data){return data.questions.findIndex(question=>!data.answers[question.id]?.correct);}
@@ -324,7 +338,6 @@
       const now=performance.now();if(now-last<250)return;last=now;
       for(const marker of quizMarkers){const facing=Math.atan2(ctx.player.x-marker.sign.position.x,ctx.player.z-marker.sign.position.z);marker.sign.rotation.y=facing;}
       for(const beam of beams)beam.rotation.y=Math.atan2(ctx.player.x-beam.position.x,ctx.player.z-beam.position.z);
-      for(const item of quizImages)item.mesh.rotation.y=Math.atan2(ctx.player.x-item.mesh.position.x,ctx.player.z-item.mesh.position.z);
       document.querySelectorAll('.city-viewport .city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
       const stationAction=[...document.querySelectorAll('.city-viewport .city-door-action')].find(button=>/^\s*\d+\s*[·.)-]/.test(button.textContent));
       stationAction?.setAttribute('data-city-quiz-station','true');

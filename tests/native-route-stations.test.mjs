@@ -28,14 +28,20 @@ test('existing question count is preserved and distributed sequentially across f
   assert.doesNotMatch(source,/answers\[[^\]]+\]\s*=|correct\s*=/);
 });
 
-test('quiz markers have specialty imagery and a downward support without an E prompt',()=>{
+test('quiz markers use the shared illustrated artwork, specialty imagery and downward support',()=>{
   assert.match(source,/function specialtyPhotos\(name\)/);
-  assert.match(source,/function createStationImage\(/);
+  assert.match(source,/function createStationArtwork\(/);
+  assert.match(source,/markerGeometry=new T\.bdM\(2\.7,1\.92\)/);
+  assert.match(source,/c\.fillText\(`Quiz \$\{index\+1\}`/);
+  assert.match(source,/station\.quizQuestion\?\.object/);
+  assert.match(source,/c\.drawImage\(image,/);
+  assert.match(source,/cityQuizArtworkReady=true/);
   assert.match(source,/CylinderGeometry/);
-  assert.match(source,/createStationImage\(ctx,station,displayX,displayZ,floorY,token,imageUrl\)/);
+  assert.match(source,/createStationArtwork\(ctx,station,index,token,imageUrl,sign,texture,canvas\)/);
   assert.match(source,/const usedImages=new Set\(\)/);
   assert.match(source,/!used\.has\(url\)/);
   assert.doesNotMatch(source,/fillText\('E',/);
+  assert.doesNotMatch(source,/markerImageGeometry|quizImages/);
 });
 
 test('four quiz image stations use a straight, evenly-spaced layout',()=>{

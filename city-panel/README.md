@@ -83,6 +83,8 @@ El adaptador oculta los tres rótulos decorativos de fases junto a los puestos d
 
 La versión `city-20261019-quiz-stage-signs-v100` (`panel-ui-v54`) oculta los carteles antiguos de las fases Observar, Planificar y Verificar. La versión `city-20261019-quiz-station-images-even-v101` (`panel-ui-v55`) usa una imagen diferente por estación (imagen de pregunta cuando existe; en su defecto, fotografía relacionada y sin repetir dentro del módulo) y ubica las cuatro en una línea con separación regular, ajustada al espacio libre de cada sala.
 
+La versión `city-20261019-quiz-station-artwork-v102` (`panel-ui-v56`) reúne en una sola placa 3D el número, nombre del objeto, fotografía propia del quiz, marco blanco/cian y plataforma luminosa, tomando como referencia la imagen entregada. El diseño se genera dinámicamente para las cuatro estaciones de cada módulo de las 35 especialidades y conserva las fotos distintas, la separación regular, el halo de suelo y el acceso al quiz.
+
 ### Fotografías de especialidades
 
 Las 35 especialidades de los 12 distritos tienen fotografías propias, compartidas por los cursos correspondientes. Se conservan los botones y sus acciones originales. Las miniaturas WebP se cargan bajo demanda, sin descargar todo el catálogo al ingresar.
