@@ -82,8 +82,8 @@
   function createQuizMarkers(ctx){
     const T=ctx.three,stations=ctx.stations||[];
     if(!stations.length)return;
-    markerGeometry=new T.bdM(2.25,.68);
-    markerHaloGeometry=new T.bdM(1.8,1.8);
+    markerGeometry=new T.bdM(2.8,.78);
+    markerHaloGeometry=new T.bdM(2.25,2.25);
     const haloCanvas=document.createElement('canvas');haloCanvas.width=256;haloCanvas.height=256;
     const haloContext=haloCanvas.getContext('2d'),glow=haloContext.createRadialGradient(128,128,24,128,128,124);
     glow.addColorStop(0,'rgba(0,210,255,.72)');glow.addColorStop(.44,'rgba(0,174,255,.36)');glow.addColorStop(1,'rgba(0,174,255,0)');
@@ -95,13 +95,15 @@
     markerHaloMaterial=new T.V9B({map:markerHaloTexture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
     const floorY=ctx.floorY+.035;
     const playerZ=ctx.player.z,anchorCenterZ=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.z,0)/stageAnchors.length:null;
-    const forward=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*2.7;
+    const anchorCenterX=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.x,0)/stageAnchors.length:null;
+    const forward=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*5.9;
+    const haloOffset=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*1.8;
     stations.forEach((station,index)=>{
       const [dx,dz]=station.totem||[station.x,station.z],x=ctx.district.x+dx,z=ctx.district.z+dz;
       if(!Number.isFinite(x)||!Number.isFinite(z))return;
-      const anchor=stageAnchors[index],displayX=anchor?anchor.x:x,displayZ=anchor?anchor.z+forward:z;
+      const anchor=stageAnchors[index],displayX=anchor?anchorCenterX+(anchor.x-anchorCenterX)*1.25:x,displayZ=anchor?anchor.z+forward:z;
       const halo=new T.eaF(markerHaloGeometry,markerHaloMaterial);halo.name=`Aula TP · halo Quiz ${index+1}`;
-      halo.position.set(displayX,floorY,displayZ);halo.rotation.x=-Math.PI/2;root.add(halo);
+      halo.position.set(displayX,floorY,displayZ+haloOffset);halo.rotation.x=-Math.PI/2;root.add(halo);
       const canvas=document.createElement('canvas');canvas.width=1050;canvas.height=320;
       const c=canvas.getContext('2d');c.clearRect(0,0,canvas.width,canvas.height);
       c.shadowColor='#00c9ff';c.shadowBlur=24;c.fillStyle='#ffffff';c.strokeStyle='#18c9ed';c.lineWidth=10;
@@ -117,7 +119,7 @@
       const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
       const signMaterial=new T.V9B({map:texture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
       const sign=new T.eaF(markerGeometry,signMaterial);
-      sign.position.set(displayX,ctx.floorY+1.12,displayZ);root.add(sign);
+      sign.position.set(displayX,ctx.floorY+1.28,displayZ);root.add(sign);
       sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
       quizMarkers.push({sign,texture,material:signMaterial});
     });

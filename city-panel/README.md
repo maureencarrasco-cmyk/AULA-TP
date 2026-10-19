@@ -81,6 +81,8 @@ Se verificaron el renderizado de la escena, la selección de distrito, el acceso
 
 El adaptador oculta los tres rótulos decorativos de fases junto a los puestos de quiz en cada especialidad. Restaura los objetos al salir de la sala y conserva la ruta de flechas, la interacción original, los quizzes y su progreso.
 
+La referencia visual de estaciones se publicó en `city-20261019-quiz-stations-reference-v92` (`panel-ui-v46`). Las tarjetas 3D consecutivas se ampliaron y separaron, y los tres aros cian se adelantaron al área libre del piso. La publicación conservó los 51 chunks originales del motor y no modificó preguntas, corrección ni progreso.
+
 ### Fotografías de especialidades
 
 Las 35 especialidades de los 12 distritos tienen fotografías propias, compartidas por los cursos correspondientes. Se conservan los botones y sus acciones originales. Las miniaturas WebP se cargan bajo demanda, sin descargar todo el catálogo al ingresar.
