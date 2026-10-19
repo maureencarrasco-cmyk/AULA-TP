@@ -5,6 +5,8 @@
   let keyHint;
   const originalSigns=[];
   const arrows=[];
+  const quizMarkers=[];
+  let markerGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial;
   function progress(event){
     const data=event.detail;
     if(!data||!Array.isArray(data.questions)||!data.answers||typeof data.specialty!=='string')return;
@@ -13,6 +15,9 @@
   addEventListener('aulatp:quiz-progress',progress);
   function dispose(){
     root?.removeFromParent();geometry?.dispose();material?.dispose();
+    markerGeometry?.dispose();markerHaloGeometry?.dispose();markerHaloTexture?.dispose();markerHaloMaterial?.dispose();
+    for(const marker of quizMarkers){marker.texture.dispose();marker.material.dispose();}
+    quizMarkers.length=0;markerGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=null;
     for(const [sign,visible] of originalSigns){sign.visible=visible;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;}
     originalSigns.length=0;
     root=geometry=material=null;arrows.length=0;panel?.remove();panel=label=action=null;
@@ -30,6 +35,7 @@
     }
     ctx.scene.add(root);
     hideQuizPhaseSigns(ctx);
+    createQuizMarkers(ctx);
     panel=document.createElement('section');panel.className='city-native-guide';panel.setAttribute('aria-live','polite');
     label=document.createElement('strong');keyHint=document.createElement('kbd');keyHint.textContent='E';keyHint.setAttribute('aria-label','Presiona E para abrir el quiz');
     action=document.createElement('button');action.type='button';action.textContent='Abrir quiz de mi módulo';
@@ -74,6 +80,42 @@
       if(station)hide(node);
     });
   }
+  function createQuizMarkers(ctx){
+    const T=ctx.three,stations=ctx.stations||[];
+    if(!stations.length)return;
+    markerGeometry=new T.bdM(2.25,.68);
+    markerHaloGeometry=new T.bdM(1.28,1.28);
+    const haloCanvas=document.createElement('canvas');haloCanvas.width=256;haloCanvas.height=256;
+    const haloContext=haloCanvas.getContext('2d'),glow=haloContext.createRadialGradient(128,128,24,128,128,124);
+    glow.addColorStop(0,'rgba(0,210,255,.72)');glow.addColorStop(.44,'rgba(0,174,255,.36)');glow.addColorStop(1,'rgba(0,174,255,0)');
+    haloContext.fillStyle=glow;haloContext.fillRect(0,0,256,256);
+    markerHaloTexture=new T.GOR(haloCanvas);markerHaloTexture.colorSpace=T.er$;
+    markerHaloMaterial=new T.V9B({map:markerHaloTexture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
+    const floorY=ctx.floorY+.035;
+    stations.forEach((station,index)=>{
+      const [dx,dz]=station.totem||[station.x,station.z],x=ctx.district.x+dx,z=ctx.district.z+dz;
+      if(!Number.isFinite(x)||!Number.isFinite(z))return;
+      const halo=new T.eaF(markerHaloGeometry,markerHaloMaterial);halo.name=`Aula TP · halo Quiz ${index+1}`;
+      halo.position.set(x,floorY,z);halo.rotation.x=-Math.PI/2;root.add(halo);
+      const canvas=document.createElement('canvas');canvas.width=1050;canvas.height=320;
+      const c=canvas.getContext('2d');c.clearRect(0,0,canvas.width,canvas.height);
+      c.shadowColor='#00c9ff';c.shadowBlur=24;c.fillStyle='#ffffff';c.strokeStyle='#18c9ed';c.lineWidth=10;
+      c.beginPath();c.roundRect(24,24,1002,272,62);c.fill();c.stroke();c.shadowBlur=0;
+      c.fillStyle='#eaf8ff';c.beginPath();c.arc(106,160,68,0,Math.PI*2);c.fill();
+      c.fillStyle='#075dd8';c.font='900 64px Arial';c.textAlign='center';c.textBaseline='middle';c.fillText(String(index+1),106,160);
+      c.textAlign='left';c.fillStyle='#102d62';c.font='900 50px Arial';c.fillText(`Quiz ${index+1}`,202,127);
+      c.fillStyle='#345477';c.font='600 31px Arial';
+      const title=String(station.equipment||station.name||station.title||station.label||'Puesto de trabajo');
+      c.fillText(title.length>34?`${title.slice(0,31)}...`:title,202,208,650);
+      c.fillStyle='#e9f8ff';c.beginPath();c.roundRect(876,72,112,176,28);c.fill();
+      c.strokeStyle='#37c9ee';c.lineWidth=8;c.stroke();c.fillStyle='#0086a5';c.font='900 82px Arial';c.textAlign='center';c.fillText('E',932,164);
+      const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
+      const signMaterial=new T.V9B({map:texture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
+      const sign=new T.eaF(markerGeometry,signMaterial);sign.name=`Aula TP · Quiz ${index+1} · ${title}`;
+      sign.position.set(x,ctx.floorY+1.65,z);sign.userData.cityQuizMarker=index+1;root.add(sign);
+      quizMarkers.push({sign,x,z,texture,material:signMaterial});
+    });
+  }
   function next(data){return data.questions.findIndex(question=>!data.answers[question.id]?.correct);}
   function selectedStation(stations,index,question){
     const object=normalize(question?.object);
@@ -102,6 +144,7 @@
       if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;panel.hidden=true;return;}
       root.visible=true;panel.hidden=false;
       const now=performance.now();if(now-last<250)return;last=now;
+      for(const marker of quizMarkers)marker.sign.rotation.y=Math.atan2(ctx.player.x-marker.x,ctx.player.z-marker.z);
       document.querySelectorAll('.city-viewport .city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
       const stationAction=[...document.querySelectorAll('.city-viewport .city-door-action')].find(button=>/^\s*\d+\s*[·.)-]/.test(button.textContent));
       stationAction?.setAttribute('data-city-quiz-station','true');

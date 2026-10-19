@@ -37,5 +37,16 @@ class ObserveBannerPatchTests(unittest.TestCase):
         self.assertIn('const arrows=[]',source)
         self.assertIn('function path(ctx,target)',source)
 
+    def test_each_quiz_station_gets_a_numbered_glowing_interaction_marker(self):
+        source=(ROOT/'city-panel/native-route.js').read_text(encoding='utf-8')
+        self.assertIn('function createQuizMarkers(ctx)',source)
+        self.assertIn('Quiz ${index+1}',source)
+        self.assertIn("c.fillText('E',932,164)",source)
+        self.assertIn('marker.sign.rotation.y=Math.atan2',source)
+        self.assertIn('station.equipment||station.name',source)
+        self.assertIn('markerHaloGeometry=new T.bdM(1.28,1.28)',source)
+        styles=(ROOT/'city-panel/city-panel.css').read_text(encoding='utf-8')
+        self.assertIn('.city-native-route-active .city-native-guide>strong,.city-native-route-active .city-native-guide>kbd { display:none!important; }',styles)
+
 
 if __name__=='__main__':unittest.main()
