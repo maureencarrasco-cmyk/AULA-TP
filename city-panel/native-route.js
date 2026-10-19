@@ -2,17 +2,22 @@
 (() => {
   const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   let context,root,geometry,material,panel,label,action,current=null,last=0,room=null,error='';
+  let stationQuestionSignature='';
   let keyHint;
   const originalSigns=[];
   const arrows=[];
   const quizMarkers=[];
   const stageAnchors=[];
+  let roomStations=[];
   let markerGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial,markerBeamGeometry,markerBeamTexture,markerBeamMaterial,markerSparkGeometry,markerSparkTexture,markerSparkMaterial;
   const beams=[],sparkles=[];
   function progress(event){
     const data=event.detail;
     if(!data||!Array.isArray(data.questions)||!data.answers||typeof data.specialty!=='string')return;
     current=data;last=0;
+    const signature=`${data.moduleId||''}:${JSON.stringify(data.questions.map(question=>[question.id,question.object]))}`;
+    if(signature!==stationQuestionSignature&&root){dispose();room=null;}
+    stationQuestionSignature=signature;
   }
   addEventListener('aulatp:quiz-progress',progress);
   function dispose(){
@@ -23,6 +28,7 @@
     for(const marker of quizMarkers){marker.texture.dispose();marker.material.dispose();}
     quizMarkers.length=0;markerGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=markerBeamGeometry=markerBeamTexture=markerBeamMaterial=markerSparkGeometry=markerSparkTexture=markerSparkMaterial=null;
     stageAnchors.length=0;
+    roomStations=[];
     for(const [sign,visible,oldGeometry,oldMaterial,oldName] of originalSigns){sign.visible=visible;sign.geometry=oldGeometry;sign.material=oldMaterial;sign.name=oldName;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityQuizMarker;}
     originalSigns.length=0;
     root=geometry=material=null;arrows.length=0;panel?.remove();panel=label=action=null;
@@ -82,8 +88,38 @@
     for(const item of signGroup||[])hide(item.node);
     stageAnchors.sort((a,b)=>a.x-b.x);
   }
+  function configureStations(ctx){
+    const source=(ctx.stations||[]).slice(0,4);
+    if(!source.length)return [];
+    const questions=current&&normalize(current.specialty)===normalize(ctx.specialty.name)?current.questions:[];
+    const learningObjects=[...new Set(questions.map(question=>String(question.object||'').trim()).filter(Boolean))];
+    const result=source.map(station=>({...station}));
+    const points=result.map(station=>station.totem||[station.x,station.z]);
+    const blocked=(x,z)=>ctx.colliders.some(block=>
+      ctx.floorY+.6>=(block.minY??-Infinity)&&ctx.floorY+.6<=(block.maxY??Infinity)&&
+      Math.abs(x-(block.x-ctx.district.x))<(block.halfX??.5)+.35&&
+      Math.abs(z-(block.z-ctx.district.z))<(block.halfZ??.5)+.35
+    );
+    const offsets=[[1.7,0],[-1.7,0],[0,1.7],[0,-1.7],[1.7,1.7],[-1.7,1.7],[1.7,-1.7],[-1.7,-1.7],[2.5,0],[-2.5,0],[0,2.5],[0,-2.5]];
+    while(result.length<4){
+      const slot=result.length,base=result[result.length-1],basePoint=base.totem||[base.x,base.z],
+        origin=[Number(basePoint[0])||0,Number(basePoint[1])||0];
+      const candidate=offsets.map(([dx,dz])=>[origin[0]+dx,origin[1]+dz]).find(([x,z])=>
+        Math.abs(x)<=5.5&&Math.abs(z)<=4.8&&
+        points.every(point=>Math.hypot(x-point[0],z-point[1])>=1.45)&&!blocked(x,z)
+      );
+      const [x,z]=candidate||[
+        Math.max(-5.3,Math.min(5.3,origin[0]+(slot%2?1:-1)*1.7)),
+        Math.max(-4.5,Math.min(4.5,origin[1]+(slot>1?1:-1)*1.7))
+      ];
+      const learningObject=learningObjects[slot];
+      result.push({...base,name:learningObject||`Aplicación práctica ${slot+1}`,equipment:learningObject||`Aplicación práctica ${slot+1}`,totem:[x,z],cityGeneratedStation:true});
+      points.push([x,z]);
+    }
+    return result;
+  }
   function createQuizMarkers(ctx){
-    const T=ctx.three,stations=ctx.stations||[];
+    const T=ctx.three,stations=roomStations=configureStations(ctx);
     if(!stations.length)return;
     markerGeometry=new T.bdM(2.05,.62);
     markerHaloGeometry=new T.bdM(2.25,2.25);
@@ -151,9 +187,9 @@
     });
   }
   function next(data){return data.questions.findIndex(question=>!data.answers[question.id]?.correct);}
-  function selectedStation(stations,index,question){
-    const object=normalize(question?.object);
-    return stations.find(station=>object&&normalize(station.name||station.title||station.label)===object)||stations[index%stations.length];
+  function selectedStation(stations,index,total){
+    const stationIndex=Math.min(stations.length-1,Math.floor(index*stations.length/Math.max(1,total)));
+    return {station:stations[stationIndex],index:stationIndex};
   }
   function path(ctx,target){
     if(!globalThis.Graph||!globalThis.astar)return [];
@@ -187,7 +223,7 @@
       const index=data?next(data):0;
       arrows.forEach(arrow=>arrow.visible=false);
       if(index<0){label.textContent='Quiz completado · revisa tu resultado';action.hidden=false;keyHint.hidden=true;return;}
-      const station=selectedStation(ctx.stations,index,data?.questions[index]);
+      const {station, index:stationIndex}=selectedStation(roomStations,index,data?.questions.length||roomStations.length);
       const [dx,dz]=station.totem||[station.x,station.z];
       const target={x:ctx.district.x+dx,z:ctx.district.z+dz};
       if(!Number.isFinite(target.x)||!Number.isFinite(target.z))return;
@@ -198,7 +234,8 @@
         if(travel<.75||arrowIndex>=arrows.length)continue;travel=0;
         const arrow=arrows[arrowIndex++];arrow.position.set(points[i].x,ctx.floorY+.035,points[i].z);arrow.rotation.y=Math.atan2(-(points[i].x-points[i-1].x),-(points[i].z-points[i-1].z));arrow.visible=true;
       }
-      label.textContent=`Quiz ${index+1} · ${station.equipment||station.name||station.title||station.label||'Puesto de trabajo'}`;
+      const title=station.equipment||station.name||station.title||station.label||'Puesto de trabajo';
+      label.textContent=data&&data.questions.length>roomStations.length?`Estación ${stationIndex+1} · Quiz ${index+1}/${data.questions.length} · ${title}`:`Quiz ${stationIndex+1} · ${title}`;
       action.hidden=Math.hypot(ctx.player.x-approach.x,ctx.player.z-approach.z)>2;
       panel.dataset.quiz=String(index+1);panel.dataset.arrows=String(arrowIndex);
       if(!points.length&&action.hidden)label.textContent+=' · acércate al pasillo central';
@@ -208,6 +245,6 @@
       if(root)root.visible=false;
     }
   }
-  globalThis.AulaTPNativeRoute={frame,status:()=>({quizMarkers:quizMarkers.length,quiz:panel?.dataset.quiz||null})};
+  globalThis.AulaTPNativeRoute={frame,status:()=>({quizMarkers:quizMarkers.length,quiz:panel?.dataset.quiz||null,stations:roomStations.length})};
   addEventListener('pagehide',event=>{if(!event.persisted)dispose();});
 })();

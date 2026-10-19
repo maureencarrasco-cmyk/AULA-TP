@@ -81,7 +81,7 @@ Se verificaron el renderizado de la escena, la selección de distrito, el acceso
 
 El adaptador oculta los tres rótulos decorativos de fases junto a los puestos de quiz en cada especialidad. Restaura los objetos al salir de la sala y conserva la ruta de flechas, la interacción original, los quizzes y su progreso.
 
-La referencia visual de estaciones se afinó y publicó en `city-20261019-quiz-stations-detail-v96` (`panel-ui-v50`). Las placas usan dos líneas (número/título y equipo), sin repetir el número en un círculo, con marco cian, tecla `E`, haz vertical, destellos y aros de piso. Su escala y posición se adaptan a pantallas angostas. La cantidad y los nombres siguen viniendo de los puestos reales del módulo; se conservaron los 51 chunks originales del motor y no se modificaron preguntas, corrección ni progreso.
+La referencia visual de estaciones se afinó y publicó en `city-20261019-quiz-stations-detail-v96` (`panel-ui-v50`). Las placas usan dos líneas (número/título y equipo), sin repetir el número en un círculo, con marco cian, tecla `E`, haz vertical, destellos y aros de piso. Su escala y posición se adaptan a pantallas angostas. La versión `city-20261019-quiz-stations-four-v97` (`panel-ui-v51`) estandariza cuatro estaciones por sala: conserva los puestos existentes, añade puestos faltantes en puntos despejados y reparte en orden las preguntas reales entre ellos. No cambia la cantidad, el contenido, la corrección ni el progreso de las preguntas; se conservan los 51 chunks originales del motor.
 
 ### Fotografías de especialidades
 
