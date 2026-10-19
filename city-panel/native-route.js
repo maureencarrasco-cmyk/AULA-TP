@@ -92,7 +92,7 @@
     markerHaloMaterial=new T.V9B({map:markerHaloTexture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
     const floorY=ctx.floorY+.035;
     const playerZ=ctx.player.z,anchorCenterZ=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.z,0)/stageAnchors.length:null;
-    const forward=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*1.55;
+    const forward=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*2.7;
     stations.forEach((station,index)=>{
       const [dx,dz]=station.totem||[station.x,station.z],x=ctx.district.x+dx,z=ctx.district.z+dz;
       if(!Number.isFinite(x)||!Number.isFinite(z))return;
@@ -113,7 +113,7 @@
       const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
       const signMaterial=new T.V9B({map:texture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
       const sign=new T.eaF(markerGeometry,signMaterial),anchor=stageAnchors[index];
-      sign.position.set(anchor?anchor.x:x,ctx.floorY+1.82,anchor?anchor.z+forward:z);root.add(sign);
+      sign.position.set(anchor?anchor.x:x,ctx.floorY+1.12,anchor?anchor.z+forward:z);root.add(sign);
       sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
       quizMarkers.push({sign,texture,material:signMaterial});
     });
