@@ -11,12 +11,14 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
    await page.addInitScript({path:path.join(root,'engine/vendor/astar.js')});
    await page.addInitScript({path:path.join(root,'native-route.js')});
    const data=fs.readFileSync('tmp/city-world-active.js','utf8');
-   const replacement='globalThis.AulaTPNativeRoute?.frame({scene:as,player:iE,indoors:iC,map:ij,specialty:iT,district:iF,room:i4,stations:i7?.stations??i6,colliders:i3,floorY:(i4?.position.y??0)+.12,three:o}),ac.render(as,af),r9()';
+   const replacement='globalThis.AulaTPNativeRoute?.frame({scene:as,player:iE,indoors:iC,map:ij,specialty:iT,district:iF,room:i4,stations:i7?.stations??i6,phaseStations:i6,colliders:i3,floorY:(i4?.position.y??0)+.12,three:o}),ac.render(as,af),r9()';
    await page.route('**/259.*.js',route=>route.fulfill({contentType:'application/javascript',body:data.replace('ac.render(as,af),r9()',replacement)}));
    const learning=fs.readFileSync('tmp/city-learning-inspect.js','utf8');
    const anchor='localStorage.setItem((0,f.Ai)(w),JSON.stringify({...N,updatedAt:new Date().toISOString()}))';
    await page.route('**/335.*.js',route=>route.fulfill({contentType:'application/javascript',body:learning.replace(anchor,anchor+",window.dispatchEvent(new CustomEvent('aulatp:quiz-progress',{detail:{specialty:w.specialty,moduleId:w.moduleId,ae:w.ae,questions:w.questions.map(q=>({id:q.id,object:q.object})),answers:N.answers}}))")}));
    await page.route('**/panel-ui-v*/city-panel.css',route=>route.fulfill({contentType:'text/css',body:fs.readFileSync(path.join(root,'city-panel.css'))}));
+   await page.route('**/panel-ui-v*/native-route.js',route=>route.fulfill({contentType:'application/javascript',body:fs.readFileSync(path.join(root,'native-route.js'))}));
+   await page.route('**/panel-ui-v*/assets/quiz-observe-stage.png',route=>route.fulfill({contentType:'image/png',body:fs.readFileSync(path.join(root,'assets/quiz-observe-stage.png'))}));
   }
   await page.goto('https://www.aulatpchile.cl/ciudad_laboral_aulatp/',{waitUntil:'domcontentloaded',timeout:60000});
   const select=page.locator('.city-specialty-section .city-district-select select');
@@ -26,9 +28,15 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
   await page.waitForFunction(()=>Number(document.querySelector('.city-native-guide')?.dataset.arrows)>0,{},{timeout:60000});
   assert.ok((await page.locator('.city-native-guide').innerText()).includes('Quiz 1'));
   assert.equal(await page.locator('.city-quiz-route-entry').isVisible(),false);
+  await page.evaluate(()=>{const original=AulaTPNativeRoute.frame;AulaTPNativeRoute.frame=context=>{window.__cityRouteContext=context;original(context)}});
+  await page.waitForFunction(()=>window.__cityRouteContext?.phaseStations?.some(station=>station.phase==='observar'),{},{timeout:60000});
+  await page.waitForFunction(()=>{let visible=false;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityObserveBanner&&object.userData.cityObserveArtworkLoaded&&object.visible&&object.material?.name==='Aula TP · arte Observar')visible=true});return visible},{},{timeout:30000});
+  assert.equal(await page.evaluate(()=>{let visible=false;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityObserveBanner&&object.userData.cityObserveArtworkLoaded&&object.visible&&object.material?.name==='Aula TP · arte Observar')visible=true});return visible}),true);
+  const quizArtwork=await page.evaluate(()=>{const dialog=document.createElement('dialog'),list=document.createElement('ol'),step=document.createElement('li');dialog.className='floor-station-dialog';list.className='floor-route-progress';step.innerHTML='<span>1</span>Observar';list.append(step);dialog.append(list);document.body.append(dialog);const image=getComputedStyle(step,'::before').backgroundImage;dialog.remove();return image});
+  assert.match(quizArtwork,/quiz-observe-stage\.png/);
   await page.screenshot({path:path.join(output,'hangar-quiz1.png'),fullPage:true});
   const specialty=await page.locator('[data-specialty]').getAttribute('data-specialty');
-  if(!process.argv.includes('--all')){
+  if(!process.argv.includes('--all')&&!process.argv.includes('--visual-only')){
    await page.evaluate(()=>addEventListener('aulatp:quiz-progress',event=>window.nativeQuizObserved=event.detail));
    await page.getByRole('button',{name:'Desafío profesional',exact:true}).click();
    try{await page.waitForFunction(()=>window.nativeQuizObserved?.questions?.length===10,{},{timeout:60000});}
@@ -45,31 +53,39 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
    await page.getByRole('button',{name:/^Cerrar/}).last().click();
    await page.waitForFunction(()=>document.querySelector('.city-native-guide')?.dataset.quiz==='2');
   }
-  await page.evaluate(specialty=>dispatchEvent(new CustomEvent('aulatp:quiz-progress',{detail:{specialty,moduleId:'test',questions:[{id:'q01'},{id:'q02'},{id:'q03'}],answers:{q01:{correct:false}}}})),specialty);
-  await page.waitForTimeout(350);assert.equal(await page.locator('.city-native-guide').getAttribute('data-quiz'),'1');
-  await page.evaluate(specialty=>dispatchEvent(new CustomEvent('aulatp:quiz-progress',{detail:{specialty,moduleId:'test',questions:[{id:'q01'},{id:'q02'},{id:'q03'}],answers:{q01:{correct:true}}}})),specialty);
-  await page.waitForFunction(()=>document.querySelector('.city-native-guide')?.dataset.quiz==='2');
-  await page.screenshot({path:path.join(output,'hangar-quiz2.png'),fullPage:true});
+  if(!process.argv.includes('--visual-only')){
+   await page.evaluate(specialty=>dispatchEvent(new CustomEvent('aulatp:quiz-progress',{detail:{specialty,moduleId:'test',questions:[{id:'q01'},{id:'q02'},{id:'q03'}],answers:{q01:{correct:false}}}})),specialty);
+   await page.waitForTimeout(350);assert.equal(await page.locator('.city-native-guide').getAttribute('data-quiz'),'1');
+   await page.evaluate(specialty=>dispatchEvent(new CustomEvent('aulatp:quiz-progress',{detail:{specialty,moduleId:'test',questions:[{id:'q01'},{id:'q02'},{id:'q03'}],answers:{q01:{correct:true}}}})),specialty);
+   await page.waitForFunction(()=>document.querySelector('.city-native-guide')?.dataset.quiz==='2');
+   await page.screenshot({path:path.join(output,'hangar-quiz2.png'),fullPage:true});
+  }
   await page.setViewportSize({width:390,height:844});await page.waitForTimeout(500);
   await page.screenshot({path:path.join(output,'mobile.png'),fullPage:true});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   if(process.argv.includes('--all')){
    await page.setViewportSize({width:1280,height:900});
-   const options=await select.locator('option').evaluateAll(items=>items.map(item=>item.value));let checked=0;
+    const options=await select.locator('option').evaluateAll(items=>items.map(item=>item.value));let checked=0,artChecked=0,artNotApplicable=0;
    for(const district of options){
     await select.selectOption(district,{force:true});
     const names=await page.locator('.city-specialties button .city-specialty-copy strong').allTextContents();
     for(const name of names){
      await page.locator('.city-specialties button').filter({has:page.locator('strong',{hasText:name})}).first().evaluate(button=>button.click());
      await page.waitForFunction(name=>document.querySelector('[data-specialty]')?.dataset.specialty===name&&Boolean(document.querySelector('.city-native-guide')),name,{timeout:20000});
+      await page.waitForFunction(name=>window.__cityRouteContext?.specialty?.name===name,name,{timeout:20000});
+      const hasObserveStage=await page.evaluate(()=>window.__cityRouteContext.phaseStations?.some(station=>station.phase==='observar'));
+      if(hasObserveStage){
+       try{await page.waitForFunction(name=>{const context=window.__cityRouteContext;if(context?.specialty?.name!==name)return false;let loaded=false;context.scene.traverse(object=>{if(object.userData.cityObserveArtworkLoaded&&object.visible)loaded=true});return loaded},name,{timeout:20000});artChecked++;}
+       catch(error){console.error('Observe art missing for '+name,await page.evaluate(()=>{const c=window.__cityRouteContext;return {specialty:c?.specialty?.name,phases:c?.phaseStations?.map(s=>({phase:s.phase,x:s.x,z:s.z})),signs:(()=>{let n=0;c?.scene.traverse(o=>{if(o.userData.cityObserveBanner)n++});return n})()}}));throw error;}
+      }else artNotApplicable++;
      await page.waitForTimeout(400);
      const guide=page.locator('.city-native-guide');
      assert.ok(Number(await guide.getAttribute('data-arrows'))>0||await guide.locator('button').isVisible(),name+' has no reachable guide');checked++;console.log(checked+': '+name);
     }
    }
-   assert.equal(checked,35);console.log(JSON.stringify({specialtiesVerified:checked}));
+    assert.equal(checked,35);assert.ok(artChecked>0);assert.equal(artChecked+artNotApplicable,35);console.log(JSON.stringify({specialtiesVerified:checked,observeArtworkVerified:artChecked,specialtiesWithoutPhaseSign:artNotApplicable}));
   }
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({originalHangar:true,floorArrows:true,realQuizEvent:!process.argv.includes('--all'),nextQuiz:true,wrongAnswerStays:true,mobile:true,errors}));
+  console.log(JSON.stringify({originalHangar:true,floorArrows:true,observeArtwork:true,published:process.argv.includes('--published'),realQuizEvent:!process.argv.includes('--all'),nextQuiz:process.argv.includes('--visual-only')?null:true,wrongAnswerStays:process.argv.includes('--visual-only')?null:true,mobile:true,errors}));
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exit(1);});

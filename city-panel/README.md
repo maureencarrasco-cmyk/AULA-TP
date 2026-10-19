@@ -75,6 +75,10 @@ Se verificaron el renderizado de la escena, la selección de distrito, el acceso
 
 `preview.py` permite revisar el panel localmente sobre la aplicación publicada. No crea una copia del motor ni de los modelos.
 
+### Rótulo 3D de la etapa Observar
+
+`assets/quiz-observe-stage.png` reemplaza el rótulo antiguo de la primera estación en cada especialidad. El adaptador conserva el punto de interacción original y solo sustituye su presentación; la publicación versionada comprueba el hash del renderizador conocido y conecta las estaciones de etapa a la capa visual. No altera preguntas, evaluación ni progresión del quiz.
+
 ### Fotografías de especialidades
 
 Las 35 especialidades de los 12 distritos tienen fotografías propias, compartidas por los cursos correspondientes. Se conservan los botones y sus acciones originales. Las miniaturas WebP se cargan bajo demanda, sin descargar todo el catálogo al ingresar.

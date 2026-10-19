@@ -380,3 +380,7 @@
   .city-native-route-active .floor-station-dialog .floor-route-progress li:first-child::after { width:31px;height:22px;border-width:3px;box-shadow:0 0 0 9px #e8f5ff,0 0 12px #42a9ff; }
   .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child) { grid-column:span 3; }
 }
+.city-native-route-active .floor-station-dialog .floor-route-progress li:first-child { position:relative;aspect-ratio:1667/292;min-height:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none; }
+.city-native-route-active .floor-station-dialog .floor-route-progress li:first-child::before { position:absolute;inset:0;z-index:2;background:url("assets/quiz-observe-stage.png") center/100% 100% no-repeat;content:"";pointer-events:none; }
+.city-native-route-active .floor-station-dialog .floor-route-progress li:first-child::after { display:none; }
+@media(max-width:700px) { .city-native-route-active .floor-station-dialog .floor-route-progress li:first-child { aspect-ratio:1667/292;min-height:0; } }
