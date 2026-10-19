@@ -97,6 +97,8 @@ La versión `city-20261019-quiz-four-visible-v107` (`panel-ui-v61`) conserva las
 
 La versión `city-20261019-quiz-clickable-v108` (`panel-ui-v62`) superpone zonas accesibles y alineadas con las cuatro placas 3D. Al pulsar una, abre a la derecha una ventana blanca vacía identificada con el número de quiz y con control para cerrarla.
 
+La versión `city-20261019-quiz-remove-old-fixtures-v110` (`panel-ui-v63`) vuelve a exponer las coordenadas de los letreros antiguos para ocultar la señalética de fase y las piezas azules, verdes y negras de sus muebles cercanos en cada módulo, manteniendo las cuatro estaciones nuevas.
+
 ### Fotografías de especialidades
 
 Las 35 especialidades de los 12 distritos tienen fotografías propias, compartidas por los cursos correspondientes. Se conservan los botones y sus acciones originales. Las miniaturas WebP se cargan bajo demanda, sin descargar todo el catálogo al ingresar.

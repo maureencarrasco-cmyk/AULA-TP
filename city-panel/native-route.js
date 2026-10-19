@@ -1,4 +1,4 @@
-/* Read-only navigation bridge: uses the existing world and its quiz progression. */
+/* Quiz stations, legacy fixture cleanup, and navigation for the existing world. */
 (() => {
   const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   let root,geometry,material,current=null,last=0,room=null,error='',generation=0;
@@ -32,7 +32,7 @@
     quizControlLayer?.remove();quizControlLayer=null;quizControls.length=0;quizWindow?.remove();quizWindow=null;
     stageAnchors.length=0;
     roomStations=[];
-    for(const [sign,visible,oldGeometry,oldMaterial,oldName] of originalSigns){sign.visible=visible;sign.geometry=oldGeometry;sign.material=oldMaterial;sign.name=oldName;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityQuizMarker;}
+    for(const [sign,visible,oldGeometry,oldMaterial,oldName,flag] of originalSigns){sign.visible=visible;sign.geometry=oldGeometry;sign.material=oldMaterial;sign.name=oldName;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityLegacyQuizFurniture;delete sign.userData.cityQuizMarker;}
     originalSigns.length=0;
     root=geometry=material=null;arrows.length=0;
     document.querySelectorAll('.city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
@@ -60,9 +60,9 @@
     });
     const position=new T.Pq0(),roomPosition=ctx.room.getWorldPosition(new T.Pq0());
     const hidden=new Set();
-    const hide=node=>{
+    const hide=(node,flag='cityLegacyQuizStageSign')=>{
       if(hidden.has(node))return;
-      hidden.add(node);originalSigns.push([node,node.visible,node.geometry,node.material,node.name]);node.visible=false;node.userData.cityLegacyQuizStageSign=true;
+      hidden.add(node);originalSigns.push([node,node.visible,node.geometry,node.material,node.name,flag]);node.visible=false;node.userData[flag]=true;
     };
     const candidates=[];
     ctx.scene.traverse(node=>{
@@ -95,6 +95,27 @@
     for(const item of signGroup||[])selected.add(item.node);
     for(const node of selected){node.getWorldPosition(position);stageAnchors.push({x:position.x,y:position.y,z:position.z});hide(node);}
     stageAnchors.sort((a,b)=>a.x-b.x);
+    hideLegacyQuizFurniture(ctx,hide);
+  }
+  function hideLegacyQuizFurniture(ctx,hide){
+    if(!stageAnchors.length)return;
+    const position=new ctx.three.Pq0();
+    ctx.scene.traverse(node=>{
+      const size=node.geometry?.parameters;
+      if(!node.isMesh||!size||node.userData?.luminousSign)return;
+      const width=Number(size.width),height=Number(size.height),depth=Number(size.depth);
+      if(!Number.isFinite(width)||!Number.isFinite(height)||!Number.isFinite(depth)||width<.25||height<.18||depth<.18||width>5||height>4||depth>5)return;
+      node.getWorldPosition(position);
+      if(position.y<ctx.floorY-.35||position.y>ctx.floorY+3.4)return;
+      if(!stageAnchors.some(anchor=>Math.abs(anchor.x-position.x)<2.8&&Math.abs(anchor.z-position.z)<4.2&&anchor.y>position.y+.2&&anchor.y-position.y<4.2))return;
+      const materials=Array.isArray(node.material)?node.material:[node.material];
+      const belongsToFixture=materials.some(item=>{
+        if(!item?.color?.getHSL)return false;
+        const {h,s,l}=item.color.getHSL({});
+        return l<.16||(s>.22&&h>.22&&h<.76);
+      });
+      if(belongsToFixture)hide(node,'cityLegacyQuizFurniture');
+    });
   }
   function configureStations(ctx){
     const source=(ctx.stations||[]).slice(0,4);

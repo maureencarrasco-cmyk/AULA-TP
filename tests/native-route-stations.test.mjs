@@ -71,3 +71,13 @@ test('each 3D quiz plate opens a closable blank window on the right',()=>{
   assert.match(styles,/\.city-quiz-marker-control-layer/);
   assert.match(styles,/\.city-quiz-empty-window \{[^}]*right:18px/);
 });
+
+test('legacy phase furniture is hidden only around the old stage-sign anchors',()=>{
+  assert.match(source,/function hideLegacyQuizFurniture\(ctx,hide\)/);
+  assert.match(source,/stageAnchors\.some\(anchor=>Math\.abs\(anchor\.x-position\.x\)<2\.8&&Math\.abs\(anchor\.z-position\.z\)<4\.2/);
+  assert.match(source,/l<\.16\|\|\(s>\.22&&h>\.22&&h<\.76\)/);
+  assert.match(source,/hide\(node,'cityLegacyQuizFurniture'\)/);
+  assert.match(source,/delete sign\.userData\.cityLegacyQuizFurniture/);
+  const hook=readFileSync(new URL('../city-panel/deploy_native_route.py',import.meta.url),'utf8');
+  assert.match(hook,/phaseStations:i6/);
+});

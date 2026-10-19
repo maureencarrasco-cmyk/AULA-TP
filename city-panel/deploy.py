@@ -18,13 +18,17 @@ def digest(path):
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--expected-base',required=True)
+    parser.add_argument('--source-base')
     parser.add_argument('--release',required=True)
     parser.add_argument('--activate',action='store_true')
     parser.add_argument('--skin-version',default='panel-ui-v1')
     args=parser.parse_args()
-    base=LIVE.resolve(strict=True)
-    if not LIVE.is_symlink() or str(base)!=args.expected_base:
+    live_base=LIVE.resolve(strict=True)
+    if not LIVE.is_symlink() or str(live_base)!=args.expected_base:
         raise SystemExit('Live release changed; inspect before proceeding.')
+    base=Path(args.source_base or args.expected_base).resolve(strict=True)
+    if base.parent!=RELEASES.resolve(strict=True) or not base.is_dir():
+        raise SystemExit('Source release must be a direct release; inspect before proceeding.')
     target=RELEASES/args.release
     if target.parent!=RELEASES or target.name!=args.release or target.exists():
         raise SystemExit('Destination must be a new, directly contained release directory.')
@@ -71,7 +75,7 @@ def main():
     for chunk in chunks:
         if digest(chunk)!=digest(target/chunk.relative_to(base)):
             raise SystemExit('Game code differs; deployment refused.')
-    manifest={'base':str(base),'release':str(target),'html_modified':modified,
+    manifest={'base':str(base),'expected_live_base':str(live_base),'release':str(target),'html_modified':modified,
               'original_game_chunks_unchanged':len(chunks),'business_logic_modified':False,
               'panel_css_sha256':digest(destination/'city-panel.css'),
               'panel_js_sha256':digest(destination/'city-panel.js')}

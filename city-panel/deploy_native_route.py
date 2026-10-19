@@ -14,7 +14,7 @@ WORLD_SHA='0a20356fd918231b5675ae540e2cf826b01a02e195c53f0a4838906912a585b3'
 LEARNING='335.b6fefe7eb2bf326e.js'
 LEARNING_SHA='2c2a44eca2d7f0f7820bc5cccbb527487e423b2241228fbb7dfc5b577d51ace5'
 WORLD_ANCHOR='ac.render(as,af),r9()'
-WORLD_HOOK='globalThis.AulaTPNativeRoute?.frame({scene:as,player:iE,indoors:iC,map:ij,specialty:iT,district:iF,room:i4,stations:i7?.stations??i6,colliders:i3,floorY:(i4?.position.y??0)+.12,three:o,camera:af,renderer:ac}),ac.render(as,af),r9()'
+WORLD_HOOK='globalThis.AulaTPNativeRoute?.frame({scene:as,player:iE,indoors:iC,map:ij,specialty:iT,district:iF,room:i4,stations:i7?.stations??i6,phaseStations:i6,colliders:i3,floorY:(i4?.position.y??0)+.12,three:o,camera:af,renderer:ac}),ac.render(as,af),r9()'
 LEARNING_ANCHOR='localStorage.setItem((0,f.Ai)(w),JSON.stringify({...N,updatedAt:new Date().toISOString()}))'
 LEARNING_HOOK=LEARNING_ANCHOR+",window.dispatchEvent(new CustomEvent('aulatp:quiz-progress',{detail:{specialty:w.specialty,moduleId:w.moduleId,ae:w.ae,questions:w.questions.map(q=>({id:q.id,object:q.object,prompt:q.prompt,criterion:q.criterion,options:q.options,difficulty:q.difficulty,hint:q.hint,feedback:q.feedback,workplace:q.workplace,image:q.image})),answers:N.answers}}))"
 
@@ -34,17 +34,18 @@ def remap_runtime(runtime,chunk,new_digest,available_digests):
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--expected-base',required=True)
+    parser.add_argument('--source-base')
     parser.add_argument('--release',required=True)
     parser.add_argument('--skin-version',required=True)
     parser.add_argument('--activate',action='store_true')
     args=parser.parse_args()
     package=Path(__file__).resolve().parent
-    base=Path(args.expected_base)
+    base=Path(args.source_base or args.expected_base)
     chunks=base/'_next/static/chunks'
     # Validate the exact deployed programs before creating or activating a release.
     world=patch((chunks/WORLD).read_bytes(),WORLD_SHA,WORLD_ANCHOR,WORLD_HOOK)
     learning=patch((chunks/LEARNING).read_bytes(),LEARNING_SHA,LEARNING_ANCHOR,LEARNING_HOOK)
-    subprocess.run([sys.executable,str(package/'deploy.py'),'--expected-base',args.expected_base,
+    subprocess.run([sys.executable,str(package/'deploy.py'),'--expected-base',args.expected_base,'--source-base',str(base),
                     '--release',args.release,'--skin-version',args.skin_version],check=True)
     target=Path('/opt/ciudad-laboral-releases')/args.release
     new_chunks=target/'_next/static/chunks'
@@ -73,13 +74,13 @@ def main():
         if not file.exists():continue
         data=file.read_bytes().replace(old_runtime.encode(),new_runtime.encode()).replace(b'</body>',scripts+b'</body>')
         temporary=file.with_name(file.name+'.native-new');temporary.write_bytes(data);os.replace(temporary,file)
-    manifest={'base':str(base),'release':str(target),'native_world_hook':replacements['259'],
+    manifest={'base':str(base),'expected_live_base':args.expected_base,'release':str(target),'native_world_hook':replacements['259'],
               'native_quiz_progress_hook':replacements['335'],'runtime':new_runtime,
               'grading_modified':False,'original_chunks_preserved':True,'activated':False}
     (target/'native-route-release.json').write_text(json.dumps(manifest,indent=2)+'\n')
     if args.activate:
         live=Path('/var/www/ciudad-laboral-aulatp')
-        if live.resolve()!=base:raise ValueError('Live release changed.')
+        if not live.is_symlink() or str(live.resolve())!=args.expected_base:raise ValueError('Live release changed.')
         temporary=live.with_name(live.name+'.native-next');os.symlink(target,temporary);os.replace(temporary,live)
         manifest['activated']=True
         metadata=target/'native-route-release.new.json'
