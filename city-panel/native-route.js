@@ -6,6 +6,7 @@
   const originalSigns=[];
   const arrows=[];
   const quizMarkers=[];
+  const stageAnchors=[];
   let markerGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial;
   function progress(event){
     const data=event.detail;
@@ -18,6 +19,7 @@
     markerGeometry?.dispose();markerHaloGeometry?.dispose();markerHaloTexture?.dispose();markerHaloMaterial?.dispose();
     for(const marker of quizMarkers){marker.texture.dispose();marker.material.dispose();}
     quizMarkers.length=0;markerGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=null;
+    stageAnchors.length=0;
     for(const [sign,visible,oldGeometry,oldMaterial,oldName] of originalSigns){sign.visible=visible;sign.geometry=oldGeometry;sign.material=oldMaterial;sign.name=oldName;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityQuizMarker;}
     originalSigns.length=0;
     root=geometry=material=null;arrows.length=0;panel?.remove();panel=label=action=null;
@@ -55,6 +57,7 @@
     const hide=node=>{
       if(hidden.has(node))return;
       hidden.add(node);originalSigns.push([node,node.visible,node.geometry,node.material,node.name]);node.visible=false;node.userData.cityLegacyQuizStageSign=true;
+      node.getWorldPosition(position);stageAnchors.push({x:position.x,y:position.y,z:position.z});
     };
     const candidates=[];
     ctx.scene.traverse(node=>{
@@ -74,6 +77,7 @@
       }
     }
     for(const item of signGroup||[])hide(item.node);
+    stageAnchors.sort((a,b)=>a.x-b.x);
   }
   function createQuizMarkers(ctx){
     const T=ctx.three,stations=ctx.stations||[];
@@ -87,13 +91,8 @@
     markerHaloTexture=new T.GOR(haloCanvas);markerHaloTexture.colorSpace=T.er$;
     markerHaloMaterial=new T.V9B({map:markerHaloTexture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
     const floorY=ctx.floorY+.035;
-    const phaseStations=ctx.phaseStations||[],legacySigns=new Map(),worldPosition=new T.Pq0();
-    ctx.scene.traverse(node=>{
-      if(!node.isMesh||!node.userData?.luminousSign)return;
-      node.getWorldPosition(worldPosition);
-      const index=phaseStations.findIndex(item=>Math.abs(worldPosition.x-(ctx.district.x+item.x))<.03&&Math.abs(worldPosition.y-(ctx.floorY+1.62))<.12&&Math.abs(worldPosition.z-(ctx.district.z+item.z))<.03);
-      if(index>=0)legacySigns.set(index,node);
-    });
+    const playerZ=ctx.player.z,anchorCenterZ=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.z,0)/stageAnchors.length:null;
+    const forward=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*1.55;
     stations.forEach((station,index)=>{
       const [dx,dz]=station.totem||[station.x,station.z],x=ctx.district.x+dx,z=ctx.district.z+dz;
       if(!Number.isFinite(x)||!Number.isFinite(z))return;
@@ -113,17 +112,10 @@
       c.strokeStyle='#37c9ee';c.lineWidth=8;c.stroke();c.fillStyle='#0086a5';c.font='900 82px Arial';c.textAlign='center';c.fillText('E',932,164);
       const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
       const signMaterial=new T.V9B({map:texture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
-      let sign=legacySigns.get(index);
-      if(sign){
-        if(!originalSigns.some(([old])=>old===sign))originalSigns.push([sign,sign.visible,sign.geometry,sign.material,sign.name]);
-        delete sign.userData.cityLegacyQuizStageSign;sign.geometry=markerGeometry;sign.visible=true;
-      }else{
-        sign=new T.eaF(markerGeometry,signMaterial);
-        const anchor=phaseStations[index];
-        sign.position.set(anchor?ctx.district.x+anchor.x:x,anchor?ctx.floorY+1.62:ctx.floorY+1.65,anchor?ctx.district.z+anchor.z:z);root.add(sign);
-      }
+      const sign=new T.eaF(markerGeometry,signMaterial),anchor=stageAnchors[index];
+      sign.position.set(anchor?anchor.x:x,ctx.floorY+1.82,anchor?anchor.z+forward:z);root.add(sign);
       sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
-      quizMarkers.push({sign,x,z,texture,material:signMaterial});
+      quizMarkers.push({sign,texture,material:signMaterial});
     });
   }
   function next(data){return data.questions.findIndex(question=>!data.answers[question.id]?.correct);}
@@ -154,7 +146,7 @@
       if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;panel.hidden=true;return;}
       root.visible=true;panel.hidden=false;
       const now=performance.now();if(now-last<250)return;last=now;
-      for(const marker of quizMarkers)marker.sign.rotation.y=Math.atan2(ctx.player.x-marker.x,ctx.player.z-marker.z);
+      for(const marker of quizMarkers)marker.sign.rotation.y=Math.atan2(ctx.player.x-marker.sign.position.x,ctx.player.z-marker.sign.position.z);
       document.querySelectorAll('.city-viewport .city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
       const stationAction=[...document.querySelectorAll('.city-viewport .city-door-action')].find(button=>/^\s*\d+\s*[·.)-]/.test(button.textContent));
       stationAction?.setAttribute('data-city-quiz-station','true');
