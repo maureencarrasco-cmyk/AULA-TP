@@ -39,6 +39,9 @@ def main():
         shutil.copy2(package/name,destination/name)
     shutil.copytree(package/'assets',destination/'assets')
     shutil.copytree(package/'engine',destination/'engine')
+    native_route=package/'native-route.js'
+    if native_route.is_file():
+        shutil.copy2(native_route,destination/'native-route.js')
     modified=[]
     for relative in (Path('index.html'),Path('ciudad/index.html')):
         file=target/relative
@@ -51,6 +54,12 @@ def main():
         else:
             replacement=original.replace(b'</head>',b'<link rel="stylesheet" href="'+prefix+b'city-panel.css"></head>')
             replacement=replacement.replace(b'</body>',b'<script defer src="'+prefix+b'city-panel.js"></script></body>')
+        if native_route.is_file():
+            replacement=re.sub(rb'<script defer src="/ciudad_laboral_aulatp/panel-ui-v[0-9]+/engine/vendor/astar\.js"></script>',b'',replacement)
+            replacement=re.sub(rb'<script defer src="/ciudad_laboral_aulatp/panel-ui-v[0-9]+/native-route\.js"></script>',b'',replacement)
+            scripts=(b'<script defer src="'+prefix+b'engine/vendor/astar.js"></script>'
+                     b'<script defer src="'+prefix+b'native-route.js"></script>')
+            replacement=replacement.replace(b'</body>',scripts+b'</body>')
         temporary=file.with_name(file.name+'.panel-new')
         temporary.write_bytes(replacement)
         os.chmod(temporary,0o644)

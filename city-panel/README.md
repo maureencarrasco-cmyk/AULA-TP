@@ -1,5 +1,19 @@
 # Ciudad Laboral: panel visual
 
+## Flechas En La Ciudad Original
+
+`native-route.js` dibuja las flechas en el escenario original, con las clases Three.js que ya usa ese motor. Lee sus puestos, posición del personaje, piso y obstáculos; calcula caminos transitables con `javascript-astar` 0.4.1 (MIT, conservado en `engine/vendor`). No crea otra sala ni mueve automáticamente al estudiante.
+
+La guía comienza en el quiz 1 y sigue el primer quiz pendiente del desafío profesional nativo. Un evento emitido después de guardar el progreso existente comunica módulo, AE, preguntas y respuestas a la guía. Una respuesta incorrecta conserva el destino mientras el desafío pide corregirla. Varios quizzes pueden utilizar un mismo puesto. La guía no modifica preguntas, calificaciones, aprobaciones ni recompensas. Si aún no se eligió un módulo, orienta al primer puesto y permite abrir el desafío profesional existente.
+
+`deploy_native_route.py` incorpora dos puntos de integración mínimos al programa publicado: lectura del mundo antes del renderizado y notificación después del guardado del quiz. Exige los SHA-256 exactos del motor y del desafío conocidos; rechaza otras versiones. Genera archivos y runtime con nombres nuevos para no reutilizar la caché, conserva los originales y activa una versión reversible. No se debe ejecutar sobre una publicación desconocida ni actualizar las huellas sin auditar los nuevos programas.
+
+`scripts/verify-native-route.cjs` comprueba el hangar real, flechas visibles, el evento real del desafío y los cambios de ruta mediante eventos de prueba. `--all` recorre las 35 especialidades; `--published` verifica el sitio sin interceptar archivos. `tests/test_native_route_patch.py` comprueba el rechazo de builds desconocidos o anclas ambiguas. Las pruebas no certifican los aprendizajes ni aprueban estudiantes.
+
+Publicado en `/opt/ciudad-laboral-releases/city-20261018-native-floor-quiz-arrows-v64`, recursos `panel-ui-v18`. La revisión previa recorrió las 35 especialidades sin errores y la verificación publicada comprobó el hangar original, evento real del quiz, avance de destino y móvil. Los archivos originales siguen disponibles; dos copias versionadas incorporan los hooks y un runtime nuevo las selecciona. La revisión publicada de la guía no cambia las reglas de evaluación del campus.
+
+El ajuste móvil posterior se publicó en `city-20261018-native-arrows-mobile-v65`: estilos `panel-ui-v19`, conservando los hooks nativos v18. Limita el ancho de la indicación para que no invada la botonera del escenario.
+
 ## Motor Editable De Quizzes
 
 `engine/main.js` crea un recorrido 3D de conocimientos con Three.js 0.180.0 (copia local y licencia MIT en `engine/vendor`). `engine/route.js` calcula la secuencia y las flechas amarillas sobre el suelo. No es una recuperación del código del motor antiguo: es un recorrido adicional editable, con una sala compartida de terminales y contenidos obtenidos del módulo autorizado. No reemplaza los edificios ni las misiones de la ciudad original.
