@@ -101,6 +101,8 @@ La versión `city-20261019-quiz-remove-old-fixtures-v110` (`panel-ui-v63`) vuelv
 
 La versión `city-20261019-quiz-hologram-template-v111` (`panel-ui-v64`) aplica la plantilla de referencia a las cuatro estaciones de los módulos de los 45 cursos: placa blanca/celeste más ancha, icono ilustrado de la especialidad, título y contenido legibles, fotografía técnica ampliada, proyección y plataforma luminosa. Conserva la numeración, la imagen pertinente de cada estación y la interacción de apertura del quiz.
 
+La versión `city-20261019-quiz-all-four-visible-v112` (`panel-ui-v65`) fija las cuatro estaciones visuales en las cuatro posiciones uniformes y despejadas que ya utiliza la guía de recorrido. Evita extrapolar la cuarta estación o depender de la cantidad y ubicación de carteles antiguos; rótulo, imagen, plataforma y flecha comparten el mismo destino en cada módulo.
+
 ### Fotografías de especialidades
 
 Las 35 especialidades de los 12 distritos tienen fotografías propias, compartidas por los cursos correspondientes. Se conservan los botones y sus acciones originales. Las miniaturas WebP se cargan bajo demanda, sin descargar todo el catálogo al ingresar.

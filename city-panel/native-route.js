@@ -138,7 +138,7 @@
     const centerX=points.reduce((sum,point)=>sum+(Number(point[0])||0),0)/points.length;
     const centerZ=points.reduce((sum,point)=>sum+(Number(point[1])||0),0)/points.length;
     const candidates=[];
-    for(const spacing of [3.15,3,2.85])for(const shiftX of [0,-.6,.6,-1.2,1.2])for(const shiftZ of [0,-1.2,1.2,-2.4,2.4,-3.6,3.6]){
+    for(const spacing of [3.3,3.15,3])for(const shiftX of [0,-.6,.6,-1.2,1.2])for(const shiftZ of [0,-1.2,1.2,-2.4,2.4,-3.6,3.6]){
       const cx=centerX+shiftX,cz=centerZ+shiftZ,line=Array.from({length:4},(_,index)=>[cx+(index-1.5)*spacing,cz]);
       if(line.some(([x,z])=>Math.abs(x)>6.2||Math.abs(z)>5.7))continue;
       const collisions=line.reduce((count,[x,z])=>count+(blocked(x,z)?1:0),0);
@@ -146,7 +146,7 @@
       if(!collisions)return result.map((station,index)=>({...station,totem:line[index]}));
     }
     const best=candidates.sort((a,b)=>a.collisions-b.collisions||a.offset-b.offset)[0];
-    return result.map((station,index)=>({...station,totem:best?.line[index]||[centerX+(index-1.5)*2.85,centerZ]}));
+    return result.map((station,index)=>({...station,totem:best?.line[index]||[centerX+(index-1.5)*3,centerZ]}));
   }
   function specialtyPhotos(name){
     const value=normalize(name);
@@ -300,19 +300,13 @@
     markerCylinderGeometry=Cylinder?new Cylinder(.075,.075,.86,12):new T.iNn(.13,.86,.13);
     markerCylinderMaterial=new T.V9B({color:0x19c9eb,toneMapped:false,transparent:true,opacity:.86,depthWrite:false});
     const floorY=ctx.floorY+.035;
-    const playerZ=ctx.player.z,anchorCenterZ=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.z,0)/stageAnchors.length:null;
-    const anchorCenterX=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.x,0)/stageAnchors.length:null;
-    const forward=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*5.9;
-    const mobileViewport=window.innerWidth<700,mobileShiftX=mobileViewport?-.45:0,token=generation;
+    const token=generation;
     const markerScale=Math.min(.9,Math.max(.7,window.innerWidth/1500));
     const usedImages=new Set();
     stations.forEach((station,index)=>{
       const [dx,dz]=station.totem||[station.x,station.z],x=ctx.district.x+dx,z=ctx.district.z+dz;
       if(!Number.isFinite(x)||!Number.isFinite(z))return;
-      const previousAnchor=stageAnchors[Math.max(0,stageAnchors.length-2)],lastAnchor=stageAnchors.at(-1);
-      const extrapolation=index-stageAnchors.length+1;
-      const anchor=stageAnchors[index]||(lastAnchor&&previousAnchor&&extrapolation>0?{x:lastAnchor.x+(lastAnchor.x-previousAnchor.x)*extrapolation,z:lastAnchor.z+(lastAnchor.z-previousAnchor.z)*extrapolation}:null);
-      const displayX=anchor&&anchorCenterX!==null?anchorCenterX+.9+mobileShiftX+(anchor.x-anchorCenterX)*1.3:x+mobileShiftX,displayZ=(anchor?.z??z)+forward;
+      const displayX=x,displayZ=z;
       const halo=new T.eaF(markerHaloGeometry,markerHaloMaterial);halo.name=`Aula TP · halo Quiz ${index+1}`;
       halo.position.set(displayX,floorY,displayZ);halo.rotation.x=-Math.PI/2;root.add(halo);
       for(let sparkle=0;sparkle<6;sparkle++){
