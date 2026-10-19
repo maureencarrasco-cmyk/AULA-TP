@@ -49,7 +49,10 @@ test('quiz markers use the shared illustrated artwork, specialty imagery and dow
 });
 
 test('four quiz image stations use a straight, evenly-spaced layout',()=>{
-  assert.match(source,/for\(const spacing of \[3\.15,3,2\.85\]/);
+  assert.match(source,/for\(const spacing of \[2\.55,2\.45,2\.35\]/);
   assert.match(source,/cx\+\(index-1\.5\)\*spacing/);
-  assert.match(source,/centerX\+\(index-1\.5\)\*2\.85/);
+  assert.match(source,/centerX\+\(index-1\.5\)\*2\.35/);
+  assert.match(source,/const displayX=x\+mobileShiftX,displayZ=z\+forward/);
+  assert.match(source,/markerScale=Math\.min\(\.9,Math\.max\(\.7,window\.innerWidth\/1500\)\)/);
+  assert.doesNotMatch(source,/anchorCenterX\+\.9|anchor\.x-anchorCenterX/);
 });
