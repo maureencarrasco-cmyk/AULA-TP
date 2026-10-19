@@ -23,6 +23,14 @@ def patch(source,expected,anchor,replacement):
         raise ValueError('Engine fingerprint changed; refusing to patch an unknown build.')
     return source.replace(anchor.encode(),replacement.encode())
 
+def remap_runtime(runtime,chunk,new_digest,available_digests):
+    pattern=rb'(?<![0-9])'+chunk.encode()+rb':"([a-f0-9]+)"'
+    matches=list(re.finditer(pattern,runtime))
+    if len(matches)!=1:raise ValueError(f'Expected one active {chunk} runtime mapping.')
+    old_digest=matches[0].group(1).decode()
+    if old_digest not in available_digests:raise ValueError(f'Active {chunk} chunk is missing.')
+    return runtime[:matches[0].start(1)]+new_digest.encode()+runtime[matches[0].end(1):]
+
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--expected-base',required=True)
@@ -52,9 +60,8 @@ def main():
     old_runtime=matches.pop().decode()
     runtime=(new_chunks/old_runtime).read_bytes()
     for chunk,(old,new) in replacements.items():
-        needle=f'{chunk}:"{old}"'.encode()
-        if runtime.count(needle)!=1:raise ValueError('Runtime mapping changed.')
-        runtime=runtime.replace(needle,f'{chunk}:"{new}"'.encode())
+        available={path.stem.split('.',1)[1] for path in new_chunks.glob(f'{chunk}.*.js')}
+        runtime=remap_runtime(runtime,chunk,new,available)
     new_runtime='webpack-'+hashlib.sha256(runtime).hexdigest()[:16]+'.js'
     (new_chunks/new_runtime).write_bytes(runtime)
     destination=target/args.skin_version

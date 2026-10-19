@@ -26,6 +26,16 @@ class NativeRoutePatchTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             module.patch(source,hashlib.sha256(source).hexdigest(),module.WORLD_ANCHOR,module.WORLD_HOOK)
 
+    def test_runtime_remaps_the_active_chunk_not_the_vanilla_hash(self):
+        runtime=b'prefix;259:"fff471c2cc046aa1",335:"2d5507b1c96ec82d";suffix'
+        result=module.remap_runtime(runtime,'259','a'*16,{'0a20356fd918231b','fff471c2cc046aa1'})
+        self.assertIn(b'259:"aaaaaaaaaaaaaaaa"',result)
+        self.assertIn(b'335:"2d5507b1c96ec82d"',result)
+
+    def test_runtime_rejects_a_missing_active_chunk(self):
+        with self.assertRaises(ValueError):
+            module.remap_runtime(b'259:"fff471c2cc046aa1"','259','a'*16,{'0a20356fd918231b'})
+
     def test_progress_hook_keeps_the_original_save_and_does_not_grade(self):
         self.assertTrue(module.LEARNING_HOOK.startswith(module.LEARNING_ANCHOR))
         self.assertIn('answers:N.answers',module.LEARNING_HOOK)
