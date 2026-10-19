@@ -33,6 +33,12 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
   assert.equal(await page.evaluate(()=>{const button=document.createElement('button');button.className='city-door-action';button.dataset.cityQuizStation='true';document.querySelector('.city-viewport').append(button);const display=getComputedStyle(button).display;button.remove();return display}),'none');
   await page.evaluate(()=>{const original=AulaTPNativeRoute.frame;AulaTPNativeRoute.frame=context=>{window.__cityRouteContext=context;original(context)}});
   await page.waitForFunction(()=>window.__cityRouteContext?.phaseStations?.some(station=>station.phase==='observar'),{},{timeout:60000});
+  const startPosition=await page.evaluate(()=>{const p=window.__cityRouteContext.player;return {x:p.x,z:p.z}});
+  await page.keyboard.down('w');await page.waitForTimeout(900);await page.keyboard.up('w');
+  const movement=await page.evaluate(start=>{const p=window.__cityRouteContext.player;return Math.hypot(p.x-start.x,p.z-start.z)},startPosition);
+  assert.ok(movement>.03,'WASD walking remains available while the quiz route is active: '+movement);
+  const arrowAlignment=await page.evaluate(()=>{const route=window.__cityRouteContext.scene.children.find(object=>object.name==='Aula TP · flechas de quizzes'),visible=route?.children.filter(arrow=>arrow.visible)||[];if(visible.length<2)return null;const first=visible[0],second=visible[1],dx=second.position.x-first.position.x,dz=second.position.z-first.position.z,length=Math.hypot(dx,dz),fx=-Math.sin(first.rotation.y),fz=-Math.cos(first.rotation.y);return (fx*dx+fz*dz)/length});
+  assert.ok(arrowAlignment>.4,'floor arrows point toward the next waypoint: '+arrowAlignment);
   const phaseNames=await page.evaluate(()=>window.__cityRouteContext.phaseStations.map(station=>station.phase).filter(phase=>['observar','planificar','verificar'].includes(phase)).sort());
   assert.deepEqual(phaseNames,['observar','planificar','verificar']);
   await page.waitForFunction(()=>{let visible=false;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityObserveBanner&&object.userData.cityObserveArtworkLoaded&&object.visible&&object.material?.name==='Aula TP · arte Observar')visible=true});return visible},{},{timeout:30000});
@@ -114,6 +120,6 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
     assert.equal(checked,35);assert.ok(artChecked>0);assert.equal(artChecked+artNotApplicable,35);console.log(JSON.stringify({specialtiesVerified:checked,observeArtworkVerified:artChecked,specialtiesWithoutPhaseSign:artNotApplicable}));
   }
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({originalHangar:true,floorArrows:true,allQuizStageArtwork:true,quizEKeyHint:true,largePromptRemoved:true,published:process.argv.includes('--published'),realQuizEvent:!process.argv.includes('--all'),nextQuiz:process.argv.includes('--visual-only')?null:true,wrongAnswerStays:process.argv.includes('--visual-only')?null:true,mobile:true,errors}));
+  console.log(JSON.stringify({originalHangar:true,floorArrows:true,arrowAlignment,movement,allQuizStageArtwork:true,quizEKeyHint:true,largePromptRemoved:true,published:process.argv.includes('--published'),realQuizEvent:!process.argv.includes('--all'),nextQuiz:process.argv.includes('--visual-only')?null:true,wrongAnswerStays:process.argv.includes('--visual-only')?null:true,mobile:true,errors}));
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exit(1);});

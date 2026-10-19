@@ -183,14 +183,15 @@
       const [dx,dz]=station.totem||[station.x,station.z];
       const target={x:ctx.district.x+dx,z:ctx.district.z+dz};
       if(!Number.isFinite(target.x)||!Number.isFinite(target.z))return;
-      const points=path(ctx,target);let arrowIndex=0,travel=0;
+      const approach={x:target.x,z:target.z+.65};
+      const points=path(ctx,approach);let arrowIndex=0,travel=0;
       for(let i=1;i<points.length;i++){
         travel+=Math.hypot(points[i].x-points[i-1].x,points[i].z-points[i-1].z);
         if(travel<.75||arrowIndex>=arrows.length)continue;travel=0;
-        const arrow=arrows[arrowIndex++];arrow.position.set(points[i].x,ctx.floorY+.035,points[i].z);arrow.rotation.y=Math.atan2(points[i].x-points[i-1].x,points[i].z-points[i-1].z);arrow.visible=true;
+        const arrow=arrows[arrowIndex++];arrow.position.set(points[i].x,ctx.floorY+.035,points[i].z);arrow.rotation.y=Math.atan2(-(points[i].x-points[i-1].x),-(points[i].z-points[i-1].z));arrow.visible=true;
       }
       label.textContent=`Quiz ${index+1} · ${station.equipment||station.name||station.title||station.label||'Puesto de trabajo'}`;
-      action.hidden=Math.hypot(ctx.player.x-target.x,ctx.player.z-target.z)>2;
+      action.hidden=Math.hypot(ctx.player.x-approach.x,ctx.player.z-approach.z)>2;
       panel.dataset.quiz=String(index+1);panel.dataset.arrows=String(arrowIndex);
       if(!points.length&&action.hidden)label.textContent+=' · acércate al pasillo central';
     }catch(cause){
