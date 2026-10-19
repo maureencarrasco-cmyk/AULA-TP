@@ -388,3 +388,21 @@
   .city-native-route-active dialog.floor-station-dialog { position:fixed;top:50%;right:24px;bottom:auto;left:auto;width:min(868px,calc(70vw - 33.6px));max-width:calc(100vw - 48px);height:min(94dvh,1120px);max-height:calc(100dvh - 32px);margin:0;transform:translateY(-50%); }
   .city-native-route-active dialog.floor-station-dialog::backdrop { background:#07263f40;backdrop-filter:none; }
 }
+
+/* Carry the Quiz 1 visual language through every stage and specialty. */
+.city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child) { position:relative;grid-column:span 3;grid-template-columns:82px minmax(0,1fr) 42px;gap:14px;min-height:96px;padding:9px 16px 9px 9px;border:3px solid #83dfff;border-radius:34px;background:linear-gradient(105deg,#e5f4ff,#fbfeff 58%,#dcf5ff);color:#102d62;font-size:clamp(19px,2.2vw,28px);font-weight:900;text-align:center;box-shadow:0 0 0 3px #e8faff,0 7px 22px #1684e344,inset 0 0 20px #bceeff; }
+.city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child) span { width:72px;height:72px;border-radius:28px 12px 28px 12px;clip-path:polygon(0 0,76% 0,100% 50%,76% 100%,0 100%);background:linear-gradient(130deg,#1167ef,#3153ed 55%,#8143ee);color:#fff;font-size:42px;box-shadow:0 0 19px #5848f270; }
+.city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child)::after { justify-self:center;width:30px;height:21px;border:3px solid #2470ec;border-radius:76% 22%;transform:rotate(45deg);background:radial-gradient(circle at 50% 50%,#4660ed 0 4px,#fff 5px 8px,transparent 9px);box-shadow:0 0 0 8px #e8f5ff,0 0 14px #42a9ff;content:""; }
+.city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child).is-current { border-color:#13cde0;background:linear-gradient(105deg,#dff7ff,#fff 58%,#d8f8ff);color:#102d62; }
+.city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child).is-current span,.city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child).is-complete span { background:linear-gradient(130deg,#1167ef,#3153ed 55%,#8143ee);color:#fff; }
+.city-native-route-active .city-viewport .city-door-action[data-city-quiz-station="true"] { border-color:#8ef7ff;background:linear-gradient(105deg,#f5fbff 0%,#e5f5ff 58%,#f8fdff 100%);box-shadow:0 0 0 5px #e3fdff,0 0 24px 8px #00c9ee88,inset 0 2px 8px #fff;color:#102d62;text-shadow:none; }
+.city-native-route-active .city-viewport .city-door-action[data-city-quiz-station="true"]::before { content:"";display:block;flex:0 0 72px;width:72px;height:72px;background:linear-gradient(130deg,#1167ef,#3153ed 55%,#8143ee);clip-path:polygon(0 0,76% 0,100% 50%,76% 100%,0 100%);filter:drop-shadow(0 0 12px #5848f28c); }
+.city-native-route-active .city-viewport .city-door-action[data-city-quiz-station="true"] kbd { border-color:#bafaff;background:linear-gradient(#fff,#eafcff);box-shadow:0 0 16px #12dfff;color:#08759e; }
+.city-native-route-active .city-native-guide { border:2px solid #8cecff;border-radius:18px 18px 18px 7px;background:linear-gradient(115deg,#f6fcffed,#e7f7ffed);box-shadow:0 0 0 4px #e8faff99,0 10px 28px #07527c4d;color:#102d62; }
+.city-native-route-active .city-native-guide button { border:2px solid #39cbe8;border-radius:12px;background:linear-gradient(110deg,#e7f7ff,#fff);box-shadow:0 0 14px #40c9f26b;color:#104579;font-weight:900; }
+@media(max-width:700px) {
+  .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child) { grid-template-columns:52px minmax(0,1fr) 24px;gap:7px;min-height:68px;padding:6px 8px 6px 6px;border-width:2px;border-radius:22px;font-size:14px; }
+  .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child) span { width:48px;height:48px;border-radius:18px 8px 18px 8px;font-size:28px; }
+  .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child)::after { width:18px;height:13px;border-width:2px;box-shadow:0 0 0 5px #e8f5ff,0 0 9px #42a9ff; }
+  .city-native-route-active .city-viewport .city-door-action[data-city-quiz-station="true"]::before { flex-basis:52px;width:52px;height:52px; }
+}

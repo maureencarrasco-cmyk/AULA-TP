@@ -2,8 +2,8 @@
 (() => {
   const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   let context,root,geometry,material,panel,label,action,current=null,last=0,room=null,error='';
-  let bannerGeometry,bannerMaterial,bannerTexture,bannerImageToken=0;
-  const banners=[],originalSigns=[];
+  let bannerGeometry,bannerImageToken=0;
+  const banners=[],originalSigns=[],bannerTextures=[],bannerMaterials=[];
   const arrows=[];
   function progress(event){
     const data=event.detail;
@@ -13,9 +13,9 @@
   addEventListener('aulatp:quiz-progress',progress);
   function dispose(){
     root?.removeFromParent();geometry?.dispose();material?.dispose();
-    bannerGeometry?.dispose();bannerMaterial?.dispose();bannerTexture?.dispose();bannerImageToken++;
-    for(const [sign,visible,geometry,material,name] of originalSigns){sign.visible=visible;sign.geometry=geometry;sign.material=material;sign.name=name;delete sign.userData.cityObserveBanner;delete sign.userData.cityObserveArtworkLoaded;}
-    originalSigns.length=0;banners.length=0;bannerGeometry=bannerMaterial=bannerTexture=null;
+    bannerGeometry?.dispose();bannerTextures.forEach(texture=>texture.dispose());bannerMaterials.forEach(item=>item.dispose());bannerImageToken++;
+    for(const [sign,visible,geometry,material,name] of originalSigns){sign.visible=visible;sign.geometry=geometry;sign.material=material;sign.name=name;delete sign.userData.cityObserveBanner;delete sign.userData.cityQuizBanner;delete sign.userData.cityObserveArtworkLoaded;delete sign.userData.cityQuizArtworkLoaded;}
+    originalSigns.length=0;banners.length=0;bannerTextures.length=0;bannerMaterials.length=0;bannerGeometry=null;
     root=geometry=material=null;arrows.length=0;panel?.remove();panel=label=action=null;
     document.querySelectorAll('.city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
     document.documentElement.classList.remove('city-native-route-active');
@@ -30,7 +30,7 @@
       arrow.visible=false;root.add(arrow);arrows.push(arrow);
     }
     ctx.scene.add(root);
-    createObserveBanners(ctx);
+    createPhaseBanners(ctx);
     panel=document.createElement('section');panel.className='city-native-guide';panel.setAttribute('aria-live','polite');
     label=document.createElement('strong');action=document.createElement('button');action.type='button';action.textContent='Abrir quiz de mi módulo';
     action.addEventListener('click',()=>{
@@ -40,44 +40,56 @@
     panel.append(label,action);document.querySelector('.city-viewport')?.append(panel);
     document.documentElement.classList.add('city-native-route-active');
   }
-  function createObserveBanners(ctx){
-    const T=ctx.three,stations=(ctx.phaseStations||[]).filter(station=>normalize(station.phase)==='observar'&&Number.isFinite(station.x)&&Number.isFinite(station.z));
+  function createPhaseBanners(ctx){
+    const phases=['observar','planificar','verificar'];
+    const T=ctx.three,stations=(ctx.phaseStations||[]).filter(station=>phases.includes(normalize(station.phase))&&Number.isFinite(station.x)&&Number.isFinite(station.z));
     if(!stations.length)return;
     const script=[...document.scripts].find(item=>item.src.includes('/native-route.js'));
     if(!script)return;
-    const canvas=document.createElement('canvas');canvas.width=1667;canvas.height=292;
-    const canvasContext=canvas.getContext('2d'),texture=new T.GOR(canvas);
-    texture.colorSpace=T.er$;texture.anisotropy=4;bannerTexture=texture;
+    const imageToken=++bannerImageToken;
     bannerGeometry=new T.bdM(1.16,1.16*292/1667);
-    bannerMaterial=new T.V9B({map:texture,side:T.$EB,toneMapped:false,depthWrite:false});
-    bannerMaterial.name='Aula TP · arte Observar';
-    const token=++bannerImageToken,image=new Image();image.decoding='async';
-    const url=new URL('assets/quiz-observe-stage.png',script.src).href;
-    image.onload=()=>{
-      if(token!==bannerImageToken)return;
-      canvasContext.clearRect(0,0,canvas.width,canvas.height);canvasContext.drawImage(image,0,0,canvas.width,canvas.height);
-      texture.needsUpdate=true;
-      for(const sign of banners){sign.geometry=bannerGeometry;sign.material=bannerMaterial;sign.visible=true;sign.userData.cityObserveArtworkLoaded=true;}
-    };
-    image.onerror=()=>{
-      if(token!==bannerImageToken)return;
-      const gradient=canvasContext.createLinearGradient(0,0,canvas.width,0);gradient.addColorStop(0,'#0875ed');gradient.addColorStop(.35,'#7351f2');gradient.addColorStop(.36,'#f8fdff');gradient.addColorStop(1,'#e9f8ff');
-      canvasContext.fillStyle=gradient;canvasContext.fillRect(0,0,canvas.width,canvas.height);canvasContext.strokeStyle='#13cde0';canvasContext.lineWidth=12;canvasContext.strokeRect(8,8,canvas.width-16,canvas.height-16);
-      canvasContext.fillStyle='#fff';canvasContext.font='900 220px Arial';canvasContext.textAlign='center';canvasContext.textBaseline='middle';canvasContext.fillText('1',180,150);
-      canvasContext.fillStyle='#102d62';canvasContext.font='900 140px Arial';canvasContext.fillText('Observar',850,154);
-      texture.needsUpdate=true;for(const sign of banners){sign.geometry=bannerGeometry;sign.material=bannerMaterial;sign.visible=true;sign.userData.cityObserveArtworkLoaded=false;}
-    };
-    image.src=url;
     const position=new T.Pq0();
     for(const station of stations){
       const x=ctx.district.x+station.x,z=ctx.district.z+station.z,y=ctx.floorY+1.62;
+      const phase=normalize(station.phase),phaseIndex=phases.indexOf(phase),stageNumber=phaseIndex+1;
+      const canvas=document.createElement('canvas');canvas.width=1667;canvas.height=292;
+      const canvasContext=canvas.getContext('2d'),texture=new T.GOR(canvas);
+      texture.colorSpace=T.er$;texture.anisotropy=4;bannerTextures.push(texture);
+      const bannerMaterial=new T.V9B({map:texture,side:T.$EB,toneMapped:false,depthWrite:false});
+      const phaseName=phase[0].toUpperCase()+phase.slice(1);bannerMaterial.name=`Aula TP · arte ${phaseName}`;bannerMaterials.push(bannerMaterial);
+      if(phase==='observar'){
+        const image=new Image();image.decoding='async';
+        image.onload=()=>{if(imageToken!==bannerImageToken)return;canvasContext.clearRect(0,0,canvas.width,canvas.height);canvasContext.drawImage(image,0,0,canvas.width,canvas.height);texture.needsUpdate=true;for(const sign of banners.filter(item=>item.phase==='observar'))sign.node.userData.cityObserveArtworkLoaded=sign.node.userData.cityQuizArtworkLoaded=true;};
+        image.onerror=()=>{if(imageToken!==bannerImageToken)return;drawStageBanner(canvasContext,stageNumber,phaseName);texture.needsUpdate=true;for(const sign of banners.filter(item=>item.phase==='observar'))sign.node.userData.cityObserveArtworkLoaded=false;};
+        image.src=new URL('assets/quiz-observe-stage.png',script.src).href;
+      }else{
+        drawStageBanner(canvasContext,stageNumber,phaseName);texture.needsUpdate=true;
+      }
       ctx.scene.traverse(node=>{
         if(!node.isMesh||!node.userData?.luminousSign)return;
         node.getWorldPosition(position);
         if(Math.abs(position.x-x)<.03&&Math.abs(position.y-y)<.12&&Math.abs(position.z-z)<.03&&!originalSigns.some(([sign])=>sign===node)){
-          originalSigns.push([node,node.visible,node.geometry,node.material,node.name]);node.name='Aula TP · etapa Observar';node.userData.cityObserveBanner=true;banners.push(node);
+          originalSigns.push([node,node.visible,node.geometry,node.material,node.name]);node.name=`Aula TP · etapa ${phaseName}`;node.geometry=bannerGeometry;node.material=bannerMaterial;node.visible=true;node.userData.cityQuizBanner=phase;node.userData.cityQuizArtworkLoaded=phase!=='observar';
+          if(phase==='observar')node.userData.cityObserveBanner=true;
+          banners.push({node,phase});
         }
       });
+    }
+  }
+  function drawStageBanner(ctx,number,title){
+    const gradient=ctx.createLinearGradient(0,0,1667,292);gradient.addColorStop(0,'#11c8ec');gradient.addColorStop(.16,'#2874f0');gradient.addColorStop(.5,'#f8fdff');gradient.addColorStop(1,'#11d7e1');
+    ctx.clearRect(0,0,1667,292);ctx.shadowColor='#20cfff';ctx.shadowBlur=22;ctx.fillStyle=gradient;ctx.beginPath();ctx.roundRect(10,10,1647,272,132);ctx.fill();ctx.shadowBlur=0;
+    const inset=ctx.createLinearGradient(0,28,0,264);inset.addColorStop(0,'#fff');inset.addColorStop(1,'#e6f7ff');ctx.fillStyle=inset;ctx.beginPath();ctx.roundRect(29,27,1609,238,116);ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=10;ctx.stroke();
+    const tab=ctx.createLinearGradient(30,0,380,0);tab.addColorStop(0,'#165cf0');tab.addColorStop(.68,'#3749f0');tab.addColorStop(1,'#8049ed');ctx.fillStyle=tab;ctx.beginPath();ctx.moveTo(52,43);ctx.lineTo(292,43);ctx.lineTo(377,146);ctx.lineTo(292,249);ctx.lineTo(52,249);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='900 174px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(number),177,151);
+    ctx.fillStyle='#102d62';ctx.font=`900 ${title.length>9?86:104}px Arial`;ctx.fillText(title,885,150,900);
+    ctx.fillStyle='#eaf7ff';ctx.beginPath();ctx.arc(1490,146,93,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#2d75ed';ctx.lineWidth=18;
+    if(title==='Observar'){
+      ctx.beginPath();ctx.ellipse(1490,147,56,33,0,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#435ceb';ctx.beginPath();ctx.arc(1490,147,15,0,Math.PI*2);ctx.fill();
+    }else if(title==='Planificar'){
+      ctx.strokeRect(1458,91,64,105);ctx.beginPath();ctx.moveTo(1473,121);ctx.lineTo(1507,121);ctx.moveTo(1473,145);ctx.lineTo(1507,145);ctx.moveTo(1473,169);ctx.lineTo(1498,169);ctx.stroke();
+    }else{
+      ctx.beginPath();ctx.moveTo(1450,148);ctx.lineTo(1478,176);ctx.lineTo(1532,116);ctx.stroke();
     }
   }
   function next(data){return data.questions.findIndex(question=>!data.answers[question.id]?.correct);}

@@ -30,15 +30,22 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
   assert.equal(await page.locator('.city-quiz-route-entry').isVisible(),false);
   await page.evaluate(()=>{const original=AulaTPNativeRoute.frame;AulaTPNativeRoute.frame=context=>{window.__cityRouteContext=context;original(context)}});
   await page.waitForFunction(()=>window.__cityRouteContext?.phaseStations?.some(station=>station.phase==='observar'),{},{timeout:60000});
+  const phaseNames=await page.evaluate(()=>window.__cityRouteContext.phaseStations.map(station=>station.phase).filter(phase=>['observar','planificar','verificar'].includes(phase)).sort());
+  assert.deepEqual(phaseNames,['observar','planificar','verificar']);
   await page.waitForFunction(()=>{let visible=false;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityObserveBanner&&object.userData.cityObserveArtworkLoaded&&object.visible&&object.material?.name==='Aula TP · arte Observar')visible=true});return visible},{},{timeout:30000});
   assert.equal(await page.evaluate(()=>{let visible=false;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityObserveBanner&&object.userData.cityObserveArtworkLoaded&&object.visible&&object.material?.name==='Aula TP · arte Observar')visible=true});return visible}),true);
+  await page.waitForFunction(()=>{const found=new Set();window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityQuizArtworkLoaded&&object.visible&&object.material?.name?.startsWith('Aula TP · arte '))found.add(object.userData.cityQuizBanner)});return ['observar','planificar','verificar'].every(phase=>found.has(phase))},{},{timeout:30000});
+  const renderedPhases=await page.evaluate(()=>{const found=new Set();window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityQuizArtworkLoaded&&object.visible&&object.material?.name?.startsWith('Aula TP · arte '))found.add(object.userData.cityQuizBanner)});return [...found].sort()});
+  assert.deepEqual(renderedPhases,['observar','planificar','verificar']);
   const quizArtwork=await page.evaluate(()=>{const dialog=document.createElement('dialog'),list=document.createElement('ol'),step=document.createElement('li');dialog.className='floor-station-dialog';list.className='floor-route-progress';step.innerHTML='<span>1</span>Observar';list.append(step);dialog.append(list);document.documentElement.classList.add('city-native-route-active');document.body.append(dialog);const image=getComputedStyle(step,'::before').backgroundImage;dialog.remove();return image});
   assert.match(quizArtwork,/quiz-observe-stage\.png/);
-  const layout=await page.evaluate(()=>{const dialog=document.createElement('dialog');dialog.className='floor-station-dialog';dialog.innerHTML='<header><div><small>1 · OBSERVAR · PISO 3</small><h2>Mecánica de Mantenimiento de Aeronaves</h2></div><button aria-label="Cerrar">×</button></header><ol class="floor-route-progress"><li><span>1</span>Observar</li><li><span>2</span>Planificar</li><li><span>3</span>Verificar</li></ol><section aria-label="Actividad situada"><h3>Conjunto de aeronave</h3><p>Responde el quiz desde el hangar formativo.</p></section><footer>Progreso común <button>Guardar y continuar</button></footer>';document.body.append(dialog);dialog.showModal();const rect=dialog.getBoundingClientRect();return {width:rect.width,height:rect.height,right:innerWidth-rect.right,expectedWidth:Math.min(868,innerWidth*.7-33.6),expectedHeight:Math.min(innerHeight*.94,1120),blur:getComputedStyle(dialog,'::backdrop').backdropFilter}});
+  const layout=await page.evaluate(()=>{const dialog=document.createElement('dialog');dialog.className='floor-station-dialog';dialog.innerHTML='<header><div><small>1 · OBSERVAR · PISO 3</small><h2>Mecánica de Mantenimiento de Aeronaves</h2></div><button aria-label="Cerrar">×</button></header><ol class="floor-route-progress"><li><span>1</span>Observar</li><li><span>2</span>Planificar</li><li><span>3</span>Verificar</li></ol><section aria-label="Actividad situada"><h3>Conjunto de aeronave</h3><p>Responde el quiz desde el hangar formativo.</p></section><footer>Progreso común <button>Guardar y continuar</button></footer>';document.body.append(dialog);dialog.showModal();const rect=dialog.getBoundingClientRect(),steps=[...dialog.querySelectorAll('.floor-route-progress li')].map(step=>{const style=getComputedStyle(step);return {background:style.backgroundImage,radius:style.borderRadius,shadow:style.boxShadow}});return {width:rect.width,height:rect.height,right:innerWidth-rect.right,expectedWidth:Math.min(868,innerWidth*.7-33.6),expectedHeight:Math.min(innerHeight*.94,1120),blur:getComputedStyle(dialog,'::backdrop').backdropFilter,steps}});
   assert.ok(Math.abs(layout.width-layout.expectedWidth)<1,JSON.stringify(layout));
   assert.ok(Math.abs(layout.height-layout.expectedHeight)<1,JSON.stringify(layout));
   assert.ok(Math.abs(layout.right-24)<1,JSON.stringify(layout));
   assert.equal(layout.blur,'none');
+  assert.equal(layout.steps.length,3);
+  for(const step of layout.steps.slice(1)){assert.match(step.background,/linear-gradient/);assert.notEqual(step.radius,'0px');assert.notEqual(step.shadow,'none');}
   await page.screenshot({path:path.join(output,'quiz-split-layout.png')});
   await page.locator('dialog.floor-station-dialog').evaluate(dialog=>dialog.close());
   await page.locator('dialog.floor-station-dialog').evaluate(dialog=>dialog.remove());
@@ -83,7 +90,7 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
       await page.waitForFunction(name=>window.__cityRouteContext?.specialty?.name===name,name,{timeout:20000});
       const hasObserveStage=await page.evaluate(()=>window.__cityRouteContext.phaseStations?.some(station=>station.phase==='observar'));
       if(hasObserveStage){
-       try{await page.waitForFunction(name=>{const context=window.__cityRouteContext;if(context?.specialty?.name!==name)return false;let loaded=false;context.scene.traverse(object=>{if(object.userData.cityObserveArtworkLoaded&&object.visible)loaded=true});return loaded},name,{timeout:20000});artChecked++;}
+       try{await page.waitForFunction(name=>{const context=window.__cityRouteContext;if(context?.specialty?.name!==name)return false;const loaded=new Set();context.scene.traverse(object=>{if(object.userData.cityQuizArtworkLoaded&&object.visible)loaded.add(object.userData.cityQuizBanner)});return ['observar','planificar','verificar'].every(phase=>loaded.has(phase))},name,{timeout:20000});artChecked++;}
        catch(error){console.error('Observe art missing for '+name,await page.evaluate(()=>{const c=window.__cityRouteContext;return {specialty:c?.specialty?.name,phases:c?.phaseStations?.map(s=>({phase:s.phase,x:s.x,z:s.z})),signs:(()=>{let n=0;c?.scene.traverse(o=>{if(o.userData.cityObserveBanner)n++});return n})()}}));throw error;}
       }else artNotApplicable++;
      await page.waitForTimeout(400);
@@ -94,6 +101,6 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
     assert.equal(checked,35);assert.ok(artChecked>0);assert.equal(artChecked+artNotApplicable,35);console.log(JSON.stringify({specialtiesVerified:checked,observeArtworkVerified:artChecked,specialtiesWithoutPhaseSign:artNotApplicable}));
   }
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({originalHangar:true,floorArrows:true,observeArtwork:true,published:process.argv.includes('--published'),realQuizEvent:!process.argv.includes('--all'),nextQuiz:process.argv.includes('--visual-only')?null:true,wrongAnswerStays:process.argv.includes('--visual-only')?null:true,mobile:true,errors}));
+  console.log(JSON.stringify({originalHangar:true,floorArrows:true,allQuizStageArtwork:true,published:process.argv.includes('--published'),realQuizEvent:!process.argv.includes('--all'),nextQuiz:process.argv.includes('--visual-only')?null:true,wrongAnswerStays:process.argv.includes('--visual-only')?null:true,mobile:true,errors}));
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exit(1);});
