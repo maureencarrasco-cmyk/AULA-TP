@@ -81,7 +81,7 @@ Se verificaron el renderizado de la escena, la selección de distrito, el acceso
 
 El adaptador oculta los tres rótulos decorativos de fases junto a los puestos de quiz en cada especialidad. Restaura los objetos al salir de la sala y conserva la ruta de flechas, la interacción original, los quizzes y su progreso.
 
-La versión `city-20261019-quiz-stations-persistent-v99` (`panel-ui-v53`) mantiene los cuatro accesos de quiz visibles en una guía fija mientras el estudiante recorre cada sala. Los pendientes permanecen legibles y no se pueden usar para saltarse el orden; las estaciones 3D siguen visibles en el espacio laboral. Se mantienen las preguntas, alternativas, evaluación y progreso originales, así como los 51 chunks originales del motor.
+La versión `city-20261019-quiz-stations-persistent-v99` (`panel-ui-v53`) mantiene los cuatro accesos de quiz visibles en una guía fija mientras el estudiante recorre cada sala. La versión `city-20261019-quiz-stage-signs-v100` (`panel-ui-v54`) oculta los carteles antiguos de las fases Observar, Planificar y Verificar usando sus puntos de estación y variantes geométricas; conserva la señal del módulo y las cuatro estaciones de quiz.
 
 ### Fotografías de especialidades
 

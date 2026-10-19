@@ -89,35 +89,46 @@
   }
   function hideQuizPhaseSigns(ctx){
     const phases=['observar','planificar','verificar'];
-    const T=ctx.three,stations=(ctx.phaseStations||[]).filter(station=>phases.includes(normalize(station.phase))&&Number.isFinite(station.x)&&Number.isFinite(station.z));
+    const T=ctx.three,stations=(ctx.phaseStations||[]).filter(station=>{
+      const name=normalize(station.phase||station.name||station.title||station.label);
+      return phases.some(phase=>name.includes(phase))&&Number.isFinite(station.x)&&Number.isFinite(station.z);
+    });
     const position=new T.Pq0(),roomPosition=ctx.room.getWorldPosition(new T.Pq0());
     const hidden=new Set();
-    let signGroup=null;
-    const anchorNodes=new Set();
     const hide=node=>{
       if(hidden.has(node))return;
       hidden.add(node);originalSigns.push([node,node.visible,node.geometry,node.material,node.name]);node.visible=false;node.userData.cityLegacyQuizStageSign=true;
-      if(anchorNodes.has(node)){node.getWorldPosition(position);stageAnchors.push({x:position.x,y:position.y,z:position.z});}
     };
     const candidates=[];
     ctx.scene.traverse(node=>{
       const size=node.geometry?.parameters;
-      if(!node.isMesh||!node.userData?.luminousSign||!size||size.width<1.8||size.width>2.5||size.height<.25||size.height>.45)return;
+      if(!node.userData?.luminousSign||!size)return;
       node.getWorldPosition(position);
-      if(Math.abs(position.x-roomPosition.x)<9&&Math.abs(position.z-roomPosition.z)<11&&Math.abs(position.y-roomPosition.y)<3.5)candidates.push({node,x:position.x,y:position.y,z:position.z,width:size.width});
+      if(Math.abs(position.x-roomPosition.x)<9&&Math.abs(position.z-roomPosition.z)<11&&Math.abs(position.y-roomPosition.y)<3.5)candidates.push({node,x:position.x,y:position.y,z:position.z,width:size.width,height:size.height});
     });
-    let groupDistance=Infinity;
+    const selected=new Set();
+    for(const station of stations){
+      const references=[[station.x,station.z],[roomPosition.x+station.x,roomPosition.z+station.z],[ctx.district.x+station.x,ctx.district.z+station.z]];
+      let nearest=null,distance=Infinity;
+      for(const candidate of candidates)for(const [x,z] of references){
+        const delta=Math.hypot(candidate.x-x,candidate.z-z);
+        if(delta<distance){distance=delta;nearest=candidate;}
+      }
+      if(nearest&&distance<3.2)selected.add(nearest.node);
+    }
+    let signGroup=null,groupDistance=Infinity;
     for(const first of candidates){
-      const group=candidates.filter(item=>Math.abs(item.y-first.y)<.08&&Math.abs(item.z-first.z)<.08).sort((a,b)=>a.x-b.x);
+      if(first.width<1.1||first.width>7||first.height<.15||first.height>2.2)continue;
+      const group=candidates.filter(item=>item.width>=1.1&&item.width<=7&&item.height>=.15&&item.height<=2.2&&Math.abs(item.y-first.y)<.12&&Math.abs(item.z-first.z)<.12).sort((a,b)=>a.x-b.x);
       for(let start=0;start<=group.length-3;start++){
         const row=group.slice(start,start+3),gaps=[row[1].x-row[0].x,row[2].x-row[1].x];
-        if(gaps.some(gap=>gap<2.1||gap>2.7))continue;
+        if(gaps.some(gap=>gap<1.2||gap>5.5))continue;
         const centerX=(row[0].x+row[2].x)/2,distance=Math.hypot(centerX-roomPosition.x,row[0].y-roomPosition.y,row[0].z-roomPosition.z);
         if(distance<groupDistance){groupDistance=distance;signGroup=row;}
       }
     }
-    for(const item of signGroup||[])anchorNodes.add(item.node);
-    for(const item of candidates)hide(item.node);
+    for(const item of signGroup||[])selected.add(item.node);
+    for(const node of selected){node.getWorldPosition(position);stageAnchors.push({x:position.x,y:position.y,z:position.z});hide(node);}
     stageAnchors.sort((a,b)=>a.x-b.x);
   }
   function configureStations(ctx){
