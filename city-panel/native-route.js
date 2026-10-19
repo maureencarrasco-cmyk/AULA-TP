@@ -1,16 +1,15 @@
 /* Read-only navigation bridge: uses the existing world and its quiz progression. */
 (() => {
   const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-  let context,root,geometry,material,panel,label,action,current=null,last=0,room=null,error='';
+  let context,root,geometry,material,panel,label,action,quizNav,current=null,last=0,room=null,error='',generation=0;
   let stationQuestionSignature='';
-  let keyHint;
   const originalSigns=[];
   const arrows=[];
   const quizMarkers=[];
   const stageAnchors=[];
   let roomStations=[];
-  let markerGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial,markerBeamGeometry,markerBeamTexture,markerBeamMaterial,markerSparkGeometry,markerSparkTexture,markerSparkMaterial;
-  const beams=[],sparkles=[];
+  let markerGeometry,markerImageGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial,markerBeamGeometry,markerBeamTexture,markerBeamMaterial,markerSparkGeometry,markerSparkTexture,markerSparkMaterial,markerCylinderGeometry,markerCylinderMaterial;
+  const beams=[],sparkles=[],cylinders=[],quizImages=[];
   function progress(event){
     const data=event.detail;
     if(!data||!Array.isArray(data.questions)||!data.answers||typeof data.specialty!=='string')return;
@@ -21,17 +20,19 @@
   }
   addEventListener('aulatp:quiz-progress',progress);
   function dispose(){
-    root?.removeFromParent();geometry?.dispose();material?.dispose();
+    generation++;root?.removeFromParent();geometry?.dispose();material?.dispose();
     markerGeometry?.dispose();markerHaloGeometry?.dispose();markerHaloTexture?.dispose();markerHaloMaterial?.dispose();
     markerBeamGeometry?.dispose();markerBeamTexture?.dispose();markerBeamMaterial?.dispose();beams.length=0;
     markerSparkGeometry?.dispose();markerSparkTexture?.dispose();markerSparkMaterial?.dispose();sparkles.length=0;
+    markerImageGeometry?.dispose();markerCylinderGeometry?.dispose();markerCylinderMaterial?.dispose();cylinders.length=0;
+    for(const item of quizImages){item.texture.dispose();item.material.dispose();}quizImages.length=0;
     for(const marker of quizMarkers){marker.texture.dispose();marker.material.dispose();}
-    quizMarkers.length=0;markerGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=markerBeamGeometry=markerBeamTexture=markerBeamMaterial=markerSparkGeometry=markerSparkTexture=markerSparkMaterial=null;
+    quizMarkers.length=0;markerGeometry=markerImageGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=markerBeamGeometry=markerBeamTexture=markerBeamMaterial=markerSparkGeometry=markerSparkTexture=markerSparkMaterial=markerCylinderGeometry=markerCylinderMaterial=null;
     stageAnchors.length=0;
     roomStations=[];
     for(const [sign,visible,oldGeometry,oldMaterial,oldName] of originalSigns){sign.visible=visible;sign.geometry=oldGeometry;sign.material=oldMaterial;sign.name=oldName;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityQuizMarker;}
     originalSigns.length=0;
-    root=geometry=material=null;arrows.length=0;panel?.remove();panel=label=action=null;
+    root=geometry=material=null;arrows.length=0;panel?.remove();panel=label=action=quizNav=null;
     document.querySelectorAll('.city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
     document.documentElement.classList.remove('city-native-route-active');
   }
@@ -48,25 +49,51 @@
     hideQuizPhaseSigns(ctx);
     createQuizMarkers(ctx);
     panel=document.createElement('section');panel.className='city-native-guide';panel.setAttribute('aria-live','polite');
-    label=document.createElement('strong');keyHint=document.createElement('kbd');keyHint.textContent='E';keyHint.setAttribute('aria-label','Presiona E para abrir el quiz');
+    label=document.createElement('strong');
+    quizNav=document.createElement('nav');quizNav.className='city-native-stations';quizNav.setAttribute('aria-label','Estaciones de quiz del módulo');
+    for(let i=0;i<4;i++){
+      const button=document.createElement('button');button.type='button';button.dataset.station=String(i);button.textContent=`Quiz ${i+1}`;
+      button.addEventListener('click',()=>{
+        const data=current&&normalize(current.specialty)===normalize(context?.specialty?.name)?current:null,index=data?next(data):0;
+        const active=Math.min(3,Math.floor(index*4/Math.max(1,data?.questions.length||4)));
+        if(i!==active||index<0)return;
+        openProfessionalQuiz();
+      });
+      quizNav.append(button);
+    }
     action=document.createElement('button');action.type='button';action.textContent='Abrir quiz de mi módulo';
-    action.addEventListener('click',()=>{
-      const button=[...document.querySelectorAll('.city-viewport button')].find(item=>normalize(item.textContent).includes('desafio profesional'));
-      if(button)button.click();
-    });
-    panel.append(label,keyHint,action);document.querySelector('.city-viewport')?.append(panel);
+    action.addEventListener('click',openProfessionalQuiz);
+    panel.append(label,quizNav,action);document.querySelector('.city-viewport')?.append(panel);
     panel.dataset.quizMarkerCount=String(quizMarkers.length);
     document.documentElement.classList.add('city-native-route-active');
+  }
+  function openProfessionalQuiz(){
+    const button=[...document.querySelectorAll('.city-viewport button')].find(item=>normalize(item.textContent).includes('desafio profesional'));
+    if(button&&!button.disabled)button.click();
+  }
+  function syncStationButtons(active,complete=false){
+    if(!quizNav)return;
+    quizNav.querySelectorAll('button[data-station]').forEach(button=>{
+      const station=Number(button.dataset.station),isActive=station===active;
+      button.disabled=complete||!isActive;button.setAttribute('aria-current',isActive?'step':'false');
+      button.classList.toggle('is-current',isActive);
+      const title=roomStations[station]?.equipment||roomStations[station]?.name||'Estación de trabajo';
+      button.textContent=`Quiz ${station+1}`;
+      button.setAttribute('aria-label',`Quiz ${station+1}: ${title}`);
+      button.title=`Quiz ${station+1}: ${title}`;
+    });
   }
   function hideQuizPhaseSigns(ctx){
     const phases=['observar','planificar','verificar'];
     const T=ctx.three,stations=(ctx.phaseStations||[]).filter(station=>phases.includes(normalize(station.phase))&&Number.isFinite(station.x)&&Number.isFinite(station.z));
     const position=new T.Pq0(),roomPosition=ctx.room.getWorldPosition(new T.Pq0());
     const hidden=new Set();
+    let signGroup=null;
+    const anchorNodes=new Set();
     const hide=node=>{
       if(hidden.has(node))return;
       hidden.add(node);originalSigns.push([node,node.visible,node.geometry,node.material,node.name]);node.visible=false;node.userData.cityLegacyQuizStageSign=true;
-      node.getWorldPosition(position);stageAnchors.push({x:position.x,y:position.y,z:position.z});
+      if(anchorNodes.has(node)){node.getWorldPosition(position);stageAnchors.push({x:position.x,y:position.y,z:position.z});}
     };
     const candidates=[];
     ctx.scene.traverse(node=>{
@@ -75,7 +102,7 @@
       node.getWorldPosition(position);
       if(Math.abs(position.x-roomPosition.x)<9&&Math.abs(position.z-roomPosition.z)<11&&Math.abs(position.y-roomPosition.y)<3.5)candidates.push({node,x:position.x,y:position.y,z:position.z,width:size.width});
     });
-    let signGroup=null,groupDistance=Infinity;
+    let groupDistance=Infinity;
     for(const first of candidates){
       const group=candidates.filter(item=>Math.abs(item.y-first.y)<.08&&Math.abs(item.z-first.z)<.08).sort((a,b)=>a.x-b.x);
       for(let start=0;start<=group.length-3;start++){
@@ -85,15 +112,18 @@
         if(distance<groupDistance){groupDistance=distance;signGroup=row;}
       }
     }
-    for(const item of signGroup||[])hide(item.node);
+    for(const item of signGroup||[])anchorNodes.add(item.node);
+    for(const item of candidates)hide(item.node);
     stageAnchors.sort((a,b)=>a.x-b.x);
   }
   function configureStations(ctx){
     const source=(ctx.stations||[]).slice(0,4);
     if(!source.length)return [];
     const questions=current&&normalize(current.specialty)===normalize(ctx.specialty.name)?current.questions:[];
+    const questionGroups=Array.from({length:4},()=>[]);
+    questions.forEach((question,index)=>questionGroups[Math.min(3,Math.floor(index*4/Math.max(1,questions.length)))].push(question));
     const learningObjects=[...new Set(questions.map(question=>String(question.object||'').trim()).filter(Boolean))];
-    const result=source.map(station=>({...station}));
+    const result=source.map((station,index)=>({...station,quizQuestion:questionGroups[index]?.[0]||null}));
     const points=result.map(station=>station.totem||[station.x,station.z]);
     const blocked=(x,z)=>ctx.colliders.some(block=>
       ctx.floorY+.6>=(block.minY??-Infinity)&&ctx.floorY+.6<=(block.maxY??Infinity)&&
@@ -112,16 +142,52 @@
         Math.max(-5.3,Math.min(5.3,origin[0]+(slot%2?1:-1)*1.7)),
         Math.max(-4.5,Math.min(4.5,origin[1]+(slot>1?1:-1)*1.7))
       ];
-      const learningObject=learningObjects[slot];
-      result.push({...base,name:learningObject||`Aplicación práctica ${slot+1}`,equipment:learningObject||`Aplicación práctica ${slot+1}`,totem:[x,z],cityGeneratedStation:true});
+      const learningObject=learningObjects[slot],quizQuestion=questionGroups[slot]?.[0]||null;
+      result.push({...base,name:learningObject||`Aplicación práctica ${slot+1}`,equipment:learningObject||`Aplicación práctica ${slot+1}`,totem:[x,z],quizQuestion,cityGeneratedStation:true});
       points.push([x,z]);
     }
     return result;
+  }
+  function specialtyPhoto(name){
+    const value=normalize(name);
+    const photos={
+      administracion:'meeting',contabilidad:'accounting',agropecuaria:'crops',forestal:'forestry',
+      'elaboracion industrial de alimentos':'food',gastronomia:'cooking',construccion:'construction',
+      'instalaciones sanitarias':'plumbing','montaje industrial':'assembly','construcciones metalicas':'welding',
+      electricidad:'electrical',electronica:'electronics','refrigeracion y climatizacion':'cooling',
+      'dibujo tecnico':'drawing',grafica:'printing','mecanica automotriz':'tools','mecanica industrial':'machining',
+      'mecanica de mantenimiento de aeronaves':'aircraft','explotacion minera':'mining','asistencia en geologia':'geology',
+      'metalurgia extractiva':'metallurgy','quimica industrial':'laboratory','atencion de enfermeria':'nursing',
+      'atencion de parvulos':'preschool',acuicultura:'aquaculture','operaciones portuarias':'port',pesqueria:'fishing',
+      'tripulacion de naves mercantes y especiales':'ship','servicios de hoteleria':'hotel','servicios de turismo':'tourism',
+      'muebles y terminaciones en madera':'furniture','vestuario y confeccion textil':'textile',
+      'conectividad y redes':'network',programacion:'programming',telecomunicaciones:'telecom'
+    };
+    return photos[value]||'tools';
+  }
+  function stationImageUrl(ctx,station){
+    const script=document.querySelector('script[src*="native-route.js"]'),base=new URL('./assets/specialties/',script?.src||location.href);
+    const image=station.quizQuestion?.image;
+    if(typeof image==='string'&&image.trim()){
+      try{const candidate=new URL(image,location.href);if(candidate.origin===location.origin&&/^https?:$/.test(candidate.protocol))return candidate.href;}catch{}
+    }
+    return new URL(`${specialtyPhoto(ctx.specialty.name)}.webp`,base).href;
+  }
+  function createStationImage(ctx,station,displayX,displayZ,floorY,token){
+    const image=new Image();image.decoding='async';image.src=stationImageUrl(ctx,station);
+    image.onload=()=>{
+      if(token!==generation||!root)return;
+      const T=ctx.three,texture=new T.GOR(image);texture.colorSpace=T.er$;texture.anisotropy=4;
+      const imageMaterial=new T.V9B({map:texture,transparent:false,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
+      const imageMesh=new T.eaF(markerImageGeometry,imageMaterial);imageMesh.position.set(displayX,floorY+.43,displayZ);imageMesh.renderOrder=19;imageMesh.userData.cityQuizImage=true;root.add(imageMesh);
+      quizImages.push({mesh:imageMesh,texture,material:imageMaterial});
+    };
   }
   function createQuizMarkers(ctx){
     const T=ctx.three,stations=roomStations=configureStations(ctx);
     if(!stations.length)return;
     markerGeometry=new T.bdM(2.05,.62);
+    markerImageGeometry=new T.bdM(1.18,.76);
     markerHaloGeometry=new T.bdM(2.25,2.25);
     const haloCanvas=document.createElement('canvas');haloCanvas.width=256;haloCanvas.height=256;
     const haloContext=haloCanvas.getContext('2d'),glow=haloContext.createRadialGradient(128,128,24,128,128,124);
@@ -148,12 +214,15 @@
     sparkContext.fillStyle=sparkGlow;sparkContext.fillRect(0,0,64,64);
     markerSparkTexture=new T.GOR(sparkCanvas);markerSparkTexture.colorSpace=T.er$;
     markerSparkMaterial=new T.V9B({map:markerSparkTexture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
+    const Cylinder=Object.values(T).find(value=>typeof value==='function'&&value.name==='CylinderGeometry');
+    markerCylinderGeometry=Cylinder?new Cylinder(.075,.075,.58,12):new T.iNn(.13,.58,.13);
+    markerCylinderMaterial=new T.V9B({color:0x19c9eb,toneMapped:false,transparent:true,opacity:.86,depthWrite:false});
     const floorY=ctx.floorY+.035;
     const playerZ=ctx.player.z,anchorCenterZ=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.z,0)/stageAnchors.length:null;
     const anchorCenterX=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.x,0)/stageAnchors.length:null;
     const forward=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*5.9;
     const haloOffset=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*1.8;
-    const mobileViewport=window.innerWidth<700,mobileShiftX=mobileViewport?-.45:0;
+    const mobileViewport=window.innerWidth<700,mobileShiftX=mobileViewport?-.45:0,token=generation;
     const markerScale=Math.min(1.45,Math.max(1,1200/window.innerWidth));
     stations.forEach((station,index)=>{
       const [dx,dz]=station.totem||[station.x,station.z],x=ctx.district.x+dx,z=ctx.district.z+dz;
@@ -168,6 +237,9 @@
       }
       const beam=new T.eaF(markerBeamGeometry,markerBeamMaterial);beam.name=`Aula TP · haz Quiz ${index+1}`;
       beam.position.set(displayX,floorY+.94,displayZ+haloOffset*.55);root.add(beam);beam.renderOrder=19;beams.push(beam);
+      const cylinder=new T.eaF(markerCylinderGeometry,markerCylinderMaterial);cylinder.name=`Aula TP · soporte Quiz ${index+1}`;
+      cylinder.position.set(displayX,floorY+.77,displayZ);root.add(cylinder);cylinders.push(cylinder);
+      createStationImage(ctx,station,displayX,displayZ,floorY,token);
       const canvas=document.createElement('canvas');canvas.width=1050;canvas.height=320;
       const c=canvas.getContext('2d');c.clearRect(0,0,canvas.width,canvas.height);
       c.shadowColor='#00c9ff';c.shadowBlur=24;c.fillStyle='rgba(248,253,255,.9)';c.strokeStyle='#18c9ed';c.lineWidth=10;
@@ -176,12 +248,10 @@
       c.fillStyle='#345477';c.font='600 40px Arial';
       const title=String(station.equipment||station.name||station.title||station.label||'Puesto de trabajo');
       c.fillText(title.length>38?`${title.slice(0,35)}...`:title,76,220,760);
-      c.fillStyle='#e9f8ff';c.beginPath();c.roundRect(876,72,112,176,28);c.fill();
-      c.strokeStyle='#37c9ee';c.lineWidth=8;c.stroke();c.fillStyle='#0086a5';c.font='900 82px Arial';c.textAlign='center';c.fillText('E',932,164);
       const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
       const signMaterial=new T.V9B({map:texture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
       const sign=new T.eaF(markerGeometry,signMaterial);
-      sign.position.set(displayX,ctx.floorY+(mobileViewport ? .75 : 1.28),displayZ);sign.scale.setScalar(markerScale);root.add(sign);
+      sign.position.set(displayX,ctx.floorY+(mobileViewport ? 1.14 : 1.38),displayZ);sign.scale.setScalar(markerScale);root.add(sign);
       sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
       quizMarkers.push({sign,texture,material:signMaterial});
     });
@@ -214,16 +284,18 @@
       if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;panel.hidden=true;return;}
       root.visible=true;panel.hidden=false;
       const now=performance.now();if(now-last<250)return;last=now;
-      for(const marker of quizMarkers)marker.sign.rotation.y=Math.atan2(ctx.player.x-marker.sign.position.x,ctx.player.z-marker.sign.position.z);
+      for(const marker of quizMarkers){const facing=Math.atan2(ctx.player.x-marker.sign.position.x,ctx.player.z-marker.sign.position.z);marker.sign.rotation.y=facing;}
       for(const beam of beams)beam.rotation.y=Math.atan2(ctx.player.x-beam.position.x,ctx.player.z-beam.position.z);
+      for(const item of quizImages)item.mesh.rotation.y=Math.atan2(ctx.player.x-item.mesh.position.x,ctx.player.z-item.mesh.position.z);
       document.querySelectorAll('.city-viewport .city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
       const stationAction=[...document.querySelectorAll('.city-viewport .city-door-action')].find(button=>/^\s*\d+\s*[·.)-]/.test(button.textContent));
       stationAction?.setAttribute('data-city-quiz-station','true');
       const data=current&&normalize(current.specialty)===normalize(ctx.specialty.name)?current:null;
       const index=data?next(data):0;
       arrows.forEach(arrow=>arrow.visible=false);
-      if(index<0){label.textContent='Quiz completado · revisa tu resultado';action.hidden=false;keyHint.hidden=true;return;}
+      if(index<0){label.textContent='Quizzes completados · revisa tu resultado';action.hidden=true;syncStationButtons(-1,true);return;}
       const {station, index:stationIndex}=selectedStation(roomStations,index,data?.questions.length||roomStations.length);
+      syncStationButtons(stationIndex);
       const [dx,dz]=station.totem||[station.x,station.z];
       const target={x:ctx.district.x+dx,z:ctx.district.z+dz};
       if(!Number.isFinite(target.x)||!Number.isFinite(target.z))return;
@@ -245,6 +317,6 @@
       if(root)root.visible=false;
     }
   }
-  globalThis.AulaTPNativeRoute={frame,status:()=>({quizMarkers:quizMarkers.length,quiz:panel?.dataset.quiz||null,stations:roomStations.length})};
+  globalThis.AulaTPNativeRoute={frame,status:()=>({quizMarkers:quizMarkers.length,quiz:panel?.dataset.quiz||null,stations:roomStations.length,quizButtons:quizNav?.querySelectorAll('button').length||0})};
   addEventListener('pagehide',event=>{if(!event.persisted)dispose();});
 })();
