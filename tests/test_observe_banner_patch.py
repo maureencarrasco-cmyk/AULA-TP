@@ -45,6 +45,7 @@ class ObserveBannerPatchTests(unittest.TestCase):
         self.assertIn('marker.sign.rotation.y=Math.atan2',source)
         self.assertIn('station.equipment||station.name',source)
         self.assertIn('markerHaloGeometry=new T.bdM(1.28,1.28)',source)
+        self.assertIn('depthTest:false,depthWrite:false',source)
         styles=(ROOT/'city-panel/city-panel.css').read_text(encoding='utf-8')
         self.assertIn('.city-native-route-active .city-native-guide>strong,.city-native-route-active .city-native-guide>kbd { display:none!important; }',styles)
 

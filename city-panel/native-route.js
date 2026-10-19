@@ -110,9 +110,9 @@
       c.fillStyle='#e9f8ff';c.beginPath();c.roundRect(876,72,112,176,28);c.fill();
       c.strokeStyle='#37c9ee';c.lineWidth=8;c.stroke();c.fillStyle='#0086a5';c.font='900 82px Arial';c.textAlign='center';c.fillText('E',932,164);
       const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
-      const signMaterial=new T.V9B({map:texture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
+      const signMaterial=new T.V9B({map:texture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
       const sign=new T.eaF(markerGeometry,signMaterial);sign.name=`Aula TP · Quiz ${index+1} · ${title}`;
-      sign.position.set(x,ctx.floorY+1.65,z);sign.userData.cityQuizMarker=index+1;root.add(sign);
+      sign.position.set(x,ctx.floorY+1.65,z);sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;root.add(sign);
       quizMarkers.push({sign,x,z,texture,material:signMaterial});
     });
   }
@@ -173,6 +173,6 @@
       if(root)root.visible=false;
     }
   }
-  globalThis.AulaTPNativeRoute={frame};
+  globalThis.AulaTPNativeRoute={frame,status:()=>({quizMarkers:quizMarkers.length,quiz:panel?.dataset.quiz||null})};
   addEventListener('pagehide',event=>{if(!event.persisted)dispose();});
 })();
