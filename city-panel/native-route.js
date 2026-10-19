@@ -118,7 +118,9 @@
         if(!originalSigns.some(([old])=>old===sign))originalSigns.push([sign,sign.visible,sign.geometry,sign.material,sign.name]);
         delete sign.userData.cityLegacyQuizStageSign;sign.geometry=markerGeometry;sign.visible=true;
       }else{
-        sign=new T.eaF(markerGeometry,signMaterial);sign.position.set(x,ctx.floorY+1.65,z);root.add(sign);
+        sign=new T.eaF(markerGeometry,signMaterial);
+        const anchor=phaseStations[index];
+        sign.position.set(anchor?ctx.district.x+anchor.x:x,anchor?ctx.floorY+1.62:ctx.floorY+1.65,anchor?ctx.district.z+anchor.z:z);root.add(sign);
       }
       sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
       quizMarkers.push({sign,x,z,texture,material:signMaterial});
