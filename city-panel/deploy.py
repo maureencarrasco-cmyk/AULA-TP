@@ -38,6 +38,7 @@ def main():
     for name in ('city-panel.css','city-panel.js'):
         shutil.copy2(package/name,destination/name)
     shutil.copytree(package/'assets',destination/'assets')
+    shutil.copytree(package/'engine',destination/'engine')
     modified=[]
     for relative in (Path('index.html'),Path('ciudad/index.html')):
         file=target/relative

@@ -1,6 +1,23 @@
 /* Presentation alias only: navigation is still handled by the original control. */
 (() => {
   const photoBase=new URL('./assets/specialties/',document.currentScript?.src||'https://www.aulatpchile.cl/ciudad_laboral_aulatp/panel-ui-v1/city-panel.js');
+  const engineUrl=new URL('../../engine/index.html',photoBase);
+  function syncQuizRouteLink(){
+    const moduleId=params.get('cityModuleId');
+    const viewport=document.querySelector('.city-viewport');
+    const room=document.querySelector('.city-room-summary,.city-open-pilot');
+    if(!viewport)return;
+    let link=viewport.querySelector('.city-quiz-route-entry');
+    if(!room){link?.remove();return;}
+    if(link)return;
+    link=document.createElement('a');link.className='city-quiz-route-entry';
+    const hasModule=/^\d+$/.test(moduleId||'');
+    const url=hasModule?new URL(engineUrl):new URL('/api/city-experience',engineUrl);
+    if(hasModule)url.search=params.toString();
+    const photo=document.querySelector('.city-specialties [aria-pressed="true"]')?.dataset?.cityPhoto;
+    if(photo)url.searchParams.set('cityPhoto',photo);
+    link.href=url.href;link.textContent=hasModule?'Recorrido 3D de quizzes →':'Elegir módulo para el recorrido de quizzes →';viewport.append(link);
+  }
   function syncMiningTile() {
     const panel=document.querySelector('.city-walk-inspector');
     const grid=panel?.querySelector('.city-island-grid');
@@ -261,6 +278,7 @@
     if(!document.querySelector('.city-viewport canvas'))return;
     syncMiningTile();syncLearningLink();syncGuideButton();syncConstructionDistrict();syncSpecialtyCards();
     syncRoomGuide();
+    syncQuizRouteLink();
     if(route&&document.querySelector('.city-map-overlay')){startRoute(routeNeedsOpen);routeNeedsOpen=false;}
   }
   function relevantMutation(record){

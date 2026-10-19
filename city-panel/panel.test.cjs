@@ -9,12 +9,12 @@ function fixture(disabled=false,specialtyNames=[],options={}){
  let callback;
  let clicks=0,queries=0,ready=options.ready!==false;
  const frames=[];
- const original={disabled,querySelector(){return null;},children:[],append(node){this.children.push(node);},click(){clicks++;}};
+ const original={disabled,querySelector(selector){return selector==='.city-quiz-route-entry'?this.children.find(node=>node.className==='city-quiz-route-entry')||null:null;},children:[],append(node){this.children.push(node);},click(){clicks++;}};
  const grid={tile:null,querySelector(){return this.tile;},append(node){this.tile=node;}};
  const specialtyButtons=specialtyNames.map(name=>({dataset:{},children:[],append(node){this.children.push(node);},querySelector(selector){return selector==='.city-specialty-copy strong'?{textContent:name}:this.children.find(node=>'.'+node.className===selector)||null;}}));
  const panel={querySelector(selector){return selector==='.city-island-grid'?grid:original;}};
  const document={documentElement:{},querySelector(selector){queries++;if(selector==='.city-viewport canvas')return ready?{}:null;return selector==='.city-walk-inspector'?panel:original;},querySelectorAll(selector){queries++;return selector==='.city-specialties button'?specialtyButtons:[];},createElement(){return {dataset:{},children:[],disabled:false,append(...items){this.children.push(...items);},addEventListener(event,action){this[event]=action;}};}};
- const context=vm.createContext({document,URL,URLSearchParams,MutationObserver:class {constructor(action){callback=action;}observe(){}}});
+ const context=vm.createContext({document,URL,URLSearchParams,location:{search:options.search||''},MutationObserver:class {constructor(action){callback=action;}observe(){}}});
  if(options.frames)context.requestAnimationFrame=action=>{frames.push(action);return frames.length;};
  vm.runInContext(source,context);
  return {original,grid,specialtyButtons,sync:()=>callback(),clicks:()=>clicks,mutate:records=>callback(records),
@@ -24,6 +24,16 @@ function fixture(disabled=false,specialtyNames=[],options={}){
 test('waits for the scene effect before adding controls to hydrated React markup',()=>{
  const f=fixture(false,[],{ready:false});assert.equal(f.grid.tile,null);
  f.setReady(true);f.sync();assert.ok(f.grid.tile);
+});
+
+test('the room links to its own editable quiz engine and preserves module context',()=>{
+ const f=fixture(false,[],{search:'?cityModuleId=451&cityCourseId=45'});
+ const link=f.original.children.find(node=>node.className==='city-quiz-route-entry');
+ assert.ok(link);const url=new URL(link.href);
+ assert.equal(url.pathname,'/ciudad_laboral_aulatp/panel-ui-v1/engine/index.html');
+ assert.equal(url.searchParams.get('cityModuleId'),'451');assert.equal(url.searchParams.get('cityCourseId'),'45');
+ f.sync();assert.equal(f.original.children.filter(node=>node.className==='city-quiz-route-entry').length,1);
+ const free=fixture();assert.equal(new URL(free.original.children.find(node=>node.className==='city-quiz-route-entry').href).pathname,'/api/city-experience');
 });
 
 test('HUD text mutations do not rescan panel controls',()=>{

@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recorrido de quizzes · Aula TP Chile</title><link rel="stylesheet" href="./style.css"></head>
+<body>
+  <main id="scene" aria-label="Recorrido 3D de quizzes"></main>
+  <header class="toolbar"><div><strong id="specialty">Ciudad Laboral</strong><span id="module"></span></div><a id="return" href="../../../">Volver a la ciudad</a></header>
+  <section class="status" aria-live="polite"><strong id="target">Cargando módulo…</strong><span id="message"></span><span id="clock"></span><button id="interact" hidden>Responder quiz</button><a id="recovery" hidden>Ver resultados y recuperación</a></section>
+  <nav class="movement" aria-label="Movimiento"><button data-move="forward" aria-label="Avanzar">↑</button><div><button data-move="left" aria-label="Girar a la izquierda">↶</button><button data-move="back" aria-label="Retroceder">↓</button><button data-move="right" aria-label="Girar a la derecha">↷</button></div></nav>
+  <dialog id="question-dialog" aria-labelledby="question-title"><form id="answer-form"><p id="question-number"></p><h1 id="question-title"></h1><img id="question-image" hidden alt=""><fieldset id="choices"><legend>Selecciona una respuesta</legend></fieldset><p id="feedback" role="status"></p><div class="dialog-actions"><button type="button" id="close-question">Volver al recorrido</button><button type="submit" id="save-answer">Guardar respuesta</button><button type="button" id="continue" hidden>Continuar</button></div></form></dialog>
+  <script type="module" src="./main.js"></script>
+</body></html>

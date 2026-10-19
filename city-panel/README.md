@@ -1,5 +1,15 @@
 # Ciudad Laboral: panel visual
 
+## Motor Editable De Quizzes
+
+`engine/main.js` crea un recorrido 3D de conocimientos con Three.js 0.180.0 (copia local y licencia MIT en `engine/vendor`). `engine/route.js` calcula la secuencia y las flechas amarillas sobre el suelo. No es una recuperación del código del motor antiguo: es un recorrido adicional editable, con una sala compartida de terminales y contenidos obtenidos del módulo autorizado. No reemplaza los edificios ni las misiones de la ciudad original.
+
+Desde una especialidad abierta con `cityModuleId`, aparece el enlace «Recorrido 3D de quizzes». Conserva el curso y módulo en la navegación y permite regresar a la ciudad original. Cada terminal se activa por proximidad, guarda la respuesta mediante la API existente y cambia el destino únicamente después de confirmar el guardado. Las respuestas incorrectas conservan su explicación y las reglas de recuperación del campus; no aprueban automáticamente la etapa. El estado del servidor permite retomar el recorrido tras recargar. No se incorpora un banco de preguntas genéricas al sitio.
+
+Validación: `node --test tests/city-route.test.mjs city-panel/panel.test.cjs tests/city-experience-hero.test.mjs`. `scripts/verify-city-route.cjs` comprueba renderizado, movimiento, error de guardado, retroalimentación, avance, reanudación y móvil usando respuestas de API simuladas, no cuentas de estudiantes. No sustituye una prueba autenticada de extremo a extremo en producción.
+
+Publicado en `/opt/ciudad-laboral-releases/city-20261018-editable-quiz-route-v63`, con recursos `panel-ui-v17`. El despliegue conservó los 42 archivos JavaScript originales del motor antiguo. La comprobación de navegador se ejecutó también contra estos recursos publicados con la API simulada. Los módulos se cargan como archivos `.js` para respetar los tipos MIME del servidor sin cambiar su configuración.
+
 Panel publicado el 17 de octubre de 2026 en la ruta existente de Ciudad Laboral.
 
 ## Alcance
