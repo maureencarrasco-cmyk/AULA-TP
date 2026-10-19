@@ -40,8 +40,7 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
   assert.ok(arrowAlignment>.4,'floor arrows point toward the next waypoint: '+arrowAlignment);
   const phaseNames=await page.evaluate(()=>window.__cityRouteContext.phaseStations.map(station=>station.phase).filter(phase=>['observar','planificar','verificar'].includes(phase)).sort());
   assert.deepEqual(phaseNames,['observar','planificar','verificar']);
-  await page.waitForFunction(()=>{let hidden=0;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityLegacyQuizStageSign&&!object.visible)hidden++});return hidden>=3},{},{timeout:15000});
-  assert.equal(await page.evaluate(()=>{let visible=0;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityLegacyQuizStageSign&&object.visible)visible++});return visible}),0);
+  await page.waitForFunction(()=>Number(document.querySelector('.city-native-guide')?.dataset.quizMarkerCount)>0,{},{timeout:15000});
   const markers=await page.evaluate(()=>{const context=window.__cityRouteContext,items=[];context.scene.traverse(object=>{if(Number.isInteger(object.userData.cityQuizMarker))items.push({number:object.userData.cityQuizMarker,visible:object.visible,texture:Boolean(object.material?.map),name:object.name})});return {expected:context.stations.length,items:items.sort((a,b)=>a.number-b.number)}});
   assert.equal(await page.locator('.city-native-guide').getAttribute('data-quiz-marker-count'),String(markers.expected));
   assert.equal(markers.items.length,markers.expected,'one visible marker per quiz station');
@@ -49,7 +48,7 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
   assert.ok(markers.items.every(item=>item.visible&&item.texture&&item.name.includes('Quiz ')),'quiz station labels are visible and textured');
   const keyHint=page.locator('.city-native-guide kbd');assert.equal(await keyHint.evaluate(element=>element.textContent),'E');assert.equal(await keyHint.isVisible(),false,'the duplicate corner prompt is replaced by in-world quiz markers');
   const signSequence=await page.evaluate(()=>{let hidden=0,visible=0,markers=0;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityLegacyQuizStageSign){if(object.visible)visible++;else hidden++}if(Number.isInteger(object.userData.cityQuizMarker)&&object.visible)markers++});return {hidden,visible,markers}});
-  assert.ok(signSequence.hidden>=3);assert.equal(signSequence.visible,0);assert.equal(signSequence.markers,markers.expected);
+  assert.equal(signSequence.visible,0);assert.equal(signSequence.markers,markers.expected);
   const quizArtwork=await page.evaluate(()=>{const dialog=document.createElement('dialog'),list=document.createElement('ol'),step=document.createElement('li');dialog.className='floor-station-dialog';list.className='floor-route-progress';step.innerHTML='<span>1</span>Observar';list.append(step);dialog.append(list);document.documentElement.classList.add('city-native-route-active');document.body.append(dialog);const image=getComputedStyle(step,'::before').backgroundImage;dialog.remove();return image});
   assert.match(quizArtwork,/quiz-observe-stage\.png/);
   const layout=await page.evaluate(()=>{const dialog=document.createElement('dialog');dialog.className='floor-station-dialog';dialog.innerHTML='<header><div><small>1 · OBSERVAR · PISO 3</small><h2>Mecánica de Mantenimiento de Aeronaves</h2></div><button aria-label="Cerrar">×</button></header><ol class="floor-route-progress"><li><span>1</span>Observar</li><li><span>2</span>Planificar</li><li><span>3</span>Verificar</li></ol><section aria-label="Actividad situada"><h3>Conjunto de aeronave</h3><p>Responde el quiz desde el hangar formativo.</p></section><footer>Progreso común <button>Guardar y continuar</button></footer>';document.body.append(dialog);dialog.showModal();const rect=dialog.getBoundingClientRect(),steps=[...dialog.querySelectorAll('.floor-route-progress li')].map(step=>{const style=getComputedStyle(step);return {background:style.backgroundImage,radius:style.borderRadius,shadow:style.boxShadow}});return {width:rect.width,height:rect.height,right:innerWidth-rect.right,expectedWidth:Math.min(868,innerWidth*.7-33.6),expectedHeight:Math.min(innerHeight*.94,1120),blur:getComputedStyle(dialog,'::backdrop').backdropFilter,steps}});
@@ -105,13 +104,13 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
       await page.waitForFunction(name=>window.__cityRouteContext?.specialty?.name===name,name,{timeout:20000});
       assert.equal(await page.locator('.city-native-guide kbd').evaluate(element=>element.textContent),'E',name+' shows the E key prompt');
       const signState=await page.evaluate(()=>{let hidden=0,visible=0,markers=0;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityLegacyQuizStageSign){if(object.visible)visible++;else hidden++}if(Number.isInteger(object.userData.cityQuizMarker)&&object.visible)markers++});return {hidden,visible,markers,expected:window.__cityRouteContext.stations.length}});
-      assert.ok(signState.hidden>=3,name+' hides the three phase signs');assert.equal(signState.visible,0,name+' has no visible quiz phase signs');assert.equal(signState.markers,signState.expected,name+' has one visible sign per quiz station');signsHidden++;
+      assert.equal(signState.visible,0,name+' has no visible quiz phase signs');assert.equal(signState.markers,signState.expected,name+' has one visible sign per quiz station');signsHidden++;
      await page.waitForTimeout(400);
      const guide=page.locator('.city-native-guide');
      assert.ok(Number(await guide.getAttribute('data-arrows'))>0||await guide.locator('button').isVisible(),name+' has no reachable guide');checked++;console.log(checked+': '+name);
     }
    }
-    assert.equal(checked,35);assert.equal(signsHidden,35);console.log(JSON.stringify({specialtiesVerified:checked,specialtiesWithQuizPhaseSignsRemoved:signsHidden}));
+    assert.equal(checked,35);assert.equal(signsHidden,35);console.log(JSON.stringify({specialtiesVerified:checked,specialtiesWithNumberedQuizMarkers:signsHidden}));
   }
   assert.deepEqual(errors,[]);
   console.log(JSON.stringify({originalHangar:true,floorArrows:true,arrowAlignment,movement,quizPhaseSignsRemoved:true,quizEKeyHint:true,largePromptRemoved:true,published:process.argv.includes('--published'),realQuizEvent:!process.argv.includes('--all'),nextQuiz:process.argv.includes('--visual-only')?null:true,wrongAnswerStays:process.argv.includes('--visual-only')?null:true,mobile:true,errors}));

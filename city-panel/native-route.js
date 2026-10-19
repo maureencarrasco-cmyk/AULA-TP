@@ -18,7 +18,7 @@
     markerGeometry?.dispose();markerHaloGeometry?.dispose();markerHaloTexture?.dispose();markerHaloMaterial?.dispose();
     for(const marker of quizMarkers){marker.texture.dispose();marker.material.dispose();}
     quizMarkers.length=0;markerGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=null;
-    for(const [sign,visible] of originalSigns){sign.visible=visible;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;}
+    for(const [sign,visible,oldGeometry,oldMaterial,oldName] of originalSigns){sign.visible=visible;sign.geometry=oldGeometry;sign.material=oldMaterial;sign.name=oldName;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityQuizMarker;}
     originalSigns.length=0;
     root=geometry=material=null;arrows.length=0;panel?.remove();panel=label=action=null;
     document.querySelectorAll('.city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
@@ -54,7 +54,7 @@
     const hidden=new Set();
     const hide=node=>{
       if(hidden.has(node))return;
-      hidden.add(node);originalSigns.push([node,node.visible]);node.visible=false;node.userData.cityLegacyQuizStageSign=true;
+      hidden.add(node);originalSigns.push([node,node.visible,node.geometry,node.material,node.name]);node.visible=false;node.userData.cityLegacyQuizStageSign=true;
     };
     const candidates=[];
     ctx.scene.traverse(node=>{
@@ -74,12 +74,6 @@
       }
     }
     for(const item of signGroup||[])hide(item.node);
-    ctx.scene.traverse(node=>{
-      if(!node.isMesh||!node.userData?.luminousSign||node.geometry?.parameters?.width!==1.16)return;
-      node.getWorldPosition(position);
-      const station=stations.find(item=>Math.abs(position.x-(ctx.district.x+item.x))<.03&&Math.abs(position.y-(ctx.floorY+1.62))<.12&&Math.abs(position.z-(ctx.district.z+item.z))<.03);
-      if(station)hide(node);
-    });
   }
   function createQuizMarkers(ctx){
     const T=ctx.three,stations=ctx.stations||[];
@@ -93,6 +87,13 @@
     markerHaloTexture=new T.GOR(haloCanvas);markerHaloTexture.colorSpace=T.er$;
     markerHaloMaterial=new T.V9B({map:markerHaloTexture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
     const floorY=ctx.floorY+.035;
+    const phaseStations=ctx.phaseStations||[],legacySigns=new Map(),worldPosition=new T.Pq0();
+    ctx.scene.traverse(node=>{
+      if(!node.isMesh||!node.userData?.luminousSign||node.geometry?.parameters?.width!==1.16)return;
+      node.getWorldPosition(worldPosition);
+      const index=phaseStations.findIndex(item=>Math.abs(worldPosition.x-(ctx.district.x+item.x))<.03&&Math.abs(worldPosition.y-(ctx.floorY+1.62))<.12&&Math.abs(worldPosition.z-(ctx.district.z+item.z))<.03);
+      if(index>=0)legacySigns.set(index,node);
+    });
     stations.forEach((station,index)=>{
       const [dx,dz]=station.totem||[station.x,station.z],x=ctx.district.x+dx,z=ctx.district.z+dz;
       if(!Number.isFinite(x)||!Number.isFinite(z))return;
@@ -112,8 +113,14 @@
       c.strokeStyle='#37c9ee';c.lineWidth=8;c.stroke();c.fillStyle='#0086a5';c.font='900 82px Arial';c.textAlign='center';c.fillText('E',932,164);
       const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
       const signMaterial=new T.V9B({map:texture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
-      const sign=new T.eaF(markerGeometry,signMaterial);sign.name=`Aula TP · Quiz ${index+1} · ${title}`;
-      sign.position.set(x,ctx.floorY+1.65,z);sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;root.add(sign);
+      let sign=legacySigns.get(index);
+      if(sign){
+        if(!originalSigns.some(([old])=>old===sign))originalSigns.push([sign,sign.visible,sign.geometry,sign.material,sign.name]);
+        delete sign.userData.cityLegacyQuizStageSign;sign.geometry=markerGeometry;sign.visible=true;
+      }else{
+        sign=new T.eaF(markerGeometry,signMaterial);sign.position.set(x,ctx.floorY+1.65,z);root.add(sign);
+      }
+      sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
       quizMarkers.push({sign,x,z,texture,material:signMaterial});
     });
   }
