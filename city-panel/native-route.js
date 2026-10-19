@@ -139,57 +139,78 @@
     questions.forEach((question,index)=>questionGroups[Math.min(3,Math.floor(index*4/Math.max(1,questions.length)))].push(question));
     const learningObjects=[...new Set(questions.map(question=>String(question.object||'').trim()).filter(Boolean))];
     const result=source.map((station,index)=>({...station,quizQuestion:questionGroups[index]?.[0]||null}));
+    while(result.length<4){
+      const slot=result.length,base=result[result.length-1],learningObject=learningObjects[slot];
+      result.push({...base,name:learningObject||`Aplicación práctica ${slot+1}`,equipment:learningObject||`Aplicación práctica ${slot+1}`,quizQuestion:questionGroups[slot]?.[0]||null,cityGeneratedStation:true});
+    }
     const points=result.map(station=>station.totem||[station.x,station.z]);
     const blocked=(x,z)=>ctx.colliders.some(block=>
       ctx.floorY+.6>=(block.minY??-Infinity)&&ctx.floorY+.6<=(block.maxY??Infinity)&&
       Math.abs(x-(block.x-ctx.district.x))<(block.halfX??.5)+.35&&
       Math.abs(z-(block.z-ctx.district.z))<(block.halfZ??.5)+.35
     );
-    const offsets=[[1.7,0],[-1.7,0],[0,1.7],[0,-1.7],[1.7,1.7],[-1.7,1.7],[1.7,-1.7],[-1.7,-1.7],[2.5,0],[-2.5,0],[0,2.5],[0,-2.5]];
-    while(result.length<4){
-      const slot=result.length,base=result[result.length-1],basePoint=base.totem||[base.x,base.z],
-        origin=[Number(basePoint[0])||0,Number(basePoint[1])||0];
-      const candidate=offsets.map(([dx,dz])=>[origin[0]+dx,origin[1]+dz]).find(([x,z])=>
-        Math.abs(x)<=5.5&&Math.abs(z)<=4.8&&
-        points.every(point=>Math.hypot(x-point[0],z-point[1])>=1.45)&&!blocked(x,z)
-      );
-      const [x,z]=candidate||[
-        Math.max(-5.3,Math.min(5.3,origin[0]+(slot%2?1:-1)*1.7)),
-        Math.max(-4.5,Math.min(4.5,origin[1]+(slot>1?1:-1)*1.7))
-      ];
-      const learningObject=learningObjects[slot],quizQuestion=questionGroups[slot]?.[0]||null;
-      result.push({...base,name:learningObject||`Aplicación práctica ${slot+1}`,equipment:learningObject||`Aplicación práctica ${slot+1}`,totem:[x,z],quizQuestion,cityGeneratedStation:true});
-      points.push([x,z]);
+    const centerX=points.reduce((sum,point)=>sum+(Number(point[0])||0),0)/points.length;
+    const centerZ=points.reduce((sum,point)=>sum+(Number(point[1])||0),0)/points.length;
+    const candidates=[];
+    for(const spacing of [3.15,3,2.85])for(const shiftX of [0,-.8,.8,-1.6,1.6])for(const shiftZ of [0,-1.2,1.2,-2.4,2.4,-3.6,3.6]){
+      const cx=centerX+shiftX,cz=centerZ+shiftZ,line=Array.from({length:4},(_,index)=>[cx+(index-1.5)*spacing,cz]);
+      if(line.some(([x,z])=>Math.abs(x)>6.2||Math.abs(z)>5.7))continue;
+      const collisions=line.reduce((count,[x,z])=>count+(blocked(x,z)?1:0),0);
+      candidates.push({line,collisions,offset:Math.abs(shiftX)+Math.abs(shiftZ)});
+      if(!collisions)return result.map((station,index)=>({...station,totem:line[index]}));
     }
-    return result;
+    const best=candidates.sort((a,b)=>a.collisions-b.collisions||a.offset-b.offset)[0];
+    return result.map((station,index)=>({...station,totem:best?.line[index]||[centerX+(index-1.5)*2.85,centerZ]}));
   }
-  function specialtyPhoto(name){
+  function specialtyPhotos(name){
     const value=normalize(name);
     const photos={
-      administracion:'meeting',contabilidad:'accounting',agropecuaria:'crops',forestal:'forestry',
-      'elaboracion industrial de alimentos':'food',gastronomia:'cooking',construccion:'construction',
-      'instalaciones sanitarias':'plumbing','montaje industrial':'assembly','construcciones metalicas':'welding',
-      electricidad:'electrical',electronica:'electronics','refrigeracion y climatizacion':'cooling',
-      'dibujo tecnico':'drawing',grafica:'printing','mecanica automotriz':'tools','mecanica industrial':'machining',
-      'mecanica de mantenimiento de aeronaves':'aircraft','explotacion minera':'mining','asistencia en geologia':'geology',
-      'metalurgia extractiva':'metallurgy','quimica industrial':'laboratory','atencion de enfermeria':'nursing',
-      'atencion de parvulos':'preschool',acuicultura:'aquaculture','operaciones portuarias':'port',pesqueria:'fishing',
-      'tripulacion de naves mercantes y especiales':'ship','servicios de hoteleria':'hotel','servicios de turismo':'tourism',
-      'muebles y terminaciones en madera':'furniture','vestuario y confeccion textil':'textile',
-      'conectividad y redes':'network',programacion:'programming',telecomunicaciones:'telecom'
+      administracion:['meeting','accounting','programming','network'],contabilidad:['accounting','meeting','programming','network'],
+      agropecuaria:['crops','forestry','aquaculture','geology'],forestal:['forestry','furniture','crops','construction'],
+      'elaboracion industrial de alimentos':['food','laboratory','cooking','crops'],gastronomia:['cooking','food','hotel','accounting'],
+      construccion:['construction','welding','plumbing','drawing'],'instalaciones sanitarias':['plumbing','construction','cooling','welding'],
+      'montaje industrial':['assembly','welding','machining','electrical'],'construcciones metalicas':['welding','machining','construction','drawing'],
+      electricidad:['electrical','electronics','network','cooling'],electronica:['electronics','electrical','network','programming'],
+      'refrigeracion y climatizacion':['cooling','electrical','plumbing','tools'],'dibujo tecnico':['drawing','construction','printing','machining'],
+      grafica:['printing','drawing','programming','textile'],'mecanica automotriz':['tools','machining','aircraft','electronics'],
+      'mecanica industrial':['machining','tools','welding','assembly'],'mecanica de mantenimiento de aeronaves':['aircraft','machining','electrical','tools'],
+      'explotacion minera':['mining','geology','metallurgy','construction'],'asistencia en geologia':['geology','mining','crops','forestry'],
+      'metalurgia extractiva':['metallurgy','welding','machining','laboratory'],'quimica industrial':['laboratory','metallurgy','food','electronics'],
+      'atencion de enfermeria':['nursing','laboratory','preschool','hotel'],'atencion de parvulos':['preschool','nursing','hotel','meeting'],
+      acuicultura:['aquaculture','fishing','food','laboratory'],'operaciones portuarias':['port','ship','construction','network'],
+      pesqueria:['fishing','aquaculture','ship','food'],'tripulacion de naves mercantes y especiales':['ship','port','fishing','telecom'],
+      'servicios de hoteleria':['hotel','cooking','tourism','meeting'],'servicios de turismo':['tourism','hotel','ship','programming'],
+      'muebles y terminaciones en madera':['furniture','forestry','construction','drawing'],'vestuario y confeccion textil':['textile','printing','furniture','drawing'],
+      'conectividad y redes':['network','telecom','programming','electronics'],programacion:['programming','network','telecom','electronics'],
+      telecomunicaciones:['telecom','network','electrical','electronics']
     };
-    return photos[value]||'tools';
+    return photos[value]||['tools','machining','construction','electronics'];
   }
-  function stationImageUrl(ctx,station){
+  function stationImageUrl(ctx,station,index,used){
     const script=document.querySelector('script[src*="native-route.js"]'),base=new URL('./assets/specialties/',script?.src||location.href);
     const image=station.quizQuestion?.image;
     if(typeof image==='string'&&image.trim()){
-      try{const candidate=new URL(image,location.href);if(candidate.origin===location.origin&&/^https?:$/.test(candidate.protocol))return candidate.href;}catch{}
+      try{const candidate=new URL(image,location.href);if(candidate.origin===location.origin&&/^https?:$/.test(candidate.protocol)&&!used.has(candidate.href)){used.add(candidate.href);return candidate.href;}}catch{}
     }
-    return new URL(`${specialtyPhoto(ctx.specialty.name)}.webp`,base).href;
+    const object=normalize(station.quizQuestion?.object||station.equipment||station.name);
+    const relevant=[];
+    const hints=[
+      [/motor|turbina|maquina|motor|mecaniz/,'machining'],[/tren|rueda|neumatico|fuselaje|ala|aeronave/,'aircraft'],
+      [/cabina|circuito|sensor|electric|electron/,'electronics'],[/plano|diseno|croquis|diagrama/,'drawing'],
+      [/soldadura|metal|estructura/,'welding'],[/cable|red|conectividad|telecom/,'network'],
+      [/cultivo|bosque|suelo|riego/,'crops'],[/pesca|mar|nave|puerto/,'ship'],[/alimento|cocina|preparacion/,'food'],
+      [/paciente|enfermer|salud/,'nursing'],[/madera|mueble/,'furniture'],[/hotel|turismo|recepcion/,'hotel']
+    ];
+    for(const [pattern,photo] of hints)if(pattern.test(object))relevant.push(photo);
+    const preferred=[...relevant,...specialtyPhotos(ctx.specialty.name)];
+    for(let offset=0;offset<preferred.length;offset++){
+      const photo=preferred[(index+offset)%preferred.length],url=new URL(`${photo}.webp`,base).href;
+      if(!used.has(url)){used.add(url);return url;}
+    }
+    return new URL(`${specialtyPhotos(ctx.specialty.name)[index%4]}.webp`,base).href;
   }
-  function createStationImage(ctx,station,displayX,displayZ,floorY,token){
-    const image=new Image();image.decoding='async';image.src=stationImageUrl(ctx,station);
+  function createStationImage(ctx,station,displayX,displayZ,floorY,token,imageUrl){
+    const image=new Image();image.decoding='async';image.src=imageUrl;
     image.onload=()=>{
       if(token!==generation||!root)return;
       const T=ctx.three,texture=new T.GOR(image);texture.colorSpace=T.er$;texture.anisotropy=4;
@@ -239,6 +260,7 @@
     const haloOffset=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*1.8;
     const mobileViewport=window.innerWidth<700,mobileShiftX=mobileViewport?-.45:0,token=generation;
     const markerScale=Math.min(1.45,Math.max(1,1200/window.innerWidth));
+    const usedImages=new Set();
     stations.forEach((station,index)=>{
       const [dx,dz]=station.totem||[station.x,station.z],x=ctx.district.x+dx,z=ctx.district.z+dz;
       if(!Number.isFinite(x)||!Number.isFinite(z))return;
@@ -254,7 +276,8 @@
       beam.position.set(displayX,floorY+.94,displayZ+haloOffset*.55);root.add(beam);beam.renderOrder=19;beams.push(beam);
       const cylinder=new T.eaF(markerCylinderGeometry,markerCylinderMaterial);cylinder.name=`Aula TP · soporte Quiz ${index+1}`;
       cylinder.position.set(displayX,floorY+.77,displayZ);root.add(cylinder);cylinders.push(cylinder);
-      createStationImage(ctx,station,displayX,displayZ,floorY,token);
+      const imageUrl=stationImageUrl(ctx,station,index,usedImages);
+      createStationImage(ctx,station,displayX,displayZ,floorY,token,imageUrl);
       const canvas=document.createElement('canvas');canvas.width=1050;canvas.height=320;
       const c=canvas.getContext('2d');c.clearRect(0,0,canvas.width,canvas.height);
       c.shadowColor='#00c9ff';c.shadowBlur=24;c.fillStyle='rgba(248,253,255,.9)';c.strokeStyle='#18c9ed';c.lineWidth=10;

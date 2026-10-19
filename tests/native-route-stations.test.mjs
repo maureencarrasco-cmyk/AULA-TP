@@ -29,9 +29,17 @@ test('existing question count is preserved and distributed sequentially across f
 });
 
 test('quiz markers have specialty imagery and a downward support without an E prompt',()=>{
-  assert.match(source,/function specialtyPhoto\(name\)/);
+  assert.match(source,/function specialtyPhotos\(name\)/);
   assert.match(source,/function createStationImage\(/);
   assert.match(source,/CylinderGeometry/);
-  assert.match(source,/createStationImage\(ctx,station,displayX,displayZ,floorY,token\)/);
+  assert.match(source,/createStationImage\(ctx,station,displayX,displayZ,floorY,token,imageUrl\)/);
+  assert.match(source,/const usedImages=new Set\(\)/);
+  assert.match(source,/!used\.has\(url\)/);
   assert.doesNotMatch(source,/fillText\('E',/);
+});
+
+test('four quiz image stations use a straight, evenly-spaced layout',()=>{
+  assert.match(source,/for\(const spacing of \[3\.15,3,2\.85\]/);
+  assert.match(source,/cx\+\(index-1\.5\)\*spacing/);
+  assert.match(source,/centerX\+\(index-1\.5\)\*2\.85/);
 });
