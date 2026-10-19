@@ -35,10 +35,7 @@
 .city-native-route-active .floor-station-dialog>footer span { color:#536b8f;font-size:15px; }
 .city-native-route-active .floor-station-dialog>footer button { min-height:58px;padding:12px 24px;border:1px solid #058c98;border-radius:16px;background:linear-gradient(120deg,#0b8995,#087782);color:#fff;font-size:18px;font-weight:900;box-shadow:0 8px 18px #07858d35; }
 .city-native-route-active .floor-station-dialog [role="status"],.city-native-route-active .floor-station-dialog [role="alert"] { color:#087782;font-weight:800; }
-.city-native-route-active .city-viewport .city-door-action[data-city-quiz-station="true"] { display:flex!important;align-items:center;justify-content:space-between;gap:18px;width:min(560px,calc(100% - 28px));min-height:112px;padding:14px 22px;border:4px solid #91f7ff;border-radius:999px;background:linear-gradient(158deg,#087e9c 0%,#00536f 56%,#0796af 100%);box-shadow:0 0 0 5px #e3fdff,0 0 22px 8px #00c9eea6,inset 0 2px 8px #ffffffa6;color:#fff;font-size:26px;font-weight:900;line-height:1.12;text-align:left;text-shadow:0 2px 2px #004966; }
-.city-native-route-active .city-viewport .city-door-action[data-city-quiz-station="true"]:hover { filter:brightness(1.1);box-shadow:0 0 0 5px #e3fdff,0 0 30px 12px #00d9ffaa,inset 0 2px 8px #ffffffa6; }
-.city-native-route-active .city-viewport .city-door-action[data-city-quiz-station="true"]:focus-visible { outline:4px solid #ffdb42;outline-offset:6px; }
-.city-native-route-active .city-viewport .city-door-action[data-city-quiz-station="true"] kbd { display:grid;place-items:center;flex:0 0 72px;width:72px;height:72px;border:4px solid #bafaff;border-radius:18px;background:linear-gradient(#fff,#eafcff);box-shadow:0 0 16px #12dfff;color:#007b99;font:900 32px Arial,sans-serif;text-shadow:none; }
+.city-native-route-active .city-viewport .city-door-action[data-city-quiz-station="true"] { display:none!important; }
 .city-native-guide { position:absolute;top:88px;left:14px;z-index:16;display:grid;gap:8px;max-width:min(310px,calc(100% - 28px));padding:10px 14px;border:1px solid #f1c326;border-radius:8px;background:#fff9e5ed;color:#073d65;font:14px Arial,sans-serif;pointer-events:auto; }
 .city-native-guide button { border:1px solid #d9a90e;border-radius:6px;background:#ffdb42;padding:8px;color:#073d65;font:700 13px Arial,sans-serif; }
 .city-native-guide[hidden],.city-native-guide button[hidden] { display:none!important; }
@@ -395,14 +392,14 @@
 .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child)::after { justify-self:center;width:30px;height:21px;border:3px solid #2470ec;border-radius:76% 22%;transform:rotate(45deg);background:radial-gradient(circle at 50% 50%,#4660ed 0 4px,#fff 5px 8px,transparent 9px);box-shadow:0 0 0 8px #e8f5ff,0 0 14px #42a9ff;content:""; }
 .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child).is-current { border-color:#13cde0;background:linear-gradient(105deg,#dff7ff,#fff 58%,#d8f8ff);color:#102d62; }
 .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child).is-current span,.city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child).is-complete span { background:linear-gradient(130deg,#1167ef,#3153ed 55%,#8143ee);color:#fff; }
-.city-native-route-active .city-viewport .city-door-action[data-city-quiz-station="true"] { border-color:#8ef7ff;background:linear-gradient(105deg,#f5fbff 0%,#e5f5ff 58%,#f8fdff 100%);box-shadow:0 0 0 5px #e3fdff,0 0 24px 8px #00c9ee88,inset 0 2px 8px #fff;color:#102d62;text-shadow:none; }
-.city-native-route-active .city-viewport .city-door-action[data-city-quiz-station="true"]::before { content:"";display:block;flex:0 0 72px;width:72px;height:72px;background:linear-gradient(130deg,#1167ef,#3153ed 55%,#8143ee);clip-path:polygon(0 0,76% 0,100% 50%,76% 100%,0 100%);filter:drop-shadow(0 0 12px #5848f28c); }
-.city-native-route-active .city-viewport .city-door-action[data-city-quiz-station="true"] kbd { border-color:#bafaff;background:linear-gradient(#fff,#eafcff);box-shadow:0 0 16px #12dfff;color:#08759e; }
 .city-native-route-active .city-native-guide { border:2px solid #8cecff;border-radius:18px 18px 18px 7px;background:linear-gradient(115deg,#f6fcffed,#e7f7ffed);box-shadow:0 0 0 4px #e8faff99,0 10px 28px #07527c4d;color:#102d62; }
-.city-native-route-active .city-native-guide button { border:2px solid #39cbe8;border-radius:12px;background:linear-gradient(110deg,#e7f7ff,#fff);box-shadow:0 0 14px #40c9f26b;color:#104579;font-weight:900; }
+.city-native-route-active .city-native-guide { grid-template-columns:minmax(0,1fr) 40px;align-items:center; }
+.city-native-route-active .city-native-guide kbd { display:grid;grid-column:2;grid-row:1;place-items:center;width:36px;height:36px;border:2px solid #7ef5ff;border-radius:10px;background:linear-gradient(#fff,#dffaff);box-shadow:0 0 0 3px #ddfbff,0 0 17px 5px #00c9eea6;color:#067c9b;font:900 21px Arial,sans-serif; }
+.city-native-route-active .city-native-guide kbd[hidden] { display:none!important; }
+.city-native-route-active .city-native-guide button { grid-column:1/-1;border:2px solid #39cbe8;border-radius:12px;background:linear-gradient(110deg,#e7f7ff,#fff);box-shadow:0 0 14px #40c9f26b;color:#104579;font-weight:900; }
 @media(max-width:700px) {
   .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child) { grid-template-columns:52px minmax(0,1fr) 24px;gap:7px;min-height:68px;padding:6px 8px 6px 6px;border-width:2px;border-radius:22px;font-size:14px; }
   .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child) span { width:48px;height:48px;border-radius:18px 8px 18px 8px;font-size:28px; }
   .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child)::after { width:18px;height:13px;border-width:2px;box-shadow:0 0 0 5px #e8f5ff,0 0 9px #42a9ff; }
-  .city-native-route-active .city-viewport .city-door-action[data-city-quiz-station="true"]::before { flex-basis:52px;width:52px;height:52px; }
+  .city-native-route-active .city-native-guide kbd { width:32px;height:32px;border-radius:9px;font-size:18px; }
 }

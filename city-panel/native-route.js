@@ -2,6 +2,7 @@
 (() => {
   const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   let context,root,geometry,material,panel,label,action,current=null,last=0,room=null,error='';
+  let keyHint;
   let bannerGeometry,bannerImageToken=0;
   const banners=[],originalSigns=[],bannerTextures=[],bannerMaterials=[];
   const arrows=[];
@@ -32,12 +33,13 @@
     ctx.scene.add(root);
     createPhaseBanners(ctx);
     panel=document.createElement('section');panel.className='city-native-guide';panel.setAttribute('aria-live','polite');
-    label=document.createElement('strong');action=document.createElement('button');action.type='button';action.textContent='Abrir quiz de mi módulo';
+    label=document.createElement('strong');keyHint=document.createElement('kbd');keyHint.textContent='E';keyHint.setAttribute('aria-label','Presiona E para abrir el quiz');
+    action=document.createElement('button');action.type='button';action.textContent='Abrir quiz de mi módulo';
     action.addEventListener('click',()=>{
       const button=[...document.querySelectorAll('.city-viewport button')].find(item=>normalize(item.textContent).includes('desafio profesional'));
       if(button)button.click();
     });
-    panel.append(label,action);document.querySelector('.city-viewport')?.append(panel);
+    panel.append(label,keyHint,action);document.querySelector('.city-viewport')?.append(panel);
     document.documentElement.classList.add('city-native-route-active');
   }
   function createPhaseBanners(ctx){
@@ -126,7 +128,7 @@
       const data=current&&normalize(current.specialty)===normalize(ctx.specialty.name)?current:null;
       const index=data?next(data):0;
       arrows.forEach(arrow=>arrow.visible=false);
-      if(index<0){label.textContent='Quiz completado · revisa tu resultado';action.hidden=false;return;}
+      if(index<0){label.textContent='Quiz completado · revisa tu resultado';action.hidden=false;keyHint.hidden=true;return;}
       const station=selectedStation(ctx.stations,index,data?.questions[index]);
       const [dx,dz]=station.totem||[station.x,station.z];
       const target={x:ctx.district.x+dx,z:ctx.district.z+dz};

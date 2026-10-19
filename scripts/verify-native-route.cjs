@@ -28,6 +28,7 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
   await page.waitForFunction(()=>Number(document.querySelector('.city-native-guide')?.dataset.arrows)>0,{},{timeout:60000});
   assert.ok((await page.locator('.city-native-guide').innerText()).includes('Quiz 1'));
   assert.equal(await page.locator('.city-quiz-route-entry').isVisible(),false);
+  assert.equal(await page.evaluate(()=>{const button=document.createElement('button');button.className='city-door-action';button.dataset.cityQuizStation='true';document.querySelector('.city-viewport').append(button);const display=getComputedStyle(button).display;button.remove();return display}),'none');
   await page.evaluate(()=>{const original=AulaTPNativeRoute.frame;AulaTPNativeRoute.frame=context=>{window.__cityRouteContext=context;original(context)}});
   await page.waitForFunction(()=>window.__cityRouteContext?.phaseStations?.some(station=>station.phase==='observar'),{},{timeout:60000});
   const phaseNames=await page.evaluate(()=>window.__cityRouteContext.phaseStations.map(station=>station.phase).filter(phase=>['observar','planificar','verificar'].includes(phase)).sort());
@@ -35,6 +36,8 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
   await page.waitForFunction(()=>{let visible=false;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityObserveBanner&&object.userData.cityObserveArtworkLoaded&&object.visible&&object.material?.name==='Aula TP · arte Observar')visible=true});return visible},{},{timeout:30000});
   assert.equal(await page.evaluate(()=>{let visible=false;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityObserveBanner&&object.userData.cityObserveArtworkLoaded&&object.visible&&object.material?.name==='Aula TP · arte Observar')visible=true});return visible}),true);
   await page.waitForFunction(()=>{const found=new Set();window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityQuizArtworkLoaded&&object.visible&&object.material?.name?.startsWith('Aula TP · arte '))found.add(object.userData.cityQuizBanner)});return ['observar','planificar','verificar'].every(phase=>found.has(phase))},{},{timeout:30000});
+  const keyHint=page.locator('.city-native-guide kbd');assert.equal(await keyHint.evaluate(element=>element.textContent),'E');assert.equal(await keyHint.isVisible(),true);assert.match(await keyHint.getAttribute('aria-label'),/Presiona E/);
+  assert.notEqual(await keyHint.evaluate(element=>getComputedStyle(element).boxShadow),'none');
   const renderedPhases=await page.evaluate(()=>{const found=new Set();window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityQuizArtworkLoaded&&object.visible&&object.material?.name?.startsWith('Aula TP · arte '))found.add(object.userData.cityQuizBanner)});return [...found].sort()});
   assert.deepEqual(renderedPhases,['observar','planificar','verificar']);
   const quizArtwork=await page.evaluate(()=>{const dialog=document.createElement('dialog'),list=document.createElement('ol'),step=document.createElement('li');dialog.className='floor-station-dialog';list.className='floor-route-progress';step.innerHTML='<span>1</span>Observar';list.append(step);dialog.append(list);document.documentElement.classList.add('city-native-route-active');document.body.append(dialog);const image=getComputedStyle(step,'::before').backgroundImage;dialog.remove();return image});
@@ -67,12 +70,14 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
    assert.equal(await page.evaluate(()=>Boolean(window.nativeQuizObserved.answers.q01?.correct)),true);
    await page.getByRole('button',{name:/^Cerrar/}).last().click();
    await page.waitForFunction(()=>document.querySelector('.city-native-guide')?.dataset.quiz==='2');
+   assert.equal(await page.locator('.city-native-guide kbd').evaluate(element=>element.textContent),'E');
   }
-  if(!process.argv.includes('--visual-only')){
+  if(process.argv.includes('--all')){
    await page.evaluate(specialty=>dispatchEvent(new CustomEvent('aulatp:quiz-progress',{detail:{specialty,moduleId:'test',questions:[{id:'q01'},{id:'q02'},{id:'q03'}],answers:{q01:{correct:false}}}})),specialty);
    await page.waitForTimeout(350);assert.equal(await page.locator('.city-native-guide').getAttribute('data-quiz'),'1');
    await page.evaluate(specialty=>dispatchEvent(new CustomEvent('aulatp:quiz-progress',{detail:{specialty,moduleId:'test',questions:[{id:'q01'},{id:'q02'},{id:'q03'}],answers:{q01:{correct:true}}}})),specialty);
    await page.waitForFunction(()=>document.querySelector('.city-native-guide')?.dataset.quiz==='2');
+   assert.equal(await page.locator('.city-native-guide kbd').evaluate(element=>element.textContent),'E');
    await page.screenshot({path:path.join(output,'hangar-quiz2.png'),fullPage:true});
   }
   await page.setViewportSize({width:390,height:844});await page.waitForTimeout(500);
@@ -88,6 +93,7 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
      await page.locator('.city-specialties button').filter({has:page.locator('strong',{hasText:name})}).first().evaluate(button=>button.click());
      await page.waitForFunction(name=>document.querySelector('[data-specialty]')?.dataset.specialty===name&&Boolean(document.querySelector('.city-native-guide')),name,{timeout:20000});
       await page.waitForFunction(name=>window.__cityRouteContext?.specialty?.name===name,name,{timeout:20000});
+      assert.equal(await page.locator('.city-native-guide kbd').evaluate(element=>element.textContent),'E',name+' shows the E key prompt');
       const hasObserveStage=await page.evaluate(()=>window.__cityRouteContext.phaseStations?.some(station=>station.phase==='observar'));
       if(hasObserveStage){
        try{await page.waitForFunction(name=>{const context=window.__cityRouteContext;if(context?.specialty?.name!==name)return false;const loaded=new Set();context.scene.traverse(object=>{if(object.userData.cityQuizArtworkLoaded&&object.visible)loaded.add(object.userData.cityQuizBanner)});return ['observar','planificar','verificar'].every(phase=>loaded.has(phase))},name,{timeout:20000});artChecked++;}
@@ -101,6 +107,6 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
     assert.equal(checked,35);assert.ok(artChecked>0);assert.equal(artChecked+artNotApplicable,35);console.log(JSON.stringify({specialtiesVerified:checked,observeArtworkVerified:artChecked,specialtiesWithoutPhaseSign:artNotApplicable}));
   }
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({originalHangar:true,floorArrows:true,allQuizStageArtwork:true,published:process.argv.includes('--published'),realQuizEvent:!process.argv.includes('--all'),nextQuiz:process.argv.includes('--visual-only')?null:true,wrongAnswerStays:process.argv.includes('--visual-only')?null:true,mobile:true,errors}));
+  console.log(JSON.stringify({originalHangar:true,floorArrows:true,allQuizStageArtwork:true,quizEKeyHint:true,largePromptRemoved:true,published:process.argv.includes('--published'),realQuizEvent:!process.argv.includes('--all'),nextQuiz:process.argv.includes('--visual-only')?null:true,wrongAnswerStays:process.argv.includes('--visual-only')?null:true,mobile:true,errors}));
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exit(1);});
