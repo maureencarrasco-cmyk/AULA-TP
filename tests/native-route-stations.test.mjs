@@ -28,17 +28,22 @@ test('existing question count is preserved and distributed sequentially across f
 test('quiz markers use the shared illustrated artwork, specialty imagery and downward support',()=>{
   assert.match(source,/function specialtyPhotos\(name\)/);
   assert.match(source,/function createStationArtwork\(/);
-  assert.match(source,/markerGeometry=new T\.bdM\(2\.7,1\.92\)/);
+  assert.match(source,/markerGeometry=new T\.bdM\(2\.7,\.82\)/);
+  assert.match(source,/markerImageGeometry=new T\.bdM\(1\.42,\.95\)/);
+  assert.match(source,/markerBeamGeometry=new T\.bdM\(1\.82,1\.92\)/);
   assert.match(source,/c\.fillText\(`Quiz \$\{index\+1\}`/);
   assert.match(source,/station\.quizQuestion\?\.object/);
-  assert.match(source,/c\.drawImage\(image,/);
+  assert.match(source,/photo\.drawImage\(image,/);
   assert.match(source,/cityQuizArtworkReady=true/);
+  assert.match(source,/sign\.position\.set\(displayX,floorY\+2\.08,displayZ\)/);
+  assert.match(source,/imageMesh\.position\.set\(displayX,floorY\+1\.02/);
+  assert.match(source,/beamContext\.lineTo\(376,512\)/);
   assert.match(source,/CylinderGeometry/);
-  assert.match(source,/createStationArtwork\(ctx,station,index,token,imageUrl,sign,texture,canvas\)/);
+  assert.match(source,/createStationArtwork\(ctx,station,index,token,imageUrl,marker,canvas,displayX,displayZ,floorY,markerScale\)/);
+  assert.match(source,/halo\.position\.set\(displayX,floorY,displayZ\)/);
   assert.match(source,/const usedImages=new Set\(\)/);
   assert.match(source,/!used\.has\(url\)/);
   assert.doesNotMatch(source,/fillText\('E',/);
-  assert.doesNotMatch(source,/markerImageGeometry|quizImages/);
 });
 
 test('four quiz image stations use a straight, evenly-spaced layout',()=>{

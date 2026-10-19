@@ -8,7 +8,7 @@
   const quizMarkers=[];
   const stageAnchors=[];
   let roomStations=[];
-  let markerGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial,markerBeamGeometry,markerBeamTexture,markerBeamMaterial,markerSparkGeometry,markerSparkTexture,markerSparkMaterial,markerCylinderGeometry,markerCylinderMaterial;
+  let markerGeometry,markerImageGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial,markerBeamGeometry,markerBeamTexture,markerBeamMaterial,markerSparkGeometry,markerSparkTexture,markerSparkMaterial,markerCylinderGeometry,markerCylinderMaterial;
   const beams=[],sparkles=[],cylinders=[];
   function progress(event){
     const data=event.detail;
@@ -21,12 +21,12 @@
   addEventListener('aulatp:quiz-progress',progress);
   function dispose(){
     generation++;root?.removeFromParent();geometry?.dispose();material?.dispose();
-    markerGeometry?.dispose();markerHaloGeometry?.dispose();markerHaloTexture?.dispose();markerHaloMaterial?.dispose();
+    markerGeometry?.dispose();markerImageGeometry?.dispose();markerHaloGeometry?.dispose();markerHaloTexture?.dispose();markerHaloMaterial?.dispose();
     markerBeamGeometry?.dispose();markerBeamTexture?.dispose();markerBeamMaterial?.dispose();beams.length=0;
     markerSparkGeometry?.dispose();markerSparkTexture?.dispose();markerSparkMaterial?.dispose();sparkles.length=0;
     markerCylinderGeometry?.dispose();markerCylinderMaterial?.dispose();cylinders.length=0;
-    for(const marker of quizMarkers){marker.texture.dispose();marker.material.dispose();}
-    quizMarkers.length=0;markerGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=markerBeamGeometry=markerBeamTexture=markerBeamMaterial=markerSparkGeometry=markerSparkTexture=markerSparkMaterial=markerCylinderGeometry=markerCylinderMaterial=null;
+    for(const marker of quizMarkers){marker.texture.dispose();marker.material.dispose();marker.imageTexture?.dispose();marker.imageMaterial?.dispose();}
+    quizMarkers.length=0;markerGeometry=markerImageGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=markerBeamGeometry=markerBeamTexture=markerBeamMaterial=markerSparkGeometry=markerSparkTexture=markerSparkMaterial=markerCylinderGeometry=markerCylinderMaterial=null;
     stageAnchors.length=0;
     roomStations=[];
     for(const [sign,visible,oldGeometry,oldMaterial,oldName] of originalSigns){sign.visible=visible;sign.geometry=oldGeometry;sign.material=oldMaterial;sign.name=oldName;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityQuizMarker;}
@@ -171,42 +171,43 @@
     }
     return new URL(`${specialtyPhotos(ctx.specialty.name)[index%4]}.webp`,base).href;
   }
-  function createStationArtwork(ctx,station,index,token,imageUrl,sign,texture,canvas){
+  function createStationArtwork(ctx,station,index,token,imageUrl,marker,canvas,displayX,displayZ,floorY,markerScale){
     const image=new Image();image.decoding='async';
     image.onload=()=>{
       if(token!==generation||!root)return;
-      const c=canvas.getContext('2d'),w=canvas.width,h=canvas.height;
+      const c=canvas.getContext('2d');
       const rounded=(x,y,width,height,radius)=>{c.beginPath();c.roundRect(x,y,width,height,radius);};
       c.clearRect(0,0,w,h);
-      c.save();c.shadowColor='#00cfff';c.shadowBlur=44;c.fillStyle='rgba(238,250,255,.94)';c.strokeStyle='#f5fdff';c.lineWidth=18;
-      rounded(36,32,1128,786,118);c.fill();c.stroke();c.shadowBlur=0;c.strokeStyle='#08c7f2';c.lineWidth=12;rounded(48,44,1104,762,108);c.stroke();c.restore();
-      const header=c.createLinearGradient(0,82,0,320);header.addColorStop(0,'rgba(255,255,255,.98)');header.addColorStop(1,'rgba(218,245,255,.92)');
-      c.save();c.shadowColor='rgba(0,174,255,.48)';c.shadowBlur=30;c.fillStyle=header;rounded(120,76,1000,254,76);c.fill();c.restore();
-      c.save();c.shadowColor='#00cfff';c.shadowBlur=26;c.fillStyle='rgba(86,220,250,.38)';c.strokeStyle='#ffffff';c.lineWidth=9;
-      c.beginPath();c.arc(220,203,116,0,Math.PI*2);c.fill();c.stroke();c.restore();
-      c.textAlign='center';c.textBaseline='middle';c.fillStyle='#0874ef';c.font='900 138px Arial';c.fillText(String(index+1),220,205);
-      c.textAlign='left';c.fillStyle='#1263ec';c.font='900 94px Arial';c.fillText(`Quiz ${index+1}`,370,165,680);
+      c.save();c.shadowColor='#00cfff';c.shadowBlur=34;c.fillStyle='rgba(235,249,255,.97)';c.strokeStyle='#ffffff';c.lineWidth=20;
+      rounded(30,30,1140,280,135);c.fill();c.stroke();c.shadowBlur=0;c.strokeStyle='#08c7f2';c.lineWidth=14;rounded(44,44,1112,252,122);c.stroke();c.restore();
+      const header=c.createLinearGradient(0,58,0,286);header.addColorStop(0,'rgba(255,255,255,.99)');header.addColorStop(1,'rgba(214,242,255,.95)');
+      c.save();c.shadowColor='rgba(0,174,255,.52)';c.shadowBlur=24;c.fillStyle=header;rounded(106,58,1010,226,92);c.fill();c.restore();
+      c.save();c.shadowColor='#00cfff';c.shadowBlur=26;c.fillStyle='rgba(86,220,250,.42)';c.strokeStyle='#ffffff';c.lineWidth=10;
+      c.beginPath();c.arc(220,171,105,0,Math.PI*2);c.fill();c.stroke();c.restore();
+      c.textAlign='center';c.textBaseline='middle';c.fillStyle='#0874ef';c.font='900 124px Arial';c.fillText(String(index+1),220,173);
+      c.textAlign='left';c.fillStyle='#1263ec';c.font='900 84px Arial';c.fillText(`Quiz ${index+1}`,370,135,680);
       const title=String(station.quizQuestion?.object||station.equipment||station.name||station.title||station.label||'Estación de trabajo');
-      c.fillStyle='#102653';c.font='800 53px Arial';c.fillText(title.length>34?`${title.slice(0,31)}...`:title,378,253,690);
-      c.save();c.shadowColor='rgba(0,164,255,.88)';c.shadowBlur=42;c.fillStyle='rgba(26,162,255,.3)';rounded(164,354,872,390,54);c.fill();c.restore();
-      c.save();rounded(188,368,824,352,40);c.clip();
-      const scale=Math.max(824/image.width,352/image.height),imageWidth=image.width*scale,imageHeight=image.height*scale;
-      c.drawImage(image,600-imageWidth/2,544-imageHeight/2,imageWidth,imageHeight);c.restore();
-      c.save();c.shadowColor='#00baff';c.shadowBlur=30;c.strokeStyle='#f4fdff';c.lineWidth=15;rounded(184,364,832,360,44);c.stroke();
-      c.shadowBlur=0;c.strokeStyle='#5de6ff';c.lineWidth=8;rounded(195,375,810,338,36);c.stroke();c.restore();
-      const platform=c.createLinearGradient(0,748,0,820);platform.addColorStop(0,'rgba(13,187,255,.84)');platform.addColorStop(1,'rgba(0,102,230,.18)');
-      c.save();c.shadowColor='#00cfff';c.shadowBlur=45;c.fillStyle=platform;c.beginPath();c.ellipse(600,772,400,45,0,0,Math.PI*2);c.fill();
-      c.strokeStyle='#ffffff';c.lineWidth=8;c.beginPath();c.ellipse(600,770,360,30,0,0,Math.PI*2);c.stroke();
-      c.strokeStyle='#51ddff';c.lineWidth=11;c.beginPath();c.ellipse(600,780,430,53,0,0,Math.PI*2);c.stroke();c.restore();
-      for(const [x,y] of [[116,516],[1082,494],[146,700],[1048,682]]){const glow=c.createRadialGradient(x,y,2,x,y,26);glow.addColorStop(0,'rgba(255,255,255,1)');glow.addColorStop(.3,'rgba(96,240,255,.95)');glow.addColorStop(1,'rgba(0,183,255,0)');c.fillStyle=glow;c.fillRect(x-26,y-26,52,52);}
-      texture.needsUpdate=true;sign.userData.cityQuizArtworkReady=true;
+      c.fillStyle='#102653';c.font='800 51px Arial';c.fillText(title.length>34?`${title.slice(0,31)}...`:title,378,220,690);
+      marker.texture.needsUpdate=true;marker.sign.userData.cityQuizArtworkReady=true;
+      const photoCanvas=document.createElement('canvas');photoCanvas.width=720;photoCanvas.height=480;
+      const photo=photoCanvas.getContext('2d');photo.save();photo.shadowColor='#00cfff';photo.shadowBlur=32;photo.fillStyle='rgba(220,249,255,.42)';photo.fillRect(0,0,720,480);photo.restore();
+      photo.save();photo.beginPath();photo.roundRect(34,24,652,432,42);photo.clip();
+      const scale=Math.max(652/image.width,432/image.height),imageWidth=image.width*scale,imageHeight=image.height*scale;
+      photo.drawImage(image,360-imageWidth/2,240-imageHeight/2,imageWidth,imageHeight);photo.restore();
+      photo.save();photo.shadowColor='#00cfff';photo.shadowBlur=34;photo.strokeStyle='#ffffff';photo.lineWidth=18;photo.beginPath();photo.roundRect(34,24,652,432,42);photo.stroke();
+      photo.shadowBlur=0;photo.strokeStyle='#28d8ff';photo.lineWidth=9;photo.beginPath();photo.roundRect(44,34,632,412,34);photo.stroke();photo.restore();
+      const T=ctx.three,imageTexture=new T.GOR(photoCanvas);imageTexture.colorSpace=T.er$;imageTexture.anisotropy=4;
+      const imageMaterial=new T.V9B({map:imageTexture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
+      const imageMesh=new T.eaF(markerImageGeometry,imageMaterial);imageMesh.position.set(displayX,floorY+1.02,displayZ);imageMesh.scale.setScalar(markerScale);imageMesh.renderOrder=20;imageMesh.userData.cityQuizImage=true;root.add(imageMesh);
+      marker.imageTexture=imageTexture;marker.imageMaterial=imageMaterial;marker.imageMesh=imageMesh;
     };
     image.src=imageUrl;
   }
   function createQuizMarkers(ctx){
     const T=ctx.three,stations=roomStations=configureStations(ctx);
     if(!stations.length)return;
-    markerGeometry=new T.bdM(2.7,1.92);
+    markerGeometry=new T.bdM(2.7,.82);
+    markerImageGeometry=new T.bdM(1.42,.95);
     markerHaloGeometry=new T.bdM(2.25,2.25);
     const haloCanvas=document.createElement('canvas');haloCanvas.width=256;haloCanvas.height=256;
     const haloContext=haloCanvas.getContext('2d'),glow=haloContext.createRadialGradient(128,128,24,128,128,124);
@@ -217,13 +218,14 @@
     haloContext.strokeStyle='#e5fbff';haloContext.lineWidth=4;haloContext.beginPath();haloContext.ellipse(128,128,94,69,0,0,Math.PI*2);haloContext.stroke();haloContext.restore();
     markerHaloTexture=new T.GOR(haloCanvas);markerHaloTexture.colorSpace=T.er$;
     markerHaloMaterial=new T.V9B({map:markerHaloTexture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
-    markerBeamGeometry=new T.bdM(.42,1.8);
-    const beamCanvas=document.createElement('canvas');beamCanvas.width=128;beamCanvas.height=512;
-    const beamContext=beamCanvas.getContext('2d'),beamWidth=beamContext.createLinearGradient(0,0,128,0);
-    beamWidth.addColorStop(0,'rgba(0,214,255,0)');beamWidth.addColorStop(.36,'rgba(0,214,255,.22)');beamWidth.addColorStop(.5,'rgba(143,245,255,.62)');beamWidth.addColorStop(.64,'rgba(0,214,255,.22)');beamWidth.addColorStop(1,'rgba(0,214,255,0)');
-    beamContext.fillStyle=beamWidth;beamContext.fillRect(0,0,128,512);beamContext.globalCompositeOperation='destination-in';
-    const beamHeight=beamContext.createLinearGradient(0,0,0,512);beamHeight.addColorStop(0,'rgba(255,255,255,0)');beamHeight.addColorStop(.16,'rgba(255,255,255,.9)');beamHeight.addColorStop(.82,'rgba(255,255,255,.9)');beamHeight.addColorStop(1,'rgba(255,255,255,0)');
-    beamContext.fillStyle=beamHeight;beamContext.fillRect(0,0,128,512);
+    markerBeamGeometry=new T.bdM(1.82,1.92);
+    const beamCanvas=document.createElement('canvas');beamCanvas.width=384;beamCanvas.height=512;
+    const beamContext=beamCanvas.getContext('2d'),beamGlow=beamContext.createLinearGradient(0,0,384,0);
+    beamGlow.addColorStop(0,'rgba(0,193,255,0)');beamGlow.addColorStop(.5,'rgba(76,225,255,.62)');beamGlow.addColorStop(1,'rgba(0,193,255,0)');
+    beamContext.fillStyle=beamGlow;beamContext.beginPath();beamContext.moveTo(144,0);beamContext.lineTo(240,0);beamContext.lineTo(376,512);beamContext.lineTo(8,512);beamContext.closePath();beamContext.fill();
+    beamContext.globalCompositeOperation='destination-in';
+    const beamHeight=beamContext.createLinearGradient(0,0,0,512);beamHeight.addColorStop(0,'rgba(255,255,255,.06)');beamHeight.addColorStop(.18,'rgba(255,255,255,.95)');beamHeight.addColorStop(.9,'rgba(255,255,255,.75)');beamHeight.addColorStop(1,'rgba(255,255,255,0)');
+    beamContext.fillStyle=beamHeight;beamContext.fillRect(0,0,384,512);
     markerBeamTexture=new T.GOR(beamCanvas);markerBeamTexture.colorSpace=T.er$;
     markerBeamMaterial=new T.V9B({map:markerBeamTexture,transparent:true,opacity:.72,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
     markerSparkGeometry=new T.bdM(.12,.12);
@@ -234,13 +236,12 @@
     markerSparkTexture=new T.GOR(sparkCanvas);markerSparkTexture.colorSpace=T.er$;
     markerSparkMaterial=new T.V9B({map:markerSparkTexture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
     const Cylinder=Object.values(T).find(value=>typeof value==='function'&&value.name==='CylinderGeometry');
-    markerCylinderGeometry=Cylinder?new Cylinder(.075,.075,.58,12):new T.iNn(.13,.58,.13);
+    markerCylinderGeometry=Cylinder?new Cylinder(.075,.075,.86,12):new T.iNn(.13,.86,.13);
     markerCylinderMaterial=new T.V9B({color:0x19c9eb,toneMapped:false,transparent:true,opacity:.86,depthWrite:false});
     const floorY=ctx.floorY+.035;
     const playerZ=ctx.player.z,anchorCenterZ=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.z,0)/stageAnchors.length:null;
     const anchorCenterX=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.x,0)/stageAnchors.length:null;
     const forward=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*5.9;
-    const haloOffset=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*1.8;
     const mobileViewport=window.innerWidth<700,mobileShiftX=mobileViewport?-.45:0,token=generation;
     const markerScale=Math.min(1.05,Math.max(1,1200/window.innerWidth));
     const usedImages=new Set();
@@ -249,26 +250,26 @@
       if(!Number.isFinite(x)||!Number.isFinite(z))return;
       const anchor=stageAnchors[index],displayX=anchor?anchorCenterX+.9+mobileShiftX+(anchor.x-anchorCenterX)*1.8:x+mobileShiftX,displayZ=anchor?anchor.z+forward:z;
       const halo=new T.eaF(markerHaloGeometry,markerHaloMaterial);halo.name=`Aula TP · halo Quiz ${index+1}`;
-      halo.position.set(displayX,floorY,displayZ+haloOffset);halo.rotation.x=-Math.PI/2;root.add(halo);
+      halo.position.set(displayX,floorY,displayZ);halo.rotation.x=-Math.PI/2;root.add(halo);
       for(let sparkle=0;sparkle<6;sparkle++){
         const angle=sparkle*Math.PI/3,light=new T.eaF(markerSparkGeometry,markerSparkMaterial);
-        light.position.set(displayX+Math.cos(angle)*1.04,floorY+.045,displayZ+haloOffset+Math.sin(angle)*.72);
+        light.position.set(displayX+Math.cos(angle)*1.04,floorY+.045,displayZ+Math.sin(angle)*.72);
         light.rotation.x=-Math.PI/2;light.renderOrder=2;root.add(light);sparkles.push(light);
       }
       const beam=new T.eaF(markerBeamGeometry,markerBeamMaterial);beam.name=`Aula TP · haz Quiz ${index+1}`;
-      beam.position.set(displayX,floorY+.94,displayZ+haloOffset*.55);root.add(beam);beam.renderOrder=19;beams.push(beam);
+      beam.position.set(displayX,floorY+1.02,displayZ);root.add(beam);beam.renderOrder=19;beams.push(beam);
       const cylinder=new T.eaF(markerCylinderGeometry,markerCylinderMaterial);cylinder.name=`Aula TP · soporte Quiz ${index+1}`;
-      cylinder.position.set(displayX,floorY+.77,displayZ);root.add(cylinder);cylinders.push(cylinder);
+      cylinder.position.set(displayX,floorY+.49,displayZ);root.add(cylinder);cylinders.push(cylinder);
       const title=String(station.quizQuestion?.object||station.equipment||station.name||station.title||station.label||'Puesto de trabajo');
-      const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=850;
+      const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=340;
       const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
       const signMaterial=new T.V9B({map:texture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
       const sign=new T.eaF(markerGeometry,signMaterial);
-      sign.position.set(displayX,ctx.floorY+.99,displayZ);sign.scale.setScalar(markerScale);root.add(sign);
+      sign.position.set(displayX,floorY+2.08,displayZ);sign.scale.setScalar(markerScale);root.add(sign);
       sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
-      quizMarkers.push({sign,texture,material:signMaterial});
+      const marker={sign,texture,material:signMaterial};quizMarkers.push(marker);
       const imageUrl=stationImageUrl(ctx,station,index,usedImages);
-      createStationArtwork(ctx,station,index,token,imageUrl,sign,texture,canvas);
+      createStationArtwork(ctx,station,index,token,imageUrl,marker,canvas,displayX,displayZ,floorY,markerScale);
     });
   }
   function next(data){return data.questions.findIndex(question=>!data.answers[question.id]?.correct);}
@@ -298,7 +299,7 @@
       if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;return;}
       root.visible=true;
       const now=performance.now();if(now-last<250)return;last=now;
-      for(const marker of quizMarkers){const facing=Math.atan2(ctx.player.x-marker.sign.position.x,ctx.player.z-marker.sign.position.z);marker.sign.rotation.y=facing;}
+      for(const marker of quizMarkers){const facing=Math.atan2(ctx.player.x-marker.sign.position.x,ctx.player.z-marker.sign.position.z);marker.sign.rotation.y=facing;if(marker.imageMesh)marker.imageMesh.rotation.y=facing;}
       for(const beam of beams)beam.rotation.y=Math.atan2(ctx.player.x-beam.position.x,ctx.player.z-beam.position.z);
       document.querySelectorAll('.city-viewport .city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
       const stationAction=[...document.querySelectorAll('.city-viewport .city-door-action')].find(button=>/^\s*\d+\s*[·.)-]/.test(button.textContent));
