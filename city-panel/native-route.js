@@ -15,7 +15,7 @@
   function dispose(){
     root?.removeFromParent();geometry?.dispose();material?.dispose();
     bannerGeometry?.dispose();bannerTextures.forEach(texture=>texture.dispose());bannerMaterials.forEach(item=>item.dispose());bannerImageToken++;
-    for(const [sign,visible,geometry,material,name] of originalSigns){sign.visible=visible;sign.geometry=geometry;sign.material=material;sign.name=name;delete sign.userData.cityObserveBanner;delete sign.userData.cityQuizBanner;delete sign.userData.cityObserveArtworkLoaded;delete sign.userData.cityQuizArtworkLoaded;}
+    for(const [sign,visible,geometry,material,name] of originalSigns){sign.visible=visible;sign.geometry=geometry;sign.material=material;sign.name=name;delete sign.userData.cityObserveBanner;delete sign.userData.cityQuizBanner;delete sign.userData.cityQuizNumber;delete sign.userData.cityObserveArtworkLoaded;delete sign.userData.cityQuizArtworkLoaded;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;}
     originalSigns.length=0;banners.length=0;bannerTextures.length=0;bannerMaterials.length=0;bannerGeometry=null;
     root=geometry=material=null;arrows.length=0;panel?.remove();panel=label=action=null;
     document.querySelectorAll('.city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
@@ -49,11 +49,62 @@
     const script=[...document.scripts].find(item=>item.src.includes('/native-route.js'));
     if(!script)return;
     const imageToken=++bannerImageToken;
-    bannerGeometry=new T.bdM(1.16,1.16*292/1667);
-    const position=new T.Pq0();
-    for(const station of stations){
+    const position=new T.Pq0(),roomPosition=ctx.room.getWorldPosition(new T.Pq0());
+    const candidates=[];
+    ctx.scene.traverse(node=>{
+      const size=node.geometry?.parameters;
+      if(!node.isMesh||!node.userData?.luminousSign||!size||size.width<1.8||size.width>2.5||size.height<.25||size.height>.45)return;
+      node.getWorldPosition(position);
+      if(Math.abs(position.x-roomPosition.x)<9&&Math.abs(position.z-roomPosition.z)<11&&Math.abs(position.y-roomPosition.y)<3.5)candidates.push({node,x:position.x,y:position.y,z:position.z,width:size.width});
+    });
+    let signGroup=null,groupDistance=Infinity;
+    for(const first of candidates){
+      const group=candidates.filter(item=>Math.abs(item.y-first.y)<.08&&Math.abs(item.z-first.z)<.08).sort((a,b)=>a.x-b.x);
+      for(let start=0;start<=group.length-3;start++){
+        const row=group.slice(start,start+3),gaps=[row[1].x-row[0].x,row[2].x-row[1].x];
+        if(gaps.some(gap=>gap<2.1||gap>2.7))continue;
+        const centerX=(row[0].x+row[2].x)/2,distance=Math.hypot(centerX-roomPosition.x,row[0].y-roomPosition.y,row[0].z-roomPosition.z);
+        if(distance<groupDistance){groupDistance=distance;signGroup=row;}
+      }
+    }
+    if(!signGroup){
+      bannerGeometry=new T.bdM(1.16,1.16*292/1667);
+      for(const station of stations)createPhaseBanner(ctx,station,phases,script,imageToken,position);
+      return;
+    }
+    bannerGeometry=new T.bdM(signGroup[0].width,signGroup[0].width*292/1667);
+    for(const item of signGroup){
+      const node=item.node;
+      originalSigns.push([node,node.visible,node.geometry,node.material,node.name]);
+    }
+    ctx.scene.traverse(node=>{
+      if(!node.isMesh||!node.userData?.luminousSign||node.geometry?.parameters?.width!==1.16)return;
+      node.getWorldPosition(position);
+      const station=stations.find(item=>Math.abs(position.x-(ctx.district.x+item.x))<.03&&Math.abs(position.y-(ctx.floorY+1.62))<.12&&Math.abs(position.z-(ctx.district.z+item.z))<.03);
+      if(station&&!originalSigns.some(([sign])=>sign===node)){
+        originalSigns.push([node,node.visible,node.geometry,node.material,node.name]);node.visible=false;node.userData.cityLegacyQuizStageSign=true;
+      }
+    });
+    for(let index=0;index<Math.min(phases.length,signGroup.length);index++){
+      const phase=phases[index],stageNumber=index+1,node=signGroup[index].node;
+      node.name=`Aula TP · Quiz ${stageNumber} · ${phase[0].toUpperCase()+phase.slice(1)}`;node.geometry=bannerGeometry;node.visible=true;node.userData.cityQuizBanner=phase;node.userData.cityQuizNumber=stageNumber;node.userData.cityQuizArtworkLoaded=phase!=='observar';
+      const canvas=document.createElement('canvas');canvas.width=1667;canvas.height=292;
+      const canvasContext=canvas.getContext('2d'),texture=new T.GOR(canvas);
+      texture.colorSpace=T.er$;texture.anisotropy=4;bannerTextures.push(texture);
+      const bannerMaterial=new T.V9B({map:texture,side:T.$EB,toneMapped:false,depthWrite:false});
+      const phaseName=phase[0].toUpperCase()+phase.slice(1);bannerMaterial.name=`Aula TP · arte ${phaseName}`;bannerMaterials.push(bannerMaterial);node.material=bannerMaterial;
+      if(phase==='observar'){
+        const image=new Image();image.decoding='async';
+        image.onload=()=>{if(imageToken!==bannerImageToken)return;canvasContext.clearRect(0,0,canvas.width,canvas.height);canvasContext.drawImage(image,0,0,canvas.width,canvas.height);texture.needsUpdate=true;node.userData.cityQuizArtworkLoaded=true;node.userData.cityObserveBanner=true;node.userData.cityObserveArtworkLoaded=true;};
+        image.onerror=()=>{if(imageToken!==bannerImageToken)return;drawStageBanner(canvasContext,stageNumber,phaseName);texture.needsUpdate=true;node.userData.cityQuizArtworkLoaded=true;node.userData.cityObserveBanner=true;node.userData.cityObserveArtworkLoaded=false;};
+        image.src=new URL('assets/quiz-observe-stage.png',script.src).href;
+      }else{drawStageBanner(canvasContext,stageNumber,phaseName);texture.needsUpdate=true;}
+      banners.push({node,phase});
+    }
+  }
+  function createPhaseBanner(ctx,station,phases,script,imageToken,position){
+      const T=ctx.three,phase=normalize(station.phase),phaseIndex=phases.indexOf(phase),stageNumber=phaseIndex+1;
       const x=ctx.district.x+station.x,z=ctx.district.z+station.z,y=ctx.floorY+1.62;
-      const phase=normalize(station.phase),phaseIndex=phases.indexOf(phase),stageNumber=phaseIndex+1;
       const canvas=document.createElement('canvas');canvas.width=1667;canvas.height=292;
       const canvasContext=canvas.getContext('2d'),texture=new T.GOR(canvas);
       texture.colorSpace=T.er$;texture.anisotropy=4;bannerTextures.push(texture);
@@ -71,12 +122,11 @@
         if(!node.isMesh||!node.userData?.luminousSign)return;
         node.getWorldPosition(position);
         if(Math.abs(position.x-x)<.03&&Math.abs(position.y-y)<.12&&Math.abs(position.z-z)<.03&&!originalSigns.some(([sign])=>sign===node)){
-          originalSigns.push([node,node.visible,node.geometry,node.material,node.name]);node.name=`Aula TP · etapa ${phaseName}`;node.geometry=bannerGeometry;node.material=bannerMaterial;node.visible=true;node.userData.cityQuizBanner=phase;node.userData.cityQuizArtworkLoaded=phase!=='observar';
+          originalSigns.push([node,node.visible,node.geometry,node.material,node.name]);node.name=`Aula TP · etapa ${phaseName}`;node.geometry=bannerGeometry;node.material=bannerMaterial;node.visible=true;node.userData.cityQuizBanner=phase;node.userData.cityQuizNumber=stageNumber;node.userData.cityQuizArtworkLoaded=phase!=='observar';
           if(phase==='observar')node.userData.cityObserveBanner=true;
           banners.push({node,phase});
         }
       });
-    }
   }
   function drawStageBanner(ctx,number,title){
     const gradient=ctx.createLinearGradient(0,0,1667,292);gradient.addColorStop(0,'#11c8ec');gradient.addColorStop(.16,'#2874f0');gradient.addColorStop(.5,'#f8fdff');gradient.addColorStop(1,'#11d7e1');
@@ -139,7 +189,7 @@
         if(travel<.75||arrowIndex>=arrows.length)continue;travel=0;
         const arrow=arrows[arrowIndex++];arrow.position.set(points[i].x,ctx.floorY+.035,points[i].z);arrow.rotation.y=Math.atan2(points[i].x-points[i-1].x,points[i].z-points[i-1].z);arrow.visible=true;
       }
-      label.textContent=`Quiz ${index+1} · ${station.name||station.title||station.label||'Puesto de trabajo'}`;
+      label.textContent=`Quiz ${index+1} · ${station.equipment||station.name||station.title||station.label||'Puesto de trabajo'}`;
       action.hidden=Math.hypot(ctx.player.x-target.x,ctx.player.z-target.z)>2;
       panel.dataset.quiz=String(index+1);panel.dataset.arrows=String(arrowIndex);
       if(!points.length&&action.hidden)label.textContent+=' · acércate al pasillo central';
