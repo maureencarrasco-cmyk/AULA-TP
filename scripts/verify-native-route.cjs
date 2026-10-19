@@ -32,8 +32,16 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
   await page.waitForFunction(()=>window.__cityRouteContext?.phaseStations?.some(station=>station.phase==='observar'),{},{timeout:60000});
   await page.waitForFunction(()=>{let visible=false;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityObserveBanner&&object.userData.cityObserveArtworkLoaded&&object.visible&&object.material?.name==='Aula TP · arte Observar')visible=true});return visible},{},{timeout:30000});
   assert.equal(await page.evaluate(()=>{let visible=false;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityObserveBanner&&object.userData.cityObserveArtworkLoaded&&object.visible&&object.material?.name==='Aula TP · arte Observar')visible=true});return visible}),true);
-  const quizArtwork=await page.evaluate(()=>{const dialog=document.createElement('dialog'),list=document.createElement('ol'),step=document.createElement('li');dialog.className='floor-station-dialog';list.className='floor-route-progress';step.innerHTML='<span>1</span>Observar';list.append(step);dialog.append(list);document.body.append(dialog);const image=getComputedStyle(step,'::before').backgroundImage;dialog.remove();return image});
+  const quizArtwork=await page.evaluate(()=>{const dialog=document.createElement('dialog'),list=document.createElement('ol'),step=document.createElement('li');dialog.className='floor-station-dialog';list.className='floor-route-progress';step.innerHTML='<span>1</span>Observar';list.append(step);dialog.append(list);document.documentElement.classList.add('city-native-route-active');document.body.append(dialog);const image=getComputedStyle(step,'::before').backgroundImage;dialog.remove();return image});
   assert.match(quizArtwork,/quiz-observe-stage\.png/);
+  const layout=await page.evaluate(()=>{const dialog=document.createElement('dialog');dialog.className='floor-station-dialog';dialog.innerHTML='<header><div><small>1 · OBSERVAR · PISO 3</small><h2>Mecánica de Mantenimiento de Aeronaves</h2></div><button aria-label="Cerrar">×</button></header><ol class="floor-route-progress"><li><span>1</span>Observar</li><li><span>2</span>Planificar</li><li><span>3</span>Verificar</li></ol><section aria-label="Actividad situada"><h3>Conjunto de aeronave</h3><p>Responde el quiz desde el hangar formativo.</p></section><footer>Progreso común <button>Guardar y continuar</button></footer>';document.body.append(dialog);dialog.showModal();const rect=dialog.getBoundingClientRect();return {width:rect.width,height:rect.height,right:innerWidth-rect.right,expectedWidth:Math.min(868,innerWidth*.7-33.6),expectedHeight:Math.min(innerHeight*.94,1120),blur:getComputedStyle(dialog,'::backdrop').backdropFilter}});
+  assert.ok(Math.abs(layout.width-layout.expectedWidth)<1,JSON.stringify(layout));
+  assert.ok(Math.abs(layout.height-layout.expectedHeight)<1,JSON.stringify(layout));
+  assert.ok(Math.abs(layout.right-24)<1,JSON.stringify(layout));
+  assert.equal(layout.blur,'none');
+  await page.screenshot({path:path.join(output,'quiz-split-layout.png')});
+  await page.locator('dialog.floor-station-dialog').evaluate(dialog=>dialog.close());
+  await page.locator('dialog.floor-station-dialog').evaluate(dialog=>dialog.remove());
   await page.screenshot({path:path.join(output,'hangar-quiz1.png'),fullPage:true});
   const specialty=await page.locator('[data-specialty]').getAttribute('data-specialty');
   if(!process.argv.includes('--all')&&!process.argv.includes('--visual-only')){
