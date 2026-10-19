@@ -56,7 +56,8 @@
       button.addEventListener('click',()=>{
         const data=current&&normalize(current.specialty)===normalize(context?.specialty?.name)?current:null,index=data?next(data):0;
         const active=Math.min(3,Math.floor(index*4/Math.max(1,data?.questions.length||4)));
-        if(i!==active||index<0)return;
+        if(index<0){label.textContent='Los cuatro quizzes están completados.';return;}
+        if(i!==active){label.textContent=`Completa primero el Quiz ${active+1} para continuar.`;return;}
         openProfessionalQuiz();
       });
       quizNav.append(button);
@@ -75,8 +76,11 @@
     if(!quizNav)return;
     quizNav.querySelectorAll('button[data-station]').forEach(button=>{
       const station=Number(button.dataset.station),isActive=station===active;
-      button.disabled=complete||!isActive;button.setAttribute('aria-current',isActive?'step':'false');
+      button.setAttribute('aria-current',isActive?'step':'false');
+      button.setAttribute('aria-disabled',complete||!isActive?'true':'false');
       button.classList.toggle('is-current',isActive);
+      button.classList.toggle('is-complete',complete||station<active);
+      button.classList.toggle('is-locked',!complete&&station>active);
       const title=roomStations[station]?.equipment||roomStations[station]?.name||'Estación de trabajo';
       button.textContent=`Quiz ${station+1}`;
       button.setAttribute('aria-label',`Quiz ${station+1}: ${title}`);

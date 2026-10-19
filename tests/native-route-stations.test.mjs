@@ -13,6 +13,12 @@ test('every configured specialty room is normalized to four visible quiz station
   assert.match(source,/for\(let i=0;i<4;i\+\+\)/);
   assert.match(source,/className='city-native-stations'/);
   assert.match(source,/button\.addEventListener\('click'/);
+  assert.match(source,/button\.setAttribute\('aria-disabled',complete\|\|!isActive\?'true':'false'\)/);
+  assert.doesNotMatch(source,/button\.disabled=complete\|\|!isActive/);
+  assert.match(source,/Completa primero el Quiz/);
+  const styles=readFileSync(new URL('../city-panel/city-panel.css',import.meta.url),'utf8');
+  assert.match(styles,/city-native-route-active \.city-native-guide \{ position:absolute;top:82px/);
+  assert.match(styles,/city-native-route-active \.city-native-stations \{ display:grid;grid-template-columns:repeat\(2/);
 });
 
 test('existing question count is preserved and distributed sequentially across four stations',()=>{
