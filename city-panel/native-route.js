@@ -7,7 +7,8 @@
   const arrows=[];
   const quizMarkers=[];
   const stageAnchors=[];
-  let markerGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial;
+  let markerGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial,markerBeamGeometry,markerBeamTexture,markerBeamMaterial,markerSparkGeometry,markerSparkTexture,markerSparkMaterial;
+  const beams=[],sparkles=[];
   function progress(event){
     const data=event.detail;
     if(!data||!Array.isArray(data.questions)||!data.answers||typeof data.specialty!=='string')return;
@@ -17,8 +18,10 @@
   function dispose(){
     root?.removeFromParent();geometry?.dispose();material?.dispose();
     markerGeometry?.dispose();markerHaloGeometry?.dispose();markerHaloTexture?.dispose();markerHaloMaterial?.dispose();
+    markerBeamGeometry?.dispose();markerBeamTexture?.dispose();markerBeamMaterial?.dispose();beams.length=0;
+    markerSparkGeometry?.dispose();markerSparkTexture?.dispose();markerSparkMaterial?.dispose();sparkles.length=0;
     for(const marker of quizMarkers){marker.texture.dispose();marker.material.dispose();}
-    quizMarkers.length=0;markerGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=null;
+    quizMarkers.length=0;markerGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=markerBeamGeometry=markerBeamTexture=markerBeamMaterial=markerSparkGeometry=markerSparkTexture=markerSparkMaterial=null;
     stageAnchors.length=0;
     for(const [sign,visible,oldGeometry,oldMaterial,oldName] of originalSigns){sign.visible=visible;sign.geometry=oldGeometry;sign.material=oldMaterial;sign.name=oldName;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityQuizMarker;}
     originalSigns.length=0;
@@ -82,7 +85,7 @@
   function createQuizMarkers(ctx){
     const T=ctx.three,stations=ctx.stations||[];
     if(!stations.length)return;
-    markerGeometry=new T.bdM(2.8,.78);
+    markerGeometry=new T.bdM(2.05,.62);
     markerHaloGeometry=new T.bdM(2.25,2.25);
     const haloCanvas=document.createElement('canvas');haloCanvas.width=256;haloCanvas.height=256;
     const haloContext=haloCanvas.getContext('2d'),glow=haloContext.createRadialGradient(128,128,24,128,128,124);
@@ -93,33 +96,56 @@
     haloContext.strokeStyle='#e5fbff';haloContext.lineWidth=4;haloContext.beginPath();haloContext.ellipse(128,128,94,69,0,0,Math.PI*2);haloContext.stroke();haloContext.restore();
     markerHaloTexture=new T.GOR(haloCanvas);markerHaloTexture.colorSpace=T.er$;
     markerHaloMaterial=new T.V9B({map:markerHaloTexture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
+    markerBeamGeometry=new T.bdM(.42,1.8);
+    const beamCanvas=document.createElement('canvas');beamCanvas.width=128;beamCanvas.height=512;
+    const beamContext=beamCanvas.getContext('2d'),beamWidth=beamContext.createLinearGradient(0,0,128,0);
+    beamWidth.addColorStop(0,'rgba(0,214,255,0)');beamWidth.addColorStop(.36,'rgba(0,214,255,.22)');beamWidth.addColorStop(.5,'rgba(143,245,255,.62)');beamWidth.addColorStop(.64,'rgba(0,214,255,.22)');beamWidth.addColorStop(1,'rgba(0,214,255,0)');
+    beamContext.fillStyle=beamWidth;beamContext.fillRect(0,0,128,512);beamContext.globalCompositeOperation='destination-in';
+    const beamHeight=beamContext.createLinearGradient(0,0,0,512);beamHeight.addColorStop(0,'rgba(255,255,255,0)');beamHeight.addColorStop(.16,'rgba(255,255,255,.9)');beamHeight.addColorStop(.82,'rgba(255,255,255,.9)');beamHeight.addColorStop(1,'rgba(255,255,255,0)');
+    beamContext.fillStyle=beamHeight;beamContext.fillRect(0,0,128,512);
+    markerBeamTexture=new T.GOR(beamCanvas);markerBeamTexture.colorSpace=T.er$;
+    markerBeamMaterial=new T.V9B({map:markerBeamTexture,transparent:true,opacity:.72,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
+    markerSparkGeometry=new T.bdM(.12,.12);
+    const sparkCanvas=document.createElement('canvas');sparkCanvas.width=64;sparkCanvas.height=64;
+    const sparkContext=sparkCanvas.getContext('2d'),sparkGlow=sparkContext.createRadialGradient(32,32,2,32,32,30);
+    sparkGlow.addColorStop(0,'rgba(255,255,255,.98)');sparkGlow.addColorStop(.2,'rgba(143,246,255,.9)');sparkGlow.addColorStop(.56,'rgba(0,193,255,.4)');sparkGlow.addColorStop(1,'rgba(0,193,255,0)');
+    sparkContext.fillStyle=sparkGlow;sparkContext.fillRect(0,0,64,64);
+    markerSparkTexture=new T.GOR(sparkCanvas);markerSparkTexture.colorSpace=T.er$;
+    markerSparkMaterial=new T.V9B({map:markerSparkTexture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
     const floorY=ctx.floorY+.035;
     const playerZ=ctx.player.z,anchorCenterZ=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.z,0)/stageAnchors.length:null;
     const anchorCenterX=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.x,0)/stageAnchors.length:null;
     const forward=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*5.9;
     const haloOffset=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*1.8;
+    const mobileViewport=window.innerWidth<700,mobileShiftX=mobileViewport?-.45:0;
+    const markerScale=Math.min(1.45,Math.max(1,1200/window.innerWidth));
     stations.forEach((station,index)=>{
       const [dx,dz]=station.totem||[station.x,station.z],x=ctx.district.x+dx,z=ctx.district.z+dz;
       if(!Number.isFinite(x)||!Number.isFinite(z))return;
-      const anchor=stageAnchors[index],displayX=anchor?anchorCenterX+(anchor.x-anchorCenterX)*1.25:x,displayZ=anchor?anchor.z+forward:z;
+      const anchor=stageAnchors[index],displayX=anchor?anchorCenterX+.9+mobileShiftX+(anchor.x-anchorCenterX)*1.8:x+mobileShiftX,displayZ=anchor?anchor.z+forward:z;
       const halo=new T.eaF(markerHaloGeometry,markerHaloMaterial);halo.name=`Aula TP · halo Quiz ${index+1}`;
       halo.position.set(displayX,floorY,displayZ+haloOffset);halo.rotation.x=-Math.PI/2;root.add(halo);
+      for(let sparkle=0;sparkle<6;sparkle++){
+        const angle=sparkle*Math.PI/3,light=new T.eaF(markerSparkGeometry,markerSparkMaterial);
+        light.position.set(displayX+Math.cos(angle)*1.04,floorY+.045,displayZ+haloOffset+Math.sin(angle)*.72);
+        light.rotation.x=-Math.PI/2;light.renderOrder=2;root.add(light);sparkles.push(light);
+      }
+      const beam=new T.eaF(markerBeamGeometry,markerBeamMaterial);beam.name=`Aula TP · haz Quiz ${index+1}`;
+      beam.position.set(displayX,floorY+.94,displayZ+haloOffset*.55);root.add(beam);beam.renderOrder=19;beams.push(beam);
       const canvas=document.createElement('canvas');canvas.width=1050;canvas.height=320;
       const c=canvas.getContext('2d');c.clearRect(0,0,canvas.width,canvas.height);
-      c.shadowColor='#00c9ff';c.shadowBlur=24;c.fillStyle='#ffffff';c.strokeStyle='#18c9ed';c.lineWidth=10;
+      c.shadowColor='#00c9ff';c.shadowBlur=24;c.fillStyle='rgba(248,253,255,.9)';c.strokeStyle='#18c9ed';c.lineWidth=10;
       c.beginPath();c.roundRect(24,24,1002,272,62);c.fill();c.stroke();c.shadowBlur=0;
-      c.fillStyle='#eaf8ff';c.beginPath();c.arc(106,160,68,0,Math.PI*2);c.fill();
-      c.fillStyle='#075dd8';c.font='900 64px Arial';c.textAlign='center';c.textBaseline='middle';c.fillText(String(index+1),106,160);
-      c.textAlign='left';c.fillStyle='#102d62';c.font='900 56px Arial';c.fillText(`Quiz ${index+1}`,202,127);
-      c.fillStyle='#345477';c.font='600 34px Arial';
+      c.textAlign='left';c.textBaseline='middle';c.fillStyle='#102d62';c.font='900 64px Arial';c.fillText(`Quiz ${index+1}`,76,112);
+      c.fillStyle='#345477';c.font='600 40px Arial';
       const title=String(station.equipment||station.name||station.title||station.label||'Puesto de trabajo');
-      c.fillText(title.length>34?`${title.slice(0,31)}...`:title,202,208,650);
+      c.fillText(title.length>38?`${title.slice(0,35)}...`:title,76,220,760);
       c.fillStyle='#e9f8ff';c.beginPath();c.roundRect(876,72,112,176,28);c.fill();
       c.strokeStyle='#37c9ee';c.lineWidth=8;c.stroke();c.fillStyle='#0086a5';c.font='900 82px Arial';c.textAlign='center';c.fillText('E',932,164);
       const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
       const signMaterial=new T.V9B({map:texture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
       const sign=new T.eaF(markerGeometry,signMaterial);
-      sign.position.set(displayX,ctx.floorY+1.28,displayZ);root.add(sign);
+      sign.position.set(displayX,ctx.floorY+(mobileViewport ? .75 : 1.28),displayZ);sign.scale.setScalar(markerScale);root.add(sign);
       sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
       quizMarkers.push({sign,texture,material:signMaterial});
     });
@@ -153,6 +179,7 @@
       root.visible=true;panel.hidden=false;
       const now=performance.now();if(now-last<250)return;last=now;
       for(const marker of quizMarkers)marker.sign.rotation.y=Math.atan2(ctx.player.x-marker.sign.position.x,ctx.player.z-marker.sign.position.z);
+      for(const beam of beams)beam.rotation.y=Math.atan2(ctx.player.x-beam.position.x,ctx.player.z-beam.position.z);
       document.querySelectorAll('.city-viewport .city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
       const stationAction=[...document.querySelectorAll('.city-viewport .city-door-action')].find(button=>/^\s*\d+\s*[·.)-]/.test(button.textContent));
       stationAction?.setAttribute('data-city-quiz-station','true');
