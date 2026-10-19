@@ -241,6 +241,7 @@
     markerCylinderMaterial=new T.V9B({color:0x19c9eb,toneMapped:false,transparent:true,opacity:.86,depthWrite:false});
     const floorY=ctx.floorY+.035;
     const playerZ=ctx.player.z,anchorCenterZ=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.z,0)/stageAnchors.length:null;
+    const anchorCenterX=stageAnchors.length?stageAnchors.reduce((sum,anchor)=>sum+anchor.x,0)/stageAnchors.length:null;
     const forward=anchorCenterZ===null?0:Math.sign(playerZ-anchorCenterZ)*5.9;
     const mobileViewport=window.innerWidth<700,mobileShiftX=mobileViewport?-.45:0,token=generation;
     const markerScale=Math.min(.9,Math.max(.7,window.innerWidth/1500));
@@ -248,7 +249,10 @@
     stations.forEach((station,index)=>{
       const [dx,dz]=station.totem||[station.x,station.z],x=ctx.district.x+dx,z=ctx.district.z+dz;
       if(!Number.isFinite(x)||!Number.isFinite(z))return;
-      const displayX=x+mobileShiftX,displayZ=z+forward;
+      const previousAnchor=stageAnchors[Math.max(0,stageAnchors.length-2)],lastAnchor=stageAnchors.at(-1);
+      const extrapolation=index-stageAnchors.length+1;
+      const anchor=stageAnchors[index]||(lastAnchor&&previousAnchor&&extrapolation>0?{x:lastAnchor.x+(lastAnchor.x-previousAnchor.x)*extrapolation,z:lastAnchor.z+(lastAnchor.z-previousAnchor.z)*extrapolation}:null);
+      const displayX=anchor&&anchorCenterX!==null?anchorCenterX+.9+mobileShiftX+(anchor.x-anchorCenterX)*1.3:x+mobileShiftX,displayZ=(anchor?.z??z)+forward;
       const halo=new T.eaF(markerHaloGeometry,markerHaloMaterial);halo.name=`Aula TP · halo Quiz ${index+1}`;
       halo.position.set(displayX,floorY,displayZ);halo.rotation.x=-Math.PI/2;root.add(halo);
       for(let sparkle=0;sparkle<6;sparkle++){

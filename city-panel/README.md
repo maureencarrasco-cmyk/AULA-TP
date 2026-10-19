@@ -93,6 +93,8 @@ La versión `city-20261019-quiz-reference-platform-v105` (`panel-ui-v59`) ensanc
 
 La versión `city-20261019-quiz-four-in-view-v106` (`panel-ui-v60`) distribuye los cuatro marcadores en una hilera más compacta centrada en las posiciones del módulo y reduce su escala según el ancho de pantalla, para mantener las cuatro estaciones dentro del campo visual desde la posición habitual del estudiante.
 
+La versión `city-20261019-quiz-four-visible-v107` (`panel-ui-v61`) conserva las coordenadas visibles de los tres rótulos de la sala y calcula la cuarta posición por extrapolación uniforme. Así evita colocar los cuatro tableros en coordenadas del recorrido que no corresponden a la vista del recinto.
+
 ### Fotografías de especialidades
 
 Las 35 especialidades de los 12 distritos tienen fotografías propias, compartidas por los cursos correspondientes. Se conservan los botones y sus acciones originales. Las miniaturas WebP se cargan bajo demanda, sin descargar todo el catálogo al ingresar.
