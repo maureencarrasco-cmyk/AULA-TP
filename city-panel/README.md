@@ -95,6 +95,8 @@ La versión `city-20261019-quiz-four-in-view-v106` (`panel-ui-v60`) distribuye l
 
 La versión `city-20261019-quiz-four-visible-v107` (`panel-ui-v61`) conserva las coordenadas visibles de los tres rótulos de la sala y calcula la cuarta posición por extrapolación uniforme. Así evita colocar los cuatro tableros en coordenadas del recorrido que no corresponden a la vista del recinto.
 
+La versión `city-20261019-quiz-clickable-v108` (`panel-ui-v62`) superpone zonas accesibles y alineadas con las cuatro placas 3D. Al pulsar una, abre a la derecha una ventana blanca vacía identificada con el número de quiz y con control para cerrarla.
+
 ### Fotografías de especialidades
 
 Las 35 especialidades de los 12 distritos tienen fotografías propias, compartidas por los cursos correspondientes. Se conservan los botones y sus acciones originales. Las miniaturas WebP se cargan bajo demanda, sin descargar todo el catálogo al ingresar.

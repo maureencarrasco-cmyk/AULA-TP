@@ -56,3 +56,18 @@ test('four quiz image stations use a straight, evenly-spaced layout',()=>{
   assert.match(source,/anchorCenterX\+\.9\+mobileShiftX\+\(anchor\.x-anchorCenterX\)\*1\.3/);
   assert.match(source,/markerScale=Math\.min\(\.9,Math\.max\(\.7,window\.innerWidth\/1500\)\)/);
 });
+
+test('each 3D quiz plate opens a closable blank window on the right',()=>{
+  assert.match(source,/control\.addEventListener\('click',\(\)=>openQuizWindow\(index\+1\)\)/);
+  assert.match(source,/panel\.className='city-quiz-empty-window'/);
+  assert.match(source,/title\.textContent=`Quiz \$\{number\}`/);
+  assert.match(source,/blank\.className='city-quiz-empty-window-body'/);
+  assert.match(source,/close\.addEventListener\('click'/);
+  assert.match(source,/new T\.Pq0\(sign\.position\.x,sign\.position\.y,sign\.position\.z\)\.project\(ctx\.camera\)/);
+  assert.match(source,/quizControlLayer\?\.remove\(\)/);
+  const hook=readFileSync(new URL('../city-panel/deploy_native_route.py',import.meta.url),'utf8');
+  assert.match(hook,/camera:af,renderer:ac/);
+  const styles=readFileSync(new URL('../city-panel/city-panel.css',import.meta.url),'utf8');
+  assert.match(styles,/\.city-quiz-marker-control-layer/);
+  assert.match(styles,/\.city-quiz-empty-window \{[^}]*right:18px/);
+});

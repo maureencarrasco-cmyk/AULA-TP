@@ -14,7 +14,7 @@ WORLD_SHA='0a20356fd918231b5675ae540e2cf826b01a02e195c53f0a4838906912a585b3'
 LEARNING='335.b6fefe7eb2bf326e.js'
 LEARNING_SHA='2c2a44eca2d7f0f7820bc5cccbb527487e423b2241228fbb7dfc5b577d51ace5'
 WORLD_ANCHOR='ac.render(as,af),r9()'
-WORLD_HOOK='globalThis.AulaTPNativeRoute?.frame({scene:as,player:iE,indoors:iC,map:ij,specialty:iT,district:iF,room:i4,stations:i7?.stations??i6,colliders:i3,floorY:(i4?.position.y??0)+.12,three:o}),ac.render(as,af),r9()'
+WORLD_HOOK='globalThis.AulaTPNativeRoute?.frame({scene:as,player:iE,indoors:iC,map:ij,specialty:iT,district:iF,room:i4,stations:i7?.stations??i6,colliders:i3,floorY:(i4?.position.y??0)+.12,three:o,camera:af,renderer:ac}),ac.render(as,af),r9()'
 LEARNING_ANCHOR='localStorage.setItem((0,f.Ai)(w),JSON.stringify({...N,updatedAt:new Date().toISOString()}))'
 LEARNING_HOOK=LEARNING_ANCHOR+",window.dispatchEvent(new CustomEvent('aulatp:quiz-progress',{detail:{specialty:w.specialty,moduleId:w.moduleId,ae:w.ae,questions:w.questions.map(q=>({id:q.id,object:q.object,prompt:q.prompt,criterion:q.criterion,options:q.options,difficulty:q.difficulty,hint:q.hint,feedback:q.feedback,workplace:q.workplace,image:q.image})),answers:N.answers}}))"
 

@@ -3,9 +3,11 @@
   const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   let root,geometry,material,current=null,last=0,room=null,error='',generation=0;
   let stationQuestionSignature='';
+  let quizControlLayer=null,quizWindow=null;
   const originalSigns=[];
   const arrows=[];
   const quizMarkers=[];
+  const quizControls=[];
   const stageAnchors=[];
   let roomStations=[];
   let markerGeometry,markerImageGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial,markerBeamGeometry,markerBeamTexture,markerBeamMaterial,markerSparkGeometry,markerSparkTexture,markerSparkMaterial,markerCylinderGeometry,markerCylinderMaterial;
@@ -27,6 +29,7 @@
     markerCylinderGeometry?.dispose();markerCylinderMaterial?.dispose();cylinders.length=0;
     for(const marker of quizMarkers){marker.texture.dispose();marker.material.dispose();marker.imageTexture?.dispose();marker.imageMaterial?.dispose();}
     quizMarkers.length=0;markerGeometry=markerImageGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=markerBeamGeometry=markerBeamTexture=markerBeamMaterial=markerSparkGeometry=markerSparkTexture=markerSparkMaterial=markerCylinderGeometry=markerCylinderMaterial=null;
+    quizControlLayer?.remove();quizControlLayer=null;quizControls.length=0;quizWindow?.remove();quizWindow=null;
     stageAnchors.length=0;
     roomStations=[];
     for(const [sign,visible,oldGeometry,oldMaterial,oldName] of originalSigns){sign.visible=visible;sign.geometry=oldGeometry;sign.material=oldMaterial;sign.name=oldName;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityQuizMarker;}
@@ -206,6 +209,10 @@
   function createQuizMarkers(ctx){
     const T=ctx.three,stations=roomStations=configureStations(ctx);
     if(!stations.length)return;
+    const viewport=ctx.renderer?.domElement?.closest('.city-viewport');
+    if(viewport){
+      quizControlLayer=document.createElement('div');quizControlLayer.className='city-quiz-marker-control-layer';quizControlLayer.setAttribute('aria-label','Estaciones de quiz');viewport.append(quizControlLayer);
+    }
     markerGeometry=new T.bdM(2.7,.82);
     markerImageGeometry=new T.bdM(1.42,.95);
     markerHaloGeometry=new T.bdM(2.8,2.8);
@@ -272,8 +279,30 @@
       sign.position.set(displayX,floorY+2.08,displayZ);sign.scale.setScalar(markerScale);root.add(sign);
       sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
       const marker={sign,texture,material:signMaterial};quizMarkers.push(marker);
+      if(quizControlLayer){
+        const control=document.createElement('button');control.type='button';control.className='city-quiz-marker-control';control.setAttribute('aria-label',`Abrir Quiz ${index+1}: ${title}`);control.dataset.quizNumber=String(index+1);
+        control.addEventListener('click',()=>openQuizWindow(index+1));quizControlLayer.append(control);quizControls.push(control);
+      }
       const imageUrl=stationImageUrl(ctx,station,index,usedImages);
       createStationArtwork(ctx,station,index,token,imageUrl,marker,canvas,displayX,displayZ,floorY,markerScale);
+    });
+  }
+  function openQuizWindow(number){
+    quizWindow?.remove();
+    const panel=document.createElement('section');panel.className='city-quiz-empty-window';panel.setAttribute('role','dialog');panel.setAttribute('aria-label',`Quiz ${number}`);
+    const header=document.createElement('header'),title=document.createElement('h2'),close=document.createElement('button'),blank=document.createElement('div');
+    title.textContent=`Quiz ${number}`;close.type='button';close.className='city-quiz-empty-window-close';close.setAttribute('aria-label','Cerrar quiz');close.textContent='×';close.addEventListener('click',()=>{panel.remove();if(quizWindow===panel)quizWindow=null;});
+    blank.className='city-quiz-empty-window-body';blank.setAttribute('aria-label','Contenido del quiz');header.append(title,close);panel.append(header,blank);document.body.append(panel);quizWindow=panel;
+  }
+  function updateQuizControls(ctx){
+    if(!quizControlLayer||!ctx.camera||!ctx.renderer)return;
+    const viewport=quizControlLayer.parentElement,viewportRect=viewport.getBoundingClientRect(),canvasRect=ctx.renderer.domElement.getBoundingClientRect(),T=ctx.three;
+    quizControls.forEach((control,index)=>{
+      const sign=quizMarkers[index]?.sign;if(!sign)return;
+      const point=new T.Pq0(sign.position.x,sign.position.y,sign.position.z).project(ctx.camera);
+      const visible=root?.visible&&point.z>=-1&&point.z<=1&&point.x>=-1.15&&point.x<=1.15&&point.y>=-1.15&&point.y<=1.15;
+      control.hidden=!visible;
+      if(visible){control.style.left=`${canvasRect.left-viewportRect.left+(point.x+1)*canvasRect.width/2}px`;control.style.top=`${canvasRect.top-viewportRect.top+(1-point.y)*canvasRect.height/2}px`;}
     });
   }
   function next(data){return data.questions.findIndex(question=>!data.answers[question.id]?.correct);}
@@ -300,8 +329,9 @@
       if(!ctx.indoors||!ctx.room||!ctx.stations.length){if(root)dispose();room=null;return;}
       if(room!==ctx.room){dispose();room=ctx.room;last=0;if(current&&normalize(current.specialty)!==normalize(ctx.specialty.name))current=null;}
       if(!root)create(ctx);
-      if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;return;}
+      if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;updateQuizControls(ctx);return;}
       root.visible=true;
+      updateQuizControls(ctx);
       const now=performance.now();if(now-last<250)return;last=now;
       for(const marker of quizMarkers){const facing=Math.atan2(ctx.player.x-marker.sign.position.x,ctx.player.z-marker.sign.position.z);marker.sign.rotation.y=facing;if(marker.imageMesh)marker.imageMesh.rotation.y=facing;}
       for(const beam of beams)beam.rotation.y=Math.atan2(ctx.player.x-beam.position.x,ctx.player.z-beam.position.z);
