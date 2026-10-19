@@ -27,11 +27,15 @@ class ObserveBannerPatchTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             deploy_observe_banner.patch_world(b'unknown world build')
 
-    def test_supplied_artwork_is_available_to_the_skin(self):
-        self.assertTrue((ROOT/'city-panel/assets/quiz-observe-stage.png').is_file())
+    def test_quiz_stage_signs_are_hidden_without_removing_navigation(self):
         source=(ROOT/'city-panel/native-route.js').read_text(encoding='utf-8')
-        self.assertIn("assets/quiz-observe-stage.png",source)
+        self.assertIn('function hideQuizPhaseSigns(ctx)',source)
+        self.assertIn('node.visible=false',source)
+        self.assertNotIn('function createPhaseBanner(',source)
+        self.assertNotIn('assets/quiz-observe-stage.png',source)
         self.assertIn("phaseStations||[]",source)
+        self.assertIn('const arrows=[]',source)
+        self.assertIn('function path(ctx,target)',source)
 
 
 if __name__=='__main__':unittest.main()

@@ -75,9 +75,9 @@ Se verificaron el renderizado de la escena, la selección de distrito, el acceso
 
 `preview.py` permite revisar el panel localmente sobre la aplicación publicada. No crea una copia del motor ni de los modelos.
 
-### Rótulo 3D de la etapa Observar
+### Rótulos 3D de las fases del quiz
 
-`assets/quiz-observe-stage.png` reemplaza el rótulo antiguo de la primera estación en cada especialidad. El adaptador conserva el punto de interacción original y solo sustituye su presentación; la publicación versionada comprueba el hash del renderizador conocido y conecta las estaciones de etapa a la capa visual. No altera preguntas, evaluación ni progresión del quiz.
+El adaptador oculta los tres rótulos decorativos de fases junto a los puestos de quiz en cada especialidad. Restaura los objetos al salir de la sala y conserva la ruta de flechas, la interacción original, los quizzes y su progreso.
 
 ### Fotografías de especialidades
 
