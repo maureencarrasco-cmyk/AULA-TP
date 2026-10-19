@@ -27,18 +27,20 @@ test('existing question count is preserved and distributed sequentially across f
 
 test('quiz markers use the shared illustrated artwork, specialty imagery and downward support',()=>{
   assert.match(source,/function specialtyPhotos\(name\)/);
+  assert.match(source,/function drawQuizSpecialtyIcon\(c,name,cx,cy\)/);
+  assert.match(source,/drawQuizSpecialtyIcon\(c,ctx\.specialty\.name,220,171\)/);
   assert.match(source,/function createStationArtwork\(/);
-  assert.match(source,/markerGeometry=new T\.bdM\(2\.7,\.82\)/);
-  assert.match(source,/markerImageGeometry=new T\.bdM\(1\.42,\.95\)/);
+  assert.match(source,/markerGeometry=new T\.bdM\(3\.65,1\.04\)/);
+  assert.match(source,/markerImageGeometry=new T\.bdM\(2\.05,1\.37\)/);
   assert.match(source,/markerHaloGeometry=new T\.bdM\(2\.8,2\.8\)/);
-  assert.match(source,/markerBeamGeometry=new T\.bdM\(1\.82,1\.92\)/);
+  assert.match(source,/markerBeamGeometry=new T\.bdM\(2\.12,2\.32\)/);
   assert.match(source,/c\.fillText\(`Quiz \$\{index\+1\}`/);
   assert.match(source,/station\.quizQuestion\?\.object/);
   assert.match(source,/photo\.drawImage\(image,/);
   assert.match(source,/c\.clearRect\(0,0,canvas\.width,canvas\.height\)/);
   assert.match(source,/cityQuizArtworkReady=true/);
-  assert.match(source,/sign\.position\.set\(displayX,floorY\+2\.08,displayZ\)/);
-  assert.match(source,/imageMesh\.position\.set\(displayX,floorY\+1\.02/);
+  assert.match(source,/sign\.position\.set\(displayX,floorY\+2\.62,displayZ\)/);
+  assert.match(source,/imageMesh\.position\.set\(displayX,floorY\+1\.22/);
   assert.match(source,/beamContext\.lineTo\(376,512\)/);
   assert.match(source,/CylinderGeometry/);
   assert.match(source,/createStationArtwork\(ctx,station,index,token,imageUrl,marker,canvas,displayX,displayZ,floorY,markerScale\)/);
@@ -49,9 +51,9 @@ test('quiz markers use the shared illustrated artwork, specialty imagery and dow
 });
 
 test('four quiz image stations use a straight, evenly-spaced layout',()=>{
-  assert.match(source,/for\(const spacing of \[2\.55,2\.45,2\.35\]/);
+  assert.match(source,/for\(const spacing of \[3\.15,3,2\.85\]/);
   assert.match(source,/cx\+\(index-1\.5\)\*spacing/);
-  assert.match(source,/centerX\+\(index-1\.5\)\*2\.35/);
+  assert.match(source,/centerX\+\(index-1\.5\)\*2\.85/);
   assert.match(source,/lastAnchor\.x\+\(lastAnchor\.x-previousAnchor\.x\)\*extrapolation/);
   assert.match(source,/anchorCenterX\+\.9\+mobileShiftX\+\(anchor\.x-anchorCenterX\)\*1\.3/);
   assert.match(source,/markerScale=Math\.min\(\.9,Math\.max\(\.7,window\.innerWidth\/1500\)\)/);

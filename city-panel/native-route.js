@@ -138,7 +138,7 @@
     const centerX=points.reduce((sum,point)=>sum+(Number(point[0])||0),0)/points.length;
     const centerZ=points.reduce((sum,point)=>sum+(Number(point[1])||0),0)/points.length;
     const candidates=[];
-    for(const spacing of [2.55,2.45,2.35])for(const shiftX of [0,-.6,.6,-1.2,1.2])for(const shiftZ of [0,-1.2,1.2,-2.4,2.4,-3.6,3.6]){
+    for(const spacing of [3.15,3,2.85])for(const shiftX of [0,-.6,.6,-1.2,1.2])for(const shiftZ of [0,-1.2,1.2,-2.4,2.4,-3.6,3.6]){
       const cx=centerX+shiftX,cz=centerZ+shiftZ,line=Array.from({length:4},(_,index)=>[cx+(index-1.5)*spacing,cz]);
       if(line.some(([x,z])=>Math.abs(x)>6.2||Math.abs(z)>5.7))continue;
       const collisions=line.reduce((count,[x,z])=>count+(blocked(x,z)?1:0),0);
@@ -146,7 +146,7 @@
       if(!collisions)return result.map((station,index)=>({...station,totem:line[index]}));
     }
     const best=candidates.sort((a,b)=>a.collisions-b.collisions||a.offset-b.offset)[0];
-    return result.map((station,index)=>({...station,totem:best?.line[index]||[centerX+(index-1.5)*2.35,centerZ]}));
+    return result.map((station,index)=>({...station,totem:best?.line[index]||[centerX+(index-1.5)*2.85,centerZ]}));
   }
   function specialtyPhotos(name){
     const value=normalize(name);
@@ -195,6 +195,38 @@
     }
     return new URL(`${specialtyPhotos(ctx.specialty.name)[index%4]}.webp`,base).href;
   }
+  function drawQuizSpecialtyIcon(c,name,cx,cy){
+    const value=normalize(name),kind=/aeronave|avion/.test(value)?'aircraft':/nave|portuar|pesquer|acuicultura/.test(value)?'ship':/enfermer|salud|parvul/.test(value)?'health':/agro|forest|cultivo/.test(value)?'nature':/gastronomia|alimento|hotel|turismo/.test(value)?'food':/min|geolog|metalurg/.test(value)?'mining':/constru|mueble|madera|sanitaria|montaje/.test(value)?'build':/dibujo|grafica|vestuario|textil/.test(value)?'design':/administra|contabilidad/.test(value)?'business':/electric|electron|telecom|redes|program/.test(value)?'circuit':'gear';
+    c.save();c.translate(cx,cy);c.lineCap='round';c.lineJoin='round';c.strokeStyle='#0865f5';c.fillStyle='#0865f5';c.lineWidth=12;
+    if(kind==='aircraft'){
+      c.beginPath();c.moveTo(-68,12);c.lineTo(-14,1);c.lineTo(-36,-46);c.quadraticCurveTo(-39,-56,-29,-51);c.lineTo(13,-3);c.lineTo(50,-12);c.quadraticCurveTo(70,-11,56,4);c.lineTo(16,18);c.lineTo(-20,53);c.quadraticCurveTo(-30,61,-31,48);c.lineTo(-28,28);c.lineTo(-67,31);c.closePath();c.fill();c.strokeStyle='#fff';c.lineWidth=7;c.beginPath();c.moveTo(-55,20);c.lineTo(52,-8);c.stroke();
+    }else if(kind==='ship'){
+      c.beginPath();c.moveTo(-65,17);c.lineTo(65,17);c.lineTo(42,47);c.lineTo(-40,47);c.closePath();c.fill();c.fillRect(-16,-38,42,48);c.fillRect(-43,-20,23,30);c.strokeStyle='#fff';c.lineWidth=7;c.beginPath();c.moveTo(-60,31);c.lineTo(55,31);c.stroke();
+    }else if(kind==='health'){
+      c.beginPath();c.roundRect(-24,-62,48,124,12);c.roundRect(-62,-24,124,48,12);c.fill();
+    }else if(kind==='nature'){
+      c.strokeStyle='#0865f5';c.lineWidth=11;c.beginPath();c.moveTo(0,56);c.bezierCurveTo(-2,12,5,-20,31,-52);c.stroke();
+      for(const [x,y,flip] of [[-5,22,-1],[8,-8,1],[0,39,1]]){c.save();c.translate(x,y);c.scale(flip,1);c.beginPath();c.moveTo(0,0);c.bezierCurveTo(33,-34,53,-20,37,2);c.bezierCurveTo(25,15,10,12,0,0);c.fill();c.restore();}
+    }else if(kind==='food'){
+      c.beginPath();c.arc(-31,-9,23,Math.PI*.95,Math.PI*1.9);c.arc(0,-29,29,Math.PI,Math.PI*2);c.arc(31,-9,23,Math.PI*1.1,Math.PI*2.05);c.lineTo(51,35);c.quadraticCurveTo(0,54,-51,35);c.closePath();c.fill();c.fillRect(-51,23,102,19);
+    }else if(kind==='mining'){
+      c.lineWidth=15;c.beginPath();c.moveTo(-32,50);c.lineTo(31,-37);c.moveTo(-51,-31);c.quadraticCurveTo(0,-65,52,-29);c.stroke();
+    }else if(kind==='build'){
+      c.lineWidth=18;c.beginPath();c.moveTo(-42,-45);c.lineTo(27,24);c.stroke();c.beginPath();c.moveTo(-59,-52);c.lineTo(-27,-67);c.lineTo(-1,-39);c.lineTo(-20,-20);c.closePath();c.fill();c.beginPath();c.moveTo(10,39);c.lineTo(51,0);c.lineTo(67,16);c.lineTo(27,57);c.closePath();c.fill();
+    }else if(kind==='design'){
+      c.beginPath();c.moveTo(-36,-51);c.lineTo(30,15);c.lineTo(-2,48);c.lineTo(-51,-30);c.closePath();c.fill();c.beginPath();c.moveTo(-51,-30);c.lineTo(-65,-54);c.lineTo(-36,-51);c.fill();c.strokeStyle='#fff';c.lineWidth=6;c.beginPath();c.moveTo(-27,-24);c.lineTo(7,13);c.stroke();
+    }else if(kind==='business'){
+      c.beginPath();c.roundRect(-58,-30,116,82,12);c.fill();c.strokeStyle='#0865f5';c.lineWidth=12;c.beginPath();c.moveTo(-18,-30);c.lineTo(-18,-48);c.lineTo(18,-48);c.lineTo(18,-30);c.stroke();c.strokeStyle='#fff';c.lineWidth=7;c.beginPath();c.moveTo(-56,0);c.lineTo(56,0);c.stroke();
+    }else if(kind==='circuit'){
+      c.lineWidth=11;c.beginPath();c.moveTo(-49,-39);c.lineTo(-5,-39);c.lineTo(-5,4);c.lineTo(43,4);c.lineTo(43,43);c.moveTo(-45,44);c.lineTo(-45,13);c.lineTo(-5,13);c.stroke();
+      for(const [x,y] of [[-49,-39],[-45,44],[-5,-39],[43,43],[43,4]]){c.beginPath();c.arc(x,y,10,0,Math.PI*2);c.fill();}
+    }else{
+      c.lineWidth=14;c.beginPath();c.arc(0,0,34,0,Math.PI*2);c.stroke();
+      for(let i=0;i<8;i++){c.save();c.rotate(i*Math.PI/4);c.fillRect(-10,-62,20,20);c.restore();}
+      c.beginPath();c.arc(0,0,12,0,Math.PI*2);c.fill();
+    }
+    c.restore();
+  }
   function createStationArtwork(ctx,station,index,token,imageUrl,marker,canvas,displayX,displayZ,floorY,markerScale){
     const image=new Image();image.decoding='async';
     image.onload=()=>{
@@ -208,10 +240,10 @@
       c.save();c.shadowColor='rgba(0,174,255,.52)';c.shadowBlur=24;c.fillStyle=header;rounded(106,58,1010,226,92);c.fill();c.restore();
       c.save();c.shadowColor='#00cfff';c.shadowBlur=26;c.fillStyle='rgba(86,220,250,.42)';c.strokeStyle='#ffffff';c.lineWidth=10;
       c.beginPath();c.arc(220,171,105,0,Math.PI*2);c.fill();c.stroke();c.restore();
-      c.textAlign='center';c.textBaseline='middle';c.fillStyle='#0874ef';c.font='900 124px Arial';c.fillText(String(index+1),220,173);
+      drawQuizSpecialtyIcon(c,ctx.specialty.name,220,171);
       c.textAlign='left';c.fillStyle='#1263ec';c.font='900 84px Arial';c.fillText(`Quiz ${index+1}`,370,135,680);
       const title=String(station.quizQuestion?.object||station.equipment||station.name||station.title||station.label||'Estación de trabajo');
-      c.fillStyle='#102653';c.font='800 51px Arial';c.fillText(title.length>34?`${title.slice(0,31)}...`:title,378,220,690);
+      c.fillStyle='#102653';let titleSize=51;c.font=`800 ${titleSize}px Arial`;while(c.measureText(title).width>690&&titleSize>32){titleSize--;c.font=`800 ${titleSize}px Arial`;}c.fillText(title,378,220,690);
       marker.texture.needsUpdate=true;marker.sign.userData.cityQuizArtworkReady=true;
       const photoCanvas=document.createElement('canvas');photoCanvas.width=720;photoCanvas.height=480;
       const photo=photoCanvas.getContext('2d');photo.save();photo.shadowColor='#00cfff';photo.shadowBlur=32;photo.fillStyle='rgba(220,249,255,.42)';photo.fillRect(0,0,720,480);photo.restore();
@@ -222,7 +254,7 @@
       photo.shadowBlur=0;photo.strokeStyle='#28d8ff';photo.lineWidth=9;photo.beginPath();photo.roundRect(44,34,632,412,34);photo.stroke();photo.restore();
       const T=ctx.three,imageTexture=new T.GOR(photoCanvas);imageTexture.colorSpace=T.er$;imageTexture.anisotropy=4;
       const imageMaterial=new T.V9B({map:imageTexture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
-      const imageMesh=new T.eaF(markerImageGeometry,imageMaterial);imageMesh.position.set(displayX,floorY+1.02,displayZ);imageMesh.scale.setScalar(markerScale);imageMesh.renderOrder=20;imageMesh.userData.cityQuizImage=true;root.add(imageMesh);
+      const imageMesh=new T.eaF(markerImageGeometry,imageMaterial);imageMesh.position.set(displayX,floorY+1.22,displayZ);imageMesh.scale.setScalar(markerScale);imageMesh.renderOrder=20;imageMesh.userData.cityQuizImage=true;root.add(imageMesh);
       marker.imageTexture=imageTexture;marker.imageMaterial=imageMaterial;marker.imageMesh=imageMesh;
     };
     image.src=imageUrl;
@@ -234,8 +266,8 @@
     if(viewport){
       quizControlLayer=document.createElement('div');quizControlLayer.className='city-quiz-marker-control-layer';quizControlLayer.setAttribute('aria-label','Estaciones de quiz');viewport.append(quizControlLayer);
     }
-    markerGeometry=new T.bdM(2.7,.82);
-    markerImageGeometry=new T.bdM(1.42,.95);
+    markerGeometry=new T.bdM(3.65,1.04);
+    markerImageGeometry=new T.bdM(2.05,1.37);
     markerHaloGeometry=new T.bdM(2.8,2.8);
     const haloCanvas=document.createElement('canvas');haloCanvas.width=256;haloCanvas.height=256;
     const haloContext=haloCanvas.getContext('2d'),glow=haloContext.createRadialGradient(128,128,24,128,128,124);
@@ -247,7 +279,7 @@
     haloContext.strokeStyle='#50e1ff';haloContext.lineWidth=4;haloContext.beginPath();haloContext.ellipse(128,128,84,61,0,0,Math.PI*2);haloContext.stroke();haloContext.restore();
     markerHaloTexture=new T.GOR(haloCanvas);markerHaloTexture.colorSpace=T.er$;
     markerHaloMaterial=new T.V9B({map:markerHaloTexture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
-    markerBeamGeometry=new T.bdM(1.82,1.92);
+    markerBeamGeometry=new T.bdM(2.12,2.32);
     const beamCanvas=document.createElement('canvas');beamCanvas.width=384;beamCanvas.height=512;
     const beamContext=beamCanvas.getContext('2d'),beamGlow=beamContext.createLinearGradient(0,0,384,0);
     beamGlow.addColorStop(0,'rgba(0,193,255,0)');beamGlow.addColorStop(.5,'rgba(76,225,255,.8)');beamGlow.addColorStop(1,'rgba(0,193,255,0)');
@@ -289,7 +321,7 @@
         light.rotation.x=-Math.PI/2;light.renderOrder=2;root.add(light);sparkles.push(light);
       }
       const beam=new T.eaF(markerBeamGeometry,markerBeamMaterial);beam.name=`Aula TP · haz Quiz ${index+1}`;
-      beam.position.set(displayX,floorY+1.02,displayZ);root.add(beam);beam.renderOrder=19;beams.push(beam);
+      beam.position.set(displayX,floorY+1.2,displayZ);root.add(beam);beam.renderOrder=19;beams.push(beam);
       const cylinder=new T.eaF(markerCylinderGeometry,markerCylinderMaterial);cylinder.name=`Aula TP · soporte Quiz ${index+1}`;
       cylinder.position.set(displayX,floorY+.49,displayZ);root.add(cylinder);cylinders.push(cylinder);
       const title=String(station.quizQuestion?.object||station.equipment||station.name||station.title||station.label||'Puesto de trabajo');
@@ -297,7 +329,7 @@
       const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
       const signMaterial=new T.V9B({map:texture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
       const sign=new T.eaF(markerGeometry,signMaterial);
-      sign.position.set(displayX,floorY+2.08,displayZ);sign.scale.setScalar(markerScale);root.add(sign);
+      sign.position.set(displayX,floorY+2.62,displayZ);sign.scale.setScalar(markerScale);root.add(sign);
       sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
       const marker={sign,texture,material:signMaterial};quizMarkers.push(marker);
       if(quizControlLayer){
