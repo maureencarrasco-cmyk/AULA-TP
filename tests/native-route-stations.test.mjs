@@ -10,20 +10,17 @@ test('every configured specialty room is normalized to four visible quiz station
   assert.match(source,/while\(result\.length<4\)/);
   assert.match(source,/const T=ctx\.three,stations=roomStations=configureStations\(ctx\)/);
   assert.match(source,/stations:roomStations\.length/);
-  assert.match(source,/for\(let i=0;i<4;i\+\+\)/);
-  assert.match(source,/className='city-native-stations'/);
-  assert.match(source,/button\.addEventListener\('click'/);
-  assert.match(source,/button\.setAttribute\('aria-disabled',complete\|\|!isActive\?'true':'false'\)/);
-  assert.doesNotMatch(source,/button\.disabled=complete\|\|!isActive/);
-  assert.match(source,/Completa primero el Quiz/);
+  assert.doesNotMatch(source,/city-native-guide|city-native-stations|quizNav/);
   const styles=readFileSync(new URL('../city-panel/city-panel.css',import.meta.url),'utf8');
-  assert.match(styles,/city-native-route-active \.city-native-guide \{ position:absolute;top:82px/);
-  assert.match(styles,/city-native-route-active \.city-native-stations \{ display:grid;grid-template-columns:repeat\(2/);
+  assert.doesNotMatch(styles,/city-native-guide|city-native-stations/);
+  assert.doesNotMatch(styles,/city-door-action\[data-city-quiz-station="true"\] \{ display:none/);
+  assert.match(source,/stationAction\?\.setAttribute\('data-city-quiz-station','true'\)/);
 });
 
 test('existing question count is preserved and distributed sequentially across four stations',()=>{
   assert.match(source,/Math\.floor\(index\*stations\.length\/Math\.max\(1,total\)\)/);
-  assert.match(source,/Quiz \$\{index\+1\}\/\$\{data\.questions\.length\}/);
+  assert.match(source,/Math\.floor\(index\*4\/Math\.max\(1,questions\.length\)\)/);
+  assert.match(source,/function selectedStation\(stations,index,total\)/);
   assert.match(source,/data\.questions\.map\(question=>\[question\.id,question\.object\]\)/);
   assert.doesNotMatch(source,/answers\[[^\]]+\]\s*=|correct\s*=/);
 });

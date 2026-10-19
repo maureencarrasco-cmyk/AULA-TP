@@ -85,6 +85,8 @@ La versión `city-20261019-quiz-stage-signs-v100` (`panel-ui-v54`) oculta los ca
 
 La versión `city-20261019-quiz-station-artwork-v102` (`panel-ui-v56`) reúne en una sola placa 3D el número, nombre del objeto, fotografía propia del quiz, marco blanco/cian y plataforma luminosa, tomando como referencia la imagen entregada. El diseño se genera dinámicamente para las cuatro estaciones de cada módulo de las 35 especialidades y conserva las fotos distintas, la separación regular, el halo de suelo y el acceso al quiz.
 
+La versión `city-20261019-quiz-guide-removed-v103` (`panel-ui-v57`) elimina el panel flotante con el título y los cuatro botones Quiz 1-4 de la especialidad. Las cuatro estaciones 3D, las flechas guía y el botón nativo de acceso del juego permanecen disponibles.
+
 ### Fotografías de especialidades
 
 Las 35 especialidades de los 12 distritos tienen fotografías propias, compartidas por los cursos correspondientes. Se conservan los botones y sus acciones originales. Las miniaturas WebP se cargan bajo demanda, sin descargar todo el catálogo al ingresar.

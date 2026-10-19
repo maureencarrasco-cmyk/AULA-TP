@@ -1,7 +1,7 @@
 /* Read-only navigation bridge: uses the existing world and its quiz progression. */
 (() => {
   const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-  let context,root,geometry,material,panel,label,action,quizNav,current=null,last=0,room=null,error='',generation=0;
+  let root,geometry,material,current=null,last=0,room=null,error='',generation=0;
   let stationQuestionSignature='';
   const originalSigns=[];
   const arrows=[];
@@ -31,7 +31,7 @@
     roomStations=[];
     for(const [sign,visible,oldGeometry,oldMaterial,oldName] of originalSigns){sign.visible=visible;sign.geometry=oldGeometry;sign.material=oldMaterial;sign.name=oldName;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityQuizMarker;}
     originalSigns.length=0;
-    root=geometry=material=null;arrows.length=0;panel?.remove();panel=label=action=quizNav=null;
+    root=geometry=material=null;arrows.length=0;
     document.querySelectorAll('.city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
     document.documentElement.classList.remove('city-native-route-active');
   }
@@ -47,44 +47,7 @@
     ctx.scene.add(root);
     hideQuizPhaseSigns(ctx);
     createQuizMarkers(ctx);
-    panel=document.createElement('section');panel.className='city-native-guide';panel.setAttribute('aria-live','polite');
-    label=document.createElement('strong');
-    quizNav=document.createElement('nav');quizNav.className='city-native-stations';quizNav.setAttribute('aria-label','Estaciones de quiz del módulo');
-    for(let i=0;i<4;i++){
-      const button=document.createElement('button');button.type='button';button.dataset.station=String(i);button.textContent=`Quiz ${i+1}`;
-      button.addEventListener('click',()=>{
-        const data=current&&normalize(current.specialty)===normalize(context?.specialty?.name)?current:null,index=data?next(data):0;
-        const active=Math.min(3,Math.floor(index*4/Math.max(1,data?.questions.length||4)));
-        if(index<0){label.textContent='Los cuatro quizzes están completados.';return;}
-        if(i!==active){label.textContent=`Completa primero el Quiz ${active+1} para continuar.`;return;}
-        openProfessionalQuiz();
-      });
-      quizNav.append(button);
-    }
-    action=document.createElement('button');action.type='button';action.textContent='Abrir quiz de mi módulo';
-    action.addEventListener('click',openProfessionalQuiz);
-    panel.append(label,quizNav,action);document.querySelector('.city-viewport')?.append(panel);
-    panel.dataset.quizMarkerCount=String(quizMarkers.length);
     document.documentElement.classList.add('city-native-route-active');
-  }
-  function openProfessionalQuiz(){
-    const button=[...document.querySelectorAll('.city-viewport button')].find(item=>normalize(item.textContent).includes('desafio profesional'));
-    if(button&&!button.disabled)button.click();
-  }
-  function syncStationButtons(active,complete=false){
-    if(!quizNav)return;
-    quizNav.querySelectorAll('button[data-station]').forEach(button=>{
-      const station=Number(button.dataset.station),isActive=station===active;
-      button.setAttribute('aria-current',isActive?'step':'false');
-      button.setAttribute('aria-disabled',complete||!isActive?'true':'false');
-      button.classList.toggle('is-current',isActive);
-      button.classList.toggle('is-complete',complete||station<active);
-      button.classList.toggle('is-locked',!complete&&station>active);
-      const title=roomStations[station]?.equipment||roomStations[station]?.name||'Estación de trabajo';
-      button.textContent=`Quiz ${station+1}`;
-      button.setAttribute('aria-label',`Quiz ${station+1}: ${title}`);
-      button.title=`Quiz ${station+1}: ${title}`;
-    });
   }
   function hideQuizPhaseSigns(ctx){
     const phases=['observar','planificar','verificar'];
@@ -329,12 +292,11 @@
   }
   function frame(ctx){
     try{
-      context=ctx;
       if(!ctx.indoors||!ctx.room||!ctx.stations.length){if(root)dispose();room=null;return;}
       if(room!==ctx.room){dispose();room=ctx.room;last=0;if(current&&normalize(current.specialty)!==normalize(ctx.specialty.name))current=null;}
       if(!root)create(ctx);
-      if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;panel.hidden=true;return;}
-      root.visible=true;panel.hidden=false;
+      if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;return;}
+      root.visible=true;
       const now=performance.now();if(now-last<250)return;last=now;
       for(const marker of quizMarkers){const facing=Math.atan2(ctx.player.x-marker.sign.position.x,ctx.player.z-marker.sign.position.z);marker.sign.rotation.y=facing;}
       for(const beam of beams)beam.rotation.y=Math.atan2(ctx.player.x-beam.position.x,ctx.player.z-beam.position.z);
@@ -344,9 +306,8 @@
       const data=current&&normalize(current.specialty)===normalize(ctx.specialty.name)?current:null;
       const index=data?next(data):0;
       arrows.forEach(arrow=>arrow.visible=false);
-      if(index<0){label.textContent='Quizzes completados · revisa tu resultado';action.hidden=true;syncStationButtons(-1,true);return;}
+      if(index<0)return;
       const {station, index:stationIndex}=selectedStation(roomStations,index,data?.questions.length||roomStations.length);
-      syncStationButtons(stationIndex);
       const [dx,dz]=station.totem||[station.x,station.z];
       const target={x:ctx.district.x+dx,z:ctx.district.z+dz};
       if(!Number.isFinite(target.x)||!Number.isFinite(target.z))return;
@@ -357,17 +318,12 @@
         if(travel<.75||arrowIndex>=arrows.length)continue;travel=0;
         const arrow=arrows[arrowIndex++];arrow.position.set(points[i].x,ctx.floorY+.035,points[i].z);arrow.rotation.y=Math.atan2(-(points[i].x-points[i-1].x),-(points[i].z-points[i-1].z));arrow.visible=true;
       }
-      const title=station.equipment||station.name||station.title||station.label||'Puesto de trabajo';
-      label.textContent=data&&data.questions.length>roomStations.length?`Estación ${stationIndex+1} · Quiz ${index+1}/${data.questions.length} · ${title}`:`Quiz ${stationIndex+1} · ${title}`;
-      action.hidden=Math.hypot(ctx.player.x-approach.x,ctx.player.z-approach.z)>2;
-      panel.dataset.quiz=String(index+1);panel.dataset.arrows=String(arrowIndex);
-      if(!points.length&&action.hidden)label.textContent+=' · acércate al pasillo central';
     }catch(cause){
       // A navigation failure must never stop the original render loop.
       const message=String(cause.message||cause);if(error!==message){error=message;console.warn('Aula TP: guía de quizzes no disponible:',message);}
       if(root)root.visible=false;
     }
   }
-  globalThis.AulaTPNativeRoute={frame,status:()=>({quizMarkers:quizMarkers.length,quiz:panel?.dataset.quiz||null,stations:roomStations.length,quizButtons:quizNav?.querySelectorAll('button').length||0})};
+  globalThis.AulaTPNativeRoute={frame,status:()=>({quizMarkers:quizMarkers.length,stations:roomStations.length})};
   addEventListener('pagehide',event=>{if(!event.persisted)dispose();});
 })();
