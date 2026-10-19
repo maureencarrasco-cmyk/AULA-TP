@@ -89,6 +89,8 @@ La versión `city-20261019-quiz-guide-removed-v103` (`panel-ui-v57`) elimina el 
 
 La versión `city-20261019-quiz-hologram-drop-v104` (`panel-ui-v58`) cambia cada estación a una placa horizontal luminosa con número y objeto arriba, imagen individual suspendida debajo, haz holográfico azul en forma de cono y aro brillante sobre el suelo. Los elementos se orientan al estudiante y se generan con la imagen asociada a cada quiz.
 
+La versión `city-20261019-quiz-reference-platform-v105` (`panel-ui-v59`) ensancha la proyección y amplía el aro con tres trazos de luz para dar continuidad visual entre rótulo, imagen suspendida y plataforma, de acuerdo con la referencia de estación holográfica.
+
 ### Fotografías de especialidades
 
 Las 35 especialidades de los 12 distritos tienen fotografías propias, compartidas por los cursos correspondientes. Se conservan los botones y sus acciones originales. Las miniaturas WebP se cargan bajo demanda, sin descargar todo el catálogo al ingresar.

@@ -30,10 +30,12 @@ test('quiz markers use the shared illustrated artwork, specialty imagery and dow
   assert.match(source,/function createStationArtwork\(/);
   assert.match(source,/markerGeometry=new T\.bdM\(2\.7,\.82\)/);
   assert.match(source,/markerImageGeometry=new T\.bdM\(1\.42,\.95\)/);
+  assert.match(source,/markerHaloGeometry=new T\.bdM\(2\.8,2\.8\)/);
   assert.match(source,/markerBeamGeometry=new T\.bdM\(1\.82,1\.92\)/);
   assert.match(source,/c\.fillText\(`Quiz \$\{index\+1\}`/);
   assert.match(source,/station\.quizQuestion\?\.object/);
   assert.match(source,/photo\.drawImage\(image,/);
+  assert.match(source,/c\.clearRect\(0,0,canvas\.width,canvas\.height\)/);
   assert.match(source,/cityQuizArtworkReady=true/);
   assert.match(source,/sign\.position\.set\(displayX,floorY\+2\.08,displayZ\)/);
   assert.match(source,/imageMesh\.position\.set\(displayX,floorY\+1\.02/);
