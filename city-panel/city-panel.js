@@ -1,5 +1,6 @@
 /* Presentation alias only: navigation is still handled by the original control. */
 (() => {
+  const photoBase=new URL('./assets/specialties/',document.currentScript?.src||'https://www.aulatpchile.cl/ciudad_laboral_aulatp/panel-ui-v1/city-panel.js');
   function syncMiningTile() {
     const panel=document.querySelector('.city-walk-inspector');
     const grid=panel?.querySelector('.city-island-grid');
@@ -42,11 +43,11 @@
     const button=document.createElement('button');
     button.type='button';button.dataset.cityGuideStart='';button.className='city-guide-action';button.textContent='Guiarme a mi distrito';
     button.addEventListener('click',()=>{
-      const select=document.querySelector('.city-specialty-section .city-district-select select');
+      const select=document.querySelector('.city-specialty-section select.city-district-select,.city-specialty-section .city-district-select select');
       const label=select?.selectedOptions?.[0]?.textContent?.trim()||'';
       const district=normalize(label);
       if(!districts[district])return;
-      clearRoute();route={district,label,area:''};startRoute();
+      clearRoute();route={district,label,area:''};startRoute(true);
     });
     card.append(button);
   }
@@ -84,12 +85,38 @@
     if(/conectividad|redes|programacion|telecomunic/.test(value))return 'digital';
     return 'general';
   }
+  const specialtyPhotos=Object.fromEntries([
+    ['administracion','meeting'],['contabilidad','accounting'],['agropecuaria','crops'],['forestal','forestry'],
+    ['elaboracion industrial de alimentos','food'],['gastronomia','cooking'],['construccion','construction'],
+    ['instalaciones sanitarias','plumbing'],['montaje industrial','assembly'],['construcciones metalicas','welding'],
+    ['electricidad','electrical'],['electronica','electronics'],['refrigeracion y climatizacion','cooling'],
+    ['dibujo tecnico','drawing'],['grafica','printing'],['mecanica automotriz','tools'],['mecanica industrial','machining'],
+    ['mecanica de mantenimiento de aeronaves','aircraft'],['explotacion minera','mining'],['asistencia en geologia','geology'],
+    ['metalurgia extractiva','metallurgy'],['quimica industrial','laboratory'],['atencion de enfermeria','nursing'],
+    ['atencion de parvulos','preschool'],['acuicultura','aquaculture'],['operaciones portuarias','port'],['pesqueria','fishing'],
+    ['tripulacion de naves mercantes y especiales','ship'],['servicios de hoteleria','hotel'],['servicios de turismo','tourism'],
+    ['muebles y terminaciones en madera','furniture'],['vestuario y confeccion textil','textile'],
+    ['conectividad y redes','network'],['programacion','programming'],['telecomunicaciones','telecom']
+  ]);
   function syncSpecialtyCards(){
     document.querySelectorAll('.city-specialties button').forEach(button=>{
       const title=button.querySelector('.city-specialty-copy strong')?.textContent||'';
       const art=specialtyArt(title);
       if(button.dataset.cityArt!==art)button.dataset.cityArt=art;
+      const photo=specialtyPhotos[normalize(title)];
+      if(!photo)return;
+      let img=button.querySelector('.city-specialty-photo');
+      if(!img){
+        img=document.createElement('img');img.className='city-specialty-photo';img.alt='';
+        img.loading='lazy';img.decoding='async';img.width=640;img.height=384;button.append(img);
+      }
+      if(button.dataset.cityPhoto!==photo){img.src=new URL(photo+'.webp',photoBase).href;button.dataset.cityPhoto=photo;}
     });
+    const section=document.querySelector('.city-specialty-section');
+    if(section&&!section.querySelector('.city-photo-credits')){
+      const link=document.createElement('a');link.className='city-photo-credits';link.href=new URL('credits.html',photoBase).href;
+      link.target='_blank';link.rel='noopener';link.textContent='Fuentes de las fotografías';section.append(link);
+    }
   }
   const districts={
     'administracion':[-36,-26],
@@ -105,10 +132,11 @@
     'madera y vestuario':[12,26],
     'tecnologias digitales':[36,26]
   };
-  let route=null,routeTimer=0,routeSvg=null,routeStatus=null;
+  let route=null,routeTimer=0,routeSvg=null,routeStatus=null,syncFrame=0;
   let roomGuide=null,roomGuideActive=false,quizClock=null,quizClockLoading='';
   const params=new URLSearchParams(globalThis.location?.search||'');
   const queryRoute=params.get('cityRoute');
+  let routeNeedsOpen=Boolean(queryRoute);
   if(queryRoute&&districts[normalize(queryRoute)])route={district:normalize(queryRoute),label:queryRoute,area:params.get('cityArea')||''};
 
   function pointFromTransform(element){
@@ -157,12 +185,16 @@
     if(!quizClock)return;
     const clock=quizClock;quizClock=null;clearInterval(clock.timer);flushQuizClock(clock);
   }
-  function startRoute(){
+  function startRoute(openMap=false){
     const map=document.querySelector('.city-map-overlay');
-    if(!map||!route)return;
-    if(map.hidden){
-      const mapButton=[...document.querySelectorAll('.city-toolbar-actions button')].find(button=>normalize(button.textContent).includes('mapa de la ciudad'));
-      mapButton?.click();
+    if(!map||!route){clearInterval(routeTimer);routeTimer=0;return;}
+    if(routeSvg&&routeSvg.parentNode!==map){routeSvg.remove();routeStatus?.remove();routeSvg=null;routeStatus=null;}
+    if(document.hidden||map.hidden){
+      clearInterval(routeTimer);routeTimer=0;
+      if(openMap&&!document.hidden){
+        const mapButton=[...document.querySelectorAll('.city-toolbar-actions button')].find(button=>normalize(button.textContent).includes('mapa de la ciudad'));
+        mapButton?.click();
+      }
       return;
     }
     const marker=[...map.querySelectorAll('.city-map-marker-district')].find(button=>normalize(button.querySelector('span')?.textContent)===route.district);
@@ -185,9 +217,10 @@
     }
     const bounds=map.getBoundingClientRect(),from=pointFromTransform(player),to=pointFromTransform(marker);
     if(!from||!to)return;
-    routeSvg.setAttribute('viewBox',`0 0 ${Math.max(1,bounds.width)} ${Math.max(1,bounds.height)}`);
-    routeSvg.setAttribute('width',String(bounds.width));routeSvg.setAttribute('height',String(bounds.height));
-    routeSvg.querySelector('.city-guide-route-line').setAttribute('d',`M ${from.x} ${from.y} L ${to.x} ${to.y}`);
+    const setAttribute=(element,key,value)=>{if(element.getAttribute(key)!==value)element.setAttribute(key,value);};
+    setAttribute(routeSvg,'viewBox',`0 0 ${Math.max(1,bounds.width)} ${Math.max(1,bounds.height)}`);
+    setAttribute(routeSvg,'width',String(bounds.width));setAttribute(routeSvg,'height',String(bounds.height));
+    setAttribute(routeSvg.querySelector('.city-guide-route-line'),'d',`M ${from.x} ${from.y} L ${to.x} ${to.y}`);
     const stage=document.querySelector('.city-stage');
     const playerX=Number(stage?.dataset.playerX),playerZ=Number(stage?.dataset.playerZ);
     const [targetX,targetZ]=districts[route.district];
@@ -197,7 +230,7 @@
     const titleNode=routeStatus.querySelector('.city-guide-route-title'),areaNode=routeStatus.querySelector('.city-guide-route-area');
     if(titleNode.textContent!==titleText)titleNode.textContent=titleText;
     if(areaNode.textContent!==areaText)areaNode.textContent=areaText;
-    if(!routeTimer)routeTimer=setInterval(startRoute,120);
+    if(!routeTimer)routeTimer=setInterval(startRoute,200);
   }
   function syncRoomGuide(){
     const workspace=document.querySelector('.city-walk-workspace');
@@ -225,20 +258,30 @@
     guide.append(kicker,title,copy,structure,context,skills,actions);workspace.querySelector('.city-viewport')?.append(guide);roomGuide=guide;
   }
   function syncPanel() {
+    if(!document.querySelector('.city-viewport canvas'))return;
     syncMiningTile();syncLearningLink();syncGuideButton();syncConstructionDistrict();syncSpecialtyCards();
     syncRoomGuide();
-    if(route)startRoute();
+    if(route&&document.querySelector('.city-map-overlay')){startRoute(routeNeedsOpen);routeNeedsOpen=false;}
   }
-  if(route){
-    const originalMap=document.querySelector('.city-map-overlay');
-    if(originalMap?.hidden){
-      const mapButton=[...document.querySelectorAll('.city-toolbar-actions button')].find(button=>normalize(button.textContent).includes('mapa de la ciudad'));
-      mapButton?.click();
-    }
+  function relevantMutation(record){
+    const target=record.target;
+    if(record.type==='attributes')return Boolean(target.matches?.('.city-approach,.city-open-pilot,.city-map-overlay'));
+    if(target.closest?.('.city-specialties'))return true;
+    const selectors='.city-walk-inspector,.city-walk-workspace,.city-specialties,.city-map-overlay,.city-open-pilot,.city-room-summary,.city-island-card,.city-mission-card,.city-specialty-section,canvas';
+    return [...record.addedNodes,...record.removedNodes].some(node=>node.nodeType===1&&(node.matches(selectors)||node.querySelector(selectors)));
   }
-  const guideObserver=new MutationObserver(syncPanel);
+  function schedulePanelSync(records){
+    // HUD text and loading progress change frequently but do not change panel controls.
+    if(document.hidden||records?.length&&!records.some(relevantMutation))return;
+    if(typeof requestAnimationFrame!=='function'){syncPanel();return;}
+    if(!syncFrame)syncFrame=requestAnimationFrame(()=>{syncFrame=0;syncPanel();});
+  }
+  const guideObserver=new MutationObserver(schedulePanelSync);
   guideObserver.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['disabled','hidden']});
-  document.addEventListener?.('visibilitychange',()=>{if(document.hidden)flushQuizClock();else if(roomGuideActive){const id=new URLSearchParams(globalThis.location?.search||'').get('cityModuleId');if(id)startQuizClock(id);}});
+  document.addEventListener?.('visibilitychange',()=>{
+    if(document.hidden){flushQuizClock();clearInterval(routeTimer);routeTimer=0;}
+    else{schedulePanelSync();if(roomGuideActive){const id=new URLSearchParams(globalThis.location?.search||'').get('cityModuleId');if(id)startQuizClock(id);}}
+  });
   globalThis.addEventListener?.('pagehide',()=>flushQuizClock());
   syncPanel();
 })();

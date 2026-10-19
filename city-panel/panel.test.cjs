@@ -5,18 +5,53 @@ const fs=require('node:fs');
 const path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'city-panel.js'),'utf8');
 
-function fixture(disabled=false,specialtyNames=[]){
+function fixture(disabled=false,specialtyNames=[],options={}){
  let callback;
- let clicks=0;
+ let clicks=0,queries=0,ready=options.ready!==false;
+ const frames=[];
  const original={disabled,querySelector(){return null;},children:[],append(node){this.children.push(node);},click(){clicks++;}};
  const grid={tile:null,querySelector(){return this.tile;},append(node){this.tile=node;}};
- const specialtyButtons=specialtyNames.map(name=>({dataset:{},querySelector(selector){return selector==='.city-specialty-copy strong'?{textContent:name}:null;}}));
+ const specialtyButtons=specialtyNames.map(name=>({dataset:{},children:[],append(node){this.children.push(node);},querySelector(selector){return selector==='.city-specialty-copy strong'?{textContent:name}:this.children.find(node=>'.'+node.className===selector)||null;}}));
  const panel={querySelector(selector){return selector==='.city-island-grid'?grid:original;}};
- const document={documentElement:{},querySelector(selector){return selector==='.city-walk-inspector'?panel:original;},querySelectorAll(selector){return selector==='.city-specialties button'?specialtyButtons:[];},createElement(){return {dataset:{},children:[],disabled:false,append(...items){this.children.push(...items);},addEventListener(event,action){this[event]=action;}};}};
- const context=vm.createContext({document,URLSearchParams,MutationObserver:class {constructor(action){callback=action;}observe(){}}});
+ const document={documentElement:{},querySelector(selector){queries++;if(selector==='.city-viewport canvas')return ready?{}:null;return selector==='.city-walk-inspector'?panel:original;},querySelectorAll(selector){queries++;return selector==='.city-specialties button'?specialtyButtons:[];},createElement(){return {dataset:{},children:[],disabled:false,append(...items){this.children.push(...items);},addEventListener(event,action){this[event]=action;}};}};
+ const context=vm.createContext({document,URL,URLSearchParams,MutationObserver:class {constructor(action){callback=action;}observe(){}}});
+ if(options.frames)context.requestAnimationFrame=action=>{frames.push(action);return frames.length;};
  vm.runInContext(source,context);
- return {original,grid,specialtyButtons,sync:()=>callback(),clicks:()=>clicks};
+ return {original,grid,specialtyButtons,sync:()=>callback(),clicks:()=>clicks,mutate:records=>callback(records),
+  queries:()=>queries,frames,setReady:value=>{ready=value;},flush:()=>{frames.splice(0).forEach(action=>action());},document};
 }
+
+test('waits for the scene effect before adding controls to hydrated React markup',()=>{
+ const f=fixture(false,[],{ready:false});assert.equal(f.grid.tile,null);
+ f.setReady(true);f.sync();assert.ok(f.grid.tile);
+});
+
+test('HUD text mutations do not rescan panel controls',()=>{
+ const f=fixture();const before=f.queries();
+ for(let i=0;i<500;i++)f.mutate([{type:'childList',target:{closest:()=>null},addedNodes:[{nodeType:3}],removedNodes:[]}]);
+ assert.equal(f.queries(),before);
+});
+
+test('batches structural changes and resumes synchronization after backgrounding',()=>{
+ const f=fixture(false,[],{frames:true});const before=f.queries();
+ const record={type:'childList',target:{closest:()=>null},addedNodes:[{nodeType:1,matches:()=>true}],removedNodes:[]};
+ for(let i=0;i<100;i++)f.mutate([record]);
+ assert.equal(f.frames.length,1);assert.equal(f.queries(),before);
+ f.flush();assert.ok(f.queries()>before);
+ f.document.hidden=true;f.mutate([record]);assert.equal(f.frames.length,0);
+ f.document.hidden=false;f.sync();assert.equal(f.frames.length,1);f.flush();
+});
+
+test('delivery artwork keeps the originals and reduces decorative downloads',()=>{
+ let before=0,after=0;
+ for(const name of ['city-header-reference','panel-reference']){
+  const original=fs.readFileSync(path.join(__dirname,'assets',name+'.png'));
+  const optimized=fs.readFileSync(path.join(__dirname,'assets',name+'.webp'));
+  assert.equal(optimized.toString('ascii',0,4),'RIFF');assert.equal(optimized.toString('ascii',8,12),'WEBP');
+  before+=original.length;after+=optimized.length;
+ }
+ assert.ok(after<before*.2);
+});
 test('does not modify the server-rendered control tree before hydration',()=>{
  const f=fixture(true);assert.equal(f.grid.tile,null);
  f.original.disabled=false;f.sync();assert.ok(f.grid.tile);
@@ -36,6 +71,13 @@ test('frontend adapter preserves game controls and only syncs the module quiz cl
  assert.ok(!source.includes('90 min'));
  assert.ok(source.includes("querySelector('.city-specialty-section')"));
 });
+test('specialty entry hides the header for every course without depending on room buttons',()=>{
+ const css=fs.readFileSync(path.join(__dirname,'city-panel.css'),'utf8');
+ assert.ok(css.includes('.city-page:has(.city-room-summary) .city-header { display:none!important; }'));
+ assert.ok(!css.includes('.city-page .city-header { display:none!important;'));
+ assert.ok(!source.includes("querySelector('.city-header')?.remove"));
+});
+
 test('skin retains native dropdown, checkbox, collapsed sections and focus states',()=>{
  const css=fs.readFileSync(path.join(__dirname,'city-panel.css'),'utf8');
  assert.ok(css.includes('focus-visible'));
@@ -62,6 +104,12 @@ test('all 35 specialties receive visual identity from their own profession',()=>
  const expected=['office','office','agro','agro','food','food','construction','construction','construction','construction','electric','electric','electric','design','design','mechanical','mechanical','mechanical','mining','mining','mining','mining','care','care','maritime','maritime','maritime','maritime','tourism','tourism','craft','design','digital','digital','digital'];
  const f=fixture(false,names);
  assert.deepEqual(f.specialtyButtons.map(button=>button.dataset.cityArt),expected);
+ assert.equal(new Set(f.specialtyButtons.map(button=>button.dataset.cityPhoto)).size,35);
+ for(const button of f.specialtyButtons){
+  const img=button.querySelector('.city-specialty-photo');assert.equal(img.loading,'lazy');assert.equal(img.alt,'');
+  assert.ok(fs.existsSync(path.join(__dirname,'assets','specialties',button.dataset.cityPhoto+'.webp')));
+ }
+ f.sync();assert.ok(f.specialtyButtons.every(button=>button.children.length===1));
 });
 
 test('entering an interior expands the panorama and hides the room action dock',()=>{
@@ -90,7 +138,7 @@ test('specialty entry shows a dismissible quiz guide and hides the city header',
 
 test('city header keeps live copy and original return link with responsive artwork',()=>{
  const css=fs.readFileSync(path.join(__dirname,'city-panel.css'),'utf8');
- assert.ok(css.includes('city-header-reference.png'));
+ assert.ok(css.includes('city-header-reference.webp'));
  assert.ok(css.includes('.city-header .city-back:focus-visible'));
  assert.ok(css.includes('@media(max-width:700px)'));
  assert.ok(!/city-header[^{}]*\{[^}]*opacity:\s*0/.test(css));

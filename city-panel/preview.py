@@ -4,6 +4,7 @@ from pathlib import Path
 from urllib.request import Request,urlopen
 from urllib.error import HTTPError
 import mimetypes
+import re
 
 ROOT=Path(__file__).resolve().parent
 PREFIX='/ciudad_laboral_aulatp/'
@@ -28,6 +29,8 @@ class Handler(BaseHTTPRequestHandler):
             with urlopen(Request('https://www.aulatpchile.cl'+self.path,headers=headers),timeout=90) as incoming:
                 data=incoming.read();kind=incoming.headers.get('Content-Type','application/octet-stream')
                 if 'text/html' in kind:
+                    data=re.sub(rb'/ciudad_laboral_aulatp/panel-ui-v[0-9]+/(city-panel\.(?:css|js))',
+                                lambda match:(PREFIX+'panel-ui-v1/').encode()+match[1],data)
                     if STYLE.encode() not in data:
                         data=data.replace(b'</head>',f'<link rel="stylesheet" href="{STYLE}"></head>'.encode())
                     if (PREFIX+'panel-ui-v1/city-panel.js').encode() not in data:
