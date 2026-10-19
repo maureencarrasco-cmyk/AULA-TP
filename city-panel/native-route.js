@@ -89,7 +89,7 @@
     const floorY=ctx.floorY+.035;
     const phaseStations=ctx.phaseStations||[],legacySigns=new Map(),worldPosition=new T.Pq0();
     ctx.scene.traverse(node=>{
-      if(!node.isMesh||!node.userData?.luminousSign||node.geometry?.parameters?.width!==1.16)return;
+      if(!node.isMesh||!node.userData?.luminousSign)return;
       node.getWorldPosition(worldPosition);
       const index=phaseStations.findIndex(item=>Math.abs(worldPosition.x-(ctx.district.x+item.x))<.03&&Math.abs(worldPosition.y-(ctx.floorY+1.62))<.12&&Math.abs(worldPosition.z-(ctx.district.z+item.z))<.03);
       if(index>=0)legacySigns.set(index,node);
