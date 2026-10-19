@@ -43,6 +43,7 @@ const output=path.resolve('tmp/native-route-qa'),root=path.resolve('city-panel')
   await page.waitForFunction(()=>{let hidden=0;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityLegacyQuizStageSign&&!object.visible)hidden++});return hidden>=3},{},{timeout:15000});
   assert.equal(await page.evaluate(()=>{let visible=0;window.__cityRouteContext.scene.traverse(object=>{if(object.userData.cityLegacyQuizStageSign&&object.visible)visible++});return visible}),0);
   const markers=await page.evaluate(()=>{const context=window.__cityRouteContext,items=[];context.scene.traverse(object=>{if(Number.isInteger(object.userData.cityQuizMarker))items.push({number:object.userData.cityQuizMarker,visible:object.visible,texture:Boolean(object.material?.map),name:object.name})});return {expected:context.stations.length,items:items.sort((a,b)=>a.number-b.number)}});
+  assert.equal(await page.locator('.city-native-guide').getAttribute('data-quiz-marker-count'),String(markers.expected));
   assert.equal(markers.items.length,markers.expected,'one visible marker per quiz station');
   assert.deepEqual(markers.items.map(item=>item.number),markers.items.map((_,index)=>index+1),'quiz marker numbers are consecutive and unique');
   assert.ok(markers.items.every(item=>item.visible&&item.texture&&item.name.includes('Quiz ')),'quiz station labels are visible and textured');

@@ -40,6 +40,7 @@ class ObserveBannerPatchTests(unittest.TestCase):
     def test_each_quiz_station_gets_a_numbered_glowing_interaction_marker(self):
         source=(ROOT/'city-panel/native-route.js').read_text(encoding='utf-8')
         self.assertIn('function createQuizMarkers(ctx)',source)
+        self.assertIn('panel.dataset.quizMarkerCount=String(quizMarkers.length)',source)
         self.assertIn('Quiz ${index+1}',source)
         self.assertIn("c.fillText('E',932,164)",source)
         self.assertIn('marker.sign.rotation.y=Math.atan2',source)

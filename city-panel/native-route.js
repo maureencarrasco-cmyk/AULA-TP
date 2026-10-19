@@ -44,6 +44,7 @@
       if(button)button.click();
     });
     panel.append(label,keyHint,action);document.querySelector('.city-viewport')?.append(panel);
+    panel.dataset.quizMarkerCount=String(quizMarkers.length);
     document.documentElement.classList.add('city-native-route-active');
   }
   function hideQuizPhaseSigns(ctx){
