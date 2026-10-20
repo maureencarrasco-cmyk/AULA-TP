@@ -489,44 +489,99 @@ def create_app(test_config=None):
         station=request.args.get('station',type=int) if request.method=='GET' else body().get('station')
         if type(station) is not int or station not in range(1,5):return fail('Estación de quiz inválida.')
         content=load_content(m['content'],m['position'])
-        questions=content.get('questions') or []
-        levels=('Inicial','Inicial','Intermedia','Avanzada')
-        level=levels[station-1]
+        questions=[q for q in content.get('questions') or [] if q.get('id') is not None and len(q.get('options') or [])==4]
+        skills=('Representar','Resolver problemas','Modelar','Argumentar')
+        def canonical_skill(question):
+            value=''.join(char for char in unicodedata.normalize('NFD',str(question.get('skill') or '').casefold()) if unicodedata.category(char)!='Mn')
+            evidence=''.join(char for char in unicodedata.normalize('NFD',' '.join(str(question.get(key) or '') for key in ('question','stimulus','criterion','explanation')).casefold()) if unicodedata.category(char)!='Mn')
+            if any(term in value for term in ('represent','interpret','lectura','diagrama')):return 'Representar'
+            if any(term in value for term in ('resolver','relacionar','problema','diagnost')):return 'Resolver problemas'
+            if any(term in value for term in ('model','aplicar','calcular','ejecutar','proponer')):return 'Modelar'
+            if any(term in value for term in ('argument','verificar','justificar','fundament','evaluar')):return 'Argumentar'
+            cues={'Representar':('plano','diagrama','esquema','tabla','simbolo','leyenda','representacion','interpretar'),
+                  'Resolver problemas':('problema','falla','diagnost','resolver','inconsistencia','conflicto','cruza','no coincide','discrepancia'),
+                  'Modelar':('calcular','dimensionar','procedimiento','proponer','aplicar','secuencia','escala','medida','mm','cm','proporcion','cubicacion'),
+                  'Argumentar':('justificar','evidencia','criterio','verificar','decidir','fundamentar','conformidad','firmar','riesgo')}
+            return max(skills,key=lambda skill:sum(evidence.count(cue) for cue in cues[skill]))
+        def topic_tokens(value):
+            text=''.join(char if char.isalnum() else ' ' for char in unicodedata.normalize('NFD',str(value or '').casefold()) if unicodedata.category(char)!='Mn')
+            return {word for word in text.split() if len(word)>3 and word not in {'quiz','estacion','aplicacion','practica','banco','mantenimiento','modulo','herramientas','equipo','aula','tp'}}
+        def topic_score(question,topic):
+            evidence=' '.join(str(question.get(key) or '') for key in ('question','stimulus','criterion','skill','caption'))
+            return len(topic_tokens(topic)&topic_tokens(evidence))
+        payload=body() if request.method=='POST' else {}
+        try:topics=json.loads(request.args.get('topics','[]')) if request.method=='GET' else payload.get('topics',[])
+        except (TypeError,ValueError):topics=[]
+        topics=[str(value or '')[:180] for value in topics] if isinstance(topics,list) else []
+        topics=(topics+['']*4)[:4]
+        pools={skill:[q for q in questions if canonical_skill(q)==skill] for skill in skills}
         with db() as con:
             con.execute('BEGIN IMMEDIATE')
             state=getstate(con,mid)
             stations=state.setdefault('city_station_quizzes',{})
-            item=stations.setdefault(str(station),{'level':level,'attempts':[],'used':[],'passed':False})
-            if request.method=='GET' and item.get('current_id') is None and not item.get('passed'):
-                candidates=[q for q in questions if q.get('difficulty')==level]
-                if not candidates:candidates=questions
-                if candidates:
-                    rng=random.Random(f"city-station:{session['uid']}:{mid}:{station}")
-                    first=candidates[rng.randrange(len(candidates))]
-                    item['current_id']=first.get('id')
-                    item['used'].append(first.get('id'))
-                    putstate(con,mid,state)
+            if stations.get('version')!=3:
+                previous={key:value for key,value in stations.items() if key!='version'}
+                if previous:state.setdefault('city_station_quiz_history',[]).append({'version':stations.get('version',1),'stations':previous,'archived_at':datetime.now(timezone.utc).isoformat()})
+                if any(len(pools[skill])<4 for skill in skills):return fail('El banco del módulo debe incluir al menos cuatro preguntas por habilidad y cuatro alternativas.',409)
+                assigned=set();groups={str(number):{'topic':topics[number-1],'question_ids':[],'skills':[]} for number in range(1,5)}
+                def pick_for_station(skill,number):
+                    group=groups[str(number)];candidates=[q for q in pools[skill] if q.get('id') not in assigned]
+                    if not candidates:return None
+                    existing_aes={q.get('ae') for q in questions if q.get('id') in group['question_ids']}
+                    chosen=max(candidates,key=lambda q:(topic_score(q,group['topic']),q.get('ae') not in existing_aes,-int(q.get('id') or 0)))
+                    assigned.add(chosen['id']);group['question_ids'].append(chosen['id']);group['skills'].append(skill)
+                    return chosen
+                for skill in skills:
+                    for number in range(1,5):
+                        if not pick_for_station(skill,number):return fail('No se pudieron organizar veinte preguntas distintas para las cuatro estaciones.',409)
+                for number in range(1,5):
+                    available=[skill for skill in skills if any(q.get('id') not in assigned for q in pools[skill])]
+                    if not available:return fail('El módulo no tiene veinte preguntas inéditas para distribuir entre sus quizzes.',409)
+                    extra=max(available,key=lambda skill:(len([q for q in pools[skill] if q.get('id') not in assigned]),max(topic_score(q,topics[number-1]) for q in pools[skill] if q.get('id') not in assigned)))
+                    pick_for_station(extra,number)
+                for group in groups.values():group.update(slot_index=0,current_id=group['question_ids'][0],attempts=[],passed=False)
+                stations={'version':3,'used_question_ids':[groups[str(number)]['current_id'] for number in range(1,5)],**groups}
+                state['city_station_quizzes']=stations
+                putstate(con,mid,state)
+            item=stations.get(str(station))
+            if not item:return fail('No se encontró el quiz de esta estación.',409)
+            slot=min(int(item.get('slot_index') or 0),4)
             question=next((q for q in questions if q.get('id')==item.get('current_id')),None)
             if request.method=='POST':
-                payload=body();question=next((q for q in questions if q.get('id')==payload.get('question_id') and q.get('id')==item.get('current_id')),None)
+                question=next((q for q in questions if q.get('id')==payload.get('question_id') and q.get('id')==item.get('current_id')),None)
                 choice=payload.get('choice');argument=payload.get('argument')
                 if item.get('passed'):return jsonify(passed=True,feedback='Este quiz ya está aprobado.')
                 if not question:return fail('La pregunta cambió. Actualiza el quiz antes de responder.',409)
                 if type(choice) is not int or choice not in range(len(question.get('options') or [])):return fail('Selecciona una alternativa disponible.')
                 if not text_valid(argument,20):return fail('Fundamenta tu respuesta con al menos 20 caracteres.')
                 feedback=answer_feedback(question,choice)
-                item.setdefault('attempts',[]).append({'question_id':question.get('id'),'choice':choice,'argument':argument.strip(),'correct':feedback['correct'],'at':datetime.now(timezone.utc).isoformat()})
-                response={'passed':feedback['correct'],'feedback':feedback['choice_feedback'],'explanation':feedback['explanation'],'correct_answer':feedback['correct_answer'] if feedback['correct'] else None,'attempts':len(item['attempts'])}
+                item.setdefault('attempts',[]).append({'slot':slot,'skill':item['skills'][slot],'question_id':question.get('id'),'choice':choice,'argument':argument.strip(),'correct':feedback['correct'],'at':datetime.now(timezone.utc).isoformat()})
+                response={'correct':feedback['correct'],'passed':False,'question_number':slot+1,'total_questions':5,'skill':item['skills'][slot],
+                          'feedback':feedback['choice_feedback'],'explanation':feedback['explanation'],'correct_answer':feedback['correct_answer'] if feedback['correct'] else None,
+                          'attempts':len(item['attempts']),'correct_in_quiz':slot if not feedback['correct'] else slot+1}
                 if feedback['correct']:
-                    item['passed']=True
+                    item['slot_index']=slot+1
+                    if item['slot_index']==5:
+                        item['passed']=True;response['passed']=True
+                    else:
+                        item['current_id']=item['question_ids'][item['slot_index']]
+                        stations['used_question_ids'].append(item['current_id'])
+                        next_question=next(q for q in questions if q.get('id')==item['current_id'])
+                        next_slot=item['slot_index']
+                        response.update(question_number=next_slot+1,next_skill=item['skills'][next_slot],
+                                        next_question={key:next_question.get(key) for key in ('id','question','options','criterion','ae','difficulty','image','stimulus') if key in next_question})
+                        ae_index=next_question.get('ae');aes=content.get('aes') or []
+                        response['ae_title']=aes[ae_index].get('title') or aes[ae_index].get('name') or '' if type(ae_index) is int and 0<=ae_index<len(aes) else ''
                 else:
-                    candidates=[q for q in questions if q.get('ae')==question.get('ae') and q.get('id') not in item['used']]
-                    candidates.sort(key=lambda q:(q.get('difficulty')!=question.get('difficulty'),str(q.get('question') or '')))
-                    if not candidates:candidates=[q for q in questions if q.get('ae')==question.get('ae') and q.get('id')!=question.get('id') and q.get('options')]
-                    if not candidates:candidates=[q for q in questions if q.get('id')!=question.get('id') and q.get('options')]
+                    skill=item['skills'][slot];used=set(stations.get('used_question_ids') or [])
+                    reserved={question_id for key,group in stations.items() if key in {'1','2','3','4'} and key!=str(station) for question_id in group.get('question_ids',[])}
+                    reserved.update(item['question_ids'][slot+1:])
+                    candidates=[q for q in pools[skill] if q.get('id')!=question.get('id') and q.get('id') not in reserved and q.get('id') not in used]
+                    if not candidates:candidates=[q for q in pools[skill] if q.get('id')!=question.get('id') and q.get('id') not in reserved]
+                    candidates.sort(key=lambda q:(q.get('ae')!=question.get('ae'),-topic_score(q,item.get('topic')),-int(q.get('id') or 0)))
                     if candidates:
-                        next_question=candidates[0];item['current_id']=next_question.get('id');item.setdefault('used',[]).append(next_question.get('id'))
-                        response['next_question']={key:next_question.get(key) for key in ('id','question','options','criterion','ae','difficulty','image','stimulus') if key in next_question}
+                        next_question=candidates[0];item['question_ids'][slot]=next_question.get('id');item['current_id']=next_question.get('id');stations['used_question_ids'].append(next_question.get('id'))
+                        response.update(next_skill=skill,next_question={key:next_question.get(key) for key in ('id','question','options','criterion','ae','difficulty','image','stimulus') if key in next_question})
                         ae_index=next_question.get('ae');aes=content.get('aes') or []
                         response['ae_title']=aes[ae_index].get('title') or aes[ae_index].get('name') or '' if type(ae_index) is int and 0<=ae_index<len(aes) else ''
                     else:response['bank_exhausted']=True
@@ -535,12 +590,12 @@ def create_app(test_config=None):
                 return jsonify(response)
             if item.get('passed'):
                 putstate(con,mid,state)
-                return jsonify(station=station,level=level,passed=True,attempts=len(item.get('attempts') or []))
+                return jsonify(station=station,passed=True,attempts=len(item.get('attempts') or []),correct_in_quiz=5,total_questions=5)
             if not question:return fail('No hay preguntas disponibles para esta estación.',409)
             ae_index=question.get('ae');aes=content.get('aes') or []
             ae_title=aes[ae_index].get('title') or aes[ae_index].get('name') or '' if type(ae_index) is int and 0<=ae_index<len(aes) else ''
             putstate(con,mid,state)
-            return jsonify(station=station,level=level,passed=False,attempts=len(item.get('attempts') or []),ae=ae_index,ae_title=ae_title,
+            return jsonify(station=station,passed=False,attempts=len(item.get('attempts') or []),question_number=slot+1,total_questions=5,skill=item['skills'][slot],topic=item.get('topic'),ae=ae_index,ae_title=ae_title,
                            question={key:question.get(key) for key in ('id','question','options','criterion','ae','difficulty','image','stimulus') if key in question})
     @app.post('/api/modules/<int:mid>/city-experience')
     @require('student')

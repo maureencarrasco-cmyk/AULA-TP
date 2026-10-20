@@ -416,16 +416,16 @@
       launch.addEventListener('click',()=>[...document.querySelectorAll('.city-view-toolbar button')].find(button=>normalize(button.textContent).includes('desafio profesional'))?.click());body.append(launch);
     }else{
       const content=document.createElement('div'),level=document.createElement('p'),alignment=document.createElement('p'),prompt=document.createElement('h3'),criterion=document.createElement('p'),form=document.createElement('form'),choices=document.createElement('fieldset'),legend=document.createElement('legend'),argumentLabel=document.createElement('label'),argument=document.createElement('textarea'),submit=document.createElement('button'),status=document.createElement('p'),feedback=document.createElement('p');
-      content.className='city-quiz-question';level.className='city-quiz-question-level';level.textContent=['Fácil','Fácil','Medianamente difícil','Difícil'][number-1]||'Desafío';
+      content.className='city-quiz-question';level.className='city-quiz-question-level';level.textContent='Pregunta 1 de 5';
       alignment.className='city-quiz-question-ae';prompt.textContent='Cargando pregunta…';criterion.className='city-quiz-question-criterion';
       form.className='city-quiz-response-form';choices.className='city-quiz-choices';legend.textContent='Selecciona una alternativa';choices.append(legend);
       argumentLabel.className='city-quiz-argument-label';argumentLabel.textContent='Argumenta tu respuesta';argument.name='argument';argument.required=true;argument.minLength=20;argument.placeholder='Explica qué evidencia del módulo respalda tu elección.';argumentLabel.append(argument);
       submit.type='submit';submit.className='city-quiz-submit';submit.textContent='Comprobar respuesta';status.className='city-quiz-save-status';status.setAttribute('aria-live','polite');feedback.className='city-quiz-feedback';feedback.setAttribute('aria-live','polite');feedback.hidden=true;
       form.append(choices,argumentLabel,submit,status,feedback);content.append(level,alignment,prompt,criterion,form);body.append(content);
       let activeQuestion=null,busy=false;
-      const renderQuestion=(item,aeTitle='')=>{
-        activeQuestion=item;prompt.textContent=String(item.question||'Resuelve el desafío del módulo.');
-        alignment.textContent=aeTitle?`Aprendizaje esperado · ${aeTitle}`:`Aprendizaje esperado ${Number(item.ae)+1} del módulo`;
+      const renderQuestion=(item,aeTitle='',skill='Representar',questionNumber=1)=>{
+        activeQuestion=item;prompt.textContent=String(item.question||'Resuelve el desafío del módulo.');level.textContent=`Pregunta ${questionNumber} de 5`;
+        alignment.textContent=`Habilidad: ${skill}${aeTitle?` · AE: ${aeTitle}`:` · Aprendizaje esperado ${Number(item.ae)+1}`}`;
         criterion.hidden=!item.criterion;criterion.textContent=item.criterion?`Criterio asociado: ${item.criterion}`:'';
         choices.replaceChildren(legend);
         (Array.isArray(item.options)?item.options:[]).slice(0,4).forEach((option,index)=>{
@@ -434,11 +434,11 @@
         });
         argument.value='';submit.disabled=false;submit.textContent='Comprobar respuesta';
       };
-      const api=`/api/modules/${encodeURIComponent(current?.moduleId||'')}/city-station-quiz`;
-      fetch(`${api}?station=${number}`,{credentials:'same-origin'}).then(async response=>{
+      const api=`/api/modules/${encodeURIComponent(current?.moduleId||'')}/city-station-quiz`,topics=roomStations.map(item=>item.quizQuestion?.object||item.equipment||item.name||item.title||'');
+      fetch(`${api}?station=${number}&topics=${encodeURIComponent(JSON.stringify(topics))}`,{credentials:'same-origin'}).then(async response=>{
         const data=await response.json();if(!response.ok)throw new Error(data.error||'No se pudo cargar este quiz.');
-        if(data.passed){alignment.textContent='Aprendizaje esperado demostrado';prompt.textContent='Este quiz ya está aprobado.';submit.disabled=true;return;}
-        renderQuestion(data.question,data.ae_title);status.textContent=data.attempts?`Intento ${data.attempts+1}`:'Primera pregunta';
+        if(data.passed){alignment.textContent='Aprendizaje esperado demostrado';level.textContent='5 de 5 preguntas correctas';prompt.textContent='Este quiz ya está aprobado.';submit.disabled=true;return;}
+        renderQuestion(data.question,data.ae_title,data.skill,data.question_number);status.textContent=data.attempts?`${data.correct_in_quiz||0} de 5 correctas`:'Primera pregunta';
       }).catch(error=>{prompt.textContent=error.message;submit.disabled=true;});
       form.addEventListener('submit',async event=>{
         event.preventDefault();if(busy||!activeQuestion)return;
@@ -448,9 +448,9 @@
         try{
           const response=await fetch(api,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({station:number,question_id:activeQuestion.id,choice:Number(choice.value),argument:reason})});
           const result=await response.json();if(!response.ok)throw new Error(result.error||'No se pudo registrar la respuesta.');
-          feedback.hidden=false;feedback.classList.toggle('is-correct',Boolean(result.passed));feedback.classList.toggle('is-incorrect',!result.passed);
-          if(result.passed){feedback.textContent=`Correcto. ${result.feedback||result.explanation||''}`;status.textContent='Quiz aprobado';alignment.textContent='Aprendizaje esperado demostrado';prompt.textContent='¡Muy bien! Puedes continuar con otra estación.';choices.querySelectorAll('input').forEach(input=>input.disabled=true);argument.disabled=true;submit.textContent='Aprobado';}
-          else if(result.next_question){feedback.textContent=`Aún no. ${result.feedback||result.explanation||'Revisa el criterio asociado y vuelve a intentarlo.'} Se generó una pregunta nueva.`;status.textContent=`Nuevo intento · ${result.attempts}`;renderQuestion(result.next_question,result.ae_title);}
+          feedback.hidden=false;feedback.classList.toggle('is-correct',Boolean(result.correct));feedback.classList.toggle('is-incorrect',!result.correct);
+          if(result.passed){feedback.textContent=`¡Quiz aprobado! ${result.feedback||result.explanation||''}`;status.textContent='5 de 5 correctas';level.textContent='5 de 5 preguntas correctas';alignment.textContent='Aprendizaje esperado demostrado';prompt.textContent='¡Muy bien! Puedes continuar con otra estación.';choices.querySelectorAll('input').forEach(input=>input.disabled=true);argument.disabled=true;submit.textContent='Aprobado';}
+          else if(result.next_question){feedback.textContent=result.correct?`Correcto. ${result.feedback||''} Continúa con la pregunta ${result.question_number} de 5.`:`Aún no. ${result.feedback||result.explanation||'Revisa el criterio asociado.'} Prueba una pregunta nueva de ${result.next_skill}.`;status.textContent=`${result.correct_in_quiz||0} de 5 correctas`;renderQuestion(result.next_question,result.ae_title,result.next_skill,result.question_number);}
           else{feedback.textContent=`Aún no. ${result.feedback||result.explanation||''} No quedan preguntas inéditas en este aprendizaje; volveremos a presentarlo.`;status.textContent='Reintento disponible';}
         }catch(error){status.textContent=error.message;submit.disabled=false;}
         finally{busy=false;}

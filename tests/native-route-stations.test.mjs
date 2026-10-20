@@ -99,7 +99,8 @@ test('each 3D quiz plate opens a server-graded four-choice form with retry feedb
   assert.match(source,/argument\.required=true;argument\.minLength=20/);
   assert.match(source,/city-station-quiz/);
   assert.match(source,/feedback\.textContent=`Aún no\./);
-  assert.match(source,/renderQuestion\(result\.next_question,result\.ae_title\)/);
+  assert.match(source,/renderQuestion\(result\.next_question,result\.ae_title,result\.next_skill,result\.question_number\)/);
+  assert.match(source,/Pregunta \$\{questionNumber\} de 5/);
   assert.doesNotMatch(source,/localStorage\.setItem\(key,JSON\.stringify\(record\)\)/);
   assert.match(source,/current\?\.moduleId/);
   assert.match(source,/close\.addEventListener\('click'/);
