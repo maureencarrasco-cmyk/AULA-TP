@@ -107,6 +107,10 @@ La versión `city-20261019-quiz-cards-v115` (`panel-ui-v67`) mantiene las cuatro
 
 La versión `city-20261020-quiz-clear-counter-v116` (`panel-ui-v68`) amplía la retirada del mobiliario antiguo para quitar también mesones grandes de color neutro que bloquean la vista de los quizzes, respetando los límites del área de estaciones y manteniendo intactas las nuevas tarjetas y plataformas.
 
+La versión `city-20261020-quiz-ae-responses-v117` (`panel-ui-v69`) conecta cada estación a preguntas del módulo y AE activos: dos fáciles, una medianamente difícil y una difícil. Cada botón abre a la derecha una pregunta con cuatro alternativas y fundamentación obligatoria. Las respuestas se guardan por curso, módulo, AE y estación en el dispositivo, sin cambiar la calificación del desafío profesional existente.
+
+La versión `city-20261020-quiz-ae-responses-v118` (`panel-ui-v70`) separa las zonas interactivas de las cuatro tarjetas en vistas compactas para que cada botón abra su propio quiz, y amplía el espacio entre filas.
+
 ### Fotografías de especialidades
 
 Las 35 especialidades de los 12 distritos tienen fotografías propias, compartidas por los cursos correspondientes. Se conservan los botones y sus acciones originales. Las miniaturas WebP se cargan bajo demanda, sin descargar todo el catálogo al ingresar.

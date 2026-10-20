@@ -3,7 +3,7 @@
   const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   let root,geometry,material,current=null,last=0,room=null,error='',generation=0;
   let stationQuestionSignature='';
-  let quizControlLayer=null,quizWindow=null;
+  let quizControlLayer=null,quizWindow=null,activeQuizNumber=null;
   const originalSigns=[];
   const arrows=[];
   const quizMarkers=[];
@@ -15,10 +15,12 @@
   function progress(event){
     const data=event.detail;
     if(!data||!Array.isArray(data.questions)||!data.answers||typeof data.specialty!=='string')return;
+    const openNumber=activeQuizNumber;
     current=data;last=0;
-    const signature=`${data.moduleId||''}:${JSON.stringify(data.questions.map(question=>[question.id,question.object]))}`;
+    const signature=`${data.moduleId||''}:${data.ae||''}:${JSON.stringify(data.questions.map(question=>[question.id,question.object,question.difficulty]))}`;
     if(signature!==stationQuestionSignature&&root){dispose();room=null;}
     stationQuestionSignature=signature;
+    if(openNumber)openQuizWindow(openNumber);
   }
   addEventListener('aulatp:quiz-progress',progress);
   function dispose(){
@@ -29,7 +31,7 @@
     markerCylinderGeometry?.dispose();markerCylinderMaterial?.dispose();cylinders.length=0;
     for(const marker of quizMarkers){marker.texture.dispose();marker.material.dispose();marker.imageTexture?.dispose();marker.imageMaterial?.dispose();}
     quizMarkers.length=0;markerGeometry=markerImageGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=markerBeamGeometry=markerBeamTexture=markerBeamMaterial=markerSparkGeometry=markerSparkTexture=markerSparkMaterial=markerCylinderGeometry=markerCylinderMaterial=null;
-    quizControlLayer?.remove();quizControlLayer=null;quizControls.length=0;quizWindow?.remove();quizWindow=null;
+    quizControlLayer?.remove();quizControlLayer=null;quizControls.length=0;quizWindow?.remove();quizWindow=null;activeQuizNumber=null;
     stageAnchors.length=0;
     roomStations=[];
     for(const [sign,visible,oldGeometry,oldMaterial,oldName,flag] of originalSigns){sign.visible=visible;sign.geometry=oldGeometry;sign.material=oldMaterial;sign.name=oldName;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityLegacyQuizFurniture;delete sign.userData.cityQuizMarker;}
@@ -51,6 +53,7 @@
     hideQuizPhaseSigns(ctx);
     createQuizMarkers(ctx);
     document.documentElement.classList.add('city-native-route-active');
+    if(activeQuizNumber)openQuizWindow(activeQuizNumber);
   }
   function hideQuizPhaseSigns(ctx){
     const phases=['observar','planificar','verificar'];
@@ -123,13 +126,12 @@
     const source=(ctx.stations||[]).slice(0,4);
     if(!source.length)return [];
     const questions=current&&normalize(current.specialty)===normalize(ctx.specialty.name)?current.questions:[];
-    const questionGroups=Array.from({length:4},()=>[]);
-    questions.forEach((question,index)=>questionGroups[Math.min(3,Math.floor(index*4/Math.max(1,questions.length)))].push(question));
+    const stationQuestions=selectStationQuizQuestions(questions);
     const learningObjects=[...new Set(questions.map(question=>String(question.object||'').trim()).filter(Boolean))];
-    const result=source.map((station,index)=>({...station,quizQuestion:questionGroups[index]?.[0]||null}));
+    const result=source.map((station,index)=>({...station,quizQuestion:stationQuestions[index]||null}));
     while(result.length<4){
       const slot=result.length,base=result[result.length-1],learningObject=learningObjects[slot];
-      result.push({...base,name:learningObject||`Aplicación práctica ${slot+1}`,equipment:learningObject||`Aplicación práctica ${slot+1}`,quizQuestion:questionGroups[slot]?.[0]||null,cityGeneratedStation:true});
+      result.push({...base,name:learningObject||`Aplicación práctica ${slot+1}`,equipment:learningObject||`Aplicación práctica ${slot+1}`,quizQuestion:stationQuestions[slot]||null,cityGeneratedStation:true});
     }
     const points=result.map(station=>station.totem||[station.x,station.z]);
     const blocked=(x,z)=>ctx.colliders.some(block=>
@@ -152,8 +154,8 @@
       const cx=targetX-ctx.district.x+rowX*shiftX+direction.x*shiftZ;
       const cz=targetZ-ctx.district.z+rowZ*shiftX+direction.z*shiftZ;
       const line=Array.from({length:4},(_,index)=>compact?
-        [cx+(index%2-.5)*2.65*rowX+(Math.floor(index/2)-.5)*2.4*direction.x,
-          cz+(index%2-.5)*2.65*rowZ+(Math.floor(index/2)-.5)*2.4*direction.z]:
+        [cx+(index%2-.5)*3.1*rowX+(Math.floor(index/2)-.5)*3.2*direction.x,
+          cz+(index%2-.5)*3.1*rowZ+(Math.floor(index/2)-.5)*3.2*direction.z]:
         [cx+(index-1.5)*spacing*rowX,cz+(index-1.5)*spacing*rowZ]);
       if(line.some(([x,z])=>Math.abs(x)>6.2||Math.abs(z)>5.7))continue;
       const collisions=line.reduce((count,[x,z])=>count+(blocked(x,z)?1:0),0);
@@ -162,6 +164,31 @@
     }
     const best=candidates.sort((a,b)=>a.collisions-b.collisions||a.offset-b.offset)[0];
     return result.map((station,index)=>({...station,totem:best?.line[index]||[centerX+(index-1.5)*3,centerZ]}));
+  }
+  function questionLevel(question){
+    const value=normalize(question.difficulty||'');
+    if(/facil|inicial|easy|basico/.test(value))return 'easy';
+    if(/media|intermedia|medium/.test(value))return 'medium';
+    if(/dificil|avanzada|hard/.test(value))return 'hard';
+    return '';
+  }
+  function selectStationQuizQuestions(questions){
+    const selected=[];
+    for(const level of ['easy','easy','medium','hard']){
+      const question=questions.find(item=>!selected.includes(item)&&questionLevel(item)===level&&String(item.prompt||'').trim()&&Array.isArray(item.options));
+      if(!question)return [];
+      selected.push(question);
+    }
+    return selected;
+  }
+  function stationQuizOptions(question){
+    const options=[...new Set((Array.isArray(question.options)?question.options:[]).map(option=>String(option).trim()).filter(Boolean))].slice(0,4);
+    const fallback='Elegir sin contrastar la evidencia con el criterio del aprendizaje esperado.';
+    while(options.length<4){
+      const candidate=options.includes(fallback)?`Omitir el registro y continuar sin verificar el criterio (${options.length+1}).`:fallback;
+      options.push(candidate);
+    }
+    return options;
   }
   function specialtyPhotos(name){
     const value=normalize(name);
@@ -358,9 +385,41 @@
   function openQuizWindow(number){
     quizWindow?.remove();
     const panel=document.createElement('section');panel.className='city-quiz-empty-window';panel.setAttribute('role','dialog');panel.setAttribute('aria-label',`Quiz ${number}`);
-    const header=document.createElement('header'),title=document.createElement('h2'),close=document.createElement('button'),blank=document.createElement('div');
-    title.textContent=`Quiz ${number}`;close.type='button';close.className='city-quiz-empty-window-close';close.setAttribute('aria-label','Cerrar quiz');close.textContent='×';close.addEventListener('click',()=>{panel.remove();if(quizWindow===panel)quizWindow=null;});
-    blank.className='city-quiz-empty-window-body';blank.setAttribute('aria-label','Contenido del quiz');header.append(title,close);panel.append(header,blank);document.body.append(panel);quizWindow=panel;
+    const header=document.createElement('header'),title=document.createElement('h2'),close=document.createElement('button'),body=document.createElement('div');
+    title.textContent=`Quiz ${number}`;close.type='button';close.className='city-quiz-empty-window-close';close.setAttribute('aria-label','Cerrar quiz');close.textContent='×';close.addEventListener('click',()=>{panel.remove();if(quizWindow===panel){quizWindow=null;activeQuizNumber=null;}});
+    body.className='city-quiz-empty-window-body';header.append(title,close);panel.append(header,body);
+    const station=roomStations[number-1],question=station?.quizQuestion;
+    if(!question){
+      body.classList.add('city-quiz-unavailable');body.append(document.createTextNode('Abre el Desafío profesional de este módulo para cargar la pregunta y su aprendizaje esperado.'));
+      const launch=document.createElement('button');launch.type='button';launch.className='city-quiz-submit';launch.textContent='Abrir Desafío profesional';
+      launch.addEventListener('click',()=>[...document.querySelectorAll('.city-view-toolbar button')].find(button=>normalize(button.textContent).includes('desafio profesional'))?.click());body.append(launch);
+    }else{
+      const content=document.createElement('div'),level=document.createElement('p'),alignment=document.createElement('p'),prompt=document.createElement('h3'),form=document.createElement('form'),choices=document.createElement('fieldset'),legend=document.createElement('legend'),argumentLabel=document.createElement('label'),argument=document.createElement('textarea'),submit=document.createElement('button'),status=document.createElement('p');
+      content.className='city-quiz-question';level.className='city-quiz-question-level';level.textContent=['Fácil','Fácil','Medianamente difícil','Difícil'][number-1]||'Desafío';
+      alignment.className='city-quiz-question-ae';alignment.textContent=`AE ${current?.ae||''}${current?.aeTitle?` · ${current.aeTitle}`:''}`.trim();
+      prompt.textContent=String(question.prompt||question.question||'Resuelve el desafío del módulo.');
+      form.className='city-quiz-response-form';choices.className='city-quiz-choices';legend.textContent='Selecciona una alternativa';choices.append(legend);
+      const key=`aulatp:city-station-quiz:v1:${encodeURIComponent(current?.specialty||'')}:${encodeURIComponent(current?.moduleId||'')}:${encodeURIComponent(current?.ae||'')}:${number}`;
+      let saved=null;try{saved=JSON.parse(localStorage.getItem(key)||'null');}catch{}
+      stationQuizOptions(question).forEach((option,index)=>{
+        const label=document.createElement('label'),radio=document.createElement('input'),copy=document.createElement('span');
+        radio.type='radio';radio.name=`city-quiz-${number}-answer`;radio.value=String(index);radio.required=true;radio.checked=Number(saved?.choice)===index;
+        copy.textContent=option;label.append(radio,copy);choices.append(label);
+      });
+      if(question.criterion){const criterion=document.createElement('p');criterion.className='city-quiz-question-criterion';criterion.textContent=`Criterio asociado: ${question.criterion}`;content.append(level,alignment,prompt,criterion);}
+      else content.append(level,alignment,prompt);
+      argumentLabel.className='city-quiz-argument-label';argumentLabel.textContent='Argumenta tu respuesta';argument.name='argument';argument.required=true;argument.minLength=12;argument.value=String(saved?.argument||'');argument.placeholder='Explica qué evidencia del módulo respalda tu elección.';argumentLabel.append(argument);
+      submit.type='submit';submit.className='city-quiz-submit';submit.textContent=saved?'Actualizar respuesta':'Guardar respuesta';status.className='city-quiz-save-status';status.setAttribute('aria-live','polite');
+      form.append(choices,argumentLabel,submit,status);form.addEventListener('submit',event=>{
+        event.preventDefault();const choice=form.querySelector('input:checked'),reason=argument.value.trim();
+        if(!choice||reason.length<12){status.textContent='Selecciona una alternativa y fundamenta tu respuesta.';return;}
+        const record={choice:Number(choice.value),argument:reason,savedAt:new Date().toISOString()};
+        try{localStorage.setItem(key,JSON.stringify(record));status.textContent='Respuesta y argumentación guardadas en este dispositivo.';submit.textContent='Actualizar respuesta';}
+        catch{status.textContent='No se pudo guardar. Revisa el almacenamiento del navegador e inténtalo otra vez.';}
+      });
+      content.append(form);body.append(content);
+    }
+    document.body.append(panel);quizWindow=panel;activeQuizNumber=number;
   }
   function updateQuizControls(ctx){
     if(!quizControlLayer||!ctx.camera||!ctx.renderer)return;

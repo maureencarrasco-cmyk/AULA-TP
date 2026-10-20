@@ -39,7 +39,7 @@ class NativeRoutePatchTests(unittest.TestCase):
     def test_progress_hook_keeps_the_original_save_and_does_not_grade(self):
         self.assertTrue(module.LEARNING_HOOK.startswith(module.LEARNING_ANCHOR))
         self.assertIn('answers:N.answers',module.LEARNING_HOOK)
-        for field in ('prompt:q.prompt','criterion:q.criterion','options:q.options','feedback:q.feedback','workplace:q.workplace'):
+        for field in ('moduleTitle:w.module','aeTitle:w.aeTitle','prompt:q.prompt','criterion:q.criterion','options:q.options','difficulty:q.difficulty','feedback:q.feedback','workplace:q.workplace'):
             self.assertIn(field,module.LEARNING_HOOK)
         self.assertNotIn('correct=',module.LEARNING_HOOK)
 

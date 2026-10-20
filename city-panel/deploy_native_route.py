@@ -16,7 +16,7 @@ LEARNING_SHA='2c2a44eca2d7f0f7820bc5cccbb527487e423b2241228fbb7dfc5b577d51ace5'
 WORLD_ANCHOR='ac.render(as,af),r9()'
 WORLD_HOOK='globalThis.AulaTPNativeRoute?.frame({scene:as,player:iE,indoors:iC,map:ij,specialty:iT,district:iF,room:i4,stations:i7?.stations??i6,phaseStations:i6,colliders:i3,floorY:(i4?.position.y??0)+.12,three:o,camera:af,renderer:ac}),ac.render(as,af),r9()'
 LEARNING_ANCHOR='localStorage.setItem((0,f.Ai)(w),JSON.stringify({...N,updatedAt:new Date().toISOString()}))'
-LEARNING_HOOK=LEARNING_ANCHOR+",window.dispatchEvent(new CustomEvent('aulatp:quiz-progress',{detail:{specialty:w.specialty,moduleId:w.moduleId,ae:w.ae,questions:w.questions.map(q=>({id:q.id,object:q.object,prompt:q.prompt,criterion:q.criterion,options:q.options,difficulty:q.difficulty,hint:q.hint,feedback:q.feedback,workplace:q.workplace,image:q.image})),answers:N.answers}}))"
+LEARNING_HOOK=LEARNING_ANCHOR+",window.dispatchEvent(new CustomEvent('aulatp:quiz-progress',{detail:{specialty:w.specialty,moduleId:w.moduleId,moduleTitle:w.module,ae:w.ae,aeTitle:w.aeTitle,questions:w.questions.map(q=>({id:q.id,object:q.object,prompt:q.prompt,criterion:q.criterion,options:q.options,difficulty:q.difficulty,hint:q.hint,feedback:q.feedback,workplace:q.workplace,image:q.image,ae:q.ae})),answers:N.answers}}))"
 
 def patch(source,expected,anchor,replacement):
     if hashlib.sha256(source).hexdigest()!=expected or source.count(anchor.encode())!=1:
@@ -72,7 +72,9 @@ def main():
     for entry in ('index.html','ciudad/index.html'):
         file=target/entry
         if not file.exists():continue
-        data=file.read_bytes().replace(old_runtime.encode(),new_runtime.encode()).replace(b'</body>',scripts+b'</body>')
+        data=file.read_bytes().replace(old_runtime.encode(),new_runtime.encode())
+        data=re.sub(rb'<script defer src="/ciudad_laboral_aulatp/panel-ui-v[0-9]+/(?:engine/vendor/astar\.js|native-route\.js)"></script>',b'',data)
+        data=data.replace(b'</body>',scripts+b'</body>')
         temporary=file.with_name(file.name+'.native-new');temporary.write_bytes(data);os.replace(temporary,file)
     manifest={'base':str(base),'expected_live_base':args.expected_base,'release':str(target),'native_world_hook':replacements['259'],
               'native_quiz_progress_hook':replacements['335'],'runtime':new_runtime,
