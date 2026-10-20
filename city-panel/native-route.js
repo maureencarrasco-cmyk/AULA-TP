@@ -43,10 +43,11 @@
   function create(ctx){
     const T=ctx.three;
     root=new T.YJl();root.name='Aula TP · flechas de quizzes';
-    geometry=new T.iNn(.09,.025,.48);material=new T.V9B({color:0xffd400,toneMapped:false,depthWrite:false});
-    for(let i=0;i<64;i++){
+    geometry=new T.iNn(.2,.045,.82);material=new T.V9B({color:0xffd400,toneMapped:false,depthWrite:false});
+    for(let i=0;i<4;i++){
       const arrow=new T.YJl();
-      for(const side of [-1,1]){const mesh=new T.eaF(geometry,material);mesh.position.set(side*.13,0,-.05);mesh.rotation.y=-side*.64;arrow.add(mesh);}
+      for(const side of [-1,1]){const mesh=new T.eaF(geometry,material);mesh.position.set(side*.3,0,-.12);mesh.rotation.y=-side*.68;arrow.add(mesh);}
+      arrow.userData.cityQuizNumber=i+1;
       arrow.visible=false;root.add(arrow);arrows.push(arrow);
     }
     ctx.scene.add(root);
@@ -432,24 +433,24 @@
       if(visible){control.style.left=`${canvasRect.left-viewportRect.left+(point.x+1)*canvasRect.width/2}px`;control.style.top=`${canvasRect.top-viewportRect.top+(1-point.y)*canvasRect.height/2}px`;}
     });
   }
-  function next(data){return data.questions.findIndex(question=>!data.answers[question.id]?.correct);}
-  function selectedStation(stations,index,total){
-    const stationIndex=Math.min(stations.length-1,Math.floor(index*stations.length/Math.max(1,total)));
-    return {station:stations[stationIndex],index:stationIndex};
-  }
-  function path(ctx,target){
-    if(!globalThis.Graph||!globalThis.astar)return [];
-    const step=.3,x0=ctx.district.x-6.9,z0=ctx.district.z-5.7,nx=44,nz=36,y=ctx.floorY+.6;
-    const blocks=ctx.colliders.filter(item=>y>=(item.minY??-Infinity)&&y<=(item.maxY??Infinity));
-    const weights=Array.from({length:nx},(_,x)=>Array.from({length:nz},(_,z)=>blocks.some(block=>Math.abs(x0+x*step-block.x)<block.halfX+.32&&Math.abs(z0+z*step-block.z)<block.halfZ+.32)?0:1));
-    const graph=new Graph(weights,{diagonal:false});
-    function nearest(point,radius){let best=null,distance=Infinity;
-      for(let x=0;x<nx;x++)for(let z=0;z<nz;z++)if(weights[x][z]){const delta=Math.hypot(x0+x*step-point.x,z0+z*step-point.z);if(delta<distance&&delta<=radius){distance=delta;best=graph.grid[x][z];}}
-      return best;
-    }
-    const start=nearest(ctx.player,1.3),end=nearest(target,1.7);
-    if(!start||!end)return [];
-    return astar.search(graph,start,end).map(node=>({x:x0+node.x*step,z:z0+node.y*step}));
+  function updateQuizArrows(ctx){
+    const player=ctx.player,stations=roomStations.slice(0,4);
+    const forward=ctx.camera?.getWorldDirection?ctx.camera.getWorldDirection(new ctx.three.Pq0()):new ctx.three.Pq0(0,0,-1);
+    forward.y=0;forward.normalize();
+    const rightX=-forward.z,rightZ=forward.x;
+    arrows.forEach((arrow,index)=>{
+      const station=stations[index];
+      if(!station){arrow.visible=false;return;}
+      const [dx,dz]=station.totem||[station.x,station.z],targetX=ctx.district.x+dx,targetZ=ctx.district.z+dz;
+      const deltaX=targetX-player.x,deltaZ=targetZ-player.z,distance=Math.hypot(deltaX,deltaZ);
+      const directionX=distance>.001?deltaX/distance:Math.cos(index*Math.PI/2);
+      const directionZ=distance>.001?deltaZ/distance:Math.sin(index*Math.PI/2);
+      const fanAngle=(index-1.5)*.6,fanX=Math.cos(fanAngle)*forward.x+Math.sin(fanAngle)*rightX,fanZ=Math.cos(fanAngle)*forward.z+Math.sin(fanAngle)*rightZ;
+      arrow.position.set(player.x+fanX*2.05,ctx.floorY+.045,player.z+fanZ*2.05);
+      arrow.rotation.y=Math.atan2(-directionX,-directionZ);
+      arrow.visible=true;
+    });
+    if(quizControlLayer)quizControlLayer.dataset.visibleQuizArrows=String(arrows.filter(arrow=>arrow.visible).length);
   }
   function frame(ctx){
     try{
@@ -465,27 +466,13 @@
       document.querySelectorAll('.city-viewport .city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
       const stationAction=[...document.querySelectorAll('.city-viewport .city-door-action')].find(button=>/^\s*\d+\s*[·.)-]/.test(button.textContent));
       stationAction?.setAttribute('data-city-quiz-station','true');
-      const data=current&&normalize(current.specialty)===normalize(ctx.specialty.name)?current:null;
-      const index=data?next(data):0;
-      arrows.forEach(arrow=>arrow.visible=false);
-      if(index<0)return;
-      const {station, index:stationIndex}=selectedStation(roomStations,index,data?.questions.length||roomStations.length);
-      const [dx,dz]=station.totem||[station.x,station.z];
-      const target={x:ctx.district.x+dx,z:ctx.district.z+dz};
-      if(!Number.isFinite(target.x)||!Number.isFinite(target.z))return;
-      const approach={x:target.x,z:target.z+.65};
-      const points=path(ctx,approach);let arrowIndex=0,travel=0;
-      for(let i=1;i<points.length;i++){
-        travel+=Math.hypot(points[i].x-points[i-1].x,points[i].z-points[i-1].z);
-        if(travel<.75||arrowIndex>=arrows.length)continue;travel=0;
-        const arrow=arrows[arrowIndex++];arrow.position.set(points[i].x,ctx.floorY+.035,points[i].z);arrow.rotation.y=Math.atan2(-(points[i].x-points[i-1].x),-(points[i].z-points[i-1].z));arrow.visible=true;
-      }
+      updateQuizArrows(ctx);
     }catch(cause){
       // A navigation failure must never stop the original render loop.
       const message=String(cause.message||cause);if(error!==message){error=message;console.warn('Aula TP: guía de quizzes no disponible:',message);}
       if(root)root.visible=false;
     }
   }
-  globalThis.AulaTPNativeRoute={frame,status:()=>({quizMarkers:quizMarkers.length,stations:roomStations.length})};
+  globalThis.AulaTPNativeRoute={frame,status:()=>({quizMarkers:quizMarkers.length,stations:roomStations.length,visibleQuizArrows:arrows.filter(arrow=>arrow.visible).length})};
   addEventListener('pagehide',event=>{if(!event.persisted)dispose();});
 })();

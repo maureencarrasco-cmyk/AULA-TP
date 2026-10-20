@@ -2,7 +2,7 @@
 
 ## Flechas En La Ciudad Original
 
-`native-route.js` dibuja las flechas en el escenario original, con las clases Three.js que ya usa ese motor. Lee sus puestos, posición del personaje, piso y obstáculos; calcula caminos transitables con `javascript-astar` 0.4.1 (MIT, conservado en `engine/vendor`). No crea otra sala ni mueve automáticamente al estudiante.
+`native-route.js` dibuja cuatro flechas cortas en el suelo junto al personaje, orientadas individualmente a las cuatro estaciones de quiz del módulo. Usa las clases Three.js del escenario original y no mueve automáticamente al estudiante.
 
 La guía comienza en el quiz 1 y sigue el primer quiz pendiente del desafío profesional nativo. Un evento emitido después de guardar el progreso existente comunica módulo, AE, preguntas y respuestas a la guía. Una respuesta incorrecta conserva el destino mientras el desafío pide corregirla. Varios quizzes pueden utilizar un mismo puesto. La guía no modifica preguntas, calificaciones, aprobaciones ni recompensas. Si aún no se eligió un módulo, orienta al primer puesto y permite abrir el desafío profesional existente.
 
@@ -110,6 +110,14 @@ La versión `city-20261020-quiz-clear-counter-v116` (`panel-ui-v68`) amplía la 
 La versión `city-20261020-quiz-ae-responses-v117` (`panel-ui-v69`) conecta cada estación a preguntas del módulo y AE activos: dos fáciles, una medianamente difícil y una difícil. Cada botón abre a la derecha una pregunta con cuatro alternativas y fundamentación obligatoria. Las respuestas se guardan por curso, módulo, AE y estación en el dispositivo, sin cambiar la calificación del desafío profesional existente.
 
 La versión `city-20261020-quiz-ae-responses-v118` (`panel-ui-v70`) separa las zonas interactivas de las cuatro tarjetas en vistas compactas para que cada botón abra su propio quiz, y amplía el espacio entre filas.
+
+La versión `city-20261020-quiz-four-arrows-v119` (`panel-ui-v71`) reemplaza la ruta larga hacia un solo quiz por cuatro flechas amarillas alrededor del estudiante, una orientada a cada quiz, siempre visibles mientras permanece en el módulo.
+
+La versión `city-20261020-quiz-four-arrows-visible-v120` (`panel-ui-v72`) aumenta el tamaño y la distancia de las flechas respecto del personaje, y publica el conteo de flechas activas para verificar que las cuatro estaciones tengan guía simultánea.
+
+La versión `city-20261020-quiz-arrows-fan-v121` (`panel-ui-v73`) reparte las flechas en abanico delante del personaje para que no queden ocultas detrás de su cuerpo; cada flecha mantiene su orientación hacia la estación asignada.
+
+La versión `city-20261020-quiz-arrows-fan-clear-v122` (`panel-ui-v74`) amplía el ángulo del abanico para distinguir visualmente las cuatro flechas sin solaparlas.
 
 ### Fotografías de especialidades
 

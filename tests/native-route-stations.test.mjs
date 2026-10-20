@@ -19,12 +19,10 @@ test('every configured specialty room is normalized to four visible quiz station
 });
 
 test('each station selects unique questions at the requested difficulty levels',()=>{
-  assert.match(source,/Math\.floor\(index\*stations\.length\/Math\.max\(1,total\)\)/);
   assert.match(source,/for\(const level of \['easy','easy','medium','hard'\]\)/);
   assert.match(source,/function questionLevel\(question\)/);
   assert.match(source,/function stationQuizOptions\(question\)/);
   assert.match(source,/const stationQuestions=selectStationQuizQuestions\(questions\)/);
-  assert.match(source,/function selectedStation\(stations,index,total\)/);
   assert.match(source,/data\.questions\.map\(question=>\[question\.id,question\.object,question\.difficulty\]\)/);
   assert.doesNotMatch(source,/answers\[[^\]]+\]\s*=|correct\s*=/);
 });
@@ -76,6 +74,20 @@ test('compact quiz stations have separated targets that cannot overlap verticall
   assert.match(source,/index%2-\.5\)\*3\.1\*rowX\+\(Math\.floor\(index\/2\)-\.5\)\*3\.2\*direction\.x/);
   const styles=readFileSync(new URL('../city-panel/city-panel.css',import.meta.url),'utf8');
   assert.match(styles,/\.city-quiz-marker-control \{ width:min\(32vw,160px\);height:min\(12vh,74px\); \}/);
+});
+
+test('four floor arrows stay around the student and each targets its matching quiz',()=>{
+  assert.match(source,/for\(let i=0;i<4;i\+\+\)/);
+  assert.match(source,/arrow\.userData\.cityQuizNumber=i\+1/);
+  assert.match(source,/function updateQuizArrows\(ctx\)/);
+  assert.match(source,/const player=ctx\.player,stations=roomStations\.slice\(0,4\)/);
+  assert.match(source,/const forward=ctx\.camera\?\.getWorldDirection\?/);
+  assert.match(source,/const fanAngle=\(index-1\.5\)\*\.6,fanX=/);
+  assert.match(source,/arrow\.position\.set\(player\.x\+fanX\*2\.05,ctx\.floorY\+\.045,player\.z\+fanZ\*2\.05\)/);
+  assert.match(source,/arrow\.rotation\.y=Math\.atan2\(-directionX,-directionZ\)/);
+  assert.match(source,/dataset\.visibleQuizArrows=String\(arrows\.filter\(arrow=>arrow\.visible\)\.length\)/);
+  assert.match(source,/updateQuizArrows\(ctx\)/);
+  assert.doesNotMatch(source,/function path\(ctx,target\)|function selectedStation\(/);
 });
 
 test('each 3D quiz plate opens an AE-linked four-choice form with a required argument',()=>{
