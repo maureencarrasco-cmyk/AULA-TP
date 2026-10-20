@@ -5,6 +5,7 @@
   let stationQuestionSignature='';
   let quizControlLayer=null,quizWindow=null,activeQuizNumber=null;
   const originalSigns=[];
+  const originalFixtureColliders=[];
   const arrows=[];
   const quizMarkers=[];
   const quizControls=[];
@@ -41,6 +42,8 @@
     roomStations=[];
     for(const saved of originalSigns){const {sign,visible,geometry,material,name,flag,position,rotation,scale,texture,newMaterial}=saved;sign.visible=visible;sign.geometry=geometry;sign.material=material;sign.name=name;sign.position.copy(position);sign.rotation.copy(rotation);sign.scale.copy(scale);texture?.dispose();if(newMaterial&&newMaterial!==material)newMaterial.dispose();delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityLegacyQuizFurniture;delete sign.userData.cityQuizMarker;delete sign.userData.citySpecialtyPlaque;}
     originalSigns.length=0;
+    for(const {list,collider} of originalFixtureColliders)if(!list.includes(collider))list.push(collider);
+    originalFixtureColliders.length=0;
     root=geometry=material=null;arrows.length=0;
     document.querySelectorAll('.city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
     document.documentElement.classList.remove('city-native-route-active');
@@ -91,7 +94,7 @@
       }
       if(token!==generation||!root)return;
       workshop?.dispose();workshop=null;resourceButton?.remove();resourceButton=null;resourceWindow?.remove();resourceWindow=null;
-      workshop=globalThis.AulaTPModuleWorkshop.create(ctx,setup,roomStations);
+      workshop=globalThis.AulaTPModuleWorkshop.create({...ctx,legacyFixtureColliders:originalFixtureColliders.map(item=>item.collider)},setup,roomStations);
       const button=document.createElement('button');button.type='button';button.className='city-module-resources';button.textContent='Recursos del módulo';
       button.addEventListener('click',()=>{
         if(quizWindow)quizWindow.hidden=true;
@@ -164,34 +167,35 @@
   function redesignSpecialtyPlaque(ctx,sign,roomPosition,saved){
     const T=ctx.three,forward=ctx.camera?.getWorldDirection?ctx.camera.getWorldDirection(new T.Pq0()):new T.Pq0(0,0,-1);
     forward.y=0;forward.normalize();const rightX=-forward.z,rightZ=forward.x;
-    const worldPosition=new T.Pq0(roomPosition.x-rightX*4.8,sign.getWorldPosition(new T.Pq0()).y,roomPosition.z-rightZ*4.8);
+    const worldPosition=new T.Pq0(ctx.player.x-rightX*5.4+forward.x*6.8,ctx.floorY+3.65,ctx.player.z-rightZ*5.4+forward.z*6.8);
     sign.parent?.updateMatrixWorld(true);sign.position.copy(sign.parent?sign.parent.worldToLocal(worldPosition):worldPosition);
     const size=sign.geometry?.parameters,baseScale=saved.scale;
     if(size?.width&&size?.height){
       const width=size.width*Math.abs(baseScale.x),height=size.height*Math.abs(baseScale.y);
-      sign.scale.set(baseScale.x*(5.4/width),baseScale.y*(1.25/height),baseScale.z);
+      sign.scale.set(baseScale.x*(3.2/width),baseScale.y*(.72/height),baseScale.z);
     }
-    sign.rotation.y=Math.atan2(rightX,-rightZ);
+    sign.rotation.y=Math.atan2(ctx.camera.position.x-worldPosition.x,ctx.camera.position.z-worldPosition.z);
     const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=320;
     const c=canvas.getContext('2d'),gradient=c.createLinearGradient(0,0,1200,320);gradient.addColorStop(0,'#092a3b');gradient.addColorStop(.62,'#104b57');gradient.addColorStop(1,'#086d70');
     c.fillStyle=gradient;c.fillRect(0,0,1200,320);c.strokeStyle='#65f0dc';c.lineWidth=12;c.strokeRect(17,17,1166,286);
     c.fillStyle='#20d1ad';c.fillRect(50,52,12,212);c.fillStyle='#8cebdd';c.font='700 28px Arial';c.fillText('AULA TP CHILE  /  ESPACIO DE APRENDIZAJE',94,83);
     const specialty=String(current?.specialty||ctx.specialty?.name||'Especialidad'),moduleTitle=String(current?.moduleTitle||ctx.district?.name||'Módulo formativo');
     c.fillStyle='#ffffff';let titleSize=59;c.font=`800 ${titleSize}px Arial`;while(c.measureText(specialty).width>1020&&titleSize>34){titleSize-=2;c.font=`800 ${titleSize}px Arial`;}c.fillText(specialty,94,164,1020);
-    c.fillStyle='#ffd15c';c.font='700 36px Arial';c.fillText(`${moduleTitle}  ·  ESTACIONES DE APRENDIZAJE`,94,235,1020);
+    c.fillStyle='#ffd15c';c.font='700 36px Arial';c.fillText(moduleTitle,94,235,1020);
     const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
     saved.texture=texture;sign.material=new T.V9B({map:texture,toneMapped:false,side:T.$EB});saved.newMaterial=sign.material;
     sign.name='Aula TP · letrero de especialidad y módulo';sign.userData.citySpecialtyPlaque=true;
   }
   function hideLegacyQuizFurniture(ctx,hide){
     if(!stageAnchors.length)return;
-    const position=new ctx.three.Pq0();
+    const position=new ctx.three.Pq0(),removedBounds=[];
     ctx.scene.traverse(node=>{
       const size=node.geometry?.parameters;
       if(!node.isMesh||!size||node.userData?.luminousSign)return;
       const scale=node.getWorldScale?node.getWorldScale(new ctx.three.Pq0()):node.scale;
       const width=Math.abs(Number(size.width)*scale.x),height=Math.abs(Number(size.height)*scale.y),depth=Math.abs(Number(size.depth)*scale.z);
-      if(!Number.isFinite(width)||!Number.isFinite(height)||!Number.isFinite(depth)||width<.08||height<.08||depth<.08||width>9||height>4||depth>7.5)return;
+      const flatBase=height>=.01&&height<.08&&width>=1&&depth>=.7;
+      if(!Number.isFinite(width)||!Number.isFinite(height)||!Number.isFinite(depth)||width<.08||(!flatBase&&height<.08)||depth<.08||width>9||height>4||depth>7.5)return;
       node.getWorldPosition(position);
       if(position.y<ctx.floorY-.35||position.y>ctx.floorY+3.4)return;
       if(!stageAnchors.some(anchor=>Math.abs(anchor.x-position.x)<4.6&&Math.abs(anchor.z-position.z)<5.8&&anchor.y>position.y+.12&&anchor.y-position.y<4.6))return;
@@ -202,8 +206,16 @@
         const {h,s,l}=item.color.getHSL({});
         return l<.16||(s>.22&&h>.22&&h<.76)||(neutralWorkSurface&&s<.22&&l>.32);
       });
-      if(belongsToFixture)hide(node,'cityLegacyQuizFurniture');
+      if(belongsToFixture){hide(node,'cityLegacyQuizFurniture');removedBounds.push({x:position.x,z:position.z,halfX:width/2,halfZ:depth/2});}
     });
+    for(let i=ctx.colliders.length-1;i>=0;i--){
+      const collider=ctx.colliders[i];
+      if(ctx.floorY<(collider.minY??-Infinity)||ctx.floorY>(collider.maxY??Infinity))continue;
+      const parts=removedBounds.filter(bounds=>Math.abs(bounds.x-collider.x)<.25&&Math.abs(bounds.z-collider.z)<.25);
+      if(parts.length&&Math.max(...parts.map(part=>part.halfX))>=collider.halfX-.45&&Math.max(...parts.map(part=>part.halfZ))>=collider.halfZ-.45){
+        originalFixtureColliders.push({list:ctx.colliders,collider});ctx.colliders.splice(i,1);
+      }
+    }
   }
   function configureStations(ctx){
     const source=(ctx.stations||[]).slice(0,4);
@@ -233,7 +245,7 @@
     const rowX=-direction.z,rowZ=direction.x;
     const compact=window.innerWidth<700;
     const candidates=[];
-    for(const spacing of [3.1,2.95,2.8])for(const shiftX of [0,-.6,.6,-1.2,1.2])for(const shiftZ of [0,-1,1,-2,2]){
+    for(const spacing of [2.55,2.45,2.35])for(const shiftX of [0,-.6,.6,-1.2,1.2])for(const shiftZ of [0,-1,1,-2,2]){
       const cx=targetX-ctx.district.x+rowX*shiftX+direction.x*shiftZ;
       const cz=targetZ-ctx.district.z+rowZ*shiftX+direction.z*shiftZ;
       const line=Array.from({length:4},(_,index)=>compact?
@@ -246,7 +258,7 @@
     }
     const best=candidates.sort((a,b)=>a.collisions-b.collisions||a.offset-b.offset)[0];
     return result.map((station,index)=>({...station,totem:best?.line[index]||(compact?
-      [centerX+(index%2-.5)*1.8*rowX+(.5-Math.floor(index/2))*2*direction.x,centerZ+(index%2-.5)*1.8*rowZ+(.5-Math.floor(index/2))*2*direction.z]:[centerX+(index-1.5)*3,centerZ])}));
+      [centerX+(index%2-.5)*1.8*rowX+(.5-Math.floor(index/2))*2*direction.x,centerZ+(index%2-.5)*1.8*rowZ+(.5-Math.floor(index/2))*2*direction.z]:[centerX+(index-1.5)*2.55,centerZ])}));
   }
   function questionLevel(question){
     const value=normalize(question.difficulty||'');
@@ -565,7 +577,8 @@
       if(current?.moduleId&&workshopKey!==String(current.moduleId))loadModuleWorkshop(ctx);
       if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;if(workshop)workshop.root.visible=false;if(resourceButton)resourceButton.hidden=true;updateQuizControls(ctx);return;}
       root.visible=true;
-      if(workshop)workshop.root.visible=true;if(resourceButton)resourceButton.hidden=false;
+      if(workshop){workshop.root.visible=true;workshop.refresh?.();}if(resourceButton)resourceButton.hidden=false;
+      for(const saved of originalSigns)if(saved.flag)saved.sign.visible=false;
       updateQuizControls(ctx);
       const now=performance.now();if(now-last<250)return;last=now;
       for(const marker of quizMarkers){const facing=Math.atan2(ctx.player.x-marker.sign.position.x,ctx.player.z-marker.sign.position.z);marker.sign.rotation.y=facing;if(marker.imageMesh)marker.imageMesh.rotation.y=facing;}

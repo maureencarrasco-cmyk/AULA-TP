@@ -22,22 +22,22 @@ test('quiz rooms are fitted as module-specific workshops without filling the sta
   const workshop=readFileSync(new URL('../city-panel/native-workshop.js',import.meta.url),'utf8');
   assert.match(workshop,/function addToolboard\(rack,items\)/);
   assert.match(workshop,/function addPpeAndDocumentWall\(rack,items\)/);
-  assert.match(workshop,/function buildServiceBench\(parent,primary\)/);
-  assert.match(workshop,/HERRAMIENTAS Y PUESTO DE TRABAJO/);
-  assert.match(workshop,/categoryTitles=\{tools:'HERRAMIENTAS',protection:'EPP'/);
-  assert.match(workshop,/headings\.slice\(1\)\.join\(' · '\)/);
-  assert.match(workshop,/items\.filter\(item=>item\.category==='protection'\)/);
+  assert.match(workshop,/function buildServiceBench\(parent,primary,repair=false\)/);
+  assert.match(workshop,/function buildStructuralSample\(parent\)/);
+  assert.match(workshop,/function buildCompressor\(parent,x,z\)/);
+  assert.match(workshop,/function buildTrolley\(parent\)/);
+  assert.match(workshop,/items\.some\(item=>item\.category==='protection'\)/);
   assert.match(workshop,/setup\.resources\|\|\[\]/);
-  assert.match(workshop,/Math\.hypot\(place\.x-ctx\.district\.x-sx,place\.z-ctx\.district\.z-sz\)<3\.25/);
+  assert.match(workshop,/Math\.hypot\(place\.x-ctx\.district\.x-sx,place\.z-ctx\.district\.z-sz\)<2\.6/);
   assert.match(workshop,/root\.userData\.fixtureCount=locations\.length\+occupied\.length/);
-  assert.match(workshop,/player\.x\+rightX\*side\*5\.6\+forward\.x\*distance/);
+  assert.match(workshop,/player\.x\+rightX\*side\*4\.85\+forward\.x\*distance/);
   assert.match(workshop,/featuredModuleEquipment=true/);
   const routing=readFileSync(new URL('../city-panel/native-route.js',import.meta.url),'utf8');
   assert.match(routing,/assets\/module-room-resources\.json/);
   assert.match(routing,/const active=current\|\|\{moduleTitle:'',specialty:ctx\.specialty\?\.name\|\|''\}/);
   assert.match(routing,/if\(current\?\.moduleId&&workshopKey!==String\(current\.moduleId\)\)loadModuleWorkshop\(ctx\)/);
   assert.match(routing,/workshopKey=key/);
-  assert.match(routing,/sign\.scale\.set\(baseScale\.x\*\(5\.4\/width\),baseScale\.y\*\(1\.25\/height\)/);
+  assert.match(routing,/sign\.scale\.set\(baseScale\.x\*\(3\.2\/width\),baseScale\.y\*\(\.72\/height\)/);
 });
 
 test('perimeter workshops follow the camera and stay clear of quiz positions',()=>{
@@ -50,8 +50,20 @@ test('perimeter workshops follow the camera and stay clear of quiz positions',()
   const stations=[-4.5,-1.5,1.5,4.5].map(x=>({totem:[x,-8]}));
   const result=choose(ctx,stations);
   assert.equal(result.length,2);
-  assert.ok(result.every(item=>Math.abs(Math.abs(item.x)-5.6)<.01));
-  assert.ok(result.every(item=>stations.every(station=>Math.hypot(item.x-station.totem[0],item.z-station.totem[1])>3.5)));
+  assert.ok(result.every(item=>Math.abs(Math.abs(item.x)-4.85)<.01));
+  assert.ok(result.every(item=>stations.every(station=>Math.hypot(item.x-station.totem[0],item.z-station.totem[1])>1.15)));
+});
+
+test('replacing a composite aircraft fixture removes its combined blocker but preserves walls',()=>{
+  class Vector {constructor(x=0,y=0,z=0){Object.assign(this,{x,y,z});}}
+  const fuselage={isMesh:true,userData:{},geometry:{parameters:{width:1,height:1,depth:1}},material:{color:{getHSL:()=>({h:.1,s:.05,l:.75})}},getWorldPosition:v=>Object.assign(v,{x:-3,y:1.1,z:-1.7}),getWorldScale:v=>Object.assign(v,{x:2.2,y:1,z:5.6})};
+  const wing={...fuselage,getWorldPosition:v=>Object.assign(v,{x:-3,y:1.2,z:-1.7}),getWorldScale:v=>Object.assign(v,{x:6.1,y:.15,z:1.7})};
+  const fixture={x:-3,z:-1.7,halfX:3,halfZ:2.8,minY:0,maxY:3.7},wall={x:-6,z:-1.7,halfX:.08,halfZ:6,minY:0,maxY:3.7};
+  const removed=[],hidden=[],ctx={three:{Pq0:Vector},floorY:0,colliders:[fixture,wall],scene:{traverse:visit=>[fuselage,wing].forEach(visit)}};
+  const fn=source.slice(source.indexOf('  function hideLegacyQuizFurniture('),source.indexOf('  function configureStations('));
+  const cleanup=vm.runInNewContext(`${fn};hideLegacyQuizFurniture`,{Math,Number,stageAnchors:[{x:-3,y:3,z:-1.7}],originalFixtureColliders:removed});
+  cleanup(ctx,node=>hidden.push(node));
+  assert.equal(hidden.length,2);assert.deepEqual(ctx.colliders,[wall]);assert.equal(removed[0].collider,fixture);
 });
 
 test('each station selects unique questions at the requested difficulty levels',()=>{
@@ -98,9 +110,9 @@ test('quiz markers use the shared illustrated artwork, specialty imagery and dow
 });
 
 test('four quiz image stations use a straight, evenly-spaced layout',()=>{
-  assert.match(source,/for\(const spacing of \[3\.1,2\.95,2\.8\]/);
+  assert.match(source,/for\(const spacing of \[2\.55,2\.45,2\.35\]/);
   assert.match(source,/cx\+\(index-1\.5\)\*spacing/);
-  assert.match(source,/centerX\+\(index-1\.5\)\*3/);
+  assert.match(source,/centerX\+\(index-1\.5\)\*2\.55/);
   assert.match(source,/const displayX=x,displayZ=z/);
   assert.doesNotMatch(source,/anchorCenterX\+\.9\+mobileShiftX/);
   assert.match(source,/markerScale=window\.innerWidth<700\?\.46:Math\.min\(\.86,Math\.max\(\.68,window\.innerWidth\/1900\)\)/);
