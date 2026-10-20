@@ -10,7 +10,7 @@
   const quizControls=[];
   const stageAnchors=[];
   let roomStations=[];
-  let workshop=null,workshopRequest=null,resourceButton=null,resourceWindow=null;
+  let workshop=null,workshopRequest=null,workshopKey='',resourceButton=null,resourceWindow=null;
   let compactLayout=window.innerWidth<700;
   let markerGeometry,markerImageGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial,markerBeamGeometry,markerBeamTexture,markerBeamMaterial,markerSparkGeometry,markerSparkTexture,markerSparkMaterial,markerCylinderGeometry,markerCylinderMaterial;
   const beams=[],sparkles=[],cylinders=[];
@@ -27,6 +27,7 @@
   addEventListener('aulatp:quiz-progress',progress);
   function dispose(){
     workshopRequest?.abort();workshopRequest=null;workshop?.dispose();workshop=null;
+    workshopKey='';
     resourceButton?.remove();resourceButton=null;resourceWindow?.remove();resourceWindow=null;
     generation++;root?.removeFromParent();geometry?.dispose();material?.dispose();
     markerGeometry?.dispose();markerImageGeometry?.dispose();markerHaloGeometry?.dispose();markerHaloTexture?.dispose();markerHaloMaterial?.dispose();
@@ -64,9 +65,11 @@
   }
   async function loadModuleWorkshop(ctx){
     if(!globalThis.AulaTPModuleWorkshop)return;
+    const active=current||{moduleTitle:'',specialty:ctx.specialty?.name||''},key=String(active.moduleId||'fallback');
+    if(workshopKey===key&&(workshop||workshopRequest))return;
+    workshopRequest?.abort();workshopRequest=null;workshopKey=key;
     const token=generation,controller=new AbortController();workshopRequest=controller;
     try{
-      const active=current||{moduleTitle:'',specialty:ctx.specialty?.name||''};
       let setup=null;
       if(active.moduleId){
         try{
@@ -87,6 +90,7 @@
         setup={...entry,module_title:title?entry.module_title:`Taller formativo · ${active.specialty||ctx.specialty?.name}`,source:{pdf:entry.pdf,url:entry.url},learning_outcomes:[]};
       }
       if(token!==generation||!root)return;
+      workshop?.dispose();workshop=null;resourceButton?.remove();resourceButton=null;resourceWindow?.remove();resourceWindow=null;
       workshop=globalThis.AulaTPModuleWorkshop.create(ctx,setup,roomStations);
       const button=document.createElement('button');button.type='button';button.className='city-module-resources';button.textContent='Recursos del módulo';
       button.addEventListener('click',()=>{
@@ -558,6 +562,7 @@
       if(room!==ctx.room){dispose();room=ctx.room;last=0;if(current&&normalize(current.specialty)!==normalize(ctx.specialty.name))current=null;}
       if(root&&compactLayout!==(window.innerWidth<700)&&!quizWindow&&!resourceWindow)dispose();
       if(!root)create(ctx);
+      if(current?.moduleId&&workshopKey!==String(current.moduleId))loadModuleWorkshop(ctx);
       if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;if(workshop)workshop.root.visible=false;if(resourceButton)resourceButton.hidden=true;updateQuizControls(ctx);return;}
       root.visible=true;
       if(workshop)workshop.root.visible=true;if(resourceButton)resourceButton.hidden=false;
