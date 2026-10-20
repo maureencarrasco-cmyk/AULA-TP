@@ -18,6 +18,20 @@ test('every configured specialty room is normalized to four visible quiz station
   assert.match(source,/stationAction\?\.setAttribute\('data-city-quiz-station','true'\)/);
 });
 
+test('quiz rooms are fitted as module-specific workshops without filling the station approach',()=>{
+  const workshop=readFileSync(new URL('../city-panel/native-workshop.js',import.meta.url),'utf8');
+  assert.match(workshop,/function addToolboard\(rack,items\)/);
+  assert.match(workshop,/function addPpeAndDocumentWall\(rack,items\)/);
+  assert.match(workshop,/function buildServiceBench\(parent,primary\)/);
+  assert.match(workshop,/HERRAMIENTAS Y PUESTO DE TRABAJO/);
+  assert.match(workshop,/categoryTitles=\{tools:'HERRAMIENTAS',protection:'EPP'/);
+  assert.match(workshop,/headings\.slice\(1\)\.join\(' · '\)/);
+  assert.match(workshop,/items\.filter\(item=>item\.category==='protection'\)/);
+  assert.match(workshop,/setup\.resources\|\|\[\]/);
+  assert.match(workshop,/Math\.hypot\(place\.x-ctx\.district\.x-sx,place\.z-ctx\.district\.z-sz\)<3\.25/);
+  assert.match(workshop,/root\.userData\.fixtureCount=locations\.length\+occupied\.length/);
+});
+
 test('each station selects unique questions at the requested difficulty levels',()=>{
   assert.match(source,/for\(const level of \['easy','easy','medium','hard'\]\)/);
   assert.match(source,/function questionLevel\(question\)/);
