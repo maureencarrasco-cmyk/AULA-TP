@@ -103,16 +103,18 @@
     ctx.scene.traverse(node=>{
       const size=node.geometry?.parameters;
       if(!node.isMesh||!size||node.userData?.luminousSign)return;
-      const width=Number(size.width),height=Number(size.height),depth=Number(size.depth);
-      if(!Number.isFinite(width)||!Number.isFinite(height)||!Number.isFinite(depth)||width<.25||height<.18||depth<.18||width>5||height>4||depth>5)return;
+      const scale=node.getWorldScale?node.getWorldScale(new ctx.three.Pq0()):node.scale;
+      const width=Math.abs(Number(size.width)*scale.x),height=Math.abs(Number(size.height)*scale.y),depth=Math.abs(Number(size.depth)*scale.z);
+      if(!Number.isFinite(width)||!Number.isFinite(height)||!Number.isFinite(depth)||width<.08||height<.08||depth<.08||width>9||height>4||depth>7.5)return;
       node.getWorldPosition(position);
       if(position.y<ctx.floorY-.35||position.y>ctx.floorY+3.4)return;
-      if(!stageAnchors.some(anchor=>Math.abs(anchor.x-position.x)<2.8&&Math.abs(anchor.z-position.z)<4.2&&anchor.y>position.y+.2&&anchor.y-position.y<4.2))return;
+      if(!stageAnchors.some(anchor=>Math.abs(anchor.x-position.x)<4.6&&Math.abs(anchor.z-position.z)<5.8&&anchor.y>position.y+.12&&anchor.y-position.y<4.6))return;
+      const neutralWorkSurface=(width>=1.7&&height<=1.4&&depth>=.65)||(width>=1.7&&height>=.7&&depth<=1.15);
       const materials=Array.isArray(node.material)?node.material:[node.material];
       const belongsToFixture=materials.some(item=>{
         if(!item?.color?.getHSL)return false;
         const {h,s,l}=item.color.getHSL({});
-        return l<.16||(s>.22&&h>.22&&h<.76);
+        return l<.16||(s>.22&&h>.22&&h<.76)||(neutralWorkSurface&&s<.22&&l>.32);
       });
       if(belongsToFixture)hide(node,'cityLegacyQuizFurniture');
     });

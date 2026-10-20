@@ -105,6 +105,8 @@ La versión `city-20261019-quiz-all-four-visible-v112` (`panel-ui-v65`) fija las
 
 La versión `city-20261019-quiz-cards-v115` (`panel-ui-v67`) mantiene las cuatro tarjetas 3D luminosas de proporción casi cuadrada, con icono, título y fotografía individual; en escritorio quedan centradas ante el estudiante y, en pantallas estrechas, se ordenan en una cuadrícula 2×2 para que las cuatro sigan visibles sin solaparse. Conserva los acentos de color, separación, soportes y plataformas. Se publica desde v113 preservando los 55 archivos JavaScript originales del motor.
 
+La versión `city-20261020-quiz-clear-counter-v116` (`panel-ui-v68`) amplía la retirada del mobiliario antiguo para quitar también mesones grandes de color neutro que bloquean la vista de los quizzes, respetando los límites del área de estaciones y manteniendo intactas las nuevas tarjetas y plataformas.
+
 ### Fotografías de especialidades
 
 Las 35 especialidades de los 12 distritos tienen fotografías propias, compartidas por los cursos correspondientes. Se conservan los botones y sus acciones originales. Las miniaturas WebP se cargan bajo demanda, sin descargar todo el catálogo al ingresar.
