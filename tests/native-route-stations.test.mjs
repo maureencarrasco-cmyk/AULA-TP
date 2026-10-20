@@ -5,6 +5,18 @@ import vm from 'node:vm';
 
 const source=readFileSync(new URL('../city-panel/native-route.js',import.meta.url),'utf8');
 
+test('room entry uses the first official module and explicit selections never borrow another inventory',()=>{
+  const catalog=JSON.parse(readFileSync(new URL('../city_room_resources.json',import.meta.url),'utf8'));
+  const helper=source.slice(source.indexOf('  function selectWorkshopInventory('),source.indexOf('  async function loadModuleWorkshop('));
+  const select=vm.runInNewContext(`${helper};selectWorkshopInventory`,{normalize:value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()});
+  const specialty=catalog['441'].specialty;
+  assert.equal(select(catalog,{},specialty).module_id,441);
+  assert.equal(select(catalog,{moduleId:441,moduleTitle:'Estructuras de aeronaves'},specialty).module_title,catalog['441'].module_title);
+  assert.equal(select(catalog,{moduleId:442},specialty).module_id,442);
+  assert.equal(select(catalog,{moduleId:99999,moduleTitle:'Desconocido'},specialty),null);
+  for(const [id,item] of Object.entries(catalog))assert.equal(select(catalog,{moduleId:Number(id)},item.specialty).module_title,item.module_title);
+});
+
 test('every configured specialty room is normalized to four visible quiz stations',()=>{
   assert.match(source,/function configureStations\(ctx\)/);
   assert.match(source,/slice\(0,4\)/);
@@ -21,7 +33,7 @@ test('every configured specialty room is normalized to four visible quiz station
 test('quiz rooms are fitted as module-specific workshops without filling the station approach',()=>{
   const workshop=readFileSync(new URL('../city-panel/native-workshop.js',import.meta.url),'utf8');
   assert.match(workshop,/function addToolboard\(rack,items\)/);
-  assert.match(workshop,/function addPpeAndDocumentWall\(rack,items\)/);
+  assert.match(workshop,/function addPpeAndDocumentWall\(rack,items,wallOnly=false\)/);
   assert.match(workshop,/function buildServiceBench\(parent,primary,repair=false\)/);
   assert.match(workshop,/function buildStructuralSample\(parent\)/);
   assert.match(workshop,/function buildCompressor\(parent,x,z\)/);

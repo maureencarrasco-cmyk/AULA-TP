@@ -50,6 +50,7 @@
   }
   function create(ctx){
     compactLayout=window.innerWidth<700;
+    globalThis.AulaTPModuleWorkshop?.captureLayout(ctx);
     const T=ctx.three;
     root=new T.YJl();root.name='Aula TP · flechas de quizzes';
     geometry=new T.iNn(.2,.045,.82);material=new T.V9B({color:0xffd400,toneMapped:false,depthWrite:false});
@@ -66,6 +67,16 @@
     document.documentElement.classList.add('city-native-route-active');
     if(activeQuizNumber)openQuizWindow(activeQuizNumber);
   }
+  function selectWorkshopInventory(catalog,active,specialtyName){
+    const key=value=>normalize(value).replace(/\bde\b/g,'').replace(/\s+/g,' ').trim();
+    const specialty=key(active.specialty||specialtyName),title=key(active.moduleTitle);
+    const candidates=Object.entries(catalog).filter(([,item])=>key(item.specialty)===specialty).sort(([a],[b])=>Number(a)-Number(b));
+    const exactId=candidates.find(([id])=>String(active.moduleId||'')===id);
+    const exactTitle=title&&candidates.find(([,item])=>key(item.module_title)===title);
+    const match=exactId||exactTitle||(!active.moduleId&&!title?candidates[0]:null);
+    if(!match)return null;
+    const [id,entry]=match;return {...entry,module_id:Number(id),module_number:candidates.findIndex(([candidate])=>candidate===id)+1,source:{pdf:entry.pdf,url:entry.url},learning_outcomes:[]};
+  }
   async function loadModuleWorkshop(ctx){
     if(!globalThis.AulaTPModuleWorkshop)return;
     const active=current||{moduleTitle:'',specialty:ctx.specialty?.name||''},key=String(active.moduleId||'fallback');
@@ -80,17 +91,12 @@
           if(response.ok)setup=await response.json();
         }catch(cause){if(cause.name==='AbortError')throw cause;}
       }
-      if(!setup){
+      if(!setup?.resources?.length){
         const script=document.querySelector('script[src*="native-route.js"]'),catalogUrl=new URL('./assets/module-room-resources.json',script?.src||location.href);
         const response=await fetch(catalogUrl,{signal:controller.signal});
         if(!response.ok)throw new Error('No se pudo cargar el equipamiento del módulo.');
-        const catalog=await response.json(),key=value=>normalize(value).replace(/\bde\b/g,'').replace(/\s+/g,' ').trim();
-        const title=key(active.moduleTitle),specialty=key(active.specialty||ctx.specialty?.name);
-        const candidates=Object.values(catalog).filter(item=>key(item.specialty)===specialty);
-        const entry=(title&&candidates.find(item=>key(item.module_title)===title))||candidates
-          .sort((a,b)=>new Set((b.resources||[]).map(item=>item.category)).size-new Set((a.resources||[]).map(item=>item.category)).size||(b.resources||[]).length-(a.resources||[]).length)[0];
-        if(!entry)throw new Error('No se encontró el inventario curricular de este módulo.');
-        setup={...entry,module_title:title?entry.module_title:`Taller formativo · ${active.specialty||ctx.specialty?.name}`,source:{pdf:entry.pdf,url:entry.url},learning_outcomes:[]};
+        setup=selectWorkshopInventory(await response.json(),active,ctx.specialty?.name);
+        if(!setup)throw new Error('No se encontró el inventario curricular de este módulo.');
       }
       if(token!==generation||!root)return;
       workshop?.dispose();workshop=null;resourceButton?.remove();resourceButton=null;resourceWindow?.remove();resourceWindow=null;
@@ -593,6 +599,6 @@
       if(root)root.visible=false;
     }
   }
-  globalThis.AulaTPNativeRoute={frame,status:()=>({quizMarkers:quizMarkers.length,stations:roomStations.length,visibleQuizArrows:arrows.filter(arrow=>arrow.visible).length,resources:workshop?.resourceCount||0})};
+  globalThis.AulaTPNativeRoute={frame,status:()=>({quizMarkers:quizMarkers.length,stations:roomStations.length,visibleQuizArrows:arrows.filter(arrow=>arrow.visible).length,resources:workshop?.resourceCount||0,representedResources:workshop?.displayedResources||0,moduleTitle:workshop?.root.userData.moduleTitle||''})};
   addEventListener('pagehide',event=>{if(!event.persisted)dispose();});
 })();
