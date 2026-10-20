@@ -377,7 +377,7 @@
 }
 
 .city-native-route-active .city-quiz-marker-control-layer { position:absolute;inset:0;z-index:28;overflow:hidden;pointer-events:none; }
-.city-native-route-active .city-quiz-marker-control { position:absolute;width:min(320px,24vw);height:112px;padding:0;transform:translate(-50%,-50%);border:0;border-radius:32px;background:transparent;color:transparent;cursor:pointer;pointer-events:auto; }
+.city-native-route-active .city-quiz-marker-control { position:absolute;width:min(270px,18vw);height:min(330px,38vh);padding:0;transform:translate(-50%,-50%);border:0;border-radius:32px;background:transparent;color:transparent;cursor:pointer;pointer-events:auto; }
 .city-native-route-active .city-quiz-marker-control:hover { background:#7deaff12;box-shadow:0 0 0 3px #4ce5ffbb,0 0 24px #29d8ffb0; }
 .city-native-route-active .city-quiz-marker-control:focus-visible { outline:4px solid #19d9f4;outline-offset:2px;box-shadow:0 0 0 7px #fff,0 0 28px #19c9eb; }
 .city-native-route-active .city-quiz-marker-control[hidden] { display:none; }
@@ -386,7 +386,7 @@
 .city-native-route-active .city-quiz-empty-window h2 { margin:0;font-size:20px;font-weight:900; }
 .city-native-route-active .city-quiz-empty-window-close { display:grid;place-items:center;width:40px;height:40px;border:1px solid #c5e2ef;border-radius:10px;background:#fff;color:#174064;font-size:28px;cursor:pointer; }
 .city-native-route-active .city-quiz-empty-window-body { flex:1;min-height:0;background:#fff; }
-@media(max-width:700px) { .city-native-route-active .city-quiz-marker-control { width:min(260px,48vw);height:92px; }.city-native-route-active .city-quiz-empty-window { top:auto;right:12px;bottom:12px;width:min(380px,calc(100vw - 24px));height:48dvh;min-height:220px;transform:none;border-radius:16px; } }
+@media(max-width:700px) { .city-native-route-active .city-quiz-marker-control { width:min(44vw,220px);height:min(32vh,260px); }.city-native-route-active .city-quiz-empty-window { top:auto;right:12px;bottom:12px;width:min(380px,calc(100vw - 24px));height:48dvh;min-height:220px;transform:none;border-radius:16px; } }
 .city-native-route-active .floor-station-dialog .floor-route-progress li:first-child { position:relative;aspect-ratio:1667/292;min-height:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none; }
 .city-native-route-active .floor-station-dialog .floor-route-progress li:first-child::before { position:absolute;inset:0;z-index:2;background:url("assets/quiz-observe-stage.png") center/100% 100% no-repeat;content:"";pointer-events:none; }
 .city-native-route-active .floor-station-dialog .floor-route-progress li:first-child::after { display:none; }

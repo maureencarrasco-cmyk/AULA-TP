@@ -2,7 +2,7 @@ import copy
 import unittest
 
 from city_progression import (PHASE_MINUTES, apply_review, evaluate_city, migrate_awards,
-                              recovery_plan, recovery_question, start_recovery)
+                              quiz_teacher_result, recovery_plan, recovery_question, start_recovery)
 
 
 PLAN = {'module': {'title': 'Diagnóstico profesional'}, 'quiz': [{'image': '/static/reference.png'}],
@@ -25,6 +25,20 @@ def review(points=None, competencies=True, safety=True, critical_phases=None):
 
 
 class CityProgression(unittest.TestCase):
+    def test_teacher_quiz_rubric_uses_weighted_score_and_technical_sufficiency_gate(self):
+        state = {'quiz': {'version': 3, 'completed_at': 'quiz', 'answers': {
+            str(i): {'correct': i > 0} for i in range(4)}}}
+        items = [{'argument_quality': 5, 'application': 5, 'coherence': 5,
+                  'technically_sufficient': True, 'feedback': 'Fundamentación revisada y vinculada con el criterio técnico.'}
+                 for _ in range(4)]
+        state['quiz']['teacher_review'] = {'items': items}
+        result = quiz_teacher_result(state)
+        self.assertEqual(result['items'][0]['score'], 70)
+        self.assertEqual(result['score'], 92.5)
+        self.assertTrue(result['approved'])
+        items[0]['technically_sufficient'] = False
+        self.assertFalse(quiz_teacher_result(state)['approved'])
+
     def test_independent_gates_and_no_rounding_up_to_pass(self):
         state = experience()
         result = apply_review(state, review([[4]*5, [4]*5, [4]*5, [1]*5]), PLAN, 1)

@@ -18,8 +18,9 @@ def quiz_percent(experience):
     return Decimal(correct * 100) / max(1, len(answers))
 
 
-def quiz_learning_status(experience, total=10):
+def quiz_learning_status(experience, total=None):
     quiz = experience.get('quiz') or {}
+    total = total or (4 if quiz.get('version') == 3 else 10)
     answers = quiz.get('answers') or {}
     correct = sum(bool(answer.get('correct') or answer.get('recovered')) for answer in answers.values())
     percent = Decimal(correct * 100) / max(1, total)
@@ -27,6 +28,28 @@ def quiz_learning_status(experience, total=10):
     return {'total': total, 'answered': len(answers), 'correct': correct, 'percent': float(percent),
             'minimum': QUIZ_PASS_PERCENT, 'complete': complete,
             'approved': complete and percent >= QUIZ_PASS_PERCENT}
+
+
+def quiz_teacher_result(experience):
+    quiz = experience.get('quiz') or {}
+    assessment = quiz.get('teacher_review') or {}
+    rows = assessment.get('items') or []
+    answers = quiz.get('answers') or {}
+    if quiz.get('version') != 3:
+        score = quiz_percent(experience)
+        return {'score': float(score), 'approved': score >= QUIZ_PASS_PERCENT, 'items': []}
+    if len(rows) != 4 or len(answers) != 4 or not quiz.get('completed_at'):
+        return {'score': 0.0, 'approved': False, 'items': []}
+    results = []
+    for index, row in enumerate(rows):
+        answer = answers.get(str(index)) or {}
+        choice_points = 30 if answer.get('correct') or answer.get('recovered') else 0
+        score = choice_points + 8 * row['argument_quality'] + 4 * row['application'] + 2 * row['coherence']
+        results.append({**row, 'choice_points': choice_points, 'score': score,
+                        'approved': score >= 70 and row['technically_sufficient']})
+    average = sum(item['score'] for item in results) / len(results)
+    return {'score': average, 'approved': average >= 70 and all(item['approved'] for item in results),
+            'items': results, 'reviewed_at': assessment.get('reviewed_at')}
 
 
 def answer_feedback(question, choice):
@@ -47,10 +70,11 @@ def phase_approved(mission, phase):
 
 
 def result_for(experience, review, legacy=False):
-    quiz = quiz_percent(experience)
+    quiz_result = quiz_teacher_result(experience)
+    quiz = Decimal(str(quiz_result['score']))
     practice = sum(sum(row) for row in review['points'])
     weighted = quiz * Decimal('0.30') + Decimal(practice) * Decimal('0.70')
-    conditions = {'quiz_score': legacy or quiz_learning_status(experience)['approved'],
+    conditions = {'quiz_score': legacy or quiz_result['approved'],
                   'final_score': weighted >= 75, 'practice_score': practice >= 75,
                   'essential_competencies': bool(review.get('competencies_approved')),
                   'critical_safety': bool(review.get('safety_approved')),
@@ -104,11 +128,15 @@ def evaluate_city(experience, plan=None):
             'alert': deepcopy(experience.get('teacher_alert')),
             'recovery': recovery_plan(experience) if review else None}
     if experience.get('quiz', {}).get('completed_at'):
-        base['quiz_score'] = float(quiz_percent(experience))
+        quiz = experience.get('quiz') or {}
+        if quiz.get('version') == 3 and quiz.get('teacher_review'):
+            base['quiz_score'] = quiz_teacher_result(experience)['score']
+        elif quiz.get('version') != 3:
+            base['quiz_score'] = float(quiz_percent(experience))
     if not experience.get('quiz', {}).get('completed_at') or not mission.get('completed_at'):
         return base
     if not review:
-        return {**base, 'status': 'pending_review', 'quiz_score': float(quiz_percent(experience)),
+        return {**base, 'status': 'pending_review',
                 'conditions': {**base['conditions'], 'activities_complete': True},
                 'message': 'La práctica quedó registrada y está pendiente de revisión docente.'}
     result = result_for(experience, review)

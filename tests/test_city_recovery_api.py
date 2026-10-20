@@ -11,6 +11,8 @@ from app import create_app
 
 TEXT = 'Revisé los procedimientos, contrasté mis evidencias y prepararé una nueva verificación segura.'
 PHASES = ('planificar', 'actuar', 'verificar', 'justificar')
+QUIZ_ASSESSMENT = [{'argument_quality': 5, 'application': 5, 'coherence': 5,
+                    'technically_sufficient': True, 'feedback': TEXT} for _ in range(4)]
 
 
 class CityRecoveryAPI(unittest.TestCase):
@@ -56,7 +58,7 @@ class CityRecoveryAPI(unittest.TestCase):
         for index, question in enumerate(payload['plan']['quiz']):
             original = next(item for item in self.bank if item['question'] == question['question'])
             answer = original['answer'] if correct else (original['answer']+1) % len(original['options'])
-            self.assertEqual(self.post({'operation': 'quiz-answer', 'index': index, 'choice': answer}).status_code, 200)
+            self.assertEqual(self.post({'operation': 'quiz-answer', 'index': index, 'choice': answer,'argument':TEXT}).status_code, 200)
         self.assertEqual(self.post({'operation': 'mission-submit', 'phase': 'planificar', 'text': TEXT}).status_code, 403)
         self.advance('quiz', 1200)
         self.advance('mission', 1800)
@@ -65,9 +67,10 @@ class CityRecoveryAPI(unittest.TestCase):
             self.assertEqual(self.validate_phase(phase).status_code, 200)
         return payload
 
-    def review(self, points=None, competencies=True, safety=True):
+    def review(self, points=None, competencies=True, safety=True, quiz_assessment=None):
         result = self.post({'user_id': 1, 'module_id': 1, 'attempt_id': self.get()['state']['mission'].get('attempt_id', 1),
-                            'points': points or [[5]*5 for _ in PHASES], 'competencies_approved': competencies,
+                            'points': points or [[5]*5 for _ in PHASES], 'quiz_assessment': quiz_assessment or QUIZ_ASSESSMENT,
+                            'competencies_approved': competencies,
                             'safety_approved': safety, 'critical_phases': ['actuar'], 'feedback': TEXT},
                            teacher=True, path='/api/teacher/city-review')
         self.assertEqual(result.status_code, 200, result.json)
@@ -131,16 +134,16 @@ class CityRecoveryAPI(unittest.TestCase):
         self.bank=self.teacher.get('/api/modules/1').json['content']['questions']
         for index,question in enumerate(payload['plan']['quiz']):
             original=next(item for item in self.bank if item['question']==question['question'])
-            response=self.post({'operation':'quiz-answer','index':index,'choice':(original['answer']+1)%4})
+            response=self.post({'operation':'quiz-answer','index':index,'choice':(original['answer']+1)%4 if index<2 else original['answer'],'argument':TEXT})
             answer=response.json['state']['quiz']['answers'][str(index)]
-            self.assertFalse(answer['correct'])
+            self.assertEqual(answer['correct'],index>=2)
             self.assertEqual(answer['correct_answer'],original['options'][original['answer']])
             self.assertTrue(answer['explanation'])
         self.advance('quiz',1200)
         self.assertFalse(self.get()['quiz_learning']['approved'])
         self.assertEqual(self.post({'operation':'heartbeat','stage':'mission','seconds':30}).status_code,403)
         self.assertEqual(self.post({'operation':'mission-submit','phase':'planificar','text':TEXT}).status_code,403)
-        for _ in range(8):
+        for _ in range(1):
             pending = self.get()['recoveries'][0]
             self.assertNotIn('answer', pending['reassessment'])
             self.assertNotIn('option_feedback',pending['reassessment'])
@@ -148,22 +151,38 @@ class CityRecoveryAPI(unittest.TestCase):
             self.assertEqual(self.post({'operation':'quiz-reinforcement','index':pending['index'],'text':TEXT}).status_code,200)
             variant = pending['reassessment']
             original = next(item for item in self.bank if item['question'] == variant['question'])
-            response = self.post({'operation': 'quiz-retry-answer', 'index': pending['index'], 'question': variant['question'], 'choice': original['answer']})
+            response = self.post({'operation': 'quiz-retry-answer', 'index': pending['index'], 'question': variant['question'], 'choice': original['answer'],'argument':TEXT})
             self.assertEqual(response.status_code, 200, response.json)
         final = self.get()
         self.assertFalse(final['reward']['approved'])
         self.assertTrue(final['quiz_learning']['approved'])
-        self.assertEqual(final['quiz_learning']['percent'],80)
+        self.assertEqual(final['quiz_learning']['percent'],75)
         self.assertEqual(final['reward']['areas'],[])
         self.assertEqual(final['state']['mission'].get('attempt_id', 1), 1)
-        self.assertEqual(final['state']['quiz']['score'],8)
+        self.assertEqual(final['state']['quiz']['score'],3)
         self.assertEqual(self.post({'operation':'mission-submit','phase':'planificar','text':TEXT}).status_code,200)
+
+    def test_insufficient_quiz_argument_can_be_revised_and_reviewed_again(self):
+        self.complete()
+        assessment = [dict(item) for item in QUIZ_ASSESSMENT]
+        assessment[0]['technically_sufficient'] = False
+        first = self.review(quiz_assessment=assessment)
+        self.assertFalse(first['approved'])
+        self.assertFalse(first['conditions']['quiz_score'])
+        payload = self.get()
+        self.assertIn('0', payload['state']['quiz']['pending_feedback'])
+        revised = self.post({'operation': 'quiz-argument-retry', 'index': 0,
+                             'argument': 'La medición debe contrastarse con el rango del fabricante y la pauta de seguridad antes de decidir.'})
+        self.assertEqual(revised.status_code, 200, revised.json)
+        self.assertNotIn('0', self.get()['state']['quiz']['pending_feedback'])
+        self.assertEqual(len(self.get()['state']['quiz']['teacher_review_history']), 1)
+        self.assertTrue(self.review()['approved'])
 
     def test_mission_validation_blocks_skips_and_preserves_corrections(self):
         payload=self.get();bank=self.teacher.get('/api/modules/1').json['content']['questions']
         for index,question in enumerate(payload['plan']['quiz']):
             original=next(item for item in bank if item['question']==question['question'])
-            self.post({'operation':'quiz-answer','index':index,'choice':original['answer']})
+            self.post({'operation':'quiz-answer','index':index,'choice':original['answer'],'argument':TEXT})
         self.advance('quiz',1200)
         self.assertEqual(self.post({'operation':'mission-submit','phase':'actuar','text':TEXT}).status_code,403)
         self.assertEqual(self.post({'operation':'mission-submit','phase':'planificar','text':TEXT}).status_code,200)
@@ -183,16 +202,16 @@ class CityRecoveryAPI(unittest.TestCase):
         payload=self.get();bank=self.teacher.get('/api/modules/1').json['content']['questions']
         for index,question in enumerate(payload['plan']['quiz']):
             original=next(item for item in bank if item['question']==question['question'])
-            self.post({'operation':'quiz-answer','index':index,'choice':original['answer'] if index<7 else (original['answer']+1)%4})
+            self.post({'operation':'quiz-answer','index':index,'choice':(original['answer']+1)%4 if index<2 else original['answer'],'argument':TEXT})
         pending=self.get()['recoveries'][0];variant=pending['reassessment'];index=pending['index']
         original=next(item for item in bank if item['question']==variant['question'])
-        body={'operation':'quiz-retry-answer','index':index,'question':variant['question'],'choice':(original['answer']+1)%4}
+        body={'operation':'quiz-retry-answer','index':index,'question':variant['question'],'choice':(original['answer']+1)%4,'argument':TEXT}
         self.assertEqual(self.post(body).status_code,409)
         self.post({'operation':'quiz-reinforcement','index':index,'text':TEXT})
         wrong=self.post(body)
         self.assertEqual(wrong.status_code,200)
         self.assertFalse(wrong.json['state']['quiz']['recovery_answers'][str(index)][-1]['correct'])
-        self.assertEqual(self.get()['quiz_learning']['percent'],70)
+        self.assertEqual(self.get()['quiz_learning']['percent'],50)
         replacement=next(item for item in self.get()['recoveries'] if item['index']==index)['reassessment']
         self.assertNotEqual(replacement['question'],variant['question'])
         self.assertEqual(self.post({**body,'question':replacement['question']}).status_code,409)

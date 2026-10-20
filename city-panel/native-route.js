@@ -138,7 +138,7 @@
     const centerX=points.reduce((sum,point)=>sum+(Number(point[0])||0),0)/points.length;
     const centerZ=points.reduce((sum,point)=>sum+(Number(point[1])||0),0)/points.length;
     const candidates=[];
-    for(const spacing of [3.3,3.15,3])for(const shiftX of [0,-.6,.6,-1.2,1.2])for(const shiftZ of [0,-1.2,1.2,-2.4,2.4,-3.6,3.6]){
+    for(const spacing of [3.5,3.4,3.3])for(const shiftX of [0,-.6,.6,-1.2,1.2])for(const shiftZ of [0,-1.2,1.2,-2.4,2.4,-3.6,3.6]){
       const cx=centerX+shiftX,cz=centerZ+shiftZ,line=Array.from({length:4},(_,index)=>[cx+(index-1.5)*spacing,cz]);
       if(line.some(([x,z])=>Math.abs(x)>6.2||Math.abs(z)>5.7))continue;
       const collisions=line.reduce((count,[x,z])=>count+(blocked(x,z)?1:0),0);
@@ -195,10 +195,22 @@
     }
     return new URL(`${specialtyPhotos(ctx.specialty.name)[index%4]}.webp`,base).href;
   }
-  function drawQuizSpecialtyIcon(c,name,cx,cy){
+  function drawQuizSpecialtyIcon(c,name,cx,cy,color='#0865f5',index=0){
     const value=normalize(name),kind=/aeronave|avion/.test(value)?'aircraft':/nave|portuar|pesquer|acuicultura/.test(value)?'ship':/enfermer|salud|parvul/.test(value)?'health':/agro|forest|cultivo/.test(value)?'nature':/gastronomia|alimento|hotel|turismo/.test(value)?'food':/min|geolog|metalurg/.test(value)?'mining':/constru|mueble|madera|sanitaria|montaje/.test(value)?'build':/dibujo|grafica|vestuario|textil/.test(value)?'design':/administra|contabilidad/.test(value)?'business':/electric|electron|telecom|redes|program/.test(value)?'circuit':'gear';
-    c.save();c.translate(cx,cy);c.lineCap='round';c.lineJoin='round';c.strokeStyle='#0865f5';c.fillStyle='#0865f5';c.lineWidth=12;
-    if(kind==='aircraft'){
+    c.save();c.translate(cx,cy);c.lineCap='round';c.lineJoin='round';c.strokeStyle=color;c.fillStyle=color;c.lineWidth=12;
+    if(index===1){
+      c.lineWidth=13;c.beginPath();c.arc(0,0,39,0,Math.PI*2);c.stroke();
+      for(let i=0;i<8;i++){c.save();c.rotate(i*Math.PI/4);c.fillRect(-8,-61,16,22);c.restore();}
+      c.beginPath();c.arc(0,0,13,0,Math.PI*2);c.fill();
+    }else if(index===2){
+      c.lineWidth=19;c.beginPath();c.moveTo(-46,-48);c.lineTo(45,45);c.moveTo(44,-49);c.lineTo(-45,47);c.stroke();
+      c.beginPath();c.arc(-51,-53,15,Math.PI,Math.PI*1.65);c.arc(-50,-53,15,Math.PI*1.35,Math.PI*2);c.stroke();
+      c.beginPath();c.arc(51,-53,15,Math.PI,Math.PI*1.65);c.arc(50,-53,15,Math.PI*1.35,Math.PI*2);c.stroke();
+      c.beginPath();c.moveTo(-55,53);c.lineTo(-38,36);c.moveTo(55,53);c.lineTo(38,36);c.stroke();
+    }else if(index===3){
+      c.lineWidth=8;c.beginPath();c.roundRect(-49,-59,98,118,10);c.stroke();
+      for(const y of [-29,0,29]){c.strokeStyle=color;c.lineWidth=7;c.beginPath();c.moveTo(-25,y);c.lineTo(-16,y+8);c.lineTo(-3,y-9);c.stroke();c.beginPath();c.moveTo(8,y);c.lineTo(34,y);c.stroke();}
+    }else if(kind==='aircraft'){
       c.beginPath();c.moveTo(-68,12);c.lineTo(-14,1);c.lineTo(-36,-46);c.quadraticCurveTo(-39,-56,-29,-51);c.lineTo(13,-3);c.lineTo(50,-12);c.quadraticCurveTo(70,-11,56,4);c.lineTo(16,18);c.lineTo(-20,53);c.quadraticCurveTo(-30,61,-31,48);c.lineTo(-28,28);c.lineTo(-67,31);c.closePath();c.fill();c.strokeStyle='#fff';c.lineWidth=7;c.beginPath();c.moveTo(-55,20);c.lineTo(52,-8);c.stroke();
     }else if(kind==='ship'){
       c.beginPath();c.moveTo(-65,17);c.lineTo(65,17);c.lineTo(42,47);c.lineTo(-40,47);c.closePath();c.fill();c.fillRect(-16,-38,42,48);c.fillRect(-43,-20,23,30);c.strokeStyle='#fff';c.lineWidth=7;c.beginPath();c.moveTo(-60,31);c.lineTo(55,31);c.stroke();
@@ -234,28 +246,22 @@
       const c=canvas.getContext('2d');
       const rounded=(x,y,width,height,radius)=>{c.beginPath();c.roundRect(x,y,width,height,radius);};
       c.clearRect(0,0,canvas.width,canvas.height);
-      c.save();c.shadowColor='#00cfff';c.shadowBlur=34;c.fillStyle='rgba(235,249,255,.97)';c.strokeStyle='#ffffff';c.lineWidth=20;
-      rounded(30,30,1140,280,135);c.fill();c.stroke();c.shadowBlur=0;c.strokeStyle='#08c7f2';c.lineWidth=14;rounded(44,44,1112,252,122);c.stroke();c.restore();
-      const header=c.createLinearGradient(0,58,0,286);header.addColorStop(0,'rgba(255,255,255,.99)');header.addColorStop(1,'rgba(214,242,255,.95)');
-      c.save();c.shadowColor='rgba(0,174,255,.52)';c.shadowBlur=24;c.fillStyle=header;rounded(106,58,1010,226,92);c.fill();c.restore();
-      c.save();c.shadowColor='#00cfff';c.shadowBlur=26;c.fillStyle='rgba(86,220,250,.42)';c.strokeStyle='#ffffff';c.lineWidth=10;
-      c.beginPath();c.arc(220,171,105,0,Math.PI*2);c.fill();c.stroke();c.restore();
-      drawQuizSpecialtyIcon(c,ctx.specialty.name,220,171);
-      c.textAlign='left';c.fillStyle='#1263ec';c.font='900 84px Arial';c.fillText(`Quiz ${index+1}`,370,135,680);
+      const accents=['#0875f5','#f39a22','#10a991','#a148e8'],accent=accents[index%accents.length];
+      c.save();c.shadowColor='#00cfff';c.shadowBlur=38;c.fillStyle='rgba(235,249,255,.98)';c.strokeStyle='#ffffff';c.lineWidth=24;
+      rounded(28,28,1144,1344,110);c.fill();c.stroke();c.shadowBlur=0;c.strokeStyle='#08c7f2';c.lineWidth=15;rounded(44,44,1112,1312,92);c.stroke();c.restore();
+      const header=c.createLinearGradient(0,48,0,430);header.addColorStop(0,'rgba(255,255,255,.99)');header.addColorStop(1,'rgba(214,242,255,.98)');
+      c.save();c.fillStyle=header;rounded(62,62,1076,354,72);c.fill();c.restore();
+      c.save();c.shadowColor=accent;c.shadowBlur=30;c.fillStyle=accent;c.globalAlpha=.2;c.beginPath();c.arc(208,238,142,0,Math.PI*2);c.fill();c.globalAlpha=1;c.strokeStyle='#ffffff';c.lineWidth=14;c.beginPath();c.arc(208,238,123,0,Math.PI*2);c.stroke();c.restore();
+      drawQuizSpecialtyIcon(c,ctx.specialty.name,208,238,accent,index);
+      c.textAlign='left';c.fillStyle='#1263ec';c.font='900 88px Arial';c.fillText(`Quiz ${index+1}`,382,191,710);
       const title=String(station.quizQuestion?.object||station.equipment||station.name||station.title||station.label||'Estación de trabajo');
-      c.fillStyle='#102653';let titleSize=51;c.font=`800 ${titleSize}px Arial`;while(c.measureText(title).width>690&&titleSize>32){titleSize--;c.font=`800 ${titleSize}px Arial`;}c.fillText(title,378,220,690);
+      c.fillStyle='#102653';let titleSize=49;c.font=`800 ${titleSize}px Arial`;while(c.measureText(title).width>700&&titleSize>31){titleSize--;c.font=`800 ${titleSize}px Arial`;}c.fillText(title,388,278,700);
+      c.save();c.fillStyle=accent;c.globalAlpha=.55;rounded(837,340,260,20,10);c.fill();c.globalAlpha=.22;rounded(837,372,188,14,7);c.fill();c.restore();
+      c.save();c.beginPath();c.roundRect(64,440,1072,888,55);c.clip();
+      const scale=Math.max(1072/image.width,888/image.height),imageWidth=image.width*scale,imageHeight=image.height*scale;
+      c.drawImage(image,600-imageWidth/2,884-imageHeight/2,imageWidth,imageHeight);c.restore();
+      c.save();c.shadowColor=accent;c.shadowBlur=28;c.strokeStyle='#ffffff';c.lineWidth=18;rounded(64,440,1072,888,55);c.stroke();c.shadowBlur=0;c.strokeStyle='#28d8ff';c.lineWidth=10;rounded(76,452,1048,864,44);c.stroke();c.restore();
       marker.texture.needsUpdate=true;marker.sign.userData.cityQuizArtworkReady=true;
-      const photoCanvas=document.createElement('canvas');photoCanvas.width=720;photoCanvas.height=480;
-      const photo=photoCanvas.getContext('2d');photo.save();photo.shadowColor='#00cfff';photo.shadowBlur=32;photo.fillStyle='rgba(220,249,255,.42)';photo.fillRect(0,0,720,480);photo.restore();
-      photo.save();photo.beginPath();photo.roundRect(34,24,652,432,42);photo.clip();
-      const scale=Math.max(652/image.width,432/image.height),imageWidth=image.width*scale,imageHeight=image.height*scale;
-      photo.drawImage(image,360-imageWidth/2,240-imageHeight/2,imageWidth,imageHeight);photo.restore();
-      photo.save();photo.shadowColor='#00cfff';photo.shadowBlur=34;photo.strokeStyle='#ffffff';photo.lineWidth=18;photo.beginPath();photo.roundRect(34,24,652,432,42);photo.stroke();
-      photo.shadowBlur=0;photo.strokeStyle='#28d8ff';photo.lineWidth=9;photo.beginPath();photo.roundRect(44,34,632,412,34);photo.stroke();photo.restore();
-      const T=ctx.three,imageTexture=new T.GOR(photoCanvas);imageTexture.colorSpace=T.er$;imageTexture.anisotropy=4;
-      const imageMaterial=new T.V9B({map:imageTexture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
-      const imageMesh=new T.eaF(markerImageGeometry,imageMaterial);imageMesh.position.set(displayX,floorY+1.22,displayZ);imageMesh.scale.setScalar(markerScale);imageMesh.renderOrder=20;imageMesh.userData.cityQuizImage=true;root.add(imageMesh);
-      marker.imageTexture=imageTexture;marker.imageMaterial=imageMaterial;marker.imageMesh=imageMesh;
     };
     image.src=imageUrl;
   }
@@ -266,8 +272,7 @@
     if(viewport){
       quizControlLayer=document.createElement('div');quizControlLayer.className='city-quiz-marker-control-layer';quizControlLayer.setAttribute('aria-label','Estaciones de quiz');viewport.append(quizControlLayer);
     }
-    markerGeometry=new T.bdM(3.65,1.04);
-    markerImageGeometry=new T.bdM(2.05,1.37);
+    markerGeometry=new T.bdM(2.72,3.12);
     markerHaloGeometry=new T.bdM(2.8,2.8);
     const haloCanvas=document.createElement('canvas');haloCanvas.width=256;haloCanvas.height=256;
     const haloContext=haloCanvas.getContext('2d'),glow=haloContext.createRadialGradient(128,128,24,128,128,124);
@@ -279,7 +284,7 @@
     haloContext.strokeStyle='#50e1ff';haloContext.lineWidth=4;haloContext.beginPath();haloContext.ellipse(128,128,84,61,0,0,Math.PI*2);haloContext.stroke();haloContext.restore();
     markerHaloTexture=new T.GOR(haloCanvas);markerHaloTexture.colorSpace=T.er$;
     markerHaloMaterial=new T.V9B({map:markerHaloTexture,transparent:true,depthWrite:false,toneMapped:false,side:T.$EB});
-    markerBeamGeometry=new T.bdM(2.12,2.32);
+    markerBeamGeometry=new T.bdM(2.1,2.85);
     const beamCanvas=document.createElement('canvas');beamCanvas.width=384;beamCanvas.height=512;
     const beamContext=beamCanvas.getContext('2d'),beamGlow=beamContext.createLinearGradient(0,0,384,0);
     beamGlow.addColorStop(0,'rgba(0,193,255,0)');beamGlow.addColorStop(.5,'rgba(76,225,255,.8)');beamGlow.addColorStop(1,'rgba(0,193,255,0)');
@@ -301,7 +306,7 @@
     markerCylinderMaterial=new T.V9B({color:0x19c9eb,toneMapped:false,transparent:true,opacity:.86,depthWrite:false});
     const floorY=ctx.floorY+.035;
     const token=generation;
-    const markerScale=Math.min(.9,Math.max(.7,window.innerWidth/1500));
+    const markerScale=Math.min(.86,Math.max(.68,window.innerWidth/1900));
     const usedImages=new Set();
     stations.forEach((station,index)=>{
       const [dx,dz]=station.totem||[station.x,station.z],x=ctx.district.x+dx,z=ctx.district.z+dz;
@@ -317,13 +322,13 @@
       const beam=new T.eaF(markerBeamGeometry,markerBeamMaterial);beam.name=`Aula TP · haz Quiz ${index+1}`;
       beam.position.set(displayX,floorY+1.2,displayZ);root.add(beam);beam.renderOrder=19;beams.push(beam);
       const cylinder=new T.eaF(markerCylinderGeometry,markerCylinderMaterial);cylinder.name=`Aula TP · soporte Quiz ${index+1}`;
-      cylinder.position.set(displayX,floorY+.49,displayZ);root.add(cylinder);cylinders.push(cylinder);
+      cylinder.scale.y=1.6;cylinder.position.set(displayX,floorY+.64,displayZ);root.add(cylinder);cylinders.push(cylinder);
       const title=String(station.quizQuestion?.object||station.equipment||station.name||station.title||station.label||'Puesto de trabajo');
-      const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=340;
+      const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=1400;
       const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
       const signMaterial=new T.V9B({map:texture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
       const sign=new T.eaF(markerGeometry,signMaterial);
-      sign.position.set(displayX,floorY+2.62,displayZ);sign.scale.setScalar(markerScale);root.add(sign);
+      sign.position.set(displayX,floorY+2.02,displayZ);sign.scale.setScalar(markerScale);root.add(sign);
       sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
       const marker={sign,texture,material:signMaterial};quizMarkers.push(marker);
       if(quizControlLayer){
