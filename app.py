@@ -481,6 +481,67 @@ def create_app(test_config=None):
                                    'attempts':(experience.get('mission',{}).get('recovery_missions') or {}).get(str(index),[])})
         return jsonify(course_title=course['title'],location=location,plan=plan,state=experience,quiz_learning=quiz_learning_status(experience,len(plan['quiz'])),
                        reward=city_reward(experience,plan),specialty_progress=specialty_progress,recoveries=recoveries)
+    @app.route('/api/modules/<int:mid>/city-station-quiz',methods=['GET','POST'])
+    @require('student')
+    def city_station_quiz(mid):
+        m,err=accessible(mid)
+        if err:return err
+        station=request.args.get('station',type=int) if request.method=='GET' else body().get('station')
+        if type(station) is not int or station not in range(1,5):return fail('Estación de quiz inválida.')
+        content=load_content(m['content'],m['position'])
+        questions=content.get('questions') or []
+        levels=('Inicial','Inicial','Intermedia','Avanzada')
+        level=levels[station-1]
+        with db() as con:
+            con.execute('BEGIN IMMEDIATE')
+            state=getstate(con,mid)
+            stations=state.setdefault('city_station_quizzes',{})
+            item=stations.setdefault(str(station),{'level':level,'attempts':[],'used':[],'passed':False})
+            if request.method=='GET' and item.get('current_id') is None and not item.get('passed'):
+                candidates=[q for q in questions if q.get('difficulty')==level]
+                if not candidates:candidates=questions
+                if candidates:
+                    rng=random.Random(f"city-station:{session['uid']}:{mid}:{station}")
+                    first=candidates[rng.randrange(len(candidates))]
+                    item['current_id']=first.get('id')
+                    item['used'].append(first.get('id'))
+                    putstate(con,mid,state)
+            question=next((q for q in questions if q.get('id')==item.get('current_id')),None)
+            if request.method=='POST':
+                payload=body();question=next((q for q in questions if q.get('id')==payload.get('question_id') and q.get('id')==item.get('current_id')),None)
+                choice=payload.get('choice');argument=payload.get('argument')
+                if item.get('passed'):return jsonify(passed=True,feedback='Este quiz ya está aprobado.')
+                if not question:return fail('La pregunta cambió. Actualiza el quiz antes de responder.',409)
+                if type(choice) is not int or choice not in range(len(question.get('options') or [])):return fail('Selecciona una alternativa disponible.')
+                if not text_valid(argument,20):return fail('Fundamenta tu respuesta con al menos 20 caracteres.')
+                feedback=answer_feedback(question,choice)
+                item.setdefault('attempts',[]).append({'question_id':question.get('id'),'choice':choice,'argument':argument.strip(),'correct':feedback['correct'],'at':datetime.now(timezone.utc).isoformat()})
+                response={'passed':feedback['correct'],'feedback':feedback['choice_feedback'],'explanation':feedback['explanation'],'correct_answer':feedback['correct_answer'] if feedback['correct'] else None,'attempts':len(item['attempts'])}
+                if feedback['correct']:
+                    item['passed']=True
+                else:
+                    candidates=[q for q in questions if q.get('ae')==question.get('ae') and q.get('id') not in item['used']]
+                    candidates.sort(key=lambda q:(q.get('difficulty')!=question.get('difficulty'),str(q.get('question') or '')))
+                    if not candidates:candidates=[q for q in questions if q.get('ae')==question.get('ae') and q.get('id')!=question.get('id') and q.get('options')]
+                    if not candidates:candidates=[q for q in questions if q.get('id')!=question.get('id') and q.get('options')]
+                    if candidates:
+                        next_question=candidates[0];item['current_id']=next_question.get('id');item.setdefault('used',[]).append(next_question.get('id'))
+                        response['next_question']={key:next_question.get(key) for key in ('id','question','options','criterion','ae','difficulty','image','stimulus') if key in next_question}
+                        ae_index=next_question.get('ae');aes=content.get('aes') or []
+                        response['ae_title']=aes[ae_index].get('title') or aes[ae_index].get('name') or '' if type(ae_index) is int and 0<=ae_index<len(aes) else ''
+                    else:response['bank_exhausted']=True
+                trace(state,'city-station-quiz-answer',station=station,correct=feedback['correct'],attempt=response['attempts'])
+                putstate(con,mid,state)
+                return jsonify(response)
+            if item.get('passed'):
+                putstate(con,mid,state)
+                return jsonify(station=station,level=level,passed=True,attempts=len(item.get('attempts') or []))
+            if not question:return fail('No hay preguntas disponibles para esta estación.',409)
+            ae_index=question.get('ae');aes=content.get('aes') or []
+            ae_title=aes[ae_index].get('title') or aes[ae_index].get('name') or '' if type(ae_index) is int and 0<=ae_index<len(aes) else ''
+            putstate(con,mid,state)
+            return jsonify(station=station,level=level,passed=False,attempts=len(item.get('attempts') or []),ae=ae_index,ae_title=ae_title,
+                           question={key:question.get(key) for key in ('id','question','options','criterion','ae','difficulty','image','stimulus') if key in question})
     @app.post('/api/modules/<int:mid>/city-experience')
     @require('student')
     def save_city_experience(mid):

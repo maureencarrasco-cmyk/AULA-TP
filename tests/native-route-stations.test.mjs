@@ -90,18 +90,23 @@ test('four floor arrows stay around the student and each targets its matching qu
   assert.doesNotMatch(source,/function path\(ctx,target\)|function selectedStation\(/);
 });
 
-test('each 3D quiz plate opens an AE-linked four-choice form with a required argument',()=>{
+test('each 3D quiz plate opens a server-graded four-choice form with retry feedback',()=>{
   assert.match(source,/control\.addEventListener\('click',\(\)=>openQuizWindow\(index\+1\)\)/);
   assert.match(source,/panel\.className='city-quiz-empty-window'/);
   assert.match(source,/title\.textContent=`Quiz \$\{number\}`/);
   assert.match(source,/body\.className='city-quiz-empty-window-body'/);
   assert.match(source,/radio\.required=true/);
-  assert.match(source,/argument\.required=true;argument\.minLength=12/);
-  assert.match(source,/localStorage\.setItem\(key,JSON\.stringify\(record\)\)/);
-  assert.match(source,/current\?\.aeTitle/);
+  assert.match(source,/argument\.required=true;argument\.minLength=20/);
+  assert.match(source,/city-station-quiz/);
+  assert.match(source,/feedback\.textContent=`Aún no\./);
+  assert.match(source,/renderQuestion\(result\.next_question,result\.ae_title\)/);
+  assert.doesNotMatch(source,/localStorage\.setItem\(key,JSON\.stringify\(record\)\)/);
+  assert.match(source,/current\?\.moduleId/);
   assert.match(source,/close\.addEventListener\('click'/);
   assert.match(source,/new T\.Pq0\(sign\.position\.x,sign\.position\.y,sign\.position\.z\)\.project\(ctx\.camera\)/);
   assert.match(source,/quizControlLayer\?\.remove\(\)/);
+  assert.match(source,/function redesignSpecialtyPlaque\(/);
+  assert.match(source,/AULA TP CHILE  \/  ESPACIO DE APRENDIZAJE/);
   const hook=readFileSync(new URL('../city-panel/deploy_native_route.py',import.meta.url),'utf8');
   assert.match(hook,/camera:af,renderer:ac/);
   assert.match(hook,/moduleTitle:w\.module,ae:w\.ae,aeTitle:w\.aeTitle/);

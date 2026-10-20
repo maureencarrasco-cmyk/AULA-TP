@@ -34,7 +34,7 @@
     quizControlLayer?.remove();quizControlLayer=null;quizControls.length=0;quizWindow?.remove();quizWindow=null;activeQuizNumber=null;
     stageAnchors.length=0;
     roomStations=[];
-    for(const [sign,visible,oldGeometry,oldMaterial,oldName,flag] of originalSigns){sign.visible=visible;sign.geometry=oldGeometry;sign.material=oldMaterial;sign.name=oldName;delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityLegacyQuizFurniture;delete sign.userData.cityQuizMarker;}
+    for(const saved of originalSigns){const {sign,visible,geometry,material,name,flag,position,rotation,scale,texture,newMaterial}=saved;sign.visible=visible;sign.geometry=geometry;sign.material=material;sign.name=name;sign.position.copy(position);sign.rotation.copy(rotation);sign.scale.copy(scale);texture?.dispose();if(newMaterial&&newMaterial!==material)newMaterial.dispose();delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityLegacyQuizFurniture;delete sign.userData.cityQuizMarker;delete sign.userData.citySpecialtyPlaque;}
     originalSigns.length=0;
     root=geometry=material=null;arrows.length=0;
     document.querySelectorAll('.city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
@@ -66,7 +66,7 @@
     const hidden=new Set();
     const hide=(node,flag='cityLegacyQuizStageSign')=>{
       if(hidden.has(node))return;
-      hidden.add(node);originalSigns.push([node,node.visible,node.geometry,node.material,node.name,flag]);node.visible=false;node.userData[flag]=true;
+      hidden.add(node);originalSigns.push({sign:node,visible:node.visible,geometry:node.geometry,material:node.material,name:node.name,flag,position:node.position.clone(),rotation:node.rotation.clone(),scale:node.scale.clone()});node.visible=false;node.userData[flag]=true;
     };
     const candidates=[];
     ctx.scene.traverse(node=>{
@@ -99,7 +99,27 @@
     for(const item of signGroup||[])selected.add(item.node);
     for(const node of selected){node.getWorldPosition(position);stageAnchors.push({x:position.x,y:position.y,z:position.z});hide(node);}
     stageAnchors.sort((a,b)=>a.x-b.x);
+    const specialtyPlaque=candidates.filter(item=>!selected.has(item.node)&&item.width>=3.2&&item.width<=10&&item.height>=.65&&item.height<=3)
+      .sort((a,b)=>Math.hypot(a.x-roomPosition.x,a.y-roomPosition.y,a.z-roomPosition.z)-Math.hypot(b.x-roomPosition.x,b.y-roomPosition.y,b.z-roomPosition.z))[0];
+    if(specialtyPlaque){const sign=specialtyPlaque.node,saved={sign,visible:sign.visible,geometry:sign.geometry,material:sign.material,name:sign.name,position:sign.position.clone(),rotation:sign.rotation.clone(),scale:sign.scale.clone()};originalSigns.push(saved);redesignSpecialtyPlaque(ctx,sign,roomPosition,saved);}
     hideLegacyQuizFurniture(ctx,hide);
+  }
+  function redesignSpecialtyPlaque(ctx,sign,roomPosition,saved){
+    const T=ctx.three,forward=ctx.camera?.getWorldDirection?ctx.camera.getWorldDirection(new T.Pq0()):new T.Pq0(0,0,-1);
+    forward.y=0;forward.normalize();const rightX=-forward.z,rightZ=forward.x;
+    const worldPosition=new T.Pq0(roomPosition.x-rightX*4.8,sign.getWorldPosition(new T.Pq0()).y,roomPosition.z-rightZ*4.8);
+    sign.parent?.updateMatrixWorld(true);sign.position.copy(sign.parent?sign.parent.worldToLocal(worldPosition):worldPosition);
+    sign.rotation.y=Math.atan2(rightX,-rightZ);
+    const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=320;
+    const c=canvas.getContext('2d'),gradient=c.createLinearGradient(0,0,1200,320);gradient.addColorStop(0,'#092a3b');gradient.addColorStop(.62,'#104b57');gradient.addColorStop(1,'#086d70');
+    c.fillStyle=gradient;c.fillRect(0,0,1200,320);c.strokeStyle='#65f0dc';c.lineWidth=12;c.strokeRect(17,17,1166,286);
+    c.fillStyle='#20d1ad';c.fillRect(50,52,12,212);c.fillStyle='#8cebdd';c.font='700 28px Arial';c.fillText('AULA TP CHILE  /  ESPACIO DE APRENDIZAJE',94,83);
+    const specialty=String(current?.specialty||ctx.specialty?.name||'Especialidad'),moduleTitle=String(current?.moduleTitle||ctx.district?.name||'Módulo formativo');
+    c.fillStyle='#ffffff';let titleSize=59;c.font=`800 ${titleSize}px Arial`;while(c.measureText(specialty).width>1020&&titleSize>34){titleSize-=2;c.font=`800 ${titleSize}px Arial`;}c.fillText(specialty,94,164,1020);
+    c.fillStyle='#ffd15c';c.font='700 36px Arial';c.fillText(`${moduleTitle}  ·  ESTACIONES DE APRENDIZAJE`,94,235,1020);
+    const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
+    saved.texture=texture;sign.material=new T.V9B({map:texture,toneMapped:false,side:T.$EB});saved.newMaterial=sign.material;
+    sign.name='Aula TP · letrero de especialidad y módulo';sign.userData.citySpecialtyPlaque=true;
   }
   function hideLegacyQuizFurniture(ctx,hide){
     if(!stageAnchors.length)return;
@@ -395,30 +415,46 @@
       const launch=document.createElement('button');launch.type='button';launch.className='city-quiz-submit';launch.textContent='Abrir Desafío profesional';
       launch.addEventListener('click',()=>[...document.querySelectorAll('.city-view-toolbar button')].find(button=>normalize(button.textContent).includes('desafio profesional'))?.click());body.append(launch);
     }else{
-      const content=document.createElement('div'),level=document.createElement('p'),alignment=document.createElement('p'),prompt=document.createElement('h3'),form=document.createElement('form'),choices=document.createElement('fieldset'),legend=document.createElement('legend'),argumentLabel=document.createElement('label'),argument=document.createElement('textarea'),submit=document.createElement('button'),status=document.createElement('p');
+      const content=document.createElement('div'),level=document.createElement('p'),alignment=document.createElement('p'),prompt=document.createElement('h3'),criterion=document.createElement('p'),form=document.createElement('form'),choices=document.createElement('fieldset'),legend=document.createElement('legend'),argumentLabel=document.createElement('label'),argument=document.createElement('textarea'),submit=document.createElement('button'),status=document.createElement('p'),feedback=document.createElement('p');
       content.className='city-quiz-question';level.className='city-quiz-question-level';level.textContent=['Fácil','Fácil','Medianamente difícil','Difícil'][number-1]||'Desafío';
-      alignment.className='city-quiz-question-ae';alignment.textContent=`AE ${current?.ae||''}${current?.aeTitle?` · ${current.aeTitle}`:''}`.trim();
-      prompt.textContent=String(question.prompt||question.question||'Resuelve el desafío del módulo.');
+      alignment.className='city-quiz-question-ae';prompt.textContent='Cargando pregunta…';criterion.className='city-quiz-question-criterion';
       form.className='city-quiz-response-form';choices.className='city-quiz-choices';legend.textContent='Selecciona una alternativa';choices.append(legend);
-      const key=`aulatp:city-station-quiz:v1:${encodeURIComponent(current?.specialty||'')}:${encodeURIComponent(current?.moduleId||'')}:${encodeURIComponent(current?.ae||'')}:${number}`;
-      let saved=null;try{saved=JSON.parse(localStorage.getItem(key)||'null');}catch{}
-      stationQuizOptions(question).forEach((option,index)=>{
-        const label=document.createElement('label'),radio=document.createElement('input'),copy=document.createElement('span');
-        radio.type='radio';radio.name=`city-quiz-${number}-answer`;radio.value=String(index);radio.required=true;radio.checked=Number(saved?.choice)===index;
-        copy.textContent=option;label.append(radio,copy);choices.append(label);
+      argumentLabel.className='city-quiz-argument-label';argumentLabel.textContent='Argumenta tu respuesta';argument.name='argument';argument.required=true;argument.minLength=20;argument.placeholder='Explica qué evidencia del módulo respalda tu elección.';argumentLabel.append(argument);
+      submit.type='submit';submit.className='city-quiz-submit';submit.textContent='Comprobar respuesta';status.className='city-quiz-save-status';status.setAttribute('aria-live','polite');feedback.className='city-quiz-feedback';feedback.setAttribute('aria-live','polite');feedback.hidden=true;
+      form.append(choices,argumentLabel,submit,status,feedback);content.append(level,alignment,prompt,criterion,form);body.append(content);
+      let activeQuestion=null,busy=false;
+      const renderQuestion=(item,aeTitle='')=>{
+        activeQuestion=item;prompt.textContent=String(item.question||'Resuelve el desafío del módulo.');
+        alignment.textContent=aeTitle?`Aprendizaje esperado · ${aeTitle}`:`Aprendizaje esperado ${Number(item.ae)+1} del módulo`;
+        criterion.hidden=!item.criterion;criterion.textContent=item.criterion?`Criterio asociado: ${item.criterion}`:'';
+        choices.replaceChildren(legend);
+        (Array.isArray(item.options)?item.options:[]).slice(0,4).forEach((option,index)=>{
+          const label=document.createElement('label'),radio=document.createElement('input'),copy=document.createElement('span');
+          radio.type='radio';radio.name=`city-quiz-${number}-answer`;radio.value=String(index);radio.required=true;copy.textContent=String(option);label.append(radio,copy);choices.append(label);
+        });
+        argument.value='';submit.disabled=false;submit.textContent='Comprobar respuesta';
+      };
+      const api=`/api/modules/${encodeURIComponent(current?.moduleId||'')}/city-station-quiz`;
+      fetch(`${api}?station=${number}`,{credentials:'same-origin'}).then(async response=>{
+        const data=await response.json();if(!response.ok)throw new Error(data.error||'No se pudo cargar este quiz.');
+        if(data.passed){alignment.textContent='Aprendizaje esperado demostrado';prompt.textContent='Este quiz ya está aprobado.';submit.disabled=true;return;}
+        renderQuestion(data.question,data.ae_title);status.textContent=data.attempts?`Intento ${data.attempts+1}`:'Primera pregunta';
+      }).catch(error=>{prompt.textContent=error.message;submit.disabled=true;});
+      form.addEventListener('submit',async event=>{
+        event.preventDefault();if(busy||!activeQuestion)return;
+        const choice=form.querySelector('input:checked'),reason=argument.value.trim();
+        if(!choice||reason.length<20){status.textContent='Selecciona una alternativa y fundamenta tu respuesta con al menos 20 caracteres.';return;}
+        busy=true;submit.disabled=true;status.textContent='Revisando respuesta…';feedback.hidden=true;
+        try{
+          const response=await fetch(api,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({station:number,question_id:activeQuestion.id,choice:Number(choice.value),argument:reason})});
+          const result=await response.json();if(!response.ok)throw new Error(result.error||'No se pudo registrar la respuesta.');
+          feedback.hidden=false;feedback.classList.toggle('is-correct',Boolean(result.passed));feedback.classList.toggle('is-incorrect',!result.passed);
+          if(result.passed){feedback.textContent=`Correcto. ${result.feedback||result.explanation||''}`;status.textContent='Quiz aprobado';alignment.textContent='Aprendizaje esperado demostrado';prompt.textContent='¡Muy bien! Puedes continuar con otra estación.';choices.querySelectorAll('input').forEach(input=>input.disabled=true);argument.disabled=true;submit.textContent='Aprobado';}
+          else if(result.next_question){feedback.textContent=`Aún no. ${result.feedback||result.explanation||'Revisa el criterio asociado y vuelve a intentarlo.'} Se generó una pregunta nueva.`;status.textContent=`Nuevo intento · ${result.attempts}`;renderQuestion(result.next_question,result.ae_title);}
+          else{feedback.textContent=`Aún no. ${result.feedback||result.explanation||''} No quedan preguntas inéditas en este aprendizaje; volveremos a presentarlo.`;status.textContent='Reintento disponible';}
+        }catch(error){status.textContent=error.message;submit.disabled=false;}
+        finally{busy=false;}
       });
-      if(question.criterion){const criterion=document.createElement('p');criterion.className='city-quiz-question-criterion';criterion.textContent=`Criterio asociado: ${question.criterion}`;content.append(level,alignment,prompt,criterion);}
-      else content.append(level,alignment,prompt);
-      argumentLabel.className='city-quiz-argument-label';argumentLabel.textContent='Argumenta tu respuesta';argument.name='argument';argument.required=true;argument.minLength=12;argument.value=String(saved?.argument||'');argument.placeholder='Explica qué evidencia del módulo respalda tu elección.';argumentLabel.append(argument);
-      submit.type='submit';submit.className='city-quiz-submit';submit.textContent=saved?'Actualizar respuesta':'Guardar respuesta';status.className='city-quiz-save-status';status.setAttribute('aria-live','polite');
-      form.append(choices,argumentLabel,submit,status);form.addEventListener('submit',event=>{
-        event.preventDefault();const choice=form.querySelector('input:checked'),reason=argument.value.trim();
-        if(!choice||reason.length<12){status.textContent='Selecciona una alternativa y fundamenta tu respuesta.';return;}
-        const record={choice:Number(choice.value),argument:reason,savedAt:new Date().toISOString()};
-        try{localStorage.setItem(key,JSON.stringify(record));status.textContent='Respuesta y argumentación guardadas en este dispositivo.';submit.textContent='Actualizar respuesta';}
-        catch{status.textContent='No se pudo guardar. Revisa el almacenamiento del navegador e inténtalo otra vez.';}
-      });
-      content.append(form);body.append(content);
     }
     document.body.append(panel);quizWindow=panel;activeQuizNumber=number;
   }
