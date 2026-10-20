@@ -30,6 +30,26 @@ test('quiz rooms are fitted as module-specific workshops without filling the sta
   assert.match(workshop,/setup\.resources\|\|\[\]/);
   assert.match(workshop,/Math\.hypot\(place\.x-ctx\.district\.x-sx,place\.z-ctx\.district\.z-sz\)<3\.25/);
   assert.match(workshop,/root\.userData\.fixtureCount=locations\.length\+occupied\.length/);
+  assert.match(workshop,/player\.x\+rightX\*side\*5\.6\+forward\.x\*distance/);
+  assert.match(workshop,/featuredModuleEquipment=true/);
+  const routing=readFileSync(new URL('../city-panel/native-route.js',import.meta.url),'utf8');
+  assert.match(routing,/assets\/module-room-resources\.json/);
+  assert.match(routing,/const active=current\|\|\{moduleTitle:'',specialty:ctx\.specialty\?\.name\|\|''\}/);
+  assert.match(routing,/sign\.scale\.set\(baseScale\.x\*\(5\.4\/width\),baseScale\.y\*\(1\.25\/height\)/);
+});
+
+test('perimeter workshops follow the camera and stay clear of quiz positions',()=>{
+  const workshop=readFileSync(new URL('../city-panel/native-workshop.js',import.meta.url),'utf8');
+  const start=workshop.indexOf('  function chooseLocations('),end=workshop.indexOf('  function create(',start);
+  const choose=vm.runInNewContext(`${workshop.slice(start,end)};chooseLocations`,{Math});
+  class Vector {constructor(x=0,y=0,z=0){this.x=x;this.y=y;this.z=z;}normalize(){const length=Math.hypot(this.x,this.y,this.z)||1;this.x/=length;this.y/=length;this.z/=length;return this;}}
+  const ctx={three:{Pq0:Vector},camera:{getWorldDirection:vector=>{vector.x=0;vector.y=0;vector.z=-1;return vector;}},
+    player:{x:0,z:0},district:{x:0,z:0},floorY:0,colliders:[]};
+  const stations=[-4.5,-1.5,1.5,4.5].map(x=>({totem:[x,-8]}));
+  const result=choose(ctx,stations);
+  assert.equal(result.length,2);
+  assert.ok(result.every(item=>Math.abs(Math.abs(item.x)-5.6)<.01));
+  assert.ok(result.every(item=>stations.every(station=>Math.hypot(item.x-station.totem[0],item.z-station.totem[1])>3.5)));
 });
 
 test('each station selects unique questions at the requested difficulty levels',()=>{

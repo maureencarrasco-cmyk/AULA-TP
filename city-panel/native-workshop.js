@@ -3,13 +3,22 @@
   const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const labels={tools:'Herramientas e instrumentos',protection:'Protección personal',documents:'Documentación técnica',digital:'Recursos digitales',materials:'Materiales e insumos',equipment:'Equipos de trabajo'};
   function chooseLocations(ctx,stations){
-    const center=ctx.room.getWorldPosition(new ctx.three.Pq0()),locations=[];
+    const locations=[];
+    const forward=ctx.camera?.getWorldDirection?ctx.camera.getWorldDirection(new ctx.three.Pq0()):new ctx.three.Pq0(0,0,-1);
+    forward.y=0;forward.normalize();const rightX=-forward.z,rightZ=forward.x,player=ctx.player;
     for(const side of [-1,1]){
-      const candidates=[-2.5,2.5,0].map(z=>({x:center.x+side*6.9,z:center.z+z,side}));
+      const candidates=[1.5,3.2,-1.2,4.8].map(distance=>({
+        x:player.x+rightX*side*5.6+forward.x*distance,
+        z:player.z+rightZ*side*5.6+forward.z*distance,side,rightX,rightZ,forwardX:forward.x,forwardZ:forward.z
+      }));
       const available=candidates.find(p=>stations.every(s=>{
         const [x,z]=s.totem||[s.x,s.z];
-        return Math.abs(p.x-ctx.district.x-x)>1.65||Math.abs(p.z-ctx.district.z-z)>3.1;
-      })&&Math.hypot(p.x-ctx.player.x,p.z-ctx.player.z)>2.7);
+        return Math.hypot(p.x-ctx.district.x-x,p.z-ctx.district.z-z)>3.5;
+      })&&Math.hypot(p.x-player.x,p.z-player.z)>3.5&&ctx.colliders.every(c=>
+        ctx.floorY+1.5<(c.minY??-Infinity)||ctx.floorY>(c.maxY??Infinity)||
+        Math.abs(c.x-p.x)>(c.halfX??.5)+2.25*Math.abs(p.rightX)+.45*Math.abs(p.forwardX)||
+        Math.abs(c.z-p.z)>(c.halfZ??.5)+2.25*Math.abs(p.rightZ)+.45*Math.abs(p.forwardZ)
+      ));
       if(available)locations.push(available);
     }
     return locations;
@@ -20,7 +29,7 @@
     root.userData.moduleTitle=setup.module_title;
     const own=value=>(owned.add(value),value);
     const boxGeometry=own(new T.iNn(1,1,1)),planeGeometry=own(new T.bdM(1,1));
-    const colors={blue:0x12639c,metal:0xb9c8cb,dark:0x183039,white:0xf4f7fa,teal:0x139a92,orange:0xf5ae38,red:0xb93631,green:0x227a59};
+    const colors={blue:0x12639c,metal:0xb9c8cb,dark:0x183039,white:0xf4f7fa,teal:0x139a92,orange:0xf5ae38,red:0xb93631};
     const materials=Object.fromEntries(Object.entries(colors).map(([key,color])=>[key,own(new T.V9B({color}))]));
     const Cylinder=Object.values(T).find(value=>typeof value==='function'&&value.name==='CylinderGeometry');
     function box(parent,x,y,z,w,h,d,color='blue'){
@@ -145,7 +154,7 @@
     const categoryTitles={tools:'HERRAMIENTAS',protection:'EPP',documents:'DOCUMENTACIÓN TÉCNICA',digital:'RECURSOS DIGITALES',materials:'MATERIALES',equipment:'EQUIPOS'};
     const headings=[...new Set((setup.resources||[]).map(item=>categoryTitles[item.category]||categoryTitles.equipment))];
     locations.forEach((location,index)=>{
-      const rack=new T.YJl();rack.position.set(location.x,ctx.floorY,location.z);rack.rotation.y=location.side<0?Math.PI/2:-Math.PI/2;root.add(rack);
+      const rack=new T.YJl();rack.position.set(location.x,ctx.floorY,location.z);rack.rotation.y=Math.atan2(-location.side*location.rightX,-location.side*location.rightZ);root.add(rack);
       box(rack,0,1.55,-.18,4.5,2.9,.12,'blue');
       const items=(setup.resources||[]).map(item=>({...item,category:item.category||'equipment'}));
       label(rack,index===0?(headings.includes('HERRAMIENTAS')?'HERRAMIENTAS Y PUESTO DE TRABAJO':headings[0]||'PUESTO DE TRABAJO'):headings.slice(1).join(' · ')||headings[0]||'RECURSOS DEL MÓDULO',0,3.14,-.08,4.5,.44);
@@ -158,20 +167,22 @@
       box(rack,-2.18,1.55,.05,.09,2.9,.62,'dark');box(rack,2.18,1.55,.05,.09,2.9,.62,'dark');
       for(const y of [.76,1.13,1.5]){box(rack,2.24,y,.32,.1,.2,.54,'orange');box(rack,2.3,y,.32,.08,.08,.2,'metal');}
       label(rack,index===0?'BANCO DE MANTENIMIENTO':'INSPECCIÓN Y SEGURIDAD',0,.13,.58,4.1,.26,'#0a3850');
-      const collider={x:location.x,z:location.z,halfX:.7,halfZ:2.35,minY:ctx.floorY,maxY:ctx.floorY+3.4};
+      const collider={x:location.x,z:location.z,halfX:2.25*Math.abs(location.rightX)+.45*Math.abs(location.forwardX),halfZ:2.25*Math.abs(location.rightZ)+.45*Math.abs(location.forwardZ),minY:ctx.floorY,maxY:ctx.floorY+3.4};
       ctx.colliders.push(collider);colliders.push(collider);
     });
     const primary=(setup.resources||[]).find(item=>!['documents','digital'].includes(item.category))||setup.resources?.[0];
-    const center=ctx.room.getWorldPosition(new T.Pq0());
-    const candidates=[[-4.6,3.8],[4.6,3.8],[-4.6,-3.8],[4.6,-3.8]];
+    const facing=ctx.camera?.getWorldDirection?ctx.camera.getWorldDirection(new T.Pq0()):new T.Pq0(0,0,-1);
+    facing.y=0;facing.normalize();const rightX=-facing.z,rightZ=facing.x;
+    const candidates=[[-6.4,5.2],[6.4,5.2],[-6.4,-3.2],[6.4,-3.2]];
     const occupied=[];
-    for(const [x,z] of candidates){
-      const place={x:center.x+x,z:center.z+z};
+    for(const [side,depth] of candidates){
+      const place={x:ctx.player.x+rightX*side+facing.x*depth,z:ctx.player.z+rightZ*side+facing.z*depth};
       const nearQuiz=stations.some(s=>{const [sx,sz]=s.totem||[s.x,s.z];return Math.hypot(place.x-ctx.district.x-sx,place.z-ctx.district.z-sz)<3.25;});
-      const collides=ctx.colliders.some(c=>ctx.floorY+1>=(c.minY??-Infinity)&&ctx.floorY<=(c.maxY??Infinity)&&Math.abs(c.x-place.x)<(c.halfX??.5)+1.65&&Math.abs(c.z-place.z)<(c.halfZ??.5)+1.05);
+      const halfX=1.55*Math.abs(rightX)+.73*Math.abs(facing.x),halfZ=1.55*Math.abs(rightZ)+.73*Math.abs(facing.z);
+      const collides=ctx.colliders.some(c=>ctx.floorY+1>=(c.minY??-Infinity)&&ctx.floorY<=(c.maxY??Infinity)&&Math.abs(c.x-place.x)<(c.halfX??.5)+halfX&&Math.abs(c.z-place.z)<(c.halfZ??.5)+halfZ);
       if(nearQuiz||collides||occupied.some(p=>Math.abs(p.x-place.x)<3.8&&Math.abs(p.z-place.z)<2.5)||Math.hypot(place.x-ctx.player.x,place.z-ctx.player.z)<3.3)continue;
-      const bench=new T.YJl();bench.position.set(place.x,ctx.floorY,place.z);root.add(bench);buildServiceBench(bench,primary);
-      const collider={x:place.x,z:place.z,halfX:1.65,halfZ:1.05,minY:ctx.floorY,maxY:ctx.floorY+2.1};ctx.colliders.push(collider);colliders.push(collider);occupied.push(place);
+      const bench=new T.YJl();bench.position.set(place.x,ctx.floorY,place.z);bench.rotation.y=Math.atan2(-rightZ,rightX);root.add(bench);buildServiceBench(bench,primary);
+      const collider={x:place.x,z:place.z,halfX,halfZ,minY:ctx.floorY,maxY:ctx.floorY+2.1};ctx.colliders.push(collider);colliders.push(collider);occupied.push(place);
       if(occupied.length===2)break;
     }
     root.userData.resourceCount=setup.resources.length;root.userData.displayedResources=displayed;root.userData.fixtureCount=locations.length+occupied.length;

@@ -18,6 +18,12 @@ class RoomInventoryTests(unittest.TestCase):
                 self.assertTrue(item['name'])
                 self.assertTrue(all(ref['pdf_page'] > 0 for ref in item['references']))
 
+    def test_public_workshop_fallback_matches_the_authoritative_inventory(self):
+        root = Path(__file__).resolve().parents[1]
+        source = json.loads((root / 'city_room_resources.json').read_text(encoding='utf-8'))
+        fallback = json.loads((root / 'city-panel' / 'assets' / 'module-room-resources.json').read_text(encoding='utf-8'))
+        self.assertEqual(fallback, source)
+
     def test_activity_parser_stops_before_execution_and_handles_single_bullets(self):
         self.assertEqual(activity_resources('Recursos:\n› Manual; reglas.\n› Guantes.\nEJECUCIÓN\nDocente:\n› Otra instrucción.'),
                          ['Manual', 'reglas', 'Guantes'])

@@ -63,12 +63,29 @@
     if(activeQuizNumber)openQuizWindow(activeQuizNumber);
   }
   async function loadModuleWorkshop(ctx){
-    if(!current?.moduleId||!globalThis.AulaTPModuleWorkshop)return;
+    if(!globalThis.AulaTPModuleWorkshop)return;
     const token=generation,controller=new AbortController();workshopRequest=controller;
     try{
-      const response=await fetch(`/api/modules/${encodeURIComponent(current.moduleId)}/city-room-setup`,{credentials:'same-origin',signal:controller.signal});
-      if(!response.ok)throw new Error('No se pudo cargar el equipamiento del módulo.');
-      const setup=await response.json();
+      const active=current||{moduleTitle:'',specialty:ctx.specialty?.name||''};
+      let setup=null;
+      if(active.moduleId){
+        try{
+          const response=await fetch(`/api/modules/${encodeURIComponent(active.moduleId)}/city-room-setup`,{credentials:'same-origin',signal:controller.signal});
+          if(response.ok)setup=await response.json();
+        }catch(cause){if(cause.name==='AbortError')throw cause;}
+      }
+      if(!setup){
+        const script=document.querySelector('script[src*="native-route.js"]'),catalogUrl=new URL('./assets/module-room-resources.json',script?.src||location.href);
+        const response=await fetch(catalogUrl,{signal:controller.signal});
+        if(!response.ok)throw new Error('No se pudo cargar el equipamiento del módulo.');
+        const catalog=await response.json(),key=value=>normalize(value).replace(/\bde\b/g,'').replace(/\s+/g,' ').trim();
+        const title=key(active.moduleTitle),specialty=key(active.specialty||ctx.specialty?.name);
+        const candidates=Object.values(catalog).filter(item=>key(item.specialty)===specialty);
+        const entry=(title&&candidates.find(item=>key(item.module_title)===title))||candidates
+          .sort((a,b)=>new Set((b.resources||[]).map(item=>item.category)).size-new Set((a.resources||[]).map(item=>item.category)).size||(b.resources||[]).length-(a.resources||[]).length)[0];
+        if(!entry)throw new Error('No se encontró el inventario curricular de este módulo.');
+        setup={...entry,module_title:title?entry.module_title:`Taller formativo · ${active.specialty||ctx.specialty?.name}`,source:{pdf:entry.pdf,url:entry.url},learning_outcomes:[]};
+      }
       if(token!==generation||!root)return;
       workshop=globalThis.AulaTPModuleWorkshop.create(ctx,setup,roomStations);
       const button=document.createElement('button');button.type='button';button.className='city-module-resources';button.textContent='Recursos del módulo';
@@ -145,6 +162,11 @@
     forward.y=0;forward.normalize();const rightX=-forward.z,rightZ=forward.x;
     const worldPosition=new T.Pq0(roomPosition.x-rightX*4.8,sign.getWorldPosition(new T.Pq0()).y,roomPosition.z-rightZ*4.8);
     sign.parent?.updateMatrixWorld(true);sign.position.copy(sign.parent?sign.parent.worldToLocal(worldPosition):worldPosition);
+    const size=sign.geometry?.parameters,baseScale=saved.scale;
+    if(size?.width&&size?.height){
+      const width=size.width*Math.abs(baseScale.x),height=size.height*Math.abs(baseScale.y);
+      sign.scale.set(baseScale.x*(5.4/width),baseScale.y*(1.25/height),baseScale.z);
+    }
     sign.rotation.y=Math.atan2(rightX,-rightZ);
     const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=320;
     const c=canvas.getContext('2d'),gradient=c.createLinearGradient(0,0,1200,320);gradient.addColorStop(0,'#092a3b');gradient.addColorStop(.62,'#104b57');gradient.addColorStop(1,'#086d70');
