@@ -29,6 +29,15 @@ class CityStationQuizAPI(unittest.TestCase):
             'argument': 'Contrasté la evidencia y el criterio técnico antes de decidir.'
         }, headers={'X-CSRF-Token': self.csrf})
 
+    def test_room_resources_require_access_and_do_not_expose_answers(self):
+        self.assertNotEqual(self.app.test_client().get('/api/modules/1/city-room-setup').status_code, 200)
+        result = self.student.get('/api/modules/1/city-room-setup')
+        self.assertEqual(result.status_code, 200)
+        self.assertTrue(result.json['learning_outcomes'])
+        self.assertNotIn('questions', result.json)
+        self.assertNotIn('answers', result.json)
+        self.assertNotEqual(self.student.get('/api/modules/999999/city-room-setup').status_code, 200)
+
     def test_each_station_has_five_distinct_four_choice_questions_and_all_four_skills(self):
         topics = ['Diagrama de sistemas', 'Diagnóstico de fallas', 'Procedimiento de reparación', 'Control de calidad']
         path = '/api/modules/1/city-station-quiz?station=1&topics=' + quote(json.dumps(topics))

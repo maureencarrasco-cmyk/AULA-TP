@@ -67,13 +67,15 @@ def main():
     (new_chunks/new_runtime).write_bytes(runtime)
     destination=target/args.skin_version
     shutil.copy2(package/'native-route.js',destination/'native-route.js')
+    shutil.copy2(package/'native-workshop.js',destination/'native-workshop.js')
     scripts=(f'<script defer src="/ciudad_laboral_aulatp/{args.skin_version}/engine/vendor/astar.js"></script>'
+             f'<script defer src="/ciudad_laboral_aulatp/{args.skin_version}/native-workshop.js"></script>'
              f'<script defer src="/ciudad_laboral_aulatp/{args.skin_version}/native-route.js"></script>').encode()
     for entry in ('index.html','ciudad/index.html'):
         file=target/entry
         if not file.exists():continue
         data=file.read_bytes().replace(old_runtime.encode(),new_runtime.encode())
-        data=re.sub(rb'<script defer src="/ciudad_laboral_aulatp/panel-ui-v[0-9]+/(?:engine/vendor/astar\.js|native-route\.js)"></script>',b'',data)
+        data=re.sub(rb'<script defer src="/ciudad_laboral_aulatp/panel-ui-v[0-9]+/(?:engine/vendor/astar\.js|native-route\.js|native-workshop\.js)"></script>',b'',data)
         data=data.replace(b'</body>',scripts+b'</body>')
         temporary=file.with_name(file.name+'.native-new');temporary.write_bytes(data);os.replace(temporary,file)
     manifest={'base':str(base),'expected_live_base':args.expected_base,'release':str(target),'native_world_hook':replacements['259'],

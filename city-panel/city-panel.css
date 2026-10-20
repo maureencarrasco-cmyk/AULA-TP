@@ -420,6 +420,16 @@
 .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child) { position:relative;grid-column:span 3;grid-template-columns:82px minmax(0,1fr) 42px;gap:14px;min-height:96px;padding:9px 16px 9px 9px;border:3px solid #83dfff;border-radius:34px;background:linear-gradient(105deg,#e5f4ff,#fbfeff 58%,#dcf5ff);color:#102d62;font-size:clamp(19px,2.2vw,28px);font-weight:900;text-align:center;box-shadow:0 0 0 3px #e8faff,0 7px 22px #1684e344,inset 0 0 20px #bceeff; }
 .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child) span { width:72px;height:72px;border-radius:28px 12px 28px 12px;clip-path:polygon(0 0,76% 0,100% 50%,76% 100%,0 100%);background:linear-gradient(130deg,#1167ef,#3153ed 55%,#8143ee);color:#fff;font-size:42px;box-shadow:0 0 19px #5848f270; }
 .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child)::after { justify-self:center;width:30px;height:21px;border:3px solid #2470ec;border-radius:76% 22%;transform:rotate(45deg);background:radial-gradient(circle at 50% 50%,#4660ed 0 4px,#fff 5px 8px,transparent 9px);box-shadow:0 0 0 8px #e8f5ff,0 0 14px #42a9ff;content:""; }
+.city-module-resources { position:absolute;left:18px;top:76px;pointer-events:auto;border:1px solid #b7d9e2;border-radius:6px;background:#fff;color:#17495c;padding:10px 14px;font:700 14px Arial;cursor:pointer;max-width:calc(100% - 36px); }
+.city-module-resources:focus-visible { outline:3px solid #0875f5;outline-offset:3px; }
+.city-native-route-active .city-quiz-empty-window[hidden] { display:none; }
+.city-quiz-empty-window-body li { margin-bottom:10px;overflow-wrap:anywhere; }
+@media(max-width:700px) {
+  .city-module-resources { top:auto;bottom:174px;left:12px;max-width:180px;padding:8px;font-size:12px; }
+  .city-native-route-active .city-view-toolbar { top:12px!important;left:12px!important;right:12px!important;width:auto!important;max-width:calc(100% - 24px)!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:6px; }
+  .city-native-route-active .city-toolbar-actions { display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;justify-content:flex-start!important;max-width:100%;width:100%;overflow-x:auto;gap:6px; }
+  .city-native-route-active .city-view-toolbar button { flex:0 0 auto;min-height:34px!important; }
+}
 .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child).is-current { border-color:#13cde0;background:linear-gradient(105deg,#dff7ff,#fff 58%,#d8f8ff);color:#102d62; }
 .city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child).is-current span,.city-native-route-active .floor-station-dialog .floor-route-progress li:not(:first-child).is-complete span { background:linear-gradient(130deg,#1167ef,#3153ed 55%,#8143ee);color:#fff; }
 @media(max-width:700px) {

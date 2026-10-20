@@ -67,11 +67,11 @@ test('four quiz image stations use a straight, evenly-spaced layout',()=>{
   assert.match(source,/centerX\+\(index-1\.5\)\*3/);
   assert.match(source,/const displayX=x,displayZ=z/);
   assert.doesNotMatch(source,/anchorCenterX\+\.9\+mobileShiftX/);
-  assert.match(source,/markerScale=Math\.min\(\.86,Math\.max\(\.68,window\.innerWidth\/1900\)\)/);
+  assert.match(source,/markerScale=window\.innerWidth<700\?\.46:Math\.min\(\.86,Math\.max\(\.68,window\.innerWidth\/1900\)\)/);
 });
 
 test('compact quiz stations have separated targets that cannot overlap vertically',()=>{
-  assert.match(source,/index%2-\.5\)\*3\.1\*rowX\+\(Math\.floor\(index\/2\)-\.5\)\*3\.2\*direction\.x/);
+  assert.match(source,/index%2-\.5\)\*1\.8\*rowX/);
   const styles=readFileSync(new URL('../city-panel/city-panel.css',import.meta.url),'utf8');
   assert.match(styles,/\.city-quiz-marker-control \{ width:min\(32vw,160px\);height:min\(12vh,74px\); \}/);
 });

@@ -17,6 +17,7 @@ from itsdangerous import URLSafeTimedSerializer, BadSignature
 from practice_scenarios import scenario as practice_scenario, review as practice_review
 from practice_pedagogy import profile as practice_profile
 from course_catalog import ensure_course_catalog
+from city_room_setup import room_setup
 from city_progression import evaluate_city, apply_review, sync_awards, start_recovery, migrate_awards, recovery_question, PHASE_MINUTES, quiz_learning_status, quiz_teacher_result, answer_feedback, phase_approved
 
 ROOT=Path(__file__).resolve().parent
@@ -481,6 +482,12 @@ def create_app(test_config=None):
                                    'attempts':(experience.get('mission',{}).get('recovery_missions') or {}).get(str(index),[])})
         return jsonify(course_title=course['title'],location=location,plan=plan,state=experience,quiz_learning=quiz_learning_status(experience,len(plan['quiz'])),
                        reward=city_reward(experience,plan),specialty_progress=specialty_progress,recoveries=recoveries)
+    @app.get('/api/modules/<int:mid>/city-room-setup')
+    @require('student')
+    def city_room_inventory(mid):
+        m,err=accessible(mid)
+        if err:return err
+        return jsonify(room_setup(m['title'],m.get('course_title') or '',load_content(m['content'],m['position'])))
     @app.route('/api/modules/<int:mid>/city-station-quiz',methods=['GET','POST'])
     @require('student')
     def city_station_quiz(mid):

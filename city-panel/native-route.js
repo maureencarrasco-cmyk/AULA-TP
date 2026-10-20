@@ -10,6 +10,8 @@
   const quizControls=[];
   const stageAnchors=[];
   let roomStations=[];
+  let workshop=null,workshopRequest=null,resourceButton=null,resourceWindow=null;
+  let compactLayout=window.innerWidth<700;
   let markerGeometry,markerImageGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial,markerBeamGeometry,markerBeamTexture,markerBeamMaterial,markerSparkGeometry,markerSparkTexture,markerSparkMaterial,markerCylinderGeometry,markerCylinderMaterial;
   const beams=[],sparkles=[],cylinders=[];
   function progress(event){
@@ -24,6 +26,8 @@
   }
   addEventListener('aulatp:quiz-progress',progress);
   function dispose(){
+    workshopRequest?.abort();workshopRequest=null;workshop?.dispose();workshop=null;
+    resourceButton?.remove();resourceButton=null;resourceWindow?.remove();resourceWindow=null;
     generation++;root?.removeFromParent();geometry?.dispose();material?.dispose();
     markerGeometry?.dispose();markerImageGeometry?.dispose();markerHaloGeometry?.dispose();markerHaloTexture?.dispose();markerHaloMaterial?.dispose();
     markerBeamGeometry?.dispose();markerBeamTexture?.dispose();markerBeamMaterial?.dispose();beams.length=0;
@@ -41,6 +45,7 @@
     document.documentElement.classList.remove('city-native-route-active');
   }
   function create(ctx){
+    compactLayout=window.innerWidth<700;
     const T=ctx.three;
     root=new T.YJl();root.name='Aula TP · flechas de quizzes';
     geometry=new T.iNn(.2,.045,.82);material=new T.V9B({color:0xffd400,toneMapped:false,depthWrite:false});
@@ -53,8 +58,39 @@
     ctx.scene.add(root);
     hideQuizPhaseSigns(ctx);
     createQuizMarkers(ctx);
+    loadModuleWorkshop(ctx);
     document.documentElement.classList.add('city-native-route-active');
     if(activeQuizNumber)openQuizWindow(activeQuizNumber);
+  }
+  async function loadModuleWorkshop(ctx){
+    if(!current?.moduleId||!globalThis.AulaTPModuleWorkshop)return;
+    const token=generation,controller=new AbortController();workshopRequest=controller;
+    try{
+      const response=await fetch(`/api/modules/${encodeURIComponent(current.moduleId)}/city-room-setup`,{credentials:'same-origin',signal:controller.signal});
+      if(!response.ok)throw new Error('No se pudo cargar el equipamiento del módulo.');
+      const setup=await response.json();
+      if(token!==generation||!root)return;
+      workshop=globalThis.AulaTPModuleWorkshop.create(ctx,setup,roomStations);
+      const button=document.createElement('button');button.type='button';button.className='city-module-resources';button.textContent='Recursos del módulo';
+      button.addEventListener('click',()=>{
+        if(quizWindow)quizWindow.hidden=true;
+        resourceWindow?.remove();const panel=document.createElement('section');panel.className='city-quiz-empty-window';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','Recursos del módulo');
+        const header=document.createElement('header'),title=document.createElement('h2'),close=document.createElement('button'),body=document.createElement('div');
+        title.textContent=setup.module_title;close.type='button';close.className='city-quiz-empty-window-close';close.textContent='×';close.setAttribute('aria-label','Cerrar recursos');close.addEventListener('click',()=>{panel.remove();if(resourceWindow===panel)resourceWindow=null;if(quizWindow)quizWindow.hidden=false;button.focus();});
+        header.append(title,close);body.className='city-quiz-empty-window-body';
+        for(const [kind,name] of Object.entries(globalThis.AulaTPModuleWorkshop.labels)){
+          const items=setup.resources.filter(item=>item.category===kind);if(!items.length)continue;
+          const heading=document.createElement('h3'),list=document.createElement('ul');heading.textContent=name;
+          for(const item of items){const li=document.createElement('li');li.textContent=item.name;
+            const pages=[...new Set(item.references.map(ref=>ref.pdf_page))];
+            if(setup.source.url){const a=document.createElement('a');a.textContent=` · PDF p. ${pages.join(', ')}`;a.href=setup.source.url+`#page=${pages[0]}`;a.target='_blank';a.rel='noopener';li.append(a);}list.append(li);}
+          body.append(heading,list);
+        }
+        if(!setup.resources.length)body.textContent='El inventario de este módulo está pendiente de revisión.';
+        panel.append(header,body);document.body.append(panel);resourceWindow=panel;close.focus();
+      });
+      quizControlLayer?.append(button);resourceButton=button;
+    }catch(cause){if(cause.name!=='AbortError')console.warn('Aula TP: equipamiento:',cause.message);}
   }
   function hideQuizPhaseSigns(ctx){
     const phases=['observar','planificar','verificar'];
@@ -175,8 +211,7 @@
       const cx=targetX-ctx.district.x+rowX*shiftX+direction.x*shiftZ;
       const cz=targetZ-ctx.district.z+rowZ*shiftX+direction.z*shiftZ;
       const line=Array.from({length:4},(_,index)=>compact?
-        [cx+(index%2-.5)*3.1*rowX+(Math.floor(index/2)-.5)*3.2*direction.x,
-          cz+(index%2-.5)*3.1*rowZ+(Math.floor(index/2)-.5)*3.2*direction.z]:
+        [cx+(index%2-.5)*1.8*rowX+(.5-Math.floor(index/2))*2*direction.x,cz+(index%2-.5)*1.8*rowZ+(.5-Math.floor(index/2))*2*direction.z]:
         [cx+(index-1.5)*spacing*rowX,cz+(index-1.5)*spacing*rowZ]);
       if(line.some(([x,z])=>Math.abs(x)>6.2||Math.abs(z)>5.7))continue;
       const collisions=line.reduce((count,[x,z])=>count+(blocked(x,z)?1:0),0);
@@ -184,7 +219,8 @@
       if(!collisions)return result.map((station,index)=>({...station,totem:line[index]}));
     }
     const best=candidates.sort((a,b)=>a.collisions-b.collisions||a.offset-b.offset)[0];
-    return result.map((station,index)=>({...station,totem:best?.line[index]||[centerX+(index-1.5)*3,centerZ]}));
+    return result.map((station,index)=>({...station,totem:best?.line[index]||(compact?
+      [centerX+(index%2-.5)*1.8*rowX+(.5-Math.floor(index/2))*2*direction.x,centerZ+(index%2-.5)*1.8*rowZ+(.5-Math.floor(index/2))*2*direction.z]:[centerX+(index-1.5)*3,centerZ])}));
   }
   function questionLevel(question){
     const value=normalize(question.difficulty||'');
@@ -244,16 +280,18 @@
     const object=normalize(station.quizQuestion?.object||station.equipment||station.name);
     const relevant=[];
     const hints=[
+      [/herramient|llave|instrument/,'tools'],
       [/motor|turbina|maquina|motor|mecaniz/,'machining'],[/tren|rueda|neumatico|fuselaje|ala|aeronave/,'aircraft'],
       [/cabina|circuito|sensor|electric|electron/,'electronics'],[/plano|diseno|croquis|diagrama/,'drawing'],
       [/soldadura|metal|estructura/,'welding'],[/cable|red|conectividad|telecom/,'network'],
       [/cultivo|bosque|suelo|riego/,'crops'],[/pesca|mar|nave|puerto/,'ship'],[/alimento|cocina|preparacion/,'food'],
       [/paciente|enfermer|salud/,'nursing'],[/madera|mueble/,'furniture'],[/hotel|turismo|recepcion/,'hotel']
     ];
+    if(/aeronave/.test(normalize(ctx.specialty.name))&&/estructura|ala|fuselaje|conjunto/.test(object))relevant.push('aircraft');
     for(const [pattern,photo] of hints)if(pattern.test(object))relevant.push(photo);
-    const preferred=[...relevant,...specialtyPhotos(ctx.specialty.name)];
+    const fallback=specialtyPhotos(ctx.specialty.name),preferred=[...relevant,...fallback.slice(index),...fallback.slice(0,index)];
     for(let offset=0;offset<preferred.length;offset++){
-      const photo=preferred[(index+offset)%preferred.length],url=new URL(`${photo}.webp`,base).href;
+      const photo=preferred[offset],url=new URL(`${photo}.webp`,base).href;
       if(!used.has(url)){used.add(url);return url;}
     }
     return new URL(`${specialtyPhotos(ctx.specialty.name)[index%4]}.webp`,base).href;
@@ -304,7 +342,7 @@
   }
   function createStationArtwork(ctx,station,index,token,imageUrl,marker,canvas,displayX,displayZ,floorY,markerScale){
     const image=new Image();image.decoding='async';
-    image.onload=()=>{
+    const drawArtwork=loaded=>{
       if(token!==generation||!root)return;
       const c=canvas.getContext('2d');
       const rounded=(x,y,width,height,radius)=>{c.beginPath();c.roundRect(x,y,width,height,radius);};
@@ -321,11 +359,14 @@
       c.fillStyle='#102653';let titleSize=49;c.font=`800 ${titleSize}px Arial`;while(c.measureText(title).width>700&&titleSize>31){titleSize--;c.font=`800 ${titleSize}px Arial`;}c.fillText(title,388,278,700);
       c.save();c.fillStyle=accent;c.globalAlpha=.55;rounded(837,340,260,20,10);c.fill();c.globalAlpha=.22;rounded(837,372,188,14,7);c.fill();c.restore();
       c.save();c.beginPath();c.roundRect(64,440,1072,888,55);c.clip();
-      const scale=Math.max(1072/image.width,888/image.height),imageWidth=image.width*scale,imageHeight=image.height*scale;
-      c.drawImage(image,600-imageWidth/2,884-imageHeight/2,imageWidth,imageHeight);c.restore();
+      if(loaded){const scale=Math.max(1072/image.width,888/image.height),imageWidth=image.width*scale,imageHeight=image.height*scale;
+        c.drawImage(image,600-imageWidth/2,884-imageHeight/2,imageWidth,imageHeight);
+      }else{c.fillStyle='#d8f4ff';c.fillRect(64,440,1072,888);c.save();c.translate(600,884);c.scale(3.2,3.2);drawQuizSpecialtyIcon(c,ctx.specialty.name,0,0,accent,index);c.restore();}
+      c.restore();
       c.save();c.shadowColor=accent;c.shadowBlur=28;c.strokeStyle='#ffffff';c.lineWidth=18;rounded(64,440,1072,888,55);c.stroke();c.shadowBlur=0;c.strokeStyle='#28d8ff';c.lineWidth=10;rounded(76,452,1048,864,44);c.stroke();c.restore();
-      marker.texture.needsUpdate=true;marker.sign.userData.cityQuizArtworkReady=true;
+      marker.texture.needsUpdate=true;marker.sign.userData.cityQuizArtworkReady=true;marker.sign.userData.cityQuizImageLoaded=loaded;
     };
+    image.onload=()=>drawArtwork(true);image.onerror=()=>drawArtwork(false);drawArtwork(false);
     image.src=imageUrl;
   }
   function createQuizMarkers(ctx){
@@ -369,7 +410,7 @@
     markerCylinderMaterial=new T.V9B({color:0x19c9eb,toneMapped:false,transparent:true,opacity:.86,depthWrite:false});
     const floorY=ctx.floorY+.035;
     const token=generation;
-    const markerScale=Math.min(.86,Math.max(.68,window.innerWidth/1900));
+    const markerScale=window.innerWidth<700?.46:Math.min(.86,Math.max(.68,window.innerWidth/1900));
     const usedImages=new Set();
     stations.forEach((station,index)=>{
       const [dx,dz]=station.totem||[station.x,station.z],x=ctx.district.x+dx,z=ctx.district.z+dz;
@@ -391,7 +432,7 @@
       const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
       const signMaterial=new T.V9B({map:texture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
       const sign=new T.eaF(markerGeometry,signMaterial);
-      const mobileHeight=window.innerWidth<700?(Math.floor(index/2)-.5)*1.1:0;
+      const mobileHeight=window.innerWidth<700?(.5-Math.floor(index/2))*1.65-.295:0;
       sign.position.set(displayX,floorY+2.02+mobileHeight,displayZ);sign.scale.setScalar(markerScale);root.add(sign);
       sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
       const marker={sign,texture,material:signMaterial};quizMarkers.push(marker);
@@ -404,6 +445,7 @@
     });
   }
   function openQuizWindow(number){
+    resourceWindow?.remove();resourceWindow=null;
     quizWindow?.remove();
     const panel=document.createElement('section');panel.className='city-quiz-empty-window';panel.setAttribute('role','dialog');panel.setAttribute('aria-label',`Quiz ${number}`);
     const header=document.createElement('header'),title=document.createElement('h2'),close=document.createElement('button'),body=document.createElement('div');
@@ -492,9 +534,11 @@
     try{
       if(!ctx.indoors||!ctx.room||!ctx.stations.length){if(root)dispose();room=null;return;}
       if(room!==ctx.room){dispose();room=ctx.room;last=0;if(current&&normalize(current.specialty)!==normalize(ctx.specialty.name))current=null;}
+      if(root&&compactLayout!==(window.innerWidth<700)&&!quizWindow&&!resourceWindow)dispose();
       if(!root)create(ctx);
-      if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;updateQuizControls(ctx);return;}
+      if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;if(workshop)workshop.root.visible=false;if(resourceButton)resourceButton.hidden=true;updateQuizControls(ctx);return;}
       root.visible=true;
+      if(workshop)workshop.root.visible=true;if(resourceButton)resourceButton.hidden=false;
       updateQuizControls(ctx);
       const now=performance.now();if(now-last<250)return;last=now;
       for(const marker of quizMarkers){const facing=Math.atan2(ctx.player.x-marker.sign.position.x,ctx.player.z-marker.sign.position.z);marker.sign.rotation.y=facing;if(marker.imageMesh)marker.imageMesh.rotation.y=facing;}
@@ -509,6 +553,6 @@
       if(root)root.visible=false;
     }
   }
-  globalThis.AulaTPNativeRoute={frame,status:()=>({quizMarkers:quizMarkers.length,stations:roomStations.length,visibleQuizArrows:arrows.filter(arrow=>arrow.visible).length})};
+  globalThis.AulaTPNativeRoute={frame,status:()=>({quizMarkers:quizMarkers.length,stations:roomStations.length,visibleQuizArrows:arrows.filter(arrow=>arrow.visible).length,resources:workshop?.resourceCount||0})};
   addEventListener('pagehide',event=>{if(!event.persisted)dispose();});
 })();

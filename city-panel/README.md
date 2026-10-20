@@ -1,5 +1,13 @@
 # Ciudad Laboral: panel visual
 
+## Equipamiento por módulo
+
+`native-workshop.js` incorpora estanterías y representaciones simplificadas de los recursos del módulo seleccionado. Su inventario procede de `city_room_resources.json`, generado desde los PDF depositados mediante `scripts/build_city_room_resources.py` (requiere PyMuPDF). Cada entrada conserva página PDF y actividad. La correspondencia se realiza por título del módulo o texto de un AE; el módulo de respaldo de redes usa pasajes de ejecución comprobados explícitamente. Estas listas son los recursos de las actividades de ejemplo del programa, no una certificación exhaustiva de equipamiento o seguridad del taller.
+
+La API autenticada `/api/modules/<id>/city-room-setup` resuelve el módulo autorizado y entrega recursos, OA y AE sin respuestas de evaluación. La consulta «Recursos del módulo» muestra el inventario completo y enlaza las páginas oficiales. Las estanterías muestran hasta doce representaciones por lado; el inventario conserva también los recursos que exceden ese espacio. Los volúmenes de colisión nuevos se retiran al salir o cambiar de módulo. La distribución deja libre el centro y evita los puestos de quiz.
+
+El despliegue requiere publicar tanto la API y su JSON como los scripts `native-route.js`, `native-workshop.js` y los estilos. Subir a GitHub no activa el servidor público. `scripts/verify-module-workshop.cjs` verifica en un navegador aislado el recorrido, cuatro botoneras, consulta de inventario y formulario con cuatro alternativas, interceptando las respuestas de prueba sin guardar calificaciones reales.
+
 ## Flechas En La Ciudad Original
 
 `native-route.js` dibuja cuatro flechas cortas en el suelo junto al personaje, orientadas individualmente a las cuatro estaciones de quiz del módulo. Usa las clases Three.js del escenario original y no mueve automáticamente al estudiante. El letrero de especialidad se rediseña y traslada a la pared izquierda, conservando el título del módulo y restaurando la escena al salir del hangar.
