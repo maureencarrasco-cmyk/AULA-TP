@@ -137,9 +137,22 @@
     );
     const centerX=points.reduce((sum,point)=>sum+(Number(point[0])||0),0)/points.length;
     const centerZ=points.reduce((sum,point)=>sum+(Number(point[1])||0),0)/points.length;
+    const direction=new ctx.three.Pq0(0,0,-1);
+    if(ctx.camera?.getWorldDirection)ctx.camera.getWorldDirection(direction);
+    direction.y=0;direction.normalize();
+    const eye=ctx.camera?.position||ctx.player?.position||ctx.player;
+    const targetX=Number.isFinite(eye?.x)?eye.x+direction.x*9.5:ctx.district.x+centerX;
+    const targetZ=Number.isFinite(eye?.z)?eye.z+direction.z*9.5:ctx.district.z+centerZ;
+    const rowX=-direction.z,rowZ=direction.x;
+    const compact=window.innerWidth<700;
     const candidates=[];
-    for(const spacing of [3.5,3.4,3.3])for(const shiftX of [0,-.6,.6,-1.2,1.2])for(const shiftZ of [0,-1.2,1.2,-2.4,2.4,-3.6,3.6]){
-      const cx=centerX+shiftX,cz=centerZ+shiftZ,line=Array.from({length:4},(_,index)=>[cx+(index-1.5)*spacing,cz]);
+    for(const spacing of [3.1,2.95,2.8])for(const shiftX of [0,-.6,.6,-1.2,1.2])for(const shiftZ of [0,-1,1,-2,2]){
+      const cx=targetX-ctx.district.x+rowX*shiftX+direction.x*shiftZ;
+      const cz=targetZ-ctx.district.z+rowZ*shiftX+direction.z*shiftZ;
+      const line=Array.from({length:4},(_,index)=>compact?
+        [cx+(index%2-.5)*2.65*rowX+(Math.floor(index/2)-.5)*2.4*direction.x,
+          cz+(index%2-.5)*2.65*rowZ+(Math.floor(index/2)-.5)*2.4*direction.z]:
+        [cx+(index-1.5)*spacing*rowX,cz+(index-1.5)*spacing*rowZ]);
       if(line.some(([x,z])=>Math.abs(x)>6.2||Math.abs(z)>5.7))continue;
       const collisions=line.reduce((count,[x,z])=>count+(blocked(x,z)?1:0),0);
       candidates.push({line,collisions,offset:Math.abs(shiftX)+Math.abs(shiftZ)});
@@ -328,7 +341,8 @@
       const texture=new T.GOR(canvas);texture.colorSpace=T.er$;texture.anisotropy=4;
       const signMaterial=new T.V9B({map:texture,transparent:true,depthTest:false,depthWrite:false,toneMapped:false,side:T.$EB});
       const sign=new T.eaF(markerGeometry,signMaterial);
-      sign.position.set(displayX,floorY+2.02,displayZ);sign.scale.setScalar(markerScale);root.add(sign);
+      const mobileHeight=window.innerWidth<700?(Math.floor(index/2)-.5)*1.1:0;
+      sign.position.set(displayX,floorY+2.02+mobileHeight,displayZ);sign.scale.setScalar(markerScale);root.add(sign);
       sign.material=signMaterial;sign.name=`Aula TP · Quiz ${index+1} · ${title}`;sign.renderOrder=20;sign.userData.cityQuizMarker=index+1;
       const marker={sign,texture,material:signMaterial};quizMarkers.push(marker);
       if(quizControlLayer){
