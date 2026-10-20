@@ -45,3 +45,23 @@ def enrich_requirements(inventories, root):
         'criteria': [{'code': code, 'resources': [name for name, _, _, codes, _, _ in rows if code in codes]}
                      for code in ['1.1', '1.2', '2.1', '2.2', '2.3', '3.1', '3.2', '3.3', '3.4']],
         'limitations': 'Representacion virtual didactica. No certifica un taller real ni sustituye manuales del fabricante, supervision o procedimientos autorizados.'}
+    # Additional concrete components checked in the other aircraft module criteria.
+    additions = [
+        ('446', 'Sistema de deteccion y extincion de incendios', 97, '1.4', 'catalog-fire-system', 'sistema de deteccion y extincion de incendios'),
+        ('447', 'Radiador de aceite', 106, '1.2', 'catalog-radiator', 'radiador de aceite'),
+        ('447', 'Magneto', 106, '1.2', 'catalog-motor', 'magnetos'),
+        ('447', 'Bomba de combustible', 106, '1.2', 'catalog-pump', 'bomba de combustible'),
+        ('447', 'Caja de accesorios', 106, '1.2', 'catalog-motor', 'caja de accesorios'),
+        ('448', 'Bomba de aceite', 117, '1.2', 'catalog-pump', 'bomba de aceite'),
+        ('448', 'Bomba de combustible', 117, '1.2', 'catalog-pump', 'bomba de combustible'),
+        ('448', 'Generador de aeronave', 117, '1.2', 'catalog-motor', 'generador para analizar su estructura'),
+    ]
+    with pymupdf.open(root / entry['pdf']) as document:
+        for mid, name, page, criterion, model, anchor in additions:
+            text = re.sub(r'\s+', ' ', normalized(document[page - 1].get_text()))
+            if anchor not in text:
+                raise ValueError(f'Unverified aircraft component: {mid}: {name}')
+            inventories[mid]['resources'].append({'name': name, 'category': 'equipment',
+                'model': model, 'criteria': [criterion],
+                'references': [{'pdf_page': page, 'criteria': [criterion],
+                    'matched_by': 'reviewed_criterion_resource', 'source_phrase': anchor}]})

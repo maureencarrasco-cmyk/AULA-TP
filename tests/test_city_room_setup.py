@@ -3,10 +3,13 @@ import unittest
 from pathlib import Path
 
 from city_room_setup import room_setup
-from scripts.build_city_room_resources import activity_resources
+from scripts.build_city_room_resources import activity_resources, category
 
 
 class RoomInventoryTests(unittest.TestCase):
+    def test_regulations_are_documents_not_rulers(self):
+        self.assertEqual(category('Reglamento Sanitario de los Alimentos'), 'documents')
+        self.assertEqual(category('Regla graduada'), 'tools')
     def test_criterion_review_is_explicit_and_sourced(self):
         data = json.loads((Path(__file__).resolve().parents[1] / 'city_room_resources.json').read_text(encoding='utf-8'))
         reviewed = data['441']
@@ -22,7 +25,7 @@ class RoomInventoryTests(unittest.TestCase):
                 self.assertIn(item['references'][0]['pdf_page'], [45, 46])
         for mid, row in data.items():
             if mid != '441':
-                self.assertEqual(row['curriculum_audit']['status'], 'requires_criterion_review')
+                self.assertEqual(row['curriculum_audit']['status'], 'source_screened_requires_disciplinary_review')
 
     def test_every_published_module_has_sourced_resources(self):
         data = json.loads((Path(__file__).resolve().parents[1] / 'city_room_resources.json').read_text(encoding='utf-8'))

@@ -133,6 +133,12 @@ La versión `city-20261020-quiz-arrows-fan-v121` (`panel-ui-v73`) reparte las fl
 
 La versión `city-20261020-quiz-arrows-fan-clear-v122` (`panel-ui-v74`) amplía el ángulo del abanico para distinguir visualmente las cuatro flechas sin solaparlas.
 
+### Equipamiento curricular transversal
+
+La version `city-20261020-curriculum-equipment-v130` (`panel-ui-v82`) desglosa recursos concretos de las actividades y criterios oficiales en los 451 modulos de los 45 cursos. Cada incorporacion conserva su pagina y frase fuente. Los criterios no confirmados y la validacion disciplinar pendiente quedan registrados en `docs/CIUDAD_EQUIPAMIENTO_BARRIDO_45_CURSOS.md`; el barrido no certifica salas completas.
+
+Incluye modelos diferenciados de medicion, maquinaria, redes, confeccion, cocina, laboratorio y proteccion cuando el recurso se nombra explicitamente. Conserva recorrido y quizzes, evita reutilizar coordenadas de otro piso y repinta tras cargar inventarios o fotografias cuando el motor esta en reposo. `python -m scripts.build_city_room_resources` reconstruye ambos catalogos y el informe.
+
 ### Fotografías de especialidades
 
 Las 35 especialidades de los 12 distritos tienen fotografías propias, compartidas por los cursos correspondientes. Se conservan los botones y sus acciones originales. Las miniaturas WebP se cargan bajo demanda, sin descargar todo el catálogo al ingresar.

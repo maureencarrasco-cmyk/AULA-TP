@@ -4,8 +4,8 @@
   const labels={tools:'Herramientas e instrumentos',protection:'Protección personal',documents:'Documentación técnica',digital:'Recursos digitales',materials:'Materiales e insumos',equipment:'Equipos de trabajo'};
   const roomLayouts=new WeakMap();
   function captureLayout(ctx){
-    const key=ctx.room||ctx.scene;let layout=roomLayouts.get(key);
-    if(!layout){const forward=ctx.camera.getWorldDirection(new ctx.three.Pq0());forward.y=0;forward.normalize();layout={x:ctx.player.x,z:ctx.player.z,forwardX:forward.x,forwardZ:forward.z,eye:{x:ctx.camera.position.x,z:ctx.camera.position.z},createdAt:performance.now()};roomLayouts.set(key,layout);}
+    const key=ctx.room||ctx.scene,signature=`${ctx.specialty?.name||''}:${ctx.floorY}:${ctx.district?.x}:${ctx.district?.z}`;let layout=roomLayouts.get(key);
+    if(!layout||layout.signature!==signature){const forward=ctx.camera.getWorldDirection(new ctx.three.Pq0());forward.y=0;forward.normalize();layout={signature,x:ctx.player.x,z:ctx.player.z,forwardX:forward.x,forwardZ:forward.z,eye:{x:ctx.camera.position.x,z:ctx.camera.position.z},createdAt:performance.now()};roomLayouts.set(key,layout);}
     return layout;
   }
   function chooseLocations(ctx,stations){
@@ -184,11 +184,154 @@
       const material=own(new T.V9B({map:texture,toneMapped:false,side:T.$EB}));
       const mesh=new T.eaF(planeGeometry,material);mesh.position.set(x,y,z);mesh.scale.set(w,h,1);parent.add(mesh);return mesh;
     }
+    function catalogModel(unit,item){
+      const family=item.model.slice(8);unit.userData.equipmentFamily=family;
+      const face=(x,y,z,w,h,color='teal')=>box(unit,x,y,z,w,h,.025,color);
+      const dial=(x,y,z,r=.14)=>{const rim=cylinder(unit,x,y,z,r,r,.045,'metal');rim.rotation.x=Math.PI/2;const screen=cylinder(unit,x,y,z+.026,r*.86,r*.86,.012,'white');screen.rotation.x=Math.PI/2;rod(unit,[x,y,z+.04],[x+r*.6,y+r*.45,z+.04],.009,'dark');};
+      if(['meter','scope','controller','marine-scope'].includes(family)){
+        box(unit,0,.3,0,.52,.55,.18,family==='meter'?'orange':'dark');face(0,.42,.11,.4,.18);
+        if(family==='meter')dial(0,.18,.12,.08);else for(let i=0;i<5;i++)face(-.16+i*.08,.16,.12,.035,.04,'white');
+        if(family==='marine-scope'){ring(unit,0,.42,.13,.075,.008,'white');rod(unit,[0,.42,.14],[.07,.47,.14],.006,'white');}
+        for(const x of [-.16,.16]){rod(unit,[x,.06,.12],[x*1.6,-.04,.35],.012,x<0?'red':'dark');rod(unit,[x*1.6,-.04,.35],[x*1.9,.18,.42],.015,'metal');}
+      }else if(family==='projector'){
+        box(unit,0,.12,0,.6,.24,.4,'white');const lens=cylinder(unit,-.15,.13,.25,.08,.08,.15,'dark');lens.rotation.x=Math.PI/2;for(let i=0;i<7;i++)face(.08+i*.035,.12,.22,.015,.12,'dark');
+      }else if(family==='gauge'){
+        dial(0,.36,0,.25);rod(unit,[0,.1,0],[0,-.05,0],.035);box(unit,0,-.05,0,.4,.05,.22,'dark');
+        if(/esfigmo/.test(normalize(item.name))){ring(unit,.32,.16,.04,.14,.04,'blue');rod(unit,[0,.13,0],[.32,.16,0],.015,'dark');}
+      }else if(['probe','thermometer'].includes(family)){
+        rod(unit,[0,.05,0],[0,.65,0],family==='probe'?.025:.035,'metal');box(unit,0,.66,0,.12,.22,.1,'white');face(0,.68,.06,.07,.08);
+      }else if(family==='caliper'){
+        box(unit,0,.24,0,.85,.045,.045,'metal');for(const x of [-.36,.03]){box(unit,x,.34,0,.045,.25,.04,'metal');box(unit,x,.19,0,.035,.18,.04,'metal');}box(unit,.04,.24,.04,.19,.14,.05,'dark');face(.04,.25,.08,.14,.06);
+      }else if(family==='wrench'){
+        rod(unit,[-.38,.06,0],[.3,.06,0],.025);ring(unit,-.38,.06,0,.1,.025,'metal').rotation.x=Math.PI/2;rod(unit,[.07,.06,0],[.3,.06,0],.05,'dark');
+      }else if(family==='balance'){
+        box(unit,0,.09,0,.65,.18,.5,'white');cylinder(unit,0,.21,0,.25,.25,.04,'metal');face(0,.1,.27,.34,.08);
+      }else if(family==='microscope'){
+        box(unit,0,.03,0,.5,.06,.42,'white');rod(unit,[.15,.08,0],[.15,.65,-.08],.07,'dark');box(unit,0,.3,.02,.42,.035,.32,'dark');rod(unit,[.15,.65,-.08],[-.1,.65,.03],.055,'white');rod(unit,[-.1,.52,.03],[-.1,.8,.03],.04,'dark');
+      }else if(family==='survey'){
+        for(const x of [-.3,0,.3])rod(unit,[x,.02,x===0?.25:-.2],[0,.65,0],.018,'orange');box(unit,0,.72,0,.35,.18,.23,'teal');const lens=cylinder(unit,0,.74,.18,.06,.06,.2,'dark');lens.rotation.x=Math.PI/2;
+      }else if(family==='square'){
+        box(unit,-.3,.04,0,.07,.04,.65,'metal');box(unit,0,.04,-.3,.65,.04,.07,'metal');
+      }else if(family==='tape'){
+        box(unit,-.2,.14,0,.3,.27,.15,'orange');box(unit,.13,.03,0,.55,.015,.08,'metal');
+      }else if(['motor','pump','compressor','piston','stepper','servo'].includes(family)){
+        box(unit,0,.04,0,.7,.08,.46,'blue');const body=cylinder(unit,0,.3,0,.22,.22,.48,'metal');body.rotation.z=Math.PI/2;
+        for(let i=0;i<6;i++){const fin=ring(unit,-.2+i*.08,.3,0,.23,.018,'blue');fin.rotation.y=Math.PI/2;}
+        rod(unit,[-.4,.3,0],[.34,.3,0],.04);if(family==='pump')rod(unit,[.15,.3,0],[.15,.65,0],.05,'metal');
+        if(family==='compressor')buildCompressor(unit,0,0).scale.setScalar(.5);
+        if(family==='piston')for(const x of [-.17,0,.17]){cylinder(unit,x,.61,0,.06,.06,.3,'metal');rod(unit,[x,.45,0],[x,.25,0],.018);}
+        if(family==='stepper')box(unit,0,.3,0,.5,.44,.4,'dark');
+        if(family==='servo'){box(unit,0,.36,0,.45,.4,.3,'dark');box(unit,0,.63,0,.5,.03,.07,'white');}
+      }else if(['transformer','battery','control'].includes(family)){
+        box(unit,0,.25,0,.52,.46,.3,family==='battery'?'dark':'metal');
+        if(family==='transformer')for(const x of [-.15,.15]){const coil=cylinder(unit,x,.28,.06,.09,.09,.32,'orange');coil.rotation.x=Math.PI/2;}
+        else for(const x of [-.18,.18]){box(unit,x,.51,0,.07,.05,.08,x<0?'dark':'red');face(x,.25,.17,.09,.18,'blue');}
+      }else if(family==='solar'){
+        const panel=box(unit,0,.3,0,.8,.55,.04,'dark');panel.rotation.x=-.3;for(let x=0;x<5;x++)for(let y=0;y<3;y++)face(-.3+x*.15,.1+y*.15,.09,.13,.13,'blue');
+      }else if(['circuitboard','memory','drive','powersupply','keyboard','monitor','cell'].includes(family)){
+        if(family==='cell')cylinder(unit,0,.04,0,.2,.2,.06,'metal');
+        else if(family==='circuitboard'||family==='memory'){
+          box(unit,0,.04,0,family==='memory'?.7:.65,.035,family==='memory'?.16:.5,'teal');
+          for(let i=0;i<5;i++)box(unit,-.25+i*.12,.09,0,.08,.055,.1,'dark');
+          for(let i=0;i<12;i++)box(unit,-.3+i*.05,.045,.1,.02,.02,.04,'orange');
+        }else if(family==='monitor'){
+          box(unit,0,.37,0,.7,.43,.05,'dark');face(0,.37,.04,.62,.35);rod(unit,[0,.13,0],[0,.03,0],.025);box(unit,0,.02,0,.35,.03,.22,'dark');
+        }else if(family==='keyboard'){
+          box(unit,0,.03,0,.8,.05,.3,'dark');for(let x=0;x<12;x++)for(let z=0;z<4;z++)box(unit,-.35+x*.064,.065,-.1+z*.06,.045,.018,.04,'white');
+        }else if(family==='drive'){
+          box(unit,0,.06,0,.55,.1,.38,'metal');cylinder(unit,0,.12,0,.13,.13,.015,'dark');
+        }else{box(unit,0,.19,0,.48,.36,.38,'metal');ring(unit,0,.2,.21,.13,.016,'dark');for(let i=0;i<4;i++)rod(unit,[.22,.1,0],[.42,.02,i*.06],.009,i%2?'red':'dark');}
+      }else if(['network','server','computer','printer'].includes(family)){
+        if(family==='computer'){box(unit,0,.4,0,.65,.42,.06,'dark');face(0,.4,.045,.57,.34);rod(unit,[0,.17,0],[0,.04,0],.03);box(unit,0,.02,.1,.66,.03,.33,'dark');}
+        else{const tall=family==='server';box(unit,0,tall?.45:.17,0,.65,tall?.9:.26,.42,'dark');
+          for(let i=0;i<(tall?5:1);i++){face(0,(tall?.16:.17)+i*.14,.23,.57,.07,'metal');for(let j=0;j<6;j++)face(-.23+j*.085,(tall?.16:.17)+i*.14,.25,.045,.035,j===0?'teal':'dark');}
+          if(family==='network')for(const x of [-.25,.25])rod(unit,[x,.25,-.13],[x,.65,-.13],.018,'dark');
+          if(family==='printer')box(unit,0,.34,.07,.45,.02,.44,'white');}
+      }else if(['antenna','radiator'].includes(family)){
+        if(family==='antenna'){rod(unit,[0,0,0],[0,.8,0],.02);for(let i=0;i<4;i++)rod(unit,[-.3+i*.04,.3+i*.12,0],[.3-i*.04,.3+i*.12,0],.015);}
+        else{box(unit,0,.3,0,.75,.5,.12,'metal');for(let i=0;i<12;i++)box(unit,-.33+i*.06,.3,.08,.015,.44,.02,'dark');}
+      }else if(family==='cable'){
+        for(let i=0;i<3;i++)ring(unit,0,.2,i*.04,.24,.012,'blue');box(unit,.24,.05,.13,.12,.08,.07,'white');
+      }else if(family==='valve'){
+        rod(unit,[-.35,.18,0],[.35,.18,0],.065);rod(unit,[0,.18,0],[0,.5,0],.035);ring(unit,0,.5,0,.18,.02,'red').rotation.x=Math.PI/2;
+      }else if(['lathe','mill','saw','grinder','press','crusher'].includes(family)){
+        box(unit,0,.08,0,.9,.16,.46,'blue');box(unit,-.3,.4,0,.2,.55,.38,'teal');box(unit,.2,.27,0,.6,.1,.38,'metal');
+        if(family==='lathe')rod(unit,[-.32,.55,0],[.35,.55,0],.08);
+        else if(['saw','grinder'].includes(family)){const disc=cylinder(unit,0,.48,0,.22,.22,.035,'metal');disc.rotation.x=Math.PI/2;}
+        else{box(unit,-.3,.72,0,.65,.12,.28,'blue');rod(unit,[.17,.38,0],[.17,.7,0],.035);}
+      }else if(['welder','drill','chainsaw','sprayer'].includes(family)){
+        box(unit,0,.23,0,.5,.35,.25,'blue');rod(unit,[-.3,.23,0],[.2,.23,0],family==='chainsaw'?.08:.025);box(unit,.15,.07,0,.1,.22,.12,'dark');rod(unit,[-.08,.43,0],[.14,.43,0],.025,'dark');
+      }else if(family==='sewing'){
+        box(unit,0,.04,0,.8,.08,.43,'white');box(unit,.26,.32,0,.18,.57,.25,'white');box(unit,0,.59,0,.66,.15,.25,'white');rod(unit,[-.25,.16,0],[-.25,.54,0],.012);cylinder(unit,.19,.74,0,.04,.04,.15,'orange');
+      }else if(family==='iron'){
+        box(unit,0,.05,0,.5,.05,.3,'metal');box(unit,0,.18,0,.32,.2,.22,'white');rod(unit,[-.12,.34,0],[.12,.34,0],.035,'dark');
+      }else if(family==='mannequin'){
+        box(unit,0,.43,0,.34,.46,.2,'teal');cylinder(unit,0,.73,0,.07,.07,.13,'wood');rod(unit,[0,.05,0],[0,.3,0],.025);box(unit,0,.02,0,.4,.04,.32,'dark');
+      }else if(family==='scissors'){
+        for(const side of [-1,1]){ring(unit,side*.1,.08,0,.08,.015,'red').rotation.x=Math.PI/2;rod(unit,[side*.1,.08,0],[-side*.2,.08,.4],.015);}
+      }else if(['oven','fridge','autoclave','hood'].includes(family)){
+        box(unit,0,.4,0,.65,.8,.5,'white');face(0,.37,.27,.52,.55,family==='fridge'?'metal':'dark');box(unit,.2,.39,.31,.035,.25,.03,'metal');face(0,.73,.27,.4,.06);
+        if(family==='hood')rod(unit,[0,.82,0],[0,1.06,0],.09,'metal');
+      }else if(family==='stove'){
+        box(unit,0,.15,0,.8,.3,.55,'metal');for(const x of [-.2,.2])for(const z of [-.15,.15])ring(unit,x,.32,z,.1,.018,'dark').rotation.x=Math.PI/2;
+      }else if(family==='mixer'){
+        box(unit,0,.04,0,.5,.08,.42,'white');cylinder(unit,0,.21,.08,.2,.14,.28,'metal');box(unit,0,.55,-.09,.42,.18,.22,'red');box(unit,.15,.32,-.09,.12,.4,.2,'white');rod(unit,[0,.3,0],[0,.54,0],.02);
+      }else if(['pot','pan','glassware','sieve'].includes(family)){
+        const tall=family==='glassware';const vessel=cylinder(unit,0,tall?.3:.12,0,tall?.1:.25,tall?.07:.2,tall?.6:.23,tall?'white':'metal');
+        ring(unit,0,tall?.6:.24,0,tall?.1:.25,.014,'metal').rotation.x=Math.PI/2;
+        if(family==='pan')rod(unit,[.18,.17,0],[.55,.17,0],.035,'dark');else if(!tall)for(const x of [-.3,.3])box(unit,x,.16,0,.12,.06,.1,'dark');
+        if(family==='sieve')for(let i=0;i<8;i++)rod(unit,[-.2,.21,-.17+i*.05],[.2,.21,-.17+i*.05],.004);
+        if(tall)for(let i=0;i<6;i++)face(.03,.1+i*.07,.105,.07,.008,'blue');
+      }else if(family==='knife'){
+        box(unit,-.2,.06,0,.25,.045,.06,'dark');box(unit,.12,.06,0,.4,.03,.12,'metal');
+      }else if(family==='board'){
+        box(unit,0,.04,0,.75,.07,.48,'teal');
+      }else if(family==='stethoscope'){
+        for(const x of [-.15,.15])rod(unit,[x,.6,0],[x,.3,0],.015);rod(unit,[-.15,.3,0],[0,.15,0],.015,'dark');rod(unit,[.15,.3,0],[0,.15,0],.015,'dark');rod(unit,[0,.15,0],[.25,.05,0],.015,'dark');cylinder(unit,.25,.05,0,.08,.08,.025,'metal');
+      }else if(['bed','wheelchair'].includes(family)){
+        box(unit,0,.3,0,.5,.08,.8,'white');for(const x of [-.2,.2])for(const z of [-.33,.33])rod(unit,[x,.05,z],[x,.3,z],.02);
+        box(unit,0,.5,-.36,.5,.35,.04,'blue');if(family==='wheelchair')for(const x of [-.3,.3]){const wheel=ring(unit,x,.24,0,.24,.018,'dark');wheel.rotation.y=Math.PI/2;}
+      }else if(family==='syringe'){
+        cylinder(unit,0,.25,0,.06,.06,.35,'white');rod(unit,[0,0,0],[0,.1,0],.008);rod(unit,[0,.42,0],[0,.58,0],.025);box(unit,0,.6,0,.17,.025,.1,'blue');
+      }else if(['gloves','goggles','helmet','headset','respirator','extinguisher','harness','lifejacket'].includes(family)){
+        if(family==='gloves')for(const x of [-.17,.17]){box(unit,x,.14,0,.2,.22,.08,'orange');for(let i=0;i<4;i++)rod(unit,[x-.07+i*.045,.22,0],[x-.07+i*.045,.4,0],.018,'orange');}
+        else if(family==='goggles')for(const x of [-.14,.14]){ring(unit,x,.25,0,.12,.02,'dark');face(x,.25,.01,.18,.12,'teal');}
+        else if(family==='headset'){ring(unit,0,.4,0,.22,.025,'dark');for(const x of [-.22,.22])box(unit,x,.23,0,.1,.2,.12,'orange');}
+        else if(family==='helmet'){const shell=cylinder(unit,0,.25,0,.16,.26,.24,'orange');box(unit,0,.12,.02,.58,.03,.4,'orange');}
+        else if(family==='extinguisher'){cylinder(unit,0,.3,0,.13,.13,.55,'red');rod(unit,[-.1,.63,0],[.1,.63,0],.025,'dark');rod(unit,[.1,.56,0],[.2,.22,0],.012,'dark');}
+        else if(family==='respirator'){box(unit,0,.27,0,.26,.26,.1,'dark');for(const x of [-.19,.19]){const filter=cylinder(unit,x,.23,.05,.1,.1,.12,'white');filter.rotation.x=Math.PI/2;}}
+        else{for(const x of [-.13,.13])box(unit,x,.32,0,.14,.5,.09,family==='lifejacket'?'orange':'red');rod(unit,[-.17,.52,0],[.17,.12,0],.02,'dark');}
+      }else if(['burner','centrifuge'].includes(family)){
+        cylinder(unit,0,.1,0,.25,.25,.2,'white');cylinder(unit,0,.26,0,.12,.12,family==='burner'?.4:.1,'metal');
+        if(family==='centrifuge')for(let i=0;i<6;i++){const a=i*Math.PI/3;cylinder(unit,Math.sin(a)*.15,.29,Math.cos(a)*.15,.025,.025,.12,'teal');}
+      }else if(['conveyor','tractor'].includes(family)){
+        box(unit,0,.25,0,.8,.13,.4,'teal');for(const x of [-.3,.3])for(const z of [-.22,.22]){const tire=cylinder(unit,x,.14,z,.12,.12,.08,'dark');tire.rotation.x=Math.PI/2;}
+        if(family==='tractor'){box(unit,-.2,.5,0,.25,.35,.3,'blue');face(-.2,.55,.17,.18,.18);}
+        else for(let i=0;i<8;i++)box(unit,-.35+i*.1,.33,0,.02,.02,.38,'dark');
+      }else if(family==='net'){
+        for(let i=0;i<9;i++){rod(unit,[-.4,.03,-.4+i*.1],[.4,.03,-.4+i*.1],.006,'teal');rod(unit,[-.4+i*.1,.03,-.4],[-.4+i*.1,.03,.4],.006,'teal');}
+      }else if(family==='fire-system'){
+        cylinder(unit,-.2,.3,0,.11,.11,.55,'red');box(unit,.2,.3,0,.24,.3,.08,'red');cylinder(unit,.2,.6,0,.12,.12,.045,'white');rod(unit,[-.2,.6,0],[.2,.6,0],.012,'dark');
+      }else if(['tank','cyclone','filterpress'].includes(family)){
+        for(const x of [-.2,.2])rod(unit,[x,.02,0],[x,.45,0],.018,'blue');
+        if(family==='filterpress'){for(let i=0;i<8;i++)box(unit,-.3+i*.085,.45,0,.04,.42,.4,'blue');rod(unit,[-.42,.45,0],[.42,.45,0],.025);}
+        else{cylinder(unit,0,.48,0,.25,family==='cyclone'?.04:.25,.48,'metal');ring(unit,0,.73,0,.25,.018,'blue').rotation.x=Math.PI/2;rod(unit,[.2,.55,0],[.4,.55,0],.035,'metal');}
+      }else if(family==='tube'){
+        for(let i=0;i<8;i++)rod(unit,[-.3+i*.08,.05,Math.sin(i*.9)*.12],[-.22+i*.08,.05,Math.sin((i+1)*.9)*.12],.02,'teal');
+      }else if(family==='strip'){
+        box(unit,0,.03,0,.7,.025,.18,'white');for(let i=0;i<10;i++)box(unit,-.3+i*.065,.05,0,.008,.006,.12,'teal');
+      }else if(family==='document'){
+        box(unit,0,.24,0,.52,.48,.025,'white');label(unit,item.name,0,.39,.018,.46,.12,'#123a59');for(let i=0;i<6;i++)face(0,.28-i*.035,.02,.36,.006,'metal');
+      }else return false;
+      return true;
+    }
     function resource(parent,item,x,y,z){
       const unit=new T.YJl();unit.position.set(x,y,z);unit.userData.curriculumResource=item;unit.name=item.name;parent.add(unit);
       bindResource(unit,item);
       const name=normalize(item.name),kind=item.category;
-      if(item.model==='structural-assembly'){
+      if(item.model?.startsWith('catalog-')&&catalogModel(unit,item)){
+        unit.userData.specializedEquipment=true;
+      }else if(item.model==='structural-assembly'){
         const body=cylinder(unit,0,.35,0,.19,.19,1.25,'metal');body.rotation.x=Math.PI/2;
         box(unit,0,.35,.03,1.7,.035,.36,'metal');box(unit,0,.47,-.52,.57,.035,.23,'metal');box(unit,0,.64,-.52,.035,.42,.23,'blue');
         box(unit,0,.55,.27,.22,.025,.2,'teal');
@@ -269,7 +412,7 @@
         for(let i=0;i<6;i++)tool(rack,.3+i*.21,2.23,.02,1,.77);
         for(let i=0;i<4;i++)tool(rack,.1+i*.48,1.6,.02,i%2?3:2,.72);
         for(let i=0;i<7;i++)tool(rack,-1.5+i*.21,1.58,.11,1,.7);
-        for(const item of items)if(!/lupa|espejo/.test(normalize(item.name)))bindResource(rack,item);
+        for(const item of items)if(!item.model&&!/lupa|espejo/.test(normalize(item.name)))bindResource(rack,item);
       }else items.slice(0,4).forEach((item,i)=>resource(rack,item,-1.32+i*.88,1.85,.12).scale.setScalar(.7));
       box(rack,0,1.03,.25,3.8,.12,1.02,'wood');box(rack,0,.5,.24,3.62,.94,.9,'blue');
       for(let col=0;col<3;col++)for(let row=0;row<4;row++){
@@ -295,7 +438,7 @@
         const headset=ring(rack,0,2.64,.09,.22,.035,'dark');headset.scale.y*=1.15;
         for(const x of [-.21,.21]){const cushion=cylinder(rack,x,2.52,.14,.13,.13,.09,'rubber');cushion.rotation.x=Math.PI/2;const cup=cylinder(rack,x,2.52,.2,.115,.1,.08,'orange');cup.rotation.x=Math.PI/2;}
         for(const x of [.85,1.26]){box(rack,x,2.44,.1,.22,.2,.09,'orange');for(let j=0;j<4;j++)rod(rack,[x-.075+j*.05,2.5,.1],[x-.08+j*.055,2.69-(j===0?.025:0),.1],.025,'orange');rod(rack,[x+.1,2.44,.1],[x+.18,2.54,.1],.035,'orange');}
-        for(const item of items.filter(item=>item.category==='protection'))if(/proteccion personal|epp|guante|antiparra|auditiv/.test(normalize(item.name)))bindResource(rack,item);
+        for(const item of items.filter(item=>item.category==='protection'&&!item.model))if(/proteccion personal|epp|guante|antiparra|auditiv/.test(normalize(item.name)))bindResource(rack,item);
       }else items.filter(item=>item.category==='protection').slice(0,3).forEach((item,i)=>resource(rack,item,-1.1+i*1.1,2.4,.12).scale.setScalar(.65));
       if(wallOnly){rack.userData.workshopFixture='safety-wall';return rack;}
       const materialsInRoom=items.filter(item=>item.category==='materials');
@@ -365,9 +508,10 @@
     }
     function buildServiceBench(parent,primary,repair=false){
       parent.name=repair?'Mesa de reparación y remachado':'Banco de trabajo del módulo';parent.userData.workshopFixture=repair?'repair':'workbench';
+      const sanitary=/gastronom|enfermer|alimentos|quimica/.test(normalize(setup.specialty));
       box(parent,0,.99,0,2.8,.1,1.35,'metal');
-      for(const x of [-1.22,1.22])for(const z of [-.52,.52]){box(parent,x,.52,z,.1,.94,.1,'blue');wheel(parent,x,.1,z);}
-      box(parent,0,.29,0,2.55,.09,1.02,'blue');box(parent,-.8,.65,-.03,.8,.57,1.05,'dark');
+      for(const x of [-1.22,1.22])for(const z of [-.52,.52]){box(parent,x,.52,z,.1,.94,.1,sanitary?'metal':'blue');wheel(parent,x,.1,z);}
+      box(parent,0,.29,0,2.55,.09,1.02,sanitary?'metal':'blue');box(parent,-.8,.65,-.03,.8,.57,1.05,'dark');
       for(let row=0;row<3;row++){const y=.85-row*.16;box(parent,-.8,y,.51,.75,.14,.025,'blue');rod(parent,[-1,y,.55],[-.6,y,.55],.018);}
       if(repair){
         for(const x of [-.9,-.33]){const plate=box(parent,x,1.06,0,.52,.035,.78,'metal');plate.rotation.y=.12;}
@@ -383,7 +527,7 @@
         rod(riveter,[-.14,.1,0],[.17,.1,0],.065);rod(riveter,[.1,.1,0],[.1,-.15,0],.05,'blue');rod(riveter,[-.14,.1,0],[-.3,.1,0],.025);
         for(let i=0;i<4;i++){const plier=tool(parent,-1+i*.28,1.08,.52,i%2?0:2,.3);plier.rotation.x=-Math.PI/2;}
         bindMatching(parent,/herramientas.*equipos|maquinaria/);
-      }else if(primary){const sample=resource(parent,primary,0,1.1,-.1);sample.scale.setScalar(1.5);sample.userData.featuredModuleEquipment=true;vise(parent,1,1.05,.2);}
+      }else if(primary){const sample=resource(parent,primary,0,1.1,-.1);sample.scale.setScalar(1.5);sample.userData.featuredModuleEquipment=true;if(/mecan|metal|electric|montaje|constru|madera/.test(normalize(setup.specialty)))vise(parent,1,1.05,.2);}
       label(parent,repair?'Reparación y remachado':'Puesto de trabajo',0,.52,.72,2.5,.31,'#064477');
       return parent;
     }
@@ -396,7 +540,7 @@
       const collider={x:location.x,z:location.z,halfX:location.halfX,halfZ:location.halfZ,minY:ctx.floorY,maxY:ctx.floorY+3.4,cityModuleWorkshop:true};
       ctx.colliders.push(collider);colliders.push(collider);
     });
-    const primary=(setup.resources||[]).find(item=>item.category==='equipment')||(setup.resources||[]).find(item=>!['documents','digital'].includes(item.category))||setup.resources?.[0];
+    const primary=(setup.resources||[]).find(item=>item.category==='equipment'&&item.model)||(setup.resources||[]).find(item=>item.category==='tools'&&item.model)||(setup.resources||[]).find(item=>item.model&&!['documents','protection'].includes(item.category))||(setup.resources||[]).find(item=>item.category==='equipment')||(setup.resources||[]).find(item=>!['documents','digital'].includes(item.category))||setup.resources?.[0];
     const structural=/aeronave/.test(normalize(setup.specialty))&&(setup.resources||[]).some(item=>/aeronave.*recubrimiento|estructuras.*alas/.test(normalize(item.name)));
     const facing=new T.Pq0(ctx.workshopLayout.forwardX,0,ctx.workshopLayout.forwardZ);
     facing.y=0;facing.normalize();const rightX=-facing.z,rightZ=facing.x;
@@ -432,7 +576,7 @@
     const remaining=(setup.resources||[]).filter(item=>!represented.has(item.name));
     let storageCount=0;
     for(let start=0;start<remaining.length;start+=15){
-      const index=start/15,side=index%2?1:-1,backWall=index<2,depth=backWall?8:-.8,lateral=backWall?side*1.15:side*6.05;
+      const index=start/15,side=index%2?1:-1,backWall=index<2,depth=backWall?8:-.8-Math.floor((index-2)/2)*2.55,lateral=backWall?side*1.15:side*6.05;
       const rack=new T.YJl();rack.name='Estantería de recursos del módulo';rack.userData.workshopFixture='storage';
       rack.position.set(origin.x+rightX*lateral+facing.x*depth,ctx.floorY,origin.z+rightZ*lateral+facing.z*depth);rack.rotation.y=backWall?Math.atan2(-facing.x,-facing.z):Math.atan2(-side*rightX,-side*rightZ);root.add(rack);
       const batch=remaining.slice(start,start+15),rows=Math.ceil(batch.length/3),height=.56+rows*.5;

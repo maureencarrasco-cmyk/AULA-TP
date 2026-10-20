@@ -5,6 +5,35 @@ import vm from 'node:vm';
 
 const source=readFileSync(new URL('../city-panel/native-route.js',import.meta.url),'utf8');
 
+test('course mentions share their specialty room without dropping the selected module',()=>{
+  const definition=source.match(/const specialtyFamily=value=>[^;]+;/)[0];
+  const family=vm.runInNewContext(`${definition};specialtyFamily`,{normalize:value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()});
+  assert.equal(family('Gastronomía, mención Cocina'),family('Gastronomía'));
+  assert.equal(family('Química Industrial, mención Laboratorio Químico'),family('Química Industrial'));
+  assert.notEqual(family('Electricidad'),family('Electrónica'));
+});
+
+test('asynchronous equipment and image loads repaint an idle renderer and ignore stale rooms',()=>{
+  const helper=source.slice(source.indexOf('  function requestRedraw('),source.indexOf('  let quizControlLayer'));
+  const scene={},camera={};let callback,calls=0;
+  const context={generation:1,root:{parent:scene},redrawFrame:0,cancelAnimationFrame(){},requestAnimationFrame(fn){callback=fn;return 1;}};
+  const redraw=vm.runInNewContext(`${helper};requestRedraw`,context);
+  const ctx={scene,camera,map:false,renderer:{render(s,c){assert.equal(s,scene);assert.equal(c,camera);calls++;}}};
+  redraw(ctx);assert.equal(calls,0);callback();assert.equal(calls,1);
+  redraw(ctx);context.generation=2;callback();assert.equal(calls,1);
+  ctx.map=true;redraw(ctx);callback();assert.equal(calls,1);
+});
+
+test('reused room objects get a fresh layout after moving to another specialty or floor',()=>{
+  const workshop=readFileSync(new URL('../city-panel/native-workshop.js',import.meta.url),'utf8');
+  const helper=workshop.slice(workshop.indexOf('  function captureLayout('),workshop.indexOf('  function chooseLocations('));
+  class Vector{normalize(){return this;}}
+  const capture=vm.runInNewContext(`${helper};captureLayout`,{roomLayouts:new WeakMap(),performance:{now:()=>0}});
+  const ctx={room:{},specialty:{name:'Electricidad'},floorY:0,district:{x:0,z:0},player:{x:1,z:2},three:{Pq0:Vector},camera:{position:{x:1,z:5},getWorldDirection:v=>Object.assign(v,{x:0,y:0,z:-1})}};
+  const first=capture(ctx);ctx.player.x=3;assert.equal(capture(ctx),first);
+  ctx.floorY=5;ctx.specialty.name='Química Industrial';assert.equal(capture(ctx).x,3);assert.notEqual(capture(ctx),first);
+});
+
 test('room entry uses the first official module and explicit selections never borrow another inventory',()=>{
   const catalog=JSON.parse(readFileSync(new URL('../city_room_resources.json',import.meta.url),'utf8'));
   const helper=source.slice(source.indexOf('  function selectWorkshopInventory('),source.indexOf('  async function loadModuleWorkshop('));
@@ -14,6 +43,8 @@ test('room entry uses the first official module and explicit selections never bo
   assert.equal(select(catalog,{moduleId:441,moduleTitle:'Estructuras de aeronaves'},specialty).module_title,catalog['441'].module_title);
   assert.equal(select(catalog,{moduleId:442},specialty).module_id,442);
   assert.equal(select(catalog,{moduleId:99999,moduleTitle:'Desconocido'},specialty),null);
+  assert.equal(select(catalog,{moduleId:42},'Gastronomía').module_id,42);
+  assert.equal(select(catalog,{moduleId:5},'Gastronomía'),null);
   for(const [id,item] of Object.entries(catalog))assert.equal(select(catalog,{moduleId:Number(id)},item.specialty).module_title,item.module_title);
 });
 

@@ -1,8 +1,15 @@
 /* Quiz stations, legacy fixture cleanup, and navigation for the existing world. */
 (() => {
   const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-  let root,geometry,material,current=null,last=0,room=null,error='',generation=0;
+  const specialtyFamily=value=>normalize(value).split(/,?\s+mencion\b/)[0].replace(/\bde\b/g,'').replace(/\s+/g,' ').trim();
+  let root,geometry,material,current=null,last=0,room=null,roomSignature='',error='',generation=0;
   let stationQuestionSignature='';
+  let redrawFrame=0;
+  function requestRedraw(ctx){
+    cancelAnimationFrame(redrawFrame);const token=generation;
+    // The world can idle before an asynchronous inventory or photograph finishes.
+    redrawFrame=requestAnimationFrame(()=>{redrawFrame=0;if(token===generation&&root?.parent===ctx.scene&&!ctx.map)ctx.renderer?.render(ctx.scene,ctx.camera);});
+  }
   let quizControlLayer=null,quizWindow=null,activeQuizNumber=null;
   const originalSigns=[];
   const originalFixtureColliders=[];
@@ -27,6 +34,7 @@
   }
   addEventListener('aulatp:quiz-progress',progress);
   function dispose(){
+    cancelAnimationFrame(redrawFrame);redrawFrame=0;
     workshopRequest?.abort();workshopRequest=null;workshop?.dispose();workshop=null;
     workshopKey='';
     resourceButton?.remove();resourceButton=null;resourceWindow?.remove();resourceWindow=null;
@@ -70,7 +78,8 @@
   function selectWorkshopInventory(catalog,active,specialtyName){
     const key=value=>normalize(value).replace(/\bde\b/g,'').replace(/\s+/g,' ').trim();
     const specialty=key(active.specialty||specialtyName),title=key(active.moduleTitle);
-    const candidates=Object.entries(catalog).filter(([,item])=>key(item.specialty)===specialty).sort(([a],[b])=>Number(a)-Number(b));
+    const exact=Object.entries(catalog).filter(([,item])=>key(item.specialty)===specialty);
+    const candidates=(exact.length?exact:Object.entries(catalog).filter(([,item])=>key(item.specialty).split(/,?\s+mencion\b/)[0]===specialty.split(/,?\s+mencion\b/)[0])).sort(([a],[b])=>Number(a)-Number(b));
     const exactId=candidates.find(([id])=>String(active.moduleId||'')===id);
     const exactTitle=title&&candidates.find(([,item])=>key(item.module_title)===title);
     const match=exactId||exactTitle||(!active.moduleId&&!title?candidates[0]:null);
@@ -101,6 +110,7 @@
       if(token!==generation||!root)return;
       workshop?.dispose();workshop=null;resourceButton?.remove();resourceButton=null;resourceWindow?.remove();resourceWindow=null;
       workshop=globalThis.AulaTPModuleWorkshop.create({...ctx,legacyFixtureColliders:originalFixtureColliders.map(item=>item.collider)},setup,roomStations);
+      requestRedraw(ctx);
       const button=document.createElement('button');button.type='button';button.className='city-module-resources';button.textContent='Recursos del módulo';
       button.addEventListener('click',()=>{
         if(quizWindow)quizWindow.hidden=true;
@@ -108,7 +118,7 @@
         const header=document.createElement('header'),title=document.createElement('h2'),close=document.createElement('button'),body=document.createElement('div');
         title.textContent=setup.module_title;close.type='button';close.className='city-quiz-empty-window-close';close.textContent='×';close.setAttribute('aria-label','Cerrar recursos');close.addEventListener('click',()=>{panel.remove();if(resourceWindow===panel)resourceWindow=null;if(quizWindow)quizWindow.hidden=false;button.focus();});
         header.append(title,close);body.className='city-quiz-empty-window-body';
-        const audit=document.createElement('p');audit.textContent=setup.curriculum_audit?.status==='reviewed_virtual_representation'?'OA y criterios contrastados: representación virtual didáctica.':'Recursos de actividades oficiales. Revisión detallada por criterio pendiente.';body.append(audit);
+        const audit=document.createElement('p');audit.textContent=setup.curriculum_audit?.status==='reviewed_virtual_representation'?'OA y criterios contrastados: representación virtual didáctica.':setup.curriculum_audit?.status==='source_screened_requires_disciplinary_review'?'Recursos explícitos contrastados con el programa. Validación disciplinar completa pendiente.':'Recursos de actividades oficiales. Revisión detallada por criterio pendiente.';body.append(audit);
         for(const objective of setup.objectives||[]){const p=document.createElement('p');p.textContent=typeof objective==='string'?objective:`${objective.code}: ${objective.title}`;body.append(p);}
         for(const outcome of setup.learning_outcomes||[]){
           const heading=document.createElement('h3'),list=document.createElement('ul');heading.textContent=outcome.title;
@@ -118,7 +128,7 @@
           const items=setup.resources.filter(item=>item.category===kind);if(!items.length)continue;
           const heading=document.createElement('h3'),list=document.createElement('ul');heading.textContent=name;
           for(const item of items){const li=document.createElement('li');li.dataset.curriculumResource='';li.textContent=item.name;
-            if(item.criteria?.length)li.append(` · OA 3 · Criterios ${item.criteria.join(', ')}`);
+            if(item.criteria?.length)li.append(` · ${item.objective?item.objective+' · ':''}Criterios ${item.criteria.join(', ')}`);
             const pages=[...new Set(item.references.map(ref=>ref.pdf_page))];
             if(setup.source.url){const a=document.createElement('a');a.textContent=` · PDF p. ${pages.join(', ')}`;a.href=setup.source.url+`#page=${pages[0]}`;a.target='_blank';a.rel='noopener';li.append(a);}list.append(li);}
           body.append(heading,list);
@@ -233,7 +243,7 @@
   function configureStations(ctx){
     const source=(ctx.stations||[]).slice(0,4);
     if(!source.length)return [];
-    const questions=current&&normalize(current.specialty)===normalize(ctx.specialty.name)?current.questions:[];
+    const questions=current&&specialtyFamily(current.specialty)===specialtyFamily(ctx.specialty.name)?current.questions:[];
     const stationQuestions=selectStationQuizQuestions(questions);
     const learningObjects=[...new Set(questions.map(question=>String(question.object||'').trim()).filter(Boolean))];
     const result=source.map((station,index)=>({...station,quizQuestion:stationQuestions[index]||null}));
@@ -416,6 +426,7 @@
       c.restore();
       c.save();c.shadowColor=accent;c.shadowBlur=28;c.strokeStyle='#ffffff';c.lineWidth=18;rounded(64,440,1072,888,55);c.stroke();c.shadowBlur=0;c.strokeStyle='#28d8ff';c.lineWidth=10;rounded(76,452,1048,864,44);c.stroke();c.restore();
       marker.texture.needsUpdate=true;marker.sign.userData.cityQuizArtworkReady=true;marker.sign.userData.cityQuizImageLoaded=loaded;
+      requestRedraw(ctx);
     };
     image.onload=()=>drawArtwork(true);image.onerror=()=>drawArtwork(false);drawArtwork(false);
     image.src=imageUrl;
@@ -584,7 +595,9 @@
   function frame(ctx){
     try{
       if(!ctx.indoors||!ctx.room||!ctx.stations.length){if(root)dispose();room=null;return;}
-      if(room!==ctx.room){dispose();room=ctx.room;last=0;if(current&&normalize(current.specialty)!==normalize(ctx.specialty.name))current=null;}
+      if(Math.abs(ctx.player.y-ctx.floorY)>.65){if(root)root.visible=false;if(workshop)workshop.root.visible=false;updateQuizControls(ctx);return;}
+      const identity=`${ctx.specialty?.name||''}:${ctx.floorY}:${ctx.district?.x}:${ctx.district?.z}`;
+      if(room!==ctx.room||roomSignature!==identity||(root&&root.parent!==ctx.scene)){dispose();room=ctx.room;roomSignature=identity;last=0;if(current&&specialtyFamily(current.specialty)!==specialtyFamily(ctx.specialty.name))current=null;}
       if(root&&compactLayout!==(window.innerWidth<700)&&!quizWindow&&!resourceWindow)dispose();
       if(!root)create(ctx);
       if(current?.moduleId&&workshopKey!==String(current.moduleId))loadModuleWorkshop(ctx);

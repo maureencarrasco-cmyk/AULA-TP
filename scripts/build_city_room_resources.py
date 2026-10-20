@@ -26,9 +26,9 @@ def activity_resources(text):
 def category(name):
     value = normalize(name)
     for kind, pattern in [('protection', r'proteccion personal|epp|guantes|antiparras|casco|seguridad personal'),
-                          ('documents', r'manual|diccionario|guia|pauta|libro|norma|texto|plano|document|ficha|registro'),
+                          ('documents', r'manual|diccionario|guia|pauta|libro|norma|reglamento|texto|plano|document|ficha|registro'),
                           ('digital', r'computador|software|internet|proyector|video|multimedia|impresora'),
-                          ('tools', r'herramient|lupa|instrument|medicion|calibr|espejo|regla|taladro|destornill|llave'),
+                          ('tools', r'herramient|lupa|instrument|medicion|calibr|espejo|\breglas?\b|taladro|destornill|llave'),
                           ('materials', r'material|pano|limpieza|desecho|insumo|papel|lapiz|cartulina|tinta')]:
         if re.search(pattern, value):
             return kind
@@ -102,10 +102,18 @@ def build():
     else:
         from city_room_requirements import enrich_requirements
     enrich_requirements(result, ROOT)
+    if __package__:
+        from scripts.city_room_criterion_scan import screen, write_report
+    else:
+        from city_room_criterion_scan import screen, write_report
+    screening = screen(result, ROOT)
     output = ROOT / 'city_room_resources.json'
-    output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    serialized = json.dumps(result, ensure_ascii=False, indent=2) + '\n'
+    output.write_text(serialized, encoding='utf-8')
+    (ROOT / 'city-panel' / 'assets' / 'module-room-resources.json').write_text(serialized, encoding='utf-8')
+    write_report(result, ROOT)
     missing = [(mid, row['module_title']) for mid, row in result.items() if not row['resources']]
-    print(json.dumps({'modules': len(result), 'courses': len({row['specialty'] for row in result.values()}), 'resources': sum(len(row['resources']) for row in result.values()), 'missing': missing}, ensure_ascii=False))
+    print(json.dumps({'modules': len(result), 'courses': len({row['specialty'] for row in result.values()}), 'resources': sum(len(row['resources']) for row in result.values()), 'missing': missing, 'screening': screening}, ensure_ascii=False))
 
 
 if __name__ == '__main__':
