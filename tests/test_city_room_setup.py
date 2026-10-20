@@ -7,6 +7,23 @@ from scripts.build_city_room_resources import activity_resources
 
 
 class RoomInventoryTests(unittest.TestCase):
+    def test_criterion_review_is_explicit_and_sourced(self):
+        data = json.loads((Path(__file__).resolve().parents[1] / 'city_room_resources.json').read_text(encoding='utf-8'))
+        reviewed = data['441']
+        self.assertEqual(len(reviewed['curriculum_audit']['criteria']), 9)
+        self.assertEqual(len(reviewed['learning_outcomes']), 3)
+        self.assertEqual(reviewed['objectives'][0]['code'], 'OA 3')
+        for criterion in reviewed['curriculum_audit']['criteria']:
+            self.assertTrue(criterion['resources'])
+            for name in criterion['resources']:
+                item = next(item for item in reviewed['resources'] if item['name'] == name)
+                self.assertIn(criterion['code'], item['criteria'])
+                self.assertTrue(item['model'])
+                self.assertIn(item['references'][0]['pdf_page'], [45, 46])
+        for mid, row in data.items():
+            if mid != '441':
+                self.assertEqual(row['curriculum_audit']['status'], 'requires_criterion_review')
+
     def test_every_published_module_has_sourced_resources(self):
         data = json.loads((Path(__file__).resolve().parents[1] / 'city_room_resources.json').read_text(encoding='utf-8'))
         self.assertEqual(len(data), 451)

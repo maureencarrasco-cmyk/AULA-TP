@@ -80,6 +80,12 @@ def build():
                             'url': source.get('url') or curriculum.get('url'),
                             'status': 'activity_resources_extracted' if resources else 'requires_source_review',
                             'resources': list(resources.values())}
+        result[str(mid)]['objectives'] = source.get('oa') or []
+        result[str(mid)]['learning_outcomes'] = [
+            {'code': ae.get('official_code'), 'title': ae.get('title') or ae.get('description') or '',
+             'criteria': ae.get('criteria') or []} for ae in content.get('aes') or []]
+        result[str(mid)]['curriculum_audit'] = {'status': 'requires_criterion_review',
+            'scope': 'activity_resources_only', 'criteria': []}
         # This module specifies its resources in execution paragraphs, without a Recursos list.
         if normalize(title) == 'recuperacion y respaldo de informacion en redes de area local':
             with pymupdf.open(ROOT / pdf) as document:
@@ -91,6 +97,11 @@ def build():
                     result[str(mid)]['resources'].append({'name': name, 'category': 'documents' if 'manual' in name else 'digital',
                                                         'references': [{'pdf_page': page, 'activity': 'Gestión de usuarios y respaldo de archivos', 'matched_by': 'verified_execution_paragraph'}]})
             result[str(mid)]['status'] = 'activity_resources_extracted'
+    if __package__:
+        from scripts.city_room_requirements import enrich_requirements
+    else:
+        from city_room_requirements import enrich_requirements
+    enrich_requirements(result, ROOT)
     output = ROOT / 'city_room_resources.json'
     output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     missing = [(mid, row['module_title']) for mid, row in result.items() if not row['resources']]

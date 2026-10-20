@@ -75,7 +75,7 @@
       if(!item)return node;
       node.userData.curriculumResources=[...(node.userData.curriculumResources||[]),item];represented.add(item.name);return node;
     }
-    function bindMatching(node,pattern){for(const item of setup.resources||[])if(pattern.test(normalize(item.name)))bindResource(node,item);return node;}
+    function bindMatching(node,pattern){for(const item of setup.resources||[])if(!item.model&&pattern.test(normalize(item.name)))bindResource(node,item);return node;}
     const boxGeometry=own(new T.iNn(1,1,1)),planeGeometry=own(new T.bdM(1,1));
     const colors={blue:0x075b9f,metal:0xbac6d0,dark:0x15222b,white:0xf4f7fa,teal:0x139a92,orange:0xf5be27,red:0xbe302c,wood:0xc89b60,rubber:0x192027,anodized:0xb6ba6e};
     const Shaded=T._4j||T.V9B;
@@ -188,7 +188,26 @@
       const unit=new T.YJl();unit.position.set(x,y,z);unit.userData.curriculumResource=item;unit.name=item.name;parent.add(unit);
       bindResource(unit,item);
       const name=normalize(item.name),kind=item.category;
-      if(/lupa|espejo/.test(name)){
+      if(item.model==='structural-assembly'){
+        const body=cylinder(unit,0,.35,0,.19,.19,1.25,'metal');body.rotation.x=Math.PI/2;
+        box(unit,0,.35,.03,1.7,.035,.36,'metal');box(unit,0,.47,-.52,.57,.035,.23,'metal');box(unit,0,.64,-.52,.035,.42,.23,'blue');
+        box(unit,0,.55,.27,.22,.025,.2,'teal');
+        for(const x of [-.6,.6]){box(unit,x,.09,0,.08,.17,.45,'blue');rod(unit,[x,.15,0],[x,.33,0],.025);}
+        for(const x of [-.23,.23])rod(unit,[x,.36,.06],[x,.6,.06],.018,'orange');
+      }else if(item.model==='landing-gear'){
+        box(unit,0,.04,0,.95,.08,.7,'blue');rod(unit,[0,.15,0],[0,.95,0],.07);rod(unit,[0,.85,0],[.3,.4,0],.035);rod(unit,[-.34,.3,0],[.34,.3,0],.04);
+        for(const x of [-.3,.3]){const tire=cylinder(unit,x,.28,0,.24,.24,.15,'rubber');tire.rotation.z=Math.PI/2;const hub=cylinder(unit,x,.28,0,.11,.11,.17,'metal');hub.rotation.z=Math.PI/2;}
+      }else if(item.model==='magnetic-inspection'){
+        box(unit,0,.03,0,.95,.06,.6,'metal');
+        for(const x of [-.22,.22])box(unit,x,.22,0,.1,.36,.14,'dark');box(unit,0,.42,0,.54,.1,.14,'red');
+        rod(unit,[-.12,.44,0],[.12,.44,0],.045,'dark');cylinder(unit,.36,.2,.15,.07,.07,.32,'white');
+        label(unit,'Particulas magneticas',0,.13,.32,.85,.15,'#164866');
+      }else if(item.model==='inspection-mirror'){
+        rod(unit,[-.35,.03,0],[.14,.38,0],.025);const mirror=cylinder(unit,.22,.43,0,.15,.15,.025,'metal');mirror.rotation.x=Math.PI/2;
+        ring(unit,.22,.43,.02,.15,.018,'dark');
+      }else if(item.model&&kind==='documents'){
+        const stand=documentStand(unit,0,0,item.name);stand.scale.setScalar(.7);
+      }else if(/lupa|espejo/.test(name)){
         const glass=magnifier(unit,-.1,.22,.07);glass.scale.setScalar(1.5);
       }else if(/compresor/.test(name)){
         const machine=buildCompressor(unit,0,0);machine.scale.setScalar(.48);
@@ -336,6 +355,9 @@
       const crack=[[-.48,-.38],[-.4,-.25],[-.46,-.12],[-.35,.04],[-.39,.16]];
       for(let i=1;i<crack.length;i++){const a=crack[i-1],b=crack[i];rod(parent,[a[0],height(a[1])+.02,a[1]],[b[0],height(b[1])+.02,b[1]],.009,'red');}
       const glass=magnifier(parent,.7,1.61,.16);glass.rotation.x=-Math.PI/2;bindMatching(glass,/lupa/);
+      for(const item of setup.resources||[])if(['inspection-mirror','magnetic-inspection'].includes(item.model)){
+        const unit=resource(parent,item,item.model==='inspection-mirror'?1.05:-.9,1.6,.3);unit.scale.setScalar(.55);
+      }
       rod(parent,[-1.25,1,-.6],[-1.25,1.97,-.6],.027,'dark');rod(parent,[-1.25,1.97,-.6],[-.65,2.05,-.6],.027,'dark');
       const lamp=cylinder(parent,-.65,2,-.6,.15,.1,.12,'dark');lamp.rotation.z=.15;
       label(parent,'Inspección estructural',0,.61,.77,2.3,.32,'#064477');
@@ -398,6 +420,9 @@
     if(industrial&&tools.length){
       const wall=new T.YJl();wall.position.set(origin.x-rightX*6.55+facing.x*2.5,ctx.floorY,origin.z-rightZ*6.55+facing.z*2.5);wall.rotation.y=Math.atan2(rightX,rightZ);root.add(wall);
       addToolboard(wall,tools);wall.userData.workshopFixture='tools-wall';wall.name='Banco y herramientas de la pared izquierda';
+      for(const item of setup.resources||[])if(['structural-assembly','landing-gear'].includes(item.model)){
+        const unit=resource(wall,item,item.model==='structural-assembly'?-.15:1.2,1.12,.35);unit.scale.setScalar(.7);
+      }
       const collider={x:wall.position.x+rightX*.4,z:wall.position.z+rightZ*.4,halfX:.55*Math.abs(rightX)+1.95*Math.abs(facing.x),halfZ:.55*Math.abs(rightZ)+1.95*Math.abs(facing.z),minY:ctx.floorY,maxY:ctx.floorY+3.3,cityModuleWorkshop:true};ctx.colliders.push(collider);colliders.push(collider);wallCount++;
     }
     if(protections.length){
@@ -420,6 +445,8 @@
     }
     root.userData.resourceCount=setup.resources.length;root.userData.displayedResources=[...represented];root.userData.fixtureCount=locations.length+occupied.length+wallCount+storageCount;
     root.userData.resourceCoverage=(setup.resources||[]).map(item=>({name:item.name,category:item.category,represented:represented.has(item.name),references:item.references}));
+    root.userData.curriculumAudit=setup.curriculum_audit||{status:'requires_criterion_review'};
+    root.userData.criterionCoverage=(setup.curriculum_audit?.criteria||[]).map(item=>({code:item.code,represented:item.resources.length>0&&item.resources.every(name=>represented.has(name)),resources:item.resources}));
     const moduleSign=label(root,`Módulo${setup.module_number?' '+setup.module_number:''} · ${structural?'Estructuras de aeronaves':setup.module_title}`,origin.x+facing.x*8.5,ctx.floorY+3.5,origin.z+facing.z*8.5,7.1,.65,'#123d54');moduleSign.rotation.y=Math.atan2(-facing.x,-facing.z);moduleSign.name='Nombre del módulo';
     ctx.scene.add(root);
     return {root,refresh,resourceCount:setup.resources.length,displayedResources:represented.size,

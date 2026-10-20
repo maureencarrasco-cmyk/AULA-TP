@@ -75,7 +75,7 @@
     const exactTitle=title&&candidates.find(([,item])=>key(item.module_title)===title);
     const match=exactId||exactTitle||(!active.moduleId&&!title?candidates[0]:null);
     if(!match)return null;
-    const [id,entry]=match;return {...entry,module_id:Number(id),module_number:candidates.findIndex(([candidate])=>candidate===id)+1,source:{pdf:entry.pdf,url:entry.url},learning_outcomes:[]};
+    const [id,entry]=match;return {...entry,module_id:Number(id),module_number:candidates.findIndex(([candidate])=>candidate===id)+1,source:{pdf:entry.pdf,url:entry.url},learning_outcomes:entry.learning_outcomes||[]};
   }
   async function loadModuleWorkshop(ctx){
     if(!globalThis.AulaTPModuleWorkshop)return;
@@ -91,7 +91,7 @@
           if(response.ok)setup=await response.json();
         }catch(cause){if(cause.name==='AbortError')throw cause;}
       }
-      if(!setup?.resources?.length){
+      if(!setup?.resources?.length||!setup.curriculum_audit){
         const script=document.querySelector('script[src*="native-route.js"]'),catalogUrl=new URL('./assets/module-room-resources.json',script?.src||location.href);
         const response=await fetch(catalogUrl,{signal:controller.signal});
         if(!response.ok)throw new Error('No se pudo cargar el equipamiento del módulo.');
@@ -108,10 +108,17 @@
         const header=document.createElement('header'),title=document.createElement('h2'),close=document.createElement('button'),body=document.createElement('div');
         title.textContent=setup.module_title;close.type='button';close.className='city-quiz-empty-window-close';close.textContent='×';close.setAttribute('aria-label','Cerrar recursos');close.addEventListener('click',()=>{panel.remove();if(resourceWindow===panel)resourceWindow=null;if(quizWindow)quizWindow.hidden=false;button.focus();});
         header.append(title,close);body.className='city-quiz-empty-window-body';
+        const audit=document.createElement('p');audit.textContent=setup.curriculum_audit?.status==='reviewed_virtual_representation'?'OA y criterios contrastados: representación virtual didáctica.':'Recursos de actividades oficiales. Revisión detallada por criterio pendiente.';body.append(audit);
+        for(const objective of setup.objectives||[]){const p=document.createElement('p');p.textContent=typeof objective==='string'?objective:`${objective.code}: ${objective.title}`;body.append(p);}
+        for(const outcome of setup.learning_outcomes||[]){
+          const heading=document.createElement('h3'),list=document.createElement('ul');heading.textContent=outcome.title;
+          for(const criterion of outcome.criteria||[]){const li=document.createElement('li');li.textContent=typeof criterion==='string'?criterion:JSON.stringify(criterion);list.append(li);}body.append(heading,list);
+        }
         for(const [kind,name] of Object.entries(globalThis.AulaTPModuleWorkshop.labels)){
           const items=setup.resources.filter(item=>item.category===kind);if(!items.length)continue;
           const heading=document.createElement('h3'),list=document.createElement('ul');heading.textContent=name;
-          for(const item of items){const li=document.createElement('li');li.textContent=item.name;
+          for(const item of items){const li=document.createElement('li');li.dataset.curriculumResource='';li.textContent=item.name;
+            if(item.criteria?.length)li.append(` · OA 3 · Criterios ${item.criteria.join(', ')}`);
             const pages=[...new Set(item.references.map(ref=>ref.pdf_page))];
             if(setup.source.url){const a=document.createElement('a');a.textContent=` · PDF p. ${pages.join(', ')}`;a.href=setup.source.url+`#page=${pages[0]}`;a.target='_blank';a.rel='noopener';li.append(a);}list.append(li);}
           body.append(heading,list);

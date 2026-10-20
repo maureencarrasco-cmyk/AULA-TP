@@ -18,6 +18,7 @@ def room_setup(title, specialty, content):
     return {'module_title': title, 'specialty': specialty,
             'status': entry['status'] if entry else 'requires_source_review',
             'resources': entry['resources'] if entry else [],
+            'curriculum_audit': entry.get('curriculum_audit') if entry else None,
             'source': {'pdf': entry['pdf'] if entry else curriculum.get('pdf'),
                        'url': entry['url'] if entry else curriculum.get('url')},
             'objectives': source.get('oa') or [],
