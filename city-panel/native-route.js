@@ -607,7 +607,7 @@
       launch.addEventListener('click',()=>[...document.querySelectorAll('.city-view-toolbar button')].find(button=>normalize(button.textContent).includes('desafio profesional'))?.click());body.append(launch);
     }else{
       const content=document.createElement('div'),level=document.createElement('p'),alignment=document.createElement('p'),prompt=document.createElement('h3'),criterion=document.createElement('p'),form=document.createElement('form'),choices=document.createElement('fieldset'),legend=document.createElement('legend'),argumentLabel=document.createElement('label'),argument=document.createElement('textarea'),submit=document.createElement('button'),status=document.createElement('p'),feedback=document.createElement('p');
-      content.className='city-quiz-question';level.className='city-quiz-question-level';level.textContent='Pregunta 1 de 5';
+      content.className='city-quiz-question';level.className='city-quiz-question-level';level.textContent='Pregunta 1 de 5 · 4 alternativas';
       alignment.className='city-quiz-question-ae';prompt.textContent='Cargando pregunta…';criterion.className='city-quiz-question-criterion';
       form.className='city-quiz-response-form';choices.className='city-quiz-choices';legend.textContent='Selecciona una alternativa';choices.append(legend);
       argumentLabel.className='city-quiz-argument-label';argumentLabel.textContent='Argumenta tu respuesta';argument.name='argument';argument.required=true;argument.minLength=20;argument.placeholder='Explica qué evidencia del módulo respalda tu elección.';argumentLabel.append(argument);
@@ -615,15 +615,16 @@
       form.append(choices,argumentLabel,submit,status,feedback);content.append(level,alignment,prompt,criterion,form);body.append(content);
       let activeQuestion=null,busy=false;
       const renderQuestion=(item,aeTitle='',skill='Representar',questionNumber=1)=>{
-        activeQuestion=item;prompt.textContent=String(item.question||'Resuelve el desafío del módulo.');level.textContent=`Pregunta ${questionNumber} de 5`;
+        activeQuestion=item;prompt.textContent=String(item.question||'Resuelve el desafío del módulo.');level.textContent=`Pregunta ${questionNumber} de 5 · 4 alternativas`;
         alignment.textContent=`Habilidad: ${skill}${aeTitle?` · AE: ${aeTitle}`:` · Aprendizaje esperado ${Number(item.ae)+1}`}`;
         criterion.hidden=!item.criterion;criterion.textContent=item.criterion?`Criterio asociado: ${item.criterion}`:'';
         choices.replaceChildren(legend);
         const options=stationQuizOptions(item);
         if(options.length!==4){activeQuestion=null;prompt.textContent='No se puede mostrar esta pregunta: debe tener exactamente cuatro alternativas válidas.';submit.disabled=true;return;}
         options.forEach((option,index)=>{
-          const label=document.createElement('label'),radio=document.createElement('input'),copy=document.createElement('span');
-          radio.type='radio';radio.name=`city-quiz-${number}-answer`;radio.value=String(index);radio.required=true;copy.textContent=String(option);label.append(radio,copy);choices.append(label);
+          const label=document.createElement('label'),radio=document.createElement('input'),letter=document.createElement('b'),copy=document.createElement('span');
+          label.className='city-quiz-choice';radio.type='radio';radio.name=`city-quiz-${number}-answer`;radio.value=String(index);radio.required=true;
+          letter.className='city-quiz-choice-letter';letter.textContent='ABCD'[index];copy.textContent=String(option);label.append(radio,letter,copy);choices.append(label);
         });
         argument.value='';submit.disabled=false;submit.textContent='Comprobar respuesta';
       };

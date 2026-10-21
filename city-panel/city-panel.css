@@ -394,8 +394,9 @@
 .city-native-route-active .city-quiz-response-form { display:grid;gap:14px; }
 .city-native-route-active .city-quiz-choices { display:grid;gap:8px;margin:0;padding:12px;border:1px solid #c9e4f1;border-radius:12px; }
 .city-native-route-active .city-quiz-choices legend { padding:0 6px;color:#17385b;font-weight:800; }
-.city-native-route-active .city-quiz-choices label { display:grid;grid-template-columns:20px 1fr;align-items:start;gap:9px;padding:10px;border:1px solid #d6e9f1;border-radius:9px;background:#f8fcff;color:#183952;cursor:pointer; }
+.city-native-route-active .city-quiz-choices label { display:grid;grid-template-columns:20px 28px minmax(0,1fr);align-items:start;gap:9px;padding:10px;border:1px solid #d6e9f1;border-radius:9px;background:#f8fcff;color:#183952;cursor:pointer; }
 .city-native-route-active .city-quiz-choices input { width:18px;height:18px;margin:1px 0 0;accent-color:#0875f5; }
+.city-native-route-active .city-quiz-choice-letter { display:grid;place-items:center;width:26px;height:26px;border-radius:6px;background:#e4f2ff;color:#075dbd;font-size:13px; }
 .city-native-route-active .city-quiz-argument-label { display:grid;gap:7px;color:#17385b;font-weight:800; }
 .city-native-route-active .city-quiz-argument-label textarea { width:100%;min-height:110px;padding:11px;border:1px solid #bad8e8;border-radius:10px;background:#fff;color:#16365c;font:inherit;resize:vertical; }
 .city-native-route-active .city-quiz-submit { justify-self:start;min-height:42px;padding:9px 16px;border:0;border-radius:9px;background:#0875f5;color:#fff;font:700 15px Arial,Helvetica,sans-serif;cursor:pointer; }
