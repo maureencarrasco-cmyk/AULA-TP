@@ -8,7 +8,7 @@
     "resources": [
       {
         "name": "Sala apropiada (mesas de trabajo amplias para el estudio de los planos)",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 40,
@@ -1084,7 +1084,7 @@
       },
       {
         "name": "Normativa eléctrica vigente",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 40,
@@ -1144,7 +1144,7 @@
       },
       {
         "name": "Normativa",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 42,
@@ -1315,7 +1315,7 @@
       },
       {
         "name": "Catálogos de conductores eléctricos",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 54,
@@ -1326,7 +1326,7 @@
       },
       {
         "name": "Normativa eléctrica vigente",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 54,
@@ -1504,7 +1504,7 @@
       },
       {
         "name": "Normativa eléctrica vigente",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 63,
@@ -1899,7 +1899,7 @@
       },
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 54,
@@ -2392,7 +2392,7 @@
       },
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 71,
@@ -2480,12 +2480,25 @@
       },
       {
         "name": "Taller o laboratorio implementado con los insumos requeridos: lavamanos, agua potable, cepillos de dientes, pasta dental y otros insumos, entre otros",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 73,
             "activity": "Desarrollando campaña de higiene bucal para escolares",
             "matched_by": "module_title"
+          }
+        ]
+      },
+      {
+        "name": "Lavamanos",
+        "category": "equipment",
+        "model": "catalog-sink",
+        "criteria": [],
+        "references": [
+          {
+            "pdf_page": 73,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "lavamanos"
           }
         ]
       }
@@ -2664,7 +2677,7 @@
       },
       {
         "name": "Taller o laboratorio implementado con unidad de paciente, elementos y materiales de aseo",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 81,
@@ -2719,7 +2732,7 @@
       },
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 83,
@@ -2900,7 +2913,7 @@
       },
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 54,
@@ -3393,7 +3406,7 @@
       },
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 71,
@@ -3481,12 +3494,25 @@
       },
       {
         "name": "Taller o laboratorio implementado con los insumos requeridos: lavamanos, agua potable, cepillos de dientes, pasta dental y otros insumos, entre otros",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 73,
             "activity": "Desarrollando campaña de higiene bucal para escolares",
             "matched_by": "module_title"
+          }
+        ]
+      },
+      {
+        "name": "Lavamanos",
+        "category": "equipment",
+        "model": "catalog-sink",
+        "criteria": [],
+        "references": [
+          {
+            "pdf_page": 73,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "lavamanos"
           }
         ]
       }
@@ -3665,7 +3691,7 @@
       },
       {
         "name": "Taller o laboratorio implementado con unidad de paciente, elementos y materiales de aseo",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 81,
@@ -3720,7 +3746,7 @@
       },
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 83,
@@ -4763,7 +4789,7 @@
       },
       {
         "name": "Catálogos de conductores eléctricos",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 98,
@@ -4779,7 +4805,7 @@
       },
       {
         "name": "Normativa eléctrica vigente",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 98,
@@ -4999,7 +5025,7 @@
       },
       {
         "name": "Normativa eléctrica vigente",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 109,
@@ -5886,7 +5912,7 @@
     "resources": [
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 111,
@@ -6221,7 +6247,7 @@
       },
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 120,
@@ -6393,7 +6419,7 @@
       },
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 130,
@@ -6970,7 +6996,7 @@
       },
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 163,
@@ -7611,7 +7637,7 @@
     "resources": [
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 173,
@@ -7939,7 +7965,7 @@
       },
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 183,
@@ -8151,7 +8177,7 @@
       },
       {
         "name": "Bibliografía y material de apoyo",
-        "category": "materials",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 193,
@@ -8672,6 +8698,42 @@
         ]
       },
       {
+        "name": "Diagrama de flujo de proceso",
+        "category": "documents",
+        "model": "catalog-document",
+        "criteria": [
+          "3.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 50,
+            "criteria": [
+              "3.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "diagrama de flujo del producto"
+          }
+        ]
+      },
+      {
+        "name": "Planilla HACCP",
+        "category": "documents",
+        "model": "catalog-document",
+        "criteria": [
+          "3.6"
+        ],
+        "references": [
+          {
+            "pdf_page": 50,
+            "criteria": [
+              "3.6"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "planilla haccp"
+          }
+        ]
+      },
+      {
         "name": "Refractometro",
         "category": "tools",
         "model": "catalog-probe",
@@ -8835,8 +8897,10 @@
           "pdf_pages": [
             50
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Diagrama de flujo de proceso"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.2",
@@ -8885,8 +8949,10 @@
           "pdf_pages": [
             50
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Planilla HACCP"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.1",
@@ -9004,7 +9070,7 @@
       },
       {
         "name": "Sala de computación con conexión a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 65,
@@ -9952,7 +10018,7 @@
       },
       {
         "name": "Sala de computación con conexión a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 87,
@@ -10900,7 +10966,7 @@
       },
       {
         "name": "Sala de computación con conexión a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 117,
@@ -12306,6 +12372,42 @@
         ]
       },
       {
+        "name": "Diagrama de flujo de proceso",
+        "category": "documents",
+        "model": "catalog-document",
+        "criteria": [
+          "3.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 50,
+            "criteria": [
+              "3.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "diagrama de flujo del producto"
+          }
+        ]
+      },
+      {
+        "name": "Planilla HACCP",
+        "category": "documents",
+        "model": "catalog-document",
+        "criteria": [
+          "3.6"
+        ],
+        "references": [
+          {
+            "pdf_page": 50,
+            "criteria": [
+              "3.6"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "planilla haccp"
+          }
+        ]
+      },
+      {
         "name": "Refractometro",
         "category": "tools",
         "model": "catalog-probe",
@@ -12469,8 +12571,10 @@
           "pdf_pages": [
             50
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Diagrama de flujo de proceso"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.2",
@@ -12519,8 +12623,10 @@
           "pdf_pages": [
             50
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Planilla HACCP"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.1",
@@ -12638,7 +12744,7 @@
       },
       {
         "name": "Sala de computación con conexión a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 65,
@@ -13586,7 +13692,7 @@
       },
       {
         "name": "Sala de computación con conexión a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 87,
@@ -16113,7 +16219,7 @@
       },
       {
         "name": "Sala de computación con computadores y acceso a internet. Programa de Estudio | 3° y 4º medio | Especialidad SERVICIOS DE HOTELERÍA",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 39,
@@ -19057,7 +19163,7 @@
     "resources": [
       {
         "name": "Laboratorio de computación con conexión a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 40,
@@ -19984,7 +20090,7 @@
       },
       {
         "name": "Laboratorio de computación con conexión a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 62,
@@ -21303,7 +21409,7 @@
     "resources": [
       {
         "name": "Laboratorio con conexión a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 109,
@@ -25446,7 +25552,7 @@
       },
       {
         "name": "Apuntes técnicos de codificación IATA",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 42,
@@ -25512,7 +25618,7 @@
       },
       {
         "name": "Presentación en formato digital del o la docente con información general de los sistemas globales de reserva",
-        "category": "equipment",
+        "category": "digital",
         "references": [
           {
             "pdf_page": 43,
@@ -26180,7 +26286,7 @@
       },
       {
         "name": "Presentación en formato digital",
-        "category": "equipment",
+        "category": "digital",
         "references": [
           {
             "pdf_page": 55,
@@ -26399,7 +26505,7 @@
     "resources": [
       {
         "name": "Sala de enlaces con conexión a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 64,
@@ -26607,7 +26713,7 @@
       },
       {
         "name": "Material bibliográfico turístico",
-        "category": "materials",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 66,
@@ -27064,7 +27170,7 @@
       },
       {
         "name": "Bibliografía de protocolos de acción de situaciones similares",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 77,
@@ -27878,7 +27984,7 @@
       },
       {
         "name": "Presentación en formato digital",
-        "category": "equipment",
+        "category": "digital",
         "references": [
           {
             "pdf_page": 98,
@@ -27988,7 +28094,7 @@
       },
       {
         "name": "Material bibliográfico turístico",
-        "category": "materials",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 101,
@@ -29676,7 +29782,7 @@
     "resources": [
       {
         "name": "Pizarra. de laboratorio y semillas de distintas especies",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 44,
@@ -29709,7 +29815,7 @@
       },
       {
         "name": "Aula o laboratorio con una red instalada (idealmente correspondiente al plano de red)",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 44,
@@ -29737,6 +29843,33 @@
             "pdf_page": 45,
             "activity": "Instalación de cableado estructurado para una red de área local de una pequeña empresa",
             "matched_by": "module_title"
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.4",
+          "5.4"
+        ],
+        "references": [
+          {
+            "pdf_page": 41,
+            "criteria": [
+              "3.4"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 43,
+            "criteria": [
+              "5.4"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
         ]
       },
@@ -30080,8 +30213,10 @@
             41,
             47
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.5",
@@ -30206,8 +30341,10 @@
           "pdf_pages": [
             43
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "5.5",
@@ -30297,7 +30434,7 @@
       },
       {
         "name": "Laboratorio o taller de trabajo para el armado de computadores",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 57,
@@ -32923,7 +33060,7 @@
       },
       {
         "name": "Laboratorio con internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 42,
@@ -34140,7 +34277,7 @@
       },
       {
         "name": "Laboratorio con internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 42,
@@ -36873,7 +37010,7 @@
     "resources": [
       {
         "name": "Laboratorio de computación con acceso a internet y software de diseño",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 43,
@@ -36895,7 +37032,7 @@
       },
       {
         "name": "Laboratorio con computadores y acceso a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 45,
@@ -37281,6 +37418,24 @@
             "source_phrase": "proyector"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "4.2"
+        ],
+        "references": [
+          {
+            "pdf_page": 54,
+            "criteria": [
+              "4.2"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -37506,8 +37661,10 @@
           "pdf_pages": [
             54
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         }
       ],
       "limitations": "No acredita equipamiento exhaustivo, certificacion ni simulacion operativa. La revision disciplinar sigue pendiente."
@@ -37522,7 +37679,7 @@
     "resources": [
       {
         "name": "Guía de laboratorio estructurada sobre configuración y pruebas de red peer-to-peer",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 68,
@@ -37577,7 +37734,7 @@
       },
       {
         "name": "Material bibliográfico disponible para desarrollar la investigación",
-        "category": "materials",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 70,
@@ -37588,7 +37745,7 @@
       },
       {
         "name": "Laboratorio acondicionado con equipos, instrumentos y herramienta para el montaje de antenas parabólicas o en su defecto, software de simulación de antenas (solo para la primera parte de los parámetros)",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 91,
@@ -37944,7 +38101,7 @@
       },
       {
         "name": "Laboratorio con computadores y acceso a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 82,
@@ -37955,7 +38112,7 @@
       },
       {
         "name": "Software de ofimática y taller acondicionado con equipos",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 82,
@@ -38251,7 +38408,7 @@
     "resources": [
       {
         "name": "Guía de laboratorio estructurada sobre configuración y pruebas de red peer-to-peer",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 68,
@@ -38284,7 +38441,7 @@
       },
       {
         "name": "Laboratorio acondicionado con equipos, instrumentos y herramienta para el montaje de antenas parabólicas o en su defecto, software de simulación de antenas (solo para la primera parte de los parámetros)",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 91,
@@ -38600,7 +38757,7 @@
     "resources": [
       {
         "name": "Guía de laboratorio estructurada: Instalación y configuración de cliente inalámbrico, configuración y pruebas de red inalámbrica, configuración y pruebas de seguridad",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 102,
@@ -38611,7 +38768,7 @@
       },
       {
         "name": "Laboratorio con equipos computacionales funcionando, tarjetas de red inalámbricas, Access Point, routers inalámbricos, antenas, etc., junto con un set de herramientas para cableado estructurado",
-        "category": "tools",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 102,
@@ -38633,7 +38790,7 @@
       },
       {
         "name": "Laboratorio de computación con acceso a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 104,
@@ -38954,7 +39111,7 @@
     "resources": [
       {
         "name": "Laboratorio acondicionado con equipos, instrumentos y herramientas para la telefonía IP, servidor de telefonía IP elastix o similar y con acceso a internet y software de ofimática",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 114,
@@ -38987,7 +39144,7 @@
       },
       {
         "name": "Guía de laboratorio estructurada",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 116,
@@ -39656,7 +39813,7 @@
       },
       {
         "name": "Laboratorio de computación con acceso a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 139,
@@ -40704,7 +40861,7 @@
     "resources": [
       {
         "name": "Laboratorio de computación con programa de dibujo asistido por computador y proyector",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 64,
@@ -40737,7 +40894,7 @@
       },
       {
         "name": "Laboratorio de computación con programa de dibujo asistido por computación y acceso a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 66,
@@ -41031,7 +41188,7 @@
     "resources": [
       {
         "name": "Laboratorio de computación con programa de dibujo asistido por computación y acceso a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 80,
@@ -41367,7 +41524,7 @@
     "resources": [
       {
         "name": "Laboratorio de computación con programa de dibujo asistido por computador",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 92,
@@ -42508,7 +42665,7 @@
       },
       {
         "name": "Especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 134,
@@ -42850,7 +43007,7 @@
       },
       {
         "name": "Laboratorio de computación con acceso a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 149,
@@ -42861,7 +43018,7 @@
       },
       {
         "name": "Listado de cubicaciones finales con especificaciones técnicas correspondientes",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 149,
@@ -43155,7 +43312,7 @@
       },
       {
         "name": "Laboratorio de computación con programa de dibujo asistido por computador",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 156,
@@ -43946,7 +44103,7 @@
       },
       {
         "name": "Laboratorio de computación con acceso a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 42,
@@ -44021,7 +44178,7 @@
       },
       {
         "name": "Sala apropiada (con buena visibilidad de la pizarra), red para el traspaso de archivos, computadores con los programas gráficos para cada alumno, proyector multimedia, impresoras de escritorio, escáner plano y software de digitalización, software Photoshop, imágenes digitales para los ejercicios, guía para los ejercicios y evaluaciones teórico-práctica, tinta de impresora de escritorio, papel bond (resmas), fotografías (originales opacos), calculadoras. 2 RGB: Acrónimo para indicar colores rojo, verde y azul",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 45,
@@ -44032,7 +44189,7 @@
       },
       {
         "name": "Sala apropiada (con buena visibilidad de la pizarra), red para el traspaso de archivos, computadores con los programas gráficos para cada alumno, proyector multimedia, impresoras de escritorio, software Photoshop, imágenes y archivos digitales para los ejercicios, guía para los ejercicios y evaluaciones teórico-práctica, tinta de impresora de escritorio, papel bond (resmas), archivos bitmap en espacios de color RGB y CMYK, rúbrica de evaluación",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 47,
@@ -44393,7 +44550,7 @@
       },
       {
         "name": "Taller apropiado: maquinaria ordenada y señalización de seguridad, estantes para almacenar tintas, papel e insumos propios para la impresión",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 62,
@@ -44861,6 +45018,33 @@
             "source_phrase": "orden de trabajo"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "2.3",
+          "3.5"
+        ],
+        "references": [
+          {
+            "pdf_page": 59,
+            "criteria": [
+              "2.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 59,
+            "criteria": [
+              "3.5"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -44992,6 +45176,7 @@
           ],
           "resources": [
             "Impresora",
+            "Elementos de proteccion personal",
             "Orden de trabajo"
           ],
           "status": "explicit_resources_linked"
@@ -45055,8 +45240,10 @@
             129,
             131
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         }
       ],
       "limitations": "No acredita equipamiento exhaustivo, certificacion ni simulacion operativa. La revision disciplinar sigue pendiente."
@@ -45622,7 +45809,7 @@
       },
       {
         "name": "Sala de clases ordenada, espectrofotómetros e instrumentos usados para el control de calidad de acuerdo a la norma ISO 12647-2,3, 6 y 7, pliegos impresos con tira de control parches CMYK + Trapping (RGB)",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 82,
@@ -45809,6 +45996,11 @@
             "matched_by": "module_title"
           },
           {
+            "pdf_page": 82,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "espectrofotometros"
+          },
+          {
             "pdf_page": 84,
             "matched_by": "verified_activity_resource_noun",
             "source_phrase": "espectrofotometro"
@@ -45846,8 +46038,14 @@
             "pdf_page": 84,
             "activity": "Ejercicios de impresión",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 84,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "cronometro"
           }
-        ]
+        ],
+        "model": "catalog-timer"
       },
       {
         "name": "tamañógrafos",
@@ -46498,7 +46696,7 @@
     "resources": [
       {
         "name": "Laboratorio de computación con acceso a internet, Micrómetros, diferentes muestras de papeles de diversos espesores, hojas de registro del ejercicio",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 105,
@@ -46515,6 +46713,19 @@
             "pdf_page": 107,
             "activity": "Propiedades para determinar el gramaje de los papeles (propiedades mecánicas)",
             "matched_by": "module_title"
+          }
+        ]
+      },
+      {
+        "name": "Micrometro",
+        "category": "tools",
+        "model": "catalog-caliper",
+        "criteria": [],
+        "references": [
+          {
+            "pdf_page": 105,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "micrometros"
           }
         ]
       },
@@ -47388,6 +47599,24 @@
             "source_phrase": "orden de trabajo"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.5"
+        ],
+        "references": [
+          {
+            "pdf_page": 59,
+            "criteria": [
+              "1.5"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -47497,8 +47726,10 @@
             129,
             131
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.1",
@@ -47788,7 +48019,7 @@
       },
       {
         "name": "guía para los ejercicios y evaluaciones práctica. 9 Para la actividad de calibración visual de monitor, se recomienda realizar el procedimiento después de 30 minutos de encendidos los equipos, utilizar en los computadores un fondo de pantalla gris neutro e, idealmente, en una sala pintada de igual color",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 157,
@@ -49917,8 +50148,14 @@
             "pdf_page": 51,
             "activity": "Ejecución de redes de agua",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 51,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Cal",
@@ -50029,7 +50266,7 @@
       },
       {
         "name": "Especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 53,
@@ -50184,7 +50421,7 @@
       },
       {
         "name": "Especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 61,
@@ -50212,8 +50449,19 @@
             "pdf_page": 61,
             "activity": "Instalación de redes para agua potable",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 61,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 63,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Set de planos",
@@ -51029,8 +51277,14 @@
             "pdf_page": 83,
             "activity": "Instalación de redes para riego agrícola",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 83,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Set de planos",
@@ -51803,7 +52057,7 @@
       },
       {
         "name": "Especificaciones técnicas del fabricante. Programa de Estudio | 3° y 4º medio | Especialidad INSTALACIONES SANITARIAS 7",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 101,
@@ -52961,7 +53215,7 @@
       },
       {
         "name": "Taller de soldadura equipado con máquinas para soldar arco manual, soldadura E6011 Ø 1/8”",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 41,
@@ -53000,6 +53254,19 @@
             "pdf_page": 43,
             "activity": "Realización de protocolo de trabajo seguro para labores de soldadura",
             "matched_by": "module_title"
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [],
+        "references": [
+          {
+            "pdf_page": 41,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
         ]
       }
@@ -53252,7 +53519,7 @@
       },
       {
         "name": "Especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 52,
@@ -54361,6 +54628,24 @@
             "source_phrase": "ficha tecnica"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "5.3"
+        ],
+        "references": [
+          {
+            "pdf_page": 89,
+            "criteria": [
+              "5.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -54601,8 +54886,10 @@
           "pdf_pages": [
             89
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "5.4",
@@ -55705,7 +55992,7 @@
       },
       {
         "name": "Sala de computación con internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 53,
@@ -55844,8 +56131,14 @@
             "pdf_page": 55,
             "activity": "Confeccionar plantillas",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 55,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Cinta metrica",
@@ -56225,6 +56518,29 @@
         ]
       },
       {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "2.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 65,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 62,
+            "criteria": [
+              "2.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
+      },
+      {
         "name": "Manual del fabricante",
         "category": "documents",
         "model": "catalog-document",
@@ -56374,8 +56690,10 @@
             65,
             67
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.2",
@@ -56483,7 +56801,7 @@
       },
       {
         "name": "Sala de computación con internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 73,
@@ -56605,7 +56923,7 @@
       },
       {
         "name": "Especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 75,
@@ -56835,7 +57153,7 @@
       },
       {
         "name": "Sala de computación con internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 85,
@@ -56957,7 +57275,7 @@
       },
       {
         "name": "Catálogos",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 87,
@@ -56968,7 +57286,7 @@
       },
       {
         "name": "Especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 87,
@@ -56987,6 +57305,51 @@
             "pdf_page": 87,
             "matched_by": "verified_activity_resource_noun",
             "source_phrase": "huincha de medir"
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "2.1",
+          "2.3",
+          "4.3",
+          "5.4"
+        ],
+        "references": [
+          {
+            "pdf_page": 82,
+            "criteria": [
+              "2.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 82,
+            "criteria": [
+              "2.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 83,
+            "criteria": [
+              "4.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 84,
+            "criteria": [
+              "5.4"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
         ]
       },
@@ -57162,6 +57525,7 @@
             89
           ],
           "resources": [
+            "Elementos de proteccion personal",
             "Manual del fabricante"
           ],
           "status": "explicit_resources_linked"
@@ -57183,8 +57547,10 @@
           "pdf_pages": [
             82
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.4",
@@ -57283,8 +57649,10 @@
           "pdf_pages": [
             83
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.4",
@@ -57336,6 +57704,7 @@
             84
           ],
           "resources": [
+            "Elementos de proteccion personal",
             "Orden de trabajo"
           ],
           "status": "explicit_resources_linked"
@@ -57929,6 +58298,24 @@
             "source_phrase": "manual del fabricante"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 107,
+            "criteria": [
+              "3.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -58080,8 +58467,10 @@
           "pdf_pages": [
             107
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.2",
@@ -58253,7 +58642,7 @@
       },
       {
         "name": "Sala de computación con internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 119,
@@ -58331,7 +58720,7 @@
       },
       {
         "name": "Catálogos de materiales",
-        "category": "materials",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 121,
@@ -58342,7 +58731,7 @@
       },
       {
         "name": "Especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 121,
@@ -58906,7 +59295,7 @@
     "resources": [
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 38,
@@ -58972,7 +59361,7 @@
       },
       {
         "name": "Infraestructura: -- Taller para elaborar alimentos con suelo y murallas lavables, y agua potable (fría y caliente). -- Sala de basura independiente de la sala de producción. -- Computadores, conexión a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 40,
@@ -58983,7 +59372,7 @@
       },
       {
         "name": "Equipamiento: -- Lavamanos con dispositivos para abrir llaves de manera higiénica. -- Dispositivos de toalla desechable, dosificadores de detergentes, desinfectantes y sanitizantes. -- Lavaderos y artículos de cocina. -- Termómetros, pHmetros, penetrómetros y equipamiento e instrumentos de laboratorio básico para medir, por ejemplo, grados Brix de la fruta fresca. -- Mesones de acero inoxidable. -- Computadores con programas procesadores de textos y de presentaciones, con conexión a internet para la realización de informes y búsqueda de información. -- Computador en la sala para realizar presentaciones, tanto de documentos como de videos",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 40,
@@ -59084,6 +59473,19 @@
             "pdf_page": 40,
             "matched_by": "verified_activity_resource_noun",
             "source_phrase": "computadores"
+          }
+        ]
+      },
+      {
+        "name": "Lavamanos",
+        "category": "equipment",
+        "model": "catalog-sink",
+        "criteria": [],
+        "references": [
+          {
+            "pdf_page": 41,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "lavamanos"
           }
         ]
       },
@@ -59256,7 +59658,7 @@
       },
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 50,
@@ -59306,7 +59708,7 @@
       },
       {
         "name": "Sala multimedia",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 51,
@@ -59423,7 +59825,7 @@
       },
       {
         "name": "Taller de elaboración de alimentos, equipamiento e insumos",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 60,
@@ -59523,6 +59925,19 @@
             "pdf_page": 61,
             "matched_by": "verified_activity_resource_noun",
             "source_phrase": "refractometros"
+          }
+        ]
+      },
+      {
+        "name": "Lavamanos",
+        "category": "equipment",
+        "model": "catalog-sink",
+        "criteria": [],
+        "references": [
+          {
+            "pdf_page": 61,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "lavamanos"
           }
         ]
       }
@@ -59784,7 +60199,7 @@
     "resources": [
       {
         "name": "Sala de computación con acceso a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 69,
@@ -59832,7 +60247,7 @@
       },
       {
         "name": "Sala de clases o con computadores con acceso a internet o biblioteca con bibliografía adecuada disponible",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 70,
@@ -59981,6 +60396,42 @@
         ]
       },
       {
+        "name": "Diagrama de flujo de proceso",
+        "category": "documents",
+        "model": "catalog-document",
+        "criteria": [
+          "1.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 67,
+            "criteria": [
+              "1.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "diagrama de flujo del producto"
+          }
+        ]
+      },
+      {
+        "name": "Planilla HACCP",
+        "category": "documents",
+        "model": "catalog-document",
+        "criteria": [
+          "1.6"
+        ],
+        "references": [
+          {
+            "pdf_page": 67,
+            "criteria": [
+              "1.6"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "planilla haccp"
+          }
+        ]
+      },
+      {
         "name": "Refractometro",
         "category": "tools",
         "model": "catalog-probe",
@@ -60042,8 +60493,10 @@
           "pdf_pages": [
             67
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Diagrama de flujo de proceso"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "1.2",
@@ -60094,8 +60547,10 @@
           "pdf_pages": [
             67
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Planilla HACCP"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.1",
@@ -60777,6 +61232,19 @@
             "matched_by": "module_title"
           }
         ]
+      },
+      {
+        "name": "Etiqueta de alimentos",
+        "category": "materials",
+        "model": "catalog-label",
+        "criteria": [],
+        "references": [
+          {
+            "pdf_page": 94,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "etiquetas de alimentos"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -60887,7 +61355,7 @@
     "resources": [
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 103,
@@ -61008,7 +61476,7 @@
       },
       {
         "name": "Acceso a computadores con internet o biblioteca con bibliografía adecuada",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 106,
@@ -61027,11 +61495,24 @@
             "pdf_page": 105,
             "matched_by": "verified_activity_resource_noun",
             "source_phrase": "computador"
-          },
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.5"
+        ],
+        "references": [
           {
-            "pdf_page": 106,
-            "matched_by": "verified_activity_resource_noun",
-            "source_phrase": "computadores"
+            "pdf_page": 101,
+            "criteria": [
+              "1.5"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
         ]
       }
@@ -61120,8 +61601,10 @@
             105,
             107
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.1",
@@ -61176,7 +61659,7 @@
     "resources": [
       {
         "name": "Bibliografía",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 113,
@@ -61264,7 +61747,7 @@
       },
       {
         "name": "Sala de computación con acceso a internet",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 115,
@@ -61818,7 +62301,7 @@
       },
       {
         "name": "Laboratorio computacional equipado con computadores con Windows",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 39,
@@ -61971,7 +62454,7 @@
       },
       {
         "name": "Laboratorio computacional equipado con computadores",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 41,
@@ -62299,7 +62782,7 @@
     "resources": [
       {
         "name": "Laboratorio computacional con un computador individual para cada estudiante",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 49,
@@ -62396,7 +62879,7 @@
       },
       {
         "name": "Laboratorio con un computador para cada estudiante",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 51,
@@ -63352,6 +63835,24 @@
             "source_phrase": "ficha tecnica"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "5.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 68,
+            "criteria": [
+              "5.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -63528,8 +64029,10 @@
           "pdf_pages": [
             68
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "5.2",
@@ -63606,7 +64109,7 @@
       },
       {
         "name": "Taller equipado con zona de patrones y zona de máquinas, de acuerdo a las normas de seguridad establecidas",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 80,
@@ -63999,6 +64502,24 @@
             "source_phrase": "niveles de agua"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "4.2"
+        ],
+        "references": [
+          {
+            "pdf_page": 78,
+            "criteria": [
+              "4.2"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -64152,8 +64673,10 @@
           "pdf_pages": [
             78
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "5.1",
@@ -64188,7 +64711,7 @@
     "resources": [
       {
         "name": "Taller o sala de laboratorio con capacidad para los computadores y mesones de trabajo",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 89,
@@ -65065,7 +65588,7 @@
     "resources": [
       {
         "name": "Taller equipado con zona de patrones y zona de máquinas, de acuerdo a las normas seguridad establecidas",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 109,
@@ -65092,7 +65615,7 @@
       },
       {
         "name": "Taller equipado con zona de patrones y zona de máquinas, de acuerdo a las normas de seguridad establecidas",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 112,
@@ -65335,6 +65858,24 @@
         ]
       },
       {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.3"
+        ],
+        "references": [
+          {
+            "pdf_page": 107,
+            "criteria": [
+              "1.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
+      },
+      {
         "name": "Manual del fabricante",
         "category": "documents",
         "model": "catalog-document",
@@ -65430,8 +65971,10 @@
           "pdf_pages": [
             107
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.1",
@@ -65546,7 +66089,7 @@
     "resources": [
       {
         "name": "Laboratorio con un computador para cada estudiante",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 51,
@@ -65922,7 +66465,7 @@
       },
       {
         "name": "Taller equipado para trabajo de patrones y confección de acuerdo a las normas de seguridad establecidas",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 118,
@@ -66062,7 +66605,7 @@
       },
       {
         "name": "Taller equipado para trabajo de patrones y confección, de acuerdo a las normas de seguridad establecidas",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 120,
@@ -66645,7 +67188,7 @@
     "resources": [
       {
         "name": "Balanza de precisión, cámara germinativa, refrigerador, estufa sin ventilación forzada, materiales de laboratorio y semillas de distintas especies",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 41,
@@ -66938,12 +67481,18 @@
             "pdf_page": 56,
             "activity": "El muestreo como base fundamental en la ejecución de inventarios forestales",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 53,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Sala de computación con software de planillas de datos",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 53,
@@ -67324,6 +67873,24 @@
             "source_phrase": "ordenes de trabajo"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 64,
+            "criteria": [
+              "3.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -67454,8 +68021,10 @@
             69,
             70
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.2",
@@ -67510,8 +68079,19 @@
             "pdf_page": 77,
             "activity": "Conociendo el uso profesional de la motosierra",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 77,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 125,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Pauta de observación",
@@ -67640,7 +68220,7 @@
       },
       {
         "name": "Equipos y herramientas manuales de taller para realizar mantenimiento a herramientas de terreno",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 125,
@@ -67947,8 +68527,14 @@
             "pdf_page": 90,
             "activity": "Marcar raleo comercial en una plantación",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 90,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Orden de trabajo",
@@ -68238,8 +68824,14 @@
             "pdf_page": 103,
             "activity": "Conociendo una faena de cosecha tradicional",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 103,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Orden de trabajo",
@@ -68442,8 +69034,14 @@
             "pdf_page": 115,
             "activity": "Control de despacho de madera",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 113,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Acceso a cancha de acopio",
@@ -68694,7 +69292,7 @@
       },
       {
         "name": "Equipos y herramientas manuales de taller para realizar mantenimiento a herramientas de terreno",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 125,
@@ -68733,8 +69331,19 @@
             "pdf_page": 127,
             "activity": "Realización de una quema controlada",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 125,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 127,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Guantes",
@@ -69822,7 +70431,51 @@
             "pdf_page": 56,
             "activity": "Fabricación de diferentes piezas para puertas y ventanas de madera",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 54,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 51,
+            "criteria": [
+              "1.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 52,
+            "criteria": [
+              "3.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 52,
+            "criteria": [
+              "4.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 53,
+            "criteria": [
+              "5.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
+        ],
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.3",
+          "3.1",
+          "4.1",
+          "5.1"
         ]
       },
       {
@@ -69981,8 +70634,10 @@
           "pdf_pages": [
             51
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.1",
@@ -70036,8 +70691,10 @@
             52,
             56
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.2",
@@ -70089,8 +70746,10 @@
           "pdf_pages": [
             52
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.2",
@@ -70129,8 +70788,10 @@
           "pdf_pages": [
             53
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "5.2",
@@ -70524,8 +71185,14 @@
             "pdf_page": 77,
             "activity": "Acopiar y reutilizar los residuos generados en la actividad productiva de muebles y elementos de carpintería",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 75,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Bitácora de trabajo",
@@ -70993,7 +71660,24 @@
             "pdf_page": 100,
             "activity": "Armado de tabiques",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 98,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 97,
+            "criteria": [
+              "3.2"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
+        ],
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.2"
         ]
       },
       {
@@ -71230,8 +71914,10 @@
           "pdf_pages": [
             97
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.3",
@@ -71494,6 +72180,43 @@
             "matched_by": "module_title"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.2",
+          "4.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 110,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 112,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 107,
+            "criteria": [
+              "1.2"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 108,
+            "criteria": [
+              "4.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -71580,8 +72303,10 @@
             114,
             115
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "1.3",
@@ -71666,8 +72391,10 @@
           "pdf_pages": [
             108
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.2",
@@ -71867,6 +72594,33 @@
             "source_phrase": "ordenes de trabajo"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.3",
+          "4.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 119,
+            "criteria": [
+              "1.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 121,
+            "criteria": [
+              "4.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -71951,6 +72705,7 @@
             119
           ],
           "resources": [
+            "Elementos de proteccion personal",
             "Orden de trabajo"
           ],
           "status": "explicit_resources_linked"
@@ -72052,8 +72807,10 @@
             121,
             124
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.2",
@@ -72144,7 +72901,24 @@
             "pdf_page": 135,
             "activity": "Mantención correctiva de máquinas portátiles y estacionarias",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 133,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 131,
+            "criteria": [
+              "2.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
+        ],
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "2.1"
         ]
       },
       {
@@ -72284,8 +73058,10 @@
             137,
             138
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.2",
@@ -72706,7 +73482,7 @@
       },
       {
         "name": "Orientaciones bibliográficas impresas y páginas de internet para buscar información",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 43,
@@ -72717,7 +73493,7 @@
       },
       {
         "name": "Laboratorio computacional con acceso a internet para buscar información",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 43,
@@ -72766,7 +73542,7 @@
       },
       {
         "name": "Laboratorio con acceso a internet para buscar información",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 45,
@@ -73024,7 +73800,7 @@
       },
       {
         "name": "Orientaciones bibliográficas impresas y páginas de internet para buscar información",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 57,
@@ -73045,7 +73821,7 @@
       },
       {
         "name": "Laboratorio con acceso a internet para buscar información",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 57,
@@ -73420,7 +74196,7 @@
       },
       {
         "name": "Material bibliográfico impreso y páginas de internet para buscar información en relación con los implementos de seguridad básicos de uso común y legal en los terminales portuarios, y de los implementos de seguridad complementarios según el tipo de carga (IMDG), como por ejemplo, buzos de papel, máscaras con filtros, pantalones especiales anticortes, etc",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 68,
@@ -73431,7 +74207,7 @@
       },
       {
         "name": "Laboratorio con acceso a internet para buscar información",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 68,
@@ -73490,7 +74266,7 @@
       },
       {
         "name": "Orientaciones bibliográficas impresas y páginas de internet para buscar información",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 69,
@@ -73523,7 +74299,7 @@
       },
       {
         "name": "Orientaciones bibliográficas y páginas de internet para buscar información",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 70,
@@ -73551,6 +74327,24 @@
             "pdf_page": 71,
             "activity": "Accidentes y sus consecuencias",
             "matched_by": "module_title"
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [],
+        "references": [
+          {
+            "pdf_page": 68,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "epp"
+          },
+          {
+            "pdf_page": 70,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "epp"
           }
         ]
       },
@@ -73799,7 +74593,7 @@
       },
       {
         "name": "Orientaciones bibliográficas impresas y páginas de internet para buscar información",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 77,
@@ -73815,7 +74609,7 @@
       },
       {
         "name": "Laboratorio con acceso a internet para buscar información",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 77,
@@ -74070,7 +74864,7 @@
       },
       {
         "name": "Apuntes técnicos con bibliografía para consulta",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 87,
@@ -74125,7 +74919,7 @@
       },
       {
         "name": "Bibliografía, apuntes, instructivos y otras fuentes de información de recepción de cargas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 88,
@@ -74147,7 +74941,7 @@
       },
       {
         "name": "Orientaciones bibliográficas impresas y páginas de internet para buscar información",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 89,
@@ -74158,7 +74952,7 @@
       },
       {
         "name": "Laboratorio con acceso a internet para buscar información",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 89,
@@ -74416,7 +75210,7 @@
       },
       {
         "name": "Orientaciones bibliográficas impresas y páginas de internet para buscar información",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 98,
@@ -74432,7 +75226,7 @@
       },
       {
         "name": "Laboratorio con acceso a internet para buscar información",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 98,
@@ -74502,7 +75296,7 @@
       },
       {
         "name": "Orientaciones bibliográficas y páginas de internet para buscar información",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 100,
@@ -74797,7 +75591,7 @@
       },
       {
         "name": "Orientaciones bibliográficas impresas y páginas de internet para buscar información en relación con los rendimientos de turnos, formularios administrativos de ejemplo de diversos terminales portuarios y otros que apoyen la lectura y revisión de los y las estudiantes",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 107,
@@ -74808,7 +75602,7 @@
       },
       {
         "name": "Laboratorio con acceso a internet para buscar información. Programa de Estudio | 3° y 4º medio | Especialidad OPERACIONES PORTUARIAS",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 107,
@@ -74841,7 +75635,7 @@
       },
       {
         "name": "Orientaciones bibliográficas impresas y páginas de internet para buscar información",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 108,
@@ -74862,7 +75656,7 @@
       },
       {
         "name": "Laboratorio con acceso a internet para buscar información",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 108,
@@ -75108,7 +75902,7 @@
       },
       {
         "name": "Orientaciones bibliográficas impresas y páginas de internet para buscar información",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 118,
@@ -75124,7 +75918,7 @@
       },
       {
         "name": "Laboratorio con acceso a internet para buscar información",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 118,
@@ -75194,7 +75988,7 @@
       },
       {
         "name": "Orientaciones bibliográficas impresas y páginas de internet para buscar información. Se recomienda trabajar directamente con el sitio web de la Organización Marítima Internacional y de la Dirección General del Territorio Marítimo (Directemar)",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 120,
@@ -75854,7 +76648,7 @@
       },
       {
         "name": "Taller de especialidad con estanques que contengan reproductores de distintas especies hidrobiológicas",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 43,
@@ -75871,8 +76665,19 @@
             "pdf_page": 43,
             "activity": "Acondicionamiento para el desove en diversas especies",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 42,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 43,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Termometro",
@@ -76638,8 +77443,14 @@
             "pdf_page": 61,
             "activity": "Utilizando tecle-winches",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 61,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Manual del fabricante",
@@ -76921,7 +77732,7 @@
       },
       {
         "name": "Videos y material bibliográfico sobre seguridad y procedimientos de manipulación de cargas en centros de cultivo",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 69,
@@ -77189,8 +78000,14 @@
             "pdf_page": 77,
             "activity": "Cosecha de ostiones",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 77,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Sistema de almacenaje de producto cosechado",
@@ -77555,8 +78372,14 @@
             "pdf_page": 88,
             "activity": "Captemos semillas para cultivar especies de moluscos",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 88,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       }
     ],
     "objectives": [
@@ -82607,6 +83430,19 @@
         ]
       },
       {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [],
+        "references": [
+          {
+            "pdf_page": 54,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
+      },
+      {
         "name": "Manual del fabricante",
         "category": "documents",
         "model": "catalog-document",
@@ -83299,7 +84135,7 @@
       },
       {
         "name": "Sala de simulación como un puente de gobierno de una nave, con todos los instrumentos básicos para permitir la navegación",
-        "category": "tools",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 76,
@@ -84261,7 +85097,7 @@
       },
       {
         "name": "Apuntes de los y las estudiantes sobre la demostración realizada por su docente",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 99,
@@ -84649,7 +85485,7 @@
       },
       {
         "name": "Apuntes de los y las estudiantes sobre la demostración realizada por la o el especialista. Docente:",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 107,
@@ -85907,6 +86743,51 @@
             "source_phrase": "plastigaje"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "2.3",
+          "4.2",
+          "4.3",
+          "4.4"
+        ],
+        "references": [
+          {
+            "pdf_page": 40,
+            "criteria": [
+              "2.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 40,
+            "criteria": [
+              "4.2"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 40,
+            "criteria": [
+              "4.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 40,
+            "criteria": [
+              "4.4"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -86047,8 +86928,10 @@
             40,
             41
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.1",
@@ -86087,8 +86970,10 @@
           "pdf_pages": [
             40
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.3",
@@ -86098,8 +86983,10 @@
             40,
             44
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.4",
@@ -86109,8 +86996,10 @@
             40,
             44
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         }
       ],
       "limitations": "No acredita equipamiento exhaustivo, certificacion ni simulacion operativa. La revision disciplinar sigue pendiente."
@@ -86223,7 +87112,7 @@
       },
       {
         "name": "Cartilla de especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 59,
@@ -86705,6 +87594,33 @@
             "source_phrase": "proyector"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "2.4",
+          "2.7"
+        ],
+        "references": [
+          {
+            "pdf_page": 70,
+            "criteria": [
+              "2.4"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 70,
+            "criteria": [
+              "2.7"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -86864,8 +87780,10 @@
           "pdf_pages": [
             70
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.5",
@@ -86894,8 +87812,10 @@
           "pdf_pages": [
             70
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.8",
@@ -87084,7 +88004,7 @@
       },
       {
         "name": "Apuntes técnicos “Funcionamiento de Aire Acondicionado”",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 86,
@@ -87152,6 +88072,24 @@
             "pdf_page": 86,
             "matched_by": "verified_activity_resource_noun",
             "source_phrase": "proyector"
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "4.2"
+        ],
+        "references": [
+          {
+            "pdf_page": 83,
+            "criteria": [
+              "4.2"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
         ]
       }
@@ -87292,8 +88230,10 @@
           "pdf_pages": [
             83
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.3",
@@ -87520,6 +88460,24 @@
             "source_phrase": "multimetro"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.7"
+        ],
+        "references": [
+          {
+            "pdf_page": 97,
+            "criteria": [
+              "3.7"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -87690,8 +88648,10 @@
           "pdf_pages": [
             97
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.1",
@@ -87894,7 +88854,7 @@
       },
       {
         "name": "La normativa vigente de gases de escape de motores de combustión interna",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 112,
@@ -87938,6 +88898,19 @@
         ]
       },
       {
+        "name": "Motor de combustion interna",
+        "category": "equipment",
+        "model": "catalog-motor",
+        "criteria": [],
+        "references": [
+          {
+            "pdf_page": 112,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "motores de combustion interna"
+          }
+        ]
+      },
+      {
         "name": "Ficha tecnica",
         "category": "documents",
         "model": "catalog-document",
@@ -87970,6 +88943,24 @@
             ],
             "matched_by": "source_verified_criterion_noun",
             "source_phrase": "motores diesel"
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.2"
+        ],
+        "references": [
+          {
+            "pdf_page": 108,
+            "criteria": [
+              "3.2"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
         ]
       }
@@ -88098,7 +89089,8 @@
             108
           ],
           "resources": [
-            "Motor diesel"
+            "Motor diesel",
+            "Elementos de proteccion personal"
           ],
           "status": "explicit_resources_linked"
         },
@@ -88429,6 +89421,33 @@
             "source_phrase": "manual del fabricante"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "4.3",
+          "5.2"
+        ],
+        "references": [
+          {
+            "pdf_page": 122,
+            "criteria": [
+              "4.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 123,
+            "criteria": [
+              "5.2"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -88711,8 +89730,10 @@
             126,
             129
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.4",
@@ -88757,8 +89778,10 @@
           "pdf_pages": [
             123
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "5.3",
@@ -88965,6 +89988,24 @@
         ]
       },
       {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 136,
+            "criteria": [
+              "3.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
+      },
+      {
         "name": "Manual de mantenimiento",
         "category": "documents",
         "model": "catalog-document",
@@ -89160,8 +90201,10 @@
           "pdf_pages": [
             136
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.2",
@@ -90873,7 +91916,7 @@
       },
       {
         "name": "Normativas institucionales",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 73,
@@ -92178,7 +93221,7 @@
       },
       {
         "name": "Orientaciones para el desarrollo de la investigación bibliográfica y su posterior exposición",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 122,
@@ -95241,6 +96284,19 @@
             "matched_by": "module_title"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [],
+        "references": [
+          {
+            "pdf_page": 61,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -95859,7 +96915,7 @@
       },
       {
         "name": "Copias de normativa legal de seguridad y medioambiental",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 85,
@@ -97251,7 +98307,7 @@
     "resources": [
       {
         "name": "Laboratorio, insumos y equipos de laboratorio",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 39,
@@ -97348,6 +98404,29 @@
         ]
       },
       {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.2"
+        ],
+        "references": [
+          {
+            "pdf_page": 39,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 37,
+            "criteria": [
+              "1.2"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "epp"
+          }
+        ]
+      },
+      {
         "name": "Computador",
         "category": "digital",
         "model": "catalog-computer",
@@ -97433,8 +98512,10 @@
             37,
             39
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "1.3",
@@ -97629,6 +98710,33 @@
             "source_phrase": "impresora"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.3",
+          "3.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 47,
+            "criteria": [
+              "1.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 49,
+            "criteria": [
+              "3.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "epp"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -97700,8 +98808,10 @@
           "pdf_pages": [
             47
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "1.4",
@@ -97778,8 +98888,10 @@
             50,
             55
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.2",
@@ -98254,6 +99366,33 @@
             "source_phrase": "impresora"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.2",
+          "2.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 69,
+            "criteria": [
+              "1.2"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "epp"
+          },
+          {
+            "pdf_page": 70,
+            "criteria": [
+              "2.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -98307,8 +99446,10 @@
           "pdf_pages": [
             69
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "1.3",
@@ -98341,8 +99482,10 @@
             71,
             75
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.2",
@@ -98475,7 +99618,24 @@
             "pdf_page": 85,
             "activity": "Harneo de mineral a través de tamices",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 84,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 79,
+            "criteria": [
+              "1.2"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
+        ],
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.2"
         ]
       },
       {
@@ -98671,8 +99831,10 @@
             79,
             82
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "1.3",
@@ -98978,6 +100140,51 @@
             "source_phrase": "impresora"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.3",
+          "2.2",
+          "3.1",
+          "3.4"
+        ],
+        "references": [
+          {
+            "pdf_page": 91,
+            "criteria": [
+              "1.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 92,
+            "criteria": [
+              "2.2"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 93,
+            "criteria": [
+              "3.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "epp"
+          },
+          {
+            "pdf_page": 93,
+            "criteria": [
+              "3.4"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "epp"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -99049,8 +100256,10 @@
           "pdf_pages": [
             91
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "1.4",
@@ -99083,8 +100292,10 @@
             94,
             98
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.3",
@@ -99117,8 +100328,10 @@
           "pdf_pages": [
             93
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.2",
@@ -99149,8 +100362,10 @@
           "pdf_pages": [
             93
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         }
       ],
       "limitations": "No acredita equipamiento exhaustivo, certificacion ni simulacion operativa. La revision disciplinar sigue pendiente."
@@ -99319,6 +100534,51 @@
             "source_phrase": "planilla de calculo"
           }
         ]
+      },
+      {
+        "name": "Diagrama de flujo de proceso",
+        "category": "documents",
+        "model": "catalog-document",
+        "criteria": [
+          "1.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 103,
+            "criteria": [
+              "1.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "diagrama de flujo del proceso"
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.1",
+          "4.3"
+        ],
+        "references": [
+          {
+            "pdf_page": 105,
+            "criteria": [
+              "3.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 106,
+            "criteria": [
+              "4.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "epp"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -99381,8 +100641,10 @@
           "pdf_pages": [
             103
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Diagrama de flujo de proceso"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "1.2",
@@ -99469,8 +100731,10 @@
           "pdf_pages": [
             105
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.2",
@@ -99532,8 +100796,10 @@
             106,
             107
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.4",
@@ -99698,7 +100964,29 @@
             "pdf_page": 122,
             "activity": "Trabajo de laboratorio: secado de material",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 121,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 122,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 117,
+            "criteria": [
+              "3.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "epp"
           }
+        ],
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.3"
         ]
       },
       {
@@ -99934,8 +101222,10 @@
           "pdf_pages": [
             117
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.4",
@@ -100868,6 +102158,33 @@
             "matched_by": "module_title"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.6",
+          "5.3"
+        ],
+        "references": [
+          {
+            "pdf_page": 60,
+            "criteria": [
+              "3.6"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 60,
+            "criteria": [
+              "5.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -101100,8 +102417,10 @@
             62,
             65
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.7",
@@ -101208,8 +102527,10 @@
             62,
             65
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "6.1",
@@ -103418,7 +104739,7 @@
       },
       {
         "name": "Apuntes de las clases",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 52,
@@ -103634,7 +104955,7 @@
     "resources": [
       {
         "name": "Normativa tributaria",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 61,
@@ -103699,7 +105020,7 @@
       },
       {
         "name": "Problema a resolver con especificaciones",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 62,
@@ -106825,6 +108146,24 @@
         ]
       },
       {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.3"
+        ],
+        "references": [
+          {
+            "pdf_page": 183,
+            "criteria": [
+              "1.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
+      },
+      {
         "name": "Hoja de seguridad",
         "category": "documents",
         "model": "catalog-document",
@@ -106902,8 +108241,10 @@
             183,
             185
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.1",
@@ -107375,7 +108716,7 @@
       },
       {
         "name": "Apuntes de las clases",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 52,
@@ -107591,7 +108932,7 @@
     "resources": [
       {
         "name": "Normativa tributaria",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 61,
@@ -107656,7 +108997,7 @@
       },
       {
         "name": "Problema a resolver con especificaciones",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 62,
@@ -109156,7 +110497,7 @@
       },
       {
         "name": "Presentación en formato digital (por ejemplo PPT o Prezi) sobre contratos de trabajo",
-        "category": "equipment",
+        "category": "digital",
         "references": [
           {
             "pdf_page": 113,
@@ -109167,7 +110508,7 @@
       },
       {
         "name": "Normativa laboral, Código del Trabajo",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 113,
@@ -109222,7 +110563,7 @@
       },
       {
         "name": "Apuntes de las clases",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 114,
@@ -109594,7 +110935,7 @@
       },
       {
         "name": "Apuntes de las clases",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 124,
@@ -109649,7 +110990,7 @@
       },
       {
         "name": "Normativa laboral, Código del Trabajo",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 125,
@@ -111799,7 +113140,7 @@
       },
       {
         "name": "Disponibilidad de computadores y material bibliográfico para investigación",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 79,
@@ -111831,11 +113172,6 @@
             "pdf_page": 77,
             "matched_by": "verified_activity_resource_noun",
             "source_phrase": "computador"
-          },
-          {
-            "pdf_page": 79,
-            "matched_by": "verified_activity_resource_noun",
-            "source_phrase": "computadores"
           }
         ]
       },
@@ -112121,8 +113457,14 @@
             "pdf_page": 89,
             "activity": "Calculando raciones alimenticias",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 89,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Computador",
@@ -112668,6 +114010,24 @@
             "source_phrase": "impresora"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.6"
+        ],
+        "references": [
+          {
+            "pdf_page": 97,
+            "criteria": [
+              "3.6"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -112858,8 +114218,10 @@
           "pdf_pages": [
             97
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         }
       ],
       "limitations": "No acredita equipamiento exhaustivo, certificacion ni simulacion operativa. La revision disciplinar sigue pendiente."
@@ -113935,7 +115297,7 @@
     "resources": [
       {
         "name": "Catálogos de equipamiento y maquinaria agrícola",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 143,
@@ -113946,7 +115308,7 @@
       },
       {
         "name": "Presentación en formato digital",
-        "category": "equipment",
+        "category": "digital",
         "references": [
           {
             "pdf_page": 143,
@@ -115524,7 +116886,7 @@
       },
       {
         "name": "Disponibilidad de computadores y material bibliográfico para investigación",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 79,
@@ -115556,11 +116918,6 @@
             "pdf_page": 77,
             "matched_by": "verified_activity_resource_noun",
             "source_phrase": "computador"
-          },
-          {
-            "pdf_page": 79,
-            "matched_by": "verified_activity_resource_noun",
-            "source_phrase": "computadores"
           }
         ]
       },
@@ -115846,8 +117203,14 @@
             "pdf_page": 89,
             "activity": "Calculando raciones alimenticias",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 89,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Computador",
@@ -116393,6 +117756,24 @@
             "source_phrase": "impresora"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.6"
+        ],
+        "references": [
+          {
+            "pdf_page": 97,
+            "criteria": [
+              "3.6"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -116583,8 +117964,10 @@
           "pdf_pages": [
             97
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         }
       ],
       "limitations": "No acredita equipamiento exhaustivo, certificacion ni simulacion operativa. La revision disciplinar sigue pendiente."
@@ -116709,7 +118092,7 @@
       },
       {
         "name": "Presentación en formato digital",
-        "category": "equipment",
+        "category": "digital",
         "references": [
           {
             "pdf_page": 156,
@@ -119526,7 +120909,7 @@
       },
       {
         "name": "Disponibilidad de computadores y material bibliográfico para investigación",
-        "category": "digital",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 79,
@@ -119558,11 +120941,6 @@
             "pdf_page": 77,
             "matched_by": "verified_activity_resource_noun",
             "source_phrase": "computador"
-          },
-          {
-            "pdf_page": 79,
-            "matched_by": "verified_activity_resource_noun",
-            "source_phrase": "computadores"
           }
         ]
       },
@@ -119848,8 +121226,14 @@
             "pdf_page": 89,
             "activity": "Calculando raciones alimenticias",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 89,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Computador",
@@ -120395,6 +121779,24 @@
             "source_phrase": "impresora"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.6"
+        ],
+        "references": [
+          {
+            "pdf_page": 97,
+            "criteria": [
+              "3.6"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -120585,8 +121987,10 @@
           "pdf_pages": [
             97
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         }
       ],
       "limitations": "No acredita equipamiento exhaustivo, certificacion ni simulacion operativa. La revision disciplinar sigue pendiente."
@@ -121700,7 +123104,7 @@
       },
       {
         "name": "Sala de computación, proyector y computador",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 235,
@@ -123030,6 +124434,24 @@
             "source_phrase": "proyector"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.4"
+        ],
+        "references": [
+          {
+            "pdf_page": 69,
+            "criteria": [
+              "1.4"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -123121,8 +124543,10 @@
           "pdf_pages": [
             69
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.1",
@@ -123666,6 +125090,24 @@
             "source_phrase": "proyector"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "2.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 94,
+            "criteria": [
+              "2.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -123738,8 +125180,10 @@
           "pdf_pages": [
             94
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.2",
@@ -125662,6 +127106,24 @@
             "source_phrase": "proyector"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.4"
+        ],
+        "references": [
+          {
+            "pdf_page": 69,
+            "criteria": [
+              "1.4"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -125753,8 +127215,10 @@
           "pdf_pages": [
             69
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.1",
@@ -126298,6 +127762,24 @@
             "source_phrase": "proyector"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "2.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 94,
+            "criteria": [
+              "2.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -126370,8 +127852,10 @@
           "pdf_pages": [
             94
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.2",
@@ -128297,6 +129781,24 @@
             "source_phrase": "proyector"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.4"
+        ],
+        "references": [
+          {
+            "pdf_page": 69,
+            "criteria": [
+              "1.4"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -128388,8 +129890,10 @@
           "pdf_pages": [
             69
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.1",
@@ -128933,6 +130437,24 @@
             "source_phrase": "proyector"
           }
         ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "2.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 94,
+            "criteria": [
+              "2.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
       }
     ],
     "objectives": [
@@ -129005,8 +130527,10 @@
           "pdf_pages": [
             94
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.2",
@@ -129380,8 +130904,14 @@
             "pdf_page": 200,
             "activity": "Interpretación y verificación de partidas",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 200,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Computador con proyector de imagen",
@@ -129807,8 +131337,14 @@
             "pdf_page": 222,
             "activity": "Mantenimiento de pavimentos asfálticos",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 222,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Elementos de señalización",
@@ -130028,8 +131564,14 @@
             "pdf_page": 232,
             "activity": "Preparación de la subrrasante, subbase y base estabilizada",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 230,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Cámara fotográfica",
@@ -130293,8 +131835,14 @@
             "pdf_page": 241,
             "activity": "Muros de contención",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 241,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Cámara fotográfica",
@@ -131068,7 +132616,7 @@
       },
       {
         "name": "Materiales de laboratorio",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 49,
@@ -131203,6 +132751,24 @@
             ],
             "matched_by": "source_verified_criterion_noun",
             "source_phrase": "planillas de calculo"
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "4.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 47,
+            "criteria": [
+              "4.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
         ]
       },
@@ -131451,8 +133017,10 @@
           "pdf_pages": [
             47
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.2",
@@ -131647,7 +133215,7 @@
       },
       {
         "name": "Material de vidrio de laboratorio",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 61,
@@ -131691,7 +133259,33 @@
             "pdf_page": 63,
             "activity": "Reacciones óxido–reducción",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 61,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 57,
+            "criteria": [
+              "1.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 58,
+            "criteria": [
+              "2.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
+        ],
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.3",
+          "2.1"
         ]
       },
       {
@@ -131762,7 +133356,7 @@
       },
       {
         "name": "Material de laboratorio de uso general",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 63,
@@ -131931,8 +133525,10 @@
           "pdf_pages": [
             57
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.1",
@@ -131941,8 +133537,10 @@
           "pdf_pages": [
             58
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.2",
@@ -132177,7 +133775,7 @@
       },
       {
         "name": "Insumos de laboratorio",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 74,
@@ -132265,7 +133863,7 @@
       },
       {
         "name": "Insumos de laboratorio: vasos precipitados, probetas, pipetas, varillas de agitación, etc",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 76,
@@ -132326,7 +133924,33 @@
             "pdf_page": 76,
             "activity": "Elaboración de un jabón",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 76,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 71,
+            "criteria": [
+              "3.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 72,
+            "criteria": [
+              "5.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
+        ],
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.3",
+          "5.3"
         ]
       },
       {
@@ -132615,8 +134239,10 @@
           "pdf_pages": [
             71
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.4",
@@ -132677,8 +134303,10 @@
           "pdf_pages": [
             72
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "5.4",
@@ -132830,7 +134458,7 @@
       },
       {
         "name": "Materiales de uso común de laboratorio",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 84,
@@ -132863,7 +134491,7 @@
       },
       {
         "name": "Guía de laboratorio",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 84,
@@ -133160,7 +134788,7 @@
       },
       {
         "name": "Apuntes estadísticos",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 140,
@@ -133215,7 +134843,7 @@
       },
       {
         "name": "Material de laboratorio",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 141,
@@ -133259,7 +134887,7 @@
       },
       {
         "name": "Bibliografía relacionada",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 142,
@@ -133584,7 +135212,7 @@
       },
       {
         "name": "Materiales de uso común en el laboratorio",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 156,
@@ -133625,6 +135253,24 @@
             "pdf_page": 156,
             "matched_by": "verified_activity_resource_noun",
             "source_phrase": "balanza"
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "2.2"
+        ],
+        "references": [
+          {
+            "pdf_page": 150,
+            "criteria": [
+              "2.2"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
         ]
       }
@@ -133742,8 +135388,10 @@
             152,
             157
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.3",
@@ -133986,7 +135634,7 @@
       },
       {
         "name": "Materiales e insumos de laboratorio: vasos precipitados, embudo analítico, soporte universal, pipetas graduadas, vidrios de reloj, crisol, frasco lavador, papel filtro, etc",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 166,
@@ -134030,8 +135678,14 @@
             "pdf_page": 168,
             "activity": "Volumetría óxido-reducción: permanganimetría",
             "matched_by": "learning_outcome"
+          },
+          {
+            "pdf_page": 166,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Material de escritorio",
@@ -134079,7 +135733,7 @@
       },
       {
         "name": "Material volumétrico de laboratorio: buretas, probetas, pipetas aforadas, etc",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 168,
@@ -134603,7 +136257,7 @@
       },
       {
         "name": "Insumos de laboratorio: matraces de aforo, pipetas aforadas, vasos precipitados, varillas de agitación, espátulas, etc",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 178,
@@ -134642,8 +136296,14 @@
             "pdf_page": 178,
             "activity": "Curva de calibración para espectrofotometría",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 178,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Espectrofotometro",
@@ -134991,7 +136651,7 @@
       },
       {
         "name": "Materiales de uso común del laboratorio",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 185,
@@ -135704,7 +137364,7 @@
       },
       {
         "name": "Materiales de laboratorio",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 49,
@@ -135839,6 +137499,24 @@
             ],
             "matched_by": "source_verified_criterion_noun",
             "source_phrase": "planillas de calculo"
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "4.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 47,
+            "criteria": [
+              "4.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
         ]
       },
@@ -136087,8 +137765,10 @@
           "pdf_pages": [
             47
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "4.2",
@@ -136283,7 +137963,7 @@
       },
       {
         "name": "Material de vidrio de laboratorio",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 61,
@@ -136327,7 +138007,33 @@
             "pdf_page": 63,
             "activity": "Reacciones óxido–reducción",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 61,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 57,
+            "criteria": [
+              "1.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 58,
+            "criteria": [
+              "2.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
+        ],
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.3",
+          "2.1"
         ]
       },
       {
@@ -136398,7 +138104,7 @@
       },
       {
         "name": "Material de laboratorio de uso general",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 63,
@@ -136567,8 +138273,10 @@
           "pdf_pages": [
             57
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.1",
@@ -136577,8 +138285,10 @@
           "pdf_pages": [
             58
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "2.2",
@@ -136813,7 +138523,7 @@
       },
       {
         "name": "Insumos de laboratorio",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 74,
@@ -136901,7 +138611,7 @@
       },
       {
         "name": "Insumos de laboratorio: vasos precipitados, probetas, pipetas, varillas de agitación, etc",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 76,
@@ -136962,7 +138672,33 @@
             "pdf_page": 76,
             "activity": "Elaboración de un jabón",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 76,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 71,
+            "criteria": [
+              "3.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 72,
+            "criteria": [
+              "5.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
+        ],
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.3",
+          "5.3"
         ]
       },
       {
@@ -137251,8 +138987,10 @@
           "pdf_pages": [
             71
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.4",
@@ -137313,8 +139051,10 @@
           "pdf_pages": [
             72
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de protección personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "5.4",
@@ -137466,7 +139206,7 @@
       },
       {
         "name": "Materiales de uso común de laboratorio",
-        "category": "materials",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 84,
@@ -137499,7 +139239,7 @@
       },
       {
         "name": "Guía de laboratorio",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 84,
@@ -138423,7 +140163,7 @@
       },
       {
         "name": "Guía de laboratorio",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 108,
@@ -139000,7 +140740,7 @@
       },
       {
         "name": "Guía de laboratorio",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 118,
@@ -139537,8 +141277,14 @@
             "pdf_page": 132,
             "activity": "Calibración de una placa orificio",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 130,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "cronometro"
           }
-        ]
+        ],
+        "model": "catalog-timer"
       },
       {
         "name": "Vaso de 50 ml",
@@ -139602,7 +141348,7 @@
       },
       {
         "name": "Guía de laboratorio",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 130,
@@ -140252,7 +141998,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 56,
@@ -140772,7 +142518,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 65,
@@ -141025,7 +142771,7 @@
       },
       {
         "name": "Apuntes",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 75,
@@ -141085,7 +142831,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 77,
@@ -141276,7 +143022,7 @@
     "resources": [
       {
         "name": "Presentación en formato digital",
-        "category": "equipment",
+        "category": "digital",
         "references": [
           {
             "pdf_page": 85,
@@ -141315,7 +143061,7 @@
       },
       {
         "name": "Apuntes",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 85,
@@ -141428,6 +143174,24 @@
             ],
             "matched_by": "source_verified_criterion_noun",
             "source_phrase": "manual del fabricante"
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.3"
+        ],
+        "references": [
+          {
+            "pdf_page": 84,
+            "criteria": [
+              "3.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
         ]
       }
@@ -141604,8 +143368,10 @@
             84,
             87
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.4",
@@ -141664,7 +143430,7 @@
     "resources": [
       {
         "name": "Presentación en formato digital",
-        "category": "equipment",
+        "category": "digital",
         "references": [
           {
             "pdf_page": 95,
@@ -141703,7 +143469,7 @@
       },
       {
         "name": "Apuntes",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 95,
@@ -141950,7 +143716,7 @@
       },
       {
         "name": "Catálogo del fabricante de las herramientas y de los proveedores de materiales",
-        "category": "tools",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 149,
@@ -142189,7 +143955,7 @@
       },
       {
         "name": "Catálogo del fabricante de herramientas y de proveedores de materiales",
-        "category": "tools",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 159,
@@ -142216,7 +143982,7 @@
       },
       {
         "name": "Catálogo de herramientas y materiales",
-        "category": "tools",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 161,
@@ -142467,7 +144233,7 @@
       },
       {
         "name": "Catálogo de herramientas",
-        "category": "tools",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 169,
@@ -142516,7 +144282,7 @@
       },
       {
         "name": "Catálogo de herramientas y materiales",
-        "category": "tools",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 171,
@@ -143455,7 +145221,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 56,
@@ -143975,7 +145741,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 65,
@@ -144228,7 +145994,7 @@
       },
       {
         "name": "Apuntes",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 75,
@@ -144288,7 +146054,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 77,
@@ -144479,7 +146245,7 @@
     "resources": [
       {
         "name": "Presentación en formato digital",
-        "category": "equipment",
+        "category": "digital",
         "references": [
           {
             "pdf_page": 85,
@@ -144518,7 +146284,7 @@
       },
       {
         "name": "Apuntes",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 85,
@@ -144631,6 +146397,24 @@
             ],
             "matched_by": "source_verified_criterion_noun",
             "source_phrase": "manual del fabricante"
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.3"
+        ],
+        "references": [
+          {
+            "pdf_page": 84,
+            "criteria": [
+              "3.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
         ]
       }
@@ -144807,8 +146591,10 @@
             84,
             87
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.4",
@@ -144867,7 +146653,7 @@
     "resources": [
       {
         "name": "Presentación en formato digital",
-        "category": "equipment",
+        "category": "digital",
         "references": [
           {
             "pdf_page": 95,
@@ -144906,7 +146692,7 @@
       },
       {
         "name": "Apuntes",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 95,
@@ -145169,7 +146955,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 191,
@@ -145443,7 +147229,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 201,
@@ -145775,7 +147561,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 215,
@@ -146726,7 +148512,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 56,
@@ -147246,7 +149032,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 65,
@@ -147499,7 +149285,7 @@
       },
       {
         "name": "Apuntes",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 75,
@@ -147559,7 +149345,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 77,
@@ -147750,7 +149536,7 @@
     "resources": [
       {
         "name": "Presentación en formato digital",
-        "category": "equipment",
+        "category": "digital",
         "references": [
           {
             "pdf_page": 85,
@@ -147789,7 +149575,7 @@
       },
       {
         "name": "Apuntes",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 85,
@@ -147902,6 +149688,24 @@
             ],
             "matched_by": "source_verified_criterion_noun",
             "source_phrase": "manual del fabricante"
+          }
+        ]
+      },
+      {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "3.3"
+        ],
+        "references": [
+          {
+            "pdf_page": 84,
+            "criteria": [
+              "3.3"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
         ]
       }
@@ -148078,8 +149882,10 @@
             84,
             87
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "3.4",
@@ -148138,7 +149944,7 @@
     "resources": [
       {
         "name": "Presentación en formato digital",
-        "category": "equipment",
+        "category": "digital",
         "references": [
           {
             "pdf_page": 95,
@@ -148177,7 +149983,7 @@
       },
       {
         "name": "Apuntes",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 95,
@@ -148456,7 +150262,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 106,
@@ -148511,7 +150317,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas. 106 3° y 4º medio | Programa de Estudio",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 108,
@@ -148893,7 +150699,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 117,
@@ -149256,7 +151062,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 127,
@@ -149518,7 +151324,7 @@
       },
       {
         "name": "Catálogos y especificaciones técnicas",
-        "category": "equipment",
+        "category": "documents",
         "references": [
           {
             "pdf_page": 138,
@@ -150706,8 +152512,14 @@
             "pdf_page": 59,
             "activity": "Visor de temperatura en formato digital",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 57,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Diccionario de términos técnicos aeronáuticos inglés-español. 2",
@@ -151251,8 +153063,14 @@
             "pdf_page": 71,
             "activity": "Remoción de guía de cable de control de vuelo de una aeronave",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 71,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Cartilla con medidas de seguridad",
@@ -152315,6 +154133,29 @@
         ]
       },
       {
+        "name": "Elementos de proteccion personal",
+        "category": "protection",
+        "model": "catalog-ppe-set",
+        "criteria": [
+          "1.1"
+        ],
+        "references": [
+          {
+            "pdf_page": 99,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 97,
+            "criteria": [
+              "1.1"
+            ],
+            "matched_by": "source_verified_criterion_noun",
+            "source_phrase": "elementos de proteccion personal"
+          }
+        ]
+      },
+      {
         "name": "Manual del fabricante",
         "category": "documents",
         "model": "catalog-document",
@@ -152380,8 +154221,10 @@
           "pdf_pages": [
             97
           ],
-          "resources": [],
-          "status": "requires_disciplinary_review"
+          "resources": [
+            "Elementos de proteccion personal"
+          ],
+          "status": "explicit_resources_linked"
         },
         {
           "code": "1.2",
@@ -152702,8 +154545,19 @@
             "pdf_page": 112,
             "activity": "Cambio de la unidad bomba de sobre presión y bomba de emergencia de combustible",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 109,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
+          },
+          {
+            "pdf_page": 112,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Diccionario de términos técnicos aeronáuticos inglés-español. 110 Especialidad MECÁNICA DE MANTENIMIENTO DE AERONAVES | 3° y 4º medio | Plan y Programa de Estudio",
@@ -153319,7 +155173,7 @@
       },
       {
         "name": "Normativa aeronáutica vigente",
-        "category": "documents",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 122,
@@ -153352,7 +155206,7 @@
       },
       {
         "name": "Sala de computación o computadores con internet disponible",
-        "category": "digital",
+        "category": "equipment",
         "references": [
           {
             "pdf_page": 122,
@@ -154011,8 +155865,14 @@
             "pdf_page": 136,
             "activity": "Mantenimiento preventivo del sistema hidráulico",
             "matched_by": "module_title"
+          },
+          {
+            "pdf_page": 136,
+            "matched_by": "verified_activity_resource_noun",
+            "source_phrase": "elementos de proteccion personal"
           }
-        ]
+        ],
+        "model": "catalog-ppe-set"
       },
       {
         "name": "Diccionario de términos técnicos aeronáuticos inglés-español",

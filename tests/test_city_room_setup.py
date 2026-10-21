@@ -10,6 +10,10 @@ class RoomInventoryTests(unittest.TestCase):
     def test_regulations_are_documents_not_rulers(self):
         self.assertEqual(category('Reglamento Sanitario de los Alimentos'), 'documents')
         self.assertEqual(category('Regla graduada'), 'tools')
+        self.assertEqual(category('Sala apropiada para estudiar los planos'), 'equipment')
+        self.assertEqual(category('Taller con zona de máquinas, según normas de seguridad'), 'equipment')
+        self.assertEqual(category('Bibliografía y catálogos técnicos'), 'documents')
+        self.assertEqual(category('Presentación en formato digital'), 'digital')
     def test_criterion_review_is_explicit_and_sourced(self):
         data = json.loads((Path(__file__).resolve().parents[1] / 'city_room_resources.json').read_text(encoding='utf-8'))
         reviewed = data['441']

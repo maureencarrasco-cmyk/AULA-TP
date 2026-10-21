@@ -25,9 +25,11 @@ def activity_resources(text):
 
 def category(name):
     value = normalize(name)
+    if re.search(r'\b(sala|taller|laboratorio|puesto de trabajo|mesa de trabajo|mes[oó]n de trabajo|zona de trabajo)\b', value):
+        return 'equipment'
     for kind, pattern in [('protection', r'proteccion personal|epp|guantes|antiparras|casco|seguridad personal'),
-                          ('documents', r'manual|diccionario|guia|pauta|libro|norma|reglamento|texto|plano|document|ficha|registro'),
-                          ('digital', r'computador|software|internet|proyector|video|multimedia|impresora'),
+                          ('documents', r'manual|diccionario|guia|pauta|libro|\bnormas?\b|reglamento|texto|plano|document|ficha|registro|bibliograf|apuntes|cat[aá]logo|especificaciones?'),
+                          ('digital', r'computador|software|internet|proyector|video|multimedia|impresora|presentaci[oó]n en formato digital'),
                           ('tools', r'herramient|lupa|instrument|medicion|calibr|espejo|\breglas?\b|taladro|destornill|llave'),
                           ('materials', r'material|pano|limpieza|desecho|insumo|papel|lapiz|cartulina|tinta')]:
         if re.search(pattern, value):

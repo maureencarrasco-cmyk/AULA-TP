@@ -188,9 +188,10 @@
       const family=item.model.slice(8);unit.userData.equipmentFamily=family;
       const face=(x,y,z,w,h,color='teal')=>box(unit,x,y,z,w,h,.025,color);
       const dial=(x,y,z,r=.14)=>{const rim=cylinder(unit,x,y,z,r,r,.045,'metal');rim.rotation.x=Math.PI/2;const screen=cylinder(unit,x,y,z+.026,r*.86,r*.86,.012,'white');screen.rotation.x=Math.PI/2;rod(unit,[x,y,z+.04],[x+r*.6,y+r*.45,z+.04],.009,'dark');};
-      if(['meter','scope','controller','marine-scope'].includes(family)){
+      if(['meter','scope','controller','marine-scope','humiditymeter','timer'].includes(family)){
         box(unit,0,.3,0,.52,.55,.18,family==='meter'?'orange':'dark');face(0,.42,.11,.4,.18);
-        if(family==='meter')dial(0,.18,.12,.08);else for(let i=0;i<5;i++)face(-.16+i*.08,.16,.12,.035,.04,'white');
+        if(['meter','humiditymeter','timer'].includes(family))dial(0,.18,.12,.08);else for(let i=0;i<5;i++)face(-.16+i*.08,.16,.12,.035,.04,'white');
+        if(family==='timer'){ring(unit,0,.18,.15,.1,.012,'orange');rod(unit,[0,.18,.16],[.05,.24,.16],.008,'dark');}
         if(family==='marine-scope'){ring(unit,0,.42,.13,.075,.008,'white');rod(unit,[0,.42,.14],[.07,.47,.14],.006,'white');}
         for(const x of [-.16,.16]){rod(unit,[x,.06,.12],[x*1.6,-.04,.35],.012,x<0?'red':'dark');rod(unit,[x*1.6,-.04,.35],[x*1.9,.18,.42],.015,'metal');}
       }else if(family==='projector'){
@@ -254,6 +255,24 @@
         for(let i=0;i<3;i++)ring(unit,0,.2,i*.04,.24,.012,'blue');box(unit,.24,.05,.13,.12,.08,.07,'white');
       }else if(family==='valve'){
         rod(unit,[-.35,.18,0],[.35,.18,0],.065);rod(unit,[0,.18,0],[0,.5,0],.035);ring(unit,0,.5,0,.18,.02,'red').rotation.x=Math.PI/2;
+      }else if(family==='sink'){
+        box(unit,0,.48,0,.82,.12,.48,'metal');box(unit,0,.55,0,.58,.035,.3,'dark');box(unit,0,.53,0,.42,.02,.2,'metal');
+        for(const x of [-.34,.34])rod(unit,[x,.43,-.16],[x,.04,-.16],.025,'metal');
+        rod(unit,[.22,.54,-.12],[.22,.76,-.12],.025,'metal');rod(unit,[.22,.76,-.12],[.04,.76,-.12],.025,'metal');
+      }else if(family==='dispenser'){
+        box(unit,0,.26,0,.28,.48,.2,'white');face(0,.3,.11,.18,.17,'teal');rod(unit,[0,.04,.12],[0,.15,.12],.012,'metal');
+      }else if(family==='sample-container'){
+        for(let i=0;i<3;i++){const x=(i-1)*.2;cylinder(unit,x,.2,0,.075,.075,.34,'white');cylinder(unit,x,.39,0,.08,.08,.055,'blue');}
+      }else if(family==='label'){
+        box(unit,0,.04,0,.72,.035,.38,'white');box(unit,0,.062,.01,.61,.008,.28,'blue');
+        for(let i=0;i<9;i++)box(unit,-.22+i*.055,.069,.01,.016,.006,i%3===0?.2:.13,'white');
+        label(unit,item.name,0,.08,.17,.58,.1,'#ffffff');
+      }else if(family==='labeler'){
+        box(unit,0,.2,0,.72,.38,.32,'metal');box(unit,0,.08,.2,.85,.08,.12,'dark');
+        const roll=cylinder(unit,-.22,.46,-.03,.16,.16,.12,'white');roll.rotation.x=Math.PI/2;face(.16,.3,.17,.24,.08,'orange');
+      }else if(family==='defibrillator'){
+        box(unit,0,.38,0,.52,.65,.2,'orange');face(0,.48,.11,.38,.2,'dark');dial(0,.19,.12,.09);
+        for(const x of [-.25,.25]){rod(unit,[x,.12,.08],[x*1.4,-.02,.24],.012,'white');box(unit,x*1.4,-.04,.24,.11,.035,.08,'teal');}
       }else if(['lathe','mill','saw','grinder','press','crusher'].includes(family)){
         box(unit,0,.08,0,.9,.16,.46,'blue');box(unit,-.3,.4,0,.2,.55,.38,'teal');box(unit,.2,.27,0,.6,.1,.38,'metal');
         if(family==='lathe')rod(unit,[-.32,.55,0],[.35,.55,0],.08);
@@ -293,8 +312,10 @@
         box(unit,0,.5,-.36,.5,.35,.04,'blue');if(family==='wheelchair')for(const x of [-.3,.3]){const wheel=ring(unit,x,.24,0,.24,.018,'dark');wheel.rotation.y=Math.PI/2;}
       }else if(family==='syringe'){
         cylinder(unit,0,.25,0,.06,.06,.35,'white');rod(unit,[0,0,0],[0,.1,0],.008);rod(unit,[0,.42,0],[0,.58,0],.025);box(unit,0,.6,0,.17,.025,.1,'blue');
-      }else if(['gloves','goggles','helmet','headset','respirator','extinguisher','harness','lifejacket'].includes(family)){
+      }else if(['gloves','goggles','helmet','headset','respirator','extinguisher','harness','lifejacket','ppe-set','uniform'].includes(family)){
         if(family==='gloves')for(const x of [-.17,.17]){box(unit,x,.14,0,.2,.22,.08,'orange');for(let i=0;i<4;i++)rod(unit,[x-.07+i*.045,.22,0],[x-.07+i*.045,.4,0],.018,'orange');}
+        else if(family==='ppe-set'){box(unit,-.2,.17,0,.22,.18,.12,'orange');const helmet=cylinder(unit,.18,.28,0,.15,.16,.13,'orange');box(unit,.18,.18,.02,.34,.035,.19,'orange');for(const x of [-.1,.1])ring(unit,x,.15,.08,.07,.016,'dark');}
+        else if(family==='uniform'){box(unit,0,.28,0,.36,.5,.16,'teal');box(unit,0,.05,.1,.5,.06,.06,'orange');for(const x of [-.17,.17])rod(unit,[x,.46,0],[x*1.5,.16,.02],.025,'teal');}
         else if(family==='goggles')for(const x of [-.14,.14]){ring(unit,x,.25,0,.12,.02,'dark');face(x,.25,.01,.18,.12,'teal');}
         else if(family==='headset'){ring(unit,0,.4,0,.22,.025,'dark');for(const x of [-.22,.22])box(unit,x,.23,0,.1,.2,.12,'orange');}
         else if(family==='helmet'){const shell=cylinder(unit,0,.25,0,.16,.26,.24,'orange');box(unit,0,.12,.02,.58,.03,.4,'orange');}

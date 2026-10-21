@@ -8,51 +8,51 @@ Los modelos son representaciones didacticas, no equipos operativos ni una acredi
 
 | Curso | Modulos | Recursos | Modelos diferenciados | Criterios con recursos enlazados / registrados |
 | --- | ---: | ---: | ---: | ---: |
-| Acuicultura | 9 | 80 | 10 | 7 / 131 |
-| Administración, mención Logística | 11 | 161 | 22 | 2 / 112 |
+| Acuicultura | 9 | 80 | 14 | 7 / 131 |
+| Administración, mención Logística | 11 | 162 | 23 | 3 / 112 |
 | Administración, mención Recursos Humanos | 11 | 136 | 20 | 4 / 105 |
-| Agropecuaria, mención Agricultura | 10 | 136 | 26 | 7 / 136 |
-| Agropecuaria, mención Pecuaria | 11 | 147 | 26 | 6 / 143 |
-| Agropecuaria, mención Vitivinícola | 11 | 140 | 29 | 14 / 151 |
-| Asistencia en Geología | 9 | 72 | 7 | 7 / 110 |
-| Atención de Enfermería, mención Adulto Mayor | 13 | 118 | 43 | 0 / 35 |
-| Atención de Enfermería, mención Enfermería | 10 | 95 | 34 | 0 / 30 |
+| Agropecuaria, mención Agricultura | 10 | 137 | 28 | 8 / 136 |
+| Agropecuaria, mención Pecuaria | 11 | 148 | 28 | 7 / 143 |
+| Agropecuaria, mención Vitivinícola | 11 | 141 | 31 | 15 / 151 |
+| Asistencia en Geología | 9 | 73 | 8 | 7 / 110 |
+| Atención de Enfermería, mención Adulto Mayor | 13 | 119 | 44 | 0 / 35 |
+| Atención de Enfermería, mención Enfermería | 10 | 96 | 35 | 0 / 30 |
 | Atención de Párvulos | 10 | 174 | 26 | 0 / 155 |
-| Conectividad y Redes | 9 | 59 | 23 | 33 / 142 |
-| Construcciones Metálicas | 9 | 130 | 30 | 18 / 130 |
-| Construcción, mención Edificación | 12 | 67 | 22 | 2 / 106 |
-| Construcción, mención Obras Viales e Infraestructura | 13 | 101 | 24 | 2 / 113 |
-| Construcción, mención Terminaciones de la Construcción | 12 | 72 | 24 | 2 / 102 |
+| Conectividad y Redes | 9 | 60 | 24 | 35 / 142 |
+| Construcciones Metálicas | 9 | 133 | 34 | 22 / 130 |
+| Construcción, mención Edificación | 12 | 69 | 24 | 4 / 106 |
+| Construcción, mención Obras Viales e Infraestructura | 13 | 103 | 30 | 4 / 113 |
+| Construcción, mención Terminaciones de la Construcción | 12 | 74 | 26 | 4 / 102 |
 | Contabilidad | 10 | 125 | 27 | 8 / 120 |
 | Dibujo Técnico | 11 | 74 | 20 | 5 / 164 |
-| Elaboración Industrial de Alimentos | 9 | 112 | 20 | 6 / 97 |
+| Elaboración Industrial de Alimentos | 9 | 118 | 26 | 9 / 97 |
 | Electricidad | 9 | 84 | 15 | 4 / 25 |
 | Electrónica | 10 | 111 | 22 | 12 / 176 |
-| Explotación Minera | 9 | 56 | 4 | 7 / 163 |
-| Forestal | 9 | 77 | 14 | 11 / 101 |
-| Gastronomía, mención Cocina | 11 | 132 | 30 | 18 / 111 |
-| Gastronomía, mención Pastelería y Repostería | 11 | 147 | 34 | 34 / 111 |
-| Gráfica | 9 | 245 | 43 | 46 / 113 |
-| Instalaciones Sanitarias | 10 | 147 | 13 | 7 / 88 |
-| Mecánica Automotriz | 10 | 158 | 24 | 10 / 155 |
-| Mecánica Industrial, mención Mantenimiento Electromecánico | 10 | 81 | 10 | 42 / 134 |
-| Mecánica Industrial, mención Matricería | 10 | 72 | 12 | 27 / 139 |
-| Mecánica Industrial, mención Máquinas-Herramientas | 10 | 73 | 9 | 29 / 132 |
-| Mecánica de Mantenimiento de Aeronaves | 11 | 165 | 38 | 60 / 145 |
-| Metalurgia Extractiva | 9 | 83 | 29 | 7 / 110 |
-| Montaje Industrial | 9 | 62 | 12 | 5 / 100 |
-| Muebles y Terminaciones en Madera | 10 | 92 | 10 | 8 / 147 |
-| Operaciones Portuarias | 9 | 95 | 3 | 2 / 132 |
+| Explotación Minera | 9 | 57 | 5 | 9 / 163 |
+| Forestal | 9 | 78 | 21 | 12 / 101 |
+| Gastronomía, mención Cocina | 11 | 134 | 32 | 20 / 111 |
+| Gastronomía, mención Pastelería y Repostería | 11 | 149 | 36 | 36 / 111 |
+| Gráfica | 9 | 248 | 47 | 48 / 113 |
+| Instalaciones Sanitarias | 10 | 147 | 16 | 7 / 88 |
+| Mecánica Automotriz | 10 | 166 | 32 | 21 / 155 |
+| Mecánica Industrial, mención Mantenimiento Electromecánico | 10 | 82 | 11 | 43 / 134 |
+| Mecánica Industrial, mención Matricería | 10 | 73 | 13 | 28 / 139 |
+| Mecánica Industrial, mención Máquinas-Herramientas | 10 | 74 | 10 | 30 / 132 |
+| Mecánica de Mantenimiento de Aeronaves | 11 | 166 | 43 | 61 / 145 |
+| Metalurgia Extractiva | 9 | 89 | 37 | 21 / 110 |
+| Montaje Industrial | 9 | 64 | 14 | 6 / 100 |
+| Muebles y Terminaciones en Madera | 10 | 94 | 16 | 17 / 147 |
+| Operaciones Portuarias | 9 | 96 | 4 | 2 / 132 |
 | Pesquería | 9 | 59 | 15 | 16 / 169 |
 | Programación | 9 | 87 | 20 | 9 / 114 |
-| Química Industrial, mención Laboratorio Químico | 10 | 180 | 39 | 10 / 155 |
-| Química Industrial, mención Planta Química | 9 | 199 | 60 | 14 / 121 |
+| Química Industrial, mención Laboratorio Químico | 10 | 182 | 45 | 16 / 155 |
+| Química Industrial, mención Planta Química | 9 | 200 | 64 | 19 / 121 |
 | Refrigeración y Climatización | 9 | 50 | 4 | 1 / 60 |
 | Servicios de Hotelería | 10 | 112 | 19 | 0 / 99 |
 | Servicios de Turismo | 10 | 167 | 21 | 1 / 134 |
-| Telecomunicaciones | 10 | 106 | 28 | 9 / 135 |
-| Tripulación de Naves Mercantes y Especiales | 9 | 87 | 27 | 30 / 159 |
-| Vestuario y Confección Textil | 10 | 203 | 52 | 37 / 107 |
+| Telecomunicaciones | 10 | 107 | 29 | 10 / 135 |
+| Tripulación de Naves Mercantes y Especiales | 9 | 88 | 28 | 30 / 159 |
+| Vestuario y Confección Textil | 10 | 206 | 55 | 40 / 107 |
 
 ## Transcripciones que requieren revision de fuente
 
