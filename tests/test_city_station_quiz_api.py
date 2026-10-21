@@ -58,13 +58,32 @@ class CityStationQuizAPI(unittest.TestCase):
         self.assertEqual(len(ids), 20)
         self.assertEqual(len(set(ids)), 20)
         expected = {'Representar', 'Resolver problemas', 'Modelar', 'Argumentar'}
+        difficulty_counts = {'Fácil': 0, 'Media': 0, 'Difícil': 0}
         for station in range(1, 5):
             data = banks[station]
             item = state[str(station)]
             self.assertEqual(len(item['question_ids']), 5)
+            self.assertEqual(len(item['difficulty_levels']), 5)
+            for level in item['difficulty_levels']:
+                difficulty_counts[level] += 1
             self.assertTrue(expected.issubset(set(item['skills'])))
             self.assertEqual(data['skill'], item['skills'][0])
             self.assertEqual(data['topic'], topics[station-1])
+        self.assertEqual(difficulty_counts, {'Fácil': 10, 'Media': 8, 'Difícil': 2})
+
+    def test_station_quiz_rejects_banks_without_exactly_four_distinct_choices(self):
+        with sqlite3.connect(self.app.config['DATABASE']) as con:
+            original = con.execute('select content from modules where id=1').fetchone()[0]
+        for options in (['A', 'B', 'C'], ['A', 'B', 'C', 'D', 'E'], ['A', 'B', 'C', 'C']):
+            content = json.loads(original)
+            for question in content['questions']:
+                question['options'] = options
+            with sqlite3.connect(self.app.config['DATABASE']) as con:
+                con.execute('update modules set content=? where id=1', (json.dumps(content),))
+            with self.subTest(options=options):
+                with patch('app.enrich', side_effect=lambda value, position: value):
+                    response = self.student.get('/api/modules/1/city-station-quiz?station=1')
+                self.assertEqual(response.status_code, 409)
 
     def test_wrong_answer_retries_same_slot_then_requires_all_five_correct(self):
         path = '/api/modules/1/city-station-quiz?station=1'
@@ -78,20 +97,28 @@ class CityStationQuizAPI(unittest.TestCase):
         wrong = self.submit(1, question, (original['answer'] + 1) % len(original['options']))
         self.assertEqual(wrong.status_code, 200, wrong.json)
         self.assertFalse(wrong.json['passed'])
-        self.assertIn('feedback', wrong.json)
+        self.assertEqual(wrong.json['feedback'], original['option_feedback'][(original['answer'] + 1) % 4])
+        self.assertEqual((wrong.json['question_number'], wrong.json['correct_in_quiz']), (1, 0))
         next_question = wrong.json['next_question']
         self.assertNotEqual(next_question['id'], question['id'])
         self.assertEqual(wrong.json['next_skill'], first.json['skill'])
         self.assertNotIn('answer', next_question)
+        next_original = next(item for item in bank if item['id'] == next_question['id'])
+        wrong_again = self.submit(1, next_question, (next_original['answer'] + 1) % len(next_original['options']))
+        self.assertFalse(wrong_again.json['correct'])
+        self.assertEqual(wrong_again.json['feedback'], next_original['option_feedback'][(next_original['answer'] + 1) % 4])
+        self.assertEqual((wrong_again.json['question_number'], wrong_again.json['correct_in_quiz']), (1, 0))
+        second_retry = wrong_again.json['next_question']
+        self.assertNotIn(second_retry['id'], {question['id'], next_question['id']})
         with sqlite3.connect(self.app.config['DATABASE']) as con:
             state = json.loads(con.execute('select state from progress where user_id=1 and module_id=1').fetchone()[0])['city_station_quizzes']
         other_station_ids = {question_id for station, group in state.items() if station in ('2', '3', '4') for question_id in group.get('question_ids', [])}
-        self.assertNotIn(next_question['id'], other_station_ids)
+        self.assertNotIn(second_retry['id'], other_station_ids)
         self.assertEqual(self.submit(1, question, original['answer']).status_code, 409)
 
         refreshed = self.student.get(path)
-        self.assertEqual(refreshed.json['question']['id'], next_question['id'])
-        current = next_question
+        self.assertEqual(refreshed.json['question']['id'], second_retry['id'])
+        current = second_retry
         result = None
         for index in range(5):
             original = next(item for item in bank if item['id'] == current['id'])
@@ -112,6 +139,53 @@ class CityStationQuizAPI(unittest.TestCase):
     def test_station_number_and_authentication_are_checked(self):
         self.assertEqual(self.student.get('/api/modules/1/city-station-quiz?station=5').status_code, 400)
         self.assertEqual(self.app.test_client().get('/api/modules/1/city-station-quiz?station=1').status_code, 401)
+
+    def test_four_station_quizzes_unlock_portal_and_preserve_mission_progression(self):
+        experience = self.student.get('/api/modules/1/city-experience')
+        self.assertEqual(experience.status_code, 200)
+        self.assertTrue(experience.json['preview_mode'])
+        self.assertTrue(experience.json['stage2_unlocked'])
+        self.assertEqual(len(experience.json['plan']['quiz']), 4)
+        self.assertTrue(all(len(question.get('options') or []) == 4 for question in experience.json['plan']['quiz']))
+        self.assertEqual(experience.json['station_progress'], [
+            {'station': 1, 'passed': False}, {'station': 2, 'passed': False},
+            {'station': 3, 'passed': False}, {'station': 4, 'passed': False},
+        ])
+        self.assertEqual(self.student.post('/api/modules/1/city-experience', json={'operation': 'flag-interact'},
+                                           headers={'X-CSRF-Token': self.csrf}).status_code, 403)
+        blocked_mission = self.student.post('/api/modules/1/city-experience', json={
+            'operation': 'mission-submit', 'phase': 'planificar', 'text': 'Intento de escritura bloqueado en la vista previa.'
+        }, headers={'X-CSRF-Token': self.csrf})
+        self.assertEqual(blocked_mission.status_code, 403)
+
+        bank = DEFAULT_CONTENT['questions']
+        for station in range(1, 5):
+            current = self.student.get(f'/api/modules/1/city-station-quiz?station={station}').json['question']
+            for slot in range(5):
+                original = next(item for item in bank if item['id'] == current['id'])
+                response = self.submit(station, current, original['answer'])
+                self.assertEqual(response.status_code, 200, response.json)
+                if slot < 4:
+                    self.assertTrue(response.json['correct'])
+                    current = response.json['next_question']
+                else:
+                    self.assertTrue(response.json['passed'])
+
+        early_flag = self.student.post('/api/modules/1/city-experience', json={'operation': 'flag-interact'},
+                                       headers={'X-CSRF-Token': self.csrf})
+        self.assertEqual(early_flag.status_code, 403)
+        for _ in range(20):
+            heartbeat = self.student.post('/api/modules/1/city-experience', json={
+                'operation': 'heartbeat', 'stage': 'quiz', 'seconds': 60,
+            }, headers={'X-CSRF-Token': self.csrf})
+            self.assertEqual(heartbeat.status_code, 200, heartbeat.json)
+        opened = self.student.post('/api/modules/1/city-experience', json={'operation': 'flag-interact'},
+                                   headers={'X-CSRF-Token': self.csrf})
+        self.assertEqual(opened.status_code, 200, opened.json)
+        status = self.student.get('/api/modules/1/city-experience').json
+        self.assertTrue(status['stage2_unlocked'])
+        self.assertTrue(status['quiz_learning']['approved'])
+        self.assertEqual(len(status['state']['quiz']['answers']), 4)
 
 
 if __name__ == '__main__':

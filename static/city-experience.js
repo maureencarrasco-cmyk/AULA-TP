@@ -5,11 +5,12 @@
   const locationSummary=$('#location-summary');
   const setupPanel=$('#setup-panel'), journey=$('#journey'), setupNotice=$('#setup-notice'), journeyNotice=$('#journey-notice');
   const welcome=$('#city-welcome'),onboarding=$('#city-onboarding'),navigation=$('#city-navigation'),enterCity=$('#enter-city');
-  let csrf='', courses=[], plan=null, state=null, reward=null, specialtyProgress=null, recoveries=[], moduleId=null, currentLocation=null, activeRewardArea=null, districtArrived=false, activeStage='quiz', activeQuestion=0, activatedQuestion=-1, activePhase='planificar';
+  let csrf='', courses=[], plan=null, state=null, reward=null, specialtyProgress=null, recoveries=[], moduleId=null, currentLocation=null, activeRewardArea=null, districtArrived=false, activeStage='quiz', activeQuestion=0, activatedQuestion=-1, activePhase='planificar', previewMode=false;
   let activeSeconds=0, pendingSeconds=0, pendingStage='quiz', draftTimer=0;
   let mutationQueue=Promise.resolve(),draftRequest=Promise.resolve(),heartbeatRequest=Promise.resolve(),switchingStage=false;
   const phases=['planificar','actuar','verificar','justificar'];
   const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const hasFourOptions=options=>Array.isArray(options)&&options.length===4&&options.every(option=>typeof option==='string'&&option.trim())&&new Set(options.map(option=>option.trim())).size===4;
   const savedCount=()=>Object.keys(state?.quiz?.answers||{}).length;
   const answeredPhases=()=>Object.keys(state?.mission?.responses||{}).length;
   const phaseApproved=phase=>state?.mission?.recovery&&!state.mission.required_phases.includes(phase)?Boolean(state.mission.responses?.[phase]):state?.mission?.validation_version?Boolean(state.mission.phase_checks?.[phase]?.approved):Boolean(state?.mission?.responses?.[phase]);
@@ -90,6 +91,10 @@
       const district=params.get('district')||preferredCourse?.city_location?.district;
       if(district&&districts.includes(district)){districtSelect.value=district;selectCourseOptions(district,preCourse);selectModules(preCourse||courseSelect.value,preModule);}
       updateOnboardingContext(preCourse,preModule);
+      if(params.get('embed')==='1'&&params.get('stage')==='mission'&&preCourse&&preModule&&String(moduleSelect.value)===String(preModule)){
+        document.documentElement.classList.add('city-experience-embedded');
+        beginCityEntry();await openJourney();
+      }
     }catch(error){setupNotice.textContent=error.message;}
   }
   districtSelect.addEventListener('change',()=>selectCourseOptions(districtSelect.value));
@@ -121,12 +126,13 @@
       $('#journey-location').textContent=place?`Distrito ${place.district} · ${place.building} · ${place.floor} · ${place.space}`:'';
       updateCityGuideLink();
       setupPanel.hidden=true;onboarding.hidden=true;navigation.hidden=true;journey.hidden=false;
-      $('#mission-tab').disabled=!quizApproved()||quizRemaining()>0;
-      activeStage=quizApproved()&&Number(state.mission?.active_seconds)>0?'mission':'quiz';
+      previewMode=Boolean(data.preview_mode);
+      $('#mission-tab').disabled=!previewMode&&(!quizApproved()||quizRemaining()>0);
+      activeStage=previewMode?'mission':quizApproved()&&Number(state.mission?.active_seconds)>0?'mission':'quiz';
       if(quizApproved()&&Number(state.quiz?.active_seconds)>=plan.timing.quiz*60)activeStage='mission';
       activeSeconds=Number(state[activeStage]?.active_seconds)||0;
       $('#timer-value').textContent=formatTime(activeSeconds);
-      $('.timer small').textContent=state.mission?.recovery?`Recuperación: ${state.mission.required_seconds/60} min · adicional al recorrido inicial de 50 min`:'Duración mínima: 20 min de quiz + 30 min de práctica';
+      $('.timer small').textContent=previewMode?'Vista previa de edición · no registra respuestas ni progreso.':state.mission?.recovery?`Recuperación: ${state.mission.required_seconds/60} min · adicional al recorrido inicial de 50 min`:'Duración mínima: 20 min de quiz + 30 min de práctica';
       $('#mission-tab small').textContent=state.mission?.recovery?`${state.mission.required_seconds/60} min de recuperación`:'30 min';
       $('.stage-tab[data-stage="quiz"]').classList.toggle('active',activeStage==='quiz');
       $('#mission-tab').classList.toggle('active',activeStage==='mission');
@@ -145,7 +151,7 @@
   }
   function renderProgress(){
     const done=savedCount()+answeredPhases();$('#progress-bar').style.width=`${Math.round(done/(plan.quiz.length+plan.mission.phases.length)*100)}%`;
-    $('#mission-tab').disabled=!quizApproved()||quizRemaining()>0;
+    $('#mission-tab').disabled=!previewMode&&(!quizApproved()||quizRemaining()>0);
     $('.stage-tab[data-stage="quiz"]').classList.toggle('active',activeStage==='quiz');
     $('#mission-tab').classList.toggle('active',activeStage==='mission');
   }
@@ -158,6 +164,10 @@
       const remaining=quizRemaining();
       $('#work-main').innerHTML=`<div class="completion"><p class="section-kicker">${remaining?'Respuestas registradas · tiempo activo en curso':'Etapa 1 completada · 20 minutos activos'}</p><h3>Desafíos registrados</h3><p>Tu resultado formativo es</p><div class="summary-score">${score} / ${plan.quiz.length}</div><p>Las respuestas quedaron guardadas en este módulo. ${remaining?'Completa el tiempo activo restante antes de iniciar la práctica profesional.':'Ya puedes continuar con la práctica profesional integrada.'}</p><p class="phase-time" id="quiz-time-gate" ${remaining?'':'hidden'}>Tiempo activo restante: ${formatTime(remaining)}</p><button class="action-button" id="open-mission" type="button" ${remaining?'disabled':''}>Continuar a práctica profesional · 30 min</button></div>`;
       $('#open-mission').addEventListener('click',()=>setStage('mission'));
+      renderQuizAside(index,current);return;
+    }
+    if(!hasFourOptions(q.options)){
+      $('#work-main').innerHTML='<p class="feedback bad">Este desafío no está disponible porque debe incluir exactamente cuatro alternativas. Se conservó tu avance; informa al docente para revisar el banco del módulo.</p>';
       renderQuizAside(index,current);return;
     }
     activeQuestion=current;activeQuestion=Math.min(activeQuestion,plan.quiz.length-1);
@@ -191,6 +201,7 @@
     state=data.state;recoveries=data.recoveries||[];reward=data.reward;specialtyProgress=data.specialty_progress;
   }
   function renderQuizRecovery(){
+    recoveries=recoveries.map(item=>item.reassessment&&!hasFourOptions(item.reassessment.options)?{...item,reassessment:null}:item);
     $('#work-main').innerHTML=`<section class="quiz-reinforcement"><p class="section-kicker">Etapa 1 · refuerzo y nuevo intento</p><h3>Fortalece los aprendizajes pendientes</h3><p class="quiz-result" role="status">${quizScore()}/${plan.quiz.length} · ${Math.round(quizScore()*100/plan.quiz.length)}% · mínimo de aprobación: 75%</p><p>La práctica se habilita cuando demuestres al menos 75%. Tus logros se conservan. Estudia la explicación y responde una pregunta distinta del mismo aprendizaje.</p>${recoveries.map((item,i)=>{const lesson=item.reinforcement||{},last=item.reassessment_attempts?.at(-1),variant=item.reassessment;return `<details class="recovery-card" ${i===0?'open':''}><summary>Quiz ${String(item.index+1).padStart(2,'0')} · ${esc(lesson.ae_title||'Aprendizaje pendiente')}</summary><p>${esc(last?.question||item.question)}</p><p class="feedback bad">${esc(item.latest_feedback||item.explanation)}</p><p><strong>Respuesta correcta:</strong> ${esc(item.correct_answer)}</p><p><strong>Criterio:</strong> ${esc(lesson.criterion)}</p>${(Array.isArray(lesson.lesson)?lesson.lesson:[lesson.lesson]).filter(Boolean).map(text=>`<p>${esc(text)}</p>`).join('')}${lesson.example?`<p><strong>Ejemplo trabajado en el módulo:</strong> ${esc(lesson.example)}</p>`:''}<p>${item.reassessment_attempts.length} intento(s) equivalente(s) registrado(s).</p>${variant?`<form data-quiz-retry="${item.index}"><label>Explica qué corregirás y por qué<textarea name="reinforcement" minlength="20" maxlength="10000" required></textarea></label><h4>Nuevo desafío equivalente</h4>${variant.image?`<img class="recovery-image" src="${esc(variant.image)}" alt="${esc(variant.alt||'Recurso del módulo')}">`:''}<p>${esc(variant.question)}</p><fieldset class="choices"><legend>Selecciona una alternativa</legend>${variant.options.map((option,n)=>`<label class="choice"><input type="radio" name="choice" value="${n}" required><span>${esc(option)}</span></label>`).join('')}</fieldset><label class="quiz-argument">Fundamenta tu nueva respuesta<textarea name="argument" minlength="20" maxlength="10000" required></textarea></label><button class="action-button" type="submit">Comprobar aprendizaje</button></form>`:'<p class="feedback">El banco de este AE no tiene más preguntas equivalentes inéditas. Solicita al docente ampliar el banco; tu avance queda guardado y la práctica sigue bloqueada.</p>'}</details>`;}).join('')}</section>`;
     $$('[data-quiz-retry]').forEach(form=>form.addEventListener('submit',async event=>{
       event.preventDefault();const button=form.querySelector('button'),data=new FormData(form),index=Number(form.dataset.quizRetry),item=recoveries.find(item=>item.index===index);button.disabled=true;
@@ -216,7 +227,7 @@
       const score=Number(state.quiz?.score)||0;
       renderMissionCompletion(score);renderMissionAside(count);return;
     }
-    if(!phases.includes(activePhase)||!responses[activePhase]&&phases.slice(0,phases.indexOf(activePhase)).some(phase=>!responses[phase]))activePhase=nextPhase();
+    if(!previewMode&&(!phases.includes(activePhase)||!responses[activePhase]&&phases.slice(0,phases.indexOf(activePhase)).some(phase=>!responses[phase])))activePhase=nextPhase();
     const phase=plan.mission.phases.find(item=>item.id===activePhase), saved=responses[phase.id], draft=state.mission?.drafts?.[phase.id]||'';
     const finalPhase=phases.every(key=>key===phase.id||responses[key]), remaining=finalPhase?missionRemaining():0;
     const check=state.mission?.phase_checks?.[phase.id],awaiting=Boolean(state.mission?.validation_version&&saved&&!check),validated=phaseApproved(phase.id);
@@ -224,7 +235,7 @@
     $('#route-status').textContent=`Misión ${String(phase.number).padStart(2,'0')} · ${currentLocation?.district||'Ciudad Laboral'}`;
     $('#route-instructions').textContent='Desarrolla la misión con la Ciudad Laboral original abierta en otra pestaña y consulta su mapa para ubicar tu especialidad.';
     const task=plan.mission.tasks[phase.number-1];
-    $('#work-main').innerHTML=`<p class="section-kicker">Misión ${String(phase.number).padStart(2,'0')} de 04 · ${phase.minutes} min</p><h3>${esc(phase.title)} · orden laboral integrada</h3><div class="scenario"><strong>${esc(plan.module.case_title)}</strong><br>${esc(plan.mission.scenario)}</div>${task?`<article class="mission-task mission-active"><strong>${esc(task.title)}${task.ae?` · AE ${esc(task.ae)}`:''}</strong>${task.ae_title?`<p>${esc(task.ae_title)}</p>`:''}<p>${esc(task.prompt)}</p><p class="task-product">Producto: ${esc(task.product)}</p>${task.criterion?`<p>Criterio: ${esc(task.criterion)}</p>`:''}</article>`:''}<p class="question">${esc(phase.prompt)}</p>${plan.mission.question?`<p class="subtle">Punto de decisión del caso: ${esc(plan.mission.question)}</p>`:''}${remaining?`<p class="phase-time" id="mission-time-gate">Tiempo activo de práctica restante para cerrar: ${formatTime(remaining)}</p>`:''}<form class="phase-form" id="phase-form"><label for="phase-response">Evidencia de la misión ${String(phase.number).padStart(2,'0')}</label><textarea id="phase-response" maxlength="10000" placeholder="Registra decisiones, acciones, verificaciones y fundamento con datos y criterios del módulo.">${esc(saved||draft)}</textarea><div class="counter" id="response-count"></div><div class="action-row"><span class="subtle" id="save-state">${saved?'Misión guardada':'Borrador guardado automáticamente'}</span><button class="action-button" id="save-phase" type="submit" ${remaining?'disabled':''}>${saved?'Actualizar y continuar':'Guardar misión'}</button></div></form>`;
+    $('#work-main').innerHTML=`${previewMode?'<p class="preview-banner" role="status">Vista previa para edición · puedes recorrer las etapas; no se guardarán respuestas, tiempos ni logros.</p>':''}<p class="section-kicker">Misión ${String(phase.number).padStart(2,'0')} de 04 · ${phase.minutes} min</p><h3>${esc(phase.title)} · orden laboral integrada</h3><div class="scenario"><strong>${esc(plan.module.case_title)}</strong><br>${esc(plan.mission.scenario)}</div>${task?`<article class="mission-task mission-active"><strong>${esc(task.title)}${task.ae?` · AE ${esc(task.ae)}`:''}</strong>${task.ae_title?`<p>${esc(task.ae_title)}</p>`:''}<p>${esc(task.prompt)}</p><p class="task-product">Producto: ${esc(task.product)}</p>${task.criterion?`<p>Criterio: ${esc(task.criterion)}</p>`:''}</article>`:''}<p class="question">${esc(phase.prompt)}</p>${plan.mission.question?`<p class="subtle">Punto de decisión del caso: ${esc(plan.mission.question)}</p>`:''}${!previewMode&&remaining?`<p class="phase-time" id="mission-time-gate">Tiempo activo de práctica restante para cerrar: ${formatTime(remaining)}</p>`:''}<form class="phase-form" id="phase-form"><label for="phase-response">Evidencia de la misión ${String(phase.number).padStart(2,'0')}</label><textarea id="phase-response" maxlength="10000" placeholder="Registra decisiones, acciones, verificaciones y fundamento con datos y criterios del módulo." ${previewMode?'readonly':''}>${esc(saved||draft)}</textarea><div class="counter" id="response-count"></div><div class="action-row"><span class="subtle" id="save-state">${previewMode?'Campos deshabilitados en vista previa':saved?'Misión guardada':'Borrador guardado automáticamente'}</span><button class="action-button" id="save-phase" type="submit" ${previewMode||remaining?'disabled':''}>${saved?'Actualizar y continuar':'Guardar misión'}</button></div></form>`;
     const input=$('#phase-response'), counter=$('#response-count');
     if(check)$('#work-main').insertAdjacentHTML('afterbegin',`<p class="feedback ${check.approved?'good':'bad'}">${check.approved?'Misión validada.':'Corrige tu procedimiento antes de continuar.'} ${esc(check.feedback)}</p>`);
     if(awaiting){input.readOnly=true;$('#save-phase').disabled=true;$('#save-state').textContent='Entrega pendiente de validación docente';}
@@ -235,8 +246,9 @@
       $('#refresh-mission').addEventListener('click',async()=>{try{await refreshLearning();activePhase=nextPhase();render();}catch(error){setNotice(error.message);}});
     }
     if(preserved){input.readOnly=true;$('#save-phase').disabled=true;$('#save-state').textContent='Competencia ya lograda · evidencia conservada';}
-    const countText=()=>{counter.textContent=`${input.value.trim().length} caracteres · mínimo 20`;};countText();input.addEventListener('input',()=>{countText();clearTimeout(draftTimer);$('#save-state').textContent='Guardando borrador…';draftTimer=setTimeout(()=>{draftRequest=saveDraft(phase.id,input.value);},650);});
+    const countText=()=>{counter.textContent=previewMode?'Vista previa de solo lectura':`${input.value.trim().length} caracteres · mínimo 20`;};countText();if(!previewMode)input.addEventListener('input',()=>{countText();clearTimeout(draftTimer);$('#save-state').textContent='Guardando borrador…';draftTimer=setTimeout(()=>{draftRequest=saveDraft(phase.id,input.value);},650);});
     $('#phase-form').addEventListener('submit',async event=>{
+      if(previewMode){event.preventDefault();return;}
       event.preventDefault();const submit=$('#save-phase');if(submit.dataset.saving)return;submit.dataset.saving='true';submit.disabled=true;clearTimeout(draftTimer);await draftRequest;setNotice('Guardando evidencia…');
       try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'mission-submit',phase:phase.id,text:input.value})});state=result.state;setNotice('Fase guardada.');
         if(answeredPhases()<plan.mission.phases.length)activePhase=nextPhase();render();
@@ -298,13 +310,14 @@
     $('#area-evidence-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget,button=form.querySelector('button');button.disabled=true;try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'area-evidence',area_id:area.id,text:new FormData(form).get('text')})});state=result.state;exploreRewardArea(area);setNotice('Evidencia complementaria guardada. No modifica el tiempo ni la nota obligatoria.');}catch(error){button.disabled=false;setNotice(error.message);}});
   }
   async function saveDraft(phase,text){
+    if(previewMode)return;
     try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'mission-draft',phase,text})});state=result.state;const status=$('#save-state');if(status)status.textContent='Borrador guardado automáticamente';}
     catch(error){setNotice(error.message);}
   }
   function renderMissionAside(count){
     const workspace=currentLocation?.space||'taller de especialidad';
     const destinations=[`Preparación de orden · ${workspace}`,`Intervención técnica · ${workspace}`,`Control de calidad · ${workspace}`,`Entrega y justificación · ${workspace}`];
-    const phasesHtml=plan.mission.phases.map((phase,i)=>{const task=plan.mission.tasks[i],done=phaseApproved(phase.id),locked=!done&&phases.slice(0,i).some(key=>!phaseApproved(key)),check=state.mission?.phase_checks?.[phase.id],submitted=Boolean(phaseState()[phase.id]);return `<li><button type="button" class="${phase.id===activePhase?'active':''}" ${locked?'disabled':''}><span class="phase-card-copy"><strong>${done?'✓ ':''}Misión ${String(i+1).padStart(2,'0')} · ${esc(phase.title)}</strong><small>${esc(task?.title||phase.prompt)}</small><small>Destino · ${esc(destinations[i])}</small><small>${done?'Validada':check?'Requiere corrección':submitted?'Pendiente de validación':'Por realizar'}</small></span><small>${phase.minutes} min</small></button></li>`;}).join('');
+    const phasesHtml=plan.mission.phases.map((phase,i)=>{const task=plan.mission.tasks[i],done=phaseApproved(phase.id),locked=!previewMode&&!done&&phases.slice(0,i).some(key=>!phaseApproved(key)),check=state.mission?.phase_checks?.[phase.id],submitted=Boolean(phaseState()[phase.id]);return `<li><button type="button" class="${phase.id===activePhase?'active':''}" ${locked?'disabled':''}><span class="phase-card-copy"><strong>${done?'✓ ':''}Misión ${String(i+1).padStart(2,'0')} · ${esc(phase.title)}</strong><small>${esc(task?.title||phase.prompt)}</small><small>Destino · ${esc(destinations[i])}</small><small>${previewMode?'Vista previa':done?'Validada':check?'Requiere corrección':submitted?'Pendiente de validación':'Por realizar'}</small></span><small>${phase.minutes} min</small></button></li>`;}).join('');
     const rubricHtml=plan.mission.rubric.length?`<details class="rubric-details"><summary>Criterios de verificación · ${plan.mission.rubric.length}</summary><ul class="ae-list">${plan.mission.rubric.map(item=>`<li>${esc(item.name)}</li>`).join('')}</ul></details>`:'';
     const destination=destinations[Math.max(0,Math.min(3,phases.indexOf(activePhase)))];
     $('#work-aside').innerHTML=`<section class="mission-comic"><p class="markers-title">Práctica profesional · misiones laborales</p><ol class="phase-list">${phasesHtml}</ol><p class="mission-location"><strong>Referencia de trabajo:</strong><br>${esc(destination)} · ${esc(currentLocation?.building||'Distrito')} · ${esc(currentLocation?.floor||'Piso asignado')}<br>La ruta amarilla del mapa 3D sigue la posición del personaje hasta tu distrito.</p><a class="city-map-link city-guide-link" href="${esc(cityGuideUrl())}" target="_blank" rel="noopener">Abrir mapa 3D con ruta amarilla ↗</a><p class="phase-time">Etapa 2 · 30 min · secuencia 5 + 15 + 5 + 5</p></section><div class="mission-resources"><p class="markers-title">Aprendizajes que se integran</p><ul class="ae-list">${plan.mission.aes.map((ae,i)=>`<li><strong>AE ${i+1}</strong> · ${esc(ae.title)}</li>`).join('')}</ul>${rubricHtml}</div>`;
@@ -313,9 +326,9 @@
   }
   async function setStage(stage){
     if(switchingStage)return;
-    if(stage==='mission'&&!quizApproved()){setNotice('Aprueba el quiz con al menos 75% antes de iniciar las misiones laborales.');return;}
-    if(stage==='mission'&&savedCount()<plan.quiz.length){setNotice('Completa los cuatro desafíos antes de abrir las misiones laborales.');return;}
-    if(stage==='mission'&&quizRemaining()>0){setNotice('Completa los 20 minutos activos del quiz antes de iniciar la práctica profesional.');return;}
+    if(!previewMode&&stage==='mission'&&!quizApproved()){setNotice('Aprueba el quiz con al menos 75% antes de iniciar las misiones laborales.');return;}
+    if(!previewMode&&stage==='mission'&&savedCount()<plan.quiz.length){setNotice('Completa los cuatro desafíos antes de abrir las misiones laborales.');return;}
+    if(!previewMode&&stage==='mission'&&quizRemaining()>0){setNotice('Completa los 20 minutos activos del quiz antes de iniciar la práctica profesional.');return;}
     if(stage!==activeStage){
       switchingStage=true;await heartbeatRequest;
       if(pendingSeconds)await sendHeartbeat(activeStage);
@@ -326,7 +339,7 @@
   }
   $$('.stage-tab').forEach(button=>button.addEventListener('click',()=>{if(!button.disabled)setStage(button.dataset.stage);}));
   function tick(){
-    if(!journey.hidden&&!document.hidden&&!switchingStage&&!state.mission?.completed_at){if(!pendingSeconds)pendingStage=activeStage;pendingSeconds++;$('#timer-value').textContent=formatTime(activeSeconds+pendingSeconds);}
+    if(!previewMode&&!journey.hidden&&!document.hidden&&!switchingStage&&!state.mission?.completed_at){if(!pendingSeconds)pendingStage=activeStage;pendingSeconds++;$('#timer-value').textContent=formatTime(activeSeconds+pendingSeconds);}
     updateTimeGates();
     if(pendingSeconds>=30)heartbeatRequest=sendHeartbeat();
   }
@@ -337,10 +350,11 @@
     if(openMission)openMission.disabled=!quizApproved()||quizRemaining()>0;
     const missionGate=$('#mission-time-gate'),savePhase=$('#save-phase');
     if(missionGate&&savePhase){const remaining=missionRemaining(),mission=state.mission||{},waiting=mission.validation_version&&mission.responses?.[activePhase]&&!mission.phase_checks?.[activePhase];missionGate.textContent=`Tiempo activo de práctica restante para cerrar: ${formatTime(remaining)}`;missionGate.hidden=remaining<=0;savePhase.disabled=remaining>0||Boolean(savePhase.dataset.saving)||Boolean(waiting)||phaseApproved(activePhase);}
-    const missionTab=$('#mission-tab');if(missionTab)missionTab.disabled=!quizApproved()||quizRemaining()>0;
+    const missionTab=$('#mission-tab');if(missionTab)missionTab.disabled=!previewMode&&(!quizApproved()||quizRemaining()>0);
   }
   function formatTime(value){const mins=Math.floor(value/60),secs=value%60;return `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;}
   async function sendHeartbeat(stage=pendingStage){
+    if(previewMode){pendingSeconds=0;return;}
     if(!pendingSeconds||!moduleId)return;const seconds=Math.min(60,pendingSeconds);pendingSeconds-=seconds;
     try{const result=await request(`/api/modules/${moduleId}/city-experience`,{method:'POST',body:JSON.stringify({operation:'heartbeat',stage,seconds})});state=result.state;if(stage===activeStage)activeSeconds=Number(state[stage]?.active_seconds)||activeSeconds;$('#timer-value').textContent=formatTime(activeSeconds+pendingSeconds);updateTimeGates();}
     catch(_error){pendingSeconds+=seconds;}

@@ -406,6 +406,26 @@
 .city-native-route-active .city-quiz-feedback.is-correct { border-color:#9cdec5;background:#effbf5;color:#126642; }
 .city-native-route-active .city-quiz-submit:disabled { opacity:.62;cursor:wait; }
 .city-native-route-active .city-quiz-unavailable { display:grid;gap:16px;align-content:start;padding:24px; }
+.city-native-route-active .city-module-stage-panel { position:fixed;left:20px;bottom:24px;z-index:75;width:min(330px,calc(100vw - 32px));padding:15px;border:1px solid #8bdff2;border-radius:14px;background:#f8fdff;color:#17365d;box-shadow:0 8px 30px #03274355;font:14px/1.4 Arial,Helvetica,sans-serif; }
+.city-native-route-active .city-module-stage-panel h2,.city-native-route-active .city-module-stage-panel h3 { margin:0 0 10px;font-size:17px; }
+.city-native-route-active .city-module-stage-list { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:0 0 10px;padding:0;list-style:none; }
+.city-native-route-active .city-module-stage-list li { display:grid;justify-items:center;gap:3px;padding:7px 2px;border:1px solid #c8dfec;border-radius:9px;background:#fff;color:#56718a;font-size:12px;font-weight:800; }
+.city-native-route-active .city-module-stage-list li span { color:#7291a6;font-size:17px; }
+.city-native-route-active .city-module-stage-list li.is-passed { border-color:#73d9af;background:#effbf5;color:#176e4c; }
+.city-native-route-active .city-module-stage-list li.is-passed span { color:#0c9b62; }
+.city-native-route-active .city-module-stage-award { margin:8px 0;padding:10px;border-radius:9px;background:#fff5cf;color:#72500a;font-weight:800; }
+.city-native-route-active .city-module-stage-award[hidden],.city-native-route-active .city-module-stage-flag[hidden],.city-native-route-active .city-module-stage-portal[hidden] { display:none; }
+.city-native-route-active .city-module-stage-flag { width:100%;min-height:42px;border:0;border-radius:9px;background:#ffd33d;color:#26344a;font-weight:900;cursor:pointer; }
+.city-native-route-active .city-module-stage-flag:disabled { opacity:.6;cursor:wait; }
+.city-native-route-active .city-module-stage-message { min-height:18px;margin:8px 0 0;color:#385b75;font-size:12px; }
+.city-native-route-active .city-module-stage-portal { display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:8px; }
+.city-native-route-active .city-module-stage-portal h3 { margin:8px 0; }
+.city-native-route-active .city-module-stage-enter { min-height:38px;padding:7px 12px;border:0;border-radius:8px;background:#ffd33d;color:#26344a;font-weight:900;cursor:pointer; }
+.city-native-route-active .city-module-stage-close { min-height:34px;padding:6px 10px;border:1px solid #c7ddea;border-radius:8px;background:#fff;color:#17365d;cursor:pointer; }
+.city-native-route-active .city-module-stage-frame { grid-column:1/-1;width:min(720px,58vw);height:min(760px,76dvh);border:1px solid #b9d8e8;border-radius:10px;background:#fff; }
+.city-native-route-active .city-module-stage-panel.is-open { left:auto;right:16px;bottom:16px;width:min(760px,62vw); }
+.city-native-route-active .city-module-stage-panel.is-open .city-module-stage-award,.city-native-route-active .city-module-stage-panel.is-open .city-module-stage-list,.city-native-route-active .city-module-stage-panel.is-open>.city-module-stage-message { display:none; }
+@media(max-width:700px) { .city-native-route-active .city-module-stage-panel { left:10px;bottom:10px;width:min(340px,calc(100vw - 20px));padding:11px; }.city-native-route-active .city-module-stage-panel.is-open { left:8px;right:8px;bottom:8px;width:auto; }.city-native-route-active .city-module-stage-frame { width:100%;height:70dvh; } }
 @media(max-width:700px) { .city-native-route-active .city-quiz-marker-control { width:min(32vw,160px);height:min(12vh,74px); }.city-native-route-active .city-quiz-empty-window { top:auto;right:12px;bottom:12px;width:min(440px,calc(100vw - 24px));height:70dvh;min-height:360px;transform:none;border-radius:16px; } }
 .city-native-route-active .floor-station-dialog .floor-route-progress li:first-child { position:relative;aspect-ratio:1667/292;min-height:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none; }
 .city-native-route-active .floor-station-dialog .floor-route-progress li:first-child::before { position:absolute;inset:0;z-index:2;background:url("assets/quiz-observe-stage.png") center/100% 100% no-repeat;content:"";pointer-events:none; }

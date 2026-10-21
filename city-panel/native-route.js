@@ -2,8 +2,9 @@
 (() => {
   const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const specialtyFamily=value=>normalize(value).split(/,?\s+mencion\b/)[0].replace(/\bde\b/g,'').replace(/\s+/g,' ').trim();
+  const previewRequested=new URLSearchParams(location.search).get('cityPreview')==='1';
   let root,geometry,material,current=null,last=0,room=null,roomSignature='',error='',generation=0;
-  let stationQuestionSignature='';
+  let stationQuestionSignature='',clockRoomActive=false;
   let redrawFrame=0;
   function requestRedraw(ctx){
     cancelAnimationFrame(redrawFrame);const token=generation;
@@ -11,6 +12,7 @@
     redrawFrame=requestAnimationFrame(()=>{redrawFrame=0;if(token===generation&&root?.parent===ctx.scene&&!ctx.map)ctx.renderer?.render(ctx.scene,ctx.camera);});
   }
   let quizControlLayer=null,quizWindow=null,activeQuizNumber=null;
+  let stagePanel=null,stageData=null,stageFrame=null,stageFetchAt=0,stageMessage='',stageBusy=false,stageCsrf='',stageRoot=null,stageFlagPosition=null,stagePortalPosition=null,stageNearFlag=false,stageNearPortal=false,lastStageUI=0;
   const originalSigns=[];
   const originalFixtureColliders=[];
   const arrows=[];
@@ -33,12 +35,99 @@
     if(openNumber)openQuizWindow(openNumber);
   }
   addEventListener('aulatp:quiz-progress',progress);
+  function setQuizRoomActive(active){
+    if(clockRoomActive===active)return;clockRoomActive=active;
+    globalThis.dispatchEvent(new CustomEvent('aulatp:quiz-room-state',{detail:{active,moduleId:current?.moduleId}}));
+  }
+  function allStationsPassed(){return Boolean(stageData?.station_progress?.length===4&&stageData.station_progress.every(item=>item.passed));}
+  function createStageLandmarks(ctx){
+    if(stageRoot||!root||(!allStationsPassed()&&!stageData?.preview_mode))return;
+    const T=ctx.three,points=roomStations.slice(0,4).map(station=>station.totem||[station.x,station.z]);
+    const x=ctx.district.x+points.reduce((sum,point)=>sum+(Number(point[0])||0),0)/points.length;
+    const z=ctx.district.z+points.reduce((sum,point)=>sum+(Number(point[1])||0),0)/points.length;
+    stageRoot=new T.YJl();stageRoot.name='Aula TP · trofeo, bandera y portal del módulo';root.add(stageRoot);
+    const box=new T.iNn(1,1,1),gold=new T.V9B({color:0xffc629,emissive:0x6b3900,toneMapped:false}),cyan=new T.V9B({color:0x32dfff,emissive:0x0788a8,toneMapped:false}),base=new T.V9B({color:0x075b9f,toneMapped:false});
+    const addBox=(px,py,pz,w,h,d,mat)=>{const mesh=new T.eaF(box,mat);mesh.position.set(px,py,pz);mesh.scale.set(w,h,d);if(mat===cyan)mesh.userData.cityStagePortal=true;stageRoot.add(mesh);return mesh;};
+    const trophyX=x-1.45,flagX=x+.15,portalX=x+1.8,y=ctx.floorY;
+    addBox(trophyX,y+.12,z,.72,.24,.72,base);addBox(trophyX,y+.3,z,.42,.12,.42,gold);addBox(trophyX,y+.58,z,.32,.42,.24,gold);addBox(trophyX,y+.85,z,.58,.12,.24,gold);addBox(trophyX,y+1.04,z,.18,.2,.18,gold);addBox(trophyX,y+1.24,z,.42,.12,.2,gold);
+    for(const side of [-1,1]){addBox(trophyX+side*.25,y+.62,z,.1,.26,.14,gold);}
+    addBox(flagX,y+.12,z,.72,.24,.72,base);addBox(flagX,y+1.08,z,.09,2.05,.09,gold);
+    const canvas=document.createElement('canvas');canvas.width=768;canvas.height=384;const c=canvas.getContext('2d');
+    c.fillStyle='#ffd52e';c.fillRect(0,0,768,384);c.fillStyle='#102c59';c.font='900 45px Arial';c.textAlign='center';c.fillText('AULA TP CHILE',384,126);c.font='800 34px Arial';c.fillText('CIUDAD LABORAL',384,180);c.font='900 78px Arial';c.fillText('✈',384,292);
+    const texture=new T.GOR(canvas);texture.colorSpace=T.er$;const banner=new T.eaF(new T.bdM(1.25,.64),new T.V9B({map:texture,side:T.$EB,toneMapped:false}));banner.position.set(flagX+.62,y+1.72,z);stageRoot.add(banner);stageRoot.userData.flagBanner=banner;stageRoot.userData.flagTexture=texture;
+    addBox(portalX,y+1.15,z,.16,2.25,.18,cyan);addBox(portalX+1.25,y+1.15,z,.16,2.25,.18,cyan);addBox(portalX+.625,y+2.25,z,.95,.16,.18,cyan);
+    const portalCanvas=document.createElement('canvas');portalCanvas.width=768;portalCanvas.height=384;const pc=portalCanvas.getContext('2d');pc.fillStyle='#eafaff';pc.fillRect(0,0,768,384);pc.fillStyle='#0454cb';pc.textAlign='center';pc.font='900 52px Arial';pc.fillText('ETAPA 2',384,150);pc.fillStyle='#112b55';pc.font='800 34px Arial';pc.fillText('PRÁCTICA LABORAL',384,220);
+    const portalTexture=new T.GOR(portalCanvas);portalTexture.colorSpace=T.er$;const portalSign=new T.eaF(new T.bdM(1.15,.58),new T.V9B({map:portalTexture,side:T.$EB,toneMapped:false}));portalSign.position.set(portalX+.63,y+1.2,z+.12);portalSign.userData.cityStagePortal=true;stageRoot.add(portalSign);stageRoot.userData.portalSign=portalSign;stageRoot.userData.portalTexture=portalTexture;
+    stageRoot.userData.trophyX=trophyX;stageRoot.userData.flagX=flagX;stageRoot.userData.portalX=portalX;stageRoot.userData.floorY=y;stageFlagPosition={x:flagX+.62,z};stagePortalPosition={x:portalX+.625,z};
+  }
+  async function refreshStageProgress(force=false){
+    if(!current?.moduleId||(!force&&performance.now()-stageFetchAt<4500))return;
+    stageFetchAt=performance.now();
+    try{
+      const preview=previewRequested?'?preview=1':'';
+      const response=await fetch(`/api/modules/${encodeURIComponent(current.moduleId)}/city-experience${preview}`,{credentials:'same-origin'});
+      const data=await response.json();if(!response.ok)throw new Error(data.error||'No se pudo consultar el avance del módulo.');
+      stageData=data;stageMessage='';renderStagePanel();
+    }catch(error){stageMessage=error.message;renderStagePanel();}
+  }
+  function renderStagePanel(){
+    if(!stageData||!current?.moduleId)return;
+    if(!stagePanel){
+      stagePanel=document.createElement('section');stagePanel.className='city-module-stage-panel';stagePanel.setAttribute('aria-label','Progreso de las etapas del módulo');
+      const title=document.createElement('h2');title.textContent='Etapa 1 · Quiz del módulo';
+      const list=document.createElement('ol');list.className='city-module-stage-list';
+      const award=document.createElement('div');award.className='city-module-stage-award';
+      const flag=document.createElement('button');flag.type='button';flag.className='city-module-stage-flag';flag.textContent='Interactuar con la bandera';
+      const message=document.createElement('p');message.className='city-module-stage-message';message.setAttribute('role','status');
+      flag.addEventListener('click',async()=>{
+        if(stageBusy)return;if(!stageNearFlag){message.textContent='Acércate a la bandera amarilla para interactuar.';return;}stageBusy=true;flag.disabled=true;message.textContent='Verificando los cuatro quiz y el tiempo activo…';
+        try{
+          if(!stageCsrf){const session=await fetch('/api/session',{credentials:'same-origin'}).then(response=>response.json());stageCsrf=session.csrf||'';}
+          const response=await fetch(`/api/modules/${encodeURIComponent(current.moduleId)}/city-experience`,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRF-Token':stageCsrf},body:JSON.stringify({operation:'flag-interact'})});
+          const data=await response.json();if(!response.ok)throw new Error(data.error||'No se pudo activar la bandera.');
+          await refreshStageProgress(true);
+        }catch(error){stageMessage=error.message;message.textContent=error.message;}
+        finally{stageBusy=false;flag.disabled=false;renderStagePanel();}
+      });
+      const portal=document.createElement('div');portal.className='city-module-stage-portal';portal.hidden=true;
+      const portalHeading=document.createElement('h3');portalHeading.textContent='Etapa 2 · Práctica laboral';
+      const enter=document.createElement('button');enter.type='button';enter.className='city-module-stage-enter';enter.textContent='Ingresar a la práctica';enter.addEventListener('click',openStagePortal);
+      const close=document.createElement('button');close.type='button';close.className='city-module-stage-close';close.textContent='Cerrar';close.addEventListener('click',()=>{portal.hidden=true;stagePanel.classList.remove('is-open');stageFrame?.remove();stageFrame=null;});
+      portal.append(portalHeading,enter,close);stagePanel.append(title,list,award,flag,message,portal);document.body.append(stagePanel);
+      stagePanel._list=list;stagePanel._award=award;stagePanel._flag=flag;stagePanel._enter=enter;stagePanel._message=message;stagePanel._portal=portal;
+    }
+    const { _list:list,_award:award,_flag:flag,_message:message,_portal:portal }=stagePanel;
+    const stationStates=stageData.station_progress||[],passed=stationStates.filter(item=>item.passed).length;
+    list.replaceChildren(...Array.from({length:4},(_,index)=>{const item=document.createElement('li'),badge=document.createElement('span');badge.textContent=stationStates[index]?.passed?'✓':'○';item.append(badge,document.createTextNode(`Quiz ${index+1}`));item.classList.toggle('is-passed',Boolean(stationStates[index]?.passed));return item;}));
+    award.hidden=stageData.preview_mode?false:passed!==4;award.textContent=stageData.preview_mode?'Vista previa de edición · no registra logros ni respuestas.':passed===4?'🏆 ¡Felicitaciones! Has superado la Etapa 1.':'Completa los cuatro quiz para obtener el trofeo y habilitar la bandera.';
+    flag.hidden=passed!==4||Boolean(stageData.stage2_unlocked);flag.disabled=stageBusy||!stageNearFlag;
+    if(stageMessage)message.textContent=stageMessage;
+    else if(passed===4&&!stageData.stage2_unlocked)message.textContent=`${stageNearFlag?'Pulsa E o interactúa aquí.':'Sigue las flechas amarillas hasta la bandera.'} Tiempo activo: ${Math.floor((Number(stageData.state?.quiz?.active_seconds)||0)/60)} de ${stageData.plan?.timing?.quiz||20} min.`;
+    else message.textContent='';
+    portal.hidden=!stageData.stage2_unlocked;
+  }
+  function openStagePortal(){
+    if(!stagePanel||!stageData?.stage2_unlocked)return;
+    const portal=stagePanel._portal;portal.hidden=false;stagePanel.classList.add('is-open');
+    if(stageFrame)return;
+    const frame=document.createElement('iframe');frame.className='city-module-stage-frame';frame.title='Prácticas laborales del módulo';
+    const url=new URL('/api/city-experience',location.origin);url.searchParams.set('course',stageData.course_id);url.searchParams.set('module',stageData.module_id);url.searchParams.set('stage','mission');url.searchParams.set('embed','1');if(stageData.preview_mode)url.searchParams.set('preview','1');
+    frame.src=url.toString();portal.append(frame);stageFrame=frame;
+  }
+  addEventListener('keydown',event=>{
+    if(event.key.toLowerCase()!=='e'||event.repeat||!stageData||quizWindow)return;
+    if(stageData.stage2_unlocked&&stageNearPortal){event.preventDefault();event.stopImmediatePropagation();stagePanel?._enter?.click();return;}
+    if(allStationsPassed()&&stageNearFlag){event.preventDefault();event.stopImmediatePropagation();stagePanel?._flag?.click();}
+  },true);
   function dispose(){
+    setQuizRoomActive(false);
     cancelAnimationFrame(redrawFrame);redrawFrame=0;
     workshopRequest?.abort();workshopRequest=null;workshop?.dispose();workshop=null;
     workshopKey='';workshopRetryAt=0;
     resourceButton?.remove();resourceButton=null;resourceWindow?.remove();resourceWindow=null;
-    generation++;root?.removeFromParent();geometry?.dispose();material?.dispose();
+    generation++;
+    if(stageRoot){stageRoot.traverse(node=>{node.geometry?.dispose();if(Array.isArray(node.material))node.material.forEach(item=>item.dispose());else node.material?.dispose();});stageRoot.userData.flagTexture?.dispose();stageRoot.userData.portalTexture?.dispose();stageRoot.removeFromParent();}
+    stageRoot=null;stageFlagPosition=stagePortalPosition=null;stageNearFlag=stageNearPortal=false;lastStageUI=0;root?.removeFromParent();geometry?.dispose();material?.dispose();
     markerGeometry?.dispose();markerImageGeometry?.dispose();markerHaloGeometry?.dispose();markerHaloTexture?.dispose();markerHaloMaterial?.dispose();
     markerBeamGeometry?.dispose();markerBeamTexture?.dispose();markerBeamMaterial?.dispose();beams.length=0;
     markerSparkGeometry?.dispose();markerSparkTexture?.dispose();markerSparkMaterial?.dispose();sparkles.length=0;
@@ -46,6 +135,7 @@
     for(const marker of quizMarkers){marker.texture.dispose();marker.material.dispose();marker.imageTexture?.dispose();marker.imageMaterial?.dispose();}
     quizMarkers.length=0;markerGeometry=markerImageGeometry=markerHaloGeometry=markerHaloTexture=markerHaloMaterial=markerBeamGeometry=markerBeamTexture=markerBeamMaterial=markerSparkGeometry=markerSparkTexture=markerSparkMaterial=markerCylinderGeometry=markerCylinderMaterial=null;
     quizControlLayer?.remove();quizControlLayer=null;quizControls.length=0;quizWindow?.remove();quizWindow=null;activeQuizNumber=null;
+    stagePanel?.remove();stagePanel=null;stageFrame=null;stageData=null;stageMessage='';stageBusy=false;stageFetchAt=0;stageCsrf='';
     stageAnchors.length=0;
     roomStations=[];
     for(const saved of originalSigns){const {sign,visible,geometry,material,name,flag,position,rotation,scale,texture,newMaterial}=saved;sign.visible=visible;sign.geometry=geometry;sign.material=material;sign.name=name;sign.position.copy(position);sign.rotation.copy(rotation);sign.scale.copy(scale);texture?.dispose();if(newMaterial&&newMaterial!==material)newMaterial.dispose();delete sign.userData.cityLegacyQuizStationSign;delete sign.userData.cityLegacyQuizStageSign;delete sign.userData.cityLegacyQuizFurniture;delete sign.userData.cityQuizMarker;delete sign.userData.citySpecialtyPlaque;}
@@ -295,20 +385,15 @@
   function selectStationQuizQuestions(questions){
     const selected=[];
     for(const level of ['easy','easy','medium','hard']){
-      const question=questions.find(item=>!selected.includes(item)&&questionLevel(item)===level&&String(item.prompt||'').trim()&&Array.isArray(item.options));
+      const question=questions.find(item=>!selected.includes(item)&&questionLevel(item)===level&&String(item.prompt||'').trim()&&Array.isArray(item.options)&&item.options.length===4&&item.options.every(option=>String(option).trim())&&new Set(item.options.map(option=>String(option).trim())).size===4);
       if(!question)return [];
       selected.push(question);
     }
     return selected;
   }
   function stationQuizOptions(question){
-    const options=[...new Set((Array.isArray(question.options)?question.options:[]).map(option=>String(option).trim()).filter(Boolean))].slice(0,4);
-    const fallback='Elegir sin contrastar la evidencia con el criterio del aprendizaje esperado.';
-    while(options.length<4){
-      const candidate=options.includes(fallback)?`Omitir el registro y continuar sin verificar el criterio (${options.length+1}).`:fallback;
-      options.push(candidate);
-    }
-    return options;
+    const options=Array.isArray(question.options)?question.options.map(option=>String(option).trim()):[];
+    return options.length===4&&options.every(Boolean)&&new Set(options).size===4?options:[];
   }
   function specialtyPhotos(name){
     const value=normalize(name);
@@ -534,7 +619,9 @@
         alignment.textContent=`Habilidad: ${skill}${aeTitle?` · AE: ${aeTitle}`:` · Aprendizaje esperado ${Number(item.ae)+1}`}`;
         criterion.hidden=!item.criterion;criterion.textContent=item.criterion?`Criterio asociado: ${item.criterion}`:'';
         choices.replaceChildren(legend);
-        (Array.isArray(item.options)?item.options:[]).slice(0,4).forEach((option,index)=>{
+        const options=stationQuizOptions(item);
+        if(options.length!==4){activeQuestion=null;prompt.textContent='No se puede mostrar esta pregunta: debe tener exactamente cuatro alternativas válidas.';submit.disabled=true;return;}
+        options.forEach((option,index)=>{
           const label=document.createElement('label'),radio=document.createElement('input'),copy=document.createElement('span');
           radio.type='radio';radio.name=`city-quiz-${number}-answer`;radio.value=String(index);radio.required=true;copy.textContent=String(option);label.append(radio,copy);choices.append(label);
         });
@@ -555,7 +642,7 @@
           const response=await fetch(api,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({station:number,question_id:activeQuestion.id,choice:Number(choice.value),argument:reason})});
           const result=await response.json();if(!response.ok)throw new Error(result.error||'No se pudo registrar la respuesta.');
           feedback.hidden=false;feedback.classList.toggle('is-correct',Boolean(result.correct));feedback.classList.toggle('is-incorrect',!result.correct);
-          if(result.passed){feedback.textContent=`¡Quiz aprobado! ${result.feedback||result.explanation||''}`;status.textContent='5 de 5 correctas';level.textContent='5 de 5 preguntas correctas';alignment.textContent='Aprendizaje esperado demostrado';prompt.textContent='¡Muy bien! Puedes continuar con otra estación.';choices.querySelectorAll('input').forEach(input=>input.disabled=true);argument.disabled=true;submit.textContent='Aprobado';}
+          if(result.passed){feedback.textContent=`¡Quiz aprobado! ${result.feedback||result.explanation||''}`;status.textContent='5 de 5 correctas';level.textContent='5 de 5 preguntas correctas';alignment.textContent='Aprendizaje esperado demostrado';prompt.textContent='¡Muy bien! Puedes continuar con otra estación.';choices.querySelectorAll('input').forEach(input=>input.disabled=true);argument.disabled=true;submit.textContent='Aprobado';refreshStageProgress(true);}
           else if(result.next_question){feedback.textContent=result.correct?`Correcto. ${result.feedback||''} Continúa con la pregunta ${result.question_number} de 5.`:`Aún no. ${result.feedback||result.explanation||'Revisa el criterio asociado.'} Prueba una pregunta nueva de ${result.next_skill}.`;status.textContent=`${result.correct_in_quiz||0} de 5 correctas`;renderQuestion(result.next_question,result.ae_title,result.next_skill,result.question_number);}
           else{feedback.textContent=`Aún no. ${result.feedback||result.explanation||''} No quedan preguntas inéditas en este aprendizaje; volveremos a presentarlo.`;status.textContent='Reintento disponible';}
         }catch(error){status.textContent=error.message;submit.disabled=false;}
@@ -581,7 +668,8 @@
     forward.y=0;forward.normalize();
     const rightX=-forward.z,rightZ=forward.x;
     arrows.forEach((arrow,index)=>{
-      const station=stations[index];
+      const destination=stageData?.stage2_unlocked?stagePortalPosition:stageFlagPosition;
+      const station=(allStationsPassed()||stageData?.preview_mode)&&destination?(index===0?{totem:[destination.x-ctx.district.x,destination.z-ctx.district.z]}:null):stations[index];
       if(!station){arrow.visible=false;return;}
       const [dx,dz]=station.totem||[station.x,station.z],targetX=ctx.district.x+dx,targetZ=ctx.district.z+dz;
       const deltaX=targetX-player.x,deltaZ=targetZ-player.z,distance=Math.hypot(deltaX,deltaZ);
@@ -596,21 +684,32 @@
   }
   function frame(ctx){
     try{
-      if(!ctx.indoors||!ctx.room||!ctx.stations.length){if(root)dispose();room=null;return;}
+      if(!ctx.indoors||!ctx.room||!ctx.stations.length){setQuizRoomActive(false);if(root)dispose();room=null;return;}
       if(Math.abs(ctx.player.y-ctx.floorY)>.65){if(root)root.visible=false;if(workshop)workshop.root.visible=false;updateQuizControls(ctx);return;}
       const identity=`${ctx.specialty?.name||''}:${ctx.floorY}:${ctx.district?.x}:${ctx.district?.z}`;
       if(room!==ctx.room||roomSignature!==identity||(root&&root.parent!==ctx.scene)){dispose();room=ctx.room;roomSignature=identity;last=0;if(current&&specialtyFamily(current.specialty)!==specialtyFamily(ctx.specialty.name))current=null;}
       if(root&&compactLayout!==(window.innerWidth<700)&&!quizWindow&&!resourceWindow)dispose();
       if(!root)create(ctx);
-      if(current?.moduleId){if(workshopKey!==String(current.moduleId)||(!workshop&&!workshopRequest&&performance.now()>=workshopRetryAt))loadModuleWorkshop(ctx);}
+      if(current?.moduleId){refreshStageProgress();if(workshopKey!==String(current.moduleId)||(!workshop&&!workshopRequest&&performance.now()>=workshopRetryAt))loadModuleWorkshop(ctx);}
       else if(!workshop&&!workshopRequest&&performance.now()>=workshopRetryAt)loadModuleWorkshop(ctx);
-      if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;if(workshop)workshop.root.visible=false;if(resourceButton)resourceButton.hidden=true;updateQuizControls(ctx);return;}
+      if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){setQuizRoomActive(false);root.visible=false;if(workshop)workshop.root.visible=false;if(resourceButton)resourceButton.hidden=true;updateQuizControls(ctx);return;}
+      if(current?.moduleId)setQuizRoomActive(true);
       root.visible=true;
       if(workshop){workshop.root.visible=true;workshop.refresh?.();}if(resourceButton)resourceButton.hidden=false;
       for(const saved of originalSigns)if(saved.flag)saved.sign.visible=false;
       updateQuizControls(ctx);
       const now=performance.now();if(now-last<250)return;last=now;
       for(const marker of quizMarkers){const facing=Math.atan2(ctx.player.x-marker.sign.position.x,ctx.player.z-marker.sign.position.z);marker.sign.rotation.y=facing;if(marker.imageMesh)marker.imageMesh.rotation.y=facing;}
+      if(allStationsPassed()||stageData?.preview_mode)createStageLandmarks(ctx);
+      if(stageRoot){
+        stageRoot.visible=allStationsPassed()||Boolean(stageData?.preview_mode);
+        for(const node of stageRoot.children)if(node.userData.cityStagePortal)node.visible=Boolean(stageData?.stage2_unlocked);
+        const banner=stageRoot.userData.flagBanner;if(banner){banner.rotation.y=Math.atan2(ctx.player.x-banner.position.x,ctx.player.z-banner.position.z);banner.rotation.z=Math.sin(now/460)*.035;}
+        const portalSign=stageRoot.userData.portalSign;if(portalSign)portalSign.rotation.y=Math.atan2(ctx.player.x-portalSign.position.x,ctx.player.z-portalSign.position.z);
+        stageNearFlag=Boolean(stageFlagPosition&&Math.hypot(ctx.player.x-stageFlagPosition.x,ctx.player.z-stageFlagPosition.z)<3.4&&Math.abs(ctx.player.y-stageRoot.userData.floorY)<.8);
+        stageNearPortal=Boolean(stagePortalPosition&&Math.hypot(ctx.player.x-stagePortalPosition.x,ctx.player.z-stagePortalPosition.z)<3.4&&Math.abs(ctx.player.y-stageRoot.userData.floorY)<.8);
+        if(stagePanel&&now-lastStageUI>700){lastStageUI=now;renderStagePanel();}
+      }
       for(const beam of beams)beam.rotation.y=Math.atan2(ctx.player.x-beam.position.x,ctx.player.z-beam.position.z);
       document.querySelectorAll('.city-viewport .city-door-action[data-city-quiz-station]').forEach(button=>button.removeAttribute('data-city-quiz-station'));
       const stationAction=[...document.querySelectorAll('.city-viewport .city-door-action')].find(button=>/^\s*\d+\s*[·.)-]/.test(button.textContent));

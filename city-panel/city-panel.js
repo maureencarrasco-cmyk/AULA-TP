@@ -150,7 +150,7 @@
     'tecnologias digitales':[36,26]
   };
   let route=null,routeTimer=0,routeSvg=null,routeStatus=null,syncFrame=0;
-  let roomGuide=null,roomGuideActive=false,quizClock=null,quizClockLoading='';
+  let roomGuide=null,roomGuideActive=false,nativeQuizRoomActive=false,quizClock=null,quizClockLoading='';
   const params=new URLSearchParams(globalThis.location?.search||'');
   const queryRoute=params.get('cityRoute');
   let routeNeedsOpen=Boolean(queryRoute);
@@ -181,18 +181,18 @@
     return clock.saving;
   }
   async function startQuizClock(moduleId){
-    if(!/^\d+$/.test(String(moduleId||''))||quizClock?.moduleId===String(moduleId)||quizClockLoading===String(moduleId))return;
+    if(!/^\d+$/.test(String(moduleId||''))||(!roomGuideActive&&!nativeQuizRoomActive)||quizClock?.moduleId===String(moduleId)||quizClockLoading===String(moduleId))return;
     quizClockLoading=String(moduleId);
     try{
       const sessionResponse=await fetch('/api/session',{credentials:'same-origin'}),session=await sessionResponse.json();
-      if(!roomGuideActive||session.user?.role!=='student'||!session.csrf)return;
+      if(session.user?.role!=='student'||!session.csrf||(!roomGuideActive&&!nativeQuizRoomActive))return;
       const response=await fetch(`/api/modules/${encodeURIComponent(moduleId)}/city-experience`,{credentials:'same-origin'}),data=await response.json();
-      if(!roomGuideActive||!response.ok)return;
+      if(!response.ok)return;
       const clock={moduleId:String(moduleId),csrf:session.csrf,activeSeconds:Number(data.state?.quiz?.active_seconds)||0,pending:0,timer:0,saving:null};
       if(clock.activeSeconds>=1200)return;
       quizClock=clock;
       clock.timer=setInterval(()=>{
-        if(document.visibilityState!=='visible'||!roomGuideActive||clock.activeSeconds+clock.pending>=1200)return;
+        if(document.visibilityState!=='visible'||(!roomGuideActive&&!nativeQuizRoomActive)||clock.activeSeconds+clock.pending>=1200)return;
         clock.pending++;
         if(clock.pending>=30||clock.activeSeconds+clock.pending>=1200)flushQuizClock(clock);
       },1000);
@@ -202,6 +202,12 @@
     if(!quizClock)return;
     const clock=quizClock;quizClock=null;clearInterval(clock.timer);flushQuizClock(clock);
   }
+  globalThis.addEventListener?.('aulatp:quiz-progress',event=>startQuizClock(event.detail?.moduleId));
+  globalThis.addEventListener?.('aulatp:quiz-room-state',event=>{
+    nativeQuizRoomActive=Boolean(event.detail?.active);
+    if(nativeQuizRoomActive)startQuizClock(event.detail?.moduleId);
+    else if(!roomGuideActive)stopQuizClock();
+  });
   function startRoute(openMap=false){
     const map=document.querySelector('.city-map-overlay');
     if(!map||!route){clearInterval(routeTimer);routeTimer=0;return;}

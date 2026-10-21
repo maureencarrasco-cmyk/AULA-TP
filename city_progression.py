@@ -233,7 +233,10 @@ def recovery_question(content, plan, experience, index):
     used = {question['question'] for question in plan['quiz']}
     used.update(item['question'] for items in attempts.values() for item in items)
     candidates = [question for question in content.get('questions', [])
-                  if question.get('ae') == original.get('ae') and question.get('question') not in used]
+                  if question.get('ae') == original.get('ae') and question.get('question') not in used
+                  and isinstance(question.get('options'), list) and len(question['options']) == 4
+                  and all(isinstance(option, str) and option.strip() for option in question['options'])
+                  and len({option.strip() for option in question['options']}) == 4]
     candidates.sort(key=lambda question: (question.get('skill') != original.get('skill'),
                                          question.get('difficulty') != original.get('difficulty'),
                                          question['question']))

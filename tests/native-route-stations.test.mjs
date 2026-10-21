@@ -122,12 +122,16 @@ test('each station selects unique questions at the requested difficulty levels',
 test('station question selection uses two easy, one medium and one hard question with four distinct choices',()=>{
   const helpers=source.slice(source.indexOf('  function questionLevel('),source.indexOf('  function specialtyPhotos('));
   const api=vm.runInNewContext(`${helpers};({selectStationQuizQuestions,stationQuizOptions,questionLevel})`,{normalize:value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()});
-  const questions=[...Array.from({length:4},(_,i)=>({id:`q0${i+1}`,difficulty:'facil',prompt:'Pregunta',options:['A','B','C']})),...Array.from({length:5},(_,i)=>({id:`q0${i+5}`,difficulty:'media',prompt:'Pregunta',options:['A','B','C']})),{id:'q10',difficulty:'dificil',prompt:'Pregunta',options:['A','B','C']}];
+  const choices=['A','B','C','D'];
+  const questions=[...Array.from({length:4},(_,i)=>({id:`q0${i+1}`,difficulty:'facil',prompt:'Pregunta',options:choices})),...Array.from({length:5},(_,i)=>({id:`q0${i+5}`,difficulty:'media',prompt:'Pregunta',options:choices})),{id:'q10',difficulty:'dificil',prompt:'Pregunta',options:choices}];
   const selected=api.selectStationQuizQuestions(questions);
   assert.equal(JSON.stringify(selected.map(question=>question.id)),JSON.stringify(['q01','q02','q05','q10']));
   assert.equal(JSON.stringify(selected.map(api.questionLevel)),JSON.stringify(['easy','easy','medium','hard']));
   assert.ok(selected.every(question=>api.stationQuizOptions(question).length===4));
   assert.equal(new Set(api.stationQuizOptions(selected[0])).size,4);
+  assert.equal(api.stationQuizOptions({options:['A','B','C']}).length,0);
+  assert.equal(api.stationQuizOptions({options:['A','B','C','D','E']}).length,0);
+  assert.equal(api.stationQuizOptions({options:['A','B','C','C']}).length,0);
 });
 
 test('quiz markers use the shared illustrated artwork, specialty imagery and downward support',()=>{

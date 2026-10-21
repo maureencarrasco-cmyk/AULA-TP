@@ -97,6 +97,11 @@ def create_app(test_config=None):
         ensure_course_catalog(con)
     def fail(message,status=400):return jsonify(error=message),status
     def body():return request.get_json(silent=True) or {}
+    def has_four_options(question):
+        options=question.get('options')
+        return (isinstance(options,list) and len(options)==4 and
+                all(isinstance(option,str) and option.strip() for option in options) and
+                len({option.strip() for option in options})==4)
     def user():
         with db() as con:return con.execute('SELECT id,username,name,role FROM users WHERE id=?',(session.get('uid'),)).fetchone()
     def is_demo_student(u):
@@ -162,7 +167,7 @@ def create_app(test_config=None):
                 if not is_demo_student(u) and not con.execute('SELECT 1 FROM enrollments WHERE user_id=? AND course_id=?',(u['id'],m['course_id'])).fetchone():return None,fail('No tienes matrícula en este curso.',403)
             return dict(m),None
     def city_experience_content(content, mid, uid, attempt_id=1, question_order=None):
-        questions=content.get('questions') or []
+        questions=[question for question in content.get('questions') or [] if has_four_options(question)]
         rng=random.Random(f'city-45-v1:{uid}:{mid}')
         difficulty_aliases={'Fácil':'Inicial','Facil':'Inicial','Media':'Intermedia','Difícil':'Avanzada','Dificil':'Avanzada'}
         cognitive_aliases={'modelar':'Modelar','resolver':'Modelar','aplicar':'Modelar','relacionar':'Modelar',
@@ -425,6 +430,7 @@ def create_app(test_config=None):
     def get_city_experience(mid):
         m,err=accessible(mid)
         if err:return err
+        preview_mode=is_demo_student(user())
         content=load_content(m['content'],m['position']);content['title']=m['title'];content['specialty']=m.get('course_title') or '';content['education_level']=m.get('course_level') or ''
         with db() as con:
             con.execute('BEGIN IMMEDIATE')
@@ -480,7 +486,13 @@ def create_app(test_config=None):
                                    'reassessment':{k:v for k,v in variant.items() if k not in ('answer','explanation','option_feedback')} if variant else None,
                                    'reassessment_attempts':experience.get('quiz',{}).get('recovery_answers',{}).get(str(index),[]),
                                    'attempts':(experience.get('mission',{}).get('recovery_missions') or {}).get(str(index),[])})
-        return jsonify(course_title=course['title'],location=location,plan=plan,state=experience,quiz_learning=quiz_learning_status(experience,len(plan['quiz'])),
+        station_groups=state.get('city_station_quizzes') or {}
+        station_progress=[{'station':number,'passed':bool((station_groups.get(str(number)) or {}).get('passed'))}
+                          for number in range(1,5)]
+        return jsonify(course_id=m['course_id'],module_id=mid,course_title=course['title'],location=location,plan=plan,state=experience,
+                       quiz_learning=quiz_learning_status(experience,len(plan['quiz'])),station_progress=station_progress,
+                       stage2_unlocked=preview_mode or bool((experience.get('native_progress') or {}).get('portal_interacted_at')),
+                       preview_mode=preview_mode,
                        reward=city_reward(experience,plan),specialty_progress=specialty_progress,recoveries=recoveries)
     @app.get('/api/modules/<int:mid>/city-room-setup')
     @require('student')
@@ -496,7 +508,7 @@ def create_app(test_config=None):
         station=request.args.get('station',type=int) if request.method=='GET' else body().get('station')
         if type(station) is not int or station not in range(1,5):return fail('Estación de quiz inválida.')
         content=load_content(m['content'],m['position'])
-        questions=[q for q in content.get('questions') or [] if q.get('id') is not None and len(q.get('options') or [])==4]
+        questions=[q for q in content.get('questions') or [] if q.get('id') is not None and has_four_options(q)]
         skills=('Representar','Resolver problemas','Modelar','Argumentar')
         def canonical_skill(question):
             value=''.join(char for char in unicodedata.normalize('NFD',str(question.get('skill') or '').casefold()) if unicodedata.category(char)!='Mn')
@@ -516,38 +528,61 @@ def create_app(test_config=None):
         def topic_score(question,topic):
             evidence=' '.join(str(question.get(key) or '') for key in ('question','stimulus','criterion','skill','caption'))
             return len(topic_tokens(topic)&topic_tokens(evidence))
+        def source_difficulty(question):
+            value=''.join(char for char in unicodedata.normalize('NFD',str(question.get('difficulty') or '').casefold()) if unicodedata.category(char)!='Mn')
+            if value in {'facil','inicial','easy','basico'}:return 'easy'
+            if value in {'media','intermedia','medium'}:return 'medium'
+            if value in {'dificil','avanzada','hard'}:return 'hard'
+            return ''
+        def complexity_rank(question):
+            evidence=' '.join(str(question.get(key) or '') for key in ('question','stimulus','criterion')).casefold()
+            cues=('diagnost','calcula','fundament','compara','integra','planifica','evalua','verifica','prioriza','secuencia','dimensiona','justifica')
+            return (sum(evidence.count(cue) for cue in cues),len(evidence.split()),evidence)
         payload=body() if request.method=='POST' else {}
         try:topics=json.loads(request.args.get('topics','[]')) if request.method=='GET' else payload.get('topics',[])
         except (TypeError,ValueError):topics=[]
         topics=[str(value or '')[:180] for value in topics] if isinstance(topics,list) else []
         topics=(topics+['']*4)[:4]
         pools={skill:[q for q in questions if canonical_skill(q)==skill] for skill in skills}
+        level_names={'easy':'Fácil','medium':'Media','hard':'Difícil'}
         with db() as con:
             con.execute('BEGIN IMMEDIATE')
             state=getstate(con,mid)
             stations=state.setdefault('city_station_quizzes',{})
-            if stations.get('version')!=3:
+            if stations.get('version')!=4:
                 previous={key:value for key,value in stations.items() if key!='version'}
                 if previous:state.setdefault('city_station_quiz_history',[]).append({'version':stations.get('version',1),'stations':previous,'archived_at':datetime.now(timezone.utc).isoformat()})
-                if any(len(pools[skill])<4 for skill in skills):return fail('El banco del módulo debe incluir al menos cuatro preguntas por habilidad y cuatro alternativas.',409)
-                assigned=set();groups={str(number):{'topic':topics[number-1],'question_ids':[],'skills':[]} for number in range(1,5)}
-                def pick_for_station(skill,number):
-                    group=groups[str(number)];candidates=[q for q in pools[skill] if q.get('id') not in assigned]
-                    if not candidates:return None
-                    existing_aes={q.get('ae') for q in questions if q.get('id') in group['question_ids']}
-                    chosen=max(candidates,key=lambda q:(topic_score(q,group['topic']),q.get('ae') not in existing_aes,-int(q.get('id') or 0)))
-                    assigned.add(chosen['id']);group['question_ids'].append(chosen['id']);group['skills'].append(skill)
-                    return chosen
-                for skill in skills:
-                    for number in range(1,5):
-                        if not pick_for_station(skill,number):return fail('No se pudieron organizar veinte preguntas distintas para las cuatro estaciones.',409)
-                for number in range(1,5):
-                    available=[skill for skill in skills if any(q.get('id') not in assigned for q in pools[skill])]
-                    if not available:return fail('El módulo no tiene veinte preguntas inéditas para distribuir entre sus quizzes.',409)
-                    extra=max(available,key=lambda skill:(len([q for q in pools[skill] if q.get('id') not in assigned]),max(topic_score(q,topics[number-1]) for q in pools[skill] if q.get('id') not in assigned)))
-                    pick_for_station(extra,number)
+                assigned=set();skill_totals={skill:0 for skill in skills}
+                groups={str(number):{'topic':topics[number-1],'question_ids':[],'skills':[],'difficulty_levels':[]} for number in range(1,5)}
+                def fill_station(number,slot=0):
+                    group=groups[str(number)]
+                    if slot==5:return all(skill in group['skills'] for skill in skills)
+                    remaining=range(slot+1,5)
+                    missing=[skill for skill in skills if skill not in group['skills']]
+                    candidates=[q for q in questions if q.get('id') not in assigned]
+                    candidates.sort(key=lambda q:(canonical_skill(q) not in missing,skill_totals[canonical_skill(q)],
+                                                  -topic_score(q,group['topic']),
+                                                  q.get('ae') in {item.get('ae') for item in questions if item.get('id') in group['question_ids']},
+                                                  -int(q.get('id') or 0)))
+                    for question in candidates:
+                        skill=canonical_skill(question)
+                        if skill not in skills:continue
+                        left_missing=[item for item in skills if item not in group['skills'] and item!=skill]
+                        if len(left_missing)>len(remaining):continue
+                        if any(not any(canonical_skill(candidate)==item and candidate.get('id') not in assigned and candidate.get('id')!=question.get('id') for candidate in questions) for item in left_missing):continue
+                        assigned.add(question['id']);group['question_ids'].append(question['id']);group['skills'].append(skill)
+                        skill_totals[skill]+=1
+                        if fill_station(number,slot+1):return True
+                        skill_totals[skill]-=1;group['skills'].pop();group['question_ids'].pop();assigned.remove(question['id'])
+                    return False
+                if not all(fill_station(number) for number in range(1,5)):
+                    return fail('No se pudieron distribuir veinte preguntas únicas con las cuatro habilidades del módulo.',409)
+                selected=[q for q in questions if q.get('id') in assigned]
+                selected.sort(key=lambda q:({'easy':0,'medium':1,'hard':2}.get(source_difficulty(q),1),complexity_rank(q),str(q.get('id'))))
+                calibrated_level={q['id']:('easy' if index<10 else 'medium' if index<18 else 'hard') for index,q in enumerate(selected)}
+                for group in groups.values():group['difficulty_levels']=[level_names[calibrated_level[question_id]] for question_id in group['question_ids']]
                 for group in groups.values():group.update(slot_index=0,current_id=group['question_ids'][0],attempts=[],passed=False)
-                stations={'version':3,'used_question_ids':[groups[str(number)]['current_id'] for number in range(1,5)],**groups}
+                stations={'version':4,'used_question_ids':[groups[str(number)]['current_id'] for number in range(1,5)],**groups}
                 state['city_station_quizzes']=stations
                 putstate(con,mid,state)
             item=stations.get(str(station))
@@ -559,7 +594,8 @@ def create_app(test_config=None):
                 choice=payload.get('choice');argument=payload.get('argument')
                 if item.get('passed'):return jsonify(passed=True,feedback='Este quiz ya está aprobado.')
                 if not question:return fail('La pregunta cambió. Actualiza el quiz antes de responder.',409)
-                if type(choice) is not int or choice not in range(len(question.get('options') or [])):return fail('Selecciona una alternativa disponible.')
+                if not has_four_options(question):return fail('La pregunta no cumple el formato de cuatro alternativas. Actualiza el quiz.',409)
+                if type(choice) is not int or choice not in range(4):return fail('Selecciona una alternativa disponible.')
                 if not text_valid(argument,20):return fail('Fundamenta tu respuesta con al menos 20 caracteres.')
                 feedback=answer_feedback(question,choice)
                 item.setdefault('attempts',[]).append({'slot':slot,'skill':item['skills'][slot],'question_id':question.get('id'),'choice':choice,'argument':argument.strip(),'correct':feedback['correct'],'at':datetime.now(timezone.utc).isoformat()})
@@ -574,6 +610,7 @@ def create_app(test_config=None):
                         item['current_id']=item['question_ids'][item['slot_index']]
                         stations['used_question_ids'].append(item['current_id'])
                         next_question=next(q for q in questions if q.get('id')==item['current_id'])
+                        next_question={**next_question,'difficulty':item['difficulty_levels'][item['slot_index']]}
                         next_slot=item['slot_index']
                         response.update(question_number=next_slot+1,next_skill=item['skills'][next_slot],
                                         next_question={key:next_question.get(key) for key in ('id','question','options','criterion','ae','difficulty','image','stimulus') if key in next_question})
@@ -583,11 +620,14 @@ def create_app(test_config=None):
                     skill=item['skills'][slot];used=set(stations.get('used_question_ids') or [])
                     reserved={question_id for key,group in stations.items() if key in {'1','2','3','4'} and key!=str(station) for question_id in group.get('question_ids',[])}
                     reserved.update(item['question_ids'][slot+1:])
-                    candidates=[q for q in pools[skill] if q.get('id')!=question.get('id') and q.get('id') not in reserved and q.get('id') not in used]
+                    target_level={'Fácil':'easy','Media':'medium','Difícil':'hard'}.get(item['difficulty_levels'][slot])
+                    candidates=[q for q in pools[skill] if source_difficulty(q)==target_level and q.get('id')!=question.get('id') and q.get('id') not in reserved and q.get('id') not in used]
+                    if not candidates:candidates=[q for q in pools[skill] if q.get('id')!=question.get('id') and q.get('id') not in reserved and q.get('id') not in used]
                     if not candidates:candidates=[q for q in pools[skill] if q.get('id')!=question.get('id') and q.get('id') not in reserved]
                     candidates.sort(key=lambda q:(q.get('ae')!=question.get('ae'),-topic_score(q,item.get('topic')),-int(q.get('id') or 0)))
                     if candidates:
                         next_question=candidates[0];item['question_ids'][slot]=next_question.get('id');item['current_id']=next_question.get('id');stations['used_question_ids'].append(next_question.get('id'))
+                        next_question={**next_question,'difficulty':item['difficulty_levels'][slot]}
                         response.update(next_skill=skill,next_question={key:next_question.get(key) for key in ('id','question','options','criterion','ae','difficulty','image','stimulus') if key in next_question})
                         ae_index=next_question.get('ae');aes=content.get('aes') or []
                         response['ae_title']=aes[ae_index].get('title') or aes[ae_index].get('name') or '' if type(ae_index) is int and 0<=ae_index<len(aes) else ''
@@ -602,6 +642,7 @@ def create_app(test_config=None):
             ae_index=question.get('ae');aes=content.get('aes') or []
             ae_title=aes[ae_index].get('title') or aes[ae_index].get('name') or '' if type(ae_index) is int and 0<=ae_index<len(aes) else ''
             putstate(con,mid,state)
+            question={**question,'difficulty':item['difficulty_levels'][slot]}
             return jsonify(station=station,passed=False,attempts=len(item.get('attempts') or []),question_number=slot+1,total_questions=5,skill=item['skills'][slot],topic=item.get('topic'),ae=ae_index,ae_title=ae_title,
                            question={key:question.get(key) for key in ('id','question','options','criterion','ae','difficulty','image','stimulus') if key in question})
     @app.post('/api/modules/<int:mid>/city-experience')
@@ -623,7 +664,27 @@ def create_app(test_config=None):
             mission=experience.setdefault('mission',{'responses':{},'drafts':{}})
             mission.setdefault('case_title',plan['module']['case_title'])
             mission.setdefault('scenario',plan['mission']['scenario'])
-            if operation=='heartbeat':
+            if operation=='flag-interact':
+                station_groups=state.get('city_station_quizzes') or {}
+                if not all((station_groups.get(str(number)) or {}).get('passed') for number in range(1,5)):
+                    return fail('Completa y aprueba los cuatro quiz del módulo antes de activar la bandera.',403)
+                required_seconds=int(plan['timing']['quiz'])*60
+                if int(quiz.get('active_seconds') or 0)<required_seconds:
+                    return fail('Los cuatro quiz están aprobados. Completa el tiempo activo del desafío antes de abrir la Etapa 2.',403)
+                if len(plan['quiz'])!=4:return fail('Este módulo requiere revisión de configuración antes de abrir sus prácticas.',409)
+                for index,question in enumerate(plan['quiz']):
+                    quiz.setdefault('answers',{})[str(index)]={
+                        'question':question['question'],'choice':None,'argument':'Aprobé las cinco preguntas del quiz de esta estación.',
+                        'correct':True,'recovered':False,'explanation':'Cinco respuestas correctas verificadas en la estación 3D.',
+                        'ae':question.get('ae'),'ae_title':(question.get('traceability') or {}).get('ae_title',''),
+                        'criterion':question.get('criterion'),'traceability':question.get('traceability') or {},
+                        'verified_by':'city_station_quiz','station':index+1,'at':datetime.now(timezone.utc).isoformat()}
+                quiz['score']=sum(bool(answer.get('correct') or answer.get('recovered')) for answer in quiz['answers'].values())
+                quiz['completed_at']=quiz.get('completed_at') or datetime.now(timezone.utc).isoformat()
+                experience.setdefault('native_progress',{})['portal_interacted_at']=datetime.now(timezone.utc).isoformat()
+                sync_awards(experience,plan,mid)
+                trace(state,'city-stage2-portal-opened',module_id=mid)
+            elif operation=='heartbeat':
                 seconds=payload.get('seconds')
                 stage=payload.get('stage')
                 if type(seconds)!=int or not 1<=seconds<=60 or stage not in ('quiz','mission'):return fail('Intervalo de actividad inválido.')
@@ -667,7 +728,8 @@ def create_app(test_config=None):
                 variant=recovery_question(content,plan,experience,index)
                 if not variant or payload.get('question')!=variant['question']:
                     return fail('Abre el desafío equivalente actualizado antes de responder.',409)
-                if type(choice) is not int or choice not in range(len(variant.get('options') or [])):
+                if not has_four_options(variant):return fail('La pregunta de recuperación no cumple el formato de cuatro alternativas.',409)
+                if type(choice) is not int or choice not in range(4):
                     return fail('Selecciona una alternativa disponible.')
                 if not text_valid(argument,20):return fail('Fundamenta tu nueva respuesta con al menos 20 caracteres.')
                 feedback=answer_feedback(variant,choice);correct=feedback['correct']
@@ -716,7 +778,7 @@ def create_app(test_config=None):
                 trace(state,'city-recovery-submitted',index=index,ae=plan['quiz'][index].get('ae'),attempt=len(attempts))
             elif operation=='quiz-answer':
                 index=payload.get('index');choice=payload.get('choice');argument=payload.get('argument');answers=quiz.setdefault('answers',{})
-                if type(index)!=int or not 0<=index<len(plan['quiz']) or type(choice)!=int or choice not in range(len(plan['quiz'][index].get('options') or [])):
+                if type(index)!=int or not 0<=index<len(plan['quiz']) or not has_four_options(plan['quiz'][index]) or type(choice)!=int or choice not in range(4):
                     return fail('Selecciona una respuesta disponible.')
                 if not text_valid(argument,20):return fail('Fundamenta tu respuesta utilizando los conocimientos y procedimientos aprendidos en este módulo (mínimo 20 caracteres).')
                 if str(index) in answers:return fail('Esta respuesta ya quedó registrada.')

@@ -118,9 +118,16 @@ class CityProgression(unittest.TestCase):
 
     def test_quiz_recovery_uses_unused_equivalent_question_from_same_ae(self):
         plan = {'quiz': [{'question': 'Original', 'ae': 1, 'skill': 'Medir'}]}
-        bank = {'questions': [{'question': 'Otro AE', 'ae': 2}, {'question': 'Equivalente', 'ae': 1, 'skill': 'Medir'}]}
+        four_options = ['A', 'B', 'C', 'D']
+        bank = {'questions': [{'question': 'Otro AE', 'ae': 2, 'options': four_options},
+                              {'question': 'Equivalente', 'ae': 1, 'skill': 'Medir', 'options': four_options},
+                              {'question': 'Tres alternativas', 'ae': 1, 'options': four_options[:3]},
+                              {'question': 'Cinco alternativas', 'ae': 1, 'options': four_options + ['E']}]}
         state = experience(0)
         self.assertEqual(recovery_question(bank, plan, state, 0)['question'], 'Equivalente')
+        bank['questions'][1]['options'] = four_options[:3]
+        self.assertIsNone(recovery_question(bank, plan, state, 0))
+        bank['questions'][1]['options'] = four_options
         state['quiz']['recovery_answers'] = {'0': [{'question': 'Equivalente'}]}
         self.assertIsNone(recovery_question(bank, plan, state, 0))
 
