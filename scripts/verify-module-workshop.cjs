@@ -6,7 +6,7 @@ const live=process.env.CITY_WORKSHOP_LIVE==='1';
  fs.mkdirSync(output,{recursive:true});
  const inventories=JSON.parse(fs.readFileSync('city_room_resources.json','utf8')),inventory=inventories['441'];
  const setup={...inventory,source:{url:inventory.url,pdf:inventory.pdf}};
- const browser=await chromium.launch({headless:true,channel:'msedge',args:['--enable-unsafe-swiftshader']});
+  const browser=await chromium.launch({headless:true,channel:'msedge',args:['--enable-unsafe-swiftshader',...(live?['--disable-http2']:[])]});
  let activePage;
  try{
   const page=await browser.newPage({viewport:{width:1867,height:900}}),errors=[];
@@ -104,7 +104,10 @@ const live=process.env.CITY_WORKSHOP_LIVE==='1';
     for(const option of options){await select.selectOption(option,{force:true});const button=page.locator('.city-specialties button').filter({hasText:base}).first();if(await button.count()){await button.dispatchEvent('click');found=true;break;}}
     assert.ok(found,'Specialty available in the real world: '+base);
     await page.waitForFunction(base=>{const clean=v=>v.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\bde\b/g,'').replace(/\s+/g,' ').trim();return __workshopContext.indoors&&clean(__workshopContext.specialty.name).includes(clean(base));},base,{timeout:60000});
-    await page.evaluate(({mid,item})=>dispatchEvent(new CustomEvent('aulatp:quiz-progress',{detail:{specialty:item.specialty,moduleId:mid,moduleTitle:item.module_title,answers:{},questions:[]}})),{mid,item});
+    const firstModule=Object.entries(inventories).filter(([,candidate])=>candidate.specialty.split(',')[0].trim()===base.trim()).sort(([a],[b])=>Number(a)-Number(b))[0]?.[1];
+    assert.ok(firstModule,'Default module inventory exists for '+base);
+    await page.waitForFunction(title=>AulaTPNativeRoute.status().moduleTitle===title,firstModule.module_title,{timeout:60000});
+    if(firstModule.module_title!==item.module_title)await page.evaluate(({mid,item})=>dispatchEvent(new CustomEvent('aulatp:quiz-progress',{detail:{specialty:item.specialty,moduleId:mid,moduleTitle:item.module_title,answers:{},questions:[]}})),{mid,item});
     await page.waitForFunction(title=>AulaTPNativeRoute.status().moduleTitle===title,item.module_title,{timeout:60000});
     assert.equal(await page.evaluate(()=>AulaTPNativeRoute.status().representedResources),item.resources.length);
     assert.equal(await page.locator('.city-quiz-marker-control').count(),4);
