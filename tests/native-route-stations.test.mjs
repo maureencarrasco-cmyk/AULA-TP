@@ -78,7 +78,8 @@ test('quiz rooms are fitted as module-specific workshops without filling the sta
   const routing=readFileSync(new URL('../city-panel/native-route.js',import.meta.url),'utf8');
   assert.match(routing,/assets\/module-room-resources\.json/);
   assert.match(routing,/const active=current\|\|\{moduleTitle:'',specialty:ctx\.specialty\?\.name\|\|''\}/);
-  assert.match(routing,/if\(current\?\.moduleId&&workshopKey!==String\(current\.moduleId\)\)loadModuleWorkshop\(ctx\)/);
+  assert.match(routing,/if\(current\?\.moduleId\)\{if\(workshopKey!==String\(current\.moduleId\)/);
+  assert.match(routing,/else if\(!workshop&&!workshopRequest&&performance\.now\(\)>=workshopRetryAt\)loadModuleWorkshop\(ctx\)/);
   assert.match(routing,/workshopKey=key/);
   assert.match(routing,/sign\.scale\.set\(baseScale\.x\*\(3\.2\/width\),baseScale\.y\*\(\.72\/height\)/);
 });

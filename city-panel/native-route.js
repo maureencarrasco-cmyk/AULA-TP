@@ -18,7 +18,7 @@
   const quizControls=[];
   const stageAnchors=[];
   let roomStations=[];
-  let workshop=null,workshopRequest=null,workshopKey='',resourceButton=null,resourceWindow=null;
+  let workshop=null,workshopRequest=null,workshopKey='',workshopRetryAt=0,resourceButton=null,resourceWindow=null;
   let compactLayout=window.innerWidth<700;
   let markerGeometry,markerImageGeometry,markerHaloGeometry,markerHaloTexture,markerHaloMaterial,markerBeamGeometry,markerBeamTexture,markerBeamMaterial,markerSparkGeometry,markerSparkTexture,markerSparkMaterial,markerCylinderGeometry,markerCylinderMaterial;
   const beams=[],sparkles=[],cylinders=[];
@@ -36,7 +36,7 @@
   function dispose(){
     cancelAnimationFrame(redrawFrame);redrawFrame=0;
     workshopRequest?.abort();workshopRequest=null;workshop?.dispose();workshop=null;
-    workshopKey='';
+    workshopKey='';workshopRetryAt=0;
     resourceButton?.remove();resourceButton=null;resourceWindow?.remove();resourceWindow=null;
     generation++;root?.removeFromParent();geometry?.dispose();material?.dispose();
     markerGeometry?.dispose();markerImageGeometry?.dispose();markerHaloGeometry?.dispose();markerHaloTexture?.dispose();markerHaloMaterial?.dispose();
@@ -90,6 +90,7 @@
     if(!globalThis.AulaTPModuleWorkshop)return;
     const active=current||{moduleTitle:'',specialty:ctx.specialty?.name||''},key=String(active.moduleId||'fallback');
     if(workshopKey===key&&(workshop||workshopRequest))return;
+    if(workshopKey===key&&performance.now()<workshopRetryAt)return;
     workshopRequest?.abort();workshopRequest=null;workshopKey=key;
     const token=generation,controller=new AbortController();workshopRequest=controller;
     try{
@@ -107,9 +108,10 @@
         setup=selectWorkshopInventory(await response.json(),active,ctx.specialty?.name);
         if(!setup)throw new Error('No se encontró el inventario curricular de este módulo.');
       }
-      if(token!==generation||!root)return;
+      if(token!==generation||!root){if(workshopRequest===controller)workshopRequest=null;return;}
       workshop?.dispose();workshop=null;resourceButton?.remove();resourceButton=null;resourceWindow?.remove();resourceWindow=null;
       workshop=globalThis.AulaTPModuleWorkshop.create({...ctx,legacyFixtureColliders:originalFixtureColliders.map(item=>item.collider)},setup,roomStations);
+      if(workshopRequest===controller)workshopRequest=null;workshopRetryAt=0;
       requestRedraw(ctx);
       const button=document.createElement('button');button.type='button';button.className='city-module-resources';button.textContent='Recursos del módulo';
       button.addEventListener('click',()=>{
@@ -137,7 +139,7 @@
         panel.append(header,body);document.body.append(panel);resourceWindow=panel;close.focus();
       });
       quizControlLayer?.append(button);resourceButton=button;
-    }catch(cause){if(cause.name!=='AbortError')console.warn('Aula TP: equipamiento:',cause.message);}
+    }catch(cause){if(workshopRequest===controller)workshopRequest=null;if(workshopKey===key)workshopKey='';if(cause.name!=='AbortError'){workshopRetryAt=performance.now()+3000;console.warn('Aula TP: equipamiento:',cause.message);}}
   }
   function hideQuizPhaseSigns(ctx){
     const phases=['observar','planificar','verificar'];
@@ -600,7 +602,8 @@
       if(room!==ctx.room||roomSignature!==identity||(root&&root.parent!==ctx.scene)){dispose();room=ctx.room;roomSignature=identity;last=0;if(current&&specialtyFamily(current.specialty)!==specialtyFamily(ctx.specialty.name))current=null;}
       if(root&&compactLayout!==(window.innerWidth<700)&&!quizWindow&&!resourceWindow)dispose();
       if(!root)create(ctx);
-      if(current?.moduleId&&workshopKey!==String(current.moduleId))loadModuleWorkshop(ctx);
+      if(current?.moduleId){if(workshopKey!==String(current.moduleId)||(!workshop&&!workshopRequest&&performance.now()>=workshopRetryAt))loadModuleWorkshop(ctx);}
+      else if(!workshop&&!workshopRequest&&performance.now()>=workshopRetryAt)loadModuleWorkshop(ctx);
       if(ctx.map||Math.abs(ctx.player.y-ctx.floorY)>.65){root.visible=false;if(workshop)workshop.root.visible=false;if(resourceButton)resourceButton.hidden=true;updateQuizControls(ctx);return;}
       root.visible=true;
       if(workshop){workshop.root.visible=true;workshop.refresh?.();}if(resourceButton)resourceButton.hidden=false;
