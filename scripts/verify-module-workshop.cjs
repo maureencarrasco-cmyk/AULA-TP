@@ -12,6 +12,7 @@ const live=process.env.CITY_WORKSHOP_LIVE==='1';
   const page=await browser.newPage({viewport:{width:1867,height:900}}),errors=[];
   activePage=page;
   page.on('pageerror',error=>errors.push(error.message));
+  if(live){page.on('console',message=>{if(['error','warning'].includes(message.type()))console.error('BROWSER',message.type(),message.text());});page.on('requestfailed',request=>console.error('REQUEST_FAILED',request.url(),request.failure()?.errorText));page.on('response',response=>{if(/native-workshop|module-room-resources|city-room-setup/.test(response.url()))console.error('RESOURCE_RESPONSE',response.status(),response.url());});}
   const hook=`\n{const frame=AulaTPNativeRoute.frame;AulaTPNativeRoute.frame=ctx=>{window.__workshopContext=ctx;frame(ctx);};}`;
   const script=live?null:fs.readFileSync(path.join(root,'native-workshop.js'),'utf8')+'\n'+fs.readFileSync(path.join(root,'native-route.js'),'utf8')+hook;
   await page.route('**/panel-ui-v*/native-route.js',async route=>{if(live){const response=await route.fetch();await route.fulfill({response,body:await response.text()+hook});}else await route.fulfill({contentType:'application/javascript',body:script});});

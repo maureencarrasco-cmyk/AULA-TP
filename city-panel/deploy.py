@@ -42,6 +42,10 @@ def main():
     for name in ('city-panel.css','city-panel.js'):
         shutil.copy2(package/name,destination/name)
     shutil.copytree(package/'assets',destination/'assets')
+    canonical_catalog=package/'module-room-resources.json'
+    if canonical_catalog.is_file():
+        # Deploy the repository's canonical catalog, not a stale skin asset copy.
+        shutil.copy2(canonical_catalog,destination/'assets'/'module-room-resources.json')
     shutil.copytree(package/'engine',destination/'engine')
     native_route=package/'native-route.js'
     if native_route.is_file():
@@ -78,7 +82,8 @@ def main():
     manifest={'base':str(base),'expected_live_base':str(live_base),'release':str(target),'html_modified':modified,
               'original_game_chunks_unchanged':len(chunks),'business_logic_modified':False,
               'panel_css_sha256':digest(destination/'city-panel.css'),
-              'panel_js_sha256':digest(destination/'city-panel.js')}
+              'panel_js_sha256':digest(destination/'city-panel.js'),
+              'module_room_catalog_sha256':digest(destination/'assets'/'module-room-resources.json')}
     manifest_temp=target/'panel-ui-release.new.json'
     manifest_temp.write_text(json.dumps(manifest,indent=2)+'\n')
     os.replace(manifest_temp,target/'panel-ui-release.json')
