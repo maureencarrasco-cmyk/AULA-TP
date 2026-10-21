@@ -254,6 +254,39 @@ def create_app(test_config=None):
             for item in candidates:
                 if item not in tasks:tasks.append(item)
                 if len(tasks)>=4:break
+        phase_specs=(
+            {'id':'planificar','number':1,'title':'Planificar','minutes':5,'skill':'Representar y planificar',
+             'product':'Plan de trabajo con datos representados, recursos requeridos, riesgos y verificaciones previas.',
+             'prompt':'Representa el encargo con los datos disponibles. Separa hechos, supuestos y pendientes; vincula la evidencia con el criterio indicado y planifica recursos, secuencia, controles preventivos y puntos de verificación antes de intervenir.'},
+            {'id':'actuar','number':2,'title':'Actuar','minutes':15,'skill':'Modelar y resolver',
+             'product':'Procedimiento secuenciado con decisiones, recursos utilizados y controles de seguridad aplicables.',
+             'prompt':'Modela y desarrolla la solución del encargo paso a paso según el criterio del AE. Explica qué recursos o herramientas seleccionarías, qué decisión tomarías ante los datos del caso y qué medidas de seguridad, bioseguridad o resguardo corresponden al módulo.'},
+            {'id':'verificar','number':3,'title':'Verificar','minutes':5,'skill':'Resolver y verificar',
+             'product':'Registro de comprobación con resultado, evidencia, desviaciones y corrección necesaria.',
+             'prompt':'Comprueba el resultado frente al criterio del AE. Describe la prueba o control que realizarías, qué evidencia registrarías, cómo reconocerías una desviación y qué condición obliga a corregir o detener el trabajo.'},
+            {'id':'justificar','number':4,'title':'Justificar y cerrar','minutes':5,'skill':'Argumentar y comunicar',
+             'product':'Informe de cierre con fundamento técnico, estado del trabajo, pendientes y traspaso responsable.',
+             'prompt':'Argumenta la decisión final con datos del caso y el criterio del AE. Emite el producto solicitado, declara el estado del trabajo, los límites de la evidencia y los pendientes; explica qué comunicarías y a quién antes de darlo por cerrado.'},
+        )
+        mission_tasks=[]
+        for index,spec in enumerate(phase_specs):
+            item=tasks[index] if index<len(tasks) else {}
+            ae_number=item.get('ae') if type(item.get('ae')) is int else min(index+1,len(aes))
+            ae_index=ae_number-1 if type(ae_number) is int and 1<=ae_number<=len(aes) else min(index,len(aes)-1)
+            ae_data=(content.get('aes') or [{}])[ae_index] if aes else {}
+            criteria=ae_data.get('criteria') or []
+            instruction=item.get('instruction') or {}
+            criterion=instruction.get('criterion') or (criteria[index%len(criteria)] if criteria else '')
+            mission_tasks.append({'id':item.get('id') or f'mission-{spec["number"]}',
+                'title':f'{spec["title"]} · {ae_data.get("short_title") or ae_data.get("title") or "aprendizaje del módulo"}',
+                'source_title':item.get('title') or content.get('title') or '',
+                'source_product':item.get('product') or '',
+                'product':spec['product'],'prompt':item.get('prompt') or spec['prompt'],
+                'ae':ae_number if type(ae_number) is int else ae_index+1,
+                'ae_code':ae_data.get('official_code') or f'AE {ae_index+1}',
+                'ae_title':ae_data.get('title') or ae_data.get('name') or '',
+                'skill':spec['skill'],'criterion':criterion,
+                'resource':instruction.get('resource') or 'Recursos, documentos y evidencias disponibles para el encargo; registra como pendiente lo que no esté disponible.'})
         cases=content.get('cases') or [{}]
         case=cases[(attempt_id-1)%len(cases)]
         return {
@@ -266,17 +299,9 @@ def create_app(test_config=None):
                 'scenario':case.get('context') or content.get('context') or content.get('application') or '',
                 'question':case.get('question') or '',
                 'aes':aes,
-                'tasks':[{'id':x.get('id') or '', 'title':x.get('title') or '', 'product':x.get('product') or '',
-                          'prompt':x.get('prompt') or '', 'ae':x.get('ae'),
-                          'ae_title':aes[int(x.get('ae') or 0)-1]['title'] if type(x.get('ae')) is int and 0<int(x.get('ae'))<=len(aes) else '',
-                          'criterion':(x.get('instruction') or {}).get('criterion') or ''} for x in tasks],
+                'tasks':mission_tasks,
                 'rubric':[{'name':x.get('name') or '', 'max':x.get('max')} for x in content.get('rubric') or []],
-                'phases':[
-                    {'id':'planificar','number':1,'title':'Planificar','minutes':5,'prompt':'Analiza la orden completa, identifica los datos disponibles y pendientes, vincula el plan con al menos dos aprendizajes esperados y ordena recursos, riesgos y verificaciones antes de intervenir.'},
-                    {'id':'actuar','number':2,'title':'Actuar','minutes':15,'prompt':'Desarrolla el procedimiento integrado del módulo. Explica las acciones y decisiones en secuencia, relaciona los encargos con sus criterios y respeta seguridad, normativa y alcance del rol.'},
-                    {'id':'verificar','number':3,'title':'Verificar','minutes':5,'prompt':'Contrasta el producto y el procedimiento con los criterios del módulo. Registra evidencia, identifica desviaciones, propone correcciones y define qué condición impide entregar el trabajo.'},
-                    {'id':'justificar','number':4,'title':'Justificar y cerrar','minutes':5,'prompt':'Justifica la decisión final con datos del caso, aprendizajes esperados y criterios. Deja un registro de cierre, declara pendientes y explica a quién escalarías cualquier condición no resuelta.'}
-                ]
+                'phases':[{key:value for key,value in spec.items() if key!='product'} for spec in phase_specs]
             }
         }
     def city_reward(experience, plan=None):

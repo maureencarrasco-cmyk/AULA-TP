@@ -187,6 +187,28 @@ class CityStationQuizAPI(unittest.TestCase):
         self.assertTrue(status['quiz_learning']['approved'])
         self.assertEqual(len(status['state']['quiz']['answers']), 4)
 
+    def test_four_workplace_missions_have_distinct_products_and_module_criteria(self):
+        response = self.student.get('/api/modules/1/city-experience')
+        self.assertEqual(response.status_code, 200, response.json)
+        mission = response.json['plan']['mission']
+        self.assertEqual(len(mission['phases']), 4)
+        self.assertEqual(len(mission['tasks']), 4)
+        self.assertEqual([phase['id'] for phase in mission['phases']],
+                         ['planificar', 'actuar', 'verificar', 'justificar'])
+        self.assertEqual([phase['minutes'] for phase in mission['phases']], [5, 15, 5, 5])
+        self.assertEqual(len({task['product'] for task in mission['tasks']}), 4)
+        self.assertEqual({task['skill'] for task in mission['tasks']}, {
+            'Representar y planificar', 'Modelar y resolver',
+            'Resolver y verificar', 'Argumentar y comunicar'})
+        content = self.student.get('/api/modules/1').json['content']
+        for task in mission['tasks']:
+            self.assertTrue(task['source_title'])
+            self.assertTrue(task['ae_code'])
+            self.assertTrue(task['criterion'])
+            ae = content['aes'][task['ae'] - 1]
+            self.assertIn(task['criterion'], ae.get('criteria') or [])
+            self.assertGreaterEqual(len(task['prompt']), 60)
+
 
 if __name__ == '__main__':
     unittest.main()
