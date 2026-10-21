@@ -85,6 +85,38 @@ class CityStationQuizAPI(unittest.TestCase):
                     response = self.student.get('/api/modules/1/city-station-quiz?station=1')
                 self.assertEqual(response.status_code, 409)
 
+    def test_legacy_ten_question_station_bank_is_archived_and_rebuilt_as_five(self):
+        self.assertEqual(self.student.get('/api/modules/1/city-station-quiz?station=1').status_code, 200)
+        with sqlite3.connect(self.app.config['DATABASE']) as con:
+            con.execute('update progress set state=? where user_id=1 and module_id=1', (json.dumps({
+                'city_station_quizzes': {
+                    'version': 4,
+                    **{str(number): {
+                        'question_ids': list(range(number * 10, number * 10 + 10)),
+                        'skills': ['Representar'] * 10,
+                        'difficulty_levels': ['Fácil'] * 10,
+                        'slot_index': 0,
+                        'current_id': number * 10,
+                        'attempts': [],
+                        'passed': False,
+                    } for number in range(1, 5)},
+                }
+            }),))
+
+        response = self.student.get('/api/modules/1/city-station-quiz?station=1')
+        self.assertEqual(response.status_code, 200, response.json)
+        self.assertEqual((response.json['question_number'], response.json['total_questions']), (1, 5))
+        self.assertEqual(len(response.json['question']['options']), 4)
+        with sqlite3.connect(self.app.config['DATABASE']) as con:
+            state = json.loads(con.execute('select state from progress where user_id=1 and module_id=1').fetchone()[0])
+        stations = state['city_station_quizzes']
+        self.assertEqual(stations['version'], 5)
+        self.assertEqual(len(state['city_station_quiz_history']), 1)
+        self.assertEqual(state['city_station_quiz_history'][0]['stations']['1']['question_ids'], list(range(10, 20)))
+        for number in range(1, 5):
+            self.assertEqual(len(stations[str(number)]['question_ids']), 5)
+            self.assertEqual(len(stations[str(number)]['difficulty_levels']), 5)
+
     def test_wrong_answer_retries_same_slot_then_requires_all_five_correct(self):
         path = '/api/modules/1/city-station-quiz?station=1'
         first = self.student.get(path)

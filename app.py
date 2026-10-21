@@ -574,7 +574,13 @@ def create_app(test_config=None):
             con.execute('BEGIN IMMEDIATE')
             state=getstate(con,mid)
             stations=state.setdefault('city_station_quizzes',{})
-            if stations.get('version')!=4:
+            valid_station_bank=(stations.get('version')==5 and all(
+                isinstance(stations.get(str(number)),dict)
+                and len(stations[str(number)].get('question_ids') or [])==5
+                and len(stations[str(number)].get('skills') or [])==5
+                and len(stations[str(number)].get('difficulty_levels') or [])==5
+                for number in range(1,5)))
+            if not valid_station_bank:
                 previous={key:value for key,value in stations.items() if key!='version'}
                 if previous:state.setdefault('city_station_quiz_history',[]).append({'version':stations.get('version',1),'stations':previous,'archived_at':datetime.now(timezone.utc).isoformat()})
                 assigned=set();skill_totals={skill:0 for skill in skills}
@@ -607,7 +613,7 @@ def create_app(test_config=None):
                 calibrated_level={q['id']:('easy' if index<10 else 'medium' if index<18 else 'hard') for index,q in enumerate(selected)}
                 for group in groups.values():group['difficulty_levels']=[level_names[calibrated_level[question_id]] for question_id in group['question_ids']]
                 for group in groups.values():group.update(slot_index=0,current_id=group['question_ids'][0],attempts=[],passed=False)
-                stations={'version':4,'used_question_ids':[groups[str(number)]['current_id'] for number in range(1,5)],**groups}
+                stations={'version':5,'used_question_ids':[groups[str(number)]['current_id'] for number in range(1,5)],**groups}
                 state['city_station_quizzes']=stations
                 putstate(con,mid,state)
             item=stations.get(str(station))
