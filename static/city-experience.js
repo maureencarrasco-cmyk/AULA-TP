@@ -127,15 +127,11 @@
       updateCityGuideLink();
       setupPanel.hidden=true;onboarding.hidden=true;navigation.hidden=true;journey.hidden=false;
       previewMode=Boolean(data.preview_mode);
-      $('#mission-tab').disabled=!previewMode&&(!quizApproved()||quizRemaining()>0);
-      activeStage=previewMode?'mission':quizApproved()&&Number(state.mission?.active_seconds)>0?'mission':'quiz';
-      if(quizApproved()&&Number(state.quiz?.active_seconds)>=plan.timing.quiz*60)activeStage='mission';
+      activeStage='quiz';
       activeSeconds=Number(state[activeStage]?.active_seconds)||0;
       $('#timer-value').textContent=formatTime(activeSeconds);
-      $('.timer small').textContent=previewMode?'Vista previa de edición · no registra respuestas ni progreso.':state.mission?.recovery?`Recuperación: ${state.mission.required_seconds/60} min · adicional al recorrido inicial de 50 min`:'Duración mínima: 20 min de quiz + 30 min de práctica';
-      $('#mission-tab small').textContent=state.mission?.recovery?`${state.mission.required_seconds/60} min de recuperación`:'30 min';
+      $('.timer small').textContent=previewMode?'Vista previa de edición · no registra respuestas ni progreso.':'Duración mínima del quiz: 20 min';
       $('.stage-tab[data-stage="quiz"]').classList.toggle('active',activeStage==='quiz');
-      $('#mission-tab').classList.toggle('active',activeStage==='mission');
       activeQuestion=Math.min(savedCount(),plan.quiz.length-1);activatedQuestion=-1;
       activePhase=nextPhase();
       $('#route-status').textContent=activeStage==='mission'?'Práctica profesional · Ciudad Laboral 3D original':'Etapa 1 · desafío de conocimientos del módulo';
@@ -150,10 +146,8 @@
     if(activeStage==='quiz')renderQuiz();else renderMission();
   }
   function renderProgress(){
-    const done=savedCount()+answeredPhases();$('#progress-bar').style.width=`${Math.round(done/(plan.quiz.length+plan.mission.phases.length)*100)}%`;
-    $('#mission-tab').disabled=!previewMode&&(!quizApproved()||quizRemaining()>0);
+    const done=savedCount();$('#progress-bar').style.width=`${Math.round(done/plan.quiz.length*100)}%`;
     $('.stage-tab[data-stage="quiz"]').classList.toggle('active',activeStage==='quiz');
-    $('#mission-tab').classList.toggle('active',activeStage==='mission');
   }
   function renderQuiz(){
     const answers=state.quiz?.answers||{}, index=Math.min(activeQuestion,plan.quiz.length-1), q=plan.quiz[index], saved=answers[String(index)];
@@ -162,8 +156,7 @@
       if(!quizApproved()){renderQuizRecovery();renderQuizAside(index,current);return;}
       const score=Number(state.quiz?.score)||Object.values(answers).filter(answer=>answer.correct).length;
       const remaining=quizRemaining();
-      $('#work-main').innerHTML=`<div class="completion"><p class="section-kicker">${remaining?'Respuestas registradas · tiempo activo en curso':'Etapa 1 completada · 20 minutos activos'}</p><h3>Desafíos registrados</h3><p>Tu resultado formativo es</p><div class="summary-score">${score} / ${plan.quiz.length}</div><p>Las respuestas quedaron guardadas en este módulo. ${remaining?'Completa el tiempo activo restante antes de iniciar la práctica profesional.':'Ya puedes continuar con la práctica profesional integrada.'}</p><p class="phase-time" id="quiz-time-gate" ${remaining?'':'hidden'}>Tiempo activo restante: ${formatTime(remaining)}</p><button class="action-button" id="open-mission" type="button" ${remaining?'disabled':''}>Continuar a práctica profesional · 30 min</button></div>`;
-      $('#open-mission').addEventListener('click',()=>setStage('mission'));
+      $('#work-main').innerHTML=`<div class="completion"><p class="section-kicker">${remaining?'Respuestas registradas · tiempo activo en curso':'Etapa 1 completada · 20 minutos activos'}</p><h3>Desafíos registrados</h3><p>Tu resultado formativo es</p><div class="summary-score">${score} / ${plan.quiz.length}</div><p>Las respuestas quedaron guardadas en este módulo. ${remaining?'Completa el tiempo activo restante del quiz.':'La Etapa 1 quedó registrada.'}</p><p class="phase-time" id="quiz-time-gate" ${remaining?'':'hidden'}>Tiempo activo restante: ${formatTime(remaining)}</p></div>`;
       renderQuizAside(index,current);return;
     }
     if(!hasFourOptions(q.options)){
@@ -325,10 +318,8 @@
     $$('.phase-list button',$('#work-aside')).forEach((button,i)=>button.addEventListener('click',()=>{if(!button.disabled){activePhase=phases[i];renderMission();}}));
   }
   async function setStage(stage){
+    if(stage!=='quiz')return;
     if(switchingStage)return;
-    if(!previewMode&&stage==='mission'&&!quizApproved()){setNotice('Aprueba el quiz con al menos 75% antes de iniciar las misiones laborales.');return;}
-    if(!previewMode&&stage==='mission'&&savedCount()<plan.quiz.length){setNotice('Completa los cuatro desafíos antes de abrir las misiones laborales.');return;}
-    if(!previewMode&&stage==='mission'&&quizRemaining()>0){setNotice('Completa los 20 minutos activos del quiz antes de iniciar la práctica profesional.');return;}
     if(stage!==activeStage){
       switchingStage=true;await heartbeatRequest;
       if(pendingSeconds)await sendHeartbeat(activeStage);
@@ -339,7 +330,7 @@
   }
   $$('.stage-tab').forEach(button=>button.addEventListener('click',()=>{if(!button.disabled)setStage(button.dataset.stage);}));
   function tick(){
-    if(!previewMode&&!journey.hidden&&!document.hidden&&!switchingStage&&!state.mission?.completed_at){if(!pendingSeconds)pendingStage=activeStage;pendingSeconds++;$('#timer-value').textContent=formatTime(activeSeconds+pendingSeconds);}
+    if(!previewMode&&!journey.hidden&&!document.hidden&&!switchingStage){if(!pendingSeconds)pendingStage=activeStage;pendingSeconds++;$('#timer-value').textContent=formatTime(activeSeconds+pendingSeconds);}
     updateTimeGates();
     if(pendingSeconds>=30)heartbeatRequest=sendHeartbeat();
   }
@@ -348,9 +339,6 @@
     const quizGate=$('#quiz-time-gate'),openMission=$('#open-mission');
     if(quizGate){const remaining=quizRemaining();quizGate.textContent=`Tiempo activo restante: ${formatTime(remaining)}`;quizGate.hidden=remaining<=0;}
     if(openMission)openMission.disabled=!quizApproved()||quizRemaining()>0;
-    const missionGate=$('#mission-time-gate'),savePhase=$('#save-phase');
-    if(missionGate&&savePhase){const remaining=missionRemaining(),mission=state.mission||{},waiting=mission.validation_version&&mission.responses?.[activePhase]&&!mission.phase_checks?.[activePhase];missionGate.textContent=`Tiempo activo de práctica restante para cerrar: ${formatTime(remaining)}`;missionGate.hidden=remaining<=0;savePhase.disabled=remaining>0||Boolean(savePhase.dataset.saving)||Boolean(waiting)||phaseApproved(activePhase);}
-    const missionTab=$('#mission-tab');if(missionTab)missionTab.disabled=!previewMode&&(!quizApproved()||quizRemaining()>0);
   }
   function formatTime(value){const mins=Math.floor(value/60),secs=value%60;return `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;}
   async function sendHeartbeat(stage=pendingStage){

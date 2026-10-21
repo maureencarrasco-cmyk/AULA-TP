@@ -105,13 +105,11 @@
           <p id="journey-location" class="location-summary"></p>
           <a class="journey-city-link" href="https://www.aulatpchile.cl/ciudad_laboral_aulatp/" target="_blank" rel="noopener">Abrir Ciudad Laboral 3D <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="timer" aria-live="polite"><span>Tiempo activo · etapa</span><strong id="timer-value">00:00</strong><small>Duración mínima: 20 min de quiz + 30 min de práctica</small></div>
+        <div class="timer" aria-live="polite"><span>Tiempo activo · Etapa 1</span><strong id="timer-value">00:00</strong><small>Duración mínima del quiz: 20 min</small></div>
       </header>
       <div class="journey-progress" aria-label="Avance del recorrido"><span id="progress-bar"></span></div>
       <nav class="stage-tabs" aria-label="Etapas del recorrido">
         <button type="button" data-stage="quiz" class="stage-tab active"><span>01</span> Desafío de conocimientos <small>20 min</small></button>
-        <span class="stage-connector" aria-hidden="true"></span>
-        <button id="mission-tab" type="button" data-stage="mission" class="stage-tab" disabled><span>02</span> Práctica profesional <small>30 min</small></button>
       </nav>
       <div class="work-area">
         <section class="work-main" id="work-main" aria-live="polite"></section>
@@ -120,6 +118,6 @@
       <p class="notice" id="journey-notice" role="status"></p>
     </section>
   </main>
-  <script src="/api/city-experience.js?v=20261021-four-choice-labels-v1" defer></script>
+  <script src="/api/city-experience.js?v=20261021-stage-one-only-v1" defer></script>
 </body>
 </html>

@@ -26,9 +26,9 @@ test('Station 4 banner replaces the old header and preserves its navigation acti
   assert.match(script,/welcome\.hidden=true;onboarding\.hidden=false;navigation\.hidden=false;setupPanel\.hidden=false/);
   assert.match(script,/startButton\.addEventListener\('click',openJourney\)/);
   assert.match(html,/id="city-onboarding"[\s\S]*?Desafío de conocimientos[\s\S]*?20 minutos[\s\S]*?Aprendizajes Esperados[\s\S]*?Práctica profesional[\s\S]*?30 minutos[\s\S]*?Tu recorrido en la/);
-  assert.match(html,/Duración mínima: 20 min de quiz \+ 30 min de práctica/);
-  assert.match(script,/20 minutos activos del quiz antes de iniciar la práctica profesional/);
-  assert.match(script,/Tiempo activo de práctica restante para cerrar/);
+  assert.match(html,/Duración mínima del quiz: 20 min/);
+  assert.match(script,/activeStage='quiz';/);
+  assert.match(script,/if\(stage!=='quiz'\)return;/);
   assert.match(script,/const missionRemaining=\(\)=>/);
   assert.match(html,/Elige especialidad y piso[\s\S]*?Completa las dos etapas/);
   assert.match(script,/updateOnboardingContext\(preCourse,preModule\)/);
