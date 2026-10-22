@@ -24,6 +24,18 @@ test('asynchronous equipment and image loads repaint an idle renderer and ignore
   ctx.map=true;redraw(ctx);callback();assert.equal(calls,1);
 });
 
+test('workshop rendering uses native display definition up to 2x and restores the original ratio',()=>{
+  const helper=source.slice(source.indexOf('  function setRenderDefinition('),source.indexOf('  function requestRedraw('));
+  let ratio=0.75;const calls=[];
+  const renderer={getPixelRatio:()=>ratio,setPixelRatio:value=>{ratio=value;calls.push(value);}};
+  const context={qualityRenderer:null,originalPixelRatio:null,window:{devicePixelRatio:1.5}};
+  const setDefinition=vm.runInNewContext(`${helper};setRenderDefinition`,context);
+  setDefinition(renderer,true);assert.equal(ratio,1.5);
+  context.window.devicePixelRatio=3;setDefinition(renderer,true);assert.equal(ratio,2);
+  setDefinition(null,false);assert.equal(ratio,0.75);
+  assert.deepEqual(calls,[1.5,2,0.75]);
+});
+
 test('reused room objects get a fresh layout after moving to another specialty or floor',()=>{
   const workshop=readFileSync(new URL('../city-panel/native-workshop.js',import.meta.url),'utf8');
   const helper=workshop.slice(workshop.indexOf('  function captureLayout('),workshop.indexOf('  function chooseLocations('));
@@ -78,7 +90,7 @@ test('quiz rooms are fitted as module-specific workshops without filling the sta
   const routing=readFileSync(new URL('../city-panel/native-route.js',import.meta.url),'utf8');
   assert.match(routing,/assets\/module-room-resources\.json/);
   assert.match(routing,/const active=current\|\|\{moduleTitle:'',specialty:ctx\.specialty\?\.name\|\|''\}/);
-  assert.match(routing,/if\(current\?\.moduleId\)\{if\(workshopKey!==String\(current\.moduleId\)/);
+  assert.match(routing,/if\(current\?\.moduleId\)\{refreshStageProgress\(\);if\(workshopKey!==String\(current\.moduleId\)/);
   assert.match(routing,/else if\(!workshop&&!workshopRequest&&performance\.now\(\)>=workshopRetryAt\)loadModuleWorkshop\(ctx\)/);
   assert.match(routing,/workshopKey=key/);
   assert.match(routing,/sign\.scale\.set\(baseScale\.x\*\(3\.2\/width\),baseScale\.y\*\(\.72\/height\)/);

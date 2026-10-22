@@ -5,7 +5,20 @@
   const previewRequested=new URLSearchParams(location.search).get('cityPreview')==='1';
   let root,geometry,material,current=null,last=0,room=null,roomSignature='',error='',generation=0;
   let stationQuestionSignature='',clockRoomActive=false;
+  let qualityRenderer=null,originalPixelRatio=null;
   let redrawFrame=0;
+  function setRenderDefinition(renderer,active){
+    const restore=()=>{
+      if(qualityRenderer&&Number.isFinite(originalPixelRatio)&&qualityRenderer.setPixelRatio)qualityRenderer.setPixelRatio(originalPixelRatio);
+      qualityRenderer=null;originalPixelRatio=null;
+    };
+    if(!active||!renderer?.getPixelRatio||!renderer?.setPixelRatio){restore();return;}
+    if(qualityRenderer&&qualityRenderer!==renderer)restore();
+    if(!qualityRenderer){qualityRenderer=renderer;originalPixelRatio=renderer.getPixelRatio();}
+    const nativeRatio=Math.max(Number(window.devicePixelRatio)||1,Number(originalPixelRatio)||1);
+    const target=Math.min(2,nativeRatio);
+    if(Math.abs(renderer.getPixelRatio()-target)>.01)renderer.setPixelRatio(target);
+  }
   function requestRedraw(ctx){
     cancelAnimationFrame(redrawFrame);const token=generation;
     // The world can idle before an asynchronous inventory or photograph finishes.
@@ -121,6 +134,7 @@
   },true);
   function dispose(){
     setQuizRoomActive(false);
+    setRenderDefinition(null,false);
     cancelAnimationFrame(redrawFrame);redrawFrame=0;
     workshopRequest?.abort();workshopRequest=null;workshop?.dispose();workshop=null;
     workshopKey='';workshopRetryAt=0;
@@ -685,6 +699,7 @@
   }
   function frame(ctx){
     try{
+      setRenderDefinition(ctx.renderer,Boolean(ctx.indoors&&ctx.room&&ctx.stations.length));
       if(!ctx.indoors||!ctx.room||!ctx.stations.length){setQuizRoomActive(false);if(root)dispose();room=null;return;}
       if(Math.abs(ctx.player.y-ctx.floorY)>.65){if(root)root.visible=false;if(workshop)workshop.root.visible=false;updateQuizControls(ctx);return;}
       const identity=`${ctx.specialty?.name||''}:${ctx.floorY}:${ctx.district?.x}:${ctx.district?.z}`;
