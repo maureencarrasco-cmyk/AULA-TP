@@ -177,7 +177,7 @@ class CityStationQuizAPI(unittest.TestCase):
         self.assertEqual(experience.status_code, 200)
         self.assertTrue(experience.json['preview_mode'])
         self.assertTrue(experience.json['stage2_unlocked'])
-        self.assertEqual(len(experience.json['plan']['quiz']), 4)
+        self.assertEqual(len(experience.json['plan']['quiz']), 5)
         self.assertTrue(all(len(question.get('options') or []) == 4 for question in experience.json['plan']['quiz']))
         self.assertEqual(experience.json['station_progress'], [
             {'station': 1, 'passed': False}, {'station': 2, 'passed': False},
@@ -217,7 +217,7 @@ class CityStationQuizAPI(unittest.TestCase):
         status = self.student.get('/api/modules/1/city-experience').json
         self.assertTrue(status['stage2_unlocked'])
         self.assertTrue(status['quiz_learning']['approved'])
-        self.assertEqual(len(status['state']['quiz']['answers']), 4)
+        self.assertEqual(len(status['state']['quiz']['answers']), 5)
 
     def test_four_workplace_missions_have_distinct_products_and_module_criteria(self):
         response = self.student.get('/api/modules/1/city-experience')

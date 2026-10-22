@@ -202,7 +202,9 @@ def create_app(test_config=None):
             {'skill':'Representar','difficulty':'Inicial','category':'Representar',
              'prompt':'Explica qué información de la representación utilizaste y cómo orienta el procedimiento.'},
             {'skill':'Modelar','difficulty':'Avanzada','category':'Modelar',
-             'prompt':'Justifica cómo aplicarías el modelo o procedimiento del módulo y qué verificarías antes de cerrar.'}
+             'prompt':'Justifica cómo aplicarías el modelo o procedimiento del módulo y qué verificarías antes de cerrar.'},
+            {'skill':'Resolver problemas','difficulty':'Inicial','category':'Modelar',
+             'prompt':'Representa el problema, explica los pasos de tu solución y señala qué evidencia confirmarías.'}
         )
         def problem_evidence(question):
             source=normalized_text(' '.join(str(question.get(key) or '') for key in ('skill','question','stimulus','criterion')))
@@ -226,7 +228,7 @@ def create_app(test_config=None):
             selected.append((chosen,normalized_difficulty(chosen) or target['difficulty'],target))
         if question_order:
             bank={question['question']:question for question in questions}
-            if len(question_order)==4 and all(item.get('question') in bank for item in question_order):
+            if len(question_order)==5 and all(item.get('question') in bank for item in question_order):
                 selected=[(bank[item['question']],item.get('difficulty') or normalized_difficulty(bank[item['question']]),
                            target_quizzes[index]) for index,item in enumerate(question_order)]
         quiz=[]
@@ -293,7 +295,7 @@ def create_app(test_config=None):
             'version':3,
             'module':{'id':mid,'title':content.get('title') or '', 'case_title':case.get('title') if attempt_id>1 else content.get('case_title') or case.get('title') or 'Situación laboral integrada'},
             'attempt_id':attempt_id,
-            'timing':{'total':50,'quiz':20,'mission':30,'quiz_per_question':5,'phases':[5,15,5,5]},
+            'timing':{'total':50,'quiz':20,'mission':30,'quiz_per_question':4,'phases':[5,15,5,5]},
             'quiz':quiz,
             'mission':{
                 'scenario':case.get('context') or content.get('context') or content.get('application') or '',
@@ -309,12 +311,13 @@ def create_app(test_config=None):
     def ensure_city_quiz_version(experience, plan):
         quiz=experience.setdefault('quiz',{'answers':{},'attempts':{}})
         order=quiz.get('question_order') or experience.get('quiz',{}).get('question_order')
-        if quiz.get('version')!=3 and isinstance(order,list) and len(order)==10:
-            experience.setdefault('legacy_quiz_attempts',[]).append({key:quiz.get(key) for key in ('answers','attempts','score','completed_at','active_seconds','reinforcements','recovery_answers') if key in quiz})
-            quiz={'version':3,'answers':{},'attempts':{},'active_seconds':0}
+        if quiz.get('version')!=4 or not isinstance(order,list) or len(order)!=5:
+            if order or quiz.get('answers') or quiz.get('attempts'):
+                experience.setdefault('legacy_quiz_attempts',[]).append({key:quiz.get(key) for key in ('version','question_order','answers','attempts','score','completed_at','active_seconds','reinforcements','recovery_answers') if key in quiz})
+            quiz={'version':4,'answers':{},'attempts':{},'active_seconds':0}
             experience['quiz']=quiz
-        quiz.setdefault('version',3)
-        if not quiz.get('question_order') or len(quiz.get('question_order') or [])!=4:
+        quiz.setdefault('version',4)
+        if not quiz.get('question_order') or len(quiz.get('question_order') or [])!=5:
             quiz['question_order']=[{'question':item['question'],'difficulty':item['difficulty']} for item in plan['quiz']]
         return quiz
     def text_valid(v,n=20):return isinstance(v,str) and n<=len(v.strip())<=10000
@@ -446,10 +449,14 @@ def create_app(test_config=None):
         return response
     @app.get('/api/city-experience.css')
     def city_experience_styles():
-        return send_from_directory(app.static_folder,'city-experience.css')
+        response=send_from_directory(app.static_folder,'city-experience.css')
+        response.headers['Cache-Control']='no-store'
+        return response
     @app.get('/api/city-experience.js')
     def city_experience_script():
-        return send_from_directory(app.static_folder,'city-experience.js')
+        response=send_from_directory(app.static_folder,'city-experience.js')
+        response.headers['Cache-Control']='no-store'
+        return response
     @app.get('/api/modules/<int:mid>/city-experience')
     @require('student')
     def get_city_experience(mid):
@@ -702,14 +709,14 @@ def create_app(test_config=None):
                 required_seconds=int(plan['timing']['quiz'])*60
                 if int(quiz.get('active_seconds') or 0)<required_seconds:
                     return fail('Los cuatro quiz están aprobados. Completa el tiempo activo del desafío antes de abrir la Etapa 2.',403)
-                if len(plan['quiz'])!=4:return fail('Este módulo requiere revisión de configuración antes de abrir sus prácticas.',409)
+                if len(plan['quiz'])!=5:return fail('Este módulo requiere revisión de configuración antes de abrir sus prácticas.',409)
                 for index,question in enumerate(plan['quiz']):
                     quiz.setdefault('answers',{})[str(index)]={
                         'question':question['question'],'choice':None,'argument':'Aprobé las cinco preguntas del quiz de esta estación.',
                         'correct':True,'recovered':False,'explanation':'Cinco respuestas correctas verificadas en la estación 3D.',
                         'ae':question.get('ae'),'ae_title':(question.get('traceability') or {}).get('ae_title',''),
                         'criterion':question.get('criterion'),'traceability':question.get('traceability') or {},
-                        'verified_by':'city_station_quiz','station':index+1,'at':datetime.now(timezone.utc).isoformat()}
+                        'verified_by':'city_station_quiz','station':index%4+1,'at':datetime.now(timezone.utc).isoformat()}
                 quiz['score']=sum(bool(answer.get('correct') or answer.get('recovered')) for answer in quiz['answers'].values())
                 quiz['completed_at']=quiz.get('completed_at') or datetime.now(timezone.utc).isoformat()
                 experience.setdefault('native_progress',{})['portal_interacted_at']=datetime.now(timezone.utc).isoformat()
@@ -1260,8 +1267,9 @@ def create_app(test_config=None):
             state=json.loads(row['state']);experience=state.get('city_experience') or {};mission=experience.get('mission') or {}
             if not experience.get('quiz',{}).get('completed_at') or not mission.get('completed_at'):
                 return fail('El estudiante debe completar las dos etapas antes de revisar.',409)
-            if experience.get('quiz',{}).get('version')==3:
-                valid_assessment=(isinstance(quiz_assessment,list) and len(quiz_assessment)==4 and all(
+            if experience.get('quiz',{}).get('version') in (3,4):
+                quiz_count=5 if experience['quiz'].get('version')==4 else 4
+                valid_assessment=(isinstance(quiz_assessment,list) and len(quiz_assessment)==quiz_count and all(
                     isinstance(item,dict) and all(type(item.get(key)) is int and item[key] in range(6)
                     for key in ('argument_quality','application','coherence')) and
                     type(item.get('technically_sufficient')) is bool and text_valid(item.get('feedback'),20)

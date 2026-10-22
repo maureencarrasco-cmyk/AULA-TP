@@ -4,7 +4,7 @@ from app import create_app
 from content import DEFAULT_CONTENT
 
 TEXT='Revisaría las etiquetas, la leyenda y la versión de los documentos antes de formular una consulta fundamentada.'
-QUIZ_ASSESSMENT=[{'argument_quality':5,'application':5,'coherence':5,'technically_sufficient':True,'feedback':TEXT} for _ in range(4)]
+QUIZ_ASSESSMENT=[{'argument_quality':5,'application':5,'coherence':5,'technically_sufficient':True,'feedback':TEXT} for _ in range(5)]
 class LMSFlow(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory(ignore_cleanup_errors=True);self.app=create_app({'TESTING':True,'DATABASE':str(Path(self.tmp.name)/'test.sqlite3'),'SECRET_KEY':'test-only'})
@@ -46,11 +46,11 @@ class LMSFlow(unittest.TestCase):
     response=self.s.get(f"/api/modules/{module['id']}/city-experience")
     self.assertEqual(response.status_code,200,(course['title'],module['title']))
     plan=response.json['plan']
-    self.assertEqual(len(plan['quiz']),4,(course['title'],module['title']))
-    self.assertEqual([item['cognitive_skill'] for item in plan['quiz']],['Resolver problemas','Argumentar','Representar','Modelar'],(course['title'],module['title']))
-    self.assertEqual([item['target_difficulty'] for item in plan['quiz']],['Intermedia','Intermedia','Inicial','Avanzada'],(course['title'],module['title']))
+    self.assertEqual(len(plan['quiz']),5,(course['title'],module['title']))
+    self.assertEqual({item['cognitive_skill'] for item in plan['quiz']},{'Resolver problemas','Argumentar','Representar','Modelar'},(course['title'],module['title']))
+    self.assertEqual([item['target_difficulty'] for item in plan['quiz']],['Intermedia','Intermedia','Inicial','Avanzada','Inicial'],(course['title'],module['title']))
     self.assertTrue(all(len(item['options'])==4 and item.get('image') and item.get('criterion') and item.get('ae') is not None and item.get('argument_prompt') and item.get('traceability') and not item.get('explanation') for item in plan['quiz']),(course['title'],module['title']))
-    self.assertEqual(len({item['question'] for item in plan['quiz']}),4,(course['title'],module['title']))
+    self.assertEqual(len({item['question'] for item in plan['quiz']}),5,(course['title'],module['title']))
     self.assertEqual(len(plan['mission']['tasks']),4,(course['title'],module['title']))
     self.assertEqual(plan['timing']['total'],50)
     self.assertEqual(plan['timing']['quiz'],20)
@@ -60,10 +60,13 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual(response.status_code,200)
   payload=response.json
   self.assertEqual(payload['location']['district'],'Metalmecánica')
-  self.assertEqual(payload['plan']['timing'],{'total':50,'quiz':20,'mission':30,'quiz_per_question':5,'phases':[5,15,5,5]})
+  self.assertEqual(payload['plan']['timing'],{'total':50,'quiz':20,'mission':30,'quiz_per_question':4,'phases':[5,15,5,5]})
   quiz=payload['plan']['quiz']
-  self.assertEqual(len(quiz),4)
-  self.assertEqual([item['cognitive_skill'] for item in quiz],['Resolver problemas','Argumentar','Representar','Modelar'])
+  self.assertEqual(len(quiz),5)
+  self.assertEqual([item['cognitive_skill'] for item in quiz],['Resolver problemas','Argumentar','Representar','Modelar','Resolver problemas'])
+  self.assertEqual([item['target_difficulty'] for item in quiz].count('Inicial'),2)
+  self.assertEqual([item['target_difficulty'] for item in quiz].count('Intermedia'),2)
+  self.assertEqual([item['target_difficulty'] for item in quiz].count('Avanzada'),1)
   self.assertEqual(len(payload['plan']['mission']['tasks']),4)
   self.assertEqual(sum(phase['minutes'] for phase in payload['plan']['mission']['phases']),30)
   self.assertEqual(self.req('/modules/1/city-experience',{'operation':'heartbeat','stage':'mission','seconds':30}).status_code,403)
@@ -89,7 +92,7 @@ class LMSFlow(unittest.TestCase):
   saved=self.s.get('/api/progress').json
   module=next(item for item in saved if item['id']==1)
   experience=module['state']['city_experience']
-  self.assertEqual(len(experience['quiz']['answers']),4)
+  self.assertEqual(len(experience['quiz']['answers']),5)
   self.assertEqual(len(experience['mission']['responses']),4)
   self.assertTrue(experience['mission']['completed_at'])
  def test_city_rewards_require_teacher_review_and_protect_expert_safety_gate(self):
@@ -120,13 +123,13 @@ class LMSFlow(unittest.TestCase):
   self.assertEqual(invalid.status_code,400)
   approved=self.req('/teacher/city-review',review,teacher=True)
   self.assertEqual(approved.status_code,200)
-  self.assertEqual(approved.json['reward']['final_score'],97.75)
+  self.assertEqual(approved.json['reward']['final_score'],98.2)
   self.assertEqual(approved.json['reward']['level'],4)
   self.assertEqual(self.s.post('/api/modules/1/city-experience',json={'operation':'area-visit','level':4},headers={'X-CSRF-Token':self.st}).status_code,200)
   state=self.s.get('/api/modules/1/city-experience').json['state']
   self.assertIn('4',state['mission']['explored_areas'])
   capped=self.req('/teacher/city-review',{**review,'safety_approved':False},teacher=True)
-  self.assertEqual(capped.json['reward']['final_score'],97.75)
+  self.assertEqual(capped.json['reward']['final_score'],98.2)
   self.assertFalse(capped.json['reward']['approved'])
   self.assertEqual(len(capped.json['reward']['areas']),3)
   self.assertEqual(capped.json['reward']['attempts'],1)

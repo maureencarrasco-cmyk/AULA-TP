@@ -281,16 +281,28 @@
     guide.append(kicker,title,copy,structure,context,skills,actions);workspace.querySelector('.city-viewport')?.append(guide);roomGuide=guide;
   }
   function syncPanel() {
+    removeMissionsTabFromQuizBoard();
     if(!document.querySelector('.city-viewport canvas'))return;
     syncMiningTile();syncLearningLink();syncGuideButton();syncConstructionDistrict();syncSpecialtyCards();
     syncRoomGuide();
     syncQuizRouteLink();
     if(route&&document.querySelector('.city-map-overlay')){startRoute(routeNeedsOpen);routeNeedsOpen=false;}
   }
+  function removeMissionsTabFromQuizBoard(){
+    for(const control of document.querySelectorAll('button,[role="tab"]')){
+      if(normalize(control.textContent).includes('misiones profesionales'))control.remove();
+    }
+  }
   function relevantMutation(record){
     const target=record.target;
     if(record.type==='attributes')return Boolean(target.matches?.('.city-approach,.city-open-pilot,.city-map-overlay'));
     if(target.closest?.('.city-specialties'))return true;
+    const addedElements=[...record.addedNodes].filter(node=>node.nodeType===1);
+    const controls=addedElements.flatMap(node=>[
+      ...(node.matches?.('button,[role="tab"]')?[node]:[]),
+      ...(node.querySelectorAll?.('button,[role="tab"]')||[])
+    ]);
+    if(controls.some(control=>normalize(control.textContent).includes('misiones profesionales')))return true;
     const selectors='.city-walk-inspector,.city-walk-workspace,.city-specialties,.city-map-overlay,.city-open-pilot,.city-room-summary,.city-island-card,.city-mission-card,.city-specialty-section,canvas';
     return [...record.addedNodes,...record.removedNodes].some(node=>node.nodeType===1&&(node.matches(selectors)||node.querySelector(selectors)));
   }

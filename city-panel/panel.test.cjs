@@ -88,6 +88,17 @@ test('specialty entry hides the header for every course without depending on roo
  assert.ok(!source.includes("querySelector('.city-header')?.remove"));
 });
 
+test('removes only the missions tab control from the quiz board',()=>{
+ const f=fixture();
+ const tab={textContent:'2 Misiones profesionales Completa la etapa 1',removed:false,remove(){this.removed=true;}};
+ const quizTab={textContent:'1 Desafío de conocimientos',removed:false,remove(){this.removed=true;}};
+ f.document.querySelectorAll=selector=>selector==='button,[role="tab"]'?[tab,quizTab]:[];
+ f.sync();
+ assert.equal(tab.removed,true);
+ assert.equal(quizTab.removed,false);
+ assert.ok(source.includes("removeMissionsTabFromQuizBoard();"));
+});
+
 test('skin retains native dropdown, checkbox, collapsed sections and focus states',()=>{
  const css=fs.readFileSync(path.join(__dirname,'city-panel.css'),'utf8');
  assert.ok(css.includes('focus-visible'));

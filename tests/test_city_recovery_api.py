@@ -12,7 +12,7 @@ from app import create_app
 TEXT = 'Revisé los procedimientos, contrasté mis evidencias y prepararé una nueva verificación segura.'
 PHASES = ('planificar', 'actuar', 'verificar', 'justificar')
 QUIZ_ASSESSMENT = [{'argument_quality': 5, 'application': 5, 'coherence': 5,
-                    'technically_sufficient': True, 'feedback': TEXT} for _ in range(4)]
+                    'technically_sufficient': True, 'feedback': TEXT} for _ in range(5)]
 
 
 class CityRecoveryAPI(unittest.TestCase):
@@ -156,10 +156,10 @@ class CityRecoveryAPI(unittest.TestCase):
         final = self.get()
         self.assertFalse(final['reward']['approved'])
         self.assertTrue(final['quiz_learning']['approved'])
-        self.assertEqual(final['quiz_learning']['percent'],75)
+        self.assertEqual(final['quiz_learning']['percent'],80)
         self.assertEqual(final['reward']['areas'],[])
         self.assertEqual(final['state']['mission'].get('attempt_id', 1), 1)
-        self.assertEqual(final['state']['quiz']['score'],3)
+        self.assertEqual(final['state']['quiz']['score'],4)
         self.assertEqual(self.post({'operation':'mission-submit','phase':'planificar','text':TEXT}).status_code,200)
 
     def test_insufficient_quiz_argument_can_be_revised_and_reviewed_again(self):
@@ -211,7 +211,7 @@ class CityRecoveryAPI(unittest.TestCase):
         wrong=self.post(body)
         self.assertEqual(wrong.status_code,200)
         self.assertFalse(wrong.json['state']['quiz']['recovery_answers'][str(index)][-1]['correct'])
-        self.assertEqual(self.get()['quiz_learning']['percent'],50)
+        self.assertEqual(self.get()['quiz_learning']['percent'],60)
         replacement=next(item for item in self.get()['recoveries'] if item['index']==index)['reassessment']
         self.assertNotEqual(replacement['question'],variant['question'])
         self.assertEqual(self.post({**body,'question':replacement['question']}).status_code,409)

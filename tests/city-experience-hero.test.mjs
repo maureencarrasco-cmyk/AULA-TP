@@ -7,6 +7,13 @@ const html=read('static/city-experience.html').toString();
 const css=read('static/city-experience-entry.css').toString();
 const script=read('static/city-experience.js').toString();
 
+test('the right-side learning panel exposes only Stage 1',()=>{
+  const stageNav=html.match(/<nav class="stage-tabs"[\s\S]*?<\/nav>/)?.[0]||'';
+  assert.match(stageNav,/data-stage="quiz"/);
+  assert.doesNotMatch(stageNav,/data-stage="mission"|Misiones profesionales/);
+  assert.equal((stageNav.match(/class="stage-tab(?:\s|")/g)||[]).length,1);
+});
+
 test('Station 4 banner replaces the old header and preserves its navigation actions',()=>{
   const image=read('static/city-experience-station4-banner.png');
   assert.deepEqual([...image.subarray(0,8)],[137,80,78,71,13,10,26,10]);

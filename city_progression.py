@@ -20,7 +20,7 @@ def quiz_percent(experience):
 
 def quiz_learning_status(experience, total=None):
     quiz = experience.get('quiz') or {}
-    total = total or (4 if quiz.get('version') == 3 else 10)
+    total = total or (4 if quiz.get('version') == 3 else 5 if quiz.get('version') == 4 else 10)
     answers = quiz.get('answers') or {}
     correct = sum(bool(answer.get('correct') or answer.get('recovered')) for answer in answers.values())
     percent = Decimal(correct * 100) / max(1, total)
@@ -35,10 +35,11 @@ def quiz_teacher_result(experience):
     assessment = quiz.get('teacher_review') or {}
     rows = assessment.get('items') or []
     answers = quiz.get('answers') or {}
-    if quiz.get('version') != 3:
+    if quiz.get('version') not in (3, 4):
         score = quiz_percent(experience)
         return {'score': float(score), 'approved': score >= QUIZ_PASS_PERCENT, 'items': []}
-    if len(rows) != 4 or len(answers) != 4 or not quiz.get('completed_at'):
+    expected = 5 if quiz.get('version') == 4 else 4
+    if len(rows) != expected or len(answers) != expected or not quiz.get('completed_at'):
         return {'score': 0.0, 'approved': False, 'items': []}
     results = []
     for index, row in enumerate(rows):

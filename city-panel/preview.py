@@ -10,6 +10,7 @@ import argparse
 ROOT=Path(__file__).resolve().parent
 PREFIX='/ciudad_laboral_aulatp/'
 STYLE=PREFIX+'panel-ui-v1/city-panel.css'
+ASSET_VERSION='20261021-quiz-five-four-v2'
 API_ORIGIN=None
 
 
@@ -45,6 +46,7 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_error(404);return
             data=path.read_bytes();self.send_response(200)
             self.send_header('Content-Type',mimetypes.guess_type(path)[0] or 'application/octet-stream')
+            self.send_header('Cache-Control','no-store')
             self.send_header('Content-Length',str(len(data)));self.end_headers();self.wfile.write(data);return
         if not self.path.startswith(PREFIX):
             self.send_error(404);return
@@ -55,14 +57,25 @@ class Handler(BaseHTTPRequestHandler):
                 data=incoming.read();kind=incoming.headers.get('Content-Type','application/octet-stream')
                 if 'text/html' in kind:
                     data=re.sub(rb'/ciudad_laboral_aulatp/panel-ui-v[0-9]+/',(PREFIX+'panel-ui-v1/').encode(),data)
+                    for asset in (b'city-panel.css',b'city-panel.js',b'native-route.js',b'native-workshop.js'):
+                        pattern=rb'(/ciudad_laboral_aulatp/panel-ui-v1/'+asset+rb')(?:\?[^"\']*)?'
+                        data=re.sub(pattern,rb'\1?v='+ASSET_VERSION.encode(),data)
                     if STYLE.encode() not in data:
-                        data=data.replace(b'</head>',f'<link rel="stylesheet" href="{STYLE}"></head>'.encode())
-                    if (PREFIX+'panel-ui-v1/city-panel.js').encode() not in data:
-                        data=data.replace(b'</body>',f'<script defer src="{PREFIX}panel-ui-v1/city-panel.js"></script></body>'.encode())
-                    native=f'<script defer src="{PREFIX}panel-ui-v1/native-route.js"></script>'.encode()
-                    workshop=f'<script defer src="{PREFIX}panel-ui-v1/native-workshop.js"></script>'.encode()
-                    if workshop not in data:
-                        data=data.replace(native,workshop+native) if native in data else data.replace(b'</body>',workshop+native+b'</body>')
+                        data=data.replace(b'</head>',f'<link rel="stylesheet" href="{STYLE}?v={ASSET_VERSION}"></head>'.encode())
+                    panel_path=(PREFIX+'panel-ui-v1/city-panel.js').encode()
+                    native_path=(PREFIX+'panel-ui-v1/native-route.js').encode()
+                    workshop_path=(PREFIX+'panel-ui-v1/native-workshop.js').encode()
+                    if panel_path not in data:
+                        panel=f'<script defer src="{PREFIX}panel-ui-v1/city-panel.js?v={ASSET_VERSION}"></script>'.encode()
+                        data=data.replace(b'</body>',panel+b'</body>')
+                    native=f'<script defer src="{PREFIX}panel-ui-v1/native-route.js?v={ASSET_VERSION}"></script>'.encode()
+                    workshop=f'<script defer src="{PREFIX}panel-ui-v1/native-workshop.js?v={ASSET_VERSION}"></script>'.encode()
+                    native_pattern=rb'<script defer src="'+re.escape(native_path)+rb'(?:\?[^"\']*)?"></script>'
+                    if workshop_path not in data:
+                        data,count=re.subn(native_pattern,workshop+native,data,count=1)
+                        if not count:data=data.replace(b'</body>',workshop+native+b'</body>')
+                    elif native_path not in data:
+                        data=data.replace(b'</body>',native+b'</body>')
                 self.send_response(incoming.status)
                 for key in ('Content-Type','Content-Range','Accept-Ranges'):
                     if incoming.headers.get(key):self.send_header(key,incoming.headers[key])
@@ -74,7 +87,7 @@ class Handler(BaseHTTPRequestHandler):
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
     parser.add_argument('--port',type=int,default=8108)
-    parser.add_argument('--api-origin',choices=['http://127.0.0.1:8110'])
+    parser.add_argument('--api-origin',choices=['http://127.0.0.1:8100','http://127.0.0.1:8110'])
     args=parser.parse_args();API_ORIGIN=args.api_origin
     print(f'Preview: http://127.0.0.1:{args.port}/ciudad_laboral_aulatp/',flush=True)
     ThreadingHTTPServer(('127.0.0.1',args.port),Handler).serve_forever()
